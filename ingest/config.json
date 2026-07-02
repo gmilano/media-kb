@@ -1,0 +1,13 @@
+{
+  "topics": ["content-generation", "media-ai", "nlp", "text-generation", "video-ai", "podcast-ai"],
+  "agentKeywords": "AI content creation generation media repurposing open source",
+  "repoKeywords": "content generation AI text video audio open source",
+  "verticalKeywords": "CMS content management headless open source",
+  "minStars": 200,
+  "licenses": ["MIT", "Apache-2.0"],
+  "keywords": {
+    "agents": ["content repurposer", "SEO agent", "script writer AI", "podcast transcription"],
+    "repos": ["Stable Diffusion", "Whisper", "CrewAI", "LangChain", "Directus"],
+    "verticals": ["Strapi", "Ghost", "Directus", "Wagtail", "Payload CMS"]
+  }
+}

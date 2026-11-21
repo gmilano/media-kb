@@ -1,4 +1,44 @@
-# 📈 Repos trending
+---
+industry: media
+region: Global
+updated: 2026-11-21
+---
+
+# 📈 Trending Media Repos — append-only log
+
+> Newest section first; history below is never rewritten.
+> Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
+> (Until this pass the two files were byte-identical — that defect is fixed here.)
+
+## 2026-11-21
+
+| Repo | License | Stars | Last push | Signal |
+|---|---|---|---|---|
+| [contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs) | MIT OR Apache-2.0 | 452 | 2026-11-21 | Pushed the day of measurement. The reference C2PA implementation, dual-licensed — see `compose/patterns.md`; this is the compliance layer the 2026 labeling laws now require. |
+| [Comfy-Org/ComfyUI](https://github.com/Comfy-Org/ComfyUI) | GPL-3.0 | 147,860 | 2026-11-21 | **Org renamed from `comfyanonymous`.** 147,860★ — earlier cycles logged "~75k", so this one genuinely doubled. |
+| [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp) | Unlicense | 209,447 | 2026-11-21 | Still the most-starred media repo anywhere; earlier cycles under-recorded it at ~96k. |
+| [huggingface/diffusers](https://github.com/huggingface/diffusers) | Apache-2.0 | 34,961 | 2026-11-21 | Daily pushes; absorbing the new video models as they land. |
+| [invoke-ai/InvokeAI](https://github.com/invoke-ai/InvokeAI) | Apache-2.0 | 29,131 | 2026-11-21 | The permissive counterweight to ComfyUI's GPL, still shipping daily. |
+| [AcademySoftwareFoundation/openexr](https://github.com/AcademySoftwareFoundation/openexr) | BSD-3-Clause | 1,888 | 2026-11-21 | ASWF cadence is steady — the standards layer is quietly active while models stall. |
+| [Breakthrough/PySceneDetect](https://github.com/Breakthrough/PySceneDetect) | BSD-3-Clause | 5,605 | 2026-11-21 | Pushed on measurement day; still the default shot-detection step. |
+| [ggml-org/whisper.cpp](https://github.com/ggml-org/whisper.cpp) | MIT | 55,377 | 2026-11-20 | On-prem ASR momentum continues (55,377★, up from the ~52k logged earlier). |
+| [owncast/owncast](https://github.com/owncast/owncast) | MIT | 11,683 | 2026-11-21 | The only MIT self-hosted live-streaming platform still under active development. |
+
+**Two listicle recommendations that are 404s.** Recorded so no future pass re-adopts them:
+
+- `MUKE-coder/mediakit` — pitched by current search results as "MediaKit (MIT), self-hosted
+  Mux/Cloudinary alternative". `git ls-remote` returns nothing. **The repo does not exist.**
+- `google/credentio` — widely reported as "Google open-sourced a C2PA validator (Aug 2026)". There is
+  **no `google/credentio` repo**; only third-party accounts (`ghchinoy/credentio-validator-web`, 1★)
+  carry the name. The claim is unverifiable at the slug everyone cites.
+- `Castopod/castopod` — carried as a vertical by an earlier cycle. **Dead at that slug**; Castopod
+  develops on its own GitLab, not GitHub.
+
+**Archived, and previously listed here as live:** `Sanster/IOPaint` (23,286★, archived),
+`salesforce/LAVIS` (11,256★, archived).
+
+## History — 2026-07-02 (preserved verbatim; was byte-identical to agents/trending.md)
+
 
 > Última actualización: 2026-07-02
 

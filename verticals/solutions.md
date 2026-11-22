@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 🏭 Vertical Platforms — Media & Entertainment
@@ -18,7 +18,9 @@ self-hostable platforms are copyleft or source-available, and the permissive opt
 narrow (Owncast, SRS) or headless CMSs borrowed from adjacent industries (Ghost, Payload). This is
 the single most important procurement fact in this KB:
 
-- **MIT / Apache → embed freely**: SRS, Owncast, Ghost, Payload, shaka-player, hls.js, Opencast.
+- **MIT / Apache → embed freely**: SRS, Owncast, Ghost, Payload, shaka-player, hls.js, Opencast,
+  and — new on 2026-11-22, and the most consequential entry in this file — **Sofie**, the MIT
+  broadcast automation platform (see below).
 - **AGPL-3.0 → deploy unmodified, integrate over REST/API, keep client code in a separate process**:
   MediaCMS, PeerTube, OvenMediaEngine, Immich. Modify the source and you owe source to network users.
 - **GPL-2.0/3.0 → separate process, no linking**: Jellyfin, Janus, Navidrome.
@@ -43,6 +45,34 @@ the single most important procurement fact in this KB:
 | OvenMediaEngine | AGPL-3.0 | [OvenMediaLabs/OvenMediaEngine](https://github.com/OvenMediaLabs/OvenMediaEngine) | 3,306 | 2026-11-18 | C++ | Sub-second latency streaming (WebRTC/LLHLS). **Correction: AGPL-3.0, not Apache-2.0** as an earlier cycle recorded — 34,452-byte license file read to confirm. Also **renamed from `AirenSoft/`**. |
 | Phraseanet | GPL-3.0 (project-declared; API reports `NOASSERTION`) | [alchemy-fr/Phraseanet](https://github.com/alchemy-fr/Phraseanet) | 276 | 2026-11-20 | PHP | One of the few real open DAM/MAM systems still maintained. |
 
+## Broadcast automation & playout — the layer this KB had no row for
+
+Every platform in the table above is a *web* platform: publishing, VOD, streaming. None of them runs
+a **channel** or a **live gallery**, which is what an actual broadcaster buys. That layer exists in
+open source, it is mature, and until 2026-11-22 this KB did not list a single one of these.
+
+| Platform | License | Repo | Stars | Forks | Last push | Use case |
+|---|---|---|---|---|---|---|
+| **Sofie** | **MIT** | [Sofie-Automation/sofie-core](https://github.com/Sofie-Automation/sofie-core) | 349 | 63 | 2026-11-19 | **Live studio & news automation** — rundowns, show styles, MOS/NRCS integration, device control. Commissioned by **NRK** as an open replacement for Vizrt Mosart; in daily news production at **NRK, the BBC and TV 2 Norway since 2018**. The only *permissively licensed* broadcast automation platform of any maturity, and the most significant find in this KB's history. Libraries listed in `repos/foundations.md`. |
+| CasparCG | GPL-3.0 | [CasparCG/server](https://github.com/CasparCG/server) | 1,112 | 329 | 2026-11-11 | On-air **graphics and clip playout**, from **SVT** (Swedish public broadcaster). The de facto open graphics engine; Sofie drives it over its own protocol, which is also how you keep the GPL at arm's length. |
+| ffplayout | GPL-3.0 | [ffplayout/ffplayout](https://github.com/ffplayout/ffplayout) | 607 | 146 | 2026-11-20 | **24/7 linear channel playout** from playlists (Rust + FFmpeg). The pragmatic way to stand up a FAST/linear channel. GPL-3.0 → run as the service it already is. |
+| LibreTime | AGPL-3.0 | [libretime/libretime](https://github.com/libretime/libretime) | 940 | 250 | 2026-11-22 | **Radio automation and scheduling** (the maintained fork of Airtime). Pushed on measurement day. AGPL → deploy unmodified, integrate over its API. |
+| OpenBroadcaster | AGPL-3.0 | [openbroadcaster/observer](https://github.com/openbroadcaster/observer) | 187 | 55 | 2026-11-13 | **MAM + scheduling + automation** for community radio/TV and IPTV. The closest thing to an open broadcast MAM that is still maintained. |
+| OpenBroadcaster Player | AGPL-3.0 | [openbroadcaster/obplayer](https://github.com/openbroadcaster/obplayer) | 144 | 54 | 2026-09-23 | Its playout client, with **CAP / emergency alerting** built in — a real regulatory capability, not a convenience feature. |
+| TVPlay | GPL-2.0 | [jaskie/PlayoutAutomation](https://github.com/jaskie/PlayoutAutomation) | 224 | 43 | 2026-04-28 | .NET channel playout automation. The only other real open playout system found. |
+
+**The architectural consequence is large enough to change a bid.** This KB's standing thesis has been
+"permissive at the pipeline, copyleft at the platform — so own the pipeline and rent the platform."
+Sofie is the exception that breaks it: an MIT platform at the point in the stack where a broadcaster
+has the most vendor pain (Vizrt/Mosart licensing) and where the incumbents are most expensive. For a
+news or live engagement, Globant can propose **owning and extending the automation platform itself**,
+not just bolting agents onto someone's REST API — and do it without inheriting a copyleft obligation.
+
+**Discovery note:** the EBU publishes its own public-domain index of this layer at
+[ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting) (CC0-1.0, 1,803★). It is the
+right starting point for broadcast tooling; generic GitHub search is not — the measured query
+`mos protocol broadcast` returns exactly one result, a dead 2★ student project from 2018.
+
 ## Gap: there is no open broadcast MAM
 
 Searched for a permissively-licensed media asset management / MAM system suitable for broadcast and
@@ -53,9 +83,23 @@ Searched for a permissively-licensed media asset management / MAM system suitabl
 - `MUKE-coder/mediakit` — recommended by current search results as the MIT option; **the repo does not exist** (404).
 - Phraseanet (above) is the closest, at 276 stars and GPL-3.0.
 
-**Implication for Globant:** MAM is a build, not an assembly. The honest pitch is a permissive
-pipeline (`repos/foundations.md`) plus a custom asset/metadata layer, not "we'll customize an
-open-source MAM." This gap is consistent across every pass of this KB.
+**Refined 2026-11-22 — the gap is narrower than "there is no open MAM".** Two real systems were
+found this pass that earlier passes missed, both copyleft:
+
+- [`openbroadcaster/observer`](https://github.com/openbroadcaster/observer) — **AGPL-3.0**, 187★/55f,
+  pushed 2026-11-13. Genuine MAM + scheduling + automation, actively maintained.
+- [`Sofie-Automation/sofie-package-manager`](https://github.com/Sofie-Automation/sofie-package-manager)
+  — **MIT**, 6★/8f, pushed 2026-11-16. Not a MAM, but it is the permissive *ingest, transfer and
+  transcode orchestration* piece, which is the half of a MAM that is expensive to build.
+- [`immstudios/nebula`](https://github.com/immstudios/nebula) — **ARCHIVED** (GPL-3.0, 20★, last push
+  2023-04-26). Current search results still recommend it as an open MAM; it is dead. Do not adopt.
+
+**Implication for Globant, restated precisely:** the accurate claim is not "MAM is a build" but
+"**the catalogue is a build; the plumbing is not.**" Asset *movement* can be assembled from
+`sofie-package-manager` (MIT) and the pipeline in `repos/foundations.md`; the searchable
+asset/metadata/rights **catalogue** is still the custom, high-margin deliverable, because every
+permissive option stops short of it and the one maintained full MAM is AGPL. That is a sharper and
+more defensible pitch than the previous blanket statement.
 
 ## How to add the AI layer
 

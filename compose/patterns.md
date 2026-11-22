@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 🧩 Composition Patterns — Media & Entertainment
@@ -176,6 +176,118 @@ process.
 
 ---
 
+## Pattern 7 — Agentic newsroom automation on Sofie (the highest-differentiation build)
+
+**Why:** this KB asserted for several passes that newsroom playout could not be automated
+off-the-shelf because no open MOS implementation existed. That was wrong, and the correction opens the
+most defensible engagement in the file. **Sofie** is MIT, commissioned by **NRK** as an open
+replacement for Vizrt Mosart, and in daily news production at **NRK, the BBC and TV 2 Norway since
+2018**. The gap that actually remains is one component wide: **nothing exposes Sofie's typed device
+layer to an agent.**
+
+```
+[NRCS: iNEWS / ENPS / Octopus]
+      ↓  MOS Protocol v2.8.4
+[sofie-mos-connection (MIT)]              ← rundown in, story/item updates out
+      ↓
+[sofie-core (MIT)]                        ← rundowns, show styles, blueprints
+      ↓
+[★ MCP SERVER YOU BUILD ★]                ← the missing component; wraps the resolver below
+      ↓
+[sofie-timeline-state-resolver (MIT)]     ← typed device abstraction: DECLARE state, it diffs & drives
+      ↓
+[CasparCG (GPL-3.0, own process) · ATEM via sofie-atem-connection (MIT) ·
+ sisyfos audio (MIT) · HyperDeck (MIT) · sofie-package-manager (MIT) for ingest/transcode]
+      ↓
+[Agent tasks: draft lower-thirds, pick archive clips, propose rundown reorder, prep B-roll]
+      ↓
+[HUMAN DIRECTOR APPROVES EVERY ON-AIR ACTION]
+```
+
+**Wiring, and the reason this is safe enough to put near a live transmission.** Do **not** let an
+agent issue device commands. `sofie-timeline-state-resolver` is *declarative*: you hand it a timeline
+of desired states and it computes the diff and drives the hardware. So the MCP tools you expose are
+`propose_timeline`, `validate_timeline`, `diff_against_current` — never `send_to_device`. The agent
+writes a proposal; Sofie owns reconciliation; a human arms it. That property is what makes an agent
+admissible in a gallery at all, and it comes from the library's design rather than from your prompt.
+
+**Scope the build honestly:** the MCP bridge is days-to-weeks of work against a documented MIT
+TypeScript library — not protocol reverse-engineering. The integration work (blueprints per show,
+NRCS field mapping, device inventory) is where the real effort and the real billing sit.
+
+**License position:** MIT end to end except `CasparCG` (GPL-3.0) and `sofie-quantel-gateway`
+(GPL-2.0), both of which are already separate processes driven over their own protocols. Nothing
+links; nothing is disclosable.
+
+**Qualifying question before proposing this:** *"are you on SMPTE ST 2110 yet?"* On a 2110 facility
+device control is network-addressable and this is deployable; on an SDI plant it is a much larger
+infrastructure conversation. ST 2110 is reported as establishing across APAC broadcasters, and EMEA
+public broadcasters are the ones already running Sofie.
+
+**Who to sell it to:** EMEA public broadcasters (Sofie is their own stack, and ARD/ZDF/DW/SRG/RAI all
+published AI codes in 2026 with no tooling behind them), then APAC 2110 adopters, then the Caribbean
+Broadcasting Union bloc, which asked for shared AI standards and has no in-house capability.
+
+---
+
+## Pattern 8 — Dual-mark provenance with ingest-side verification
+
+**Why:** Pattern 1 signs a C2PA manifest, which is strippable by a re-encode. The previous version of
+this KB said no permissive watermarking library existed to pair with it; **that was wrong** —
+VideoSeal, AudioSeal and TrustMark are all MIT. But the measured counter-fact is that
+**watermark-removal projects outnumber embedders 10.4× by stars and are better maintained**
+(`intel/trends.md` trend 8). So the product is not a seal, it is a **chain of custody plus a
+verifier**. This is also the direct remediation for the **2026-12-02** EU Article 50(2) deadline and
+the **2027-01-01** California AI Transparency Act obligations.
+
+```
+GENERATION SIDE (every synthetic asset, no exceptions)
+[Wan 2.2 / LTX-Video (Apache-2.0) output]
+      ↓
+[facebookresearch/videoseal (MIT)]        ← imperceptible payload INTO the pixels
+      ↓  (audio track, if voice is synthetic)
+[facebookresearch/audioseal (MIT)]        ← sample-level payload; marks WHICH segments are synthetic
+      ↓  (stills / thumbnails / key art)
+[adobe/trustmark (MIT)]                   ← image-domain payload
+      ↓
+[c2pa-rs (MIT OR Apache-2.0)]             ← signed manifest: model, version, operator, consent ID
+      ↓
+[c2patool (Apache-2.0)]                   ← verify the manifest in CI before the asset can ship
+
+INGEST / VERIFICATION SIDE (the part competitors omit — and the billable one)
+[Any inbound asset: UGC, partner delivery, archive, affiliate feed]
+      ↓
+[c2pa-rs: manifest present? signature valid? chain intact?]
+      ↓  manifest absent or broken  →  NOT proof of tampering (most paths strip it)
+[videoseal / audioseal / trustmark DETECTORS]   ← recover payload from pixels & audio
+      ↓
+[Decision record: {manifest: ok|missing|invalid, watermark: found|absent, confidence}]
+      ↓
+[Route: publish · label · hold for human review · reject]
+```
+
+**Wiring, and the detail that makes it honest.** Mark in **both** domains and treat the two signals
+as independent evidence: a manifest proves *who signed what*, a watermark survives *the paths that
+strip manifests*. Neither is sufficient. Record a **decision with a confidence level**, never a
+boolean "authentic" — the four-state manifest result above matters because a missing manifest is the
+*normal* case for anything that has been through a social platform, and a system that treats "no
+manifest" as "fake" will be switched off in a week.
+
+**Say the limitation out loud, with the numbers.** `guillaumemeyer/watermarks-remover` is MIT with
+28,124 stars and 3,162 forks; one project names SynthID in its title. A client engineer will find
+these. The regulations require a **good-faith marking effort**, not an unbreakable one — so the
+asymmetry is a design constraint, and naming it first is what makes the rest of the proposal credible.
+
+**Where the margin is:** not the embedding (three MIT libraries, a week of integration) but the
+**verification service and its decision log** — the auditable record of what arrived, what was
+claimed, what was recovered and what was done. That is what an Article 50 or California-Act
+examination actually asks to see, and it is pure software with no licensing encumbrance.
+
+**Pair with Pattern 4.** The consent ID from the digital-replica ledger belongs in the C2PA manifest
+*and* in the watermark payload, so a performer's consent survives a re-encode that strips the manifest.
+
+---
+
 ## Anti-patterns — learned the hard way in this KB
 
 1. **Don't ship HunyuanVideo to EMEA or South Korea.** Its license excludes the EU, UK and KR by name.
@@ -186,5 +298,25 @@ process.
    `apple/ml-stable-diffusion` all still resolve — all are renames. Use canonical slugs.
 4. **Don't start on archived code**: `Sanster/IOPaint` and `salesforce/LAVIS` are archived;
    `coqui-ai/TTS`, `OpenVoice`, `SadTalker` and `Grounded-SAM` are dormant 1–2+ years.
-5. **Don't promise provenance alone.** C2PA is strippable by re-encoding and screenshots; say so, and
-   pair it with watermarking — for which no permissive open library currently exists.
+5. **Don't promise provenance alone** — but do not repeat this KB's own error either. C2PA is
+   strippable by re-encoding and screenshots, so pair it with watermarking. **Corrected 2026-11-22:**
+   earlier passes of this file said "no permissive open library currently exists" for watermarking.
+   It does — `facebookresearch/videoseal`, `facebookresearch/audioseal` and `adobe/trustmark` are all
+   MIT and all actively maintained. See Pattern 8.
+6. **Don't sell a watermark as tamper-proof.** Measured 2026-11-22: watermark-*removal* repos total
+   42,896 stars against 4,138 for the embedders, a **10.4× asymmetry**, with the leading remover at
+   28,124★ under MIT and one project naming SynthID in its title. Promise a probabilistic chain of
+   custody with ingest-side verification, and say the limitation before the client's engineer does.
+7. **Don't conclude a category is empty because a capability query returned nothing.** This KB
+   asserted across several passes that no open MOS-protocol implementation existed. It has existed
+   since 2018, is MIT, and runs the news at NRK, the BBC and TV 2 Norway — but the query
+   `mos protocol broadcast` returns exactly **one** result, a dead 2★ project from 2018, because
+   Sofie's repos are named after the project rather than the capability. **Search the proper noun**
+   (project, vendor, standards body, national broadcaster) and check the institutional index
+   ([`ebu/awesome-broadcasting`](https://github.com/ebu/awesome-broadcasting), CC0) before recording
+   an absence. An absence recorded as fact is the most expensive kind of error in this KB: it tells a
+   future reader not to look.
+8. **Don't judge broadcast infrastructure by stars.** `sofie-timeline-state-resolver` has 25 stars and
+   25 forks; `sofie-input-gateway` has **0 stars and 5 forks**. Deployed infrastructure is forked and
+   configured, not starred. Use the ★/fork ratio: around 1 means people run it, above ~50 means
+   attention without use (`hikaku-io/hikaku-extension`, 407★/9f).

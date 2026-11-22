@@ -1,13 +1,70 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 📈 Trending Media AI Agents — append-only log
 
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
+
+## 2026-11-22
+
+Measured on 2026-11-22 via GitHub `search/repositories` (stars, forks, `pushed_at` and SPDX in one
+call, so the figures can always be cross-checked); existence confirmed by `git ls-remote`; licenses
+read from the LICENSE file wherever the API returned `NOASSERTION`.
+
+**The headline: this KB's "clearest open-source gap in media" was never a gap.** The previous pass
+recorded that *no permissive open watermarking library exists* and that *SynthID is Google-internal*.
+Both are wrong. There is a whole MIT-licensed family, most of it actively maintained:
+
+| Agent / Model | Repo | License | Stars | Forks | Last push | What it does |
+|---|---|---|---|---|---|---|
+| VideoSeal | [facebookresearch/videoseal](https://github.com/facebookresearch/videoseal) | MIT | 828 | 111 | 2026-11-10 | Meta's neural **video** watermarking — models, training and evaluation code all MIT. Survives re-encoding and editing; strength setting trades robustness against visibility. The direct answer to the gap this KB recorded. |
+| AudioSeal | [facebookresearch/audioseal](https://github.com/facebookresearch/audioseal) | MIT | 804 | 109 | 2026-11-03 | Localized **audio** watermarking with sample-level detection — marks which *segments* of a track are synthetic. The missing piece for dubbed/cloned-voice deliverables. |
+| TrustMark | [adobe/trustmark](https://github.com/adobe/trustmark) | **MIT** | 189 | 41 | 2026-11-11 | Adobe Research's invisible image watermarking, and the watermarking arm of C2PA's own soft-binding story. API reports `NOASSERTION`; the 1,218-byte LICENSE opens "Copyright 2023 Adobe All Rights Reserved" and **then grants MIT** — the same read-past-line-1 trap as SadTalker. |
+| SynthID-Text | [google-deepmind/synthid-text](https://github.com/google-deepmind/synthid-text) | Apache-2.0 | 1,258 | 117 | 2026-11-18 | **Correction: SynthID is not entirely Google-internal.** The *text* watermarking is open and Apache-2.0. The image/video/audio SynthID remains closed — so the correct statement is "SynthID-Text is open, SynthID for AV is not." |
+| invisible-watermark | [ShieldMnt/invisible-watermark](https://github.com/ShieldMnt/invisible-watermark) | MIT | 1,993 | 177 | 2023-09-23 | The DWT-DCT library Stable Diffusion ships by default — the most-deployed embedder here, and dormant since 2023. Fine to vendor, do not expect fixes. |
+| Watermark Anything | [facebookresearch/watermark-anything](https://github.com/facebookresearch/watermark-anything) | MIT | 1,133 | 56 | 2025-06-20 | **ARCHIVED.** Localized image watermarking (multiple marks per image). Superseded by VideoSeal for new work. |
+| RivaGAN | [DAI-Lab/RivaGAN](https://github.com/DAI-Lab/RivaGAN) | MIT | 324 | 44 | 2021-10-12 | Attention-based robust video watermarking. Research-grade, five years dormant; cited for lineage only. |
+
+**Counter-signal, and it is the most important number in this pass: the removal ecosystem is
+10.4× the size of the embedding ecosystem, and it is better maintained.**
+
+| Repo | License | Stars | Forks | Last push | Why it matters |
+|---|---|---|---|---|---|
+| [guillaumemeyer/watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) | MIT | 28,124 | 3,162 | 2026-11-16 | Single most-starred repo in this whole subject area — 34× VideoSeal. |
+| [wiltodelta/remove-ai-watermarks](https://github.com/wiltodelta/remove-ai-watermarks) | Apache-2.0 | 6,482 | 599 | 2026-11-22 | Pushed on measurement day. Named for removing *AI* watermarks specifically. |
+| [GargantuaX/gemini-watermark-remover](https://github.com/GargantuaX/gemini-watermark-remover) | MIT | 5,781 | 835 | 2026-11-19 | Targets a specific vendor's marks. |
+| [YaoFANGUK/video-subtitle-remover](https://github.com/YaoFANGUK/video-subtitle-remover) | Apache-2.0 | 13,865 | 1,721 | 2026-06-30 | Burned-in subtitle/overlay removal — also strips visible provenance badges. |
+| [D-Ogi/WatermarkRemover-AI](https://github.com/D-Ogi/WatermarkRemover-AI) | MIT | 2,150 | 404 | 2026-11-02 | Diffusion-based inpainting removal. |
+| [froggeric/gemini-watermark-and-synthid-remover](https://github.com/froggeric/gemini-watermark-and-synthid-remover) | MIT | 132 | 24 | 2026-09-25 | **Names SynthID in the repo title.** Small, but proof that the specific defeat of a named scheme is a published, MIT-licensed project. |
+
+Measured totals: six removers = **42,896 stars**; five embedders = **4,138 stars**. Ratio **10.4×**.
+Three of the six removers were pushed inside the last three weeks.
+
+**What to tell a client, precisely:** watermarking is buildable today on MIT code — that part of the
+gap is closed and Pattern 8 in `compose/patterns.md` now exists. But never sell a watermark as
+tamper-proof. The honest architecture is **dual marking plus detection-side verification**: C2PA
+manifest (strippable by re-encode) + VideoSeal/AudioSeal payload (attackable by a better-resourced
+open ecosystem) + a verification service *you* run at ingest. Provenance is a *probabilistic chain of
+custody*, not a seal, and the measured star counts are the argument for saying so out loud.
+
+**Short-form drama, the APAC category everyone asks about — informed gap, not silence.** Searched
+`short-drama`, `micro-drama` and `ai-short-drama`. The category is commercially real, the open code
+is not usable:
+
+- `Anil-matcha/Open-AI-Micro-Drama-Generator` — 587★/123f, pushed 2026-08-02, and **no LICENSE file
+  at all**. Also a wrapper around *paid closed* APIs (Seedance, Kling, Veo, Sora), so it is neither
+  open nor self-hostable.
+- `chatfire-AI/drama-skills` — promoted by a directory site as "~4.4k stars, MIT". **The slug does not
+  resolve.** Do not re-adopt it.
+- `huobao-drama` — promoted as "~18k stars", reported **CC-BY-NC-SA-4.0**. Non-commercial: unusable
+  in client work even if the stars are real. Not confirmed at any slug.
+- [mediago-dev/mediago-drama](https://github.com/mediago-dev/mediago-drama) — Apache-2.0, **110★/29f**,
+  2026-10-21. Re-measured at exactly the 110 the last pass recorded. Still the **only** permissively
+  licensed, self-hostable short-drama agent found in two consecutive passes.
 
 ## 2026-11-21
 

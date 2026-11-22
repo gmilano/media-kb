@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-21
+updated: 2026-11-22
 ---
 
 # 🎯 AI Agents & Generative Media Models — Media & Entertainment
@@ -46,6 +46,51 @@ updated: 2026-11-21
 | SadTalker | [OpenTalker/SadTalker](https://github.com/OpenTalker/SadTalker) | Apache-2.0 | 14,213 | 2024-06-26 | Audio-driven talking head. Its LICENSE opens "Tencent … All rights reserved." but **is** Apache-2.0 with third-party carve-outs — read past line 1. Dormant since mid-2024. |
 | CogVideo / CogVideoX | [zai-org/CogVideo](https://github.com/zai-org/CogVideo) | Apache-2.0 | 13,217 | 2025-11-04 | **Renamed from `THUDM/CogVideo`.** Apache-2.0, but no push in ~12 months. |
 | HunyuanVideo | [Tencent-Hunyuan/HunyuanVideo](https://github.com/Tencent-Hunyuan/HunyuanVideo) | Tencent Hunyuan Community | 12,815 | 2026-10-08 | ⚠️ **Territorially restricted.** The license text states it "DOES NOT APPLY IN THE EUROPEAN UNION, UNITED KINGDOM AND SOUTH KOREA." Unusable for EMEA and South Korean engagements — a constraint no listicle surfaces. Also needs 60–80 GB VRAM at full size. |
+
+## Re-verified 2026-11-22 — what moved, and what was added elsewhere
+
+Spot-checked the rows above against fresh `search/repositories` measurements. **Every figure the
+2026-11-21 pass *measured* reproduced within a day's drift** — `mediago-drama` 110★ exactly,
+`KyaniteLabs/kinocut` 272→278★, `Netflix/photon` 258★ exactly, `OpenTimelineIO` 2,105→2,109★,
+`c2pa-rs` 452→453★. The figures that were wrong in earlier cycles were the ones *inherited from
+listicles*, never the ones measured. **Measuring is cheap; inheriting is expensive.** No row above
+needed correction this pass.
+
+**Two agent/model families were added to other files rather than duplicated here:**
+
+- **Provenance & watermarking models** — `facebookresearch/videoseal` (MIT, 828★),
+  `facebookresearch/audioseal` (MIT, 804★), `adobe/trustmark` (MIT, 189★),
+  `google-deepmind/synthid-text` (Apache-2.0, 1,258★). These retract this KB's previous claim that no
+  permissive watermarking library existed. Full table in `repos/foundations.md`; the adversarial
+  counter-measurement is in `intel/trends.md` trend 8; the recipe is `compose/patterns.md` Pattern 8.
+- **Broadcast automation (Sofie, MIT)** — a 23-repo MIT ecosystem from NRK that retracts the "no open
+  MOS implementation exists" claim. Platform in `verticals/solutions.md`, libraries in
+  `repos/foundations.md`, the agent recipe in `compose/patterns.md` Pattern 7.
+
+**Also added to `repos/foundations.md` this pass, and load-bearing for Pattern 2:**
+[`pyannote/pyannote-audio`](https://github.com/pyannote/pyannote-audio) (MIT, 10,831★, pushed
+2026-11-19) — the speaker-diarization toolkit `whisperX` is built on, absent from this KB until now;
+and [`facebookresearch/demucs`](https://github.com/facebookresearch/demucs) (MIT, 10,423★,
+**archived**) for stem separation, which is how a title gets re-dubbed when the original M&E stems are
+lost.
+
+### Short-form drama (the APAC category clients ask about): informed gap, not silence
+
+Searched the `short-drama`, `micro-drama` and `ai-short-drama` topics. The category is commercially
+real; the open code is mostly unusable, and the reason is worth recording so no future pass re-adopts
+these:
+
+| Candidate | Measured | Verdict |
+|---|---|---|
+| [mediago-dev/mediago-drama](https://github.com/mediago-dev/mediago-drama) | Apache-2.0, 110★/29f, 2026-10-21 | **The only usable one.** Re-measured at exactly the 110★ the last pass recorded. Novel→short-drama agent workbench. Already in Tier 1 above. |
+| [Anil-matcha/Open-AI-Micro-Drama-Generator](https://github.com/Anil-matcha/Open-AI-Micro-Drama-Generator) | **no LICENSE file**, 587★/123f, 2026-08-02 | **Reject.** Unlicensed, and a wrapper around *paid closed* APIs (Seedance, Kling, Veo, Sora) — neither open nor self-hostable. |
+| `chatfire-AI/drama-skills` | slug does not resolve | **Reject.** Promoted by a directory site as "~4.4k★, MIT". It does not exist. |
+| `huobao-drama` | unconfirmed at any slug; reported CC-BY-NC-SA-4.0 | **Reject.** Non-commercial licensing would bar client work even if the claimed ~18k★ are real. |
+
+**The honest line for a client:** for short-form drama, the open ecosystem gives you one Apache-2.0
+workbench and otherwise expects you to rent closed video models. Build this pattern on the
+Apache-2.0 generators already in Tier 1 (Wan 2.2, LTX-Video) rather than on a short-drama-branded
+wrapper, and you keep both the license position and the model choice.
 
 ## Corrections to earlier cycles of this file
 

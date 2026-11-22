@@ -9,6 +9,44 @@ updated: 2026-11-22
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-22 — pass 4: the conformance & preservation plane (two literal zeros)
+
+Fourth pass of the same day. The plane was **measured at zero across all eight files at `HEAD`**
+before any research: `mediainfo`, `mediaconch`, `ebur128`, `R128`, `BS.1770`, `CALM`, `archivematica`,
+`bagit`, `qctools`, `FFV1`, `Matroska`, `OAIS` and `preservation` returned **no match anywhere in
+this KB**. Nothing here overlaps passes 1–3 (general, monetization, accessibility).
+
+**The headline is an absence, and it is the cleanest one this KB has measured:**
+
+| Query | Total | Note |
+|---|---|---|
+| `broadcast QC agent` | **0** | Nothing, under any license. |
+| `file-based quality control video stars:>=20` | **0** | Nothing above the noise floor. |
+| `media preservation agent` | 1 | 1 star. Not a finding. |
+| `archive metadata agent stars:>=20` | 2 | Both keyword collisions (`jettbrains/-L-`, `CNTRUN/Termux-command`). |
+| `loudness normalization stars:>=50` | 2 | Both TTS/voice tools, not broadcast compliance. |
+| `mediainfo mcp` | 2 | Top results at 0 and 2 stars. |
+| `loudness agent` | 287 | **Contaminated, not populated** — top hit `kajisho5/ffmpeg-skill` (MIT, 9637★/859f) is an FFmpeg *skill pack*. Deliberately excluded; recorded so a later pass does not "discover" it as a media agent. |
+
+So this section adds **no agent rows**, because there are none to add. Fourth consecutive
+confirmation of this KB's law: **permissive open source follows the file format, not the judgment.**
+The format layer of this same plane is mature and permissive — six implementations, several pushed
+the day of this pass — and is catalogued in `repos/foundations.md`, not here.
+
+**Licensing discovery of the pass, and it is reusable in all twelve industries.** A license can live
+in three places and GitHub reads only one: a plain `LICENSE` file; **an HTML file** (`License.html` —
+this is how `bavc/qctools` and `MediaArea/MediaConch` ship theirs, both reported `NOASSERTION`/`NONE`);
+and **packaging metadata with no license file at all** (`bagit-python` declares `License :: Public
+Domain` in a `pyproject.toml` classifier). Six repos in this plane carry a GitHub license field that
+is wrong rather than vague. Best single find: **MediaConch is dual GPLv3+ *or* MPLv2+**, so under MPL
+it can be linked into a closed client product — a fact every secondary source misses, sitting in an
+HTML file.
+
+**Dormancy worth recording:** `MediaArea/MediaConch`, the tool the field cites for Matroska/FFV1
+conformance, has **not been pushed since 2021-09-29** (35★) while its siblings `MediaInfoLib` and
+`RAWcooked` were both pushed 2026-11-22. Third plane in a row where **conformance is the weakest
+link** (accessibility found it in caption conformance; the ad plane in SCTE-35).
+
 ## 2026-11-22 — pass 3: the accessibility plane (the duty with a deadline)
 
 Third pass of the same day. Before starting, the gap was **measured, not guessed**: across all eight

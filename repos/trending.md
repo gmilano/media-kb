@@ -10,6 +10,62 @@ updated: 2026-11-22
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-22 — pass 4: the conformance & preservation infrastructure (20 verified repos)
+
+Fourth pass of the same day, on a plane that returned **no match in any of the eight files** at
+`HEAD` before this pass. Every row below was measured this pass: stars/forks/push date via
+`search/repositories`, existence via `git ls-remote`, **license by reading bytes**.
+
+**Conformance & technical QC**
+
+| Repo | License | Stars/forks | Push | Note |
+|---|---|---|---|---|
+| MediaArea/MediaInfo | BSD-2-Clause | 2075★/203f | 2026-11-19 | De-facto technical-metadata reader. |
+| MediaArea/MediaInfoLib | BSD-2-Clause | 806★/229f | 2026-11-22 | The library to link; ratio 3.5 = deployed. |
+| MediaArea/RAWcooked | BSD-2-Clause | 50★/13f | 2026-11-22 | RAW → FFV1/Matroska, reversible. |
+| bavc/qctools | **GPL-3.0** (in `License.html`; GUI + ffmpeg stats filter additionally BSD) | 389★/44f | 2026-11-15 | GitHub says `NOASSERTION`. |
+| MediaArea/MediaConch | **GPLv3+ *or* MPLv2+** (in `SourceCode/License.html`) | 35★/10f | **2021-09-29** | Dual-licensed — MPL route is embeddable. Dormant. PREFORMA Consortium condition on bundled libs. |
+| amiaopensource/vrecord | **CC-BY-4.0** | 206★/55f | 2026-11-01 | A *content* license on software — reimplement, do not vendor. |
+
+**Loudness**
+
+| Repo | License | Stars/forks | Push | Note |
+|---|---|---|---|---|
+| csteinmetz1/pyloudnorm | MIT | 796★/71f | 2026-01-04 | ITU-R BS.1770 meter in Python. |
+| jiixyj/libebur128 | MIT | 498★/94f | 2026-11-20 | Canonical EBU R128 implementation; ratio 5.3 = ships inside other products. |
+| librosa/librosa | **ISC** | 9106★/1149f | 2026-11-22 | Permissive BSD-equivalent, often misrecorded as MIT. |
+| MTG/essentia | **AGPL-3.0** | 3814★/646f | 2026-11-18 | Reaches across a network boundary. |
+| bbc/peaks.js | **LGPL-3.0** | 3413★/292f | 2026-10-21 | Routinely misreported as MIT. |
+
+**Preservation & repository**
+
+| Repo | License | Stars/forks | Push | Note |
+|---|---|---|---|---|
+| fcrepo/fcrepo | **Apache-2.0** | 255★/138f | 2026-11-20 | **The only permissive platform in the tier.** Ratio 1.8. |
+| artefactual/archivematica | AGPL-3.0 | 527★/136f | 2026-11-21 | Reference OAIS pipeline. |
+| archivesspace/archivesspace | **ECL-2.0** (in `COPYING`, 747 B) | 449★/255f | 2026-11-20 | Apache-shaped, OSI-approved, almost no tool recognizes the id. |
+| openpreserve/jhove | **LGPL-2.1+** (in `LICENSE`, 879 B) | 204★/86f | 2026-09-16 | Its own license file misspells "Lesser" as "Lessor". |
+| openpreserve/fido | **Apache-2.0** (in `LICENSE.txt`, 615 B) | 160★/49f | 2026-11-18 | PRONOM format identification; GitHub says `NOASSERTION`. |
+| Islandora/islandora | **GPL-2.0** (`LICENSE`, 18091 B) | **refs=1659, stars unavailable** | — | `search/repositories` returns nothing; `ls-remote` returns 1659 refs. **Fifth measurement of that false negative.** |
+| LibraryOfCongress/bagit-python | **Public Domain** (only in `pyproject.toml`; **no license file**) | 276★/101f | 2026-06-18 | Reference BagIt implementation. |
+
+**AI layer over the archive** (not new to the world; new as a row connecting it to the tier above)
+
+| Repo | License | Stars/forks | Push | Note |
+|---|---|---|---|---|
+| facebookresearch/faiss | MIT | 41857★/4661f | 2026-11-22 | Collection-scale retrieval. |
+| mlfoundations/open_clip | MIT (`LICENSE`, 1228 B) | 14281★/1345f | 2026-11-21 | Shot-level search over unlabelled footage; GitHub says `NOASSERTION`. |
+
+**Demoted — documents, not code** (T13 applied again): `usnationalarchives/digital-preservation`
+(Public Domain, 245★, **refs=2**) is NARA's preservation *policy*; `digipres/awesome-digital-preservation`
+(CC0-1.0, 151★) is an awesome-list. Both are worth citing and neither is software.
+
+**Channel notes added this pass.** (1) A license may ship as **HTML** — searching the repo for
+`filename:LICENSE` is what surfaces `License.html`; plain-name raw probes miss it. (2) A license may
+exist **only in packaging metadata**. (3) `search/repositories` false negatives measured again
+(Islandora). (4) `MediaArea/MediaInfoOnline` returned **refs=0 — the slug does not exist**; dropped
+rather than carried.
+
 ## 2026-11-22 — pass 3: the accessibility & conformance infrastructure
 
 Third pass of the same day, on the plane measured at **zero** across all eight files at `HEAD`

@@ -264,6 +264,120 @@ an ad buyer, asks for the evidence.
 > `Netflix/photon` (IMF, which carries caption/AD assets), `shaka-project/shaka-player` and
 > `videojs/video.js` (playback). Not re-listed here.
 
+## The conformance & preservation plane — measured 2026-11-22 (pass 4)
+
+Pass 4 of the same day. Before writing a line, this plane was **measured at zero across all eight
+files at `HEAD`**: `mediainfo`, `mediaconch`, `ebur128`, `R128`, `BS.1770`, `CALM`, `archivematica`,
+`bagit`, `qctools`, `FFV1`, `Matroska`, `OAIS` and `preservation` each returned **no match in any
+file in this KB**. This is not a refresh of existing rows — it is a layer the KB did not have.
+
+Three facts govern everything below, and all three were established by reading bytes, not metadata:
+
+1. **GitHub's license field is wrong on six repos in this plane.** Not "imprecise" — wrong.
+2. **A license can hide in three different places.** A plain `LICENSE` file is only the first.
+3. **This plane has a mature permissive tool layer and no agent layer at all.** Measured, in
+   `agents/top.md`, not assumed.
+
+### Where a license actually lives — three channels, and GitHub only reads one
+
+This is the generalizable channel finding of the pass, and it applies to all twelve industries.
+
+| Channel | Example | What GitHub's API reports | What the bytes say |
+|---|---|---|---|
+| Plain `LICENSE` / `COPYING` file | `openpreserve/fido` → `LICENSE.txt` (615 B) | `NOASSERTION` | Apache-2.0 |
+| **An HTML file** — `License.html` | `bavc/qctools`, `MediaArea/MediaConch` | `NOASSERTION` / `NONE` | GPL-3.0 / GPLv3+ **and** MPLv2+ |
+| **Packaging metadata only** — no license file exists | `LibraryOfCongress/bagit-python` → `pyproject.toml` classifier | `NONE` | `License :: Public Domain` |
+
+Practical rule, added to this KB's channel notes: when the license field reads `NOASSERTION` or
+`NONE`, probing plain filenames is **not sufficient**. Search the repo for `filename:LICENSE` (which
+finds `License.html`), and if that is empty, read the packaging manifest. Three of the rows below
+would have been recorded with the wrong license by a plain-name probe alone.
+
+### Conformance & technical QC — permissive at the metadata layer, copyleft at the checker
+
+| Repo | License | Stars / forks | Last push | What it is |
+|---|---|---|---|---|
+| [MediaArea/MediaInfo](https://github.com/MediaArea/MediaInfo) | BSD-2-Clause | 2075★ / 203f | 2026-11-19 | The de-facto standard technical-metadata reader for audiovisual files. Permissive, active, embeddable. |
+| [MediaArea/MediaInfoLib](https://github.com/MediaArea/MediaInfoLib) | BSD-2-Clause | 806★ / 229f | 2026-11-22 | The library under MediaInfo. This is the one you link against; 229 forks against 806 stars (ratio 3.5) says it is deployed, not admired. |
+| [MediaArea/RAWcooked](https://github.com/MediaArea/RAWcooked) | BSD-2-Clause | 50★ / 13f | 2026-11-22 | Lossless RAW image sequence → FFV1 in Matroska, reversibly. The film-scan preservation workhorse. |
+| [MediaArea/MediaConch](https://github.com/MediaArea/MediaConch) | **GPLv3+ *or* MPLv2+ (dual)** — in `SourceCode/License.html` | 35★ / 10f | **2021-09-29** | Conformance checker for Matroska / FFV1 / LPCM. See the two warnings below — both matter commercially. |
+| [bavc/qctools](https://github.com/bavc/qctools) | **GPL-3.0**, in `License.html`; the GUI part and the FFmpeg statistics filter are additionally BSD | 389★ / 44f | 2026-11-15 | Visual QC analysis for video — the tool archivists actually use to find tape and transfer defects. |
+| [amiaopensource/vrecord](https://github.com/amiaopensource/vrecord) | **CC-BY-4.0** — a *content* license on software | 206★ / 55f | 2026-11-01 | Analog/VHS capture to preservation-grade targets. Widely used; see the licensing caveat below. |
+
+**Two warnings on MediaConch, and they point in opposite directions.**
+
+- *The good news nobody states:* it is **dual-licensed GPLv3+ / MPLv2+**. Every listicle records it as
+  "GPL" and stops. The MPL-2.0 option is file-level copyleft, which means **MediaConch can be linked
+  into a proprietary or client-owned product** — you keep modifications to MediaConch's own files
+  open and nothing else. For a deliverable that must ship inside a client's closed system, this is
+  the difference between usable and unusable, and it is invisible in GitHub's UI.
+- *The bad news:* the repository **has not been pushed since 2021-09-29**, and carries 35 stars
+  against 72 refs. The canonical open conformance checker is effectively dormant. Its own license
+  file also records that several bundled libraries and `libcurl`/`zlib` support are **disabled
+  pending consent of the PREFORMA Consortium** — a licensing condition written into the project by
+  the EU programme that funded it. Budget for carrying it yourself if a client build depends on it.
+
+**The `vrecord` licensing trap.** `vrecord` is published under **CC-BY-4.0**, a Creative Commons
+*content* license applied to executable code. Creative Commons itself advises against using CC
+licenses for software: CC-BY grants copyright permission but says nothing about patents and has no
+source-disclosure or warranty-disclaimer structure built for code. It is permissive in spirit and
+ambiguous in practice. Use it as a *documented procedure* to reimplement; do not vendor it into a
+client deliverable and call the licensing settled. Same shape as the `NOASSERTION` traps earlier
+cycles found, one level further out: here the license is real, correctly stated, and **the wrong
+instrument for the artefact**.
+
+### Loudness — the regulated measurement, and the permissive implementation is tiny
+
+Loudness is the cleanest example in media of this KB's standing rule that regulators **mandate the
+artefact and are silent on the method** (see `intel/trends.md` T18). Every region sets a target in
+LUFS/LKFS; not one specifies the code that measures it.
+
+| Repo | License | Stars / forks | Last push | What it is |
+|---|---|---|---|---|
+| [csteinmetz1/pyloudnorm](https://github.com/csteinmetz1/pyloudnorm) | MIT | 796★ / 71f | 2026-01-04 | ITU-R BS.1770 loudness meter and normalization in Python. The fastest path to a measured number in a pipeline. |
+| [jiixyj/libebur128](https://github.com/jiixyj/libebur128) | MIT | 498★ / 94f | 2026-11-20 | The canonical C implementation of EBU R128 / ITU-R BS.1770. 94 forks on 498 stars (ratio 5.3) — this is the one that ships inside other products. |
+| [librosa/librosa](https://github.com/librosa/librosa) | ISC | 9106★ / 1149f | 2026-11-22 | General audio analysis. ISC is a permissive BSD-equivalent — safe, and often misrecorded as MIT. |
+| [MTG/essentia](https://github.com/MTG/essentia) | **AGPL-3.0** | 3814★ / 646f | 2026-11-18 | Audio feature extraction at scale. AGPL reaches across a network boundary — if it sits behind a client's API, the obligation follows. A commercial license exists; it is not open source. |
+| [bbc/peaks.js](https://github.com/bbc/peaks.js) | **LGPL-3.0** | 3413★ / 292f | 2026-10-21 | BBC waveform visualization UI. LGPL is workable for a linked front-end component; it is not MIT, and vendor roundups routinely say it is. |
+
+**The asymmetry worth pricing.** The entire permissive loudness layer is two small MIT repos —
+`libebur128` (498★) and `pyloudnorm` (796★) — sitting under a duty that applies to effectively every
+broadcaster and, as of July 2026 in the US, to streaming distribution as well. The measurement is
+solved and free; the **compliance workflow around it is not open source anywhere**. That is the
+build, and it is a small build on a large obligation.
+
+### Preservation & repository — OAIS, and the one Apache-2.0 platform
+
+| Repo | License | Stars / forks | Last push | What it is |
+|---|---|---|---|---|
+| [fcrepo/fcrepo](https://github.com/fcrepo/fcrepo) | **Apache-2.0** | 255★ / 138f | 2026-11-20 | Fedora repository core. **The only permissively-licensed platform in this tier** — 138 forks on 255 stars (ratio 1.8) is an infrastructure signature, not a promotion signature. |
+| [artefactual/archivematica](https://github.com/artefactual/archivematica) | **AGPL-3.0** | 527★ / 136f | 2026-11-21 | The reference OAIS-conformant preservation system. AGPL, so it is a system you deploy and integrate, not code you absorb. |
+| [archivesspace/archivesspace](https://github.com/archivesspace/archivesspace) | **ECL-2.0**, in `COPYING` (747 B) | 449★ / 255f | 2026-11-20 | Archival description and access. ECL-2.0 is Apache-2.0 with a narrowed patent grant for academic contributors — OSI-approved and permissive; almost no tool recognizes the identifier. |
+| [openpreserve/jhove](https://github.com/openpreserve/jhove) | **LGPL-2.1-or-later**, in `LICENSE` (879 B) | 204★ / 86f | 2026-09-16 | Format validation (JSTOR/Harvard, now Open Preservation Foundation). Its own license file misspells "Lesser" as "Lessor" — a reminder that these strings are written by humans and should be read, not matched. |
+| [openpreserve/fido](https://github.com/openpreserve/fido) | **Apache-2.0**, in `LICENSE.txt` (615 B) | 160★ / 49f | 2026-11-18 | Format identification against the PRONOM registry. Permissive, active, and reported as `NOASSERTION` by GitHub. |
+| [Islandora/islandora](https://github.com/Islandora/islandora) | **GPL-2.0** (`LICENSE`, 18091 B) | *stars unavailable* — refs=1659 | — | Drupal + Fedora repository front end. **`search/repositories` returns nothing for this slug while `ls-remote` returns 1659 refs** — the false-negative pattern this KB has now measured five times. Existence is `ls-remote`. |
+| [LibraryOfCongress/bagit-python](https://github.com/LibraryOfCongress/bagit-python) | **Public Domain** — declared *only* in the `pyproject.toml` classifier; **there is no license file** | 276★ / 101f | 2026-06-18 | Reference implementation of BagIt, the packaging format for archival transfer. Public domain is the least encumbered status available; it is also the easiest to miss. |
+
+### The AI layer over the archive — already permissive, already proven
+
+Nothing in this subsection is new to the world; what is new is that this KB had no row connecting it
+to the preservation tier. These two are what turn a preserved archive into a searchable one.
+
+| Repo | License | Stars / forks | Last push | Role in this plane |
+|---|---|---|---|---|
+| [facebookresearch/faiss](https://github.com/facebookresearch/faiss) | MIT | 41857★ / 4661f | 2026-11-22 | Vector index for archive retrieval at collection scale. |
+| [mlfoundations/open_clip](https://github.com/mlfoundations/open_clip) | MIT (`LICENSE`, 1228 B) | 14281★ / 1345f | 2026-11-21 | Open visual-text embeddings — the shot-level search layer over footage with no usable metadata. Reported `NOASSERTION`; the bytes say MIT. |
+
+### Documents, not code — demoted on sight
+
+This KB's T13 rule (four "repos" in the ad plane were documents) applies again. Both of these are
+real, useful and **not software**; carrying them as tooling rows would be the padding this KB refuses.
+
+| Repo | License | Stars | What it actually is |
+|---|---|---|---|
+| [usnationalarchives/digital-preservation](https://github.com/usnationalarchives/digital-preservation) | Public Domain (`LICENSE.md`, 1335 B) | 245★ / 22f, **refs=2** | NARA's preservation *policy and strategy documents*. A federal-agency primary source — cite it, do not `pip install` it. |
+| [digipres/awesome-digital-preservation](https://github.com/digipres/awesome-digital-preservation) | CC0-1.0 | 151★ / 15f | An awesome-list. Excellent starting index, zero executable content. |
+
 ## ⚠️ Archived or dormant — do not start new work here
 
 Four repos that earlier cycles of this KB listed as live foundations:

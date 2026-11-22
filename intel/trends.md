@@ -371,6 +371,100 @@ this in the proposal rather than discovering it in delivery — and note that an
 deliver the *carriage* (Able Player track, LIBRAS asset management) while the translation itself
 stays human or licensed.
 
+## 21. The fourth plane, the fourth identical result — the law is not a coincidence any more
+
+Pass 4 measured broadcast QC, loudness compliance and archive preservation. The result is the same
+shape this KB has now found in provenance, monetization and accessibility:
+
+> **Permissive open source follows the file format, not the judgment.**
+
+What makes the conformance plane the strongest evidence yet is that both halves are unusually crisp.
+The format half: six permissive implementations of measurement and identification, several pushed the
+same day as this pass (`MediaInfo` BSD-2-Clause 2075★, `MediaInfoLib` BSD-2-Clause 806★, `libebur128`
+MIT 498★, `pyloudnorm` MIT 796★, `fido` Apache-2.0, `bagit-python` public domain). The judgment half:
+`broadcast QC agent` → **0 results**, `file-based quality control video stars:>=20` → **0 results**.
+
+Four planes, four confirmations, two of them literal zeros. This is now the most reliable predictive
+rule in this KB: **to find where the margin is, find the regulated decision whose inputs are already
+free.** It transfers to every industry in the rotation.
+
+## 22. A license can live in an HTML file, or in nothing but a packaging classifier
+
+This pass found three distinct channels for a license declaration, and GitHub's license field reads
+only the first:
+
+- a plain `LICENSE`/`COPYING` file — `fido` (Apache-2.0), `jhove` (LGPL-2.1+), `archivesspace` (ECL-2.0);
+- **an HTML file** — `bavc/qctools` and `MediaArea/MediaConch` both ship `License.html`, and GitHub
+  reports `NOASSERTION`/`NONE` for both;
+- **packaging metadata with no license file at all** — `LibraryOfCongress/bagit-python` declares
+  `License :: Public Domain` in a `pyproject.toml` classifier and ships no license file.
+
+Six repos in this plane carry a GitHub license field that is **wrong, not merely vague**. The
+operational upgrade to this KB's existing "`NOASSERTION` is a pointer, open the file" rule: when
+plain filenames come back empty, **search the repo for `filename:LICENSE`** (that is what surfaced
+`License.html`) and then read the packaging manifest. A plain-name probe alone would have
+mis-licensed three of the rows now in `repos/foundations.md`.
+
+The single most commercially useful thing it uncovered: **MediaConch is dual-licensed GPLv3+ *or*
+MPLv2+.** Every secondary source records it as "GPL". Under the MPL-2.0 option it can be linked into
+a closed client product. That fact was sitting in an HTML file.
+
+## 23. The US just extended loudness guidance to streaming — and it is guidance, not law
+
+**ATSC revised A/85, its loudness Recommended Practice, on 2026-07-08 (announced 2026-07-15), and
+the revision extends guidance beyond traditional television to hybrid broadcast and streaming.**
+That is the material change in this plane in 2026.
+
+The nuance decides the architecture, and it is this KB's P9 rule applied again — **do not overstate
+the mandate**:
+
+- The **CALM Act** is the law. Its FCC rules took effect 2012-12-13 (47 CFR § 73.682(e)) and they
+  cover **television commercials only** — not radio, not internet or streaming delivery. Enforcement
+  is complaint-driven and has reportedly not gone beyond warnings.
+- **A/85:2026-07 is a Recommended Practice**, not a regulation. It is the document the industry
+  treats as the method, and the FCC's rules reference the ATSC practice — but a streaming service is
+  not breaking the CALM Act by ignoring it.
+
+So never tell a client "streaming loudness is now regulated in the US." Tell them: *the statutory
+duty still stops at broadcast commercials; the industry's reference method was extended to streaming
+in July 2026; and the only permissive implementations of the measurement are two small MIT repos.*
+That sentence is defensible, and it is also the pitch.
+
+## 24. LATAM is deploying archive AI faster than anyone is building archive-AI tooling
+
+LATAM out-evidenced its own narrative again — the fourth industry in this rotation where that has
+happened — and this time the evidence is **named production systems over archives**:
+
+- **Listín Diario** (Dominican Republic) built a RAG platform over its **136-year archive**, cutting
+  research that took full days down to minutes, with **25% of the archive searchable** so far.
+- **La Silla Vacía** (Colombia) runs **SillaBot**, which lets readers query its archive, plus a
+  fact-checking prototype.
+- **ABC Color** (Paraguay) runs semantic archive search and automated news monitoring.
+- The **IAPA/SIP**, with Google News Initiative backing, launched an **AI Video Lab 2026 for more
+  than 40 outlets** (its earlier AI Product Lab has closed).
+- The **EBU** and **Alianza Informativa Latinoamericana** signed a news-sharing agreement effective
+  **2026-05-01** — not AI-specific, but it is the pipe regional content moves through.
+
+The asymmetry is the finding: the region has **named, shipped, production archive-AI deployments and
+no open archive-AI tooling of its own**. Every preservation platform in `verticals/solutions.md`
+comes from the North American and European library world. For a studio that sells delivery rather
+than product, deployments without tooling is the better market.
+
+## 25. The canonical open conformance checker has been dormant for five years
+
+`MediaArea/MediaConch` is the tool the preservation field cites for Matroska/FFV1/LPCM conformance.
+Its repository has **not been pushed since 2021-09-29** and carries 35 stars. Meanwhile its siblings
+from the same vendor are alive and were pushed the day of this pass — `MediaInfoLib` (2026-11-22),
+`RAWcooked` (2026-11-22), `MediaInfo` (2026-11-19).
+
+Two things follow. First, this is the **third plane in a row where conformance is the weakest link** —
+the accessibility plane found the same (T15/T16 and the BSD-licensed caption conformance gap), and
+the ad plane found it in SCTE-35 signalling. Validation is consistently the least-maintained layer in
+open media tooling, across three unrelated planes. Second, MediaConch's own license file records that
+bundled libraries and `libcurl`/`zlib` support are **disabled pending consent of the PREFORMA
+Consortium**, the EU programme that funded it. A client build that depends on it should budget to
+carry it. Do not present it as a maintained upstream.
+
 ## Low-confidence items — flagged, not promoted
 
 - Market sizing diverges ~2× across vendors (see `intel/market.md`); every figure is a vendor estimate.

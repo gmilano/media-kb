@@ -560,6 +560,115 @@ Do not let a LATAM proposal imply automated sign language.
 
 ---
 
+## Pattern 13 — Delivery QC gate with an evidence trail (the small build on the large obligation)
+
+**The opportunity in one line:** the measurement is free and permissive, the *decision* has no open
+implementation anywhere (`broadcast QC agent` → **0 results**, measured 2026-11-22), and the duty
+touches every distributor in every region.
+
+**What it does.** Every file about to be delivered or published passes a gate that (a) extracts
+technical metadata, (b) measures loudness against the *territory's* target, (c) validates container
+and format conformance, and (d) emits a signed, human-readable **evidence record** — so that when a
+regulator or a distribution partner asks, the answer is a document, not a recollection.
+
+**The parts — all real, all verified 2026-11-22:**
+
+| Step | Component | License | Why this one |
+|---|---|---|---|
+| Technical metadata | [MediaArea/MediaInfoLib](https://github.com/MediaArea/MediaInfoLib) | BSD-2-Clause | The library, not the CLI — link it. Pushed 2026-11-22. |
+| Format identification | [openpreserve/fido](https://github.com/openpreserve/fido) | Apache-2.0 | PRONOM-backed identification; catches "it is not the format the filename claims". |
+| Loudness measurement | [jiixyj/libebur128](https://github.com/jiixyj/libebur128) | MIT | Canonical EBU R128 / ITU-R BS.1770 implementation. Target is a **parameter**. |
+| Loudness in-pipeline | [csteinmetz1/pyloudnorm](https://github.com/csteinmetz1/pyloudnorm) | MIT | Fastest path to a number in Python; use for the orchestration layer. |
+| Container conformance | [MediaArea/MediaConch](https://github.com/MediaArea/MediaConch) | **GPLv3+ *or* MPLv2+** | **Take the MPL-2.0 option** if the gate ships inside a client's closed system. Dormant since 2021 — vendor it and budget to carry it. |
+| Visual/signal QC | [bavc/qctools](https://github.com/bavc/qctools) | GPL-3.0 | Only where a **separate process** is acceptable — GPL-3.0, so do not link it into a proprietary binary. Invoke it, read its output. |
+| Format validation | [openpreserve/jhove](https://github.com/openpreserve/jhove) | LGPL-2.1+ | For still/document essence accompanying the delivery. |
+
+**Wiring.**
+
+1. **Profile first, code second.** Build a `territory.yaml` holding the loudness target and tolerance
+   per market: **EMEA −23 LUFS / −1 dBTP (EBU R128)**; **North America** per **ATSC A/85:2026-07**,
+   which as of 2026-07-08 extends to hybrid and streaming delivery; **Japan** per **ARIB TR-B32**
+   (this KB records the −24 LKFS figure as *unverified secondary* — read the ARIB document before
+   committing it). The target is configuration. Hardcoding it is the defect that makes the gate
+   unusable in a second region.
+2. **Measure, then judge, and keep them separate.** `MediaInfoLib` + `fido` + `libebur128` produce
+   facts. A separate, explicit rules layer turns facts into pass/fail. Keep the thresholds in
+   versioned rules the client owns — this is the same structural choice as P10's CQL library in
+   healthcare, and for the same reason: **the rules are the deliverable with margin**, not the
+   measurement code.
+3. **The LLM writes the explanation, never the verdict.** The agent's job is to turn a failed check
+   into "this file is 2.3 LU over the EMEA target and its audio is 5.1 where the contract specifies
+   stereo" — prose for a human operator. The **pass/fail decision is deterministic code**. An LLM
+   that decides compliance is an unauditable gate and will not survive a client's first review.
+4. **Emit the evidence record and store it with the asset**, not in a log that rotates. This is the
+   part clients actually pay for and no open tool produces.
+5. **Human approval on every rejection that stops a delivery.** Same rule as P9 and P10: the agent
+   prepares, a person approves anything with a commercial consequence.
+
+**What to sell.** Not "AI QC". Sell **the evidence trail for a duty the client already has**, with
+the honest framing from T23: in the US the statutory duty still stops at broadcast commercials and
+A/85:2026-07 is a *Recommended Practice*; in EMEA R128 is the operational target. The gate is cheap
+because every input is permissively licensed; it is valuable because nothing open produces the record.
+
+**Do not promise:** an all-MIT deliverable. `MediaConch` under MPL-2.0 is file-level copyleft and
+`qctools` is GPL-3.0 — architect them as a linked library and a separate process respectively, and
+say so in the proposal. This is the CPT-shaped trap from healthcare in a milder form: **permissive
+inputs, encumbered validator.**
+
+## Pattern 14 — Archive to revenue: OAIS-grade ingest with an AI retrieval layer (the LATAM recipe)
+
+**Why this pattern exists.** LATAM has **named, shipped archive-AI deployments and no open
+archive-AI tooling of its own** (T24): Listín Diario's RAG platform over a 136-year archive with 25%
+searchable, La Silla Vacía's **SillaBot**, ABC Color's semantic archive search. The demand is proven,
+the tooling is all North American and European in origin, and there is no incumbent product. APAC
+shows the same demand from a different direction — the **ABU** reports Australian and Singaporean
+public broadcasters testing AI for **archiving and verification** specifically.
+
+**The parts — all real, all verified 2026-11-22:**
+
+| Layer | Component | License | Note |
+|---|---|---|---|
+| Repository core | [fcrepo/fcrepo](https://github.com/fcrepo/fcrepo) | **Apache-2.0** | **The only permissive platform in this tier.** Start here if the client is to own the result. 138 forks / 255 stars = infrastructure, not hype. |
+| Preservation pipeline | [artefactual/archivematica](https://github.com/artefactual/archivematica) | AGPL-3.0 | Reference **OAIS**-conformant ingest. Integrate as a deployed system; AGPL follows a networked deployment. |
+| Description & access | [archivesspace/archivesspace](https://github.com/archivesspace/archivesspace) | ECL-2.0 | Use when the client already has archivists and finding aids. |
+| Transfer packaging | [LibraryOfCongress/bagit-python](https://github.com/LibraryOfCongress/bagit-python) | **Public Domain** | Zero licensing cost. Use BagIt as the handoff format between client and studio. |
+| Lossless film/video | [MediaArea/RAWcooked](https://github.com/MediaArea/RAWcooked) | BSD-2-Clause | RAW scans → FFV1 in Matroska, **reversibly**. The preservation target for scanned film. |
+| Analog capture | [amiaopensource/vrecord](https://github.com/amiaopensource/vrecord) | **CC-BY-4.0** | Treat as a **documented procedure to reimplement**, not code to vendor — a content license on software (T22). Much LATAM broadcast heritage is on tape, so this step is often unavoidable. |
+| Speech → text | Whisper / `whisper.cpp` | MIT | Already in `repos/foundations.md`. The single highest-yield enrichment step for a news archive. |
+| Visual search | [mlfoundations/open_clip](https://github.com/mlfoundations/open_clip) | MIT | Shot-level retrieval over footage with no usable metadata. |
+| Vector index | [facebookresearch/faiss](https://github.com/facebookresearch/faiss) | MIT | Collection-scale retrieval. |
+
+**Wiring.**
+
+1. **Preserve before you enrich.** Ingest to an OAIS-conformant package (Archivematica, or Fedora
+   plus BagIt if the client must own the stack) and **fix the preservation master first**. Embeddings
+   are regenerable; a lost master is not. Teams that invert this order produce a searchable archive
+   they cannot re-derive.
+2. **Identify and validate on the way in** — `fido` for format identification, `MediaInfoLib` for
+   technical metadata, `jhove` for document/still essence. An archive ingested without this produces
+   confident, wrong metadata later, which is the keyword-collision failure this KB has recorded
+   before.
+3. **Enrich in a separate, rebuildable index.** Whisper for transcript, `open_clip` for visual
+   embeddings, `faiss` for retrieval. Never write derived AI output back into the preservation master
+   — keep it in a sidecar that can be thrown away and regenerated when models improve.
+4. **Cite or do not answer.** Follow Listín Diario's shape: a retrieval interface over the archive
+   that **always surfaces the source document**. For a newsroom this is not a nicety — an archive
+   assistant that paraphrases without citation is a correction liability.
+5. **Ship partial and say so.** Listín Diario is at **25% of its archive searchable** and that is
+   already in production and valuable. Scope the first engagement to one decade or one collection,
+   with a measured coverage number as the deliverable. "25% searchable, here is the number" is a far
+   better client artefact than an unbounded digitization programme.
+
+**What to sell.** Archive-to-revenue, with a measured coverage figure as the milestone — and, for a
+regional client, the **sovereignty argument from the imec-SMIT (VUB) May 2026 finding** that European
+media use AI heavily but do not control the infrastructure, models or rights that capture the value.
+That argument lands even harder in LATAM, where the outlets themselves name **control over their own
+content** as a primary concern. `fcrepo` under Apache-2.0 is what makes "you will own this" true.
+
+**Do not promise:** that the preservation and the broadcast handling come from one platform. They do
+not — every platform in this tier models objects and descriptions, not frames, timecode and essence
+(see the gap note in `verticals/solutions.md`). Assemble it, and price the assembly honestly.
+
 ## Anti-patterns — learned the hard way in this KB
 
 1. **Don't ship HunyuanVideo to EMEA or South Korea.** Its license excludes the EU, UK and KR by name.

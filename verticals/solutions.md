@@ -190,6 +190,43 @@ proximity, discoverability, previewability, and consistency/persistence. Those a
 player UI, not of the caption file. A pitch that only promises machine captions does not answer this
 rule at all; Able Player plus an axe-core gate does.
 
+## The preservation & repository tier — added 2026-11-22 (pass 4)
+
+The platform layer for archives. This KB already recorded that **there is no open broadcast MAM**
+(see the gap section above); that remains true. What does exist — and what this file had no row for —
+is the **library/archive** repository tier, which is mature, standards-based, and the natural host
+for a media archive that has to survive longer than any vendor.
+
+| Platform | License | Stars / forks | What it is | Customizable with AI? |
+|---|---|---|---|---|
+| [Fedora (fcrepo)](https://github.com/fcrepo/fcrepo) | **Apache-2.0** | 255★ / 138f | Durable repository core with a linked-data API. Built to outlive its own software. | Yes — permissive, API-first; embeddings and enrichment attach cleanly alongside it. |
+| [Archivematica](https://github.com/artefactual/archivematica) | **AGPL-3.0** | 527★ / 136f | The reference **OAIS-conformant** preservation pipeline: ingest → normalize → package → store. | Yes, as an integrated system. AGPL means the obligation follows a networked deployment. |
+| [ArchivesSpace](https://github.com/archivesspace/archivesspace) | **ECL-2.0** | 449★ / 255f | Archival description, accessioning and public access. 255 forks on 449 stars — institutions run it. | Yes — ECL-2.0 is Apache-2.0-shaped and permissive in practice. |
+| [Islandora](https://github.com/Islandora/islandora) | **GPL-2.0** | refs=1659 (stars unavailable — see note) | Drupal front end over Fedora: the "repository with a website" option. | Yes, as a deployed system; GPL-2.0 constrains redistribution of derivatives. |
+
+### This tier obeys this file's licence law — with one exception that matters
+
+This file's standing rule is **permissive at the pipeline, copyleft at the platform**. It holds again:
+Archivematica is AGPL, Islandora GPL-2.0. The exception is the important part — **Fedora is
+Apache-2.0**, which makes it the one platform in this tier you can build a client-owned product
+*around* rather than merely *deploy*. It is also the quietest: 255 stars, 138 forks. A fork ratio of
+1.8 is what real infrastructure looks like, and it is why star count is the wrong way to choose here.
+
+**Note on Islandora's numbers.** `search/repositories` returns nothing for `Islandora/islandora`
+while `git ls-remote` returns 1659 refs. The repository plainly exists and is substantial; the search
+index simply does not have it. Stars are recorded as unavailable rather than guessed. This is the
+fifth time this KB has measured that false negative — **existence is `ls-remote`, full stop.**
+
+### The gap, stated plainly: nothing here was built for broadcast
+
+Every platform above comes from the library, museum and university-archive world. They model
+*objects and descriptions*, not **frames, timecode, essence and carriage**. There is no open platform
+that does both — OAIS-grade preservation *and* broadcast-grade media handling. That is a real,
+measured hole in the open landscape and the reason `compose/patterns.md` P14 assembles the archive
+path from a permissive repository core plus the conformance tooling in `repos/foundations.md`,
+instead of naming a product. If a client already runs Archivematica or ArchivesSpace, integrate; if
+they are starting clean and want to own the result, start at Fedora.
+
 ## How to add the AI layer
 
 1. Deploy the platform **unmodified** — this preserves your license position for AGPL/GPL bases.

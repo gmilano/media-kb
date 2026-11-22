@@ -197,6 +197,59 @@ project, and the largest has 56 stars, against Subtitle Edit's 15,100 in the cap
 public, the caption half is solved by MIT tooling, and the AD half has no incumbent — open or
 commercial — with any real adoption.
 
+## The conformance & preservation plane has no agent layer — measured 2026-11-22 (pass 4)
+
+Pass 4 went looking for agents over broadcast QC, loudness compliance and archive preservation.
+**There are none.** Not "few", not "immature" — two of the four primary queries return literal zero.
+This is written down as a measurement because an informed gap is information and silence is not.
+
+| GitHub search query | Total results | Verdict |
+|---|---|---|
+| `broadcast QC agent` | **0** | Nothing exists, under any license. |
+| `file-based quality control video stars:>=20` | **0** | Nothing exists above the noise floor. |
+| `media preservation agent` | 1 | A single repo with **1 star**. Not a finding. |
+| `archive metadata agent stars:>=20` | 2 | **Both are keyword collisions** — `jettbrains/-L-` (GPL-3.0, 174★) and `CNTRUN/Termux-command` (120★) have nothing to do with archives. |
+| `loudness normalization stars:>=50` | 2 | Both are TTS/voice audio tools, not broadcast loudness compliance. |
+| `mediainfo mcp` | 2 | Top results have **0 and 2 stars**. The MCP layer over technical metadata does not exist yet. |
+| `loudness agent` | 287 | **Contaminated, not populated** — top hits are `kajisho5/ffmpeg-skill` (MIT, 9637★) and generic assistants. See the contamination note below. |
+
+### The fourth consecutive confirmation of this KB's structural law
+
+This is now measured in four separate planes of this KB — provenance, monetization, accessibility and
+conformance — and the law holds every time:
+
+> **Permissive open source follows the file format, not the judgment.**
+
+The conformance plane is the sharpest case yet, because the two halves sit side by side:
+
+- **The format layer is mature, permissive and actively maintained.** `MediaInfo` (BSD-2-Clause,
+  2075★), `MediaInfoLib` (BSD-2-Clause, 806★, pushed the day of this pass), `libebur128` (MIT, 498★),
+  `pyloudnorm` (MIT, 796★), `fido` (Apache-2.0), `bagit-python` (public domain). Six permissive
+  implementations of *measurement and identification*.
+- **The judgment layer is empty.** "Is this file fit to air?" and "does this archive transfer meet
+  the preservation target?" are decisions, and **zero** permissive agents make them.
+
+The commercial reading is the same one healthcare's prior-authorization finding produced, and it is
+the reason this plane is worth a proposal: the expensive, regulated, auditable *decision* has no open
+floor, while every input it needs is free and permissively licensed. That is where proprietary IP
+belongs.
+
+### Contamination warning — `loudness agent` returns 287 results and none of them qualify
+
+`kajisho5/ffmpeg-skill` (MIT, 9637★ / 859f) is real, popular and genuinely useful — and it is an
+**agent skill pack for driving FFmpeg**, not loudness or QC tooling. Retail's pass recorded the same
+hazard with Claude-Code marketing skill packs dominating `ecommerce mcp`, and noted that media
+shipped eight of them as headline agents before catching it. Not repeating that here: `ffmpeg-skill`
+is **excluded from this KB's agent tables deliberately**, and recorded here so a later pass does not
+"discover" it.
+
+### What stands in for an agent layer today
+
+Nothing in this KB's agent tiers covers this plane. The honest answer for a client engagement is that
+the agent is **the thing Globant builds**, assembled from the permissive parts catalogued in
+`repos/foundations.md` and wired per `compose/patterns.md` P13 (delivery QC gate) and P14
+(archive-to-revenue). There is no base to adopt and no incumbent to displace.
+
 ## Corrections to earlier cycles of this file
 
 The eight rows this file carried until today were **generic Claude-Code marketing/SEO skill packs, not

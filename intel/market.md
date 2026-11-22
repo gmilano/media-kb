@@ -141,6 +141,34 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   landscape or market shares** (Verbit, 3Play, AI-Media et al. appear only in their own marketing).
   Treat NA competitive positioning in this segment as *unresearched*, not *absent*.
 
+- **Loudness compliance just moved into streaming — as a method, not a mandate (new 2026-11-22).**
+  **ATSC revised A/85, its loudness Recommended Practice, on 2026-07-08** (announced 2026-07-15) and
+  the revision extends guidance beyond traditional TV to **hybrid broadcast and streaming**. The
+  statutory instrument, the **CALM Act** (FCC rules effective 2012-12-13, 47 CFR § 73.682(e)), still
+  covers **television commercials only** — not radio, not internet delivery — and enforcement is
+  complaint-driven. *The sellable framing:* the duty has not expanded, the industry's reference
+  method has, and a streaming operator that ignores A/85 is out of step with its distribution
+  partners rather than in breach of the law. Never pitch it as "streaming loudness is now regulated".
+- **The opportunity is the workflow, not the measurement.** The permissive loudness layer is two
+  small MIT repos (`libebur128` 498★, `pyloudnorm` 796★). Measurement is solved and free; the
+  **auditable compliance workflow around it is not open source anywhere** (`broadcast QC agent` → 0
+  results). A delivery-QC gate that produces an evidence trail is a small build against an
+  obligation that touches every distributor in the region. See `compose/patterns.md` P13.
+- **Public-domain primary sources are an asset here.** NARA publishes its preservation policy as a
+  public-domain repository (`usnationalarchives/digital-preservation`), and `bagit-python` — the
+  reference implementation of the archival transfer format — is public domain. For a US public-sector
+  engagement, the standards and the reference code carry **no licensing cost at all**.
+- **Adoption is board-level, which changes who the buyer is.** A Grant Thornton 2026 survey reports
+  **87% of media and entertainment boards have approved major AI investments**; Akamai's *State of AI
+  in Media 2026* frames the problem as converting broad experimentation into value. A 2026
+  NewscastStudio survey found ~45% expecting broadcast/production technology budgets to rise.
+- **Regulatory risk is comparatively low and that is a selling point.** Radio World reports **no
+  federal AI law enacted** as of this pass, with legislation under debate. Media is lightly regulated
+  next to banking or health, so in North America the binding constraints on an AI media build are
+  **union agreements and the loudness/accessibility duties**, not an AI statute.
+- **Informed gap:** this pass found **no sourced market-share data for broadcast QC or preservation
+  vendors** in North America. Treat competitive positioning in this plane as *unresearched*.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -248,6 +276,39 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   Act's disclosure scope. Plausible, legally untested, vendor-authored. Flag it to counsel; do not
   build a compliance promise on it.
 
+- **The conformance layer this plane depends on was built with EU public money (new 2026-11-22).**
+  `MediaArea/MediaConch`, the canonical open conformance checker for Matroska/FFV1/LPCM, carries a
+  licensing condition naming the **PREFORMA Consortium** — the EU programme that funded it — and
+  records that bundled libraries plus `libcurl`/`zlib` support are **disabled pending the
+  consortium's consent**. The open conformance stack is EMEA-origin, and its constraints are
+  EMEA-origin too. It has also **not been pushed since 2021-09-29**: an EMEA engagement that depends
+  on it must budget to carry it.
+- **R128 is the region's loudness target and the permissive implementation is European.**
+  **EBU R128** sets integrated loudness at **−23 LUFS** with true peak at or below **−1 dBTP**;
+  **EBU Tech 3341** specifies the meter. *Numbers in conflict across sources:* the tolerance is given
+  as **±0.5 LU** for non-live in one source and **±1 LU for live** in two — cite the **direction and
+  the primary document (EBU R128 v5.0)**, not a tolerance figure, in front of a client.
+- **Sovereignty is the EMEA argument, and there is now research behind it.** An **imec-SMIT (VUB)
+  report, May 2026** finds European media use AI heavily but **do not control the infrastructure,
+  models or rights that generate the value** — value accrues to whoever controls those layers. That
+  is the strongest available case for a client-owned stack assembled from permissive parts, which is
+  exactly what this plane offers: `MediaInfoLib` (BSD-2-Clause), `fido` (Apache-2.0), `fcrepo`
+  (Apache-2.0), `libebur128` (MIT).
+- **Build-in-house is already the trend — sell capability, not product.** The **DPP European Media
+  Trends 2026** report finds **a quarter of European media companies shifted strategy toward building
+  more in-house or taking on greater integration responsibility**, enabled by AI-assisted coding.
+  A studio that helps them build and own beats one that sells them a platform.
+- **The labelling fight continues and it cuts against this KB's flagship pattern.** The commercial
+  broadcasters' association **ACT**, in a **2026-06-16 issue paper**, argues for proportionate rules
+  respecting editorial control and **objects to blanket measures including the AI Act's Article 50
+  labelling duty**. Reinforces T14: Article 50 is in force, and the industry is lobbying against the
+  assumption that Pattern 1 is built on.
+- **Convening points for 2026:** the **EBU AI Forum 2026** (March 2026, with NVIDIA, Google and
+  Perplexity on the lineup) and the DPP Broadcaster Summit. Bloomberg reports European media facing
+  AI disruption alongside weak ad demand, with the Stoxx 600 media subindex's 2026 earnings growth
+  put at **6.9%** against ~10% for the broader index — budgets are tight, which favours
+  cost-reduction pitches like QC automation over growth pitches.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -343,6 +404,36 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   - **India:** nothing relevant to captioning or accessibility regulation found this pass.
   - **No Australian or Japanese audio-description quota** was found, in contrast to the FCC's explicit
     50-hours-per-quarter rule. APAC AD duties should be treated as unresearched.
+
+- **Japan has its own loudness instrument, and the number is not verified (new 2026-11-22).**
+  **ARIB TR-B32**, *Operational Guidelines for Loudness of Digital Television Programs*, is the
+  Japanese operational guideline. A vendor comparison table gives the target as **−24 LKFS / −1
+  dBTP**, but that is a **secondary source this pass could not confirm against the ARIB document** —
+  recorded as a lead, not a fact. The practical consequence is architectural and certain even when
+  the figure is not: **the loudness target is a per-region configuration value, not a constant**, so
+  any delivery-QC gate built for APAC must carry a per-territory profile (`libebur128` and
+  `pyloudnorm` both take the target as a parameter).
+- **Public broadcasters here are explicitly testing archive AI — which places this plane in APAC.**
+  The **ABU (Asia-Pacific Broadcasting Union)** reports public broadcasters in **Australia and
+  Singapore** exploring AI for newsroom work, **archiving and verification**. Archiving is named, not
+  inferred: this is the clearest regional demand signal for the preservation plane found in any
+  region this pass.
+- **Regulation accelerated sharply in the last year, and it fragmented.** A **Latham & Watkins
+  client alert (September 2026)** reports significant acceleration of AI regulation across APAC and
+  groups it into **risk-based frameworks (South Korea, Vietnam)** and **targeted rules (China)**.
+  South Korea has a comprehensive risk-based AI law. For a regional rollout this means the
+  compliance artefact differs per market — the same per-territory profile problem as loudness, one
+  layer up.
+- **Australia's regulator has published on AI in media.** **ACMA** issued a report on AI in media in
+  **April 2026**. This pass could not retrieve its findings; flagged as a primary source worth
+  reading before an Australian engagement.
+- **Adoption pace is second only to North America** (ASIAtechX 2026 trends), with the region split
+  between early-stage adopters and digitally mature, saturated markets. Kantar's Media Reactions
+  2026 puts Google ahead on consumer ad equity across APAC, followed by Netflix, YouTube, TikTok and
+  Instagram.
+- **Informed gap:** no authoritative regional survey of AI adoption **specifically among APAC
+  broadcasters** was found, and **no APAC-origin open preservation or QC tooling** turned up in any
+  query this pass. The tooling for this plane is entirely North American and European in origin.
 
 ### LATAM
 
@@ -469,6 +560,42 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   everywhere else in this pass, regulators mandate the **artefact** and are silent on the **method**.
   In LATAM that silence is widest, which is permission to automate — and the reason an AI-assisted
   accessibility pipeline can be sold here before the rules harden.
+
+- **The region is deploying archive AI faster than anyone is building archive-AI tooling (new
+  2026-11-22).** This is the pass's clearest regional finding, and unusually it rests on **named
+  production systems**, not vendor forecasts:
+  - **Listín Diario** (Dominican Republic) built an AI document platform over its **136-year
+    archive**, cutting research that took full days to minutes, with **25% of the archive searchable**.
+  - **La Silla Vacía** (Colombia) runs **SillaBot**, a reader-facing archive query tool, plus a
+    fact-checking prototype.
+  - **ABC Color** (Paraguay) runs semantic archive search and automated news monitoring.
+  - Industry voices at **BVS Media Connect 2026** framed the goal as turning a video library into a
+    searchable, reusable asset rather than a passive archive.
+- **The asymmetry is the opportunity.** Every preservation and QC platform catalogued in this KB
+  (`fcrepo`, `archivematica`, `archivesspace`, `islandora`, `MediaInfo`, `MediaConch`) originates in
+  the North American or European library and broadcast world. **No LATAM-origin open tooling for this
+  plane was found in any query this pass.** Named deployments plus absent tooling is the best
+  possible shape for a delivery business: the demand is proven and there is no incumbent product.
+- **The funded entry points are identifiable and currently open.** The **IAPA/SIP**, with Google
+  News Initiative support, launched an **AI Video Lab 2026 for more than 40 Latin American outlets**
+  (its earlier AI Product Lab has closed), and runs a 2026 dialogue series on AI and media.
+  **IFPIM** backs regional AI media initiatives and convenes CTRL+J on AI regulation and
+  sustainability. **Aspen Digital** published *Mind the Gap: AI and the Future of News in Latin
+  America* in January 2026. The **EBU–Alianza Informativa Latinoamericana** news-sharing agreement
+  took effect **2026-05-01**.
+- **What the outlets themselves say the problem is:** audience trust, business models and **control
+  over their own content** — which is an argument for client-owned stacks on permissive licences, not
+  for a hosted product. Note that `fcrepo` (Apache-2.0) is the one platform in the preservation tier
+  a client can genuinely own.
+- **Informed gap, stated rather than filled: no LATAM AI-media regulation was found this pass.**
+  The regional search returned adoption and funding coverage and **no specific 2026 national AI rules
+  for media** in any LATAM country. This is an *unsearched-to-conclusion* gap, not evidence of
+  absence — national AI bills and AI-training copyright rules in Brazil and Mexico are the obvious
+  next queries and were not run.
+- **Informed gap on loudness:** no LATAM loudness instrument was verified this pass. Several
+  countries in the region broadcast on ISDB-T/ISDB-Tb, whose Japanese lineage makes an ARIB-derived
+  loudness practice **plausible** — explicitly a hypothesis to test against a primary document, not
+  a finding, and not to be repeated to a client as fact.
 
 ## Globant positioning
 

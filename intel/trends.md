@@ -175,6 +175,97 @@ owning and extending the automation platform itself, with no copyleft obligation
 national broadcasters co-maintain. Nothing comparable exists for MAM, CMS or VOD — so this is one
 exception, not a repeal of trend 4.
 
+## 11. The monetization plane is open at both ends and dormant in the middle
+
+Researched for the first time on 2026-11-22 (second pass), and the shape is unusually clean:
+
+| Layer | Best permissive option | Last push | State |
+|---|---|---|---|
+| Auction | [prebid/Prebid.js](https://github.com/prebid/Prebid.js), [prebid-server](https://github.com/prebid/prebid-server) (Apache-2.0) | 2026-11-22 | Canonical, active, pushed today |
+| **Ad signalling (SCTE-35)** | [Comcast/scte35-js](https://github.com/Comcast/scte35-js) (Apache-2.0, 51★) | 2026-05-21 | **Thin** — and the Python alternative, [futzu/threefive](https://github.com/futzu/threefive), is dormant since 2024-11-27 |
+| Channel assembly | [Eyevinn/channel-engine](https://github.com/Eyevinn/channel-engine) (Apache-2.0) | 2026-11-06 | Active, small, EMEA-origin |
+| Measurement | [apache/druid](https://github.com/apache/druid), [pinot](https://github.com/apache/pinot), [snowplow](https://github.com/snowplow/snowplow) (Apache-2.0) | 2026-11-21/22 | ASF-maintained, industrial |
+| **Decisioning / agents** | — | — | **Nothing. Measured, see `agents/top.md`.** |
+
+The ends of this chain are in excellent health. The **hinge** — the cue-parsing layer that connects a
+broadcaster's playout to an ad auction — is 51 stars of maintained TypeScript and a dormant
+two-year-old Python library whose sibling (`x9k3`) has no LICENSE file at all. The layer *above* the
+whole chain, decisioning, does not exist in open source in any form this KB could verify.
+
+**Why this is a trend and not a list:** it inverts the pattern everywhere else in this KB. In
+generation, the models are the fast-moving part and integration is the drudgery. Here the
+infrastructure is mature and *someone else maintains it*, while the two pieces that decide whether a
+deal is differentiated — the cue bridge and the decisioning agent — are the empty ones. Both are
+small. Neither needs a GPU.
+
+## 12. Advertising overtook subscription as the growth engine — and that is the LATAM story
+
+The KB has carried LATAM market totals for several cycles without the mechanism. The mechanism is ads:
+
+- **LATAM media revenues reach ~$65B in 2026, and Omdia names advertising and bundling as the
+  drivers** — advertising is now the *primary* driver of regional media growth, not subscriptions.
+- **Brazil is the world's #3 FAST market by revenue (~$152M), behind only the US and UK.** A
+  mid-sized market punching far above its weight in exactly the ad-supported format whose assembly
+  layer (`channel-engine`) is Apache-2.0.
+- **PwC: advertising passed $1T globally for the first time in 2025 and is projected at $1.4T by
+  2030**, with streaming still the largest single revenue component (~$56.3B) in 2030.
+- Netflix holds ~50% of LATAM streaming revenue, and ad-supported tiers at the major streamers are
+  the growing part of the US market (Chambers, July 2026).
+
+**Consequence for engagement framing:** in LATAM the ad stack is not a back-office add-on to a
+content play — it is the growth line. This is the first trend in this file where the *commercial*
+driver and the *permissive-licence* position point at the same build, and `compose/patterns.md`
+Pattern 9 is that build.
+
+## 13. Four of the "repos" in the ad plane are documents, not code
+
+A licence-class trap worth recording, because it is specific to this plane. The three IAB Tech Lab
+repos (`openrtb`, `AdCOM`, `GDPR-Transparency-and-Consent-Framework`) report `NONE` to GitHub's
+licence detector and carry **Creative Commons Attribution 3.0** in their READMEs. CC BY is a
+documentation licence: it grants the right to implement a specification, not working code.
+
+Two adjacent measurement errors found the same way, both of which an API-only pass would have shipped:
+
+- **`NOASSERTION` is not "no licence."** Both Video.js repos report it; the LICENSE files are
+  Apache-2.0. Read the file.
+- **A declared licence is not a licence.** `futzu/x9k3` has **no LICENSE file**; MIT appears only as a
+  `setup.py` classifier. `Eyevinn/hls-vodtolive` has no LICENSE file either; MIT appears only in
+  `package.json`. Both are usable, both need the licence confirmed in writing before a deliverable.
+
+This is the same class of defect as this file's `threefive` note (an MIT grant carrying a stale
+"Python Packaging Authority" copyright line) and the sister KBs' rule that **the MIT incipit is not a
+licence identifier.** Four distinct failure modes, one remedy: open the file.
+
+## 14. Europe's broadcasters are lobbying against the labelling duty this KB's flagship pattern assumes
+
+The strongest claim in this file is trend 2 — provenance has become law, and Article 50 is the forcing
+function. A counter-signal surfaced this pass and belongs on the record next to it, because it is the
+regulated industry itself pushing back:
+
+- **ACT**, the Association of Commercial Televisions in Europe, published AI principles for
+  audiovisual media services (issue paper dated June 2026) arguing that restrictions on AI in
+  audiovisual media must be **proportionate**, and **specifically opposing blanket measures such as
+  mandatory labelling of generative-AI content under AI Act Article 50.** Their argument is that
+  broadcasters already carry editorial responsibility under EMFA and the AVMS Directive, so a
+  general-purpose labelling duty duplicates an existing accountability regime.
+- **DIGITALEUROPE** is arguing the adjacent line: technology-neutral horizontal rules rather than
+  extending sector-specific AVMSD obligations.
+- Counterweight: EU law does **not** extend freedom-of-expression protection to content produced
+  solely by AI (Taylor Wessing), and Cineuropa records AI Act transparency rules beginning
+  enforcement in July 2026, with European film associations pressing for vigilance.
+
+**Dates are genuinely contested and should not be quoted as settled.** The AI Act's main application
+date is 2 August 2026 with some provisions live since 2 August 2025, while Reed Smith's timeline puts
+AI Omnibus amendments at 27 July 2026. Sources disagree; check the final text before putting a date
+in a client deck.
+
+**What this does and does not change.** It does not weaken Pattern 1 or Pattern 8 — a broadcaster
+that wins a proportionality argument still needs internal provenance to *prove* editorial
+responsibility, which is the same C2PA build with a different buyer and a different justification. It
+does change the pitch: in EMEA, lead with editorial accountability under EMFA, not with Article 50
+compliance, because the broadcaster you are selling to may be actively lobbying against the clause you
+are citing.
+
 ## Low-confidence items — flagged, not promoted
 
 - Market sizing diverges ~2× across vendors (see `intel/market.md`); every figure is a vendor estimate.

@@ -10,6 +10,64 @@ updated: 2026-11-22
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-22 — pass 2: the monetization plane (16 verified repos, a new section in `foundations.md`)
+
+Second pass of the same day, aimed at the plane this KB had never covered. Measured before starting:
+`prebid` 0 hits across all eight files, `scte` 0, `ssai` 0, `openrtb` 0, `ad server` 0 — while
+`intel/market.md` already carried $9.1B of AI video advertising and named advertising as the primary
+driver of LATAM media growth. The KB quantified the market and had no tooling for it.
+
+**Headline: the plane is permissive and active at the auction and measurement ends, and dormant in
+the middle.** Full tables in `repos/foundations.md` → *The monetization plane*; the new builds are
+`compose/patterns.md` Patterns 9 and 10.
+
+| Repo | License | Stars | Forks | Last push | Signal |
+|---|---|---|---|---|---|
+| [prebid/Prebid.js](https://github.com/prebid/Prebid.js) | Apache-2.0 | 1,619 | 2,437 | 2026-11-22 | **More forks than stars (0.66).** Pushed the day of measurement. The canonical header-bidding library. |
+| [prebid/prebid-server](https://github.com/prebid/prebid-server) | Apache-2.0 | 595 | 983 | 2026-11-22 | Also fork-heavy (0.61). Server-side auction — the piece that makes SSAI possible without a vendor. |
+| [prebid/prebid-server-java](https://github.com/prebid/prebid-server-java) | Apache-2.0 | 110 | 264 | 2026-11-20 | 0.42 ★/fork. The JVM option for broadcaster stacks. |
+| [Comcast/scte35-js](https://github.com/Comcast/scte35-js) | Apache-2.0 | 51 | 23 | 2026-05-21 | **The only maintained SCTE-35 parser.** Start here. |
+| [futzu/threefive](https://github.com/futzu/threefive) | MIT | 164 | 30 | 2024-11-27 | The one every tutorial recommends — **dormant two years.** LICENSE is a real MIT grant but the copyright line still says "The Python Packaging Authority". |
+| [futzu/x9k3](https://github.com/futzu/x9k3) | MIT *declared only* | — | — | 2024-07-10 | **No LICENSE file**; MIT lives in a `setup.py` classifier. Absent from GitHub's search index — `git ls-remote` is the only proof it exists. |
+| [Eyevinn/channel-engine](https://github.com/Eyevinn/channel-engine) | Apache-2.0 | 134 | 34 | 2026-11-06 | FAST linear-channel assembly with ad-break signalling. **EMEA-origin (Sweden).** |
+| [Eyevinn/hls-vodtolive](https://github.com/Eyevinn/hls-vodtolive) | MIT *(package.json only)* | 46 | 12 | 2026-10-26 | No LICENSE file; API reports `NONE`. |
+| [shaka-project/shaka-player](https://github.com/shaka-project/shaka-player) | Apache-2.0 | 8,285 | 1,629 | 2026-11-22 | Already in this KB as a player; logged here for its DRM-and-ads path. |
+| [openplayerjs/openplayerjs](https://github.com/openplayerjs/openplayerjs) | MIT | 650 | 92 | 2026-11-16 | The only player whose ads plugin surfaces **SSAI breaks as SCTE-35 TextTrack cues** — lets a client verify a stitched break. |
+| [videojs/videojs-contrib-ads](https://github.com/videojs/videojs-contrib-ads) | Apache-2.0 *(API: `NOASSERTION`)* | 396 | 252 | 2024-05-17 | **Dormant since mid-2024**, and fork-heavy — current work lives in the forks. |
+| [orestbida/cookieconsent](https://github.com/orestbida/cookieconsent) | MIT | 5,779 | 505 | 2026-11-22 | The practical MIT consent-banner start for GDPR/LGPD. |
+| [apache/superset](https://github.com/apache/superset) | Apache-2.0 | 75,621 | 18,632 | 2026-11-22 | Ad-sales reporting surface. |
+| [apache/druid](https://github.com/apache/druid) | Apache-2.0 | 14,099 | 3,821 | 2026-11-21 | Real-time OLAP for impression/bid events. |
+| [apache/pinot](https://github.com/apache/pinot) | Apache-2.0 | 6,178 | 1,536 | 2026-11-22 | Druid's genuine alternative — pick one, not both. |
+| [snowplow/snowplow](https://github.com/snowplow/snowplow) | Apache-2.0 | 7,051 | 1,170 | 2026-10-19 | Own-your-own first-party event collection. |
+
+**Specs, not code — logged so a later pass does not mistake them for dependencies.** The three IAB
+Tech Lab repos report `NONE` to GitHub's licence detector and carry **CC BY 3.0** in their READMEs:
+[openrtb](https://github.com/InteractiveAdvertisingBureau/openrtb) (530★, 2026-11-11),
+[AdCOM](https://github.com/InteractiveAdvertisingBureau/AdCOM) (142★, 2026-10-29),
+[GDPR-Transparency-and-Consent-Framework](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework)
+(954★, 2026-08-07).
+
+**Platform-layer repos went to `verticals/solutions.md`, not here:** `revive-adserver` (GPL-2.0,
+1,522★, the only maintained open ad server, display-only), `matomo` (GPL-3.0), `plausible` (AGPL-3.0),
+`posthog` (MIT **with a proprietary `ee/` carve-out**). The plane reproduces this KB's existing
+licence law — permissive at the primitives, copyleft at the platforms — which is the strongest
+independent confirmation that rule has had.
+
+**Rejected after verification, recorded so nobody re-guesses them:** `Eyevinn/vod2live`,
+`Eyevinn/node-vast-parser`, `futzu/threefive3` and
+`InteractiveAdvertisingBureau/iabtechlab-ads.cert` were all plausible slugs that **`git ls-remote`
+reports dead.** Also excluded: `countly/countly-server`, which presents as open source but ships the
+**"Countly Lite License"** — a vendor licence, not an OSI one.
+
+**Method note for the fleet.** `curl -sI github.com/<slug>` returns 403 for everything through this
+proxy, so the brief's URL check carries no information here — this is the fifth consecutive pass to
+measure that. Two channels that *do* work: `git ls-remote` for existence, and
+`raw.githubusercontent.com/<slug>/HEAD/LICENSE` for licence text. New this pass:
+`git init && git fetch --depth 1 --filter=blob:none <url> HEAD && git log -1 --format=%cd FETCH_HEAD`
+gives a **real last-push date without the API**, which is how `x9k3` was dated despite being missing
+from the search index. `gh api -X GET search/repositories` remains the only source of star/fork
+counts, and it cross-confirmed every licence and date measured independently above.
+
 ## 2026-11-22
 
 **The headline: this KB's second recorded hard gap — "no open MOS-protocol implementation exists at

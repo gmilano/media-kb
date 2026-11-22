@@ -288,6 +288,117 @@ examination actually asks to see, and it is pure software with no licensing encu
 
 ---
 
+## Pattern 9 — Ad-supported FAST channel with auditable ad breaks (the monetization build)
+
+**Why:** advertising is now the primary driver of LATAM media growth (~$65B regional revenue in 2026),
+Brazil is the world's #3 FAST market, and every component below except the decisioning layer is
+Apache-2.0 or MIT. This is the first pattern in this file whose commercial driver and licence position
+point the same way. New 2026-11-22.
+
+```
+[VOD library]
+     |
+     v
+[Eyevinn/hls-vodtolive (MIT*)]        <- HLS VOD -> rolling live window
+     |
+     v
+[Eyevinn/channel-engine (Apache-2.0)] <- assembles the linear FAST channel + ad-break signalling
+     |
+     +--> [Comcast/scte35-js (Apache-2.0)]  <- parse/emit SCTE-35 cues at break boundaries
+     |            |
+     |            v
+     |    [prebid/prebid-server (Apache-2.0)]  <- server-side auction fired at the cue
+     |            |
+     |            v
+     |    [YOUR DECISIONING SERVICE]  <- floor price, frequency cap, pacing. NOT OPEN SOURCE. Build.
+     |
+     v
+[openplayerjs (MIT)]  <- client confirms the stitched break via SCTE-35 TextTrack cues
+     |
+     v
+[snowplow/snowplow (Apache-2.0)] -> [apache/druid (Apache-2.0)] -> [apache/superset (Apache-2.0)]
+                                      impression/bid OLAP            ad-sales reporting
+```
+
+**Wiring, concretely:**
+
+1. `hls-vodtolive` turns the VOD catalogue into a live window; `channel-engine` schedules it as a
+   linear channel. Both are small Node libraries — this is a service you run, not a platform you adopt.
+2. `channel-engine` emits the ad-break opportunity. Parse and emit the cue with **`Comcast/scte35-js`,
+   not `futzu/threefive`** — threefive is the better-known library and every tutorial points to it,
+   but it has been dormant since 2024-11-27 and its segmenter sibling `x9k3` ships **no LICENSE file**.
+3. The cue triggers `prebid-server` (Go) or `prebid-server-java` (JVM, if the broadcaster is a Java
+   shop). Prebid gives you the auction and the bidder adapters; it does **not** give you pacing, floor
+   pricing or frequency capping. That gap is the billable part — see `agents/top.md`, where the
+   measured number of open-source ad-decisioning agents is zero.
+4. `openplayerjs` is the only player in this KB whose ads plugin surfaces SSAI break boundaries as
+   TextTrack cues, so the client can *verify* a stitched break rather than trust it. That verification
+   event is what makes the break auditable, which is the whole point of the pattern name.
+5. Impressions and bid events go to `snowplow` (collection/enrichment you own) into `druid` or `pinot`
+   (pick one, they are alternatives) and out through `superset`.
+
+**Fold in the rest of this KB — this pattern does not stand alone:**
+
+- **Ad creative** is Pattern 2 (localization factory) with a 15-second input. One Spanish campaign,
+  re-voiced per LATAM market, through the dubbing pipeline that already exists in this file.
+- **AI-generated ad creative must carry provenance.** Run it through Pattern 1's `c2pa-rs` step before
+  it enters the break. In the EU, South Korea, Vietnam and India that is a legal requirement, and an
+  ad is exactly the asset an enforcement body examines first.
+- **EMEA adds a consent layer:** `orestbida/cookieconsent` (MIT) for the banner, and the IAB TCF
+  consent string — remember TCF is a **CC BY 3.0 specification, not code**, so that is an
+  implementation, not a dependency.
+
+**Licence caveats that travel with this pattern:** `hls-vodtolive` declares MIT only in
+`package.json` and `x9k3` only in a `setup.py` classifier — neither has a LICENSE file. Get both
+confirmed in writing before a deliverable. Everything else in the diagram is Apache-2.0 or MIT with a
+real LICENSE file, which is a cleaner licence position than any other pattern in this file.
+
+**What not to propose:** Revive Ad Server as the ad server. It is GPL-2.0, maintained, and genuinely
+the only open ad server left — but it is a display/banner server, not a CTV/SSAI one. Putting it in a
+FAST architecture is a category error that a broadcaster's ad-ops team will catch immediately.
+
+---
+
+## Pattern 10 — First-party audience graph (lowest risk in this KB)
+
+**Why:** Deloitte's 2026 outlook identifies the binding constraint on media monetization as the fact
+that **firms lack a unified view of their audiences** — cross-platform audience intelligence stays
+fragmented. That is not an AI problem, it is a data-engineering problem, and it has four Apache-2.0
+answers already sitting in `repos/foundations.md`. New 2026-11-22.
+
+```
+[Web / app / player / CTV events]
+     |
+     v
+[snowplow/snowplow (Apache-2.0)]   <- schema'd first-party event collection + enrichment, self-hosted
+     |
+     v
+[apache/druid OR apache/pinot (Apache-2.0)]   <- high-cardinality real-time OLAP
+     |
+     +--> [apache/superset (Apache-2.0)]      <- audience & yield reporting
+     |
+     +--> [Pattern 9's decisioning service]   <- the same graph prices the ad break
+     |
+     +--> [agents/top.md recommender work]    <- segments as features
+```
+
+**Why it is the lowest-risk engagement here:** every component is Apache-2.0 with a real LICENSE file
+and an ASF or vendor-neutral maintainer; there is no model to fine-tune, no GPU, no generated content,
+and therefore **no provenance or AI-labelling exposure at all** — the only pattern in this file that
+can say that. It is also the prerequisite for Pattern 9 being worth anything: an auction without an
+audience graph bids blind.
+
+**The LATAM-specific reason to lead with this one:** regional growth is ad-led and Netflix holds ~50%
+of streaming revenue, so a regional broadcaster's realistic strategy is not to out-subscribe Netflix
+but to out-target it on local inventory. That requires exactly this graph, and it requires it before
+any generative work.
+
+**Brazil caveat:** if the output feeds a recommender, note trend 10's Brazilian bill requiring
+AI-based content *recommendation* systems to surface local, community and independent outlets. The
+audience graph is where that obligation would be implemented, so keep the ranking layer inspectable.
+
+---
+
 ## Anti-patterns — learned the hard way in this KB
 
 1. **Don't ship HunyuanVideo to EMEA or South Korea.** Its license excludes the EU, UK and KR by name.

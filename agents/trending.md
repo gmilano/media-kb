@@ -9,6 +9,38 @@ updated: 2026-11-22
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-22 — pass 2: the monetization plane (a measured zero)
+
+Second pass of the same day. The morning pass had already shipped this KB's eight files, so rather
+than re-measure generation agents three hours later, this pass researched the one plane the KB had
+never touched: **ad signalling, auction, decisioning and measurement.** `repos/trending.md` carries
+the infrastructure findings; this file records the agent result.
+
+**The agent result is zero, and it is reported as zero.** Searched `open source AI agent advertising
+creative generation media buying github 2026 MIT Apache` plus the ad-tech cuts of the four prescribed
+global queries. Everything returned was commercial — Creatify's *AI Media Buyer*, Omneky (API and MCP
+server released, agent not open-sourced), AdsGency, Taboola's agent tooling. The one named
+open-source candidate, `Nuraveda_lab/ai-ads-agent`, is on **Codeberg rather than GitHub** and
+`git ls-remote` could not reach it, so it fails the existence test and gets **no row**.
+
+| What was looked for | Result |
+|---|---|
+| Permissive GitHub-hosted ad-decisioning agent | **None found** |
+| Permissive ad-creative generation agent (ad-specific) | **None found** — generation is covered by Tier 1 of `agents/top.md` already |
+| Open ad-ops / campaign-orchestration agent | One unlicensed GitHub topic repo, no resolvable slug — **not carried** |
+
+**Why a zero is worth a dated entry.** The infrastructure under this absent layer is in excellent
+health — `prebid/Prebid.js` was pushed on the day of this measurement, and `apache/druid`/`pinot` are
+ASF-maintained. So this is not "an immature field with nothing in it"; it is a mature permissive
+infrastructure stack with **no open agent layer above it.** That asymmetry is the finding, and the
+next pass should re-run the same query and see whether the zero moves. If it does, that is a real
+trend signal. If a future pass fills this table without the proper name of an ad-tech artefact
+(openrtb, scte-35, vast, prebid, tcf) in each row, that is keyword-collision ingest, not progress —
+the sister `retail-kb` carried a Minecraft mod as inventory intelligence for exactly that reason.
+
+**No corrections to the morning pass.** Its ten Tier-1 rows, the VideoSeal/AudioSeal watermarking
+correction and the short-form-drama gap note were spot-checked and stand as written.
+
 ## 2026-11-22
 
 Measured on 2026-11-22 via GitHub `search/repositories` (stars, forks, `pushed_at` and SPDX in one

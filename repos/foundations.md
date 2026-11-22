@@ -122,6 +122,100 @@ daily live news at NRK, the BBC and TV 2 Norway since 2018. The platform itself 
 starred. Zero stars with five forks is not abandonment — it is a library whose entire audience is
 broadcast engineers who run it in a gallery.
 
+## The monetization plane — ad signalling, auction and measurement
+
+New on 2026-11-22 (second pass of the day). Until this section the KB described how to **make**,
+**deliver** and **prove** media, and said nothing about how to **sell against it** — while
+`intel/market.md` carried $9.1B of AI video advertising and named advertising as *the* primary driver
+of LATAM media growth. Measured across all eight files before this pass: `prebid` 0 hits, `scte` 0,
+`ssai` 0, `openrtb` 0, `ad server` 0. The gap was total, and it sat directly under the KB's own
+revenue numbers.
+
+Stars/forks/`pushed_at` come from one `search/repositories` call; existence from `git ls-remote`;
+licenses were read from the LICENSE file directly. That last step is not ceremony here: GitHub's
+detector returns `NOASSERTION` for **both** Video.js repos and `NONE` for four others that do carry
+terms, so an API-only pass would have mislabelled six of the rows below.
+
+### Auction — the only layer of this plane that is permissive, canonical and active
+
+| Repo | License | Stars | Forks | ★/fork | Last push | Role |
+|---|---|---|---|---|---|---|
+| [prebid/Prebid.js](https://github.com/prebid/Prebid.js) | Apache-2.0 | 1,619 | 2,437 | **0.66** | 2026-11-22 | The de-facto client-side header-bidding library. Publisher runs one auction across many demand partners before the ad call. Pushed the day this was written. |
+| [prebid/prebid-server](https://github.com/prebid/prebid-server) | Apache-2.0 | 595 | 983 | **0.61** | 2026-11-22 | Server-side auction in Go. This is the component that makes **server-side ad insertion** possible without handing the auction to a vendor. |
+| [prebid/prebid-server-java](https://github.com/prebid/prebid-server-java) | Apache-2.0 | 110 | 264 | **0.42** | 2026-11-20 | The JVM implementation of the same spec — the realistic choice inside a broadcaster whose stack is already Java. |
+
+**Read the ★/fork column before judging these by stars.** All three Prebid repos have **more forks
+than stars** — the same signature this file already documented for the Sofie libraries. It means the
+same thing: nobody stars their ad stack, they fork it and add their own bidder adapters. 1,619 stars
+on Prebid.js understates it by an order of magnitude; 2,437 forks is the real number, and it is the
+largest fork count of any repo in this KB outside the core engines.
+
+### Ad signalling (SCTE-35) — permissive, tiny, and the weakest link in the chain
+
+SCTE-35 is the cue standard that marks where an ad break starts and stops inside a transport stream.
+It is the exact hinge between a broadcaster's playout and an ad auction, and it is the most
+poorly-maintained layer in this KB.
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [Comcast/scte35-js](https://github.com/Comcast/scte35-js) | Apache-2.0 | 51 | 23 | 2026-05-21 | SCTE-35 cue parser in TypeScript, from Comcast. **The only maintained option** — start here, not at `threefive`. |
+| [futzu/threefive](https://github.com/futzu/threefive) | MIT | 164 | 30 | 2024-11-27 | The best-known Python SCTE-35 parser and the one every tutorial points to. **Dormant for two years.** Licence caveat: the LICENSE file is the full MIT grant, but its copyright line still reads "The Python Packaging Authority" — a packaging-template leftover, not a second licensor. MIT holds; the attribution line is wrong. |
+| [futzu/x9k3](https://github.com/futzu/x9k3) | MIT *(declared, not licensed)* | — | — | 2024-07-10 | HLS segmenter that cuts segments on SCTE-35 cues. **Has no LICENSE file at all**: MIT appears only as a `setup.py` classifier. It is also absent from GitHub's search index, so `git ls-remote` is the only proof it is live. Do not put this in a client deliverable without getting the licence in writing. |
+
+**This is the finding, and it is a build opportunity rather than a warning.** The three repos that
+stand between a broadcaster's ad cues and a Prebid auction are 51★, 164★ and one with no licence
+file, and two of the three have been untouched since 2024. The auction layer above them was pushed
+today; the measurement layer below them is maintained by the Apache Software Foundation. The hinge is
+the only dormant part, and the hinge is also the smallest codebase — a few thousand lines of cue
+parsing. Cheap to adopt, cheap to maintain, and whoever maintains it owns the integration point.
+
+### Playback — where the ad is actually rendered
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [videojs/video.js](https://github.com/videojs/video.js) | Apache-2.0 *(LICENSE read; API says `NOASSERTION`)* | 40,233 | 7,504 | 2026-11-22 | The most-deployed open web player. Already in `verticals/solutions.md` as a player; listed here for its ad surface. |
+| [shaka-project/shaka-player](https://github.com/shaka-project/shaka-player) | Apache-2.0 | 8,285 | 1,629 | 2026-11-22 | Google's DASH/HLS player. The DRM-and-ads path most CTV work ends up on. |
+| [openplayerjs/openplayerjs](https://github.com/openplayerjs/openplayerjs) | MIT | 650 | 92 | 2026-11-16 | The one **MIT** player here, and the only one whose ads plugin handles **SSAI with SCTE-35 boundaries surfaced as TextTrack cues** — i.e. it can detect a stitched ad break client-side. Small but precisely on target. |
+| [videojs/videojs-contrib-ads](https://github.com/videojs/videojs-contrib-ads) | Apache-2.0 *(LICENSE read; API says `NOASSERTION`)* | 396 | 252 | 2024-05-17 | The ad-plugin toolkit for Video.js. **Dormant since mid-2024** — note the 396★/252f ratio: heavily forked relative to stars, so the forks are where any current work lives. |
+
+### FAST channel assembly — EMEA-origin, and the layer LATAM is buying
+
+FAST (free ad-supported streaming TV) is where the ad-supported money actually is in LATAM, where
+Brazil is the world's #3 FAST market by revenue. Both maintained open components come from **Eyevinn
+(Sweden)** — a genuinely EMEA-origin entry in a KB whose repos are otherwise US- and China-origin.
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [Eyevinn/channel-engine](https://github.com/Eyevinn/channel-engine) | Apache-2.0 | 134 | 34 | 2026-11-06 | Assembles a **linear FAST channel from VOD assets**, with ad-break signalling. This is the core of a FAST build and it is Apache-2.0. |
+| [Eyevinn/hls-vodtolive](https://github.com/Eyevinn/hls-vodtolive) | MIT *(package.json; **no LICENSE file**, API reports `NONE`)* | 46 | 12 | 2026-10-26 | The library `channel-engine` is built on: converts HLS VOD into a live window. Get the licence confirmed in writing before shipping — the declaration exists only in `package.json`. |
+
+### Consent and the wire formats
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [orestbida/cookieconsent](https://github.com/orestbida/cookieconsent) | MIT | 5,779 | 505 | 2026-11-22 | Lightweight, dependency-free consent UI. The practical MIT starting point for the GDPR/LGPD banner layer. |
+| [InteractiveAdvertisingBureau/openrtb](https://github.com/InteractiveAdvertisingBureau/openrtb) | **CC BY 3.0** (per README) | 530 | 218 | 2026-11-11 | The OpenRTB bid-request spec. **Specification, not code.** |
+| [InteractiveAdvertisingBureau/AdCOM](https://github.com/InteractiveAdvertisingBureau/AdCOM) | **CC BY 3.0** (per README) | 142 | 85 | 2026-10-29 | The ad-object model OpenRTB 3.0 carries. Spec, not code. |
+| [InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) | **CC BY 3.0** (per README) | 954 | 370 | 2026-08-07 | The TCF consent-string spec — the EMEA-specific obligation in this plane. Spec, not code. |
+
+**All three IAB repos report `NONE` to GitHub's licence detector and carry CC BY 3.0 in the README
+instead.** CC BY is a *documentation* licence: it lets you implement the spec, it does not give you
+code, and it is not interchangeable with Apache-2.0 in a bid response. Four of the "repos" in this
+plane are documents.
+
+### Measurement — Apache-2.0, boring, and the strongest part of the stack
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [apache/superset](https://github.com/apache/superset) | Apache-2.0 | 75,621 | 18,632 | 2026-11-22 | The reporting surface an ad-sales team actually logs into. |
+| [apache/druid](https://github.com/apache/druid) | Apache-2.0 | 14,099 | 3,821 | 2026-11-21 | Real-time OLAP built for exactly this shape of data: high-cardinality impression and bid events, sub-second slice-and-dice. |
+| [apache/pinot](https://github.com/apache/pinot) | Apache-2.0 | 6,178 | 1,536 | 2026-11-22 | The same job as Druid with lower query latency; the two are genuine alternatives, not a stack. |
+| [snowplow/snowplow](https://github.com/snowplow/snowplow) | Apache-2.0 | 7,051 | 1,170 | 2026-10-19 | Event collection and enrichment you own end-to-end — the permissive answer to "we need first-party audience data" that `intel/market.md` identifies as the fragmented capability. |
+
+Deloitte's 2026 outlook says media firms **lack a unified view of their audiences, and that this is
+what hampers monetization.** That is a data-engineering problem with four Apache-2.0 answers already
+in the list above, which makes it the lowest-risk, highest-certainty engagement in this entire plane.
+
 ## ⚠️ Archived or dormant — do not start new work here
 
 Four repos that earlier cycles of this KB listed as live foundations:

@@ -101,6 +101,41 @@ asset/metadata/rights **catalogue** is still the custom, high-margin deliverable
 permissive option stops short of it and the one maintained full MAM is AGPL. That is a sharper and
 more defensible pitch than the previous blanket statement.
 
+## Ad serving and audience analytics — the monetization platforms
+
+New on 2026-11-22 (second pass). This file had no row for the systems a media client uses to **sell**
+inventory and **count** audiences, which is the other half of every broadcaster and publisher P&L.
+
+| Platform | License | Repo | Stars | Forks | Last push | Use case |
+|---|---|---|---|---|---|---|
+| Revive Ad Server | GPL-2.0 | [revive-adserver/revive-adserver](https://github.com/revive-adserver/revive-adserver) | 1,522 | 618 | 2026-11-21 | **The only maintained open-source ad server**, and still actively pushed. Descendant of OpenX. Built for display/banner inventory — it is *not* a CTV/SSAI ad server, so do not propose it as one. |
+| Eyevinn Channel Engine | Apache-2.0 | [Eyevinn/channel-engine](https://github.com/Eyevinn/channel-engine) | 134 | 34 | 2026-11-06 | Permissive FAST channel assembly with ad-break signalling. The one platform-shaped component in this plane that carries no copyleft obligation. |
+| Matomo | GPL-3.0 | [matomo-org/matomo](https://github.com/matomo-org/matomo) | 22,046 | 2,944 | 2026-11-22 | Self-hosted web analytics; the GDPR-defensible Google Analytics replacement for a publisher. |
+| Plausible | AGPL-3.0 | [plausible/analytics](https://github.com/plausible/analytics) | 29,912 | 1,945 | 2026-11-21 | Lightweight, cookie-free analytics. AGPL — deploy unmodified, integrate over its API. |
+| PostHog | **MIT with a proprietary `ee/` carve-out** | [PostHog/posthog](https://github.com/PostHog/posthog) | 41,022 | 3,722 | 2026-11-22 | Product analytics with session replay and flags. The LICENSE file is MIT **except** everything under `ee/`, which has its own terms. Read as MIT-core, commercial-enterprise — closer to Directus/Strapi in this file's taxonomy than to Ghost. |
+
+**Excluded after reading the licence, not before:** `countly/countly-server` presents as open source
+in roundups, but its LICENSE.md is the **"Countly Lite License"** — a vendor licence, not an OSI one.
+It does not belong in a permissive recommendation and is listed here only so the next pass does not
+re-add it.
+
+### This plane obeys this file's licence law exactly
+
+The rule at the top of this file — **permissive at the pipeline, copyleft at the platform** — was
+derived from generation and delivery repos. The monetization plane was researched independently this
+pass and lands in precisely the same shape, which is the strongest confirmation the rule has had:
+
+- **Permissive at the primitives:** Prebid (Apache-2.0, all three), SCTE-35 parsers (Apache-2.0/MIT),
+  Druid, Pinot, Superset, Snowplow (all Apache-2.0), channel-engine (Apache-2.0).
+- **Copyleft at the platforms:** Revive GPL-2.0, Matomo GPL-3.0, Plausible AGPL-3.0, PostHog's `ee/`.
+
+The practical consequence is the same prescription: **assemble the ad stack from permissive
+primitives you own, and keep any copyleft platform in a separate process behind its API.** There is
+one genuine difference from the generation side. In generation, the permissive layer is where the
+innovation is. Here the permissive layer is *infrastructure that already works* — Prebid was pushed
+the day this was written — and the value Globant adds sits in the decisioning and creative layer
+above it, which `agents/top.md` measured as empty.
+
 ## How to add the AI layer
 
 1. Deploy the platform **unmodified** — this preserves your license position for AGPL/GPL bases.

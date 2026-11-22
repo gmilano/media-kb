@@ -92,6 +92,47 @@ workbench and otherwise expects you to rent closed video models. Build this patt
 Apache-2.0 generators already in Tier 1 (Wan 2.2, LTX-Video) rather than on a short-drama-branded
 wrapper, and you keep both the license position and the model choice.
 
+## The monetization plane has no agent layer — measured on 2026-11-22, not assumed
+
+`repos/foundations.md` gained a whole new section this pass: the ad signalling, auction and
+measurement layer. The obvious follow-up question is which **agents** compose onto it. The measured
+answer is **none that can be listed here**, and that is the commercially useful finding, so it is
+written down rather than padded.
+
+**What was searched:** `open source AI agent advertising creative generation media buying github 2026
+MIT Apache`, plus the ad-tech cuts of the four prescribed global queries.
+
+**What came back:** commercial products, almost exclusively — Creatify's *AI Media Buyer*, Omneky
+(which released an API and MCP server but not the agent), AdsGency, and Taboola's agent tooling. The
+only named open-source candidate, `Nuraveda_lab/ai-ads-agent`, is hosted on **Codeberg, not GitHub**,
+and `git ls-remote` could not reach it — so it fails this KB's existence test and gets no row. Two
+further leads ("MiniAgent", an unnamed `ad-ops` topic repo) had no verifiable licence and no
+resolvable slug.
+
+**So the row count for this section is zero, and the table is omitted rather than filled.** Compare
+the generation side of this same file: ten permissive, actively-maintained models. The asymmetry is
+real and it is the opportunity — the ad plane has excellent permissive *infrastructure* (Prebid pushed
+today, Druid and Pinot under the ASF) and **no open agent on top of any of it.**
+
+**What to compose instead, using only rows that already exist in this KB:**
+
+- **Creative variation** is already solved here. The TVBEurope signal for 2026 is AI-native content
+  packaging — platforms generating multiple versions of promos and previews per user context. That is
+  Tier 1 of this file (Wan, CogVideoX) plus `compose/patterns.md` Pattern 5, pointed at ad creative
+  instead of social clips. No new agent needed.
+- **Localized ad creative** is Pattern 2 (the localization factory) with a 15-second input. For LATAM
+  this matters more than it sounds: one Spanish-language campaign, re-voiced per market, is the same
+  pipeline the Mexican dubbing industry already buys.
+- **The decisioning agent is the unbuilt product**, and it is the direct sibling of Pattern 4's
+  consent ledger: both are cases where this KB found strong permissive primitives, a hard regulatory
+  driver, and nobody selling the thing in between.
+
+**One caution carried over from this file's own corrections.** An "ad agent" is the kind of target
+where keyword-collision ingest produces confident, plausible, wrong rows — the sister `retail-kb`
+carried a *Minecraft hopper-optimization mod* as inventory intelligence for months. Anything proposed
+for this section needs the proper name of a real ad-tech artefact in it (openrtb, scte-35, vast,
+prebid, tcf) before it earns a row.
+
 ## Corrections to earlier cycles of this file
 
 The eight rows this file carried until today were **generic Claude-Code marketing/SEO skill packs, not

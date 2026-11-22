@@ -83,6 +83,24 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   The watermarking line in a national strategy is a direct hook for the VideoSeal/AudioSeal + C2PA
   stack in `compose/patterns.md` Pattern 8.
 
+- **The monetization plane — new 2026-11-22.** PwC puts global advertising **past $1T for the first
+  time in 2025, rising to ~$1.4T by 2030**, with streaming still the largest single revenue component
+  (~$56.3B) in 2030, and it names the **2026 World Cup in North America** as the region's major shared
+  live event. Ad-supported tiers at the major streamers are the growing part of the US market and
+  bundling has returned as the antidote to churn (Chambers, July 2026). **Opportunity:** the ad-break
+  and yield stack in `compose/patterns.md` Pattern 9, with the audience graph of Pattern 10 as the
+  prerequisite — Deloitte names fragmented cross-platform audience intelligence as the thing actually
+  hampering monetization, and that is an Apache-2.0 data build, not a model build.
+- **Buy-vs-build is shifting toward partnership.** Chambers records Netflix acquiring **InterPositive**
+  (the AI-tools startup founded by Ben Affleck) and notes media companies increasingly **allying with
+  AI developers rather than building in-house** — which is the engagement shape Globant sells into,
+  and an argument for proposing composition over custom model work.
+- **Informed gap, stated rather than implied:** the regional query returned **no specifics on US state
+  AI statutes, Canadian federal legislation, or advertising-disclosure requirements**. The US voice-
+  cloning activity already recorded above is the only concrete federal-level hook this pass confirmed.
+  Treat NA ad-disclosure obligations as *unresearched*, not as *absent*.
+
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -128,6 +146,28 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
 - ISG reports EMEA telecom/media firms moving to cloud-native AI-led supply chains, with Accenture,
   Capgemini, HCLTech, IBM and Infosys already positioned as Leaders.
 
+- **The monetization plane — new 2026-11-22.** EMEA is the only region with a **consent-signalling
+  obligation layered on top of the ad stack**: the IAB Europe TCF consent string (a **CC BY 3.0
+  specification, not code** — see `intel/trends.md` trend 13) plus a banner layer for which
+  `orestbida/cookieconsent` (MIT, 5,779★) is the practical permissive start. Budget the consent layer
+  as a distinct workstream in any EMEA ad engagement; it does not exist in the other three regions.
+- **The one EMEA-origin vendor in this KB's repo set.** `Eyevinn/channel-engine` (Apache-2.0) and
+  `Eyevinn/hls-vodtolive` (MIT) come from **Eyevinn, Sweden** — notable because this KB's repos are
+  otherwise overwhelmingly US- and China-origin. For a European public broadcaster, a FAST build on
+  Swedish Apache-2.0 components alongside Norwegian-commissioned MIT Sofie is a procurement story
+  about European technological autonomy, not just a licence position. Pair with the Commission's own
+  finding that trustworthy, ethically-trained, financially sustainable AI remains **out of reach for
+  many European creators and media organisations** — that is a stated funding gap, publicly argued.
+- **Sell editorial accountability, not Article 50 compliance.** See trend 14: **ACT**, the commercial
+  broadcasters' own trade body, is lobbying *against* blanket generative-AI labelling under Article 50
+  (issue paper, June 2026), arguing EMFA and the AVMS Directive already impose editorial
+  responsibility. The provenance build is unchanged; the justification must change, because the buyer
+  may be opposing the clause you are quoting.
+- **Informed gap:** the regional query returned **no concrete EMEA AI-adoption figures and no 2026
+  market survey** for media specifically. Every EMEA number in this file is regulatory or
+  trade-association material. Do not present an EMEA adoption percentage — this pass could not source one.
+
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -164,6 +204,29 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   available claims ("second only to North America in adoption pace", "pilots moving to production in
   2026") are trade commentary and forecasts, not survey data. Regulation and ST 2110 readiness are
   the defensible APAC narrative; adoption percentages are not.
+
+- **The monetization plane — new 2026-11-22.** APAC's ad-supported format is the **microdrama**, and
+  it is now both industrialised and regulated. State media claim **over 95% of the 120,000+
+  microdramas released in Q1 2026 were AI-generated**, against near-zero a year earlier, with Hangzhou
+  firms reportedly producing 100-minute AI dramas for **under ¥20,000 (~$2,981)**. Regulation arrived
+  with it: a rule effective **1 September** brings all microdramas with episodes under 20 minutes into
+  a **unified national framework**, and enforcement is live — roughly **53,000 takedowns in Q1**, with
+  one platform (Hongguo) handling 670 offending AI works. Incumbents have followed: **TVB's "You, and
+  Only You"** was Hong Kong's first short drama with AI-generated characters, and **CCTV** produced an
+  AI comic drama in January 2026.
+- **What that means commercially.** At ~$3K per title, the production cost has collapsed and the
+  binding constraints become **compliance throughput and monetization efficiency** — which are exactly
+  Pattern 1 (provenance/labelling at generation) and Pattern 9 (ad breaks and yield), not generation
+  capability. A platform shipping thousands of titles a quarter under a takedown regime needs an
+  auditable pipeline more than it needs a better model. Note the per-title figures come from Chinese
+  trade press and state media and vary by source; treat them as directional.
+- **Informed gap, explicit:** **India returned almost nothing.** The only India signal this pass
+  confirmed is that download growth is driven by emerging markets including India while paying users
+  stay concentrated in mature markets. A low-authority page claiming India platform issues reshaped
+  inventory toward Thailand and Taiwan is **unverified and deliberately not carried as a finding**.
+  India's IT Rules, AI-labelling obligations and OTT regime are **unresearched** in this KB — the
+  single largest named gap in this file, and the first thing to fix on the next APAC pass.
+
 
 ### LATAM
 
@@ -222,6 +285,34 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   Center's own read is that the number of AI laws actually *enacted* in the region remains very low,
   so the effect on journalism is still unclear. **Regulation, not market sizing, remains the
   defensible LATAM narrative** — and that is now a two-pass finding rather than an impression.
+
+- **The monetization plane — new 2026-11-22, and this is the region where it matters most.** Omdia
+  puts **LATAM media revenues at ~$65B in 2026 with advertising and bundling as the drivers** —
+  advertising is now the *primary* driver of regional growth, not subscription. **Brazil is the world's
+  #3 FAST market by revenue (~$152M)**, behind only the US and UK, while **Netflix holds ~50% of LATAM
+  streaming revenue**. A regional broadcaster cannot out-subscribe Netflix; it can out-target it on
+  local inventory. **Opportunity:** Pattern 10 (first-party audience graph, all Apache-2.0, no AI
+  exposure) as the entry engagement, then Pattern 9's FAST-and-ad-break stack on top. This is the only
+  place in this file where the growth line, the licence position and an existing permissive component
+  set (`Eyevinn/channel-engine`) all agree.
+- **Brazil's advertising rules now name synthetic presenters explicitly.** **CONAR's 2026 influencer
+  guidance** covers **avatars, virtual profiles and AI-generated content**, alongside child
+  participation and transparency duties — so an AI-generated brand presenter is already inside a
+  self-regulatory advertising code, separate from the electoral rules above. And platforms with **over
+  5 million monthly active users in Brazil** had to file compliance plans documenting content
+  moderation, **AI governance** and coordinated-behaviour detection by **16 August 2026**. Both are
+  direct ad-side hooks that this file previously recorded only on the generation side.
+- **Mexico's film-law draft would add a distribution obligation to the AI-labour one.** Beyond the
+  14 May 2026 LFDA/LFT amendments already recorded above, a draft **Federal Film and Audiovisual Law**
+  would replace the 1992 framework with a **10% screen quota, mandatory streaming visibility
+  requirements, AI-related labour protections and progressive public funding**. If it passes, "local
+  content must be findable" becomes a catalogue-and-recommender requirement — the same inspectable
+  ranking layer Brazil's recommender provision would demand. Draft status: **before Congress, not law.**
+- **Low-confidence, flagged not promoted:** a report that **Neymar signed with a Chinese microdrama
+  platform for 16 AI-and-live-action titles** would be a significant APAC→LATAM content-format bridge,
+  but it rests on a single Korean-language trade source. Not carried as a finding; worth re-checking
+  next pass.
+
 
 ## Globant positioning
 

@@ -378,6 +378,216 @@ real, useful and **not software**; carrying them as tooling rows would be the pa
 | [usnationalarchives/digital-preservation](https://github.com/usnationalarchives/digital-preservation) | Public Domain (`LICENSE.md`, 1335 B) | 245★ / 22f, **refs=2** | NARA's preservation *policy and strategy documents*. A federal-agency primary source — cite it, do not `pip install` it. |
 | [digipres/awesome-digital-preservation](https://github.com/digipres/awesome-digital-preservation) | CC0-1.0 | 151★ / 15f | An awesome-list. Excellent starting index, zero executable content. |
 
+## The identification & rights-reservation plane — measured 2026-11-22 (pass 5)
+
+This is the plane that answers *"which asset is this, and who may train on it?"* Before this pass the
+word **`fingerprint` did not appear anywhere in this KB** — a structural hole, because content
+identification is the substrate under royalty attribution, ad verification, takedown, archive
+dedupe and every AI-training-rights claim a client will make this year.
+
+All rows below: existence by `git ls-remote`, licence by fetching the licence file and counting its
+bytes. **30/30 URLs resolved.** Star/fork counts measured 2026-11-22 via one `search/repositories`
+call each — not inherited from any listicle.
+
+### Audio fingerprinting — permissive at the edges, copyleft in the active middle
+
+| Repo | License (verified) | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [acoustid/chromaprint](https://github.com/acoustid/chromaprint) | ⚠️ **LGPL-2.1 as a whole** (`LICENSE.md`, 1800 B) | 1,432★ / 180f | 2026-10-15 | The industry-standard audio fingerprinter; generates the codes behind AcoustID/MusicBrainz. **Read the licence note below — this is not an MIT repo.** |
+| [beetbox/pyacoustid](https://github.com/beetbox/pyacoustid) | MIT (`LICENSE`, 1080 B) | 413★ / 71f | 2026-05-19 | Python bindings to Chromaprint + the AcoustID web service. The clean way in. |
+| [worldveil/dejavu](https://github.com/worldveil/dejavu) | MIT (`LICENSE.md`, 1070 B) | 6,789★ / 1,463f | 2024-04-22 | The most-starred permissive fingerprinter. Ratio 4.6 — genuinely deployed. **Dormant ~2.5 years**; vendor it. |
+| [dpwe/audfprint](https://github.com/dpwe/audfprint) | MIT (`LICENSE`, 1112 B) | 622★ / 136f | 2019-09-24 | Landmark-based matching from Dan Ellis (Columbia/Google). Reference-grade algorithm, **unmaintained since 2019**. |
+| [adblockradio/stream-audio-fingerprint](https://github.com/adblockradio/stream-audio-fingerprint) | MPL-2.0 (`LICENSE`, 16722 B) | 781★ / 65f | 2021-11-05 | **Real-time** matching against a live stream — built to detect ad breaks on radio. The only repo here designed for broadcast ingest. Weak copyleft: file-level, linkable. |
+| [JorenSix/Olaf](https://github.com/JorenSix/Olaf) | AGPL-3.0 (`LICENSE`, 32386 B) | 426★ / 48f | 2026-10-16 | Embedded/C fingerprinter, runs on microcontrollers and in-browser. **Actively maintained — and AGPL.** |
+| [JorenSix/Panako](https://github.com/JorenSix/Panako) | AGPL-3.0 (`license.txt`, 32385 B) | 276★ / 53f | 2026-09-17 | Pitch/time-scale **invariant** matching — survives the speed-ups broadcasters apply. Academic pedigree (`paper.md` in-tree). **AGPL.** |
+
+**The pattern this table shows, and it is the commercially important one:** the two *actively
+maintained* fingerprinters are **AGPL-3.0**, and the three *permissive* ones have not been touched
+since 2019–2024. A client who wants permissive audio fingerprinting is choosing between vendoring
+dead MIT code and accepting AGPL obligations on a service. There is **no actively maintained
+permissive audio fingerprinter.** That is a precise, buildable gap.
+
+### ⚠️ Chromaprint's licence is decided by your build flags — a category this KB had not met
+
+`chromaprint`'s `LICENSE.md` states it plainly, and the GitHub API reports `NOASSERTION` *because*
+of it:
+
+> *"Chromaprint's own source code is licensed under the MIT license, but we include some parts of the
+> FFmpeg library, which is licensed under the LGPL 2.1 license. As a whole, Chromaprint should be
+> therefore considered to be licensed under the LGPL 2.1 license."*
+
+And then a **third** layer: *"when distributing Chromaprint in binary form, you should also take into
+consideration the license of the external FFT library that you compile Chromaprint with."*
+
+So the licence of the shipped artefact is a function of **which FFT library the build links** —
+FFmpeg (LGPL-2.1), FFTW3 (**GPL-2.0+**, and the commercial-licence route exists precisely because of
+this), or KissFFT (BSD-3). Build with FFTW3 and a redistributed binary is arguably **GPL**.
+
+This is a new category for this KB. T22 recorded that a licence can live in an HTML file or a
+packaging classifier; this is worse — **the licence is not a property of the repository at all, it is
+a property of the compile.** No SPDX field, SBOM scan of the source tree, or GitHub licence badge can
+capture it. CI rule, generalisable to all twelve industries: *for any native dependency, resolve the
+licence of the **linked** libraries, not the repository.*
+
+### Standards-based content codes — the ISO identifier with an Apache-2.0 implementation
+
+| Repo | License (verified) | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [iscc/iscc-core](https://github.com/iscc/iscc-core) | Apache-2.0 (`LICENSE`, 11345 B) | 26★ / 6f | 2026-10-17 | Reference implementation of **ISO 24138:2024** — the International Standard Content Code. Similarity-preserving, content-derived codes for text, image, audio, video, mixed. |
+| [iscc/iscc-sdk](https://github.com/iscc/iscc-sdk) | Apache-2.0 (`LICENSE`, 11339 B) | 24★ / 8f | 2026-10-26 | The batteries-included layer (media extraction + code generation). The practical entry point. |
+| [iscc/iscc-lib](https://github.com/iscc/iscc-lib) | Apache-2.0 | 2★ / 1f | 2026-11-22 | Pushed the day of this pass — the Rust/multi-language rewrite. Early. |
+| [iscc/iscc-web](https://github.com/iscc/iscc-web) | Apache-2.0 | 9★ / 4f | 2026-11-09 | HTTP service wrapper. Useful as a deployment template. |
+| [iscc/iscc-codes](https://github.com/iscc/iscc-codes) | **CC-BY-4.0** | 53★ / 8f | 2026-11-11 | ⚠️ **Documents, not code** — the specification text. T13 rule: cite it, do not depend on it. |
+
+**Why this matters more than 26 stars suggests.** ISCC is a *published ISO standard* (ISO 24138:2024,
+first edition, 2024-05 — **no 2026 revision exists**; checked, because an invented version number is
+exactly the error this KB has been punished for). It is designed to complement, not replace, DOI,
+ISBN, **ISAN, ISRC, ISSN and ISWC**. And unlike all of those, **its reference implementation is
+Apache-2.0 and free to use.**
+
+The honest reading is a two-sided one, and a proposal must carry both sides: ISCC is the only
+content identifier in media whose implementation Globant can build on without a licence negotiation
+— *and* a 26-star reference implementation is evidence that the industry has not adopted it. It is a
+**standards-backed bet, not an installed base.** Pitch it as the internal join key, never as the
+identifier a client's partners will already recognise.
+
+### The incumbent identifiers have no open implementation at all — measured, not assumed
+
+Queries run and shortened per this KB's rule (*a plausible query returning 0 is a query that is too
+long, until proven otherwise*):
+
+- **EIDR** (the audiovisual registry — the ID that actually moves between studios and distributors):
+  `eidr` → **160 results, not one of them an EIDR implementation.** Every hit is a false friend
+  (national eID card readers, an unrelated `eidra-agent`, an epidemiology tagger). There is **no
+  open-source EIDR client.**
+- **ISAN** (ISO 15706, audiovisual works): `isan` → **1,942 results, zero relevant** — all NLP
+  libraries (`isanlp`) and unrelated projects. **No open ISAN tooling.**
+- **ISRC / ISWC**: no implementation repo; these are registry allocations, not computable artefacts.
+
+These are **informed gaps, not silence.** The reason is structural and is the same law this KB found
+in healthcare for CPT codes: *an identifier issued by a registry under membership terms cannot have a
+useful open implementation, because the scarce thing is the allocation, not the parser.*
+
+### Rights-format carriers — DDEX lives, CWR died
+
+| Repo | License (verified) | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [miqwit/dedex](https://github.com/miqwit/dedex) | MIT (`LICENSE`, 1063 B) | 30★ / 15f | 2026-11-02 | **DDEX ERN** (Electronic Release Notification) parser. Ratio 2.0 — forked by people who deploy it. Small but the only live permissive DDEX code found. |
+| [wavbee/ddex-ern-validate](https://github.com/wavbee/ddex-ern-validate) | MIT | 0★ / 0f | 2026-08-03 | Listed for completeness and **not recommended**: zero stars, zero forks. Read it, don't depend on it. |
+| [weso/CWR-Validator](https://github.com/weso/CWR-Validator) | MIT (`LICENSE`, 1070 B) | 16★ / 7f | **2015-07-31** | **CWR** (Common Works Registration — how publishers register songs with societies). Untouched for **11 years**. |
+| [aporia-records/APORIA-Works-Registration](https://github.com/aporia-records/APORIA-Works-Registration) | GPL-3.0 (`LICENSE`, 35140 B) | 16★ / 6f | 2018-09-06 | The only other CWR implementation. Also dead. |
+
+**The contrast is the finding.** DDEX ERN — the *delivery* format, implemented by anyone shipping
+audio to a store — has live permissive code. **CWR — the *rights registration* format — has two
+implementations and both have been dead for 7–11 years.** Delivery is a format problem and attracts
+open source; rights registration sits behind CISAC society membership, so the open layer starved.
+Same law, visible inside a single industry.
+
+⚠️ **Channel limitation, recorded rather than glossed:** `new.ddex.net` **does not resolve from this
+session** (outside the allowed network domains), so **DDEX's membership fees and implementer-licence
+terms are UNVERIFIED in this pass.** What search results did indicate — and what must be confirmed
+against the primary source before it reaches a client: DDEX is a not-for-profit standards body
+(20th anniversary in 2026) whose standards require a licence to implement, and it is **developing a
+rights-reservation message for AI training opt-outs**. Treat the commercial terms as *unresearched,
+not free*. Never assume a standards body's spec is royalty-free because its parser is MIT.
+
+### AI rights reservation — the declaration layer is real, the honouring layer is abandoned
+
+| Repo | License (verified) | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [ai-robots-txt/ai.robots.txt](https://github.com/ai-robots-txt/ai.robots.txt) | MIT (`LICENSE`, 1069 B) | 4,265★ / 206f | **2026-11-22** | The de-facto AI-crawler blocklist, with generated `robots.txt`/nginx/Caddy artefacts. Pushed the day of this pass — this list is maintained *daily*. |
+| [w3c-cg/tdm-reservation-protocol](https://github.com/w3c-cg/tdm-reservation-protocol) | ⚠️ **W3C Software and Document License** (`LICENSE.md`, 432 B) | 17★ / 14f | 2026-09-03 | **TDMRep** — the machine-readable opt-out the EU DSM Directive's Art. 4 reservation depends on. Ratio **1.2** — forks ≈ stars, this KB's signature of real infrastructure. Not an OSI-style permissive licence; read it before vendoring. |
+| [rslstandard/rsl](https://github.com/rslstandard/rsl) | ⛔ **NO LICENCE FILE** (checked `master`+`main`, 11 filenames) | 47★ / 1f | 2026-03-31 | The official repo of **RSL 1.0** — the licensing standard Reddit, Yahoo, Medium, Quora and Ziff Davis have endorsed. See the warning below. |
+| [jeffpaul/rsl-wp](https://github.com/jeffpaul/rsl-wp) | ⛔ **NO LICENCE FILE** | 35★ / 1f | 2026-11-03 | WordPress plugin emitting RSL terms. Active, unlicensed. |
+| [onurkanbakirci/rsl-editor](https://github.com/onurkanbakirci/rsl-editor) | MIT (`LICENSE.md`, 1070 B) | 22★ / 1f | 2026-02-16 | An RSL term editor, and **the only properly licensed RSL tool found.** |
+| [Spawning-Inc/datadiligence](https://github.com/Spawning-Inc/datadiligence) | MIT (`LICENSE.txt`, 1079 B) | 41★ / 5f | **2024-10-09** | The library for *honouring* opt-outs on the training side. **Dormant 2+ years.** |
+
+**⛔ The sharpest licence trap in this KB: the rights-reservation standard is itself unlicensed.**
+`rslstandard/rsl` — the repository of the standard whose entire purpose is to let publishers state
+machine-readable terms for reuse — **ships no licence file at all.** Neither does the WordPress
+plugin that implements it. Without a licence grant, default copyright applies: *all rights
+reserved*. A client cannot safely vendor the schema, and an agent that generated RSL documents from
+that repo's code would be building a compliance product on an unlicensed dependency. Use the spec as
+published at `rslstandard.org`, use `rsl-editor` (MIT) for code, and raise this in any
+rights-reservation engagement. **This is a defect in the standard's packaging, not a reason to ignore
+RSL** — the backers are real and the direction of travel is clear.
+
+**The asymmetry is the opportunity.** The tooling to *declare* a reservation was updated the day of
+this pass (`ai.robots.txt`, 2026-11-22). The tooling to *honour* one has been untouched since
+October 2024 (`datadiligence`). Publishers are tooled to say no; nobody maintains the code that
+listens. And the settlement layer below it is empty — `pay-per-crawl` returns 33 results whose top
+six hold **5, 2, 2, 0, 0 and 0 stars.** Declaration is a format problem (solved, permissive);
+honouring and settlement are judgment problems (empty). **Fifth consecutive confirmation** of this
+KB's structural law.
+
+### Catalogue & metadata — copyleft at the platform, with one MIT exception
+
+| Repo | License (verified) | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [beetbox/beets](https://github.com/beetbox/beets) | **MIT** (`LICENSE`, 1079 B) | 15,972★ / 2,207f | 2026-11-22 | Music catalogue manager with a real plugin API, MusicBrainz lookup and `chromaprint` fingerprinting built in. **The MIT exception at the platform tier** (cf. T10). The single best starting point in this plane. |
+| [metabrainz/musicbrainz-server](https://github.com/metabrainz/musicbrainz-server) | **GPL-2.0-or-later** (`COPYING.md`, with `leaflet` under BSD-2) | 1,114★ / 347f | 2026-11-19 | The open music metadata encyclopedia. The *database* is the asset; the server is copyleft. |
+| [metabrainz/picard](https://github.com/metabrainz/picard) | GPL-2.0 (`COPYING.txt`, 17983 B) | 5,398★ / 479f | 2026-11-19 | The reference tagger — AcoustID fingerprint → MusicBrainz identity. The working proof of the ID→metadata join. |
+| [metabrainz/listenbrainz-server](https://github.com/metabrainz/listenbrainz-server) | GPL-2.0 (`LICENSE`, 18205 B) | 1,077★ / 402f | 2026-11-22 | Open listening-history and recommendation data. Ratio 2.7 — deployed. |
+| [MTG/essentia](https://github.com/MTG/essentia) | AGPL-3.0 (`COPYING.txt`, 31772 B) | 3,814★ / 646f | 2026-11-18 | Already in this file. Restated here because it is also the audio-ID feature extractor. |
+| [librosa/librosa](https://github.com/librosa/librosa) | ISC (`LICENSE.md`, 765 B) | 9,106★ / 1,149f | 2026-11-22 | Already in this file. The permissive feature-extraction floor under any custom fingerprinter. |
+
+**`beets` is the row to act on.** MIT, 15,972★, ratio 7.2, pushed the day of this pass, and it
+already wires fingerprint → identity → tagged catalogue. For an archive or catalogue engagement it
+removes months of plumbing, and unlike the MetaBrainz servers it carries **no copyleft obligation on
+a derived product.**
+
+### Visual / generic hashing
+
+| Repo | License (verified) | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [akamhy/videohash](https://github.com/akamhy/videohash) | MIT (`LICENSE`, 1075 B) | 388★ / 65f | 2024-07-12 | Perceptual video hashing — near-duplicate detection across re-encodes. **Dormant since 2024**; small enough to vendor and own. |
+
+For scene-level work this pairs with `PySceneDetect` (BSD-3) already listed above: segment, then hash
+per segment, rather than hashing whole files.
+
+### Rights *enforcement* — one Apache-2.0 reference server
+
+| Repo | License (verified) | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [awslabs/speke-reference-server](https://github.com/awslabs/speke-reference-server) | Apache-2.0 (`LICENSE`, 11357 B) | 123★ / 50f | 2026-09-08 | **SPEKE** (Secure Packager and Encoder Key Exchange) reference server — the standard interface between a packager and a DRM key provider. Ratio **2.5** = real deployment. |
+
+Note what it is and is not: SPEKE standardises *key exchange*. The DRM systems it feeds (Widevine,
+PlayReady, FairPlay) are **proprietary and licensed per-device** — no open implementation exists or
+can. Same shape as the identifier registries: the **interface** is open, the **entitlement** is not.
+
+### Audio watermarking — the identification sibling, permissive and crowded
+
+| Repo | License (verified) | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [facebookresearch/audioseal](https://github.com/facebookresearch/audioseal) | MIT | 804★ / 109f | 2026-11-03 | Already in this KB. Localised detection — finds *which seconds* were AI-generated. |
+| [resemble-ai/Perth](https://github.com/resemble-ai/Perth) | MIT (`LICENSE`, 1067 B) | 546★ / 51f | 2026-09-02 | **New to this KB.** Perceptual-threshold watermarker, built for robustness across re-encoding. |
+| [wavmark/wavmark](https://github.com/wavmark/wavmark) | ⚠️ MIT **template, unfilled** (`LICENSE`, 1068 B — reads `Copyright (c) [year] [fullname]`) | 323★ / 44f | 2024-01-07 | **New to this KB.** AI-based watermarking with ~1s payload resolution. The licence is an **unexecuted MIT template** — the grant is almost certainly intended but the copyright holder is not named. Minor, real, and worth a one-line note in a legal review. |
+| [swesterfeld/audiowmark](https://github.com/swesterfeld/audiowmark) | GPL-3.0 (`COPYING`, 35148 B) | 604★ / 119f | 2026-09-23 | **New to this KB.** The broadcast-grade option (robust to MP3/AAC, used by radio); **copyleft**, so service-side only. |
+
+**And the counter-signal, measured again:** `wiltodelta/remove-ai-watermarks` (Apache-2.0,
+**6,483★ / 600f**, pushed **2026-11-22**) has more stars than every watermarking repo in this table
+*combined*. T8 recorded this asymmetry; it has **widened**, and it was re-measured today rather than
+re-asserted. Any provenance pitch must assume the removal tool is better maintained and more popular
+than the marking tool.
+
+### Method correction from this pass — the licence probe was wrong, and it mattered
+
+`JorenSix/Panako` initially returned **404 from `raw.githubusercontent.com` for every path tried,
+including a commit-pinned one** — which looked like a repo whose licence could not be read. It was
+not. The licence is at **`license.txt`, all lower-case**, and the readme is `README.textile`, not
+`README.md`. The probe list used by earlier cycles (`LICENSE`, `LICENSE.md`, `LICENSE.txt`, `COPYING`,
+`LICENCE`, `License`, `license.md`, …) **omits the all-lower-case `license.txt`**, and the earlier
+`COPYING.md` omission is what made `musicbrainz-server` look unlicensed too.
+
+Two durable rules for all twelve industries:
+
+1. **Add `license.txt`, `license`, `COPYING.md` and `Licence.txt` to the probe list.** Paths are
+   case-sensitive and older projects favour lower-case.
+2. **If `README.md` also 404s, the repo is not missing files — your filename guesses are wrong.**
+   A failing control request proves throttling; a *passing* control plus a 404 proves a naming
+   convention. In that case **shallow-clone and look**, which is cheap and conclusive. A 404 from
+   the raw channel is never by itself evidence that a licence is absent.
+
 ## ⚠️ Archived or dormant — do not start new work here
 
 Four repos that earlier cycles of this KB listed as live foundations:

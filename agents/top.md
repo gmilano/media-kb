@@ -250,6 +250,98 @@ the agent is **the thing Globant builds**, assembled from the permissive parts c
 `repos/foundations.md` and wired per `compose/patterns.md` P13 (delivery QC gate) and P14
 (archive-to-revenue). There is no base to adopt and no incumbent to displace.
 
+## The identification & rights-reservation plane has no agent layer — measured 2026-11-22 (pass 5)
+
+Pass 5 went looking for agents over content identification, royalty attribution and AI-training
+rights. **There are none** — and this plane produced the starkest zero yet recorded in this KB:
+a query whose entire first page holds **no stars at all**.
+
+| GitHub search query | Total results | Verdict |
+|---|---|---|
+| `music royalty accounting` | 14 | ⛔ **The top six results hold 0, 0, 0, 0, 0 and 0 stars**, and four of the six carry **no licence**. An empty field — starker than healthcare's `medical necessity` (six repos, 3 stars between them). |
+| `pay-per-crawl` | 33 | Top six hold **5, 2, 2, 0, 0, 0** stars. The AI-content *settlement* layer does not exist. |
+| `rights management media stars:>=50` | 5 | **Four of the five are keyword collisions** (a DRM-bypass toolkit, a reference list, an unrelated repo). The one real hit is `awslabs/speke-reference-server` — a *key-exchange* server, not rights management. |
+| `eidr` | 160 | ⛔ **Zero relevant** — all false friends (national eID readers, an epidemiology tagger). No open EIDR client exists. |
+| `isan` | 1,942 | ⛔ **Zero relevant** — all NLP libraries. No open ISAN tooling exists. |
+| `cwr common works registration` | 8 | Two real implementations, last pushed **2015** and **2018**. The rights-registration format's open layer is dead. |
+| `rslstandard` | 0 | The org is findable only as `org:rslstandard`. The standard has **one** repo, and it is unlicensed. |
+
+### The fifth consecutive confirmation of this KB's structural law — and a sharper statement of it
+
+Five planes now — provenance, monetization, accessibility, conformance/preservation, and
+identification/rights — and the law has not broken once:
+
+> **Permissive open source follows the file format, not the judgment.**
+
+This plane lets the law be stated more precisely, because here the two halves are *the same subject
+matter* split by function:
+
+- **Declaring** a rights reservation is a format problem. It is solved, permissive and maintained
+  **daily**: `ai.robots.txt` (MIT, 4,265★) was pushed on the day of this pass; `tdm-reservation-protocol`
+  carries a fork-to-star ratio of 1.2.
+- **Honouring** a reservation is a judgment problem. `Spawning-Inc/datadiligence` (MIT, 41★) is the
+  only library for it and has been **dormant since October 2024**.
+- **Settling** the resulting obligation — who owes whom, for which use — is pure judgment, and it is
+  a **measured zero** in both `pay-per-crawl` and `music royalty accounting`.
+
+So: **publishers are tooled to say no; nobody maintains the code that listens; and nothing at all
+computes what is owed.** That is a three-step gradient from permissive-and-active to literally empty,
+inside one plane, measured in a single pass. The commercial reading is this KB's standing one — the
+expensive, auditable *decision* has no open floor while every input it needs is free — and the
+prediction it licenses is in `compose/patterns.md` P15.
+
+### The content-licence law reappears, and it is the real constraint in this plane
+
+Healthcare's pass found that *the licence of the code is not the licence of the content* (an open
+format can carry a proprietary code set, and the obligation travels with the content). **Media's
+identifier layer is the same trap in a different costume**, and it explains every zero above:
+
+| Identifier | What it identifies | Who controls it | Open implementation? |
+|---|---|---|---|
+| **ISRC** | A sound recording | IFPI via **decentralised national agencies** | None — allocation, not computation |
+| **ISWC** | A musical work (composition) | **CISAC** | None |
+| **ISAN** | An audiovisual work | ISAN-IA (ISO 15706) | ⛔ None — measured, 1,942 false hits |
+| **EIDR** | An audiovisual asset, commercially | EIDR Association (membership) | ⛔ None — measured, 160 false hits |
+| **CWR** | A works *registration* message | CISAC societies | Two, both dead since 2015/2018 |
+| **DDEX ERN** | A release *delivery* message | DDEX (licence to implement; **terms unverified, see below**) | ✅ `miqwit/dedex`, MIT, live |
+| **ISCC** | Any digital asset, by content | **ISO 24138:2024 — open** | ✅ `iscc-core`, Apache-2.0 |
+
+Read the last two rows against the first five. **The only identifiers with usable open
+implementations are the two that are not gated by a membership registry** — and of those, the only
+one that is genuinely open end to end (ISCC) has a 26-star reference implementation, i.e. no installed
+base. That is not a market oversight. It is the licence structure of the industry showing through the
+code.
+
+**What this means for a proposal, stated so it cannot be over-promised:** an identification build for
+a music or audiovisual client is **an integration with registries the client already pays for**, plus
+an internal content-derived join key (ISCC, or a fingerprint) that Globant builds and the client
+owns. What must never be promised is a "fully open" identification stack — the same prohibition
+healthcare's pass wrote down for CPT.
+
+⚠️ **Unverified in this pass:** `new.ddex.net` does not resolve from this session, so **DDEX's
+implementer-licence terms and fees were not confirmed.** Treat them as *unresearched, not free*.
+
+### Contamination warning — three queries in this plane are traps
+
+- **`eidr` and `isan` are the worst false-friend queries met so far in this KB**: 160 and 1,942
+  results respectively, **none relevant**. A careless pass would have written an "EIDR client" row
+  from `vigorlee/eidra-agent` (MIT, 89★ — an unrelated agent) or an "ISAN" row from `isanlp`. Both
+  would have compiled into this KB as fictional entities.
+- **`rights management media` returns a DRM-circumvention toolkit** in its top five. Do not carry it;
+  do not cite it.
+- **The generic query `top open source AI agents media 2026 github MIT` returned no media-specific
+  agent at all** — only general-purpose harnesses (OpenHands, MetaGPT, browser-use, CrewAI and the
+  like). Recorded because it is now the **sixth** such measurement across this KB's industries: there
+  is still **no boom in permissively licensed vertical media agents.**
+
+### What stands in for an agent layer today
+
+Nothing in this KB's agent tiers covers this plane, and no base exists to adopt. The assembly is
+Globant's: `chromaprint`/`pyacoustid` or `dejavu` for audio identity, `iscc-sdk` for a standards-backed
+content code, `beets` (MIT) as the catalogue spine that already joins the two, `dedex` for DDEX
+ingest, and `ai.robots.txt` + TDMRep + RSL for the reservation surface. Wiring in
+`compose/patterns.md` **P15** (rights-reservation gate) and **P16** (identification → attribution).
+
 ## Corrections to earlier cycles of this file
 
 The eight rows this file carried until today were **generic Claude-Code marketing/SEO skill packs, not

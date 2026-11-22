@@ -169,6 +169,44 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
 - **Informed gap:** this pass found **no sourced market-share data for broadcast QC or preservation
   vendors** in North America. Treat competitive positioning in this plane as *unresearched*.
 
+#### Content identification & AI licensing — added 2026-11-22 (pass 5)
+
+- **The buyer-side bloc for AI content licensing is American, and it has a standard now.** **RSL 1.0**
+  (Really Simple Licensing) is governed by the US nonprofit **RSL Collective** and endorsed by
+  **Reddit, Yahoo, Medium, Quora and Ziff Davis**, with Fastly and Adweek supporting without joining.
+  It extends `robots.txt` into XML licensing terms including **pay-per-crawl and pay-per-inference**.
+  **Commercial read:** North American publishers have declared terms faster than anyone has built the
+  systems to administer them — there is no console, no audit trail, no per-asset policy store
+  (see `verticals/solutions.md`). That administration gap is the engagement.
+- **The enforcement posture is hardening on the infrastructure side.** Fast Company reports
+  **Cloudflare taking a hard line against AI ingesting publisher content without compensation**, and
+  TV Tech expects the industry to need a durable economic model for open-web media. Both point the
+  same way: the metering and settlement layer is being demanded before it exists.
+- **⛔ The compliance stack has an unlicensed root.** `rslstandard/rsl` ships **no licence file**, and
+  nor does the active WordPress plugin implementing it. For a US client building AI-licensing
+  compliance this is a real supply-chain finding, not a pedantic one — raise it in scoping. See
+  `intel/trends.md` §27.
+- **Regulatory asymmetry is the selling point here, as elsewhere in NA.** Radio World reports **no
+  federal AI law enacted**; Grant Thornton notes regulatory uncertainty weighs less on media than on
+  banking or insurance. So in North America the binding constraints on an identification/rights build
+  are **guild agreements and contract law**, not an AI statute — which makes it a *faster* region to
+  ship in, and worth saying out loud in a proposal.
+- **EIDR is a North American institution with no open client.** The audiovisual registry US studios
+  and distributors actually exchange IDs through is a membership association, and `eidr` returns
+  **160 GitHub results with zero relevant hits**. Any NA studio integration is **registry
+  integration against paid membership**, never an open-source adoption. Do not scope it as the
+  latter.
+- **Market weight, with the conflict stated:** compilations put North America at roughly **33.6%–40.6%**
+  of the AI-in-media market depending on the research firm and the definition used, attributed to US
+  studios and platforms. ⚠️ Cite the **direction** (largest region, by a wide margin), not the point
+  estimate. One widely repeated vendor claim — **82% of global media organisations using AI in at
+  least one production workflow**, attributed to IAB — **could not be verified against IAB itself**;
+  do not put it in a deck.
+- **Informed gap:** this pass found **no sourced data on North American rights-administration or
+  content-ID vendor market shares** (the incumbents in royalty administration are private and
+  publish nothing comparable). Treat NA competitive positioning in this plane as *unresearched, not
+  absent*.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -309,6 +347,54 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   put at **6.9%** against ~10% for the broader index — budgets are tight, which favours
   cost-reduction pitches like QC automation over growth pitches.
 
+#### Content identification & AI licensing — added 2026-11-22 (pass 5)
+
+- **EMEA is the only region where the rights reservation is a legal instrument, and it has a
+  machine-readable vehicle with a name.** The EU DSM Directive's **Article 4** text-and-data-mining
+  exception applies **unless rights are expressly reserved in a machine-readable form** — and the
+  W3C community-group protocol built for exactly that is
+  [`w3c-cg/tdm-reservation-protocol`](https://github.com/w3c-cg/tdm-reservation-protocol) (**TDMRep**,
+  17★ / 14f, ratio **1.2** — this KB's signature of real infrastructure rather than attention).
+  ⚠️ It carries the **W3C Software and Document Licence**, not an OSI-style permissive licence: read
+  it before vendoring.
+- **This is the region's strongest single opportunity in the plane, and the reason is structural.**
+  Elsewhere a rights reservation is a commercial preference; in the EU it is **the thing that
+  determines whether mining your catalogue was lawful**. A reservation that is not machine-readable
+  is, in effect, not made. So an EMEA client needs the reservation **emitted, stored per asset, and
+  evidenced over time** — a compliance artefact with an audit trail, which is a services shape and
+  therefore Globant's. See `compose/patterns.md` **P15**.
+- **A European government has already measured the defect this plane exists to fix.** The **UK
+  government's music streaming metadata report (April 2026)** found **no central registry for ISRCs**
+  and **ISRC-to-ISWC matching rates ranging from 0% to 85%** by source. A measured range, from a
+  primary public source, is the rarest kind of asset in this KB — it converts a vague complaint into
+  a scoped reconciliation problem. **DDEX** convened a Meta-backed summit on precisely this in
+  Toronto on **19 November 2026**; no readout found yet, and it is a procurement trigger worth
+  watching. See `intel/trends.md` §30.
+- **The standards bodies in this plane are European, which matters for access and for cost.** CISAC
+  (ISWC, CWR) is France-based; DDEX operates from Europe; ISAN-IA is Swiss. ⚠️ **DDEX's
+  implementer-licence terms and fees could not be verified in this pass — `new.ddex.net` does not
+  resolve from this session.** Treat them as *unresearched, not free*, and confirm at source before
+  any proposal depends on them.
+- **Digital sovereignty makes an open identification layer unusually sellable here.** The **DPP's
+  European Media Trends 2026** report identifies AI as the dominant driver of transformation and
+  finds European media increasingly wanting **digital sovereignty**; an imec-SMIT (VUB) mapping
+  argues value accrues to whoever controls infrastructure, data, models, interfaces **and rights**,
+  flagging the risk that smaller regional players fall behind; VSN argues many cloud MAM systems lean
+  on AI engines running outside Europe. **Commercial read:** a content-derived, self-hosted identifier
+  (ISCC, Apache-2.0, ISO 24138) is a *sovereignty* story in EMEA, not merely a technical one — the
+  client owns the join key and it never leaves their estate.
+- **The regulatory backdrop is live, not settled.** The European Parliament backed its position on the
+  **AI Act Omnibus simplification proposal by 569 votes to 45**, and DIGITALEUROPE is arguing for
+  technology-neutral horizontal rules over more sector-specific AVMSD rules. The **EBU held an AI
+  Forum in Brussels on 25 March 2026** on governance for public-service media. Design for Article 50
+  and Article 4 as they stand; do not assume the simplification lands.
+- **MENA is a distinct, funded sub-market inside this region.** Arab media **AI spending is reported
+  to reach $520 million in 2026**, with commentary noting AI regulation there cannot be separated from
+  existing privacy, misinformation and platform-responsibility rules.
+- **Informed gap:** this pass found **no EMEA-specific data on adoption of TDMRep or RSL by
+  broadcasters or publishers** — the protocols are documented, the uptake is not measured anywhere
+  found. Treat EMEA reservation-adoption rates as *unresearched*.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -434,6 +520,48 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
 - **Informed gap:** no authoritative regional survey of AI adoption **specifically among APAC
   broadcasters** was found, and **no APAC-origin open preservation or QC tooling** turned up in any
   query this pass. The tooling for this plane is entirely North American and European in origin.
+
+#### Content identification & AI licensing — added 2026-11-22 (pass 5)
+
+- **The region's regulation is the opposite of a single market, and that is the design constraint.** A
+  **Latham & Watkins alert (September 2026)** groups APAC approaches into three categories: binding
+  risk-based frameworks (**South Korea**, **Vietnam** given as examples), **targeted** AI regulation
+  such as **China's**, and a third grouping. CX Network covers how **nine APAC countries** regulate
+  AI, including **disclosure and labelling of generative content**. **Commercial read:** an
+  identification/labelling build for APAC is **per-jurisdiction by construction** — the asset is a
+  policy engine with pluggable per-market rules over one identification core, not a single compliance
+  mode. Sell the engine; charge per market.
+- **Labelling obligations make content identification load-bearing here.** Where a regulator requires
+  generative content to be *disclosed*, the operator must be able to say reliably **which asset is
+  which and how it was made** across a catalogue — identification plus provenance, joined. That is
+  exactly the pairing this KB already has permissive parts for (`iscc-sdk` + C2PA tooling in
+  `repos/foundations.md`), and it is a stronger pitch in APAC than in any region except EMEA.
+- **Adoption is fast, which shortens the sales cycle and raises the integration risk.** Broadcasting
+  trade coverage puts APAC **second only to North America in overall adoption pace**, and the Asia
+  Tech x Singapore 2026 outlook expects AI embedded in the core of production, operations and viewer
+  experience. Kantar's Media Reactions 2026 finds roughly **one in three APAC consumers using AI to
+  research brands**.
+- **The monetisation gap is the regional headline, and identification is upstream of it.** Variety
+  reports the **Asia-Pacific screen economy racing toward $200 billion with a monetisation gap
+  defining the decade**, while APAC **adspend grows just 5.2% year on year in 2026 — the slowest rate
+  since the pandemic**. Scale without proportional monetisation is, concretely, an attribution
+  problem: you cannot pay out or price inventory against content you cannot identify. That is the
+  commercial bridge from this plane to the monetization plane already in this file.
+- **Players to name:** Kantar ranks **Google** first for consumer Ad Equity across APAC, followed by
+  **Netflix, YouTube, TikTok and Instagram**; **Tencent Video** and **iQIYI** are investing in
+  generative AI; and the **Asia-Pacific Broadcasting Union (ABU)** notes public broadcasters in
+  markets such as **Australia and Singapore** exploring AI for newsroom workflows, **archiving and
+  verification** — the last two being identification work by another name, and a warmer entry point
+  than commercial streamers.
+- **The permissive-fingerprinting gap bites hardest here.** With no actively maintained permissive
+  audio fingerprinter (`intel/trends.md` §31) and the maintained options under **AGPL-3.0**, an APAC
+  client shipping an on-device or embedded matcher faces a genuine licence decision. `JorenSix/Olaf`
+  is the technically right answer for embedded work **and it is AGPL** — surface that early, because
+  it changes the architecture, not just the paperwork.
+- **Informed gap:** this pass found **no APAC-specific sourced data on content-ID or
+  rights-administration adoption**, and **no evidence of regional uptake of RSL or TDMRep**. China's
+  labelling regime was identified only at the level of secondary legal commentary, not primary text.
+  Treat all three as *unresearched, not absent*.
 
 ### LATAM
 
@@ -596,6 +724,51 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   countries in the region broadcast on ISDB-T/ISDB-Tb, whose Japanese lineage makes an ARIB-derived
   loudness practice **plausible** — explicitly a hypothesis to test against a primary document, not
   a finding, and not to be repeated to a client as fact.
+
+#### Content identification & AI licensing — added 2026-11-22 (pass 5)
+
+- **The regional regulatory direction is set, and it is the one that makes this plane matter.** LATAM
+  is broadly **following the EU model** (IBA), which means the machine-readable-reservation logic of
+  EU DSM Article 4 is the likely destination here too — with regional commentators warning that
+  copying it risks **over-regulation** that hinders innovation. **Uruguay** became the first country
+  in the region to sign the **Council of Europe Framework Convention on AI and Human Rights,
+  Democracy and the Rule of Law** (2025). **Chile** is the regional leader, with an **AI bill before
+  Congress** and **Latam-GPT**, the first open-source LLM trained on Latin American data. No LATAM
+  country yet has a **fully mature, harmonised AI regime** across sectors.
+- **Content labelling is already arriving through the platforms, ahead of the statutes.** **Google
+  introduced AI transparency features across Search, YouTube and Discover in July 2026**, and
+  regional communications commentary is already framing **content labelling** as the thing brands
+  must prepare for. **Commercial read:** in LATAM the near-term forcing function is **platform
+  policy, not law** — which is faster to arrive and easier to scope against, because the requirement
+  is published and testable rather than litigated.
+- **The newsroom is the warmest buyer in this region, and it is already writing the rules it will buy
+  against.** Colombia's **FLIP** and Argentina's **ADEPA** have researched newsroom AI adoption while
+  tracking regulation, and ADEPA has published a tool-and-workflow guide; Lima's **El Comercio**
+  implemented a nearly 10-page AI guide in early 2026; **SiPreBA** (with the Heinrich Böll
+  Foundation) published *Notes Toward Regulating Artificial Intelligence in the Media* in **May
+  2026**; the **IAPA** describes newsroom AI as ongoing practice under strong human oversight, and
+  **Aspen Digital** published a January 2026 report on AI and the future of news in Latin America.
+  **IFPIM** funds regional work and convenes **CTRL+J** on AI regulation and media sustainability.
+  Every one of those documents is a procurement trigger: an outlet that has written a policy has
+  committed to being able to *evidence* compliance with it, and evidencing requires identification.
+- **The identification build here should be content-derived and self-owned.** With registry
+  memberships (ISRC national agencies, CISAC societies, EIDR) priced for Northern-hemisphere
+  incumbents, the **ISCC** route (ISO 24138:2024, `iscc-core`/`iscc-sdk`, Apache-2.0) is
+  disproportionately attractive in LATAM: no membership, no per-use fee, client owns the join key.
+  State the limit honestly in the same breath — **26 stars means no installed base**, so it is the
+  *internal* key, and registry integration is still required wherever assets cross borders.
+- **Where this plane meets the region's actual growth.** This file already records advertising as
+  LATAM's growth engine and archive AI as a region where deployment outpaces tooling (§24). Both run
+  through identification: ad attribution and archive dedupe are the same matching problem.
+  `beets` (MIT) plus a vendored permissive fingerprinter is a genuinely low-cost entry for a
+  broadcaster's existing library — see `compose/patterns.md` **P16**.
+- **Informed gap, stated rather than implied:** this pass found **no LATAM-specific coverage of music
+  rights administration, collecting-society AI policy, or adoption of RSL/TDMRep**, and **no
+  country-level bill text** for AI-in-media beyond the Chilean bill's existence. The regional search
+  returned press-freedom and newsroom-governance material, which is genuinely where the activity is —
+  but it means **LATAM rights-administration opportunity is unresearched, not absent.** The one hard
+  regional data point this pass could not obtain is whether any LATAM collecting society has published
+  an AI policy; treat that as an open question to raise with the client rather than an answer.
 
 ## Globant positioning
 

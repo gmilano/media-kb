@@ -465,6 +465,138 @@ bundled libraries and `libcurl`/`zlib` support are **disabled pending consent of
 Consortium**, the EU programme that funded it. A client build that depends on it should budget to
 carry it. Do not present it as a maintained upstream.
 
+## 26. The fifth plane, the fifth identical result — and the law now has a three-step gradient
+
+Five planes of this KB have now been measured independently — provenance, monetization,
+accessibility, conformance/preservation, and identification/rights — and the law has not broken once:
+
+> **Permissive open source follows the file format, not the judgment.**
+
+The identification plane is the most precise case yet, because here the same subject matter splits by
+*function* rather than by subject, giving a three-step gradient inside a single plane:
+
+| Function | Nature | Measured state (2026-11-22) |
+|---|---|---|
+| **Declare** a rights reservation | Format problem | `ai-robots-txt/ai.robots.txt` — MIT, 4,265★, **pushed the day of this pass** |
+| **Honour** a reservation | Judgment problem | `Spawning-Inc/datadiligence` — MIT, 41★, **dormant since 2024-10-09** |
+| **Settle** the obligation | Pure judgment | **Literal zero.** `pay-per-crawl` top six = 5, 2, 2, 0, 0, 0 stars |
+
+**Publishers are tooled to say no; nobody maintains the code that listens; nothing at all computes
+what is owed.** After five planes this is no longer a pattern to note — it is the planning assumption.
+Where a client's problem is a *format*, assume a permissive implementation exists and go find it.
+Where it is a *judgment*, assume there is nothing and price the build.
+
+## 27. The rights-reservation standard is itself unlicensed — and two of its three tools are too
+
+**RSL 1.0** (Really Simple Licensing) is the most significant new rights layer in media this year:
+launched September 2025 with the spec finalised in December 2025, backed by **Reddit, Yahoo, Medium,
+Quora and Ziff Davis**, governed by the nonprofit **RSL Collective** (Doug Leeds, Eckart Walther),
+with Fastly and Adweek supporting without joining. It extends `robots.txt` from yes/no into XML
+licensing terms: **free, attribution, subscription, pay-per-crawl and pay-per-inference** — that last
+one meaning payment falls due only when content is used to generate a response. It reached UK
+Parliament as written evidence (AIC0023). An RSS co-creator is behind the protocol.
+
+And the official repository — [`rslstandard/rsl`](https://github.com/rslstandard/rsl), 47★ —
+**contains no licence file.** Checked across `master` and `main` against eleven filenames. Neither
+does [`jeffpaul/rsl-wp`](https://github.com/jeffpaul/rsl-wp) (35★), the active WordPress plugin that
+implements it. Without a grant, default copyright applies: **all rights reserved.** The only properly
+licensed RSL tool found is [`onurkanbakirci/rsl-editor`](https://github.com/onurkanbakirci/rsl-editor)
+(MIT, 22★).
+
+*The irony is quotable and the risk is real:* a client building AI-licensing compliance could end up
+with an unlicensed dependency at the root of its compliance stack. **Commercial read:** use the
+published spec and the MIT tool, raise the packaging defect explicitly in any rights engagement, and
+do **not** treat this as a reason to dismiss RSL — the publisher bloc is real and the direction of
+travel is clear. Whether AI labs will honour it is genuinely unresolved; do not build a business case
+on the assumption that they will.
+
+## 28. A licence can be a property of the compile, not of the repository
+
+T22 recorded that a licence can hide in an HTML file or a packaging classifier. `chromaprint` — the
+industry-standard audio fingerprinter, 1,432★ — is worse, and it says so itself:
+
+> *"Chromaprint's own source code is licensed under the MIT license, but we include some parts of the
+> FFmpeg library, which is licensed under the LGPL 2.1 license. As a whole, Chromaprint should be
+> therefore considered to be licensed under the LGPL 2.1 license."*
+
+Then a third layer: *"when distributing Chromaprint in binary form, you should also take into
+consideration the license of the external FFT library that you compile Chromaprint with."* The
+candidates are FFmpeg (LGPL-2.1), **FFTW3 (GPL-2.0+)** and KissFFT (BSD-3). **Build against FFTW3 and
+the redistributed binary is arguably GPL.**
+
+So the licence of the shipped artefact is a function of the build configuration. No SPDX field, no
+GitHub licence badge, and **no SBOM scan of the source tree** can capture that — which is why the
+GitHub API reports `NOASSERTION` here and why a licence-automation gate would have waved it through.
+
+**CI rule, generalisable to all twelve industries:** for any native dependency, resolve the licence of
+the **linked** libraries, not the repository. If the build graph is not in the licence report, the
+licence report is incomplete.
+
+## 29. The only genuinely open content identifier is the one nobody has adopted
+
+| Identifier | Controlled by | Open implementation |
+|---|---|---|
+| ISRC (recordings) | IFPI, decentralised national agencies | None |
+| ISWC (works) | CISAC | None |
+| ISAN (audiovisual, ISO 15706) | ISAN-IA | ⛔ None — `isan` → 1,942 results, **zero relevant** |
+| EIDR (audiovisual, commercial) | EIDR Association (membership) | ⛔ None — `eidr` → 160 results, **zero relevant** |
+| CWR (works registration) | CISAC societies | Two, dead since **2015** and **2018** |
+| DDEX ERN (release delivery) | DDEX (licence to implement) | ✅ `miqwit/dedex`, MIT, live |
+| **ISCC** | **ISO 24138:2024 — open** | ✅ `iscc-core`, Apache-2.0 — **26★** |
+
+The two identifiers with usable open implementations are **the two that are not gated by a membership
+registry.** That is not a market oversight; it is the licence structure of the industry showing
+through the code. Where the scarce asset is the *allocation*, an open parser has no value, so nobody
+writes one.
+
+**The honest two-sided reading, and a proposal must carry both halves:** ISCC is the only content
+identifier in media Globant can build on with no licence negotiation — ISO-published, Apache-2.0,
+designed to *complement* DOI, ISBN, ISAN, ISRC, ISSN and ISWC rather than replace them. And a
+26-star reference implementation is evidence the industry has not adopted it. **Pitch it as the
+internal join key, never as the identifier a client's partners will recognise.** (ISO 24138 is first
+edition, 2024-05 — there is **no 2026 revision**; checked, because an invented version number is
+exactly the error this KB has been punished for.)
+
+## 30. A government has now measured music data's biggest unsolved problem — and put a number on it
+
+The UK government's **music streaming metadata report (April 2026)** found that there is **no central
+registry for ISRCs**, producing duplication and confusion, and — the number worth carrying —
+**ISRC-to-ISWC matching rates ranging from 0% to 85% depending on the source.** Music Business
+Worldwide describes linking songs (ISWC) to recordings (ISRC) as music data's *"single biggest
+unsolved problem"*, and DDEX convened a Meta-backed summit on it in Toronto on **19 November 2026**
+— three days before this pass, **with no coverage of the outcome yet found.**
+
+**Why this is the most sellable fact in the plane:** a government report has converted a vague
+industry complaint into a measured defect with a range. The gap between 0% and 85% is a reconciliation
+problem — fuzzy matching, confidence scoring, human adjudication of the residue — which is precisely
+the *judgment* layer that §26 shows has no open implementation. It is also auditable, which means it
+can be sold as an outcome rather than a tool. Watch for the summit readout; it is a procurement
+trigger.
+
+⚠️ **Unverified and must not be asserted:** `new.ddex.net` does not resolve from this session, so
+**DDEX's implementer-licence terms and fees are unresearched.** Search results indicate DDEX is a
+not-for-profit body (20 years old in 2026) whose standards require a licence to implement, that some
+Sony DDEX compliance capability has been released as open source, and that DDEX is **developing a
+rights-reservation message for AI** — all of it to be confirmed at source before it reaches a client.
+Treat the terms as *unresearched, not free*.
+
+## 31. There is no actively maintained permissive audio fingerprinter
+
+Measured, and it is a precise gap rather than a lament:
+
+- **Actively maintained:** `JorenSix/Olaf` (**AGPL-3.0**, 426★, 2026-10-16), `JorenSix/Panako`
+  (**AGPL-3.0**, 276★, 2026-09-17). Both copyleft.
+- **Permissive:** `worldveil/dejavu` (MIT, 6,789★ — **last push 2024-04-22**),
+  `adblockradio/stream-audio-fingerprint` (MPL-2.0, 781★ — **2021-11-05**), `dpwe/audfprint`
+  (MIT, 622★ — **2019-09-24**). All dormant.
+- **And the one in the middle:** `chromaprint` is active but, per §28, effectively LGPL-2.1.
+
+A client wanting permissive audio fingerprinting is choosing between **vendoring dead MIT code** and
+**accepting network copyleft on a service**. Both are defensible; neither is free. `dejavu`'s
+star:fork ratio of 4.6 and `audfprint`'s Columbia/Google provenance mean the dormant code is
+*reference-grade*, not abandoned junk — vendoring is the pragmatic answer, and the maintenance cost
+should be in the estimate rather than discovered later.
+
 ## Low-confidence items — flagged, not promoted
 
 - Market sizing diverges ~2× across vendors (see `intel/market.md`); every figure is a vendor estimate.

@@ -227,6 +227,67 @@ path from a permissive repository core plus the conformance tooling in `repos/fo
 instead of naming a product. If a client already runs Archivematica or ArchivesSpace, integrate; if
 they are starting clean and want to own the result, start at Fedora.
 
+## The identification & catalogue tier — added 2026-11-22 (pass 5)
+
+The platforms that answer *"which asset is this, and what do we know about it?"* This tier was absent
+from this file entirely.
+
+| Platform | Licence (verified) | Stars / forks | Last push | What it is, and the honest limit |
+|---|---|---|---|---|
+| [beets](https://github.com/beetbox/beets) | **MIT** (`LICENSE`, 1079 B) | 15,972★ / 2,207f | 2026-11-22 | Catalogue manager with a real plugin API; ships MusicBrainz lookup **and** Chromaprint fingerprinting. Audio-only, CLI-first, single-user by design — it is a **library spine, not a multi-tenant service**. |
+| [MusicBrainz Server](https://github.com/metabrainz/musicbrainz-server) | **GPL-2.0-or-later** (`COPYING.md`; `leaflet` BSD-2) | 1,114★ / 347f | 2026-11-19 | The open music-metadata encyclopedia. The *database* is the asset; self-hosting the server is a real operation, not a weekend. |
+| [Picard](https://github.com/metabrainz/picard) | GPL-2.0 (`COPYING.txt`, 17983 B) | 5,398★ / 479f | 2026-11-19 | Desktop tagger: AcoustID fingerprint → MusicBrainz identity. The working **proof** that the ID→metadata join is solvable with open parts. Desktop, not a service. |
+| [ListenBrainz](https://github.com/metabrainz/listenbrainz-server) | GPL-2.0 (`LICENSE`, 18205 B) | 1,077★ / 402f | 2026-11-22 | Open listening-history + recommendation data. Ratio 2.7 = genuinely deployed. |
+| [ISCC Web](https://github.com/iscc/iscc-web) | Apache-2.0 | 9★ / 4f | 2026-11-09 | HTTP service around ISO 24138 content codes. A **deployment template**, not a platform — treat it as the 200 lines you would otherwise write. |
+
+### This tier obeys this file's licence law — and names the exception precisely
+
+The law this file records (*permissive at the pipeline, copyleft at the platform*) holds for all three
+MetaBrainz platforms: **GPL-2.0 across the board.** The exception is **`beets`, which is MIT at
+15,972 stars** — the second MIT platform-tier entry this KB has found (cf. T10), and the more useful
+of the two, because it sits exactly where an identification build starts.
+
+**Scoping consequence, stated plainly:** a client product can embed and extend `beets` without
+copyleft reaching the product. It cannot do that with MusicBrainz, Picard or ListenBrainz — those are
+**services you run and integrate with**, not code you ship. For a music or archive engagement, that
+is the single most important line in this file.
+
+### Gap: there is no open rights-management or royalty platform — and the reason is licensing, not neglect
+
+Measured this pass, not inferred: `music royalty accounting` returns **14 results whose top six hold
+zero stars between them**, four of them with no licence at all. `rights management media stars:>=50`
+returns five hits, **four of which are keyword collisions** (including a DRM-circumvention toolkit —
+do not carry it, do not cite it).
+
+So there is no Odoo-of-royalties, no OpenMRS-of-rights. This KB has met this shape before: in
+healthcare, the absence of a permissive revenue-cycle platform turned out to be a **licensing
+impossibility**, because the output of the process must be expressed in proprietary CPT codes. Media
+is the same trap in a different costume:
+
+- **ISRC** (recordings) — IFPI via national agencies. **ISWC** (works) — CISAC. **ISAN** — ISAN-IA.
+  **EIDR** — membership association. **CWR** — CISAC society membership.
+- A royalty statement is *expressed in those identifiers*. The obligation travels with the content,
+  not the code.
+- Therefore a royalty platform cannot be bought open **or** built open end to end, and its open layer
+  starved: the only two CWR implementations have been dead since **2015** and **2018**.
+
+**This does not close the business — it relocates it**, exactly as healthcare's pass concluded. The
+client already pays for the registry memberships. Globant builds the **attribution and judgment layer
+on top**, and the deliverable with margin is the rules/attribution logic the client owns, versions and
+audits. **What must never be promised is an "all open source" rights or royalty platform.**
+
+The one genuinely open identifier is **ISCC** (ISO 24138:2024, Apache-2.0 implementation) — usable as
+the *internal* join key, never as the identifier a client's partners will already recognise. A
+26-star reference implementation is a standards-backed bet, not an installed base.
+
+### Gap: the rights-reservation surface has no platform at all
+
+The declaration formats are real and permissive (`ai.robots.txt` MIT 4,265★, TDMRep, RSL 1.0), but
+there is **no platform that manages reservations across a catalogue** — no console, no audit trail, no
+per-asset policy store. The library for *honouring* reservations (`Spawning-Inc/datadiligence`, MIT)
+has been **dormant since 2024-10-09**, and the settlement layer (`pay-per-crawl`) is a measured zero.
+See `compose/patterns.md` **P15**.
+
 ## How to add the AI layer
 
 1. Deploy the platform **unmodified** — this preserves your license position for AGPL/GPL bases.

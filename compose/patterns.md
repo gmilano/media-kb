@@ -669,6 +669,137 @@ content** as a primary concern. `fcrepo` under Apache-2.0 is what makes "you wil
 not — every platform in this tier models objects and descriptions, not frames, timecode and essence
 (see the gap note in `verticals/solutions.md`). Assemble it, and price the assembly honestly.
 
+## Pattern 15 — Rights-reservation gate: a per-asset record of who may train on what
+
+**The opportunity in one line:** publishers have been handed three ways to *declare* AI-training
+terms and no way at all to **administer** them — there is no console, no per-asset policy store and
+no audit trail anywhere in open source, while the settlement layer below is a measured zero
+(`pay-per-crawl` top six = 5, 2, 2, 0, 0, 0 stars, measured 2026-11-22).
+
+**Why it is defensible rather than a nice-to-have.** In the EU, the DSM Directive's **Article 4**
+TDM exception applies *unless rights are expressly reserved in a machine-readable form*. A
+reservation that is not machine-readable is, in practice, not made — so for an EMEA client this is
+the artefact that decides whether mining their catalogue was lawful. Everywhere else it is the
+evidence that underpins a licensing claim. Either way the client needs to show **what was reserved,
+for which asset, from which date** — and that is a record, not a file.
+
+**The parts — all verified 2026-11-22 (`git ls-remote` + licence bytes):**
+
+| Step | Component | License | Why this one |
+|---|---|---|---|
+| Crawler blocklist | [ai-robots-txt/ai.robots.txt](https://github.com/ai-robots-txt/ai.robots.txt) | MIT, 1069 B | 4,265★, **pushed 2026-11-22** — maintained daily, and generates `robots.txt`/nginx/Caddy artefacts directly. The blunt instrument, and the one that works today. |
+| EU machine-readable reservation | [w3c-cg/tdm-reservation-protocol](https://github.com/w3c-cg/tdm-reservation-protocol) | ⚠️ **W3C Software and Document Licence**, 432 B | **TDMRep** — the protocol built for Article 4. Ratio 1.2 (17★/14f) = real infrastructure. Read the licence before vendoring; it is not OSI-style permissive. |
+| Granular commercial terms | **RSL 1.0 spec** (`rslstandard.org`) | ⛔ **repo has NO LICENCE FILE** | The standard Reddit, Yahoo, Medium, Quora and Ziff Davis back. Supports free / attribution / subscription / **pay-per-crawl / pay-per-inference**. Use the **published spec**, not the repo's code. |
+| RSL authoring | [onurkanbakirci/rsl-editor](https://github.com/onurkanbakirci/rsl-editor) | MIT, 1070 B | 22★ — small, and **the only properly licensed RSL tool found.** |
+| Honouring, on the ingest side | [Spawning-Inc/datadiligence](https://github.com/Spawning-Inc/datadiligence) | MIT, 1079 B | The only library for *respecting* opt-outs. **Dormant since 2024-10-09** — vendor it, budget to carry it, and say so. |
+| Asset identity for the record | [iscc/iscc-sdk](https://github.com/iscc/iscc-sdk) | Apache-2.0, 11339 B | ISO 24138 content code, so the reservation attaches to **the content**, not to a URL that will change. |
+| Catalogue spine | [beetbox/beets](https://github.com/beetbox/beets) | MIT, 1079 B | Where the per-asset policy actually lives for audio. MIT at the platform tier — no copyleft on the product. |
+
+**Wiring.**
+
+1. **Policy is data, in the client's repository.** One `reservation.yaml` per collection: scope,
+   permitted use, licence class, effective date, contact. Everything downstream is a *rendering* of
+   that file. Hardcoding terms into templates is the defect that makes the gate unusable the first
+   time legal changes its mind.
+2. **Render to all three surfaces from the single source.** `robots.txt` (via `ai.robots.txt`'s
+   generated artefacts), TDMRep assertions for the EU, and an RSL document for commercial terms. They
+   are not alternatives — they address different readers (crawler operators, EU law, licensing
+   counterparties).
+3. **Bind the reservation to a content code, not a path.** Generate an ISCC per asset with
+   `iscc-sdk` and key the policy store on it. URLs rot and CDNs rewrite them; a content-derived code
+   survives re-encoding and re-hosting, which is exactly what a dispute two years later will turn on.
+4. **Emit a dated, immutable evidence record per asset** — reservation text, ISCC, timestamp, the
+   rendered artefacts' hashes. Store it *with* the asset, never in a rotating log. **This is the
+   deliverable clients pay for and nothing open produces it.**
+5. **Deterministic rendering; the LLM writes prose only.** The agent drafts human-readable summaries
+   and explains a policy to an editor. It must never decide a licence class. Same rule as P10 and
+   P13: an LLM that decides compliance is an unauditable gate.
+6. **Human approval on anything that changes commercial terms.** Reserving rights is a legal act.
+
+**What to sell.** Not "AI blocking". Sell **the per-asset reservation record and its audit trail** —
+in EMEA as the Article 4 compliance artefact and a **digital-sovereignty** story (the join key never
+leaves the client's estate), in North America as the administration layer under terms their peers
+have already published.
+
+**Do not promise:** that AI labs will honour any of it. Whether they come to the table is genuinely
+unresolved — TechCrunch frames it as the open question of RSL, and this pattern's value does not
+depend on the answer: the record is what supports a claim, a negotiation or a licence sale.
+**Also do not ship the RSL repo's code** — it is unlicensed, so default copyright applies. Flag that
+in the proposal; it is a real supply-chain finding (`intel/trends.md` §27).
+
+**Falsifiable prediction, registered 2026-11-22.** This KB's healthcare pass established that when a
+regulator turns a judgment into a computable artefact, permissive open source appears for that
+judgment **and appears before the mandate**. Article 4 has already made the *reservation* computable,
+and TDMRep exists. The judgment still uncomputed is **"was this use licensed?"** — the settlement
+step. The prediction: **the first permissive implementations of AI-training-use settlement will appear
+within 1–2 standardisation cycles of a regulator or court making the accounting unit explicit, and the
+leading indicator is a published spec for a usage report — not GitHub activity.** Watch DDEX's
+AI rights-reservation message and the RSL Collective's reporting format. If a permissive settlement
+library with a ratio under ~5 appears *before* any such spec, this prediction is wrong and the
+structural law needs revising.
+
+## Pattern 16 — Identification to attribution: a content-ID spine for a catalogue nobody can match
+
+**Why this pattern exists, with a government's number behind it.** The UK government's **music
+streaming metadata report (April 2026)** found **no central registry for ISRCs** and **ISRC-to-ISWC
+matching rates ranging from 0% to 85%** depending on source. Music Business Worldwide calls linking
+works to recordings music data's *"single biggest unsolved problem."* That gap between 0% and 85% is
+not a tooling complaint — it is a **measured reconciliation defect from a primary public source**,
+which makes it scopeable and sellable as an outcome.
+
+**What it does.** Takes a client's existing library — a broadcaster's archive, a label's catalogue, a
+rights-holder's masters — and produces, per asset: a **content-derived identity** that survives
+re-encoding, a **best-match registry identity** with a confidence score, and a **queue of the residue**
+for human adjudication. The output is a join key the client owns and an auditable match record.
+
+**The parts — all verified 2026-11-22:**
+
+| Step | Component | License | Why this one |
+|---|---|---|---|
+| Catalogue spine | [beetbox/beets](https://github.com/beetbox/beets) | **MIT**, 1079 B | 15,972★, ratio 7.2, pushed 2026-11-22. Already wires fingerprint → identity → tags, with a real plugin API. **The MIT exception at the platform tier** — extend it without copyleft reaching the product. |
+| Audio fingerprint (default) | [acoustid/chromaprint](https://github.com/acoustid/chromaprint) + [beetbox/pyacoustid](https://github.com/beetbox/pyacoustid) | ⚠️ **LGPL-2.1 as a whole** / MIT | The industry standard, and what `beets` already calls. **Read §28 of `intel/trends.md` first: its licence depends on which FFT library you link.** |
+| Audio fingerprint (permissive) | [worldveil/dejavu](https://github.com/worldveil/dejavu) *or* [dpwe/audfprint](https://github.com/dpwe/audfprint) | MIT | When permissive is a hard requirement. Both **dormant** (2024-04, 2019-09) and both reference-grade (ratio 4.6; Columbia/Google provenance). **Vendor and budget the maintenance.** |
+| Audio fingerprint (embedded / active) | [JorenSix/Olaf](https://github.com/JorenSix/Olaf) or [Panako](https://github.com/JorenSix/Panako) | **AGPL-3.0** | The only *maintained* options; Panako is pitch/time-scale **invariant**, so it survives broadcast speed-ups. **Network copyleft — architecture decision, not paperwork.** |
+| Broadcast / live matching | [adblockradio/stream-audio-fingerprint](https://github.com/adblockradio/stream-audio-fingerprint) | MPL-2.0 | The only repo here built for **real-time** stream matching (it detects radio ad breaks). File-level copyleft, linkable. |
+| Standards-backed content code | [iscc/iscc-sdk](https://github.com/iscc/iscc-sdk) | Apache-2.0 | **ISO 24138:2024.** Similarity-preserving codes across text, image, audio, video. The internal join key. |
+| Video near-duplicates | [akamhy/videohash](https://github.com/akamhy/videohash) | MIT, 1075 B | Perceptual video hashing; pair with `PySceneDetect` (BSD-3) to hash **per scene** rather than per file. |
+| Metadata authority | [MusicBrainz](https://github.com/metabrainz/musicbrainz-server) / [Picard](https://github.com/metabrainz/picard) | GPL-2.0 | Run as **services you integrate with**, not code you ship. Picard is the working proof of the fingerprint→identity join. |
+| Delivery-format ingest | [miqwit/dedex](https://github.com/miqwit/dedex) | MIT, 1063 B | DDEX **ERN** parsing where the client receives or sends release notifications. Ratio 2.0 — small, but the only live permissive DDEX code found. |
+
+**Wiring.**
+
+1. **Generate two identities per asset, never one.** An **ISCC** (content-derived, free, client-owned,
+   survives re-encoding) *and* a **registry identity** (ISRC/ISWC/EIDR, authoritative, paid). The
+   ISCC is the primary key inside the estate; the registry ID is a foreign key out to the industry.
+   Conflating them is the mistake that makes the whole build non-portable.
+2. **Fingerprint, then match, then score — and keep the residue visible.** Never silently accept a
+   low-confidence match. The 0–85% range *is* the product: a match table with confidence bands and an
+   explicit **unmatched** queue beats a table that looks complete and is wrong.
+3. **The LLM adjudicates nothing; it prepares adjudications.** The agent assembles the evidence for a
+   human — candidate matches, differing credits, conflicting durations — and writes the summary. The
+   **match decision above the auto-accept threshold is deterministic code**; everything below goes to
+   a person. A hallucinated ISWC is a royalty misdirected to the wrong writer, which is a legal
+   problem, not a quality problem.
+4. **Store the match record, not just the match.** Which fingerprinter, which version, which
+   threshold, which human approved it, when. Royalty disputes are retrospective.
+5. **Integrate the registries; do not try to replace them.** EIDR, ISAN, ISRC and ISWC have **no open
+   implementations** — measured this pass (`eidr` → 160 results, zero relevant; `isan` → 1,942,
+   zero relevant). The client already pays for the memberships. That is integration work, priced as
+   integration work.
+
+**What to sell.** The **attribution layer and its audit trail** — not a fingerprinting tool. The
+inputs are free and permissive; the reconciliation judgment has **no open implementation anywhere**
+(`music royalty accounting` → 14 results, **top six hold zero stars between them**). This is the
+same structural position as healthcare's CQL library: the rules and the match records are the
+deliverable the client owns, versions and audits.
+
+**Do not promise:** an all-open-source rights or royalty stack. The output of this process is
+expressed in identifiers controlled by IFPI, CISAC, ISAN-IA and the EIDR Association — **the
+obligation travels with the content, not the code**, exactly as CPT does in healthcare. And do not
+pitch **ISCC** as an identifier the client's partners will recognise: it is ISO-published and
+Apache-2.0, and its reference implementation has **26 stars**. It is the internal join key and a
+standards-backed bet — nothing more, and that is still worth a great deal.
+
 ## Anti-patterns — learned the hard way in this KB
 
 1. **Don't ship HunyuanVideo to EMEA or South Korea.** Its license excludes the EU, UK and KR by name.

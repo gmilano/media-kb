@@ -10,6 +10,100 @@ updated: 2026-11-22
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-22 — pass 5: the identification & rights infrastructure (30 verified repos, 30/30 resolved)
+
+Fifth pass of the same day. New section in `repos/foundations.md`: **the identification &
+rights-reservation plane**. Before this pass, `fingerprint` appeared **nowhere** in this KB — the
+largest single vocabulary hole found in any pass, because content identification is the substrate
+under royalty attribution, ad verification, takedown, archive dedupe and every AI-training-rights
+claim a client will make this year.
+
+**Verification:** existence by `git ls-remote` (**30/30 resolved**); licence by fetching the licence
+file and counting bytes; stars/forks/`pushed_at` from one `search/repositories` call each, so the two
+can always be cross-checked. No number below is inherited from a listicle.
+
+### The audio-fingerprinting layer — and the gap that defines it
+
+| Repo | Licence | Stars / forks | Ratio | Last push |
+|---|---|---|---|---|
+| [worldveil/dejavu](https://github.com/worldveil/dejavu) | MIT, 1070 B | 6,789★ / 1,463f | 4.6 | 2024-04-22 |
+| [acoustid/chromaprint](https://github.com/acoustid/chromaprint) | ⚠️ LGPL-2.1 as a whole, 1800 B | 1,432★ / 180f | 8.0 | 2026-10-15 |
+| [adblockradio/stream-audio-fingerprint](https://github.com/adblockradio/stream-audio-fingerprint) | MPL-2.0, 16722 B | 781★ / 65f | 12.0 | 2021-11-05 |
+| [dpwe/audfprint](https://github.com/dpwe/audfprint) | MIT, 1112 B | 622★ / 136f | 4.6 | 2019-09-24 |
+| [JorenSix/Olaf](https://github.com/JorenSix/Olaf) | AGPL-3.0, 32386 B | 426★ / 48f | 8.9 | 2026-10-16 |
+| [beetbox/pyacoustid](https://github.com/beetbox/pyacoustid) | MIT, 1080 B | 413★ / 71f | 5.8 | 2026-05-19 |
+| [JorenSix/Panako](https://github.com/JorenSix/Panako) | AGPL-3.0, 32385 B | 276★ / 53f | 5.2 | 2026-09-17 |
+
+**The gap, stated as a sentence a proposal can use:** the two *actively maintained* audio
+fingerprinters are **AGPL-3.0**; the three *permissive* ones were last touched in 2019, 2021 and
+2024. **There is no actively maintained permissive audio fingerprinter.** A client wanting one is
+choosing between vendoring dead MIT code and accepting network copyleft on a service. Narrow,
+measured, and buildable.
+
+### Standards-based codes, catalogue, enforcement, watermarking
+
+| Repo | Licence | Stars / forks | Last push | Layer |
+|---|---|---|---|---|
+| [beetbox/beets](https://github.com/beetbox/beets) | **MIT**, 1079 B | 15,972★ / 2,207f | 2026-11-22 | Catalogue platform — the MIT exception at the platform tier |
+| [metabrainz/picard](https://github.com/metabrainz/picard) | GPL-2.0, 17983 B | 5,398★ / 479f | 2026-11-19 | Tagger / ID→metadata join |
+| [metabrainz/musicbrainz-server](https://github.com/metabrainz/musicbrainz-server) | GPL-2.0-or-later, `COPYING.md` | 1,114★ / 347f | 2026-11-19 | Metadata encyclopedia |
+| [metabrainz/listenbrainz-server](https://github.com/metabrainz/listenbrainz-server) | GPL-2.0, 18205 B | 1,077★ / 402f | 2026-11-22 | Listening data |
+| [awslabs/speke-reference-server](https://github.com/awslabs/speke-reference-server) | Apache-2.0, 11357 B | 123★ / 50f | 2026-09-08 | DRM key exchange |
+| [iscc/iscc-core](https://github.com/iscc/iscc-core) | Apache-2.0, 11345 B | 26★ / 6f | 2026-10-17 | **ISO 24138:2024** reference |
+| [iscc/iscc-sdk](https://github.com/iscc/iscc-sdk) | Apache-2.0, 11339 B | 24★ / 8f | 2026-10-26 | ISCC, batteries included |
+| [iscc/iscc-web](https://github.com/iscc/iscc-web) | Apache-2.0 | 9★ / 4f | 2026-11-09 | ISCC HTTP service |
+| [iscc/iscc-lib](https://github.com/iscc/iscc-lib) | Apache-2.0 | 2★ / 1f | 2026-11-22 | ISCC multi-language rewrite, early |
+| [akamhy/videohash](https://github.com/akamhy/videohash) | MIT, 1075 B | 388★ / 65f | 2024-07-12 | Perceptual video hashing |
+| [resemble-ai/Perth](https://github.com/resemble-ai/Perth) | MIT, 1067 B | 546★ / 51f | 2026-09-02 | **New** — perceptual audio watermarking |
+| [swesterfeld/audiowmark](https://github.com/swesterfeld/audiowmark) | GPL-3.0, 35148 B | 604★ / 119f | 2026-09-23 | **New** — broadcast-grade, copyleft |
+| [wavmark/wavmark](https://github.com/wavmark/wavmark) | ⚠️ MIT **template, unfilled** | 323★ / 44f | 2024-01-07 | **New** — `Copyright (c) [year] [fullname]` |
+
+**Documents, not code — demoted on sight (T13 again):** [iscc/iscc-codes](https://github.com/iscc/iscc-codes)
+(**CC-BY-4.0**, 53★) is the ISCC specification text. Cite it; do not depend on it.
+
+### T8 re-measured, not re-asserted: watermark removal has widened its lead
+
+[wiltodelta/remove-ai-watermarks](https://github.com/wiltodelta/remove-ai-watermarks) — Apache-2.0,
+**6,483★ / 600f**, pushed **2026-11-22** — has more stars than every watermarking repo in this KB
+*combined* (`audioseal` 804 + `audiowmark` 604 + `Perth` 546 + `wavmark` 323 = 2,277). Measured
+today. Any provenance pitch must assume the removal tool is better maintained and more popular than
+the marking tool.
+
+### Measurement note — the licence probe used by earlier passes was incomplete
+
+`JorenSix/Panako` returned **404 from `raw.githubusercontent.com` for every path tried, including a
+commit-pinned one.** That looked like an unreadable licence. It was not: the file is
+**`license.txt`, all lower-case**, and the readme is `README.textile`, not `README.md`. A control
+request (`beetbox/beets/master/LICENSE` → 200) proved the channel was healthy, so the 404s were
+**naming convention, not absence**. A shallow clone settled it in one call: AGPL-3.0, 32,385 B.
+
+The same omission had already bitten this pass once — `musicbrainz-server` looked unlicensed because
+the probe list lacked **`COPYING.md`**.
+
+**Two durable rules, for all twelve industries:**
+
+1. **Probe list must include** `license.txt`, `license`, `COPYING.md`, `Licence.txt` alongside the
+   upper-case names. Paths are case-sensitive; older projects favour lower-case.
+2. **If `README.md` also 404s, your filenames are wrong — the repo is not empty.** Failing control =
+   throttled; *passing* control + 404 = naming convention. Then **shallow-clone and look**: cheap and
+   conclusive. A raw-channel 404 is never by itself evidence that a licence is absent.
+
+This supersedes nothing in the channel guidance; it extends it. `git ls-remote` remains the only
+reliable existence oracle, and `search/repositories` with `-f q='repo:<slug>'` still returns
+stars + forks + `pushed_at` + SPDX in a single call.
+
+### Query-shortening rule confirmed again, and it saved this pass
+
+Four plausible queries returned 0 or 1 and were wrong: `tdm reservation protocol`, `eidr identifier`,
+`ai.txt crawler opt-out`, `spawning ai datadiligence`. Shortened to `tdmrep`/`tdm reservation
+protocol`, `eidr`, `ai.txt`, `datadiligence` they returned the real repos — including
+`ai-robots-txt/ai.robots.txt` (4,265★), which the long query missed entirely. **A plausible query
+returning zero is a query that is too long, until proven otherwise.**
+
+But the converse also held, and that is the new half: `eidr` → 160 results and `isan` → 1,942
+results, with **zero relevant hits in either**. Shortening a query can turn a false zero into a false
+*abundance*. Both require reading the results, not the total.
+
 ## 2026-11-22 — pass 4: the conformance & preservation infrastructure (20 verified repos)
 
 Fourth pass of the same day, on a plane that returned **no match in any of the eight files** at

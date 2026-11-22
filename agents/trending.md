@@ -9,6 +9,101 @@ updated: 2026-11-22
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-22 — pass 5: the identification & rights-reservation plane (the first page with no stars)
+
+Fifth pass of the same day, and the first to find a query whose **entire first page of results holds
+zero stars**. The plane: *which asset is this, and who may train on it?* Before this pass the word
+`fingerprint` did not appear anywhere in this KB.
+
+**The measured zeros, which are the finding:**
+
+| Query | Total | Top-6 stars | Verdict |
+|---|---|---|---|
+| `music royalty accounting` | 14 | **0, 0, 0, 0, 0, 0** | ⛔ Empty field. Four of six carry no licence. Starker than healthcare's `medical necessity` (3 stars across six). |
+| `pay-per-crawl` | 33 | 5, 2, 2, 0, 0, 0 | ⛔ The AI-content settlement layer does not exist. |
+| `eidr` | 160 | — | ⛔ **Zero relevant.** No open EIDR client. All false friends. |
+| `isan` | 1,942 | — | ⛔ **Zero relevant.** All NLP libraries. No open ISAN tooling. |
+| `cwr common works registration` | 8 | 16, 16, 8, 2, 0, 0 | Both real implementations dead since **2015** and **2018**. |
+
+### The fifth consecutive confirmation of the structural law — now with a three-step gradient
+
+Five planes, five identical results. This pass sharpens the law because the same subject matter
+splits cleanly by function:
+
+- **Declare** a reservation → format problem → **permissive, maintained daily.** `ai.robots.txt`
+  (MIT, 4,265★/206f) pushed **2026-11-22**, the day of this pass.
+- **Honour** a reservation → judgment problem → **MIT, 41★, dormant since 2024-10-09**
+  (`Spawning-Inc/datadiligence`).
+- **Settle** the obligation → pure judgment → **literal zero.**
+
+Publishers are tooled to say no; nobody maintains the code that listens; nothing computes what is
+owed.
+
+### Verified this pass — newly added to this KB
+
+All 30 repos of this pass: existence by `git ls-remote` (**30/30 resolved**), licence by fetching the
+file and counting bytes, stars/forks/`pushed_at` from one `search/repositories` call each.
+
+| Repo | Licence (verified) | Stars / forks | Last push | Why it is here |
+|---|---|---|---|---|
+| [beetbox/beets](https://github.com/beetbox/beets) | MIT, 1079 B | 15,972★ / 2,207f | 2026-11-22 | **The row to act on.** MIT catalogue platform that already joins fingerprint → identity → tags. Ratio 7.2. |
+| [worldveil/dejavu](https://github.com/worldveil/dejavu) | MIT, 1070 B | 6,789★ / 1,463f | 2024-04-22 | Most-starred permissive fingerprinter. Ratio 4.6 = deployed. Dormant 2.5y. |
+| [ai-robots-txt/ai.robots.txt](https://github.com/ai-robots-txt/ai.robots.txt) | MIT, 1069 B | 4,265★ / 206f | **2026-11-22** | The de-facto AI-crawler blocklist, updated daily. |
+| [acoustid/chromaprint](https://github.com/acoustid/chromaprint) | ⚠️ **LGPL-2.1 as a whole** | 1,432★ / 180f | 2026-10-15 | The industry fingerprinter. **Licence depends on build flags** — see below. |
+| [metabrainz/picard](https://github.com/metabrainz/picard) | GPL-2.0, 17983 B | 5,398★ / 479f | 2026-11-19 | Working proof of the fingerprint→metadata join. |
+| [metabrainz/musicbrainz-server](https://github.com/metabrainz/musicbrainz-server) | GPL-2.0-or-later (`COPYING.md`) | 1,114★ / 347f | 2026-11-19 | Copyleft at the platform — the law holds again. |
+| [metabrainz/listenbrainz-server](https://github.com/metabrainz/listenbrainz-server) | GPL-2.0, 18205 B | 1,077★ / 402f | 2026-11-22 | Ratio 2.7 = deployed. |
+| [adblockradio/stream-audio-fingerprint](https://github.com/adblockradio/stream-audio-fingerprint) | MPL-2.0, 16722 B | 781★ / 65f | 2021-11-05 | The only **real-time/broadcast** matcher found. Weak copyleft. |
+| [dpwe/audfprint](https://github.com/dpwe/audfprint) | MIT, 1112 B | 622★ / 136f | 2019-09-24 | Reference-grade landmark matching (Columbia/Google). Unmaintained. |
+| [JorenSix/Olaf](https://github.com/JorenSix/Olaf) | AGPL-3.0, 32386 B | 426★ / 48f | 2026-10-16 | Embedded fingerprinting. **Active and copyleft.** |
+| [beetbox/pyacoustid](https://github.com/beetbox/pyacoustid) | MIT, 1080 B | 413★ / 71f | 2026-05-19 | The clean way into Chromaprint/AcoustID. |
+| [akamhy/videohash](https://github.com/akamhy/videohash) | MIT, 1075 B | 388★ / 65f | 2024-07-12 | Perceptual video hashing. Dormant, small enough to own. |
+| [JorenSix/Panako](https://github.com/JorenSix/Panako) | AGPL-3.0 (`license.txt`, 32385 B) | 276★ / 53f | 2026-09-17 | Pitch/time-scale **invariant** matching — survives broadcast speed-ups. |
+| [awslabs/speke-reference-server](https://github.com/awslabs/speke-reference-server) | Apache-2.0, 11357 B | 123★ / 50f | 2026-09-08 | SPEKE key-exchange reference. Ratio 2.5 = real. |
+| [rslstandard/rsl](https://github.com/rslstandard/rsl) | ⛔ **NO LICENCE FILE** | 47★ / 1f | 2026-03-31 | The RSL 1.0 standard repo. **Unlicensed.** See below. |
+| [Spawning-Inc/datadiligence](https://github.com/Spawning-Inc/datadiligence) | MIT, 1079 B | 41★ / 5f | 2024-10-09 | The *honouring* side. Dormant 2+ years. |
+| [jeffpaul/rsl-wp](https://github.com/jeffpaul/rsl-wp) | ⛔ **NO LICENCE FILE** | 35★ / 1f | 2026-11-03 | Active RSL WordPress plugin, unlicensed. |
+| [miqwit/dedex](https://github.com/miqwit/dedex) | MIT, 1063 B | 30★ / 15f | 2026-11-02 | DDEX ERN parser. Ratio 2.0 — the only live permissive DDEX code. |
+| [iscc/iscc-core](https://github.com/iscc/iscc-core) | Apache-2.0, 11345 B | 26★ / 6f | 2026-10-17 | Reference implementation of **ISO 24138:2024**. |
+| [iscc/iscc-sdk](https://github.com/iscc/iscc-sdk) | Apache-2.0, 11339 B | 24★ / 8f | 2026-10-26 | The practical ISCC entry point. |
+| [onurkanbakirci/rsl-editor](https://github.com/onurkanbakirci/rsl-editor) | MIT, 1070 B | 22★ / 1f | 2026-02-16 | **The only properly licensed RSL tool found.** |
+| [w3c-cg/tdm-reservation-protocol](https://github.com/w3c-cg/tdm-reservation-protocol) | ⚠️ W3C Software and Document Licence, 432 B | 17★ / 14f | 2026-09-03 | **TDMRep** — the EU DSM Art. 4 machine-readable opt-out. Ratio **1.2** = real infrastructure. |
+| [weso/CWR-Validator](https://github.com/weso/CWR-Validator) | MIT, 1070 B | 16★ / 7f | **2015-07-31** | Rights registration, dead 11 years. |
+| [aporia-records/APORIA-Works-Registration](https://github.com/aporia-records/APORIA-Works-Registration) | GPL-3.0, 35140 B | 16★ / 6f | 2018-09-06 | The other dead CWR implementation. |
+
+Watermarking rows added the same pass (`resemble-ai/Perth` MIT 546★, `wavmark/wavmark` 323★ with an
+**unfilled MIT template**, `swesterfeld/audiowmark` GPL-3.0 604★) are logged in `repos/trending.md`.
+
+### ⛔ The sharpest licence trap yet: the rights-reservation standard is itself unlicensed
+
+`rslstandard/rsl` — the repository of **RSL 1.0**, the licensing standard endorsed by Reddit, Yahoo,
+Medium, Quora and Ziff Davis, whose whole purpose is machine-readable terms for content reuse —
+**ships no licence file** (checked `master` and `main`, 11 filenames). Neither does the WordPress
+plugin implementing it. Default copyright applies: all rights reserved. Use the published spec and
+`rsl-editor` (MIT) for code, and raise it explicitly in any rights engagement. A defect in the
+standard's packaging, **not** a reason to ignore RSL.
+
+### ⚠️ Chromaprint: a licence decided by the compile — a new category for this KB
+
+Its own `LICENSE.md`: own code MIT, bundled FFmpeg parts LGPL-2.1, *"as a whole, Chromaprint should
+be therefore considered to be licensed under the LGPL 2.1 license"* — plus a third layer, the
+**external FFT library you compile against** (FFmpeg LGPL-2.1 / FFTW3 **GPL-2.0+** / KissFFT BSD-3).
+Build with FFTW3 and a redistributed binary is arguably GPL. T22 recorded licences hiding in HTML
+files and packaging classifiers; this is worse — **the licence is a property of the build, not of the
+repository**, so no SPDX field or source-tree SBOM scan can see it.
+
+### Informed gaps from this pass
+
+- **DDEX commercial terms: UNVERIFIED.** `new.ddex.net` does not resolve from this session (outside
+  allowed network domains). Membership fees and implementer-licence terms are *unresearched, not
+  free*. DDEX is reportedly developing an **AI rights-reservation message** — confirm at source.
+- **No open implementation of EIDR, ISAN, ISRC or ISWC exists** — measured, not assumed, and
+  structural: the scarce thing is the registry allocation, not the parser.
+- **No media-specific agent appeared in the generic 2026 agent search** — only general harnesses.
+  Sixth such measurement in this KB. Still no boom in permissive vertical media agents.
+- **ISCC has no 2026 revision.** ISO 24138:2024, first edition, published 2024-05. Checked, because
+  an invented version number is exactly the error this KB has been punished for.
+
 ## 2026-11-22 — pass 4: the conformance & preservation plane (two literal zeros)
 
 Fourth pass of the same day. The plane was **measured at zero across all eight files at `HEAD`**

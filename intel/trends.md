@@ -266,6 +266,111 @@ does change the pitch: in EMEA, lead with editorial accountability under EMFA, n
 compliance, because the broadcaster you are selling to may be actively lobbying against the clause you
 are citing.
 
+## 15. Accessibility is the only plane in media with a statutory deadline — and the third proof of this KB's structural rule
+
+Added 2026-11-22 (pass 3). Every other plane this KB maps is sold on ambition: better content, cheaper
+localization, new revenue. Accessibility is sold on a **date set by a regulator**. The EAA has applied
+since 2025-06-28; the FCC's caption-display-settings rule hit compliance on 2026-08-17; Australia's
+subscription-TV targets rise 5 points every financial year by legislation.
+
+And the plane has the **same shape this KB has now found three times**:
+
+| Plane | The edges (active) | The middle (dead) |
+|---|---|---|
+| Provenance (pass 1) | `c2pa-rs`, watermarking | verification at ingest, unbuilt |
+| Monetization (pass 2) | Prebid, measurement | SCTE-35 tooling, dormant |
+| Accessibility (pass 3) | `ttconv`, `imscJS`, `dash.js` — all pushed within 48h | `imscHRM` 920 days, `ebu-tt-live-toolkit` ~5 years |
+
+**The rule, stated generally: open source reliably builds the pipeline and reliably abandons the
+proof.** Byte-moving code attracts contributors; conformance validators do not. Wherever a regulator
+asks for *evidence* rather than *output*, there is a maintained gap — and evidence-on-demand is
+exactly what a services firm is paid for. This is now the most reusable finding in the media KB and
+it should be tested against the next plane rather than assumed.
+
+## 16. The FCC has turned against automated captions — ASR alone became a liability in October 2026
+
+The FCC's 2026 CVAA report (released **2026-10-07**) explicitly flagged **inaccurate automated
+captions**, inconsistent caption controls on video-conferencing platforms, and accessibility barriers
+in emerging AI-driven communication tools. The FCC sets **no accuracy percentage** — it weighs errors
+in context and treats live as harder than prerecorded.
+
+This inverts the obvious pitch. "We will caption your library with AI" is now a regulatory *risk*
+transfer onto the client in the US. The defensible offer is the workflow the regulator's complaint
+implies: **AI draft → human review → timing and conformance check**, with the conformance step
+citing `w3c/imsc-tests` rather than in-house samples. That is more billable than pure automation, not
+less — and it is the rare case where the compliant architecture is also the more profitable one.
+
+⚠️ Do not repeat the widely circulated claim that the CVAA requires **99% accuracy for AI live
+captions**. It could not be confirmed against any primary source and contradicts the FCC's own
+stated approach.
+
+## 17. Audio description is the largest unmet mandate in media — a 56-star ceiling under a hard quota
+
+The FCC requires **50 hours of AD per calendar quarter** in prime time or children's programming. The
+EAA requires AD **wherever the picture carries information the sound does not**, and requires
+platforms to pass through broadcasters' AD. México's new Ley Federal de Cine y el Audiovisual (April
+2026) orders subtitulaje audiodescriptivo. Brazil's ANCINE regulates audiodescrição formats for
+cinema. Argentina's Ley 26.522 art. 66 names it.
+
+Against all of that, the **entire open audio-description layer is prototypes**: the largest is
+`microsoft/ai-audio-descriptions` at **56 stars**, whose README calls it research and experimentation
+and which ships no authentication. Next door in the caption layer, `SubtitleEdit` has **15,100**.
+This pass also found **no market sizing for audio description at all**, while captioning has eight
+competing vendor estimates.
+
+A statutory mandate, in four regions, with no open tooling, no measured market and no incumbent of
+any kind. **This is the clearest build opportunity in the media KB** — and the reason to treat AD as
+a first-class track in architecture now rather than retrofitting it.
+
+## 18. Regulators mandate the artefact and are silent on the method — which is standing permission to automate
+
+Across every jurisdiction examined this pass — US (FCC/CVAA/ADA), EU (EAA), Australia (ACMA Part 9D),
+México, Brasil, Argentina, Uruguay — the law specifies **what must exist**: captions, audio
+description, sign language, player controls. **This pass found no regulation anywhere that governs
+whether a human or a machine produces them.** The LATAM silence is the widest.
+
+Two consequences, and they pull in opposite directions, which is why both must be said:
+
+1. **Automation is permitted.** There is no legal barrier to AI-generated accessibility assets, and
+   clients who believe otherwise are wrong — a useful thing to be able to tell them with sourcing.
+2. **Automation carries the full liability.** Because the rule is about the artefact's *quality*, the
+   producer owns every ASR error. Trend 16 is the FCC acting on exactly that.
+
+The method is unregulated; the outcome is not. Sell the QC gate, not the model.
+
+## 19. Accessibility obligations ratchet upward on a published schedule — the business case grows by law
+
+Most compliance work is a threshold: meet it once, you are done. Accessibility is a **ratchet**:
+
+- **Australia:** subscription-TV captioning targets are legislated to **rise 5 percentage points per
+  year until they reach 100%**. Movie channels already sit at a 100% target in FY 2025/26.
+- **EU:** the EAA's exemption for pre-2025 content expires for existing content and platforms in
+  **June 2030**, so the remediation backlog has a four-year, dated runway.
+- **US:** S.4322 (introduced April 2026) would add recommended deadlines for captioning *and* AD on
+  online video.
+
+For a client, the obligated volume increases every year on a schedule published in advance while the
+budget does not. That is the strongest recurring-revenue argument in this KB, and unusually, it does
+not depend on any claim about AI capability.
+
+## 20. Sign language is mandated most where the tooling is least — and the one project everyone cites is not open source
+
+LATAM law names sign language far more consistently than US or EU rules do: **LIBRAS** in Brazil
+(ANCINE-regulated for cinema), **lengua de señas** in Argentina (Ley 26.522 art. 66) and Uruguay's
+2026 recommendations. Able Player supports a synchronized sign-language video track, so the
+*delivery* side is MIT-licensed and solved.
+
+The *production* side is not. The most visible project, `sign/translate` — formerly `sign.mt`, now
+**Rylo Translate** (Nagish Inc.) — reads as open source and is **not**: its LICENSE.md is dual-tier
+source-available, free for individuals, non-profits and education, with **a separate commercial
+licence required for for-profit organizations**. No open sign-language *generation* with meaningful
+adoption was found at all.
+
+So the region with the broadest sign-language duty has no permissive tooling to discharge it. Say
+this in the proposal rather than discovering it in delivery — and note that an engagement can still
+deliver the *carriage* (Able Player track, LIBRAS asset management) while the translation itself
+stays human or licensed.
+
 ## Low-confidence items — flagged, not promoted
 
 - Market sizing diverges ~2× across vendors (see `intel/market.md`); every figure is a vendor estimate.

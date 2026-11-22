@@ -136,6 +136,60 @@ innovation is. Here the permissive layer is *infrastructure that already works* 
 the day this was written — and the value Globant adds sits in the decisioning and creative layer
 above it, which `agents/top.md` measured as empty.
 
+## The accessibility layer of this plane — and the platform that is missing
+
+Added 2026-11-22 (pass 3). The EAA does not only require a caption *file*; it requires the service
+to deliver it and the player to expose it. That makes accessibility a **platform** question, not just
+a tooling one — so it belongs in this file, not only in `agents/top.md`.
+
+### Gap: there is no open collaborative subtitling platform — and there is a reason
+
+This is the second structural gap this file records, alongside "there is no open broadcast MAM".
+
+**Amara** was the open collaborative subtitling platform — the one every list still cites. Its own
+about page continues to describe the project as AGPL. **It is not: Amara announced it was closing its
+source code in January 2020**, and the code has been proprietary since. The docs that promise "the
+source code to Amara is available on GitHub" are stale, and the ReadTheDocs build behind them has not
+been rebuilt in roughly three years. No current repository or self-hosting path was found.
+
+Do not promise a client a self-hosted Amara. The honest position: the *tools* for subtitling are
+permissive and excellent (Subtitle Edit MIT, subaligner MIT, ttconv BSD-2), the *multi-user
+workflow platform* around them does not exist in open source and has to be built. That is a scoped,
+fundable engagement rather than a disappointment, and it is the strongest platform-shaped opportunity
+in this plane.
+
+### The one platform here with accessibility as a core service — verified in the source tree
+
+| Platform | License | Repo | Last push | What was verified |
+|---|---|---|---|---|
+| Opencast | ECL-2.0 (Apache-derived, permissive) | [Opencast/opencast](https://github.com/Opencast/opencast) | 2026-11-22 | Already in the table above for lecture capture. **Re-examined this pass for accessibility, and it is the standout:** caption is a first-class service (`modules/caption-api`, `caption-impl`, `caption-remote`), with converters for **DFXP/TTML, WebVTT, SubRip and MPEG-7**, plus a transcription subsystem with engines for **Whisper, whisper.cpp and Vosk** — i.e. fully local ASR, no cloud dependency — alongside Google and Azure. Confirmed by listing the repo tree, not from documentation. |
+
+For a client that needs an auditable captioning pipeline on permissive licences, this is the shortest
+path in the whole KB: Opencast already has the service, the formats and local Whisper wired in. What
+it lacks is an **IMSC** converter (DFXP is the older TTML profile) — which is exactly the hole
+`sandflow/ttconv` fills as a sidecar.
+
+### Accessibility capability of the rest of this table — stated honestly
+
+The remaining platforms carry caption *files* as assets without treating conformance as a feature.
+MediaCMS and PeerTube both accept subtitle uploads and serve them; neither validates them, neither
+handles audio description as a distinct track, and both are AGPL-3.0 — so they are deploy-and-
+integrate, not fork-and-embed. Jellyfin has the richest client-side subtitle handling of the group
+and is GPL-2.0.
+
+### The player tier — where the duty is actually discharged
+
+| Component | License | Repo | Last push | Role |
+|---|---|---|---|---|
+| Able Player | MIT | [ableplayer/ableplayer](https://github.com/ableplayer/ableplayer) | 2026-11-20 | The accessible player: audio description via a described `<source>` or a WebVTT `descriptions` track, and sign language in a second synchronized player. MIT, so it can be embedded in client code directly. |
+| dash.js | BSD-3-Clause | [Dash-Industry-Forum/dash.js](https://github.com/Dash-Industry-Forum/dash.js) | 2026-11-22 | DASH reference player, accessibility track selection. |
+| axe-core | **MPL-2.0** | [dequelabs/axe-core](https://github.com/dequelabs/axe-core) | 2026-11-16 | Automated conformance checking of the player *UI*. MPL-2.0 is file-level copyleft: ship it unmodified and the client's own code stays closed. |
+
+The FCC's caption-display-settings rule (compliance date **2026-08-17**) is judged on four factors —
+proximity, discoverability, previewability, and consistency/persistence. Those are properties of the
+player UI, not of the caption file. A pitch that only promises machine captions does not answer this
+rule at all; Able Player plus an axe-core gate does.
+
 ## How to add the AI layer
 
 1. Deploy the platform **unmodified** — this preserves your license position for AGPL/GPL bases.

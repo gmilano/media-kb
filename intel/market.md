@@ -23,6 +23,8 @@ range, and say it is a range:
 | $30.32B (2026) → $194.08B (2034) | Third vendor | Same 2026 base, wildly different horizon — the clearest evidence these are not interchangeable. |
 | +$30.72B growth (2024–2028) | Technavio | Measures *growth*, not market size; frequently misquoted as a total. |
 | **Media localization: $5.6B (2024) → $12.8B (2033), APAC fastest at 12.3% CAGR** | DataIntelo, via trade press | Added 2026-11-22. **A segment figure, not an "AI in M&E" figure** — and therefore the most usable number in this table, because localization is the segment this KB recommends leading with (trend 7) and the one where the open stack is ~80% complete. Still one vendor at second hand. |
+| **Captioning & subtitling solutions: estimates for 2026 span ~$0.39B to ~$7.2B** | Eight market-research vendors | Added 2026-11-22 (pass 3). **An order-of-magnitude disagreement — the widest spread in this file, and the most honest thing in it.** High cluster: GMI ~$7.2B (2026) from $6.7B (2025) → $16.5B by 2035 at 9.4% CAGR; Research Nester $6.25B (2026); Data Bridge $6.50B (2025) → $13.28B (2033). Low cluster: MarketGrowthReports $407.33M (2026) → $796.67M (2035); Business Research Insights $0.41B → $0.8B; MarkWide $385.6M; WENKH $590.48M. Narrower cuts: services-only $732M (2025) → ~$1.3B (2032); another subtitling-and-captioning cut $3.16B (2026) → $6.47B (2035). **The spread is a scope artefact**, not noise: the high cluster counts live captioning, transcription and translation services, the low cluster counts software licences only. **Ask which definition a client means before quoting any of them.** |
+| **Audio description market: no data found** | — | Added 2026-11-22 (pass 3). Searched; **no vendor sizing for audio description surfaced at all** — despite AD being a hard FCC quota and an EAA duty. An unsized market with a statutory mandate and a 56-star tooling ceiling. Recorded as an informed gap, and arguably the most interesting line in this table. |
 
 **Low confidence on all of them.** The defensible statement to a client is directional: double-digit
 CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
@@ -101,6 +103,44 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   Treat NA ad-disclosure obligations as *unresearched*, not as *absent*.
 
 
+#### Accessibility compliance — added 2026-11-22 (pass 3)
+
+- **The deadline already passed, and that is the opening.** The FCC's caption **display-settings**
+  rule reached its compliance date on **2026-08-17** (implementing CVAA §203). It applies to TVs,
+  streaming devices and apps, and is judged on four factors: **proximity, discoverability,
+  previewability, and consistency/persistence**. These are properties of the *player UI*, not of the
+  caption file — so a client who bought "AI captions" has not addressed this rule at all. One useful
+  scoping limit: a consumer-installed streaming app on a smart TV is **not** the manufacturer's
+  responsibility.
+- **The regulator has turned explicitly skeptical of automated captions.** The FCC's 2026 CVAA
+  report (released **2026-10-07**) flagged *inaccurate automated captions*, inconsistent caption
+  controls on video-conferencing platforms, and accessibility barriers in emerging AI-driven
+  communication tools. **Commercial read:** pure-ASR captioning is now a regulatory liability in the
+  US, not a saving. What is sellable is the workflow the regulator implicitly asks for — AI draft →
+  human review → timing/conformance check — which is a *services* shape, and therefore Globant's.
+- **The FCC sets no accuracy percentage.** It weighs errors in context and treats live captioning as
+  harder than prerecorded. ⚠️ A widely repeated claim that the CVAA mandates **99% accuracy for AI
+  live captions could not be confirmed against any primary source** and conflicts with the above —
+  do not put it in a client deck.
+- **Audio description is a hard quota here:** 50 hours per calendar quarter, in prime time or
+  children's programming. Against that, the entire open AD tool layer peaks at 56 stars
+  (see `agents/top.md`) — the sharpest mismatch between duty and tooling in this KB.
+- **Online video scope:** programming that aired on US TV with captions must be captioned when
+  distributed over the internet, including in OTT apps. Pure-online originals fall under ADA
+  expectations rather than the CVAA — a distinction worth drawing explicitly in scoping, because it
+  changes who the obligated party is.
+- **Pipeline to watch:** **S.4322, the Communications, Video, and Technology Accessibility Act of
+  2026** (119th Congress, introduced April 2026) would have the government recommend deadlines for
+  captioning *and* audio description on online video. Not law — a reason to design for AD now.
+- **Broadcast-grade is a real technical constraint:** US broadcast captions must conform to
+  **CEA-608/708**, and consumer AI captioning tools do not emit those formats. `CCExtractor`
+  (GPL-2.0) is the only maintained open path, and there is no permissive equivalent.
+- **Low confidence, flagged not promoted:** a DOJ **ADA Title II** deadline of April 2027 for larger
+  public entities appears in vendor material; not verified against a primary source.
+- **Informed gap:** this pass found **no sourced data on the North American accessibility-vendor
+  landscape or market shares** (Verbit, 3Play, AI-Media et al. appear only in their own marketing).
+  Treat NA competitive positioning in this segment as *unresearched*, not *absent*.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -168,6 +208,46 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   trade-association material. Do not present an EMEA adoption percentage — this pass could not source one.
 
 
+#### Accessibility compliance — added 2026-11-22 (pass 3)
+
+- **The European Accessibility Act (Directive (EU) 2019/882) has applied since 2025-06-28**, and this
+  is the strictest accessibility regime in the KB. Scope detail that matters for scoping: pre-recorded
+  video published *before* 2025-06-28 is exempt; video published from that date inside an in-scope
+  consumer service needs captions, **plus audio description where the picture carries information the
+  sound does not**. Platforms must also *pass through* the audio description broadcasters provide.
+  **Existing content and platforms have until June 2030** — so the backlog remediation market has a
+  four-year runway and has barely been touched.
+- **Enforcement is national, so the numbers are national.** Example found this pass: **Spain
+  (CNMC / LGCA) — 75–90% subtitling and a minimum of 2 hours/day of audio description** on public and
+  commercial channels. ⚠️ Vendor-sourced; verify against the LGCA text before quoting. A claimed
+  general **90% caption threshold** and **€1M penalty ceiling** circulating in vendor material could
+  **not** be confirmed against the Directive or any national law — excluded from this KB as data.
+- **Two deadlines now stack in this region.** The EAA duty (above) and the EU AI Act Article 50
+  marking duty already recorded in this section — pre-existing systems due **2026-12-02**. A client
+  shipping AI-assisted subtitles in the EU is inside *both*: the caption is an accessibility artefact
+  **and** AI-generated content. **No competitor is selling one pipeline that answers both.** That is
+  this KB's single best-defined EMEA offer, and `compose/patterns.md` Pattern 11 now specifies it.
+- **The tooling gap is EMEA-shaped, which is unusual and exploitable.** `ebu-tt-live-toolkit` — the
+  reference implementation of **EBU-TT Live**, Europe's live-subtitle contribution spec — has been
+  **abandoned for ~5 years (last push 2021-12-21)**, while the EAA made live subtitling a legal duty
+  in June 2025. Europe has the strictest rule and the deadest reference tooling. Reviving a BSD-3
+  EBU toolkit is a credible, cheap, high-visibility move in exactly the region where public
+  broadcasters procure on open-source credibility (see trend 9).
+- **Compliance, not efficiency, is the actual adoption driver here** — captioning and subtitling are
+  regulated in most EMEA markets, which creates a dated obligation that internal-efficiency business
+  cases never match. Trade reporting this pass is explicit that localization is what pulls AI into
+  broadcast, and that **for smaller languages the economics of traditional dubbing simply do not
+  work** — which is the honest case for AI in the EU's 24-official-language market.
+- **Corroboration of this KB's trend 14:** the **EBU and the main commercial broadcaster
+  associations** have asked the Commission to narrow the deepfake definition, clarify when on-screen
+  disclosure is required, and keep marking standards proportionate. The lobbying this KB flagged is
+  real and ongoing — so the labelling duty our flagship pattern assumes may be *softened*, not
+  tightened. Design the marking layer to be configurable, not hardcoded.
+- **One vendor interpretation worth knowing and not repeating as fact:** that caption/subtitle
+  workflows which transcribe and translate *without generating a new voice track* sit outside the AI
+  Act's disclosure scope. Plausible, legally untested, vendor-authored. Flag it to counsel; do not
+  build a compliance promise on it.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -227,6 +307,42 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   India's IT Rules, AI-labelling obligations and OTT regime are **unresearched** in this KB — the
   single largest named gap in this file, and the first thing to fix on the next APAC pass.
 
+
+#### Accessibility compliance — added 2026-11-22 (pass 3)
+
+- **Australia is the region's concrete, quantified regime, and the best entry point.** ACMA enforces
+  it under **Part 9D of the Broadcasting Services Act**, with quality judged against the
+  **Broadcasting Services (Television Captioning) Standard 2023**:
+  - **Free-to-air** (commercial and national): caption **all main-channel programs 06:00–24:00**, and
+    **all news and current affairs at any time**.
+  - **Subscription TV:** targets are **legislated to rise 5 percentage points per year until they
+    reach 100%**. As at **FY 2025/26 all movie channels are at a 100% target**; the sports-channel
+    target example is **70%**, and **each individual sports channel must caption at least two-thirds
+    of the target** every financial year.
+  - **Commercial read:** a rising statutory percentage is the ideal AI-captioning business case,
+    because the client's obligation grows every single year on a published schedule while their
+    budget does not. This is the cleanest "volume must go up, cost must come down" argument in the KB.
+  - ⚠️ Figures are from ACMA's own pages via secondary guides; verify the current financial year's
+    table before quoting, since it changes annually by design.
+- **South Korea — a one-year enforcement window that is open right now.** Korea's comprehensive
+  **risk-based AI law** is in force, but the ministry has indicated **2026 is effectively a pilot
+  period with limited enforcement, and a one-year grace period on penalties.** For AI-assisted media
+  work this is the most permissive moment Korea will offer; it closes, and clients who start in the
+  grace period are compliant-by-design when it does. Note this is the AI statute, **not** a
+  captioning mandate — the search returned no Korean captioning quota.
+- **The regional asymmetry is the finding, and it cuts the other way from EMEA.** An industry source
+  (AVIA, *Regulating for Growth*) states that for **some Asian pay-TV and streaming markets there is
+  no regulation or requirement for dubbing, subtitling or captioning at all.** ⚠️ That page is
+  roughly 690 days old and may be outdated. Where it holds, accessibility in APAC is a
+  **competitive-differentiation** sale (reach, searchability, sponsor-friendly inventory), **not a
+  compliance sale** — the NA/EMEA pitch does not port, and using it will land wrong.
+- **Informed gaps — searched and not found, which is not the same as absent:**
+  - **Japan (MIC) subtitling/AD targets:** searched directly; no accessible primary or secondary
+    source surfaced. Japan's public broadcaster obligations are known to exist; **this KB does not
+    have the numbers.** Go to MIC's own publications before any Japanese engagement.
+  - **India:** nothing relevant to captioning or accessibility regulation found this pass.
+  - **No Australian or Japanese audio-description quota** was found, in contrast to the FCC's explicit
+    50-hours-per-quarter rule. APAC AD duties should be treated as unresearched.
 
 ### LATAM
 
@@ -313,6 +429,46 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   but it rests on a single Korean-language trade source. Not carried as a finding; worth re-checking
   next pass.
 
+
+#### Accessibility compliance — added 2026-11-22 (pass 3)
+
+- **México is the live trigger, and it is new.** The **Senado approved a new Ley Federal de Cine y el
+  Audiovisual (April 2026)**, which orders the incorporation of **subtitulaje audiodescriptivo and
+  subtitulaje adaptado in all formats in which cinematographic works are presented**, with coverage
+  describing subtitles, audiodescripción and further access tools for both cinemas and streaming.
+  ⚠️ Verify the final published text and its *reglamento* before scoping — the obligation's edges
+  (which formats, what timetable, who enforces) are exactly what a reglamento settles, and it was not
+  found this pass. **This is the single most actionable accessibility opportunity in LATAM right now**
+  because the law is fresh, the implementing detail is still unsettled, and nobody has tooled for it.
+- **Brasil — the framework is old and the cinema rules are concrete.** **Lei 13.146/2015 (Estatuto da
+  Pessoa com Deficiência)** first brought audiovisual accessibility into Brazilian law, and **ANCINE**
+  regulated the delivery formats — **legenda descritiva, audiodescrição and LIBRAS** — for cinema
+  exhibition, with a published register of rooms. The Ministério da Cultura's own accessibility guide
+  is the practical reference. Note the shape: Brazil mandates **three** distinct accessibility tracks,
+  one of which is sign language.
+- **Argentina — Ley 26.522 (Servicios de Comunicación Audiovisual), artículo 66** requires
+  accessibility of programming content and names **subtitulado oculto, lengua de señas and
+  audiodescripción** explicitly. The **Defensoría del Público** supports implementation with
+  diagnostics and training, which makes it the natural first conversation for an Argentine engagement
+  — and Globant's home market.
+- **Uruguay** published official **recommendations for accessible audiovisual content in July 2026**
+  (subtitles, transcription, lengua de señas, audiodescripción) via AGESIC/ICAU. **Paraguay** has a
+  **bill pending** that would require closed captioning and audiodescripción on broadcast TV —
+  approval unconfirmed. Both are small markets that signal regional direction.
+- **The LATAM-specific insight, and it is genuinely different from NA/EMEA.** LATAM law mandates
+  **sign language** (LIBRAS in Brazil, lengua de señas in Argentina and Uruguay) far more consistently
+  than US or EU rules do — and **sign language is precisely where the open stack is weakest.** The
+  most visible project, `sign/translate` (ex-`sign.mt`, now **Rylo Translate**, Nagish Inc.), is
+  **source-available with a mandatory commercial licence for for-profit use**, and no open
+  sign-language *generation* with real adoption was found at all. So the region with the broadest
+  sign-language duty has **no permissive tooling to discharge it**. That is either the hardest
+  blocker in LATAM accessibility work or its biggest build opportunity, and it should be said out
+  loud in any proposal rather than discovered in delivery.
+- **Informed gap:** **no LATAM regulation was found that governs the use of AI** to produce
+  accessibility assets (automatic audiodescripción, machine captions as legal compliance). As
+  everywhere else in this pass, regulators mandate the **artefact** and are silent on the **method**.
+  In LATAM that silence is widest, which is permission to automate — and the reason an AI-assisted
+  accessibility pipeline can be sold here before the rules harden.
 
 ## Globant positioning
 

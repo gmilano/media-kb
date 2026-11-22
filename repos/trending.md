@@ -10,6 +10,63 @@ updated: 2026-11-22
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-22 — pass 3: the accessibility & conformance infrastructure
+
+Third pass of the same day, on the plane measured at **zero** across all eight files at `HEAD`
+(`imsc`, `ttml`, `cea-608`, `cea-708`, `ebu-tt`, `wcag`, `accessib*`, `closed caption` — 0 hits each).
+This file records the **infrastructure and standards** half; `agents/trending.md` carries the tools
+and the AD finding.
+
+### Verified this pass — standards, rendering, conformance
+
+| Repo | License | Stars | Last push | Layer |
+|---|---|---|---|---|
+| [Dash-Industry-Forum/dash.js](https://github.com/Dash-Industry-Forum/dash.js) | BSD-3-Clause | — | 2026-11-22 | Delivery / accessibility track rendering. Pushed today. |
+| [sandflow/ttconv](https://github.com/sandflow/ttconv) | BSD-2-Clause | 242 | 2026-11-21 | Subtitle format interchange (STL/SRT/TTML/SCC/WebVTT). |
+| [ableplayer/ableplayer](https://github.com/ableplayer/ableplayer) | MIT | 837 | 2026-11-20 | Accessible player; AD + sign-language tracks. |
+| [sandflow/imscJS](https://github.com/sandflow/imscJS) | BSD-2-Clause | 92 | 2026-11-20 | IMSC → HTML5 rendering. |
+| [dequelabs/axe-core](https://github.com/dequelabs/axe-core) | **MPL-2.0** | — | 2026-11-16 | Accessibility conformance engine for the player UI. File-level copyleft. |
+| [CCExtractor/ccextractor](https://github.com/CCExtractor/ccextractor) | **GPL-2.0** | 919 | 2026-11-11 | CEA-608/708 caption extraction from transport streams. |
+| [w3c/imsc-tests](https://github.com/w3c/imsc-tests) | W3C Test Suite **or** W3C BSD-3 | 18 | 2026-10-22 | IMSC conformance corpus. |
+| [sandflow/imscHRM](https://github.com/sandflow/imscHRM) | BSD-2-Clause | 10 | 2024-05-16 | ⚠️ HRM validator — dormant ~920 days. |
+| [ebu/ebu-tt-live-toolkit](https://github.com/ebu/ebu-tt-live-toolkit) | BSD-3-Clause | 27 | 2021-12-21 | ⚠️ EBU-TT Live reference toolkit — abandoned ~1,797 days. |
+
+### What the dates say
+
+Ranked by last push, this plane splits cleanly in two. Everything that **moves bytes** — conversion,
+rendering, playback, extraction — was pushed within the last 11 days. Everything that **proves
+correctness** — `imscHRM`, `ebu-tt-live-toolkit` — stopped years ago. The W3C test corpus (31 days)
+is the only conformance artefact still maintained, and it is a test suite, not a validator.
+
+That is the third time this KB has recorded the same shape in a different plane:
+
+| Plane | Edges | Middle |
+|---|---|---|
+| Ad / monetization (pass 2) | Prebid active, measurement active | SCTE-35 tooling dormant |
+| Provenance (pass 1) | c2pa-rs active, watermarking active | verification at ingest unbuilt |
+| Accessibility (this pass) | ttconv/imscJS/dash.js active | HRM + EBU-TT Live conformance dead |
+
+The generalization worth carrying into client conversations: **open source reliably builds the
+pipeline and reliably abandons the proof.** Wherever a regulator asks for evidence rather than
+output, there is a gap — and that is precisely where a services firm is paid.
+
+### Measurement note — the verification oracle changed
+
+`curl -sI` against a github.com repo page is now **useless in this environment**: the egress proxy returns
+`403` for every github.com HTML request, real and nonexistent alike, so it cannot distinguish a live
+repo from a 404. `api.github.com` is scoped to this session's own repositories and returns
+"GitHub access to this repository is not enabled for this session" for everything else.
+
+What works, and what this pass used:
+
+- **Existence:** `git ls-remote` against the repo URL — lists refs for a real repo, fails
+  with a credential prompt for a nonexistent one. Confirms the method already recorded in `agents/top.md`.
+- **Licence:** `git clone --depth 1 --filter=blob:none --sparse` then
+  `git sparse-checkout set LICENSE` and read the file. Catches what the GitHub sidebar hides —
+  this is how `sign/translate`'s commercial tier and Subtitle Edit's real MIT licence were found.
+- **Last push:** blobless shallow clone + `git log -1 --format=%ad`. Cheap and exact.
+- **Stars:** WebFetch of the repo page (the only channel that still reports them here).
+
 ## 2026-11-22 — pass 2: the monetization plane (16 verified repos, a new section in `foundations.md`)
 
 Second pass of the same day, aimed at the plane this KB had never covered. Measured before starting:

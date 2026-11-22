@@ -399,6 +399,167 @@ audience graph is where that obligation would be implemented, so keep the rankin
 
 ---
 
+## Pattern 11 — Dual-duty accessible publishing (one pass, two regulators)
+
+**Why:** a client publishing AI-assisted subtitles in the EU is inside **two** regimes at once — the
+caption is an **accessibility artefact** (EAA, applied since 2025-06-28) *and* **AI-generated content**
+(AI Act Art. 50, with pre-existing systems due **2026-12-02**). Everyone sells one or the other.
+Nobody found in this pass sells a single pipeline that discharges both, and the components are
+already permissive. New 2026-11-22 (pass 3).
+
+```
+[mezzanine / transport stream]
+     |
+     +--> [CCExtractor (GPL-2.0, SIDECAR PROCESS)]  <- lift existing CEA-608/708 if the asset has them
+     |
+     +--> [whisper.cpp (MIT)] + [jianfch/stable-ts (MIT)]   <- draft captions WITH word-level timestamps
+                  |
+                  v
+        [pyannote-audio (MIT)]        <- speaker turns => speaker-labelled captions, not just text
+                  |
+                  v
+        [baxtree/subaligner (MIT)]    <- forced-alignment re-sync (the defect QC actually finds)
+                  |
+                  v
+        [SubtitleEdit (MIT)]          <- THE HUMAN REVIEW STEP. Not optional: see trend 16.
+                  |
+                  v
+        [sandflow/ttconv (BSD-2)]     <- emit IMSC/TTML + WebVTT for web, EBU-STL back for broadcast
+                  |
+                  +--> [sandflow/imscHRM (BSD-2, DORMANT - vendor it)]  <- will it render in real time?
+                  +--> [w3c/imsc-tests (take the BSD-3 option)]         <- cite a real conformance corpus
+                  +--> [sandflow/imscJS (BSD-2)]                        <- visual proof for the client
+                  |
+                  v
+        [contentauth/c2pa-rs (Apache-2.0)]  <- Art. 50(2) marking: the caption was AI-assisted
+                  |
+                  v
+        [ableplayer (MIT)] + [dequelabs/axe-core (MPL-2.0)]  <- FCC display-settings duty, UI-side
+```
+
+**Wiring, concretely:**
+
+1. **Branch on whether captions already exist.** Most broadcast libraries have CEA-608/708 buried in
+   the stream; lifting them with `CCExtractor` is far cheaper and more accurate than re-ASR. Run it as
+   a **separate process** — it is GPL-2.0 and there is no permissive equivalent, so the boundary is
+   architectural, not a preference.
+2. **Only ASR what has nothing.** `whisper.cpp` for throughput, `stable-ts` because plain Whisper's
+   timestamps are not good enough to time a caption. Add `pyannote-audio` for speaker turns — that is
+   the difference between a *correct* caption and a *good* one, and it is what reviewers mark down.
+3. **`subaligner` before review, not after.** Drift is the most common real defect; fixing it
+   mechanically keeps the human reviewer on language instead of timing.
+4. **`SubtitleEdit` is the review surface** — MIT (verified; the common "it's GPL" claim is wrong),
+   300+ formats, Whisper already integrated. Trend 16 is the argument for this step: the FCC named
+   inaccurate automated captions in October 2026, so an unreviewed ASR pipeline transfers regulatory
+   risk onto the client.
+5. **`ttconv` is the format spine.** One source of truth out to IMSC/WebVTT for web and EBU-STL for
+   broadcast. This is the step hybrid broadcasters get wrong.
+6. **The conformance gate is the differentiator and it needs work.** `imscHRM` answers "will this
+   actually render on a set-top box" and has been **dormant 920 days** — vendor it, pin it, and
+   budget maintenance. Cite `w3c/imsc-tests` (BSD-3 option) in the deliverable; a gate built on
+   in-house samples is not defensible to a regulator.
+7. **Mark the asset with `c2pa-rs`** — this is where the pattern earns its name. The same artefact now
+   satisfies the accessibility duty and the AI Act marking duty. Keep the marking **configurable**:
+   per trend 14 and the EBU's confirmed lobbying, the disclosure rules may soften.
+8. **Finish in the player.** `ableplayer` (MIT) carries captions, audio description and a synchronized
+   sign-language track; `axe-core` gates the UI. The FCC's four factors — proximity, discoverability,
+   previewability, consistency/persistence — are player-UI properties, so a caption-only pitch does
+   not answer that rule.
+
+**Shortcut if the client wants a platform, not a pipeline:** **Opencast** (ECL-2.0, permissive, pushed
+2026-11-22) already ships caption as a core service (`modules/caption-api`, `caption-impl`,
+`caption-remote`) with DFXP/TTML, WebVTT, SubRip and MPEG-7 converters and **local Whisper, whisper.cpp
+and Vosk** engines wired in — verified by reading its source tree. Add `ttconv` as a sidecar for the
+**IMSC** profile it lacks, and most of steps 2–5 are already built.
+
+**What not to propose:** a self-hosted **Amara**. Its about page still says AGPL; it **closed its
+source in January 2020** and has been proprietary since. There is no open collaborative subtitling
+*platform* — only excellent open *tools*. Scope the workflow layer as a build, honestly, up front.
+
+---
+
+## Pattern 12 — Audio description factory (the unbuilt product)
+
+**Why:** AD is a hard quota (FCC: 50 hours/calendar quarter in prime time or children's programming),
+an EAA duty wherever the picture carries information the sound does not, and newly mandated in México
+(April 2026), Brazil (ANCINE) and Argentina (Ley 26.522 art. 66). The entire open AD layer peaks at
+**56 stars** and no vendor has even sized the market. There is no incumbent to displace — open or
+commercial. New 2026-11-22 (pass 3).
+
+```
+[video]
+   |
+   +--> [Breakthrough/PySceneDetect (BSD-3)]   <- shot boundaries = candidate description points
+   |
+   +--> [whisper.cpp (MIT)] + [pyannote-audio (MIT)]
+   |              |
+   |              v
+   |      DIALOGUE GAP MAP  <- the hard constraint: AD may only speak where dialogue does not
+   |
+   v
+[VLM describes each shot]        <- Grounded-SAM / LAVIS (both already in repos/foundations.md)
+   |   prompted with:
+   |   [Double-FW/Audio-Descriptions (MIT)]  <- editorial rules, NOT code. Use it as the system prompt.
+   v
+[draft AD script, fitted to the gap map]
+   |
+   v
+[HUMAN AD EDITOR]               <- keep this. Microsoft's own reference calls its output a draft.
+   |
+   v
+[Kokoro-82M (Apache-2.0) | F5-TTS (MIT) | Chatterbox (MIT)]   <- the description voice
+   |
+   v
+[FFmpeg / moviepy (MIT)]  -->  WebVTT `descriptions` track  OR  mixed described audio track
+   |
+   v
+[ableplayer (MIT)]        <- described <source> or WebVTT descriptions track, natively
+```
+
+**Wiring, concretely:**
+
+1. **The gap map is the whole engineering problem, and it is why this is hard.** AD is not captioning
+   with different words: the description must fit **between** lines of dialogue. `pyannote-audio` +
+   `whisper.cpp` give speech activity; `PySceneDetect` gives where a description is *needed*. The
+   intersection — needed and permitted — is the script's skeleton. Get this wrong and the output is
+   unusable regardless of description quality.
+2. **Use `PySceneDetect` for candidates, not for truth.** A shot change is not necessarily new visual
+   information; the VLM step filters.
+3. **Prompt the VLM with a real style guide.** `Double-FW/Audio-Descriptions` (MIT) is a *documents*
+   repo of editorial rules and review frameworks written for both human editors and AI agents — which
+   makes it the highest-value artefact per byte in this pattern. AD has strong conventions (present
+   tense, no interpretation, no spoilers); an unprompted VLM violates all of them.
+4. **Keep the human editor.** Every reference implementation does, including Microsoft's.
+5. **TTS choice is a licence-clean decision for once:** `Kokoro-82M` (Apache-2.0, CPU-only — relevant
+   for volume), `F5-TTS` or `Chatterbox` (both MIT). No constraint to manage here.
+6. **Deliver as a WebVTT `descriptions` track where possible** rather than a burnt-in mixed audio
+   track — it keeps the original audio intact and lets `ableplayer` handle presentation. Mix to a
+   described audio track only when the distribution path demands it (broadcast, cinema).
+7. **Extended AD needs the video to pause**, which `ableplayer` supports and most players do not.
+   `arnabdotorg/open-vtt` targets exactly this (WCAG 1.2.7) but is **AGPL-3.0** — read it for the
+   approach, do not link it into client code.
+
+**Reference implementations worth reading before building (none worth adopting):**
+`microsoft/ai-audio-descriptions` (MIT, 56★ — the cleanest end-to-end shape; ships no auth, bind to
+localhost), `asadullah48/accessai` (Apache-2.0 — the only **live** AD attempt, scores against WCAG 2.2
+AAA / Section 508 / ADA Title III), `jdmiller/audio-description-generator` (MIT — uses a **local**
+vision model, so it is the starting point for an air-gapped or data-resident client),
+`fhswf/descraibe` (MIT, 0★ — German university, needs an external LLM key).
+
+**Say this out loud in the proposal:** every one of those is a prototype. This pattern is a **build**,
+not an integration, and that is precisely why it is worth proposing — the duty is statutory in four
+regions and nobody has shipped the product. Price it as a product build with a compliance deadline
+attached, not as a tooling integration.
+
+**The LATAM caveat that must travel with this pattern:** LATAM mandates **sign language** alongside AD
+(LIBRAS in Brazil, lengua de señas in Argentina/Uruguay) more consistently than NA or EMEA do, and the
+open stack cannot produce it — the most visible project, `sign/translate` (now **Rylo Translate**,
+Nagish Inc.), requires a **commercial licence for for-profit use**. Deliver the *carriage* (Able
+Player's synchronized sign track, LIBRAS asset management) and keep the translation human or licensed.
+Do not let a LATAM proposal imply automated sign language.
+
+---
+
 ## Anti-patterns — learned the hard way in this KB
 
 1. **Don't ship HunyuanVideo to EMEA or South Korea.** Its license excludes the EU, UK and KR by name.
@@ -431,3 +592,27 @@ audience graph is where that obligation would be implemented, so keep the rankin
    25 forks; `sofie-input-gateway` has **0 stars and 5 forks**. Deployed infrastructure is forked and
    configured, not starred. Use the ★/fork ratio: around 1 means people run it, above ~50 means
    attention without use (`hikaku-io/hikaku-extension`, 407★/9f).
+9. **Don't believe a project's own "we are open source" page.** Added 2026-11-22. **Amara's** about
+   page still states everything it does is available under the AGPL; Amara **closed its source in
+   January 2020** and has been proprietary since, with stale docs still promising a GitHub repo.
+   `sign/translate` (ex-`sign.mt`, now **Rylo Translate**) reads as open source on GitHub and is
+   dual-tier source-available, requiring a **paid commercial licence** for for-profit use. **Read the
+   LICENSE file in the default branch, every time** — not the README, not the About sidebar, not the
+   marketing site. Both of these would have reached a client as "open source" on any other method.
+10. **Don't sell automated captions as a compliance deliverable in the US.** Added 2026-11-22. The
+   FCC's 2026 CVAA report (2026-10-07) explicitly names *inaccurate automated captions*. The FCC sets
+   no accuracy percentage and judges errors in context, so unreviewed ASR transfers regulatory risk to
+   the client rather than removing cost. Sell the reviewed pipeline (Pattern 11). Also: the claim that
+   the CVAA mandates **99% accuracy** for AI live captions is unsourced and contradicts the FCC's own
+   position — it is in several vendor blogs and must not enter a client deck.
+11. **Don't answer a caption rule with a caption file.** Added 2026-11-22. The FCC's
+   display-settings rule (compliance date 2026-08-17) is judged on **proximity, discoverability,
+   previewability and consistency/persistence** — all properties of the *player UI*. The EAA likewise
+   requires the service to expose audio description, not merely to possess it. A proposal that stops
+   at generating assets does not address either rule; `ableplayer` + an `axe-core` gate does.
+12. **Don't assume the compliance pitch ports across regions.** Added 2026-11-22. The EAA/FCC
+   "you are legally obliged" framing is the wrong opening in APAC, where an industry source reports
+   **no captioning, subtitling or dubbing requirement at all** in some Asian pay-TV and streaming
+   markets. There, accessibility is a reach-and-differentiation sale. Check the jurisdiction's actual
+   duty before choosing the argument — and see `intel/market.md` for the Japan and India gaps this KB
+   has **not** closed.

@@ -9,6 +9,75 @@ updated: 2026-11-22
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-22 — pass 3: the accessibility plane (the duty with a deadline)
+
+Third pass of the same day. Before starting, the gap was **measured, not guessed**: across all eight
+files at `HEAD`, `imsc` 0 hits, `ttml` 0, `audio description` 0, `cea-608` 0, `cea-708` 0, `ebu-tt` 0,
+`accessib*` 0, `closed caption` 0, `accessibility act` 0, `cvaa` 0, `wcag` 0. Meanwhile `subtitl*`
+had 10 hits and `dubbing` 13 — so this KB knew subtitling **as a localization revenue activity and
+not once as a compliance artefact.** That is the hole this pass fills.
+
+**New in `agents/top.md` and `repos/foundations.md` this pass — all existence-verified with
+`git ls-remote`, all licences read from the LICENSE file, all dates from blobless shallow clones:**
+
+| Agent / Tool | Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| Subtitle Edit | [SubtitleEdit/subtitleedit](https://github.com/SubtitleEdit/subtitleedit) | MIT | 15,100 | 2026-11-22 | Pushed *today*. **MIT, not GPL** — the widely repeated claim is wrong; LICENSE read. |
+| stable-ts | [jianfch/stable-ts](https://github.com/jianfch/stable-ts) | MIT | 2,300 | 2026-05-30 | Word-level timestamps for Whisper. Slowing (176 days). |
+| Able Player | [ableplayer/ableplayer](https://github.com/ableplayer/ableplayer) | MIT | 837 | 2026-11-20 | Carries AD **and** sign-language tracks natively. |
+| CCExtractor | [CCExtractor/ccextractor](https://github.com/CCExtractor/ccextractor) | GPL-2.0 | 919 | 2026-11-11 | CEA-608/708 extraction. No permissive equivalent exists. |
+| subaligner | [baxtree/subaligner](https://github.com/baxtree/subaligner) | MIT | 509 | 2026-11-02 | Forced-alignment re-sync. |
+| ttconv | [sandflow/ttconv](https://github.com/sandflow/ttconv) | BSD-2-Clause | 242 | 2026-11-21 | STL/SRT/TTML/SCC/WebVTT conversion. |
+| imscJS | [sandflow/imscJS](https://github.com/sandflow/imscJS) | BSD-2-Clause | 92 | 2026-11-20 | IMSC → HTML5 reference renderer. |
+| IMSC tests | [w3c/imsc-tests](https://github.com/w3c/imsc-tests) | W3C Test Suite **or** W3C BSD-3 | 18 | 2026-10-22 | Dual-licensed; the Test Suite option forbids derivatives — take BSD-3. |
+| imscHRM | [sandflow/imscHRM](https://github.com/sandflow/imscHRM) | BSD-2-Clause | 10 | 2024-05-16 | ⚠️ Dormant ~920d. |
+| EBU-TT Live toolkit | [ebu/ebu-tt-live-toolkit](https://github.com/ebu/ebu-tt-live-toolkit) | BSD-3-Clause | 27 | 2021-12-21 | ⚠️ Abandoned ~1,797d. |
+
+### The finding of this pass
+
+**The format layer is alive; the conformance layer is dead.** `ttconv` and `imscJS` were both pushed
+within 48 hours of this measurement. `imscHRM` — the validator that answers whether a caption file
+can actually render in real time — has not moved in 920 days, and `ebu-tt-live-toolkit`, the
+reference implementation of Europe's live-subtitle contribution spec, has not moved in ~5 years,
+*while the EAA turned live subtitling into a legal duty in June 2025.*
+
+Both dormant repos are BSD and small. That makes reviving one the cheapest high-visibility open-source
+contribution available to Globant anywhere in this KB, and it sits under a compliance budget rather
+than an innovation budget.
+
+### Audio description: a 56-star ceiling under a statutory mandate
+
+Searched for open AD tooling and found **only prototypes**: `microsoft/ai-audio-descriptions` (MIT,
+**56★**, README says research/experimentation, ships no authentication),
+`asadullah48/accessai` (Apache-2.0, the only live-AD attempt, scores against WCAG 2.2 AAA),
+`jdmiller/audio-description-generator` (MIT, local vision model, WCAG 1.2.5),
+`fhswf/descraibe` (MIT, **0★**, German university), `arnabdotorg/open-vtt` (AGPL-3.0, extended AD,
+WCAG 1.2.7), `Double-FW/Audio-Descriptions` (MIT, editorial rules — documents, not code).
+
+56 stars is the ceiling of the entire open AD layer, against Subtitle Edit's 15,100 in the caption
+layer next door — while the FCC requires 50 hours of AD per calendar quarter and the EAA requires it
+wherever the picture carries information the sound does not. **Recorded as the clearest unmet build
+opportunity in this KB.**
+
+### One licence trap caught
+
+`sign/translate` — formerly `sign.mt`, now **"Rylo Translate" (Nagish Inc.)** — is the most visible
+sign-language translation project and reads as open source from its GitHub page. Its LICENSE.md is a
+**dual-tier source-available** licence: free for individuals, non-profits and education, and *"a
+separate license is required for for-profit commercial organizations."* It cannot be used in a client
+engagement without buying a licence. Added to Tier 2 with that constraint attached.
+
+### Informed gaps from this pass
+
+- **No open sign-language *generation*** (avatar/synthesis) with meaningful adoption was found, only
+  the commercially-licensed translation project above.
+- **Japan (MIC) subtitling targets:** searched, not found in accessible sources. Australia's ACMA
+  quotas were found and are recorded in `intel/market.md`; Japan's are not, and that is a gap in this
+  KB rather than an absence of regulation.
+- **No regulation found anywhere** that governs the *use of AI* to produce accessibility assets
+  (automatic AD, machine captions as legal compliance). Regulators mandate the artefact and are silent
+  on the method — which is permission to automate, and the commercial opening for this plane.
+
 ## 2026-11-22 — pass 2: the monetization plane (a measured zero)
 
 Second pass of the same day. The morning pass had already shipped this KB's eight files, so rather

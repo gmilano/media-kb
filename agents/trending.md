@@ -1,13 +1,124 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 📈 Trending Media AI Agents — append-only log
 
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
+
+## 2026-11-25 — pass 6: the production & virtual-production plane (the first plane whose agent layer is *misallocated*, not missing)
+
+Three days after pass 5, and the first pass in six to find an agent layer that is not a rounding
+error. The plane: *how a shot is built, versioned, reviewed and rendered.* The gap was found the same
+way as last pass — grep ~45 candidate terms against the 8 files before touching the web (~1 call).
+`usd`, `materialx`, `opencue`, `openvdb`, `virtual production`, `render farm`, `animation`,
+`color grading`, `motion capture` and `opentrackio` scored **zero files, zero hits**.
+
+### The gradient — five orders of magnitude, ordered by who installs it
+
+| Layer the bridge targets | Best open bridge | Licence | Stars | Last push |
+|---|---|---|---|---|
+| Blender — free DCC, mass individual base | [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender) | MIT | **35,788★** | 2026-11-18 |
+| Houdini — paid, studio | [healkeiser/fxhoudinimcp](https://github.com/healkeiser/fxhoudinimcp) | MIT | 437★ | 2026-11-20 |
+| Maya — paid, studio | [PatrickPalmer/MayaMCP](https://github.com/PatrickPalmer/MayaMCP) | MIT | 124★ | 2025-05-12 |
+| OpenUSD — studio interchange | [dcc-mcp/dcc-mcp-openusd](https://github.com/dcc-mcp/dcc-mcp-openusd) | MIT | **2★** | 2026-11-24 |
+| OpenAssetIO — studio asset resolution | [OpenAssetIO/openassetio-mcp](https://github.com/OpenAssetIO/openassetio-mcp) | Apache-2.0 | **1★** | 2026-05-18 |
+
+**35,788 → 437 → 124 → 2 → 1.** Not ordered by substrate health, obligation or market size — ordered
+by how many individuals can install it on a laptop tonight.
+
+### The structural law, sixth plane, and this is the first genuine refinement since pass 3
+
+Passes 2–5 produced the same result four times: high obligation, absent agent layer. That could still
+have been a story about regulation. This plane kills that reading, because the substrate here is the
+**healthiest in the entire KB** — **22 ASWF repos over 100★, of which 20 are Apache-2.0 or BSD-3**
+(the only two exceptions are an image corpus and the governance repo: data, not code), **15 of them
+pushed within 9 days of this pass**, under a Linux Foundation umbrella with studio funding — and
+the studio-facing agent layer is still **1 star**.
+
+So the law is not "regulated planes lack agents". It is:
+
+> **The open agent layer tracks the size of the individual practitioner population — not the
+> regulatory obligation, and not the substrate's health.**
+
+Where the user is a person, the bridge is enormous. Where the user is a pipeline, the bridge is a
+rounding error. Pass 5's three-step gradient (declare / honour / settle) was about *judgment*; this
+one is about *who holds the mouse*, and it is the more general statement.
+
+### Verified this pass — the agent layer
+
+`git ls-remote` existence: **35/35 resolved.** Stars / forks / `pushed_at` from `search/repositories`.
+
+| Repo | Licence | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender) | MIT | 35,788★ / 3,298f | 2026-11-18 | Bigger than Blender's own repo star count (22,543★). Self-declared: *"Not affiliated with the official Blender Foundation."* |
+| [healkeiser/fxhoudinimcp](https://github.com/healkeiser/fxhoudinimcp) | MIT | 437★ / 55f | 2026-11-20 | Best maintained *studio* bridge found. |
+| [capoomgit/houdini-mcp](https://github.com/capoomgit/houdini-mcp) | MIT | 312★ / 41f | 2026-06-11 | Second Houdini bridge, quiet 5 months. |
+| [PatrickPalmer/MayaMCP](https://github.com/PatrickPalmer/MayaMCP) | MIT | 124★ / 36f | 2025-05-12 | Dormant 18 months, for the most-installed studio DCC. |
+| [dcc-mcp/dcc-mcp-maya](https://github.com/dcc-mcp/dcc-mcp-maya) | MIT | 79★ / 9f | 2026-11-24 | Active alternative to the above. |
+| [dcc-mcp/dcc-mcp-core](https://github.com/dcc-mcp/dcc-mcp-core) | MIT | 76★ / 9f | 2026-11-25 | Multi-DCC abstraction. |
+| [binary-core-llc/bowerbot](https://github.com/binary-core-llc/bowerbot) | Apache-2.0 | 39★ / 3f | **2026-11-25** | Natural language → production-correct OpenUSD scene. Pushed the day of this pass. |
+| [damionrashford/media-os](https://github.com/damionrashford/media-os) | MIT | 26★ / 6f | 2026-05-31 | Rare agent↔OpenTimelineIO join. |
+| [sideshowroberto/vfx-agent-toolkit](https://github.com/sideshowroberto/vfx-agent-toolkit) | MIT | 21★ / 4f | 2026-11-09 | Owner-sized VFX agent tooling. |
+| [dcc-mcp/dcc-mcp-openusd](https://github.com/dcc-mcp/dcc-mcp-openusd) | MIT | 2★ / 1f | 2026-11-24 | The USD bridge. Two stars. |
+| [OpenAssetIO/OpenAssetIO-ComfyUI](https://github.com/OpenAssetIO/OpenAssetIO-ComfyUI) | Apache-2.0 | 2★ / 2f | 2025-09-30 | **The seam between this KB's generative plane and its production plane. Two stars, dormant 14 months.** |
+| [OpenAssetIO/openassetio-mcp](https://github.com/OpenAssetIO/openassetio-mcp) | Apache-2.0 | **1★** / 1f | 2026-05-18 | Highest leverage, lowest stars. Pattern 17. |
+
+### ⛔ The licence finding of this pass: OpenUSD is not Apache-2.0
+
+[PixarAnimationStudios/OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD) — **7,675★ /
+1,486f, pushed 2026-11-23**, the foundation of the modern 3D pipeline and the thing AOUSD ratified a
+Core Specification 1.0 for — is licensed under the **"Tomorrow Open Source Technology License 1.0"**
+(`LICENSE.txt` on `master`, **49,827 B**, read this pass). Its own preamble states the delta:
+
+> *"Note: The Tomorrow Open Source Technology License 1.0 differs from the original Apache License
+> 2.0 in the following manner. Section 6 ('Trademarks') is different."*
+
+Practically Apache-2.0 with a modified trademark clause — but it is a **separate, renamed licence**,
+the GitHub API reports `NOASSERTION`, and no SPDX field, badge or SBOM scan will tell a client what
+it is. This KB has now met four distinct ways a licence hides: a non-standard filename (pass 5), a
+licence owned by the *compile* (Chromaprint, pass 5), an HTML file or a packaging classifier
+(trend 22), and now **a renamed fork of a standard licence whose only delta is trademarks.**
+
+### ⚠️ A third licence category at the platform tier: delayed-open
+
+[ynput/ayon-backend](https://github.com/ynput/ayon-backend) and
+[ayon-frontend](https://github.com/ynput/ayon-frontend) are **FSL-1.1-ALv2** — Functional Source
+Licence, *ALv2 Future Licence* (`LICENSE`, 3,744 B each, read this pass): source-available now,
+Apache-2.0 only after a delay. Meanwhile **every** AYON client component is plain Apache-2.0
+(`ayon-core` 80★, `ayon-launcher` 55★, `ayon-blender` 20★, `ayon-houdini` 18★, `ayon-kitsu` 14★).
+
+The platform/pipeline licence law of this KB held in all five previous planes with copyleft at the
+platform. Here the platform chose **neither permissive nor copyleft but delayed-open, and split the
+split *inside one product*.** A client told "AYON is Apache-2.0" has been told something true about
+the clients and false about the server they would actually deploy.
+
+### Contamination — two of the worst queries measured in any industry
+
+| Query | Total | Reality |
+|---|---|---|
+| `virtual production` | **1,291** | Top hits are a Go asset embedder (`knadh/stuffbin`, 205★ — matches "production"), a dumped W3C report (176★), a mainframe emulator calling itself "production-quality" (113★). One defensible hit in the top six. |
+| `color grading open source` | 42 | **Four of the top six are the Bee Movie script** (228★, 98★, 53★, 40★, each opening *"According to all known laws of aviation…"*). |
+
+`virtual production` is the inverse of pass 5's `eidr`/`isan` trap and the same lesson: 1,291 looks
+like abundance and is noise, while `opentrackio` returns **8 results of which 4 are real and
+permissive**. Read the results, not the total.
+
+### Informed gaps from this pass
+
+- **Flamenco** (Blender's own farm manager) is not on GitHub; it lives at `projects.blender.org`,
+  which **does not resolve from this session** (egress policy). Real, unverified here, not absent.
+- **No agent bridge for review-and-approval**, though `OpenRV` (797★, Apache-2.0) and `xstudio`
+  (782★, Apache-2.0) are both permissive and active. Notes/versions/approvals is the most
+  agent-shaped workflow in post and the hook does not exist.
+- **No licensed agent bridge for Nuke**: best found is `dughogan/nuke_mcp`, 40★, **no licence file**,
+  2025-11-03. Compositing is the largest seat count in VFX.
+- `www.gov.uk` and `www.linuxfoundation.org` **do not resolve from this session**, so the UK VFX
+  relief wording and the AOUSD Core Spec 1.0 ratification date are carried at **secondary-source
+  confidence only** — see `intel/market.md`. Not verified against primary text.
 
 ## 2026-11-22 — pass 5: the identification & rights-reservation plane (the first page with no stars)
 

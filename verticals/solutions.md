@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🏭 Vertical Platforms — Media & Entertainment
@@ -295,3 +295,88 @@ See `compose/patterns.md` **P15**.
 3. Put agents (`agents/top.md`) in that service; keep model weights and prompts on your side of the line.
 4. Emit C2PA Content Credentials on every generated asset (`compose/patterns.md`, Pattern 1) — in the
    EU, South Korea, Vietnam and India this is now a legal requirement, not a nice-to-have.
+
+## The production-pipeline tier — added 2026-11-25 (pass 6)
+
+The systems a studio actually runs to track shots, versions, tasks and renders. This is the tier the
+agents of `agents/top.md` pass 6 would sit on, and the tier where this file's licence law gets its
+**third** category.
+
+All rows verified 2026-11-25: existence by `git ls-remote`, stars / forks / `pushed_at` / SPDX from
+`search/repositories`, licences read from the file where the API returned `NOASSERTION`.
+
+| Platform | Licence (verified) | Stars / forks | Last push | What it is |
+|---|---|---|---|---|
+| [cgwire/kitsu](https://github.com/cgwire/kitsu) | **AGPL-3.0** | 776★ / 190f | 2026-11-25 | Collaboration platform for animation and VFX production — the closest thing to an open ShotGrid |
+| [cgwire/zou](https://github.com/cgwire/zou) | **AGPL-3.0** | 203★ / 148f | 2026-11-24 | Kitsu's API server. Fork ratio **1.4** — the lowest in this file, meaning people *deploy* it |
+| [cgwire/gazu](https://github.com/cgwire/gazu) | LGPL-3.0 | 98★ / 67f | 2026-11-24 | Python client for the Kitsu/Zou API — **the integration surface, and weaker copyleft than the platform** |
+| [cgwire/kitsu-docker](https://github.com/cgwire/kitsu-docker) | Apache-2.0 | 60★ / 37f | 2026-11-24 | Containerised deployment |
+| [ynput/ayon-core](https://github.com/ynput/ayon-core) | Apache-2.0 | 80★ / 93f | 2026-11-25 | AYON pipeline client core. Fork ratio **0.86 — more forks than stars**, the strongest deployment signal in this file |
+| [ynput/ayon-backend](https://github.com/ynput/ayon-backend) | ⚠️ **FSL-1.1-ALv2** (3,744 B) | 40★ / 40f | 2026-11-25 | **The AYON server. Source-available, not open source** — see below |
+| [ynput/ayon-frontend](https://github.com/ynput/ayon-frontend) | ⚠️ **FSL-1.1-ALv2** (3,744 B) | 31★ / 45f | 2026-11-25 | The AYON web UI. Same licence as the backend |
+| [ynput/ayon-launcher](https://github.com/ynput/ayon-launcher) | Apache-2.0 | 55★ / 29f | 2026-11-25 | Desktop launcher |
+| [quadproduction/quadpype](https://github.com/quadproduction/quadpype) | MIT | 10★ / 1f | 2026-11-25 | **MIT** pipeline for 2D/3D/VFX productions — an OpenPype-lineage fork, tiny but permissive and active |
+| [tumblehead/TumblePipe](https://github.com/tumblehead/TumblePipe) | MIT | 31★ / 2f | 2026-11-25 | A small studio pipeline for animation/VFX in Houdini. Owner-sized and honest about it |
+
+**DCC integrations for AYON, all Apache-2.0 and all pushed within days of this pass:**
+[ayon-blender](https://github.com/ynput/ayon-blender) (20★), [ayon-houdini](https://github.com/ynput/ayon-houdini)
+(18★), [ayon-python-api](https://github.com/ynput/ayon-python-api) (17★),
+[ayon-shotgrid](https://github.com/ynput/ayon-shotgrid) (15★),
+[ayon-kitsu](https://github.com/ynput/ayon-kitsu) (14★),
+[ayon-resolve](https://github.com/ynput/ayon-resolve) (13★).
+
+### Render-farm platforms
+
+| Platform | Licence | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| [AcademySoftwareFoundation/OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) | **Apache-2.0** | 1,010★ / 273f | 2026-11-23 | Deploy unmodified; the only permissive farm manager at this scale |
+| [CGRU/cgru](https://github.com/CGRU/cgru) | LGPL-3.0 | 302★ / 117f | 2026-10-18 | CGRU/AFANASY |
+| [uberware/sqi](https://github.com/uberware/sqi) | **AGPL-3.0** | 44★ / 1f | 2026-11-25 | 2026 entrant. AGPL — a hosted render service built on it is a network-copyleft question |
+
+### ⚠️ This tier obeys this file's licence law — and adds a third category to it
+
+The law as this file has carried it: **permissive at the pipeline, copyleft at the platform.** Five
+planes upheld it. This tier upholds it *and extends it*:
+
+- **Permissive at the pipeline** — ✅ emphatically. The ASWF substrate under this tier is 19 code
+  projects over 100★, all Apache-2.0/BSD-3 (`repos/foundations.md`), and every AYON *client* and DCC integration is Apache-2.0.
+- **Copyleft at the platform** — ✅ Kitsu and Zou are **AGPL-3.0**; the independent farm managers are
+  **LGPL-3.0** and **AGPL-3.0**.
+- **New: delayed-open at the platform** — ⚠️ AYON's server and web UI are **FSL-1.1-ALv2**
+  (*Functional Source Licence, ALv2 Future Licence*): source-available now, Apache-2.0 only after a
+  delay. **This is not an OSI-approved open-source licence.**
+
+**The practical trap, stated for a proposal.** "AYON is Apache-2.0" is true of everything a developer
+touches and false of the server a client would deploy. The licence boundary runs *inside one product*,
+between the clients (Apache-2.0) and the service (FSL). Before any AYON engagement, read
+`ayon-backend/LICENSE` and decide deliberately — and note that `gazu` (LGPL-3.0) is deliberately
+weaker copyleft than the Kitsu platform it talks to, which is the vendor telling you exactly where
+the intended integration seam is. **Use it.**
+
+### ⛔ Archived — do not start new work here
+
+| Repo | Licence | Stars / forks | Last push | Status |
+|---|---|---|---|---|
+| [ynput/OpenPype](https://github.com/ynput/OpenPype) | MIT | 301★ / 118f | 2024-09-18 | **ARCHIVED.** Superseded by AYON. The most-starred pipeline in this lineage is the dead one — a listicle will still recommend it |
+
+### Gap: there is still no open broadcast MAM — and now we can say *why* precisely
+
+The gap recorded earlier in this file stands, and this pass sharpens it. The production world has
+**three** maintained open asset platforms (Kitsu AGPL, AYON split-licence, quadpype MIT) plus a
+permissive asset-resolution *standard* (`OpenAssetIO`, 353★, Apache-2.0). None of them is a broadcast
+MAM: they are built around **shots, tasks and versions**, not around **programmes, rights windows and
+playout**. The vocabulary is wrong, not the maturity. A client wanting a MAM cannot be handed Kitsu;
+a client wanting shot tracking should never be sold a MAM build.
+
+### How to add the AI layer to this tier, specifically
+
+The generic four-step recipe in **§ *How to add the AI layer*** above applies unchanged. Two
+additions this pass measured, continuing its numbering:
+
+5. **Put the agent on the Apache-2.0 client, never on the copyleft server.** For Kitsu that means
+   `gazu` (LGPL-3.0, 98★); for AYON that means `ayon-core`/`ayon-python-api` (Apache-2.0) and
+   **not** `ayon-backend` (FSL).
+6. **Prefer `OpenAssetIO` (Apache-2.0) as the agent's view of "what is an asset"** rather than a
+   platform's own schema — it is the one layer here designed to be vendor-neutral, and it keeps the
+   build portable between Kitsu, AYON and a studio's in-house tracker. The MCP bridge for it exists
+   and has **one star** (`OpenAssetIO/openassetio-mcp`); see `compose/patterns.md` Pattern 17.

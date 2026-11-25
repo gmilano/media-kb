@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🧩 Composition Patterns — Media & Entertainment
@@ -800,6 +800,125 @@ pitch **ISCC** as an identifier the client's partners will recognise: it is ISO-
 Apache-2.0, and its reference implementation has **26 stars**. It is the internal join key and a
 standards-backed bet — nothing more, and that is still worth a great deal.
 
+## Pattern 17 — Studio-grade pipeline agent on OpenAssetIO + OpenTimelineIO (the 1-star opportunity)
+
+Added 2026-11-25 (pass 6). **The highest-differentiation build in this file, and the cheapest to
+start.** Every component is Apache-2.0 or BSD-3-Clause, the standards are maintained this week by a
+Linux Foundation project, and the three connectors the build needs have **1, 2 and 10 stars** — which
+means no incumbent, no vendor alternative, and a realistic path to becoming the maintainer.
+
+**The problem it solves.** A studio's agent can be told "re-render shot 040 with the approved lighting
+and publish it as v12". To do that it needs three things no LLM has: *what an asset is* (resolution),
+*where it sits in the edit* (timeline), and *how to get it made* (farm). Those three layers exist,
+are permissive, and are not connected to anything agent-shaped.
+
+**Wire-up:**
+
+1. **Asset identity and resolution — `OpenAssetIO`** (Apache-2.0, 353★, pushed 2026-11-25). The
+   vendor-neutral answer to "what is this asset and where does it live". Develop against
+   `OpenAssetIO-Manager-BAL` (Apache-2.0, 9★) as the reference manager, and generate your traits with
+   `OpenAssetIO-TraitGen` (Apache-2.0, 7★). Use `OpenAssetIO-MediaCreation` (16★) for the media
+   trait set rather than inventing one.
+2. **The agent surface — `OpenAssetIO/openassetio-mcp`** (Apache-2.0, **1★**, 2026-05-18). This is the
+   repo that makes the whole pattern an agent build instead of a scripting project. **It is one star
+   and five months quiet: expect to fork it, fund it, and offer the work upstream.** That is the
+   differentiator, not a risk to hide.
+3. **Timeline truth — `OpenTimelineIO`** (Apache-2.0, 2,117★, pushed 2026-11-25). The edit is the
+   only artefact that knows which shots matter and in what order. ⚠️ The official bridge
+   `OpenAssetIO/otio-openassetio` (Apache-2.0, 10★) has been **dormant since 2024-07-26** — budget to
+   revive it; it is small and it is exactly the join.
+4. **Scene assembly — `PixarAnimationStudios/OpenUSD`** (⚠️ **Tomorrow Open Source Technology
+   License 1.0**, 7,675★) resolved through `OpenAssetIO/usdOpenAssetIOResolver` (Apache-2.0, 28★) or
+   `LucaScheller/VFX-UsdAssetResolver` (Apache-2.0, 141★). For natural-language scene assembly,
+   `binary-core-llc/bowerbot` (Apache-2.0, 39★, pushed 2026-11-25) is the only right-shaped project
+   found; treat it as a reference, not a dependency.
+5. **Execution — `AcademySoftwareFoundation/OpenCue`** (Apache-2.0, 1,010★). Deploy unmodified. Its
+   job records are also the evidence trail Pattern 18 needs, so do not wrap it in anything that
+   discards them.
+6. **Environment determinism — `rez`** (Apache-2.0, 1,101★). An agent that cannot pin the exact
+   package set it rendered with cannot reproduce its own output; without this the whole build is a
+   demo.
+7. **Review and sign-off — `OpenRV`** (⚠️ Apache-2.0 *except* `Notice.txt` components, 797★) or
+   `xstudio` (Apache-2.0, 782★). **Neither has any agent bridge** — if the engagement has appetite,
+   this is the second unbuilt product in this plane.
+
+**Licence position:** clean. Apache-2.0/BSD-3 throughout, with two things to state in writing —
+OpenUSD's renamed licence (trademark clause differs from Apache-2.0) and OpenRV's `Notice.txt`
+carve-outs. Keep agents and prompts in **your own service**, talk to platforms over their APIs, and
+if a tracker is involved use the Apache-2.0 client (`ayon-core`) or the LGPL client (`gazu`) — never
+`ayon-backend` (FSL-1.1-ALv2, not open source).
+
+**Who buys it:** North American studios first — the substrate originated there and is already
+installed (`intel/market.md`, NA). APAC and LATAM service studios second, where owning the pipeline
+is the answer to margin compression rather than an efficiency story (see trend 36).
+
+## Pattern 18 — VFX tax-credit apportionment trail (the CFO-sponsored build)
+
+Added 2026-11-25 (pass 6). **The only recipe in this file whose sponsor is the finance department,
+and the one with a statutory deadline attached.**
+
+**The duty.** UK additional VFX relief can be claimed on up to **100% of eligible UK VFX spend**, and
+**generative-AI costs inside the VFX process are eligible** (the proposed exclusion was dropped after
+consultation). But costs such as filming against an LED volume are **not** VFX costs, so a
+virtual-production shoot must **apportion** spend between eligible and ineligible work — per shot, per
+task, defensibly, months after the fact. ⚠️ Carried at trade-press/advisory confidence only:
+`www.gov.uk` does not resolve from this session. **Verify the current rules and the post-1-April-2027
+position with the client's tax advisor before scoping.**
+
+**Wire-up:**
+
+1. **The spine — `OpenTimelineIO`** (Apache-2.0, 2,117★). Every claim is ultimately "this shot, these
+   frames, this work". The timeline is the only artefact that carries that natively; everything else
+   hangs off it.
+2. **Stage vs. VFX discrimination — `SMPTE/ris-osvp-metadata-camdkit`** (BSD-3-Clause, 55★) and
+   `mosys/opentrackio-cpp` (MIT, 15★). OpenTrackIO camera/lens/stage metadata is what *distinguishes*
+   an LED-volume capture from downstream VFX work. Without it the apportionment is an opinion; with
+   it, it is a record. Unreal Engine has supported OpenTrackIO officially since **5.6** (vendor
+   documentation).
+3. **Cost attribution — `OpenCue`** (Apache-2.0, 1,010★) job records plus `rez` (Apache-2.0, 1,101★)
+   environment pins. Render hours are the largest attributable VFX cost and OpenCue already records
+   them per job; the work is joining job → shot → claim category, not instrumenting from scratch.
+4. **Asset lineage — `OpenAssetIO`** (Apache-2.0, 353★). Answers "which version of which asset was
+   used in the frame being claimed for", which is the question an auditor asks second.
+5. **Provenance on anything generative — C2PA** (see Pattern 1 and Pattern 8). If AI cost is being
+   claimed as eligible VFX spend, the claim is far stronger when each generated asset carries signed
+   Content Credentials. This is the one place in the KB where **provenance tooling pays for itself in
+   cash rather than compliance**.
+6. **Output.** A per-shot ledger: eligible VFX spend, ineligible production spend, the evidence for
+   each line, and an immutable record of the split. Deliver it as a report the client's advisors can
+   audit — not as a dashboard.
+
+**Why it wins:** it is narrow, it is measurable, the budget is already allocated (the relief is worth
+more than the build), and no vendor in this KB's market map sells it. It also drops straight into
+Pattern 17 — same artefacts, different reader.
+
+**Portability warning:** this is a **UK-specific** recipe. Do not re-pitch it in NA, where the
+binding constraint on AI in production is a **labour agreement**, not a tax credit — there the same
+artefacts produce the record described in trend 37, which is a different deliverable with a different
+buyer. Check the jurisdiction's actual instrument before choosing the argument.
+
+## Pattern 19 — Agent-enabled review and approval (the smallest unbuilt product in this plane)
+
+Added 2026-11-25 (pass 6). Named separately because it is the one gap in this plane that a **single
+developer** can close, and because notes-and-approvals is the most agent-shaped workflow in post
+production.
+
+**The measured gap.** `OpenRV` (797★, Apache-2.0 except `Notice.txt`) and `xstudio` (782★,
+Apache-2.0) are both permissive, both active (pushed 2026-11-25 and 2026-11-20), and **neither has
+any agent bridge that this pass could find**. Review sessions generate exactly the data an agent is
+good at: timecoded notes, versions, approvals, who asked for what.
+
+**Wire-up:** `xstudio` (Apache-2.0 — prefer it over OpenRV purely for the cleaner licence) as the
+review application → an MCP server you own exposing *list versions*, *fetch notes*, *compare*,
+*record approval* → `OpenTimelineIO` for note→shot→edit placement → `OpenAssetIO` for version
+identity → Kitsu via `gazu` (LGPL-3.0, 98★) or AYON via `ayon-python-api` (Apache-2.0, 17★) to write
+the task status back.
+
+**The honest scope:** this is days-to-weeks, not months, and its value is that it demonstrates the
+whole of Pattern 17 on a workflow a client can see in a single review session. Use it as the wedge.
+It is also the cheapest credible way to become a named contributor in an ASWF project, which is the
+credential this plane actually respects.
+
 ## Anti-patterns — learned the hard way in this KB
 
 1. **Don't ship HunyuanVideo to EMEA or South Korea.** Its license excludes the EU, UK and KR by name.
@@ -856,3 +975,26 @@ standards-backed bet — nothing more, and that is still worth a great deal.
    markets. There, accessibility is a reach-and-differentiation sale. Check the jurisdiction's actual
    duty before choosing the argument — and see `intel/market.md` for the Japan and India gaps this KB
    has **not** closed.
+13. **Don't call OpenUSD Apache-2.0.** Added 2026-11-25. It is the **Tomorrow Open Source Technology
+   License 1.0** — Apache-2.0 with a different Section 6 (Trademarks), and the GitHub API reports
+   `NOASSERTION`. Functionally equivalent for most uses, but a client's legal review will find the
+   difference and a deck that got it wrong loses the room. Same for `OpenRV`: Apache-2.0 **except**
+   the components listed in its `Notice.txt`.
+14. **Don't deploy `ayon-backend` believing AYON is open source.** Added 2026-11-25. The server and
+   web UI are **FSL-1.1-ALv2** — source-available with delayed Apache conversion, **not** OSI
+   open source — while every AYON client is Apache-2.0. The licence boundary runs *inside the
+   product*. Build on `ayon-core` / `ayon-python-api`, and make the server choice deliberately.
+15. **Don't start a pipeline on OpenPype.** Added 2026-11-25. `ynput/OpenPype` (301★, MIT) is the
+   most-starred project in its lineage and has been **archived since 2024-09-18**, superseded by
+   AYON. Listicles still recommend it. A live URL is not a live project — the rule from pass 5,
+   repeating in a new plane.
+16. **Don't search this plane in generic English.** Added 2026-11-25. `virtual production` returns
+   **1,291 results** that are mostly a Go asset embedder, a dumped W3C report and a mainframe
+   emulator; `color grading open source` returns **42 results of which four of the top six are the
+   Bee Movie script**. Query the *standard's* name — `opentrackio` (8 results, 4 real and
+   permissive), `OpenColorIO`, `camdkit` — and read the results rather than the total.
+17. **Don't pitch the 40% efficiency saving to a studio that bills by the hour.** Added 2026-11-25.
+   FICCI-EY attributes up to 40% time savings to AI in roto, clean-up and pipeline work — which is
+   precisely what APAC and LATAM service studios invoice for. Sell pipeline ownership priced per seat
+   and per system (Patterns 17–19). The efficiency framing hands the client its own disintermediation
+   case; see trend 36.

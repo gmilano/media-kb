@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 📈 Trending Media Repos — append-only log
@@ -9,6 +9,118 @@ updated: 2026-11-22
 > Newest section first; history below is never rewritten.
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
+
+## 2026-11-25 — pass 6: the production & post-production infrastructure (35 verified repos, 35/35 resolved)
+
+New section in `repos/foundations.md`: **the production & post-production plane** — scene
+description, colour, timelines, asset resolution, render management, camera metadata. Found by
+grepping ~45 candidate terms against the 8 files before any web search (~1 call); `usd`, `materialx`,
+`opencue`, `openvdb`, `render farm`, `animation`, `color grading`, `motion capture` and `opentrackio`
+all scored **zero files, zero hits** — the second-largest vocabulary hole after `fingerprint`.
+
+**Verification:** existence by `git ls-remote` (**35/35 resolved**); stars / forks / `pushed_at` /
+SPDX from `search/repositories`; licences read from the actual file wherever the API said
+`NOASSERTION`. Note for future passes: **`gh api repos/{owner}/{repo}` is unavailable in this
+session** (repo-scoped token → *"GitHub access to this repository is not enabled"*, 18/18 candidates).
+The search endpoint works and `org:<name>` returns a whole foundation's inventory in **one call** —
+that is how the table below was built.
+
+### The ASWF core — one org, one call, and the healthiest substrate in this KB
+
+| Repo | Licence | Stars / forks | Ratio | Last push |
+|---|---|---|---|---|
+| [openvdb](https://github.com/AcademySoftwareFoundation/openvdb) | Apache-2.0 | 3,556★ / 807f | 4.4 | 2026-11-25 |
+| [OpenImageIO](https://github.com/AcademySoftwareFoundation/OpenImageIO) | Apache-2.0 | 2,407★ / 727f | 3.3 | 2026-11-25 |
+| [OpenShadingLanguage](https://github.com/AcademySoftwareFoundation/OpenShadingLanguage) | BSD-3-Clause | 2,351★ / 422f | 5.6 | 2026-11-25 |
+| [MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX) | Apache-2.0 | 2,315★ / 472f | 4.9 | 2026-11-23 |
+| [OpenColorIO](https://github.com/AcademySoftwareFoundation/OpenColorIO) | BSD-3-Clause | 2,145★ / 513f | 4.2 | 2026-10-01 |
+| [OpenTimelineIO](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) | Apache-2.0 | 2,117★ / 366f | 5.8 | 2026-11-25 |
+| [openexr](https://github.com/AcademySoftwareFoundation/openexr) | BSD-3-Clause | 1,890★ / 721f | 2.6 | 2026-11-25 |
+| [rez](https://github.com/AcademySoftwareFoundation/rez) | Apache-2.0 | 1,101★ / 369f | 3.0 | 2026-11-25 |
+| [OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) | Apache-2.0 | 1,010★ / 273f | 3.7 | 2026-11-23 |
+| [OpenPBR](https://github.com/AcademySoftwareFoundation/OpenPBR) | Apache-2.0 | 845★ / 48f | 17.6 | 2026-11-16 |
+| [OpenRV](https://github.com/AcademySoftwareFoundation/OpenRV) | ⚠️ Apache-2.0 except `Notice.txt` components | 797★ / 258f | 3.1 | 2026-11-25 |
+| [xstudio](https://github.com/AcademySoftwareFoundation/xstudio) | Apache-2.0 | 782★ / 135f | 5.8 | 2026-11-20 |
+| [openfx](https://github.com/AcademySoftwareFoundation/openfx) | BSD-3-Clause | 592★ / 160f | 3.7 | 2026-11-11 |
+| [Imath](https://github.com/AcademySoftwareFoundation/Imath) | BSD-3-Clause | 495★ / 166f | 3.0 | 2026-11-13 |
+| [OpenColorIO-Config-ACES](https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES) | BSD-3-Clause | 440★ / 53f | 8.3 | 2026-10-27 |
+| [openapv](https://github.com/AcademySoftwareFoundation/openapv) | BSD-3-Clause | 273★ / 50f | 5.5 | 2026-11-10 |
+| [rawtoaces](https://github.com/AcademySoftwareFoundation/rawtoaces) | Apache-2.0 | 197★ / 66f | 3.0 | 2026-11-24 |
+| [openqmc](https://github.com/AcademySoftwareFoundation/openqmc) | Apache-2.0 | 107★ / 8f | 13.4 | 2026-11-23 |
+
+**Twenty-two repos over 100★ in one organisation, of which 20 are Apache-2.0 or BSD-3-Clause — the
+two exceptions, `openexr-images` (`NOASSERTION`) and `tac` (CC-BY-4.0), are an image corpus and
+governance documents. Every code project in the foundation above 100★ is permissive, and fifteen of
+them were pushed within nine days of this pass.** (The 19 rows above are the code projects relevant
+to a build; the full org listing is one `search/repositories` call with `org:AcademySoftwareFoundation`.) No other plane in this KB looks like this. The low
+star:fork ratios (2.6–5.8 across the core) say the same thing the dates do: these are *integrated*,
+not admired.
+
+### Asset resolution — Apache-2.0 end to end, with both connectors orphaned
+
+| Repo | Licence | Stars / forks | Ratio | Last push |
+|---|---|---|---|---|
+| [OpenAssetIO/OpenAssetIO](https://github.com/OpenAssetIO/OpenAssetIO) | Apache-2.0 | 353★ / 50f | 7.1 | 2026-11-25 |
+| [LucaScheller/VFX-UsdAssetResolver](https://github.com/LucaScheller/VFX-UsdAssetResolver) | Apache-2.0 | 141★ / 28f | 5.0 | 2026-05-24 |
+| [OpenAssetIO/usdOpenAssetIOResolver](https://github.com/OpenAssetIO/usdOpenAssetIOResolver) | Apache-2.0 | 28★ / 5f | 5.6 | 2026-11-02 |
+| [OpenAssetIO/OpenAssetIO-MediaCreation](https://github.com/OpenAssetIO/OpenAssetIO-MediaCreation) | Apache-2.0 | 16★ / 12f | 1.3 | 2026-11-23 |
+| [OpenAssetIO/otio-openassetio](https://github.com/OpenAssetIO/otio-openassetio) | Apache-2.0 | 10★ / 2f | 5.0 | **2024-07-26** |
+| [OpenAssetIO/OpenAssetIO-Manager-BAL](https://github.com/OpenAssetIO/OpenAssetIO-Manager-BAL) | Apache-2.0 | 9★ / 9f | 1.0 | 2026-11-23 |
+| [OpenAssetIO/OpenAssetIO-TraitGen](https://github.com/OpenAssetIO/OpenAssetIO-TraitGen) | Apache-2.0 | 7★ / 7f | 1.0 | 2026-11-23 |
+| [OpenAssetIO/OpenAssetIO-ComfyUI](https://github.com/OpenAssetIO/OpenAssetIO-ComfyUI) | Apache-2.0 | 2★ / 2f | 1.0 | **2025-09-30** |
+| [OpenAssetIO/openassetio-mcp](https://github.com/OpenAssetIO/openassetio-mcp) | Apache-2.0 | **1★** / 1f | 1.0 | 2026-05-18 |
+
+**The shape of this table is the finding.** The standard (353★) and its trait/manager machinery are
+maintained this week. The *connectors* — `otio-openassetio` (dormant since **2024-07**),
+`OpenAssetIO-ComfyUI` (dormant since **2025-09**) and `openassetio-mcp` (**1★**) — are the three
+repos a client actually needs and all three are orphaned or newborn. A healthy standard with
+orphaned connectors is a different, better opportunity than an empty field: the hard part is done.
+
+### Render management — and a trend, not an anecdote
+
+| Repo | Licence | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| [AcademySoftwareFoundation/OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) | **Apache-2.0** | 1,010★ / 273f | 2026-11-23 | Incumbent; the only permissive option at this tier |
+| [CGRU/cgru](https://github.com/CGRU/cgru) | LGPL-3.0 | 302★ / 117f | 2026-10-18 | CGRU/AFANASY, independent, long-lived |
+| [uberware/sqi](https://github.com/uberware/sqi) | **AGPL-3.0** | 44★ / 1f | **2026-11-25** | The 2026 entrant — and it chose network copyleft |
+
+`render farm manager` returns **32 results in total**: this tier is genuinely tiny. The notable
+pattern is that the orchestration layer licenses like this KB's *platform* tier (AGPL/LGPL), and
+OpenCue's Apache-2.0 is a **foundation artefact, not a market norm**.
+
+### Virtual production & camera metadata — the standard name is the query
+
+| Repo | Licence | Stars / forks | Ratio | Last push |
+|---|---|---|---|---|
+| [SMPTE/ris-osvp-metadata-camdkit](https://github.com/SMPTE/ris-osvp-metadata-camdkit) | BSD-3-Clause | 55★ / 17f | 3.2 | 2026-07-31 |
+| [mosys/opentrackio-cpp](https://github.com/mosys/opentrackio-cpp) | MIT | 15★ / 12f | **1.25** | 2026-07-23 |
+| [unitycoder/Unity.OpenTrackIO](https://github.com/unitycoder/Unity.OpenTrackIO) | MIT | 1★ | — | 2026-05-04 |
+
+`opentrackio` = **8 results, 4 real and permissive**. `virtual production` = **1,291 results and
+near-total contamination** (a Go asset embedder at 205★, a dumped W3C report at 176★, a mainframe
+emulator at 113★). The fork ratio of 1.25 on `opentrackio-cpp` is the tell that it is being
+*integrated* by vendors rather than starred by onlookers.
+
+### Query-shortening rule — the inverse case, and the sharpest example yet
+
+Pass 5 recorded that shortening a query can turn a false zero into a false *abundance*. This pass
+produced the cleanest illustration in the KB: **`color grading open source` returns 42 results and
+four of the top six are the Bee Movie script** (228★, 98★, 53★, 40★, each opening *"According to all
+known laws of aviation…"*). Meme repos outrank every real colour tool in this plane, while the actual
+colour infrastructure — `OpenColorIO` (2,145★) and `OpenColorIO-Config-ACES` (440★) — is found only
+by its project name. **In this plane, generic English is worthless and the standard's name is
+everything.**
+
+### Licence findings carried into `foundations.md`
+
+- **OpenUSD** (7,675★): **Tomorrow Open Source Technology License 1.0** — Apache-2.0 with Section 6
+  (Trademarks) changed, `LICENSE.txt` 49,827 B. API says `NOASSERTION`.
+- **OpenRV** (797★): Apache-2.0 *except components enumerated in `Notice.txt`*.
+- **ynput/ayon-backend + ayon-frontend**: **FSL-1.1-ALv2** (3,744 B) — source-available with delayed
+  Apache conversion, while every AYON *client* repo is plain Apache-2.0.
+- **cgwire/awesome-cg-vfx-pipeline** (1,286★): **CC-BY-SA-3.0** — a link list. Documents, not code.
+- **ynput/OpenPype** (301★, MIT): **archived 2024-09-18**, superseded by AYON. A live URL is still
+  not a live project.
 
 ## 2026-11-22 — pass 5: the identification & rights infrastructure (30 verified repos, 30/30 resolved)
 

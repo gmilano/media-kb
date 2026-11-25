@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🏗️ Foundational Repos — Media & Entertainment
@@ -587,6 +587,132 @@ Two durable rules for all twelve industries:
    A failing control request proves throttling; a *passing* control plus a 404 proves a naming
    convention. In that case **shallow-clone and look**, which is cheap and conclusive. A 404 from
    the raw channel is never by itself evidence that a licence is absent.
+
+## The production & post-production plane — measured 2026-11-25 (pass 6)
+
+The layer *above* the codecs and *below* the delivery stack: scene description, colour, timelines,
+asset resolution, render management and camera metadata. Before this pass none of
+`usd`, `materialx`, `opencue`, `openvdb`, `render farm`, `animation` or `color grading` appeared
+anywhere in this KB.
+
+**This is the healthiest substrate in this entire knowledge base, and it is the one honest
+counterexample to this file's "permissive at the pipeline, copyleft at the platform" summary — the
+pipeline half is not merely permissive, it is permissive, canonical, vendor-neutral, foundation-
+governed and pushed daily.** Twenty-two repos over 100★ in one organisation, of which **20 are
+Apache-2.0 or BSD-3-Clause** — the only two exceptions being `openexr-images` (`NOASSERTION`, an
+image corpus) and `tac` (CC-BY-4.0, governance documents), i.e. **every code project in the
+foundation above 100★ is permissive.** Fifteen were pushed within nine days of this pass.
+
+### The Academy Software Foundation core — Apache-2.0 / BSD-3, and active this week
+
+Verified 2026-11-25: existence by `git ls-remote` (**35/35 resolved** across this pass), stars /
+forks / `pushed_at` / SPDX from `search/repositories`.
+
+| Repo | Licence | Stars / forks | Last push | What it is |
+|---|---|---|---|---|
+| [openvdb](https://github.com/AcademySoftwareFoundation/openvdb) | Apache-2.0 | 3,556★ / 807f | 2026-11-25 | Sparse volume data structure and tools — the standard for volumetrics |
+| [OpenImageIO](https://github.com/AcademySoftwareFoundation/OpenImageIO) | Apache-2.0 | 2,407★ / 727f | 2026-11-25 | Format-agnostic image read/write/process API aimed at VFX |
+| [OpenShadingLanguage](https://github.com/AcademySoftwareFoundation/OpenShadingLanguage) | BSD-3-Clause | 2,351★ / 422f | 2026-11-25 | Shading language for production GI renderers |
+| [MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX) | Apache-2.0 | 2,315★ / 472f | 2026-11-23 | Open standard for exchanging material and look-dev content |
+| [OpenColorIO](https://github.com/AcademySoftwareFoundation/OpenColorIO) | BSD-3-Clause | 2,145★ / 513f | 2026-10-01 | Colour management framework for VFX and animation |
+| [OpenTimelineIO](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) | Apache-2.0 | 2,117★ / 366f | 2026-11-25 | **API and interchange format for editorial timeline information** — the spine of Patterns 17–19 |
+| [openexr](https://github.com/AcademySoftwareFoundation/openexr) | BSD-3-Clause | 1,890★ / 721f | 2026-11-25 | The EXR spec and reference implementation — the industry's image storage format |
+| [rez](https://github.com/AcademySoftwareFoundation/rez) | Apache-2.0 | 1,101★ / 369f | 2026-11-25 | Package configuration, build and deployment — how studios pin an environment |
+| [OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) | Apache-2.0 | 1,010★ / 273f | 2026-11-23 | **Render management system** for VFX and animation (Sony Imageworks / Google origin) |
+| [OpenPBR](https://github.com/AcademySoftwareFoundation/OpenPBR) | Apache-2.0 | 845★ / 48f | 2026-11-16 | Spec + reference implementation of the OpenPBR Surface shading model |
+| [OpenRV](https://github.com/AcademySoftwareFoundation/OpenRV) | ⚠️ Apache-2.0 **except** components in `Notice.txt` | 797★ / 258f | 2026-11-25 | Sci-Tech-award media review and playback (the open RV) |
+| [xstudio](https://github.com/AcademySoftwareFoundation/xstudio) | Apache-2.0 | 782★ / 135f | 2026-11-20 | Playback and review application for post, VFX and animation |
+| [openfx](https://github.com/AcademySoftwareFoundation/openfx) | BSD-3-Clause | 592★ / 160f | 2026-11-11 | The OpenFX plug-in effects API |
+| [Imath](https://github.com/AcademySoftwareFoundation/Imath) | BSD-3-Clause | 495★ / 166f | 2026-11-13 | 2D/3D vector and matrix maths for graphics |
+| [OpenColorIO-Config-ACES](https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES) | BSD-3-Clause | 440★ / 53f | 2026-10-27 | The ACES configuration generator for OCIO |
+| [openapv](https://github.com/AcademySoftwareFoundation/openapv) | BSD-3-Clause | 273★ / 50f | 2026-11-10 | OpenAPV — professional-grade intra-frame codec implementation |
+| [rawtoaces](https://github.com/AcademySoftwareFoundation/rawtoaces) | Apache-2.0 | 197★ / 66f | 2026-11-24 | Camera RAW → ACES conversion utility |
+| [aswf-landscape](https://github.com/AcademySoftwareFoundation/aswf-landscape) | Apache-2.0 | 153★ / 31f | 2026-11-23 | CNCF-style interactive landscape of motion-picture open source — **use it as a map, it is data not code** |
+| [openqmc](https://github.com/AcademySoftwareFoundation/openqmc) | Apache-2.0 | 107★ / 8f | 2026-11-23 | Quasi-Monte-Carlo sampling library for renderers |
+
+### ⚠️ OpenUSD is not Apache-2.0 — a fourth way a licence hides
+
+| Repo | Licence (read this pass) | Stars / forks | Last push |
+|---|---|---|---|
+| [PixarAnimationStudios/OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD) | ⚠️ **Tomorrow Open Source Technology License 1.0** (`LICENSE.txt`, master, 49,827 B) | 7,675★ / 1,486f | 2026-11-23 |
+
+Its own preamble states the delta: *"the Tomorrow Open Source Technology License 1.0 differs from the
+original Apache License 2.0 in the following manner. Section 6 ('Trademarks') is different."*
+
+**So: functionally Apache-2.0 with a modified trademark clause, but a separate, renamed licence.** The
+GitHub API reports `NOASSERTION`; no SPDX field, badge or SBOM scan of the source tree will tell a
+client what it actually is. Four distinct hiding places are now recorded in this file: a non-standard
+filename, a licence owned by the *compile* (Chromaprint), an HTML file or packaging classifier, and
+now **a renamed fork of a standard licence whose only delta is trademarks.** Also note **OpenRV**
+above: Apache-2.0 *except as otherwise required by the specific licences of components*, enumerated
+in `Notice.txt` — the Chromaprint lesson again, in a repo a client will absolutely want.
+
+### Asset resolution — the layer that makes a pipeline addressable, and it is all permissive
+
+| Repo | Licence | Stars / forks | Last push | Role |
+|---|---|---|---|---|
+| [OpenAssetIO/OpenAssetIO](https://github.com/OpenAssetIO/OpenAssetIO) | Apache-2.0 | 353★ / 50f | 2026-11-25 | **Interoperability standard between tools and content-management systems in media production** |
+| [LucaScheller/VFX-UsdAssetResolver](https://github.com/LucaScheller/VFX-UsdAssetResolver) | Apache-2.0 | 141★ / 28f | 2026-05-24 | USD asset-resolver reference implementations — the practical entry point |
+| [OpenAssetIO/usdOpenAssetIOResolver](https://github.com/OpenAssetIO/usdOpenAssetIOResolver) | Apache-2.0 | 28★ / 5f | 2026-11-02 | AR2 plug-in hosting OpenAssetIO — joins USD resolution to the asset standard |
+| [OpenAssetIO/OpenAssetIO-MediaCreation](https://github.com/OpenAssetIO/OpenAssetIO-MediaCreation) | Apache-2.0 | 16★ / 12f | 2026-11-23 | The media-creation trait set |
+| [OpenAssetIO/OpenAssetIO-Manager-BAL](https://github.com/OpenAssetIO/OpenAssetIO-Manager-BAL) | Apache-2.0 | 9★ / 9f | 2026-11-23 | Basic Asset Library — the reference manager to develop against |
+| [OpenAssetIO/OpenAssetIO-TraitGen](https://github.com/OpenAssetIO/OpenAssetIO-TraitGen) | Apache-2.0 | 7★ / 7f | 2026-11-23 | Trait code generation |
+| [OpenAssetIO/otio-openassetio](https://github.com/OpenAssetIO/otio-openassetio) | Apache-2.0 | 10★ / 2f | 2024-07-26 | **OTIO ↔ OpenAssetIO bridge. Dormant since 2024-07** — and it is precisely the join Pattern 17 needs. |
+
+**The gap in one sentence a proposal can use:** the asset-resolution layer is Apache-2.0 end to end,
+maintained this week at the core, and the *two* repos that connect it to anything else — `otio-openassetio`
+(10★, dormant 16 months) and `OpenAssetIO-ComfyUI` (2★, dormant 14 months) — are the smallest and
+stalest in the set. The standard is healthy; the connectors are orphaned.
+
+### Render management — permissive at the incumbent, copyleft at both challengers
+
+| Repo | Licence | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| [AcademySoftwareFoundation/OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) | **Apache-2.0** | 1,010★ / 273f | 2026-11-23 | The incumbent, foundation-governed, and the only permissive option at this tier |
+| [CGRU/cgru](https://github.com/CGRU/cgru) | LGPL-3.0 | 302★ / 117f | 2026-10-18 | CGRU / AFANASY — long-lived independent render manager |
+| [uberware/sqi](https://github.com/uberware/sqi) | **AGPL-3.0** | 44★ / 1f | **2026-11-25** | New distributed task/render manager "built for modern production pipelines". Pushed the day of this pass. |
+
+**Worth noting as a trend, not an anecdote:** the 2026 entrant at this tier chose **AGPL-3.0**, and
+the other independent is LGPL-3.0. The orchestration tier is behaving like this KB's *platform* tier,
+not its *pipeline* tier — and OpenCue's Apache-2.0 is a foundation artefact, not a market norm. Build
+on OpenCue and the licence position is clean; build on `sqi` and a hosted render service is a network
+-copyleft question.
+
+### Virtual production & camera metadata — tiny, permissive, and standards-backed
+
+| Repo | Licence | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| [SMPTE/ris-osvp-metadata-camdkit](https://github.com/SMPTE/ris-osvp-metadata-camdkit) | BSD-3-Clause | 55★ / 17f | 2026-07-31 | **Reference implementation of the SMPTE RIS OSVP camera metadata model** — the OpenTrackIO substrate |
+| [mosys/opentrackio-cpp](https://github.com/mosys/opentrackio-cpp) | MIT | 15★ / 12f | 2026-07-23 | C++ OpenTrackIO implementation from a tracking vendor. Fork ratio 1.25 = being integrated, not starred |
+| [unitycoder/Unity.OpenTrackIO](https://github.com/unitycoder/Unity.OpenTrackIO) | MIT | 1★ | 2026-05-04 | Unity receiver — minimal, but it exists |
+
+`opentrackio` returns **8 results total** and four are real and permissively licensed. Compare
+`virtual production` (1,291 results, near-total contamination — see `agents/top.md`). **The standard
+name is the query; the marketing phrase is noise.** Per vendor documentation, Unreal Engine has
+supported OpenTrackIO officially since **5.6**, and a camera vendor states support across its
+cine line as of February 2026 — both carried at **vendor-documentation confidence**, not verified
+against SMPTE primary text (`www.gov.uk` and `www.linuxfoundation.org` do not resolve from this
+session; SMPTE's own repos do, and are the rows above).
+
+### Node graphs and DCCs — context rows, not recommendations
+
+| Repo | Licence | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| [GafferHQ/gaffer](https://github.com/GafferHQ/gaffer) | BSD-3-Clause | 1,116★ / 227f | 2026-11-25 | Node-based look-dev, lighting **and automation** — the permissive place to put pipeline logic |
+| [blender/blender](https://github.com/blender/blender) | ⚠️ `NOASSERTION` (GPL family; this is the GitHub mirror) | 22,543★ / 3,679f | 2026-11-25 | Context for the 35,788★ MCP bridge above. Canonical development is **not** on GitHub |
+
+### Documents, not code — demoted on sight (the rule from pass 4 holds)
+
+- [cgwire/awesome-cg-vfx-pipeline](https://github.com/cgwire/awesome-cg-vfx-pipeline) — 1,286★ /
+  185f, pushed 2026-11-16, licence **CC-BY-SA-3.0** (`LICENSE`, master, 21,581 B, read this pass). It
+  is the best *map* of this plane that exists and it is a **link list**. High stars, zero code. Use it
+  for discovery; never cite it as tooling.
+- [AcademySoftwareFoundation/aswf-landscape](https://github.com/AcademySoftwareFoundation/aswf-landscape)
+  — 153★, Apache-2.0, is likewise a landscape/data project, not a library.
+
+*Still genuinely missing in this plane: an agent bridge for review-and-approval (`OpenRV` and
+`xstudio` are both permissive, active and unexposed), a licensed Nuke bridge, and a maintained
+`otio-openassetio`. See `agents/top.md` pass 6 and `compose/patterns.md` Pattern 17.*
 
 ## ⚠️ Archived or dormant — do not start new work here
 

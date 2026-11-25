@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🎯 AI Agents & Generative Media Models — Media & Entertainment
@@ -341,6 +341,100 @@ Globant's: `chromaprint`/`pyacoustid` or `dejavu` for audio identity, `iscc-sdk`
 content code, `beets` (MIT) as the catalogue spine that already joins the two, `dedex` for DDEX
 ingest, and `ai.robots.txt` + TDMRep + RSL for the reservation surface. Wiring in
 `compose/patterns.md` **P15** (rights-reservation gate) and **P16** (identification → attribution).
+
+## The production & post-production plane — measured 2026-11-25 (pass 6), and it is the first plane with a real agent layer
+
+> **Read this section before the five above it.** Passes 2–5 each ended in the same sentence: the
+> plane has no agent layer. This one does — and the result is *more* useful than another zero,
+> because the agent layer here is not missing, it is **misallocated**, and the misallocation is
+> measurable to the star.
+
+The plane: *how a shot is built, versioned, reviewed and rendered* — the upstream of everything else
+in this KB. Before this pass, `usd`, `materialx`, `opencue`, `openvdb`, `virtual production`,
+`render farm`, `animation`, `color grading`, `motion capture` and `opentrackio` appeared **nowhere in
+this KB** (grep, 2026-11-25, all 8 files). That is the second-largest vocabulary hole found in any
+pass, after `fingerprint`.
+
+### The gradient — the finding of this pass, and the most actionable one in the file
+
+Every row verified 2026-11-25 by `git ls-remote` (existence) plus one `search/repositories` call
+(stars / forks / `pushed_at` / SPDX), so the two can always be cross-checked.
+
+| Layer the bridge targets | Best open agent bridge | Licence | Stars | Last push |
+|---|---|---|---|---|
+| **Blender** — free DCC, mass individual user base | [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender) | MIT | **35,788★** / 3,298f | 2026-11-18 |
+| **Houdini** — paid licence, studio tool | [healkeiser/fxhoudinimcp](https://github.com/healkeiser/fxhoudinimcp) | MIT | 437★ / 55f | 2026-11-20 |
+| **Maya** — paid licence, studio tool | [PatrickPalmer/MayaMCP](https://github.com/PatrickPalmer/MayaMCP) | MIT | 124★ / 36f | 2025-05-12 (dormant) |
+| **OpenUSD** — studio *interchange* | [dcc-mcp/dcc-mcp-openusd](https://github.com/dcc-mcp/dcc-mcp-openusd) | MIT | **2★** / 1f | 2026-11-24 |
+| **OpenAssetIO** — studio *asset resolution* | [OpenAssetIO/openassetio-mcp](https://github.com/OpenAssetIO/openassetio-mcp) | Apache-2.0 | **1★** / 1f | 2026-05-18 |
+
+Read the column of stars downward: **35,788 → 437 → 124 → 2 → 1.** Five orders of magnitude, and the
+ordering is not by substrate health, not by obligation, and not by market size. It is by **how many
+individual practitioners can install the thing on a laptop tonight.**
+
+**The law this KB has been writing, restated for six planes:** the open agent layer tracks the size
+of the *individual practitioner population*, not the regulatory obligation (planes 3–5) and not the
+substrate's health (this plane). Where the user is a person, the bridge is enormous. Where the user
+is a pipeline, the bridge is a rounding error — **even when the pipeline underneath it is the
+healthiest, most permissive, best-funded substrate in this entire knowledge base.**
+
+**Why that is a sell, not a lament.** The 35,788★ bridge is a solved, crowded, undifferentiated
+problem and it carries an explicit disclaimer in its own description: *"Community plugin to control
+Blender 3D with any LLM of your choice. **Not affiliated with the official Blender Foundation.**"*
+The 1★ and 2★ bridges sit on Apache-2.0 / BSD-3 foundations that every major studio already runs, and
+have **no commercial alternative a client could buy instead**. That is the whole opportunity of this
+plane in two sentences.
+
+### Tier 1 — permissive, active, safe to build on
+
+| Agent / bridge | Licence (verified) | Stars / forks | Last push | Why it is here |
+|---|---|---|---|---|
+| [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender) | MIT | 35,788★ / 3,298f | 2026-11-18 | The reference implementation of DCC-over-MCP, and the proof the pattern works. Community project, **not** Blender Foundation. |
+| [healkeiser/fxhoudinimcp](https://github.com/healkeiser/fxhoudinimcp) | MIT | 437★ / 55f | 2026-11-20 | The most complete Houdini MCP server. The highest-value *studio* bridge that is actually maintained. |
+| [binary-core-llc/bowerbot](https://github.com/binary-core-llc/bowerbot) | Apache-2.0 | 39★ / 3f | **2026-11-25** | Agent that assembles production-correct OpenUSD scenes from natural language — assets, materials, lighting, validation. Pushed the day of this pass. Small company, early, but the right shape. |
+| [dcc-mcp/dcc-mcp-core](https://github.com/dcc-mcp/dcc-mcp-core) | MIT | 76★ / 9f | 2026-11-25 | The multi-DCC abstraction the one-off bridges lack. Siblings: `dcc-mcp-maya` (79★), `dcc-mcp-openusd` (2★). |
+| [sideshowroberto/vfx-agent-toolkit](https://github.com/sideshowroberto/vfx-agent-toolkit) | MIT | 21★ / 4f | 2026-11-09 | Small, honest, VFX-specific agent tooling. Owner-sized. |
+
+### Tier 2 — real, but staleness or scope constrains client work
+
+| Agent / bridge | Licence | Stars / forks | Last push | Constraint |
+|---|---|---|---|---|
+| [capoomgit/houdini-mcp](https://github.com/capoomgit/houdini-mcp) | MIT | 312★ / 41f | 2026-06-11 | Second Houdini bridge; ~5 months quiet. Prefer `fxhoudinimcp`. |
+| [PatrickPalmer/MayaMCP](https://github.com/PatrickPalmer/MayaMCP) | MIT | 124★ / 36f | 2025-05-12 | **Dormant 18 months.** Maya is the most-installed studio DCC and its best-known bridge is stale. |
+| [damionrashford/media-os](https://github.com/damionrashford/media-os) | MIT | 26★ / 6f | 2026-05-31 | One of very few projects joining agents to OpenTimelineIO. Dormant 6 months. |
+| [OpenAssetIO/openassetio-mcp](https://github.com/OpenAssetIO/openassetio-mcp) | Apache-2.0 | **1★** / 1f | 2026-05-18 | **The highest-leverage repo in this section and the least-starred.** See Pattern 17. |
+| [OpenAssetIO/OpenAssetIO-ComfyUI](https://github.com/OpenAssetIO/OpenAssetIO-ComfyUI) | Apache-2.0 | 2★ / 2f | 2025-09-30 | The bridge from generative tooling to studio asset resolution. **Two stars, dormant 14 months** — the exact seam between this KB's generative plane and its production plane, and nobody is holding it. |
+
+### ⚠️ Contamination warnings — two of the worst queries in this KB
+
+Both measured 2026-11-25. A careless pass would have written fictional rows from either.
+
+| Query | Total | What the top of the page actually is |
+|---|---|---|
+| `virtual production` | **1,291** | **Near-total false friend.** Top hits include `knadh/stuffbin` (205★, a *Go static-asset embedder* — matches "production"), `jettbrains/-L-` (176★, a dumped W3C report), `rbowler/spinhawk` (113★, a mainframe emulator describing itself as "production-quality"), and a 121★ `motionbuilder-setup-guide` with no licence. The one defensible hit is `otdavies/UnityChromakey` (260★, MIT, 2025-02-28). |
+| `color grading open source` | 42 | **The most absurd contamination found in any industry.** Four of the top six results are the **Bee Movie script** meme repos (228★, 98★, 53★, 40★ — all opening *"According to all known laws of aviation…"*). The only genuine hit is `hety0211/lumen-raw` (304★, MIT, RAW photo editor, 2026-11-21) and it is photography, not grading. |
+
+**Rule, repeated because it keeps paying:** read the results, never the total. `virtual production`
+returning 1,291 hits looks like abundance and is a vocabulary that GitHub's index simply does not
+carry — the real vocabulary is the vendor and standard names (`opentrackio`, `camdkit`), which return
+8 and 1 results respectively and are both real.
+
+### Informed gaps from this pass — searched, and genuinely not found
+
+- **Blender's own render-farm manager, Flamenco, is not on GitHub.** `flamenco blender render`
+  returns 16 results, all third-party and ≤5★. Flamenco is developed at `projects.blender.org`, which
+  **does not resolve from this session** (egress policy). Treat Flamenco as *real but unverified
+  here* — not as absent, and not as GitHub-hosted.
+- **No open agent layer for review-and-approval.** `OpenRV` (797★) and `xstudio` (782★) are both
+  permissive, both active, and neither has any agent bridge found. Notes, versions and approvals are
+  the most agent-shaped workflow in post, and the hook does not exist.
+- **No open agent bridge for Nuke** worth a row: best found is `dughogan/nuke_mcp` (40★, **no licence
+  file**, 2025-11-03). Compositing is the largest seat count in VFX.
+
+*Verification method for this pass: `git ls-remote` for existence (**35/35 resolved**); stars, forks
+and `pushed_at` from `search/repositories`; licences read from the actual file where the API returned
+`NOASSERTION`. `gh api repos/{owner}/{repo}` is **not** available in this session (repo-scoped token,
+returns "GitHub access to this repository is not enabled") — use the search endpoint, which is.*
 
 ## Corrections to earlier cycles of this file
 

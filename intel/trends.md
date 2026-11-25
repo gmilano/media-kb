@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 📡 Trends — Media & Entertainment
@@ -596,6 +596,140 @@ A client wanting permissive audio fingerprinting is choosing between **vendoring
 star:fork ratio of 4.6 and `audfprint`'s Columbia/Google provenance mean the dormant code is
 *reference-grade*, not abandoned junk — vendoring is the pragmatic answer, and the maintenance cost
 should be in the estimate rather than discovered later.
+
+## 32. The sixth plane breaks the pattern — the agent layer is misallocated, not missing
+
+Added 2026-11-25 (pass 6). Passes 2–5 each ended identically: high obligation, no agent layer. Four
+repetitions made it tempting to conclude that regulation suppresses open tooling. **The production
+plane kills that reading**, because here the substrate is the healthiest in this entire KB — **22
+ASWF repos over 100★, 20 of them Apache-2.0 or BSD-3-Clause** (the two exceptions are an image
+corpus and the governance repo), 15 pushed within 9 days of the pass, under a
+Linux Foundation umbrella with studio funding — and the *studio-facing* agent layer is still **one
+star**.
+
+What the stars actually track, measured:
+
+| Layer the bridge targets | Best open bridge | Stars |
+|---|---|---|
+| Blender — free, mass individual base | `ahujasid/mcp-for-blender` (MIT) | **35,788★** |
+| Houdini — paid, studio | `healkeiser/fxhoudinimcp` (MIT) | 437★ |
+| Maya — paid, studio | `PatrickPalmer/MayaMCP` (MIT, dormant) | 124★ |
+| OpenUSD — studio interchange | `dcc-mcp/dcc-mcp-openusd` (MIT) | **2★** |
+| OpenAssetIO — studio asset resolution | `OpenAssetIO/openassetio-mcp` (Apache-2.0) | **1★** |
+
+**The law, restated for six planes:** the open agent layer tracks the size of the **individual
+practitioner population** — not the regulatory obligation, and not the substrate's health. Where the
+user is a person, the bridge is enormous; where the user is a pipeline, it is a rounding error.
+
+This is the more general statement, and it predicts: in any plane, find where individuals install
+software and you will find the agents; find where *systems* talk to each other and you will find the
+gap. It also tells you where the money is, since the 35,788★ bridge is crowded and undifferentiated
+while the 1★ bridge has **no commercial alternative a client could buy instead**.
+
+## 33. OpenUSD is not Apache-2.0 — the fourth distinct way a licence hides
+
+Added 2026-11-25. `PixarAnimationStudios/OpenUSD` (**7,675★ / 1,486f**, pushed 2026-11-23) — the
+foundation of the modern 3D pipeline — is licensed under the **"Tomorrow Open Source Technology
+License 1.0"** (`LICENSE.txt`, 49,827 B). Its preamble states the whole delta: it *"differs from the
+original Apache License 2.0 in the following manner. Section 6 ('Trademarks') is different."*
+
+Functionally Apache-2.0 with a modified trademark clause — but a **separate, renamed licence**, and
+the GitHub API reports `NOASSERTION`. This KB has now recorded four hiding places for a licence:
+
+1. a non-standard filename (`license.txt` lowercase, `COPYING.md` — pass 5);
+2. a licence owned by the **compile**, not the repo (Chromaprint's LGPL-as-a-whole — pass 5);
+3. an HTML file or nothing but a packaging classifier (trend 22);
+4. **a renamed fork of a standard licence whose only difference is trademarks** (this pass).
+
+None of the four is visible to an SPDX field, a badge, or an SBOM scan of the source tree. Also
+`AcademySoftwareFoundation/OpenRV` (797★): Apache-2.0 **except components enumerated in
+`Notice.txt`** — case 2 again, in a repo clients will want.
+
+## 34. A third licence category at the platform tier: delayed-open, and it splits one product
+
+Added 2026-11-25. This KB's law — *permissive at the pipeline, copyleft at the platform* — held in
+five planes with copyleft at the platform. AYON adds a third category and puts the boundary **inside
+a single product**: `ayon-backend` and `ayon-frontend` are **FSL-1.1-ALv2** (Functional Source
+Licence, ALv2 *Future* Licence: source-available now, Apache-2.0 only after a delay — **not
+OSI-approved**), while **every** AYON client and DCC integration is plain Apache-2.0 (`ayon-core`
+80★, `ayon-launcher` 55★, `ayon-blender` 20★, `ayon-houdini` 18★, `ayon-kitsu` 14★).
+
+"AYON is Apache-2.0" is therefore true of everything a developer touches and false of the server a
+client deploys. Compare `cgwire/kitsu` (AGPL-3.0) whose Python client `gazu` is **LGPL-3.0** — a
+vendor deliberately marking the integration seam with a weaker copyleft. Read that signal and build
+on the client, never the server.
+
+## 35. The UK now subsidises AI inside VFX — and the apportionment duty is the product
+
+Added 2026-11-25. The UK's additional VFX tax relief allows claims on up to **100% of eligible UK VFX
+spend**, and the proposal to **exclude generative AI from the uplift was dropped after industry
+consultation**, so AI costs incurred in the VFX process are eligible. But relief covers VFX costs and
+**not** other production costs such as shooting against an LED volume — so a virtual-production shoot
+must **apportion** its spend between eligible and ineligible portions.
+
+That apportionment is an evidence problem over artefacts this KB already types: `OpenTimelineIO`
+timelines, `OpenAssetIO` asset identity, `OpenCue` job records, `camdkit` stage metadata. **A
+tax-credit evidence trail is CFO-sponsored and deadline-bound** — the strongest buying signal in this
+file. See Pattern 18.
+
+⚠️ **Confidence:** `www.gov.uk` does not resolve from this session, so this trend rests on trade-press
+and advisory-firm reporting and is **not verified against the primary policy paper**. A 2024
+consultation indicated existing film/HETV reliefs cease after **1 April 2027**; current status
+unconfirmed. Verify before it reaches a deck.
+
+## 36. India's VFX recovery runs straight into the AI paradox
+
+Added 2026-11-25. FICCI-EY 2026: Indian animation and VFX grew about **1.6% in 2025** after falling
+**9% to ₹103bn in 2024**; the VFX segment is recalibrating toward **₹48bn**, with the combined
+segment projected at **₹138bn by 2028**. The same report attributes **up to 40% time savings** to AI
+in **rotoscoping, clean-up and pipeline work**.
+
+Those are the *billable* tasks of the world's largest production-services industry. The efficiency
+story and the disintermediation threat are **the same sentence applied to the same P&L** — which is
+why the APAC (and LATAM) offer has to be pipeline ownership, priced per seat and per system, rather
+than fewer hours of the thing the client sells. Netflix's Eyeline Studios in Hyderabad is the
+up-stack signal to point at.
+
+## 37. In North America this plane is governed by a labour contract, not a statute
+
+Added 2026-11-25. The IATSE Basic Agreement permits AI **"as a tool"** with limitations and sets up
+standing AI meetings; VFX workers on Marvel/Disney and *Avatar* projects ratified **first IATSE
+contracts**, and Apple Studios' in-house VFX artists reached a first contract with AI protections.
+SAG-AFTRA's four-year agreement limits AI performers with **no strike rights over AI until 2030**;
+2026 WGA and DGA agreements expand AI governance.
+
+**The deliverable a statute wants and the one a contract wants are different.** A statute wants a
+label on the output (EU AI Act Art. 50, the APAC labelling regimes — trends 2, 14, 18). A collective
+agreement wants a **per-shot record of what the AI did, who approved it, and what human work it did
+or did not displace.** Nobody is selling that. Meanwhile production jobs fell **over 35% from October
+2022 to February 2026**, so the framing must be capacity and compliance evidence, never headcount.
+
+## 38. The orchestration tier licenses like a platform, and OpenCue is the exception
+
+Added 2026-11-25. Render management is a tiny field — `render farm manager` returns **32 results in
+total** — and its licences line up with this KB's *platform* tier rather than its *pipeline* tier:
+`CGRU/cgru` is **LGPL-3.0** (302★) and the 2026 entrant `uberware/sqi` chose **AGPL-3.0** (44★,
+pushed the day of the pass). The only permissive option at scale,
+`AcademySoftwareFoundation/OpenCue` (**Apache-2.0**, 1,010★), is permissive because a **foundation**
+holds it — not because the market trends that way.
+
+Consequence for a hosted-render proposal: build on OpenCue and the licence position is clean; build
+on `sqi` and a service offering is a network-copyleft question to answer *before* the architecture
+is drawn.
+
+## 39. Generic English is worthless in this plane — two of the KB's worst contaminated queries
+
+Added 2026-11-25. Both measured, both would have produced fictional rows:
+
+| Query | Total | What the top of the page is |
+|---|---|---|
+| `virtual production` | **1,291** | A Go static-asset embedder (`knadh/stuffbin`, 205★ — matches "production"), a dumped W3C report (176★), a mainframe emulator self-describing as "production-quality" (113★), an unlicensed 121★ setup guide. One defensible hit in the top six. |
+| `color grading open source` | 42 | **Four of the top six are the Bee Movie script** (228★, 98★, 53★, 40★, each opening *"According to all known laws of aviation…"*). |
+
+Meanwhile the *standard's name* works perfectly: `opentrackio` returns **8 results of which 4 are
+real and permissively licensed**, and the genuine colour infrastructure (`OpenColorIO` 2,145★,
+`OpenColorIO-Config-ACES` 440★) is reachable only by project name. Pass 5's rule gets its sharpest
+case: **1,291 looks like abundance and is noise. Read the results, never the total.**
 
 ## Low-confidence items — flagged, not promoted
 

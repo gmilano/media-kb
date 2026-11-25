@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-22
+updated: 2026-11-25
 ---
 
 # 🗺️ Market Map — Media & Entertainment
@@ -25,6 +25,8 @@ range, and say it is a range:
 | **Media localization: $5.6B (2024) → $12.8B (2033), APAC fastest at 12.3% CAGR** | DataIntelo, via trade press | Added 2026-11-22. **A segment figure, not an "AI in M&E" figure** — and therefore the most usable number in this table, because localization is the segment this KB recommends leading with (trend 7) and the one where the open stack is ~80% complete. Still one vendor at second hand. |
 | **Captioning & subtitling solutions: estimates for 2026 span ~$0.39B to ~$7.2B** | Eight market-research vendors | Added 2026-11-22 (pass 3). **An order-of-magnitude disagreement — the widest spread in this file, and the most honest thing in it.** High cluster: GMI ~$7.2B (2026) from $6.7B (2025) → $16.5B by 2035 at 9.4% CAGR; Research Nester $6.25B (2026); Data Bridge $6.50B (2025) → $13.28B (2033). Low cluster: MarketGrowthReports $407.33M (2026) → $796.67M (2035); Business Research Insights $0.41B → $0.8B; MarkWide $385.6M; WENKH $590.48M. Narrower cuts: services-only $732M (2025) → ~$1.3B (2032); another subtitling-and-captioning cut $3.16B (2026) → $6.47B (2035). **The spread is a scope artefact**, not noise: the high cluster counts live captioning, transcription and translation services, the low cluster counts software licences only. **Ask which definition a client means before quoting any of them.** |
 | **Audio description market: no data found** | — | Added 2026-11-22 (pass 3). Searched; **no vendor sizing for audio description surfaced at all** — despite AD being a hard FCC quota and an EAA duty. An unsized market with a statutory mandate and a 56-star tooling ceiling. Recorded as an informed gap, and arguably the most interesting line in this table. |
+
+| **Production / post-production (this plane): no AI-specific sizing found** | — | Added 2026-11-25 (pass 6). Searched; **no vendor sizing for "AI in VFX/animation production" surfaced at all.** The usable regional figures are segment figures from trade bodies, not AI figures: India animation+VFX **₹48bn** VFX / **₹138bn** combined by 2028 (FICCI-EY 2026), Indian VFX **$1.1B (2025) → $1.8B (2034)** at 5.58% CAGR (IMARC), LATAM screen/VFX **~$1.5B (2026)** (vendor directory, unverified — see LATAM). **The plane with the healthiest open substrate in this KB is the one with no market sizing**, which is a finding about analyst coverage, not about the market. |
 
 **Low confidence on all of them.** The defensible statement to a client is directional: double-digit
 CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
@@ -205,6 +207,34 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
 - **Informed gap:** this pass found **no sourced data on North American rights-administration or
   content-ID vendor market shares** (the incumbents in royalty administration are private and
   publish nothing comparable). Treat NA competitive positioning in this plane as *unresearched, not
+  absent*.
+
+#### Added 2026-11-25 (pass 6) — the production plane: the gate here is a *labour contract*, not a statute
+
+- **North America is the one region where AI in production is governed by collective bargaining
+  rather than regulation, and that is an easier sell, not a harder one.** The IATSE Basic Agreement
+  permits AI **"as a tool"** with limitations and establishes standing meetings on AI use; VFX workers
+  on Marvel/Disney and *Avatar* projects have **ratified their first IATSE contracts**, and Apple
+  Studios' in-house VFX artists reached a first contract including AI protections. SAG-AFTRA's
+  four-year deal constrains AI performers with **no strike rights over AI until 2030**, and the 2026
+  WGA and DGA agreements expand AI governance further.
+- **What that means for a build.** A statute wants a label on the output (EMEA, APAC — see those
+  sections). A labour agreement wants something different and more technical: **a per-shot,
+  per-task record of what the AI actually did, who approved it, and which human work it did or did
+  not replace.** That is an evidence-trail product, it maps exactly onto `OpenTimelineIO` +
+  `OpenAssetIO` + render-job metadata, and no vendor is selling it. See `compose/patterns.md`
+  Pattern 17 and Pattern 18.
+- **The demand context is contraction, not growth.** Production jobs fell **over 35% between October
+  2022 and February 2026** (Duke Tech Policy Center analysis). Pitch AI in NA production as *capacity
+  per remaining head* and as *contract-compliance evidence*. A pitch framed as headcount reduction
+  walks into the one constraint that is contractually enforceable here.
+- **The substrate is already in the building.** Every ASWF project in `repos/foundations.md` pass 6
+  originated in or is funded by North American studios (Pixar, Sony Imageworks, ILM, DreamWorks,
+  Netflix). An engagement here does not need to introduce the open stack — it needs to **agent-enable
+  the stack the client already runs**, which is a far shorter sale.
+- **Informed gap:** this pass found **no sourced data on how widely NA studios have adopted the agent
+  bridges** named in `agents/top.md` pass 6, and **no public figures for OpenCue or Kitsu/AYON
+  deployment counts** at named studios. Treat NA pipeline-agent penetration as *unresearched, not
   absent*.
 
 ### EMEA
@@ -395,6 +425,37 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   broadcasters or publishers** — the protocols are documented, the uptake is not measured anywhere
   found. Treat EMEA reservation-adoption rates as *unresearched*.
 
+#### Added 2026-11-25 (pass 6) — the production plane: the UK now *subsidises* AI in VFX, and requires apportionment
+
+- **The single most sellable regional fact found this pass.** The UK's additional tax relief for
+  visual effects lets qualifying productions claim relief on up to **100% of eligible UK VFX spend**,
+  and the proposal to **exclude generative AI from the uplift was dropped after industry
+  consultation** — AI costs incurred in the VFX process are **eligible**. The UK is described in trade
+  coverage as the largest VFX hub in Europe and the second largest in the world.
+- **And here is the build.** Relief covers **VFX** costs but **not** other production costs such as
+  filming in front of an LED volume, so a production using virtual production **must apportion its
+  spend between the VFX and non-VFX portions**. Apportionment is a cost-attribution-and-evidence
+  problem over exactly the artefacts this KB already types: timelines (`OpenTimelineIO`), asset
+  identity (`OpenAssetIO`), render-job records (`OpenCue`) and camera/stage metadata
+  (`SMPTE/ris-osvp-metadata-camdkit`). **A tax-credit evidence trail is a CFO-sponsored project with a
+  statutory deadline, which is the best buying signal in this file.** See `compose/patterns.md`
+  Pattern 18.
+- ⚠️ **Confidence caveat, stated plainly:** `www.gov.uk` **does not resolve from this session**
+  (egress policy), so every sentence above is carried at **trade-press and advisory-firm confidence
+  only** — not verified against the primary policy paper. A 2024 consultation also indicated the
+  existing film and high-end TV reliefs cease after **1 April 2027**; this pass could **not** confirm
+  that date's current status. **Verify against gov.uk before it goes in a client deck.** This is a
+  channel limitation, not a finding.
+- **Digital sovereignty is the procurement frame.** EMEA trade reporting (DPP's European Media Trends
+  2026) puts AI and digital sovereignty together as the dominant driver of European media technology
+  strategy, and the EBU ran an AI Forum in Brussels in March 2026 on public-service-media governance.
+  For this plane that favours **self-hostable, permissively licensed pipeline components over
+  cloud-only vendor stacks** — which is precisely what the ASWF substrate is. Lead EMEA conversations
+  with "runs in your own infrastructure, Apache-2.0", not with model capability.
+- **Informed gap:** no EMEA-specific data was found on **adoption of OpenCue, Kitsu or AYON by
+  European facilities**, and no measured uptake figures for OpenTrackIO among EMEA virtual-production
+  stages. Unresearched, not absent.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -562,6 +623,37 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   rights-administration adoption**, and **no evidence of regional uptake of RSL or TDMRep**. China's
   labelling regime was identified only at the level of secondary legal commentary, not primary text.
   Treat all three as *unresearched, not absent*.
+
+#### Added 2026-11-25 (pass 6) — the production plane: the region with the most to gain and the most to lose
+
+- **India is the global production-services centre of this plane, and it is recovering from a real
+  contraction.** FICCI-EY's 2026 report has animation and VFX growing about **1.6% in 2025** — read as
+  early stabilisation after the segment **fell 9% to ₹103 billion in 2024** — with the VFX segment
+  recalibrating toward **₹48 billion** and the combined animation/VFX/post segment projected to reach
+  **₹138 billion by 2028**. A narrower IMARC cut puts Indian VFX at **$1.1B (2025) → $1.8B (2034),
+  5.58% CAGR**. Netflix's Eyeline Studios facility in **Hyderabad** is the clearest signal of the
+  shift from outsourcing hub toward high-end digital production.
+- **The paradox, and it is the strategic point of this whole section.** The same FICCI-EY report links
+  AI in **rotoscoping, clean-up and pipeline work** to time savings of **up to 40%** — and roto,
+  paint and camera tracking are precisely the labour-intensive tasks the regional outsourcing model
+  **bills for**. Industry commentary (ORF, VFX Voice) states the risk directly: AI attacks the
+  billable task. **AI is simultaneously the efficiency story and the disintermediation threat to the
+  same P&L.**
+- **Therefore the APAC offer is up-stack, not cheaper.** A studio whose revenue is per-hour roto
+  cannot be sold 40% fewer hours. It can be sold **pipeline ownership**: the agent bridges, the
+  asset-resolution layer and the evidence trails in `compose/patterns.md` Patterns 17–19 — work that
+  is per-seat and per-system rather than per-frame. This is the clearest case in the KB for leading
+  with *margin architecture* rather than *tooling*.
+- **Regulatory divergence remains the regional constant.** Latham & Watkins (September 2026) sorts
+  APAC into binding risk-based frameworks (South Korea, Vietnam), targeted rules (China) and lighter
+  regimes; Malaysia is weighing AI provisions inside a copyright overhaul. For this plane the
+  consequence is the one already recorded in the LATAM/APAC sections of earlier passes: **the asset
+  is a per-jurisdiction policy engine**, and in production that policy must attach to the *shot*, not
+  the delivery master.
+- **Informed gap:** this pass found **no APAC-specific data on open-source pipeline adoption** —
+  nothing on OpenCue, Kitsu or AYON deployment in Indian, Chinese, Korean or Japanese facilities,
+  despite the region holding the largest artist headcount in the world. That is the single most
+  commercially interesting unmeasured number in this file, and it is unresearched, not absent.
 
 ### LATAM
 
@@ -769,6 +861,38 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   but it means **LATAM rights-administration opportunity is unresearched, not absent.** The one hard
   regional data point this pass could not obtain is whether any LATAM collecting society has published
   an AI policy; treat that as an open question to raise with the client rather than an answer.
+
+#### Added 2026-11-25 (pass 6) — the production plane: real studios, and the thinnest data in this file
+
+- ⚠️ **Read the confidence warning before the numbers.** The only regional sizing this pass could
+  find for LATAM animation/VFX comes from a **vendor marketing directory** (Vitrina), not from a
+  government or trade body: ~**$1.5B** screen/VFX production market in 2026 and ~**20,000** VFX and
+  post-production professionals regionally; separately an animation-market figure of **$27.9B (2024)
+  → $66.1B (2033), 9.3% CAGR**. **Those two figures cannot both describe the same thing** — a $27.9B
+  "animation market" alongside a $1.5B production market is a scope mismatch of ~19×, which is itself
+  the useful signal: **treat all LATAM production sizing in this file as unverified vendor material
+  and say so to the client.**
+- **The studios, by contrast, are concrete and checkable.** Brazil is the primary hub — **O2 Filmes**
+  (São Paulo), **Copa Studio** (animation), **Raccoon VFX** (Porto Alegre, feature VFX and game
+  cinematics). Argentina runs a long-standing service industry out of Buenos Aires (**Hook Up
+  Animation**, and **Bellolandia** with the anime-style series *Electro Andes*). **Colombia, Chile and
+  Peru** are the emerging tier, with regional recognition through Annecy's La Liga focus and Ventana
+  Sur's animation pitching sessions.
+- **The regional trade-body source worth reading is Premios Quirino's *Laboratorio de Futuros*
+  (April 2026)** — the one non-vendor regional document this pass surfaced on the future of LATAM
+  animation. Use it in preference to directory sites.
+- **Why this plane fits LATAM's actual position.** The region's strength is **service production for
+  foreign clients**, which makes it structurally identical to India's exposure (see APAC) — and it has
+  far less domestic scale to fall back on. The defensible offer is the same and more urgent: own the
+  **pipeline**, not the frame count. The ASWF substrate costs nothing in licence fees, runs on
+  self-hosted infrastructure, and the agent bridges that matter are **1–2 star repos** — a regional
+  studio can realistically become the maintainer of one, which is a positioning no amount of seat
+  licensing buys.
+- **Informed gap, and it is a large one:** this pass found **no official government or trade-body data
+  on Argentine or Colombian VFX output**, and the frequently cited **Colombian 40% cash rebate** was
+  found only in vendor material and **could not be verified** against a film-commission source. No
+  LATAM-specific data on open-source pipeline adoption was found either. Unresearched, not absent —
+  and for LATAM this plane is the *least* measured of the six.
 
 ## Globant positioning
 

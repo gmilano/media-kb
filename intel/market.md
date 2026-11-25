@@ -25,8 +25,8 @@ range, and say it is a range:
 | **Media localization: $5.6B (2024) → $12.8B (2033), APAC fastest at 12.3% CAGR** | DataIntelo, via trade press | Added 2026-11-22. **A segment figure, not an "AI in M&E" figure** — and therefore the most usable number in this table, because localization is the segment this KB recommends leading with (trend 7) and the one where the open stack is ~80% complete. Still one vendor at second hand. |
 | **Captioning & subtitling solutions: estimates for 2026 span ~$0.39B to ~$7.2B** | Eight market-research vendors | Added 2026-11-22 (pass 3). **An order-of-magnitude disagreement — the widest spread in this file, and the most honest thing in it.** High cluster: GMI ~$7.2B (2026) from $6.7B (2025) → $16.5B by 2035 at 9.4% CAGR; Research Nester $6.25B (2026); Data Bridge $6.50B (2025) → $13.28B (2033). Low cluster: MarketGrowthReports $407.33M (2026) → $796.67M (2035); Business Research Insights $0.41B → $0.8B; MarkWide $385.6M; WENKH $590.48M. Narrower cuts: services-only $732M (2025) → ~$1.3B (2032); another subtitling-and-captioning cut $3.16B (2026) → $6.47B (2035). **The spread is a scope artefact**, not noise: the high cluster counts live captioning, transcription and translation services, the low cluster counts software licences only. **Ask which definition a client means before quoting any of them.** |
 | **Audio description market: no data found** | — | Added 2026-11-22 (pass 3). Searched; **no vendor sizing for audio description surfaced at all** — despite AD being a hard FCC quota and an EAA duty. An unsized market with a statutory mandate and a 56-star tooling ceiling. Recorded as an informed gap, and arguably the most interesting line in this table. |
-
-| **Production / post-production (this plane): no AI-specific sizing found** | — | Added 2026-11-25 (pass 6). Searched; **no vendor sizing for "AI in VFX/animation production" surfaced at all.** The usable regional figures are segment figures from trade bodies, not AI figures: India animation+VFX **₹48bn** VFX / **₹138bn** combined by 2028 (FICCI-EY 2026), Indian VFX **$1.1B (2025) → $1.8B (2034)** at 5.58% CAGR (IMARC), LATAM screen/VFX **~$1.5B (2026)** (vendor directory, unverified — see LATAM). **The plane with the healthiest open substrate in this KB is the one with no market sizing**, which is a finding about analyst coverage, not about the market. |
+| **Production / post-production (pass 6): no AI-specific sizing found** | — | Added 2026-11-25 (pass 6). Searched; **no vendor sizing for "AI in VFX/animation production" surfaced at all.** The usable regional figures are segment figures from trade bodies, not AI figures: India animation+VFX **₹48bn** VFX / **₹138bn** combined by 2028 (FICCI-EY 2026), Indian VFX **$1.1B (2025) → $1.8B (2034)** at 5.58% CAGR (IMARC), LATAM screen/VFX **~$1.5B (2026)** (vendor directory, unverified — see LATAM). **The plane with the healthiest open substrate in this KB is the one with no market sizing**, which is a finding about analyst coverage, not about the market. |
+| **Audience measurement (pass 7): US national TV currency = $1.5B–$2B / year** | **CIMM, January 2026 — a primary document, read directly** | Added 2026-11-25. **The only primary-sourced figure in this table.** From *"Funding the Fiesta: The Economics of National TV Currency in the US Market"*: TAM **$1.5–2B/yr**, of which Nielsen takes **85–90%** (**$1.2–1.8B**); an entry-level currency-grade service costs **~$110M/yr to operate**, a competitive one needs **~$250M/yr** of revenue; Nielsen's panel is **42,000+ homes** at an estimated **$150–250M/yr** while every challenger panel targets **5,000**. The US is **2–3× the most expensive** measurement market on earth and holds **~two thirds of global video currency spend**. **Quote these numbers in preference to anything else in this table** — and note what they explain: there is no open-source audience currency because a currency is an operating cost, not a codebase. |
 
 **Low confidence on all of them.** The defensible statement to a client is directional: double-digit
 CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
@@ -236,6 +236,54 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   bridges** named in `agents/top.md` pass 6, and **no public figures for OpenCue or Kitsu/AYON
   deployment counts** at named studios. Treat NA pipeline-agent penetration as *unresearched, not
   absent*.
+
+#### The audience & measurement plane — added 2026-11-25 (pass 7). The only plane in this KB with a verified price on the barrier
+
+- **This is the best-sourced economic finding in these eight files, and it comes from a primary
+  document.** CIMM's *"Funding the Fiesta: The Economics of National TV Currency in the US Market"*
+  (January 2026) was downloaded and read directly — not summarised from trade press. It answers, with
+  numbers, why no open-source audience currency exists:
+  - **Total addressable market: $1.5–2 billion/year** for national cross-platform video currency.
+  - **Nielsen holds an estimated 85–90% of national video currency spending** → revenues of **$1.2–1.8
+    billion**. All competitors share the remaining **10–20%**.
+  - **An entry-level currency-grade service costs ~$110M/year to maintain**, needing **$135–140M** of
+    annual revenue at a 20% margin. A competitive one needs **~$250M/year**.
+  - **Nielsen's panel is "more than 42,000 homes"**, with ongoing panel costs the authors conservatively
+    estimate at **$150–250M/year** (Nielsen's pre-2024 SEC filings referenced panel costs of "hundreds
+    of millions of dollars"). Adding a proprietary panel of that scale adds **$150–250M** to any
+    challenger's cost base.
+  - **Competing panels (TVision, HyphaMetrics, Kantar) all target 5,000 households** — Nielsen's is
+    **8–10× larger**. CIMM explicitly does not expect any provider to attempt to match it.
+  - **The US is the most expensive measurement market in the world**, with data users spending **2–3×**
+    comparable countries, and **roughly two thirds of all global video currency spend is in the US.**
+- **What that means for open source, stated precisely.** The barrier is not a licence, not a patent and
+  not neglect — it is a **fixed operating cost of observation plus an accreditation regime** (MRC
+  accreditation and JIC certification are named by CIMM as entry barriers). This is the sixth
+  confirmation of this KB's structural law and the first with a dollar figure: **where compliance
+  requires an asset that must be continuously operated rather than written, open source does not
+  appear.** No amount of permissive licensing produces a $110M/year panel.
+- **The certification picture, and the inconsistency worth knowing.** The Joint Industry Committee has
+  certified **both Comscore and VideoAmp** as national TV currencies, yet most buyers and sellers still
+  transact on Nielsen numbers. Separately, trade press reports that **Nielsen and VideoAmp both withdrew
+  from the MRC accreditation process** (date not precisely established — treat as reported). So the
+  market has more certified currencies than it uses, and the dominant two have stepped back from the
+  older accreditation body. **A client's "which currency?" question is political, not technical.**
+- **Where the open stack actually wins, and this is the engagement.** Because the currency is closed,
+  advertiser demand migrated to what *can* be done without a panel — and eMarketer's H1 2026 read is
+  that **outcome-based measurement is overtaking the currency debate** in TV and CTV. That is exactly
+  the layer where open source is strong: **`google/meridian` (Apache-2.0, 1,616★), `Robyn` (MIT,
+  1,540★) and `pymc-marketing` (Apache-2.0, 1,314★), all pushed within 15 days of this measurement.**
+  Pitch *incrementality and media-mix modelling on the client's own data*, not a currency substitute.
+  See Pattern 20.
+- **The agent bridge is adoptable here and nowhere else.** `googleanalytics/google-analytics-mcp`
+  (Apache-2.0, **3,866★**, 802 forks, pushed 2026-11-24) is a real dependency. Nielsen has announced a
+  natural-language AI-assisted interface as part of cross-platform products slated for **early 2027**,
+  and plans **2027 content measurement built on publisher streaming data** — so the incumbent's agent
+  surface is a year out and will be proprietary. **The window for an open, client-owned agentic
+  analytics layer is now and it is about twelve months wide.**
+- **Informed gap:** the **MRC withdrawal dates could not be pinned to a primary source**, and no
+  figure was found for how many NA broadcasters self-host a recommender versus licensing one.
+  Unresearched, not absent.
 
 ### EMEA
 
@@ -456,6 +504,48 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   European facilities**, and no measured uptake figures for OpenTrackIO among EMEA virtual-production
   stages. Unresearched, not absent.
 
+#### The audience & measurement plane — added 2026-11-25 (pass 7). The one region where the *measurement method itself* was legally blocked
+
+- **The finding of this plane, and the most sellable one in this file: in EMEA the measured party can
+  veto the sensor.** In **January 2026 YouTube sent cease-and-desist letters to Barb and Kantar Media**
+  over the **audio-matching ACR** used to report some 200 YouTube channels on UK television sets, and
+  **Barb paused that service on 28 January 2026.** Nowhere else in this KB has a *measurement
+  technique* — not a licence, not a model — been stopped by the entity being measured.
+  - **Why it matters commercially:** ACR is the only panel-free way to see what a TV is actually
+    playing, and the open matcher exists today (`a-gram/audioneex`, **MPL-2.0**, 61★ — weak per-file
+    copyleft, so linkable from proprietary code). The technology was never the obstacle. **The
+    obstacle is permission**, which is the same law this KB found in the rights-reservation plane,
+    arriving here through contract rather than copyright.
+  - **The design consequence, and it is concrete:** any EMEA measurement product must be built on
+    **consented first-party and device-level data the client already has the right to observe**, not on
+    recognising third-party platform content. Sell the audience graph, not the ACR.
+  - **Source caveat, stated plainly:** `www.barb.co.uk` and `videoweek.com` **do not resolve from this
+    session** (outside the allowed network domains), so this is recorded from trade-press summaries and
+    **has not been confirmed against Barb's own statements.** The post-pause status of the service is
+    **unknown**. Verify before putting it in a client deck.
+- **EMEA is also the only region where audience measurement is being pulled into media *law*.**
+  Germany's AGF reports that it is engaged, through its membership of the Audience Measurement
+  Coalition, on **how the European Media Freedom Act (EMFA) applies to audience measurement** — and AGF
+  names **deduplicated cross-media reach** as the market's dominant demand. Measurement methodology
+  becoming a regulated subject is a procurement trigger: a methodology that cannot be explained cannot
+  be defended.
+- **A regional consolidation is underway and it is an opening.** **CIMM and the WFA announced a
+  strategic review of cross-media measurement in Europe in January 2026**; the UK's **Origin**
+  cross-media project uses Médiamétrie's **Virtual ID** model; Barb has added pre-campaign planning to
+  its Ads Hub. Médiamétrie's own public position is that AI must be integrated in a **"governed,
+  explainable"** way faithful to independence and rigour. **The deliverable EMEA is asking for is an
+  auditable method, not a better model** — which is the same shape as the EU AI Act Article 50 work
+  already recorded in this section.
+- **Where to lead:** permissively licensed, self-hostable components, because the regional constraint is
+  data residency and auditability rather than model capability — `splink` (**MIT**, 2,604★, UK Ministry
+  of Justice, pushed on measurement day) for identity resolution with a public-sector provenance that
+  survives procurement review, plus `cube-js/cube` (**Apache-2.0**) as the single semantic definition of
+  "a viewer" that an auditor can read. Avoid `rudderlabs/rudder-server` entirely: **Elastic License
+  2.0**, which forbids offering it to third parties as a managed service — i.e. it forbids the SI model.
+- **Informed gap:** **no EMEA-specific figure was found for open-source recommender or analytics
+  adoption by European broadcasters**, and the **commercial terms of JIC/currency data licences could
+  not be obtained** from any reachable source. Treat currency data as *not researched and not free*.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -654,6 +744,51 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   nothing on OpenCue, Kitsu or AYON deployment in Indian, Chinese, Korean or Japanese facilities,
   despite the region holding the largest artist headcount in the world. That is the single most
   commercially interesting unmeasured number in this file, and it is unresearched, not absent.
+
+#### The audience & measurement plane — added 2026-11-25 (pass 7). The region where fragmented measurement is the named cause of the revenue gap
+
+- **APAC's monetisation gap is attributed, by the trade press covering it, specifically to
+  measurement.** Variety's 2026 reporting on the Asia-Pacific screen economy racing toward **$200
+  billion** records that ad dollars have **not** followed audiences onto the streaming screen, and
+  attributes the lag to **fragmented measurement standards across streaming platforms, device makers
+  and ad-supported channels.** Alongside it, **APAC ad spend is on track to grow just 5.2% in 2026 — the
+  slowest rate since the pandemic.** The diagnosis in the region's own press is therefore not "not
+  enough AI" but "no comparable numbers", which is exactly a measurement-infrastructure engagement.
+- **The strongest independent confirmation of that reading is a vendor survey that argues against its
+  own product category.** Braze's June 2026 APAC report on media and entertainment concludes the biggest
+  barrier to effective personalisation is **not a lack of AI** but a **lack of unified data,
+  measurement discipline and clear** goals. When a marketing-automation vendor tells the region its
+  problem is upstream of AI, the upstream work is the sale: **event collection, identity resolution and
+  a semantic layer before any model.** See Pattern 20.
+- **ACR is being deployed commercially here while it is being litigated in EMEA.** Nexxen has expanded
+  its ACR-based TV Intelligence in **Australia** across **more than 1.9 million devices**, covering
+  linear and streaming. Same technique, opposite regulatory weather — which makes **APAC the region
+  where a panel-free measurement product is most likely to be permitted to run.** Note this is a vendor
+  announcement, so treat the device count as claimed rather than audited.
+- **Regulation that bears on *this* plane — distinct from the labelling regimes already recorded
+  above.** The rules that constrain personalisation and measurement are **data-protection and
+  automated-decision rules**, not synthetic-media labelling:
+  - **India — the Digital Personal Data Protection Act** is the main compliance driver for streaming and
+    media audience data, and consent architecture is the gating work.
+  - **Australia** is progressing a **second tranche of Privacy Act reforms**, a **"digital duty of
+    care"**, and — most directly relevant — a **new transparency obligation for automated
+    decision-making**. A recommender is an automated decision system; this is where a ranking layer has
+    to become inspectable.
+  - **South Korea and China** add content-approval and digital-content standards that, per Deloitte's
+    regional read, demand substantial investment in governance infrastructure.
+  - *(India's February 2026 IT Rules amendment and MeitY's April labelling proposal, Japan's election
+    deepfake rule and Vietnam's machine-readable marking requirement are labelling obligations and
+    belong to this KB's provenance plane — cross-referenced here, not re-counted as measurement
+    regulation.)*
+- **The APAC-specific opportunity:** the region has the industry's largest audience and its weakest
+  comparability, and **no incumbent currency has the lock Nielsen has in the US.** A regional
+  broadcaster or streamer can therefore own a **consent-aware first-party measurement and
+  personalisation stack** built from permissive components — `recommenders-team/recommenders` (MIT,
+  22,012★), `Transformers4Rec` (Apache-2.0) for session-shaped viewing, `alibaba/RecIS` (Apache-2.0,
+  APAC-origin and therefore an easier internal sell) — rather than waiting for a currency to arrive.
+- **Informed gap:** this pass found **no APAC-specific data on open-source recommender or analytics
+  adoption** by broadcasters in India, China, Korea or Japan, and **no audited figure** for ACR device
+  coverage in any APAC market. Unresearched, not absent.
 
 ### LATAM
 
@@ -893,6 +1028,57 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   found only in vendor material and **could not be verified** against a film-commission source. No
   LATAM-specific data on open-source pipeline adoption was found either. Unresearched, not absent —
   and for LATAM this plane is the *least* measured of the six.
+
+#### The audience & measurement plane — added 2026-11-25 (pass 7). The region where the panel is smallest and the first-party graph therefore wins soonest
+
+- **The measurement incumbency in LATAM is real but thin, and the numbers are the argument.** Nielsen
+  IBOPE's streaming panel expansion in **Mexico** took it from **900 to 1,650 households** — against
+  Nielsen's **42,000+** in the US (CIMM, January 2026; see the North America section). A national
+  currency resting on ~1,650 homes is **statistically fragile for exactly the long-tail, local-language
+  inventory a regional broadcaster sells.** That is the opening: a client's own first-party graph, built
+  on its own logs, can be more granular about its own audience than the regional currency is — a claim
+  that is simply not available in the US.
+- **Ownership of the region's measurement changed hands and the brand reverted.** **Kantar Media was
+  acquired from the Kantar Group by H.I.G. Capital in August 2025** and is rebranding globally as
+  **Fifty5Blue**, while in Latin America it continues to operate under the **Ibope** name (and in
+  Argentina as Ibope). **Source caveat: `www.fifty5blue.com` does not resolve from this session**
+  (outside the allowed network domains), so this is recorded from trade press, **not** from the
+  company. An ownership change at the regional measurement incumbent is a commercial window —
+  integration work, re-contracting, methodology review — but **verify the corporate facts before
+  citing them.**
+- **Cross-media measurement in the region is explicitly at "first step" stage.** Kantar launched a daily
+  dashboard combining **broadcast TV and VoD streaming consumption** in Brazil, described by the company
+  itself as the **first step** toward cross-media audience measurement in Brazil; **Cross-Platform View**
+  was introduced in **Peru in July 2025**; and **Nielsen launched streaming ad measurement within
+  Digital Ad Intel in Brazil in August 2026.** The region is therefore buying the capability this plane
+  describes *right now*, and nobody has finished building it.
+- **The regulation that bites here is automated decisions, and it has become enforceable.** Brazil's
+  **ANPD became a fully independent regulatory agency in February 2026**, and **Decrees 12.975 and
+  12.976 in force since May 2026** expanded its competence over platforms and user rights. Its stated
+  enforcement priorities **explicitly include the use of personal data for advertising**, and its open
+  interpretive work includes **LGPD Article 20 — the right to review automated decisions.**
+  - **A recommender is an automated decision**, so Article 20 is the provision that lands on the ranking
+    layer. This **reinforces, from a second direction, the Brazilian bill already recorded in this
+    section** requiring AI-based content *recommendation* systems to surface local, community and
+    independent outlets: one obligation requires the ranker to be **explainable**, the other requires it
+    to be **steerable**. Both are implemented in the same place.
+  - **Build consequence:** the ranking layer must be inspectable and overridable by construction. That
+    rules out an opaque hosted recommender and favours `recommenders-team/recommenders` (**MIT**) or
+    `RUCAIBox/RecBole` (**MIT**, 90+ algorithms on a common benchmark — the tool for *evidencing* that
+    one ranker was chosen over another on measured grounds).
+  - **Contested, and recorded as contested:** sources disagree on whether **PL 2338/2023** has become
+    law — one states Brazil has no AI-specific statute yet and LGPD governs, others claim enactment in
+    December 2025 with phased 2026 implementation. **Not asserted here. Verify against an official
+    source before relying on it either way.**
+- **Consent is already the practical blocker for measurement tags.** Regional privacy guidance reports
+  that firing analytics or advertising tags **before** consent violates the law in **Brazil, Mexico and
+  Colombia** — which makes a self-hosted, consent-gated collection layer (`jitsucom/jitsu`, **MIT**;
+  `snowplow/snowplow`, **Apache-2.0**) not a preference but a compliance requirement. Note this came
+  from commercial guidance, so treat it as orientation.
+- **Informed gap:** this pass found **no LATAM-specific source on streaming or CTV *measurement*
+  regulation** — the regulatory material that exists is general data protection and AI governance, not
+  audience-measurement rules — and **no figure for open-source recommender adoption** by LATAM
+  broadcasters. Searched in Spanish and Portuguese; unresearched, not absent.
 
 ## Globant positioning
 

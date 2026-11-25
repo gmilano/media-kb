@@ -9,6 +9,105 @@ updated: 2026-11-25
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-25 — pass 7: the audience & measurement plane (the agent layer runs *against* the openness)
+
+Seventh plane, found by grepping ~95 candidate terms against all eight files before any web search.
+`panel`, `Nielsen`, `ratings`, `clean room`, `identity resolution`, `collaborative filtering`, `EPG`,
+`podcast`, `A/B` and `recommender` all scored **zero files**. Pass 2 had covered *ad* measurement — the
+supply side; this is the **demand** side: who is watching, what to show them next, and how reach is
+counted and sold.
+
+### The gradient — and it is the first one that contradicts what openness would predict
+
+| Analytics substrate | Agent bridge | Licence | Stars | Forks | Last push |
+|---|---|---|---|---|---|
+| Google Analytics 4 — **proprietary, hosted** | [googleanalytics/google-analytics-mcp](https://github.com/googleanalytics/google-analytics-mcp) | Apache-2.0 | **3,866** | 802 | 2026-11-24 |
+| PostHog — **open, 41,121★** | [PostHog/mcp](https://github.com/PostHog/mcp) | MIT | 152 | 27 | 2026-01-19 (**archived**) |
+| Matomo — **open, 22,056★** | [FGRibreau/mcp-matomo](https://github.com/FGRibreau/mcp-matomo) | MIT | 12 | 2 | 2026-07-27 |
+| Mixed / generic | [embeddedlayers/mcp-analytics](https://github.com/embeddedlayers/mcp-analytics) | MIT | 9 | 1 | 2026-10-26 |
+| Matomo — **open, 22,056★** | [kitconcept/matomo-mcp](https://github.com/kitconcept/matomo-mcp) | MIT | 1 | 0 | 2025-12-15 |
+
+~63,000 stars of **open** analytics software are served by **22 stars** of agent bridge, one archived.
+The **closed** hosted platform has 3,866 stars and 802 forks.
+
+### The structural law, seventh plane — second confirmation of pass 6's refinement, from the hard side
+
+Pass 6 refined this KB's law: the open agent layer tracks **practitioner population**, not regulatory
+obligation (passes 3–5) and not substrate health. Pass 6 could not separate population from openness,
+because Blender is both the most-installed *and* open. **This plane separates them, and they point in
+opposite directions.** GA4's population is vastly larger than Matomo's, GA4 is closed, and GA4 has
+~175× the agent adoption. Population wins; **licence and openness do not enter into it.**
+
+Practical form: *an agent bridge is written by whoever has the most users to serve.* Where a client runs
+the popular closed platform, adopt the bridge. Where they self-host the open one, **the bridge is a
+build** — small, well-specified, and genuinely unoccupied.
+
+### The recommender layer has no agent bridge at all, and for a new reason
+
+`recommender MCP` / `personalization MCP` surface nothing with adoption. Closest artefact:
+[JoshuaOliphant/vault-recommender](https://github.com/JoshuaOliphant/vault-recommender) — **2 stars, no
+LICENSE file, 2026-11-16**, a personal Obsidian note recommender. Do not cite it.
+
+Yet the libraries *below* it are the healthiest permissive layer in this KB (`recommenders-team/recommenders`
+MIT **22,012★** pushed 2026-11-05; `gorse-io/gorse` Apache-2.0 **9,928★** pushed on measurement day).
+Sixth plane with a strong substrate and no agent layer — but the reason is new and much more tractable
+than passes 3–5: not regulatory risk, not a closed content licence, simply that **a recommender is
+called by a service, not by a person.** Nobody has needed to talk to one yet.
+
+### ⛔ The licence finding of this pass: the licence is a PDF
+
+The only code published under an audience-measurement banner by an actual currency vendor is Comscore's
+SDK set. Its `LICENSE` is **145 bytes of prose pointing at `LicenseAgreement.pdf`** (58,057 B, verified
+present and readable). GitHub reports `NOASSERTION` on all three repos; no SPDX field, SBOM scan or
+text-based probe — **including this KB's own, already extended twice in pass 5** — can read it.
+
+**Fifth distinct way a licence hides**, after a non-standard filename (pass 5), a licence owned by the
+compile (Chromaprint, pass 5), an HTML file / packaging classifier (pass 4) and a modified Apache
+(OpenUSD, pass 6).
+
+And the content is the real finding: read, the PDF is **not a software licence** but a **data-collection
+agreement** granting Comscore rights to viewing data "for inclusion in syndicated and/or custom products
+… as well as use in its work with certain industry associations and market currency initiatives or joint
+industry committees." The code is public; what you accept is that **your audience feeds someone else's
+currency** — the exact inverse of pass 5's rights-reservation plane, whose whole purpose was
+machine-readable terms. All three repos were **pushed on measurement day**, so this is live code.
+
+**New CI rule, and it generalises past media:** a `LICENSE` under ~300 bytes is a *pointer*, not a
+licence. Treat it as unresolved and open what it points at, including binary documents.
+
+### ⛔ Licence correction that contradicts the published comparisons: Unleash is AGPL-3.0
+
+Third-party roundups, one dated 2026, state Unleash's open-source core is **Apache-2.0**. It is
+**AGPL-3.0** — `LICENSE` read on both `main` and `master`, 34,523 B, GNU Affero v3, and the API agrees.
+For a client embedding flag evaluation in a streaming service that is the difference between a
+permissive dependency and network copyleft. Use **Flagsmith (BSD-3-Clause, 9,879★)** or GrowthBook's
+MIT core.
+
+### Contamination — the worst false-friend query measured in any industry in this KB
+
+- **`data clean room` = 870 results, ZERO relevant.** All Android **"clean architecture"** repos and a
+  timetable app with a "clean room overview": `CoinTrend/CoinTrend` 274★, `ibrajix/NewsFly` 124★,
+  `ahmedmolawale/Star-Wars-Characters` 108★. Three plausible-looking rows were available and every one
+  would have been a mobile app. Worse than pass 5's `isan` (1,942 results, zero relevant).
+- **`audience measurement` = 91 results**, top by stars is an ML *tutorial* (304★, no licence, 2024).
+- **`identity resolution advertising` = 4 results**, only on-topic one has **0 stars**, stale since 2021.
+- **`reach frequency curve media` = 1 result** and it is the same ML tutorial.
+- **`panel weighting survey` = 4 results; the top three have 0 stars.**
+- **`currency measurement TV` = 1 result, 0 stars** — an API-surface description, not an implementation.
+
+Pass 5's two-sided rule confirmed again: **read the results, never the total.** 870 is not abundance.
+
+### Informed gaps from this pass
+
+- **No open-source panel measurement exists, and it is now a priced fact, not an impression:** the CIMM
+  (Jan 2026) floor is **~$110M/year of operating cost** — see `intel/market.md` North America.
+- **Three hosts do not resolve from this session** (outside allowed network domains): `videoweek.com`,
+  `www.barb.co.uk`, `www.fifty5blue.com`. The Barb/YouTube ACR dispute and the Kantar Media →
+  Fifty5Blue rebrand are therefore recorded **from trade-press summaries, not primary sources**.
+- **Brazil's PL 2338/2023 status could not be settled**: sources disagree on whether it is law. Recorded
+  as contested, not asserted.
+- **No figure found for how many media companies self-host a recommender** versus buying one.
+
 ## 2026-11-25 — pass 6: the production & virtual-production plane (the first plane whose agent layer is *misallocated*, not missing)
 
 Three days after pass 5, and the first pass in six to find an agent layer that is not a rounding

@@ -714,6 +714,200 @@ session; SMPTE's own repos do, and are the rows above).
 `xstudio` are both permissive, active and unexposed), a licensed Nuke bridge, and a maintained
 `otio-openassetio`. See `agents/top.md` pass 6 and `compose/patterns.md` Pattern 17.*
 
+## The audience & measurement plane — measured 2026-11-25 (pass 7)
+
+The demand side: **recommend the next item, model what media did, resolve who the viewer is, and count
+the audience as a tradeable currency.** Pass 2 covered the supply side of monetization (auction,
+SCTE-35, SSAI, Druid/Pinot). This section is what the KB was missing on the other side, and it supplies
+the recommender layer that `compose/patterns.md` Pattern 10 had been pointing at since 2026-11-22
+without it existing.
+
+**The headline, and it is the most precisely measured statement of this KB's structural law so far.**
+Three steps inside one plane, each one a strictly harder *observation* problem, and the open-source
+health collapses monotonically along it:
+
+| Step | What it needs to observe | Open-source health (measured 2026-11-25) |
+|---|---|---|
+| **Recommend the next item** | only your own first-party log | **Strong** — 22,012★ MIT, pushed this month |
+| **Model what the media did** | your spend + outcomes, no panel | **Strong** — 1,616★ and 1,540★, both pushed within 15 days |
+| **Count the audience as currency** | a nationally representative panel you cannot own | **Zero** — see the measured void below |
+
+The scarce thing is **not the algorithm and not the data licence — it is the right to observe.** A
+currency is a legally constituted observation right (JIC certification, MRC accreditation) plus a
+~$110M/year operating cost, not a library. Sixth confirmation of this KB's law, and the first time the
+law has a **price** attached from a named primary source. See `intel/market.md` North America.
+
+### Recommenders — the healthiest permissive layer in this KB, and it was entirely absent until now
+
+| Repo | Licence | Stars | Forks | Last push | Notes |
+|---|---|---|---|---|---|
+| [recommenders-team/recommenders](https://github.com/recommenders-team/recommenders) | **MIT** | 22,012 | 3,336 | 2026-11-05 | Linux Foundation project (ex-Microsoft). Best-practice implementations end to end: data prep, 30+ algorithms, evaluation, operationalization. **The default starting point.** |
+| [gorse-io/gorse](https://github.com/gorse-io/gorse) | **Apache-2.0** | 9,928 | 931 | 2026-11-25 | Go recommender *service* — REST/gRPC, not a notebook library. Pushed on measurement day. The one component in this plane that is deployable as-is. |
+| [NicolasHug/Surprise](https://github.com/NicolasHug/Surprise) | **BSD-3-Clause** | 6,828 | 1,054 | 2026-05-30 | Classic explicit-rating toolkit. Good for baselines and teaching; not a serving path. |
+| [RUCAIBox/RecBole](https://github.com/RUCAIBox/RecBole) | **MIT** | 4,623 | 755 | 2026-11-23 | 90+ algorithms on a unified benchmark. **The right tool for "prove model B beats model A"** before committing a client to one. |
+| [benfred/implicit](https://github.com/benfred/implicit) | **MIT** | 3,842 | 640 | 2026-05-08 | Fast ALS/BPR for implicit feedback — the realistic case for a streamer (plays, not ratings). GPU-capable. |
+| [meta-pytorch/torchrec](https://github.com/meta-pytorch/torchrec) | **BSD-3-Clause** | 2,630 | 751 | 2026-11-25 | Production-scale sharded embeddings for very large catalogues. Pushed on measurement day. |
+| [NVIDIA-Merlin/Transformers4Rec](https://github.com/NVIDIA-Merlin/Transformers4Rec) | **Apache-2.0** | 1,283 | 168 | 2026-08-23 | Sequential/session-based recommendation — **the shape that matches a viewing session**, which matters more in media than in retail. |
+| [NVIDIA-Merlin/Merlin](https://github.com/NVIDIA-Merlin/Merlin) | **Apache-2.0** | 913 | 132 | 2026-07-22 | The umbrella for NVIDIA's recommender stack (NVTabular, Systems). Useful as an integration reference. |
+| [massquantity/LibRecommender](https://github.com/massquantity/LibRecommender) | **MIT** | 490 | 72 | 2025-07-17 | End-to-end train-and-serve. **16 months without a push** — read before adopting. |
+| [NVIDIA/recsys-examples](https://github.com/NVIDIA/recsys-examples) | **BSD-3-Clause** (`LICENSE`, 2,124 B; API says `NOASSERTION`) | 369 | 97 | 2026-11-23 | Accelerated training/deployment examples. Licence resolved by reading the file. |
+| [alibaba/RecIS](https://github.com/alibaba/RecIS) | **Apache-2.0** | 366 | 26 | 2026-09-23 | Large-scale sparse training framework. APAC-origin; useful signal for APAC engagements. |
+| [keras-team/keras-rs](https://github.com/keras-team/keras-rs) | **Apache-2.0** | 173 | 23 | 2026-11-18 | Multi-backend (JAX/TF/PyTorch) recommender layers on Keras 3. New and small, but actively pushed and from a credible maintainer. |
+
+**Two exclusions made after reading, not before:**
+
+- [twitter/the-algorithm](https://github.com/twitter/the-algorithm) — **AGPL-3.0**, 74,125★, 13,228
+  forks, **last push 2025-09-08**. The most-starred recommender code on GitHub and **unusable for
+  client work twice over**: network copyleft, and over a year stale. It is a published artefact, not a
+  maintained library. Named here so no later pass is tempted by the star count.
+- [bytedance/monolith](https://github.com/bytedance/monolith) — **Apache-2.0** (`LICENSE`, 12,621 B;
+  API says `NOASSERTION` because a copyright preamble precedes the Apache text), 9,283★, but
+  **ARCHIVED, last push 2025-10-13**. Permissive and dead — the licence check passes and the project is
+  still unusable. See this section's own archived list below.
+- [lyst/lightfm](https://github.com/lyst/lightfm) — **Apache-2.0**, 5,119★, 723 forks, **last push
+  2024-07-24**. Still the most-cited hybrid recommender in blog posts; **28 months stale.** Do not
+  start new work here.
+
+### Media-mix and incrementality — the open substitute for a currency, and it is thriving
+
+This is the commercially important finding of the plane. Advertisers cannot buy an open currency, so
+the open-source energy went into **measuring media effect without a panel** — and that layer is
+permissive, well-maintained and backed by Google and Meta:
+
+| Repo | Licence | Stars | Forks | Last push | Notes |
+|---|---|---|---|---|---|
+| [google/meridian](https://github.com/google/meridian) | **Apache-2.0** | 1,616 | 317 | 2026-11-25 | Google's current Bayesian MMM, with geo-level hierarchical modelling and reach/frequency support. Pushed on measurement day. **The successor to `lightweight_mmm`.** |
+| [facebookexperimental/Robyn](https://github.com/facebookexperimental/Robyn) | **MIT** | 1,540 | 442 | 2026-11-10 | Meta's semi-automated MMM (R, with a Python port). Ridge regression + evolutionary hyperparameter search. The most permissive of the three. |
+| [pymc-labs/pymc-marketing](https://github.com/pymc-labs/pymc-marketing) | **Apache-2.0** | 1,314 | 451 | 2026-11-25 | Bayesian MMM **and** CLV in one toolbox, on PyMC. Vendor-neutral maintainer; the best choice when the client wants the model inspectable rather than a black box. |
+
+**Deprecated, and do not start here:** [google/lightweight_mmm](https://github.com/google/lightweight_mmm)
+— Apache-2.0, 1,055★, 237 forks, **ARCHIVED, last push 2025-06-17**. Still the top search result for
+"open source MMM" and still cited in vendor decks. Google's replacement is Meridian, above.
+
+### Identity resolution — the generic technique is healthy, the advertising-specific graph is a zero
+
+| Repo | Licence | Stars | Forks | Last push | Notes |
+|---|---|---|---|---|---|
+| [dedupeio/dedupe](https://github.com/dedupeio/dedupe) | **MIT** | 4,531 | 578 | 2025-07-29 | Active-learning record linkage. 16 months stale but the library is mature and widely embedded. |
+| [moj-analytical-services/splink](https://github.com/moj-analytical-services/splink) | **MIT** | 2,604 | 291 | 2026-11-25 | Probabilistic linkage at scale (Fellegi–Sunter) on DuckDB/Spark/Athena. **UK Ministry of Justice**, pushed on measurement day. The strongest choice here, and a public-sector provenance that survives procurement review. |
+| [zinggAI/zingg](https://github.com/zinggAI/zingg) | **AGPL-3.0** | 1,277 | 177 | 2026-11-03 | ML entity resolution on Spark. **AGPL — run it unmodified as a separate service behind its interface**, per this file's standing rule. |
+
+**The measured gap:** `identity resolution advertising` returns **4 repos on all of GitHub**, and the
+only on-topic one has **0 stars** and has not been touched since 2021. The *technique* is open and
+excellent; the **advertising identity graph** — the thing a media client actually needs — has no open
+implementation at all. Build it on Splink; do not go looking for a ready-made one.
+
+### Privacy-preserving joins — what exists instead of an open clean room
+
+`data clean room` is a dead query (870 results, zero relevant — see `agents/top.md`). The real
+primitives are published under their cryptographic names:
+
+| Repo | Licence | Stars | Forks | Last push | Notes |
+|---|---|---|---|---|---|
+| [google/private-join-and-compute](https://github.com/google/private-join-and-compute) | **Apache-2.0** | 860 | 162 | 2026-03-09 | Private set intersection **sum** — compute an aggregate over the overlap without revealing the overlap. The exact primitive under "how many of my viewers saw your campaign". |
+| [OpenMined/PSI](https://github.com/OpenMined/PSI) | **Apache-2.0** | 153 | 40 | 2026-09-22 | PSI with multi-language bindings (C++, Go, Rust, JS, Python). Smaller, but the easiest to integrate. |
+
+**Archived — do not build on, named so they are not re-adopted:**
+[tiktok-privacy-innovation/PrivacyGo-DataCleanRoom](https://github.com/tiktok-privacy-innovation/PrivacyGo-DataCleanRoom)
+(Apache-2.0, 37★, archived 2024-10-31; TEE-based and one-way collaboration only) and
+[facebookresearch/fbpcs](https://github.com/facebookresearch/fbpcs) (MIT, 151★, archived 2024-11-22).
+**Both of the industry-backed open clean rooms are dead.** The pattern is the one this KB keeps
+finding: the primitives survive, the products built on them do not.
+
+### Experimentation and feature flags — the layer that makes a recommender provable
+
+| Repo | Licence | Stars | Forks | Last push | Notes |
+|---|---|---|---|---|---|
+| [Unleash/unleash](https://github.com/Unleash/unleash) | **AGPL-3.0** (`LICENSE`, 34,523 B — verified) | 14,342 | 933 | 2026-11-25 | Feature flags and gradual rollout. **See the licence correction below — this is not Apache-2.0.** |
+| [Flagsmith/flagsmith](https://github.com/Flagsmith/flagsmith) | **BSD-3-Clause** | 9,879 | 659 | 2026-11-25 | Flags + remote config, self-hostable. **The most permissive real platform in this tier** and the right default for client work. |
+| [growthbook/growthbook](https://github.com/growthbook/growthbook) | **MIT with an enterprise carve-out** (3 named dirs) | 8,659 | 919 | 2026-11-25 | The only one here with real statistics: CUPED variance reduction and sequential testing. Carve-out is `packages/{back-end/src,front-end,shared/src}/enterprise`. |
+| [open-feature/spec](https://github.com/open-feature/spec) | **Apache-2.0** | 1,301 | 65 | 2026-11-25 | CNCF vendor-neutral flagging **specification** — a document, not an engine. Use it to keep the client un-locked-in, per this KB's standing warning that specs are not code. |
+
+**⛔ Licence correction, and it contradicts the published comparisons.** Third-party roundups — including
+one dated 2026 — state that Unleash's open-source core is **Apache-2.0**. It is **AGPL-3.0**: verified
+by reading `LICENSE` on both `main` and `master` (34,523 bytes, GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3), and the GitHub API agrees. For a media client embedding flag evaluation in a streaming
+service, that is the difference between a permissive dependency and a network-copyleft one. **Flagsmith
+(BSD-3) or GrowthBook's MIT core are the safe picks.**
+
+### The event and query substrate — the new rows, and one licence that is not open source at all
+
+Pass 2 already recorded Snowplow, Druid, Pinot and Superset. The demand side adds:
+
+| Repo | Licence | Stars | Forks | Last push | Notes |
+|---|---|---|---|---|---|
+| [ClickHouse/ClickHouse](https://github.com/ClickHouse/ClickHouse) | **Apache-2.0** | 51,139 | 9,326 | 2026-11-25 | The column store most audience platforms are actually built on. Apache-2.0 and enormous. |
+| [duckdb/duckdb](https://github.com/duckdb/duckdb) | **MIT** | 43,358 | 4,203 | 2026-11-25 | In-process analytics; the engine Splink runs linkage on. MIT, no server to operate. |
+| [umami-software/umami](https://github.com/umami-software/umami) | **MIT** | 40,358 | 8,656 | 2026-11-25 | **The only large self-hosted web analytics platform that is actually MIT** — Matomo is GPL-3.0, Plausible AGPL-3.0, PostHog MIT-with-carve-out. For a publisher that wants to *modify* its analytics, this is the one. |
+| [getredash/redash](https://github.com/getredash/redash) | **BSD-2-Clause** | 28,902 | 4,647 | 2026-11-25 | Query-and-dashboard layer; lighter alternative to Superset. |
+| [cube-js/cube](https://github.com/cube-js/cube) | **Apache-2.0** by default (dual Apache-2.0 / MIT per `LICENSE`, 254 B) | 21,294 | 2,210 | 2026-11-25 | Semantic layer — defines "a view", "a unique viewer" **once** so the recommender, the dashboard and the ad stack cannot disagree. The highest-leverage small component in this plane. |
+| [jitsucom/jitsu](https://github.com/jitsucom/jitsu) | **MIT** | 5,139 | 403 | 2026-11-25 | Event collection / Segment replacement. MIT and pushed on measurement day. |
+
+**⛔ Excluded after reading the licence:**
+[rudderlabs/rudder-server](https://github.com/rudderlabs/rudder-server) — 4,520★, pushed on measurement
+day, universally described as open-source CDP infrastructure. Its `LICENSE` is the **Elastic License
+2.0** (3,793 B), which forbids providing the software to third parties as a managed service. **It is
+source-available, not open source**, and it cannot be the basis of a Globant-operated platform for a
+client. Use Jitsu (MIT) or Snowplow (Apache-2.0) instead. This is the **fourth** licence category this
+KB has had to add at the platform tier, after copyleft, delayed-open (FSL) and MIT-with-carve-out.
+
+### Catalogue, EPG and podcast measurement — the small permissive corner that actually works
+
+| Repo | Licence | Stars | Forks | Last push | Notes |
+|---|---|---|---|---|---|
+| [iptv-org/iptv](https://github.com/iptv-org/iptv) | **Unlicense** | 144,722 | 8,635 | 2026-11-25 | The largest public channel index. Public-domain dedication; **treat the channel *streams* as a legal question separate from the data.** |
+| [iptv-org/epg](https://github.com/iptv-org/epg) | **Unlicense** | 3,560 | 561 | 2026-11-21 | EPG grabbers for hundreds of sources, emitting XMLTV. The practical way to get programme metadata without a vendor feed. |
+| [XMLTV/xmltv](https://github.com/XMLTV/xmltv) | **GPL-2.0** | 425 | 108 | 2026-10-13 | The 25-year-old EPG interchange format and grabber suite. The *format* is the asset; the Perl tooling is copyleft. |
+| [skymethod/op3](https://github.com/skymethod/op3) | **MIT** | 144 | 10 | 2026-11-25 | **The Open Podcast Prefix Project** — an open, privacy-respecting download-analytics prefix service. MIT, pushed on measurement day, and the only credible open audience-measurement *service* found anywhere in this plane. |
+| [opawg/user-agents-v2](https://github.com/opawg/user-agents-v2) | **MIT** | 69 | 76 | 2026-11-24 | The Open Podcast Analytics Working Group's user-agent list — the shared reference data that makes two podcast counts comparable. **More forks than stars (1.1)**, the signature of real infrastructure. |
+
+**Podcasting is the exception that proves the rule, and it is worth understanding.** OP3 is an open
+measurement service that exists *because podcast delivery is an open RSS/HTTP download* — the
+observation point is the publisher's own redirect, so no panel is needed and no gatekeeper can withhold
+it. Where the observation is structurally available, open measurement appears immediately. Where it is
+not — television — it does not exist at any star count.
+
+**One informed caveat:** OP3 states IAB v2 *compliance as a goal* contingent on sponsorship, **not
+certification**. Do not tell a client OP3 is IAB-certified. [growlfm/odl](https://github.com/growlfm/odl)
+("Open Downloads", an alternative counting spec) **exists** — 11 refs via `git ls-remote` — but returns
+nothing from `search/repositories` (**sixth measurement of that false negative**) and has **no LICENSE
+file** at any of six probed names while `README.md` returns 200, so the missing licence is real, not a
+naming convention. Use the spec, not the code.
+
+### Automatic content recognition — the only open sensing method, and it is legally contested
+
+ACR is how cross-platform viewing gets measured without a panel: fingerprint what the TV is playing,
+match it to a reference database. This KB covered fingerprinting as *identification* in pass 5; here it
+is the **measurement sensor**.
+
+| Repo | Licence | Stars | Forks | Last push | Notes |
+|---|---|---|---|---|---|
+| [a-gram/audioneex](https://github.com/a-gram/audioneex) | **MPL-2.0** | 61 | 10 | 2026-06-17 | Content-agnostic real-time audio recognition; small fingerprints. **MPL-2.0 is weak per-file copyleft — it can be linked from proprietary code**, which is why it is the usable one. |
+| [SafeNetIoT/ACR](https://github.com/SafeNetIoT/ACR) | **AGPL-3.0** | 24 | 0 | 2024-09-09 | The measurement tool from the 2024 smart-TV ACR tracking study. A research instrument, **not** a library; 0 forks, 14 months stale. |
+
+**And the finding that makes this section matter:** in EMEA the ACR method itself was stopped by legal
+action, not by a technical limit — see `intel/market.md` EMEA. **There is no open-source reference
+fingerprint database for broadcast or streaming content, and that — not the matcher — is the asset.**
+The matcher is 61 stars of MPL-2.0 you can have today.
+
+### ⚠️ Archived or dormant in this plane — verified 2026-11-25, do not start new work here
+
+Five repos that are top search results for their category and should not be adopted:
+
+| Repo | Licence | Stars | Last push | Status |
+|---|---|---|---|---|
+| [twitter/the-algorithm](https://github.com/twitter/the-algorithm) | AGPL-3.0 | 74,125 | 2025-09-08 | Not archived but 14 months stale, **and AGPL** — unusable twice over. A published artefact, not a library. |
+| [bytedance/monolith](https://github.com/bytedance/monolith) | Apache-2.0 (file read) | 9,283 | 2025-10-13 | **ARCHIVED.** Permissive and dead. |
+| [lyst/lightfm](https://github.com/lyst/lightfm) | Apache-2.0 | 5,119 | 2024-07-24 | **28 months stale** and still the most-cited hybrid recommender in blog posts. |
+| [google/lightweight_mmm](https://github.com/google/lightweight_mmm) | Apache-2.0 | 1,055 | 2025-06-17 | **ARCHIVED.** Still the top result for "open source MMM". Replaced by `google/meridian`. |
+| [facebookresearch/fbpcs](https://github.com/facebookresearch/fbpcs) | MIT | 151 | 2024-11-22 | **ARCHIVED.** One of the two dead industry open clean rooms. |
+
+Also dormant rather than dead: [dedupeio/dedupe](https://github.com/dedupeio/dedupe) (MIT, 4,531★,
+2025-07-29) and [massquantity/LibRecommender](https://github.com/massquantity/LibRecommender) (MIT, 490★,
+2025-07-17) — both mature and still embeddable, but check before proposing them as actively maintained.
+[devflowinc/trieve](https://github.com/devflowinc/trieve) (MIT, 2,727★) has not been pushed since
+**2026-01-25**.
+
 ## ⚠️ Archived or dormant — do not start new work here
 
 Four repos that earlier cycles of this KB listed as live foundations:

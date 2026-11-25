@@ -380,3 +380,71 @@ additions this pass measured, continuing its numbering:
    platform's own schema — it is the one layer here designed to be vendor-neutral, and it keeps the
    build portable between Kitsu, AYON and a studio's in-house tracker. The MCP bridge for it exists
    and has **one star** (`OpenAssetIO/openassetio-mcp`); see `compose/patterns.md` Pattern 17.
+
+## The audience & personalization tier — added 2026-11-25 (pass 7)
+
+The platforms a media client would **run** to recommend content, test whether the recommendation worked,
+and count the audience. Pass 2 added the ad-serving and web-analytics platforms (Revive, Matomo,
+Plausible, PostHog — still in the table above, not repeated here). This tier is the demand side.
+
+| Platform | License | Repo | Stars | Forks | Last push | Use case |
+|---|---|---|---|---|---|---|
+| Jellyfin | **GPL-2.0** | [jellyfin/jellyfin](https://github.com/jellyfin/jellyfin) | 59,763 | 5,878 | 2026-11-25 | The only mature open media server with a real catalogue, user profiles and watch history — **the realistic test bed for a recommender before it touches a client's production OTT stack.** GPL-2.0: deploy it, integrate over its API, do not fork it into a product. |
+| Umami | **MIT** | [umami-software/umami](https://github.com/umami-software/umami) | 40,358 | 8,656 | 2026-11-25 | **The only large self-hosted analytics platform that is genuinely MIT** — Matomo is GPL-3.0, Plausible AGPL-3.0, PostHog MIT-with-carve-out. For a publisher that needs to *modify* its analytics platform, this is the one row in this file that permits it. |
+| Redash | **BSD-2-Clause** | [getredash/redash](https://github.com/getredash/redash) | 28,902 | 4,647 | 2026-11-25 | Query + dashboard layer over the audience warehouse. Lighter than Superset and more permissive. |
+| Cube | **Apache-2.0** by default (dual Apache-2.0 / MIT, `LICENSE` 254 B) | [cube-js/cube](https://github.com/cube-js/cube) | 21,294 | 2,210 | 2026-11-25 | Semantic layer: define "a view", "a unique viewer", "completion" **once**, so the recommender, the ad stack and the board deck cannot disagree. **The highest-leverage small platform in this plane** and the cheapest fix for the cross-platform fragmentation Deloitte names as the binding constraint. |
+| Unleash | **AGPL-3.0** (`LICENSE` read, 34,523 B) | [Unleash/unleash](https://github.com/Unleash/unleash) | 14,342 | 933 | 2026-11-25 | Feature flags and staged rollout. **Widely mis-described as Apache-2.0 — it is not.** Run unmodified behind its API or choose Flagsmith. |
+| Flagsmith | **BSD-3-Clause** | [Flagsmith/flagsmith](https://github.com/Flagsmith/flagsmith) | 9,879 | 659 | 2026-11-25 | Flags + remote config, self-hostable. **The most permissive real platform in this tier — the default recommendation for client work.** |
+| GrowthBook | **MIT with an enterprise carve-out** (`packages/{back-end/src,front-end,shared/src}/enterprise`) | [growthbook/growthbook](https://github.com/growthbook/growthbook) | 8,659 | 919 | 2026-11-25 | The only one here with real statistics — CUPED variance reduction and sequential testing. **This is how you prove a recommender earned its keep** rather than asserting it. |
+| Gorse | **Apache-2.0** | [gorse-io/gorse](https://github.com/gorse-io/gorse) | 9,928 | 931 | 2026-11-25 | A recommender **service** with REST/gRPC, not a notebook library — the only component in this plane that is deployable as a platform rather than assembled. Pushed on measurement day. |
+| Trieve | **MIT** | [devflowinc/trieve](https://github.com/devflowinc/trieve) | 2,727 | 254 | 2026-01-25 | Search + recommendations + RAG + analytics in one Rust service. MIT and genuinely useful, but **10 months without a push — verify maintenance before proposing it.** |
+| OP3 | **MIT** | [skymethod/op3](https://github.com/skymethod/op3) | 144 | 10 | 2026-11-25 | **The only open audience-measurement service in this file.** Podcast download analytics as an open prefix. Works because podcast delivery is an open HTTP download — see the gap note below. |
+| iptv-org/epg | **Unlicense** | [iptv-org/epg](https://github.com/iptv-org/epg) | 3,560 | 561 | 2026-11-21 | EPG grabbers for hundreds of sources emitting XMLTV — programme metadata without a vendor feed. Public-domain dedication; **the legality of the underlying *streams* is a separate question from the data.** |
+
+### ⚠️ This tier adds a FOURTH licence category to this file's taxonomy
+
+The rule at the top of this file — **permissive at the pipeline, copyleft at the platform** — held for
+generation, delivery, monetization, accessibility, preservation and identification. This tier is the
+first that **partly breaks it**, and the exceptions are instructive:
+
+1. **Copyleft at the platform, as expected:** Jellyfin GPL-2.0, Unleash AGPL-3.0, Matomo GPL-3.0.
+2. **Permissive at the platform, breaking the rule:** **Flagsmith BSD-3-Clause, Umami MIT, Redash
+   BSD-2-Clause, Gorse Apache-2.0, Trieve MIT.** Five permissive platforms in one tier — more than the
+   rest of this file combined. The reason appears to be commercial rather than cultural: these products
+   monetise **hosting**, not the licence, so they have no reason to use copyleft as a moat.
+3. **MIT with a carve-out:** PostHog (`ee/`), GrowthBook (three `enterprise` directories).
+4. **NEW — source-available, which is not open source at all:**
+   [rudderlabs/rudder-server](https://github.com/rudderlabs/rudder-server) (4,520★, pushed on measurement
+   day) is under the **Elastic License 2.0** (`LICENSE`, 3,793 B). **ELv2 forbids providing the software
+   to third parties as a managed service** — which is precisely the systems-integrator model. It is
+   excluded from the table above and named here so no later pass adds it. Use **Jitsu (MIT)** or
+   **Snowplow (Apache-2.0)**.
+
+This joins **delayed-open (FSL-1.1-ALv2, AYON — pass 6)** as the second non-OSI category this file has
+had to carry. **Read the LICENSE file of every platform before it reaches a client proposal:** four of
+the eleven rows above have a licence that a badge or an SPDX field reports incorrectly or not at all.
+
+### Gap: there is no open audience-measurement platform for video, and podcasting shows exactly why
+
+OP3 is the only open measurement *service* in this file, and it covers **podcasts**. That is not an
+accident of community interest — it is structural:
+
+- **Podcast delivery is an open RSS/HTTP download.** The observation point is the publisher's **own**
+  redirect. No panel is required, and no gatekeeper can withhold it. So an open, privacy-respecting
+  measurement service appeared, and the shared reference data that makes two counts comparable
+  ([opawg/user-agents-v2](https://github.com/opawg/user-agents-v2), MIT, **more forks than stars**) is
+  maintained collaboratively.
+- **Television and streaming are not observable that way.** Measuring them requires either a
+  **nationally representative panel** — which CIMM prices at **$110M/year minimum to operate** (see
+  `intel/market.md` North America) — or **ACR against third-party content**, which in EMEA was
+  **stopped by cease-and-desist** (see `intel/market.md` EMEA). So no platform exists at any star count.
+
+**Prescription, and it is the honest one:** never propose an open-source *currency*. Propose the
+client's **own** first-party audience platform — assembled from the permissive rows above — and prove
+its value with media-mix modelling and controlled experiments rather than against a rating. Pattern 20.
+
+**Two caveats to carry into any proposal:** OP3 states IAB v2 compliance as a **goal contingent on
+sponsorship, not certification** — do not claim it is certified. And `growlfm/odl`, the alternative
+open download-counting spec, **exists but has no licence file at all** (verified across six filename
+probes while `README.md` returns 200). Use its specification, not its code.
+

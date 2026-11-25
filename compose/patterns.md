@@ -379,7 +379,7 @@ answers already sitting in `repos/foundations.md`. New 2026-11-22.
      |
      +--> [Pattern 9's decisioning service]   <- the same graph prices the ad break
      |
-     +--> [agents/top.md recommender work]    <- segments as features
+     +--> [repos/foundations.md recommender stack]  <- segments as features; see Pattern 20
 ```
 
 **Why it is the lowest-risk engagement here:** every component is Apache-2.0 with a real LICENSE file
@@ -918,6 +918,148 @@ the task status back.
 whole of Pattern 17 on a workflow a client can see in a single review session. Use it as the wedge.
 It is also the cheapest credible way to become a named contributor in an ASWF project, which is the
 credential this plane actually respects.
+
+## Pattern 20 — Panel-free audience intelligence with provable lift (the demand-side flagship)
+
+**Why:** this is the plane's commercial answer to a barrier this KB can now price. A national audience
+currency costs **~$110M/year to operate** and Nielsen holds **85–90%** of US spend (CIMM, January 2026 —
+`intel/market.md` North America), so a client will never own one. But eMarketer's H1 2026 read is that
+**outcome-based measurement is overtaking the currency debate**, and *that* layer is permissive, active
+and free. This recipe builds what the client can own: their own audience graph, a recommender on top of
+it, and a defensible measurement of whether it worked. New 2026-11-25.
+
+It also supersedes nothing: **Pattern 10 is the lower half of this stack** (collection → OLAP →
+reporting). Pattern 20 adds the two layers Pattern 10 pointed at and this KB did not have — **the
+recommender and the proof.**
+
+```
+[Web / app / player / CTV events]
+     |
+     v
+[jitsucom/jitsu MIT  OR  snowplow/snowplow Apache-2.0]   <- consent-gated, schema'd collection
+     |                                                      (NEVER rudderlabs/rudder-server: ELv2)
+     v
+[ClickHouse/ClickHouse Apache-2.0  OR  apache/druid Apache-2.0]   <- high-cardinality event store
+     |
+     v
+[cube-js/cube Apache-2.0]        <- THE SEMANTIC LAYER: "view", "unique viewer", "completion"
+     |                              defined ONCE so recommender, ad stack and board deck agree
+     +--> [moj-analytical-services/splink MIT]        <- identity resolution across device/profile
+     |
+     +--> [recommenders-team/recommenders MIT 22,012*] <- candidate generation + ranking
+     |      \__ [NVIDIA-Merlin/Transformers4Rec Apache-2.0] <- session-shaped ranking (the media case)
+     |      \__ [RUCAIBox/RecBole MIT] <- offline benchmark: EVIDENCE that model B beat model A
+     |      \__ [gorse-io/gorse Apache-2.0] <- if the client wants a service, not a library
+     |
+     +--> [growthbook/growthbook MIT core]  <- online experiment: CUPED + sequential testing
+     |                                         => the lift number that survives a CFO
+     +--> [google/meridian Apache-2.0  OR  facebookexperimental/Robyn MIT]
+     |         <- media-mix / incrementality: what the SPEND did, with no panel
+     +--> [apache/superset Apache-2.0  OR  getredash/redash BSD-2-Clause]  <- reporting
+```
+
+**Why this is the strongest-licensed pattern in this file.** Every component is MIT, Apache-2.0 or
+BSD — **no copyleft, no carve-out in any path actually used** (GrowthBook's carve-out is three
+`enterprise` directories the open core does not need), and no generated content, so **no provenance or
+AI-labelling exposure at all.** Pattern 10 previously held that distinction; this extends it through the
+recommender and measurement layers.
+
+**The three substitutions that make it defensible rather than merely cheap:**
+
+1. **Cube instead of per-team SQL.** Deloitte names the binding constraint on media monetization as the
+   absence of a unified audience view. That is a *definition* problem before it is a data problem — Cube
+   is the cheapest place to fix it, and it is what makes the recommender's features and the ad stack's
+   segments the same thing.
+2. **RecBole offline + GrowthBook online.** The recommender claim a client will challenge is "is this
+   better than what we had?" RecBole answers it on history across 90+ algorithms; GrowthBook answers it
+   in production with variance reduction. **Together they are the only honest answer**, and neither
+   requires a currency.
+3. **Meridian/Robyn instead of a rating.** Reach and frequency have **no open implementation** (`reach
+   frequency curve media` returns one result and it is an unrelated ML tutorial). Do not try to rebuild
+   them. Model the outcome instead — which is what advertisers are migrating to anyway.
+
+**Regional shaping — the same stack, a different lead in each region:**
+
+- **North America:** lead with **incrementality**, not audience. The client has a currency and resents
+  it; they do not need a second one. Adopt `googleanalytics/google-analytics-mcp` (Apache-2.0, 3,866★)
+  if they are on GA4. Nielsen's own natural-language interface is slated for **early 2027**, so the
+  window for a client-owned agentic layer is roughly twelve months.
+- **EMEA:** lead with **auditability and residency**. Every component self-hosts; Splink's UK Ministry
+  of Justice provenance survives procurement review; Cube makes the method readable to a regulator —
+  which matters because EMFA is being applied to audience measurement. **Do not propose ACR against
+  third-party content:** that is what was cease-and-desisted in January 2026.
+- **APAC:** lead with **comparability**. The region's own press blames fragmented measurement for ad
+  dollars lagging viewers, and a vendor survey says the barrier to personalisation is unified data, not
+  AI. `alibaba/RecIS` (Apache-2.0) is an easier internal sell in the region than a US-origin library.
+- **LATAM:** lead with **granularity beating the panel**. Nielsen IBOPE's Mexican streaming panel is
+  **1,650 households** against 42,000+ in the US; the client's own logs are genuinely more informative
+  about their own long-tail local inventory. Then apply Pattern 21, because Brazil regulates the ranker.
+
+**What not to promise.** No open-source currency, no certified rating, no clean room (both
+industry-backed open clean rooms are **archived** — use `google/private-join-and-compute` Apache-2.0 for
+the actual primitive), and no claim that OP3 is IAB-certified (it states certification as a *goal
+contingent on sponsorship*).
+
+---
+
+## Pattern 21 — The inspectable ranker: an explainability and steerability gate for recommendations
+
+**Why:** two regions now regulate the **recommender itself**, not the content it serves, and they
+require opposite-looking things that are built in the same place. **Brazil:** LGPD **Article 20** gives a
+right to review automated decisions, the **ANPD became a fully independent regulator in February 2026**
+with enforcement priorities that explicitly name the use of personal data for advertising, and a
+Brazilian bill already recorded in `intel/market.md` would require recommendation systems to **surface
+local, community and independent outlets**. **Australia:** a **new transparency obligation for
+automated decision-making** is progressing alongside the second tranche of Privacy Act reforms. A
+recommender is an automated decision system. New 2026-11-25.
+
+So the ranker must be able to answer two questions on demand: **"why was this shown to this person?"**
+(explainability) and **"show that you can be made to favour this category"** (steerability).
+
+```
+[Pattern 20's audience graph + semantic layer]
+     |
+     v
+[recommenders-team/recommenders MIT]      <- candidate generation + ranking, in YOUR process
+     |                                       (an opaque hosted recommender cannot satisfy Art. 20)
+     +--> [RUCAIBox/RecBole MIT]
+     |       <- benchmark record: WHICH algorithm was chosen, on WHAT measured grounds
+     |          => the "we evaluated alternatives" evidence a regulator asks for
+     |
+     +--> [a per-decision record: {user segment, candidate set, features, score, rule applied}]
+     |       stored in [ClickHouse Apache-2.0] beside the events that produced it
+     |       => this is the Article 20 artefact. It is a LOG, not a model card.
+     |
+     +--> [Flagsmith BSD-3-Clause]  <- the steerability lever: a flagged, auditable
+     |       "local & independent content boost" that can be turned on, tuned and EVIDENCED
+     |       per market without a redeploy
+     |
+     +--> [growthbook/growthbook MIT core]  <- proves the boost's cost in engagement, so the
+             obligation is negotiated with a number instead of absorbed blind
+```
+
+**The non-obvious design point, and it is the whole pattern:** the deliverable is **a per-decision log,
+not an explainable model.** Article 20 and Australia's ADM transparency ask what happened to *this
+person's* decision — a question answered by a record, not by model interpretability. This is the same
+conclusion pass 6 reached for North American labour contracts ("a per-shot record of what the AI did,
+not a label on the output") arriving independently in a different plane from a different regulator.
+**Third plane in this KB where the sellable artefact turns out to be an evidence trail.**
+
+**Why Flagsmith and not Unleash:** Unleash is **AGPL-3.0** (verified by reading `LICENSE`, 34,523 B —
+the published comparisons calling it Apache-2.0 are wrong). Flagsmith is **BSD-3-Clause**, so the
+steerability lever can be embedded in the streaming service itself.
+
+**Honest limits of this pattern:**
+
+- **Brazil's PL 2338/2023 status is contested** across sources — one holds that LGPD still governs with
+  no AI statute in force, others claim enactment in December 2025 with phased 2026 implementation.
+  **Build the log either way** (Article 20 is not contested), but do not cite the statute to a client
+  until it is verified against an official source.
+- The local-content provision is **a bill, not law**. The flag costs little to build and converts the
+  obligation from a rewrite into a configuration change, which is the reason to build it now.
+- **No open-source implementation of this gate exists** — `identity resolution advertising` returns four
+  repos and the only on-topic one has 0 stars. This is a build, and that is the point: it is a
+  differentiator, not a procurement.
 
 ## Anti-patterns — learned the hard way in this KB
 

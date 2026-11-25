@@ -731,6 +731,102 @@ real and permissively licensed**, and the genuine colour infrastructure (`OpenCo
 `OpenColorIO-Config-ACES` 440★) is reachable only by project name. Pass 5's rule gets its sharpest
 case: **1,291 looks like abundance and is noise. Read the results, never the total.**
 
+## 40. The scarce thing is the right to observe — and this pass put a price on it
+
+This KB's structural law has been restated six times. Pass 7 measures it in the one plane where the
+barrier can be **costed from a primary document**, and the law comes out sharper than any previous
+formulation.
+
+CIMM's *"Funding the Fiesta: The Economics of National TV Currency in the US Market"* (January 2026,
+downloaded and read, not summarised) gives the floor:
+
+- **$1.5–2B/year** total addressable market for US national video currency.
+- **85–90%** of it goes to Nielsen → **$1.2–1.8B** of revenue.
+- **~$110M/year** operating cost for an *entry-level* currency-grade service; **~$250M/year** of
+  revenue needed for a competitive one.
+- **42,000+ homes** in Nielsen's panel, at an estimated **$150–250M/year**; every challenger panel
+  targets **5,000**.
+
+Now place that against the open-source health of the same plane, measured the same day:
+
+| Step | What it must observe | Open source |
+|---|---|---|
+| Recommend the next item | your own log | `recommenders-team/recommenders` **MIT, 22,012★**, pushed 2026-11-05 |
+| Model what media did | your spend + outcomes | `meridian` **Apache-2.0, 1,616★**; `Robyn` **MIT, 1,540★**; `pymc-marketing` **Apache-2.0, 1,314★** — all ≤15 days |
+| Count audience as currency | a national panel | **`reach frequency curve media` = 1 result and it is an ML tutorial** |
+
+**The refinement:** earlier passes said the *licence of the knowledge content* decides whether open
+source can comply (CPT, MedDRA, ISRC). This plane has no content licence to blame — there is no
+copyrighted codebook. What is scarce is **a continuously operated observation apparatus plus an
+accreditation regime** (MRC accreditation, JIC certification). So the law generalises:
+
+> **Open source appears wherever compliance can be *written*, and is absent wherever it must be
+> *operated*.** A permissive licence cannot produce a $110M/year panel, and no amount of community
+> goodwill substitutes for the right to observe.
+
+**Commercial consequence, and it is the one to lead with:** eMarketer's H1 2026 read is that
+**outcome-based measurement is overtaking the currency debate** in TV/CTV. Advertisers routed around
+the closed currency, and they routed into exactly the layer open source is strong in. Sell
+incrementality on the client's own data; never sell a currency substitute.
+
+## 41. A licence can be a PDF — the fifth distinct way a licence hides, and the first that defeats every scanner
+
+Running total of how a licence has hidden from automated detection in this KB:
+
+1. **A non-standard filename** — `license.txt` lowercase, `COPYING.md` (pass 5: Panako, musicbrainz-server).
+2. **A licence owned by the compile** — Chromaprint's own code MIT, the linked FFT library deciding the
+   binary's terms (pass 5).
+3. **An HTML file, or nothing but a packaging classifier** (pass 4).
+4. **A modified standard licence** — OpenUSD's "Tomorrow Open Source Technology License 1.0", Apache-2.0
+   with Section 6 rewritten (pass 6).
+5. **NEW — a binary document referenced by a text stub.** `comScore/ComScore-Android`'s `LICENSE` is
+   **145 bytes of prose** saying *"Please refer to the license agreement document on the following
+   URL"*, pointing at **`LicenseAgreement.pdf`, 58,057 bytes**.
+
+Category 5 is the worst for tooling, because categories 1–4 all leave *text* somewhere a scanner can
+read. Here there is text, and it is a sentence telling a human to open a PDF. GitHub reports
+`NOASSERTION` for all three Comscore repos.
+
+**And the content matters more than the format.** Read, the PDF is **not a software licence in the OSI
+sense** — it is a **data-collection agreement**, granting Comscore rights to viewing data collected
+through the SDK "for inclusion in syndicated and/or custom products and services … as well as use in
+its work with certain industry associations and market currency initiatives or joint industry
+committees." The code is published; what the integrator accepts is that **their audience becomes someone
+else's currency.** That is the exact inverse of the rights-reservation plane (pass 5), where the entire
+*purpose* of the artefacts was machine-readable terms. All three repos were **pushed on measurement
+day** — live, maintained code.
+
+**New rule, and it generalises past media:** **a `LICENSE` file under ~300 bytes is a pointer, not a
+licence.** Treat it as unresolved and follow it, including into binary documents. Add to the CI gate
+alongside pass 5's "resolve the licence of linked native libraries, not the repo".
+
+## 42. Three of this plane's most-cited "open source" platforms are not open source, or not the licence everyone says
+
+The audience plane produced a higher rate of licence error than any previous plane, and every case was
+caught by **reading the file** rather than trusting a badge, a vendor comparison or the GitHub API:
+
+- **`Unleash/unleash` is AGPL-3.0, not Apache-2.0.** Third-party comparisons — including one dated
+  2026 — describe its open-source core as Apache-2.0. `LICENSE` on both `main` and `master` is **34,523
+  bytes of GNU Affero GPL v3**, and the API agrees. For a client embedding flag evaluation in a
+  streaming service this is the difference between a permissive dependency and network copyleft.
+- **`rudderlabs/rudder-server` is under the Elastic License 2.0** (3,793 B) — **source-available, not
+  open source.** ELv2 forbids providing the software to third parties as a managed service, which is
+  the systems-integrator business model. It is described as open-source CDP infrastructure nearly
+  everywhere, and it was pushed on measurement day, so staleness gives no warning.
+- **`bytedance/monolith` is Apache-2.0 but ARCHIVED** (`LICENSE` 12,621 B; the API says `NOASSERTION`
+  only because a copyright preamble precedes the Apache text). 9,283 stars, last push **2025-10-13**.
+  Permissive and dead — the licence check passes and the project is still unusable.
+
+Alongside these: **`twitter/the-algorithm`** (74,125★) is **AGPL-3.0 and 14 months stale**, and
+**`google/lightweight_mmm`** (1,055★) is **archived**, replaced by Meridian — yet both remain top
+search results for their categories.
+
+**The pattern across all five:** in this plane, **the signals that normally substitute for reading —
+star count, recent push, a vendor's own comparison page, the SPDX field — each failed on at least one
+repo, and no single signal caught all five.** The only method that worked was: resolve existence with
+`git ls-remote`, resolve health with `pushed_at` **and** `archived`, and resolve the licence by reading
+the file and following what it points at.
+
 ## Low-confidence items — flagged, not promoted
 
 - Market sizing diverges ~2× across vendors (see `intel/market.md`); every figure is a vendor estimate.

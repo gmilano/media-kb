@@ -829,6 +829,39 @@ layer is **zero repos** (`audio ad insertion server stars:>=20` → 0, measured 
   adjacent to AI-generated segments**. Written down as a gap: a US client asking "must we disclose
   our AI host?" has a *reputational* answer today, not a statutory one — unlike EMEA (below).
 
+- **The picture desk is where AI policy has actually bitten, and the rule has an undefined term in
+  it.** AP's newsroom standards still **bar generative AI from creating, altering or enhancing news
+  photography**, and additionally require disclosure whenever generative AI plays a **"material"
+  role** in published content. The reporting on the July 2026 update notes that **"material" is not
+  defined**, leaving it to editorial judgment. Getty Images runs the same policy on the supply side:
+  it **does not accept generative-AI visuals in its Creative or Editorial libraries** at all.
+  **Opportunity:** the artefact nobody sells is a *materiality record* — per asset, what model
+  touched it, at which pipeline stage, and which editor accepted that it stayed below the disclosure
+  threshold. `exiftool` writes it, `c2patool` signs it, and the whole open field for the workflow
+  around it is one repo with one star (`agents/trending.md` pass 23).
+- **Capture-side provenance is already shipping in North American channels, with a lock-in twist.**
+  Leica (M11-P, and now the SL3-S) signs at capture with a dedicated secure chip; **Nikon's
+  Authenticity Service** adds Content Credentials on select bodies but **requires registration with
+  Nikon Imaging Cloud**; Sony enabled it by firmware on pro bodies including the A1 and A7S III.
+  The twist worth knowing before a proposal: for Sony, a valid C2PA certificate alone does not prove
+  a Sony camera took the picture — the image must carry **both** the certificate and Sony's
+  proprietary authenticity signature, and that combination **can only be validated in Sony Ci Media
+  Cloud**. **So the open standard has a vendor-validated tier sitting on top of it.** A client told
+  "we are C2PA compliant" may still be unable to verify their own archive without a vendor cloud.
+  One secondary source (Wikipedia, mid-2026) further claims Leica, Nikon and Canon **do not
+  participate in the official C2PA Conformance Program**; unverified against the C2PA site and
+  recorded as a claim, not a fact.
+- **The training-rights question is still open in the US, and the UK ruling does not settle it.**
+  Getty's US action against Stability AI continues and Getty has said it will carry findings of fact
+  from the UK judgment into it. North America is therefore the region where an image-rights posture
+  has to be defensible **without** a controlling precedent.
+- **Informed gap.** Searches for a **US federal rule on AI-generated or AI-altered images in news**
+  returned nothing statutory — no disclosure mandate, no labeling requirement for still images. The
+  binding constraints in this region are **editorial policy (AP, Getty), contract, and the 2026
+  guild agreements**, not image law. A US client asking "must we label an AI-retouched photo?" has a
+  **policy and contractual** answer, not a legal one — the opposite of APAC (below), and this is the
+  sharpest regional contrast in the plane.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1744,6 +1777,48 @@ law rather than etiquette.**
   pass's searches — the retrievable material was legal commentary, not measurement. Recorded rather
   than estimated.
 
+- **Europe's media sector is most active in exactly this plane, and that is measured, not asserted.**
+  The imec-SMIT (Vrije Universiteit Brussel) report of May 2026 finds that at the application layer
+  Europe's media sector is most active in **archive search and retrieval**, newsroom productivity,
+  and audience-facing products. **Archive search and retrieval is the still-image plane's primary
+  use case**, and the permissive stack for it exists and has almost no users: `Cantaloupe` (MIT,
+  308★) to serve, `OpenSeadragon` (BSD-3) to view, `open_clip` (MIT, alive) to embed, `exiftool` to
+  carry the IPTC. **Opportunity:** a European archive-search engagement can be built end to end
+  with **no copyleft and no vendor** — and the demand side is the one the research names first.
+- **AI Act Article 50 is the forcing function for image labeling, and the date is genuinely
+  contested.** BDO reports the transparency obligations applying from **2 August 2026**; the
+  European Audiovisual Observatory reports a Council-approved revision of **29 June 2026** moving
+  the updated Article 50 requirements to **2 December 2026**; Chambers (updated 21 May 2026) records
+  formal adoption and Official Journal publication as still pending, and the political agreement
+  postponing Annex III high-risk obligations to **December 2027**. **These do not reconcile.**
+  For a client deliverable, cite the Official Journal, not a secondary tracker — and design the
+  labeling pipeline so the *date* is configuration rather than architecture.
+- **The publishers are fighting the enforcement mechanism, not the obligation.** A coalition of
+  news, media and entertainment organisations attacked the draft code of practice as
+  **"fundamentally flawed"** and pressed the EU to overhaul or reject it, while over 100 companies —
+  Amazon, Google, Microsoft, OpenAI, alongside Airbus, Nokia and Orange — signed the voluntary code.
+  **A European publisher client is institutionally on the opposite side of this from the model
+  vendors**, which matters for how a provenance proposal is framed: as leverage, not as compliance
+  cost.
+- **UK: the training question was left open, and the appeal is live.** In *Getty Images v Stability
+  AI* (High Court, 4 November 2025) Getty **dropped its primary training-infringement claim
+  mid-trial**, partly for lack of evidence that training occurred in the UK, and the court dismissed
+  secondary infringement on the reasoning that a model which **does not store or reproduce** the
+  works is not an "infringing copy". Getty won a **narrow** trademark finding on watermarks in
+  outputs, which the judge called "both historic and extremely limited in scope", and has been
+  granted **permission to appeal** on the meaning of "infringing copy". **The UK therefore has no
+  meaningful ruling on the lawfulness of learning from copyrighted images** — a UK client's image
+  position rests on licensing and reservation, not on case law.
+- **Agencies have already set the editorial floor.** dpa's internal AI directive (reviewed as of
+  June 2026) **generally prohibits AI-generated photos and videos in a news context.** Combined with
+  AP and Getty, the practical standard across the Atlantic is converging on *no synthetic news
+  imagery, disclosure for everything else* — which is a workflow specification, and nobody has built
+  the workflow.
+- **Informed gap.** No EU instrument specific to **photographic** or print production surfaced in
+  this pass — Article 50 is a horizontal transparency duty over synthetic content, not an
+  image-sector rule. The sectoral pressure in EMEA is coming through the **AVMSD overhaul** that
+  Member States are pushing, and this pass found **no image-specific provision** in it.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -2611,6 +2686,40 @@ open-source story.**
   across, reach an AI-voiced podcast, but **no source in this pass says so**. Written down as a gap
   because silence here looks exactly like coverage: an APAC engagement should treat labeling as
   *probable and unconfirmed*, and check the national rule before committing to a disclosure design.
+
+- **China has the world's strongest image-provenance mandate, and it maps almost one-to-one onto the
+  open toolchain in this plane.** The **Measures for Labeling of AI-Generated Synthetic Content**,
+  issued 14 March 2025 by four agencies and **in force since 1 September 2025**, together with the
+  **mandatory national standard GB 45438-2025**, require two kinds of label on AI-generated content
+  **including images**: an **explicit** label (a visible notice) and an **implicit** label
+  **embedded in the content's metadata**. Obligations fall on generation-service providers,
+  content-propagation platforms, app distribution platforms **and users**; platforms must **check
+  for implicit labels**, users must proactively declare AI content, and **maliciously deleting,
+  tampering with, forging or concealing the identifiers is prohibited.**
+  **This is the single clearest commercial opportunity in the still-image plane in any region.**
+  An "implicit label" is metadata written into an image file — which is precisely `exiftool`
+  (Artistic/GPL, and the permissive option is available) plus `c2patool` (Apache-2.0/MIT) plus a
+  verification gate on ingest. The obligation is binding, the tooling is permissive and mature, and
+  the open provenance stack has **629 stars worldwide**.
+- **The adversarial tool is better resourced than the compliance tool.** The most-starred on-topic
+  result for `image metadata agent` is `wiltodelta/remove-ai-watermarks` (**6,530★, Apache-2.0**) —
+  a tool for stripping exactly the identifiers the Chinese Measures forbid removing. It out-stars
+  the entire open C2PA implementation by roughly ten to one. Any APAC compliance proposal should
+  assume label-stripping is easy and widely tooled, and argue from **capture-side signatures and
+  platform-side verification** rather than from metadata durability.
+- **The rest of the region is diverging, not converging.** A Latham & Watkins alert (September 2026)
+  sorts APAC into **binding risk-based frameworks** (South Korea, Vietnam) versus **targeted rules**
+  (China). **Vietnam's dedicated AI law, Law No. 134/2025/QH15, took effect 1 March 2026.** A
+  nine-country survey finds the common threads are high-impact systems, **labeling of generative AI**
+  and human oversight. **Consequence for delivery:** a regional client cannot ship one labeling
+  configuration. Build the label writer once and make the *regime* a per-market policy object.
+- **Players to expect in the room:** Tencent (Tencent Video), Alibaba, Baidu, Naver, Samsung,
+  ByteDance, Sony, and iQIYI — with Tencent Video and iQIYI named as investing in generative media.
+  Adoption is strongest in China, India and Southeast Asia and slower in the mature markets.
+- **Informed gap.** This pass found **no APAC rule specific to news photography or print
+  production**, and **no Japanese or Indian image-labeling instrument** — China's Measures and
+  Vietnam's law were the only binding image-reaching rules located. Japan and India are recorded
+  here as **unverified, not as permissive**: absence of a found rule is absence of evidence.
 
 ### LATAM
 
@@ -3494,6 +3603,43 @@ and 45 originates in North America, EMEA or APAC. The region is a buyer and a ca
 which is the commercial argument for Globant building the regional capability rather than integrating
 something that already exists locally.
 
+- **Mexico is the one sector-specific move, and for images it is a consent duty, not a label duty.**
+  Amendments to Mexico's copyright and labour laws published in **May 2026** are described as the
+  **first sector-specific AI regulation in Mexico**. As pass 22 recorded for audio, the shape of the
+  Mexican obligation is **performer consent**, not horizontal transparency — so for the still-image
+  plane the artefact is a **likeness-and-consent record per person depicted**, not a label per file.
+  A Mexican client distributing into the EU needs **both**: consent records for Mexico and Article 50
+  labels for Europe. These are different data models, and conflating them is the common error.
+- **The regional strategy is collective bargaining over image rights, and it is explicit.** Aspen
+  Digital's **"Mind the Gap: AI and the Future of News in Latin America"** (January 2026) describes
+  a regional push toward **shared AI assets and attribution and licensing frameworks**, finding that
+  such coalitions strengthen Latin America's long-term capacity and bargaining position.
+  **Opportunity:** a *shared* rights-and-attribution registry for photo archives across several
+  outlets is a better-fitting product here than a per-publisher tool — and it is the one engagement
+  shape where the region's fragmentation is an asset rather than an obstacle.
+- **The permissive path matters more here than anywhere else, and this plane makes it acute.**
+  Budgets in the region favour self-hosting, and **self-hosting is exactly what triggers AGPL.**
+  Five of the seven self-hostable photo platforms in `verticals/solutions.md` pass 23 are AGPL-3.0,
+  including both of the attractive ones (Immich 120,170★, PhotoPrism 40,481★). The permissive route
+  is narrow and should be named in the proposal: **`LibrePhotos` (MIT) for a library**, or
+  **`Cantaloupe` (MIT) + `OpenSeadragon` (BSD-3) + `open_clip` (MIT)** for an archive — plus
+  `Little-CMS` (MIT) if print is in scope. It is the difference between an archive the client owns
+  and an archive whose source they must offer to their own users.
+- **Who is already organising:** IFPIM backing regional initiatives; **FLIP** (Colombia) and
+  **ADEPA** (Argentina) studying adoption and the regulatory debate; **SiPreBA** with the Heinrich
+  Böll Foundation publishing a May 2026 report on regulating AI in media; and the **Inter American
+  Press Association (SIP/IAPA)** convening on governance and business models, noting in July 2026
+  that adoption is no longer hypothetical while trust and business-model control remain unresolved.
+  Beyond Mexico, **Brazil, Argentina, Chile, Colombia and Costa Rica** are developing AI governance
+  frameworks and **Uruguay signed the Council of Europe AI treaty in 2025**; no country has a fully
+  harmonised regime.
+- **Informed gap, stated plainly.** This pass found **no LATAM instrument addressing AI-generated or
+  AI-altered photography in news**, and **no regional figure for the stock-image, photo-archive or
+  print-production market.** Searches returned commentary, law-firm summaries and newsroom-policy
+  studies, not image-sector market data. **No LATAM revenue or volume figure is asserted for this
+  plane.** The regional anchors available here are regulatory (Mexico) and organisational (the
+  coalitions above), and those are what a proposal should be built on.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -3963,3 +4109,44 @@ to it.**
   were **not retrievable** in this pass, and no 2026 regional ad-revenue total could be verified. The
   2023 listener counts are the strongest anchors available here; **no 2026 LATAM revenue figure is
   asserted.**
+
+## Market size — pass 23 addendum (2026-11-26): the still-image & print segment, and a refusal
+
+**No market figure is asserted for this plane, and the reason is worth recording rather than
+quietly omitting.**
+
+What was searched: open-source image-processing and DAM comparisons, 2026 media/AI industry
+outlooks (Akamai, Deloitte, PwC, EY, Reuters Institute, Nieman Lab, TV Tech, TVBEurope), the four
+regional adoption-and-regulation sweeps above, and the photo-specific threads (Getty v Stability,
+agency AI policies, C2PA camera adoption, alt-text tooling, prepress and font tooling).
+
+What came back: **no sizing for the still-image segment at all.** The 2026 outlooks size
+"AI in media and entertainment" as a whole — and even there the spread is wide enough to be
+unusable (North America's share is put at **33.6%** by one firm for 2024 and **40.60%** by another
+for 2025 on a generative-AI scope), while one vendor-style report claims an **82% adoption rate**
+among media organisations from a March 2026 IAB survey **that could not be verified**. None of it
+separates stock imagery, photo archives, picture-desk operations, prepress or print production.
+
+**Why the refusal rather than a proxy.** A general "AI in M&E" number applied to the still-image
+plane would be wrong in both directions at once: it includes video generation, dubbing and
+recommendation (which dwarf still imagery), and excludes commercial print, which is a large,
+declining, non-AI market this plane sits inside. Passes 16 and 17 made the same refusal for the
+avails and pre-production segments; this is the third, and the pattern is now clear enough to state
+as guidance: **this KB has reliable figures for consumer-facing media segments and no reliable
+figures for production-tooling segments.** Do not manufacture one from an adjacent scope.
+
+**What to use instead in a proposal.** The defensible quantities in this plane are **structural, not
+monetary**, and they are measured in this pass:
+
+| Quantity | Measured value | Why it carries weight |
+|---|---|---|
+| Permissive photo-library platforms | **1 of 7** (`LibrePhotos`, MIT) | Decides whether a picture archive can be a product at all. |
+| Stars behind the entire open C2PA implementation | **629** (`c2pa-rs` 455 + `c2patool` 174) | The provenance layer every 2026 trust panel assumes exists. |
+| Stars behind the leading label-*stripping* tool | **6,530** | Roughly 10× the whole provenance stack. |
+| Open editorial alt-text agents on GitHub | **1 repo, 1 star** | The size of the competition for the workflow product. |
+| Stars behind ICC colour management (`Little-CMS`, MIT) | **764** | Load-bearing for Scribus, GIMP and Krita; the print path's quiet dependency. |
+| Stars behind the RIP that turns a page into ink (`ghostpdl`, AGPL-3.0) | **310** | A single point of failure with a licensing question attached. |
+| Days since the most-starred open upscaler was touched | **~840** (`Real-ESRGAN`, last push 2024-08-06) | "37,679 stars" is not maintenance. |
+
+These are checkable, they are current as of 2026-11-26, and each one changes a decision. A market
+size that is wrong by a factor of three changes none.

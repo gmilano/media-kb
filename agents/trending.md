@@ -9,6 +9,84 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 23: still-image & photo-desk agents (**the field is one repo with one star, and the best-starred "image metadata agent" exists to strip metadata**)
+
+Agents and models only. The processing engines, codecs, colour, type and print infrastructure for
+this plane are in `repos/trending.md` pass 23 — the two files stay distinct, as fixed in pass 22.
+
+### The whole editorial-agent layer for the photo desk, in one table
+
+Searched 2026-11-26. This is not a selection; it is **everything** that turned up on-topic and
+licensed.
+
+| Agent | Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| AI Alt Text (WordPress) | [soderlind/ai-alt-text](https://github.com/soderlind/ai-alt-text) | GPL-2.0-or-later | **1** | 2026-03-29 | Alt text for the WP media library across OpenAI, Claude, Gemini, **Ollama** (local) and Grok. The Ollama path matters: it is the only way to draft captions on unpublished embargoed images without sending them to a third party. **Licence is declared in `composer.json` only — the README's LICENSE link 404s.** |
+
+One row. One star. That is the measured state of open-source editorial image agents in
+November 2026, and it is written as one row rather than padded.
+
+**Where the real ones live, and why GitHub looked empty.** The alt-text tooling newsrooms actually
+install is **not hosted on GitHub**: Drupal's `ai_image_alt_text` (customisable prompt template,
+multilingual output, bulk back-processing of existing images, explicit human-in-the-loop
+verification) and `aidmi` (a CKEditor plugin for alt and caption text) are on drupal.org, and the
+WordPress equivalents on wordpress.org. **Measuring this plane on GitHub alone understates it and
+is the kind of silence the KB is supposed to avoid.** Recorded as an informed gap: the CMS plugin
+registries are the right place to measure a CMS-side agent layer, and this pass did not enumerate
+them beyond the modules named above.
+
+### Models an image agent would actually call — and the state they are in
+
+| Model | Repo | License | Stars | Last push | Fit for a photo desk |
+|---|---|---|---|---|---|
+| open_clip | [mlfoundations/open_clip](https://github.com/mlfoundations/open_clip) | MIT | 14,292 | 2026-11-21 | **The one live, permissive base.** Embeddings for natural-language search over an image archive. API says `NOASSERTION`; LICENSE read — MIT. |
+| rembg | [danielgatis/rembg](https://github.com/danielgatis/rembg) | MIT | 25,686 | 2026-11-24 | Background removal — the single most-requested production task on a retail or OOH image set. MIT and alive. |
+| Real-ESRGAN | [xinntao/Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) | BSD-3-Clause | 37,679 | **2024-08-06** | Restoration/upscaling of archive scans. **Dormant 2y 3m.** Pin the commit; do not track a branch. |
+| LLaVA | [haotian-liu/LLaVA](https://github.com/haotian-liu/LLaVA) | Apache-2.0 | 25,093 | **2024-08-12** | Describe-the-image for alt-text drafts. **Dormant 2y 3m.** |
+| BLIP | [salesforce/BLIP](https://github.com/salesforce/BLIP) | BSD-3-Clause | 5,699 | 2026-03-03 | Captioning. **ARCHIVED — read-only.** |
+| imagededup | [idealo/imagededup](https://github.com/idealo/imagededup) | Apache-2.0 | 5,688 | 2025-08-15 | Near-duplicate detection across an archive ingest. ~15 months idle; algorithms stable. |
+| imagehash | [JohannesBuchner/imagehash](https://github.com/JohannesBuchner/imagehash) | BSD-2-Clause | n/a | — | Perceptual hashes for dedupe and re-use detection. Exists; invisible to the search index. |
+
+**The asymmetry, stated precisely.** Three of the four most-starred models an image agent would
+call have not been touched since 2024, and the captioning reference is archived — while the
+*engines* that move the pixels (`sharp`, `ImageMagick`, `libvips`, `imgproxy`) were all pushed
+within two days of this pass. **Open source moves pixels continuously and describes them on a
+2024 snapshot.** This is the same shape every plane of this KB has found, now with dates attached.
+
+### Measured emptiness and contamination
+
+| Query | Total repos | Top result | Stars | Verdict |
+|---|---|---|---|---|
+| `caption agent newsroom` | **0** | — | — | Literal zero. |
+| `photo desk agent` | 11 | `danderfer/Comp_Sci_Sem_2` | 228 | Computer-science coursework. Contamination. |
+| `image licensing agent` | 31 | `danderfer/Comp_Sci_Sem_2` | 228 | **The same coursework repo, a second query.** |
+| `picture editor agent` | 14 | `yuyuanweb/ai-picture-editor` | 320 | On-topic, **unlicensed**; a consumer editor, not a desk tool. |
+| `photo archive agent` | 16 | `CNTRUN/Termux-command` | 120 | Contamination by name. **Indexed but not git-servable** — not verifiable as a live repo. |
+| `alt text agent` | 47 | `zszszszsz/.config` | 373 | A dotfiles repo. Contamination. |
+| `prepress automation` | 26 | `sams-joseph/prepress-automation` | **1** | The only on-topic top hit in the set. One star. |
+| `image metadata agent` | 93 | `wiltodelta/remove-ai-watermarks` | 6,530 | **Apache-2.0, 6,530★, actively on-topic — and it removes watermarks and provenance.** |
+
+**The last row is the finding, not a curiosity.** In the one image-metadata query where a
+well-starred, properly licensed, genuinely on-topic project exists, its purpose is to *delete* the
+provenance that `c2pa-rs` (455★) exists to *add*. The adversarial tool out-stars the entire open
+provenance stack by an order of magnitude. Any client proposal built on Content Credentials should
+expect that asymmetry to be raised in the room, and should answer it with the capture-side
+hardware signatures (Leica, Nikon, Sony) rather than with the metadata alone.
+
+**Contamination warning for later passes.** `danderfer/Comp_Sci_Sem_2` (228★) tops both
+`photo desk agent` and `image licensing agent`. It is the second repo in this KB to contaminate two
+distinct planes, after `jettbrains/-L-` (passes 4 and 22). **Recorded so a later pass does not
+report it as a discovery.**
+
+### Agent-relevant accuracy evidence found this pass
+
+A 2026 engineering primer (Disability World) reports testing on **~600 images** and concludes AI
+alt-text drafts are usable as a **first draft for the photo column**, but are **a risk for
+decorative images** unless the workflow explicitly accounts for them. This is the most concrete
+accuracy datapoint this KB has on image captioning, and it points at the same conclusion as the
+star counts: **the model is not the product; the review loop is.** Secondary source, single study,
+recorded as such.
+
 ## 2026-11-26 — pass 22: the podcast & spoken-audio distribution plane (**the money layer is a literal zero, and the community built a payment rail for the revenue it doesn't have**)
 
 **Probe before search, as in passes 11–21.** 61 vocabulary terms across six candidate planes.

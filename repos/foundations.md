@@ -2687,3 +2687,131 @@ agents in `agents/top.md` pass 22 (`autoclip` MIT, `VideoAgent` MIT).
 - **Two major platforms are not on GitHub and were not measured:** Castopod (AGPL-3.0,
   `code.castopod.org`) and Funkwhale (AGPL-3.0, `dev.funkwhale.audio`). Both hosts are blocked by
   this session's egress proxy; figures for them are **not** restated as measured here.
+
+## Pass 23 (2026-11-26) — the still-image, photo-desk & print-production substrate
+
+Licences read from the actual LICENSE file over the raw channel; stars and last-push from
+`gh api -X GET search/repositories` (the REST `/repos/*` endpoint is blocked in this session).
+`n/a` = exists and serves git, but invisible to the search index — never guessed.
+
+### The central structural finding of this pass
+
+**Licensing in this plane tracks the *lineage* of the layer, not its position in the stack.**
+
+Every previous pass of this KB confirmed a law of the form "the substrate is permissive, the
+judgment layer is empty". This plane splits that law in a way no earlier pass could see, because it
+is the first plane holding two substrates with different ancestries:
+
+- **The pixel substrate descends from web infrastructure** → Apache-2.0, MIT, BSD, almost
+  without exception, and all of it pushed within the last week.
+- **The page-and-print substrate descends from desktop applications** → GPL-2.0, GPL-3.0 and
+  **AGPL-3.0**, almost without exception.
+
+Both are "substrate". Both are mature. Both are actively maintained. **One is free to build a
+product on and the other is not** — and the predictor is not how fundamental the layer is, it is
+whether the code grew up in a browser/CDN world or in a desktop-publishing world. Written down
+because it is directly actionable: it tells you which half of an imaging engagement can be
+productised and which half can only be deployed.
+
+### Layer 1 — image codecs (permissive; the floor of the plane)
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [libjxl/libjxl](https://github.com/libjxl/libjxl) | BSD-3-Clause | 3,871 | 2026-11-26 | JPEG XL reference codec. The successor format; permissive and pushed daily. |
+| [webmproject/libwebp](https://github.com/webmproject/libwebp) | BSD-3-Clause | 2,435 | 2026-11-25 | WebP encode/decode. The format with real browser ubiquity today. |
+| [strukturag/libheif](https://github.com/strukturag/libheif) | LGPL-3.0 | 2,427 | 2026-11-24 | HEIF/HEIC — the format every iPhone shoots. API reports `NOASSERTION`; `COPYING` (44,366 B) read and it is LGPL-3.0. **Link, do not statically fold in.** |
+| [AOMediaCodec/libavif](https://github.com/AOMediaCodec/libavif) | BSD-2-Clause | 2,237 | 2026-11-26 | AVIF container/codec. API reports `NOASSERTION`; LICENSE (20,415 B) read and it is BSD-2-Clause. |
+| [mozilla/mozjpeg](https://github.com/mozilla/mozjpeg) | IJG + BSD-3-Clause (+ zlib for SIMD) | 5,748 | 2025-06-23 | Still the best-in-class baseline-JPEG encoder. **Dormant ~17 months.** A *three-licence composite in one repo* — see the warning below. |
+
+### Layer 2 — processing engines and servers (permissive; four competitors, one engine)
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [lovell/sharp](https://github.com/lovell/sharp) | Apache-2.0 | 32,872 | 2026-11-26 | The Node binding to libvips. The most-deployed resize layer in JS. |
+| [ImageMagick/ImageMagick](https://github.com/ImageMagick/ImageMagick) | ImageMagick License (own, permissive) | 17,946 | 2026-11-26 | Universal conversion/composition. Its own licence explicitly permits commercial use, linking across licences, and merging into differently-licensed works. |
+| [libvips/libvips](https://github.com/libvips/libvips) | LGPL-2.1 | 11,841 | 2026-11-25 | The streaming, low-memory engine under sharp, imgproxy, imagor and imaginary. |
+| [imgproxy/imgproxy](https://github.com/imgproxy/imgproxy) | Apache-2.0 | 11,220 | 2026-11-24 | Signed-URL image server in Go. OSS core Apache-2.0; a paid Pro tier exists. |
+| [thumbor/thumbor](https://github.com/thumbor/thumbor) | MIT | 10,533 | 2026-11-21 | Python smart-crop server; the widest transformation set and a plugin model. |
+| [image-rs/image](https://github.com/image-rs/image) | MIT OR Apache-2.0 | 5,920 | 2026-11-11 | Pure-Rust imaging; dual-licensed, no native linking question at all. |
+| [cshum/imagor](https://github.com/cshum/imagor) | Apache-2.0 | 4,065 | 2026-11-21 | Thumbor-compatible URLs on a Go/libvips core — the migration target off thumbor. |
+| [weserv/images](https://github.com/weserv/images) | BSD-3-Clause | 2,865 | 2026-11-01 | Production nginx+libvips image CDN, open-sourced. |
+
+### Layer 3 — image metadata (where the editorial facts live)
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [exiftool/exiftool](https://github.com/exiftool/exiftool) | **Artistic-1.0-Perl OR GPL-1.0-or-later** | 5,321 | 2026-11-16 | The universal read/write tool for EXIF, IPTC and XMP — the de facto standard for photo metadata. **The GitHub API reports `GPL-3.0` and that is wrong**: the repo ships a GPL-3.0 text, but the README states the terms are "the same terms as Perl itself (either the Perl Artistic License or GPL)". The permissive option is available to you. |
+| [Exiv2/exiv2](https://github.com/Exiv2/exiv2) | GPL-2.0 | 1,174 | 2026-11-23 | C++ metadata library behind many desktop photo tools. API reports `NOASSERTION`; `COPYING` (18,092 B) read and it is GPL-2.0, **not** LGPL. |
+| [ianare/exif-py](https://github.com/ianare/exif-py) | BSD-3-Clause | 978 | 2026-06-10 | Pure-Python EXIF reader; the permissive choice when you only need to read. |
+
+IPTC Photo Metadata is the schema a picture desk actually fills in, and `exiftool` is how it gets
+written. This KB already covers IPTC *NewsML* for story interchange (pass 11); the **photo**
+side of IPTC enters the KB here.
+
+### Layer 4 — colour, type and shaping (the permissive half of print)
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [google/fonts](https://github.com/google/fonts) | **per-family OFL-1.1 / Apache-2.0 / UFL** — no root licence | 20,807 | 2026-11-26 | The font library itself. **There is no repository-level LICENSE file**: licences live per family under `ofl/`, `apache/` and `ufl/` (e.g. `ofl/roboto/OFL.txt`). A scanner that looks only at the root concludes "unlicensed" and is wrong. |
+| [harfbuzz/harfbuzz](https://github.com/harfbuzz/harfbuzz) | "Old MIT" | 6,259 | 2026-11-26 | The text-shaping engine behind essentially every modern renderer. API reports `NOASSERTION`; `COPYING` read — MIT-variant, **with per-subdirectory COPYING files and Unicode data under its own notice.** |
+| [fonttools/fonttools](https://github.com/fonttools/fonttools) | MIT | 5,338 | 2026-11-25 | Python font manipulation: subsetting (`pyftsubset`), TTX round-tripping, and `varLib` for building variable fonts from a designspace. Latest release reported as 4.64.0 (2026-08-31). |
+| [mm2/Little-CMS](https://github.com/mm2/Little-CMS) | MIT | 764 | 2026-11-26 | **The single most strategically important repo in the print half of this plane.** ICC colour management — the thing that makes a CMYK proof match the press. MIT, pushed the day of this pass, and **764 stars**. Scribus, GIMP and Krita all depend on it. |
+| [googlefonts/fontbakery](https://github.com/googlefonts/fontbakery) | Apache-2.0 | n/a | — | Font QA: validates a font family against Google Fonts / OpenType spec checks. Exists; invisible to the search index. |
+
+`Little-CMS` at 764 stars, under MIT, maintained, and load-bearing for every open-source
+publishing application is the clearest instance in this KB of **critical infrastructure with no
+constituency.** If a print engagement depends on colour fidelity, this is the dependency to read.
+
+### Layer 5 — page, PDF and print (the copyleft half, with four permissive exceptions)
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [mozilla/pdf.js](https://github.com/mozilla/pdf.js) | Apache-2.0 | 54,196 | 2026-11-26 | Browser PDF rendering. **Permissive exception #1** — and by far the most-starred repo in this layer. |
+| [py-pdf/pypdf](https://github.com/py-pdf/pypdf) | BSD-3-Clause | 10,319 | 2026-11-26 | Python PDF read/write/split/merge. API reports `NOASSERTION`; LICENSE (1,605 B) read — BSD-3-Clause. **Permissive exception #2.** |
+| [pdfcpu/pdfcpu](https://github.com/pdfcpu/pdfcpu) | Apache-2.0 | 8,922 | 2026-11-02 | Go PDF processor with imposition, validation and page manipulation. **Permissive exception #3.** |
+| [qpdf/qpdf](https://github.com/qpdf/qpdf) | Apache-2.0 | 5,618 | 2026-09-26 | Structural PDF transformation and linearisation — the tool for repairing a broken print PDF. **Permissive exception #4.** |
+| [pdfarranger/pdfarranger](https://github.com/pdfarranger/pdfarranger) | GPL-3.0 | 6,085 | 2026-11-13 | Page-level reordering, rotation and imposition GUI. |
+| [ArtifexSoftware/mupdf](https://github.com/ArtifexSoftware/mupdf) | AGPL-3.0 | 3,073 | 2026-11-25 | Lightweight, fast PDF/XPS renderer. **AGPL.** Commercial licence sold by Artifex. |
+| [OpenPrinting/cups](https://github.com/OpenPrinting/cups) | Apache-2.0 | 1,803 | 2026-11-25 | The printing system itself — queues, drivers, IPP. Relicensed to Apache-2.0 years ago; the one piece of the physical-output path that is permissive. |
+| [scribusproject/scribus](https://github.com/scribusproject/scribus) | GPL-2.0-or-later | 659 | 2026-11-26 | **The only open-source professional page-layout application** — the InDesign substitute. PDF/X-1a, PDF/X-3 and PDF/X-4 export with embedded ICC press profiles. Reported stable 1.6.6 and preview 1.7.3, both 2026-04-13. Pushed the day of this pass, with 659 stars. |
+| [veraPDF/veraPDF-library](https://github.com/veraPDF/veraPDF-library) | **GPL-3.0+ OR MPL-2.0+** (dual) | 352 | 2026-11-22 | The industry-reference PDF/A validator, built for archives and regulated print. **Its default branch is `integration`, and its licences are `LICENSE.GPL` and `LICENSE.MPL`** — a conventional probe finds neither. The MPL-2.0 option makes this *usable alongside proprietary code*, which the GPL option alone would not. |
+| [ArtifexSoftware/ghostpdl](https://github.com/ArtifexSoftware/ghostpdl) | AGPL-3.0 (composite, per-directory) | 310 | 2026-11-24 | Ghostscript — PostScript/PDF interpretation and rasterisation; the RIP. Required by Scribus for EPS/PS import and print preview. **See the composite-licence warning below.** |
+
+**The print path has a 310-star, AGPL-licensed single point of failure.** Ghostscript is how a
+PDF becomes ink, Scribus depends on it, and it is AGPL with a commercial licence sold alongside.
+Any print-production engagement must answer the Ghostscript licensing question explicitly and
+early; it is not a detail.
+
+### Layer 6 — RAW decoding and the darkroom (uniformly copyleft)
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [darktable-org/darktable](https://github.com/darktable-org/darktable) | GPL-3.0 | 13,508 | 2026-11-26 | The leading open RAW developer. **5.6 (June 2026) added an opt-in AI subsystem** — `neural restore` for RAW denoise, denoise and upscale, plus an AI object-mask tool and HEIF export; disabled by default and gated behind a build flag. See `repos/trending.md` pass 23. |
+| [LibRaw/LibRaw](https://github.com/LibRaw/LibRaw) | **LGPL-2.1 OR CDDL-1.0** (dual) | 1,640 | 2026-11-26 | The library that decodes every camera's RAW format — the dependency under darktable, RawTherapee and ART. **Licence files are `COPYRIGHT`, `LICENSE.LGPL` and `LICENSE.CDDL`**; a probe for `LICENSE`/`COPYING` finds nothing and a careless reading calls it unlicensed. |
+| [Beep6581/RawTherapee](https://github.com/Beep6581/RawTherapee) | GPL-3.0 | n/a | — | The other major open RAW developer. **Default branch is `dev`.** Invisible to the search index. |
+| [artpixls/ART](https://github.com/artpixls/ART) | GPL-3.0 | n/a | — | A RawTherapee derivative focused on a simpler pipeline and local editing. Licence in `LICENSE.txt` (33,345 B). |
+
+### Composite-licence warnings — the pattern cycle 8 found with Chromaprint, now confirmed twice more
+
+Cycle 8 recorded that **a licence can belong to the compilation rather than the repository**
+(`acoustid/chromaprint`: own code MIT, but LGPL-2.1 as a whole because it links FFmpeg). This pass
+found two more instances, which makes it a structural property of native media code rather than an
+anecdote:
+
+- **`ArtifexSoftware/ghostpdl` — licence varies by directory.** Its LICENSE states that `base`,
+  `psi`, `lib`, `toolbin`, `examples`, `doc`, `man`, `iccprofiles`, `pcl`, `xps` and `gpdl` are GPL
+  Ghostscript; that `Resource` is too **except** the Adobe-copyrighted `CMap` files, which are under
+  a separate AGPL-compatible licence; and that the fonts in `Resource/Font` are AGPL **with a
+  written exemption**. One repository, four licensing regimes, none visible from a root-level scan.
+- **`GNOME/gimp` — GPL with an explicit plug-in exemption.** Its LICENSE carries a deliberate
+  carve-out stating that *"arbitrarily-licensed programs such as GIMP plug-ins do not automatically
+  assume the GPL themselves simply because of their invocation of (or by) procedures"*. This is
+  materially useful: **a proprietary GIMP plug-in is contemplated and permitted by the project.**
+  An SPDX field reading `GPL-3.0` tells you the opposite of what the licence actually says.
+- **`mozilla/mozjpeg` — three licences in one tree.** The IJG licence covers the libjpeg API, the
+  3-clause BSD covers the TurboJPEG API and build system, and the SIMD code is zlib-licensed
+  (subsumed by IJG in context).
+
+**Reusable rule, now with three independent confirmations: for any native media dependency, resolve
+the licence of the *linked libraries and the specific directories you ship*, not of the repository.
+No SPDX field, badge or source-tree SBOM scan can see this.**

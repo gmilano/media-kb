@@ -10,6 +10,89 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 23: the still-image, photo-desk & print-production plane (**the describe layer is permissive and dying at the top: the three most-starred models are dormant and the canonical captioning model is archived**)
+
+**Probe before search, as in passes 11–22.** 65 vocabulary terms against the eight live files.
+`libvips`, `ImageMagick`, `imgproxy`, `thumbor`, `darktable`, `RawTherapee`, `fontTools`,
+`Ghostscript`, `CMYK`, `ICC profile`, `color management`, `stock photo`, `photo editorial`,
+`photojournalism`, `prepress`, `Scribus`, `PhotoPrism`, `image captioning`, `upscal*` — **0 hits
+out of 19.** The decisive measurement: `print` matched 124 lines, and **121 were
+`fingerprint`/`Chromaprint`** — bare `print` occurred three times in the whole KB. Candidate planes
+`playout`/`EPG`, comics, data journalism and GLAM/IIIF came back already covered by passes 4, 8, 18
+and 20; this one was empty.
+
+### New this pass — AI arriving inside the classic darkroom
+
+| Project | Repo | License | Stars | Last push | What moved |
+|---|---|---|---|---|---|
+| darktable | [darktable-org/darktable](https://github.com/darktable-org/darktable) | GPL-3.0 | 13,508 | 2026-11-26 | **5.6 (June 2026) shipped an opt-in AI subsystem**: `neural restore` (RAW denoise, denoise, upscale), an AI object-mask tool, HEIF export. Models are **NIND UNet** (denoise) and **RawNIND UtNet2** (RAW denoise); RAW denoise writes DNG, denoise/upscale write TIFF. **Disabled by default, behind a build flag.** 5.6.1 (August 2026) made RAW denoise *refuse* legacy Fujifilm Super CCD sensors the models were never trained on. |
+| Upscayl | [upscayl/upscayl](https://github.com/upscayl/upscayl) | AGPL-3.0 | 53,276 | 2026-11-26 | The most-starred AI image tool in this plane, pushed the day of the pass. **AGPL** — fine as a desktop app for a client's own staff, disclosable the moment it becomes a service. |
+| c2pa-rs | [contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs) | MIT OR Apache-2.0 | 455 | 2026-11-26 | Reference C2PA implementation, pushed the day of the pass. Dual-licensed (`LICENSE-MIT` read; API says `NOASSERTION`). |
+| c2patool | [contentauth/c2patool](https://github.com/contentauth/c2patool) | Apache-2.0 OR MIT | 174 | 2026-11-26 | CLI to sign/verify Content Credentials — the drop-in for an ingest pipeline. |
+
+**darktable's model-provenance policy is the governance detail worth copying.** The team ships the
+models separately, with documented licences, and states that models of unclear provenance are
+excluded. That is a defensible answer to "what is in your AI feature", and it came from a
+GPL volunteer project rather than a vendor.
+
+### Dormant or archived at the top of the describe layer — measured 2026-11-26
+
+| Project | Repo | License | Stars | Last push | State |
+|---|---|---|---|---|---|
+| Real-ESRGAN | [xinntao/Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) | BSD-3-Clause | 37,679 | **2024-08-06** | **Dormant 2y 3m.** Still the upscaling weights the ecosystem ships. |
+| LLaVA | [haotian-liu/LLaVA](https://github.com/haotian-liu/LLaVA) | Apache-2.0 | 25,093 | **2024-08-12** | **Dormant 2y 3m.** Still the VLM most captioning guides target. |
+| BLIP | [salesforce/BLIP](https://github.com/salesforce/BLIP) | BSD-3-Clause | 5,699 | 2026-03-03 | **ARCHIVED by its owner** — read-only. The canonical open captioning model for alt text. |
+| CLIP | [openai/CLIP](https://github.com/openai/CLIP) | MIT | 34,666 | 2026-03-25 | Reference-only, 8 months idle. Use `open_clip` instead. |
+| imagededup | [idealo/imagededup](https://github.com/idealo/imagededup) | Apache-2.0 | 5,688 | 2025-08-15 | ~15 months idle; stable algorithms, low risk. |
+| imaginary | [h2non/imaginary](https://github.com/h2non/imaginary) | MIT | 6,091 | 2025-11-08 | ~12 months idle. |
+| mozjpeg | [mozilla/mozjpeg](https://github.com/mozilla/mozjpeg) | IJG + BSD-3-Clause | 5,748 | 2025-06-23 | ~17 months idle, still best-in-class baseline JPEG. |
+
+**The one live base in the describe layer:** `mlfoundations/open_clip` (MIT, 14,292★, pushed
+2026-11-21). Licence confirmed by reading the file — the API reports `NOASSERTION`.
+
+### Moving this week (pushed within 5 days of the pass)
+
+| Repo | License | Stars | Last push |
+|---|---|---|---|
+| [huggingface/transformers](https://github.com/huggingface/transformers) | Apache-2.0 | 169,360 | 2026-11-26 |
+| [immich-app/immich](https://github.com/immich-app/immich) | AGPL-3.0 | 120,170 | 2026-11-26 |
+| [mozilla/pdf.js](https://github.com/mozilla/pdf.js) | Apache-2.0 | 54,196 | 2026-11-26 |
+| [facebookresearch/faiss](https://github.com/facebookresearch/faiss) | MIT | 41,936 | 2026-11-25 |
+| [photoprism/photoprism](https://github.com/photoprism/photoprism) | AGPL-3.0 | 40,481 | 2026-11-26 |
+| [qdrant/qdrant](https://github.com/qdrant/qdrant) | Apache-2.0 | 35,725 | 2026-11-26 |
+| [lovell/sharp](https://github.com/lovell/sharp) | Apache-2.0 | 32,872 | 2026-11-26 |
+| [danielgatis/rembg](https://github.com/danielgatis/rembg) | MIT | 25,686 | 2026-11-24 |
+| [google/fonts](https://github.com/google/fonts) | per-family OFL/Apache/UFL | 20,807 | 2026-11-26 |
+| [ImageMagick/ImageMagick](https://github.com/ImageMagick/ImageMagick) | ImageMagick License | 17,946 | 2026-11-26 |
+| [mm2/Little-CMS](https://github.com/mm2/Little-CMS) | MIT | 764 | 2026-11-26 |
+| [scribusproject/scribus](https://github.com/scribusproject/scribus) | GPL-2.0-or-later | 659 | 2026-11-26 |
+
+### The agent layer over photo *operations* — measured, and it is contaminated noise
+
+| Query | Total repos | Top result | Stars | Verdict |
+|---|---|---|---|---|
+| `caption agent newsroom` | **0** | — | — | Literal zero. |
+| `photo desk agent` | 11 | `danderfer/Comp_Sci_Sem_2` | 228 | Coursework repo. Contamination. |
+| `image licensing agent` | 31 | `danderfer/Comp_Sci_Sem_2` | 228 | **Same coursework repo, second query.** |
+| `alt text agent` | 47 | `zszszszsz/.config` | 373 | Dotfiles repo. Contamination. |
+| `photo archive agent` | 16 | `CNTRUN/Termux-command` | 120 | Contamination by name. **Indexed but not git-servable** — not verifiable as a live repo. |
+| `prepress automation` | 26 | `sams-joseph/prepress-automation` | **1** | Genuinely on-topic, one star. |
+| `image metadata agent` | 93 | `wiltodelta/remove-ai-watermarks` | 6,530 | On-topic, pointing **the wrong way** — it strips provenance. |
+
+**Contamination warning.** `danderfer/Comp_Sci_Sem_2` (228★) tops two unrelated queries in this
+plane. Second repo in this KB to contaminate two planes, after `jettbrains/-L-` (passes 4 and 22).
+Recorded so no later pass "discovers" it.
+
+### Verification-channel disclosure for this pass
+
+The GitHub REST `/repos/*` endpoint returned **HTTP 403** throughout (session-scoped to this
+account's own repositories), so all stars and last-push dates come from
+`gh api -X GET search/repositories`. **Six of 65 repos return HTTP 422 from the search index while
+serving git normally** — `Beep6581/RawTherapee`, `artpixls/ART`, `googlefonts/fontbakery`,
+`JohannesBuchner/imagehash`, `ente-io/ente`, `UKPLab/sentence-transformers`. Their star counts are
+written `n/a` in this pass's tables, **not estimated**. Existence was confirmed by `git ls-remote`
+for all 65.
+
 ## 2026-11-26 — pass 22: podcast & spoken-audio infrastructure (**44 slugs probed, 42 resolve on GitHub, 2 live off-GitHub; the substrate is the most permissive in this KB and the money layer is empty**)
 
 Infrastructure and platform repos for the podcast plane. Agents are in `agents/trending.md` pass 22.

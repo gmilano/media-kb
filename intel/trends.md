@@ -2236,3 +2236,145 @@ is an **unlicensed** MCP server), `podcast seo agent` 6 (top **4★**), `podcast
 *generation* agents are permissive and healthy (`SurfSense` Apache-2.0 16,962★, `autoclip` MIT
 16,708★, `podcastfy` Apache-2.0 6,860★). The asymmetry is consistent with every other plane in this
 KB: **open source generates; it does not run the business.**
+
+## Pass 23 (2026-11-26) — the still-image, photo-desk & print-production plane
+
+### 1. The industry-wide trend, and what it means for still images specifically
+
+The 2026 consensus across Akamai, Deloitte, EY, TV Tech and TVBEurope is that **the adoption
+question is closed and the value question is open**: Akamai's *State of AI in Media 2026* frames the
+challenge as turning widespread experimentation into business value, and reports **time spent in
+generative AI apps doubling between H1 2025 and H1 2026**. TV Tech calls 2026 "the year of scaling
+AI throughout the media enterprise" and expects **several false starts with agentic advertising**;
+EY says the strategic question has shifted to applying AI **responsibly**; more than half of
+Deloitte's 2026 predictions link directly to AI.
+
+**For the still-image plane this general trend resolves into something unusually concrete.** The
+"responsible application" everyone is describing in the abstract already has, for images, a
+*specified* form: a labeling duty (EU Article 50, China's Measures), an editorial prohibition
+(AP, dpa, Getty), a consent duty (Mexico), and a signing standard (C2PA, shipping in Leica, Nikon
+and Sony bodies). **Images are the one media type where "responsible AI" has stopped being a
+principle and become a file format.** That is why this plane is a buildable engagement rather than
+a policy conversation.
+
+### 2. The structural law of this KB, refined: licence tracks lineage, not layer
+
+Every prior pass found a version of *"the substrate is permissive and healthy; the judgment layer is
+empty"*. This plane is the first to contain **two substrates with different ancestries**, and they
+are licensed oppositely:
+
+| Substrate | Ancestry | Typical licence | State |
+|---|---|---|---|
+| Pixel pipeline — `sharp`, `libvips`, `imgproxy`, `thumbor`, `imagor`, `libjxl`, `libavif`, `libwebp` | Web infrastructure / CDN | **Apache-2.0, MIT, BSD** | All pushed within days |
+| Page & print pipeline — `scribus`, `ghostpdl`, `mupdf`, `pdfarranger`, GIMP, Krita, darktable, RawTherapee | Desktop applications | **GPL-2.0, GPL-3.0, AGPL-3.0** | All actively maintained |
+
+Both are mature, both are fundamental, both are alive. **One can become a product and the other
+cannot** — and the predictor is not the layer's depth in the stack, it is whether the code grew up
+in a browser-and-CDN world or a desktop-publishing world. **Refinement to the law: permissiveness
+is inherited from a project's origin community, not determined by its technical position.**
+Practical consequence: an imaging engagement is cleanly separable into a productisable half
+(serving, transforming, searching) and a deployable-only half (layout, RIP, darkroom), and the
+licence boundary falls in a predictable place.
+
+### 3. The sharpest trend in the plane: the describe layer is decaying while the move layer sprints
+
+Measured 2026-11-26, same day, same method:
+
+- **Move pixels:** `sharp` (Apache-2.0, 32,872★) pushed **today**. `ImageMagick` (17,946★) **today**.
+  `libvips` (11,841★) yesterday. `imgproxy` (11,220★) two days. `libjxl`, `libavif` **today**.
+- **Describe pixels:** `Real-ESRGAN` (37,679★) last pushed **2024-08-06**. `LLaVA` (25,093★)
+  **2024-08-12**. `BLIP` (5,699★) **archived**. `openai/CLIP` (34,666★) eight months idle.
+
+**Four of the five best-known open image-understanding projects are frozen on a 2024 snapshot while
+the plumbing beneath them ships continuously.** The reason is visible in the star counts: the
+plumbing has paying infrastructure users and the models were research artefacts whose authors moved
+on. The operational lesson for a client is not "avoid them" — they work — but **"vendor and pin
+them, and own the inference wrapper"**, because there is no upstream to receive a bug report.
+
+The one live, permissive base is **`open_clip` (MIT, 14,292★, pushed 2026-11-21)**. Any
+natural-language image search built in 2026 should sit on it rather than on `openai/CLIP`.
+
+### 4. AI is arriving inside the classic tools, opt-in and with model provenance stated
+
+**darktable 5.6 (June 2026)** added an AI subsystem to a 13,508-star GPL-3.0 RAW developer:
+`neural restore` (RAW denoise, denoise, upscale), an AI object-mask tool, HEIF export. Three details
+make it a governance template rather than a feature:
+
+1. **Opt-in and off by default** — the AI path requires a build flag.
+2. **Models ship separately with documented licences**, and the project states that **models of
+   unclear provenance are excluded.**
+3. **5.6.1 (August 2026) made RAW denoise refuse legacy Fujifilm Super CCD sensors** the models were
+   never trained on — a deliberate refusal to run out of distribution.
+
+User reports are mixed (one found output noticeably less vibrant), which is the honest state of it.
+But **"optional, provenance-documented, and refuses inputs it was not trained for"** is a better
+articulated AI policy than most vendor datasheets, and it came from a volunteer project. Worth
+quoting in a client conversation about what a defensible AI feature looks like.
+
+### 5. Provenance: the standard is settled, the implementation is tiny, the counter-tool is bigger
+
+- The open implementation of C2PA is **`c2pa-rs` (455★) + `c2patool` (174★)**, both dual
+  MIT/Apache-2.0, both pushed the day of this pass. **629 stars for the entire thing.**
+- The most-starred on-topic `image metadata agent` is **`wiltodelta/remove-ai-watermarks`
+  (6,530★, Apache-2.0)** — a tool for removing watermarks and provenance. **~10× the provenance
+  stack.**
+- Capture-side adoption is real but fragmented: Leica signs in hardware (M11-P, SL3-S); Nikon's
+  Authenticity Service requires Nikon Imaging Cloud; Sony enabled pro bodies by firmware but
+  **full validation requires Sony Ci Media Cloud** — a vendor tier above the open standard. One
+  secondary source claims Leica, Nikon and Canon are **not** in the official C2PA Conformance
+  Program as of mid-2026; unverified.
+
+**The trend to state honestly: provenance has won the argument and lost the build.** Everyone
+specifies C2PA; 629 stars implement it; a better-resourced project deletes it. A client proposal
+should therefore lean on **capture-side hardware signatures plus platform-side verification at
+ingest**, and should not promise that metadata survives the open internet.
+
+### 6. Alt text is the clearest "model is not the product" case in the whole KB
+
+- The models are commodity and free (BLIP BSD-3 but archived, LLaVA Apache-2.0 but dormant, plus
+  every hosted VLM).
+- The accuracy evidence says drafting is **nearly, but not quite, good enough**: a 2026 engineering
+  primer testing **~600 images** found AI drafts usable as a **first draft for the photo column**
+  and **actively risky for decorative images** unless the workflow handles them separately.
+- Drupal's `ai_image_alt_text` module — the most serious implementation found — leads with a
+  **customisable prompt template, multilingual output, bulk back-processing** and explicit
+  **human-in-the-loop verification.**
+- The open GitHub field for the editorial workflow is **one repo with one star.**
+
+**Everything hard about alt text is the review loop, the bulk back-catalogue run, the
+decorative-image exception and the audit trail — and none of it is the model.** This is the most
+sellable gap in the plane and the easiest to explain to a non-technical buyer, because the
+compliance driver (accessibility law) already exists in every region.
+
+### 7. The regional asymmetry is the strongest this KB has recorded
+
+| Region | What binds an image | Artefact required |
+|---|---|---|
+| **APAC (China)** | **Binding law since 2025-09-01**: explicit *and* implicit (metadata) labels on AI-generated images; platforms must verify; removal prohibited; GB 45438-2025 sets the method | A metadata label writer + ingest verification gate |
+| **EMEA** | AI Act Article 50 horizontal transparency — **date contested** (2026-08-02 vs 2026-12-02); UK training question **unresolved** after *Getty v Stability* | A configurable label + a rights-reservation posture |
+| **North America** | **No statute.** Editorial policy (AP bars AI in news photography, disclosure on "material" use — undefined), Getty's AI-free libraries, 2026 guild agreements | A materiality + consent record |
+| **LATAM** | Mexico's May 2026 amendments — a **performer-consent** duty, not a labeling duty | A likeness-and-consent record per person depicted |
+
+**Four regions, four different artefacts, one pipeline.** The design consequence is the
+deliverable: write the metadata once, and make the *regime* a per-market policy object rather than a
+branch in the code. A publisher operating in Mexico and the EU needs a consent record **and** a
+label; they are different data models, and a single "AI disclosure" field satisfies neither.
+
+### 8. Informed gaps from this pass
+
+- **No market figure** for the still-image, stock, photo-archive or print-production segment could be
+  verified in any region. See the refusal in `intel/market.md` pass 23 addendum. This is the third
+  such refusal (after passes 16 and 17) and the pattern now reads: **this KB can size consumer-facing
+  media segments and cannot size production-tooling segments.**
+- **ResourceSpace**, named in 2026 roundups as a leading open-source DAM, **could not be verified** —
+  not on GitHub under `montala/ResourceSpace`, and its site was unreachable from this environment.
+  No URL is asserted.
+- **The CMS plugin registries were not enumerated.** The real alt-text agent layer lives on
+  drupal.org and wordpress.org, not GitHub, so this pass's GitHub measurement **understates** that
+  layer. Named modules (`ai_image_alt_text`, `aidmi`, and the WordPress AI Client plugins) are
+  recorded, but no systematic count was taken. A later pass measuring CMS-side agents should start
+  there.
+- **No image-specific rule found for Japan or India**, and none in the AVMSD overhaul. Recorded as
+  unverified, **not** as permissive.
+- **RawTherapee's and fontbakery's star counts are unknown** (search index returns 422 while git
+  serves normally). Written `n/a` rather than estimated.

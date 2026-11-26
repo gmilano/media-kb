@@ -1315,3 +1315,89 @@ platform** — not a weak one, not an abandoned one, none (`audio ad insertion s
 → 0 results, measured 2026-11-26). Every commercial system in that slot is proprietary
 (Megaphone, Acast, Triton, ART19, Spreaker). For a client who needs it, that is not an integration;
 it is a build, and the inputs for it are all permissive. Pattern 47.
+
+## Pass 23 (2026-11-26) — still-image platforms: photo libraries, image servers, IIIF and page layout
+
+Real, running systems for the still-image and print plane — the ones a client may already have, or
+should start from. All licences read from the actual LICENSE file; stars and last-push from
+`search/repositories`. `n/a` = exists and serves git, invisible to the search index.
+
+### The licence shape of this layer — read before choosing
+
+**The photo-library layer is almost entirely AGPL-3.0, and that is the single most important
+commercial fact in this plane.** Of the seven self-hostable photo platforms below, five are
+AGPL-3.0, one is GPL-2.0, and **exactly one is permissive.** AGPL means that if the client's
+deployment is reachable by users over a network, the source — including modifications — must be
+offered to those users. For a media client who wants to *own* a differentiated picture archive,
+that is usually disqualifying, and it is almost never noticed at the pilot stage.
+
+| Platform | Repo | License | Stars | Last push | What it is, and the catch |
+|---|---|---|---|---|---|
+| **LibrePhotos** | [LibrePhotos/librephotos](https://github.com/LibrePhotos/librephotos) | **MIT** | 8,187 | 2026-11-26 | **The only permissive self-hosted photo library in this plane.** Albums, faces, semantic search, timeline, map view. If the engagement needs a photo archive the client owns outright and can extend as a closed product, this is the start point — there is no second option. |
+| Immich | [immich-app/immich](https://github.com/immich-app/immich) | AGPL-3.0 | 120,170 | 2026-11-26 | The most popular self-hosted photo platform by a wide margin, and the best AI story: **CLIP-based natural-language smart search** plus face recognition, with native iOS/Android background backup. Pushed daily. **AGPL** — deploy it, extend it internally, but a hosted product built on it is disclosable. Memory requirements are the practical constraint on small servers. |
+| PhotoPrism | [photoprism/photoprism](https://github.com/photoprism/photoprism) | AGPL-3.0 | 40,481 | 2026-11-26 | The photographer-grade option: **strong RAW handling and disk-based archives**, on-device models via ONNX Runtime, AI tagging and scene search. API reports `NOASSERTION`; LICENSE (33,824 B) read — AGPL-3.0. Sources disagree on how open-ended its semantic search is versus Immich's; verify against its own docs for a search-led brief. |
+| Pixelfed | [pixelfed/pixelfed](https://github.com/pixelfed/pixelfed) | AGPL-3.0 | 7,155 | 2026-11-25 | Federated (ActivityPub) image-sharing platform — the base for a publisher-owned, non-Instagram visual community. AGPL. |
+| Piwigo | [Piwigo/Piwigo](https://github.com/Piwigo/Piwigo) | GPL-2.0 | 3,891 | 2026-11-22 | Long-lived PHP photo library / light DAM with a real plugin ecosystem. API reports `NOASSERTION`; `LICENSE.txt` (18,092 B) read — **GPL-2.0, not LGPL.** GPL-2.0 without the network clause, so a hosted deployment does not trigger disclosure the way AGPL does. |
+| Ente | [ente-io/ente](https://github.com/ente-io/ente) | AGPL-3.0 | n/a | — | End-to-end-encrypted photo storage. The one to look at when confidentiality of unpublished images is the requirement. Invisible to the search index; exists and serves git. |
+| Nextcloud Photos | [nextcloud/photos](https://github.com/nextcloud/photos) | AGPL-3.0 | 725 | 2026-11-24 | The photo app for an existing Nextcloud estate. Relevant mainly when the client already runs Nextcloud — then it is a configuration, not a project. |
+
+### Editorial / enterprise DAM — thin, and one licence trap
+
+| Platform | Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| Phraseanet | [alchemy-fr/Phraseanet](https://github.com/alchemy-fr/Phraseanet) | GPL-3.0 | 276 | 2026-11-25 | A genuine media-company DAM — ingest, IPTC/XMP metadata editing, controlled vocabularies, publication. API reports `NOASSERTION`; LICENSE (35,414 B) read — GPL-3.0. Actively pushed, and at 276 stars it is the most credible open editorial DAM found. |
+| Pimcore | [pimcore/pimcore](https://github.com/pimcore/pimcore) | **POCL — source-available, NOT open source** | 3,891 | 2026-11-26 | **Licence trap, and widely mis-stated.** Pimcore (DAM + PIM + CMS) is listed as "open source" in most 2026 DAM roundups. Its `LICENSE.md` on the default branch is the **Pimcore Open Core License (POCL)**, last updated June 2025 — a negotiated agreement between Pimcore GmbH and the licensee, not an OSI licence. The GitHub API reports `NOASSERTION`, and **its default branch is `2026.x`**, so a probe of `master`/`main` returns 404 and looks like a missing file. **Do not put Pimcore in a proposal as open source without legal review.** |
+
+**Informed gap — ResourceSpace.** Named in several 2026 roundups as a leading fully open-source DAM
+(and the one most often recommended for media libraries). **It could not be verified in this pass:**
+`montala/ResourceSpace` and `montala/resourcespace` both return no refs from `git ls-remote`, and
+`resourcespace.com` was not reachable from this environment. Its source is distributed from the
+vendor's own infrastructure rather than GitHub. **No row is written for it and no URL is asserted** —
+if a client raises it, verify the licence and source channel directly with Montala first.
+
+### IIIF — the standards-based way to serve an image archive, and it is permissive
+
+This is the quiet good news of the layer. The archive-image delivery stack is **MIT, BSD and
+Apache-2.0 end to end** — the opposite of the photo-library layer above. IIIF is already in this KB
+from the preservation and journalism passes; the serving and viewing components enter here.
+
+| Component | Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|---|
+| OpenSeadragon | [openseadragon/openseadragon](https://github.com/openseadragon/openseadragon) | BSD-3-Clause | 3,543 | 2026-11-20 | Deep-zoom viewer for very large images — scanned pages, maps, high-resolution art. The front end of any archive-image product. |
+| Mirador | [ProjectMirador/mirador](https://github.com/ProjectMirador/mirador) | Apache-2.0 | 626 | 2026-11-25 | Multi-window IIIF workspace: compare several images or manuscript openings side by side, with annotation. |
+| Cantaloupe | [cantaloupe-project/cantaloupe](https://github.com/cantaloupe-project/cantaloupe) | **MIT** | 308 | 2026-11-23 | IIIF Image API server — dynamic tiling, cropping and scaling of archive masters on the fly. API reports `NOASSERTION`; `LICENSE.txt` (1,870 B) read — MIT. **A permissive, standards-compliant image server at 308 stars.** |
+
+**A permissive archive-image delivery stack exists, is standards-based, and has almost no
+constituency.** Cantaloupe (MIT, 308★) plus OpenSeadragon (BSD-3) plus Mirador (Apache-2.0) is a
+complete, ownable IIIF product that a cultural-heritage, publishing or broadcast-archive client can
+deploy and extend without any disclosure obligation — the direct contrast with Immich's 120,170
+stars under AGPL.
+
+### Page layout, prepress and the desktop darkroom
+
+These are applications, not services — the systems a design desk or print operation already runs.
+**All of them are copyleft**, which is fine for deployment on staff machines and fatal for a
+productised fork.
+
+| Platform | Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|---|
+| Krita | [KDE/krita](https://github.com/KDE/krita) | GPL-3.0 | 10,812 | 2026-11-26 | Professional digital painting and illustration — the production tool for original editorial artwork. |
+| GIMP | [GNOME/gimp](https://github.com/GNOME/gimp) | GPL (**with an explicit plug-in exemption**) | 6,627 | 2026-11-26 | Raster retouching. **The exemption is the commercially useful part:** its LICENSE states that arbitrarily-licensed programs such as GIMP plug-ins do not automatically assume the GPL merely by invoking (or being invoked by) GIMP procedures. **A proprietary GIMP plug-in is explicitly contemplated** — so "automate the retouching desk with a closed plug-in" is a legitimate engagement shape. |
+| Scribus | [scribusproject/scribus](https://github.com/scribusproject/scribus) | GPL-2.0-or-later | 659 | 2026-11-26 | **The only open professional page-layout application** — the InDesign substitute. Exports PDF/X-1a, PDF/X-3 and PDF/X-4 with an embedded ICC profile defining the intended press condition. Requires Ghostscript for EPS/PS import and print preview (a documented beginner stumbling block). Reported stable **1.6.6** and preview **1.7.3**, both 2026-04-13; 1.6.6 added MSVC 2026 project files. |
+| darktable | [darktable-org/darktable](https://github.com/darktable-org/darktable) | GPL-3.0 | 13,508 | 2026-11-26 | The RAW darkroom, now with an opt-in AI subsystem (5.6, June 2026). See `repos/trending.md` pass 23. |
+| RawTherapee | [Beep6581/RawTherapee](https://github.com/Beep6581/RawTherapee) | GPL-3.0 | n/a | — | The other major open RAW developer. **Default branch `dev`**; invisible to the search index. |
+| CUPS | [OpenPrinting/cups](https://github.com/OpenPrinting/cups) | Apache-2.0 | 1,803 | 2026-11-25 | The printing system — queues, IPP, drivers. **The one permissive component in the physical-output path.** |
+
+### How to choose, in one paragraph per engagement shape
+
+- **"We need a picture archive we own and can sell."** `LibrePhotos` (MIT) or build on
+  `Cantaloupe` + `OpenSeadragon` + `open_clip`. Do not start from Immich or PhotoPrism, however much
+  better they look in a demo — AGPL will surface in the first legal review.
+- **"We need the best internal photo tool, fastest."** Immich (AGPL-3.0), and say plainly in the
+  proposal that it is an internal deployment, not a product base. Its CLIP search and mobile backup
+  are genuinely ahead of everything permissive.
+- **"We have a print operation."** Scribus + Ghostscript + Little-CMS, and treat the **Ghostscript
+  AGPL question as a first-week decision**, not a detail: it is a 310-star AGPL project that Scribus
+  depends on to turn a page into ink, with a commercial licence sold alongside.
+- **"We already run Pimcore and were told it is open source."** Stop and read `LICENSE.md` on the
+  `2026.x` branch. It is the POCL.

@@ -3143,3 +3143,197 @@ a checklist, not a discussion.
 the measurement path and the disclosure obligations — with licences attached. If the answer to Q1 is
 "yes, permissive, and alive", there is exactly one row in this KB that satisfies it; make sure the
 client knows that before they discover it in a legal review.
+
+## Pass 23 (2026-11-26) — still-image, photo-desk & print-production patterns (51–55)
+
+Every repo named below was verified on 2026-11-26: existence via `git ls-remote`, licence by reading
+the actual LICENSE file, stars and last-push via `search/repositories`. Licence notes are not
+decoration — in this plane they decide whether the result can be a product.
+
+### Pattern 51 — The ownable archive: natural-language image search with zero copyleft
+
+**Problem.** A publisher, broadcaster or heritage client has 10k–10M images with thin metadata and
+wants "find me the shot of the minister in the red coat". The attractive platforms (Immich 120,170★,
+PhotoPrism 40,481★) are **AGPL-3.0**, so the archive could never be offered as a product or a
+multi-tenant service without disclosing the source.
+
+**Stack — permissive end to end.**
+
+| Role | Component | License |
+|---|---|---|
+| Image serving / tiling | [cantaloupe-project/cantaloupe](https://github.com/cantaloupe-project/cantaloupe) | **MIT** |
+| Deep-zoom viewer | [openseadragon/openseadragon](https://github.com/openseadragon/openseadragon) | BSD-3-Clause |
+| Multi-image compare workspace | [ProjectMirador/mirador](https://github.com/ProjectMirador/mirador) | Apache-2.0 |
+| Embeddings (text↔image) | [mlfoundations/open_clip](https://github.com/mlfoundations/open_clip) | **MIT** |
+| Vector index | [qdrant/qdrant](https://github.com/qdrant/qdrant) or [facebookresearch/faiss](https://github.com/facebookresearch/faiss) | Apache-2.0 / MIT |
+| Derivative generation | [lovell/sharp](https://github.com/lovell/sharp) or [imgproxy/imgproxy](https://github.com/imgproxy/imgproxy) | Apache-2.0 |
+| Metadata read/write | [exiftool/exiftool](https://github.com/exiftool/exiftool) | Artistic-1.0-Perl **OR** GPL-1.0+ |
+| Near-duplicate detection | [idealo/imagededup](https://github.com/idealo/imagededup) | Apache-2.0 |
+
+**Wiring.** Masters stay on object storage. Cantaloupe serves IIIF Image API URLs from the masters,
+so no derivative pyramid is pre-baked and OpenSeadragon gets tiles on demand. On ingest: `exiftool`
+extracts IPTC/EXIF/XMP into the catalogue row; `imagededup` PHash flags near-duplicates against the
+existing index before anything is stored; `open_clip` embeds the image; the vector goes to Qdrant
+with the catalogue id as payload. A query embeds the text with the **same** `open_clip` checkpoint
+and does an ANN search. `sharp` or `imgproxy` handles web derivatives at the edge.
+
+**Why it holds together.** The licence column has no copyleft in it — and for `exiftool`, **take the
+Artistic option** (its README grants "the same terms as Perl itself", so the GPL-3.0 text in the
+repo is one of two choices, not the only one; see the method notes in `agents/top.md` pass 23).
+
+**The two traps.** (1) **Pin the `open_clip` checkpoint and store its identifier on every vector.**
+Changing checkpoints silently invalidates the whole index, and a mixed index degrades without
+erroring. (2) **`openai/CLIP` is reference-only and 8 months idle** — build on `open_clip`.
+
+### Pattern 52 — The alt-text review loop (the sellable gap, not the model)
+
+**Problem.** Accessibility obligations exist in every region; a client has 400,000 images with no
+alt text and a photo desk that cannot write 400,000 captions. The model is free; the accountability
+is not. The entire open GitHub field for this workflow is **one repo with one star**.
+
+**Stack.**
+
+| Role | Component | License |
+|---|---|---|
+| Caption drafting (self-hosted) | [haotian-liu/LLaVA](https://github.com/haotian-liu/LLaVA) (Apache-2.0, **pin it — dormant since 2024-08-12**) or any hosted VLM | Apache-2.0 |
+| CMS-side plugin precedent | Drupal `ai_image_alt_text` / `aidmi` (drupal.org), [soderlind/ai-alt-text](https://github.com/soderlind/ai-alt-text) | GPL-2.0-or-later |
+| Local inference for embargoed images | Ollama path in `soderlind/ai-alt-text` | GPL-2.0-or-later |
+| Metadata persistence | [exiftool/exiftool](https://github.com/exiftool/exiftool) → IPTC `AltTextAccessibility` | Artistic **OR** GPL |
+| Bulk back-catalogue pass | [lovell/sharp](https://github.com/lovell/sharp) for thumbnails + queue | Apache-2.0 |
+
+**Wiring, and the whole value is in steps 2–4.**
+
+1. **Classify first, draft second.** Route each image to *decorative* / *informative* /
+   *complex*. The ~600-image study cited in `intel/trends.md` pass 23 found AI drafts fine as a
+   first draft for the photo column and **actively risky for decorative images** — a decorative
+   image needs `alt=""`, and a model will cheerfully describe it instead. **This classification step
+   is the difference between a compliance improvement and a compliance regression.**
+2. **Draft into a queue, never into the live field.** The draft lands in a review state with the
+   model id and prompt template recorded.
+3. **One-keystroke editor acceptance**, with edit-distance between draft and accepted text logged.
+   That metric is the client's evidence the loop is working, and the input to deciding which image
+   classes can later be auto-accepted.
+4. **Write the accepted text to IPTC with `exiftool`**, so the caption travels with the file into
+   every downstream system rather than living only in the CMS database.
+
+**Why this is the proposal.** Steps 1, 3 and 4 are where every open implementation stops. Drupal's
+module gets closest — it ships a customisable prompt template, multilingual output, bulk
+back-processing and explicit human-in-the-loop verification — and it is a module, not a workflow.
+**Sell the loop and the audit trail; the model is a commodity line item.**
+
+### Pattern 53 — Ingest-time provenance gate (and the one honest caveat)
+
+**Problem.** A newsroom must satisfy, depending on market: China's implicit-metadata label (binding
+since 2025-09-01), the EU's Article 50 transparency duty, AP/dpa-style editorial prohibitions on
+synthetic news imagery, and Mexico's consent duty. Nothing open does this.
+
+**Stack.**
+
+| Role | Component | License |
+|---|---|---|
+| Sign / verify Content Credentials | [contentauth/c2patool](https://github.com/contentauth/c2patool) | Apache-2.0 **OR** MIT |
+| Embed in a service | [contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs) | MIT **OR** Apache-2.0 |
+| EXIF/IPTC/XMP read-write | [exiftool/exiftool](https://github.com/exiftool/exiftool) | Artistic **OR** GPL |
+| Perceptual hash for re-use detection | [JohannesBuchner/imagehash](https://github.com/JohannesBuchner/imagehash) | BSD-2-Clause |
+| Pixel normalisation | [libvips/libvips](https://github.com/libvips/libvips) via [lovell/sharp](https://github.com/lovell/sharp) | LGPL-2.1 / Apache-2.0 |
+
+**Wiring.** Every image entering the DAM passes one gate: `c2patool` reads any existing manifest and
+records signer, capture claims and edit assertions; `exiftool` extracts IPTC credit, source and
+usage terms; `imagehash` computes a pHash and checks it against the archive to catch re-submission
+of a known asset under a new credit. The gate writes a **single provenance row per asset** —
+signer, hash, declared AI involvement, consent reference, market-policy verdict — and **re-signs**
+with the organisation's own certificate on publish, so downstream consumers can verify the
+publisher's assertion even when the camera made none.
+
+**Make the regime a policy object, not a branch.** One writer, four configurations: China (explicit
+visible label **and** implicit metadata label, verification on ingest); EU (Article 50 label, with
+the effective date as configuration — the sources disagree between 2026-08-02 and 2026-12-02);
+US (materiality determination + editorial sign-off; no statute); Mexico (consent record keyed to the
+person depicted, not a label on the file).
+
+**The caveat to put in the proposal in writing.** `wiltodelta/remove-ai-watermarks` is
+**Apache-2.0 with 6,530 stars** — roughly ten times the entire open C2PA implementation (629 stars).
+**Metadata does not survive a determined adversary, and claiming otherwise will not survive the
+first hostile question.** Anchor the argument in capture-side hardware signatures (Leica's secure
+chip, Nikon Authenticity Service, Sony firmware) plus **verification at ingest and at publish**,
+and present the gate as chain-of-custody for assets the organisation controls — which is a real and
+defensible claim — rather than as tamper-proofing of the open internet.
+
+### Pattern 54 — Self-hosted image CDN that replaces a SaaS line item
+
+**Problem.** The client pays per-transform to an image SaaS and wants the spend and the data back,
+without rewriting every `<img>` URL in a 15-year-old CMS.
+
+**Stack.**
+
+| Role | Component | License | Note |
+|---|---|---|---|
+| Migration-compatible server | [cshum/imagor](https://github.com/cshum/imagor) | Apache-2.0 | **Thumbor-compatible URL API** |
+| Or: signed-URL server | [imgproxy/imgproxy](https://github.com/imgproxy/imgproxy) | Apache-2.0 | OSS core; a paid Pro tier exists |
+| Or: Python-extensible | [thumbor/thumbor](https://github.com/thumbor/thumbor) | MIT | Widest transformation set, custom detectors |
+| Engine | [libvips/libvips](https://github.com/libvips/libvips) | LGPL-2.1 | Shared by all three |
+| Modern formats | [libjxl/libjxl](https://github.com/libjxl/libjxl), [AOMediaCodec/libavif](https://github.com/AOMediaCodec/libavif), [webmproject/libwebp](https://github.com/webmproject/libwebp) | BSD | Negotiate on `Accept` |
+| Baseline JPEG quality | [mozilla/mozjpeg](https://github.com/mozilla/mozjpeg) | IJG + BSD-3-Clause | **Dormant ~17 months**; still best-in-class |
+
+**Wiring.** Put the server behind the existing CDN with a long `Cache-Control` and an origin pull
+from object storage; derivatives are computed once per URL and then served from cache, so steady-state
+CPU is near zero. Content-negotiate AVIF → WebP → JPEG on `Accept`.
+
+**Choose by the migration cost, not the benchmark.** If the client is already on thumbor, **imagor
+is a routing change** because the URL contract matches. If starting fresh, imgproxy's signed URLs
+prevent the open-proxy resize-bomb problem by construction. Treat **all** published benchmarks here
+as vendor-run: imgproxy's own benchmark reports it more than twice as fast as thumbor and imagor on
+Intel Xeon, while imagor's own benchmark (updated May 2026) reports imagor consistently faster than
+thumbor and competitive with imgproxy. **Both projects have a stake in their own numbers.** All
+three run the same libvips engine, so measure on the client's own image mix before choosing.
+
+**Licence note that actually matters here.** `imazen/imageflow` is the fast tempting alternative and
+is **AGPL-3.0** — a hosted image service built on it is disclosable. It sells a commercial licence;
+if it is in scope, that is a procurement conversation, not a technical one.
+
+### Pattern 55 — Print production with the licence boundary drawn explicitly
+
+**Problem.** A publisher still prints — a magazine, a catalogue, a newspaper section — and wants
+AI-assisted page production. This is the half of the plane that **cannot** become a product, and
+the engagement has to be shaped accordingly.
+
+**Stack.**
+
+| Role | Component | License | Productisable? |
+|---|---|---|---|
+| Page layout | [scribusproject/scribus](https://github.com/scribusproject/scribus) | GPL-2.0-or-later | **No** — deploy and script only |
+| RIP / PS+PDF interpretation | [ArtifexSoftware/ghostpdl](https://github.com/ArtifexSoftware/ghostpdl) | **AGPL-3.0** (composite, per-directory) | **No** — commercial licence sold |
+| ICC colour management | [mm2/Little-CMS](https://github.com/mm2/Little-CMS) | **MIT** | **Yes** |
+| PDF/A–PDF/X validation | [veraPDF/veraPDF-library](https://github.com/veraPDF/veraPDF-library) | GPL-3.0+ **OR MPL-2.0+** | **Yes, via MPL** |
+| PDF structural repair | [qpdf/qpdf](https://github.com/qpdf/qpdf) | Apache-2.0 | **Yes** |
+| Imposition / page ops | [pdfcpu/pdfcpu](https://github.com/pdfcpu/pdfcpu) | Apache-2.0 | **Yes** |
+| Preflight in-browser | [mozilla/pdf.js](https://github.com/mozilla/pdf.js) | Apache-2.0 | **Yes** |
+| Font QA / subsetting | [fonttools/fonttools](https://github.com/fonttools/fonttools), [googlefonts/fontbakery](https://github.com/googlefonts/fontbakery) | MIT / Apache-2.0 | **Yes** |
+| Retouch automation | [GNOME/gimp](https://github.com/GNOME/gimp) | GPL **+ plug-in exemption** | **Yes, as a plug-in** |
+| RAW developing | [darktable-org/darktable](https://github.com/darktable-org/darktable) | GPL-3.0 | **No** — deploy, script via Lua |
+
+**Wiring.** Scribus runs on the design desk and is driven by its Python scripting API for templated
+pages (catalogue, listings, programme). The AI-assisted parts sit **outside** Scribus, in the
+permissive column: `fonttools` subsets fonts to what each page actually uses; `Little-CMS` applies
+the press ICC profile; Scribus exports **PDF/X-3 or PDF/X-4 with the press condition embedded**;
+`veraPDF` validates against the standard **under its MPL-2.0 option** so the preflight service can
+ship alongside proprietary code; `qpdf` and `pdfcpu` repair and impose; `pdf.js` renders the proof
+for in-browser sign-off.
+
+**The two decisions to make in week one, not at delivery.**
+
+1. **Ghostscript.** It is how a page becomes ink, Scribus needs it for EPS/PS import and print
+   preview, it is **AGPL-3.0 with a commercial licence sold alongside**, and it has **310 stars.**
+   A 310-star AGPL project is a single point of failure with a procurement question attached. Decide
+   explicitly: deploy under AGPL (internal use, no disclosure trigger for staff tooling), or buy the
+   Artifex licence.
+2. **GIMP's plug-in exemption is a genuine opening.** Its LICENSE explicitly states that
+   arbitrarily-licensed programs such as GIMP plug-ins do **not** automatically assume the GPL merely
+   by invoking (or being invoked by) GIMP procedures. **So "automate the retouching desk with a
+   proprietary plug-in" is contemplated and permitted by the project** — one of very few ways to
+   build closed value on a GPL application in this plane. An SPDX field reading `GPL-3.0` tells you
+   the opposite; read the file.
+
+**And one dependency to read before promising colour fidelity:** `Little-CMS` is MIT, maintained,
+load-bearing for Scribus, GIMP and Krita — and has **764 stars.** If the engagement's value
+proposition is "the printed piece matches the screen", that promise rests on it.

@@ -2302,3 +2302,154 @@ The plane splits cleanly into work Globant can take and work it cannot:
 - **The ad stack is a greenfield build, and that is the proposal.** Zero open repos touch podcast
   ad insertion. The input signals (`podcast-namespace` CC0, OPAWG regexes MIT, OP3 MIT) are all
   free. Pattern 47 wires exactly that.
+
+## Pass 23 (2026-11-26) — the still-image, photo-desk & print-production plane
+
+**Why this plane.** media-kb already held 22 passes, eight of them dated 2026-11-26. Following the
+cycle-8 method, 65 vocabulary terms were grepped against the eight live files *before* any web
+search. The result was the cleanest hole found in this KB since `fingerprint`: **`libvips`,
+`ImageMagick`, `imgproxy`, `thumbor`, `darktable`, `RawTherapee`, `fontTools`, `Ghostscript`,
+`CMYK`, `ICC profile`, `color management`, `stock photo`, `photo editorial`, `prepress`, `Scribus`,
+`PhotoPrism`, `image captioning` and `upscal*` were all at literal zero.** The word `print`
+appeared on 124 lines and **121 of them were `fingerprint`/`Chromaprint`** — bare `print` occurred
+three times. Twenty-two passes of a Media & Entertainment KB had never described how a still image
+or a printed page is actually made.
+
+**Verification channel, and a disclosure.** The GitHub REST `/repos/*` endpoint is **blocked in
+this session** (HTTP 403, "GitHub access to this repository is not enabled for this session") — it
+is scoped to the session's own repositories. Stars and last-push below therefore come from
+`gh api -X GET search/repositories`, which does work, and licenses come from **reading the actual
+LICENSE file over the raw channel**, which is how every `NOASSERTION` in this table was resolved.
+**Six repos exist and serve git but are invisible to the search index** (HTTP 422); their star
+counts are written `n/a` rather than guessed. See the method notes at the end of this section.
+
+### Tier 1 — move and convert pixels: permissive, and alive (the healthiest substrate in this KB)
+
+| Agent / Library | Repo | License | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| sharp | [lovell/sharp](https://github.com/lovell/sharp) | Apache-2.0 | 32,872 | 2026-11-26 | Node image pipeline over libvips; the default resize/convert layer for JS backends. Pushed the day of this pass. |
+| ImageMagick | [ImageMagick/ImageMagick](https://github.com/ImageMagick/ImageMagick) | ImageMagick License (own, permissive) | 17,946 | 2026-11-26 | The universal convert/composite toolbox. API reports `NOASSERTION`; the LICENSE file (12,557 B) is ImageMagick's own Apache-2.0-derived licence, which permits commercial use and linking against differently-licensed libraries. |
+| libvips | [libvips/libvips](https://github.com/libvips/libvips) | LGPL-2.1 | 11,841 | 2026-11-25 | The engine under sharp, imgproxy and imagor: streaming, low-memory image processing. LGPL — link, do not fork into a static binary without reading it. |
+| imgproxy | [imgproxy/imgproxy](https://github.com/imgproxy/imgproxy) | Apache-2.0 | 11,220 | 2026-11-24 | Go on-the-fly resize/crop/convert server over libvips, with signed URLs. The OSS core is Apache-2.0; a separate commercial "Pro" tier exists — check which you deploy. |
+| thumbor | [thumbor/thumbor](https://github.com/thumbor/thumbor) | MIT | 10,533 | 2026-11-21 | The original smart-crop image server; Python, widest transformation set, extensible detectors. |
+| imaginary | [h2non/imaginary](https://github.com/h2non/imaginary) | MIT | 6,091 | 2025-11-08 | Go/libvips HTTP microservice. **Dormant ~12 months** — usable, unmaintained. |
+| image (Rust) | [image-rs/image](https://github.com/image-rs/image) | MIT OR Apache-2.0 | 5,920 | 2026-11-11 | Pure-Rust decode/encode/transform. Dual-licensed, so it is the cleanest base for a redistributable binary. |
+| imageflow | [imazen/imageflow](https://github.com/imazen/imageflow) | AGPL-3.0 | 4,475 | 2026-11-23 | High-performance imaging server. **AGPL — a hosted service built on it is disclosable.** Commercial licence sold separately. |
+| imagor | [cshum/imagor](https://github.com/cshum/imagor) | Apache-2.0 | 4,065 | 2026-11-21 | Go, libvips, **thumbor-compatible URL API** — the drop-in migration path off thumbor. |
+| images (wsrv.nl) | [weserv/images](https://github.com/weserv/images) | BSD-3-Clause | 2,865 | 2026-11-01 | The code behind the public wsrv.nl image CDN; nginx module + libvips. |
+
+### Tier 2 — describe pixels (the judgment layer): permissive, and **dying at the top**
+
+This is the finding of the pass. Every row is permissive. **Four of the seven are dormant or
+archived, including the three most-starred.**
+
+| Agent / Model | Repo | License | Stars | Last push | State |
+|---|---|---|---|---|---|
+| Real-ESRGAN | [xinntao/Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) | BSD-3-Clause | 37,679 | **2024-08-06** | The most-starred upscaler/restorer in the plane and **dormant for over two years.** Still the weights everyone ships. |
+| CLIP | [openai/CLIP](https://github.com/openai/CLIP) | MIT | 34,666 | 2026-03-25 | The original image/text embedding model. Reference-only; 8 months idle. |
+| LLaVA | [haotian-liu/LLaVA](https://github.com/haotian-liu/LLaVA) | Apache-2.0 | 25,093 | **2024-08-12** | The vision-language model most captioning tutorials still target. **Dormant over two years.** |
+| open_clip | [mlfoundations/open_clip](https://github.com/mlfoundations/open_clip) | MIT | 14,292 | 2026-11-21 | **The live one.** Open CLIP training + inference, many checkpoints. API says `NOASSERTION`; LICENSE file read (1,229 B) and it is MIT. Build semantic image search on this, not on `openai/CLIP`. |
+| imagededup | [idealo/imagededup](https://github.com/idealo/imagededup) | Apache-2.0 | 5,688 | 2025-08-15 | Near-duplicate detection (PHash/CNN). ~15 months idle; the algorithms are stable, so low risk. |
+| BLIP | [salesforce/BLIP](https://github.com/salesforce/BLIP) | BSD-3-Clause | 5,699 | 2026-03-03 | **ARCHIVED by its owner.** The canonical open captioning model for alt-text drafting is now read-only. |
+| imagehash | [JohannesBuchner/imagehash](https://github.com/JohannesBuchner/imagehash) | BSD-2-Clause | n/a | — | Perceptual hashing (aHash/pHash/dHash/wHash). Exists and serves git; invisible to the search index. |
+
+### Tier 3 — the editorial alt-text workflow: a measured near-zero
+
+| Agent | Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| AI Alt Text (WordPress) | [soderlind/ai-alt-text](https://github.com/soderlind/ai-alt-text) | GPL-2.0-or-later | **1** | 2026-03-29 | Multi-provider alt text (OpenAI/Claude/Gemini/Ollama/Grok) for the WP media library. **Its README links a LICENSE file that returns 404; the SPDX id lives in `composer.json`.** One star. |
+
+The CMS-side alt-text modules that newsrooms actually install are **not on GitHub** — Drupal's
+`ai_image_alt_text` and `aidmi` are on drupal.org, and the WordPress plugins on wordpress.org.
+A plane that looks empty on GitHub is not necessarily empty; it is hosted elsewhere, and that is
+itself the finding for anyone sizing the competition.
+
+### Tier 4 — provenance at the point of capture: permissive, alive, and tiny
+
+| Tool | Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| c2pa-rs | [contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs) | MIT OR Apache-2.0 | 455 | 2026-11-26 | The reference Rust implementation of C2PA / Content Credentials. API says `NOASSERTION`; `LICENSE-MIT` (1,083 B) read and confirmed — dual-licensed. Pushed the day of this pass. |
+| c2patool | [contentauth/c2patool](https://github.com/contentauth/c2patool) | Apache-2.0 OR MIT | 174 | 2026-11-26 | CLI to sign, inspect and verify Content Credentials on image files. The piece that drops into an ingest pipeline. |
+
+**455 stars.** The entire open implementation of image provenance — the thing every 2026 trust-in-media
+panel is about — is two repos with 629 stars between them, against 120,170 for one self-hosted
+photo app. The standard is settled and the tooling is permissive; almost nobody has wired it up.
+
+### Measured: does an "image judgment agent" layer exist? No, and the results are contaminated
+
+Measured 2026-11-26 via `search/repositories`, sorted by stars:
+
+| Query | Total repos | Top result | Stars | Verdict |
+|---|---|---|---|---|
+| `caption agent newsroom` | **0** | — | — | Literal zero. |
+| `photo desk agent` | 11 | `danderfer/Comp_Sci_Sem_2` | 228 | **Contamination** — a computer-science coursework repo. |
+| `image licensing agent` | 31 | `danderfer/Comp_Sci_Sem_2` | 228 | **The same coursework repo**, contaminating a second query. |
+| `picture editor agent` | 14 | `yuyuanweb/ai-picture-editor` | 320 | On-topic but unlicensed; a consumer editor, not a picture desk. |
+| `photo archive agent` | 16 | `CNTRUN/Termux-command` | 120 | **Contamination** — a Termux command list by its name. **Listed by the search index but `git ls-remote` cannot serve it** (see method note 7); the count of 16 is indexed, the top repo is not verifiable. |
+| `alt text agent` | 47 | `zszszszsz/.config` | 373 | **Contamination** — a dotfiles repo. |
+| `prepress automation` | 26 | `sams-joseph/prepress-automation` | **1** | The only genuinely on-topic top hit in the set, at one star. |
+| `image metadata agent` | 93 | `wiltodelta/remove-ai-watermarks` | 6,530 | On-topic and **pointing the wrong way**: the most-starred result is a tool for *stripping* watermarks and provenance. |
+
+**Contamination warning for later passes.** `danderfer/Comp_Sci_Sem_2` (228★) is the top result for
+both `photo desk agent` and `image licensing agent`. It is unrelated to media. Pass 4 and pass 22
+recorded the same behaviour for `jettbrains/-L-`; this is the second repo in this KB to contaminate
+two distinct planes. **Recorded so a later pass does not "discover" it as a finding.**
+
+The irony in the last row is worth stating plainly for a client: in the one query where a
+well-starred, properly licensed, on-topic project exists, **it exists to remove the metadata the
+rest of this plane is trying to add.**
+
+### What this means for a client engagement
+
+- **Take the pipeline. It is free and it is alive.** Resize/convert/serve is Apache-2.0 and MIT down
+  to the engine, and four independent servers compete on the same libvips core. Nobody needs to buy
+  Cloudinary to crop an image, and `imagor` gives a thumbor-compatible URL contract so a migration
+  is a routing change rather than a rewrite.
+- **Do not inherit the describe layer; pin it.** The three most-starred models in Tier 2 have not
+  been touched since 2024, and the canonical captioning model is archived. They still work — but
+  "BSD-3 and 37k stars" is not maintenance. Vendor the weights, pin the commit, and own the
+  inference wrapper. `open_clip` (MIT, pushed 2026-11-21) is the one live base.
+- **The alt-text workflow is the sellable gap.** Drafting a caption is solved and nearly free.
+  Routing it to a photo editor, recording who approved it, and proving it later is not: the whole
+  GitHub field is one repo with one star, and the Disability World testing cited in `intel/trends.md`
+  pass 23 found AI drafts usable as a *first draft* and actively risky on decorative images. The
+  product is the review loop and the audit trail, not the model.
+- **Wire C2PA now, because the capture end is already shipping.** Leica (M11-P, SL3-S), Nikon's
+  Authenticity Service and Sony firmware already sign at capture; `c2patool` verifies on ingest in
+  one binary under a permissive licence. 629 stars means no incumbent.
+
+### Method notes from this pass (reusable across all twelve industries)
+
+1. **`search/repositories` returning HTTP 422 is not evidence a repo does not exist.** Six of 65
+   repos — `Beep6581/RawTherapee`, `artpixls/ART`, `googlefonts/fontbakery`,
+   `JohannesBuchner/imagehash`, `ente-io/ente`, `UKPLab/sentence-transformers` — return
+   *"the listed users and repositories cannot be searched"* while `git ls-remote` serves refs
+   normally. This is the exact analogue of cycle 8's rule that a raw-channel 404 never proves a
+   missing licence. **Confirm existence with `git ls-remote`, and write `n/a` for stars rather than
+   guessing.**
+2. **The `repo:` qualifier is case-sensitive.** A retry loop that had lower-cased the slugs turned
+   five live repos into 422s. Keep the original casing.
+3. **Detect a GPL version from the title lines, not the body.** A body-wide grep misreported
+   **GPL-2.0 as LGPL-2.0** for `Exiv2/exiv2` and `Piwigo/Piwigo`, because the GPL-2.0 preamble
+   contains the phrase *"the GNU Library General Public License instead"*. Read the first six lines.
+4. **The default branch is often neither `master` nor `main`.** This pass found `2026.x`
+   (pimcore), `integration` (veraPDF) and `dev` (RawTherapee). Probe
+   `git ls-remote --symref <url> HEAD` before concluding a file is absent.
+5. **A LICENSE file can be one option of a dual licence, and taking it at face value overstates
+   copyleft.** `exiftool/exiftool` ships a 35,149-byte GPL-3.0 text and the GitHub API duly reports
+   `GPL-3.0` — but its README states the terms are *"the same terms as Perl itself (either the Perl
+   Artistic License or GPL)"*. The real answer is `Artistic-1.0-Perl OR GPL-1.0-or-later`, which is
+   far weaker copyleft than the file implies. **New licence-trap category: the file in the repo may
+   be a copy of the stricter option.**
+6. **A licence can live only in package metadata.** `soderlind/ai-alt-text` has no reachable LICENSE
+   file at all; `composer.json` carries `"license": "GPL-2.0-or-later"`. Check `composer.json`,
+   `package.json`, `pyproject.toml` and `Cargo.toml` before declaring a repo unlicensed.
+7. **The divergence in note 1 runs both ways, and this direction is the dangerous one.** Note 1
+   recorded repos that git serves but the search index cannot see. The inverse also happened:
+   **`CNTRUN/Termux-command` is returned by `search/repositories` with 120 stars, and
+   `git ls-remote` cannot serve it** under any casing. An indexed result is therefore **not**
+   proof a repository is live — the index can be stale or the repo withdrawn. **Rule: verify with
+   `git ls-remote` before writing any repo into a table, including one you only intend to cite as
+   noise.** Of 66 repo URLs written in this pass, 66 resolve; of 6 repos cited by name as search
+   contamination, 5 resolve and this one does not, and it is annotated in place rather than
+   removed, because the search *count* it illustrates is still real.

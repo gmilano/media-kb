@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 
 # 📈 Trending Media Repos — append-only log
@@ -9,6 +9,145 @@ updated: 2026-11-25
 > Newest section first; history below is never rewritten.
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
+
+## 2026-11-26 — pass 8: the live & delivery infrastructure (45 verified repos, 45/45 resolved)
+
+### Headline: the first plane in this KB where copyright is not the binding constraint
+
+Seven planes, one gate, always copyright — on the code or on the content. This plane is permissive
+almost everywhere in copyright and gated instead by **two non-copyright instruments**: patent pools
+and DRM key agreements. Neither is visible in a licence badge.
+
+**Gate 1 — the codecs refuse to grant patents, in writing.** `BSD-3-Clause-Clear` / "The Clear BSD
+License": the *Clear* **is** the patent carve-out.
+
+| Codec | Repo | Licence | Stars | Push |
+|---|---|---|---|---|
+| VVC encoder | https://github.com/fraunhoferhhi/vvenc | BSD-3-Clause-Clear | 1,228 | 2026-11-25 |
+| VVC decoder | https://github.com/fraunhoferhhi/vvdec | BSD-3-Clause-Clear | 573 | 2026-11-24 |
+| LCEVC decoder | https://github.com/v-novaltd/LCEVCdec | The Clear BSD License | 35 | 2026-10-27 |
+| MPEG-H 3D Audio decoder | https://github.com/Fraunhofer-IIS/mpeghdec | Fraunhofer FDK — §3 **"No PATENT LICENSE"** | 100 | 2026-07-24 |
+| AV1 (production) | https://github.com/AOMediaCodec/SVT-AV1 | BSD-3-Clause-Clear | 131 | 2026-11-23 |
+| AV1 (Rust) | https://github.com/xiph/rav1e | BSD-2-Clause | 4,167 | 2026-11-25 |
+| **Quality metric (control case)** | https://github.com/Netflix/vmaf | **BSD-2-Clause-Patent — express patent grant** | 5,660 | 2026-11-16 |
+
+VMAF proves the pattern is deliberate: same era, same culture, **opposite** licence — because VMAF is
+unpooled and VVC/LCEVC/MPEG-H are pooled. The licence tracks the patent pool.
+
+**Gate 2 — the key is the gate.** Packaging and CENC encryption are fully open
+(`shaka-project/shaka-packager`, BSD-3-Clause, 2,673★). The key/licence server for Widevine,
+PlayReady and FairPlay is not available as open source at all: each needs its own endpoint and
+key-delivery protocol under a signed agreement (Google partner programme + Master Licence Agreement
+and security questionnaire; a Microsoft agreement for any PlayReady service provider; Apple's
+developer agreement for FairPlay). **ClearKey is the only fully-open DRM and no studio accepts it.**
+
+### ⛔ Sixth distinct way a licence hides — on the most-recommended DRM packaging tool
+
+`https://github.com/axiomatic-systems/Bento4` — API reports **`NONE`**. Reality: **GPL-2.0 with a
+paid commercial alternative**, text at **`Documents/LICENSE.txt`** (18,693 B), one directory below
+root where no scanner reads it. Link it into a proprietary packager and you have shipped GPL
+obligations or you owe Axiomatic a fee. Taxonomy now: HTML file / packaging classifier / compile
+flags / modified-Apache-same-name / PDF / **non-root path**.
+
+### A seventh shape: a standards body minted its own licence
+
+`https://github.com/5G-MAG/rt-libflute` — **5G-MAG Public License v1.0**, Apache-2.0 in structure and
+wording with the patent grant rewritten: §3.1 licenses Essential Patents "to make, have made, use,
+and otherwise transfer **(excluding selling)** … **solely for study, testing and research
+purposes**"; §3.2 grants nothing for any other purpose and instead requires that "**You commit to be
+prepared to negotiate**" FRAND terms with every contributor. A field-of-use restriction on selling
+means **this is not open source** by the OSI definition — and it governs the reference stack for
+5G Broadcast/MBMS, exactly what an EMEA public broadcaster would pilot.
+
+### Contribution — and APAC owns the permissive substrate here
+
+| Repo | Licence | Stars | Push | Origin |
+|---|---|---|---|---|
+| https://github.com/ossrs/srs | MIT | 29,457 | 2026-11-25 | **China** |
+| https://github.com/bluenviron/mediamtx | MIT | 20,772 | 2026-11-25 | — |
+| https://github.com/ZLMediaKit/ZLMediaKit | MIT *(read)* | 17,729 | 2026-11-25 | **China** |
+| https://github.com/pion/webrtc | MIT | 16,926 | 2026-11-25 | — |
+| https://github.com/Haivision/srt | MPL-2.0 | 3,640 | 2026-11-25 | — |
+| https://github.com/obsproject/obs-studio | GPL-2.0 | 80,138 | 2026-11-26 | — |
+| https://github.com/livekit/livekit | Apache-2.0 | 22,396 | 2026-11-25 | — |
+| https://github.com/Eyevinn/whip | Apache-2.0 | 150 | 2026-06-09 | **Sweden** |
+| https://github.com/Eyevinn/srt-whep | Apache-2.0 | 145 | 2026-10-31 | **Sweden** |
+
+**The two most-starred self-hosted streaming servers on earth are both China-origin and both MIT.**
+That inverts the pattern in every other plane of this KB, where the permissive layer is
+Western-origin. Here APAC owns it outright.
+
+### The platform tier breaks this KB's "copyleft at the platform" law — twice
+
+| Repo | Licence | Stars | Push |
+|---|---|---|---|
+| https://github.com/OvenMediaLabs/OvenMediaEngine | AGPL-3.0 (obeys) | 3,309 | 2026-11-25 |
+| https://github.com/DDVTECH/mistserver | **Unlicense — public domain** | 521 | 2026-11-23 |
+| https://github.com/ant-media/Ant-Media-Server | **no root LICENSE** — open-core | 4,747 | 2026-11-23 |
+
+MistServer's `COPYING.md`: "dedicated to the public domain… anyone can use MistServer for any
+purpose - including commercial purposes - without any restrictions." A platform-tier streaming server
+with **zero** obligations, and at 521★ almost nobody has noticed. Ant Media returned 404 across six
+filename probes while `README.md` returns 200 and sells an Enterprise Edition — source-available;
+get terms in writing.
+
+### Packaging, players, and the compile-flag licence category confirmed twice
+
+| Repo | Licence | Stars | Push |
+|---|---|---|---|
+| https://github.com/shaka-project/shaka-packager | BSD-3-Clause *(read)* | 2,673 | 2026-11-04 |
+| https://github.com/gpac/gpac | LGPL-2.1 | 3,331 | 2026-11-24 |
+| https://github.com/Eyevinn/mp4ff | MIT | 669 | 2026-11-24 |
+| https://github.com/videojs/video.js | Apache-2.0 *(read)* | 40,253 | 2026-11-25 |
+| https://github.com/video-dev/hls.js | Apache-2.0 *(read)* | 17,066 | 2026-11-23 |
+| https://github.com/shaka-project/shaka-player | Apache-2.0 | 8,289 | 2026-11-25 |
+| https://github.com/Dash-Industry-Forum/dash.js | **BSD-3 + explicit patent non-grant** *(read)* | 5,555 | 2026-11-24 |
+| https://github.com/FFmpeg/FFmpeg | **LGPL-2.1+, GPL by build flag** *(read)* | 68,197 | 2026-11-25 |
+
+FFmpeg joins Chromaprint (pass 5) as the **second** instance of a licence decided by the compile, so
+that category is now a pattern. Audit build flags, not just the dependency list. And dash.js — the
+*reference DASH player* — states that no patent rights are granted: Gate 1 reaching the last mile.
+
+### Media over QUIC — the first new media transport since this KB began, and it is permissive
+
+Not yet an RFC: `draft-ietf-moq-transport` is Standards-Track Internet-Draft (-22, 1 Oct 2026); the
+IESG publication-request milestone is **2026-12-31**. Eleven vendors interoperated at NAB 2026; the
+MoQ Alliance includes Akamai, AWS, Cisco, Cloudflare, Fastly. LOC container milestone: March 2027.
+
+| Repo | Licence | Stars | Push | Origin |
+|---|---|---|---|---|
+| https://github.com/moq-dev/moq | Apache-2.0 | 1,642 | **2026-11-26** | reference (ex-`kixelated/moq-rs`) |
+| https://github.com/facebookexperimental/moxygen | Apache-2.0 | 127 | 2026-11-25 | Meta — NA |
+| https://github.com/Quicr/libquicr | BSD-2-Clause | 21 | 2026-11-25 | Cisco — NA |
+| https://github.com/mengelbart/moqtransport | MIT | 91 | 2026-09-16 | academic — EMEA |
+| https://github.com/nttcom/moq-wasm | MIT | 57 | 2026-11-25 | **NTT — APAC** |
+| https://github.com/kixelated/moq-js | `NONE` | 154 | **ARCHIVED 2025-06-20** | do not start here |
+
+All four regions are already in the implementer set, the implementations are permissive, and the
+standard is still open to influence. Pilot in 2026, production expected 2027 — early, not late.
+Honest caveat: ad insertion only partially supported, VOD unresolved. It does not replace HLS/DASH.
+
+### Edge and CDN — and a relocation this pass deliberately did not over-claim
+
+| Repo | Licence | Stars | Push |
+|---|---|---|---|
+| https://github.com/apache/trafficserver | Apache-2.0 | 2,001 | 2026-11-25 |
+| https://github.com/varnishcache/varnish-cache | BSD-2-Clause | 4,040 | **ARCHIVED 2026-02-16** |
+| https://github.com/rdkcentral/Thunder | Apache-2.0 | 61 | 2026-11-25 |
+| https://github.com/tvheadend/tvheadend | GPL-3.0 | 3,587 | 2026-11-25 |
+| https://github.com/jellyfin/jellyfin | GPL-2.0 | 59,765 | 2026-11-25 |
+
+Varnish's GitHub repo is archived and its own `README.rst` says "THIS REPOSITORY HAS MOVED" to
+`code.vinyl-cache.org`, with `master`→`main` and a `last` tag. **Neither `code.vinyl-cache.org` nor
+`vinyl-cache.org` resolved from this environment (`curl` → `000`)**, which may be egress policy
+rather than absence. So: don't start new work from the GitHub repo, and **don't tell a client the
+project is dead.** Apache Traffic Server is the verified-active permissive alternative.
+
+### Measurement note
+
+`librist` — the standards-based (VSF) RIST contribution reference — lives on `code.videolan.org`
+(GitLab), so it is invisible to GitHub-based discovery including this KB's own oracle. Recorded as an
+informed gap, not an absence. Second plane in which the canonical implementation is off-GitHub.
 
 ## 2026-11-25 — pass 7: the audience & measurement infrastructure (37 verified repos, 37/37 resolved)
 

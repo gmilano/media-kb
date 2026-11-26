@@ -1,13 +1,79 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 
 # 📈 Trending Media AI Agents — append-only log
 
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
+
+## 2026-11-26 — pass 8: the live & delivery plane (the strongest substrate, the emptiest agent layer)
+
+Scope: contribution → transcode → package/encrypt → origin → edge → player. 45 repos verified,
+45/45 resolved by `git ls-remote`. **9 of 45 needed a LICENSE-file read** — the worst API-accuracy
+ratio of any plane in this KB.
+
+### The eighth consecutive confirmation of the structural law, and the most extreme instance
+
+The substrate here is the healthiest this KB has measured in any plane — `ossrs/srs` 29,457★ MIT,
+`bluenviron/mediamtx` 20,772★ MIT, `pion/webrtc` 16,926★ MIT, `FFmpeg` 68,197★, all pushed within
+24 hours of measurement. The delivery-operations agent layer above it is a **measured zero**.
+
+Five stars-sorted `search/repositories` queries were run. `streaming agent llm video ops` returned
+**zero results**. The rest returned general video-*editing* agents. The only genuine real-time agent
+found at any star count is `yondonfu/ai-rtc-agent` — **26★, MIT, last pushed 2024-11-04**.
+
+Nothing open source watches an encoder ladder, reacts to a QoE collapse, re-packs a failing
+rendition, or drives an origin. That is the gap, and it sits on top of the best substrate in M&E.
+
+### The four real agents in or adjacent to this plane
+
+| Repo | Licence | Stars | Last push |
+|---|---|---|---|
+| https://github.com/OpenMontageInc/OpenMontage | **AGPL-3.0** | 83,342 | 2026-11-16 |
+| https://github.com/hypit-ai/hypit | modified Apache-2.0 (source-available) | 31,513 | 2026-11-25 |
+| https://github.com/Alisa0808/vox-director | MIT | 3,187 | 2026-10-05 |
+| https://github.com/yondonfu/ai-rtc-agent | MIT | 26 | 2024-11-04 (dormant) |
+
+### ⛔ Licence finding: a directory reported an 83,342★ AGPL agent as "32.3K stars, MIT"
+
+An AI-tooling aggregator promoted OpenMontage as **"32.3K stars, MIT License"**. Verified:
+**83,342 stars and AGPL-3.0.** Wrong on both counts, and wrong in the direction that always recurs —
+the repo looked *more* usable than it is. Third time in this KB that a directory has shifted a
+licence toward permissive. MIT and AGPL-3.0 are the two ends of the client-risk axis; this is not a
+rounding error.
+
+`hypit-ai/hypit` (31,513★) is `NOASSERTION` because it is a *modified* Apache-2.0. The modification,
+read in full, is favourable to a consultancy and worth knowing exactly: **permitted** — own
+infrastructure, own commercial work, and explicitly "work performed for your clients", plus
+single-tenant deployments; **requires a paid licence** — operating a multi-tenant environment (two or
+more outside parties with separate workspaces, fee or no fee) and commercial redistribution or
+bundling. Attribution must stay visible in the CLI and in generated run reports. Output is yours.
+Net: usable in Globant client delivery, **not** usable as the engine of a Globant-hosted SaaS.
+
+### ⚙️ Method correction — a known oracle "flaw" was actually a rename detector
+
+Earlier cycles recorded that `search/repositories` "returns false 422s on live repos" and left it as
+flakiness. **Both 422s this pass had one cause: the repo was renamed.** The old path still resolves
+over git (redirect); search only indexes the canonical name.
+
+| Path still cited everywhere | ls-remote | search | Canonical today |
+|---|---|---|---|
+| `AirenSoft/OvenMediaEngine` | OK | 422 | **`OvenMediaLabs/OvenMediaEngine`** (AGPL-3.0, 3,309★) |
+| `kixelated/moq-rs` | OK | 422 | **`moq-dev/moq`** (Apache-2.0, 1,642★, pushed 2026-11-26) |
+
+New rule: **ls-remote OK + search 422 = rename.** Search by name, find the new owner, write that one.
+
+### Informed gaps from this pass
+
+- No open-source delivery-operations agent, at any star count, under five query shapes.
+- No agent anywhere near the DRM step — structural, not neglect (see `repos/foundations.md`, Gate 2).
+- No MPEG-H Audio **encoder** exists; `Fraunhofer-IIS/mpeghdec` is a decoder, and Brazil's DTV+
+  mandates MPEG-H in every receiver.
+- `libatsc3` has **no canonical repo** — `libatsc3/libatsc3` and `Sony/libatsc3` both fail
+  `ls-remote`; only stale MIT forks (13★/2019, 12★/2023) exist for the US transition standard.
 
 ## 2026-11-25 — pass 7: the audience & measurement plane (the agent layer runs *against* the openness)
 

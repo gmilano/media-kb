@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 
 # 📡 Trends — Media & Entertainment
@@ -826,6 +826,216 @@ star count, recent push, a vendor's own comparison page, the SPDX field — each
 repo, and no single signal caught all five.** The only method that worked was: resolve existence with
 `git ls-remote`, resolve health with `pushed_at` **and** `archived`, and resolve the licence by reading
 the file and following what it points at.
+
+
+## 43. The eighth plane is the first where copyright is not the gate — patents and DRM keys are
+
+Seven planes, one answer: the gate was always a **copyright** licence, on the code (copyleft at the
+platform) or on the content (CPT, MedDRA, a measurement currency). The live & delivery plane breaks
+that. Here the code is permissive nearly everywhere — `ossrs/srs` MIT 29,457★, `bluenviron/mediamtx`
+MIT 20,772★, `pion/webrtc` MIT 16,926★, `shaka-packager` BSD-3, `trafficserver` Apache-2.0 — and two
+**non-copyright** instruments gate it absolutely:
+
+1. **Patent pools.** The codecs' own reference implementations refuse to license the patents.
+2. **DRM key agreements.** Packaging and encryption are open; the key server is unobtainable as open
+   source by design.
+
+Neither appears in a licence badge, a GitHub label or any listicle. **This is the most commercially
+important structural finding in eight passes**, because it means a licence audit — the thing every
+procurement process actually does — returns "all clear" on a stack with two hard commercial gates in
+it. Verified 2026-11-26 across 45 repos, 45/45 resolving.
+
+## 44. `BSD-3-Clause-Clear` is a patent carve-out, and the "Clear" is the whole point
+
+The industry reads "BSD" and stops. Read from the licence files:
+
+| Repo | Licence | Clause |
+|---|---|---|
+| `fraunhoferhhi/vvenc`, `fraunhoferhhi/vvdec` | BSD-3-Clause-Clear | "NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE" |
+| `v-novaltd/LCEVCdec` | The Clear BSD License | same |
+| `AOMediaCodec/SVT-AV1` | BSD-3-Clause-Clear | no patent grant |
+| `Fraunhofer-IIS/mpeghdec` | Fraunhofer FDK MPEG-H | §3 titled **"No PATENT LICENSE"** |
+| `Dash-Industry-Forum/dash.js` | BSD-3 variant | "including patent rights, and **no such rights are granted** under this license" |
+| **`Netflix/vmaf`** | **BSD-2-Clause-Patent** | **"an express patent grant"** |
+
+VMAF is the control case that makes this deliberate rather than accidental: same industry, same era,
+**opposite** licence — because VMAF is an unpooled metric and VVC/LCEVC/MPEG-H/AV1 are pooled. **The
+licence tracks the patent pool, not the generosity of the author.** Corollary for every engagement:
+a permissive codec licence is not a cost signal. Budget pool royalties as a separate line item.
+
+## 45. The only DRM you can run entirely on open source is the one no studio will accept
+
+The chain is open right up to the key and then stops dead. Packaging (`shaka-packager`, BSD-3),
+CMAF/DASH/HLS, and Common Encryption (CENC, ISO/IEC 23001-7) are all open — one encrypted asset can
+serve all three DRMs, split only by scheme (`cenc`/AES-CTR vs `cbcs`/AES-CBC, and **FairPlay requires
+`cbcs`**). But Widevine, PlayReady and FairPlay each require **their own licence request, endpoint
+and key-delivery protocol under a signed agreement**: Google's partner programme with a Master
+Licence Agreement and security questionnaire, a Microsoft agreement for any PlayReady service
+provider, Apple's developer agreement for FairPlay. **ClearKey** is the only fully-open DRM, and it
+is a test mechanism no rights holder accepts for premium content.
+
+Three private companies hold the cryptographic root of trust for premium video and issue it by
+contract. No amount of engineering changes this. **It is a procurement dependency for week one, not
+a build task** — and it is the structural reason this plane has no agent anywhere near the DRM step.
+
+## 46. A licence can live one directory below root — the sixth distinct hiding place, on a tool everyone recommends
+
+`axiomatic-systems/Bento4` (2,530★, pushed 2026-11-22): GitHub's API reports **`NONE`**. The truth is
+**GPL-2.0 with a paid commercial alternative**, and the text sits at **`Documents/LICENSE.txt`**
+(18,693 B): "Bento4 is available under two different licenses… a non-GPL commercial license is
+available from Axiomatic Systems LLC."
+
+Bento4 is one of the two tools every multi-DRM packaging guide names — a commercial DRM vendor even
+publishes a Bento4 configuration guide for it. A client who links it into a proprietary packaging
+service has shipped GPL-2.0 obligations or owes a commercial fee, **and GitHub told them there was no
+licence at all.** The taxonomy is now six: an HTML file; a packaging classifier; compile flags; a
+modified Apache that keeps the name; a PDF; **a non-root path**. Six mechanisms, one rule: the
+licence *field* is not evidence. Only the file is.
+
+## 47. A standards body minted its own licence, and production use carries no patent rights
+
+The **5G-MAG Public License v1.0** (`5G-MAG/rt-libflute`) is Apache-2.0 in structure and wording with
+the patent grant rewritten:
+
+- **§3.1** licenses Essential Patents "to make, have made, use, and otherwise transfer **(excluding
+  selling)** the Work, **solely for study, testing and research purposes**."
+- **§3.2**, for every other purpose, grants nothing: "**You commit to be prepared to negotiate**" a
+  licence with **each Contributor** on **FRAND** terms.
+
+A field-of-use restriction on selling means **this is not open source** under the OSI definition,
+however the file is named — and it governs the reference stack for 5G Broadcast/MBMS, precisely the
+technology a European public broadcaster would pilot. It reads as permissive to every scanner and to
+every engineer who recognises the Apache shape. **A pilot that quietly becomes a service has
+acquired an unbounded patent obligation.** Seventh licence shape, and the most dangerous yet, because
+the disguise is structural rather than clerical.
+
+## 48. The compile-flag licence is now a pattern, not an anecdote — FFmpeg is the second case
+
+Pass 5 recorded Chromaprint as "a licence decided by the compile" and called it a new category.
+`FFmpeg/FFmpeg` (68,197★) confirms it: `LICENSE.md` states most files are **LGPL-2.1+** and that
+LGPL-2.1+ applies in combination — but `--enable-gpl` produces a **GPL** binary. Two independent
+instances make it a pattern, and the operational rule follows: **audit your build flags, not just
+your dependency list.** A dependency manifest cannot express this, which means no SCA tool catches
+it. The same binary is two different licences depending on how it was compiled.
+
+## 49. The platform tier broke its own law twice in one plane — and one project went to public domain
+
+This KB's "copyleft at the platform, permissive at the pipeline" law held across six planes.
+This plane produced two exceptions at once:
+
+- `DDVTECH/mistserver` (521★) — **Unlicense, public domain**. `COPYING.md`: "dedicated to the public
+  domain… anyone can use MistServer for any purpose - including commercial purposes - without any
+  restrictions." A platform-tier streaming server with **zero** obligations.
+- `ant-media/Ant-Media-Server` (4,747★) — **no LICENSE file at root at all** (404 across six
+  filename probes while `README.md` returns 200), selling an Enterprise Edition against a Community
+  Edition. Open-core; get terms in writing.
+
+`OvenMediaLabs/OvenMediaEngine` still obeys the law at AGPL-3.0. But MistServer goes further than the
+MIT exception recorded in §10: **public domain is the most permissive outcome this KB has found at
+the platform tier**, and at 521★ essentially nobody has noticed it exists.
+
+## 50. APAC owns the permissive substrate in this plane — the first inversion of that pattern in this KB
+
+In every earlier plane the permissive layer was Western-origin and the Asian contribution was
+downstream. Here it is reversed: the two most-starred self-hosted streaming servers on earth are
+**both China-origin and both MIT** — `ossrs/srs` (29,457★) and `ZLMediaKit/ZLMediaKit` (17,729★,
+licence read from file; the API said `NOASSERTION`). `nttcom/moq-wasm` (MIT, NTT) puts Japan in the
+MoQ implementer set.
+
+The consequence is regional and practical: an APAC delivery engagement can run on region-native
+MIT-licensed infrastructure with **no copyright gate at all**, which makes the licence conversation
+there purely about codec patents. It also matters commercially: APAC adspend is growing at
+**+5.2% in 2026, the slowest since the pandemic**, against a screen economy racing toward
+**USD 200 billion** with a monetisation gap — so cost per delivered stream is a board number, and
+the MIT substrate is the answer to it.
+
+## 51. Media over QUIC is the first new media transport since this KB began, and it is permissive in all four regions
+
+Status on 2026-11-26: `draft-ietf-moq-transport` is a **Standards-Track Internet-Draft, not an RFC**
+(revision -22, 1 October 2026), with an IETF milestone to request IESG publication on
+**2026-12-31**. Eleven vendors demonstrated interoperable implementations at **NAB 2026**; the MoQ
+Alliance includes **Akamai, AWS, Cisco, Cloudflare and Fastly**. The LOC container draft carries a
+**March 2027** milestone.
+
+What makes it unusual for this KB: the implementations are permissive (`moq-dev/moq` Apache-2.0 and
+pushed **2026-11-26**; `facebookexperimental/moxygen` Apache-2.0; `Quicr/libquicr` BSD-2;
+`mengelbart/moqtransport` MIT; `nttcom/moq-wasm` MIT), **all four regions are already in the
+implementer set**, and the standard is still open to influence before year end. Pilot in 2026,
+production expected 2027 — so an engagement starting now is early rather than late.
+
+Honest caveats, because the trade press is bullish: ad insertion is only partially supported, VOD is
+unresolved, and **MoQ does not replace HLS/DASH today**. Claims that Cloudflare runs relays in 330+
+cities and that Meta moved Instagram Live ingest to MoQ in October 2026 come from vendor blogs and
+**could not be verified against primary sources** — flagged, not promoted. `kixelated/moq-js` is
+**archived** (2025-06-20): do not start there.
+
+## 52. Europe regulates delivery with a stopwatch, and the political risk has already inverted
+
+EMEA is the only region where a regulator imposes a **latency** requirement on an operational
+response. Italy's Piracy Shield lets AGCOM order blocks **without prior judicial review**, to be
+implemented **within 30 minutes**; by mid-2026 it had reportedly blocked **120,000+ domains and IPs**
+(press-attributed, not AGCOM-confirmed); resolution **47/25/CONS** extended the duty to **VPN and
+public DNS** providers, and **Cloudflare was fined multimillion euros** for refusing DNS-level
+blocks. An EU study now proposes a **binding Regulation** with the same 30-minute window across
+**DNS resolvers, VPNs and CDNs**.
+
+But the criticism has flipped direction. The European Commission (June 2025) raised **overblocking,
+opacity and absence of prior judicial review**; Spain's Congress committee voted on **2026-04-29** to
+direct reform of the regime; LaLiga is **blocking entire IP ranges rather than specific domains**; and
+the EU's own assessment concluded rapid blocking **comes up short** for sports and broadcast.
+
+**So the sellable product is not the blocking — it is the proportionality evidence.** Detection,
+evidence capture, an auditable order trail, a 30-minute actuation path across intermediaries, and a
+defensible overblocking record. Everyone is building the first half; the regulator is now asking for
+the second.
+
+## 53. The US has a dated delivery deadline and no open tooling for it
+
+ATSC 3.0 is the only delivery-side deadline in this KB that forces re-engineering of a live chain:
+broadcasters running ATSC 3.0 must currently simulcast "substantially similar" ATSC 1.0 content
+**through at least 2027-07-17**, which the FCC's proposal would end; deployment is already past
+**80 markets and 70% of population**; NAB wants ATSC 1.0 gone **by 2028 in the top 55 markets and
+everywhere by 2030**. The proposal sets **no cutoff date and no tuner mandate**, asking instead for
+comment on a tuner requirement and a **labelling** rule for incapable sets.
+
+⚠️ These are a **proposal and a draft order** — this pass found no source confirming a **final
+adopted FCC order**, and says so rather than smoothing it.
+
+Underneath the deadline there is a vacuum: **`libatsc3` has no canonical repository.**
+`libatsc3/libatsc3` and `Sony/libatsc3` both fail `ls-remote`; the survivors are forks at 13★ (2019)
+and 12★ (2023). A regulated, dated, capital-intensive transition with no maintained open
+implementation is the cleanest engagement shape in this plane.
+
+## 54. Brazil switched on a national standard built entirely on patent-pooled codecs
+
+The largest LATAM finding in eight passes. Brazil's **DTV+ / TV 3.0** went live on **2026-06-11**
+across Rio de Janeiro, São Paulo and the Federal District, timed to the 2026 FIFA World Cup under a
+decree signed in August 2025. The stack: **VVC (H.266) + MPEG-5 LCEVC** two-layer video — reportedly
+the first national standard built that way — with **MPEG-H Audio mandatory, including over HDMI on
+every receiver**, and a physical layer borrowing MIMO and LDM from ATSC 3.0. Globo ran the Rio
+lighthouse station; Intelbras and Aquario shipped the first receivers from 2026-06-08.
+
+**All three mandated codecs have reference implementations that refuse to grant patents** (trend 44),
+and **one has no open encoder at all**: `Fraunhofer-IIS/mpeghdec` is a decoder, so every DTV+ audio
+encode in the country must pass through commercial equipment. A whole nation's broadcast standard now
+rests on three royalty-bearing codecs whose open implementations point licensees at "the respective
+patent owners". The royalty exposure is **accruing now**, which makes codec-royalty mapping a
+CFO-sponsored engagement with a deadline already in the past.
+
+## 55. The best substrate in this KB has the emptiest agent layer — and the queries prove it
+
+Eighth consecutive confirmation of the structural law, and the most extreme instance. The substrate:
+four repos above 16,000★ all pushed within 24 hours of measurement. The agent layer: five
+stars-sorted `search/repositories` queries, of which **`streaming agent llm video ops` returned zero
+results**, and the others returned general video-*editing* agents. The only genuine real-time agent
+at any star count is **`yondonfu/ai-rtc-agent` — 26★, MIT, last pushed 2024-11-04.**
+
+Nothing open source watches an encoder ladder, reacts to a QoE collapse, re-packs a failing rendition
+or drives an origin. Meanwhile the industry consensus for 2026 is that **agentic AI** is the theme
+and that the question has shifted from adoption to **business value** (Akamai), with
+**87% of M&E boards having approved major AI investments** (Grant Thornton) while North American
+firms remain **stuck in early experimentation** (Forrester). Authorised budget, named priority,
+empty shelf — on the layer that runs the business.
 
 ## Low-confidence items — flagged, not promoted
 

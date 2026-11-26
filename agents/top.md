@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 
 # 🎯 AI Agents & Generative Media Models — Media & Entertainment
@@ -560,6 +560,106 @@ Confirms pass 5's two-sided rule again: **read the results, never the total.** 8
   recorded from trade-press summaries, **not primary sources**. Treat both as reported, not verified.
 - **No measured figure was found for how many media companies self-host a recommender** versus buying
   one. Unresearched, not absent.
+
+
+## The live & delivery plane — measured 2026-11-26 (pass 8), and the agent layer is a measured near-zero
+
+> The plane: contribution (first mile) → transcode → package/encrypt → origin → CDN/edge → player.
+> This is where M&E spends the most money per engineer and where this KB had **eight lines of
+> content** before today. All rows verified 2026-11-26: existence by `git ls-remote` (45/45 resolved),
+> stars and `pushed_at` from `search/repositories`, licence by reading the LICENSE file wherever the
+> API returned `NOASSERTION` or `NONE` — which in this plane was **9 of 45 repos**, the highest
+> proportion of any plane in this KB.
+
+### The eighth consecutive confirmation of the structural law — with the gradient now fully inverted
+
+Seven planes have now produced the same result: **the substrate is permissive and healthy, and the
+agent layer above it is missing.** This plane confirms it an eighth time, and it is the most extreme
+case measured so far, because the substrate here is the *strongest* in the entire KB:
+
+| Layer | Health (verified 2026-11-26) | Agent layer |
+|---|---|---|
+| Contribution / ingest servers | `ossrs/srs` 29,457★ MIT, `bluenviron/mediamtx` 20,772★ MIT, `pion/webrtc` 16,926★ MIT — all pushed within 24h | none |
+| Transcode | `FFmpeg/FFmpeg` 68,197★, pushed 2026-11-25 | none |
+| Packaging / origin | `shaka-project/shaka-packager` 2,673★ BSD-3 | none |
+| Players | `videojs/video.js` 40,253★, `video-dev/hls.js` 17,066★ — both Apache-2.0 | none |
+| **Delivery operations agent** | **the only real-time one is 26★ and last pushed 2024-11-04** | — |
+
+Five queries were run against `search/repositories`, stars-sorted (`ffmpeg agent llm`,
+`streaming agent llm video ops`, `video encoding agent ai`, `broadcast ai agent`,
+`transcoding llm agent`). `streaming agent llm video ops` returned **literally zero results**. The
+others returned general-purpose video *editing* agents, not delivery or operations agents. Nothing
+that watches an encoder ladder, reacts to a QoE collapse, re-packs a failing rendition or drives an
+origin exists as open source at any star count.
+
+### The four agents that are real in or adjacent to this plane
+
+| Name | Repo | Licence | Stars | Last push | What it actually does |
+|---|---|---|---|---|---|
+| OpenMontage | https://github.com/OpenMontageInc/OpenMontage | **AGPL-3.0** | 83,342 | 2026-11-16 | Agentic video production/assembly. The largest media agent repo found in any pass of this KB. |
+| Hypit | https://github.com/hypit-ai/hypit | **modified Apache-2.0** (source-available) | 31,513 | 2026-11-25 | Agentic render/generation backend driving FFmpeg-class tooling; produces run reports and manifests. |
+| vox-director | https://github.com/Alisa0808/vox-director | MIT | 3,187 | 2026-10-05 | Multi-step voice/narration direction agent. |
+| ai-rtc-agent | https://github.com/yondonfu/ai-rtc-agent | MIT | 26 | **2024-11-04** | Real-time AI over a WebRTC transport. **The only genuine real-time agent in this plane, and it is dormant — two years stale.** |
+
+### ⛔ The licence finding of this pass, part 1: a 32,000-star agent is not the licence the directories report
+
+An AI-tooling aggregator promoted OpenMontage as **"32.3K stars, MIT License"**. Both halves are
+wrong, and verification took one call:
+
+- Stars: **83,342**, not 32.3K.
+- Licence: **AGPL-3.0**, not MIT.
+
+MIT and AGPL-3.0 are the two ends of this KB's risk axis. AGPL-3.0 on a video-production agent means
+that if a client reaches it over a network, the client's own modifications are in scope. This is the
+third time in this KB that an aggregator or directory has misreported a licence in the **permissive**
+direction, and the direction of the error is never random: it always makes the repo look more usable
+than it is. **Never take a licence from a listicle. Read the file.**
+
+`hypit-ai/hypit` is the same shape in a subtler form: GitHub reports `NOASSERTION` because it is a
+*modified* Apache-2.0. Read in full, the modification is commercially precise, and for a consultancy
+it is unusually favourable — so the detail is worth stating rather than avoiding:
+
+- **Permitted without a paid licence:** running it on your own infrastructure, for your own
+  organisation's commercial work, **and explicitly "work performed for your clients"**, plus
+  single-tenant deployments operated by and for one organisation.
+- **Requires a paid licence:** operating a **multi-tenant** environment (two or more outside parties
+  holding separate workspaces, *fee or no fee*), and commercial redistribution — selling or bundling
+  it into a product supplied to third parties.
+- Also: the name, logo and copyright in the CLI and in **generated run reports and manifests** may
+  not be removed where a user sees them.
+- Output is yours: the producer claims no rights in generated artefacts.
+
+So Hypit is usable in Globant client delivery, and **not** usable as the engine of a Globant-hosted
+multi-tenant product. That distinction decides which of the two it can be, and it is invisible from
+the repo badge.
+
+### ⚠️ Contamination — and a method correction that turns a known flaw into a diagnostic
+
+Earlier cycles of this file recorded that `search/repositories` "returns false 422s on live repos"
+and treated it as oracle flakiness. **That diagnosis was incomplete. Both 422s in this pass had a
+single cause: the repository had been renamed**, so the old path still resolves over git (GitHub
+serves a redirect) while search only indexes the canonical name.
+
+| Path every guide still cites | `ls-remote` | `search/repositories` | Canonical name today |
+|---|---|---|---|
+| `AirenSoft/OvenMediaEngine` | OK | **422** | **`OvenMediaLabs/OvenMediaEngine`** (AGPL-3.0, 3,309★) |
+| `kixelated/moq-rs` | OK | **422** | **`moq-dev/moq`** (Apache-2.0, 1,642★, pushed 2026-11-26) |
+
+**The rule, stated for the next pass:** `ls-remote` OK + search 422 does not mean the oracle is
+broken. It means *rename* — go find the new owner with a name search before writing either path.
+A dead-looking project may simply have moved, and a KB that records the old path sends an engagement
+to a repo nobody is updating.
+
+### Informed gaps from this pass — searched, and genuinely not found
+
+- **No open-source delivery-operations agent**, at any star count, under any of five query shapes.
+- **No agent anywhere near the DRM step** — and §"the key is the gate" in `repos/foundations.md`
+  explains why that one is structural rather than neglect.
+- **No MPEG-H Audio encoder**, open or otherwise: `Fraunhofer-IIS/mpeghdec` is a **decoder**, and
+  Brazil's DTV+ mandates MPEG-H support in every receiver (see `intel/market.md` → LATAM).
+- **`libatsc3` has no canonical home.** `libatsc3/libatsc3` and `Sony/libatsc3` both fail
+  `ls-remote`; what exists are forks (`junhuac/libatsc3` 13★ 2019, `kansonkong/libatsc3` 12★ 2023),
+  all MIT, all stale. The US transition standard has no maintained open implementation.
 
 ## Corrections to earlier cycles of this file
 

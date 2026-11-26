@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 
 # 🧩 Composition Patterns — Media & Entertainment
@@ -1060,6 +1060,130 @@ steerability lever can be embedded in the streaming service itself.
 - **No open-source implementation of this gate exists** — `identity resolution advertising` returns four
   repos and the only on-topic one has 0 stars. This is a build, and that is the point: it is a
   differentiator, not a procurement.
+
+
+## Pattern 22 — Permissive low-latency live chain with an operations agent (the empty-shelf build)
+
+**The gap it fills.** The substrate of this plane is the healthiest in this KB and its
+delivery-operations agent layer is a measured zero: five stars-sorted queries, one returning
+*literally* zero results, and the only real-time agent at any star count is `yondonfu/ai-rtc-agent`
+(26★, MIT, **last pushed 2024-11-04**). Boards have authorised the money — 87% of M&E boards have
+approved major AI investments — and there is nothing on the shelf for the layer that runs the
+business.
+
+**The stack, all verified 2026-11-26 and all permissive:**
+
+| Role | Component | Licence |
+|---|---|---|
+| Contribution | `Haivision/srt` (MPL-2.0) or `Eyevinn/whip` (Apache-2.0, RFC 9725) | weak/permissive |
+| Ingest + routing | `bluenviron/mediamtx` (MIT, 20,772★) — or `ossrs/srs` (MIT) at scale | MIT |
+| WebRTC plumbing | `pion/webrtc` (MIT) | MIT |
+| Broadcast→browser bridge | `Eyevinn/srt-whep` (Apache-2.0) | Apache-2.0 |
+| Transcode | `FFmpeg/FFmpeg` — **build LGPL-2.1+, do NOT pass `--enable-gpl`** | LGPL-2.1+ |
+| Packaging | `shaka-project/shaka-packager` (BSD-3) + `Eyevinn/mp4ff` (MIT) for segment surgery | BSD/MIT |
+| Edge | `apache/trafficserver` (Apache-2.0) | Apache-2.0 |
+| Players | `video-dev/hls.js` or `shaka-project/shaka-player` (both Apache-2.0) | Apache-2.0 |
+| Objective quality | `Netflix/vmaf` (**BSD-2-Clause-Patent — express patent grant**) | permissive + patents |
+
+**Wiring.**
+
+1. Contribution lands on MediaMTX over SRT (or WHIP from a browser/OBS encoder — `obs-studio` has
+   pushed WHIP since v30; run it as a *tool*, never link it, because it is GPL-2.0).
+2. MediaMTX fans out to an FFmpeg ladder; Shaka Packager produces CMAF with `cbcs` (the scheme
+   FairPlay requires, and the one that lets a single encrypted asset serve all three DRMs).
+3. Traffic Server fronts the origin; `hls.js`/`shaka-player` report QoE events back.
+4. **The agent** — this is the part you are building, because it does not exist — consumes
+   player QoE, origin/edge logs and VMAF scores, and acts on: rendition-ladder changes, segment
+   re-packing, origin failover, and cache-rule adjustments. Every action it takes is a config change
+   against components above, so each one is reversible and auditable.
+5. `Eyevinn/mp4ff` lets the agent manipulate ISOBMFF segments directly in Go under MIT — the piece
+   that makes "re-pack a failing rendition" an actual operation rather than a restart.
+
+**Two boundaries the agent must not cross.** The **DRM key step** (contractual — see Pattern 24) and
+**codec selection** (patent-pooled — trend 44). An agent that "optimises" a client onto VVC has
+created a royalty obligation nobody priced.
+
+**Licence hygiene that decides whether you own the result:** build on MediaMTX/SRS (MIT), **not** on
+`OvenMediaEngine` (AGPL-3.0) or `ant-media` (no root licence), or the agent you write inherits a
+distribution problem. Do not link `axiomatic-systems/Bento4` — it is **GPL-2.0 + paid commercial**,
+with the text hidden at `Documents/LICENSE.txt` where GitHub reports "no licence".
+
+**Sell it as:** cost per delivered stream and incidents-avoided-per-month. In APAC that is a board
+number (adspend +5.2%, the slowest since the pandemic, against a USD 200bn screen economy).
+
+---
+
+## Pattern 23 — DTV+ / TV 3.0 codec-royalty and conformance trail (the LATAM build with a deadline already past)
+
+**The situation.** Brazil's **DTV+ / TV 3.0** went live **2026-06-11** (Rio, São Paulo, Federal
+District), mandating **VVC + MPEG-5 LCEVC** video and **MPEG-H Audio including over HDMI on every
+receiver**. All three mandated codecs' reference implementations **explicitly refuse to grant patent
+rights**, and MPEG-H has **no open encoder at all** — only `Fraunhofer-IIS/mpeghdec`, a decoder.
+Exposure is therefore **accruing now**, for every broadcaster, receiver maker and integrator in the
+country.
+
+**What you build.**
+
+1. **A codec-layer inventory.** For each delivered stream: which codec, which layer (base VVC vs
+   LCEVC enhancement), which audio system, which encoder produced it, and which pool administers the
+   relevant patents. The licences themselves point you at "the respective patent owners", so the
+   mapping is the deliverable.
+2. **A conformance and evidence trail** per emission, reusing the QC machinery from **Pattern 13**:
+   the artefact, the tool version, the operator, the timestamp, the result.
+3. **Toolchain placement, stated honestly.** Verified reference points:
+   - `fraunhoferhhi/vvenc` / `vvdec` — BSD-3-Clause-Clear, **no patent grant**
+   - `v-novaltd/LCEVCdec` — The Clear BSD License, **no patent grant** (decoder; 35★)
+   - `Fraunhofer-IIS/mpeghdec` — Fraunhofer FDK, **§3 "No PATENT LICENSE"** (decoder only)
+   - Everything *around* the codecs is permissive and usable: `gpac/gpac` (LGPL-2.1),
+     `shaka-packager` (BSD-3), `Eyevinn/mp4ff` (MIT), `FFmpeg` (LGPL-2.1+ if built without
+     `--enable-gpl`)
+4. **A dual-chain matrix** for the transition period: legacy ISDB-Tb alongside DTV+, two encodes, two
+   audio paths, receiver-compatibility coverage at the Intelbras/Aquario tier.
+
+**What you must not promise.** That open source removes the royalty. It does not, by the explicit
+terms of all three licences. The deliverable is a **defensible, itemised exposure map and an evidence
+trail** — which is what a CFO can act on, and what nobody in the region currently has.
+
+**Who sponsors it.** The CFO, not the CTO. This is the LATAM twin of **Pattern 18** (VFX tax-credit
+apportionment): a regulator or standard created a financial obligation, and the product is the
+auditable trail that bounds it.
+
+---
+
+## Pattern 24 — Multi-DRM delivery where the key boundary is explicit (the pattern that saves a programme)
+
+**Why this exists as a pattern.** The single most common way a premium-video programme fails late is
+discovering in month four that the open-source stack cannot issue DRM licences — because every guide
+shows an open packager encrypting content and then goes quiet. **Gate 2 is structural:** packaging and
+Common Encryption are fully open; the key and licence server for Widevine, PlayReady and FairPlay are
+not available as open source at all, by design.
+
+**The architecture, with the boundary drawn on purpose.**
+
+1. **Encode once, package once.** `shaka-project/shaka-packager` (BSD-3) produces a single CMAF asset
+   under **CENC (ISO/IEC 23001-7)**. Choose **`cbcs`** (AES-CBC) as the primary scheme: FairPlay
+   requires it, and Widevine and PlayReady accept it on modern clients.
+2. **Keep a `cenc` (AES-CTR) variant only if you must** support older PlayReady 3.x / early Widevine
+   CDMs that decrypt CTR only. That is a device-support decision with a storage cost — make it
+   explicitly, not by accident.
+3. **Cross the boundary commercially.** Three separate licence requests, endpoints and key-delivery
+   protocols, each under a signed agreement: Google's partner programme (Master Licence Agreement +
+   security questionnaire), a Microsoft agreement for any PlayReady service provider, Apple's
+   developer agreement for FairPlay. Either contract directly or buy a multi-DRM vendor. **Put this
+   in week one of the plan.**
+4. **Use ClearKey for CI only.** It is the only fully-open DRM; it is a test mechanism and no studio
+   accepts it for premium content. Wire it into automated tests so the pipeline is verifiable without
+   touching production keys.
+5. **Playback:** `shaka-player` or `hls.js` (both Apache-2.0) via EME. Note that
+   `Dash-Industry-Forum/dash.js` states that **no patent rights are granted** — fine to use, not fine
+   to assume it covers you.
+6. **Studio security requirements are contractual, not technical:** premium tiers specify
+   **Widevine L1 and HDCP** levels in the content agreement. Confirm the required security level
+   *before* choosing devices, because it determines them.
+
+**Anti-pattern this replaces:** "we'll add DRM later with open source." There is no later and there is
+no open source for it. The honest version — open everywhere except a named, priced, contracted key
+service — is both cheaper and faster, and it is the version that survives a studio audit.
 
 ## Anti-patterns — learned the hard way in this KB
 

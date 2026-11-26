@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 
 # 🏭 Vertical Platforms — Media & Entertainment
@@ -448,3 +448,81 @@ sponsorship, not certification** — do not claim it is certified. And `growlfm/
 open download-counting spec, **exists but has no licence file at all** (verified across six filename
 probes while `README.md` returns 200). Use its specification, not its code.
 
+## The live & delivery tier — added 2026-11-26 (pass 8)
+
+> Running systems for contribution, origin, packaging and playout that a studio can deploy and then
+> add an agentic layer to. All rows verified 2026-11-26 (`git ls-remote` + `search/repositories`,
+> licence read from file wherever the API returned `NOASSERTION` or `NONE`).
+
+| Platform | Repo | Licence | Stars | Last push | What you get |
+|---|---|---|---|---|---|
+| SRS | https://github.com/ossrs/srs | MIT | 29,457 | 2026-11-25 | Full streaming server: RTMP/SRT/WebRTC/HLS, clustering. **APAC-origin, MIT — the most permissive platform-tier option at scale.** |
+| MediaMTX | https://github.com/bluenviron/mediamtx | MIT | 20,772 | 2026-11-25 | Single Go binary, SRT/RTSP/WebRTC/HLS in and out. The fastest credible starting point. |
+| ZLMediaKit | https://github.com/ZLMediaKit/ZLMediaKit | MIT *(read)* | 17,729 | 2026-11-25 | C++11 media server, broad protocol coverage. **APAC-origin.** |
+| LiveKit | https://github.com/livekit/livekit | Apache-2.0 | 22,396 | 2026-11-25 | Self-hostable WebRTC SFU + agents framework; the interactive/low-latency end. |
+| OvenMediaEngine | https://github.com/OvenMediaLabs/OvenMediaEngine | **AGPL-3.0** | 3,309 | 2026-11-25 | Sub-second LL-HLS/WebRTC origin. **Note the rename** — guides still cite `AirenSoft/…`. |
+| MistServer | https://github.com/DDVTECH/mistserver | **Unlicense (public domain)** | 521 | 2026-11-23 | Ingest/transcode/playout platform with **zero licence obligations**. |
+| Ant Media Server | https://github.com/ant-media/Ant-Media-Server | **no root LICENSE** — open-core | 4,747 | 2026-11-23 | Ultra-low-latency WebRTC platform; Community vs Enterprise split. **Verify terms in writing.** |
+| Jellyfin | https://github.com/jellyfin/jellyfin | GPL-2.0 | 59,765 | 2026-11-25 | Media server/library with transcoding and client apps. |
+| Tvheadend | https://github.com/tvheadend/tvheadend | GPL-3.0 | 3,587 | 2026-11-25 | DVB/IPTV backend — the broadcast-input platform. |
+| Eyevinn Channel Engine | https://github.com/Eyevinn/channel-engine | Apache-2.0 | 135 | 2026-11-06 | FAST/linear channel assembly from VOD. **EMEA-origin.** |
+| Apache Traffic Server | https://github.com/apache/trafficserver | Apache-2.0 | 2,001 | 2026-11-25 | Caching proxy / CDN core — the self-hosted edge. |
+| RDK Thunder | https://github.com/rdkcentral/Thunder | Apache-2.0 | 61 | 2026-11-25 | Set-top/device framework: the far end of the chain. |
+
+### ⚠️ This tier **breaks** this file's licence law twice — the first plane in which it fails
+
+This file's law has been "copyleft at the platform, permissive at the pipeline" since pass 2, with one
+MIT exception. The live & delivery tier produces two exceptions at once, and one of them goes further
+than MIT has ever gone:
+
+- **`DDVTECH/mistserver` is public domain.** `COPYING.md`: "dedicated to the public domain… anyone can
+  use MistServer for any purpose - including commercial purposes - without any restrictions." A
+  platform-tier streaming server with **no obligations of any kind**. At 521★, almost nobody knows.
+- **`ossrs/srs` and `ZLMediaKit` are MIT at 29,457★ and 17,729★** — platform-tier systems, not
+  libraries, at the permissive end and at the top of the star rankings.
+
+So in this tier the law is not merely bent, it is **inverted**: the most-adopted platforms are the
+most permissive ones. The copyleft options (`OvenMediaEngine` AGPL-3.0, `Jellyfin` GPL-2.0,
+`Tvheadend` GPL-3.0) are real but are *not* where the adoption is.
+
+### ⛔ The two gates this tier cannot give you, no matter which platform you pick
+
+Every platform above will ingest, transcode, package and deliver. **Neither of the following is
+obtainable from any of them**, and both must be sourced commercially — see `repos/foundations.md`:
+
+1. **Premium DRM.** The key/licence server for Widevine, PlayReady and FairPlay requires a signed
+   agreement with Google, Microsoft and Apple respectively. ClearKey is the only fully-open DRM and
+   no studio accepts it. There is **no open-source path to a Widevine L1 / HDCP premium service.**
+2. **Codec patent rights.** The VVC, LCEVC, MPEG-H and AV1 reference implementations are permissive
+   in copyright and explicitly grant **no** patent rights (`BSD-3-Clause-Clear` / "No PATENT
+   LICENSE"). Pool royalties are a separate budget line.
+
+### Gap: there is no open-source broadcast-grade **playout and channel origination** platform
+
+Searched this pass and stated as a gap rather than left silent. `Eyevinn/channel-engine` (135★)
+assembles FAST/linear channels from VOD and is the closest thing that exists; `MistServer` and `SRS`
+do playout only in the streaming sense. Nothing open source provides broadcast playout with
+as-run logging, secondary events, branding/graphics insertion and redundancy — the capabilities a
+channel actually needs. This is the **second** structural MAM/playout gap this KB has recorded (the
+first being the absent open broadcast MAM, passes 2 and 6), and it has the same cause: the buyers are
+few, large, and already locked to vendors with certification obligations.
+
+### Gap: no maintained open ATSC 3.0 stack, while the US transition runs
+
+`libatsc3/libatsc3` and `Sony/libatsc3` both fail `ls-remote`. Only stale MIT forks exist (13★/2019,
+12★/2023). See `intel/market.md` → North America for the deadline this sits under.
+
+### How to add the AI layer to this tier, specifically
+
+The agent layer here is a **measured zero** (`agents/top.md`, pass 8), so everything below is
+unbuilt — which is the point:
+
+1. **Start from MediaMTX or SRS** (both MIT) rather than an AGPL platform, so the agent you write
+   stays yours.
+2. **Instrument before you automate.** Join player-side QoE (`hls.js`/`shaka-player` events) to
+   origin and edge logs; `Netflix/vmaf` (BSD-2-Clause-**Patent**, express patent grant) gives you an
+   objective quality number an agent can act on.
+3. **Give the agent the ladder, not the pixels.** Rendition selection, segment re-packing and origin
+   failover are decisions; generative work belongs in the production plane (pass 6).
+4. **Keep the DRM step out of the agent's reach.** It is a contractual boundary, and nothing in this
+   plane's tooling can cross it.

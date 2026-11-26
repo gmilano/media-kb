@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-25
+updated: 2026-11-26
 ---
 
 # 🗺️ Market Map — Media & Entertainment
@@ -285,6 +285,59 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   figure was found for how many NA broadcasters self-host a recommender versus licensing one.
   Unresearched, not absent.
 
+
+#### The live & delivery plane — added 2026-11-26 (pass 8). The region with a **dated engineering deadline** nobody has tooling for
+
+**The regulatory event.** The US over-the-air transition to ATSC 3.0 ("NextGen TV") is the only
+delivery-side deadline in this KB that forces a re-engineering of a live chain:
+
+- Under current rules, a broadcaster running ATSC 3.0 must **simulcast "substantially similar"
+  content in ATSC 1.0 through at least 2027-07-17**. The FCC's proposal would **end** that
+  simulcast obligation.
+- The proposal **does not** set an ATSC 1.0 cutoff date and **does not** mandate ATSC 3.0 tuners in
+  new televisions. The FCC instead sought comment on whether a tuner requirement should apply to all
+  new receivers, on its cost, and on an informational **labelling** rule for sets that cannot
+  receive the new signals.
+- Deployment per a draft order: full-power ATSC 3.0 live in **more than 80 markets, covering over
+  70% of the population**. NAB's stated aim is to be rid of ATSC 1.0 **by 2028 in the 55 largest
+  markets and everywhere by 2030**.
+- Advocacy is live: the National Religious Broadcasters urged the FCC in **February 2026** to adopt a
+  tuner requirement and reaffirm must-carry; cable operators object to the equipment cost.
+
+⚠️ **Status caveat, stated rather than smoothed:** these are a **proposal and a draft order**. This
+pass found **no source confirming a final adopted FCC order**. Check the FCC docket before quoting a
+rule as settled in a client conversation.
+
+**Why this is an opportunity rather than a news item.** The transition is a dual-chain problem —
+two encodes, two packagings, two carriage paths, a conformance duty on both, and a labelling regime
+under discussion — and **there is no maintained open-source ATSC 3.0 implementation to build on.**
+`libatsc3/libatsc3` and `Sony/libatsc3` both fail `ls-remote`; the only survivors are forks at 13★
+(2019) and 12★ (2023), all MIT and all stale. A regulated, dated, capital-intensive transition with
+a verified tooling vacuum underneath it is the cleanest engagement shape in this plane.
+
+**Site-blocking arrives in the US.** Two site-blocking bills were introduced in **September**, which
+would let courts order blocking of foreign pirate sites **including live sports streams**. If either
+passes, the EMEA operational playbook (below) becomes directly sellable here — and North American
+broadcasters have no 30-minute-response muscle because they have never needed it.
+
+**Adoption and buyers.** Grant Thornton's 2026 survey reports **87% of M&E boards have approved
+major AI investments** — budget is authorised, which is why the board-level barrier is gone and the
+delivery barrier is what remains. Forrester describes North American M&E as enthusiastic about
+generative AI but **still stuck in early experimentation**. Netflix and Disney are the named
+large-scale deployers. Market-share estimates put North America at roughly **34–41%** of the global
+AI-in-media market depending on the vendor — treat as a range, not a number.
+
+**The DRM gate is a North American procurement reality.** All three premium DRM roots of trust are
+held by US companies (Google, Microsoft, Apple) and issued **by contract**: a Widevine Master
+Licence Agreement and security questionnaire, a Microsoft agreement for any PlayReady service
+provider, Apple's developer agreement for FairPlay. There is no open-source path to a Widevine L1 /
+HDCP premium service. Put the agreement in week one of the plan, not in the build.
+
+**MoQ is being built here.** `facebookexperimental/moxygen` (Apache-2.0, Meta) and `Quicr/libquicr`
+(BSD-2-Clause, Cisco) are both North American, and the MoQ Alliance includes Akamai, AWS, Cisco,
+Cloudflare and Fastly. Influence over the standard is still available before the **2026-12-31** IESG
+publication-request milestone.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -546,6 +599,73 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   adoption by European broadcasters**, and the **commercial terms of JIC/currency data licences could
   not be obtained** from any reachable source. Treat currency data as *not researched and not free*.
 
+
+#### The live & delivery plane — added 2026-11-26 (pass 8). The only region where delivery is governed by a **stopwatch**
+
+**The 30-minute rule is the commercial fact of this plane in EMEA.** Nowhere else in this KB does a
+regulator impose a *latency* requirement on an operational response.
+
+- **Italy (Piracy Shield)** is the reference model. AGCOM can issue near-instant blocking orders
+  **without prior judicial review**, and blocks must be implemented **within 30 minutes**. By
+  mid-2026 it had reportedly blocked **more than 122,000 domains and IP addresses** (press-attributed;
+  **not** confirmed against AGCOM directly — flagged, not promoted). Resolution **47/25/CONS**
+  (approved February 2025) extended the duty to **VPN and public DNS providers**, and a
+  **multimillion-euro fine was levied on Cloudflare** for refusing to implement blocks via its public
+  DNS service.
+- **EU level:** the study *Countering online piracy of sports and broadcast in the EU* (Prof. Giovanni
+  Maria Riccio) recommends moving from voluntary guidance to a **binding Regulation** for
+  live-streaming piracy, with a **30-minute compliance window modelled on Italy**, extended across
+  **DNS resolvers, VPNs and CDNs**. The Audiovisual Anti-Piracy Alliance filed a plea on
+  **2026-11-17**; Commission recommendations were expected "in November" — **this pass could not
+  confirm they have been published.** An EU assessment separately concluded that rapid blocking
+  **comes up short** for sports and broadcast.
+- **Spain:** a Commercial Court order of **February 2026** requires blocking of **IP addresses**, and
+  LaLiga is **blocking entire IP ranges rather than specific infringing domains** — the overblocking
+  complaint in one sentence. On **2026-04-29** Spain's Commission on Economy, Trade and Digital
+  Transformation voted to direct the government to reform the legal framework behind the regime. A
+  European Commission letter of June 2025 had already raised **overblocking of legitimate sites,
+  lack of transparency and absence of prior judicial review**. LaLiga has asked the Commission to add
+  several **VPN providers** to the EU piracy watch list, arguing they damage territorial exclusivity.
+
+**The product this creates.** A rights holder or broadcaster in Italy or Spain needs: live detection,
+evidence capture, an auditable order trail, a 30-minute actuation path across DNS/CDN/VPN
+intermediaries, **and** a defensible overblocking record — because the political risk has now
+inverted from "too slow" to "blocked the wrong thing". That last item is the differentiator: the
+Commission, the Spanish Congress and the EU's own assessment have all criticised the regimes from the
+**overblocking** side. Sell the evidence-and-proportionality trail, not the blocking.
+
+**⛔ The licence trap that lands precisely on the EMEA pilot.** 5G Broadcast/MBMS — the technology a
+European public broadcaster would pilot for stadium and mass-event delivery — has its reference stack
+under the **5G-MAG Public License v1.0**. It is Apache-2.0 in structure and wording, and its patent
+grant covers Essential Patents **"solely for study, testing and research purposes"**, explicitly
+**"excluding selling"**; for anything else you merely "**commit to be prepared to negotiate**" FRAND
+terms with every contributor. A field-of-use restriction on selling means **it is not open source**,
+and a pilot that quietly becomes a service has acquired an unbounded patent obligation. Flag it at
+the architecture review, not at go-live. (`5G-MAG/rt-mbms-modem` is separately AGPL-3.0.)
+
+**Sovereignty is now a delivery requirement, not a slogan.** The DPP's *European Media Trends 2026*
+report describes AI as the dominant driver of change in European media and records a growing
+appetite for **digital sovereignty** as part of business resilience. An imec-SMIT (Vrije Universiteit
+Brussel) mapping from **May 2026** sharpens it: AI adoption **does not automatically translate into
+control, revenue or strategic autonomy** — value is captured by whoever controls **infrastructure,
+data, models, interfaces, rights and business arrangements**. That is an argument for self-hosted
+origin and packaging, and this plane is where it is actually winnable: `ossrs/srs`, `mediamtx`,
+`pion/webrtc`, `shaka-packager`, `trafficserver` and `mp4ff` are MIT/Apache/BSD end to end.
+
+**The permissive EMEA toolchain exists and is Swedish.** `Eyevinn/mp4ff` (MIT, 669★),
+`Eyevinn/whip` (Apache-2.0), `Eyevinn/srt-whep` (Apache-2.0), `Eyevinn/webrtc-player` (MIT) and
+`Eyevinn/channel-engine` (Apache-2.0) are a coherent, permissively-licensed, region-native delivery
+kit. `mengelbart/moqtransport` (MIT) puts EMEA in the MoQ implementer set too.
+
+**Regulatory context carried from earlier passes:** the EU AI Act's Article 50 transparency duties
+remain the labelling spine (the **2026-12-02** deadline already recorded in this file), and the
+European Parliament voted **569 to 45** to adopt its position on the AI Act Omnibus simplification
+proposal. The EBU convened its **AI Forum in Brussels in March 2026**.
+
+**MENA, within EMEA, stated as its own figure:** Arab media AI spending is projected at
+**USD 520 million in 2026**, with one report expecting AI adoption to exceed **95% among media
+organisations in the UAE and Saudi Arabia by 2030**. Reported, not independently verified.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -789,6 +909,65 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
 - **Informed gap:** this pass found **no APAC-specific data on open-source recommender or analytics
   adoption** by broadcasters in India, China, Korea or Japan, and **no audited figure** for ACR device
   coverage in any APAC market. Unresearched, not absent.
+
+
+#### The live & delivery plane — added 2026-11-26 (pass 8). The region that owns the permissive substrate *and* the hardest delivery problem on earth
+
+**APAC is the only region in this KB that owns a permissive substrate outright.** The two
+most-starred self-hosted streaming servers in the world are both China-origin and both MIT:
+
+| Repo | Licence | Stars | Last push |
+|---|---|---|---|
+| https://github.com/ossrs/srs | MIT | 29,457 | 2026-11-25 |
+| https://github.com/ZLMediaKit/ZLMediaKit | MIT *(read; API said `NOASSERTION`)* | 17,729 | 2026-11-25 |
+
+In every other plane of this KB the permissive layer is Western-origin and the Asian contribution is
+downstream. Here it is inverted. `nttcom/moq-wasm` (MIT, NTT Communications) puts Japan in the MoQ
+implementer set as well. **Practical consequence:** an APAC engagement can be built on
+region-native, MIT-licensed infrastructure with no copyright gate at all — the licence conversation
+in this region is about *codec patents*, not about code.
+
+**The scale record is here, and it is the reference proof point.** JioHotstar peaked at
+**72.5 million concurrent viewers** on the **ICC Men's T20 World Cup 2026 final** — stated by
+JioStar's CEO and repeated in a Southeast Asia marketing release. The earlier **65.2 million** peak
+(India v England semi-final, reported 2026-03-05) was described at the time as the highest
+concurrency ever recorded for a live event on any digital platform. JioStar reports delivering over
+**1 billion viewers every IPL season** and **FY26 revenue of ₹31,048 crore**.
+
+⚠️ **Contamination caught in this figure.** A Medium write-up claims **821 million concurrent
+viewers** for the same final. It conflicts with every other source by an order of magnitude and is
+**not credible** — do not repeat it. The verified ceiling is 72.5M, and the gap between 72.5M and
+821M is exactly the kind of number that destroys credibility in a pitch. *(Also note: the
+"engineering story" posts about this stack are secondary blogs, not primary disclosures.)*
+
+**Regulation is accelerating and diverging — which is itself the selling point.** A Latham & Watkins
+alert of **September 2026** reports "a significant acceleration in the enactment of AI regulation
+across the Asia-Pacific" and sorts regimes into groups: **binding risk-based frameworks** (South
+Korea, Vietnam) and **targeted rules** (China), with a third category this pass could not read in
+full. A CX Network survey (January 2026) covers nine APAC countries and centres on **disclosure and
+labelling of generative AI** and high-impact systems. **Malaysia** is weighing AI rules inside a
+**copyright law overhaul** (July 2026). An ASEAN policy brief (April 2026) records that policymakers
+recognise the need for regional cooperation on media regulation but that **progress is slow**.
+
+Divergence, not strictness, is the commercial fact: a regional streamer serving South Korea, China,
+Malaysia and ASEAN markets must satisfy several incompatible labelling and disclosure regimes **from
+one delivery chain**. That is a packaging-and-metadata problem — exactly where this plane's
+permissive tooling (`shaka-packager`, `mp4ff`, `gpac`) operates.
+
+**Demand-side pressure.** APAC adspend is tracking **+5.2% year-on-year in 2026, the slowest rate
+since the pandemic**, while the Asia-Pacific screen economy is described as racing toward
+**USD 200 billion** with a **monetisation gap** defining the decade. Delivery cost per stream is
+therefore a board-level number here in a way it is not in North America — and the MIT substrate above
+is the direct answer. APAC is reported as **second only to North America** in generative-AI adoption
+pace, and the ABU notes public broadcasters in **Australia and Singapore** exploring AI for newsroom
+workflows, archiving and verification. AI is the central theme of **APOS 2026** in Bali. One survey
+of APAC PR professionals names **lack of structured training** as the most persistent barrier to
+adoption — a services opportunity attached to every delivery build.
+
+**Players named in the sources:** Tencent Video and iQIYI investing in generative AI (market-research
+page, weaker source); Google, Netflix, YouTube, TikTok and Instagram ranking highest for consumer ad
+equity across APAC per Kantar, which also finds roughly **one in three APAC consumers use AI to
+research brands**, varying considerably by market.
 
 ### LATAM
 
@@ -1079,6 +1258,92 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
   regulation** — the regulatory material that exists is general data protection and AI governance, not
   audience-measurement rules — and **no figure for open-source recommender adoption** by LATAM
   broadcasters. Searched in Spanish and Portuguese; unresearched, not absent.
+
+
+#### The live & delivery plane — added 2026-11-26 (pass 8). The region with a **live national standard** and the hardest patent problem in this KB
+
+**This is the most consequential LATAM finding in eight passes: Brazil has switched on a next-generation
+national broadcast standard, and every codec it mandates is patent-pooled.**
+
+**DTV+ / TV 3.0 — what is verified:**
+
+- A presidential decree signed in **August 2025** created the system. The public signal went live on
+  **2026-06-11**, reaching **Rio de Janeiro, São Paulo and the Federal District simultaneously**,
+  timed to the **2026 FIFA World Cup**.
+- The video stack is **VVC (H.266) with an MPEG-5 LCEVC enhancement layer** — making Brazil, per the
+  vendor's own account, the **first country to build a national broadcast standard on a two-layer
+  design**.
+- **MPEG-H Audio is mandatory**, and the standard requires MPEG-H support **over the HDMI connection
+  of every DTV+ receiver**.
+- The physical layer **borrows from ATSC 3.0**, including MIMO and Layered Division Multiplexing.
+- **Globo** ran the Rio lighthouse station on Harmonic equipment with VVC and LCEVC. **Intelbras** and
+  **Aquario** began selling the first compatible receivers and converters, with deliveries from
+  **2026-06-08**, so existing TVs can receive the improved signal without replacement.
+
+*Source caveat: much of the above comes from vendor and trade material (V-Nova, IBC, broadcaster
+releases). The launch date and the codec mandate are consistently reported across them; performance
+claims are not independently verified. This pass found **nothing** on DTV+'s broadband/MPEG-DASH
+interactivity side — recorded as an open question, not as an absence.*
+
+**⛔ Why this is the hardest patent problem in this KB.** All three mandated codecs have reference
+implementations whose licences **affirmatively refuse to grant patent rights** — read from the files
+on 2026-11-26:
+
+| Mandated by DTV+ | Reference implementation | Licence | The clause |
+|---|---|---|---|
+| VVC (H.266) | https://github.com/fraunhoferhhi/vvenc (enc), https://github.com/fraunhoferhhi/vvdec (dec) | BSD-3-Clause-Clear | "NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS LICENSE" |
+| MPEG-5 LCEVC | https://github.com/v-novaltd/LCEVCdec | The Clear BSD License | same |
+| MPEG-H 3D Audio | https://github.com/Fraunhofer-IIS/mpeghdec | Fraunhofer FDK MPEG-H licence | §3 titled **"No PATENT LICENSE"**; licences "may be obtained from the respective patent owners individually and/or under FRAND conditions" |
+
+So a Brazilian broadcaster, receiver maker or systems integrator can legally **compile and ship** the
+open reference code and still owe royalties to the VVC, LCEVC and MPEG-H pools. The open source is
+not a route around the pool and was never meant to be one.
+
+**And one of the three has no open encoder at all.** `Fraunhofer-IIS/mpeghdec` is a **decoder**
+(100★, last push 2026-07-24). There is **no open-source MPEG-H Audio encoder** — while the standard
+mandates MPEG-H support in every receiver in the country. Every DTV+ audio encode must therefore go
+through commercial equipment. That is a verified, dated, country-sized gap.
+
+**The engagement shapes this creates, in priority order:**
+
+1. **Codec-royalty and conformance advisory for DTV+.** Nobody in the region has mapped which pool
+   covers which layer, and the licences themselves point the client at "the respective patent
+   owners". This is a CFO-sponsored piece of work with a hard deadline already passed, which means
+   the exposure is **accruing now**.
+2. **Dual-chain delivery during the transition** — legacy ISDB-Tb alongside DTV+, two encodes, two
+   audio paths, receiver-compatibility matrices. The permissive tooling (`shaka-packager`, `gpac`,
+   `mp4ff`, `ffmpeg`) covers everything **except** the three codec layers and the DRM key.
+3. **Receiver and converter validation** at the Intelbras/Aquario tier, including the mandatory
+   MPEG-H-over-HDMI requirement.
+
+**Mexico — the region's other dated regulatory event, and it is media-specific:**
+
+- **2026-05-14:** amendments to the **Federal Copyright Law and Federal Labour Law** were published,
+  introducing **the first sector-specific AI regulation in Mexico**.
+- **2026-05-22:** the new **Federal Law on Cinema and Audiovisual** was published, extending
+  regulatory oversight **for the first time to digital video-on-demand (VOD) platforms**.
+
+A VOD platform operating in Mexico is now inside a licensing regime it was previously outside — and
+that is a compliance-reporting and content-metadata build, directly adjacent to this plane.
+
+**Wider LATAM regulatory state.** **No Latin American country has a fully mature, harmonised AI
+regime.** **Peru** is furthest along: the regulation of **Law No. 31814** took effect in
+**January 2026**. **Deepfakes, synthetic media and identity fraud** are named as rapidly becoming
+enforcement priorities — which ties this plane to the provenance work already in Patterns 1 and 8.
+Several firms in the region are also tracking the EU AI Act's transparency obligations (applicable
+from 2026-08-02) because they reach LATAM operations of multinationals.
+
+**Capability and ecosystem.** **Latam-GPT**, led by Chile's **CENIA** with support from **30+
+institutions across eight countries**, is the region's flagship sovereign-model effort. Colombia's
+**FLIP** and Argentina's **ADEPA** have researched AI adoption in media while tracking regulation,
+and **ADEPA has published a guide for media** recommending platforms, tools and workflows. The
+**International Fund for Public Interest Media** supports outlets charting their own AI paths.
+Aspen Digital's **January 2026** report records leaders stressing careful adoption with
+**human-in-the-loop checks and clear guardrails**.
+
+⚠️ **Low-confidence figure, flagged not promoted:** a LatAm Journalism Review figure cited by Forbes
+México says **only 6% of Latin Americans access news through AI tools**, mainly chatbots. Verify
+before using it in a deck — it is a striking number and it is third-hand here.
 
 ## Globant positioning
 

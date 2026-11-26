@@ -1104,3 +1104,71 @@ proprietary code. The permissive components are the *conformance and rendering* 
 | EAA backlist remediation at scale | **`w3c/epubcheck` + `daisy/ace` + Sigil for human fix-up** | **BSD-3 + MIT** for the automated layer; GPL-3 only for the desktop editor a human drives |
 | Reading app or accessible reading system | **Thorium Reader** / `readium/*` | **BSD-3-Clause** — permissive, embeddable |
 | Ebook/audiobook delivery to end users | **Komga** (MIT) or Audiobookshelf (GPL-3) | Komga if the product must stay proprietary |
+
+## The sports & live-event plane — measured 2026-11-26 (pass 19)
+
+**The shape of this layer, and it is worse than the M&E average.** This file already records that
+M&E has no permissively-licensed turnkey platform comparable to Odoo. Sports is the extreme case:
+there is **no open-source sports-media platform at all** — nothing that manages rights, schedules a
+linear sports channel, runs a fan community or reconciles a rights payment. What exists splits into
+two unrelated groups: **generic event/ticketing platforms** (healthy, copyleft, not sports-aware)
+and **scoreboard overlay utilities** (tiny, permissive, genuinely useful). The middle is empty.
+
+### Group 1 — Event & ticketing platforms (real systems, all copyleft)
+
+| Platform | Repo | License | Stars | Forks | Last push | What it is |
+|---|---|---|---|---|---|---|
+| Hi.Events | https://github.com/HiEventsDev/Hi.Events | ⚠️ **AGPL-3.0 + §7(b) attribution** (file `LICENCE`, 35,725 B) | 4,201 | 760 | 2026-11-26 | Event management and ticket selling; actively developed. **The §7(b) clause requires you to retain their attribution** — read it before white-labelling |
+| Attendize | https://github.com/Attendize/Attendize | `NOASSERTION` — treat as unresolved | 4,278 | 1,233 | 2024-08-20 | Ticket selling + event management (Laravel). **Dormant 2+ years** |
+| Dreeve | https://github.com/dreeveapp/dreeve | AGPL-3.0 | 2,224 | 150 | 2026-11-25 | Self-hosted dashboard for sports and fitness data; the most active sports-adjacent platform found |
+| Zammad | https://github.com/zammad/zammad | AGPL-3.0 | 6,150 | 1,112 | 2026-11-26 | General helpdesk — relevant because **no sports-specific fan-support system exists** |
+| Frappe Helpdesk | https://github.com/frappe/helpdesk | AGPL-3.0 | 3,517 | 1,032 | 2026-11-25 | Same role, same caveat |
+
+**Licence consequence for the studio.** Every usable platform in this group is AGPL-3.0, and
+Hi.Events adds an attribution term on top. A client-facing deployment therefore means either
+honouring AGPL §13 (publish the modified source of the hosted service) or keeping the platform at
+arm's length behind an API boundary, with Globant's proprietary value in a separate service. This is
+the same architecture this file recommends for the rest of M&E; sports does not offer an exception.
+
+### Group 2 — Scoreboard & overlay utilities (permissive, tiny, and the honest finding is their size)
+
+| Tool | Repo | License | Stars | Forks | Last push |
+|---|---|---|---|---|---|
+| sport-streamer | https://github.com/JimThatcher/sport-streamer | **MIT** | 31 | 3 | 2023-06-07 |
+| Froggi | https://github.com/obfedder/Froggi | **MIT** | 12 | 1 | 2025-05-14 |
+| fly-scoreboard (OBS overlay) | https://github.com/mmlTools/fly-scoreboard | GPL-2.0 | 12 | 10 | 2026-10-26 |
+
+Three real tools, none above 31 stars, two dormant. **Fewer real rows beat padding:** these are the
+only open scoreboard/overlay projects located, and their size *is* the finding — the graphics layer
+of a live sports broadcast, which every regional broadcaster needs, is served by hobby projects.
+The composable alternative is to drive overlays from `roboflow/sports` (MIT) output into a browser
+source, which `compose/patterns.md` Pattern 18 sets out.
+
+### Group 3 — Odds & market data (one entry, and it is a wrapper)
+
+| Tool | Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| odds-api | https://github.com/odds-api/odds-api | **Apache-2.0** | 41 | 2026-11-05 | OpenAPI spec, SDKs, MCP server and mocks for a **commercial** odds feed. Permissive client, paid data |
+| soccerapi | https://github.com/S1M0N38/soccerapi | MIT | 182 | **2022-12-08** | The most-starred open odds scraper, **dead four years** |
+
+### What does not exist — stated as gaps, not omissions
+
+Searched this pass and **not found at any usable star level**:
+
+- **No open-source sports rights-management or avails system.** Pass 16 built out the avails and
+  windowing plane generally; nothing in it is sports-aware, and sports rights are the most
+  fragmented in M&E (per-territory, per-competition, per-window, per-platform).
+- **No open-source fan-engagement or fan-community platform.** The entire category tops out at
+  **28 stars** with no licence (see `agents/top.md`). Clubs and leagues buy this; nobody has built it
+  openly.
+- **No open-source sports federation / league management system** (fixtures, officials, discipline,
+  registrations) comparable to what OpenMRS is for health or Moodle for education.
+- **No open-source officiating or VAR tooling.**
+- **No sports-specific DAM.** The general M&E options already in this file apply unchanged.
+- **Sportradar, Genius Sports and Stats Perform commercial terms are NOT verified** — no public
+  pricing, nothing reachable. Treat as *not investigated, not free*.
+
+**Why this matters for an engagement.** In every other plane this KB has mapped, the question is
+*which* open platform to extend. In sports it is the opposite: the platform layer is the deliverable.
+Globant can build the sports-aware layer — rights, fixtures, fan identity — on a generic AGPL event
+platform held at arm's length, with the permissive CV and data stack doing the sport-specific work.

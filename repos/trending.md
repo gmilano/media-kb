@@ -10,6 +10,91 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 19: sports-media & live-event infrastructure (**~65 slugs recorded, 0 absent; 15 licence-channel investigations, 3 traps and 5 false negatives**)
+
+**Method this pass, and it reverses pass 18's conclusion.** Pass 18 reported the GitHub API
+unreachable for out-of-session repositories (`403: sessions are bound to their configured
+repositories`) and **dropped every star count as a result**. That 403 applies only to
+`repos/{owner}/{repo}/...`. **`search/repositories` with `repo:<slug>` qualifiers works for
+arbitrary repositories** — several at once — returning stars, forks, SPDX id and `pushed_at` in one
+call. Every figure in this pass came from that endpoint; **25 slugs were additionally confirmed by
+`git ls-remote`**, which remains the only true existence oracle. The rest were returned live by the
+search endpoint, which only lists extant repositories. **0 absent.**
+
+### The layer this KB had never recorded
+
+A probe of all eight files returned **0 lines** for `YOLO`, `pose estimation`, `mmpose`,
+`ultralytics`, `DeepSORT`, `ByteTrack`, `object tracking` and `multi-object`. The detection and
+multi-object-tracking substrate — which sports analytics, virtual production, ad verification, trust
+& safety and audience measurement all sit on — was missing after eighteen passes. It is now in
+`repos/foundations.md`. The headline is a licence fork, not a capability gap:
+
+| Repo | License | Stars | Last push |
+|---|---|---|---|
+| `ultralytics/ultralytics` (YOLO26/27, the default detector) | ⚠️ **AGPL-3.0** | 63,769 | 2026-11-26 |
+| `mikel-brostrom/boxmot` (leading pluggable MOT) | ⚠️ **AGPL-3.0** (`LICENSE`, 34,715 B) | 8,330 | 2026-11-20 |
+| `roboflow/supervision` (permissive workhorse) | **MIT** | 51,730 | 2026-11-26 |
+| `open-mmlab/mmpose` | **Apache-2.0** | 8,083 | 2025-08-04 |
+| `FoundationVision/ByteTrack` | **MIT** | 6,833 | 2024-06-19 |
+| `roboflow/trackers` | **Apache-2.0** | 4,022 | 2026-11-25 |
+| `tryolabs/norfair` | **BSD-3-Clause** | 2,708 | 2025-04-30 |
+
+The two most-starred libraries in the layer are **both AGPL-3.0**, and a permissive stack of equal
+capability exists beside them. For a hosted service this is the difference between owing source code
+under §13 and not. `boxmot`'s licence file also states that third-party components keep their own
+notices — the **compilation-licence** category cycle 8 found on `chromaprint`, recurring.
+
+### Licence-channel results — 3 traps, 5 false negatives
+
+**Traps** (high stars, nothing shippable), each verified with a README control request proving the
+branch resolves, then 10 filenames × 2 branches plus `LICENSE.pdf` and `LICENCE`:
+
+| Repo | Stars | Finding |
+|---|---|---|
+| `hudl/open-data` | 3,847 | Licence is **`LICENSE.pdf` at repo root** (HTTP 200, `application/octet-stream`). API says `NOASSERTION` — **SPDX detectors read text, not PDFs** |
+| `hudl/statsbombpy` | 758 | **No licence file at all.** README defers *data* terms to `doc/LICENSE.pdf` (verified present) behind a registration wall |
+| `hudl/StatsBombR` | 314 | `DESCRIPTION` reads **`License: 3.5.0`** — a version number in the licence field |
+
+Also confirmed genuinely unlicensed, with controls passing: `iptc/sport-schema` (38★, IPTC's
+SportsML successor, pushed 2026-10-01 — while IPTC's *vocabulary* repo `sports-newscodes` **is**
+CC-BY-4.0), `SoccerNet/sn-calibration` (113★), `metrica-sports/sample-data` (515★),
+`eddwebster/football_analytics` (2,870★), `linouk23/NBA-Player-Movements` (757★).
+
+**False negatives — the more valuable half.** Five repos reported `NOASSERTION` and **all are MIT**:
+
+| Repo | Evidence |
+|---|---|
+| `nflverse/nflfastR` (558★) | `LICENSE` 57 B (`YEAR:`/`COPYRIGHT HOLDER:` only) + `LICENSE.md` 1,086 B full MIT + `DESCRIPTION`: `License: MIT + file LICENSE` |
+| `sportsdataverse/hoopR` (157★) | `LICENSE` 48 B stub + `LICENSE.md` 1,418 B MIT |
+| `sportsdataverse/cfbfastR` (114★) | `LICENSE` 46 B stub + `LICENSE.md` 1,080 B MIT |
+| `nflverse/nflreadr` (117★) | `LICENSE` 46 B stub + `LICENSE.md` 1,075 B MIT |
+| `HiEventsDev/Hi.Events` (4,201★) | Licence in **`LICENCE`** (British spelling), 35,725 B: **AGPL-3.0 with an additional §7(b) attribution requirement** |
+
+**Two additions to the probe list**, which cycle 8 last extended with lowercase `license.txt` and
+`COPYING.md`: **`LICENSE.pdf`** and **`LICENCE`**. And the rule behind the R result: *for any R
+package, read `DESCRIPTION`'s `License:` field and `LICENSE.md` before recording `NOASSERTION` —
+but read the value, because `StatsBombR` has the same structure with garbage in it.*
+
+### Dormancy ledger for this plane
+
+Permissive, on-topic and **dead** — vendor the code, do not depend on upstream:
+`S1M0N38/soccerapi` (MIT, 182★, **2022-12-08** — and it is the most-starred odds library),
+`iptc/sportsml-python` (MIT, 2★, **2019-01-25**), `OwlTing/AI_basketball_games_video_editor`
+(Apache-2.0, 126★, **2024-08-19**), `lRomul/ball-action-spotting` (MIT, 141★, **2023-07-02**),
+`SilvioGiancola/SoccerNetv2-DevKit` (MIT, 231★, **2024-07-08**), `AtomScott/SportsLabKit` (GPL-3.0,
+329★, **2023-12-19**), `teijo/jquery-bracket` (MIT, 500★, **2023-07-30**),
+`devinpleuler/analytics-handbook` (MIT, 1,720★, **2024-05-26**), `FoundationVision/ByteTrack` (MIT,
+6,833★, **2024-06-19**), `open-mmlab/mmpose` (Apache-2.0, 8,083★, **2025-08-04**),
+`tryolabs/norfair` (BSD-3, 2,708★, **2025-04-30**).
+
+### Alive and permissive — the short list that matters
+
+`roboflow/supervision` (MIT, 2026-11-26), `roboflow/sports` (MIT, 2026-11-25), `roboflow/trackers`
+(Apache-2.0, 2026-11-25), `davidpagnon/Sports2D` (BSD-3, 2026-11-25), `PySport/kloppy` (BSD-3,
+2026-11-06), `martineastwood/penaltyblog` (MIT, 2026-11-24), `withqwerty/reep` (CC0-1.0,
+2026-08-20), `sportsdataverse/sportsdataverse-py` (MIT, 2026-11-26), and the three MIT esports
+parsers `demoinfocs-golang` / `demoparser` / `awpy` (all within four days of this pass).
+
 ## 2026-11-26 — pass 18: book & scholarly-publishing infrastructure (**40 slugs probed, 39 resolve, 1 absent; 5 licence files found only off the standard path**)
 
 Method this pass, and it is a change worth noting: **the GitHub API was unavailable**

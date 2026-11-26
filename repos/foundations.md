@@ -2281,3 +2281,140 @@ client moving a backlist between NA (BISAC) and EMEA (Thema) markets, **that map
    blocked. This replaced the API for all 40 repos in this pass.
 5. **Always include a negative control in an existence probe.** A deliberate fake slug was probed
    alongside the 39 real ones; without it, "all resolved" is not evidence that the probe works.
+
+## The sports-media & live-event plane — measured 2026-11-26 (pass 19)
+
+**A substrate this KB was missing entirely, not just for sports.** A probe of all eight files
+returned **0 lines** for `YOLO`, `pose estimation`, `mmpose`, `ultralytics`, `DeepSORT`,
+`ByteTrack`, `object tracking` and `multi-object` — and 7 lines for `supervision`. Nineteen passes
+into an M&E knowledge base, **the object-detection and multi-object-tracking layer had never been
+recorded**. It underpins sports analytics, but also virtual production, ad verification, trust &
+safety and audience measurement — all planes this KB already covers. The rows below are therefore
+foundations for far more than sport.
+
+All rows verified 2026-11-26: existence via `git ls-remote`, stars/forks/push via
+`search/repositories`, licence by reading the file where the API was unhelpful.
+
+### Detection, tracking & pose — and the licence gradient is commercially decisive
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| https://github.com/roboflow/supervision | **MIT** | 51,730 | 4,963 | 2026-11-26 | The permissive workhorse: annotation, zones, line counters, tracker glue. **Start here** |
+| https://github.com/FoundationVision/ByteTrack | **MIT** | 6,833 | 1,156 | 2024-06-19 | The reference MOT algorithm. Permissive but dormant — vendor it, don't depend on upstream |
+| https://github.com/open-mmlab/mmpose | **Apache-2.0** | 8,083 | 1,547 | 2025-08-04 | Pose estimation toolbox/benchmark. Permissive; last push 2025-08 |
+| https://github.com/roboflow/trackers | **Apache-2.0** | 4,022 | 437 | 2026-11-25 | Clean modular re-implementations of leading MOT algorithms — the maintained permissive path to ByteTrack-class tracking |
+| https://github.com/tryolabs/norfair | **BSD-3-Clause** | 2,708 | 280 | 2025-04-30 | Lightweight real-time MOT, attaches to any detector |
+| https://github.com/ultralytics/ultralytics | ⚠️ **AGPL-3.0** | 63,769 | 12,045 | 2026-11-26 | YOLO26/YOLO27 — the de-facto default detector, and **the single most consequential licence trap in this plane** |
+| https://github.com/mikel-brostrom/boxmot | ⚠️ **AGPL-3.0** (`LICENSE`, 34,715 B) | 8,330 | 1,912 | 2026-11-20 | Leading pluggable MOT collection. API reports `NOASSERTION`; the file is plainly AGPL-3.0 |
+
+**Read this before any sports or vision proposal.** The two most-starred libraries in the layer —
+`ultralytics` (63,769★) and `boxmot` (8,330★) — are **both AGPL-3.0**. For a hosted service, AGPL
+§13 reaches the client's deployment: Globant would owe source for the service, or buy Ultralytics'
+commercial licence. The permissive stack is a full alternative and is not a downgrade:
+`supervision` (MIT, 51,730★) + `trackers` or `norfair` (Apache-2.0 / BSD-3) + a permissive detector.
+`boxmot`'s own licence file additionally warns that *"third-party components retain their own
+licensing notices"* — the **compilation-licence** category cycle 8 identified on `chromaprint`,
+reappearing here. Resolve the licences of what you link, not of the repo.
+
+### Sports-specific vision
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| https://github.com/davidpagnon/Sports2D | **BSD-3-Clause** | 354 | 52 | 2026-11-25 | 2D pose **and joint angles** from video or webcam; active. The most permissive sports-pose option |
+| https://github.com/SilvioGiancola/SoccerNetv2-DevKit | **MIT** | 231 | 46 | 2024-07-08 | SoccerNet challenge dev kit; dormant but the canonical benchmark entry point |
+| https://github.com/lRomul/ball-action-spotting | **MIT** | 141 | 25 | 2023-07-02 | 1st-place SoccerNet ball-action-spotting solution; dormant, valuable as a reference implementation |
+| https://github.com/SoccerNet/sn-gamestate | GPL-3.0 | 472 | 102 | 2026-05-02 | Game-state reconstruction: tracking + athlete identification |
+| https://github.com/AtomScott/SportsLabKit | GPL-3.0 | 329 | 31 | 2023-12-19 | Sports video → CSV; dormant |
+| https://github.com/SoccerNet/sn-calibration | ⚠️ **no licence** | 113 | 17 | 2024-06-18 | Camera calibration — the step everything geometric depends on, and it ships **no grant** (verified: READMEs resolve on both branches, 10 filenames + `LICENSE.pdf` + `LICENCE` all absent) |
+
+### The data-standardization layer — thin, alive, and the real keystone
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| https://github.com/PySport/kloppy | **BSD-3-Clause** | 573 | 113 | 2026-11-06 | **The keystone.** Normalizes tracking *and* event data across providers into one model. Without it every integration is bespoke |
+| https://github.com/andrewRowlinson/mplsoccer | **MIT** | 555 | 92 | 2026-10-27 | Pitch plotting for matplotlib — the default visual vocabulary of the field |
+| https://github.com/dcaribou/transfermarkt-datasets | **CC0-1.0** | 532 | 102 | 2026-09-05 | Extract/prepare/publish Transfermarkt datasets |
+| https://github.com/martineastwood/penaltyblog | **MIT** | 250 | 40 | 2026-11-24 | Football data pipelines, scraping and match models; active |
+| https://github.com/withqwerty/reep | **CC0-1.0** | 245 | 12 | 2026-08-20 | **The football entity register** — maps player, team and coach identity across providers. The identity-resolution layer pass 5's identification plane needed and did not have for sport |
+| https://github.com/UnravelSports/unravelsports | MPL-2.0 | 250 | 34 | 2026-01-16 | Graph/spatial modelling helpers; weak copyleft (file-level) |
+| https://github.com/floodlight-sports/floodlight | **MIT** | 135 | 25 | 2026-05-04 | Provider-agnostic sports data analysis |
+| https://github.com/droher/boxball | **Apache-2.0** | 135 | 22 | 2026-05-20 | Retrosheet's complete baseball history prebuilt into Docker images for several analytic engines |
+| https://github.com/shufinskiy/sport_analytics_tools | **Apache-2.0** | 90 | 5 | 2026-06-16 | Index of sports data tools |
+| https://github.com/USSoccerFederation/ussf_ssac_23_soccer_gnn | **MIT** | 122 | 13 | 2024-08-29 | US Soccer Federation's MIT Sloan GNN paper code — a federation publishing permissively |
+| https://github.com/devinpleuler/analytics-handbook | **MIT** | 1,720 | 214 | 2024-05-26 | The field's teaching text; dormant, still the best onboarding reference |
+
+### The R cluster — rescued from a systematic false negative
+
+All five below report `NOASSERTION` on the GitHub API and **all are MIT**. See the method correction
+after the table; this is reusable across all twelve industries.
+
+| Repo | Real license (verified) | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| https://github.com/nflverse/nflfastR | **MIT** (`LICENSE.md` 1,086 B; `DESCRIPTION`: `License: MIT + file LICENSE`) | 558 | 73 | 2026-11-25 | NFL play-by-play |
+| https://github.com/sportsdataverse/hoopR | **MIT** (`LICENSE.md` 1,418 B) | 157 | 28 | 2026-11-25 | Men's basketball play-by-play |
+| https://github.com/sportsdataverse/cfbfastR | **MIT** (`LICENSE.md` 1,080 B) | 114 | 17 | 2026-11-25 | College football play-by-play |
+| https://github.com/nflverse/nflreadr | **MIT** (`LICENSE.md` 1,075 B) | 117 | 20 | 2026-09-17 | nflverse data loader |
+| https://github.com/lbenz730/ncaahoopR | **MIT** (API-reported, standard file) | 232 | 59 | 2026-02-08 | NCAA basketball play-by-play |
+
+Permissive and API-clean in the same ecosystem: `sportsdataverse/sportsdataverse-py` (**MIT**, 133★,
+2026-11-26), `sportsdataverse/sportsdataverse-js` (**MIT**, 89★, 2026-11-25). Copyleft siblings:
+`sportsdataverse/sportyR` (GPL-3.0, 120★) and `sportypy` (GPL-3.0, 52★) for drawing regulation
+playing surfaces.
+
+### Esports — the healthiest corner of the plane
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| https://github.com/markus-wa/demoinfocs-golang | **MIT** | 1,078 | 156 | 2026-11-23 | CS2 demo parser (Go) |
+| https://github.com/LaihoE/demoparser | **MIT** | 746 | 110 | 2026-11-24 | CS2 replay parser for Python and JavaScript |
+| https://github.com/pnxenopoulos/awpy | **MIT** | 640 | 89 | 2026-11-22 | Parse, analyze and visualize CS2 data |
+| https://github.com/teijo/jquery-bracket | **MIT** | 500 | 243 | 2023-07-30 | Single/double-elimination tournament brackets; dormant but still the common answer |
+
+Three independent MIT parsers, all pushed within four days of this pass. Compare the vendor-feed
+column in `agents/top.md`: same analytical problem, opposite licence health.
+
+### ⚠️ Known-broken: high stars, no usable grant — do not ship these
+
+Verified 2026-11-26 by the full probe (10 filenames × `master`/`main`, plus `LICENSE.pdf` and
+`LICENCE`), with a README control request confirming the branch name resolves in every case. A 404
+alone is never proof; these are proof.
+
+| Repo | Stars | What it actually is | Status |
+|---|---|---|---|
+| https://github.com/hudl/open-data | 3,847 | StatsBomb Open Data (events, lineups, 360 frames) | **Licence is `LICENSE.pdf` at the repo root** — HTTP 200, `application/octet-stream`. GitHub reports `NOASSERTION` because SPDX detectors read text, not PDFs. README additionally requires crediting StatsBomb **and using their logo** |
+| https://github.com/hudl/statsbombpy | 758 | Official Python client | **No licence file of any kind.** README points to `doc/LICENSE.pdf` (verified present) for *data* terms and requires registration. The **code** carries no grant → default all-rights-reserved |
+| https://github.com/hudl/StatsBombR | 314 | Official R client | **`DESCRIPTION` declares `License: 3.5.0`** — a version number in the licence field. Not a missing licence, not a custom one: a field filled from the wrong field |
+| https://github.com/eddwebster/football_analytics | 2,870 | The best-known football analytics collection | No licence |
+| https://github.com/linouk23/NBA-Player-Movements | 757 | SportVU movement visualization | No licence |
+| https://github.com/metrica-sports/sample-data | 515 | Metrica tracking + event sample data | No licence |
+| https://github.com/iptc/sport-schema | 38 | **IPTC's next-generation sports data model** (SportsML successor, semantic-web based), pushed 2026-10-01 | No licence on either branch. Note the contrast: IPTC's *vocabulary* `iptc/sports-newscodes` **is** CC-BY-4.0 (recorded in this file at pass 11); the **schema repo is not licensed** |
+| https://github.com/iptc/sportsml-python | 2 | SportsML/SportsJS Python library | MIT, but **dead since 2019-01-25** |
+
+### Method corrections — reusable across all twelve industries
+
+**1. The R/CRAN `MIT + file LICENSE` convention produces a systematic `NOASSERTION` false negative.**
+Measured on four repos this pass, not inferred: CRAN requires the copyright holder in a separate
+file, so an R package ships a **46–57 byte `LICENSE`** containing only `YEAR:` and
+`COPYRIGHT HOLDER:` lines, puts the real grant in **`LICENSE.md`**, and declares
+`License: MIT + file LICENSE` in `DESCRIPTION`. GitHub's detector sees a licence file it cannot match
+and returns `NOASSERTION`. **All four were MIT.** Rule: *for any R package, read `DESCRIPTION`'s
+`License:` field and `LICENSE.md` before recording `NOASSERTION` or "none".* This likely rescues R
+packages across the health, finance, energy and education KBs too — and note the inverse exists:
+`hudl/StatsBombR` has the same `DESCRIPTION` structure and its field reads `3.5.0`, so **read the
+value, don't just confirm the field is present.**
+
+**2. A licence delivered as a PDF is invisible to every SPDX field, badge and SBOM scan.**
+`hudl/open-data` carries `LICENSE.pdf` at the repository root and GitHub still reports
+`NOASSERTION`. Cycle 8 extended the probe list with lowercase `license.txt` and `COPYING.md`; two
+more entries are now required: **`LICENSE.pdf`** and **`LICENCE`** (British spelling — which is
+exactly how `HiEventsDev/Hi.Events` ships AGPL-3.0, 35,725 B, and why its API licence reads
+"Other"). A PDF licence should be flagged *"read manually, do not auto-classify"* — never treated as
+absent and never auto-approved.
+
+**3. This corrects pass 18's own stated conclusion.** Pass 18 recorded that "the GitHub API is
+unreachable for out-of-session repositories (`403: sessions are bound to their configured
+repositories`)" and consequently **dropped every star count from its tables**. That is true only of
+the `repos/{owner}/{repo}/...` endpoints. **`search/repositories` with `repo:<slug>` qualifiers works
+for arbitrary repositories** and returns stars, forks, SPDX id and `pushed_at` in a single call —
+which is how every figure in this pass was obtained, and it accepts several `repo:` qualifiers at
+once. Pass 18's star data was lost unnecessarily; later passes should not repeat that.

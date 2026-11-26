@@ -1817,3 +1817,105 @@ the badge.
   star and staleness claims were actively wrong at least once here** — a directory page reported
   `zach-m/jonix` as ~763 days stale; its real last commit is **2026-10-17**. Prior passes' star
   figures are left as they stand and are not carried into this one.
+
+## The sports-media, live-event & fan-engagement plane — measured 2026-11-26 (pass 19), and the **first plane in this KB with a control group for the content law**
+
+**Why this plane, and why it was missing.** Eighteen passes built out the audiovisual chain, and a
+vocabulary probe over all eight files returned **0 hits** for `play-by-play`, `box score`,
+`Sportradar`, `tracking data`, `officiating`, `sports rights`, `player stats`, `odds` and
+`merchandise`, **1 hit** for `esports` and `live sports`, and **2** for `clipping` — while
+`broadcast` scored **246 lines**. The generic delivery plumbing was deeply covered and the single
+largest category of live media value was absent. `agents/top.md` itself had already flagged
+`esports` as scoring zero files in an earlier probe; that gap was never closed. It is closed here.
+
+**Every row below was verified on 2026-11-26**: existence via `git ls-remote`, stars/forks/last-push
+via GitHub `search/repositories` with `repo:` qualifiers, and licence by reading the actual file
+whenever the API returned `NOASSERTION` or nothing.
+
+### Why this plane matters more than its size suggests
+
+Sports is the one media segment where the *same* technical problem appears with three different data
+substrates, which makes it the first place this KB can test the content law instead of merely
+observing it. See "The control group" below — it is the most important thing in this pass.
+
+### Tier 1 — Permissive, actively maintained (safe to build on)
+
+| Agent / Model | Repo | License | Stars | Forks | Last push | What it does |
+|---|---|---|---|---|---|---|
+| Roboflow Sports | https://github.com/roboflow/sports | **MIT** | 5,517 | 684 | 2026-11-25 | The keystone of this plane: player/ball detection, tracking, pitch keypoint detection and radar-view projection, as runnable notebooks per sport |
+| AI YouTube Shorts Generator | https://github.com/Anil-matcha/AI-Youtube-Shorts-Generator | **MIT** | 6,577 | 1,217 | 2026-11-24 | Open alternative to Opus Clip / Vidyo.ai / Klap: long-form → vertical clips with highlight selection. The clip layer most sports rights-holders actually need |
+| yt-short-clipper | https://github.com/jipraks/yt-short-clipper | **MIT** | 1,113 | 316 | 2026-11-26 | Desktop long-form → 9:16 clipper with AI highlight picking; pushed the day of this pass |
+| LINE Lighthouse | https://github.com/line/lighthouse | **Apache-2.0** | 274 | 22 | 2026-11-01 | The only *research-grade* highlight library here: video moment retrieval + highlight detection, reproducible (EMNLP'24 demo, ICASSP'25 and '26). This is the component to build on, not the YouTube wrappers |
+| World Cup Voice | https://github.com/zicojiao/worldcupvoice | **MIT** | 111 | 15 | 2026-06-25 | AI live commentator: watches an Agora RTC feed and adds generated voice commentary. The only open commentary agent located |
+
+### Tier 2 — Real but copyleft, dormant, or narrow
+
+| Agent | Repo | License | Stars | Forks | Last push | Caveat |
+|---|---|---|---|---|---|---|
+| Clips Studio ("Clips Kitty") | https://github.com/ColinGPT9/clips-studio | AGPL-3.0 | 700 | 149 | 2026-11-26 | Local Opus Clip alternative, actively developed — but AGPL reaches a hosted clipping service |
+| VideoHighlighter | https://github.com/Aseiel/VideoHighlighter | AGPL-3.0 | 510 | 71 | 2026-11-24 | Local Ollama-powered analyzer, visual search + automatic highlights. Same AGPL reach |
+| SoccerNet Game State | https://github.com/SoccerNet/sn-gamestate | GPL-3.0 | 472 | 102 | 2026-05-02 | CVPRW'24 end-to-end athlete tracking **and identification** — the closest thing to a full game-state agent. GPL-3.0 |
+| Volleyball Analytics | https://github.com/masouduut94/volleyball_analytics | GPL-2.0 | 154 | 38 | 2026-10-08 | Complete per-sport worked example; GPL-2.0 |
+| AI Basketball Video Editor | https://github.com/OwlTing/AI_basketball_games_video_editor | Apache-2.0 | 126 | 23 | 2024-08-19 | Permissive and genuinely on-topic (auto basketball highlights) but **dormant 2+ years** |
+
+### The control group — the finding of this pass
+
+This KB has asserted a "content law" since healthcare (CPT) and restated it for media (MedDRA,
+ISRC/ISWC): *the regulator creates the obligation, but the licence of the underlying content decides
+whether open source can satisfy it.* Until now that was a correlation across different problems.
+Sports supplies something better: **one problem — extract spatiotemporal events from a match — with
+three different substrates.** Difficulty is held constant; only ownership of the substrate varies.
+
+| Substrate | Who holds it | Representative code | Licence health |
+|---|---|---|---|
+| **A. Pixels you already license** (the broadcast feed) — you generate the data yourself with CV | You / the rights-holder | `roboflow/sports` MIT 5,517★, `roboflow/supervision` MIT 51,730★, `roboflow/trackers` Apache-2.0 4,022★, `tryolabs/norfair` BSD-3 2,708★, `davidpagnon/Sports2D` BSD-3 354★ | **Healthy and permissive.** Abundant, active, multiple independent maintainers |
+| **B. Vendor optical / event feeds** (Opta, Sportradar, Second Spectrum, StatsBomb) | A vendor, by contract | `hudl/statsbombpy` **no licence** 758★, `hudl/StatsBombR` **`License: 3.5.0`** 314★, `hudl/open-data` **licence-in-a-PDF** 3,847★, `metrica-sports/sample-data` none 515★, `eddwebster/football_analytics` none 2,870★, `linouk23/NBA-Player-Movements` none 757★ | **Broken.** High stars, no usable grant. Nothing here is safe to ship |
+| **C. Client-side game replays** (esports demo files on the player's own disk; no registry allocates them) | Nobody — the artifact is local | `markus-wa/demoinfocs-golang` MIT 1,078★ (2026-11-23), `LaihoE/demoparser` MIT 746★ (2026-11-24), `pnxenopoulos/awpy` MIT 640★ (2026-11-22) | **Healthy and permissive.** All three active within four days of this pass |
+
+**The conclusion, stated as sharply as the evidence allows:** *esports telemetry is open because the
+file sits on the player's disk; football telemetry is closed because the file sits on Opta's server.*
+The analytics problem is the same and the engineering is arguably harder in esports. What differs is
+who holds the substrate — and the licence health tracks the substrate, not the difficulty. **A and C
+are the treatment and the control; B is the untreated case.** This is the strongest form the content
+law has taken in nineteen passes, and the first time it rests on a controlled comparison.
+
+**Falsifiable prediction, registered for a later pass to check:** if any league publishes optical
+tracking data under an actual open licence, a permissively-licensed client library will appear within
+two quarters. Conversely, **no amount of demand will produce a permissive Opta/Sportradar client
+while the feed is contractual** — the blocker is not developer interest, which substrate B's star
+counts (3,847 / 2,870 / 757) prove is high.
+
+### The gradient within the plane — four steps, and it collapses at the money
+
+Cycle 8 found a three-step gradient in rights reservation. Sports has four, and the collapse is
+sharper:
+
+1. **SEE the game** (pixels → data) — permissive, abundant, active. *Solved.*
+2. **STANDARDIZE the data** — thin but real and alive: `PySport/kloppy` **BSD-3-Clause** 573★
+   (2026-11-06) normalizes tracking and event data across providers; `withqwerty/reep` **CC0-1.0**
+   245★ maps player/team/coach identity across Transfermarkt and others. *Two repos carry this step.*
+3. **ACCESS the official feed** — unlicensed wrappers only (substrate B above). *Legally unusable.*
+4. **MONETIZE it** (odds, betting, ticketing tied to rights, fan engagement) — **near-total vacuum.**
+
+### The measured zeros, and what could not be measured
+
+- **Fan engagement is the crudest zero in this KB to date.** The top six GitHub results for
+  `fan engagement` are **28★, 6★, 5★, 4★, 3★, 3★** — about 49 stars in total — and the top result
+  (`ASportsV/iBall`, a gaze-moderated basketball viewing study) has **no licence** and last moved
+  **2023-12-12**. This is cruder than cycle 8's `music royalty accounting` (top six = 0★) in one
+  respect: here there is demand and spend, and still no code. The nearest usable thing is
+  `AkramOM606/AI-SoccerCoach` (MIT, **5★**, 2025-02-22).
+- **Betting/odds is a dead layer.** Most-starred result `S1M0N38/soccerapi` is MIT, 182★ and **dead
+  since 2022-12-08**. The only active permissive entry is `odds-api/odds-api` (Apache-2.0, 41★,
+  2026-11-05), which is an OpenAPI spec and SDK wrapper around a commercial feed, not an odds source.
+- **No open agent for officiating, VAR or rules adjudication** was located at any star level.
+- **No sports-specific open-source project originating in LATAM was found**, despite LATAM being the
+  region this plane's market section shows as most streaming-committed. Stated as an informed gap,
+  not coverage.
+- **Commercial terms for Sportradar, Genius Sports and Stats Perform are NOT verified.** No public
+  pricing exists and none was reachable. Treat as *not investigated, not free* — the same discipline
+  cycle 8 applied to DDEX.
+- **The StatsBomb user agreement was deliberately not retrieved.** Access requires registering
+  personal details at `statsbomb.com/resource-centre`. This pass declined to submit any user details
+  to a third party, so the agreement's terms are recorded as unread. What *is* verified is that the
+  agreement exists as a binary PDF in-repo (see `repos/foundations.md`).

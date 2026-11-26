@@ -9,6 +9,69 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 19: the sports-media, live-event & fan-engagement plane (**the first plane with a control group, and the crudest zero yet**)
+
+**What is new this week in this plane, and what is simply new to this KB.** A vocabulary probe over
+all eight files before searching the web — the cycle-8 method, ~1 call — returned **0 hits** for
+`play-by-play`, `box score`, `Sportradar`, `tracking data`, `officiating`, `sports rights`,
+`player stats`, `odds` and `merchandise`, and **1** for `esports`, against **246 lines** for
+`broadcast`. The plumbing was covered; the largest category of live media value was not.
+
+**Genuinely new this week (pushed within four days of this pass):**
+
+| Repo | License | Stars | Forks | Last push |
+|---|---|---|---|---|
+| `jipraks/yt-short-clipper` — long-form → 9:16 AI highlight clipper | **MIT** | 1,113 | 316 | 2026-11-26 |
+| `ColinGPT9/clips-studio` — local Opus Clip alternative | AGPL-3.0 | 700 | 149 | 2026-11-26 |
+| `roboflow/supervision` — the permissive CV workhorse | **MIT** | 51,730 | 4,963 | 2026-11-26 |
+| `ultralytics/ultralytics` — YOLO26/27 | ⚠️ AGPL-3.0 | 63,769 | 12,045 | 2026-11-26 |
+| `sportsdataverse/sportsdataverse-py` | **MIT** | 133 | 22 | 2026-11-26 |
+| `roboflow/sports` — the keystone sports-CV repo | **MIT** | 5,517 | 684 | 2026-11-25 |
+| `davidpagnon/Sports2D` — 2D pose + joint angles | **BSD-3-Clause** | 354 | 52 | 2026-11-25 |
+| `Anil-matcha/AI-Youtube-Shorts-Generator` | **MIT** | 6,577 | 1,217 | 2026-11-24 |
+| `LaihoE/demoparser` — CS2 replay parser | **MIT** | 746 | 110 | 2026-11-24 |
+| `markus-wa/demoinfocs-golang` — CS2 demo parser | **MIT** | 1,078 | 156 | 2026-11-23 |
+| `pnxenopoulos/awpy` — CS2 analysis | **MIT** | 640 | 89 | 2026-11-22 |
+
+**The finding — and it is a method result, not just a list.** Sports is the first plane in this KB
+where the *same* problem (extract spatiotemporal events from a match) exists with **three different
+data substrates**, so difficulty is held constant and only ownership varies. Pixels you already
+license → permissive and abundant. Vendor optical feeds → high stars, no usable grant. Client-side
+esports replays → permissive and active. **Esports telemetry is open because the file is on the
+player's disk; football telemetry is closed because the file is on Opta's server.** The content law
+finally has a control group instead of a correlation. Full table in `agents/top.md`.
+
+**The crudest zero this KB has recorded.** `fan engagement`: top six results are **28★, 6★, 5★, 4★,
+3★, 3★** — ~49 stars combined — and the leader (`ASportsV/iBall`) has **no licence** and last moved
+**2023-12-12**. Cycle 8's `music royalty accounting` summed to 0 stars, but this one is worse in a
+way that matters commercially: here the spend is enormous and documented, and still nobody has
+written the code. Betting/odds is likewise dead — most-starred `S1M0N38/soccerapi` (MIT, 182★) has
+not moved since **2022-12-08**.
+
+**Three licence traps found this week, all in repos with four-figure stars:**
+
+1. `hudl/open-data` (3,847★) — licence is **`LICENSE.pdf` at the repo root**. HTTP 200,
+   `application/octet-stream`. GitHub reports `NOASSERTION` because SPDX detectors read text, not
+   PDFs. **No badge, SPDX field or SBOM scan can see this.**
+2. `hudl/statsbombpy` (758★) — the official Python client has **no licence file at all**; its README
+   points to that PDF for *data* terms and requires registration. The code carries no grant.
+3. `hudl/StatsBombR` (314★) — `DESCRIPTION` declares **`License: 3.5.0`**. A version number in the
+   licence field: not missing, not custom, just filled from the wrong field.
+
+**And one false negative corrected, worth more than the traps.** Five R packages reported
+`NOASSERTION` and **all are MIT**: CRAN's convention ships a 46–57 byte `LICENSE` holding only
+`YEAR:`/`COPYRIGHT HOLDER:`, puts the grant in `LICENSE.md`, and writes
+`License: MIT + file LICENSE` in `DESCRIPTION`. `nflfastR` (558★), `hoopR` (157★), `cfbfastR` (114★)
+and `nflreadr` (117★) were all recoverable — rescuing the whole nflverse/sportsdataverse cluster,
+and probably R packages in the health, finance and energy KBs as well.
+
+**Momentum check against earlier passes.** `roboflow/supervision` at 51,730★ and `ultralytics` at
+63,769★ confirm that the detection/tracking layer — absent from this KB for eighteen passes — is one
+of the largest permissive-vs-AGPL forks in open source, not a niche. The sports-specific layer is
+two orders of magnitude smaller (`roboflow/sports` 5,517★, `kloppy` 573★) and that ratio is the real
+shape of the opportunity: the general substrate is solved and free; the sports-specific glue is thin
+and mostly maintained by two or three people.
+
 ## 2026-11-26 — pass 18: the book, ebook & scholarly-publishing plane (the **written word**, measured for the first time)
 
 **What is new this week in this plane, and what is simply new to this KB.** Seventeen passes covered

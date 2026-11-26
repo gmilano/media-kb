@@ -1911,3 +1911,83 @@ cutting and scanning pages** to produce training data. A publishing expert quote
 question of **resale rights** may matter more than the AI training use itself. Recorded as reported,
 not verified — but the direction is the one every rights-holder conversation in this plane now
 starts from.
+
+## The sports-media plane — trends measured 2026-11-26 (pass 19)
+
+### 1. The rights market peaks this year and is forecast to fall — the first falling number in this KB
+
+The SportBusiness Global Media Report 2026 puts global sports media rights at a record
+**$65.82bn in 2026, up 15% year on year**, and forecasts a **drop to $62.2bn in 2027**, then a
+plateau rather than renewed growth. Nearly every market figure elsewhere in this KB points up and to
+the right; this one does not, and it changes how to pitch. **The 2027 buying conversation is about
+cost per hour of produced content, not about growth.** That is precisely the conversation automation
+wins.
+
+Note a genuine conflict between two credible sources, which this pass does not resolve: Ampere
+Analysis projects streaming services' sports-rights spend **rising** to **$14.2bn in 2026** (from
+$13.2bn in 2025), while SportBusiness projects the **total** falling in 2027. Both can hold —
+streaming taking share of a shrinking whole — but no source states that explicitly, so it is flagged
+rather than asserted.
+
+### 2. Prime Video displaces DAZN at the top of streaming sports spend — first time since 2018
+
+Ampere expects **Prime Video ranked first** for sports-rights spend in 2026, ending DAZN's lead in
+every year since 2018. A platform shift of that size at the top of the spend table is a procurement
+signal: the incoming leader is an AWS-native buyer with its own ML stack, which raises the bar on
+what an integrator must bring beyond raw model capability.
+
+### 3. Automated highlights have shipped; automated commentary and direction have not
+
+This is the clearest adoption line in the plane, and the asymmetry is the useful part:
+
+| Capability | Status 2026 | Evidence |
+|---|---|---|
+| Automated highlights / clipping | **Shipping in production** | Spiideo launched AI Highlights in Spiideo Play on **2026-05-05**, starting with soccer, ice hockey, basketball and handball, combining video + event data + audio commentary. Sky's "Recap" builds personalized highlights with ML/CV across football to tennis |
+| Olympic-scale AI workflows | **Deployed** | Olympic Broadcasting Services expanded AI-powered content workflows for **Milano-Cortina 2026** |
+| AI commentary | **Deployed but fragile** | IBM watsonx commentary at the Masters and Wimbledon; publicly criticized for mispronouncing a player's name |
+| End-to-end automated production | **Not demonstrated** | LiveU's 2026 outlook states AI proved useful for *focused* tasks — highlights, metadata, commentary — and treats end-to-end workflow automation as the open question for 2026 |
+
+**Read against the repo evidence this is a near-perfect match**, which is why it is trustworthy: the
+open-source layer has real, active, permissive highlight/clip tooling (`roboflow/sports` MIT 5,517★,
+`line/lighthouse` Apache-2.0, two MIT clippers above 1,000★) and essentially nothing for commentary
+(one MIT repo at **111★**) or automated direction (**nothing**). The vendor roadmap and the open
+source agree on where the frontier is.
+
+### 4. The detection/tracking layer is one of open source's largest permissive-vs-AGPL forks
+
+Measured this pass, last-push dates included:
+
+| Repo | License | Stars | Last push |
+|---|---|---|---|
+| `ultralytics/ultralytics` | **AGPL-3.0** | 63,769 | 2026-11-26 |
+| `roboflow/supervision` | **MIT** | 51,730 | 2026-11-26 |
+| `mikel-brostrom/boxmot` | **AGPL-3.0** | 8,330 | 2026-11-20 |
+| `roboflow/trackers` | **Apache-2.0** | 4,022 | 2026-11-25 |
+
+Both camps are actively developed and roughly matched in capability. The trend worth naming:
+**the permissive side is consolidating around Roboflow while the AGPL side consolidates around
+Ultralytics**, and a 2027 engagement will have to pick a side deliberately rather than inherit one
+from a tutorial. Most tutorials teach the AGPL one.
+
+### 5. The content law now has a control group — the methodological trend of this pass
+
+Nineteen passes have restated that the licence of the underlying content, not regulatory pressure,
+decides whether open source can serve a plane. Sports is the first plane that **tests** it: one
+problem, three substrates, difficulty held constant. Pixels you license → permissive and abundant.
+Vendor optical feeds → 3,847★ / 2,870★ / 757★ of code with **no usable grant**. Client-side esports
+replays → three independent MIT parsers, all active within four days of this pass.
+
+**Esports telemetry is open because the file is on the player's disk; football telemetry is closed
+because the file is on Opta's server.** The trend to watch is whether substrate B ever opens: the
+falsifiable prediction registered in `agents/top.md` is that a permissive client library appears
+within two quarters of any league publishing tracking data under a real open licence — and that no
+amount of developer demand produces one while the feed stays contractual.
+
+### 6. Where the plane collapses: the money layer, measured
+
+The gradient runs SEE → STANDARDIZE → ACCESS → MONETIZE, and it dies at the last step.
+`fan engagement` returns **28★, 6★, 5★, 4★, 3★, 3★** for its top six results, the leader unlicensed
+and last touched **2023-12-12**. The most-starred open odds library has been **dead since
+2022-12-08**. Against a $65.82bn rights market and documented nine-figure fan-monetization spend,
+this is the largest gap between money and code anywhere in this KB — larger than cycle 8's music
+royalty accounting, because there the spend was contested and here it is not.

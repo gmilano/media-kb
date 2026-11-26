@@ -685,6 +685,41 @@ target for the open-textbook segment.
 **Informed gap:** no primary DOJ source for the ADA Title II date was located in this pass, and the
 two secondary dates differ by a year. Flagged rather than resolved.
 
+#### Sports media & live events — pass 19 (2026-11-26). The region **is** the market, and it is the most licence-sensitive
+
+- **The US is 53.9% of the entire global sports media rights market**, up from 46% in 2022
+  (SportBusiness Global Media Report 2026). No other segment in this KB is this concentrated in one
+  region. The jump is driven chiefly by the **NBA's 11-season agreements with Comcast, Disney and
+  Amazon**.
+- **Streaming is now the top buyer.** Ampere Analysis expects **Prime Video to rank first** in
+  sports-rights spend in 2026, ending DAZN's run as leader in every year since 2018, within a
+  streaming total of **$14.2bn** (from $13.2bn in 2025).
+- **AI is already on air here.** IBM watsonx supplied commentary at the **Masters and Wimbledon**
+  (and was publicly criticized for mispronouncing a player's name); **Fox Sports** built World Cup
+  AI agents with Google Cloud. The precedent problem is solved; the quality problem is not.
+- **Regulatory gate is contractual, not statutory.** There is no federal AI statute reaching this;
+  the operative constraints are the **WGA, SAG-AFTRA and DGA agreements** plus state privacy law
+  (CCPA) over fan data. For sports specifically, the labour gate bites on **synthetic commentary and
+  synthetic on-air talent**, not on highlight clipping — which is why clipping shipped first.
+
+**Opportunity, specific to this region:** the differentiator here is **licence cleanliness, not
+model quality**. US enterprise procurement runs the deepest open-source legal review of any region,
+and the default sports-CV tutorial stack is built on **`ultralytics` (AGPL-3.0, 63,769★)** and
+**`boxmot` (AGPL-3.0, 8,330★)** — both of which reach a hosted service through AGPL §13. Globant's
+offer is a **capability-equivalent permissive stack**: `roboflow/supervision` (MIT, 51,730★) +
+`roboflow/trackers` (Apache-2.0) or `tryolabs/norfair` (BSD-3) + `roboflow/sports` (MIT, 5,517★),
+with `line/lighthouse` (Apache-2.0) for highlight retrieval. That is a deliverable a general counsel
+can approve, and most competitors will arrive carrying AGPL without knowing it.
+
+**Second opportunity:** the **regional sports network** segment is under the most cost pressure in
+US media, and the 2027 rights forecast falls (see the pass 19 market addendum). Automated highlight
+and overlay production is the one capability that lowers cost per produced hour without touching a
+rights payment.
+
+**Informed gap:** no US league or federation was found publishing optical tracking data under an open
+licence. `USSoccerFederation/ussf_ssac_23_soccer_gnn` (MIT) shows a federation *can* publish
+permissively — it is research code, not a feed.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1436,6 +1471,48 @@ Article 50 at the same time. **Compliance evidence, not just compliance, is the 
 every enforcement claim traces to a vendor page. Stated as a gap, because the difference between
 "enforced" and "claimed enforced" changes how a proposal should be pitched.
 
+#### Sports media & live events — pass 19 (2026-11-26). The only region where **sovereignty makes the permissive stack the cheap answer**
+
+- **Scale, in proportion:** Europe's five largest markets are together worth about **one third of the
+  US** sports-rights total, and the **Premier League alone is 7.8% of the global total**
+  (SportBusiness 2026). The region is a collection of strong national markets rather than one block.
+- **The sovereignty argument is now the procurement argument.** The DPP's *European Media Trends
+  2026* reports digital sovereignty entering business-resilience planning at European media
+  companies. VSN states the mechanism plainly: standard cloud DAM offerings **rely on third-party
+  public AI engines that aggregate data on extra-European servers**. For sports this is acute — match
+  footage is the single most valuable asset a rights-holder owns, and sending it to a third-party
+  inference endpoint is the exact thing sovereignty policy is written to prevent.
+- **The AI Act continues to tighten and simplify at once.** Article 50 transparency duties have
+  applied since **2026-08-02** (recorded at pass 9 in this file); the **European Parliament voted
+  569–45** to adopt its position on the AI Act Omnibus simplification proposal. Synthetic commentary
+  and synthetic presenters fall under Article 50 marking and disclosure; automated highlight
+  selection does not.
+- **Mid-tier clubs and leagues are the at-risk buyer, per a primary academic source.** The
+  **imec-SMIT (VUB)** mapping of May 2026 concludes that value accrues to whoever controls
+  infrastructure, data, models, interfaces, rights and business arrangements, and warns explicitly
+  that **smaller and regional media players risk being left behind**. In sports that is every league
+  outside the top five — the ones that cannot fund a broadcast operation per match.
+- **Piracy enforcement remains measurably inadequate for sport.** This file already records the EU
+  study *Countering online piracy of sports and broadcast in the EU*, whose own assessment found
+  rapid blocking **comes up short** for sports and broadcast specifically — a live, unsolved,
+  EU-acknowledged problem in exactly this plane.
+- **MENA:** media-company AI spending in the region is expected to reach **$520m in 2026**.
+- **Public service media are organizing.** The EBU AI Forum (March 2026) featured structured AI
+  adoption, governance frameworks and strategic direction across public broadcasters — and public
+  broadcasters hold large shares of national sports rights in EMEA.
+
+**Opportunity, specific to this region:** **on-premise, sovereign sports analysis — and it is cheap
+here for a structural reason.** Every component of the permissive sports-CV stack runs locally on a
+single GPU: `roboflow/sports` (MIT), `roboflow/supervision` (MIT), `roboflow/trackers` (Apache-2.0),
+`Sports2D` (BSD-3), `PySport/kloppy` (BSD-3). There is **no inference API in the critical path**, so
+"your footage never leaves your datacentre" is an architectural fact rather than a contractual
+promise. This is the one plane in the KB where the sovereignty requirement and the open-source
+licence shape point the same way, and the buyer is the mid-tier league the imec report identifies.
+
+**Informed gap:** no EMEA-specific open-source sports project of consequence was located; the
+football-analytics tooling is maintained by individuals and small groups across several countries
+rather than by any European institution.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -2150,6 +2227,46 @@ should be sold that way.
   number must not be reused as a proxy for this region.
 - **No India/ANZ-specific finding** emerged from the regional search despite both being substantial
   English-language publishing markets.
+
+#### Sports media & live events — pass 19 (2026-11-26). The region whose **sports are absent from the open-source stack**
+
+- **Cricket is the money, and the numbers are large.** The **IPL's 2023–2027 cycle is valued at
+  approximately INR 48,390.32 crore (US$5.23bn)**, and in **July 2026 JioStar acquired exclusive
+  Indian rights to all 68 matches of The Hundred**. The Asia-Pacific screen economy is described as
+  racing toward **$200bn**, with the **monetisation gap defining the decade** — this file records
+  that framing at pass 5 and it applies with full force to sport.
+- **Adoption is second only to North America.** APAC is reported as adopting generative AI faster
+  than every region except NA. The **ABU** reports public broadcasters in **Australia and Singapore**
+  testing AI for newsroom workflows, archiving and verification — all three of which are sports
+  workloads at a broadcaster that carries live sport. **APOS 2026 (Bali)** ran AI as its central
+  theme.
+- **Regulation does not converge, and that is the design constraint.** Latham & Watkins (September
+  2026) groups the region into divergent categories — binding risk-based frameworks (**South Korea**,
+  **Vietnam**), targeted rules (**China**), and others — with a recent acceleration in AI legislation
+  across APAC. This file's cycle-8 conclusion holds and extends here: **the sellable asset is a
+  policy engine keyed by jurisdiction, not a single compliance mode.** Content labelling and
+  disclosure is the recurring specific obligation across the nine-country overviews.
+
+**Opportunity, specific to this region, and it is the sharpest placed finding of this pass:** the
+entire open-source sports stack is **football-first and essentially football-only**. Every
+foundational component recorded in `repos/foundations.md` was built for association football —
+`SoccerNet/*`, `PySport/kloppy`, `mplsoccer`, `penaltyblog`, `UnravelSports` — with American sports
+covered by the R cluster (`nflfastR`, `hoopR`, `cfbfastR`). **Cricket, kabaddi, sumo, Australian
+rules and the Asian baseball leagues have no equivalent at any star level.** Cricket is the
+second-most-watched sport on earth and anchors a $5.23bn rights cycle, and its open tooling is a
+blank.
+
+That gap is addressable rather than merely noted, because the generic layer transfers: detection,
+tracking and pose (`supervision` MIT, `trackers` Apache-2.0, `mmpose` Apache-2.0, `Sports2D` BSD-3)
+are sport-agnostic. What is missing is **sport-specific geometry, event taxonomy and state
+machines** — pitch/crease calibration, over and innings structure, dismissal types. That is a
+well-bounded build on permissive foundations, and it is defensible IP in the region that has the
+largest unserved rights market.
+
+**Informed gap:** no APAC-origin open-source sports analytics project was located. The one APAC
+corporate contribution found in this plane is **`line/lighthouse`** (LINE, Apache-2.0, 274★) for
+video moment retrieval — not sports-specific, but the most research-credible highlight component in
+the plane and a live indication that the capability exists regionally.
 
 ### LATAM
 
@@ -2944,6 +3061,53 @@ are what make this plane the most sellable in the region.**
   **shared regional AI assets and attribution and licensing frameworks** — which is an argument for one
   reusable consent asset rather than twelve bespoke ones.
 
+#### Sports media & live events — pass 19 (2026-11-26). The region where the **creator is the rights-holder**, and the stack fits that buyer exactly
+
+- **The 2026 World Cup is the organizing event, and the rights are unusually fragmented.** Per
+  Dataxis, **21 companies across the region's six biggest markets** hold broadcast rights tied to the
+  tournament, and **76% are betting on streaming**. Fragmentation at that level means many buyers
+  each needing their own production capability — the opposite of a single national broadcaster.
+- **Brazil — a YouTuber holds free-to-air Olympic rights.** **CazéTV** took FTA rights in Brazil for
+  the **2026 and 2028 Olympics**, and is reported at **25.9m subscribers** with announced World Cup
+  advertising deals worth around **$400m**. ⚠️ Those two figures come from a single trade source and
+  are flagged as unverified; the rights award itself is reported consistently. Alongside it,
+  **Globo** holds Brazilian Olympic **pay-TV** rights through **2032** and F1 through **2028**;
+  **Warner Bros. Discovery** carries the Champions League on TNT Sports and HBO Max; World Cup
+  coverage is shared across **Globo, YouTube, CazéTV, SBT and N Sports**.
+- **Mexico.** **TelevisaUnivision** holds exclusive Olympic rights through **2032**, with **ViX**
+  positioning as the only home for all **104 World Cup matches** digitally; **Amazon added El Tri**
+  matches (August 2026); **Sky Sports** (Televisa) took F1 from Fox Sports Mexico in 2025.
+- **Region-wide.** **América Móvil** renewed LATAM Olympic rights through **2032**; **ESPN** retains
+  F1 for LATAM and the Caribbean through **2028**; the Champions League in Spanish-speaking LATAM is
+  split **50/50 between Disney and Paramount**, with the Mexican deal expiring at the end of
+  2026/27 — a dated, near-term renewal to watch.
+- **Regulation is arriving sector-first.** **Peru's Law 31814** took effect in **January 2026** with
+  a risk-based structure and a government programme running to 2030. **Mexico** passed 2026 AI
+  amendments to its **copyright and labour** laws — the first sector-specific AI rules there — plus a
+  new **audiovisual law reaching video-on-demand platforms**, which is the one most likely to touch a
+  sports streamer. Baker McKenzie notes no LATAM country yet has a mature harmonized regime and that
+  **deepfakes and synthetic media are becoming enforcement priorities**. **Latam-GPT** (Chile's
+  CENIA, 30+ institutions across eight countries) remains the regional model effort.
+
+**Opportunity, specific to this region:** **the creator-broadcaster.** CazéTV is the archetype and
+it is not an anomaly — a digital-native rights-holder with a real audience, real advertising revenue
+and **no broadcast infrastructure**. That buyer cannot staff a highlights desk per match, and cannot
+sign an AGPL obligation or a per-minute inference bill either. The permissive local stack is
+precisely sized for them: `roboflow/sports` (MIT) for detection and tracking,
+`Anil-matcha/AI-Youtube-Shorts-Generator` or `jipraks/yt-short-clipper` (both MIT, both >1,000★, both
+pushed within two days of this pass) for vertical clipping, a browser-source overlay driven from that
+output, running on one GPU at near-zero marginal cost per match. **It is the only plane in this KB
+where the LATAM-native buyer is better served by the open stack than an incumbent broadcaster is.**
+
+**Second opportunity:** with 21 rights-holders across six markets and 76% streaming-committed, the
+repeatable product is a **per-rights-holder clipping and overlay deployment**, not a single
+enterprise platform — the same offer sold 21 times.
+
+**Informed gap, stated explicitly:** **no sports-specific open-source project originating in LATAM
+was found**, at any star level, despite LATAM being the most streaming-committed region in this
+plane. The region is a buyer here, not a producer of this tooling — which is the commercial argument
+for Globant building it regionally rather than integrating something that already exists.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -3255,3 +3419,38 @@ equivalent of the EAA**. Access is delivered via the **Marrakesh Treaty** and au
   study and the Chambers IP guide carried the region; no publisher survey was located.
 - Ratification counts differ between sources (103 by 4 March 2026 vs 105 by September 2026); likely
   just different reporting dates, recorded rather than reconciled.
+
+## Market size — pass 19 addendum (2026-11-26): the sports segment, and **the first falling number in this KB**
+
+Sports is the rare segment where a credible primary-style figure exists and **points down**. Every
+other addendum in this file reports growth; this one does not, and that reframes the sale.
+
+| Figure | Value | Source |
+|---|---|---|
+| Global sports media rights value, 2026 | **$65.82bn** (record, **+15% YoY**) | SportBusiness Global Media Report 2026 |
+| Global sports media rights value, 2027 | **$62.2bn** — a **forecast decline**, then a plateau | SportBusiness Global Media Report 2026 |
+| US share of that global total | **53.9%** (was 46% in 2022) | SportBusiness 2026 |
+| Europe's five biggest markets, combined | ≈ **one third of the US** total | SportBusiness 2026 |
+| Premier League share of global total | **7.8%** | SportBusiness 2026 |
+| Streaming services' sports-rights spend, 2026 | **$14.2bn** (from $13.2bn in 2025); **Prime Video ranked first**, ending DAZN's lead since 2018 | Ampere Analysis |
+| IPL rights cycle 2023–2027 | ≈ **US$5.23bn** | reported |
+| MENA media-company AI spend, 2026 | **$520m** | reported |
+
+**An unresolved conflict, flagged rather than smoothed over.** Ampere projects streaming sports
+spend **rising**; SportBusiness projects the **total** market **falling** in 2027. Both can be true
+if streaming takes share of a shrinking whole, but **no source consulted states that**, so this KB
+does not assert it. Use the two figures separately and attribute each.
+
+**Why the falling number is the better sales position.** A market that grew 15% buys capability; a
+market forecast to contract buys **cost per produced hour**. Automated highlight and overlay
+production is the only lever in this plane that reduces cost per hour without renegotiating a rights
+payment — and the 2027 forecast gives the conversation a date. The segment where that lands hardest
+is the one with the thinnest margins and the most matches: mid-tier leagues in EMEA (the buyer the
+imec-SMIT report identifies as at risk), regional sports networks in North America, and the
+creator-broadcasters in LATAM.
+
+**What this addendum does NOT contain, and will not pretend to.** No verified commercial terms for
+**Sportradar, Genius Sports or Stats Perform** — the three vendors that actually price the data layer
+this whole plane depends on. No public pricing exists and none was reachable from this session.
+Following the discipline cycle 8 applied to DDEX: **treat as not investigated, not free.** Any
+proposal that assumes a data-feed cost is guessing, and should say so to the client.

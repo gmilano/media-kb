@@ -2580,3 +2580,186 @@ margin, exactly as the rules library was in the healthcare pharmacovigilance pat
 | "Thema/BISAC mapping is a solved problem" | No verified open repo treats it as a first-class feature. Also a build |
 | Reusing the NA 63% AI-adoption figure for other regions | It is a **BookNet Canada/BISG North American** survey. No comparable APAC or LATAM figure was located |
 | Quoting EAA enforcement as established fact | Every enforcement claim located traces to a **vendor page**, and two of them contradict each other |
+
+---
+
+## Pattern 36 — The licence-clean sports vision spine (replace the AGPL default before it reaches a client)
+
+**Problem.** Every sports-CV tutorial, demo and Stack Overflow answer builds on
+**`ultralytics/ultralytics` (AGPL-3.0, 63,769★)**, often with
+**`mikel-brostrom/boxmot` (AGPL-3.0, 8,330★)** for tracking. A team that follows the obvious path
+ships AGPL into a hosted service, where **§13 obliges Globant to offer the service's source to its
+users**. This is discovered in legal review, after the demo has been approved — the worst possible
+moment. The capability is not the problem; the default is.
+
+**The swap, component for component.** Each replacement is permissive, actively maintained, and does
+the same job:
+
+| Job | AGPL default | **Permissive replacement** | License | Stars | Last push |
+|---|---|---|---|---|---|
+| CV utilities, annotation, zones | `ultralytics` helpers | **`roboflow/supervision`** | **MIT** | 51,730 | 2026-11-26 |
+| Multi-object tracking | `boxmot` | **`roboflow/trackers`** | **Apache-2.0** | 4,022 | 2026-11-25 |
+| Lightweight MOT alternative | `boxmot` | **`tryolabs/norfair`** | **BSD-3-Clause** | 2,708 | 2025-04-30 |
+| Tracking algorithm reference | — | **`FoundationVision/ByteTrack`** | **MIT** | 6,833 | 2024-06-19 (vendor it) |
+| Sport-aware detection, pitch keypoints, radar view | — | **`roboflow/sports`** | **MIT** | 5,517 | 2026-11-25 |
+| Pose and joint angles | — | **`davidpagnon/Sports2D`** (BSD-3) or **`open-mmlab/mmpose`** (Apache-2.0) | **BSD-3 / Apache-2.0** | 354 / 8,083 | 2026-11-25 / 2025-08-04 |
+| Highlight / moment retrieval | — | **`line/lighthouse`** | **Apache-2.0** | 274 | 2026-11-01 |
+| Provider-agnostic data model | — | **`PySport/kloppy`** | **BSD-3-Clause** | 573 | 2026-11-06 |
+| Cross-provider identity resolution | — | **`withqwerty/reep`** | **CC0-1.0** | 245 | 2026-08-20 |
+
+**Wiring.**
+
+```
+[broadcast feed / fixed camera]
+      ↓
+[detector]  ──► supervision (MIT): annotate, zones, line counters
+      ↓
+[roboflow/trackers (Apache-2.0) or norfair (BSD-3)]  ──► stable track IDs
+      ↓
+[roboflow/sports (MIT)]  ──► pitch keypoints → homography → real-world coordinates
+      ↓
+[kloppy (BSD-3)]  ──► normalize into a provider-agnostic tracking/event model
+      ↓
+[reep (CC0)]  ──► resolve players/teams to stable cross-provider identities
+      ↓
+[line/lighthouse (Apache-2.0)]  ──► retrieve highlight moments
+      ↓
+[clip + overlay render]  ──► deliverable
+```
+
+**The detector is the one open decision**, and it must be made deliberately: choose a permissively
+licensed detector, or train your own weights, or buy Ultralytics' commercial licence. Do not let the
+choice be inherited from a notebook.
+
+**Two licence rules this pattern exists to enforce.**
+1. **Resolve the licences of what you link, not of the repo.** `boxmot`'s own licence file states
+   third-party components retain their own notices — the compilation-licence trap cycle 8 found on
+   `chromaprint`. Native and model dependencies need their linked licences resolved in CI.
+2. **Never record a licence from an API field alone.** Five R packages in this plane report
+   `NOASSERTION` and are all **MIT**; `hudl/open-data` reports `NOASSERTION` and ships its licence as
+   a **PDF**; `HiEventsDev/Hi.Events` reports "Other" and is **AGPL-3.0 + §7(b) attribution** in a
+   file named `LICENCE`. See `repos/foundations.md` for the full probe list.
+
+---
+
+## Pattern 37 — The creator-broadcaster match-day pipeline (built for the LATAM buyer, runs on one GPU)
+
+**Problem.** A digital-native rights-holder — the CazéTV archetype, and there are at least 21
+World-Cup-linked rights-holders across LATAM's six biggest markets, 76% of them streaming-committed
+— has an audience and advertising revenue but **no broadcast operation**. They need per-match
+highlights, vertical clips and a scoreboard overlay, at a marginal cost that works for a league
+nobody else is covering. They cannot absorb an AGPL obligation and cannot pay per-minute inference.
+
+**Why the open stack fits this buyer better than it fits an incumbent.** Every component runs
+locally, so there is no per-minute cost and no footage leaving the building — which also satisfies
+the EMEA sovereignty requirement, making the same deployment sellable in two regions.
+
+**Recipe.**
+
+| Stage | Component | License | Note |
+|---|---|---|---|
+| 1. Detect & track | `roboflow/sports` + `roboflow/supervision` | **MIT** | Players, ball, pitch keypoints |
+| 2. Spot moments | `line/lighthouse` | **Apache-2.0** | Moment retrieval; reproducible research baselines |
+| 3. Cut verticals | `Anil-matcha/AI-Youtube-Shorts-Generator` (6,577★) or `jipraks/yt-short-clipper` (1,113★) | **MIT** | Both pushed within two days of this pass |
+| 4. Scene boundaries | `Breakthrough/PySceneDetect` | **BSD-3-Clause** | Already in `repos/foundations.md` |
+| 5. Subtitle & dub | `VideoLingo` (Apache-2.0), `KrillinAI` (MIT) | **Permissive** | Already recorded; pt-BR ↔ es-419 is the regional requirement |
+| 6. Overlay | `JimThatcher/sport-streamer` (MIT, 31★) or a custom browser source | **MIT** | ⚠️ 31★ and dormant — expect to own this code |
+| 7. Publish | `yt-dlp` / platform APIs | Unlicense | Already recorded |
+
+**Honest sizing.** Stage 6 is the weak link and the pattern says so: the entire open scoreboard and
+overlay category tops out at **31 stars** with two of three projects dormant. Budget for building
+the overlay renderer; everything upstream of it is mature and permissive.
+
+**Stage 0 — the stage most proposals skip.** Confirm in writing which rights the client holds for
+clip distribution per platform and territory. LATAM rights are split per-territory and per-window
+(Champions League runs Disney/Paramount 50/50 in Spanish-speaking markets, WBD in Brazil; the
+Mexican deal expires end of 2026/27), and an automated pipeline will happily publish a clip into a
+territory the client does not hold. Pass 16's avails plane is the reference for modelling that.
+
+---
+
+## Pattern 38 — Entering a sport the open stack has never served (the APAC cricket build)
+
+**Problem.** The open sports stack is **football-first and essentially football-only**: `SoccerNet/*`,
+`kloppy`, `mplsoccer`, `penaltyblog` and `UnravelSports` were all built for association football,
+with American sports served by the R cluster. **Cricket, kabaddi, sumo, Australian rules and the
+Asian baseball leagues have no equivalent at any star level** — against an IPL rights cycle worth
+about **US$5.23bn**. A client in that market cannot adopt; they have to build.
+
+**What transfers for free, and what must be built.** This split is the whole value of the pattern,
+because it turns "no tooling exists" into a bounded piece of work:
+
+| Layer | Status for a new sport | Component |
+|---|---|---|
+| Detection, tracking, pose | **Transfers unchanged** — sport-agnostic | `supervision` (MIT), `trackers` (Apache-2.0), `mmpose` (Apache-2.0), `Sports2D` (BSD-3) |
+| Camera calibration / homography | **Transfers as method**, must be re-fit to the playing surface | ⚠️ `SoccerNet/sn-calibration` (113★) is the reference and ships **no licence** — read it for method, write your own |
+| Playing-surface geometry | **Must be built** | Crease, pitch, boundary rope — not a football pitch |
+| Event taxonomy & state machine | **Must be built** | Overs, innings, dismissal types, powerplays, DRS |
+| Data model | **Extend, don't replace** | `kloppy` (BSD-3) is a provider-agnostic model worth extending upstream |
+| Identity resolution | **Must be built** | `withqwerty/reep` (CC0) is football-only; the pattern is reusable |
+
+**Why this is defensible rather than merely absent.** The permissive foundations mean the build is
+sport-specific logic on top of solved vision — and because `kloppy` is BSD-3 and actively maintained
+(2026-11-06), a cricket extension can be contributed upstream while the event taxonomy, calibration
+fits and trained weights stay with the client. That is a clean IP boundary: contribute the model,
+keep the domain.
+
+**Regulatory wiring for APAC, carried from cycle 8.** Latham & Watkins (September 2026) places APAC
+jurisdictions in divergent regulatory categories — binding risk-based (South Korea, Vietnam),
+targeted (China), others — so the compliance component is a **policy engine keyed by jurisdiction**,
+not one compliance mode. Content labelling and disclosure is the recurring concrete obligation, which
+matters the moment synthetic commentary or a synthetic presenter enters the pipeline.
+
+---
+
+## Pattern 39 — The substrate test: a 30-minute gate before any sports-data proposal
+
+**Problem.** The sports-data layer contains repos with **3,847**, **2,870** and **757** stars that
+ship **no usable licence grant**, and five more reporting `NOASSERTION` that are actually **MIT**. A
+proposal built on star counts will be wrong in both directions: it will adopt something unshippable
+and reject something perfectly usable.
+
+**The gate.** Before any sports-data dependency enters a proposal, answer one question: **who holds
+the substrate?** The answer predicts licence health better than any other signal measured in this KB.
+
+| Substrate | Expect | Action |
+|---|---|---|
+| **Pixels you already license** (your own feed) | Permissive, abundant, active | **Proceed.** Pattern 36 |
+| **Client-side artifacts** (esports replays — the file is on the player's disk) | Permissive and active: three independent MIT CS2 parsers, all pushed within four days of this pass | **Proceed.** `demoinfocs-golang`, `demoparser`, `awpy` |
+| **Vendor optical/event feeds** (Opta, Sportradar, Second Spectrum, StatsBomb) | High stars, no usable grant | **Stop.** Price the commercial feed; assume nothing is free |
+
+**Then run the licence probe — the API field is not an answer.**
+
+```
+# 1. existence (the only true oracle)
+git ls-remote --exit-code -h https://github.com/<slug> >/dev/null && echo OK
+
+# 2. stars/forks/spdx/pushed_at — works for ANY repo, several at once
+gh api -X GET search/repositories -f q='repo:<slug> repo:<slug2>' \
+  --jq '.items[] | "\(.stargazers_count)\t\(.license.spdx_id // "NONE")\t\(.pushed_at[0:10])\t\(.full_name)"'
+
+# 3. if NOASSERTION or nothing: read the file. 12 names x 2 branches.
+#    LICENSE LICENSE.md LICENSE.txt license.txt LICENCE LICENCE.md
+#    COPYING COPYING.md LICENSE-MIT DESCRIPTION LICENSE.pdf
+# 4. CONTROL: if all 404, fetch README.md. If README 404 too, your branch name is wrong -
+#    a 404 is NEVER by itself proof a licence is missing.
+```
+
+**Four failure modes this gate catches, every one of them measured in this plane:**
+
+1. **Licence as a PDF.** `hudl/open-data` (3,847★) ships `LICENSE.pdf` **at the repo root** — HTTP
+   200, `application/octet-stream`. **No SPDX field, badge or SBOM scan can read it.** Flag as
+   "read manually"; never treat as absent, never auto-approve.
+2. **No licence at all behind a registration wall.** `hudl/statsbombpy` (758★) has no licence file;
+   its README defers *data* terms to that PDF and requires registering personal details. The
+   **code** carries no grant → default all-rights-reserved.
+3. **Garbage in the licence field.** `hudl/StatsBombR` (314★) declares `License: 3.5.0` in
+   `DESCRIPTION` — a version number. Read the *value*, not just the field's presence.
+4. **The R/CRAN false negative — the one that saves work.** A 46–57 byte `LICENSE` holding only
+   `YEAR:`/`COPYRIGHT HOLDER:`, the real grant in `LICENSE.md`, and `License: MIT + file LICENSE` in
+   `DESCRIPTION`. `nflfastR`, `hoopR`, `cfbfastR` and `nflreadr` all report `NOASSERTION` and are all
+   **MIT**. Four usable dependencies that a careless pass would have discarded.
+
+**The rule, stated for reuse across all twelve industries:** *existence comes from `ls-remote`;
+metadata comes from `search/repositories`; the licence comes from reading the file — and a missing
+file is only proven by a control request that succeeds.*

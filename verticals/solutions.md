@@ -526,3 +526,61 @@ unbuilt — which is the point:
    failover are decisions; generative work belongs in the production plane (pass 6).
 4. **Keep the DRM step out of the agent's reach.** It is a contractual boundary, and nothing in this
    plane's tooling can cross it.
+
+---
+
+## The trust & safety tier — added 2026-11-26 (pass 9)
+
+The platform layer that decides whether content may be published, shown to a minor, monetised or
+reported. Until this pass this file had **no row** for it, while `intel/market.md` had been
+describing the obligations for three passes.
+
+| Platform | Repo | Licence | ★ / forks | Last push | What it replaces |
+|---|---|---|---|---|---|
+| **ROOST Coop** | [roostorg/coop](https://github.com/roostorg/coop) | Apache-2.0 | 150★ / 55f | **2026-11-26** | The review console of a commercial T&S suite (Hive, ActiveFence, Checkstep). Dashboard, queues, routing, automatic enforcement rules, integrations — **self-hosted, so content never leaves the client's infrastructure.** |
+| **ROOST Osprey** | [roostorg/osprey](https://github.com/roostorg/osprey) | Apache-2.0 | 511★ / 73f | 2026-11-23 | The rules engine. **Discord's production engine, donated.** |
+| **Jigsaw Altitude** | [Jigsaw-Code/altitude](https://github.com/Jigsaw-Code/altitude) | Apache-2.0 | 44★ / 11f | 2026-06-21 | A whole T&S function for a platform too small to staff one. Explicitly designed for small platforms. |
+| **Conversation AI Moderator** | [conversationai/conversationai-moderator](https://github.com/conversationai/conversationai-moderator) | Apache-2.0 | 208★ / 31f | 2026-06-22 | Machine-assisted human moderation for comment sections — the newsroom use case. |
+| **Ozone** | [bluesky-social/ozone](https://github.com/bluesky-social/ozone) | dual MIT/Apache-2.0 | 548★ / 94f | 2026-11-23 | Labelling console for atproto. The only **stackable** model here: third parties publish labels, users subscribe. |
+| **Draupnir** | [the-draupnir-project/Draupnir](https://github.com/the-draupnir-project/Draupnir) | Apache-2.0 (via REUSE) | 253★ / 30f | **2026-11-26** | Community management and moderation for Matrix. Successor to mjolnir. |
+| **EU Age Verification app** | [av-app-android-wallet-ui](https://github.com/eu-digital-identity-wallet/av-app-android-wallet-ui) | **EUPL-1.2** | 309★ / 52f | 2026-11-07 | A commercial age-assurance vendor (Yoti, AU10TIX, VerifyMy). Published by the European Commission, with a ZKP design that reveals only whether the threshold is met. |
+| **DSA Transparency Database** | [digital-services-act/transparency-database](https://github.com/digital-services-act/transparency-database) | **GPL-2.0** | 55★ / 10f | 2026-11-25 | Nothing — it *is* the regulator's system. Read it to understand what a statement of reasons must contain. |
+| **Marble** | [checkmarble/marble](https://github.com/checkmarble/marble) | **Elastic-2.0 — source-available, not open source** | 629★ / 97f | 2026-11-16 | A fraud/AML decision engine. Listed because it is good and widely recommended, and flagged because the licence class is wrong for a resold build. |
+
+### ⚠️ This tier **breaks** this file's licence law — and the replacement is better
+
+Since pass 2 this file has recorded that **the platform tier is copyleft** (PeerTube AGPL, MediaCMS
+AGPL, Castopod AGPL, Funkwhale AGPL, Janus GPL, OpenMontage AGPL, Directus BSL). In the trust &
+safety tier, **every platform is Apache-2.0 or MIT**.
+
+The exception is systematic, not random, and it rewrites the law into something that predicts rather
+than describes:
+
+> **The publisher sets the licence, not the layer.** An **operator** donating infrastructure it runs
+> itself wants adoption and ships permissive (Discord → Osprey, Jigsaw → Altitude, Meta →
+> content-review-filters, Bluesky → Ozone). A **vendor** protects a business model and ships
+> copyleft or source-available (Marble → Elastic-2.0). A **public body** ships copyleft because
+> reuse-with-reciprocity is its mandate (the Commission → GPL-2.0, EUPL-1.2).
+
+Test it against this file's existing rows and it holds: PeerTube, Funkwhale and Castopod are
+community/vendor projects, while **Sofie** — the MIT exception this file already flagged as unusual —
+was commissioned by **NRK, an operator**. The law was right about the pattern and wrong about the
+cause.
+
+### Gap: there is no open age-gated **streaming** platform
+
+Searched. The EU estate provides the age-verification *app*, the *verifier UI* and even a
+**cinema** reference frontend, but **no open OTT/VOD platform integrates any of it**. None of the
+platforms in this file's main table — PeerTube, MediaCMS, Owncast, Funkwhale, Castopod — has an
+age-assurance hook at all. A Brazilian or EU streaming client facing ECA Digital or the DSA has to
+have that integration built, and the pieces to build it with are all permissive or EUPL-1.2.
+**This is the most concrete unbuilt thing in this file** — see `compose/patterns.md` Pattern 17.
+
+### Gap: no open T&S platform speaks a statutory reporting format
+
+Coop, Osprey, Altitude and Ozone all end at "enforcement action taken." None of them files a
+CyberTipline report, a DSA statement of reasons, or an ANPD notification. The only artifacts that do
+are [ello/ncmec_reporting](https://github.com/ello/ncmec_reporting) (7★, no licence, dead since
+2022-03-29) and [afkzonagroup/rationale](https://github.com/afkzonagroup/rationale) (0★, Apache-2.0,
+2026-11-22). **The gap between "we removed it" and "we told the regulator we removed it" is
+unbuilt**, and it is the half with legal consequences.

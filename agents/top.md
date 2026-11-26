@@ -682,3 +682,114 @@ not to Media & Entertainment production. They are kept here only as this correct
 *Verification method: `git ls-remote` for existence (the only reliable oracle — `search/repositories`
 returns false 422s on live repos, and `curl -sI github.com` is blind through this proxy); stars and
 `pushed_at` from the same `search/repositories` call so the two can always be cross-checked.*
+
+---
+
+## The trust & safety plane — measured 2026-11-26 (pass 9), and the first plane whose licence breaks in the **model** layer
+
+Scope: the pipeline that decides whether a piece of user or licensed content may be published, shown
+to a minor, monetised or reported to an authority. Hash matching → classification → rules →
+review queue → enforcement → statutory report. **62 repos verified this pass, 62/62 resolve by
+`git ls-remote`.**
+
+This plane did not exist in this KB before today. The vocabulary probe that found it is recorded in
+`agents/trending.md`: `trust and safety`, `age verification`, `age assurance`, `perceptual hash`,
+`hash matching`, `DSA`, `Online Safety`, `brand safety`, `CSAM`, `content classification` and
+`parental` returned **zero occurrences across all eight files**, while the regulatory prose in
+`intel/market.md` had been describing the obligations for three passes without naming a single tool
+that discharges them.
+
+### The agent layer, measured — and it is the ninth consecutive near-zero
+
+| Agent | Repo | Licence | ★ / forks | Last push | What it actually is |
+|---|---|---|---|---|---|
+| **ROOST Pigeon** | [roostorg/pigeon](https://github.com/roostorg/pigeon) | **none in repo** | 2★ / 1f | 2026-11-21 | "Prototyping open-weight safety models as Coop signals and Osprey rule functions." **This is the entire agent layer of the plane** — the bridge from a safety model to a rules engine — and it is a 2-star prototype with no licence file, from the one organisation with the most credibility in the field. |
+
+That is not a thin agent layer. That is **the** agent layer. The substrate underneath it is healthy,
+permissive and pushed this week (see `repos/foundations.md`), and the thing that would turn a model
+into an enforcement decision is a prototype two people have starred.
+
+### The finding of this pass: the licence constraint has moved from the code to the weights
+
+Every earlier pass in this KB found the restrictive instrument in a **content** licence (CPT codes in
+healthcare, MedDRA, ISRC/ISWC registry membership, MDN/Nielsen panels) or in a **code** licence
+(AGPL at the platform tier, GPL at the checker). This plane is the first where the code is almost
+uniformly permissive and **the restriction sits on the model weights** — and it sits there in
+proportion to how valuable the model is.
+
+The cleanest proof is a single company publishing a single toolkit under two licences:
+
+| Artifact | Repo | Licence | ★ | What it is | Usable in client work? |
+|---|---|---|---|---|---|
+| Roblox **Sentinel** | [Roblox/Sentinel](https://github.com/Roblox/Sentinel) | **Apache-2.0** | 120★ | Python library for real-time safety inference — the *plumbing* | **Yes** |
+| Roblox **RoGuard 1.0** | [Roblox/RobloxGuard-1.0](https://github.com/Roblox/RobloxGuard-1.0) | **RAIL Research-Only** (17,642 B licence file: "ROGUARD RESEARCH-ONLY RAIL-MS LICENSE", licensed artifacts = "RoGuard Model Weights and related inference code") | 68★ | The state-of-the-art safety LLM trained on the abuse that actually happens on Roblox — the *judgment* | **No** |
+| Roblox **voice safety classifier** | [Roblox/voice-safety-classifier](https://github.com/Roblox/voice-safety-classifier) | **CC-BY-SA-3.0** (22,240 B) — a *content* licence, with share-alike, applied to model weights | 105★ | Real-time voice abuse detection | Only with share-alike accepted |
+
+Same company. Same toolkit. Same month. The library is Apache-2.0; the model that makes the library
+worth running is research-only. **Ask for the weights' licence separately from the repo's licence, on
+every safety model, every time** — and expect the answer to get worse the better the model is.
+
+The same split holds across the field: Meta's **Llama Guard** ships under the
+[Llama 3.2 Community Licence](https://github.com/meta-llama/PurpleLlama) (4,495★, 7,669 B licence
+file — acceptable-use restrictions plus an MAU threshold, **not** OSI-approved), and the leading
+deepfake-detection benchmark, [SCLBD/DeepfakeBench](https://github.com/SCLBD/DeepfakeBench)
+(1,145★), is **CC-BY-NC-4.0** — explicitly *"NonCommercial means not primarily intended for or
+directed towards commercial advantage or monetary compensation"*, verified in the 43,107 B licence
+file. A client engagement is commercial advantage. That benchmark cannot ship.
+
+### Tier 1 — permissive, active, and safe to build on
+
+| Agent / model | Repo | Licence | ★ / forks | Last push | Why it qualifies |
+|---|---|---|---|---|---|
+| **IBM Granite Guardian** | [ibm-granite/granite-guardian](https://github.com/ibm-granite/granite-guardian) | Apache-2.0 | 192★ / 20f | 2026-10-16 | Risk detection in prompts *and* responses, Apache-2.0 on the weights as well as the code. The cleanest licence in the judgment layer. |
+| **OpenAI gpt-oss-safeguard** | [openai/gpt-oss-safeguard](https://github.com/openai/gpt-oss-safeguard) | Apache-2.0 | 67★ / 14f | 2026-01-14 | Open-weight safety *reasoning* model: you supply the policy, it reasons against it. The only artifact in this plane that takes a client's own policy document as input. Low stars, high strategic value. |
+| **Detoxify** | [unitaryai/detoxify](https://github.com/unitaryai/detoxify) | Apache-2.0 | 1,320★ / 149f | 2026-11-11 | Toxicity across all three Jigsaw challenges. The most-installed permissive text classifier here, and still maintained after five years. |
+| **OpenGuardrails** | [openguardrails/openguardrails](https://github.com/openguardrails/openguardrails) | Apache-2.0 | 373★ / 63f | 2026-11-18 | Local rules + sandbox + firewall for agents. Active, and the newest credible entrant. |
+| **Guardrails AI** | [guardrails-ai/guardrails](https://github.com/guardrails-ai/guardrails) | Apache-2.0 | 7,641★ / 751f | 2026-11-24 | The validator-framework incumbent. |
+| **NeMo Guardrails** | [NVIDIA-NeMo/Guardrails](https://github.com/NVIDIA-NeMo/Guardrails) | **Apache-2.0** — file-verified, see the licence finding below | 7,581★ / 912f | 2026-11-25 | Programmable safety rails. **Note the repo path**: it moved from `NVIDIA/NeMo-Guardrails`. |
+| **Roblox Sentinel** | [Roblox/Sentinel](https://github.com/Roblox/Sentinel) | Apache-2.0 | 120★ / 27f | 2026-08-18 | Real-time safety inference library from a platform that runs it at scale. |
+
+### Tier 2 — real, but the licence or the staleness constrains client work
+
+| Agent / model | Repo | Licence | ★ | Last push | The constraint |
+|---|---|---|---|---|---|
+| Llama Guard / Purple Llama | [meta-llama/PurpleLlama](https://github.com/meta-llama/PurpleLlama) | Llama 3.2 Community | 4,495★ | 2026-11-20 | Not OSI-approved; acceptable-use terms + MAU threshold. Legal review before any client deployment. |
+| NudeNet | [notAI-tech/NudeNet](https://github.com/notAI-tech/NudeNet) | **AGPL-3.0** | 2,510★ | 2026-06-09 | Active and good, but AGPL over a network service is the one copyleft shape that reaches a SaaS deployment. |
+| nsfw-filter | [nsfw-filter/nsfw-filter](https://github.com/nsfw-filter/nsfw-filter) | GPL-3.0 | 1,800★ | 2026-10-18 | Browser extension; GPL-3.0. |
+| nsfw_model | [GantMan/nsfw_model](https://github.com/GantMan/nsfw_model) | **MIT with a third-party carve-out** — the 1,243 B `LICENSE.md` opens *"This project contains third-party copyrighted material under different licenses. Except where otherwise explicitly stated, this project is licensed as follows: MIT"* | 2,112★ | 2024-02-26 | Stale by two and a half years, and the carve-out means the SPDX field (`NOASSERTION`) is right to hesitate. |
+| Bumble Private Detector | [bumble-tech/private-detector](https://github.com/bumble-tech/private-detector) | Apache-2.0 | 1,366★ | 2023-11-05 | Clean licence, three years stale. |
+| Yahoo open_nsfw | [yahoo/open_nsfw](https://github.com/yahoo/open_nsfw) | BSD-2-Clause | 6,018★ | 2018-11-21 | **Archived.** Caffe-era. The most-starred artifact in this plane is also the deadest — read the stars as history, not as a recommendation. |
+| LLM Guard | [protectai/llm-guard](https://github.com/protectai/llm-guard) | MIT | 3,223★ | 2026-07-08 | **Archived in 2026.** A 3.2k-star LLM security toolkit went read-only this year; do not start on it. |
+| Marble | [checkmarble/marble](https://github.com/checkmarble/marble) | **Elastic-2.0 — source-available, not open source** | 629★ | 2026-11-16 | Real-time fraud/AML decision engine. Good software, wrong licence class for a resold build. |
+| localmod | [KOKOSde/localmod](https://github.com/KOKOSde/localmod) | MIT | 116★ | 2026-10-31 | Self-hosted moderation API, fully offline. Young, but MIT and active — worth watching. |
+| FaceForensics | [ondyari/FaceForensics](https://github.com/ondyari/FaceForensics) | **code: verbatim MIT text** (1,142 B, unnamed) / **dataset: separate EULA** | 2,807★ | 2022-12-08 | The content law again: the code is permissive, the data that makes it work needs a signed agreement. |
+| DFDC winning solution | [selimsef/dfdc_deepfake_challenge](https://github.com/selimsef/dfdc_deepfake_challenge) | MIT | 867★ | 2023-02-11 | Genuinely MIT, genuinely stale, and trained against 2020-era generators. |
+| CLIP-based NSFW detector | [LAION-AI/CLIP-based-NSFW-Detector](https://github.com/LAION-AI/CLIP-based-NSFW-Detector) | **NO LICENCE FILE** — probed 11 names on `main` and `master`; `README.md` returns 200 on both, so the names are not the problem | 473★ | 2023-05-30 | No grant means all rights reserved. 473 stars of unusable code. |
+
+### ⚠️ Contamination — two of the worst false-friend queries measured in this KB
+
+- **`age assurance` → 478 results, zero relevant.** Every hit is quality *assurance*, an *agent*
+  framework, or French-language insurance (`gestion-assurance`). The real artifact estate for age
+  verification — nine repos, see `repos/foundations.md` — is **only** reachable through the
+  organisation name `eu-digital-identity-wallet`, never through the plane's own vocabulary. A pass
+  that searched the obvious term and wrote "no open age-verification tooling found" would have been
+  confidently wrong about a 309-star regulator-published Android app.
+- **`csam` → 722 results, one relevant.** The top hits are a Bioconductor genomics summer school
+  (`CSAMA`, 92★) and Azure B2C samples (`b2csamples`, 136★). The single relevant result is
+  [AsuharietYgvar/AppleNeuralHash2ONNX](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX)
+  (1,532★, Apache-2.0, 2021) — which is a *reverse-engineering* of Apple's abandoned NeuralHash, not
+  a detection tool. **The acronym is not the vocabulary.** The working tools are found under "hash
+  matching" and are listed in `repos/foundations.md`.
+
+### Informed gaps from this pass — searched, and genuinely not found
+
+- **No open agent that files a statutory report.** US federal law (18 U.S.C. §2258A) obliges
+  providers to report to the NCMEC CyberTipline. Exactly one open client exists —
+  [ello/ncmec_reporting](https://github.com/ello/ncmec_reporting), 7★, **no licence file**, last
+  pushed **2022-03-29** — and it is abandoned and unlicensed. Searched; nothing has replaced it.
+- **No open brand-safety classifier.** `brand safety` as a tooling query returns no permissive
+  implementation; the GARM taxonomy is a document, and the IAB floor is a PDF. Stated as a gap.
+- **No agent layer for age assurance.** The EU estate is apps, libraries and verifiers — there is no
+  agent that reads a platform's own age policy and decides a case.
+- **No open deepfake detector trained on 2026-era generators.** The three detection repos that exist
+  are from 2020–2025 and the usable ones are non-commercial or stale. Measured, not assumed.

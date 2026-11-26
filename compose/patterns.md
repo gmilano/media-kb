@@ -1185,6 +1185,119 @@ not available as open source at all, by design.
 no open source for it. The honest version — open everywhere except a named, priced, contracted key
 service — is both cheaper and faster, and it is the version that survives a studio audit.
 
+## Pattern 25 — The age-gated streaming front door (the unbuilt component four regulators now require)
+
+**Added 2026-11-26 (pass 9).** The most concrete unbuilt thing in this KB: every open media platform
+in `verticals/solutions.md` has **no age-assurance hook at all**, while the EU, Brazil and Australia
+all now require one.
+
+**Wire it together:**
+
+1. **Age signal** — [`eu-digital-identity-wallet/av-lib-android-zkp-age-icao`](https://github.com/eu-digital-identity-wallet/av-lib-android-zkp-age-icao)
+   (Apache-2.0) and [`av-lib-ios-longfellow-zkp`](https://github.com/eu-digital-identity-wallet/av-lib-ios-longfellow-zkp)
+   (Apache-2.0) generate a zero-knowledge proof that the viewer is over a threshold, **without
+   disclosing the birth date or the document**. Verify it with
+   [`av-srv-trust-validator`](https://github.com/eu-digital-identity-wallet/av-srv-trust-validator)
+   (Apache-2.0) against the member-state trust list.
+2. **Copy the reference integration the regulator already wrote** —
+   [`av-verifier-frontend-cinema`](https://github.com/eu-digital-identity-wallet/av-verifier-frontend-cinema)
+   is a **cinema age-gate frontend**, 1★, Apache-2.0. It is the closest thing to a media reference
+   implementation in existence, and it is one star because nobody has looked.
+3. **Bind the proof to the session, not the account** — issue a short-lived capability from
+   [`av-web-verifier-ui`](https://github.com/eu-digital-identity-wallet/av-web-verifier-ui)'s flow
+   and attach it to the playback token your player already mints (pass 8's delivery chain). This is
+   what keeps Australia's "no government-ID-only route" and the OAIC's data-handling rules satisfiable:
+   **you never store the identity attribute.**
+4. **Gate the catalogue, not the stream** — enforce at the EPG/catalogue tier recorded in pass 7, so
+   an under-threshold viewer never receives a manifest URL. Gating at the CDN is too late and leaks
+   the asset ID.
+5. **Keep the evidence** — write each gate decision to the audit trail in Pattern 26.
+
+**Why Globant wins this:** the EUPL-1.2 licence on the *apps* is what stops product teams reusing
+them, and the Apache-2.0 licence on the *libraries* is what makes this build legal — telling those
+two apart is a 20-minute conversation that most bidders will get wrong. **Avoid forking the EUPL-1.2
+app**; consume the Apache-2.0 libraries and build your own UI.
+
+⚠️ **Verify before quoting a deadline.** `ageverification.dev` does not resolve from this session, so
+the reported **31 December 2026** rollout date is unconfirmed here (`intel/market.md`, EMEA).
+
+---
+
+## Pattern 26 — "We removed it" → "we told the regulator we removed it" (the half nobody built)
+
+**Added 2026-11-26 (pass 9).** Coop, Osprey, Altitude and Ozone all stop at *enforcement action
+taken*. **No open T&S platform files a statutory report.** That gap is where the legal consequence
+lives, and it is a per-action structured-record problem — the exact shape of work Globant sells.
+
+**Wire it together:**
+
+1. **Detect** — [`meta/ThreatExchange`](https://github.com/meta/ThreatExchange) (BSD) for PDQ image,
+   TMK+PDQF / vPDQ video hashing and HMA matching; add
+   [`ibm-granite/granite-guardian`](https://github.com/ibm-granite/granite-guardian) (Apache-2.0) or
+   [`openai/gpt-oss-safeguard`](https://github.com/openai/gpt-oss-safeguard) (Apache-2.0) for policy
+   classification. **gpt-oss-safeguard takes the client's own written policy as the input**, which
+   means the client's legal team authors the classifier rather than reviewing yours.
+2. **Decide** — [`roostorg/osprey`](https://github.com/roostorg/osprey) (Apache-2.0) evaluates the
+   rules. Osprey is Discord's production engine, so the throughput question is already answered.
+3. **Review** — [`roostorg/coop`](https://github.com/roostorg/coop) (Apache-2.0) for the queue,
+   routing and human decision, self-hosted so content never leaves the client's estate. Start from
+   [`coop-integration-example`](https://github.com/roostorg/coop-integration-example).
+4. **Redact before anything leaves the boundary** —
+   [`data-privacy-stack/presidio`](https://github.com/data-privacy-stack/presidio) (MIT, 12,065★) on
+   every transcript, subtitle and UGC text field. **Note the path**: it moved from
+   `microsoft/presidio`.
+5. **File it — this is the new part.** Emit, per enforcement action, a typed record and route it by
+   jurisdiction: EU → a DSA **statement of reasons** via
+   [`afkzonagroup/rationale`](https://github.com/afkzonagroup/rationale) (Apache-2.0, 0★), validated
+   against the Commission's own schema in
+   [`digital-services-act/transparency-database`](https://github.com/digital-services-act/transparency-database)
+   (**GPL-2.0 — read it, don't link it into a proprietary build**); US → the NCMEC CyberTipline,
+   where [`ello/ncmec_reporting`](https://github.com/ello/ncmec_reporting) (7★, **no licence file**,
+   dead since 2022-03-29) is a *reference for the wire format only* — **do not depend on it**;
+   Brazil → the ANPD reporting obligation under ECA Digital, for which **no open client exists**.
+6. **Prove the trail** — reuse the C2PA/provenance spine from Patterns 8 and 15 so each decision
+   carries a signed, machine-readable claim about what was seen and when.
+
+**The deliverable to name in a proposal:** a jurisdiction-routed enforcement-reporting service. It is
+boring, it is mandatory, it has **no incumbent open implementation in three of the four regions**,
+and the client cannot buy it from the T&S vendors because they stop where Coop stops.
+
+---
+
+## Pattern 27 — Policy-as-code age and content gating for a multi-region operator
+
+**Added 2026-11-26 (pass 9).** APAC's rules diverge by *mechanism*, not threshold (Australia bans
+ID-only, Malaysia mandates government ID, Singapore sets "reasonable accuracy", Indonesia tiers by
+age with parental consent under 17), and `intel/trends.md` trend 10 shows all four regions demanding
+*different artifacts* from the same pipeline. A per-market fork is therefore guaranteed to rot.
+
+**Wire it together:**
+
+1. **One policy object per jurisdiction** — [`policykit/policykit`](https://github.com/policykit/policykit)
+   (MIT, 159★) is the only open artifact that treats a moderation policy as a first-class object
+   rather than as configuration. Use it to hold the *rules*; it is academic in origin, so expect to
+   own the operational hardening.
+2. **One evaluation engine** — [`roostorg/osprey`](https://github.com/roostorg/osprey) (Apache-2.0)
+   with the jurisdiction as a rule dimension, not as a deployment.
+3. **Pluggable age mechanisms behind one interface** — the EU ZKP libraries (Apache-2.0) for the
+   no-ID route, a document-check vendor for ID-mandatory markets, and an app-store attestation path
+   for Singapore and Australia's store code. **The interface is the asset**; the mechanisms are
+   swappable and some are necessarily commercial.
+4. **Stackable labels where the architecture allows it** —
+   [`bluesky-social/ozone`](https://github.com/bluesky-social/ozone) (dual MIT/Apache-2.0) is the
+   reference for third-party labels users subscribe to. For an operator facing divergent national
+   rules, this is the only model that does not force one global truth — a market-specific labeler per
+   jurisdiction, one subscription policy per market.
+5. **Evidence per market** — Pattern 26's reporting router, with the jurisdiction's artifact type
+   selected from the same policy object.
+
+**The pitch:** "you will be asked for a different artifact in every market you operate in, and the
+only thing you can standardise is the engine." This is the same conclusion pass 8 reached about
+synthetic-content rules in APAC, now confirmed from minor protection — **two independent routes to
+'the asset is a per-jurisdiction policy engine' makes it a pattern, not an anecdote.**
+
+---
+
 ## Anti-patterns — learned the hard way in this KB
 
 1. **Don't ship HunyuanVideo to EMEA or South Korea.** Its license excludes the EU, UK and KR by name.
@@ -1264,3 +1377,22 @@ service — is both cheaper and faster, and it is the version that survives a st
    precisely what APAC and LATAM service studios invoice for. Sell pipeline ownership priced per seat
    and per system (Patterns 17–19). The efficiency framing hands the client its own disintermediation
    case; see trend 36.
+18. **Don't promise a safety classifier you cannot license.** Added 2026-11-26. The best open safety
+   models are **research-only or non-commercial**: Roblox **RoGuard 1.0** is RAIL Research-Only,
+   `Roblox/voice-safety-classifier` is CC-BY-SA-3.0, Meta's **Llama Guard** is the Llama 3.2
+   Community licence with an MAU threshold, and `SCLBD/DeepfakeBench` is CC-BY-NC-4.0. Meanwhile the
+   most-starred NSFW classifiers are **archived** (`yahoo/open_nsfw`, 6,018★, archived 2018) or
+   **unlicensed** (`LAION-AI/CLIP-based-NSFW-Detector`, 473★, no licence file). **Ask for the
+   weights' licence separately from the repo's licence, every time** — and quote only
+   `granite-guardian`, `gpt-oss-safeguard`, `detoxify`, `openguardrails` or `Roblox/Sentinel`.
+19. **Don't conclude "unlicensed" from a missing root licence file.** Added 2026-11-26. `Draupnir`
+   (253★, pushed the day of the pass) reports **no licence** via the API and has no `LICENSE` under
+   eleven probed names — because it uses **REUSE**: `REUSE.toml`, per-file SPDX identifiers, a
+   `LICENSES/` directory and `"license": "Apache-2.0"` in `package.json`. It is *more* compliant than
+   the API can read. Likewise `NVIDIA-NeMo/Guardrails` (7,581★) reports `NOASSERTION` while its
+   `LICENSE.md` contains the line `SPDX-License-Identifier: Apache-2.0`. **Check `REUSE.toml`, a
+   `LICENSES/` directory and the package manifest before writing off a maintained project** — and
+   check the repo hasn't simply **moved**: a `repo:<slug>` search returning 422 while `git ls-remote`
+   succeeds means a rename, which caught `facebook/ThreatExchange` → `meta/ThreatExchange`,
+   `NVIDIA/NeMo-Guardrails` → `NVIDIA-NeMo/Guardrails` and `microsoft/presidio` →
+   `data-privacy-stack/presidio` in a single pass.

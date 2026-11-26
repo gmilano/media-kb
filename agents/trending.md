@@ -9,6 +9,140 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 9: the trust & safety plane (the licence moved into the weights)
+
+Scope: hash matching → classification → rules → review queue → enforcement → statutory report.
+**62 repos verified, 62/62 resolve by `git ls-remote`.** A plane that did not exist in this KB
+before today.
+
+### How the gap was found — the vocabulary probe, and it is now the cheapest tool in this workflow
+
+The remote already held a pass from **this same day** (`799f1f4`, the live & delivery plane), so
+rewriting or re-verifying would have added nothing. Per the pass-8 corollary, the right move was to
+look for the missing vocabulary. One `grep` of ~50 candidate terms against the eight files, before a
+single web search:
+
+| Term | Occurrences across all 8 files, before this pass |
+|---|---|
+| `trust and safety` | **0** |
+| `CSAM`, `PhotoDNA` | **0** |
+| `age verification`, `age assurance` | **0** |
+| `perceptual hash`, `hash matching` | **0** |
+| `DSA`, `Online Safety` | **0** |
+| `brand safety`, `content classification`, `parental`, `nudity` | **0** |
+| `moderation` | 4 — and **all four** were regulatory prose or one 0-star Discord bot |
+
+Three passes of this KB had been describing minor-protection, illegal-content and transparency
+obligations in `intel/market.md` without naming **one tool that discharges any of them**. Cost of
+finding that: one tool call.
+
+### The headline: the ninth consecutive near-zero agent layer, and the thinnest one yet
+
+The entire agent layer of this plane is
+[roostorg/pigeon](https://github.com/roostorg/pigeon) — "prototyping open-weight safety models as
+Coop signals and Osprey rule functions" — at **2★, no licence file, pushed 2026-11-21**. The
+substrate beneath it is Apache-2.0, operator-donated and pushed this week. The bridge from "a model
+has an opinion" to "an enforcement action happens" is a two-star prototype.
+
+### ⛔ The finding of this pass, and the first genuine refinement of the structural law since pass 6
+
+Every earlier pass located the restrictive instrument in a **content** licence (CPT, MedDRA,
+ISRC/ISWC, Nielsen panels) or a **code** licence (AGPL at the platform, GPL at the checker). **This
+plane is the first where the code is uniformly permissive and the restriction sits on the model
+weights — in proportion to how good the model is.**
+
+One company, one toolkit, one month, two licences:
+
+| Artifact | Licence | ★ | Layer | Usable commercially |
+|---|---|---|---|---|
+| [Roblox/Sentinel](https://github.com/Roblox/Sentinel) | **Apache-2.0** | 120★ | the plumbing | **yes** |
+| [Roblox/RobloxGuard-1.0](https://github.com/Roblox/RobloxGuard-1.0) | **RAIL Research-Only** (17,642 B) | 68★ | the judgment | **no** |
+| [Roblox/voice-safety-classifier](https://github.com/Roblox/voice-safety-classifier) | **CC-BY-SA-3.0** (22,240 B) — a content licence, with share-alike, on model weights | 105★ | the judgment | only under share-alike |
+
+Confirmed across the field: Llama Guard ([meta-llama/PurpleLlama](https://github.com/meta-llama/PurpleLlama),
+4,495★) is **Llama 3.2 Community** — acceptable-use terms plus an MAU threshold, not OSI-approved;
+and the leading deepfake benchmark ([SCLBD/DeepfakeBench](https://github.com/SCLBD/DeepfakeBench),
+1,145★) is **CC-BY-NC-4.0**, verified in a 43,107 B licence file that defines NonCommercial as *"not
+primarily intended for or directed towards commercial advantage"*. A client engagement is commercial
+advantage.
+
+**Falsifiable prediction, recorded for a later pass:** as open safety models improve, the share of
+them under research-only / non-commercial / community licences will **rise, not fall**, because the
+training data is the moat and the weights are the only place to defend it. If a SOTA safety model
+ships Apache-2.0 on the weights in 2027, this is wrong.
+
+### ⛔ An eighth way a licence hides — and the first that is the *inverse* of hiding
+
+[the-draupnir-project/Draupnir](https://github.com/the-draupnir-project/Draupnir) (253★, pushed the
+day of this pass) reports **no licence** via the API; eleven filename probes on `main` and `master`
+found only a `NOTICE`. It is in fact **Apache-2.0**, declared through **REUSE** — `REUSE.toml` with
+per-file `SPDX-License-Identifier` annotations, a `LICENSES/` directory holding `Apache-2.0.txt`,
+`MIT.txt`, `0BSD.txt`, `AFL-3.0.txt`, `CC-BY-SA-4.0.txt`, `CC0-1.0.txt`, and `"license":
+"Apache-2.0"` in `package.json`.
+
+The project is **more** compliant than the API can read: GitHub looks for one root file, REUSE
+deliberately replaces it with per-file annotation. Maximum compliance reads as zero compliance.
+
+Second instance the same pass, bigger repo: **[NVIDIA-NeMo/Guardrails](https://github.com/NVIDIA-NeMo/Guardrails)**
+(7,581★) reports `NOASSERTION` while its `LICENSE.md` contains the literal line
+`SPDX-License-Identifier: Apache-2.0`. Two of the largest repos in the plane, mislabelled in the same
+direction.
+
+### ⚙️ Method: the `repo:` 422 is confirmed as a rename detector — three hits in one pass
+
+| Slug as the docs still write it | `ls-remote` | `repo:` search | Canonical today | ★ |
+|---|---|---|---|---|
+| `facebook/ThreatExchange` | EXISTS | **422** | [meta/ThreatExchange](https://github.com/meta/ThreatExchange) | 1,417★ |
+| `NVIDIA/NeMo-Guardrails` | EXISTS | **422** | [NVIDIA-NeMo/Guardrails](https://github.com/NVIDIA-NeMo/Guardrails) | 7,581★ |
+| `microsoft/presidio` | EXISTS | **422** | [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | 12,065★ |
+
+Control case proving it is rename and not case: `jigsaw-code/altitude` resolved fine to
+`Jigsaw-Code/altitude`. All three old paths still redirect in a browser, so humans never notice and
+secondary sources keep citing dead slugs.
+
+### The law that *broke* this pass, and the better law that replaces it
+
+`verticals/solutions.md` has said since pass 2 that the **platform tier is copyleft**. In this plane
+every platform-tier artifact is permissive: Osprey (Apache-2.0, Discord), Coop (Apache-2.0, ROOST),
+conversationai-moderator (Apache-2.0, Google Jigsaw), Altitude (Apache-2.0, Jigsaw),
+content-review-filters (Apache-2.0, Meta), Ozone (dual MIT/Apache-2.0, Bluesky).
+
+The replacement predicts better: **the publisher sets the licence, not the layer.** An *operator*
+donating infrastructure it runs itself wants adoption and picks permissive. A *vendor* or a *public
+body* picks copyleft — and sure enough the one GPL artifact here is the European Commission's own
+[digital-services-act/transparency-database](https://github.com/digital-services-act/transparency-database)
+(GPL-2.0, 55★), and the fediverse's non-operator tooling is AGPL
+([fedimod/fires](https://github.com/fedimod/fires)) and GPL-2.0.
+
+### ⚠️ Contamination — two of the worst false-friend queries measured in this KB
+
+- **`age assurance` → 478 results, ZERO relevant.** All quality *assurance*, *agent* frameworks, or
+  French insurance (`gestion-assurance`). The actual estate — nine repos, 309★ on the flagship — is
+  reachable **only** through the org name `eu-digital-identity-wallet`. A pass that trusted the
+  obvious query would have reported "no open age-verification tooling" while a regulator-published
+  Android app sat there.
+- **`csam` → 722 results, ONE relevant.** Top hits: a Bioconductor genomics summer school (`CSAMA`,
+  92★) and Azure B2C samples (136★). **The acronym is not the vocabulary** — the working tools are
+  under "hash matching".
+
+This is the second half of the pass-8 query rule, confirmed again: shortening a query can turn a
+false zero into a **false abundance**. Read the results, never the total.
+
+### Informed gaps from this pass
+
+- **No open agent files a statutory report.** US law (18 U.S.C. §2258A) mandates NCMEC CyberTipline
+  reporting; the only open client, [ello/ncmec_reporting](https://github.com/ello/ncmec_reporting),
+  is **7★, no licence file, dead since 2022-03-29**.
+- **The hash lists cannot be obtained at all.** NCMEC / IWF / GIFCT distribute under membership and
+  vetting, not licence; PhotoDNA is a gated service. [c4osl/rocketchatcsam](https://github.com/c4osl/rocketchatcsam)
+  (MIT, 13★) is an open client to a closed service — the content law, ninth confirmation.
+- **No open brand-safety classifier.** GARM is a taxonomy document, the IAB floor is a PDF.
+- **No open deepfake detector trained on 2026-era generators.** The three that exist are 2020–2025
+  and the usable ones are non-commercial or stale.
+- **Channel gap:** `ageverification.dev` **does not resolve from this session** (outside allowed
+  network domains), so the blueprint's version, conformance programme and the reported
+  **31 December 2026** rollout deadline are **unverified here**. Treat as reported, not confirmed.
+
 ## 2026-11-26 — pass 8: the live & delivery plane (the strongest substrate, the emptiest agent layer)
 
 Scope: contribution → transcode → package/encrypt → origin → edge → player. 45 repos verified,

@@ -27,6 +27,7 @@ range, and say it is a range:
 | **Audio description market: no data found** | — | Added 2026-11-22 (pass 3). Searched; **no vendor sizing for audio description surfaced at all** — despite AD being a hard FCC quota and an EAA duty. An unsized market with a statutory mandate and a 56-star tooling ceiling. Recorded as an informed gap, and arguably the most interesting line in this table. |
 | **Production / post-production (pass 6): no AI-specific sizing found** | — | Added 2026-11-25 (pass 6). Searched; **no vendor sizing for "AI in VFX/animation production" surfaced at all.** The usable regional figures are segment figures from trade bodies, not AI figures: India animation+VFX **₹48bn** VFX / **₹138bn** combined by 2028 (FICCI-EY 2026), Indian VFX **$1.1B (2025) → $1.8B (2034)** at 5.58% CAGR (IMARC), LATAM screen/VFX **~$1.5B (2026)** (vendor directory, unverified — see LATAM). **The plane with the healthiest open substrate in this KB is the one with no market sizing**, which is a finding about analyst coverage, not about the market. |
 | **Audience measurement (pass 7): US national TV currency = $1.5B–$2B / year** | **CIMM, January 2026 — a primary document, read directly** | Added 2026-11-25. **The only primary-sourced figure in this table.** From *"Funding the Fiesta: The Economics of National TV Currency in the US Market"*: TAM **$1.5–2B/yr**, of which Nielsen takes **85–90%** (**$1.2–1.8B**); an entry-level currency-grade service costs **~$110M/yr to operate**, a competitive one needs **~$250M/yr** of revenue; Nielsen's panel is **42,000+ homes** at an estimated **$150–250M/yr** while every challenger panel targets **5,000**. The US is **2–3× the most expensive** measurement market on earth and holds **~two thirds of global video currency spend**. **Quote these numbers in preference to anything else in this table** — and note what they explain: there is no open-source audience currency because a currency is an operating cost, not a codebase. |
+| **Content moderation solutions (pass 9): 2026 base ~$10.8B–$13.3B, CAGR 8.1%–17.5%** | Six market-research vendors | Added 2026-11-26. A **factor-of-two spread on the base year and a factor-of-two spread on the growth rate** — the second-widest disagreement in this table after captioning. Low cluster: Global Info Research $11.8B (2025) → $20.3B (2032) at 8.1%; GII ~$10.78B (2026) → $18.22B (2032) at 9.14%. Middle: The Business Research Company $13.31B (2025) → $26.14B (2030) at 14.5%; Expert Market Research 13.10% CAGR (2026–2035) → ~$33.05B. High: Market Research Future ~$9.99B (2024) base at 17.49%. Narrower regional cut: **AI content moderation for OTT in North America ~$600M (2026)** (Mordor). **The scope artefact to ask about is services**: the high cluster counts outsourced human moderation labour, the low cluster counts software licences only. Since the open stack in `repos/foundations.md` replaces *software*, not *labour*, the **low cluster is the addressable figure** for an open-source engagement. |
 
 **Low confidence on all of them.** The defensible statement to a client is directional: double-digit
 CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
@@ -337,6 +338,40 @@ HDCP premium service. Put the agreement in week one of the plan, not in the buil
 (BSD-2-Clause, Cisco) are both North American, and the MoQ Alliance includes Akamai, AWS, Cisco,
 Cloudflare and Fastly. Influence over the standard is still available before the **2026-12-31** IESG
 publication-request milestone.
+
+#### Trust & safety and minor protection — added 2026-11-26 (pass 9)
+
+**The regulatory shape here is the inverse of EMEA's: the hardest obligation is federal and old, and
+the newest obligations are state-level and about AI labelling.**
+
+- **The statutory duty with no usable tooling.** Under **18 U.S.C. §2258A**, electronic service
+  providers must report apparent child sexual exploitation to the **NCMEC CyberTipline**. The only
+  open client is [ello/ncmec_reporting](https://github.com/ello/ncmec_reporting) — **7★, no licence
+  file, last pushed 2022-03-29**. A US UGC or streaming client therefore has a mandatory reporting
+  pipeline with no open code behind it, and the hash lists it would match against (NCMEC, PhotoDNA)
+  are distributed by membership and vetting, not by licence. This is the clearest
+  "obligation without an implementation" in any region of this file.
+- **Federal AI policy went the other way.** The **White House National Policy Framework for AI**
+  (March 2026, non-binding) names government pressure on platforms to suppress lawful content as a
+  primary risk and leans toward restraint rather than new platform liability. There is still **no
+  comprehensive federal AI or platform statute**, so enforcement remains sectoral — FTC, FCC and
+  state law.
+- **The state layer is where the dates are.** The **California AI Transparency Act** phases in from
+  **August 2026**, reaching *hosting platforms* and *capture devices* in **2027–2028**, and applies
+  to generative providers above **1,000,000 monthly California users**. Deloitte expects generative
+  video to push US regulators toward age verification and AI-content labelling, naming **New York,
+  Tennessee and Utah** as early movers.
+- **Who the buyers are.** North America is the largest regional market for AI content moderation
+  (~**$600M in 2026** for the OTT slice alone, per Mordor — vendor figure, treat as indicative), and
+  the open substrate was largely *donated by North American operators*: Discord (Osprey), Google
+  Jigsaw (Altitude, conversationai-moderator), Meta (ThreatExchange, content-review-filters),
+  Bluesky (Ozone), Roblox (Sentinel). **The engagement is integration, not invention**, and the
+  credibility move is knowing that Llama Guard and RoGuard cannot be deployed commercially.
+- ⚠️ **Unverified claims encountered and deliberately not carried as fact**: a market report
+  referenced a "Meta–OpenAI real-time filtering partnership" and a "Jigsaw expansion across North
+  America". Neither could be confirmed against a primary source. Recorded here so a later pass does
+  not re-import them from the same vendor page as established.
+
 
 ### EMEA
 
@@ -666,6 +701,48 @@ proposal. The EBU convened its **AI Forum in Brussels in March 2026**.
 **USD 520 million in 2026**, with one report expecting AI adoption to exceed **95% among media
 organisations in the UAE and Saudi Arabia by 2030**. Reported, not independently verified.
 
+#### Trust & safety, age verification and DSA transparency — added 2026-11-26 (pass 9)
+
+**EMEA is the only region where the compliance artifact is itself open source, published by the
+regulator. That makes it the only region where a fixed-price compliance build is honest.**
+
+- **The Commission shipped code, not just a specification.** The **Age Verification Blueprint** is a
+  nine-repo estate under the [`eu-digital-identity-wallet`](https://github.com/eu-digital-identity-wallet)
+  organisation: the white-label Android and iOS apps under **EUPL-1.2**, the ZKP libraries, issuer,
+  verifier UI, trust validator and — one star, and a media use case written by the regulator — a
+  **cinema age-gate reference frontend**. The design reveals only whether the user meets the
+  requested threshold, using zero-knowledge proofs. Full table in `repos/foundations.md`.
+- **Dates, with their confidence stated.** First blueprint **July 2025**; second version with
+  technical specifications and open-source implementation **October 2025**; a **Commission
+  Recommendation on a common EU approach to age verification reported for 29 April 2026**; pilots
+  reported in **Denmark, France, Greece, Italy and Spain**; a **31 December 2026** rollout date
+  reported by a single vendor blog. ⚠️ **`ageverification.dev` does not resolve from this session**
+  (outside allowed network domains), so **the rollout deadline and the current blueprint version are
+  reported, not verified.** Verify from an unrestricted network before putting either in a proposal.
+  One security vendor (which sells a competing wallet product) has publicly criticised the April 2026
+  release as a white-label reference implementation rather than a hardened product — one-sided, and
+  consistent with what the repos are.
+- **DSA enforcement is now measured in hundreds of millions.** Reported decisions: **X — €120M**
+  (5 December 2025, the first non-compliance decision, now under court challenge in *X v
+  Commission*); **Temu — €200M** (May 2026, inadequate systemic-risk assessment); **AliExpress —
+  €550M** (July 2026, the largest to date, with an action plan due 20 October 2026). Open matters
+  include preliminary findings against **TikTok** on addictive design, a **Meta** investigation into
+  minors' access (29 April 2026) and a **Shein** investigation (17 February 2026). Ceiling is **6% of
+  worldwide annual turnover**. ⚠️ Sources are secondary legal commentary and **disagree on whether
+  the 28 May 2026 second decision was X or Temu** — cite the amounts, not the sequence, until
+  checked against Commission press releases.
+- **The transparency obligation has open code on both sides.** The Commission's own
+  [transparency-database](https://github.com/digital-services-act/transparency-database) is
+  **GPL-2.0** (55★, pushed 2026-11-25), and the submission SDK
+  [afkzonagroup/rationale](https://github.com/afkzonagroup/rationale) is Apache-2.0 with **zero
+  stars**, four days old at the time of this pass. **Every statement of reasons a platform files is a
+  per-action structured record** — that is an integration, a volume problem and an audit trail, which
+  is exactly the shape of work Globant sells.
+- **The sellable opening.** EUPL-1.2 and Apache-2.0 mean the EU estate is **legally reusable outside
+  Europe** (see `intel/trends.md` trend 10). EMEA is therefore not just a compliance market — it is
+  where the reference implementation for every other region's age-assurance build comes from.
+
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -968,6 +1045,43 @@ adoption — a services opportunity attached to every delivery build.
 page, weaker source); Google, Netflix, YouTube, TikTok and Instagram ranking highest for consumer ad
 equity across APAC per Kantar, which also finds roughly **one in three APAC consumers use AI to
 research brands**, varying considerably by market.
+
+#### Trust & safety and age assurance — added 2026-11-26 (pass 9)
+
+**APAC has the most aggressive obligations in the world and the least open tooling. That gap is the
+opportunity, and it is a build, not an integration.**
+
+- **Australia is the live case, and the numbers are real.** The under-16 regime is **in force**:
+  age-restricted platforms must take reasonable steps to prevent under-16s holding accounts, and by
+  mid-December **4.7 million under-16 accounts had been removed**. Messaging, gaming, professional
+  networking and education/health services are **carved out** under the 2025 rules, **amended in
+  March 2026** to clarify scope. The **app-store age-assurance code applied from 9 September 2026**,
+  and a **Digital Duty of Care** bill is pending (an exposure draft is reported for 8 September
+  2026). Critically for design: **platforms may not require government ID as the sole method of age
+  assurance**, and age-verification data falls under Privacy Act handling obligations partly enforced
+  by the OAIC. **That combination — mandatory assurance, no ID-only route, strict data handling — is
+  precisely the problem the EU's zero-knowledge libraries solve**, and nobody has ported them.
+- **The rest of the region diverges, deliberately.** Reported in comparison guides: **Malaysia**
+  mandates government ID; **Singapore's** app-store code uses a "reasonable accuracy" standard with
+  app stores as the primary target; **Indonesia** is tiered by age with parental consent mandatory
+  under 17. These are different *mechanisms*, not different thresholds, so a single implementation
+  cannot satisfy them — **the asset is a policy engine per jurisdiction**, which is the same
+  conclusion pass 8 reached for APAC on synthetic-content rules, now from a second direction.
+- **India: measured as a gap, not as silence.** Searches returned **nothing current on the IT Rules'
+  age-verification provisions**. The only result was a Supreme Court petition in which the court
+  proposed to the Central Government that age verification be required and under-16/18 use
+  prohibited, with **no law passed as of the most recent reliable snapshot**. This KB's existing
+  record notes an **India IT Rules amendment dated 2026-02-20** (see `intel/trends.md`) on synthetic
+  content; whether it reaches age assurance is **not established here**. Treat India as unresolved
+  and verify with MeitY directly before advising.
+- **Zero open implementations found.** No APAC-specific age-assurance or moderation artifact
+  surfaced in this pass. The reusable primitives are the EU's Apache-2.0 ZKP libraries
+  ([av-lib-android-zkp-age-icao](https://github.com/eu-digital-identity-wallet/av-lib-android-zkp-age-icao),
+  [av-lib-ios-longfellow-zkp](https://github.com/eu-digital-identity-wallet/av-lib-ios-longfellow-zkp)),
+  and the one platform-scale safety model trained on genuinely APAC-relevant abuse —
+  Roblox's RoGuard — is **research-only licensed**. Stated as a gap: the region with the hardest
+  deadlines has the thinnest open stack.
+
 
 ### LATAM
 
@@ -1344,6 +1458,47 @@ Aspen Digital's **January 2026** report records leaders stressing careful adopti
 ⚠️ **Low-confidence figure, flagged not promoted:** a LatAm Journalism Review figure cited by Forbes
 México says **only 6% of Latin Americans access news through AI tools**, mainly chatbots. Verify
 before using it in a deck — it is a striking number and it is third-hand here.
+
+#### Trust & safety and minor protection — added 2026-11-26 (pass 9)
+
+**Brazil has moved from a takedown regime to a design regime, and it is the most demanding
+minor-protection law outside the EU. It is also the LATAM engagement most likely to be funded.**
+
+- **ECA Digital is in force.** **Law 15.211/2025** took effect **17 March 2026**, with
+  **Decree 12,880/26** (published 18 March 2026, **54 articles**) detailing obligations on
+  prevention, protection, age assessment, inappropriate and prohibited content, and parental
+  supervision. Scope covers **social networks, games, app stores and operating systems**, reaches
+  **services likely to be used by minors**, and applies to **foreign providers**. Enforcement sits
+  with the **ANPD**, alongside a new screening centre within the **Federal Police**.
+- **What it demands is design, not reaction.** Reported duties include **age verification**,
+  stricter moderation, and removal of harmful material involving minors **without a court order** —
+  a significant departure from Marco Civil's judicial-order tradition. The law **bans loot boxes** in
+  games aimed at or likely accessed by children, and providers advertising to minors must **prevent
+  profiling and the use of emotional analysis or AR/XR/VR**. Platforms with **more than one million
+  minor users** face extra reporting, reportedly **semiannual data-protection impact reports to the
+  ANPD**. Penalties run to warnings and fines **up to ~$10M**, with suspension or banning available
+  in severe cases. ⚠️ Sources disagree on the law's number (most say 15.211/2025, one says 15.100)
+  and most are compliance-vendor commentary; **no ANPD enforcement action or guidance since March
+  surfaced in this pass** — enforcement intensity is therefore **unconfirmed**.
+- **The demand signal is measured, and it is large.** A pre-enforcement study found **21 of 25
+  services did not verify age at sign-up**. That is not a market forecast; it is a count of
+  non-compliant products in the market that each now need the same component built.
+- **Nothing region-specific exists to build it with.** No Brazilian or Spanish-language open T&S or
+  age-assurance project surfaced. The credible assembly is **ROOST Coop + Osprey** (Apache-2.0) for
+  review and rules, **meta/ThreatExchange** (BSD) for hashing, **granite-guardian** or
+  **gpt-oss-safeguard** (Apache-2.0) for classification, and the **EU EUPL-1.2/Apache-2.0 age
+  estate** for the age signal — none of it written for Brazil, all of it legally reusable there.
+  **Portuguese-language safety classification is the specific unmet need**, and it is unmet for the
+  same reason pass 8 found: the classifiers worth having are trained on English-language abuse and
+  licensed research-only.
+- **Why this is a *regional* opportunity and not a Brazilian one.** ECA Digital, the EU's DSA and
+  Australia's under-16 regime converge on the same three components — an age signal, a review
+  pipeline and a reporting trail. A Brazilian build is therefore **reusable into EMEA and APAC with
+  the policy layer swapped**, which is the argument that justifies building rather than buying. It
+  also compounds with what this file already records for LATAM: the region's hottest buyer is the
+  newsroom, because an organisation that has written a policy has committed to being able to
+  **evidence** it.
+
 
 ## Globant positioning
 

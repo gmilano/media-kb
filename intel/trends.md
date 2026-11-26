@@ -1065,3 +1065,70 @@ Added 2026-11-22:
 - **`chatfire-AI/drama-skills` "~4.4k stars, MIT"** and **`huobao-drama` "~18k stars"** — promoted by
   an AI-microdrama directory site. The first slug does not resolve; the second was not confirmable at
   any slug and is reported CC-BY-NC-SA (non-commercial). Do not re-adopt either.
+
+---
+
+## Trend 9 (added 2026-11-26, pass 9) — the enforcement stack went open, and the licence retreated into the weights
+
+**What changed.** Trust & safety tooling was, until roughly 2025, something a platform either bought
+(Hive, ActiveFence, Checkstep) or built from nothing. In 2026 three operators donated the parts they
+run in production: **Discord's rules engine** became
+[roostorg/osprey](https://github.com/roostorg/osprey) (Apache-2.0, 511★), **ROOST** shipped
+[coop](https://github.com/roostorg/coop) (Apache-2.0, 150★, pushed 2026-11-26), **Google Jigsaw**
+published [Altitude](https://github.com/Jigsaw-Code/altitude) and
+[conversationai-moderator](https://github.com/conversationai/conversationai-moderator) (both
+Apache-2.0), **Meta** published [content-review-filters](https://github.com/meta/content-review-filters)
+and keeps [ThreatExchange](https://github.com/meta/ThreatExchange) (BSD, 1,417★) current, and
+**Bluesky** published [Ozone](https://github.com/bluesky-social/ozone) (dual MIT/Apache-2.0, 548★).
+
+**And what did not change.** The *judgment* layer stayed closed, and it closed itself with **model
+licences** rather than code licences:
+
+- [Roblox/RobloxGuard-1.0](https://github.com/Roblox/RobloxGuard-1.0) — **RAIL Research-Only**
+- [Roblox/voice-safety-classifier](https://github.com/Roblox/voice-safety-classifier) — **CC-BY-SA-3.0**
+- [meta-llama/PurpleLlama](https://github.com/meta-llama/PurpleLlama) (Llama Guard) — **Llama 3.2 Community**, acceptable-use terms + MAU threshold
+- [SCLBD/DeepfakeBench](https://github.com/SCLBD/DeepfakeBench) — **CC-BY-NC-4.0**
+
+while the same companies' *libraries* went Apache-2.0 ([Roblox/Sentinel](https://github.com/Roblox/Sentinel)).
+
+**Why it is the pattern and not an accident.** The training data is the moat. A safety model trained
+on a decade of real abuse reports from a platform with hundreds of millions of users cannot be
+reproduced from public data, and the weights are the only place that advantage can be defended. The
+code around it is worth more as a standard than as a secret.
+
+**The consequence for a client.** The cleanly usable judgment layer is short and must be named
+precisely: [ibm-granite/granite-guardian](https://github.com/ibm-granite/granite-guardian)
+(Apache-2.0, 192★), [openai/gpt-oss-safeguard](https://github.com/openai/gpt-oss-safeguard)
+(Apache-2.0, 67★ — takes the client's *own written policy* as input), and
+[unitaryai/detoxify](https://github.com/unitaryai/detoxify) (Apache-2.0, 1,320★). Everything more
+famous is either archived ([yahoo/open_nsfw](https://github.com/yahoo/open_nsfw) 6,018★ archived
+2018; [protectai/llm-guard](https://github.com/protectai/llm-guard) 3,223★ archived 2026), stale
+([GantMan/nsfw_model](https://github.com/GantMan/nsfw_model) 2024,
+[bumble-tech/private-detector](https://github.com/bumble-tech/private-detector) 2023), copyleft
+([notAI-tech/NudeNet](https://github.com/notAI-tech/NudeNet) AGPL-3.0), or unlicensed
+([LAION-AI/CLIP-based-NSFW-Detector](https://github.com/LAION-AI/CLIP-based-NSFW-Detector) 473★, no
+licence file at all).
+
+**Falsifiable prediction.** The share of leading open safety models under research-only /
+non-commercial / community licences will **rise** through 2027, not fall. If a state-of-the-art
+safety classifier ships Apache-2.0 weights, this trend is wrong and the next pass should say so.
+
+## Trend 10 (added 2026-11-26, pass 9) — four regulators, four different compliance artifacts, one calendar
+
+Minor protection and platform accountability became enforceable in all four regions within about
+fifteen months, and **they do not ask for the same artifact.** The buyer in each region is paying for
+a different thing, which is why a single "content moderation" pitch lands in none of them:
+
+| Region | The instrument | What it actually demands | Open artifact that discharges it |
+|---|---|---|---|
+| **EMEA** | DSA + the Age Verification Blueprint | A *verifiable age signal* and a *machine-readable statement of reasons* per enforcement action | The Commission's own code — [av-app-android-wallet-ui](https://github.com/eu-digital-identity-wallet/av-app-android-wallet-ui) (EUPL-1.2) and [transparency-database](https://github.com/digital-services-act/transparency-database) (GPL-2.0) |
+| **North America** | 18 U.S.C. §2258A + state AI transparency laws | A *filed report to a named authority*, plus provenance labelling | Essentially nothing: [ello/ncmec_reporting](https://github.com/ello/ncmec_reporting) is 7★, unlicensed and dead since 2022 |
+| **APAC** | Australia's under-16 regime, app-store codes, divergent national rules | *Account-level age assurance at signup*, per jurisdiction | No open implementation found; the EU libraries are the only reusable ZKP age primitives |
+| **LATAM** | Brazil's ECA Digital (Law 15.211/2025, in force 2026-03-17) + Decree 12,880/26 | *Preventive design*: age assessment, parental supervision, no profiling of minors, removal without a court order | None specific; the EU estate plus ROOST Coop is the only credible assembly |
+
+**The reusable observation**: three of the four regions demand an artifact for which **no
+region-specific open implementation exists**, and the one estate that does exist was published by
+the European Commission under EUPL-1.2 and Apache-2.0 — so it is legally reusable outside Europe. The
+EU's compliance code is, in practice, **the only open age-assurance toolkit on earth**, and that is
+an export opportunity rather than a European curiosity. Details and dates by region in
+`intel/market.md`.

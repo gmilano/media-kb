@@ -10,6 +10,112 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 9: the trust & safety infrastructure (62 verified repos, 62/62 resolved)
+
+The enforcement substrate under the minor-protection, illegal-content and transparency duties this
+KB has described in prose since pass 2 without naming a tool. **62/62 URLs resolve by
+`git ls-remote`.** Full tables in `repos/foundations.md`; this is what moved and what it means.
+
+### Headline: the healthiest *permissive platform tier* in this KB, and it arrived by donation
+
+Three operators gave away infrastructure they run in production, and that single fact explains the
+licence distribution of the whole plane:
+
+| Repo | Licence | ★ / forks | Last push | Donated by |
+|---|---|---|---|---|
+| [roostorg/osprey](https://github.com/roostorg/osprey) | Apache-2.0 | 511★ / 73f | 2026-11-23 | **Discord** — its production safety rules engine |
+| [roostorg/coop](https://github.com/roostorg/coop) | Apache-2.0 | 150★ / 55f | **2026-11-26** | **ROOST** — review console, queues, routing, enforcement rules |
+| [conversationai/conversationai-moderator](https://github.com/conversationai/conversationai-moderator) | Apache-2.0 | 208★ / 31f | 2026-06-22 | **Google Jigsaw** |
+| [Jigsaw-Code/altitude](https://github.com/Jigsaw-Code/altitude) | Apache-2.0 | 44★ / 11f | 2026-06-21 | **Google Jigsaw** — aimed explicitly at small platforms |
+| [meta/content-review-filters](https://github.com/meta/content-review-filters) | Apache-2.0 | 8★ / 6f | 2026-10-24 | **Meta** |
+| [bluesky-social/ozone](https://github.com/bluesky-social/ozone) | **dual MIT/Apache-2.0** | 548★ / 94f | 2026-11-23 | **Bluesky** |
+
+[ROOST](https://github.com/roostorg) is new to this KB and is the reason the plane is buildable:
+15 repos, Apache-2.0 on code, two flagships pushed this week, and a CC-BY-4.0 directory
+([awesome-safety-tools](https://github.com/roostorg/awesome-safety-tools), 274★) that is the only
+reliable way to *discover* this plane — generic GitHub search cannot surface an 8-star Meta repo.
+
+### The hash-matching layer — BSD, and the list is the asset
+
+| Repo | Licence | ★ / forks | Last push | Notes |
+|---|---|---|---|---|
+| [meta/ThreatExchange](https://github.com/meta/ThreatExchange) | **BSD** (file-verified, 1,522 B) | 1,417★ / 368f | 2026-11-19 | PDQ, TMK+PDQF, vPDQ, HMA, `python-threatexchange`. **Renamed from `facebook/ThreatExchange`.** |
+| [matrix-org/hma-matrix](https://github.com/matrix-org/hma-matrix) | Apache-2.0 | 8★ / 2f | 2026-11-24 | HMA bound into a real platform. Pushed this week. |
+| [c4osl/rocketchatcsam](https://github.com/c4osl/rocketchatcsam) | MIT | 13★ / 1f | 2026-11-05 | Validates uploads against **Microsoft PhotoDNA** — open client, gated service. |
+| [jenssegers/imagehash](https://github.com/jenssegers/imagehash) | MIT | 2,060★ / 173f | 2025-09-17 | PHP perceptual hashing. |
+| [coenm/ImageHash](https://github.com/coenm/ImageHash) | MIT | 242★ / 27f | 2025-01-08 | .NET, on ImageSharp. |
+| [AsuharietYgvar/AppleNeuralHash2ONNX](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX) | Apache-2.0 | 1,532★ / 124f | 2021-08-21 | Historical: the reverse-engineering that ended Apple's client-side scanning. |
+
+**The three-step gradient across one statutory duty**, measured rather than asserted:
+**detect** = BSD and healthy (1,417★, pushed last week) → **obtain the list** = no licence exists,
+membership and vetting only (NCMEC / IWF / GIFCT / PhotoDNA) → **report to the authority** =
+[ello/ncmec_reporting](https://github.com/ello/ncmec_reporting), **7★, no licence file, dead since
+2022-03-29**. Ninth confirmation of the content law, and the most legally loaded instance of it.
+
+### Age verification — nine repos, published by the regulator, two licence shapes
+
+The European Commission shipped the Age Verification Blueprint **as working software**:
+[av-app-android-wallet-ui](https://github.com/eu-digital-identity-wallet/av-app-android-wallet-ui)
+(**EUPL-1.2**, 309★/52f, 2026-11-07),
+[av-app-ios-wallet-ui](https://github.com/eu-digital-identity-wallet/av-app-ios-wallet-ui)
+(**EUPL-1.2**, 20★, 2026-10-15),
+[av-lib-android-zkp-age-icao](https://github.com/eu-digital-identity-wallet/av-lib-android-zkp-age-icao)
+(Apache-2.0, 20★), [av-lib-ios-longfellow-zkp](https://github.com/eu-digital-identity-wallet/av-lib-ios-longfellow-zkp)
+(Apache-2.0, 4★, 2026-10-30), [av-srv-web-issuing-avw-py](https://github.com/eu-digital-identity-wallet/av-srv-web-issuing-avw-py)
+(Apache-2.0, 5★), [av-web-verifier-ui](https://github.com/eu-digital-identity-wallet/av-web-verifier-ui)
+(Apache-2.0, 15★), [av-srv-trust-validator](https://github.com/eu-digital-identity-wallet/av-srv-trust-validator)
+(Apache-2.0, 0★), the CC-BY-4.0 [technical specification](https://github.com/eu-digital-identity-wallet/av-doc-technical-specification)
+(99★) — and, one star and easy to miss,
+[av-verifier-frontend-cinema](https://github.com/eu-digital-identity-wallet/av-verifier-frontend-cinema):
+**a cinema age-gate reference frontend written by the regulator**.
+
+**Apps are EUPL-1.2 (copyleft, OSI-approved, legally binding in 23 languages); libraries and servers
+are Apache-2.0.** First EUPL-1.2 artifact recorded anywhere in this KB. Embed the ZKP libraries
+freely; think hard before shipping a modified fork of the app.
+
+### Platform transparency — the obligation has an open substrate and nobody is watching it
+
+| Repo | Licence | ★ | Last push | Notes |
+|---|---|---|---|---|
+| [digital-services-act/transparency-database](https://github.com/digital-services-act/transparency-database) | **GPL-2.0** | 55★ / 10f | 2026-11-25 | The Commission's own database code. Copyleft — because the publisher is a public body, not an operator. |
+| [afkzonagroup/rationale](https://github.com/afkzonagroup/rationale) | Apache-2.0 | 0★ | 2026-11-22 | SDK for submitting statements of reasons. **Zero stars, four days old at the time of this pass.** |
+| [eu-dsa-transparency-db-sor-data-downloader](https://github.com/transparency-in-content-moderation/eu-dsa-transparency-db-sor-data-downloader) | Apache-2.0 | 1★ | 2026-09-14 | Research direction: pulling the data back out. |
+
+### Decentralised moderation — atproto is live, the fediverse side is copyleft and small
+
+[bluesky-social/ozone](https://github.com/bluesky-social/ozone) (dual MIT/Apache-2.0, 548★,
+2026-11-23) and [bluesky-social/indigo](https://github.com/bluesky-social/indigo) (Apache-2.0,
+1,395★/271f, 2026-11-25) are the reference implementation of **stackable** moderation — third
+parties publish labels, users subscribe — which is the only architecture in this plane that does not
+assume one platform owns one truth. On Matrix,
+[the-draupnir-project/Draupnir](https://github.com/the-draupnir-project/Draupnir) (253★, **pushed
+2026-11-26**) has succeeded [matrix-org/mjolnir](https://github.com/matrix-org/mjolnir) (449★,
+2026-10-28). The fediverse tooling is smaller and copyleft:
+[fedimod/fires](https://github.com/fedimod/fires) (AGPL-3.0, 29★),
+[MarcT0K/Fediverse-Spam-Filtering](https://github.com/MarcT0K/Fediverse-Spam-Filtering) (GPL-2.0,
+8★), [selfagency/mastodont](https://github.com/selfagency/mastodont) (MIT, 22★), with
+[swicg/activitypub-trust-and-safety](https://github.com/swicg/activitypub-trust-and-safety) (51★)
+holding the W3C taskforce's documents.
+
+### The adjacent giants — bigger than anything in the plane proper
+
+| Repo | Licence | ★ / forks | Last push | Why it matters to a media client first |
+|---|---|---|---|---|
+| [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT | 12,065★ / 1,472f | 2026-11-24 | PII detection and redaction. Subtitles, transcripts and UGC are full of personal data. **Renamed from `microsoft/presidio`.** |
+| [NVIDIA/garak](https://github.com/NVIDIA/garak) | Apache-2.0 | 10,186★ / 1,523f | 2026-11-25 | LLM vulnerability scanner — the pre-launch harness for any public generative feature. |
+| [microsoft/PyRIT](https://github.com/microsoft/PyRIT) | MIT | 5,088★ / 1,128f | 2026-11-25 | AI red-teaming toolkit. |
+
+### Measurement note — the licence probe needed extending for the sixth time, and in a new direction
+
+Earlier passes extended the probe with lowercase `license.txt` and `COPYING.md`. This pass needed
+something different: **a directory**. Draupnir's licences live in `LICENSES/` with per-file SPDX
+annotation under **REUSE** (the FSFE/SPDX reuse-compliance standard; `reuse.software` is outside this session's allowed network domains, so the URL is deliberately not linked here — unverified, not dead), and `NVIDIA-NeMo/Guardrails` states
+`SPDX-License-Identifier: Apache-2.0` inside a `LICENSE.md` the detector still called
+`NOASSERTION`. Standing rule, all twelve industries: **`NONE` or `NOASSERTION` on an actively
+pushed repo means check `REUSE.toml`, a `LICENSES/` directory, and the manifest
+(`package.json` / `pyproject.toml` / `Cargo.toml`) before concluding anything.** A shallow clone
+settles it in one call and is still the cheapest conclusive oracle.
+
 ## 2026-11-26 — pass 8: the live & delivery infrastructure (45 verified repos, 45/45 resolved)
 
 ### Headline: the first plane in this KB where copyright is not the binding constraint

@@ -1744,3 +1744,70 @@ work, and this KB should say so in the first meeting.
   built against it.
 - **`survos/omc`** — created 2026-11-24, MIT, OMC 2.8 DTOs. One day old when measured. If it is alive in
   three months it is the first new permissively-licensed entrant in this plane since 2023.
+
+## The development & pre-production plane — trends measured 2026-11-26 (pass 17)
+
+### 1. The structural law holds for a sixth time, and this pass found the version that **removes the leverage**
+
+The law as formulated in pass 5 and refined through pass 11: *declaring* something is a format problem and
+gets permissive, maintained code; *honouring* it is a judgment problem and gets dormant code; *settling*
+the money is pure judgment and gets nothing. Pass 17's gradient, inside one workflow:
+
+| Step | Nature of the problem | What exists | Measured |
+|---|---|---|---|
+| **WRITE** the script | format | `nyousefi/Fountain` MIT **690★**, `betterfountain` MIT **454★**, `screenplain` MIT **187★**, `screenplay-tools` MIT 29★ | Healthy, permissive, maintained |
+| **BREAK DOWN & SCHEDULE** | judgment | `OpenShotDesigner` GPL-3.0 47★, `CineSched` GPL-3.0 15★, `FilmOrganizer` MIT 1★, `method-scheduling` Apache-2.0 1★, `opengate` GPL-3.0 1★, two unlicensed at 0★ | **73★ across eight repos** |
+| **SETTLE** the money | pure judgment | `CineSpend` MIT 8★; residuals/payroll **0** | Effectively nothing |
+
+**But the consequence inverts, and this is the new part.** `intel/trends.md` trend 4 has said since pass 1
+that M&E open source is "permissive at the pipeline, copyleft at the platform", and everywhere else in
+this KB that is *good news*: the permissive layer is the valuable substrate (codecs, colour, OTIO, ASR)
+and the copyleft layer is a replaceable turnkey app. **Here it is the reverse.** The permissive layer is a
+plain-text parser — a weekend of work, and eleven of them already exist. The layer carrying all the domain
+knowledge, the one a production office actually pays for, is GPL-3.0, proprietary, or absent.
+
+**So the law is structural, not commercial.** It predicts *where* permissive code appears; it does not
+promise that the permissive code is worth having. In this plane the permissive licences sit on the
+cheapest asset in the pipeline. **Refinement to carry forward: before valuing a permissive layer, ask
+what it would cost to rewrite. If the answer is "a weekend", the licence is not leverage.**
+
+### 2. The money follows the restriction — now with a ratio
+
+Across this plane's agent layer: **15,261 stars on the source-available-or-unlicensed side** (`waoowaoo`
+ELv2 14,989★, `film-studio-skills` unlicensed 186★, `motion-graphics-skills` all-rights-reserved 69★,
+`script-weaver` unlicensed 11★, `Script-Breakdown-Skills` unlicensed 6★) against **301 stars on the
+permissive side** (`story-shot-agent` 248★, `how-to-make-script` 21★, three others at 10–11★). A **50:1
+ratio**, and the split is not random: every permissive agent generates *story*, every restricted one
+claims to run a *production*. Pass 13 observed the licence hardening as it approaches the money; pass 17
+measures the same gradient inside a single workflow.
+
+### 3. A regulator has produced a duty with no supply anywhere — the first clean case in the KB
+
+Eleven passes have concluded that regulatory pressure does not predict permissive supply, and that the
+correlation is often inverse. Mexico's reform (in force **2026-05-15**) is the first instance of
+something stronger: a **dated, sector-specific, labour-side consent duty** — express consent per purpose,
+revocable, surviving the contract, extending to AI *training* on a worker's voice or image, naming dubbing
+actors explicitly — whose **system of record is the production office**, a layer with **73 stars of open
+tooling in total**. Not copyleft supply. **Absent supply, against an enacted duty.** That is the
+cleanest build case this KB has recorded, and the inversion is worth watching for in the other eleven
+industries.
+
+### 4. The format layer is moving this week; the management layer is being born 0-star
+
+Seven of fourteen tracked repos pushed within ten days of measurement (`story-shot-agent` and
+`visual-storytelling-skills` **on** measurement day). But **five of the eight management-tier repos were
+first pushed within the last ten weeks** and sit at 0–1 stars with licences ranging from Apache-2.0 to
+nothing at all. That is the signature of freshly generated single-author projects, not an emerging
+ecosystem. **Do not read "eight repositories appeared this quarter" as momentum** — read the stars, the
+forks and whether a second contributor ever arrived. `method-scheduling` (Apache-2.0, 1★/1f) is the one
+worth a revisit next pass, on licence and scope rather than traction.
+
+### 5. The measured non-trend: the stripboard has no digital commons, and its name is taken
+
+`stripboard` returns **112 GitHub repositories and not one is about film.** They are modular-synthesizer
+perfboard layouts and PCB autorouters. The stripboard — the board of coloured strips that *is* the
+shooting schedule — is the central artefact of production planning, and on GitHub the word belongs
+entirely to electronics. Meanwhile every artefact downstream of the script (stripboard, day-out-of-days,
+call sheet, budget top-sheet) exists only in proprietary formats, while **the one open interchange format,
+Fountain, sits upstream of all of them.** There is no trend to track here and no pipeline to watch: there
+is an absence, and the correct response is to stop re-checking it hopefully and price the build.

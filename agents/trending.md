@@ -9,6 +9,60 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 17: the development & pre-production plane (the agent layer **splits down the middle of one plane**)
+
+### A new shape, and the cleanest split measured so far
+
+Fourteen planes produced near-zero agent layers; pass 14 broke the streak; pass 15 found a
+vendor-captured layer; pass 16 found one born in a quarter and adopted by nobody. **This plane produces
+something different again: a layer that is healthy on one side of a single workflow and absent on the
+other.** The workflow is script → breakdown → stripboard → schedule → call sheet → budget. Everything
+left of the breakdown has permissive, maintained agents. Everything right of it has none.
+
+**Permissive and alive — all five operate on *story*:**
+
+| Agent | Repo | Stars | License | Last push |
+|---|---|---|---|---|
+| PenShot | neopen/story-shot-agent | 248★ | **Apache-2.0** | **2026-11-26** (measurement day) |
+| how-to-make-script | XucroYuri/how-to-make-script | 21★ | **MIT** | 2026-08-24 |
+| ai-screenplay-writer | E-Asrar-Haghighi/ai-screenplay-writer | 11★ | **MIT** | 2026-03-12 |
+| visual-storytelling-skills | leynos/visual-storytelling-skills | 11★ | **ISC** | **2026-11-26** (measurement day) |
+| Story-Film-Skills | badgids/Story-Film-Skills | 10★ | **Apache-2.0** | 2026-08-24 |
+
+**Unlicensed or source-available — and these are the ones that touch production management:**
+
+| Agent | Repo | Stars | License status |
+|---|---|---|---|
+| waoowaoo | waooAI/waoowaoo | **14,989★** | 🚫 **Elastic License 2.0** — not open source |
+| film-studio-skills | machina-exm/film-studio-skills | 186★ | ⚠️ **no license file** (17 names × 2 branches, control README 200) |
+| motion-graphics-skills | imMamdouhaboammar/motion-graphics-skills | 69★ | 🚫 **"PROPRIETARY AND CONFIDENTIAL — ALL RIGHTS RESERVED"** |
+| script-weaver | KKenny0/script-weaver | 11★ | ⚠️ no license file |
+| Script-Breakdown-Skills | jpcastel88/Script-Breakdown-Skills | 6★ | ⚠️ no license file |
+
+**The one-line version: every agent that generates a story is permissive, and every agent that runs a
+production is not.** 15,261 stars sit on the unlicensed/source-available side; 301 sit on the permissive
+side. The money follows the restriction.
+
+### Two false friends, one of them the worst in the KB
+
+- **`stripboard` → 112 results, ZERO relevant.** Every result is electronics: modular-synth perfboard
+  layouts (`golkit1/Stripboard-Layouts`, 46★ GPL-3.0), a PCB autorouter (`rogerdahl/striprouter-cpp`,
+  27★ MIT), a circuit layout editor (`KarloFunke/stripboard-editor`, 19★ GPL-3.0). The stripboard is the
+  defining artefact of film scheduling and **its name belongs to electronics on GitHub.**
+- **`call sheet agent` → 109 results, ZERO relevant.** All n8n/Vapi/Twilio phone-call sales bots.
+
+Both are the `eidr`/`isan` pattern from pass 5 and they confirm its second half: a short query can
+manufacture **false abundance** as easily as a long one manufactures a false zero. 112 results and 0
+findings is not a thin plane — it is a collision.
+
+### Watch item with a falsifiable prediction
+
+`neopen/story-shot-agent` (Apache-2.0, 248★) pushed on measurement day and is the only permissive,
+maintained, non-trivial agent in the plane. **Prediction, to check next media pass:** it will still be
+the only one, and the breakdown-to-schedule side will still have no permissive agent above 25 stars.
+If a permissive management-side agent appears above that line, the plane has started to open and the
+build-vs-integrate advice in `verticals/solutions.md` needs revisiting.
+
 ## 2026-11-26 — pass 16: the avails, windowing & distribution-rights plane (an agent layer **born in one quarter, adopted by nobody**)
 
 ### A new shape: six agents, all permissive, all at zero

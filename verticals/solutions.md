@@ -989,3 +989,58 @@ compliance reporting. API Evangelist published independent public-API profiles f
 `api-evangelist/filmtrack` (2026-10-30) and `api-evangelist/whip-media-group` (2026-11-01) — 0 stars, no
 licence, and not code, but they confirm the thing that matters commercially: **the incumbents expose
 public API surfaces**, so integration is a real design and not a hope.
+
+## The development & production-management tier — added 2026-11-26 (pass 17)
+
+The Odoo-equivalent question for this plane is: **is there a production-management platform you can
+deploy, then put an agent on top of?** Measured answer: **no.** This is the thinnest vertical tier in the
+KB — thinner than the "no open broadcast MAM" gap recorded earlier in this file.
+
+### What exists
+
+| Platform | License | Repo | Stars | Last push | Deployable today? |
+|---|---|---|---|---|---|
+| Open Shot Designer | **GPL-3.0** | [koosoli/OpenShotDesigner](https://github.com/koosoli/OpenShotDesigner) | 47★ / 9f | 2026-11-16 | Partly. Broadest scope in the tier — lined script, shot list, storyboard, floor plan, scheduling, call sheets, crew/cast, budget, locations, continuity log, all in a browser tab. Single-author, 47 stars: pilot it, do not stake a studio on it. **GPL-3.0 → deploy unmodified and integrate over its boundary** |
+| Beat | **GPL-3.0-or-later** | [lmparppei/Beat](https://github.com/lmparppei/Beat) | 368★ / 60f | 2026-11-02 | Yes, as an *authoring* app on macOS only. Mature and maintained, but it is a screenwriting editor, not a production platform |
+| Trelby | GPL-2.0 | [trelby/trelby](https://github.com/trelby/trelby) | 354★ / 107f | 2025-10-21 | Yes, cross-platform authoring. Thirteen months without a push |
+| CineSched + CineSpend | GPL-3.0-or-later / **MIT** | [ChrisTempel/CineSched](https://github.com/ChrisTempel/CineSched) · [ChrisTempel/CineSpend](https://github.com/ChrisTempel/CineSpend) | 15★ / 8★ | 2026-10-11 / 2026-10-06 | macOS only, and they are two separate apps — scheduling and budgeting do not share a model. CineSpend is **MIT** and is the only permissive budgeting code located anywhere in this plane |
+| method-scheduling | **Apache-2.0** | [method-production-suite/method-scheduling](https://github.com/method-production-suite/method-scheduling) | 1★ / 1f | 2026-11-21 | Not yet. But it is **the only Apache-2.0 licence in the tier**, it covers breakdown → stripboard → day-out-of-days → reports, and it declares an open file format. **The one to watch**: a permissive licence on the right scope is worth more here than 47 stars on a GPL one |
+| Open Gate | GPL-3.0 | [opengateapp/opengate](https://github.com/opengateapp/opengate) | 1★ / 1f | 2026-11-03 | Not yet. Widest single-project scope on paper (screenplay → breakdown → stripboard → call sheets → storyboards + budget), one star |
+
+### 🚫 What looks like the answer and is not
+
+[waooAI/waoowaoo](https://github.com/waooAI/waoowaoo) — **14,989★ / 3,232f, last push 2026-09-21** —
+presents itself as the "industry-first industrial-grade full-pipeline AI film and TV production platform"
+and is, by star count, 60× larger than anything else in this plane. **Its LICENSE file is the Elastic
+License 2.0** (3,860 B, verified by reading). That is a source-available licence, not open source: ELv2
+prohibits providing the software to third parties as a hosted or managed service and prohibits working
+around its licence-key functionality. **A studio engagement delivered on top of it is the prohibited use
+case.** The GitHub API reports only `NOASSERTION` here, so a metadata scan will not catch it.
+
+This is the third distinct non-open "open" licence the KB has now recorded on a plane's largest artefact
+(after Tencent Hunyuan's territorial community licence and the BSL on Directus) and it is the pattern to
+check first whenever a plane has exactly one dominant repository.
+
+### Gap: there is no open production-management platform, and the reason is structural
+
+**The incumbents are wholly proprietary and they own the file formats:** Movie Magic Scheduling and
+Budgeting, Showbiz, Gorilla, StudioBinder, Yamdu, SetHero, Croogloo; Wrapbook and Cast & Crew on payroll.
+A production office's artefacts — the stripboard, the day-out-of-days, the call sheet, the budget
+top-sheet — exist as proprietary formats, and the only interchange that is actually open is **Fountain, at
+the script end, before any of the production data is created.**
+
+That asymmetry is the whole finding. The open format sits at the *beginning* of the pipeline; every
+artefact downstream of the breakdown is proprietary. So integration work in this plane is import-only:
+you can read the script, and from there you are writing the model yourself. **Scope accordingly — this is
+a build with a permissive front door, not a platform customisation.**
+
+### Honest gap statement
+
+A single Odoo-class candidate would change this tier completely, and none was found. Searched
+2026-11-26: `open source film production scheduling breakdown call sheet github`,
+`open source film production accounting budgeting payroll software github`, GitHub
+`search/repositories` for `stripboard`, `script breakdown agent`, `call sheet agent`,
+`production scheduling MCP`, plus the 27-term grep listed in `agents/top.md`. The directory sites
+(SourceForge, Slashdot, G2) return only proprietary products for these categories. **If a client needs
+production management, the correct answer is that the open base does not exist — say so and price the
+build.**

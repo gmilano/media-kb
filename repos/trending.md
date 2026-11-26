@@ -10,6 +10,62 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 17: development & pre-production infrastructure (42 slugs probed, 38 resolve, 4 do not, **4 reached only via rename redirect**)
+
+### The movement is all in the format layer, and it is this week
+
+Last-push dates, measured 2026-11-26:
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [neopen/story-shot-agent](https://github.com/neopen/story-shot-agent) | **Apache-2.0** | 248★ | **2026-11-26** | Script → shots → video prompts. Pushed on measurement day |
+| [leynos/visual-storytelling-skills](https://github.com/leynos/visual-storytelling-skills) | **ISC** | 11★ | **2026-11-26** | Pushed on measurement day |
+| [method-production-suite/method-scheduling](https://github.com/method-production-suite/method-scheduling) | **Apache-2.0** | 1★ | 2026-11-21 | Breakdown → stripboard → day-out-of-days. Only Apache licence in the management tier |
+| [vilcans/screenplain](https://github.com/vilcans/screenplain) | **MIT** | 187★ | 2026-11-21 | Fountain → PDF/HTML/FDX |
+| [rsdoiel/scripttool](https://github.com/rsdoiel/scripttool) | AGPL-3.0 | 46★ | 2026-11-19 | fdx/fadein/osf/fountain conversion |
+| [rsdoiel/fountain](https://github.com/rsdoiel/fountain) | AGPL-3.0 | 8★ | 2026-11-19 | Go Fountain package |
+| [wildwinter/screenplay-tools](https://github.com/wildwinter/screenplay-tools) | **MIT** | 29★ | 2026-11-18 | C++/JS/Python/C# parse **and write** |
+| [nachobust/FilmOrganizer](https://github.com/nachobust/FilmOrganizer) | **MIT** | 1★ | 2026-11-17 | Breakdown + schedule, offline, three platforms |
+| [koosoli/OpenShotDesigner](https://github.com/koosoli/OpenShotDesigner) | GPL-3.0 | 47★ | 2026-11-16 | Widest deployable scope in the plane |
+| [KKenny0/script-weaver](https://github.com/KKenny0/script-weaver) | ⚠️ none | 11★ | 2026-11-15 | Agent-native screenplay/storyboard |
+| [imMamdouhaboammar/motion-graphics-skills](https://github.com/imMamdouhaboammar/motion-graphics-skills) | 🚫 proprietary | 69★ | 2026-11-11 | All rights reserved, stated in LICENSE |
+| [lmparppei/Beat](https://github.com/lmparppei/Beat) | GPL-3.0+ | 368★ | 2026-11-02 | macOS screenwriting |
+| [opengateapp/opengate](https://github.com/opengateapp/opengate) | GPL-3.0 | 1★ | 2026-11-03 | Full pre-production scope, one star |
+| [jtoy/fountainrb](https://github.com/jtoy/fountainrb) | **MIT** | 0★ | 2026-10-27 | Pure-Ruby parser with validation. Active, unnoticed |
+
+**Seven of the fourteen repos above were pushed in the ten days before measurement, and five of them are
+permissive.** All five permissive movers are in the *format and story* layer. The management-tier movers
+(`method-scheduling`, `FilmOrganizer`, `opengate`, `OpenShotDesigner`) are all at 1–47 stars.
+
+### Dormant or gone — recorded so later passes do not re-discover them
+
+| Repo | Status |
+|---|---|
+| [nyousefi/Fountain](https://github.com/nyousefi/Fountain) | MIT, 690★ — the format's reference implementation, **no push since 2023-06-10** |
+| [dimkanovikov/KITScenarist](https://github.com/dimkanovikov/KITScenarist) | GPL-3.0, 352★ — **ARCHIVED** 2023-08-01 |
+| [trelby/trelby](https://github.com/trelby/trelby) | GPL-2.0, 354★ — last push 2025-10-21 |
+| [overvale/Textplay](https://github.com/overvale/Textplay) | BSD-3-Clause, 107★ — last push 2019-11-28 |
+| [ifrost/afterwriting-labs](https://github.com/ifrost/afterwriting-labs) | 280★ — **no licence file**, last push 2026-01-28 |
+| [jtsage/TDTracX](https://github.com/jtsage/TDTracX) | 0★, no licence, **ARCHIVED** 2024-06-25, and it is theatre not film — the only payroll-adjacent artefact found |
+| `Falconwing/CineSched`, `nguernse/screenplay-js`, `sunsetsystems/fountain`, `ifrost/afterwriting` | **Do not exist.** Both oracles agree |
+
+### 🔧 The oracle disagreement that produced four corrections
+
+`git ls-remote` reported EXISTS for four slugs that `search/repositories` rejected with **HTTP 422
+"the listed users and repositories cannot be searched"**. That combination means **rename/transfer
+redirect**, which `ls-remote` follows silently:
+
+- `wildwinter/fountain-tools` → **`wildwinter/screenplay-tools`**
+- `rsdoiel/scripttools` → **`rsdoiel/scripttool`**
+- `afterwriting-labs/afterwriting` → **`ifrost/afterwriting-labs`** (owner changes entirely)
+- `olivertaylor/textplay` → **`overvale/Textplay`** (owner changes entirely)
+
+Every one of those stale slugs is what the search engines and tool directories still publish, and every
+one **still resolves in a browser**, so a URL check passes and the KB would have recorded four
+non-canonical slugs. See `repos/foundations.md` for the full rule. In this session
+`curl -sI https://github.com/…` returns **403 from the egress proxy**, so the redirect is not readable
+from headers; `WebFetch` of the repository page is the oracle that yields the canonical name.
+
 ## 2026-11-26 — pass 16: avails & distribution-rights infrastructure (24 slugs checked, 22 resolve, 2 do not)
 
 ### The anchor this KB had never named

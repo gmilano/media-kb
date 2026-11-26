@@ -1610,3 +1610,66 @@ abandoned. Both outcomes are informative; the KB should check and write down whi
 Clearance is the *researchable* end of this plane, which is why six people tried to agent it. Nothing in
 the table evaluates a window, and nothing settles money. Those two are the subject of the gradient
 recorded in `repos/foundations.md` for this pass, and the second of them is a literal zero.
+
+## The development & pre-production plane — measured 2026-11-26 (pass 17): the agent layer is **real at the creative end and unlicensed at the management end**
+
+The plane is the one every production starts with and this KB had never touched: **script → breakdown →
+stripboard → shooting schedule → call sheet → budget → payroll.** Before any search, 27 candidate terms
+were grepped against all eight files. `script breakdown`, `fountain`, `stripboard`, `pre-production`,
+`call sheet`, `production accounting`, `payroll`, `budgeting`, `greenlight`, `chain of title`,
+`shot list`, `day out of days`, `screenwriting` and `logline` each returned **literal zero**. The
+apparent hits were substring noise and are worth recording as a method warning: `casting` (31) was
+**broad*casting***, `slate` (98) was **tran*slate***, `script` (237) was **de*script*ion**. This is the
+largest single vocabulary gap found in seventeen passes.
+
+### The agents, verified 2026-11-26
+
+Existence via `git ls-remote`, stars/forks/last-push via GitHub `search/repositories`, and **license by
+reading the LICENSE file** wherever the API returned `NOASSERTION` or `NONE`.
+
+| Agent | Repo | License | Stars / Forks | Last push | What it actually does |
+|---|---|---|---|---|---|
+| PenShot (story-shot-agent) | [neopen/story-shot-agent](https://github.com/neopen/story-shot-agent) | **Apache-2.0** (+NOTICE) | 248★ / 49f | 2026-11-26 | Script → shot-level breakdown → video prompts, via LangGraph + LlamaIndex. Accepts arbitrary script formats. **The only permissive, actively maintained agent in this plane** — pushed on measurement day |
+| how-to-make-script | [XucroYuri/how-to-make-script](https://github.com/XucroYuri/how-to-make-script) | **MIT** | 21★ / 1f | 2026-08-24 | Screenwriting *knowledge infrastructure* written for writers **and agents** — rules and structure, not generation |
+| ai-screenplay-writer | [E-Asrar-Haghighi/ai-screenplay-writer](https://github.com/E-Asrar-Haghighi/ai-screenplay-writer) | **MIT** | 11★ / 0f | 2026-03-12 | Multi-agent system generating full seasons of original TV screenplays |
+| visual-storytelling-skills | [leynos/visual-storytelling-skills](https://github.com/leynos/visual-storytelling-skills) | **ISC** | 11★ / 1f | 2026-11-26 | Agent skills for film production, prose → picture. Pushed on measurement day |
+| Story-Film-Skills | [badgids/Story-Film-Skills](https://github.com/badgids/Story-Film-Skills) | **Apache-2.0** (+NOTICE) | 10★ / 2f | 2026-08-24 | Local-first agent-skills suite for story writing and book/film work |
+
+**Five permissive agents, and none of them reaches the management end.** Every one of the five operates
+on *story* — structure, prose, shots, prompts. Not one produces a breakdown sheet, a stripboard, a
+shooting schedule, a call sheet or a budget line.
+
+### The management end: four artefacts, none usable as a base
+
+| Artefact | Repo | License | Stars | Last push | Why it cannot be built on |
+|---|---|---|---|---|---|
+| waoowaoo | [waooAI/waoowaoo](https://github.com/waooAI/waoowaoo) | ⚠️ **Elastic License 2.0** (LICENSE, 3,860 B) | 14,989★ / 3,232f | 2026-09-21 | Self-described "industry-first industrial-grade full-pipeline AI film/TV production platform". **Not open source.** ELv2 forbids providing the software to third parties as a managed service — which is exactly what a studio engagement does. The most-starred artefact in the plane by 60×, and unusable |
+| film-studio-skills | [machina-exm/film-studio-skills](https://github.com/machina-exm/film-studio-skills) | ⚠️ **No license file** | 186★ / 26f | 2026-08-14 | Seven installable agent skills claiming to run a "$2M AI video production" pipeline. 17 license names probed on both branches, all 404, control README 200 → genuinely unlicensed = all rights reserved |
+| motion-graphics-skills | [imMamdouhaboammar/motion-graphics-skills](https://github.com/imMamdouhaboammar/motion-graphics-skills) | 🚫 **"PROPRIETARY AND CONFIDENTIAL — ALL RIGHTS RESERVED"** (LICENSE, 4,261 B) | 69★ / 20f | 2026-11-11 | A public repository whose LICENSE file affirmatively reserves all rights. The GitHub API reports only `NOASSERTION`. Worse than no license, because it is deliberate |
+| Script-Breakdown-Skills | [jpcastel88/Script-Breakdown-Skills](https://github.com/jpcastel88/Script-Breakdown-Skills) | ⚠️ **No license file** | 6★ / 0f | 2026-08-04 | Six agent skills turning a screenplay into a **production breakdown** — the single artefact in the entire plane aimed at the management end, and it carries no grant |
+| script-weaver | [KKenny0/script-weaver](https://github.com/KKenny0/script-weaver) | ⚠️ **No license file** | 11★ / 3f | 2026-11-15 | Agent-native screenplay and storyboard engine; no grant |
+
+### The measured zeros, and two of the worst false friends in the KB
+
+| Query | Results | Relevant | What came back instead |
+|---|---|---|---|
+| `stripboard` | **112** | **0** | **Every hit is electronics.** `golkit1/Stripboard-Layouts` (46★, GPL-3.0) is modular-synthesizer perfboard; `rogerdahl/striprouter-cpp` (27★, MIT) is a PCB autorouter; `KarloFunke/stripboard-editor` (19★, GPL-3.0) is a circuit layout editor |
+| `call sheet agent` | **109** | **0** | All phone-call sales agents — n8n/Vapi/Twilio voice bots. "Call" collides completely |
+| `script breakdown agent` | 16 | 1 | Only `jpcastel88/Script-Breakdown-Skills`, unlicensed. The rest are YouTube/short-form "hook breakdown" skills |
+| `production scheduling MCP` | 41 | 0 | Generic "production-ready MCP servers" — "production" collides with "production-grade" |
+| `residuals calculation film` | **0** | 0 | Carried from pass 5 and re-confirmed: still literally zero |
+
+**The stripboard case is the sharpest false friend this KB has recorded, and it deserves its own rule.**
+The stripboard is *the* central artefact of film scheduling — the board of coloured strips that becomes
+the shooting order — and its name is owned outright by electronics prototyping. A careless pass does not
+return zero rows here; it returns 46★ GPL-3.0 **modular-synthesizer layouts** written into a media KB as
+production tooling. This is the `eidr`/`isan` pattern of pass 5 recurring, and it confirms that rule's
+second half: **shortening a query can convert a false zero into a false abundance. Read the results, never
+the total.**
+
+### What this means for a bid
+
+**Do not promise an open-source pre-production stack.** The honest position is narrow and defensible: the
+*format* layer is permissive and solid (see `repos/foundations.md`), the *creative* agent layer is
+permissive and genuinely moving, and the *management* layer — the part a production actually pays for —
+has no permissive, maintained base anywhere. It is a build, not an integration.

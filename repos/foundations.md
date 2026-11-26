@@ -2037,3 +2037,115 @@ NOASSERTION), `aaked-app/aakd` (12*, **AGPL-3.0**), `bytecrunch-io/openclm` (4*,
 `0xyz-exe/contractflow` (1*, MIT). The only permissive entry has one star. AGPL on a service that
 would hold a studio's deal terms is a conversation with a client's counsel, not a default. Recorded so a
 later pass does not re-discover it as an opportunity.
+
+## The development & pre-production plane — measured 2026-11-26 (pass 17)
+
+**42 slugs probed. 38 resolve to a canonical repository, 4 do not exist, and 4 of the 38 were reachable
+only through a rename redirect** (recorded below under their canonical names — see the new oracle rule at
+the end of this section).
+
+### Tier 1 — the format substrate: permissive, and the one healthy layer in the plane
+
+Fountain is the open screenplay markup format, and it is the reason this plane has any permissive
+foundation at all. It is plain text, so every tool in this tier is a parser or a renderer.
+
+| Repo | License | Stars / Forks | Last push | Role |
+|---|---|---|---|---|
+| [nyousefi/Fountain](https://github.com/nyousefi/Fountain) | **MIT** | 690★ / 71f | 2023-06-10 | The **reference implementation** of the Fountain format. Dormant three years, but it is the spec made executable — read it, do not depend on it |
+| [piersdeseilligny/betterfountain](https://github.com/piersdeseilligny/betterfountain) | **MIT** | 454★ / 75f | 2026-09-11 | Screenwriting inside VS Code. The most-starred *maintained* MIT artefact in the plane, and the practical authoring front end |
+| [vilcans/screenplain](https://github.com/vilcans/screenplain) | **MIT** | 187★ / 35f | 2026-11-21 | Fountain → PDF / HTML / FDX in Python. Pushed five days before measurement; the dependable conversion workhorse |
+| [overvale/Textplay](https://github.com/overvale/Textplay) | **BSD-3-Clause** (verified by reading; see below) | 107★ / 16f | 2019-11-28 | Fountain → HTML/FDX command-line converter. Dormant since 2019; **licence is permissive despite the API saying `NOASSERTION`** |
+| [wildwinter/screenplay-tools](https://github.com/wildwinter/screenplay-tools) | **MIT** | 29★ / 8f | 2026-11-18 | Format-agnostic screenplay representation with parse **and write** in C++, JavaScript, Python and C#. The only multi-language option, and the right pick for a polyglot pipeline |
+| [rsdoiel/scripttool](https://github.com/rsdoiel/scripttool) | AGPL-3.0 | 46★ / 7f | 2026-11-19 | Converts between **fdx, fadein, osf and fountain** (Go). The widest format coverage found — but AGPL, so deploy unmodified behind an interface |
+| [rsdoiel/fountain](https://github.com/rsdoiel/fountain) | AGPL-3.0 | 8★ / 1f | 2026-11-19 | Go package for Fountain; the library under `scripttool` |
+| [xiota/ftn2xml](https://github.com/xiota/ftn2xml) | GPL-3.0 | 5★ / 2f | 2026-01-21 | C++ converter to XML/HTML/PDF/FDX, written for speed because the author observed that nearly all open Fountain parsers are scripting-language implementations |
+| [mgmarlow/ftnbuild](https://github.com/mgmarlow/ftnbuild) | **MIT** | 2★ / 1f | 2021-12-25 | JS processor. Dormant five years; listed for completeness |
+| [Joeboy/scenewriter](https://github.com/Joeboy/scenewriter) | **MIT** | 1★ / 0f | 2023-10-22 | Fountain parser in Rust/Nom |
+| [jtoy/fountainrb](https://github.com/jtoy/fountainrb) | **MIT** | 0★ / 0f | 2026-10-27 | Dependency-free pure-Ruby parser with line-level validation. Active, unnoticed |
+
+⚠️ **The licence trap in this tier, and it sits on the critical path.**
+[ifrost/afterwriting-labs](https://github.com/ifrost/afterwriting-labs) — **280★ / 53f, last push
+2026-01-28 — has no license file at all.** Seventeen license filenames were probed on both `master` and
+`main` (including the lowercase `license.txt` and `COPYING.md` names added by pass 5) and every one
+returned 404, while the control request for `README.md` returned 200. The names are not the problem:
+**there is no grant.** Afterwriting is the de-facto Fountain post-processor and PDF generator that the
+rest of this tier leans on for output. **Unlicensed means all rights reserved.** Use `screenplain` (MIT)
+for the render path instead.
+
+### Tier 2 — the editors: all copyleft, one archived
+
+| Repo | License | Stars / Forks | Last push | Note |
+|---|---|---|---|---|
+| [lmparppei/Beat](https://github.com/lmparppei/Beat) | **GPL-3.0-or-later** (LICENSE.md, 507 B — a notice, not the full text) | 368★ / 60f | 2026-11-02 | macOS screenwriting app, actively maintained. API said `NOASSERTION` |
+| [trelby/trelby](https://github.com/trelby/trelby) | GPL-2.0 | 354★ / 107f | 2025-10-21 | Multiplatform, feature-rich. Thirteen months since last push |
+| [dimkanovikov/KITScenarist](https://github.com/dimkanovikov/KITScenarist) | GPL-3.0 | 352★ / 51f | 2023-08-01 | 🚫 **ARCHIVED.** Do not propose it |
+
+### Tier 3 — the management layer: this is the desert
+
+Breakdown, stripboard, schedule, call sheet, budget. Everything a production office runs on.
+
+| Repo | License | Stars / Forks | Last push | Scope |
+|---|---|---|---|---|
+| [koosoli/OpenShotDesigner](https://github.com/koosoli/OpenShotDesigner) | **GPL-3.0** (LICENSE, 35,809 B behind a custom header) | 47★ / 9f | 2026-11-16 | The broadest scope found: lined script, shot list, storyboard, floor plan, scheduling, call sheets, crew/cast, budget, locations, continuity log. Browser-based. **The high-water mark of this tier is 47 stars** |
+| [ChrisTempel/CineSched](https://github.com/ChrisTempel/CineSched) | **GPL-3.0-or-later** (LICENSE, 817 B notice) | 15★ / 6f | 2026-10-11 | macOS shoot scheduling, Final Draft (.fdx) import, PDF schedule export |
+| [ChrisTempel/CineSpend](https://github.com/ChrisTempel/CineSpend) | **MIT** | 8★ / 1f | 2026-10-06 | macOS budgeting, ten currencies. **The only budgeting repository found in the plane, and the only permissive one** |
+| [nachobust/FilmOrganizer](https://github.com/nachobust/FilmOrganizer) | **MIT** | 1★ / 0f | 2026-11-17 | Breakdown + shooting schedule, offline, Windows/macOS/Linux. Imports PDF, Word, Final Draft and Fountain |
+| [method-production-suite/method-scheduling](https://github.com/method-production-suite/method-scheduling) | **Apache-2.0** | 1★ / 1f | 2026-11-21 | Breakdown, stripboard with day breaks and banners, calendar, **day out of days**, reports. Imports Fountain and .fdx. Claims an open file format. The most permissive licence in the tier at one star |
+| [opengateapp/opengate](https://github.com/opengateapp/opengate) | GPL-3.0 | 1★ / 1f | 2026-11-03 | Screenplay → breakdown → stripboard → calendar → call sheets → storyboards, one synced project |
+| [Govind-vaghasiya/CALLSHEETPRO](https://github.com/Govind-vaghasiya/CALLSHEETPRO) | ⚠️ **No license** | 0★ / 0f | 2026-10-13 | Next.js/Supabase scene-breakdown-to-call-sheet app with conflict checks |
+| [mrrishit909/film-production-planner](https://github.com/mrrishit909/film-production-planner) | ⚠️ **No license** | 0★ / 0f | 2026-10-05 | Breakdown parser + **CP-SAT** shoot scheduling with a rule checker and producer approval gate. The only constraint-solver approach found |
+
+**Nothing in Tier 3 is a base.** The combined star count of all eight repositories is **73** — fewer than
+`betterfountain` alone, and barely a tenth of `nyousefi/Fountain`. Five of the eight were first pushed
+within the last ten weeks, which is the signature of freshly generated single-author projects rather than
+an emerging ecosystem. The permissive ones are at 1 and 8 stars; the one with real scope is GPL-3.0.
+
+### Tier 4 — the money: effectively nothing
+
+`production accounting`, `payroll`, `budgeting` and `greenlight` returned **zero** across all eight KB
+files before this pass, and the web is barely better. Besides `CineSpend` (MIT, 8★) the only adjacent
+artefact located is [jtsage/TDTracX](https://github.com/jtsage/TDTracX) — **0★, no license, ARCHIVED
+2024-06-25**, and built for *theatre* technical directors, not film. `residuals calculation film` remains
+**0 repositories**, now confirmed in two separate passes. Incumbents here (Movie Magic Budgeting,
+Showbiz, Wrapbook, Cast & Crew) are entirely proprietary.
+
+### 🔧 New oracle rule — reusable across all twelve industries
+
+**`git ls-remote` says EXISTS + `search/repositories` with `repo:<slug>` returns HTTP 422 "cannot be
+searched" ⇒ the slug is a rename/transfer redirect, and `ls-remote` followed it silently.**
+
+Four cases in this pass alone:
+
+| Slug as published by search engines and blogs | Canonical repository | Licence difference it hides |
+|---|---|---|
+| `wildwinter/fountain-tools` | [wildwinter/screenplay-tools](https://github.com/wildwinter/screenplay-tools) | — (MIT either way) |
+| `rsdoiel/scripttools` | [rsdoiel/scripttool](https://github.com/rsdoiel/scripttool) | — (AGPL-3.0 either way) |
+| `afterwriting-labs/afterwriting` | [ifrost/afterwriting-labs](https://github.com/ifrost/afterwriting-labs) | Owner changes entirely; **no licence** |
+| `olivertaylor/textplay` | [overvale/Textplay](https://github.com/overvale/Textplay) | Owner changes entirely; BSD-3-Clause |
+
+And one case where **both oracles agree the repo is simply gone**: `Falconwing/CineSched` (also
+`nguernse/screenplay-js`, `sunsetsystems/fountain`, `ifrost/afterwriting`).
+
+**Why this matters more than it sounds.** The stale slug *resolves in a browser today* — GitHub serves
+the redirect — so a `curl`/URL check **passes** and the KB still records a non-canonical slug that breaks
+the day the owner drops the redirect or someone else claims the old name. **`ls-remote` is an oracle of
+reachability, not of identity.** Pass 5's rule stands ("a 404 is never by itself proof a licence is
+missing"); this adds its mirror: **a 200 is never by itself proof a slug is canonical.** Two oracles, and
+the disagreement between them is the signal. Note also that in this session `curl -sI https://github.com/…`
+is answered **403 by the egress proxy**, so the redirect cannot be read from response headers — a
+`WebFetch` of the repository page was the third oracle that produced the canonical names above.
+
+### 🔧 Correction to the licence probe — `NOASSERTION` cuts both ways
+
+Pass 5 established that a custom LICENSE filename can hide a real licence. This pass found the stronger
+version: **a custom licence *title* can hide either a standard permissive grant or an affirmative refusal
+of one, and the API reports `NOASSERTION` for both.**
+
+- [overvale/Textplay](https://github.com/overvale/Textplay) — file titled `TEXTPLAY LICENSE`, body is
+  **verbatim BSD-3-Clause**. Permissive. Safe.
+- [imMamdouhaboammar/motion-graphics-skills](https://github.com/imMamdouhaboammar/motion-graphics-skills)
+  — file titled `PROPRIETARY AND CONFIDENTIAL LICENSE (ALL RIGHTS RESERVED)`. **No grant at all.**
+
+Same API value, opposite legal consequence. **`NOASSERTION` is an instruction to read the file, not a
+verdict in either direction** — and in this plane it also concealed three GPL-3.0 projects behind short
+custom notices (`Beat` 507 B, `CineSched` 817 B, `OpenShotDesigner` 35,809 B).

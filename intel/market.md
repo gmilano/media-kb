@@ -615,6 +615,35 @@ is a revenue-and-liability dashboard built on P16.1, sold on money rather than o
 harder sale than EMEA's statutory report and a larger one, because it touches the catalogue of the
 companies that own the incumbents' biggest contracts.
 
+#### Development & pre-production — pass 17 (2026-11-26)
+
+- **The federal digital-replica bill is still not law, and the date matters for how it is sold.**
+  The **NO FAKES Act** was reintroduced **2026-05-20** as **S.4591** with House companion **H.R. 8915**,
+  advanced out of the **Senate Judiciary Committee on a unanimous vote 2026-06-18**, and was placed on
+  the Senate Legislative Calendar under General Orders **2026-06-24**. **No floor vote and no enactment
+  was found as of this pass.** The 2026 text's main new feature is a **DMCA-style counter-notification
+  process** letting users contest takedowns. Preemption is genuinely disputed in the sources: the
+  sponsors' own summary says it would preempt *future* state digital-replica laws, while Holland &
+  Knight reads Tennessee's ELVIS Act as surviving it. **Sell against the guild agreements, which are in
+  force, not against this bill, which is not.**
+- **Why that puts the obligation in the production office.** The in-force instrument in NA remains the
+  2026 WGA / SAG-AFTRA / DGA agreements requiring informed consent and compensation for digital
+  replicas (recorded above). Consent is not created in post — it is created when a performer is booked,
+  which means the **deal memo, the call sheet and the day-out-of-days are the system of record**, and
+  pass 17 measured that layer as having no permissive maintained base anywhere (73 combined stars across
+  eight repositories; see `repos/foundations.md` Tier 3).
+- **Opportunity — ranked second for NA, behind exposure control.** A **consent-and-replica ledger wired
+  into the booking artefacts** rather than bolted onto delivery: capture at call-sheet time, carry the
+  claim through the C2PA layer this KB already has (Pattern 4 / Pattern 8), and produce the per-performer
+  evidence trail a guild audit or a NO FAKES claim would demand. It is the same build as the Mexican
+  LFT/LFDA obligation in LATAM — **one build, two markets** — and it is a build, because the
+  pre-production layer has nothing to integrate with.
+- **Honest gap, stated rather than inferred.** California **AB 1836** (deceased personalities' digital
+  replicas) and **AB 2602** (contractual replica provisions) were searched for directly in this pass and
+  **the query returned nothing on either bill**; their current status is therefore **not verified here**
+  and must not be asserted to a client from this file. Next pass should query the California Legislature
+  bill pages by number rather than by topic.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1279,6 +1308,39 @@ mechanical, the per-title European-works classification is the defensible judgme
 open source computes it today**. France adds a second, narrower asset: a window engine whose rules are
 statutory, which is the only place that work can be sold as compliance rather than as operations.
 
+#### Development & pre-production — pass 17 (2026-11-26)
+
+- **The region's AI agenda for media is now explicitly a *sovereignty* agenda, and that is the hook for
+  this plane.** The **DPP's European Media Trends 2026** report names AI **and digital sovereignty**
+  together as the dominant forces reshaping media technology strategy. Separately, broadcasters are
+  weighing the EU AI Act against the fact that standard cloud DAM offerings route content through
+  third-party public AI engines that aggregate data on **extra-European servers**. Pre-production is
+  where a sovereignty argument is cheapest to satisfy: scripts are small, plain-text and
+  pre-publication, and the one Apache-2.0 artefact in the management tier
+  (`method-production-suite/method-scheduling`) is explicitly **local-first**. A **local-first,
+  self-hosted breakdown and scheduling layer over Fountain** is a sovereignty deliverable that needs no
+  model hosting at all.
+- **Where European media AI effort actually sits, measured rather than asserted.** An **imec-SMIT (VUB)
+  report of May 2026** maps the European media sector across compute, model and application layers and
+  finds activity concentrated in the **application layer — archive search, newsroom productivity and
+  audience-facing products** — while warning that **smaller and regional media risk being left behind.**
+  Pre-production tooling appears in none of those three buckets, which is consistent with this pass's
+  own measurement and is why the plane is open ground rather than a contested one.
+- **Regulatory direction of travel, with the vote attached.** The EU's **Apply AI Strategy** (launched
+  October 2025) targets sectoral adoption; the **European Parliament adopted its position on the AI Act
+  Omnibus simplification proposal by 569 votes to 45**; and Member States are pressing for an overhaul of
+  the **AVMSD**, with industry preference reported for **horizontal** regulation over expanding
+  sector-specific audiovisual rules. For this plane the practical consequence is that **no EU instrument
+  places a duty on pre-production** — the duties land at transparency and distribution. Do not sell this
+  plane in EMEA as compliance; sell it as sovereignty and cost.
+- **Market-structure constant worth repeating here.** EU providers represent only **16% of the EU SVoD
+  market** (2025 Commission outlook), so the European buyer for production tooling is the public
+  broadcaster and the independent producer, not a regional streamer of scale.
+- **Opportunity — ranked third for EMEA.** Below the Art. 13 catalogue reporter and the Art. 50
+  transparency work, both of which have deadlines. This one has none, which makes it a slower sale;
+  it is listed because the sovereignty framing converts it from "nice tooling" into an infrastructure
+  decision, and because the EBU/DPP bloc of small broadcasters buys collectively.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1903,6 +1965,39 @@ compliance-led: (1) a **per-jurisdiction policy engine** for windows and territo
 divergence documented by Latham makes necessary rather than nice; (2) a **rights model for short-form
 vertical**, where no incumbent schema fits and the volume is growing fastest. Neither has a deadline
 attached, which makes them harder to sell than the EMEA report and more valuable if won.
+
+#### Development & pre-production — pass 17 (2026-11-26)
+
+- **The only permissive, maintained agent in this entire plane is APAC-origin and APAC-shaped.**
+  [neopen/story-shot-agent](https://github.com/neopen/story-shot-agent) (PenShot, **Apache-2.0**, 248★,
+  pushed **2026-11-26**) turns a script into shot-level segments and video prompts, and its own
+  description names its target formats as **film, anime, short drama (短剧) and novels**. That is not a
+  Hollywood feature-film tool; it is built for the **microdrama** pipeline. Pass 17 found nothing
+  comparable from any other region.
+- **Why that is strategically significant rather than incidental.** Microdrama is the highest-volume
+  pre-production workload in the world — hundreds of episodes per title, shot on schedules where
+  breakdown and scheduling *are* the bottleneck. The **2026 APOS summit** (Hollywood Reporter) had AI as
+  its main theme and seated **streamers, Indian conglomerates, Chinese tech platforms and AI-and-microdrama
+  upstarts** at the same table, while **Variety** reports the **Asia-Pacific screen economy approaching
+  $200B with a monetisation gap defining the decade.** The volume is here, the tooling is being written
+  here, and it is being written permissively.
+- **Regulation remains three different problems, not one.** **Latham & Watkins (September 2026)** sorts
+  APAC AI regulation into divergent categories — binding risk-based frameworks (**South Korea's AI
+  Framework Act**, which pairs business obligations with support measures such as public data sharing and
+  R&D funding; **Vietnam**), and targeted rules (**China**). A third category is described only in
+  truncated form in the source and **is not recorded here as a finding.** The consequence for this plane
+  is unchanged from pass 16: the sellable asset is a **per-jurisdiction policy engine**, not a single
+  compliance mode.
+- **Public-broadcaster adoption is real but is pointed elsewhere.** The **Asia-Pacific Broadcasting Union
+  (March 2026)** reports public broadcasters in **Australia and Singapore** testing AI for **newsrooms,
+  archiving and verification** — none of which is pre-production. **Informed gap:** no APAC-specific
+  pre-production or production-management adoption datum was located in this pass, and no APAC regulation
+  touching the production office was found.
+- **Opportunity — ranked first for APAC in this plane, which is unusual.** Everywhere else in this file
+  APAC ranks behind EMEA. Here it leads, because this is the one plane where the region supplies both the
+  volume **and** the permissive starting point. The asset is a **breakdown-and-scheduling layer for
+  episodic short-form built on PenShot's Apache-2.0 base** — the segment where no incumbent schema fits
+  (pass 16's finding) and where the shot list, not the stripboard, is the governing artefact.
 
 ### LATAM
 
@@ -2649,6 +2744,54 @@ reporting obligation on a statutory clock with no open-source tool to meet it �
 written. If it stalls, the same code still serves EU clients, so the downside is bounded. That asymmetry
 is the reason to build before the vote rather than after it.
 
+#### Development & pre-production — pass 17 (2026-11-26): the obligation lands exactly where the tooling does not exist
+
+The Mexican reform is already recorded above. **What pass 17 adds is the *labour-law mechanics*, and they
+are what make this plane the most sellable in the region.**
+
+- **The consent duty is per-purpose, revocable, and it outlives the contract.** Under the reformed
+  **Federal Copyright Law Article 87**, image rights are extended to cover **voice and results generated
+  by AI systems**, and such use requires the **express consent of the holder for specific purposes, with
+  revocation possible for justified cause.** On the labour side — **the first time AI is addressed in
+  Mexico's Federal Labour Law** — performers **retain rights over AI-generated reproductions of their
+  likeness after the underlying contract has ended**, and employers and production companies **must
+  obtain explicit consent to use a worker's image or voice to train AI models or generate synthetic
+  performances.** AI-generated modification of **advertising** content featuring a performer requires
+  **separate, specific consent and remuneration.**
+- **Legislative path and dates, for a proposal that has to cite them.** Chamber of Deputies **2026-04-07**
+  (335 in favour, 129 abstentions); Senate **2026-04-15**; decree published in the **Diario Oficial de la
+  Federación 2026-05-14**; **in force 2026-05-15**.
+- **⚠️ Correction — do not quote penalties.** **Economic sanctions were removed from the final bill.**
+  The figures circulating in secondary coverage — up to **MX$586,000 (~US$34,000)**, and the
+  **1,000–5,000 UMA** ranges — belong to the **earlier 2025 draft**, not the enacted text. The Federal
+  Copyright Law's own pre-existing penalties still apply to improper use of protected content. A proposal
+  that cites a dropped fine as live exposure will be corrected by the client's counsel.
+- **Political risk attached to the same instrument.** The industry association **AMITI** has warned that
+  the measure may be technically unfeasible and **could complicate the 2026 USMCA review.** Mexico still
+  has **no general AI statute**: the broader **CONAIA** governance bill remained in Senate committee as of
+  late April 2026.
+- **The thesis, and it is the sharpest in this file.** Mexico is the hub of Spanish-language dubbing for
+  all of LATAM, and the reform **names dubbing actors, voice-over artists and locutors explicitly** as
+  protected performers. From 2026-05-15, consent for voice, likeness and **AI training** is a
+  per-purpose, revocable, post-contract obligation on the production company. **Consent is created at
+  booking, not at delivery** — so the system of record is the call sheet, the deal memo and the
+  day-out-of-days. Pass 17 measured that layer and found **73 combined stars across eight repositories,
+  the only broad-scope one GPL-3.0, and the only permissive ones at 1 and 8 stars.** The obligation has
+  landed precisely on the layer with no open tooling.
+- **This inverts the usual pattern in this KB.** The recurring finding across sixteen passes is that
+  regulatory pressure does not produce permissive supply. Here the regulation is **enacted, dated,
+  sector-specific and labour-side**, and the supply is not merely copyleft — **it is absent.** That is a
+  cleaner sale than a compliance report, because there is no incumbent to displace.
+- **Opportunity — ranked first for LATAM in this plane.** A **consent-capture layer inside the production
+  office**: performer consent recorded per purpose at booking, revocation tracked, scope carried forward
+  past wrap, and the evidence trail joined to the C2PA/provenance stack already in Patterns 4 and 8. It
+  is the same engine as the North American guild build (**one build, two markets**), and the Mexican
+  version has a statutory date to anchor the urgency. Regional reinforcement: **Uruguay** was the first
+  LATAM signatory of the Council of Europe AI framework convention; **Peru** published its AI law
+  regulation in September 2025; and **Aspen Digital's** regional recommendation is explicitly to build
+  **shared regional AI assets and attribution and licensing frameworks** — which is an argument for one
+  reusable consent asset rather than twelve bespoke ones.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -2866,3 +3009,33 @@ KB has recorded enough laundered market-research numbers to know what an untrace
 **The one number that should drive a proposal in this plane is 17, not a market size.** Seventeen member
 states with an in-force catalogue-composition duty, a published counting method, and no open-source
 implementation is a better qualified-pipeline estimate than any TAM figure available for this segment.
+
+## Market size — pass 17 addendum (2026-11-26): the pre-production segment, and a refusal with a number behind it
+
+**No market-size figure is given for pre-production and production-management software, and as in pass 16
+the refusal is the finding** — but this time a *supply-side* measurement can stand in for it, which is
+better than a TAM.
+
+The incumbent vendors in this segment (Movie Magic/Entertainment Partners, Showbiz, Gorilla,
+StudioBinder, Yamdu, SetHero, Croogloo; Wrapbook and Cast & Crew on payroll) are privately held or sit
+inside larger payroll businesses, and none reports this segment separately. Every figure located in this
+pass was for "AI in media" as a whole and could not be traced to this segment.
+
+**What can be stood behind, with its provenance:**
+
+| Figure | Value | Source and caveat |
+|---|---|---|
+| Combined stars, **all eight** open production-management repos | **73★** | Measured 2026-11-26 via GitHub `search/repositories`. **Primary.** Fewer than `betterfountain` (454★) alone |
+| Most-starred artefact in the plane | **14,989★**, and **Elastic License 2.0** | `waooAI/waoowaoo`, licence read from file. **Primary** — and it is not open source |
+| Permissive management-tier repos, by stars | **1★** and **8★** | `method-scheduling` (Apache-2.0), `CineSpend` (MIT). **Primary** |
+| Open repos for film residuals/payroll | **0** | `residuals calculation film`, confirmed in pass 5 and again here. **Primary** |
+| Mexican reform in force since | **2026-05-15** | Diario Oficial, published 2026-05-14. **Primary** |
+| NO FAKES Act status | **Not law**; Senate calendar 2026-06-24 | Committee vote 2026-06-18, unanimous. **Primary-adjacent** (congressional records) |
+| APAC screen economy | approaching **$200B** | Variety; regional total, **not this segment** |
+| NA share of global AI-in-media market | 33.6%–40.6% | Grand View 2024 / Precedence 2025; ranges by scope. Carried, not re-verified |
+
+**The number that should drive a proposal in this plane is 73, not a market size.** Seventy-three stars
+is the entire open-source answer to the question "what runs a production office", against an enacted
+Mexican consent duty, in-force US guild agreements, and a segment whose incumbents are wholly
+proprietary and own every file format downstream of the script. **A supply-side zero next to a dated legal
+duty is a stronger qualified-pipeline argument than any TAM this KB could have cited.**

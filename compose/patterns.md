@@ -2265,3 +2265,122 @@ that reduces research time by 70% and introduces one unsignalled miss per hundre
 value*, because the miss surfaces as an infringement claim after distribution. The signature is what
 makes the speed-up safe to sell, and it is also what keeps the pattern honest about the gradient: this
 recipe automates discovery and leaves judgment exactly where the open source leaves it.
+
+## Pattern 34 — Script-to-breakdown on a permissive spine (the plane's only safe architecture)
+
+**The problem.** A production wants AI-assisted script breakdown: scan the screenplay, tag cast, props,
+locations, wardrobe, VFX and stunts, and emit something the production office can schedule from.
+Commercial tools (Filmustage, Studiovity, RivetAI, Celtx, Blooper) do this; their accuracy claims are
+self-published and unverified. The client wants it in-house, on their own infrastructure, and reusable.
+
+**Why the obvious approach fails.** The temptation is to fork the one repository with the right scope.
+Every candidate blocks you: `waooAI/waoowaoo` (14,989★) is **Elastic License 2.0** — delivering it as a
+client service is the prohibited use; `koosoli/OpenShotDesigner` (47★) is **GPL-3.0**;
+`jpcastel88/Script-Breakdown-Skills` (6★) and `machina-exm/film-studio-skills` (186★) carry **no licence
+at all**; `ifrost/afterwriting-labs` (280★), which everything reaches for to render PDFs, is **also
+unlicensed.**
+
+**The architecture that survives a licence review.**
+
+```
+Screenplay (.fountain / .fdx / .pdf)
+   │
+   ├─ PARSE ─────────────► wildwinter/screenplay-tools (MIT, 29★, C++/JS/Python/C#)
+   │                       └─ or vilcans/screenplain (MIT, 187★, Python) for render
+   │                       └─ or rsdoiel/scripttool (AGPL-3.0, 46★) ONLY as a
+   │                          separate process for .fdx/.fadein/.osf import —
+   │                          AGPL: keep it behind a boundary, never linked in
+   │
+   ├─ STRUCTURE ────────► XucroYuri/how-to-make-script (MIT, 21★)
+   │                       screenplay rules/structure as agent-readable knowledge
+   │
+   ├─ BREAKDOWN (build) ─► your tagging layer: scene → cast/props/locations/VFX
+   │                       LLM extraction + a deterministic rule checker.
+   │                       THIS IS THE BUILD. Nothing permissive exists for it.
+   │
+   ├─ SHOT PLANNING ────► neopen/story-shot-agent (Apache-2.0, 248★)
+   │                       script → shot segments; the only permissive, maintained
+   │                       agent in the plane. LangGraph + LlamaIndex
+   │
+   └─ SCHEDULE ─────────► constraint solve (CP-SAT) over the breakdown.
+                           Reference only: mrrishit909/film-production-planner
+                           (0★, NO LICENCE) proves the approach — READ, DO NOT COPY.
+                           Export to Movie Magic / Excel; the client's office lives there.
+```
+
+**Licence boundaries, explicitly.** MIT/Apache/ISC components may be linked and shipped. `scripttool`
+(AGPL-3.0) runs as a **separate executable invoked over a CLI or socket** or is dropped entirely — .fdx
+import can be written against the published format instead. **Nothing unlicensed enters the tree**, which
+rules out afterwriting; use `screenplain` (MIT) for PDF output.
+
+**What to tell the client.** The parse and the shot planning are integration. **The breakdown tagging and
+the scheduler are a build**, because the open ecosystem stops at the script. Budget for that honestly —
+pass 17 measured the entire open production-management layer at **73 combined stars**.
+
+**Falsifiable check for the next media pass.** If a permissive, multi-contributor breakdown-to-schedule
+repository appears above ~25★, this pattern collapses into an integration and should be rewritten.
+
+---
+
+## Pattern 35 — Consent capture at the call sheet (the Mexican statute's missing system of record)
+
+**The trigger, with a date.** Mexico's reformed **Federal Copyright Law Art. 87** and **Federal Labour
+Law** amendments — published in the DOF **2026-05-14**, **in force 2026-05-15** — require **express,
+purpose-specific, revocable consent** to use a performer's voice, image or AI-generated likeness; the
+rights **survive the end of the contract**; explicit consent is required to use a worker's image or voice
+**to train AI models or generate synthetic performances**; and AI-modified **advertising** featuring a
+performer needs **separate consent and remuneration**. **Dubbing actors, voice-over artists and locutors
+are named explicitly** — which puts the Mexican dubbing industry, serving all of Spanish-speaking LATAM,
+directly in scope. In North America the 2026 WGA/SAG-AFTRA/DGA agreements impose a parallel
+consent-and-compensation duty. **One build, two markets.**
+
+**The insight that makes this a pattern rather than a policy memo.** Consent is **created at booking, not
+at delivery.** Every existing provenance tool in this KB attaches claims to an *asset* after it exists —
+C2PA at export, watermarking at encode. But the statutory artefact is a *permission*, granted before any
+asset exists, scoped to a purpose, and revocable afterwards. The place it is actually created is the
+**deal memo, the call sheet and the day-out-of-days** — and pass 17 measured that layer as having no
+permissive maintained base (eight repositories, 73 stars, the only broad-scope one GPL-3.0).
+
+**The build.**
+
+```
+BOOKING (the consent event — build this)
+  performer + role + purpose scope (dubbing? synthetic performance?
+  model training? advertising variant?) + territory + duration
+  + post-termination scope + revocation hook
+        │
+        │ consent record keyed to performer AND purpose, versioned,
+        │ revocation as a first-class state change (not a delete)
+        ▼
+CALL SHEET / DOOD  ── generated from the same model, so the consent
+  (schedule layer)    trail and the production record cannot diverge
+        │             Scope reference: method-production-suite/
+        │             method-scheduling (Apache-2.0, 1★) — breakdown,
+        │             stripboard, day-out-of-days, open file format.
+        │             Permissive and the right shape; 1 star, so treat
+        │             as a reference model, not a dependency.
+        ▼
+PRODUCTION ─► any synthetic voice/likeness step must present a valid,
+              unrevoked consent token for THAT purpose, or it fails closed
+        │     (gate it the way Pattern 15's rights-reservation gate works)
+        ▼
+PROVENANCE ─► C2PA manifest per asset carries the consent reference
+              (Pattern 4 + Pattern 8 — already built in this KB)
+        ▼
+EVIDENCE ───► per-performer trail: what was granted, for what purpose,
+              when, revoked or not. This is the deliverable a guild audit
+              or an Art. 87 claim actually asks for.
+```
+
+**Why it fails closed rather than logging.** A revocable right means a pipeline that merely *records*
+consent is non-compliant the moment consent is withdrawn. The gate must read current state at generation
+time. This is the same shape as Pattern 15's rights-reservation gate, and the same lesson applies:
+declaring is easy, honouring is the engineering.
+
+**⚠️ Do not cite penalties.** Economic sanctions were **removed from the enacted Mexican text**. The
+MX$586,000 and 1,000–5,000 UMA figures in circulation come from the **2025 draft**. Sell this on the
+in-force duty, the dubbing-sector exposure and the guild agreements — not on a fine that does not exist.
+
+**Why Globant wins this.** It needs production-office domain knowledge, LATAM statutory reading, and the
+C2PA stack this KB already has — and there is **no incumbent to displace**, because the open layer where
+the obligation lands is empty.

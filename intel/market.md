@@ -956,6 +956,34 @@ layer is **zero repos** (`audio ad insertion server stars:>=20` → 0, measured 
 - **Unverifiable claim flagged:** sources conflict on New York's synthetic-performer law (signed
   December 2025 and effective 2026-06-09 then repealed/replaced in May 2026, versus signed January
   2026). **Do not cite New York specifics without reading the statute.†**
+
+#### Pass 26 addendum (2026-11-26) — the energy & carbon plane: studio-led, unregulated, and free at the point of use
+
+- **There is no federal mandate, and that is the whole character of the region.** Unlike EMEA, nothing
+  in North America compels a production to measure its footprint. The driver is studio procurement: the
+  **Sustainable Entertainment Alliance** (the major studios; note the KB correction — "Sustainable
+  Production Alliance" is the former name) publishes the **Green Production Guide** and the **PEAR**
+  carbon calculator, **free for US productions**, covering the US and Canada.
+- **Opportunity — the voluntary-disclosure asymmetry.** Because nothing is mandatory, nothing is
+  standardised, and a studio cannot compare two suppliers' numbers. The sellable artefact is a
+  **comparable, auditable footprint per production** that survives a procurement review: PEAR-shaped
+  output, with the underlying per-asset data retained by the client. No open implementation competes —
+  `film production carbon footprint` returns **0 repositories**.
+- **Opportunity — the render farm, which is where the region's emissions actually are.** North America
+  hosts the heaviest concentration of VFX, animation and cloud-render capacity in the industry, and the
+  entire open-source surface for it is **one MIT plugin with 3 stars**
+  ([BreakTools/deadline-energy-cost-calculator](https://github.com/BreakTools/deadline-energy-cost-calculator)).
+  Deadline is standard in these facilities. Pattern 26.2 is a North America-first build for this reason.
+- **Opportunity — the AI-workload line item.** The region's studios are also its largest GenAI adopters,
+  and the only measurement tool with real adoption is [codecarbon](https://github.com/mlco2/codecarbon)
+  (MIT, 1,955★). Attaching an energy figure to an AI-assisted sequence is unbuilt everywhere and most
+  valuable where the AI spend is largest.
+- **⚠️ Informed gap.** No AI-adoption statistics for North American media *production sustainability*
+  were found, and the Green Production Guide shows **no sign of AI-specific standards**. Searched:
+  `AI media sustainability North America 2026 adoption Green Production Guide Sustainable Production
+  Alliance`. The trade-body surveys that would settle it are not public. **Treat regional AI-adoption
+  figures as unresearched, not as zero.**
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2004,6 +2032,57 @@ law rather than etiquette.**
   scheduling operations specifically**. EBU material covers newsroom, metadata, provenance and
   recommendation; the commercial/scheduling desk is unmeasured here. Treat EMEA traffic-desk adoption
   as **not researched, not absent**.
+
+#### Pass 26 addendum (2026-11-26) — the energy & carbon plane: the only region where this is enforced, and it is enforced by contract, not by law
+
+**This is the region that makes the plane commercial.** It is also the clearest instance in this KB of an
+obligation that binds harder than legislation while not being legislation at all.
+
+- **The binding mechanism is the commissioning condition.** The **BBC** makes **BAFTA albert**
+  certification mandatory for all new commissions and recommissions of TV broadcast content. **ITV**
+  requires full-length productions to complete certification *and* carry the required end-board logo as
+  an expected delivery item. **Channel 4** requires productions to use albert tools to measure and
+  report. Commentary across the industry makes the same observation: albert certification has become one
+  of the most consistently enforced requirements in UK commissioning **and it is not a legal obligation
+  at all**. A production that skips it does not get fined — it does not get delivered.
+- **📅 A dated trigger to watch, with a conflict left unresolved.** The current albert toolkit is being
+  replaced by a **Next Generation Toolkit** with a redesigned calculator. **albert's own figure for the
+  closure of the current toolkit is 16 December 2026**; one industry guide states 17 December. The BBC
+  stated the new version would launch 16 September 2026. **The conflict is recorded, not resolved —
+  confirm with albert before committing a delivery date.** Either way, every integration built against
+  the current toolkit expires within weeks, which is a buying trigger rather than a risk.
+- **The EU instrument arrived this year.** The **MEDIA Carbon Calculator** launched **13 February 2026**
+  at the European Film Market (Berlinale): EU-backed, **free**, accessed via **EU Login**, following the
+  **GHG Protocol** across **Scope 2 and Scope 3** (transport, waste, business travel, purchased goods).
+  It is the first single EU-backed tool for live-action project footprints and explicitly does **not**
+  replace national calculators — so EMEA now has *more* tools, not fewer, and **reconciliation between
+  them is a real client problem**. It was presented by Florian Reimann of **Yamdu**, a
+  production-management vendor already catalogued in `verticals/solutions.md`: that is the integration
+  surface.
+- **National frameworks remain in force alongside it:** **Carbon'Clap** and the Ecoprod label (France,
+  collective founded 2009), **Green Film** (Trentino Film Commission, Italy — present at the EFM
+  12–18 February 2026). Italy additionally reports rising green-production and cinema energy-efficiency
+  activity.
+- **CSRD/ESRS reaches the sector indirectly.** A Council of Europe report on the green transition in the
+  audiovisual sector concludes the CSRD affects AV **indirectly**, via obligations on all undertakings
+  large enough to fall in scope; AV actors meeting the large-undertaking threshold report directly.
+  ⚠️ **Scope and timing have been amended since those publications (Omnibus) and were not verified in
+  this pass — do not quote a CSRD threshold to a client from this KB.**
+- **A second regulatory edge, and it is the one nobody in media is watching:** EU **green-claims** rules
+  taking effect **September 2026** bar generic environmental claims such as "eco-friendly" without
+  recognised proof. A broadcaster or streamer that markets a "carbon-neutral" production or a "green"
+  streaming tier is making exactly such a claim. **The compliance artefact is the evidence trail behind
+  the claim** — which is the same artefact Pattern 26.3 produces.
+- **Opportunity — the permissive institutional asset nobody uses.**
+  [ABC-TransitionBasCarbone/bilan-carbone](https://github.com/ABC-TransitionBasCarbone/bilan-carbone)
+  is **MIT**, pushed **2026-11-26**, and has **5 stars** — code from the body that owns France's official
+  corporate carbon methodology. For a French or francophone engagement this is a credible, licence-clean
+  starting point that no competitor has noticed.
+- **Opportunity — ESRS machine-readability.** [esrs-xbrl-parser](https://github.com/aimabel-ai/esrs-xbrl-parser)
+  (**ISC**, 12★) is the only permissive, correctly-licensed ESRS/XBRL piece found; the best-starred
+  alternative, [report-analyst](https://github.com/climateandtech/report-analyst) (42★, pushed today),
+  has **no licence file at all**. An AV group that must file ESRS has no adoptable open tool.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3001,6 +3080,41 @@ open-source story.**
   leaders (**Singapore, Japan, South Korea**) but **no specific APAC traffic/ad-sales vendors**.† The
   incumbent vendor map for APAC broadcast traffic is **unresearched** — do not assume WideOrbit and
   Imagine hold the region as they do North America.
+
+#### Pass 26 addendum (2026-11-26) — the energy & carbon plane: albert's methodology travelled here, and the regulation arrives from outside the sector
+
+- **Australia is the region's developed case, and it is an albert derivative.** **Sustainable Screens
+  Australia** partnered with BAFTA albert and **localised its carbon calculator for the Australian
+  market**, then launched the country's first **Sustainability Supervisor** training programme in 2025,
+  backed by **Netflix** and **Screen Australia**. Production-level practice is visible and specific: the
+  Melbourne feature *Wilderness* tracked emissions using **HVO renewable diesel** and battery-powered
+  lighting and generators; **Disney Studios Australia** was recognised at the **2026 Global Production
+  Awards** as the first studio in Australia to install solar.
+- **Korea and Japan are regulated, but not as media.** Korea announced in **July 2026** that large
+  companies must align with the **ISSB's IFRS S1 and S2** standards from **FY27**. Japan's **GX-ETS**
+  has entered its mandatory phase, covering an estimated **300–400 companies** by direct CO2 emissions.
+  Neither instrument is sector-specific, so for a large Korean or Japanese broadcaster the driver is
+  **group-level sustainability reporting**, not a commissioning condition — a different buyer, in
+  finance rather than production.
+- **Opportunity — the methodology-localisation pattern, now proven.** Australia demonstrated that
+  albert's framework can be re-based onto local emission factors and accepted locally. That is a
+  repeatable engagement shape for any APAC market with a growing screen sector and no national
+  calculator, and it is **data and methodology work, not platform work** — which is fortunate, because
+  the platform does not exist to fork.
+- **Opportunity — ISSB-shaped disclosure for media groups.** Korea's FY27 date is a hard planning
+  horizon announced in 2026. A media group needs its energy and emissions data assembled and auditable
+  before then, and the open toolchain for the infrastructure half ([kepler](https://github.com/sustainable-computing-io/kepler),
+  [scaphandre](https://github.com/hubblo-org/scaphandre), [cloud-carbon-footprint](https://github.com/cloud-carbon-footprint/cloud-carbon-footprint))
+  is permissive and mature.
+- **Regional scale, for sizing a practice:** the Asia Pacific Screen Forum projects the regional screen
+  economy at **$179 billion in 2026**, rising to **$200 billion by 2031**, and its 2026 edition carries
+  an explicit sustainability theme.
+- **⚠️ Informed gaps, stated rather than left silent.** Searches for sustainable *film production*
+  practice in **Korea and Japan** returned **regulation only and nothing sector-specific**; any claim
+  about adoption in those two markets would be invention. The same search surfaced unrelated
+  "carbon film" manufacturing reports (heating film, protective film) — **a false-friend query class to
+  avoid**: use *screen production* or *audiovisual*, never *film*, when searching this plane in APAC.
+
 ### LATAM
 
 - **Mexico now has the region's first sector-specific AI law for entertainment.** Amendments to the
@@ -4023,6 +4137,45 @@ something that already exists locally.
   not traffic-desk practice. Treat it as **unresearched, not absent**. (2) One frequently surfaced
   LATAM "AI impact 2026" source **ships unfilled `[VERIFY]` placeholders where its adoption statistics
   should be — do not cite it**, and treat any figure traceable to it as fabricated.
+
+#### Pass 26 addendum (2026-11-26) — the energy & carbon plane: self-regulation, private offsetting, and the emptiest open-source layer in the plane
+
+- **No regulation was found, and the search was explicit.** Queried in Portuguese and Spanish
+  (`produção audiovisual sustentável LATAM 2026 huella de carbono cine Brasil regulación`), the Brazilian
+  picture is **self-regulation and private certification**, with no sectoral carbon rule for audiovisual
+  production. ⚠️ **This is an informed gap, not a verified absence**: the authoritative check would be
+  **ANCINE**, the Ministry of Culture, and public-procurement policy for audiovisual commissioning, and
+  **this pass did not reach those sources.** Treat as "no sectoral mandate found", not "no mandate
+  exists".
+- **What exists instead is a voluntary layer with real volume.** **Grupo Globo** has run a
+  *Guia de Produções Verdes* since **2023** — fleet electrification, replacing generators on live
+  programmes — making it the region's largest adopter, self-authored and uncertified. **BrLab 2026**
+  closed its 15th edition with a *carta-manifesto* for a more sustainable audiovisual industry,
+  positioning Brazil and Latin America as active agents of that change. Private vendors supply the rest:
+  **Eccaplan's Set Neutro** seal for offsetting shoot emissions nationwide, **Set Sustentável** reporting
+  **>650 t CO2** offset via **Carbonext**, **Publicis Production's A.L.I.C.E.** mapping campaign
+  emissions since 2023, and the **FAM** festival (Florianópolis) offsetting **50 t CO2** in its 30th
+  edition.
+- **Read the category carefully before proposing anything:** this market buys **offsetting and
+  measurement services**, not certification against a public standard. The artefact that sells is a
+  **credible inventory** — the number itself, defensible to a brand or a co-producer — rather than a
+  compliance pack aimed at a certifier, which is what EMEA buys.
+- **Opportunity — the co-production compliance bridge, and it is the strongest play in the region.** A
+  LATAM producer in a European co-production inherits the **EMEA** obligation: albert certification for a
+  UK commissioner, or the **MEDIA Carbon Calculator** for an EU-backed project. The deliverable is a
+  LATAM-side data pack that satisfies a European calculator built on European assumptions and emission
+  factors. **That is an emission-factor and methodology problem, and nobody is selling it.**
+- **Opportunity — the green-claims exposure that travels.** The EU green-claims rules effective
+  **September 2026** bind the claim, not the claimant's address. A LATAM production or campaign marketed
+  as carbon-neutral into an EU market needs the evidence trail behind the claim (Pattern 26.3), and the
+  offsetting seals above are **not** that evidence.
+- **⛔ The measured zero, and a trap worth recording.** The open-source layer here is the emptiest in the
+  plane, and the totals actively mislead: `huella de carbono` returns **467** repositories and
+  `pegada de carbono` **177**, yet **every first-page result is a student or personal project at 0–4
+  stars, mostly unlicensed, and not one is audiovisual.** The only LATAM-adjacent, correctly-licensed
+  repos found anywhere in the plane are generic. A pass that reported those totals as coverage would have
+  called LATAM the best-served region here; it is the worst.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -4661,3 +4814,61 @@ broadcaster that is not Fox or NBCU cannot buy what Fox and NBCU built — and t
 the same function is a 2-star repo whose billing step is a roadmap item. **That asymmetry is the
 opening, and it is why the sellable artefact is the reconciliation and evidence layer (Patterns 25.1,
 25.2, 25.4) rather than an agentic sales platform.**
+
+---
+
+## Market size — pass 26 addendum (2026-11-26): the carbon-software segment, and an order-of-magnitude disagreement
+
+**⛔ The refusal first: there is no media-specific figure for this segment.** No analyst sizing of carbon
+or sustainability software *for media and entertainment* was found. Anyone quoting one is sub-segmenting a
+general-purpose carbon-software forecast without saying so. **Stated as an informed gap, not estimated.**
+
+And the general-purpose figures cannot be averaged, because they disagree by **more than three orders of
+magnitude** — a wider spread than the 100× dubbing spread recorded in pass 12, and the widest in this KB:
+
+| Source | Figure | Note |
+|---|---|---|
+| IMARC | **USD 22.2 M** (2025) | Narrowest definition found; three orders of magnitude below the high end |
+| Astute Analytica | **USD 1.2 B** (2025) → USD 10.1 B (2035) | — |
+| Verdantix / GII, *Carbon Accounting Software Platforms* | **USD 1.93 B** (2026) → USD 4.12 B (2032), **13.54% CAGR** | Named platform category; the most conservatively-scoped multi-year series |
+| Meticulous Research, *Carbon Management Software* | **USD 2.4 B** (2026), **16.8% CAGR** to 2036 | **Includes ESG reporting** as a segment — broader than carbon accounting alone |
+| P&S Intelligence | **USD 14.5 B** (2025) | — |
+| Fortune Business Insights | **USD 27.51 B** (2026) → USD 136.44 B (2034) | High end; broadest scope |
+| Technavio | **32.1% CAGR**, 2025–2030 | Growth rate only, no base published in the result |
+| MarkNtel Advisors | **25.73% CAGR**, 2026–2032 | Growth rate only |
+
+### What can be stood behind
+
+**For the narrow software category, roughly USD 1.9–2.4 B in 2026, growing in the mid-teens.** That is
+the band where two independently-scoped sources (Verdantix/GII and Meticulous) land, and it is the only
+defensible quotation here. The spread above the band comes from folding in broader carbon management and
+ESG reporting; the figure below it comes from a far narrower definition. **Quote the band, name the
+source, and say which definition it uses** — the same discipline pass 11 applied to the scope artefact.
+
+**The methodological point, and it recurs across this KB:** where a market is defined by a *regulation*
+rather than by a *product*, analyst scope boundaries move with each firm's reading of the regulation, and
+the forecasts stop being comparable. Pass 11 (healthcare, CPT at 18.50 vs 14 USD) found conflicting
+secondaries for a single published price. This is the same defect one level up — and unlike MedDRA, whose
+rates are published by the official source, **no authoritative body publishes a size for this market at
+all.**
+
+### Global players — pass 26 addendum (the carbon & footprint layer)
+
+| Player | Role | Position | Limit for a media client |
+|---|---|---|---|
+| **BAFTA albert** | Certification body (UK, used internationally) | **Holds the enforced mandate.** BBC, ITV and Channel 4 all require its tooling or certification by contract | Closed web tool; no API or open schema found. Current toolkit closes **16 Dec 2026** (albert's figure; an industry guide says 17 Dec — conflict unresolved) |
+| **European Commission / Creative Europe MEDIA** | Public instrument (EMEA) | **MEDIA Carbon Calculator**, launched 13 Feb 2026 at the EFM: free, EU Login, GHG Protocol Scope 2 + 3 | Does not replace national calculators, so it **adds** a reconciliation burden rather than removing one |
+| **Sustainable Entertainment Alliance** | Studio consortium (North America) | Owns the **Green Production Guide** and the free **PEAR** calculator for US productions | Voluntary; no comparability requirement between suppliers |
+| **DIMPACT** (Carnstone + University of Bristol) | Membership modelling tool (Global) | The streaming-side reference. The Carbon Trust work on DIMPACT produced the sector's most-quoted figure, **~55 gCO2e per hour** of European video streaming | Membership-gated; its own representatives concede consistent cross-supply-chain measurement is unsolved |
+| **Greening of Streaming** | Industry body (Global) | Hardware-measurement counterweight to DIMPACT's modelling: the **REM** platform and **OWL**, a live measurement bench for streaming **and AI workloads**; convenes the **LESS Accord** | Membership; measurement standard still in formation |
+| **Accedo** (Ecoflow / Ecoflow X) | Commercial vendor (Global) | Streaming-application energy efficiency, named in the 2026 standardisation effort | Proprietary |
+| **EcoProd** (Carbon'Clap) · **Green Film** (Trentino) · **Sustainable Screens Australia** | National/regional bodies | The national calculator and label layer: France, Italy, Australia — the Australian tool is a **localised BAFTA albert calculator** | Each with its own factors and framework: the fragmentation *is* the client problem |
+| **Eccaplan** (Set Neutro) · **Set Sustentável** · **Publicis Production** (A.L.I.C.E.) | Private vendors (LATAM) | Offsetting seals and campaign-emissions mapping; Set Sustentável reports >650 t CO2 offset via Carbonext | Sell offsetting and services, **not** certification against a public standard |
+| **Green Software Foundation** · **Green Web Foundation** | Standards and open-source bodies (Global) | Produce the plane's permissive toolchain: SCI (**ISO/IEC 21031**), Carbon Aware SDK, Impact Framework, co2.js | Generic by design — **nothing in their output knows what a title, a render or a stream is** |
+
+**The structural observation for positioning.** Every player holding a *mandate* is closed, and every
+player shipping *permissive code* is sector-agnostic. There is no overlap, and the gap between them is
+exactly one layer wide: **the connector that turns a media company's own operational data into the
+evidence a certifier or a regulator will accept.** That layer is permissively licensable, client-owned,
+has no incumbent, and is the subject of Patterns 26.1 to 26.6. It is also the reason this plane's
+open-source count for the mandated task is zero without the opportunity being zero — see **P39**.

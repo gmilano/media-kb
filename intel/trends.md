@@ -2667,3 +2667,138 @@ And a seventh data point for the **content-licence** half of the law: after CPT 
 content, pass 11 healthcare), BXF adds a new category — **free of charge, published on GitHub, and
 still All Rights Reserved.** Easier to get wrong than a paywall, because nothing about fetching it
 feels like a licence event.
+
+---
+
+## Pass 26 trends (2026-11-26) — the energy, carbon & environmental-footprint plane
+
+### 1. The hardest-enforced obligation in this KB has zero open implementations, and the reason is structural
+
+Measured, not asserted. On 2026-11-26 the GitHub search API returns **0 repositories** for
+`film production carbon footprint` and **0** for `albert carbon calculator`. Against that: the **BBC**
+makes BAFTA albert certification mandatory for all new commissions and recommissions of TV broadcast
+content; **ITV** requires certification plus the end-board logo as a delivery item; **Channel 4** requires
+productions to use albert tools. No statute in this KB is enforced this reliably — and the open-source
+total is nil.
+
+Every earlier pass would have predicted supply here. Pass 11 (healthcare) established that permissive
+open source appears when the **knowledge content is freely licensed**, and in this plane it largely is:
+Ember and Green Web Foundation intensity data under **CC-BY-SA**, Electricity Maps under **ODbL**, USEEIO
+factors public. Free content plus a hard mandate, and still zero. **The law needed a third condition,
+and this plane isolated it — see P39 in `compose/patterns.md`.** The short form: the obligation is
+discharged by **attestation to a single private gatekeeper**, not by producing a computable artefact. You
+cannot implement albert certification; you can only submit to it.
+
+The control case is in the same plane and it is clean. Where the deliverable *is* a number or a document
+— SCI (**ISO/IEC 21031**), CSRD/ESRS filings, cloud footprints, per-pod energy — the layer is populated
+and permissive: **16 adoptable repos, six of them above a thousand stars.** Same industry, same year,
+same freely-licensed inputs, two different kinds of deliverable, two opposite outcomes.
+
+### 2. The substrate is healthy and the media-specific layer is one repo with three stars
+
+The plane's open toolchain is institutional and alive: [electricitymaps-contrib](https://github.com/electricitymaps/electricitymaps-contrib)
+4,057★ (AGPL-3.0), [scaphandre](https://github.com/hubblo-org/scaphandre) 2,018★ (Apache-2.0),
+[codecarbon](https://github.com/mlco2/codecarbon) 1,955★ (MIT), [kepler](https://github.com/sustainable-computing-io/kepler)
+1,605★ (Apache-2.0, pushed today), [cloud-carbon-footprint](https://github.com/cloud-carbon-footprint/cloud-carbon-footprint)
+1,054★ (Apache-2.0), [carbon-aware-sdk](https://github.com/Green-Software-Foundation/carbon-aware-sdk)
+600★ (MIT).
+
+And the complete media-native intersection is
+[BreakTools/deadline-energy-cost-calculator](https://github.com/BreakTools/deadline-energy-cost-calculator):
+**MIT, 3 stars, last push 2025-09-17**, a Deadline render-farm plugin. That is not an excerpt of a list.
+It is the list.
+
+**This is pass 6's "misallocated" shape, now in a plane with a real regulatory driver.** The agent layer
+is neither missing (pass 8) nor vendor-captured (pass 15): it is pointed at the wrong workload. Seven
+agents found, five permissive, most pushed within weeks, totalling **~293 stars** — of which **256 are
+one tool that measures a coding assistant**. Not one reads a call sheet, a render queue, a transcode
+ladder, a playout schedule or a CDN log.
+
+### 3. A licence obligation that collides with DRM — new, and it reaches the whole delivery layer
+
+[co2.js](https://github.com/thegreenwebfoundation/co2.js) is the natural substrate for any per-stream
+carbon metric. GitHub reports `NOASSERTION`; its `LICENSE` is **12,678 B** where canonical Apache-2.0 is
+11,357 B, and reading it shows four licences stacked: **Apache-2.0** code, **CC-BY-SA** Ember data,
+**CC-BY-SA** Green Web Foundation marginal data (from the UNFCCC **IFI TWG** dataset), and Electricity
+Maps grid data under **ODbL** — which requires attribution, **share-alike on derivative databases**, and
+**"provide unrestricted versions if using DRM."**
+
+This KB says **`DRM` 53 times, `Widevine` 13, `PlayReady` 12.** DRM is the default state of commercial
+media delivery. So the most obvious build in the plane — compute per-title emissions, surface them in a
+DRM-protected service — triggers an ODbL parallel-distribution duty that **no SPDX field, badge or
+source-tree SBOM scan can detect**, because the repo-level answer is "Apache-2.0" and the repo-level
+answer is wrong.
+
+This is the **third** confirmation of the pass-8 law that *the licence can belong to the compilation, not
+the repository* (after `chromaprint` and `musicbrainz-server`), and the **first where the compilation's
+duty conflicts with a technical norm of the industry** rather than merely adding copyleft.
+[green-metrics-tool](https://github.com/green-coding-solutions/green-metrics-tool) is the fourth: a
+**35,429 B "License Index"** stacking AGPL-3.0 source, co2.js's Apache terms and Electricity Maps ODbL.
+
+**And the inversion worth carrying to the other eleven industries:** in this plane the *code* is
+permissive and the *facts* are share-alike. Licence risk enters through a **dataset**, not a framework —
+the exact inverse of pass 1's finding for M&E platforms.
+
+### 4. Standards bodies keep publishing standards without an OSI licence
+
+[Green-Software-Foundation/sci](https://github.com/Green-Software-Foundation/sci) has 298 stars and is
+**not open source**. Its licence lives at **`LICENCE.md`** — British spelling, which is why a
+`LICENSE*`-only probe reports "no licence" — and the 2,347 B file is a Joint Development Foundation
+"AS IS" materials grant under **W3C patent mode**: warranty disclaimers and a patent pledge, with **no
+copyright grant to reproduce or modify**. The specification is **ISO/IEC 21031**: implement the standard,
+do not vendor the repo.
+
+Second body in this KB to do this, after `w3c-cg/tdm-reservation-protocol` (pass 5) — and **the third
+reason to keep `LICENCE` with a C in every licence probe**, alongside pass 8's `license.txt` and
+`COPYING.md` corrections.
+
+### 5. The vibe-coded-compliance pattern, and the trap that comes with it
+
+`ghg protocol scope 3 accounting` returns 16 repositories and **eight of the first eight have 0 stars**,
+most created or pushed within six months. `esg reporting agent` returns 62 with the same profile. A
+regulation creates visible demand, dozens of single-author repos appear within weeks, none acquires
+users. **Counting repositories here measures enthusiasm, not supply.**
+
+Two traps came with it, both recorded so a future pass does not repeat them:
+
+- **The false friend.** [crbnos/carbon](https://github.com/crbnos/carbon) has **2,863 stars**, was pushed
+  today, and ranks first for `carbon mcp server` — and it is a **manufacturing ERP/MES/QMS named
+  "Carbon"** with no relation to emissions. By stars alone it becomes this plane's flagship. The sharpest
+  false friend since `eidr` and `isan` in pass 5.
+- **False abundance in two languages.** `huella de carbono` returns **467** repositories and
+  `pegada de carbono` **177** — and every first-page result is a student or personal project at 0–4
+  stars, mostly unlicensed, **none audiovisual**. Pass 8's rule holds: **read the results, not the
+  total.** Trusting these numbers would have made LATAM the best-covered region in the plane; it is the
+  emptiest.
+
+### 6. A dated trigger: the mandated toolkit is being replaced within weeks
+
+albert's current toolkit is closing — **16 December 2026** by albert's own figure, **17 December**
+according to one industry guide (**conflict recorded, unresolved; confirm with albert**) — and is being
+replaced by a **Next Generation Toolkit** with a redesigned calculator, which the BBC said would launch
+16 September 2026. Meanwhile the **MEDIA Carbon Calculator** (EU-backed, free, EU Login, GHG Protocol
+Scope 2 + 3) launched **13 February 2026** at the EFM and explicitly does **not** replace national
+calculators.
+
+**So the number of calculators a European producer may face went up this year, not down**, and the
+incumbent one expires within weeks. Reconciliation between albert, the MEDIA calculator, Carbon'Clap and
+Green Film is a live client problem with a date attached — the most concrete buying trigger this pass
+found.
+
+### 7. Where the emissions are, there is no measurement tool at all
+
+`video encoding energy efficiency` returns **1** repository and it is a 2022 bibliography.
+`broadcast energy consumption` returns **1**, an Arduino mains monitor last pushed 2014-11-25. Encoding,
+transcoding and delivery are the largest energy lines in a streaming business, and the open-source
+measurement surface for them is **empty** — while the generic cloud and Kubernetes layer beneath them is
+mature and permissive. The instruments exist; nothing points them at the workload.
+
+### 8. The AI footprint is becoming a broadcaster deliverable before anyone has built the tool
+
+The 2025 **Green Animation Guide** (EcoProd) already documents a German studio appending an **AI
+traceability annex** to production reports for broadcasters, and recommends smaller fine-tuned models.
+**Greening of Streaming's OWL** bench explicitly measures streaming **and AI workloads**. So the
+disclosure is beginning to be *asked for* — and the only measurement tool with real adoption,
+[codecarbon](https://github.com/mlco2/codecarbon) (MIT, 1,955★), is generic, with nothing mapping its
+output to a broadcaster-shaped deliverable. **This is the plane's clearest unbuilt product** (Pattern
+26.4), and it sits exactly where this KB's own industry is heading.

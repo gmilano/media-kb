@@ -3004,3 +3004,95 @@ The sole as-run artefact on GitHub is [alochbaum/CheckAsRun](https://github.com/
 recorded for completeness only. Contaminated totals that look like coverage and are not:
 `broadcast traffic` 163/**0 relevant**, `radio traffic` 246/**0**, `rate card` **2,013**/**0**,
 `traffic billing` 136/**0**, `advertising sales management` 51/**0**.
+
+---
+
+## Energy, carbon & environmental-footprint foundations — added 2026-11-26 (pass 26)
+
+All rows verified 2026-11-26: **21 slugs probed by `git ls-remote`, 21/21 resolve, 0 absent.** Stars,
+forks and last-push via `search/repositories`; every `NOASSERTION` resolved by reading the licence file
+and counting its bytes.
+
+**The shape of this layer, stated before the table.** This plane inverts the usual finding of this KB.
+Here the *substrate is healthy, institutional and largely permissive* — the Green Software Foundation,
+the Green Web Foundation, Hubblo, Boavizta, PowerAPI and Electricity Maps between them ship a complete
+measurement toolchain, much of it pushed this week. What is missing is not infrastructure. It is
+**everything media-specific above it**: one 3-star plugin, and nothing else.
+
+### Measurement and metrology
+
+| Repo | Stars | Forks | Licence | Last push | Role |
+|---|---|---|---|---|---|
+| [hubblo-org/scaphandre](https://github.com/hubblo-org/scaphandre) | 2,018★ | 133f | **Apache-2.0** | 2026-07-19 | Host-level power metrology via RAPL. The most-starred permissive measurement tool here; 4 months quiet |
+| [mlco2/codecarbon](https://github.com/mlco2/codecarbon) | 1,955★ | 360f | **MIT** | 2026-11-22 | Per-job compute emissions. The standard way to attach a number to a GenAI render, fine-tune or inference batch |
+| [sustainable-computing-io/kepler](https://github.com/sustainable-computing-io/kepler) | 1,605★ | 294f | **Apache-2.0** | **2026-11-26** | Per-pod energy attribution in Kubernetes via eBPF. The right instrument for a containerised transcode or render farm |
+| [powerapi-ng/powerapi](https://github.com/powerapi-ng/powerapi) | 255★ | 45f | **BSD-3-Clause** | 2026-11-24 | Software power-meter toolkit for building your own middleware. The most permissive band in the plane |
+| [green-coding-solutions/green-metrics-tool](https://github.com/green-coding-solutions/green-metrics-tool) | 260★ | 50f | **AGPL-3.0 source + bundled ODbL data + Apache (co2.js)** — 35,429 B "License Index" read | **2026-11-26** | Repeatable measurement lab for a whole pipeline. Three licences in one dependency; see the licence note below |
+
+### Emission factors, grid intensity and embodied carbon
+
+| Repo | Stars | Forks | Licence | Last push | Role |
+|---|---|---|---|---|---|
+| [electricitymaps/electricitymaps-contrib](https://github.com/electricitymaps/electricitymaps-contrib) | 4,057★ | 1,073f | **AGPL-3.0** | 2026-11-26 | The grid-intensity source the rest of the ecosystem re-publishes. Consume the data under its own terms; **do not vendor the application** |
+| [thegreenwebfoundation/co2.js](https://github.com/thegreenwebfoundation/co2.js) | 499★ | 73f | **Apache-2.0 code + CC-BY-SA + ODbL data** — 12,678 B read | 2026-11-17 | Bytes → gCO2e via the Sustainable Web Design and 1-byte models. **The single most useful repo in this plane for a streaming business, and the one with the sharpest licence gate** |
+| [thegreenwebfoundation/grid-intensity-go](https://github.com/thegreenwebfoundation/grid-intensity-go) | 84★ | 10f | **Apache-2.0** | 2026-05-11 | Grid intensity as a Go library and Prometheus exporter — the shape you want on a CDN or edge node |
+| [Boavizta/boaviztapi](https://github.com/Boavizta/boaviztapi) | 102★ | 45f | **AGPL-3.0** | 2026-11-24 | **Embodied** (manufacturing) carbon of hardware — devices, servers, the half that operational tools silently omit. Copyleft |
+| [agirgol/carbon-accounting-dotnet](https://github.com/agirgol/carbon-accounting-dotnet) | 0★ | — | **MIT** | 2026-08-17 | GHG Protocol + **ISO 14064-1** Scope 1/2/3 in .NET with a versioned, source-cited factor catalogue. Zero adoption, correct standards |
+
+### Modelling, reporting and reduction
+
+| Repo | Stars | Forks | Licence | Last push | Role |
+|---|---|---|---|---|---|
+| [cloud-carbon-footprint/cloud-carbon-footprint](https://github.com/cloud-carbon-footprint/cloud-carbon-footprint) | 1,054★ | 310f | **Apache-2.0** | 2026-04-23 | Cloud billing exports → emissions estimates across AWS/Azure/GCP. 7 months quiet; still the only credible open multi-cloud estimator |
+| [Green-Software-Foundation/carbon-aware-sdk](https://github.com/Green-Software-Foundation/carbon-aware-sdk) | 600★ | 113f | **MIT** | 2026-11-04 | Move a workload to a cleaner time or region. The *reduce* layer, and the only part of it with real adoption |
+| [Green-Software-Foundation/if](https://github.com/Green-Software-Foundation/if) | 184★ | 54f | **MIT** | 2026-10-24 | Impact Framework — a manifest describing a pipeline becomes a calculable footprint. The natural place to encode a media delivery chain |
+| [GreenScheduler/cats](https://github.com/GreenScheduler/cats) | 82★ | 23f | **MIT** (1,076 B) | **2026-11-26** | Climate-Aware Task Scheduler: a CLI that defers a job to a low-carbon window. Pushed today |
+| [Green-Software-Foundation/sci-otel](https://github.com/Green-Software-Foundation/sci-otel) | 10★ | — | **Apache-2.0** | 2026-11-18 | SCI as an OpenTelemetry vocabulary — how a carbon figure becomes an ordinary metric beside bitrate and rebuffer ratio |
+| [ABC-TransitionBasCarbone/bilan-carbone](https://github.com/ABC-TransitionBasCarbone/bilan-carbone) | 5★ | — | **MIT** (1,081 B, `master`) | **2026-11-26** | The **Association Bilan Carbone** — owner of France's official corporate carbon methodology — shipping MIT code, pushed today, at 5 stars |
+| [aimabel-ai/esrs-xbrl-parser](https://github.com/aimabel-ai/esrs-xbrl-parser) | 12★ | — | **ISC** (746 B) | 2024-12-17 | Parses **ESRS** XBRL taxonomies. A permissive licence band not previously recorded in this KB; dormant ~23 months |
+
+### The media-native layer, in full
+
+| Repo | Stars | Licence | Last push | Note |
+|---|---|---|---|---|
+| [BreakTools/deadline-energy-cost-calculator](https://github.com/BreakTools/deadline-energy-cost-calculator) | **3★** | **MIT** (1,067 B) | 2025-09-17 | An AWS/Thinkbox **Deadline** event plugin that computes the energy and cost of a render job. **This is the entire media-native intersection of this plane.** Deadline is standard across VFX and animation facilities, so the installed base under this 3-star plugin is large and nobody has built on it |
+
+That table is not an excerpt. **One repo, three stars, fifteen months since its last push** — against a
+substrate of six repos with over a thousand stars each.
+
+### ⚠️ Licence notes that no SBOM scan will produce
+
+1. **co2.js is a four-licence compilation.** `LICENSE` is **12,678 B** where canonical Apache-2.0 is
+   11,357 B; the surplus is data licensing. Code **Apache-2.0**; Ember average grid-intensity data
+   **CC-BY-SA**; Green Web Foundation marginal-intensity data **CC-BY-SA** (derived from the UNFCCC
+   **IFI TWG** harmonised dataset); Electricity Maps annual grid data **ODbL**, which obliges you to
+   **attribute**, to **share-alike derivative databases**, and to **"provide unrestricted versions if
+   using DRM."** The GitHub API reports `NOASSERTION`; a repo-level reading reports "Apache-2.0"; both
+   miss the obligation. **In a plane where `DRM` appears 53 times in this KB, that clause is the gate**
+   — Pattern 26.1 draws it explicitly.
+2. **green-metrics-tool is a three-licence compilation**: AGPL-3.0 source (licence text at line 652 of
+   the index), bundled co2.js Apache terms (line 7), bundled Electricity Maps **ODbL** (line 673).
+3. **`Green-Software-Foundation/sci` is not open source.** `LICENCE.md` — **British spelling**, which is
+   why a `LICENSE*`-only probe reports "no licence" — is a 2,347 B Joint Development Foundation "AS IS"
+   materials grant with **W3C patent mode**: warranty disclaimers and a patent pledge, and **no
+   copyright grant to reproduce or modify**. The specification is **ISO/IEC 21031**; implement the
+   standard, cite it, and do not vendor the repo. This is the second body in this KB to publish a
+   standard without an OSI licence (after `w3c-cg/tdm-reservation-protocol`, pass 5) and the **third
+   confirmation that `LICENCE` with a C belongs in every licence probe.**
+4. **Copyleft is concentrated in the data layer**: Electricity Maps (AGPL-3.0), Boavizta (AGPL-3.0),
+   green-metrics-tool (AGPL-3.0). The *code* layer is permissive and the *facts* layer is share-alike —
+   the exact inverse of the pass-1 finding for M&E platforms, and it means the licence risk here enters
+   through a dataset, not through a framework.
+
+### Measured gaps — searched and absent, stated so silence is not read as coverage
+
+| Query (GitHub `search/repositories`, 2026-11-26) | Total | Relevant | Reading |
+|---|---|---|---|
+| `film production carbon footprint` | **0** | 0 | The task three UK broadcasters require by contract has **no open implementation anywhere** |
+| `albert carbon calculator` | **0** | 0 | No open client, exporter or schema for the mandated toolkit |
+| `sustainable film production` | 3 | **0** | Two production-company portfolio sites and a 2019 coursework report |
+| `video encoding energy efficiency` | 1 | **0** | A 2022 bibliography repo. **The single largest energy line in streaming has no open measurement tool** |
+| `broadcast energy consumption` | 1 | **0** | An Arduino mains monitor, last push 2014-11-25 |
+| `render farm energy` | 2 | **1** | The one real hit is the 3-star MIT Deadline plugin above |
+| `emission factor database api` | 1 | **0** | An API-profile stub. Factor data arrives bundled in libraries or from commercial APIs, not from an open database repo |
+| **False abundance** — `huella de carbono` / `pegada de carbono` | **467 / 177** | **0** | Every first-page result is a student or personal project at 0–4 stars, mostly unlicensed, **none audiovisual**. Pass 8's rule earns its keep: read the results, not the total |

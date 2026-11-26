@@ -1523,3 +1523,57 @@ the one a third-party build-vs-buy analysis independently reaches (see `intel/ma
 **keep the incumbent traffic core (WideOrbit, Marketron, Imagine LandmarkOSI) and build the
 cross-platform order and reconciliation layer around it** — which is permissively licensable,
 client-owned, and the subject of Patterns 25.1 and 25.2.
+
+---
+
+## Carbon & sustainability platforms for screen production — added 2026-11-26 (pass 26)
+
+**This section has an unusual shape, and the shape is the finding.** Every other plane in this KB offers
+at least one startable open platform — PeerTube, Owncast, Strapi, OpenMRS-equivalents. Here there is
+**none**. Every system a media client actually uses to discharge its carbon obligation is a **closed web
+tool run by a private body or a public agency**, and `film production carbon footprint` returns **zero**
+GitHub repositories. So this section catalogues the incumbents you must **integrate with and feed**,
+rather than platforms you can fork — and that reframing is the sellable work (Pattern 26.3).
+
+### The tools that carry the mandate
+
+| Platform | Owner / region | Access | Status | What it is |
+|---|---|---|---|---|
+| **BAFTA albert** toolkit + certification | BAFTA (UK, used internationally) | Closed web tool; free to productions | **The enforced standard.** BBC makes certification mandatory for all new commissions and recommissions of TV broadcast content; ITV requires certification plus the on-screen end-board logo as a delivery item; Channel 4 requires productions to use albert tools to measure and report | Carbon calculator plus a certification process awarding stars. **Not a legal obligation — a commissioning condition**, which is why it binds harder than most statutes in this KB |
+| **albert Next Generation Toolkit** | BAFTA | Closed | **In transition, and this is a dated trigger.** albert's own figures put the closure of the current toolkit at **16 December 2026**; one industry guide says 17 December (**conflict recorded, not resolved** — confirm against albert directly before planning). The BBC stated a new version with a redesigned carbon calculator would launch 16 September 2026 | A rebuilt calculator replacing the current one. **Any integration built against the current toolkit has a known expiry date** |
+| **MEDIA Carbon Calculator** | European Commission / Creative Europe MEDIA (EMEA) | **Free**, sign-in via **EU Login** | Launched **13 February 2026** at the European Film Market, Berlinale | The first EU-backed single tool for calculating the footprint of live-action projects. Follows the **GHG Protocol**, covering **Scope 2 and Scope 3** including transport, waste, business travel and purchased goods. Explicitly does **not** replace national calculators. Presented by Florian Reimann of **Yamdu** — a production-management vendor already listed in this file, which is the integration path |
+| **Carbon'Clap** + Ecoprod label | EcoProd collective (France, founded 2009) | Free / membership | Established national standard | The French film and TV carbon calculator, with a shared label reference framework |
+| **Green Film** | Trentino Film Commission (Italy) | Tool + certification | Active; present at the EFM, 12–18 February 2026 | A sustainability rating tool, a certifying label and a partner network. The Italian counterpart to albert, and the one with the strongest festival-market presence |
+| **Green Production Guide / PEAR** calculator | **Sustainable Entertainment Alliance** (major studios; US + Canada) | **Free** for US productions | The de facto North American toolkit | Studio-backed toolkit and carbon calculator. ⚠️ **Naming correction for this KB:** the body is the *Sustainable Entertainment Alliance*; "Sustainable Production Alliance" is the former name and still circulates widely |
+| **DIMPACT** | Carnstone + University of Bristol, with media members (Global) | **Membership** | The reference tool for streaming-side reporting | Models energy and emissions across data centres, networks and user devices for digital media services. The Carbon Trust work built on DIMPACT produced the sector's most-quoted figure: **~55 gCO2e per hour** of video streaming in Europe. DIMPACT's own representatives concede that consistent measurement across media supply chains remains unsolved |
+| **Greening of Streaming** — REM platform, **OWL**, **LESS Accord** | Industry body (Global) | Membership | Active; **OWL** presented as a live measurement bench for streaming **and AI workloads** | Takes a hardware-measurement approach — smart-meter-based real-world energy measurement at scale — against DIMPACT's modelling approach. The **LESS Accord** is the cross-industry effort to standardise how the sector measures at all |
+| **Accedo Ecoflow / Ecoflow X** | Accedo (Global) | Commercial | Active | Streaming-application energy efficiency tooling, named alongside LESS Accord and DIMPACT in the 2026 standardisation effort |
+| **Sustainable Screens Australia** | Industry body (APAC) | Free tools + training | Active | **Partnered with BAFTA albert and localised its carbon calculator for Australia**; launched the country's first Sustainability Supervisor training programme in 2025, backed by Netflix and Screen Australia. The clearest instance in APAC of albert's methodology travelling |
+| **Globo — Guia de Produções Verdes** | Grupo Globo (LATAM) | Internal | In force since 2023 | Broadcaster-wide green production guide: fleet electrification, replacing generators on live programmes. The largest single LATAM adopter and it is self-authored, not certified |
+| **Set Neutro** (Eccaplan) · **Set Sustentável** · **A.L.I.C.E.** (Publicis Production) | Private vendors (LATAM, Brazil) | Commercial | Active | Offsetting seals and campaign-emissions mapping. Set Sustentável reports **>650 t CO2** offset via Carbonext; Publicis Production has used A.L.I.C.E. to map campaign emissions since 2023. **Note the category: these sell offsetting and measurement services, not certification against a public standard** |
+
+### What is open, and where it sits
+
+| Layer | Open option | Licence | Verdict |
+|---|---|---|---|
+| Production footprint (the mandated task) | **None** | — | `film production carbon footprint` = **0 repos**. Integrate with albert / MEDIA Carbon Calculator; do not propose replacing them |
+| Streaming/delivery footprint | [co2.js](https://github.com/thegreenwebfoundation/co2.js) + [grid-intensity-go](https://github.com/thegreenwebfoundation/grid-intensity-go) | Apache-2.0 code, **CC-BY-SA + ODbL data** | Viable and permissive **after** the ODbL/DRM gate is cleared (Pattern 26.1) |
+| Render / transcode energy | [cats](https://github.com/GreenScheduler/cats) + [carbon-aware-sdk](https://github.com/Green-Software-Foundation/carbon-aware-sdk) + [Deadline plugin](https://github.com/BreakTools/deadline-energy-cost-calculator) | **MIT** throughout | The one place in this plane where a complete permissive stack exists (Pattern 26.2) |
+| Infrastructure energy | [kepler](https://github.com/sustainable-computing-io/kepler), [scaphandre](https://github.com/hubblo-org/scaphandre), [powerapi](https://github.com/powerapi-ng/powerapi) | Apache-2.0 / BSD-3 | Mature and permissive |
+| Corporate / CSRD reporting | [esrs-xbrl-parser](https://github.com/aimabel-ai/esrs-xbrl-parser) | **ISC** | Thin and dormant 23 months; the best-starred alternative has **no licence** |
+| Embodied hardware carbon | [boaviztapi](https://github.com/Boavizta/boaviztapi) | **AGPL-3.0** | Real, institutional, **copyleft** |
+
+### The build-vs-buy line for this plane
+
+**Never propose replacing albert, the MEDIA Carbon Calculator, PEAR or DIMPACT.** Two of them are
+commissioning conditions, one is an EU instrument with EU Login identity, and the fourth owns the
+sector's only widely-cited emissions figure. Nothing about them is a technology problem that an open
+build solves, and a client who fails certification because a bespoke tool disagreed with albert has been
+actively harmed.
+
+The defensible proposal is the **evidence layer around them**: pull the data these calculators demand out
+of the systems that already hold it — the production-management platform (**Yamdu**, Croogloo, SetHero,
+StudioBinder, all already catalogued in this file), the payroll and accounting system, the render farm,
+the CDN logs — assemble it into a submission-ready pack, and keep the per-asset numbers the client owns
+and the certifier never sees. That layer is permissively licensable, client-owned, and the subject of
+**Patterns 26.1 through 26.5**.

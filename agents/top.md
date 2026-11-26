@@ -2627,3 +2627,54 @@ Grepped inside 9eye's own working tree: `makegood` **0**, `pre-empt`/`preempt` *
 | Makegood proposal agent (price a pre-empted spot, find equivalent replacement inventory) | **0 hits anywhere**, including inside 9eye. The incumbents are building this and none of it is open (see `intel/trends.md` pass 25). |
 | Rate-card / yield agent (price an avail by daypart and demand) | `rate card` = **2,013 results, zero relevant.** The only repo in this KB containing the word *daypart* is [itsoumya-d/rcs-music-scheduler](https://github.com/itsoumya-d/rcs-music-scheduler) (MIT, **0★**) and it is a music rotation scheduler, not a pricing engine. |
 | BXF export agent | No usable implementation, **and the schema is All Rights Reserved** — see Pattern 25.3. |
+
+---
+
+## Energy, carbon & environmental-footprint agents — added 2026-11-26 (pass 26)
+
+Verified 2026-11-26: existence via `git ls-remote`, stars/forks/last-push via GitHub
+`search/repositories`, licence by reading the licence file wherever the API returned `NOASSERTION`.
+
+**Read this section with its conclusion first: there is no media-specific agent in this plane.** Every
+permissive, maintained agent below measures *generic compute* or *generic corporate emissions*. None
+reads a call sheet, a render queue, a transcode ladder, a playout schedule or a CDN log. The obligation,
+by contrast, is the most consistently enforced in this entire KB (BBC, ITV and Channel 4 all require
+BAFTA albert tooling or certification as a condition of commission). That mismatch is the opportunity,
+and **P39** explains why it has persisted.
+
+### Tier 1 — permissive and maintained
+
+| Agent | Repo | Stars | Licence | Last push | What it does |
+|---|---|---|---|---|---|
+| claude-carbon | [gwittebolle/claude-carbon](https://github.com/gwittebolle/claude-carbon) | 256★ / 23f | **MIT** (1,074 B read) | 2026-11-23 | Measures the carbon footprint of Claude Code sessions. The plane's best-starred agent — and it measures the assistant, not the media workload |
+| CATS (Climate-Aware Task Scheduler) | [GreenScheduler/cats](https://github.com/GreenScheduler/cats) | 82★ / 23f | **MIT** (1,076 B read) | **2026-11-26** | Defers a job until the grid is cleaner. Usable today as the scheduling brain for render and transcode queues |
+| agent-carbon-tracker | [Thomaszhou22/agent-carbon-tracker](https://github.com/Thomaszhou22/agent-carbon-tracker) | 8★ | **MIT** | 2026-07-30 | EcoLogits-based footprint accounting for agent operations |
+| NZC USEEIO matching agent | [salesforce-misc/NZC-USEEIOMatchingAgent](https://github.com/salesforce-misc/NZC-USEEIOMatchingAgent) | 0★ | **Apache-2.0** | 2026-11-12 | Maps Scope 3 procurement spend lines onto USEEIO emission factors — the exact shape of a production-spend footprint. **0 stars behind a Salesforce org**: institutional code nobody found |
+| agent-carbon (callback) | [ChanelYJ19/agent-carbon](https://github.com/ChanelYJ19/agent-carbon) | 0★ | **MIT** | 2026-05-17 | Emissions-tracking callback for LangChain / LangGraph pipelines |
+| carbon.md | [carbon-md/carbon-md](https://github.com/carbon-md/carbon-md) | 0★ | **MIT** | 2026-10-11 | A proposed Markdown standard for declaring carbon governance of an agent. A convention to adopt, not a system to run |
+
+### Tier 2 — usable but constrained
+
+| Agent | Repo | Stars | Licence | Last push | Constraint |
+|---|---|---|---|---|---|
+| Scope3Scout | [m-zest/Scope3Scout](https://github.com/m-zest/Scope3Scout) | 17★ | **AGPL-3.0** | 2026-10-06 | Supplier ESG claim verification. **Copyleft** — fine as a deployed service, not as embedded library code in a proprietary product |
+| Climatiq MCP server | [jagan-shanmugam/climatiq-mcp-server](https://github.com/jagan-shanmugam/climatiq-mcp-server) | 12★ | **MIT** | 2025-03-28 | **Dormant ~20 months**, and the permissive part is a thin shim over the **commercial** Climatiq emission-factor API. The licence is free; the data behind it is not |
+
+### ⛔ Do not ship these — verified non-adoptable
+
+| Repo | Stars | Measured problem |
+|---|---|---|
+| [crbnos/carbon](https://github.com/crbnos/carbon) | **2,863★** | **A manufacturing ERP/MES/QMS named "Carbon".** Zero relation to emissions, yet it ranks first for `carbon mcp server`. By star count alone a careless pass writes this as the plane's flagship — the sharpest false friend since `eidr` and `isan` in pass 5 |
+| [climateandtech/report-analyst](https://github.com/climateandtech/report-analyst) | 42★ | **No licence file.** 9 filenames × 2 branches all 404 while `README.md` returns HTTP 200 — the raw channel works, so the file is genuinely absent, not misnamed. All rights reserved by default. The best-starred CSRD tool in the plane and unusable |
+| `Hazrat-Ali9/Carbon-Aware-AI-Model-Scheduling` (no link given, deliberately) | 30★ | **Empty repository.** `git ls-remote` returns **0 refs** and `README.md` 404s on `main` and `master`, yet the search API reports 30 stars and a push date of 2026-08-15. There is no code to license, review or adopt |
+| [Green-Software-Foundation/sci](https://github.com/Green-Software-Foundation/sci) | 298★ | **Not OSI-licensed** — `LICENCE.md` (2,347 B, read in full) is a Joint Development Foundation "AS IS" grant under **W3C patent mode**: disclaimers and a patent pledge, **no copyright grant**. Implement **ISO/IEC 21031**; do not vendor the repository |
+
+### The agents a media client will ask for, and their measured state
+
+| The agent a client will ask for | Measured state on 2026-11-26 |
+|---|---|
+| Production carbon agent (read the call sheet, travel and generator logs; emit an albert-shaped footprint) | `film production carbon footprint` = **0 GitHub repositories**, `albert carbon calculator` = **0**. The mandated task has no open implementation at all |
+| Per-title streaming carbon agent (gCO2e per stream, per title, per device mix) | No repo does this. The substrate exists ([co2.js](https://github.com/thegreenwebfoundation/co2.js) + [grid-intensity-go](https://github.com/thegreenwebfoundation/grid-intensity-go)) and the assembly is Pattern 26.1 — **with the ODbL/DRM gate cleared first** |
+| Render-farm carbon scheduler (shift a queue into a clean-grid window) | The two halves both exist and permissive — [cats](https://github.com/GreenScheduler/cats) (MIT) + [carbon-aware-sdk](https://github.com/Green-Software-Foundation/carbon-aware-sdk) (MIT) — and the only media-native connector is a **3-star** MIT Deadline plugin. This is the shortest path to a working product in the plane (Pattern 26.2) |
+| GenAI-footprint disclosure agent (what did this AI-assisted sequence cost in energy?) | [codecarbon](https://github.com/mlco2/codecarbon) (MIT) measures it; nothing maps it to a broadcaster deliverable, **even though the 2025 Green Animation Guide already documents a studio appending an AI traceability annex to production reports for broadcasters** (Pattern 26.4) |
+| CSRD/ESRS evidence agent for an AV group | Partial: [esrs-xbrl-parser](https://github.com/aimabel-ai/esrs-xbrl-parser) (**ISC**, dormant 23 months) is the only permissive, correctly-licensed piece; the best-starred alternative has no licence at all |

@@ -3789,3 +3789,260 @@ Run these six checks before writing an estimate. Each one has cost somebody a sc
 6. **Is there a political or regulated-advertising window in the engagement's calendar?** If yes
    (Brazil **October 2026**, any US election cycle), Pattern 25.4 is not an enhancement — it is the
    deadline that sets the delivery date.
+
+---
+
+## Energy, carbon & environmental-footprint recipes — added 2026-11-26 (pass 26)
+
+Every repo named below appears with its verified licence and last-push date in `agents/top.md`,
+`repos/foundations.md` or `repos/trending.md` (pass 26 sections). **Read Pattern 26.6 first if the
+engagement involves European delivery** — it is a licence and mandate gate, and it is cheap.
+
+### P39 — The attestation condition: why a hard mandate plus free data still yields zero open source
+
+**This is the pass's law, and it corrects P12/P31 rather than replacing them.**
+
+Pass 6 established: *regulator declares → body publishes an implementation guide → permissive
+implementations appear.* Pass 11 (healthcare) added the second condition: that sequence describes the
+**format layer**; for the **judgment layer** the body of knowledge used to judge must also be freely
+licensed. This plane satisfies **both** conditions and still returns zero, so a third condition exists.
+
+**The measurement:**
+
+| | Production carbon (albert) | Software/corporate carbon (SCI, CSRD, cloud) |
+|---|---|---|
+| Mandate | **Maximum enforcement** — BBC, ITV, Channel 4 require it by contract; non-compliance blocks delivery | Weaker and mostly indirect (CSRD reaches AV indirectly; SCI is voluntary) |
+| Input data licence | **Free** — Ember CC-BY-SA, Green Web Foundation CC-BY-SA, Electricity Maps ODbL, USEEIO public | **Identical inputs**, same licences |
+| **Form of the deliverable** | **A certificate issued by one private body** | **A number, a report, a filing** |
+| Open implementations | **0** (`film production carbon footprint`, `albert carbon calculator`) | **16 adoptable repos; 6 above 1,000 stars** |
+
+**The third condition: open source appears where the obligation is discharged by producing a computable
+artefact, and does not appear where it is discharged by attestation to a gatekeeper** — no matter how
+hard the mandate or how free the inputs. You cannot implement a certification; you can only submit to
+it. There is no artefact to compete on, no output to validate against, and no way for a second
+implementation to be *better* — so nobody writes the first one.
+
+**Ask in this order on any plane:**
+1. Is the deliverable a **document/number** or a **certificate from a named body**? If a certificate,
+   expect zero open source and **sell the feed, not the replacement** (Pattern 26.3).
+2. Is the knowledge content free or taxed? (P31, healthcare pass 11.)
+3. Is it a format problem or a judgment problem? (P12, pass 6.)
+4. Is there a figure for harm avoided, from a primary public source?
+
+**Falsifiable prediction, with today's baseline recorded.** `film production carbon footprint` = **0**
+and `albert carbon calculator` = **0** on 2026-11-26. albert's current toolkit closes **16 December
+2026** (albert's figure; one guide says 17 December) and is replaced by the Next Generation Toolkit. **If
+that toolkit ships a public API, data schema or export format, the first permissive implementations
+should appear within two cycles of its release. If it remains a closed web form, both queries stay at
+zero even as CSRD and green-claims pressure increase** — and increased mandate pressure alone will not
+move them. Either outcome tests the condition directly.
+
+### P40 — The licence enters through the dataset, not the framework
+
+In every earlier plane of this KB, licence risk arrived through a *framework* (AGPL platforms, GPL
+tooling, the BXF schema's All-Rights-Reserved trap). Here the code is permissive —
+Apache-2.0/MIT/BSD-3 across the whole measurement toolchain — and **the obligations live in the bundled
+facts**: Electricity Maps **ODbL** (attribution + share-alike + "provide unrestricted versions if using
+DRM"), Ember and Green Web Foundation data **CC-BY-SA**.
+
+**Operational rule, reusable across all twelve industries:** for any dependency that **ships reference
+data**, resolve the licence of the *data* separately from the licence of the *code*, and do it by reading
+the licence file rather than the SPDX field. `co2.js` reports Apache-2.0 at repo level and carries four
+licences at file level (12,678 B vs canonical Apache-2.0's 11,357 B — **the byte count is the tell**);
+`green-metrics-tool` ships a 35,429 B "License Index" stacking three. This is the companion to pass 8's
+rule for **linked native libraries**: same defect, different vector, and neither is visible to an SBOM
+scan of the source tree.
+
+### Pattern 26.1 — Per-title streaming carbon, with the ODbL/DRM boundary drawn before the first commit
+
+**For:** a streamer, broadcaster or FAST operator that needs a defensible per-title or per-stream
+emissions figure — for an ESG report, a green-claims substantiation, or a carbon-aware product feature.
+
+**Stack:**
+1. [thegreenwebfoundation/co2.js](https://github.com/thegreenwebfoundation/co2.js) (Apache-2.0 code) —
+   bytes → gCO2e via the Sustainable Web Design and 1-byte models.
+2. [thegreenwebfoundation/grid-intensity-go](https://github.com/thegreenwebfoundation/grid-intensity-go)
+   (Apache-2.0) — grid intensity at the edge/CDN node, as a Prometheus exporter.
+3. [Green-Software-Foundation/if](https://github.com/Green-Software-Foundation/if) (MIT) — encode the
+   delivery chain (origin → packager → CDN → device mix) as an Impact Framework manifest, so the model
+   is reviewable rather than buried in code.
+4. [Green-Software-Foundation/sci-otel](https://github.com/Green-Software-Foundation/sci-otel)
+   (Apache-2.0) — emit the result as an OpenTelemetry metric beside bitrate and rebuffer ratio, on the
+   dashboards the operations team already watches.
+5. Device and embodied half: [Boavizta/boaviztapi](https://github.com/Boavizta/boaviztapi) — **AGPL-3.0,
+   so call it as a service, do not embed it.**
+
+**🔴 The licence gate, and it is the whole point of this pattern.** The grid data bundled in co2.js comes
+from Electricity Maps under **ODbL**, which obliges you to attribute, to keep derivative databases
+share-alike, and to **"provide unrestricted versions if using DRM."** A commercial streaming service is
+DRM-protected by default (`DRM` appears 53 times in this KB). Decide **before** building, in writing:
+
+- **Option A — keep the database at arm's length.** Query grid intensity at runtime from an external
+  service; store only the computed gCO2e against your own titles. Your output is then an ordinary
+  derived figure, not a redistributed derivative database.
+- **Option B — publish the intensity table.** Accept the share-alike and keep-open duties and publish the
+  derived database openly, attributed. Often perfectly acceptable, because grid-intensity data is not
+  the client's competitive asset — **their per-title figures are**, and those stay private under A or B.
+- **Option C — licence the data commercially** from Electricity Maps and drop the ODbL path entirely.
+
+**What never to do:** vendor co2.js's bundled data into a DRM-protected product and report
+"Apache-2.0" from the SPDX field. That is the finding of this pass, and it is invisible to SBOM scanning.
+
+**Why it sells:** the EU **green-claims** rules effective **September 2026** bar generic environmental
+claims without recognised proof. A "green tier" or "carbon-neutral streaming" claim needs this figure and
+its audit trail; this pattern produces both, and no open competitor exists.
+
+### Pattern 26.2 — Carbon-aware render and transcode scheduling (the one place a complete permissive stack exists)
+
+**For:** a VFX house, animation studio, post facility or any operator of a large render/transcode farm.
+**This is the shortest path to a shipped, measurable result in the plane** — and it saves money, so it
+does not depend on a sustainability budget.
+
+**Stack, MIT/Apache end to end:**
+1. [GreenScheduler/cats](https://github.com/GreenScheduler/cats) (**MIT**, pushed 2026-11-26) — decide
+   *when* to run: defer a job to a low-carbon window.
+2. [Green-Software-Foundation/carbon-aware-sdk](https://github.com/Green-Software-Foundation/carbon-aware-sdk)
+   (**MIT**) — decide *where*: shift between regions by forecast intensity.
+3. [BreakTools/deadline-energy-cost-calculator](https://github.com/BreakTools/deadline-energy-cost-calculator)
+   (**MIT**, 3★) — the media-native connector: a Deadline event plugin computing energy and cost per
+   render job. **The only media-specific repo in this plane; treat it as a reference implementation to
+   extend, not a maintained dependency** (last push 2025-09-17, 3 stars).
+4. [sustainable-computing-io/kepler](https://github.com/sustainable-computing-io/kepler) (**Apache-2.0**,
+   pushed today) for per-pod energy on a containerised farm, or
+   [hubblo-org/scaphandre](https://github.com/hubblo-org/scaphandre) (**Apache-2.0**) on bare metal.
+5. [cloud-carbon-footprint/cloud-carbon-footprint](https://github.com/cloud-carbon-footprint/cloud-carbon-footprint)
+   (**Apache-2.0**) to reconcile against the cloud bill — the number finance already trusts.
+
+**The wiring that makes it real:** Deadline's event plugin emits per-job energy; CATS gates job
+submission on forecast intensity; kepler/scaphandre provide the measured ground truth that validates the
+estimate; CCF reconciles monthly against billing. Deadlines that cannot move (a delivery date) opt out
+per-queue — **this is a scheduling policy, not a hard constraint, and saying so protects the pipeline.**
+
+**Why it sells:** deferred rendering cuts cost and emissions together, the measurement is defensible, and
+North America — where the render capacity concentrates — has **no mandate** to satisfy, so the economic
+argument has to carry the engagement. Here it does.
+
+### Pattern 26.3 — The certification evidence pack (sell the feed, because you cannot replace the calculator)
+
+**For:** any production company or broadcaster delivering into the UK or EU. **This is the direct
+commercial consequence of P39.**
+
+**The premise, stated to the client up front:** albert, the MEDIA Carbon Calculator, PEAR, Carbon'Clap
+and Green Film **cannot and must not be replaced.** Two are commissioning conditions, one is an EU
+instrument behind EU Login. A bespoke tool that disagrees with albert does not help the client — it
+fails their certification. `film production carbon footprint` = **0 open repositories** is not a gap in
+the market to fill with a competing calculator; it is a reason to build the **feed**.
+
+**Build:**
+1. **Extraction** from the systems that already hold the data: the production-management platform
+   (**Yamdu** — which presented the MEDIA Carbon Calculator at the EFM and is already in
+   `verticals/solutions.md` — plus Croogloo, SetHero, StudioBinder), the accounting/payroll system
+   (travel, fuel, freight lines), facilities and generator logs, and the render farm (Pattern 26.2).
+2. **Mapping** spend lines to emission factors with
+   [salesforce-misc/NZC-USEEIOMatchingAgent](https://github.com/salesforce-misc/NZC-USEEIOMatchingAgent)
+   (**Apache-2.0**) — the agent layer's one genuinely apt tool, and it has 0 stars.
+3. **Calculation** against the GHG Protocol with
+   [agirgol/carbon-accounting-dotnet](https://github.com/agirgol/carbon-accounting-dotnet) (**MIT**,
+   GHG Protocol + **ISO 14064-1**, versioned source-cited factors) or, for a French engagement,
+   [ABC-TransitionBasCarbone/bilan-carbone](https://github.com/ABC-TransitionBasCarbone/bilan-carbone)
+   (**MIT**, pushed 2026-11-26) — the official French methodology body's own code, at 5 stars.
+4. **Submission pack** shaped to each destination: albert (Scope 1/2/3 as its toolkit asks), MEDIA
+   Carbon Calculator (**GHG Protocol Scope 2 + 3**: transport, waste, business travel, purchased goods),
+   PEAR for US productions.
+5. **Retain the per-asset detail the client owns and the certifier never sees.** This is the durable
+   asset: it compounds across productions into a benchmark the client can bid with, and no calculator
+   gives it back to them.
+
+**📅 Timing, and it is the buying trigger.** The current albert toolkit closes **16 December 2026**
+(albert's own figure; one industry guide says 17 December — **verify with albert before committing a
+date**), replaced by the Next Generation Toolkit with a redesigned calculator. **Build the extraction and
+mapping layers to be calculator-agnostic**, with the destination format as a thin adapter — because the
+destination is changing within weeks and will change again.
+
+**The multi-calculator problem is the premium.** The MEDIA Carbon Calculator explicitly does *not*
+replace national calculators, so a European co-production can face albert **and** the MEDIA calculator
+**and** Carbon'Clap or Green Film, each with its own factors and boundaries. One extraction, several
+adapters, reconciled — that is the engagement.
+
+### Pattern 26.4 — The AI-workload footprint annex (the plane's clearest unbuilt product)
+
+**For:** any studio or broadcaster using GenAI in production and delivering to a European commissioner.
+
+**Why now, with evidence rather than speculation:** the 2025 **Green Animation Guide** (EcoProd) already
+documents a German studio appending an **AI traceability annex** to production reports for broadcasters,
+and recommends smaller fine-tuned models. **Greening of Streaming's OWL** bench explicitly measures
+streaming **and AI workloads**. The disclosure is starting to be asked for, and **nothing open maps a
+measurement to a broadcaster-shaped deliverable.**
+
+**Stack:**
+1. [mlco2/codecarbon](https://github.com/mlco2/codecarbon) (**MIT**, 1,955★) — per-job emissions for
+   every inference, fine-tune and generation batch.
+2. [gwittebolle/claude-carbon](https://github.com/gwittebolle/claude-carbon) (**MIT**, 256★) or
+   [Thomaszhou22/agent-carbon-tracker](https://github.com/Thomaszhou22/agent-carbon-tracker) (**MIT**) —
+   the assistant and agent side, where scripted and iterative work accumulates invisibly.
+3. [ChanelYJ19/agent-carbon](https://github.com/ChanelYJ19/agent-carbon) (**MIT**) if the pipeline is
+   LangChain/LangGraph — a callback is cheaper than instrumenting by hand.
+4. [Green-Software-Foundation/sci-otel](https://github.com/Green-Software-Foundation/sci-otel)
+   (**Apache-2.0**) to report it as **SCI** — implement **ISO/IEC 21031**, and **do not vendor
+   `Green-Software-Foundation/sci`**, which is not OSI-licensed (JDF "AS IS", W3C patent mode).
+5. Attribute per shot/sequence/asset so the annex matches the production's own breakdown structure.
+
+**The honest framing to give the client:** a per-prompt figure is an estimate with wide error bars, and
+the credible claim is **relative** — this sequence against that one, this model against a smaller
+fine-tune. Industry commentary on AI video production's energy and water use is largely opinion without
+measured data; **this pattern's value is that it replaces that argument with the client's own numbers.**
+
+### Pattern 26.5 — ESRS/CSRD evidence for an audiovisual group
+
+**For:** a broadcaster or media group large enough to report under CSRD, or inside the value chain of one
+that is.
+
+**Stack:** [aimabel-ai/esrs-xbrl-parser](https://github.com/aimabel-ai/esrs-xbrl-parser) (**ISC**, 12★,
+dormant since 2024-12-17) for the ESRS XBRL taxonomy; the Pattern 26.3 inventory as the data source;
+[cloud-carbon-footprint](https://github.com/cloud-carbon-footprint/cloud-carbon-footprint)
+(**Apache-2.0**) for the IT estate; [Boavizta/boaviztapi](https://github.com/Boavizta/boaviztapi)
+(**AGPL-3.0**, as a service) for embodied hardware carbon — the half operational tools omit, and
+material for a broadcaster running transmission and device estates.
+
+**⛔ Do not use [climateandtech/report-analyst](https://github.com/climateandtech/report-analyst)** — 42
+stars, pushed today, the best-starred CSRD tool found, and it has **no licence file**: 9 filenames × 2
+branches all 404 while `README.md` returns 200, so the channel works and the file is genuinely absent.
+All rights reserved by default.
+
+**⚠️ State the scope honestly.** CSRD reaches the AV sector **indirectly**, via obligations on
+undertakings large enough to be in scope, and **the thresholds and timing have been amended (Omnibus)
+and were not verified in this pass.** Confirm the client's filing obligation with their auditors before
+scoping. Promise the **evidence layer**, never the legal conclusion.
+
+### Pattern 26.6 — The 20-minute gate for any media carbon proposal
+
+Run this before writing an estimate. Each question has a cheap answer and each one has sunk a proposal
+somewhere in this plane.
+
+1. **Is the deliverable a certificate or a number?** If the client must be *certified* (UK commission →
+   albert; EU-backed project → MEDIA Carbon Calculator), you are building a **feed**, not a calculator
+   (P39, Pattern 26.3). Proposing a replacement calculator loses the engagement and would fail their
+   certification if it won.
+2. **Which calculators does this production actually face?** Possibly several at once — albert, MEDIA
+   Carbon Calculator, Carbon'Clap, Green Film, PEAR — because the MEDIA calculator explicitly does not
+   replace national tools. **Count them before estimating; each is an adapter.**
+3. **Does the build touch DRM-protected delivery?** If yes and the stack includes `co2.js`, choose
+   Option A, B or C of Pattern 26.1 **in writing, before the first commit**. ODbL's share-alike and
+   "unrestricted versions if using DRM" duties are real and invisible to SBOM scanning.
+4. **Does any dependency ship reference data?** Resolve the **data** licence separately from the **code**
+   licence, by reading the licence file and checking its byte count (P40). co2.js: 12,678 B, four
+   licences. green-metrics-tool: 35,429 B, three.
+5. **Is copyleft acceptable anywhere in the estimate?** The data layer is where it concentrates:
+   Electricity Maps **AGPL-3.0**, Boavizta **AGPL-3.0**, green-metrics-tool **AGPL-3.0**. Call them as
+   services or accept the terms — decide before delivery, not during.
+6. **Is there a marketing claim attached?** If the client will say "carbon-neutral" or "green" into an EU
+   market, the EU **green-claims** rules from **September 2026** require recognised proof, and offsetting
+   seals are not proof. The evidence trail becomes the deliverable.
+7. **Is a hard date already in the calendar?** albert's current toolkit closes **16 December 2026**
+   (albert's figure; one guide says 17 December — confirm with albert), and Korea's **ISSB IFRS S1/S2**
+   alignment starts **FY27**. If either applies, the timeline sets the delivery date rather than the
+   scope.
+8. **Where are the client's emissions actually concentrated?** Usually the render farm or the delivery
+   chain — and both have mature permissive tooling (Patterns 26.1, 26.2) while the mandated production
+   footprint has **zero**. **Measure where the energy is, report where the mandate is**, and do not let
+   the mandate decide the engineering.

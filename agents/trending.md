@@ -9,6 +9,83 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 26: the energy, carbon & environmental-footprint plane (**a hard, enforced mandate, free input data, and still zero implementations**)
+
+Agents only; the measurement and infrastructure repos for this plane are in `repos/trending.md` pass 26.
+
+**Why this plane, and how it was chosen.** Twenty-five passes had covered this KB's planes down to
+makegood spots and photo-desk metadata. A 46-term vocabulary probe against all eight files before any
+web search returned the largest remaining hole in the KB: `carbon` **0 occurrences**, `albert` **0**,
+`CSRD` **0**, `ESRS` **0**, `GHG` **0**, `scope 3` **0**, `ISO 14064` **0**, `renewable` **0**,
+`e-waste` **0**, `circular` **0**. The word `sustainab*` appeared 11 times and **not once** about
+emissions — it was the Monospace *Sustainable* Core licence name (pass 13), an out-of-home procurement
+criterion, and "media sustainability" meaning press-freedom funding. Meanwhile `intel/trends.md:1681`
+(pass 15) had already recorded *"sustainability is becoming an EMEA procurement criterion"* — **a prior
+pass logged the demand signal and no pass ever measured the supply.** This pass measures it.
+
+### The headline: the mandated task has zero open source, and the reason is new
+
+`film production carbon footprint` → **0 repositories.** Not "few". Zero, from the GitHub search API on
+2026-11-26. `albert carbon calculator` → **0**. This is the plane whose obligation is the *most
+consistently enforced* in the whole KB — the BBC makes albert certification mandatory for all new
+commissions and recommissions of TV broadcast content, ITV requires certification plus the end-board
+logo as a delivery item, Channel 4 requires productions to use albert tools — and the open-source total
+for the mandated task is **nil**.
+
+That breaks the shape every earlier pass found, so the law needed a third condition. See **P39** in
+`compose/patterns.md`: the obligation here is discharged by **attestation to a single private
+gatekeeper**, not by producing a computable artefact. You cannot implement albert certification; you can
+only submit to it. Where the deliverable is a *certificate*, free input data and a hard mandate do not
+produce permissive supply — and where the deliverable is a *number or a report* (SCI, CSRD/XBRL, cloud
+footprint), the same inputs produce a populated, permissive layer. Both halves are measured below.
+
+### The agent layer: permissive, alive, and almost entirely unstarred
+
+| Agent / repo | Stars | Forks | Licence | Last push | What it actually does |
+|---|---|---|---|---|---|
+| [gwittebolle/claude-carbon](https://github.com/gwittebolle/claude-carbon) | 256★ | 23f | **MIT** (1,074 B read) | 2026-11-23 | Carbon footprint of Claude Code sessions. The best-starred agent-side artefact in the plane — and it measures *the agent itself*, not any media workload |
+| [m-zest/Scope3Scout](https://github.com/m-zest/Scope3Scout) | 17★ | — | **AGPL-3.0** | 2026-10-06 | Verifies supplier ESG claims. Copyleft: not a "build on it" asset |
+| [jagan-shanmugam/climatiq-mcp-server](https://github.com/jagan-shanmugam/climatiq-mcp-server) | 12★ | — | **MIT** | 2025-03-28 | MCP server over the Climatiq emission-factor API. **Dormant ~20 months**, and it wraps a *commercial* API — the open part is the thin shim |
+| [Thomaszhou22/agent-carbon-tracker](https://github.com/Thomaszhou22/agent-carbon-tracker) | 8★ | — | **MIT** | 2026-07-30 | EcoLogits-based footprint of agent operations |
+| [salesforce-misc/NZC-USEEIOMatchingAgent](https://github.com/salesforce-misc/NZC-USEEIOMatchingAgent) | 0★ | — | **Apache-2.0** | 2026-11-12 | Matches Scope 3 procurement spend to USEEIO factors. **0 stars with a Salesforce org behind it** — institutional code nobody found |
+| [carbon-md/carbon-md](https://github.com/carbon-md/carbon-md) | 0★ | — | **MIT** | 2026-10-11 | A Markdown standard for "carbon-governed AI agents". A proposal, not a base |
+| [ChanelYJ19/agent-carbon](https://github.com/ChanelYJ19/agent-carbon) | 0★ | — | **MIT** | 2026-05-17 | Emissions-tracking callback for LangChain / LangGraph |
+
+**Read that table as a shape, not a list.** Seven agents, five permissive, most pushed within weeks —
+and the *entire* plane's agent layer totals **~293 stars**, of which 256 are one tool that measures a
+coding assistant. **Not one of these agents knows anything about media.** No agent reads a call sheet, a
+render queue, a transcode ladder, a playout schedule or a CDN log. The agent layer here is not missing
+(pass 8's shape) and not vendor-captured (pass 15's shape) — it is **pointed at the wrong workload**,
+which is pass 6's "misallocated" shape reappearing in a plane with a real regulatory driver.
+
+### ⛔ Correction layer — four rows a careless pass would have shipped
+
+| Repo | Why it looked right | Why it is not adoptable |
+|---|---|---|
+| [crbnos/carbon](https://github.com/crbnos/carbon) | **2,863★**, pushed today; ranks #1 for `carbon mcp server` | **FALSE FRIEND — it is a manufacturing ERP/MES/QMS named "Carbon".** Nothing to do with emissions. By stars it would have been written as this plane's flagship. The KB's worst false-friend since `eidr` and `isan` (pass 5) |
+| [climateandtech/report-analyst](https://github.com/climateandtech/report-analyst) | 42★, pushed **today**, the best-starred CSRD tool found | **NO LICENCE FILE** — 9 filenames × 2 branches all 404 while `README.md` returns 200, so the channel works and the file is absent. Default copyright: all rights reserved |
+| `Hazrat-Ali9/Carbon-Aware-AI-Model-Scheduling` | 30★ and a `pushed_at` of 2026-08-15 in the search API | **The repository is EMPTY.** `git ls-remote` returns **0 refs** — not zero branches, zero refs of any kind — and `README.md` 404s on both `main` and `master`. Thirty people starred a repository with no commits in it. **No URL is written for this row deliberately**; see the oracle correction in `repos/trending.md` pass 26 |
+| [Green-Software-Foundation/sci](https://github.com/Green-Software-Foundation/sci) | 298★, the SCI spec (**ISO/IEC 21031**) | **Not OSI-licensed.** `LICENCE.md` (British spelling, 2,347 B, read in full) is a Joint Development Foundation "AS IS" materials grant with **W3C patent mode** — disclaimers and a patent pledge, *no copyright grant to copy or modify*. Use the published standard; do not vendor the repo |
+
+### The false-abundance trap, in two languages
+
+Pass 8's rule — *read the results, not the total* — earned its keep twice here. `huella de carbono`
+returned **467 repositories** and `pegada de carbono` **177**. Every result on both first pages was a
+student or personal project at **0–4 stars**, mostly unlicensed, and **not one was audiovisual.** A pass
+that trusted the totals would have reported LATAM as the best-covered region in the plane. It is the
+emptiest. Recorded as an informed gap in `intel/market.md`, not as coverage.
+
+### Measured zeros — stated so silence is not mistaken for coverage
+
+| Query (GitHub search API, 2026-11-26) | Total | Relevant | Note |
+|---|---|---|---|
+| `film production carbon footprint` | **0** | 0 | The mandated task. The crudest zero in this plane |
+| `albert carbon calculator` | **0** | 0 | The tool three UK broadcasters require by contract |
+| `sustainable film production` | 3 | **0** | Two portfolio websites and a 2019 coursework report |
+| `video encoding energy efficiency` | 1 | **0** | A 2022 bibliography repo |
+| `broadcast energy consumption` | 1 | **0** | An Arduino mains monitor, last push 2014-11-25 |
+| `render farm energy` | 2 | **1** | The one media-native hit is in `repos/trending.md` — and it has **3 stars** |
+
 ## 2026-11-26 — pass 25: the traffic, sales-order-to-air & billing plane (**the KB could say `SCTE-35` 25 times and `makegood` zero times**)
 
 Agents only; the platform and infrastructure repos for this plane are in `repos/trending.md` pass 25.

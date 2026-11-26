@@ -10,6 +10,105 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 11: description, cataloguing & syndication infrastructure (52 repos, 52/52 exist)
+
+**Verification channel for this pass, stated because it had to change.** `curl -sI` returned **403
+for all 52 GitHub URLs and `000` for all 8 non-GitHub URLs — one 200 in 60**. Those are proxy policy
+and blocked domains, **not 404s**. Existence was established with `git ls-remote --exit-code`:
+**52/52 exist, 0 dead.** Metrics came from `search/repositories`; **every licence below was read from
+the actual file over the raw channel**, with filename and byte count where the API said
+`NOASSERTION`.
+
+### Standards & schemas — the layer that is open, and actively pushed
+
+| Repo | License | Stars / forks | Push |
+|---|---|---|---|
+| `schemaorg/schemaorg` | Apache-2.0 | 6320★ / 975f | 2026-11-25 |
+| `iptc/newsinjson` (ninjs) | MIT | 47★ / 10f | 2026-11-24 |
+| `iptc/sport-schema` | **no licence file** | 38★ / 3f | 2026-10-01 |
+| `ebu/ebucoreplus` | **MIT** | 30★ / 8f | 2026-10-02 |
+| `ebu/ebucore` | **CC-BY-NC-SA-3.0 ⚠ NonCommercial** (`LICENSE.md`, 386 B) | 27★ / 7f | 2026-08-18 |
+| `iptc/newsml-g2` | **CC-BY-4.0** (`LICENSE`, 901 B) | 20★ / 5f | 2026-11-20 |
+| `iptc/python-newsmlg2` | MIT | 6★ / 4f | 2026-11-11 |
+| `iptc/rightsml-dev` | **no licence file** | 5★ / 2f | 2026-07-06 |
+| `iptc/json-for-concepts-vocabularies` | **no licence file** | 4★ / 0f | 2017-10-20 |
+| `iptc/catalog` | MIT (`LICENSE`, 1061 B) | 3★ / 0f | 2026-11-17 |
+| `iptc/video-metadata-hub` | MIT (`LICENSE`, 1066 B) | 2★ / 0f | **2026-11-25** |
+| `iptc/sports-newscodes` | **CC-BY-4.0** (`LICENSE`, 444 B — "applies to all NewsCodes") | 1★ / 0f | 2023-09-29 |
+
+**IPTC's whole org tops out at 47★ and pushed six repos in November 2026.** That is the signature of
+infrastructure maintained by the standards body itself with almost no outside adoption — the inverse
+of the usual "popular but abandoned" pattern, and the reason low stars here are not a disqualifier.
+
+### Vocabulary, description & reconciliation tooling
+
+| Repo | License | Stars / forks | Push |
+|---|---|---|---|
+| `OpenRefine/OpenRefine` | BSD-3-Clause | 12118★ / 2214f | 2026-11-24 |
+| `exiftool/exiftool` | GPL-3.0 (`LICENSE`, 35149 B) | 5319★ / 508f | 2026-11-16 |
+| `MediaArea/MediaInfo` | BSD-2-Clause | 2079★ / 202f | 2026-11-24 |
+| `ebu/awesome-broadcasting` | CC0-1.0 (`LICENSE.md`, 187 B) | 1805★ / 237f | 2026-09-30 |
+| `apache/jena` | Apache-2.0 | 1511★ / 745f | 2026-11-25 |
+| `Exiv2/exiv2` | GPL-2.0 (`COPYING`, 18092 B) | 1174★ / 350f | 2026-11-23 |
+| `NatLibFi/Skosmos` | **MIT** (`LICENSE`, 1376 B) | 269★ / 105f | 2026-11-18 |
+| `tematres/TemaTres-Vocabulary-Server` | **GPL-2.0-or-later** — `readme.md` + source headers, **no licence file** | 142★ / 11f | **2026-11-25** |
+| `NatLibFi/Finto-data` | **MIXED** (`LICENSE`, 1765 B) | 21★ / 6f | **2026-11-26** |
+| `mikrosimage/jebu-core` | GPL-2.0 | 3★ / 2f | **2018-06-13 — dead 8 years** |
+
+### Platforms — newsroom, cataloguing, repository, IIIF
+
+| Repo | License | Stars / forks | Push |
+|---|---|---|---|
+| `wagtail/wagtail` | BSD-3-Clause | 20779★ / 4750f | 2026-11-26 |
+| `DSpace/DSpace` | BSD-3-Clause | 1116★ / 1509f | 2026-11-23 |
+| `IQSS/dataverse` | Apache-2.0 (`LICENSE.md`, 10889 B) | 1080★ / 574f | 2026-11-24 |
+| `projectblacklight/blacklight` | Apache-2.0 (`LICENSE`, 788 B) | 800★ / 254f | 2026-11-24 |
+| `superdesk/superdesk` | **AGPL-3.0** | 760★ / 236f | 2026-11-23 |
+| `ProjectMirador/mirador` | Apache-2.0 | 625★ / 280f | 2026-11-25 |
+| `UniversalViewer/universalviewer` | MIT (`LICENSE.txt`, 1227 B) | 576★ / 210f | 2026-11-25 |
+| `omeka/omeka-s` | GPL-3.0 | 534★ / 179f | 2026-11-24 |
+| `archivesspace/archivesspace` | **ECL-2.0** (`COPYING`, 748 B) | 450★ / 255f | 2026-11-25 |
+| `collectiveaccess/providence` | GPL-3.0 | 389★ / 200f | 2026-11-25 |
+| `vufind-org/vufind` | GPL-2.0 | 311★ / 404f | 2026-11-25 |
+| `cantaloupe-project/cantaloupe` | **NCSA** (`LICENSE.txt`, 1870 B) | 308★ / 124f | 2026-11-23 |
+| `fcrepo/fcrepo` | Apache-2.0 | 255★ / 138f | **2026-11-26** |
+| `Islandora/islandora` | GPL-2.0 (`LICENSE`, 18092 B) | **not in search index** | — |
+| `Islandora/documentation` | MIT | 112★ / 69f | 2026-11-25 |
+| `fabiodalez-dev/Pinakes` | GPL-3.0 | 95★ / 11f | 2026-11-25 |
+| `islandora-interest-groups/Islandora-Metadata-Committee` | no licence file | 37★ / 42f | 2026-11-20 |
+| `superdesk/superdesk-core` | AGPL-3.0 | 32★ / 89f | 2026-11-25 |
+| `intranda/goobi-viewer-core` | GPL-2.0 | 27★ / 17f | 2026-11-20 |
+| `superdesk/newsroom` | GPL-3.0 | 24★ / 32f | 2026-11-23 |
+| `Daniel-KM/Omeka-S-module-OaiPmhRepository` | GPL-3.0 | 5★ / 7f | 2026-10-05 |
+
+### INA — the French national audiovisual institute's org, new to this KB
+
+| Repo | License | Stars / forks | Push |
+|---|---|---|---|
+| `ina-foss/inaSpeechSegmenter` | MIT | 919★ / 149f | 2026-03-12 |
+| `ina-foss/amalia.js` | MIT | 191★ / 36f | 2023-08-28 (dormant) |
+| `ina-foss/twembeddings` | MIT | 33★ / 5f | 2026-06-30 |
+| `ina-foss/afp-api-client` | LGPL-3.0 | 3★ / 0f | 2023-12-05 (dormant) |
+
+22 repos in the org. `inaSpeechSegmenter` is **the most-starred purpose-built archive-indexing tool
+found in this plane.** `afp-api-client` is the only open wire-service client located anywhere.
+
+### Two structural reads of this table
+
+**The copyleft/permissive split runs along a functional line, not a random one.** Schemas and
+*delivery* are permissive (CC BY 4.0, MIT, Apache-2.0, BSD, NCSA, CC0); **purpose-built newsroom and
+cataloguing systems are uniformly AGPL/GPL** — Superdesk, CollectiveAccess, Omeka S, VuFind,
+Islandora, TemaTres. If a client refuses copyleft for a hosted service there is **no open newsroom
+CMS for them**; the honest substitute is Wagtail (BSD-3) plus custom workflow. **IIIF is the one
+permissive escape hatch in the systems tier** — Mirador Apache-2.0, Universal Viewer MIT, Cantaloupe
+NCSA, all pushed within six days of this pass.
+
+**Liveness is near-universal here, which is unusual for this KB.** Of 52 repos, all but four were
+pushed within ~60 days, and eleven within six days of the pass — including `fcrepo` and
+`NatLibFi/Finto-data` **on the day of the pass**. The dead ones are named and dated above rather than
+quietly dropped: `jebu-core` (2018), `amalia.js` (2023), `afp-api-client` (2023), `edsu/pymarc`
+(archived 2020, live at `gitlab.com/pymarc/pymarc`).
+
 ## 2026-11-26 — pass 10: the theatrical & digital-cinema infrastructure (25 verified repos, 25/25 resolved)
 
 ### Headline: the first plane in this KB that is **copyleft end to end**, and the keys are a 3-star layer

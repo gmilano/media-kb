@@ -9,6 +9,113 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 11: the description & semantic-interchange plane (the law's control case)
+
+### How the gap was found — the vocabulary probe, now at two calls and 110 terms
+
+`media-kb` arrived with the remote **already carrying pass 10 from today** and `rotation.json` still
+reading `next=4, last_industry=healthcare` — **the sixth consecutive failure of step 5 on this same
+industry.** Pass 8's corollary applied again: same-day passes on the remote mean the correct move is
+neither a rewrite nor a re-verification but **finding the missing vocabulary plane**. Two Bash calls,
+110 candidate terms, before any web search:
+
+| Term group | Files | Hits | Verdict |
+|---|---|---|---|
+| `IPTC`, `NewsML`, `ninjs`, `NITF`, `EBUCore`, `PBCore`, `Dublin Core`, `schema.org`, `metadata schema` | 0 | **0** | Interchange schemas absent |
+| `SKOS`, `thesaurus`, `controlled vocabulary`, `authority control`, `cataloguing` | 0 | **0** | Vocabulary layer absent |
+| `Wikidata`, `named entity`, `entity linking`, `knowledge graph`, `semantic search`, `ontolog*` | 0 | **0** | Linking layer absent |
+| `OAI-PMH`, `IIIF`, `Omeka`, `DSpace`, `CollectiveAccess`, `Dataverse`, `XMP`, `exiftool`, `syndication` | 0 | **0** | Exposure + description substrate absent |
+| `Sofie` 165 · `C2PA` 64 · `MARC`/`AtoM`/`ArchivesSpace` 15-28 | 4-8 | high | **Already covered** — playout (p8), provenance (p9), repositories (p4). The *description* layer between them was the hole |
+
+The KB could identify (p5), prove (p9), preserve (p4) and play out (p8) an asset. It could not
+**describe, catalogue or syndicate** one — the bottleneck under every archive-AI engagement.
+
+### The headline: the first plane where the content is openly licensed, and it is still not built
+
+Primary evidence, from IPTC's own repository files rather than a vendor page:
+`iptc/sports-newscodes/master/LICENSE` (444 B) — *"The Creative Commons Attribution (CC BY) 4.0
+license applies to **all NewsCodes**"*; `iptc/newsml-g2/master/LICENSE` (901 B) — *"Adapt — remix,
+transform, and build upon the material for any purpose, **even commercially**."*
+
+Prediction: a healthy plane. Measurement: **a three-step gradient.**
+
+| Layer | State | Evidence |
+|---|---|---|
+| **DESCRIBE** (format) | **HEALTHY** | schema.org 6320★ Apache-2.0 · ninjs MIT 47★ · EBUCorePlus MIT · Skosmos MIT 269★ · TemaTres 142★ · **IPTC pushed six repos in Nov 2026**, `video-metadata-hub` the day before this pass |
+| **ASSIGN** (judgment) | **ONE REPO DEEP** | **Annif**, 280★, Apache-2.0, from the National Library of Finland. `subject indexing` = 257 results and ranks 2-6 are `OK-`, `sahabatfb`, `Aim`, `Theme`, `DAWD` — unlicensed 2014-2022 noise |
+| **AGENTIC** (judgment at scale) | **PAPERS, NOT CODE** | arXiv 2504.05711, 2605.16338 · `archival metadata LLM agent` = 8 results, **top-6 star sum 3** · `vidya archival metadata` = **0** · only live repo is ICAEW's, **3★ and unlicensed** |
+
+**The refinement — the sharpest the structural law has had.** Inside one organisation:
+`NatLibFi/Annif` is **Apache-2.0**; `NatLibFi/Annif-corpora`, the labelled training data **without
+which Annif assigns nothing**, has **no licence file** (control `README.md` on `master` = 200, so the
+filenames are not at fault). `NatLibFi/Finto-data` is explicitly mixed — code under `tools/` MIT,
+data varies.
+
+> An open licence on the schema buys the **format**. It does not buy the **judgment**, because
+> judgment trains on annotated records — and those are the asset an institution keeps. When the
+> schema is finally granted, the withheld layer does not vanish; it **moves down to the corpus.**
+
+### New agents verified this pass
+
+| Agent | Repo | License | Stars | Push |
+|---|---|---|---|---|
+| spaCy | `explosion/spaCy` | MIT | 34094★ | 2026-11-21 |
+| flair | `flairNLP/flair` | MIT (`LICENSE` 1166 B, Zalando) | 14400★ | 2026-10-19 |
+| GLiNER | `urchade/GLiNER` | Apache-2.0 | 4296★ | 2026-11-11 |
+| inaSpeechSegmenter | `ina-foss/inaSpeechSegmenter` | MIT | 919★ | 2026-03-12 |
+| **Annif** | `NatLibFi/Annif` | Apache-2.0 (`LICENSE.txt` 606 B) | 280★ | 2026-11-24 |
+| OpenTapioca | `opentapioca/opentapioca` | Apache-2.0 | 263★ | 2026-08-26 |
+| spacyopentapioca | `UB-Mannheim/spacyopentapioca` | MIT | 96★ | 2026-02-05 |
+
+**`wetneb/opentapioca` would have been a 404** — the project moved to its own org. Verify slugs, not
+remembered paths.
+
+### Method corrections, reusable across all twelve industries
+
+**(1) `curl` is not an existence oracle in this session, and a 403 is not a 404.** The task
+instructions mandate `curl -sI` verification. Run over this pass's 60 URLs, curl returned **403 for
+all 52 GitHub URLs and `000` for every non-GitHub domain — exactly one 200 in 60.** All 52 repos
+exist: `git ls-remote --exit-code` confirms **52/52, zero dead.** A pass that trusted curl would have
+discarded its entire findings list as dead links. The 403 is the agent proxy refusing github.com
+HTML; the `000` is a blocked domain.
+
+**(2) `search/repositories` is not a complete existence oracle either — the converse.**
+`Islandora/islandora` is **absent from the search index** (`islandora in:name` → 1317 results without
+it) while `ls-remote` confirms it exists and raw returns its `LICENSE` (GPL-2.0, 18092 B).
+**Search for metrics, `ls-remote` for existence.**
+
+**(3) The control request needs lowercase `readme.md`.** TemaTres 404'd on every licence name *and*
+on `README.md` on both branches — which by pass 8's rule means wrong filenames, not a missing
+licence. A shallow clone settled it in one call: the file is **`readme.md`**, and the GPL-2.0-or-later
+grant lives in it and in every source header, with **no licence file at all.**
+
+**(4) Read the results, not the total — now with a fourth failure mode.** `automated cataloguing`
+(203 results) tops out at **a penetration-testing tool** (`chrismaddalena/ODIN`, 670★, archived);
+`metadata enrichment` (1043 results) tops out at a **Kubernetes fluentd plugin**. Four of seven
+queries this pass were false friends or false abundance — the `eidr`/`isan` trap of pass 8, repeated.
+
+### Licence traps found
+
+- **`ebu/ebucore` is CC BY-NC-SA 3.0 — NonCommercial**, while successor `ebu/ebucoreplus` is **MIT**.
+  The *installed* generation of the EBU's metadata standard is the commercially unusable one.
+  Second predecessor/successor licence split in this KB → treat as a pattern (new Pattern 32).
+- **Three of IPTC's twenty public repos have no licence file** — `sport-schema` (38★),
+  `rightsml-dev`, `json-for-concepts-vocabularies` — inside an org that licenses its flagship
+  standards CC BY 4.0. **Openness at org level does not propagate to repo level.**
+- `icaew-digital-archive/metadata-extraction`: live LLM→Dublin Core cataloguing, pushed 2026-11-24,
+  **unlicensed**. Reference, not dependency.
+
+### Informed gaps — searched and genuinely not found
+
+**VocBench 3** (BSD-3 per the EU SEMIC catalogue, the system that managed **EuroVoc**) has **no
+canonical GitHub repo** — only third-party Dockerfiles at 1-4★. **ShowVoc**: no meaningful GitHub
+presence (top hit 0★). **pymarc** is **archived** at `edsu/pymarc` (last push 2020-02-03); live at
+`gitlab.com/pymarc/pymarc` — the one URL of 60 that curl could reach. **No open system does IIIF
+delivery *and* OAI-PMH out of the box.** **`iptc.org` and `cv.iptc.org` do not resolve from this
+session** (outside allowed network domains, as `new.ddex.net` was in pass 8), so Media Topics' ~1,100
+term count and 2-3 month cadence are **secondary-sourced and internally inconsistent** across IPTC's
+own pages — treat the cadence as unverified; the licence family is primary-sourced from the repos.
+
 ## 2026-11-26 — pass 10: the theatrical & digital-cinema plane (six literal zeros)
 
 ### How the gap was found — the vocabulary probe, now confirmed as the cheapest tool in this workflow

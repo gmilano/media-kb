@@ -418,6 +418,34 @@ Omdia Cinema Sites & Screens database is paywalled. **Not estimated.** Also unve
 2025–2026 DOJ enforcement action or amendment to the 2016 rule — searched, nothing found, so the
 rule is treated as in force and unamended.
 
+#### Pass 11 (2026-11-26) — the description & semantic-interchange plane
+
+**The region owns the vocabulary that AI answer engines read, and it is Apache-2.0.**
+`schemaorg/schemaorg` (6320★, Apache-2.0, pushed 2026-11-25) is governed by a W3C community group
+founded by Google, Microsoft, Yahoo and Yandex. `NewsArticle`, `VideoObject` and `ClaimReview` are the
+structured-data types that decide whether a North American publisher is legible to AI search. That
+makes schema.org the one asset in this plane with no licence friction and a direct revenue story.
+
+**But the causal claim is not evidenced, and selling it as if it were is a liability.** Search Engine
+Land states plainly that there are **no peer-reviewed studies** on schema markup's effect on AI
+search visibility or on LLM citation behaviour, and that the link rests on assumptions that cannot be
+verified for most platforms. Vendor sources assert the opposite (one claims schema was "the only
+factor" determining AI Overview appearance, without naming the study). Contently reports **25.11% of
+Google searches triggered an AI Overview in Q1 2026**, and a DEV post citing the 5W Citation Source
+Index (May 2026) says news and media sites dominate AI citation rankings — both are real signals of
+*stakes*, neither is evidence of *mechanism*.
+
+**The sellable framing is therefore hygiene, not ranking:** accurate, current `NewsArticle` markup,
+consistent publisher naming, a 48-hour news sitemap, and the `isAccessibleForFree` flag. Stale or
+wrong structured data is reported as *more* harmful than missing markup, which makes correctness —
+not coverage — the deliverable. One single-source claim to verify before repeating: that Google
+removed FAQ rich results from Search on 2026-05-07.
+
+**Institutional gap.** North America has no equivalent of INA or the National Library of Finland
+shipping maintained open cataloguing tools for media. The region sets the *vocabulary* and buys the
+*tooling*; EMEA builds the tooling. For a North American engagement, expect to supply the cataloguing
+layer from European open source and the schema layer from schema.org itself.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -833,6 +861,48 @@ retrieved snippet and is **not recorded here** rather than guessed at. (c) `new.
 resolve from this session, so **ISDCF commercial terms and the current Interop-deprecation status
 are unverified** — the May 2026 ISDCF minutes are indexed but their contents were not readable here.
 
+#### Pass 11 (2026-11-26) — the description & semantic-interchange plane
+
+**EMEA is where this plane's open-source infrastructure is actually built and maintained**, and the
+only region with public institutions shipping it:
+
+- **INA** (Institut national de l'audiovisuel, France) — `ina-foss`, 22 repos.
+  `inaSpeechSegmenter` (MIT, 919★, 2026-03-12) is the most-starred purpose-built archive-indexing
+  tool found in this plane, and `ground-control-frontend` was pushed 2026-11-25.
+- **National Library of Finland** (`NatLibFi`) — **Annif** (Apache-2.0, 280★) and **Skosmos**
+  (MIT, 269★), the two tools that do the actual subject-assignment and vocabulary-publishing work,
+  plus Finto/Finto AI as live national services since May 2020.
+- **EBU** — EBUCorePlus (MIT), `awesome-broadcasting` (CC0-1.0, 1805★), and 108 public repos.
+
+**The licence trap is also European, and it is the sharpest in this pass.** EBU's **EBUCore**
+(Tech 3293), the descriptive/technical metadata spec most European broadcasters have actually
+deployed, is **CC BY-NC-SA 3.0 — NonCommercial** (verified: `ebu/ebucore/master/LICENSE.md`, 386 B).
+Its successor **EBUCorePlus is MIT**. So the modern model is commercially usable and the installed
+one is not. Any EMEA broadcast engagement that touches metadata modelling must establish **which of
+the two the client is on** before a line of code is written; the answer changes what Globant may
+ship. This is the second time this KB has found a standards body whose predecessor and successor
+differ in commercial usability.
+
+**Policy and funding context, 2026:**
+- **TEMS (Trusted European Media Data Space)**, EBU a founding partner, selected by the European
+  Commission and funded by the Digital Europe Programme, **runs 2023-2026 — i.e. it concludes this
+  year**, which makes its final deliverables a near-term buying trigger. Partner counts disagree
+  across sources (EBU: 43 partners / 14 countries; a Gaia-X document: 42 / 12) — unresolved.
+- **EUIPO published a metadata mapping study on 2026-05-28** finding that the lack of
+  interoperability between copyright-related metadata standards "triggers major inefficiencies."
+  That is an EU-institutional source measuring the exact defect this plane addresses — the most
+  sellable single citation in this pass for EMEA.
+- EBU has called for **sovereign cloud and AI infrastructure** in Europe and announced a
+  **sovereign-AI partnership with NVIDIA** for public broadcasters. A vendor analysis separately
+  warns that cloud media-asset tools relying on third-party AI engines **outside Europe** are a
+  regulatory exposure — which is precisely the argument for self-hosted Annif/Skosmos over an API.
+- The European Parliament voted **569 to 45** to adopt its position on the **AI Act Omnibus**
+  simplification proposal; Article 50 transparency duties are already reshaping adland practice.
+- An imec-SMIT (VUB) paper, May 2026, argues adoption alone confers neither control nor revenue —
+  value accrues to whoever controls infrastructure, data, models and rights — and warns that smaller
+  and regional media players risk being left behind. That is the pitch for giving a regional
+  broadcaster its own description layer rather than renting one.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1224,6 +1294,43 @@ mode.**
 tracker is paywalled and Statista's China series was not retrievable. One snippet reporting "active
 screens falling by 42 year over year to 498" **names no country and is therefore not recorded.**
 Deliberately left as a gap rather than estimated.
+
+#### Pass 11 (2026-11-26) — the description & semantic-interchange plane
+
+**APAC has the most concrete *recent* work product in this plane of any region, and it is Japanese.**
+The W3C **Media Content Metadata Japanese Community Group (`mcm-jp`)** published a final report,
+**"Practical Use Cases of Media Content Metadata Interoperability", dated 2026-06-09**. A
+jurisdiction-specific, standards-body-published, 2026 document on exactly this plane is a rare
+artefact — most regions in this pass offered trade-press forecasts instead. Use it as the anchor
+reference for any Japanese media-metadata engagement.
+*(Channel note: the W3C report URL did not resolve from this session; it is recorded from search
+results and should be re-fetched when w3.org is reachable.)*
+
+**The region also has the clearest production deployment.** **ABC (Australia)** used **Gemini 2.0
+Flash via Vertex AI** to generate descriptive metadata for its archive and has integrated AI tagging
+**directly into the content pipeline** — not a pilot. The **ABU** (Asia-Pacific Broadcasting Union)
+reports public broadcasters in **Australia and Singapore** exploring AI for newsroom workflows,
+**archiving and verification**, and frames the regional challenge as complexity rather than pace.
+
+**What that combination means commercially:** APAC is the region where the buyer is most likely to
+have *already chosen a hosted frontier model* for cataloguing. The competitive position for open
+source here is not "instead of Gemini" but **the vocabulary and validation layer around it** — Annif
+or GLiNER constrained to the client's own controlled vocabulary, so output is auditable against a
+thesaurus rather than free text. ABC's own framing (AI tagging in the pipeline) implies they already
+need that constraint.
+
+**Regulation is divergent by design.** Latham & Watkins (September 2026) sorts APAC into three
+categories — binding risk-based frameworks (South Korea, Vietnam), targeted rules (China's), and a
+third — with **content labelling** a particular focus. Malaysia is weighing AI rules and anti-piracy
+provisions in a copyright overhaul. ASEAN policymakers see a need for regional cooperation on media
+regulation but progress is slow. The asset for this region is therefore a **per-jurisdiction policy
+engine**, the same conclusion pass 8 reached for rights reservation — labelling obligations are
+metadata obligations, and they differ by country.
+
+**Market context:** the Asia-Pacific screen economy is reported racing toward **$200bn** with a
+monetisation gap defining the decade (Variety); APOS 2026 in Bali ran AI through the whole programme,
+with Tencent Video and iQIYI named as generative-AI investors. Kantar finds roughly **one in three
+APAC consumers** use AI to research brands, varying widely by market.
 
 ### LATAM
 
@@ -1699,6 +1806,52 @@ quotas under IN 165 were **not retrievable** (the Ancine guide is a `.docx` behi
 download handler); the enactment status of Mexico's Act is **contradicted between sources**. Both
 recorded as gaps. No LATAM screen count was verifiable either.
 
+#### Pass 11 (2026-11-26) — the description & semantic-interchange plane
+
+**The finding of this pass for LATAM: the region is not a consumer of this plane's infrastructure —
+it built a piece of it.** **TemaTres** (https://github.com/tematres/TemaTres-Vocabulary-Server) is a
+SKOS/thesaurus vocabulary server at **142★, pushed 2026-11-25** — the day before this pass — and it
+is **Argentine**: copyright Diego Ferreyra, `tematres@r020.com.ar`, GPL-2.0-or-later declared in
+`readme.md` and in every source header. It is the **second most-starred controlled-vocabulary server
+on GitHub**, behind Finland's Skosmos (269★) and ahead of everything else in the category.
+
+This matters beyond pride. Every prior pass placed LATAM as a *buyer* of open source built elsewhere.
+Here a LATAM-origin, two-decade-old, actively maintained tool **is** the regional reference
+implementation, and it is the natural anchor for a Spanish-language cataloguing engagement — the
+vocabulary layer speaks the client's language because it was written in it. Two caveats to state
+honestly: it is **GPL-2.0-or-later** (copyleft, so a hosted-service client must accept that or
+contribute back), and its licence is **not in a `LICENSE` file**, so automated SBOM scanning and the
+GitHub API both report it as unlicensed. Expect to have to prove the grant to a client's legal team;
+the evidence is `readme.md` plus the header of every `.php` file.
+
+**The archival-standards angle is also LATAM-specific.** arXiv **2605.16338** ("Vidya") describes an
+LLM + FOSS pipeline for semantic enrichment and archival ingestion reported compliant with
+**NOBRADE** (the Brazilian archival description standard) and **ISAD(G)**, explicitly designed for
+low-cost deployment on modest hardware in memory institutions — which is the correct shape for the
+region's budgets. **No code was found on GitHub under that name** (`vidya archival metadata` = 0
+results). Treat it as a design to implement, not a dependency to adopt; and note that a NOBRADE-aware
+description pipeline is a genuinely differentiated offer, because nothing open implements it.
+
+**Regulation moved in 2026, and it moved first for media:**
+- **Mexico** published amendments to its **copyright and labour laws on 2026-05-14** — reported as
+  **the first sector-specific AI regulation in Mexico** — and a new **audiovisual law extended
+  regulatory oversight for the first time to digital VOD platforms**. Sector-specific plus
+  VOD-in-scope is the combination that creates metadata and labelling duties.
+- **Peru**: the regulation of **Law No. 31814 took effect in January 2026**, promoting AI while
+  reducing risks across health, education, justice and citizen security.
+- No regional model exists; no LATAM country has a fully harmonised AI regime. **Deepfakes, synthetic
+  media and identity fraud are becoming enforcement priorities** — which is a provenance-and-
+  description demand, not only a moderation one.
+
+**The buyer remains the newsroom, and now there is a reason it can act.** Pass 8 established the
+newsroom as LATAM's hottest buyer (FLIP in Colombia, ADEPA in Argentina, SiPreBA, IAPA, Aspen
+Digital's "Mind the Gap") because an organisation that has written an AI policy has committed to
+evidencing it. This pass supplies what that evidencing actually requires: a controlled vocabulary, a
+description schema, and a subject-assignment tool — **TemaTres + ninjs + Annif, all three usable in
+Spanish, two of three LATAM- or EU-public-institution maintained.** Latam-GPT (CENIA Chile, 30+
+institutions across 8 countries) is the regional model to pair with them. Adoption headroom is real:
+only **6% of Latin Americans access news through AI tools**.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -1731,3 +1884,31 @@ recorded as gaps. No LATAM screen count was verifiable either.
    pre-August AI systems must meet the Article 50(2) marking-and-detection duty. North America:
    **2027-01-01**, when the California AI Transparency Act's obligations on AI *hosting platforms*
    begin. Both are remediated by the same Pattern 8 build.
+
+## Market size — pass 11 addendum (2026-11-26): the description & cataloguing segment
+
+The plane this pass covers has its own sizing, and it is **the most scope-dependent number in this
+KB.** Media Asset Management for 2026, from four firms:
+
+| Source | 2026 size | Forecast | Note |
+|---|---|---|---|
+| Coherent Market Insights | **$2.39bn** | → $6.47bn by 2033 | Archive & storage management is the **largest segment, 25.8% share in 2026** |
+| Fortune Business Insights | **$2.58bn** | → $7.29bn by 2034 | |
+| MarkWide Research | **$3.8bn** | → $10.04bn by 2035 | |
+| The Business Research Company | **$8.8bn** | — | **3.7× the lowest estimate for the same year** |
+| Meticulous Research | — | → $7.23bn by 2035, CAGR 13.9% from 2025 | |
+
+**A 3.7× spread between firms for the same year is the finding, not a detail.** Some count only
+media-specific MAM software; others fold in broader digital asset management, services, hardware and
+archive storage. **Never quote a single MAM figure to a client without naming the firm and the
+scope.** A separate Media Archive Solution report gives CAGR **8.31%** (2025-2032) and notes that
+AI-driven automated metadata tagging "revolutionised archive searchability" by enabling frame-accurate
+retrieval — which is the benefit statement this plane sells, from a market-research source rather than
+a measured study.
+
+What the vendors agree on, and what it means for Globant: Coherent says AI is automating **metadata
+tagging, content indexing, quality control and rights management**; Technavio describes the market
+"rapidly transitioning from passive archive storage into highly intelligent, automated workflow
+orchestration hubs." Both are describing *the judgment layer this pass measured as one repo deep.*
+The demand is priced in; the open supply is Annif. That gap is the commercial opportunity, and it is
+also the reason not to promise it as off-the-shelf.

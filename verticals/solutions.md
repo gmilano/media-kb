@@ -667,3 +667,74 @@ not put a model inside `asdcplib`. Put an agent above the pipeline:
    present, correctly labelled and actually render, *before* the key ships. This is Pattern 29.
 
 Full recipes: Patterns 28–30 in `compose/patterns.md`.
+
+## Description, cataloguing & syndication platforms — measured 2026-11-26 (pass 11)
+
+Pass 4 catalogued archival *repositories* as preservation systems. This section is the different
+question a client actually asks: **what do we run that lets a human or an agent describe, catalogue
+and then syndicate the asset?** Licences below are the verified file, not the API's guess.
+
+### Newsroom & editorial systems — the plane's commercial centre, and it is all copyleft
+
+| Platform | Repo | License | Stars / forks | Last push | What you get |
+|---|---|---|---|---|---|
+| Superdesk | https://github.com/superdesk/superdesk | **AGPL-3.0** | 760★ / 236f | 2026-11-23 | Sourcefabric's end-to-end newsroom: ingest, authoring, curation, archive, distribution. Python. The only serious open newsroom CMS |
+| Superdesk Core | https://github.com/superdesk/superdesk-core | AGPL-3.0 | 32★ / 89f | 2026-11-25 | The backend you actually extend (note forks ≫ stars — a build-on repo) |
+| Superdesk Newshub | https://github.com/superdesk/newsroom | GPL-3.0 | 24★ / 32f | 2026-11-23 | **Content distribution / syndication** store fed by Superdesk output — the closest open thing to a wire-service delivery tier |
+| Wagtail | https://github.com/wagtail/wagtail | BSD-3-Clause | 20779★ / 4750f | 2026-11-26 | Django CMS. **The only permissive option in this table**, and the pragmatic base when AGPL is refused |
+
+**The constraint to state in any proposal:** every purpose-built open newsroom system is AGPL or GPL.
+If the client will not accept AGPL for a hosted service, there is **no open-source newsroom CMS for
+them** — the honest answer is Wagtail plus custom editorial workflow, not Superdesk.
+
+### Cataloguing & description systems
+
+| Platform | Repo | License | Stars / forks | Last push | What you get |
+|---|---|---|---|---|---|
+| ArchivesSpace | https://github.com/archivesspace/archivesspace | **ECL-2.0** (`COPYING`, 748 B — Educational Community License, an OSI-approved Apache-2.0 variant) | 450★ / 255f | 2026-11-25 | Archival description **and a metadata authoring tool** — emits EAD, MARCXML, MODS, Dublin Core, METS |
+| CollectiveAccess Providence | https://github.com/collectiveaccess/providence | GPL-3.0 | 389★ / 200f | 2026-11-25 | Cataloguing with **out-of-the-box PBCore support**; the configurable choice for AV collections |
+| Omeka S | https://github.com/omeka/omeka-s | GPL-3.0 | 534★ / 179f | 2026-11-24 | **Dublin Core native** publishing platform |
+| ↳ OAI-PMH Repository module | https://github.com/Daniel-KM/Omeka-S-module-OaiPmhRepository | GPL-3.0 | 5★ / 7f | 2026-10-05 | Exposes Omeka S items to harvesters **and appends IIIF `info.json` + manifest links to the Dublin Core records** — the single cheapest way to make a collection both harvestable and IIIF-viewable |
+| Pinakes | https://github.com/fabiodalez-dev/Pinakes | GPL-3.0 | 95★ / 11f | 2026-11-25 | Library cataloguing app; the one real hit from `automatic cataloging library` |
+
+### Repositories & discovery — the exposure tier
+
+| Platform | Repo | License | Stars / forks | Last push | Role |
+|---|---|---|---|---|---|
+| DSpace | https://github.com/DSpace/DSpace | BSD-3-Clause | 1116★ / 1509f | 2026-11-23 | Repository; **permissive**, and forks ≫ stars |
+| Dataverse | https://github.com/IQSS/dataverse | Apache-2.0 (`LICENSE.md`, 10889 B) | 1080★ / 574f | 2026-11-24 | Repository for datasets; **permissive** |
+| Blacklight | https://github.com/projectblacklight/blacklight | Apache-2.0 (`LICENSE`, 788 B) | 800★ / 254f | 2026-11-24 | Solr-backed **discovery UI**; permissive |
+| Fedora | https://github.com/fcrepo/fcrepo | Apache-2.0 | 255★ / 138f | **2026-11-26** | Repository architecture with OAI-PMH support; permissive, pushed the day of this pass |
+| VuFind | https://github.com/vufind-org/vufind | GPL-2.0 | 311★ / 404f | 2026-11-25 | Discovery layer |
+| Islandora | https://github.com/Islandora/islandora | GPL-2.0 (`LICENSE`, 18092 B) | *not in the search index* — see method note in `repos/foundations.md` | — | Drupal + Fedora repository framework |
+| ↳ Islandora documentation | https://github.com/Islandora/documentation | MIT | 112★ / 69f | 2026-11-25 | The citable, indexed companion repo |
+| ↳ Islandora Metadata Committee | https://github.com/islandora-interest-groups/Islandora-Metadata-Committee | no licence file | 37★ / 42f | 2026-11-20 | Where the community's metadata mappings are argued out |
+
+### IIIF — the one genuinely permissive, genuinely healthy sub-stack in this plane
+
+| Platform | Repo | License | Stars / forks | Last push | Role |
+|---|---|---|---|---|---|
+| Mirador | https://github.com/ProjectMirador/mirador | Apache-2.0 | 625★ / 280f | 2026-11-25 | Multi-window IIIF viewer; comparison and annotation |
+| Universal Viewer | https://github.com/UniversalViewer/universalviewer | MIT (`LICENSE.txt`, 1227 B — Wellcome, British Library, NLW) | 576★ / 210f | 2026-11-25 | Embeddable IIIF viewer |
+| Cantaloupe | https://github.com/cantaloupe-project/cantaloupe | **NCSA** (`LICENSE.txt`, 1870 B — University of Illinois/NCSA Open Source License, BSD-style permissive) | 308★ / 124f | 2026-11-23 | IIIF **image server**; dynamic derivatives |
+| Goobi viewer | https://github.com/intranda/goobi-viewer-core | GPL-2.0 | 27★ / 17f | 2026-11-20 | Presentation of digitised cultural assets |
+
+Three of four IIIF components are permissive (Apache-2.0, MIT, NCSA) and all four were pushed within
+six days of this pass. **IIIF is the recommendation when a client needs image/AV delivery with
+structure and annotation and cannot take copyleft** — it is the exception to this plane's copyleft rule.
+
+### Informed gaps — searched, and genuinely not there
+
+- **VocBench 3** is real and BSD-3-licensed per the EU's SEMIC catalogue, and was the system used to
+  manage **EuroVoc** — but it has **no canonical GitHub repository**. Searching `vocbench` returns
+  only third-party Dockerfiles at 1-4★. Its home is outside GitHub; do not cite a GitHub slug for it.
+- **ShowVoc**, the second platform the EU Publications Office runs alongside VocBench, has **no
+  meaningful GitHub presence** — the top `showvoc` result is 0★.
+- **pymarc** (MARC record handling in Python) is **archived on GitHub** at `edsu/pymarc` (259★, last
+  push 2020-02-03). The live project is on GitLab at https://gitlab.com/pymarc/pymarc — the only one
+  of the 60 URLs in this pass that returned HTTP 200 through curl. Cite the GitLab URL.
+- **No open-source system was found that does IIIF delivery *and* OAI-PMH harvesting out of the
+  box.** The Omeka S module above is the closest, and it is a 5★ module. Assembling that pair is
+  integration work, not adoption.
+- **No open implementation of EBUCorePlus tooling** was found beyond the ontology itself — the only
+  Java port, `jebu-core`, targets the old EBUCore and died in 2018.

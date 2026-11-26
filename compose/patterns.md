@@ -1545,3 +1545,134 @@ products.** That is the whole reason this pattern is buildable at all.
   `bbc/bmx` archived 2025-09-29, `sandflow/regxmllib` archived 2026-11-22, `bbc/libMXF` relocated
   into an `-archive` org, the EBU's library last touched in 2013. Permissive-and-abandoned is a
   worse dependency risk than copyleft-and-alive, and no licence scan, SPDX field or SBOM reports it.
+
+## Pattern 31 — The description backfill: make an unsearchable archive retrievable before anyone trains a model
+
+**The problem.** A broadcaster or publisher has decades of assets with filenames, durations and
+little else. Every "AI over our archive" proposal dies the same way: retrieval is impossible over
+assets that carry no description, so the model has nothing to rank. The MAM vendors have priced this
+demand in — Coherent names "metadata tagging, content indexing" as the growth driver, and archive &
+storage management is the largest MAM segment at **25.8% share in 2026** — while the open supply for
+the *judgment* step is one repository deep.
+
+**The recipe — four stages, all verified in pass 11, no component licensed shut:**
+
+1. **Technical + structural pass.** `MediaArea/MediaInfo` (BSD-2-Clause, 2079★) over the whole
+   corpus. It is the only tool found that **emits EBUCore and PBCore 1.2/2.1 directly**, so stage 1
+   output is already in a broadcast schema rather than a bespoke JSON blob. For AV, add
+   `ina-foss/inaSpeechSegmenter` (MIT, 919★) to segment speech / music / noise — that gives you
+   per-segment boundaries to describe, instead of one row per file.
+2. **Transcribe and extract entities.** Whisper (already in this KB's foundations, MIT) → then
+   `urchade/GLiNER` (Apache-2.0, 4296★) for **zero-shot** NER, because an archive's entity types are
+   the client's own and GLiNER needs no retraining to accept them. Link what you extract with
+   `UB-Mannheim/spacyopentapioca` (MIT) over `opentapioca/opentapioca` (Apache-2.0) to put **Wikidata
+   QIDs** on people, places and organisations — stable identifiers, not strings.
+3. **Assign subjects against a controlled vocabulary — the step everyone skips.** Publish the
+   client's thesaurus with `NatLibFi/Skosmos` (MIT, 269★) on `apache/jena` Fuseki (Apache-2.0), or
+   with `tematres/TemaTres-Vocabulary-Server` (GPL-2.0-or-later, 142★) for a Spanish-language
+   engagement. Then train `NatLibFi/Annif` (Apache-2.0, 280★) on that SKOS vocabulary plus whatever
+   catalogue records already exist, and have it assign subject headings to the backfill. Where no
+   thesaurus exists, seed from **IPTC Media Topics (~1,100 terms, CC BY 4.0 — attribution only, and
+   the grant explicitly permits commercial use)**.
+4. **Emit in an interchange schema and expose it.** Serialise to `iptc/newsinjson` (ninjs, MIT) or
+   NewsML-G2 via `iptc/python-newsmlg2` (MIT) for news; EBUCore/PBCore from stage 1 for AV; add
+   `schemaorg/schemaorg` `NewsArticle`/`VideoObject` for the public web. Expose for harvest with
+   Omeka S (GPL-3.0) + `Daniel-KM/Omeka-S-module-OaiPmhRepository` (GPL-3.0), which appends **IIIF
+   `info.json` and manifest links to the Dublin Core records** in one module, and serve images through
+   `cantaloupe-project/cantaloupe` (NCSA) with `ProjectMirador/mirador` (Apache-2.0) on top.
+
+**Why it closes.** Stage 3 is the differentiator and the reason this is a build rather than a
+purchase: competitors will deliver stages 1, 2 and 4 as free-text tags. Subject assignment **against
+the client's own vocabulary** is auditable — every heading traces to a thesaurus concept — which is
+what turns "we tagged the archive" into something a rights, compliance or editorial team will accept.
+
+**The two things to say out loud in the proposal.**
+- **Annif's training corpora are not licensed.** `NatLibFi/Annif-corpora` has no licence file. You
+  train on *the client's own* catalogue records; budget the annotation, and do not plan to bootstrap
+  from someone else's labelled data.
+- **Licence boundary.** Stages 1-2 and the schema layer are permissive (BSD/MIT/Apache/CC BY).
+  Stage 4's exposure tier and TemaTres are **copyleft**. If the client refuses copyleft for a hosted
+  service, swap Omeka S for a permissive repository — `IQSS/dataverse` (Apache-2.0) or `DSpace/DSpace`
+  (BSD-3) — and keep IIIF, which is permissive in three of its four components.
+
+---
+
+## Pattern 32 — The EBUCore version gate: a two-hour check that decides whether a metadata programme is legal
+
+**The problem.** A European broadcaster asks Globant to model or migrate its media metadata. The
+obvious move is to adopt the EBU's standard. **EBUCore (Tech 3293) is CC BY-NC-SA 3.0 —
+NonCommercial** (verified: `ebu/ebucore/master/LICENSE.md`, 386 B). Its successor **EBUCorePlus is
+MIT** (`ebu/ebucoreplus`, 30★). The widely installed generation is the one Globant cannot build
+commercial work on, and nothing in a vendor deck or an SBOM scan of a source tree will tell you which
+one the client is on.
+
+**The recipe.**
+1. **Establish the generation before scoping.** Ask for the client's metadata model and look for
+   EBUCorePlus v2.0/v2.1 markers versus Tech 3293 EBUCore. Treat the answer as a gating question with
+   a contractual consequence, not a technical detail.
+2. **If EBUCorePlus (MIT):** proceed. Model against `ebu/ebucoreplus`, generate from the ontology,
+   and use `MediaArea/MediaInfo` (BSD-2) for EBUCore-shaped technical extraction — the *tool* is
+   BSD-2 regardless of the ontology's terms.
+3. **If legacy EBUCore (CC BY-NC-SA 3.0):** do not redistribute or build a commercial deliverable on
+   the ontology. Two lawful routes: (a) **migrate the client to EBUCorePlus** as the first work
+   package — which is a sellable project with an EBU-backed rationale, since EBUCorePlus is the EBU's
+   current flagship; or (b) model in **IPTC (CC BY 4.0, commercial use expressly granted)** or
+   **schema.org (Apache-2.0)** and crosswalk at the boundary. The **W3C Ontology for Media
+   Resources** defines a core property set with mappings between EBUCore, Dublin Core and others, and
+   is the reference for that crosswalk.
+4. **Never cite `mikrosimage/jebu-core`** as an EBUCore implementation: GPL-2.0 and **dead since
+   2018-06-13**. There is no maintained open EBUCorePlus tooling beyond the ontology itself — that
+   absence is itself a build opportunity, at 30★ and 8 forks.
+5. **Record the determination in writing** with the licence file and byte count as evidence, because
+   the GitHub API reports `NOASSERTION` for `ebu/ebucore` and an automated scan will therefore report
+   *nothing* where the real answer is "NonCommercial".
+
+**Why it matters now.** **TEMS** (Trusted European Media Data Space), with the EBU a founding partner
+and Digital Europe Programme funding, **runs 2023-2026 and concludes this year**, and the **EUIPO's
+2026-05-28 mapping study** found that poor interoperability between copyright-related metadata
+standards "triggers major inefficiencies." EMEA buyers have both a deadline and an institutional
+citation. The engagement they are about to fund is exactly the one this licence question gates.
+
+---
+
+## Pattern 33 — Evidencing an AI policy for a Spanish-language newsroom (the LATAM build with its own reference implementation)
+
+**The problem.** Pass 8 established that LATAM's hottest buyer is the newsroom, because an
+organisation that has published an AI policy (FLIP in Colombia, ADEPA in Argentina, SiPreBA, IAPA,
+Aspen Digital's "Mind the Gap") has committed to **evidencing** it. Pass 11 supplies what evidencing
+requires — and, unusually, the components are regional.
+
+**The recipe.**
+1. **Vocabulary layer, in Spanish, LATAM-built.** `tematres/TemaTres-Vocabulary-Server` — 142★,
+   pushed 2026-11-25, **GPL-2.0-or-later**, © Diego Ferreyra, Argentina. The second most-starred
+   controlled-vocabulary server on GitHub. Seed it from **IPTC Media Topics (CC BY 4.0)**, which is
+   published in multiple languages, rather than inventing a taxonomy.
+2. **Subject assignment.** `NatLibFi/Annif` (Apache-2.0) trained on the newsroom's own archive plus
+   the TemaTres vocabulary. Annif was built precisely because Finnish and Swedish were poorly served
+   by existing tools — the same argument applies to Spanish and Portuguese, and it is the reason to
+   prefer it over an English-first hosted tagger.
+3. **Description and syndication schema.** `iptc/newsinjson` (ninjs, MIT) as the record format;
+   `superdesk/superdesk` (AGPL-3.0, 760★) if the client needs the full newsroom system, or
+   `wagtail/wagtail` (BSD-3) plus custom workflow if AGPL is refused. `superdesk/newsroom` (GPL-3.0)
+   is the open syndication tier.
+4. **Provenance join.** Pass 9's C2PA layer attaches to the same records, so "what we published",
+   "how it was made" and "what subject we filed it under" resolve to one auditable object.
+
+**The deliverable is a report, not a pipeline.** The buyer's obligation is to show a regulator, a
+funder or its own readers that the published policy is being followed. Output: per-article subject
+headings traceable to a named vocabulary concept, AI-involvement provenance, and a dated log.
+
+**Three honest caveats to put in the proposal.**
+- **TemaTres' licence is not in a `LICENSE` file** — it is declared in `readme.md` and in every
+  source header, so the GitHub API and SBOM scanners both report it as unlicensed. Expect to prove
+  the GPL-2.0-or-later grant to the client's legal team; the evidence is cited above.
+- **GPL-2.0-or-later is copyleft.** For a hosted multi-tenant service, confirm the client accepts it.
+- **NOBRADE is unimplemented.** arXiv 2605.16338 ("Vidya") describes an LLM+FOSS archival pipeline
+  reported compliant with **NOBRADE** and ISAD(G) for low-cost deployment in memory institutions, but
+  **no code exists on GitHub under that name**. For a Brazilian archival engagement that is a
+  genuinely differentiated build — and it is a build, not an adoption.
+
+**Regulatory timing.** Mexico's **2026-05-14** copyright and labour amendments are reported as its
+first sector-specific AI regulation, and a new audiovisual law extended oversight to **VOD platforms**
+for the first time; Peru's **Law 31814** regulation took effect **January 2026**. Sector-specific
+rules plus VOD-in-scope create description and labelling duties on a clock.

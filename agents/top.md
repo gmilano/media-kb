@@ -878,3 +878,105 @@ actually good at. See Patterns 28–30 in `compose/patterns.md`.
   layer is 3 stars across its top eight repos.
 - **No open preshow/cinema-advertising stack.** Zero results. Cinema advertising is a real market
   (Statista tracks it as its own APAC category) with no open substrate at all.
+
+## The description & semantic-interchange plane — measured 2026-11-26 (pass 11), and the **first plane in this KB whose agent layer is permitted but still unbuilt**
+
+Ten passes have found the same shape: a plane with no agent layer, because the knowledge content the
+agents would need was licensed shut (CPT, MedDRA, ISRC/ISWC/ISAN/EIDR/CWR, MovieLabs). This plane is
+the **control case** the law needed. Here the knowledge content is *openly licensed* — and the result
+is neither the usual zero nor a healthy field. It is a **three-step gradient inside one plane**, and
+it is the most precise statement the structural law has had.
+
+### How the gap was found — the vocabulary probe again, two Bash calls, before any web search
+
+| Term | Files | Hits | Verdict |
+|---|---|---|---|
+| `IPTC`, `NewsML`, `ninjs`, `NITF`, `EBUCore`, `PBCore`, `Dublin Core`, `schema.org` | 0 | **0** | The interchange schemas are absent |
+| `XMP`, `exiftool`, `syndication`, `wire service`, `cataloguing`, `metadata schema` | 0 | **0** | The description substrate is absent |
+| `SKOS`, `thesaurus`, `controlled vocabulary`, `authority control` | 0 | **0** | The vocabulary layer is absent |
+| `Wikidata`, `named entity`, `entity linking`, `knowledge graph`, `semantic search`, `ontolog*` | 0 | **0** | The linking layer is absent |
+| `OAI-PMH`, `IIIF`, `Omeka`, `DSpace`, `CollectiveAccess`, `Dataverse` | 0 | **0** | The exposure protocols are absent |
+| `Sofie` | 7 | **165** | **Already covered** — pass 8 took newsroom *playout*, not description |
+| `AtoM`, `ArchivesSpace`, `Islandora`, `fedora`, `MARC` | 4–6 | 15–28 | **Already covered** — pass 4 took archival *repositories*, not cataloguing |
+| `C2PA`, `provenance` | 7–8 | 51–64 | **Already covered** — pass 9 took *provenance*, not description |
+
+The KB could already **identify** an asset (pass 5), **prove** it (pass 9), **preserve** it (pass 4)
+and **play it out** (pass 8). It could not **describe, catalogue or syndicate** it. That is the
+bottleneck under every "AI over the client's archive" engagement: retrieval is impossible over
+assets that carry no description.
+
+### Tier 1 — Permissive, actively maintained, safe to build on
+
+| Agent | Repo | License | Stars / forks | Last push | What it actually does |
+|---|---|---|---|---|---|
+| spaCy | https://github.com/explosion/spaCy | MIT | 34094★ / 4753f | 2026-11-21 | The pipeline substrate the rest of this table plugs into |
+| flair | https://github.com/flairNLP/flair | MIT (`LICENSE`, 1166 B, Zalando SE) | 14400★ / 2095f | 2026-10-19 | NER + entity linking framework; sequence labelling over news text |
+| GLiNER | https://github.com/urchade/GLiNER | Apache-2.0 | 4296★ / 327f | 2026-11-11 | **Zero-shot NER** — arbitrary entity types with no retraining, which is what an archive with a bespoke subject list actually needs |
+| inaSpeechSegmenter | https://github.com/ina-foss/inaSpeechSegmenter | MIT | 919★ / 149f | 2026-03-12 | Speech/music/noise segmentation for AV archive indexing, from **INA**, the French national audiovisual institute — the most-starred purpose-built archive-indexing tool found in this plane |
+| **Annif** | https://github.com/NatLibFi/Annif | **Apache-2.0** (`LICENSE.txt`, 606 B, University of Helsinki) | 280★ / 50f | 2026-11-24 | **Automated subject indexing against a controlled vocabulary.** Trains on a SKOS thesaurus + existing catalogue records and assigns subject headings to new documents. Powers Finto AI, a national service, since May 2020 |
+| OpenTapioca | https://github.com/opentapioca/opentapioca | Apache-2.0 | 263★ / 30f | 2026-08-26 | Lightweight **Wikidata** entity linking, kept in sync with Wikidata in real time |
+| spacyopentapioca | https://github.com/UB-Mannheim/spacyopentapioca | MIT | 96★ / 8f | 2026-02-05 | spaCy wrapper for OpenTapioca — the one-line way to put Wikidata linking in an existing pipeline |
+| Annif-client | https://github.com/NatLibFi/Annif-client | Apache-2.0 (`LICENSE.txt`, 601 B) | 3★ / 3f | 2025-09-25 | Thin REST client for a hosted Annif; use when you do not want to train |
+
+Note the shape: **one** tool does the actual judgment (Annif), and it comes from a *national library*,
+not a media company. Everything above it in the star ranking is general-purpose NLP that knows
+nothing about media vocabularies.
+
+### Tier 2 — Real, but the licence or the staleness constrains client work
+
+| Agent | Repo | License | Stars / forks | Last push | Constraint |
+|---|---|---|---|---|---|
+| amalia.js | https://github.com/ina-foss/amalia.js | MIT | 191★ / 36f | 2023-08-28 | INA's metadata-overlay player. Permissive but **dormant >3 years** |
+| twembeddings | https://github.com/ina-foss/twembeddings | MIT | 33★ / 5f | 2026-06-30 | INA event detection/clustering over social text; research-grade |
+| afp-api-client | https://github.com/ina-foss/afp-api-client | LGPL-3.0 | 3★ / 0f | 2023-12-05 | Agence France-Presse wire client — the only open wire-service client found. Dormant, and LGPL |
+| Annif-corpora | https://github.com/NatLibFi/Annif-corpora | **NO LICENSE FILE** | 8★ / 6f | 2026-10-09 | See below — this is the finding of the pass |
+| metadata-extraction | https://github.com/icaew-digital-archive/metadata-extraction | **NO LICENSE FILE** | 3★ / 0f | 2026-11-24 | LLM → Dublin Core JSON cataloguing with archivist review. Live two days before this pass, and **unlicensed** |
+
+### The finding: Annif is Apache-2.0 and **Annif-corpora is not licensed at all**
+
+`NatLibFi/Annif` carries a clean Apache-2.0 grant. `NatLibFi/Annif-corpora` — the labelled training
+corpora **without which Annif assigns nothing** — has no licence file on either branch, with the
+control request passing (`README.md` on `master` = 200, so the probe's filenames are not at fault).
+`NatLibFi/Finto-data` (21★, pushed 2026-11-26, the day of this pass) is explicitly **mixed**: its
+`LICENSE` opens "This repository contains code and data under various open source licenses. Code
+under `tools/` is generally licensed under the MIT License, unless explicitly stated otherwise".
+
+So the law survives its control case, in a sharper form than before:
+
+> **The code was never the bottleneck. In every plane, the thing that is not granted is the
+> knowledge content — and when the *schema* is finally granted (IPTC, CC BY 4.0), the withheld
+> layer moves down to the *labelled corpus* that teaches a machine to apply it.**
+
+An open schema buys you the format. It does not buy you the judgment, because judgment is trained on
+annotated records, and those are the asset an institution does not give away. This is why the plane
+is permitted but unbuilt.
+
+### Measured: the judgment layer is one repo deep, and the searches that should find rivals return other industries
+
+Per pass 8's rule — read the results, not the total:
+
+| Query | Results | Top-6 star sum | What is actually in the top 6 |
+|---|---|---|---|
+| `subject indexing` | 257 | 437 | **Annif (280★) and then nothing** — ranks 2-6 are `OK-`, `sahabatfb`, `Aim`, `Theme`, `DAWD`, all 2014-2022, all unlicensed, all unrelated |
+| `automated cataloguing` | 203 | 753 | **Top hit is a security recon tool** — `chrismaddalena/ODIN`, BSD-3, 670★, archived 2022. Zero relevance |
+| `metadata enrichment` | 1043 | 1392 | **False abundance** — top hit is a *Kubernetes fluentd plugin* (355★). Only one media item: INA's `amalia.js` |
+| `automatic cataloging library` | 61 | 141 | One real: `fabiodalez-dev/Pinakes` (GPL-3.0, 95★, 2026-11-25) |
+| `controlled vocabulary` | 531 | 1141 | Real: Skosmos 269★, TemaTres 142★. The rest is climate (`CMIP6_CVs`) and privacy (`w3c-cg/dpv`) |
+| `archival metadata LLM agent` | 8 | 3 | **Empty.** Top results 0-2★, none relevant |
+| `vidya archival metadata` | **0** | — | arXiv 2605.16338 describes an LLM+FOSS archival pipeline. **No code under that name on GitHub** |
+
+`automated cataloguing` returning a penetration-testing tool is this pass's `eidr`/`isan`: a query
+that looks productive and is answering a different industry. Four of the seven queries above are
+false friends or false abundance.
+
+### The agentic layer is papers, not code — stated precisely
+
+Two 2026 arXiv papers describe exactly the agent this plane needs: **2504.05711** (a multi-agent
+archival-metadata framework with several LLMs, a validator and a federator) and **2605.16338**
+("Vidya", an LLM + FOSS pipeline for semantic enrichment and archival ingestion, reported compliant
+with **NOBRADE** and **ISAD(G)** and designed for low-cost deployment on modest hardware in memory
+institutions). Neither has locatable released code from this session. The only live LLM-cataloguing
+repo found anywhere is ICAEW's, at 3★ and unlicensed.
+
+**Do not promise a client an off-the-shelf agentic cataloguing stack.** The format layer is ready,
+the judgment layer is one national-library tool, and the agentic layer is two preprints.

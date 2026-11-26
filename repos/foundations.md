@@ -1466,3 +1466,96 @@ with no open tooling and no commercial open alternative.
   which surfaced the new location and its forks in one call. And a new consequence worth watching
   for: when the new owner is an `*-archive` org, **the relocation is the finding** — it means the
   maintainer has formally retired the project.
+
+## The description & semantic-interchange plane — foundations, measured 2026-11-26 (pass 11)
+
+Everything below was verified in this session: existence by `git ls-remote`, stars/forks/push date by
+`search/repositories`, and **licence by fetching the actual file over the raw channel**. Where the
+GitHub API reported `NOASSERTION`, the real licence is given with the filename and byte count that
+proves it.
+
+### Tier 1 — The interchange schemas, and they are permissively licensed
+
+| Project | Repo | License | Stars / forks | Last push | Role |
+|---|---|---|---|---|---|
+| schema.org | https://github.com/schemaorg/schemaorg | Apache-2.0 | 6320★ / 975f | 2026-11-25 | `NewsArticle`, `VideoObject`, `ClaimReview`. The vocabulary AI answer engines actually consume |
+| ninjs (News in JSON) | https://github.com/iptc/newsinjson | MIT | 47★ / 10f | 2026-11-24 | IPTC's JSON news format; schema + examples + generator. Versions 1.7, 2.3, 3.2 |
+| NewsML-G2 | https://github.com/iptc/newsml-g2 | **CC-BY-4.0** (`LICENSE`, 901 B) | 20★ / 5f | 2026-11-20 | The XML news interchange standard, v2.34, with unit tests |
+| python-newsmlg2 | https://github.com/iptc/python-newsmlg2 | MIT | 6★ / 4f | 2026-11-11 | IPTC's own Python library for NewsML-G2, v1.0 |
+| Video Metadata Hub | https://github.com/iptc/video-metadata-hub | MIT (`LICENSE`, 1066 B) | 2★ / 0f | **2026-11-25** | IPTC's video metadata mapping — pushed the day before this pass |
+| IPTC catalog | https://github.com/iptc/catalog | MIT (`LICENSE`, 1061 B) | 3★ / 0f | 2026-11-17 | Catalog files resolving IPTC scheme URIs |
+| Sports NewsCodes | https://github.com/iptc/sports-newscodes | **CC-BY-4.0** (`LICENSE`, 444 B) | 1★ / 0f | 2023-09-29 | **Primary evidence for the whole vocabulary licence — see below** |
+| EBUCorePlus | https://github.com/ebu/ebucoreplus | **MIT** | 30★ / 8f | 2026-10-02 | EBU's current flagship media-enterprise ontology, v2.0/v2.1 |
+| awesome-broadcasting | https://github.com/ebu/awesome-broadcasting | CC0-1.0 | 1805★ / 237f | 2026-09-30 | EBU's own curated index; the highest-starred thing in the EBU org |
+
+### Tier 1 — Vocabulary servers and description tooling
+
+| Project | Repo | License | Stars / forks | Last push | Role |
+|---|---|---|---|---|---|
+| OpenRefine | https://github.com/OpenRefine/OpenRefine | BSD-3-Clause | 12118★ / 2214f | 2026-11-24 | Messy-metadata cleanup **and Wikidata reconciliation** — the practical bridge from a spreadsheet of titles to linked entities |
+| ExifTool | https://github.com/exiftool/exiftool | GPL-3.0 (`LICENSE`, 35149 B) | 5319★ / 508f | 2026-11-16 | Read/write XMP + IPTC photo metadata. Copyleft — a tool you *run*, not a library you link |
+| MediaInfo | https://github.com/MediaArea/MediaInfo | BSD-2-Clause | 2079★ / 202f | 2026-11-24 | Extracts technical metadata and **exports EBUCore and PBCore 1.2/2.1 directly** |
+| Apache Jena | https://github.com/apache/jena | Apache-2.0 | 1511★ / 745f | 2026-11-25 | RDF/SPARQL store; the triple store Skosmos runs on (Fuseki) |
+| Exiv2 | https://github.com/Exiv2/exiv2 | GPL-2.0 (`COPYING`, 18092 B) | 1174★ / 350f | 2026-11-23 | C++ XMP/IPTC/Exif library |
+| **Skosmos** | https://github.com/NatLibFi/Skosmos | **MIT** (`LICENSE`, 1376 B) | 269★ / 105f | 2026-11-18 | SKOS thesaurus browser/publisher over a SPARQL endpoint; the software behind Finto |
+| **TemaTres** | https://github.com/tematres/TemaTres-Vocabulary-Server | **GPL-2.0-or-later** — declared in `readme.md` and in every source header; **there is no `LICENSE` file** | 142★ / 11f | **2026-11-25** | Vocabulary/thesaurus server. **Argentine-built** (© Diego Ferreyra, `tematres@r020.com.ar`). See LATAM in `intel/market.md` |
+| Finto-data | https://github.com/NatLibFi/Finto-data | **MIXED** (`LICENSE`, 1765 B: code under `tools/` generally MIT, data varies) | 21★ / 6f | 2026-11-26 | The vocabulary data behind Finto; read the licence per-directory |
+
+### Tier 3 — Verified traps. These exist, are starred, and grant you nothing
+
+| Project | Repo | Stars | Last push | The trap |
+|---|---|---|---|---|
+| **EBUCore** | https://github.com/ebu/ebucore | 27★ / 7f | 2026-08-18 | **CC BY-NC-SA 3.0 — NonCommercial** (`LICENSE.md`, 386 B). EBU's long-standing descriptive/technical metadata spec (Tech 3293), still in active use, **cannot be used in commercial client work**. Its successor EBUCorePlus is MIT. *The predecessor is the one most broadcasters have deployed.* |
+| IPTC Sport Schema | https://github.com/iptc/sport-schema | 38★ / 3f | 2026-10-01 | **No licence file** on `master` or `main`; control `README.md` on `master` = 200, so the filenames are not at fault |
+| IPTC RightsML dev | https://github.com/iptc/rightsml-dev | 5★ / 2f | 2026-07-06 | **No licence file**; control passes on `master` |
+| JSON for Concepts & Vocabularies | https://github.com/iptc/json-for-concepts-vocabularies | 4★ / 0f | 2017-10-20 | **No licence file**; control passes on `master` |
+| jebu-core | https://github.com/mikrosimage/jebu-core | 3★ / 2f | **2018-06-13** | Java port of EBUCore Tech 3293 incl. Audio Definition Model. GPL-2.0 and **dead for 8 years** |
+
+The IPTC repos with no licence are the `rslstandard/rsl` trap of pass 5, repeated inside an
+organisation that licenses its flagship standards CC BY 4.0. **Openness at the org level does not
+propagate to the repo level.** Three of twenty IPTC repos grant nothing; use the published spec, not
+the repo contents.
+
+### Primary evidence for the vocabulary licence — and why it mattered
+
+`iptc.org` and `cv.iptc.org` **do not resolve from this session** (outside the allowed network
+domains), so IPTC's own NewsCodes server could not be read — the same channel limit as `new.ddex.net`
+in pass 8. The licence was established from a *harder* source instead: IPTC's own repository files.
+
+`iptc/sports-newscodes/master/LICENSE` (444 B) states verbatim:
+
+> Copyright (c) 2016 IPTC — **The Creative Commons Attribution (CC BY) 4.0 license applies to all
+> NewsCodes**
+
+and `iptc/newsml-g2/master/LICENSE` (901 B) grants:
+
+> Adapt — remix, transform, and build upon the material **for any purpose, even commercially**.
+
+That is the sentence that makes this plane commercially buildable, from IPTC's own repository, not
+from a vendor summary. **IPTC Media Topics (~1,100 terms after retirements) being CC BY 4.0 is
+therefore primary-sourced as to the licence family, and secondary-sourced as to the term count and
+the 2-3 month update cadence**, which came from search snippets of the unreachable iptc.org and
+disagree with each other (one IPTC page says "at least once a year"). Treat the cadence as unverified.
+
+### Three method corrections, reusable across all twelve industries
+
+**(1) `curl` is not a valid existence oracle in this session, and a 403 is not a 404.** The task
+instructions say to verify every URL with `curl -sI`. Run against the 52 GitHub URLs in this pass,
+curl returned **403 for all 52 and `000` for every non-GitHub domain — one single 200 in 60 URLs.**
+Every one of those 52 repos exists. The 403 is the agent proxy refusing github.com HTML; the `000` is
+a blocked domain. `git ls-remote --exit-code` then confirmed **52/52 exist, 0 dead.** A pass that
+believed curl would have deleted its entire findings list as "404s".
+
+**(2) `search/repositories` is *not* a complete existence oracle either — and this is the converse of
+the rule above.** `Islandora/islandora` is absent from the search index entirely (`islandora in:name`
+returns 1317 results without it), yet `git ls-remote` confirms it exists and the raw channel returns
+its `LICENSE` (GPL-2.0, 18092 B). Use search for *metrics*, `ls-remote` for *existence*. Neither
+substitutes for the other.
+
+**(3) The licence probe needed a new filename, and the control request is what revealed it.**
+TemaTres returned 404 for every licence name **and** for `README.md` on both branches, which by pass
+8's rule means the filenames were wrong rather than the licence missing. A shallow clone showed why:
+the file is **`readme.md`, lowercase**, and there is no licence file at all — the grant lives in
+`readme.md` and in every source header. Add lowercase `readme.md` to the control set. Running total
+of conventions this KB has had to learn: `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `license.txt`,
+`COPYING`, `COPYING.md`, and now `readme.md` for the control.

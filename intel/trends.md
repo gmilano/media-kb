@@ -1275,3 +1275,91 @@ that **yield management and title-supply analytics are the live questions**, and
 both is 103 repositories of 2017–2020 coursework summing **29 stars**. One caution on citation: UNIC
 reports 863.6m admissions and the European Audiovisual Observatory reports 796m **for the same
 year**, because their territory coverage differs. **Cite the body, not the number.**
+
+## The description & semantic-interchange plane — trends measured 2026-11-26 (pass 11)
+
+### T1. The structural law meets its control case, and survives in a sharper form
+
+Ten passes found planes with no agent layer because the knowledge content was licensed shut. This
+plane is the first where **the knowledge content is openly licensed**: IPTC's own repository states
+that "the Creative Commons Attribution (CC BY) 4.0 license applies to all NewsCodes", and NewsML-G2's
+grant explicitly permits building on it "even commercially". The prediction was a healthy plane. The
+measurement is a **three-step gradient**:
+
+| Layer | Problem type | State | Evidence |
+|---|---|---|---|
+| **DESCRIBE** with a standard | Format | **HEALTHY** | schema.org 6320★ Apache-2.0; ninjs MIT; NewsML-G2 CC BY 4.0; EBUCorePlus MIT; Skosmos 269★ MIT; TemaTres 142★ — IPTC pushed 6 repos in Nov 2026 |
+| **ASSIGN** the right term | Judgment | **ONE REPO DEEP** | Annif, 280★, Apache-2.0, from a national library. `subject indexing` ranks 2-6 are unrelated 2014-era noise |
+| **AGENTIC** cataloguing at scale | Judgment at scale | **PAPERS, NOT CODE** | arXiv 2504.05711 and 2605.16338; `archival metadata LLM agent` = 8 results, top-6 star sum **3**; the one live repo is 3★ and unlicensed |
+
+**The refinement, which is new:** an open licence on the *schema* unblocks the format layer and
+leaves the judgment layer untouched — because judgment is trained on **annotated records**, and those
+are the asset institutions keep. Proof inside a single organisation: `NatLibFi/Annif` is Apache-2.0
+and `NatLibFi/Annif-corpora`, the labelled training data without which it assigns nothing, **has no
+licence file at all.** The withheld layer did not disappear; it moved down one level.
+
+### T2. Standards-body openness does not propagate to the repo level
+
+IPTC licenses its flagship standards CC BY 4.0 and ships MIT code — and **three of its twenty public
+repos have no licence file**: `sport-schema` (38★), `rightsml-dev`, `json-for-concepts-vocabularies`.
+Control requests pass, so the filenames are not at fault; the grant is simply absent, and default
+copyright applies. Same trap as `rslstandard/rsl` in pass 8, now found *inside* a permissive org.
+**Audit the repo, never the organisation's reputation.**
+
+### T3. The successor is free and the installed base is NonCommercial
+
+**EBUCore** (EBU Tech 3293), the descriptive/technical metadata spec most European broadcasters have
+actually deployed, is **CC BY-NC-SA 3.0 — NonCommercial**. **EBUCorePlus**, its successor, is **MIT**.
+A client's commercial usability therefore depends on *which generation of the standard they are on* —
+and the unusable one is the widely installed one. Second occurrence of a predecessor/successor licence
+split in this KB; treat it as a pattern and ask the version question before scoping.
+
+### T4. 2026 is the year media AI moved from adoption to accountability — which is a metadata problem
+
+Akamai: AI adoption "is no longer the question"; the challenge is converting experimentation into
+business value. TV Tech calls 2026 the year of **scaling** AI through the media enterprise while
+expecting "several false starts" in agentic deployments. EY: the question moved from whether to adopt
+to **how to apply it responsibly**. Every one of those framings cashes out as description work —
+you cannot audit, attribute, retrieve or report on assets that carry no structured description. The
+EUIPO's 2026-05-28 mapping study put an institutional number on the same defect: the lack of
+interoperability between copyright-related metadata standards "triggers major inefficiencies."
+
+### T5. Structured data is now load-bearing for discovery — and the causal evidence does not exist
+
+Contently reports **25.11% of Google searches triggered an AI Overview in Q1 2026**, and AlphaSense
+notes AI Overviews often reference news publications while sending **fewer clicks** to the source.
+Against that, Search Engine Land states there are **no peer-reviewed studies** on schema markup's
+effect on AI search visibility or LLM citation behaviour. **Sell structured-data correctness as
+hygiene and risk reduction, never as a ranking guarantee** — and note the reported finding that stale
+or inaccurate structured data is *more* harmful than missing markup, which makes accuracy the
+deliverable rather than coverage.
+
+### T6. The retrieval bottleneck is description, and it is why "AI over the archive" stalls
+
+Every vendor framing of the MAM market now describes AI automating "metadata tagging, content
+indexing, quality control and rights management" (Coherent) and archives becoming "intelligent
+workflow orchestration hubs" (Technavio). The honest engineering read: retrieval over an archive is
+impossible where assets carry no description, so **the first deliverable of any archive-AI programme
+is a description backfill, not a model**. ABC (Australia) is the clearest production case — Gemini
+2.0 Flash via Vertex AI generating descriptive metadata, integrated directly into the content
+pipeline — and the gap it leaves open is auditability against a controlled vocabulary, which is
+exactly what Annif or GLiNER constrained to a client thesaurus provides.
+
+### T7. The institutional open-source base for this plane is European and public, not commercial
+
+INA (France), the National Library of Finland, and the EBU maintain the tools; the EU funds the data
+space (TEMS, 2023-**2026**, concluding this year); the EU Publications Office runs the vocabulary
+platforms. No North American or APAC media company maintains a comparable public cataloguing stack.
+The one notable non-European exception is **LATAM**: TemaTres, Argentine-built, 142★, pushed the day
+before this pass. For Globant this inverts the usual regional story — in this plane, LATAM has a
+reference implementation to lead with rather than import.
+
+### T8. Copyleft dominates the systems tier, with IIIF as the single permissive escape hatch
+
+Every purpose-built open newsroom and cataloguing system is AGPL or GPL: Superdesk AGPL-3.0,
+CollectiveAccess GPL-3.0, Omeka S GPL-3.0, VuFind GPL-2.0, Islandora GPL-2.0, TemaTres GPL-2.0.
+The permissive options are the *repository and delivery* tiers — Dataverse Apache-2.0, DSpace BSD-3,
+Blacklight Apache-2.0, Fedora Apache-2.0 — and **IIIF, where three of four components (Mirador
+Apache-2.0, Universal Viewer MIT, Cantaloupe NCSA) are permissive and all four were pushed within six
+days of this pass.** If a client refuses AGPL for a hosted service, there is no open newsroom CMS for
+them, and the honest answer is Wagtail (BSD-3) plus custom workflow.

@@ -1673,3 +1673,147 @@ the total.**
 *format* layer is permissive and solid (see `repos/foundations.md`), the *creative* agent layer is
 permissive and genuinely moving, and the *management* layer — the part a production actually pays for —
 has no permissive, maintained base anywhere. It is a build, not an integration.
+
+---
+
+## The book, ebook & scholarly-publishing plane — measured 2026-11-26 (pass 18), and the **first plane in this KB whose permissive code is the regulated layer**
+
+Seventeen passes have measured the audiovisual side of M&E. This pass measures the **written-word**
+side — ebooks, trade and scholarly publishing — which a vocabulary probe showed was a near-total
+blank in this KB before today.
+
+### How the plane was chosen — the vocabulary probe, before any web search
+
+Two Bash calls over the whole KB, counting files and hits per term:
+
+| Term | Files | Hits | Read |
+|---|---|---|---|
+| `Readium` | 0 | 0 | **Zero** — the reference reading-system stack was absent |
+| `Calibre` | 0 | 0 | **Zero** |
+| `ONIX` | 0 | 0 | **Zero** — the book industry's metadata standard was absent |
+| `Pressbooks` | 0 | 0 | **Zero** |
+| `Open Journal` | 0 | 0 | **Zero** — the most-deployed scholarly platform on earth was absent |
+| `Thorium` | 0 | 0 | **Zero** |
+| `Audiobookshelf` | 0 | 0 | **Zero** |
+| `EPUB` | 4 | 4 | Four incidental mentions, no rows |
+| `newsroom` | 7 | 53 | **Already covered** — the editorial/CMS layer is not the gap |
+| `Superdesk` / `Ghost` / `Wagtail` / `Directus` | 3–5 | 5–18 | **Already covered** |
+
+The probe did real work: the obvious guess — "the newsroom plane" — was already well covered, and
+the actual hole was the **book**, not the news story. This KB's publishing coverage stopped at the
+article and never reached the volume.
+
+### ⛔ The finding of this pass: the licence is ordered by **who wrote the code**, and in this plane the producers split cleanly
+
+Seventeen prior passes ordered the licence by *proximity* — to the money, to the regulator, to the
+process the code runs inside. This plane does not fit that shape, and the reason is that its code
+has exactly **two kinds of author**:
+
+| Producer | Mission | Licence they ship | Verified examples |
+|---|---|---|---|
+| **Format standards bodies & format consortia** | Get the *format* adopted everywhere | **BSD-3-Clause / MIT / Apache-2.0** | `w3c/epubcheck` BSD-3, `daisy/ace` MIT, `edrlab/thorium-reader` BSD-3, all of `readium/*` BSD-3, `pagedjs` MIT, `quarto-cli` MIT |
+| **The scholarly & library commons** | Keep the *commons* open | **GPL-3.0 / AGPL-3.0** | `pkp/ojs` GPL-3, `pressbooks` GPL-3, `manifold` GPL-3, `internetarchive/openlibrary` AGPL-3, `fiduswriter` AGPL-3, `calibre` GPL-3 |
+
+A standards body is permissive because a copyleft reference implementation would **suppress adoption
+of its own format**; a scholarly commons is copyleft because permissiveness would let a commercial
+host enclose the commons it was built to defend. Both choices are rational, and they point in
+opposite directions.
+
+### Why that inverts this KB's AV finding — the sharpest cross-plane contrast in eighteen passes
+
+Pass 4 recorded, for the audiovisual side of this same industry, that conformance tooling was
+*permissive at the metadata layer and copyleft at the checker* — `MediaConch` is GPL. In publishing
+the **checker itself is permissive**: `w3c/epubcheck` is BSD-3-Clause and `daisy/ace` is MIT.
+
+**Same industry, opposite licence shape, and the discriminator is the producer, not the subject
+matter.** AV conformance tools come from engineering collectives; publishing conformance tools come
+from the standards body that wrote the spec. The actionable consequence reverses too:
+
+> On the AV side of M&E, Globant can embed the *platform* and must be careful with the *checker*.
+> On the publishing side, Globant can embed the **checker** freely and must deploy-not-link the
+> **platform**.
+
+### ⚠️ The licence warning that matters most in this plane — `ebooklib` is AGPL-3.0
+
+`aerkalov/ebooklib` is the default Python EPUB library; it is what almost every developer reaches
+for first, and it is **AGPL-3.0** (verified from `LICENSE.txt`, last commit 2026-11-01). Used inside
+a *hosted* remediation or conversion service, AGPL §13 obliges offering the service's complete
+corresponding source to its users. This is the single most likely way a publishing engagement
+acquires a network-copyleft obligation without noticing, because nothing in the package name
+signals it.
+
+Permissive alternatives verified in this pass for the same job: `futurepress/epub.js` (BSD-2-Clause,
+browser-side) and `pagedjs/pagedjs` (MIT) for rendering; `w3c/epubcheck` (BSD-3) and `daisy/ace`
+(MIT) for validation. There is **no verified permissive server-side EPUB read/write library** in
+this pass — stated as a gap below, not papered over.
+
+### Tier 1 — permissive, active, safe to build on
+
+Verified 2026-11-26: existence via `git ls-remote`, licence by **reading the licence file in the
+repo**, last-commit date via a `--filter=blob:none --no-checkout` clone.
+
+| Agent / tool | Repo | Licence (file read) | Last commit | What it does | Region of origin |
+|---|---|---|---|---|---|
+| Accessibility Agents | https://github.com/Community-Access/accessibility-agents | MIT (`LICENSE`) | 2026-11-07 | **The only verified agent in this plane that handles EPUB.** WCAG 2.2 AA review packaged as agent skills for Claude Code/Copilot/Gemini CLI/Codex; scans Office, PDF and ePub one file or a whole tree, emits remediation scripts | Global |
+| ebook2audiobook | https://github.com/DrewThomasson/ebook2audiobook | Apache-2.0 (`LICENSE`) | 2026-11-24 | Ebook → audiobook with voice cloning, many languages; the most active audio-conversion project measured | Global |
+| audiblez | https://github.com/santinic/audiblez | MIT (`LICENSE`) | 2026-02-27 | EPUB → M4B audiobook via Kokoro-82M TTS. **9 months since last commit** — works, but not moving | EMEA |
+| epub_to_audiobook | https://github.com/p0n1/epub_to_audiobook | MIT (`LICENSE`) | 2026-10-26 | EPUB → audiobook, pluggable TTS backends; trended late Oct 2026 | Global |
+| book-writer | https://github.com/tobyilee/book-writer | MIT (`LICENSE`) | 2026-11-21 | Multi-agent long-form book-writing harness with EPUB output; agent+skill architecture | Global |
+
+### Tier 2 — real, but the licence or the staleness constrains client work
+
+| Agent / tool | Repo | Licence (file read) | Last commit | The constraint |
+|---|---|---|---|---|
+| pdf-accessibility-app | https://github.com/CUNY-AI-Lab/pdf-accessibility-app | **AGPL-3.0** (`LICENSE`) | 2026-11-25 | Very active and institutionally maintained, but AGPL — network copyleft if hosted. PDF only, not EPUB |
+| infinite-bookshelf | https://github.com/Bklieger/infinite-bookshelf | MIT (`LICENSE.md`) | 2025-10-09 | **Over 13 months stale.** Readable as a reference pipeline, not a base |
+
+### ⛔ A new licence-hiding category for this KB: the **licence asserted only in prose and a badge**
+
+`AIScientists-Dev/AI-Powered-PDF-Accessibility` is reported as MIT-licensed by the search results
+that surfaced it, and its own README carries an **MIT shields.io badge**, the sentence "This project
+is open source under the MIT License", and a `## License` section reading "MIT License — Use freely,
+contribute back if you can."
+
+**There is no licence file in the repository.** Probed: `LICENSE`, `LICENSE.txt`, `LICENSE.md`,
+`LICENCE`, `LICENCE.md`, `COPYING`, `COPYING.txt`, `license.txt`, `LICENSE.rst`, `LICENSE-MIT` — all
+404.
+
+Every prior licence finding in this KB was a licence **hidden in a channel GitHub does not read**
+(`COPYING.txt`, `LICENSES/`, a wrapper that is not the data). This is the **inverse**: a licence
+*announced* in three places with no licence text behind any of them. A badge is not a grant and
+"use freely" is not a licence. **Not usable as a base for client work** — and it is also 10 months
+stale (last commit 2026-01-20). Recorded as a row here precisely so nobody re-finds it and believes
+the badge.
+
+### ⚙️ Three method corrections from this pass — all reusable across the other eleven industries
+
+1. **`COPYING.md` is licence-probe extension #4.** `jgm/pandoc` and `quarto-dev/quarto-cli` both
+   returned "no licence file" against the previous probe list and both are licensed — pandoc
+   **GPL-2.0** and quarto **MIT**, each in `COPYING.md`. Two independent hits in one pass makes it a
+   pattern, not an accident.
+2. **A bare lowercase `license` with no extension is extension #5.** `futurepress/epub.js` is
+   licensed **BSD-2-Clause** (FreeBSD; confirmed by the *absence* of a "neither the name" clause) in
+   a file named `license`. The probe checked `license.txt` and missed it.
+3. **First-match licence detection is wrong on a multi-licence file, and it failed on my own run.**
+   `standardebooks/tools` was auto-classified `CC-*` because CC0 appears early in its `LICENSE.md`.
+   Reading the file: the repository is **GPL-3.0**, with CC0 1.0 only for `./se/data/templates`, and
+   per-directory licences under `./se/data` and `./se/vendor`. **The first licence named in a licence
+   file is not the licence of the code.** Detectors must read the whole file and report the set.
+
+### The measured zeros, and the honest statement of what could not be measured
+
+- **No open-source agent for ONIX metadata generation or correction.** Five real ONIX *libraries*
+  were verified (see `repos/foundations.md`) and not one agentic layer over them.
+- **No open-source agent for EPUB accessibility remediation.** The only EPUB-aware agent found is a
+  *reviewer* (`accessibility-agents`); everything generative in this space targets PDF. The single
+  EPUB-specific result was an academic paper, "AltGen: AI-driven alt text generation for enhancing
+  EPUB accessibility", with no public code located.
+- **No open-source agent for peer review, manuscript triage or editorial decision support**, against
+  `pkp/ojs` running 25,000+ journals.
+- **⚠️ Star counts could not be verified this session and are therefore absent from every row
+  above.** The GitHub API is unreachable for out-of-session repositories from this environment
+  (`403: sessions are bound to their configured repositories`), so this pass reports only what it
+  could verify first-hand: existence, licence read from the file, and last-commit date. **Aggregator
+  star and staleness claims were actively wrong at least once here** — a directory page reported
+  `zach-m/jonix` as ~763 days stale; its real last commit is **2026-10-17**. Prior passes' star
+  figures are left as they stand and are not carried into this one.

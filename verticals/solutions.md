@@ -1044,3 +1044,63 @@ A single Odoo-class candidate would change this tier completely, and none was fo
 (SourceForge, Slashdot, G2) return only proprietary products for these categories. **If a client needs
 production management, the correct answer is that the open base does not exist — say so and price the
 build.**
+
+---
+
+## Book & scholarly-publishing platforms — measured 2026-11-26 (pass 18)
+
+Real, running systems a client already operates or could be stood up on, with an agentic layer added
+on top — the publishing equivalent of Odoo for ERP or OpenMRS for healthcare. All rows verified
+2026-11-26 by reading the licence file and taking the last-commit date from a filtered clone.
+
+**The deployment rule for this whole section, in one line:** every platform here is **GPL-3.0,
+AGPL-3.0 or LGPL** — there is no permissive publishing *platform*. Globant's engagement model in
+this plane is therefore **deploy, configure and extend as separate services**, not link into
+proprietary code. The permissive components are the *conformance and rendering* libraries
+(`repos/foundations.md`), which is where proprietary value can sit.
+
+### Scholarly & academic publishing — the most-deployed open platforms on earth
+
+| Platform | Repo | Licence (file) | Last commit | What it runs | Why it matters |
+|---|---|---|---|---|---|
+| **Open Journal Systems (OJS)** | https://github.com/pkp/ojs | GPL-3.0 (`LICENSE`) | 2026-11-26 | Journal submission → peer review → publication | **25,000+ journals worldwide.** The single largest installed base in this plane. Dominant in LATAM — see the opportunity in `intel/market.md` |
+| **Open Monograph Press (OMP)** | https://github.com/pkp/omp | GPL-3.0 (`LICENSE`) | 2026-11-23 | Monographs, edited volumes, scholarly editions | Same PKP stack and workflow model as OJS, applied to books |
+| **pkp-lib** | https://github.com/pkp/pkp-lib | GPL-3.0 (`LICENSE`) | 2026-11-23 | Shared framework under OJS/OMP | **Integrate here, not in OJS directly** — the stable seam for plugins across both |
+| **PubPub** | https://github.com/pubpub/pubpub | LGPL (`LICENSE`) | 2026-11-24 | Drafting, peer review, journal and book hosting | **LGPL = weak copyleft**, the mildest licence of any platform in this plane. Where a client needs proprietary extension, this is the least constrained starting point |
+| **Manifold** | https://github.com/manifoldscholar/manifold | GPL-3.0 (`LICENSE.md`) | 2026-11-19 | Scholarly monograph reading and annotation | University-press reading platform; strong annotation model |
+| **Fidus Writer** | https://github.com/fiduswriter/fiduswriter | AGPL-3.0 (`LICENSE`) | 2026-11-12 | Collaborative academic authoring | AGPL — network copyleft applies if hosted for third parties |
+| **Thoth** | https://github.com/thoth-pub/thoth | **Apache-2.0** (`LICENSE`) | 2026-11-25 | OA book metadata management, ONIX/MARC export | **The one permissive platform-adjacent system here.** EMEA (COPIM/UK). If metadata is the engagement, start here |
+
+### Trade publishing, books & open textbooks
+
+| Platform | Repo | Licence (file) | Last commit | What it runs |
+|---|---|---|---|---|
+| **Pressbooks** | https://github.com/pressbooks/pressbooks | GPL-3.0 (`LICENSE.md`) | 2026-11-25 | Book production on WordPress multisite; outputs PDF, EPUB and web from one source. Heavily used for open textbooks in NA higher education |
+| **Calibre** | https://github.com/kovidgoyal/calibre | GPL-3.0 (`LICENSE`) | 2026-11-26 | Library management and format conversion; the de facto desktop standard, scriptable headless via `calibredb`/`ebook-convert` |
+| **Sigil** | https://github.com/Sigil-Ebook/Sigil | GPL-3.0 (`COPYING.txt`) | 2026-11-25 | WYSIWYG EPUB editor — the tool a human remediator sits in front of |
+| **Standard Ebooks tools** | https://github.com/standardebooks/tools | GPL-3.0 + **CC0** for `./se/data/templates` | 2026-11-25 | Production pipeline with a genuinely reusable CC0-dedicated template set |
+| **Omeka S** | https://github.com/omeka/Omeka-S | GPL-3.0 (`LICENSE`) | 2026-11-24 | Digital collections and exhibits publishing — the archive-facing option |
+
+### Reading, distribution & catalogue systems
+
+| Platform | Repo | Licence (file) | Last commit | What it runs |
+|---|---|---|---|---|
+| **Thorium Reader** | https://github.com/edrlab/thorium-reader | **BSD-3-Clause** (`LICENSE`) | 2026-11-26 | Reference desktop reading app (EDRLab, France): EPUB, LCP, audiobooks, **and the accessibility behaviour the EAA expects of a reading system** |
+| **Komga** | https://github.com/gotson/komga | **MIT** (`LICENSE`) | 2026-11-24 | Ebook/comic server with OPDS. **The only permissive reading server verified** |
+| **Kavita** | https://github.com/Kareadita/Kavita | GPL-3.0 (`LICENSE`) | 2026-11-22 | Self-hosted reading server, broad format support |
+| **Calibre-Web** | https://github.com/janeczku/calibre-web | GPL-3.0 (`LICENSE`) | 2026-11-22 | Web front end over an existing Calibre library — the fastest path to a browser-based catalogue |
+| **Audiobookshelf** | https://github.com/advplyr/audiobookshelf | GPL-3.0 (`LICENSE`) | 2026-11-19 | Self-hosted audiobook and podcast server — the delivery end of any ebook→audiobook pipeline |
+| **Open Library** | https://github.com/internetarchive/openlibrary | AGPL-3.0 (`LICENSE`) | 2026-11-26 | Bibliographic catalogue and work/edition identifiers; usable as an enrichment source |
+| **KOReader** | https://github.com/koreader/koreader | AGPL-3.0 (`COPYING`) | 2026-11-25 | E-ink device reading application |
+
+### Which platform to start from, by engagement type
+
+| If the engagement is… | Start from | Licence consequence |
+|---|---|---|
+| Journal or scholarly workflow, incl. AI editorial policy | **`pkp/pkp-lib`** (plugin seam), deployed as OJS/OMP | GPL-3.0 — deploy and extend via plugins; keep proprietary models behind a service boundary |
+| Scholarly platform needing proprietary extension | **PubPub** | LGPL — weak copyleft; the only platform here that tolerates linking |
+| Book metadata, ONIX/MARC, catalogue distribution | **Thoth** + `titusz/onixcheck` + `chrisribal/onix-parser` | **Apache-2.0 / Apache-2.0 / MIT — fully permissive path, end to end.** The cleanest commercial route in this plane |
+| Open textbook or multi-format book production | **Pressbooks** | GPL-3.0 — WordPress plugin model makes extension conventional |
+| EAA backlist remediation at scale | **`w3c/epubcheck` + `daisy/ace` + Sigil for human fix-up** | **BSD-3 + MIT** for the automated layer; GPL-3 only for the desktop editor a human drives |
+| Reading app or accessible reading system | **Thorium Reader** / `readium/*` | **BSD-3-Clause** — permissive, embeddable |
+| Ebook/audiobook delivery to end users | **Komga** (MIT) or Audiobookshelf (GPL-3) | Komga if the product must stay proprietary |

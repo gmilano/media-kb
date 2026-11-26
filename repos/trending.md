@@ -10,6 +10,83 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 18: book & scholarly-publishing infrastructure (**40 slugs probed, 39 resolve, 1 absent; 5 licence files found only off the standard path**)
+
+Method this pass, and it is a change worth noting: **the GitHub API was unavailable**
+(`403: sessions are bound to their configured repositories`), so no field here comes from an API.
+Existence is `git ls-remote`; licence is **the licence file read from `raw.githubusercontent.com`**;
+last-commit date is a `git clone --depth 1 --filter=blob:none --no-checkout` followed by
+`git log -1 --format=%cs`. That last trick is **instant** (sub-second per repo, no blobs fetched) and
+is the method fix of this pass: *verified last-commit dates without any API access.* Reusable in all
+twelve industries.
+
+### The permissive substrate — standards bodies and format consortia
+
+| Repo | Licence (file read) | Last commit | Role |
+|---|---|---|---|
+| https://github.com/w3c/epubcheck | BSD-3-Clause (`LICENSE.md`) | 2026-11-02 | **The** EPUB conformance checker; the one every retailer runs |
+| https://github.com/daisy/ace | MIT (`LICENSE.txt`) | 2026-05-01 | Ace by DAISY — EPUB accessibility checker |
+| https://github.com/edrlab/thorium-reader | BSD-3-Clause (`LICENSE`) | 2026-11-26 | Reference desktop EPUB/LCP reader; committed *today* |
+| https://github.com/readium/readium-css | BSD-3-Clause (`LICENSE`) | 2026-11-16 | Reading-system CSS; the typography layer |
+| https://github.com/readium/r2-shared-js | BSD-3-Clause (`LICENSE`) | 2025-10-28 | Readium 2 shared models. **13 months stale** |
+| https://github.com/readium/readium-lcp-server | BSD-3-Clause (`LICENSE.md`) | 2026-06-22 | LCP licence server — the open DRM the EAA does not let you use to disable accessibility |
+| https://github.com/futurepress/epub.js | **BSD-2-Clause** (bare `license`) | 2026-03-23 | Browser EPUB renderer. Licence found only at a lowercase extensionless path |
+| https://github.com/pagedjs/pagedjs | MIT (`LICENSE.md`) | 2026-10-20 | Paged-media CSS — print/PDF from HTML |
+| https://github.com/asciidoctor/asciidoctor | MIT (`LICENSE`) | 2026-11-22 | Text processor and publishing toolchain |
+| https://github.com/quarto-dev/quarto-cli | **MIT** (`COPYING.md`) | 2026-11-25 | Scientific publishing toolchain. Licence found only in `COPYING.md` |
+| https://github.com/jupyter-book/jupyter-book | BSD-3-Clause (`LICENSE`) | 2026-11-25 | Executable-book builder |
+| https://github.com/thoth-pub/thoth | Apache-2.0 (`LICENSE`) | 2026-11-25 | Open-access book metadata management (COPIM, UK) |
+| https://github.com/gotson/komga | MIT (`LICENSE`) | 2026-11-24 | Ebook/comic media server — the permissive one of the four |
+| https://github.com/daisy/pipeline-ui | MIT (`LICENSE`) | 2026-09-05 | DAISY Pipeline UI |
+
+### The copyleft commons — scholarly platforms, reader tools, libraries
+
+| Repo | Licence (file read) | Last commit | Role |
+|---|---|---|---|
+| https://github.com/pkp/ojs | GPL-3.0 (`LICENSE`) | 2026-11-26 | Open Journal Systems; 25,000+ journals. Committed *today* |
+| https://github.com/pkp/omp | GPL-3.0 (`LICENSE`) | 2026-11-23 | Open Monograph Press — scholarly books |
+| https://github.com/pkp/pkp-lib | GPL-3.0 (`LICENSE`) | 2026-11-23 | Shared library under OJS/OMP |
+| https://github.com/pressbooks/pressbooks | GPL-3.0 (`LICENSE.md`) | 2026-11-25 | Book publishing on WordPress multisite; PDF/EPUB/web |
+| https://github.com/manifoldscholar/manifold | GPL-3.0 (`LICENSE.md`) | 2026-11-19 | Scholarly monograph reading platform |
+| https://github.com/pubpub/pubpub | LGPL (`LICENSE`) | 2026-11-24 | Drafting, peer review, journal/book hosting. **LGPL — weak copyleft, the mildest in this group** |
+| https://github.com/fiduswriter/fiduswriter | AGPL-3.0 (`LICENSE`) | 2026-11-12 | Collaborative academic writing |
+| https://github.com/kovidgoyal/calibre | GPL-3.0 (`LICENSE`) | 2026-11-26 | Ebook library management and conversion. Committed *today* |
+| https://github.com/Sigil-Ebook/Sigil | GPL-3.0 (`COPYING.txt`) | 2026-11-25 | WYSIWYG EPUB editor |
+| https://github.com/standardebooks/tools | **GPL-3.0 + CC0 1.0 (split)** (`LICENSE.md`) | 2026-11-25 | Production toolset. GPL-3 overall; CC0 only for `./se/data/templates` |
+| https://github.com/internetarchive/openlibrary | AGPL-3.0 (`LICENSE`) | 2026-11-26 | Open bibliographic catalogue. Committed *today* |
+| https://github.com/aerkalov/ebooklib | **AGPL-3.0** (`LICENSE.txt`) | 2026-11-01 | Python EPUB read/write. **The accidental-copyleft trap of this plane** |
+| https://github.com/vivliostyle/vivliostyle.js | AGPL-3.0 (`LICENSE`) | 2026-11-24 | CSS typesetting engine. **APAC-origin (Japan)** |
+| https://github.com/koreader/koreader | AGPL-3.0 (`COPYING`) | 2026-11-25 | E-ink reader application |
+| https://github.com/janeczku/calibre-web | GPL-3.0 (`LICENSE`) | 2026-11-22 | Web front end over a Calibre library |
+| https://github.com/Kareadita/Kavita | GPL-3.0 (`LICENSE`) | 2026-11-22 | Self-hosted reading server |
+| https://github.com/rstudio/bookdown | GPL-3.0 (`LICENSE.txt`) | 2026-09-18 | R-based book authoring |
+| https://github.com/omeka/Omeka-S | GPL-3.0 (`LICENSE`) | 2026-11-24 | Digital collections publishing |
+| https://github.com/daisy/pipeline-modules | LGPL-2.1/3.0 (`LICENSE.txt`) | 2026-10-08 | DAISY Pipeline conversion modules — braille, TTS, DAISY/EPUB |
+
+### ONIX — the book industry's metadata wire format, and it is permissive across the board
+
+| Repo | Licence (file read) | Last commit | Note |
+|---|---|---|---|
+| https://github.com/titusz/onixcheck | Apache-2.0 (`LICENSE`) | 2026-10-16 | Validates ONIX 2.1/3.0/3.1 against official XML Schema. **Best-maintained validator** |
+| https://github.com/zach-m/jonix | Apache-2.0 (`LICENSE`) | 2026-10-17 | Java ONIX extraction. **An aggregator claimed ~763 days stale; it is 5 weeks** |
+| https://github.com/chrisribal/onix-parser | MIT (`LICENSE`) | 2026-09-29 | PHP; reads **and writes** ONIX 3.0/3.1, resolves official code lists |
+| https://github.com/jaerith/ONIX-Data | Apache-2.0 (`LICENSE`) | 2025-10-14 | C#/.NET ONIX structures. 13 months stale |
+| https://github.com/xercode/metadata-onix-lib | MIT (`LICENSE`) | 2021-04-28 | **5½ years stale — do not start here** |
+
+### ⛔ Four slugs that do not survive contact, and one that is not software
+
+| Slug | What the probe returned | Read |
+|---|---|---|
+| `AIScientists-Dev/AI-Powered-PDF-Accessibility` | Exists; **no licence file** at ten probed paths, while README badge + prose claim MIT | Unusable. A badge is not a grant |
+| `daisy/pipeline` | Exists; **no licence file at root** | A `git-subrepo` umbrella, not the licensed artefact. The code is in `pipeline-modules` (LGPL) and `pipeline-ui` (MIT) |
+| `phantom-artist/onix-creator` | Exists; no licence file; last commit **2022-05-10** | Not usable |
+| `daisy/epub-revision-a11y` | Exists; no licence file; last commit **2015-10-02** | Dead; historical interest only |
+| `w3c/publ-epub-revision` | **W3C Software and Document License** | **Documents, not code** — spec text under a document licence. Demoted on sight, per this KB's standing rule |
+
+**39 of 40 slugs resolve.** The one absent slug was a deliberate control (`nonexistent/nope-xyz123`)
+used to prove the existence probe can actually fail — without a negative control, "everything
+resolved" means nothing.
+
 ## 2026-11-26 — pass 17: development & pre-production infrastructure (42 slugs probed, 38 resolve, 4 do not, **4 reached only via rename redirect**)
 
 ### The movement is all in the format layer, and it is this week

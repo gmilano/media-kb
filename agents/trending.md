@@ -9,6 +9,44 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 18: the book, ebook & scholarly-publishing plane (the **written word**, measured for the first time)
+
+**What is new this week in this plane, and what is simply new to this KB.** Seventeen passes covered
+the audiovisual side of M&E. A vocabulary probe over the whole KB returned **0 hits** for `Readium`,
+`Calibre`, `ONIX`, `Pressbooks`, `Open Journal`, `Thorium` and `Audiobookshelf` — so most of what
+follows is not newly built, it is newly *recorded*. The genuinely recent movement is flagged as such.
+
+**Moving right now (verified last-commit dates, 2026-11-26):**
+
+| Project | Repo | Licence (file read) | Last commit | Why it is moving |
+|---|---|---|---|---|
+| ebook2audiobook | https://github.com/DrewThomasson/ebook2audiobook | Apache-2.0 | 2026-11-24 | Voice-cloning audiobook conversion; the most active AI project in the plane |
+| book-writer | https://github.com/tobyilee/book-writer | MIT | 2026-11-21 | Multi-agent book harness with EPUB output; appeared on trending lists early Nov 2026 |
+| accessibility-agents | https://github.com/Community-Access/accessibility-agents | MIT | 2026-11-07 | **The only EPUB-aware agent found**; WCAG 2.2 AA skills for coding agents |
+| pdf-accessibility-app | https://github.com/CUNY-AI-Lab/pdf-accessibility-app | AGPL-3.0 | 2026-11-25 | Nov 2026 PR made a model-service failure flag the figure for re-upload instead of silently passing alt text — an honest-failure design worth copying |
+| epub_to_audiobook | https://github.com/p0n1/epub_to_audiobook | MIT | 2026-10-26 | Gained stars late Oct 2026 |
+
+**The substrate is overwhelmingly alive, which is the real headline.** Of 40 repos verified in this
+pass, **28 had a commit in November 2026**, including `pkp/ojs`, `calibre`, `thorium-reader`,
+`openlibrary`, `pressbooks` and `sigil` all on 2026-11-23 or later. This is not a legacy plane.
+
+**The licence shape, stated once (full argument in `agents/top.md`):** in publishing the licence is
+ordered by **who wrote the code** — standards bodies ship BSD/MIT (`epubcheck`, `ace`, `readium/*`),
+the scholarly commons ships GPL/AGPL (`ojs`, `pressbooks`, `manifold`, `openlibrary`). This
+**inverts** pass 4's AV finding, where the checker was the copyleft component.
+
+**⛔ Watch item: `ebooklib` is AGPL-3.0.** The default Python EPUB library carries network copyleft.
+Most likely accidental obligation in a publishing engagement.
+
+**⛔ Watch item: a badge is not a licence.**
+`AIScientists-Dev/AI-Powered-PDF-Accessibility` advertises MIT in a shields.io badge, in prose, and
+under a `## License` heading, and ships **no licence file at all** (ten probe filenames, all 404).
+New category for this KB — the inverse of a hidden licence.
+
+**Informed gaps, searched and genuinely not found this week:** no agentic layer over ONIX metadata;
+no open EPUB alt-text generator (the one EPUB-specific result, "AltGen", is a paper with no located
+code); no peer-review or manuscript-triage agent against 25,000+ OJS journals.
+
 ## 2026-11-26 — pass 17: the development & pre-production plane (the agent layer **splits down the middle of one plane**)
 
 ### A new shape, and the cleanest split measured so far

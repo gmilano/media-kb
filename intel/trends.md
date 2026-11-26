@@ -1811,3 +1811,103 @@ entirely to electronics. Meanwhile every artefact downstream of the script (stri
 call sheet, budget top-sheet) exists only in proprietary formats, while **the one open interchange format,
 Fountain, sits upstream of all of them.** There is no trend to track here and no pipeline to watch: there
 is an absence, and the correct response is to stop re-checking it hopefully and price the build.
+
+---
+
+## Trends in the book, ebook & scholarly-publishing plane — measured 2026-11-26 (pass 18)
+
+### 1. Accessibility stopped being a virtue and became a market-access condition — but only in EMEA
+
+The European Accessibility Act (Directive (EU) 2019/882) has applied to ebooks sold in the EU since
+**28 June 2025**, with a transition for backlist titles reported as running to **June 2030**. The
+technical baseline cited across guidance is **EN 301 549** (V3.2.1, based on WCAG 2.1 AA; **V4.1.1
+published September 2026** aligning with WCAG 2.2) together with **EPUB Accessibility 1.1**. Two
+requirements recur and both are machine-checkable: accessibility features must be **discoverable in
+metadata**, and **DRM must not switch them off**.
+
+The commercial mechanism matters more than the penalty: a non-compliant title risks **removal or
+suppression from EU storefronts**, which does not require a regulator to act. That is why this is a
+trend and not a compliance footnote — the enforcement is retail, not judicial.
+
+**Contested, and recorded as contested:** one source claims a first EAA court ruling in **June
+2026**; another reports that after fourteen months **no publisher, bookseller or ebook platform had
+been fined or sued** over ebook accessibility. Neither was verifiable against a primary source in
+this pass. Penalties are set per member state, so there is no single EU sanctions regime, and one
+tracker notes there is **no EU-wide enforcement dataset** and the Commission's first review is not
+due until **2030**.
+
+### 2. The open-source answer to that duty is permissive — the first time in this KB that the regulated layer is the free one
+
+`w3c/epubcheck` is **BSD-3-Clause** and `daisy/ace` is **MIT** (both verified from their licence
+files, 2026-11-26). The validation layer under a statutory duty carries **no copyleft obligation**.
+
+Every comparable finding in this KB ran the other way: healthcare's pharmacovigilance duty sat
+behind a paid MedDRA licence; AV conformance sat behind GPL `MediaConch`; US coding sat behind CPT.
+Here the regulator created a duty and the standards body published the checker permissively. **The
+reason is the producer: DAISY and W3C exist to make the format spread, and a toll would defeat
+that.** It is the cleanest regulated-demand/permissive-supply pairing in eighteen passes.
+
+### 3. AI adoption in book publishing is majority behaviour, and accessibility is one of its top uses
+
+The BookNet Canada / BISG **2026** survey of the North American book industry found **63% of
+respondents' organizations are using AI**. Among university presses (n=32) the leading uses were
+administrative/operational (47%), marketing (44%) and **accessibility (44%)** — alt-text generation
+in InDesign is given as a concrete example. At the same time **86% were concerned about AI accuracy
+for consumers**, including difficulty distinguishing AI-generated from human-made work.
+
+Remediation at scale is already demonstrated: **Elsevier reports completing remediation of over
+8,000 of its most widely used ebooks as of May 2026**, adding accessible EPUB files and alt text.
+That is the reference point for sizing a backlist programme — a real number from a real publisher,
+not a vendor estimate.
+
+### 4. Two regulatory clocks now overlap, and publishers are "deployers" under one of them
+
+The **EU AI Act Article 50** transparency obligations — labelling of AI-generated content — took
+effect **August 2026**, with Commission guidelines published **20 July 2026**. A publisher using
+third-party AI tools in editorial work is generally a **deployer** under the Act, not a provider,
+which is the lighter of the two roles but not an exemption. One guide notes that where AI-assisted
+content has been reviewed and approved by a person with documented editorial responsibility,
+labelling is not required — which turns **documented human editorial sign-off into a compliance
+artefact**, and therefore into something a workflow has to record.
+
+Sources disagree on the high-risk timetable (one says obligations became enforceable 2 August 2026;
+another says EAA compliance becomes a legal requirement for high-risk AI providers only from
+**December 2027**). Recorded as unresolved rather than picking a date.
+
+### 5. Audiobook generation is the one genuinely hot open-source category in this plane
+
+The most active AI projects measured are all ebook→audio: `DrewThomasson/ebook2audiobook`
+(Apache-2.0, last commit 2026-11-24), `p0n1/epub_to_audiobook` (MIT, 2026-10-26, gained stars late
+October 2026), `santinic/audiblez` (MIT, Kokoro-82M TTS). The driver is that **open TTS became good
+enough** — and note the licence shape: these are **MIT and Apache-2.0**, i.e. the generative edge of
+this plane is permissive while its platforms are copyleft.
+
+### 6. The substrate is not legacy — 28 of 40 verified repos committed in November 2026
+
+Including `pkp/ojs`, `calibre`, `edrlab/thorium-reader` and `internetarchive/openlibrary` all on
+**2026-11-26 itself**. Any pitch that treats open publishing infrastructure as dormant is factually
+wrong, and this is the measurement that refutes it.
+
+### 7. The agent layer is almost entirely absent, and where it exists it targets PDF, not EPUB
+
+Measured, not assumed. The only verified EPUB-aware agent is a **reviewer**
+(`Community-Access/accessibility-agents`, MIT, 2026-11-07), not a generator. Everything generative
+in document accessibility targets PDF: `CUNY-AI-Lab/pdf-accessibility-app` (AGPL-3.0), Equalify
+Reflow (PDF→accessible Markdown), `AIScientists-Dev/AI-Powered-PDF-Accessibility` (no licence file —
+see `agents/top.md`). The single EPUB-specific result was a paper, **"AltGen: AI-driven alt text
+generation for enhancing EPUB accessibility"**, with no public code located. A 2026 case study found
+in the same search argues there are **no mature open-source tools for end-to-end document
+remediation** — consistent with what this pass measured independently.
+
+**So the shape of the opportunity is: statutory EU demand, permissive validators, a documented
+backlist precedent at 8,000 titles — and no generator.** The missing piece is the one Globant would
+build.
+
+### 8. Content-licensing pressure has reached physical books
+
+A Japanese book distributor reportedly agreed to sell large quantities of books to an AI company;
+the report, citing US court documents, describes AI firms buying physical books, **removing bindings,
+cutting and scanning pages** to produce training data. A publishing expert quoted argues the legal
+question of **resale rights** may matter more than the AI training use itself. Recorded as reported,
+not verified — but the direction is the one every rights-holder conversation in this plane now
+starts from.

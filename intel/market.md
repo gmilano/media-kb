@@ -644,6 +644,47 @@ companies that own the incumbents' biggest contracts.
   and must not be asserted to a client from this file. Next pass should query the California Legislature
   bill pages by number rather than by topic.
 
+#### Book, ebook & scholarly publishing — pass 18, measured 2026-11-26
+
+**Adoption is majority behaviour and the figures are primary.** The BookNet Canada / BISG survey
+*AI use across the North American book industry 2026* found **63% of respondents' organizations are
+using AI**. Among **university presses (n=32)**, the top uses were administrative/operational
+(47%), marketing (44%) and **accessibility (44%)** — with alt-text generation in InDesign given as
+a concrete example. **86% reported concern about AI accuracy for consumers**, including difficulty
+telling AI-generated from human-made work.
+
+**The regulatory driver is indirect, and its date is genuinely unsettled.** The US has no EAA
+equivalent for commercial ebooks. Pressure arrives through **ADA Title II**, which binds state and
+local government entities and therefore reaches publishers through **public universities and
+libraries** as a procurement condition. Sources conflict on the deadline: BISG's accessibility page
+refers to the ADA Title II update as **effective April 2026**, while another source says it takes
+effect **26 April 2027** for larger public entities after a one-year extension. **Recorded as
+conflicting; verify against the DOJ rule before putting a date in a proposal.** The practical
+consequence does not depend on which is right: accessible EPUB is becoming a condition of selling
+into the public-sector education market.
+
+**The precedent that sizes a programme:** Elsevier reports that **as of May 2026 it had completed
+remediation of over 8,000 of its most widely used ebooks**, adding accessible EPUB files and alt
+text. This is the most useful number in the plane — a real backlist programme at a known scale,
+better evidence for a bid than any market-size estimate.
+
+**Key open-source players anchored in this region:** **PKP** (Public Knowledge Project, Canada —
+`pkp/ojs`, `pkp/omp`, GPL-3.0, both committed within the last three days); **Posit**
+(`quarto-dev/quarto-cli`, MIT); **Internet Archive** (`openlibrary`, AGPL-3.0); **Standard Ebooks**
+(US volunteer project, GPL-3.0 + CC0 templates); **Pressbooks**, the backbone of open-textbook
+publishing in NA higher education (GPL-3.0).
+
+**Opportunity, specific to this region:** the buyer is the **university press and the academic
+library**, not the trade publisher, because that is where both the ADA Title II exposure and the
+measured 44% accessibility-AI adoption sit. The offer is a **remediation pipeline whose automated
+stages are permissive end to end** — `w3c/epubcheck` (BSD-3) + `daisy/ace` (MIT) + an alt-text
+generator Globant builds — with `Sigil` (GPL-3.0) for human fix-up, deployed as a separate tool so
+no copyleft reaches the client's proprietary code. Pressbooks (GPL-3.0) is the natural integration
+target for the open-textbook segment.
+
+**Informed gap:** no primary DOJ source for the ADA Title II date was located in this pass, and the
+two secondary dates differ by a year. Flagged rather than resolved.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1341,6 +1382,60 @@ statutory, which is the only place that work can be sold as compliance rather th
   it is listed because the sovereignty framing converts it from "nice tooling" into an infrastructure
   decision, and because the EBU/DPP bloc of small broadcasters buys collectively.
 
+#### Book, ebook & scholarly publishing — pass 18, measured 2026-11-26
+
+**This is the region where accessibility is a condition of market access.** The **European
+Accessibility Act (Directive (EU) 2019/882)** has applied to ebooks sold in the EU since **28 June
+2025**, with a reported backlist transition to **June 2030**. Technical baseline: **EN 301 549**
+(V3.2.1 = WCAG 2.1 AA; **V4.1.1 published September 2026**, aligning with WCAG 2.2) plus **EPUB
+Accessibility 1.1**. Two obligations recur and both are machine-testable — accessibility features
+must be **discoverable in metadata**, and **DRM must not disable them**.
+
+**The enforcement mechanism is commercial before it is legal.** Reported consequence of failure is
+**suppression or removal from EU storefronts, with no formal warning process** — a retailer decision,
+not a regulator's. That is what makes this urgent independently of fines.
+
+**Enforcement state, recorded as contested because the sources genuinely conflict:**
+
+| Claim | Source character | Status |
+|---|---|---|
+| First EAA court ruling landed **June 2026** | Vendor compliance blog | **Unverified** |
+| After 14 months, **no** publisher, bookseller or platform fined or sued over ebook accessibility | Vendor analysis, Sept 2026 | **Unverified, and contradicts the above** |
+| First **French** lawsuits reported late 2025; **Dutch and German** authorities signalled audits in 2026 | Vendor compliance pages | Directional |
+| Penalties set **per member state**; no single EU sanctions regime | Multiple | Consistent across sources |
+| **No EU-wide enforcement dataset**; Commission's first review due **2030** | EAA tracker | Consistent |
+
+**Overlapping clock — the EU AI Act.** Article 50 transparency obligations (labelling AI-generated
+content) took effect **August 2026**; Commission guidelines published **20 July 2026**. A publisher
+using third-party AI editorial tools is generally a **deployer**. Where AI-assisted content has been
+**reviewed and approved by a person with documented editorial responsibility, labelling is reported
+not to be required** — which converts documented human sign-off into a compliance artefact the
+workflow must capture. Timing for high-risk obligations is disputed (2 August 2026 vs **December
+2027** for the EAA-compliance requirement on high-risk providers); recorded as unresolved.
+
+**Readiness, and therefore the size of the gap:** one vendor cites **fewer than 4 in 10 European
+publishers producing accessible ebooks**. Unverified and probably dated, but no counter-figure was
+located.
+
+**Key open-source players anchored in this region — EMEA owns the reading-system stack:**
+**EDRLab** (France) — `edrlab/thorium-reader` and the `readium/*` stack, **all BSD-3-Clause**, the
+reference implementation of accessible reading and of LCP; **COPIM/Thoth** (UK) —
+`thoth-pub/thoth`, **Apache-2.0**, OA book metadata with ONIX/MARC export; **EDItEUR** (UK) —
+custodian of **ONIX** and **Thema**, with **freely available code lists**; **DAISY Consortium** —
+`daisy/ace` (MIT) and the Pipeline modules (LGPL).
+
+**Opportunity, specific to this region, and it is the strongest in this plane:** statutory demand
+with a date already passed, a backlist deadline in 2030, a measured supply gap, **permissive
+validators** (`epubcheck` BSD-3, `ace` MIT), **permissive reading systems** (`readium/*` BSD-3) —
+and **no open generator for the remediation itself**. The deliverable is a metadata-first
+remediation service: assert `schema:accessibilityFeature` correctly, prove it with `ace` and
+`epubcheck` in CI, and keep an auditable record of human editorial approval to satisfy AI Act
+Article 50 at the same time. **Compliance evidence, not just compliance, is the billable artefact.**
+
+**Informed gap:** no primary regulator or court source for any EAA enforcement action was located;
+every enforcement claim traces to a vendor page. Stated as a gap, because the difference between
+"enforced" and "claimed enforced" changes how a proposal should be pitched.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1998,6 +2093,63 @@ attached, which makes them harder to sell than the EMEA report and more valuable
   volume **and** the permissive starting point. The asset is a **breakdown-and-scheduling layer for
   episodic short-form built on PenShot's Apache-2.0 base** — the segment where no incumbent schema fits
   (pass 16's finding) and where the shot list, not the stripboard, is the governing artefact.
+
+#### Book, ebook & scholarly publishing — pass 18, measured 2026-11-26
+
+**The asymmetry that defines this region: APAC has reading-access law aimed at *libraries*, not a
+conformance duty on *publishers*.** Japan's **Reading Barrier-Free Act** (読書バリアフリー法, enacted
+**June 2019**) encourages public libraries to collect and provide accessible reading materials so
+that everyone can access printed culture regardless of disability. It **encourages** publishers to
+produce accessible content; it does not impose the EAA's product-level obligation. That is the
+single most important commercial distinction between EMEA and APAC in this plane.
+
+**And the encouragement has visibly not been enough — by a major publisher's own admission.**
+Kadokawa states that several years after the law, "the inclusive publication of books and the
+improvement of accessibility **have not advanced sufficiently**" in published content such as
+novels, comics and picture books. A self-assessment from one of Japan's largest publishers is
+stronger evidence of a gap than any analyst estimate, and it is a stated commercial intent to close
+it — the opening for a vendor is explicit rather than inferred.
+
+**The adjacent mandate that does bite, and it has a date:** on **7 April 2026** Japan's cabinet
+approved a bill to recognise **digital textbooks as official textbooks**, with a 2030 mandate
+trajectory. Analysis ties the accessibility case directly to adjustable text size, read-aloud audio
+and **automatic furigana** for children with dyslexia or visual impairment. **This is the APAC entry
+point: the obligation arrives through education procurement, not trade publishing.**
+
+**Market and content signals:**
+
+| Signal | Detail |
+|---|---|
+| AI-generated content already winning commercially | An AI-generated YA comic topped the young-adult category on **Comic CmoA**, described as Japan's largest ebook platform, with the listing openly stating "This work was created using AI-generated images". The source notes it alarmed other creators |
+| Public-domain corpus | **Aozora Bunko**: over **17,700 works** as of January 2026 — a clean, licence-safe Japanese-language corpus for pipeline development and evaluation |
+| Copyright term | Japan extended to **70 years** on 30 December 2018, tied to the EU–Japan trade agreement — relevant to any public-domain-based offer |
+| Training-data pressure | A Japanese book distributor reportedly agreed to supply large volumes of physical books to an AI company for scanning; a publishing expert quoted argues **resale rights** may be the more consequential legal question |
+
+**Key open-source player anchored in this region:** **Vivliostyle** (`vivliostyle/vivliostyle.js`,
+**AGPL-3.0**, last commit 2026-11-24) — a Japanese-origin CSS typesetting engine and the best open
+answer for **CJK vertical writing, ruby/furigana and complex layout**. It is also the clearest
+licence trap in the region: the one engine that solves the hardest APAC typography problem is
+**network copyleft**, so it belongs in a separately deployed rendering service, never linked into a
+client's proprietary product.
+
+**Opportunity, specific to this region:** the buyer is the **education publisher and the textbook
+supplier**, driven by the 2026 digital-textbook decision and its 2030 trajectory — not the trade
+publisher, who faces no conformance duty. The differentiating capability is **Japanese-language
+accessible production**: furigana generation, vertical-writing EPUB, read-aloud alignment. Vivliostyle
+(AGPL) handles layout behind a service boundary; `daisy/pipeline-modules` (LGPL) handles TTS and
+DAISY output; `epubcheck` (BSD-3) and `ace` (MIT) validate. **Globant's differentiator here is
+language and script competence, not compliance pressure** — the reverse of the EMEA pitch, and it
+should be sold that way.
+
+**Informed gaps — searched, and genuinely not found:**
+- **No ebook accessibility regulation located for Korea or China.** Searched in English; nothing
+  returned on either country's rules for ebooks or digital publishing accessibility. This is a real
+  hole, not an absence of regulation — it needs searching **in Korean and Chinese**, and against
+  each country's disability and publishing statutes directly. Flagged for a future pass.
+- **No APAC-wide AI-adoption figure for publishing** comparable to the NA BookNet/BISG 63%. The NA
+  number must not be reused as a proxy for this region.
+- **No India/ANZ-specific finding** emerged from the regional search despite both being substantial
+  English-language publishing markets.
 
 ### LATAM
 
@@ -3039,3 +3191,67 @@ is the entire open-source answer to the question "what runs a production office"
 Mexican consent duty, in-force US guild agreements, and a segment whose incumbents are wholly
 proprietary and own every file format downstream of the script. **A supply-side zero next to a dated legal
 duty is a stronger qualified-pipeline argument than any TAM this KB could have cited.**
+
+#### Book, ebook & scholarly publishing — pass 18, measured 2026-11-26
+
+**The concrete opportunity of this entire pass sits in this region, and it is a measured number
+against an installed base this KB can name.**
+
+Of **1,119 Latin American journals indexed in Scopus, 72.8% (815 journals) have no explicit
+guidelines on the use of AI on their websites** (*Publications*, 2026 — a peer-reviewed source, not
+a vendor estimate). Meanwhile **Open Journal Systems** (`pkp/ojs`, GPL-3.0, committed 2026-11-26)
+runs **25,000+ journals worldwide** and is the dominant scholarly platform in LATAM.
+
+**815 named institutions, one shared open-source platform, and a policy gap they are all aware
+of.** That is a repeatable engagement — an OJS plugin for AI-disclosure policy capture, submission
+screening and editorial sign-off recording — sold once and deployed many times, with
+`pkp/pkp-lib` (GPL-3.0) as the correct integration seam. Delivered as a GPL plugin it carries no
+contamination risk, because the plugin *is* the deliverable.
+
+**The regulatory picture — AI rules are arriving, and IP is the sharp edge:**
+
+| Jurisdiction | Position | Date / status |
+|---|---|---|
+| **Mexico** | Reforms made **AI-enabled IP infringement sanctionable** — described as the **first jurisdiction in Latin America** to address this at statutory level | **April 2026** |
+| **Brazil** | **PL 2.338/2023** (Senate version): risk-based, transparency duties; training-data disclosure still debated. The regional bellwether for a comprehensive horizontal statute | In progress |
+| **Mexico, Brazil, Chile, Colombia** | **Authorship treated as a human attribute** — purely AI-generated output is not protected | Settled |
+| **Region-wide** | **No major LATAM jurisdiction provides a comprehensive TDM exception** for AI training. **Ecuador is the sole exception** with an express TDM provision | Current |
+
+The TDM position is the commercially important one: a publisher in this region cannot assume a
+training-data exception, so **rights-cleared corpus construction is a service, not a formality** —
+and Ecuador's outlier provision is worth knowing by name.
+
+**Accessibility runs through Marrakesh, not through a product mandate.** There is **no LATAM
+equivalent of the EAA**. Access is delivered via the **Marrakesh Treaty** and authorized entities:
+
+| Signal | Detail |
+|---|---|
+| Argentina's implementation | **Article 36 bis** permits authorized entities to reproduce accessible-format copies — explicitly including **audio and digital** formats |
+| The measured supply gap | Argentina has roughly **25,000** accessible books against Spain's **~100,000** (World Blind Union figure) |
+| Spanish-language supply | **70,000** Spanish-language titles via the ABC **Global Book Service** |
+| Regional coordination | A **ULAC** congress in Lima brought together representatives of **19 countries**, highlighting the need for better distribution, greater digital accessibility and cross-border exchange of accessible books |
+| Treaty scale | **103–105 contracting parties** (sources differ by reporting date; ~129 countries) |
+
+**Opportunity, specific to this region — two distinct offers, and they have different buyers:**
+
+1. **The AI-policy and editorial-integrity plugin for OJS.** Buyer: universities, journal
+   consortia, national science agencies. Evidence: **815 of 1,119** Scopus-indexed LATAM journals
+   with no AI guidelines, on a platform Globant can extend conventionally. **This is the
+   highest-confidence, most repeatable offer identified in pass 18, in any region.**
+2. **Accessible-format production for authorized entities.** Buyer: libraries, Marrakesh authorized
+   entities, ministries of education. Evidence: a **25,000 vs 100,000** supply gap against Spain and
+   an explicit regional call for digital accessibility. The pipeline is the permissive one —
+   `epubcheck` (BSD-3), `ace` (MIT), `daisy/pipeline-modules` (LGPL) for DAISY/TTS output,
+   `ebook2audiobook` (Apache-2.0) for Spanish-language audio. **Note the difference from EMEA: the
+   driver is a service gap under a treaty exception, not a conformance duty on a product**, so the
+   buyer is public-sector and the pitch is capacity, not compliance.
+
+**Informed gaps — searched, and genuinely not found:**
+- **No 2026 Brazilian or Mexican ebook-accessibility statute** located. Both have general
+  accessibility and consumer law, but nothing EAA-equivalent for ebooks surfaced. The next step is
+  each country's copyright and accessibility statutes directly, and the **2026 IFLA Marrakesh
+  Monitoring Report**.
+- **No LATAM ebook-market or AI-adoption figures** comparable to NA's 63%. The *Publications* journal
+  study and the Chambers IP guide carried the region; no publisher survey was located.
+- Ratification counts differ between sources (103 by 4 March 2026 vs 105 by September 2026); likely
+  just different reporting dates, recorded rather than reconciled.

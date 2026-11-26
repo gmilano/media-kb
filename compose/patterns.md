@@ -2384,3 +2384,199 @@ in-force duty, the dubbing-sector exposure and the guild agreements — not on a
 **Why Globant wins this.** It needs production-office domain knowledge, LATAM statutory reading, and the
 C2PA stack this KB already has — and there is **no incumbent to displace**, because the open layer where
 the obligation lands is empty.
+
+---
+
+## Book, ebook & scholarly-publishing patterns — pass 18, 2026-11-26
+
+Every repo named below appears with its **licence read from its own licence file** and its verified
+last-commit date in `repos/foundations.md`, `verticals/solutions.md` or `agents/top.md`.
+
+**The licence rule for this whole plane, applied in every recipe:** the *validators and renderers*
+are permissive (BSD-3/MIT) and embeddable; the *platforms* are GPL-3.0/AGPL-3.0 and must be
+deployed as separate services, not linked. Where a recipe crosses that line, the boundary is called
+out explicitly.
+
+---
+
+### P33 — EAA backlist remediation, with compliance evidence as the deliverable (EMEA)
+
+**Why:** the EAA has applied to ebooks since 28 June 2025, backlist transition to June 2030, and the
+real penalty is **removal from EU storefronts**. Fewer than 4 in 10 European publishers are reported
+to be producing accessible ebooks. The validators are permissive; **the generator does not exist.**
+
+**Wire-up:**
+
+1. **Ingest & triage.** `w3c/epubcheck` (**BSD-3-Clause**) for structural validity →
+   `daisy/ace` (**MIT**) for EPUB Accessibility 1.1 conformance. Both run as CI steps. Ace's JSON
+   report is the triage queue; sort the backlist by defect class, not by title.
+2. **Metadata first — this is the cheapest win and a hard EAA requirement.** Accessibility features
+   must be **discoverable in metadata**. Assert `schema:accessibilityFeature`,
+   `accessibilityHazard`, `accessMode` and `accessibilitySummary` in the OPF. Many titles fail
+   discoverability while being substantially accessible — fix the metadata before touching content.
+3. **Alt text — the part Globant builds.** No open EPUB alt-text generator exists (the only
+   EPUB-specific result is the *AltGen* paper, no code). Build it against the Ace report, and copy
+   the honest-failure design from `CUNY-AI-Lab/pdf-accessibility-app`: when the model service
+   fails, **flag the figure for re-upload rather than emitting empty alt that passes a checker**.
+4. **Human fix-up.** `Sigil-Ebook/Sigil` (GPL-3.0) as the remediator's desktop tool — a separate
+   application, so no copyleft touches client code.
+5. **DRM check.** If the client applies LCP, verify via `readium/readium-lcp-server`
+   (BSD-3-Clause) that protection does **not** disable accessibility features — an explicit EAA
+   requirement and a frequently missed one.
+6. **Re-validate and retain.** Re-run `epubcheck` + `ace`, and **store the reports as the
+   compliance artefact.** The stored evidence is what a retailer or auditor asks for.
+
+**Licence boundary:** steps 1, 2, 5 and 6 are **BSD-3/MIT — fully embeddable**. Step 4 is a
+separately installed GPL-3.0 desktop tool. **Do not use `aerkalov/ebooklib` (AGPL-3.0) for the
+server-side EPUB writing in step 2 or 3** — it would place network copyleft on the hosted service.
+Write the OPF with a permissive XML library or a purpose-built writer.
+
+---
+
+### P34 — AI-disclosure and editorial-integrity plugin for OJS (LATAM first, globally reusable)
+
+**Why:** **815 of 1,119 (72.8%) Scopus-indexed Latin American journals have no explicit AI
+guidelines** (*Publications*, 2026), and `pkp/ojs` is the dominant platform in the region with
+25,000+ journals worldwide. One plugin, many deployments.
+
+**Wire-up:**
+
+1. **Integrate at `pkp/pkp-lib`** (GPL-3.0), not in `pkp/ojs` directly — it is the stable seam
+   shared by **both** OJS (journals) and `pkp/omp` (monographs), so the same plugin serves both.
+2. **Submission-time disclosure.** Add a required AI-use declaration to the submission form:
+   which tools, at which stage, for which sections.
+3. **Editorial sign-off capture.** Record **who** approved AI-assisted content and **when**. This is
+   not bureaucracy — under **EU AI Act Article 50** (in force August 2026), documented human
+   editorial responsibility is reported to remove the labelling obligation, so the record is the
+   compliance artefact for any journal with EU readership or authors.
+4. **Policy publication.** Render the journal's AI policy as a public page from the same
+   configuration, so the policy and the enforcement cannot drift apart.
+5. **Reviewer-side screening.** Surface the declaration to reviewers; do **not** auto-reject on an
+   AI-detection score — accuracy of detection is exactly what 86% of NA publishers said they
+   distrust, and a false accusation is a worse failure than a missed disclosure.
+
+**Licence position:** the deliverable **is** a GPL-3.0 plugin. No contamination question arises —
+publish it as GPL-3.0 and the client's obligation is satisfied by distributing the plugin.
+**The margin is in deployment, configuration and the policy design, not in withholding code.**
+
+---
+
+### P35 — Permissive-end-to-end book metadata and ONIX distribution (any region)
+
+**Why:** this is **the cleanest fully permissive path in the plane** — no copyleft anywhere — and
+ONIX code lists are freely available, so there is no content toll (unlike MedDRA in healthcare or
+CPT in US coding).
+
+**Wire-up:**
+
+1. **`thoth-pub/thoth`** (**Apache-2.0**) as the metadata system of record — books, works,
+   contributors, with ONIX and MARC export.
+2. **`titusz/onixcheck`** (**Apache-2.0**) to validate ONIX 2.1/3.0/3.1 against the official XML
+   Schema in CI before anything reaches a trading partner.
+3. **`chrisribal/onix-parser`** (**MIT**) for read **and write** of ONIX 3.0/3.1 with official code
+   list resolution — the only verified permissive ONIX *writer*.
+4. **`zach-m/jonix`** (**Apache-2.0**) if the client is a JVM shop ingesting partner feeds.
+5. **Agent layer — Globant builds it; there is none.** No open-source agent for ONIX generation or
+   correction exists. The highest-value target is **error explanation and repair suggestion**:
+   `onixcheck` says *what* is invalid; an agent that says *why* and proposes the corrected element
+   is the differentiator.
+6. **Subject-scheme mapping is also a build.** No verified repo handles **Thema** or **BISAC** as a
+   first-class feature. A client selling a backlist into both NA (BISAC) and EMEA (Thema) needs that
+   mapping, and it does not exist openly.
+
+**Licence position:** **Apache-2.0 / MIT throughout.** This recipe can be embedded in a proprietary
+product with no copyleft obligation — the only recipe in this plane of which that is true.
+
+---
+
+### P36 — Japanese accessible-production pipeline (APAC)
+
+**Why:** Japan's Reading Barrier-Free Act (2019) targets libraries, not publishers, so there is **no
+product conformance duty** — but Kadokawa itself states accessibility "has not advanced
+sufficiently", and the **7 April 2026** cabinet decision recognising digital textbooks as official
+textbooks creates an obligation through **education procurement**. The differentiator here is
+**script and language competence, not compliance pressure.**
+
+**Wire-up:**
+
+1. **Layout and typesetting:** `vivliostyle/vivliostyle.js` (**AGPL-3.0**) — the best open engine
+   for **CJK vertical writing, ruby/furigana and complex layout**.
+   **⛔ Deploy it as a standalone rendering service behind an API.** AGPL §13 attaches to a hosted
+   service's users; keeping it in its own service with published source satisfies the licence
+   without touching the client's product code.
+2. **Furigana and read-aloud:** `daisy/pipeline-modules` (**LGPL-2.1/3.0**) for TTS and DAISY output
+   — weak copyleft, linkable with care, and the module set is the licensed artefact.
+   **Do not cite `daisy/pipeline` itself: it has no licence file** (it is a `git-subrepo` umbrella).
+3. **Validation:** `w3c/epubcheck` (BSD-3) + `daisy/ace` (MIT), as in P33.
+4. **Audio output:** `DrewThomasson/ebook2audiobook` (**Apache-2.0**) for multi-language audiobook
+   generation.
+5. **Evaluation corpus:** **Aozora Bunko** (17,700+ public-domain Japanese works as of January
+   2026) — a licence-safe corpus for building and benchmarking the pipeline before touching
+   client content. Note Japan's **70-year** term when selecting titles.
+
+**Licence boundary:** one AGPL component (isolated as a service), one LGPL component (linkable),
+two permissive validators. Workable, but the architecture is **dictated by the licence**, not by
+engineering preference — say so in the proposal rather than discovering it in delivery.
+
+---
+
+### P37 — Marrakesh accessible-format production for authorized entities (LATAM)
+
+**Why:** no EAA equivalent exists in LATAM; access flows through the **Marrakesh Treaty** and
+authorized entities. Argentina's **Article 36 bis** explicitly permits accessible-format
+reproduction including **audio and digital**. The supply gap is measured: **~25,000** accessible
+books in Argentina against **~100,000** in Spain, and a ULAC congress of **19 countries** called
+specifically for greater digital accessibility and cross-border exchange.
+
+**Wire-up:**
+
+1. **Confirm the legal basis first, per country.** The exception is what makes the work lawful
+   without per-title clearance. Argentina's Art. 36 bis is verified; **other countries must be
+   checked individually against the IFLA Marrakesh Monitoring Report** — do not assume regional
+   uniformity.
+2. **Conversion:** `daisy/pipeline-modules` (LGPL) for DAISY and braille output — the formats
+   authorized entities actually distribute, which EPUB alone does not cover.
+3. **Spanish-language audio:** `DrewThomasson/ebook2audiobook` (Apache-2.0) or
+   `p0n1/epub_to_audiobook` (MIT).
+4. **Validation:** `epubcheck` (BSD-3) + `ace` (MIT).
+5. **Delivery:** `gotson/komga` (**MIT**) as the catalogue and OPDS server — chosen over Kavita and
+   Calibre-Web (both GPL-3.0) specifically because it is the **only permissive reading server
+   verified**, so a public-sector client can wrap it in a proprietary portal.
+6. **Interoperate, don't duplicate:** enrich against `internetarchive/openlibrary` (AGPL-3.0) **via
+   its public API** — reading an AGPL service's data creates no obligation; bundling its code would.
+
+**Pitch note:** the buyer is public-sector (libraries, authorized entities, ministries of education)
+and the proposition is **capacity**, not compliance. This is the inverse of P33's EMEA framing, and
+reusing the compliance pitch here would land badly.
+
+---
+
+### P38 — Ebook → audiobook at catalogue scale (any region)
+
+**Why:** the one genuinely hot open-source category in this plane, and the licences are permissive.
+Open TTS became good enough during 2026.
+
+**Wire-up:** `aerkalov/ebooklib` **avoided** — use `futurepress/epub.js` (BSD-2) or a permissive
+parser for chapter extraction → `DrewThomasson/ebook2audiobook` (Apache-2.0, voice cloning,
+many languages) or `santinic/audiblez` (MIT, Kokoro-82M) → `advplyr/audiobookshelf` (GPL-3.0,
+deployed separately) for delivery.
+
+**The quality gate is the whole engagement.** These tools produce audio cheaply; what they do not
+produce is a **pronunciation policy** — names, place names, numerals, acronyms, and in CJK the
+correct reading of ambiguous kanji. A lexicon plus a QC sampling step is the deliverable with
+margin, exactly as the rules library was in the healthcare pharmacovigilance pattern.
+
+---
+
+### What not to promise in this plane
+
+| Temptation | Why it fails |
+|---|---|
+| "We'll use `ebooklib` for the EPUB service" | **AGPL-3.0.** Network copyleft on a hosted service. The most likely accidental obligation in publishing |
+| "`daisy/pipeline` is LGPL" | The umbrella repo has **no licence file**. Cite `pipeline-modules` (LGPL) or `pipeline-ui` (MIT) |
+| "This PDF accessibility repo is MIT, the badge says so" | `AIScientists-Dev/AI-Powered-PDF-Accessibility` has **no licence file at ten probed paths**. A badge is not a grant |
+| "We'll build on the EPUB 3 spec repo" | `w3c/publ-epub-revision` is under the **W3C Software and Document License** — spec text, not a software grant |
+| "There's an open alt-text generator for EPUB we can adopt" | There is not. Measured. Everything generative targets **PDF**; the one EPUB paper has no located code. **It is a build** |
+| "Thema/BISAC mapping is a solved problem" | No verified open repo treats it as a first-class feature. Also a build |
+| Reusing the NA 63% AI-adoption figure for other regions | It is a **BookNet Canada/BISG North American** survey. No comparable APAC or LATAM figure was located |
+| Quoting EAA enforcement as established fact | Every enforcement claim located traces to a **vendor page**, and two of them contradict each other |

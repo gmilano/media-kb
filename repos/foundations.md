@@ -2149,3 +2149,135 @@ of one, and the API reports `NOASSERTION` for both.**
 Same API value, opposite legal consequence. **`NOASSERTION` is an instruction to read the file, not a
 verdict in either direction** — and in this plane it also concealed three GPL-3.0 projects behind short
 custom notices (`Beat` 507 B, `CineSched` 817 B, `OpenShotDesigner` 35,809 B).
+
+---
+
+## The book, ebook & scholarly-publishing plane — measured 2026-11-26 (pass 18)
+
+The written-word substrate of M&E, absent from this KB until this pass. All rows verified
+2026-11-26: existence via `git ls-remote`, **licence by reading the licence file in the repo**,
+last-commit date via `git clone --depth 1 --filter=blob:none --no-checkout` + `git log -1`.
+**No star counts** — the GitHub API is unreachable for out-of-session repos from this environment,
+and an unverified number is worse than an absent one.
+
+### The finding that shapes this section
+
+In this plane the licence tracks **who wrote the code**, not how regulated the layer is:
+
+- **Standards bodies** (W3C, DAISY, EDRLab/Readium, Posit, Jupyter) → **BSD-3 / MIT / Apache-2.0**.
+  Their product is a *format*; a copyleft reference implementation would slow its adoption.
+- **The scholarly & library commons** (PKP, Pressbooks, Manifold, Internet Archive, Fidus Writer) →
+  **GPL-3.0 / AGPL-3.0**. Their product is a *commons*; permissiveness would let a host enclose it.
+
+Practical consequence for a bid: **the conformance and rendering layers are embeddable; the platform
+layer must be deployed and extended, not linked into proprietary code.** This is the reverse of the
+AV side of the same industry, where pass 4 found the checker (`MediaConch`) copyleft and the
+metadata layer permissive.
+
+### Conformance & accessibility validation — permissive, and this is the strongest part of the stack
+
+This is the layer under a statutory duty in the EU (see `intel/market.md`), and it is the layer
+Globant can embed without obligation. That combination does not occur anywhere else in this KB.
+
+| Repo | Licence (file) | Last commit | Role |
+|---|---|---|---|
+| https://github.com/w3c/epubcheck | BSD-3-Clause (`LICENSE.md`) | 2026-11-02 | The canonical EPUB validator; what retailers and aggregators gate on |
+| https://github.com/daisy/ace | MIT (`LICENSE.txt`) | 2026-05-01 | Ace by DAISY — EPUB accessibility conformance against EPUB Accessibility 1.1 |
+| https://github.com/daisy/pipeline-modules | LGPL-2.1/3.0 (`LICENSE.txt`) | 2026-10-08 | Conversion modules: braille, TTS, DAISY ↔ EPUB. Weak copyleft — linkable with care |
+| https://github.com/daisy/pipeline-ui | MIT (`LICENSE`) | 2026-09-05 | Desktop front end to the Pipeline |
+
+> **⚠️ `daisy/pipeline` itself has no licence file.** It is a `git-subrepo` umbrella pointing at ~25
+> sub-repositories; the licensed artefacts are the modules above. Citing `daisy/pipeline` as
+> "LGPL" in a client deck would be citing a repository that grants nothing. Verified 2026-11-26.
+
+### Reading systems & rendering — permissive, EMEA-anchored
+
+| Repo | Licence (file) | Last commit | Role |
+|---|---|---|---|
+| https://github.com/edrlab/thorium-reader | BSD-3-Clause (`LICENSE`) | 2026-11-26 | Reference desktop reader (EDRLab, France); EPUB + LCP + audiobooks |
+| https://github.com/readium/readium-css | BSD-3-Clause (`LICENSE`) | 2026-11-16 | The typography and user-settings layer of a reading system |
+| https://github.com/readium/r2-shared-js | BSD-3-Clause (`LICENSE`) | 2025-10-28 | Readium 2 shared models. **13 months stale** — pin it, do not expect fixes |
+| https://github.com/readium/readium-lcp-server | BSD-3-Clause (`LICENSE.md`) | 2026-06-22 | LCP licence server — open DRM |
+| https://github.com/futurepress/epub.js | BSD-2-Clause (bare `license`) | 2026-03-23 | Browser-side EPUB renderer. **The permissive alternative to `ebooklib`** for read paths |
+| https://github.com/pagedjs/pagedjs | MIT (`LICENSE.md`) | 2026-10-20 | Paged-media CSS: HTML → print/PDF with real pagination |
+| https://github.com/vivliostyle/vivliostyle.js | **AGPL-3.0** (`LICENSE`) | 2026-11-24 | CSS typesetting engine, **Japanese-origin** — the best open answer for CJK vertical writing and complex layout, and the licence is the catch |
+
+### Authoring & toolchains
+
+| Repo | Licence (file) | Last commit | Role |
+|---|---|---|---|
+| https://github.com/jgm/pandoc | **GPL-2.0** (`COPYING.md`) | 2026-11-25 | Universal document converter. Licence lives in `COPYING.md` — GitHub's own detector often misses it |
+| https://github.com/quarto-dev/quarto-cli | **MIT** (`COPYING.md`) | 2026-11-25 | Scientific & technical publishing toolchain (Posit). Also `COPYING.md` |
+| https://github.com/asciidoctor/asciidoctor | MIT (`LICENSE`) | 2026-11-22 | Fast text processor + publishing toolchain |
+| https://github.com/jupyter-book/jupyter-book | BSD-3-Clause (`LICENSE`) | 2026-11-25 | Executable books from notebooks |
+| https://github.com/rstudio/bookdown | GPL-3.0 (`LICENSE.txt`) | 2026-09-18 | R-based book authoring |
+| https://github.com/Sigil-Ebook/Sigil | GPL-3.0 (`COPYING.txt`) | 2026-11-25 | WYSIWYG EPUB editor — the tool human remediators actually use |
+| https://github.com/standardebooks/tools | GPL-3.0, **CC0 1.0 for `./se/data/templates`** (`LICENSE.md`) | 2026-11-25 | Production toolset with a genuinely reusable CC0 template set |
+| https://github.com/aerkalov/ebooklib | **AGPL-3.0** (`LICENSE.txt`) | 2026-11-01 | Python EPUB read/write. **Read the warning below before importing it** |
+
+> **⛔ `ebooklib` is AGPL-3.0 and it is the default choice.** It is the library a developer reaches
+> for to manipulate EPUB in Python. Inside a *hosted* conversion or remediation service, AGPL §13
+> obliges offering complete corresponding source to the service's users. Nothing in the package name
+> signals this. **This is the most likely way a publishing engagement acquires network copyleft by
+> accident.** Verified from `LICENSE.txt`, 2026-11-26.
+>
+> **There is no verified permissive server-side EPUB read/write library in this pass.** Searched and
+> not found — stated as a gap. Permissive options exist only either side of it: `epub.js`
+> (BSD-2, browser) and `pagedjs` (MIT) for rendering, `epubcheck` (BSD-3) and `ace` (MIT) for
+> validation. A server-side writer is a **build**, not an adopt.
+
+### ONIX — the book industry's metadata wire format, permissive across the board
+
+ONIX for Books (EDItEUR) is to publishing what SCTE-35 is to ad insertion: small, boring, and the
+thing that actually has to be right. Unlike MedDRA in healthcare or CPT in US coding, the **ONIX
+code lists are freely available** — so this is a regulated-adjacent metadata layer with no content
+toll, which is rarer in this KB than it should be.
+
+| Repo | Licence (file) | Last commit | Language | Read |
+|---|---|---|---|---|
+| https://github.com/titusz/onixcheck | Apache-2.0 (`LICENSE`) | 2026-10-16 | Python | Validates 2.1/3.0/3.1 against official XML Schema. **Start here** |
+| https://github.com/zach-m/jonix | Apache-2.0 (`LICENSE`) | 2026-10-17 | Java | Extraction library. Aggregators misreport it as stale; it is not |
+| https://github.com/chrisribal/onix-parser | MIT (`LICENSE`) | 2026-09-29 | PHP | **Reads and writes** 3.0/3.1 and resolves code lists — the only verified writer |
+| https://github.com/jaerith/ONIX-Data | Apache-2.0 (`LICENSE`) | 2025-10-14 | C# / .NET | 13 months stale, but structurally complete |
+| https://github.com/xercode/metadata-onix-lib | MIT (`LICENSE`) | 2021-04-28 | PHP | **5½ years stale. Do not start here** |
+| https://github.com/phantom-artist/onix-creator | **none found** | 2022-05-10 | — | No licence file, 4½ years stale. Unusable |
+
+**Informed gap:** no verified open-source library resolves **Thema** (the international subject
+scheme) or **BISAC** codes as a first-class feature. Searched; the repositories above handle ONIX
+structure and EDItEUR code lists, and subject-scheme mapping was not found in any of them. For a
+client moving a backlist between NA (BISAC) and EMEA (Thema) markets, **that mapping is a build.**
+
+### Catalogue, library & bibliographic layer
+
+| Repo | Licence (file) | Last commit | Role |
+|---|---|---|---|
+| https://github.com/internetarchive/openlibrary | AGPL-3.0 (`LICENSE`) | 2026-11-26 | Open bibliographic catalogue + identifiers |
+| https://github.com/thoth-pub/thoth | **Apache-2.0** (`LICENSE`) | 2026-11-25 | OA book metadata management and ONIX/MARC export (COPIM, UK). **The permissive metadata platform in this plane** |
+| https://github.com/omeka/Omeka-S | GPL-3.0 (`LICENSE`) | 2026-11-24 | Digital collections publishing |
+| https://github.com/gotson/komga | MIT (`LICENSE`) | 2026-11-24 | Ebook/comic server — **the permissive one** of the four reading servers |
+| https://github.com/Kareadita/Kavita | GPL-3.0 (`LICENSE`) | 2026-11-22 | Self-hosted reading server |
+| https://github.com/janeczku/calibre-web | GPL-3.0 (`LICENSE`) | 2026-11-22 | Web front end over a Calibre library |
+| https://github.com/koreader/koreader | AGPL-3.0 (`COPYING`) | 2026-11-25 | E-ink reader application |
+| https://github.com/kovidgoyal/calibre | GPL-3.0 (`LICENSE`) | 2026-11-26 | Library management + format conversion; the de facto desktop standard |
+
+### Standards documents — not code, demoted on sight
+
+| Artefact | Licence | Read |
+|---|---|---|
+| https://github.com/w3c/publ-epub-revision | **W3C Software and Document License** | EPUB 3 spec revision text. A document licence, not a software grant |
+| https://github.com/daisy/epub-revision-a11y | none | Last commit 2015-10-02. Historical |
+
+### ⚙️ Method additions from this pass — reusable in all twelve industries
+
+1. **`COPYING.md` joins the licence probe** (extension #4). Two independent hits in one pass:
+   `jgm/pandoc` = GPL-2.0, `quarto-dev/quarto-cli` = MIT. Both read "unlicensed" without it.
+2. **A bare lowercase `license` with no extension joins the probe** (extension #5).
+   `futurepress/epub.js` = BSD-2-Clause, found nowhere else.
+3. **Report the licence *set*, not the first match.** `standardebooks/tools` auto-classified as
+   `CC-*` on first match; it is GPL-3.0 with a CC0 carve-out. The first licence named in a file is
+   not the licence of the code.
+4. **Last-commit dates without an API:** `git clone --depth 1 --filter=blob:none --no-checkout`
+   then `git log -1 --format=%cs`. Sub-second, no blob transfer, works where the GitHub API is
+   blocked. This replaced the API for all 40 repos in this pass.
+5. **Always include a negative control in an existence probe.** A deliberate fake slug was probed
+   alongside the 39 real ones; without it, "all resolved" is not evidence that the probe works.

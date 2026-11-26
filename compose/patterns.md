@@ -3337,3 +3337,221 @@ for in-browser sign-off.
 **And one dependency to read before promising colour fidelity:** `Little-CMS` is MIT, maintained,
 load-bearing for Scribus, GIMP and Krita — and has **764 stars.** If the engagement's value
 proposition is "the printed piece matches the screen", that promise rests on it.
+
+## Owned-channel & audience-relationship recipes — added 2026-11-26 (pass 24)
+
+Every repo named below appears with its verified licence, star count and last-push date in
+`repos/foundations.md` or `verticals/solutions.md` (pass 24). The plane's agent layer is a measured
+near-zero, so **four of these five patterns are integrations of healthy permissive infrastructure, not
+adoptions of an agent.**
+
+**The licence rule for this whole plane, stated once:** the list manager is copyleft (listmonk AGPL,
+Mautic GPLv3+), so it runs **behind a service boundary** the client's proprietary code calls over
+HTTP. Everything the client should own and differentiate — Postal, Novu, Unomi, Coral, c15t,
+react-email/MJML, parsedmarc — is MIT, Apache-2.0 or MPL-2.0.
+
+---
+
+### Pattern 24.1 — The reachable-audience spine (run this before anything else in the plane)
+
+**Why:** Piano's diagnostic question — *what percentage of your audience can you reach without a
+referral source?* — is the business case for this entire plane, and most clients cannot answer it.
+Google Discover referrals fell **21% YoY**, and exposed publishers report **50–90%** revenue declines.
+This pattern produces the number and then fixes it.
+
+```
+[Web / app / player events]
+        |
+        v
+[snowplow/snowplow (Apache-2.0)]  or  [jitsucom/jitsu (MIT)]   <- first-party event collection
+        |
+        v
+[apache/unomi (Apache-2.0, 382*)]        <- THE PROFILE STORE: identity stitching + segments
+        |                                    + consent state as a first-class field
+        |
+        +--> [ory/kratos (Apache-2.0)]    <- registration / login wall: anonymous -> known
+        |
+        +--> [novuhq/novu (MIT, 40,432*)] <- ONE orchestration API for every owned channel
+        |         |
+        |         +--> email  -> [knadh/listmonk (AGPL, service boundary)] or [mettle/sendportal (MIT)]
+        |         |                    |
+        |         |                    v
+        |         |            [postalserver/postal (MIT)] <- owned MTA, per-domain DKIM, webhooks
+        |         |
+        |         +--> web push -> [web-push-libs/web-push (MPL-2.0)] + [mozilla-services/autopush-rs]
+        |         |
+        |         +--> in-app / breaking -> [binwiederhier/ntfy (Apache-2.0)]
+        |
+        +--> [apache/druid | apache/pinot (Apache-2.0)]  <- the Pattern 10 reporting path
+```
+
+**What makes this different from Pattern 10 (first-party audience *graph*):** Pattern 10 observes.
+This one **activates** — and the join between them is Unomi's profile, where the consent record and
+the reachable-channel list live on the same object. Run Pattern 10 first if it is not already in place.
+
+**The deliverable that justifies the engagement:** a single number per client —
+*reachable audience / total audience* — broken down by channel and by consent basis, refreshed daily.
+No client currently has it.
+
+**Licence posture:** Unomi, Kratos, Novu, Postal, ntfy, web-push, Snowplow, Druid = all permissive and
+in the client's build. Only the list manager is copyleft, and only if listmonk is chosen over
+SendPortal. **Do not use `rudderlabs/rudder-server`** (Elastic License 2.0) however many listicles
+recommend it.
+
+---
+
+### Pattern 24.2 — The newsroom comment desk with an open moderation assistant (the smallest unbuilt product in this plane)
+
+**Why:** Coral is the only commenting platform ever built for newsrooms, it is **Apache-2.0**, it was
+pushed today, and it ships AI-assisted moderation inside the product. `detoxify` is the open toxicity
+model. **Nothing wires an agent between them** — and comment moderation is a liability the publisher
+carries per published comment, which is exactly why the generic alternative (Discourse, 48,117★) is
+24× better resourced and 24× less fit.
+
+```
+[coralproject/talk (Apache-2.0, 2,005*)]      <- per-stream pre/post moderation, queues,
+        |                                        banned + suspect word lists, publisher owns the data
+        |  webhook / queue
+        v
+[moderation agent  <-- THE BUILD]
+        |   +-- [unitaryai/detoxify (Apache-2.0, 1,320*)]  <- toxicity scores, self-hosted
+        |   +-- LLM pass for context the classifier misses (sarcasm, local slurs, dogwhistles)
+        |   +-- policy-as-code: the client's community standards, versioned
+        v
+[decision + REASON + model version]  ---> back to Coral's queue (approve / reject / escalate)
+        |
+        v
+[append-only moderation log]  <- the evidence trail, per decision
+```
+
+**Why the log is the product, not the classifier:** a moderation decision a publisher cannot explain
+is a liability in every region this KB covers. Record input, score, model version, policy version,
+decision and the human who confirmed it. This is the same "we removed it → we told the regulator we
+removed it" structure as Pattern 26, applied to comments instead of content.
+
+**Both components are Apache-2.0**, so the agent, the policy and the log are all client-owned IP.
+LATAM note: Brazil's Decrees 12,975 and 12,976 added content-moderation, reporting and transparency
+duties for intermediaries **effective 20 July 2026** — the log is how that duty is discharged.
+
+---
+
+### Pattern 24.3 — Deliverability as an evidence loop (the agent nobody has built, on a substrate that is ready)
+
+**Why:** the owned channel is only owned if it arrives. Gmail retired its High/Medium/Low reputation
+scores in Postmaster Tools v2 for a compliance checklist and a deliverability verdict; Apple MPP and
+now Gmail's auto-opening Gemini summaries have made the **open rate unusable** (opens inflate, clicks
+fall). The metrics that survive are **DMARC evidence, clicks and conversions** — and there is no open
+agent for any of it, over a permissive substrate that is pushed weekly.
+
+```
+[DMARC aggregate + forensic reports from every receiver]
+        |
+        v
+[domainaware/parsedmarc (Apache-2.0, 1,321*)] --> OpenSearch / Elasticsearch
+        |
+[postalserver/postal (MIT)] bounce + click webhooks -----+
+        |                                                |
+        v                                                v
+[deliverability ops agent  <-- THE BUILD]
+        |   reads: SPF/DKIM/DMARC pass rates by receiver and sending domain,
+        |          bounce classes, complaint rates, click/conversion by segment
+        |   does:  flags a receiver whose alignment dropped; proposes list-hygiene
+        |          actions; quarantines a bad segment BEFORE the 2M-recipient send;
+        |          never sends - it files a recommendation
+        v
+[axllent/mailpit (MIT)] <- the template + headers proved in CI before any real send
+```
+
+**Measure what still exists, and say so to the client in these words:** stop reporting opens, report
+**inbox placement evidence (DMARC alignment), clicks, conversions and replies**. A client still
+running on open rate is measuring Gmail's summariser.
+
+**Caveat to carry into the room:** the AI-summary findings above are vendor-blog sourced. No
+independent 2026 dataset on publisher engagement under AI inbox summaries was found — the direction is
+well attested, the magnitudes are not.
+
+---
+
+### Pattern 24.4 — Re-configurable consent, because the rules are mid-change (the EMEA-first build)
+
+**Why:** every date in this layer is **already past** — TCF v2.3 mandatory since **1 March 2026**,
+TCF v2.4 specs published **23 July 2026** with a website deadline of **23 October 2026** — while the
+EU is simultaneously relitigating consent itself through the Digital Omnibus (EMMA, ENPA, EPC and NME
+objected to Articles 88a/88b; browser-level cookie preferences were dropped in October 2026; adoption
+of the wider package is **not expected before 2028**). A consent layer built to be *correct today* is
+guaranteed to be wrong.
+
+```
+[c15t/c15t (Apache-2.0, 2,045*)]            <- headless consent UI, client-owned and themeable
+        |  +-- [@c15t/iab]                      <- TC-string generation
+        |  +-- [InteractiveAdvertisingBureau/iabtcf-es (Apache-2.0, 156*)]  <- official encode/decode
+        v
+[CONSENT RECORD as a typed object in apache/unomi (Apache-2.0)]
+        |   fields: purpose, legal basis (consent | legitimate interest), jurisdiction,
+        |           TCF version + TC string, GPP section, timestamp, UI version shown
+        v
++-- activation gate: NO channel send and NO ad call without a matching basis
++-- [Prebid.js] (already in this KB, pass 2) reads the string
++-- audit export: what was asked, when, in which words, under which spec version
+```
+
+**The two things to say in week one, before anyone builds:**
+
+1. **No open-source CMP is IAB-registered.** `c15t` and `iabtcf-es` give you a valid TC string and a
+   consent UI — **not standing in the framework.** If the client needs TCF registration, that is a
+   procurement line item, not a build.
+2. **The IAB GPP repo is a specification under CC-BY-3.0, not software** — and the IAB Tech Lab IPR
+   policy can override that licence for members. Read it as a document, implement it yourself.
+
+**Store the legal basis, not just the boolean.** The European Publishers Council is pushing for
+low-risk first-party processing to run on **legitimate interest** instead of consent. A record that
+only says `true`/`false` cannot survive that change; one with a `legal_basis` field can.
+
+**Do not use `ConsentOS/consentos`** (Elastic License 2.0) despite its feature list.
+
+---
+
+### Pattern 24.5 — The editorial digest with the agent kept on the draft side of the line
+
+**Why:** the agent layer in this plane is 915★ and **16 months dead**, with a tail of 0–17★ hobby
+repos, four of which have no licence. So do not adopt one — compose the two or three usable pieces and
+keep the LLM strictly upstream of the send decision.
+
+```
+[CMS / wire output for the day]  (Superdesk, Ghost, ninjs — all already in this KB)
+        |
+        v
+[curation step: rank + cluster + section]
+        |   reference implementations worth reading, NOT depending on:
+        |     - [elbruno/weekly-ai-news-digest] (MIT, 11*) - runs as a GitHub Agentic Workflow, no server
+        |     - [p55d2k/thegist] (MIT, 0*)                 - RSS -> themed sections -> digest
+        |   DO NOT depend on [finaldie/auto-news] (MIT, 915*, dead since 2025-07-19)
+        v
+[DRAFT in the newsroom's own tooling]  <-- HUMAN EDITOR APPROVES HERE. Hard gate.
+        |
+        v
+[resend/react-email (MIT) | mjmlio/mjml (MIT) | maizzle/framework (MIT)]  <- render
+        |
+        v
+[axllent/mailpit (MIT)]   <- prove it in CI: headers, alt text, dark mode, Outlook
+        |
+        v
+[knadh/listmonk (AGPL, behind an API) | mettle/sendportal (MIT)]  --> [postalserver/postal (MIT)]
+        |
+        v
+[Pattern 24.3's evidence loop]
+```
+
+**The gate is the pattern.** Everything above the human approval step is a draft; nothing below it is
+generated. That boundary is what makes this shippable under the EU AI Act Art. 50 labelling regime,
+Brazil's TSE Resolution 23,755/2026 on synthetic electoral content, and the APAC labelling duties in
+`intel/market.md` — because **no generated text reaches a reader unapproved**, so the question of
+labelling a generated newsletter never arises.
+
+**Note the inversion worth pricing:** the agent is the cheap, replaceable part (reference
+implementations have 11 and 0 stars and you will write your own in days). The expensive, durable parts
+are the **render → CI-proof → owned-MTA → evidence** chain, and all of it is MIT.
+
+**One thing not to automate:** send-time and frequency decisions on a list that is the client's last
+unintermediated relationship with its audience. Pattern 24.3's agent *files recommendations*; a human
+presses send.

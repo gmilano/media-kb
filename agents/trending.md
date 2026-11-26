@@ -9,6 +9,104 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 24: the owned-channel & audience-relationship plane (**the KB had no word for `email`, and the agent that writes the newsletter has been dead for 16 months**)
+
+Agents only. The sending, rendering, delivery, push, community, consent and identity infrastructure
+for this plane is in `repos/trending.md` pass 24 — the two files stay distinct, as fixed in pass 22.
+
+### How the gap was found, and why it is the biggest one measured here
+
+The pre-search vocabulary probe (two Bash calls, ~120 terms) returned the starkest result of any
+pass: **`email` occurred ZERO times in 20,389 lines of this KB.** So did `Listmonk`, `Mautic`,
+`Coral`, `Novu`, `ntfy`, `web push`, `Discourse`, `customer data platform`, `cookieless`, `UID2` and
+`Privacy Sandbox` — while `Snowplow`, `Matomo`, `PostHog`, `Plausible`, `Keycloak` and `Jitsu` were
+all already present.
+
+> **The KB could measure an audience and could not contact one.** Passes 7 and 10 built out the
+> observation half of first-party data; the activation half — the owned channel itself — was absent
+> from all eight files.
+
+### The whole agent layer for this plane, in one table
+
+Searched 2026-11-26; verified by GitHub API with licence files read where the API returned nothing.
+Not a selection — **everything** on-topic.
+
+| Agent | Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| auto-news | [finaldie/auto-news](https://github.com/finaldie/auto-news) | MIT | 915 | **2025-07-19** | Multi-source pull + LLM digest. Best-starred in the plane; **16 months without a push**. |
+| aginews | [ericciarla/aginews](https://github.com/ericciarla/aginews) | **NONE** | 274 | 2024-11-15 | Agent + Resend + Firecrawl. No licence file. |
+| AIPulse | [raghavkv85/AIPulse](https://github.com/raghavkv85/AIPulse) | **NONE** | 17 | 2026-04-07 | Curated AI newsletter. No licence. |
+| weekly-ai-news-digest | [elbruno/weekly-ai-news-digest](https://github.com/elbruno/weekly-ai-news-digest) | MIT | 11 | 2026-11-25 | GitHub Agentic Workflows digest. **The only permissive + active agent here.** |
+| newsletter-ai-agent | [ahmadhuss/newsletter-ai-agent](https://github.com/ahmadhuss/newsletter-ai-agent) | **NONE** | 7 | 2024-08-14 | Researcher + editor + HTML-writer crew. No licence. |
+| thegist | [p55d2k/thegist](https://github.com/p55d2k/thegist) | MIT | 0 | 2026-10-11 | RSS → themed sections → email digest on GitHub Actions. |
+| myfeed | [MatDagommer/myfeed](https://github.com/MatDagommer/myfeed) | **NONE** | 0 | 2026-04-25 | LangGraph + Mistral RSS picker. |
+
+**Permissive and pushed in the last 90 days: two of seven, holding 11 and 0 stars.** Four of seven
+have **no licence file at all**. Seven rows because seven is what exists.
+
+### The finding: the law now has a single explanatory variable — liability
+
+Twenty-three passes recorded this law by layer, by lineage, by distance from money, by where the code
+runs and by what the code owns. This plane isolates the variable cleanly: **who carries the liability
+for the record the code keeps.**
+
+`postal`/`listmonk` (deliver and send; nobody is liable) **16,982 / 24,473★** →
+`discourse` (host a conversation generically) **48,117★** →
+`coralproject/talk` (host a *newsroom* conversation; the publisher is liable) **2,005★** →
+`iabtcf-es` (encode consent lawfully) **156★** →
+IAB GPP (carry consent across jurisdictions) **128★ and not software** →
+`uid2-operator` (operate identity) **18★**.
+
+**A 1,360× collapse inside one plane.** And the control case is exact: *one function* — hosting
+comments — differs **24×** between the generic and the newsroom version, because only one of them
+makes the operator answer for what gets published.
+
+### The licence finding: a sixth way a licence hides, and the first that is a **star-count decoy**
+
+`maizzle/maizzle` (**2,864★**) is what search returns for the Maizzle email framework. It has **no
+licence file** (six paths checked, all 404), **no `license` field in `package.json`**, and a README
+that says "MIT" while linking to a `./LICENSE` that **404s**. npm points at a different repo:
+**`maizzle/framework` (1,624★) has a real MIT LICENSE file.** The more-starred repo is the *starter
+template*, and starters are the repos people forget to license.
+
+**Reusable rule for all twelve industries:** when a project name resolves to two repos, check which
+one the package registry points at **before** quoting the stars or the licence.
+
+### Two Elastic License 2.0 repos, both in the privacy layer
+
+[rudderlabs/rudder-server](https://github.com/rudderlabs/rudder-server) (**4,521★**) — the CDP every
+2026 "open source Segment alternative" listicle recommends — and
+[ConsentOS/consentos](https://github.com/ConsentOS/consentos) (25★) are both **ELv2**: licence files
+read, neither is OSI open source, and the managed-service limitation targets precisely what an
+integrator does. Use [jitsucom/jitsu](https://github.com/jitsucom/jitsu) (MIT) or
+[apache/unomi](https://github.com/apache/unomi) (Apache-2.0, **382★**) instead.
+
+### Contamination — three queries that return a different industry
+
+- **`AI newsletter agent`** → sales/outbound growth tooling plus 0-star hobby digests. "Newsletter"
+  in open source means *marketing send*, not *publication*.
+- **`open source CDP`** → Elastic-licensed products presented as open source, because the vendors
+  write the comparison blogs.
+- **`email agent`** → inbox assistants (triage, auto-reply). Search the **verb** (`send`, `digest`,
+  `curate`), never the medium.
+
+### Watch item with a falsifiable prediction
+
+`elbruno/weekly-ai-news-digest` (MIT, 11★, pushed 2026-11-25) is built on **GitHub Agentic
+Workflows** — the agent runs as CI, with no server. **Prediction, checkable next pass:** the first
+viable open newsletter agent will arrive as a *workflow definition* rather than an application,
+because the editorial newsletter's real problem is scheduling and sourcing, not inference. If by the
+next media pass there is a 500★+ permissive repo in this plane, expect it to be CI-shaped. If instead
+`auto-news` (915★, dead since 2025-07-19) gets revived, this prediction is wrong.
+
+### Verification
+
+All 7 agent rows and all 31 infrastructure rows checked 2026-11-26 against the GitHub API
+(`search/repositories`) for stars, forks, last push and archive status; licence files **read** for
+`mautic`, `Mailu`, `coralproject/talk`, `novu`, `web-push`, `rudder-server`, `consentos`,
+`maizzle/*` and the IAB GPP README. Nine licences differed from, or were absent in, the API's
+answer — the highest correction rate of any pass in this KB.
+
 ## 2026-11-26 — pass 23: still-image & photo-desk agents (**the field is one repo with one star, and the best-starred "image metadata agent" exists to strip metadata**)
 
 Agents and models only. The processing engines, codecs, colour, type and print infrastructure for

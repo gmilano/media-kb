@@ -862,6 +862,55 @@ layer is **zero repos** (`audio ad insertion server stars:>=20` → 0, measured 
   **policy and contractual** answer, not a legal one — the opposite of APAC (below), and this is the
   sharpest regional contrast in the plane.
 
+#### The owned-channel & audience-relationship plane — added 2026-11-26 (pass 24). The region that decided first-party data is structural, and the only region where UID2 is real
+
+- **The demand signal is a survey, not a vendor claim.** The **April 2026 IAB survey of 109 US
+  publishers** found news publishers prioritising **subscriptions, attribution and direct audience
+  ownership**, while large publishers scale **licensing and third-party distribution** instead. Two
+  different strategies in one region, and they need different builds: the first needs this plane, the
+  second needs pass 5's rights-reservation plane.
+- **The framing has hardened.** AdExchanger's position is that AI **settled** the third-party-cookie
+  debate — first-party data is now structurally necessary rather than a hedge. The Alliance for
+  Audited Media (July 2026) describes audience data as **strategic assets to be protected, managed and
+  monetised**. eMarketer now calls newsletters **"first-party media"** — an inventory class.
+- **Where publishers say they already use AI:** ad sales, subscriptions and data analytics (Piano
+  research) — i.e. the *commercial* stack, not the editorial one. That is this plane.
+- **The buy-side complaint is the opening.** At an IAB roundtable, a Prudential buyer said the **lack
+  of first-party data from AI platforms** is what holds back budget flowing to LLM surfaces. A
+  publisher with a provable reachable audience is selling into a measurement vacuum.
+- **Opportunity 1 — the reachable-audience number (Pattern 24.1).** Deliver *reachable audience / total
+  audience*, split by channel and legal basis, refreshed daily, on Unomi + Kratos + Novu (all
+  permissive). No US client currently has this number, and it is the business case for everything else
+  in the plane.
+- **Opportunity 2 — UID2, and this is the only region where it is a real conversation.**
+  `IABTechLab/uid2-operator` is **Apache-2.0, 18 stars, pushed 2026-11-26**. The operator model is
+  North American in origin (The Trade Desk) and adoption is NA-led: **1,000+ publisher and technology
+  partners** per The Trade Desk's own disclosures (mid-2025; **no 2026 primary figure found**). Public
+  operators never materialised — Prebid.org **paused** its integration and participants run **private**
+  operators over their own users' emails. **So the engagement is not "install UID2", it is "decide
+  whether the client will hold other parties' hashed emails, and under what indemnity."**
+  Governance reporting conflicts (Prebid.org independent governance vs AdExchanger reporting Prebid
+  stepping back) — **verify against a primary source before advising.**
+- **Opportunity 3 — deliverability evidence (Pattern 24.3)**, which lands hardest here because Gmail
+  and Apple Mail are the duopoly of the US inbox and both have changed the rules: Postmaster Tools v2
+  replaced reputation scores with a compliance checklist and deliverability verdict; Apple Mail writes
+  **pre-open** summaries that overwrite the preheader; Gmail's Gemini summaries appear to **auto-open**
+  messages. `parsedmarc` (Apache-2.0, 1,321★) is the open way to own that evidence.
+- **Legal posture: contract and policy, not statute.** The live matter is **Penske Media** (Rolling
+  Stone, Billboard, Variety) suing Google over AI Overviews — the first major US publisher action of
+  its kind. On the channel itself the baseline is CAN-SPAM plus state privacy regimes, which is why the
+  **GPP** multi-jurisdiction string matters more here than TCF.
+- **Informed gap.** Searches for a **US federal rule governing consent capture or newsletter
+  operations for publishers** returned nothing statutory in 2026 — no federal consent framework, no
+  publisher-specific duty. The binding constraints are **state privacy law, platform policy (Gmail,
+  Apple) and contract.** A US client asking "what must our consent banner say?" has a **fifty-state
+  and two-platform** answer, not a federal one — the inverse of EMEA below, and the reason the
+  consent object in Pattern 24.4 must be configurable rather than correct.
+- **Market share note:** North America holds **~40% of the newsletter-software market** (Verified
+  Market Research) — the largest regional share in the plane. See the pass 24 market-size addendum,
+  including why that figure sizes *tooling* and not publisher revenue.
+
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1819,6 +1868,52 @@ law rather than etiquette.**
   image-sector rule. The sectoral pressure in EMEA is coming through the **AVMSD overhaul** that
   Member States are pushing, and this pass found **no image-specific provision** in it.
 
+#### The owned-channel & audience-relationship plane — added 2026-11-26 (pass 24). The region where the consent layer *is* the engagement, and every deadline is already past
+
+- **Both TCF deadlines are behind us, not ahead.** **TCF v2.3 became mandatory for TC strings
+  generated on or after 1 March 2026** (Google publisher guidance; iubenda gives 28 February 2026 —
+  a one-day discrepancy that changes nothing). **TCF v2.4 specifications and the updated Global Vendor
+  List published 23 July 2026**, with the **website deadline 23 October 2026** and a later date for
+  apps and CTV. A client that has not moved is already non-conformant, which makes this the only plane
+  in this KB with a **remediation** sale rather than a transformation sale.
+- **⛔ And no open-source CMP is IAB-registered.** `c15t` (Apache-2.0, 2,045★) and
+  `iabtcf-es` (Apache-2.0, **156★**) produce a valid TC string and a consent UI; they do **not**
+  produce standing in the framework. **Raise this in week one** — it is a procurement line item, not a
+  build, and it is the most likely late-stage surprise in an EMEA engagement in this plane.
+- **Consent itself is being relitigated right now, which changes the design.** Media bodies **EMMA,
+  ENPA, EPC and NME** jointly objected to the **Digital Omnibus**'s **Articles 88a/88b**, arguing the
+  media exemption does **not** preserve publishers' ability to ask readers directly for consent. EU
+  governments **dropped browser-level cookie-consent preferences** (MLex, October 2026) — publishers
+  read that as a win, and MLex's own headline notes the advertising fight is **unresolved**. The
+  **European Publishers Council** wants low-risk **first-party** processing to run on **legitimate
+  interest** rather than consent, while objecting that AI developers may invoke legitimate interest for
+  systemic processing. **Adoption of the wider package is not expected before 2028.**
+  → **Design consequence (Pattern 24.4): store the `legal_basis` field, not a boolean.** A consent
+  record that only says true/false cannot survive a shift to legitimate interest; one with a legal
+  basis, jurisdiction, spec version and the UI version shown can.
+- **The AI-labelling clock also runs here:** marking obligations for AI-generated content carry a
+  **2 December 2026** deadline for systems already on the market before 2 August 2026.
+- **A revenue-side tailwind worth naming:** the EU Court has confirmed that publishers **can be granted
+  rights to fair remuneration** when platforms use their content — which strengthens the business case
+  for the identification and rights-reservation work in pass 5 alongside this plane.
+- **Opportunity 1 — the re-configurable consent spine (Pattern 24.4).** c15t + iabtcf-es + the consent
+  object in Apache Unomi, with an audit export of *what was asked, when, in which words, under which
+  spec version*. All Apache-2.0, all client-owned.
+- **Opportunity 2 — data residency has a named answer.** [pentacent/keila](https://github.com/pentacent/keila)
+  (AGPL-3.0, 2,269★, pushed 2026-11-24) is a newsletter tool **built and hosted in the EU**. When the
+  blocker is "we cannot send our subscriber list to a US processor", this is the row to open with —
+  with the AGPL service-boundary caveat from `verticals/solutions.md`.
+- **⛔ Avoid in this region specifically:** `rudderlabs/rudder-server` and `ConsentOS/consentos` are
+  **Elastic License 2.0** (licence files read) — source-available, not open source, and ELv2 forbids
+  providing the software to third parties as a managed service. Recommending either to an EMEA client
+  with a compliance-driven procurement process would not survive legal review.
+- **Informed gap.** Searched for **EMEA-specific adoption figures** for publisher owned-channel or
+  consent tooling; **none surfaced.** The EMEA evidence in this plane is **regulatory and advocacy
+  material, not market data** — several sources are trade-body objections and newsletters rather than
+  primary texts, and one result carried contradictory dates. Verify the Omnibus status against
+  official Commission or Council documents before quoting it to a client.
+
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -2720,6 +2815,56 @@ open-source story.**
   production**, and **no Japanese or Indian image-labeling instrument** — China's Measures and
   Vietnam's law were the only binding image-reaching rules located. Japan and India are recorded
   here as **unverified, not as permissive**: absence of a found rule is absence of evidence.
+
+#### The owned-channel & audience-relationship plane — added 2026-11-26 (pass 24). The region where the owned channel is a messaging app, and there is no open tooling for it
+
+- **The regulatory direction is acceleration.** Latham & Watkins (September 2026) records a
+  **significant acceleration in the enactment of AI regulation across APAC** over the preceding
+  12 months. BowerGroupAsia's Indo-Pacific overview notes that several countries have introduced
+  **mandatory AI-content labelling** since 2025, and that compliance duties may land on **AI
+  developers, online intermediaries, advertisers, publishers and press agencies** depending on the
+  market. Unlike EMEA, there is **no single consent framework to implement** — the obligations are
+  per-market and labelling-shaped.
+- **The audience behaviour that defines the plane here:** users spend **more than 50% of their time in
+  messaging and social** (DigiconAsia). An ASEAN policy brief records regional players — **LINE**
+  (Thailand) and **Zalo** (Vietnam) — **disrupting traditional media distribution and advertising
+  models**, while noting that regional media regulation moves slowly. **Malaysia** required major
+  messaging and social platforms to be **registered from January 2026**. In Korea, **KakaoTalk**
+  carries news channels and most readers get news from domestic platforms (**Naver, Kakao**) rather
+  than from publisher sites.
+- **So the "owned" channel in APAC is rented.** LINE's publisher-relevant inventory spans the chat
+  list, the VOOM feed, LINE News and the wallet tab. A publisher's reachable audience in Thailand,
+  Japan or Korea sits inside a platform account, not an email list — which **inverts this plane's
+  thesis** for the region: the email/push stack in `repos/foundations.md` is necessary but not
+  sufficient here, and the Pattern 24.1 "reachable audience" metric must count **platform followers as
+  a separate, non-portable class** with its own risk note.
+- **AI-assisted discovery is already mainstream with consumers, and trust is the constraint.** Kantar's
+  **Media Reactions 2026** finds roughly **one in three APAC consumers use AI to research brands and
+  products** (varying considerably by market), while only **20% trust brand recommendations from AI
+  assistants** against **24% for influencers and creators**. *Methodology changed in that study — do
+  not compare its rankings with earlier years.*
+- **Opportunity 1 — the non-portable-audience audit.** For an APAC publisher, the deliverable is
+  sharper than in any other region: *how much of your audience exists only inside LINE, Kakao or
+  Zalo, and what happens to it if the platform changes terms?* Build it on Unomi (Apache-2.0) with
+  platform-follower counts as a distinct profile class. No open tooling does this; it is pure
+  integration work, which suits a studio engagement.
+- **Opportunity 2 — labelling-aware editorial digests (Pattern 24.5).** Because APAC's duties are
+  labelling-shaped rather than consent-shaped, the human-approval gate in Pattern 24.5 is the compliance
+  artefact that matters most here, and it is cheap to implement.
+- **Opportunity 3 — localization adjacency.** APAC is the **fastest-growing media-localization region
+  at 12.3% CAGR** (DataIntelo, recorded in this file's pass-22 addendum) and the localization open
+  stack is ~80% complete (trend 7). A multilingual owned channel — one digest, many languages, one
+  consent record — is the composition of pass 14's plane with this one.
+- **⚠️ Informed gap, and it is a large one.** Searched specifically for **2026 publisher metrics on
+  LINE, KakaoTalk and Zalo** as distribution channels: **nothing current found.** The available
+  publisher evidence is from the mid-2010s and must be labelled historical — The Economist's LINE
+  account reached nearly 1 million followers with popular posts driving roughly as much referral
+  traffic as its Facebook presence, and LINE's then-cited 212 million MAU is **outdated**. On **Zalo
+  specifically, nothing relevant surfaced at all.** And there is **no open-source WhatsApp/LINE
+  publisher-distribution tooling** in existence — searched, genuinely absent. An APAC messaging
+  engagement is therefore built on **platform APIs under platform terms**, with no open substrate to
+  fall back on: price the platform risk explicitly.
+
 
 ### LATAM
 
@@ -3640,6 +3785,66 @@ something that already exists locally.
   plane.** The regional anchors available here are regulatory (Mexico) and organisational (the
   coalitions above), and those are what a proposal should be built on.
 
+#### The owned-channel & audience-relationship plane — added 2026-11-26 (pass 24). The region with the best *evidence* in this plane, a regulator who just opened the channel, and an adequacy decision that makes the EMEA build portable
+
+- **WhatsApp is the owned channel, and the penetration figures are not close.** A regional analysis
+  (Infobip) puts WhatsApp at **85% in Brazil**, **80% in Argentina** and **75% in Colombia** as the
+  top messaging channel. In Brazil WhatsApp ranks **first for social platform use (83%)**, with just
+  under half — **48%** — using it for **news** (WARC; undated in the source, treat as recent-but-unpinned).
+- **⭐ The strongest single piece of evidence found in this plane, and it is academic, not vendor.**
+  A **2026 *New Media & Society*** field experiment by **Mont'Alverne, Rossini and Kalogeropoulos**
+  tested **WhatsApp news channels in Brazil**. Findings: receiving news via WhatsApp **does not alter
+  more stable attitudes** — belief in misinformation and trust were unmoved — but it **reduces news
+  fatigue** and **increases engagement with news on WhatsApp**. **Quote this in preference to any
+  vendor material in this plane**, and note precisely what it supports: WhatsApp distribution is an
+  **engagement and retention** intervention, **not** a trust or misinformation remedy. A client
+  pitching it as a misinformation fix is pitching something this study does not support.
+- **⭐ And the regulator just opened the channel.** Brazil's competition authority **CADE ordered Meta
+  to suspend contractual terms prohibiting third-party AI providers from using the WhatsApp Business
+  API**, and later reporting has Meta **paying daily fines for non-compliance with the interim
+  measures**. **This is the single most actionable regulatory fact in this pass:** the terms that
+  would have blocked an AI-assisted publisher distribution agent on WhatsApp in Brazil are under
+  suspension order. **Verify the current procedural status before building** — interim measures move —
+  but the direction of travel is open.
+- **LGPD adequacy makes the EMEA build portable.** The **European Commission recognised Brazil's LGPD
+  as essentially equivalent to EU standards (January 2026)**. The practical consequence for this plane:
+  **the Pattern 24.4 consent object — legal basis, purpose, jurisdiction, spec version — ports from an
+  EMEA engagement to a Brazilian one** with the vocabulary intact. That is a reusable asset across two
+  regions, and it is the cheapest cross-region leverage in this KB.
+- **What the ANPD will be looking at, 2026–2027:** children's data, **targeted advertising**, AI and
+  emerging tech (**facial recognition, recommendation systems**), public-sector data sharing, and
+  biometric processing. Three of those five touch this plane directly.
+- **The rest of the regulatory frame.** Brazil's AI bill **No. 2,338/2023** passed the Federal Senate
+  and, as of July 2026, awaited the rapporteur's opinion in a Chamber special committee — **still
+  pending**. **Decrees 12,975 and 12,976** added content-moderation, reporting and transparency duties
+  for intermediaries including AI services, **effective 20 July 2026** — which is what Pattern 24.2's
+  moderation log discharges. **TSE Resolution No. 23,755/2026** governs deepfakes and synthetic content
+  in electoral advertising. Regionally the picture is **fragmented — Latin America does not follow one
+  regional model**, so build per-jurisdiction and configure.
+- **Ecosystem that an engagement can plug into:** the **International Fund for Public Interest Media
+  (IFPIM)** supports media AI initiatives across Latin America and launched **CTRL+J**, holding its
+  inaugural LatAm conference in **São Paulo in March**; **ADEPA** publishes a guide for media on AI
+  tools and workflows. These are partners and credibility, not competitors.
+- **Opportunity 1 — the WhatsApp-first owned channel.** Compose Pattern 24.1's spine (Unomi + Novu,
+  both permissive) with WhatsApp Business API delivery, under the CADE opening above. **There is no
+  open-source WhatsApp publisher-distribution tooling** — searched, genuinely absent — so this is
+  greenfield integration work in the region where the channel has 85% penetration. Price the platform
+  dependency honestly: the channel is rented, and CADE's measures are interim.
+- **Opportunity 2 — moderation with an evidence trail (Pattern 24.2)** against Decrees 12,975/12,976,
+  on Coral (Apache-2.0) + detoxify (Apache-2.0), with Spanish- and Portuguese-language policy-as-code.
+  Pass 11's reference implementation for a Spanish-language newsroom AI policy (Pattern 33) is the
+  nearest precedent.
+- **Opportunity 3 — email as the hedge against the rented channel.** Because WhatsApp is a platform
+  and CADE's remedy is interim, the strategically correct advice to a LATAM publisher is to run
+  Pattern 24.1's email/push spine **underneath** the WhatsApp channel, so the audience survives a terms
+  change. SendPortal (MIT) or Keila (AGPL, EU-hosted) plus Postal (MIT) are the permissive options.
+- **Informed gap.** Searched specifically for **newsletter and audience-data practices under the LGPD**
+  and for **2026 LATAM publisher adoption figures** for owned channels: **nothing found.** Older
+  Brazilian evidence exists but is group-based rather than Channels-based — the daily *Correio*
+  reported WhatsApp sharing accounting for **7–10% of its daily audience** — and should be labelled as
+  such. Reuters Institute's Digital News Report would be the place to close this gap next pass.
+
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -4150,3 +4355,64 @@ monetary**, and they are measured in this pass:
 
 These are checkable, they are current as of 2026-11-26, and each one changes a decision. A market
 size that is wrong by a factor of three changes none.
+
+## Market size — pass 24 addendum (2026-11-26): the owned-channel segment, an 8× scope artefact, and a refusal
+
+Added 2026-11-26 (pass 24). Searched for sizing on the owned-channel plane. What exists is
+**email-marketing *software* sizing**, which is not what a publisher is asking about — and the one
+figure a publisher actually wants **does not exist**. Both findings are recorded.
+
+| Estimate | Source type | Note |
+|---|---|---|
+| **"Email marketing" market: $13.72B (2026) → $22.93B (2031)** | Market-research vendor | The broad cut. |
+| **"Email marketing" market: $12.45B (2026), ~15.5% CAGR** | The Business Research Company | Agrees with the above on the base year. Its definition is explicit and it is the reason for the spread below: **platforms + email design tools + marketing automation software + tracking and analytics tools.** |
+| **"Email marketing *software*": $1.92B (2025) → $3.47B (2030), 12.2% CAGR** | Market-research vendor | The narrow cut — licences only. |
+| **"Email marketing *software*": $2.39B (2025) → $6.05B (2033)** | Second vendor | Same narrow scope, same order of magnitude on the base, very different horizon. |
+| **"Newsletter software": $1.60B (2025) → $3.20B (2033), 9.2% CAGR** | Verified Market Research | The closest cut to this plane. **North America ~40% share** — the largest regional share recorded in this plane. |
+| **"Newsletter software": 11.12% CAGR (2025–2032)** | Third vendor | Growth-rate agreement within ~2pp of VMR, which is unusually tight for this file. |
+| **Newsletter *advertising / sponsorship* revenue: NO DATA FOUND** | — | **The refusal. See below.** |
+
+### The scope artefact: ~8×, and it is the question to ask before quoting anything
+
+**"Email marketing" ($12.45–13.72B) is roughly 8× "email marketing software" ($1.92–2.39B)**, and the
+gap is not noise — TBRC states the definition outright. The broad figure counts **automation
+platforms, design tools and analytics**; the narrow figure counts **licences**. This is the same
+artefact this file recorded for captioning (pass 3, an order of magnitude) and content moderation
+(pass 9, services vs software), now with the vendor's own definition available to prove it.
+
+**Which figure is addressable for an open-source engagement?** The **narrow cluster** — the
+**$1.6B–$3.5B newsletter/email-software** range — because the open stack in `repos/foundations.md`
+replaces **software licences**, not services or media spend. This is the same reasoning as pass 9's
+moderation conclusion, and it holds for the same reason.
+
+### ⛔ The refusal: the number a publisher actually wants is unsized
+
+A publisher in this plane is not buying email software — it is replacing **lost referral revenue with
+newsletter revenue**. **No vendor sizes newsletter advertising or sponsorship revenue.** Searched;
+nothing surfaced. The only quantitative signal found anywhere is a marketplace datapoint —
+**newsletter revenue grew ~30% in a year at Paved** (via The Current) — which is **one intermediary's
+book, not a market**, and must be labelled as such.
+
+**So this file will not state a newsletter-revenue market size, and neither should a pitch.** What can
+be said honestly, and is stronger than a fabricated total:
+
+- The **loss** side is attested: Google Discover referrals **−21% YoY**; exposed publishers reporting
+  **50–90%** revenue declines; Facebook referrals already halved over a year.
+- The **response** side is attested: the April 2026 **IAB survey of 109 US publishers** shows news
+  publishers prioritising subscriptions, attribution and **direct audience ownership**; The Guardian
+  moving readers to always-on weekly products; Punchbowl stating that **even site visits are driven
+  through the newsletter**; eMarketer reclassifying newsletters as **"first-party media"**.
+- The **tooling** side is sized, narrowly: **$1.6B–$3.5B** (above).
+
+**Lead with the client's own reachable-audience ratio (Pattern 24.1), not with a market number.** It is
+measurable in weeks, it is specific to them, and it is the only figure in this plane that is not a
+vendor estimate. That is a better opening than any row in this table.
+
+### One methodological note carried from this pass
+
+The engagement data underneath this plane — AI inbox summaries, open-rate inflation, deliverability
+verdicts — is **almost entirely email-vendor blog material**. The direction is consistently attested
+across many independent vendors; the **magnitudes are not independently verified**, and the
+frequently-quoted "**4–8 percentage points**" of MPP open-rate inflation traces to a single secondary
+source. **No independent 2026 dataset on publisher open or click rates under AI inbox summaries
+exists** — searched, not found. Quote the mechanism, not the magnitude.

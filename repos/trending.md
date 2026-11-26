@@ -10,6 +10,107 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 24: the owned-channel & audience-relationship plane (**the transport layer is permissive and shipping daily; the consent and identity layer at the end of it has 18 stars**)
+
+Infrastructure and platform repos. The agent layer for this plane is in `agents/trending.md` pass 24.
+All rows verified 2026-11-26 via the GitHub API, licence files **read** where the API returned
+`NONE`/`NOASSERTION` (nine corrections — the highest rate of any pass here).
+
+**Why this plane entered the KB now:** the vocabulary probe found the string **`email` zero times in
+20,389 lines**, along with `Listmonk`, `Mautic`, `Coral`, `Novu`, `ntfy`, `web push`, `Discourse`,
+`cookieless` and `UID2`. The KB had the *observation* half of first-party data (Snowplow, Matomo,
+PostHog, Plausible, Jitsu, Keycloak) and none of the *activation* half.
+
+### Pushed within the last 7 days — the live edge of this plane
+
+| Repo | License | Stars | Forks | Last push | What it is |
+|---|---|---|---|---|---|
+| [TryGhost/Ghost](https://github.com/TryGhost/Ghost) | MIT | 55,925 | 12,088 | 2026-11-26 | Publishing + memberships + newsletters in one MIT codebase. |
+| [discourse/discourse](https://github.com/discourse/discourse) | GPL-2.0 | 48,117 | 9,057 | 2026-11-26 | General-purpose community platform. |
+| [novuhq/novu](https://github.com/novuhq/novu) | **MIT** (file read) | 40,432 | 4,571 | 2026-11-26 | Multi-channel notification infrastructure (email/SMS/push/in-app), preferences, digest batching. Highest-starred permissive repo in the plane. |
+| [binwiederhier/ntfy](https://github.com/binwiederhier/ntfy) | Apache-2.0 | 35,771 | 1,753 | 2026-11-25 | Self-hostable HTTP pub/sub push. |
+| [knadh/listmonk](https://github.com/knadh/listmonk) | **AGPL-3.0** | 24,473 | 2,836 | 2026-11-26 | The default self-hosted newsletter manager. **v7.0.0-beta.2 released 10 Nov 2026.** |
+| [resend/react-email](https://github.com/resend/react-email) | MIT | 20,008 | 1,122 | 2026-11-26 | Emails as React components. |
+| [mjmlio/mjml](https://github.com/mjmlio/mjml) | MIT | 18,305 | 1,007 | 2026-11-26 | Responsive-email markup language. |
+| [postalserver/postal](https://github.com/postalserver/postal) | MIT | 16,982 | 1,325 | 2026-11-20 | Full open mail-delivery platform. |
+| [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB) | GPL-3.0 | 15,254 | 2,999 | 2026-11-26 | Real-time Node.js forum. |
+| [axllent/mailpit](https://github.com/axllent/mailpit) | MIT | 11,044 | 381 | 2026-11-25 | SMTP capture + API for testing sends. |
+| [mautic/mautic](https://github.com/mautic/mautic) | **GPL-3.0-or-later** (file read) | 11,123 | 3,572 | 2026-11-26 | Marketing automation: segments, campaigns, drip. |
+| [Mailu/Mailu](https://github.com/Mailu/Mailu) | **MIT** (file read) | 7,642 | 1,037 | 2026-11-25 | Docker mail server. |
+| [foxcpp/maddy](https://github.com/foxcpp/maddy) | GPL-3.0 | 6,142 | 346 | 2026-11-21 | Composable Go mail server. |
+| [Mailtrain-org/mailtrain](https://github.com/Mailtrain-org/mailtrain) | GPL-3.0 | 5,748 | 707 | 2026-11-25 | Self-hosted newsletter app. |
+| [umputun/remark42](https://github.com/umputun/remark42) | **MIT** | 5,654 | 463 | 2026-11-25 | Embeddable privacy-friendly comment engine. |
+| [haraka/Haraka](https://github.com/haraka/Haraka) | MIT | 5,646 | 720 | 2026-11-23 | Extensible event-driven SMTP server. |
+| [orestbida/cookieconsent](https://github.com/orestbida/cookieconsent) | MIT | 5,785 | 505 | 2026-11-22 | Consent banner (UI, not compliance). |
+| [jitsucom/jitsu](https://github.com/jitsucom/jitsu) | MIT | 5,140 | 403 | 2026-11-26 | MIT event ingestion; **no identity resolution** — you build it. |
+| [web-push-libs/web-push](https://github.com/web-push-libs/web-push) | **MPL-2.0** (file read) | 3,580 | 331 | 2026-11-23 | Node Web Push (RFC 8030/8291/8292, VAPID). |
+| [pentacent/keila](https://github.com/pentacent/keila) | **AGPL-3.0** | 2,269 | 180 | 2026-11-24 | EU-built, EU-hosted newsletter tool — the EMEA data-residency answer. |
+| [c15t/c15t](https://github.com/c15t/c15t) | **Apache-2.0** | 2,045 | 287 | 2026-11-26 | Headless consent manager; optional `@c15t/iab` TC-string add-on. Best-licensed active CMP. |
+| [coralproject/talk](https://github.com/coralproject/talk) | **Apache-2.0** (file read, © 2025 Vox Media) | **2,005** | 374 | 2026-11-26 | **The only comment platform built for newsrooms.** Per-stream moderation, queues, AI-assisted moderation, publisher owns the data. |
+| [maizzle/framework](https://github.com/maizzle/framework) | MIT (file read) | 1,624 | 69 | 2026-11-25 | Tailwind email framework. **Not** `maizzle/maizzle` — see the decoy note below. |
+| [domainaware/parsedmarc](https://github.com/domainaware/parsedmarc) | Apache-2.0 | 1,321 | 277 | 2026-11-23 | Parses DMARC aggregate/forensic reports. The quiet high-value row. |
+| [unitaryai/detoxify](https://github.com/unitaryai/detoxify) | Apache-2.0 | 1,320 | 149 | 2026-11-11 | Open toxicity model; nothing wires it to a comment platform. |
+| [apache/unomi](https://github.com/apache/unomi) | Apache-2.0 | **382** | 148 | 2026-11-26 | **The only genuinely Apache-licensed CDP that exists.** |
+| [mozilla-services/autopush-rs](https://github.com/mozilla-services/autopush-rs) | MPL-2.0 | 363 | 32 | 2026-11-25 | Mozilla's production push server in Rust. |
+| [InteractiveAdvertisingBureau/iabtcf-es](https://github.com/InteractiveAdvertisingBureau/iabtcf-es) | Apache-2.0 | **156** | 101 | 2026-11-03 | Official TCF v2 encode/decode suite. |
+| [IABTechLab/uid2-operator](https://github.com/IABTechLab/uid2-operator) | Apache-2.0 | **18** | 19 | 2026-11-26 | **The cookie replacement for the open web, with eighteen stars.** Pushed today — not abandoned, just not self-served. |
+
+### Slower-moving but in-plane
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [ory/kratos](https://github.com/ory/kratos) | Apache-2.0 | 13,983 | 2026-07-29 | Identity capture / registration wall. **Four months idle** — watch it. |
+| [isso-comments/isso](https://github.com/isso-comments/isso) | MIT | 5,316 | 2026-10-25 | Disqus alternative. **Org renamed** — `posativ/isso` no longer resolves in GitHub search. |
+| [mettle/sendportal](https://github.com/mettle/sendportal) | **MIT** | 2,193 | 2026-10-22 | **The only permissive newsletter manager** — 9% of listmonk's stars. |
+| [web-push-libs/pywebpush](https://github.com/web-push-libs/pywebpush) | MPL-2.0 | 381 | 2026-09-01 | Python push payload encryption. |
+| [InteractiveAdvertisingBureau/Global-Privacy-Platform](https://github.com/InteractiveAdvertisingBureau/Global-Privacy-Platform) | **CC-BY-3.0 spec, not code** | 128 | 2026-11-04 | One consent string across GDPR + US state regimes. Documents, not software — demoted per pass 4's rule. |
+
+### ⛔ Do not ship — measured this pass
+
+| Repo | Stars | Finding |
+|---|---|---|
+| [rudderlabs/rudder-server](https://github.com/rudderlabs/rudder-server) | 4,521 | **Elastic License 2.0** (file read). Not OSI. The CDP every 2026 listicle calls open source; ELv2 forbids managed-service provision to third parties. |
+| [ConsentOS/consentos](https://github.com/ConsentOS/consentos) | 25 | **Elastic License 2.0** (file read). TCF v2.3 + GPP v1 + Consent Mode v2, source-available only. |
+| [stalwartlabs/stalwart](https://github.com/stalwartlabs/stalwart) | 16,395 | **Licence unresolved.** No `LICENSE`, `LICENSE.md`, `COPYING`, `LICENSE-AGPL` or `LICENSES/` file at the repo root on `main` (six paths checked), no `license` key in the workspace `Cargo.toml`, and the GitHub API reports none. A 16,395-star mail server with no licence discoverable at the root — **do not ship until the client's counsel resolves it.** |
+| ⛔ [djyde/cusdis](https://github.com/djyde/cusdis) | 2,773 | **ARCHIVED** 2026-07-17. Recorded so a directory listing does not resell it. |
+
+### The gradient, as a one-line reading of the tables above
+
+Deliver a byte (**16,982★**) → send to a list (**24,473★**) → host a conversation generically
+(**48,117★**) → host a *newsroom* conversation (**2,005★**) → encode consent lawfully (**156★**) →
+carry consent across jurisdictions (**128★, not software**) → operate identity (**18★**).
+
+**1,360× from one end of the plane to the other, and the variable is liability** — not layer, not
+lineage, not distance from money. The control case is exact: hosting comments differs **24×** between
+the generic and newsroom versions of the *same function*, because only one makes the operator answer
+for what gets published.
+
+### The licence finding: the first **star-count decoy** in this KB
+
+`maizzle/maizzle` (**2,864★**) is what search returns for the Maizzle framework. No licence file (six
+paths, all 404), no `license` field in `package.json`, README claims MIT while linking to a `./LICENSE`
+that **404s**. npm points elsewhere: **`maizzle/framework` (1,624★) has a real MIT LICENSE.** The
+more-starred repo is the *starter template*. **Rule for all twelve industries: when a name resolves to
+two repos, check which one the package registry points at before quoting stars or licence.**
+
+### Deliverability became the binding constraint, and `parsedmarc` is the only open answer
+
+Gmail retired High/Medium/Low domain and IP reputation in Postmaster Tools v2 for a compliance
+checklist plus a deliverability verdict; Apple Mail Privacy Protection already broke the open rate
+(vendor estimates of **4–8pp** inflation, unverified); and Gmail's Gemini summaries appear to
+**auto-open** messages — inflating opens while clicks fall, because the reader is satisfied by the
+summary. **When the open rate dies, DMARC reports plus clicks are the evidence that remains**, and
+[domainaware/parsedmarc](https://github.com/domainaware/parsedmarc) (Apache-2.0, 1,321★) is the way
+to own it rather than rent it.
+
+### Regulatory clock on the consent rows — already past, not upcoming
+
+**TCF v2.3 mandatory for TC strings generated on/after 1 March 2026** (Google publisher guidance;
+iubenda says 28 Feb 2026). **TCF v2.4 specs + updated GVL published 23 July 2026**, website deadline
+**23 October 2026**, later for apps and CTV. **And no open-source CMP is IAB-registered** — `c15t`
+and `iabtcf-es` give the string and the UI, never the standing. Say so before a client assumes the
+open stack discharges the duty.
+
 ## 2026-11-26 — pass 23: the still-image, photo-desk & print-production plane (**the describe layer is permissive and dying at the top: the three most-starred models are dormant and the canonical captioning model is archived**)
 
 **Probe before search, as in passes 11–22.** 65 vocabulary terms against the eight live files.

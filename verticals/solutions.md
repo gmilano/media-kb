@@ -1401,3 +1401,80 @@ productised fork.
   depends on to turn a page into ink, with a commercial licence sold alongside.
 - **"We already run Pimcore and were told it is open source."** Stop and read `LICENSE.md` on the
   `2026.x` branch. It is the POCL.
+
+## The owned-channel & audience-relationship tier — added 2026-11-26 (pass 24)
+
+Real, customisable platforms for the channel a publisher **owns**: the newsletter, the push
+subscription, the on-site community, and the consent and profile store underneath them. This tier
+entered the KB because the vocabulary probe found the string **`email` zero times in 20,389 lines** —
+the KB had the audience-*measurement* platforms (pass 7) and none of the audience-*relationship* ones.
+
+All rows verified 2026-11-26 (GitHub API; licence files read where the API reported nothing).
+
+| Platform | Repo | License | Stars | Last push | What it is, and what to customise |
+|---|---|---|---|---|---|
+| **Ghost** | [TryGhost/Ghost](https://github.com/TryGhost/Ghost) | **MIT** | 55,925 | 2026-11-26 | Publishing + memberships + subscriptions + newsletters in **one MIT codebase**. The shortest path from "we have articles" to "we have a paying, reachable audience". Customise: the members/tiers model, the newsletter template, webhooks into the client's CDP. |
+| **Discourse** | [discourse/discourse](https://github.com/discourse/discourse) | GPL-2.0 | 48,117 | 2026-11-26 | The general-purpose community platform. Plugin API is excellent; copyleft, so run it as a service with SSO rather than forking it. |
+| **Novu** | [novuhq/novu](https://github.com/novuhq/novu) | **MIT** (file read) | 40,432 | 2026-11-26 | Not a channel — the **orchestration layer over all of them**: one API for email/SMS/push/in-app, subscriber preference centre, digest batching. The piece that keeps "breaking news" from arriving three times on three channels. |
+| **listmonk** | [knadh/listmonk](https://github.com/knadh/listmonk) | **AGPL-3.0** | 24,473 | 2026-11-26 | The default self-hosted newsletter manager: templates, segments by subscriber attribute, bounce processing. **AGPL — operate it, do not fork it into client code.** |
+| **NodeBB** | [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB) | GPL-3.0 | 15,254 | 2026-11-26 | Real-time forum. Lighter than Discourse, same copyleft posture. |
+| **Mautic** | [mautic/mautic](https://github.com/mautic/mautic) | **GPL-3.0-or-later** (file read) | 11,123 | 2026-11-26 | The only platform here with real **campaign logic** — segments, drip, scoring, landing pages. Heavy (PHP), copyleft, and the right answer when the client's ask is lifecycle marketing rather than a newsletter. |
+| **Postal** | [postalserver/postal](https://github.com/postalserver/postal) | **MIT** | 16,982 | 2026-11-20 | A complete mail-delivery platform the client **owns**: queues, per-domain DKIM, bounce/click webhooks, message tracing. The MIT answer to "we don't want to depend on SES/SendGrid". |
+| **Mailu** | [Mailu/Mailu](https://github.com/Mailu/Mailu) | **MIT** (file read) | 7,642 | 2026-11-25 | Mail server as Docker images — the simplest self-hosted SMTP estate to stand up. |
+| **Coral** | [coralproject/talk](https://github.com/coralproject/talk) | **Apache-2.0** (file read, © 2025 Vox Media) | **2,005** | 2026-11-26 | **The only commenting platform on earth built for newsrooms** — per-stream pre/post moderation, moderation queues, banned and suspect word lists, Slack integration, AI-assisted moderation, **publisher owns the audience data**, ad-free. Born Mozilla + Washington Post; maintained by Vox Media. **Apache-2.0 and pushed today: the best licence/fitness combination in this tier.** |
+| **Keila** | [pentacent/keila](https://github.com/pentacent/keila) | **AGPL-3.0** | 2,269 | 2026-11-24 | Newsletter tool **built and hosted in the EU**. Name this first when an EMEA client's blocker is data residency. |
+| **SendPortal** | [mettle/sendportal](https://github.com/mettle/sendportal) | **MIT** | 2,193 | 2026-10-22 | **The only permissively-licensed newsletter manager in the open set** — and it has 9% of listmonk's stars. The licence/adoption trade-off in this tier, in one row. |
+| **Apache Unomi** | [apache/unomi](https://github.com/apache/unomi) | **Apache-2.0** | **382** | 2026-11-26 | **The only genuinely Apache-licensed customer data platform that exists.** ASF-governed profile and segment store, consent-aware by design. The permissive profile store under everything above. |
+| **c15t** | [c15t/c15t](https://github.com/c15t/c15t) | **Apache-2.0** | 2,045 | 2026-11-26 | Headless consent manager with an optional `@c15t/iab` TC-string add-on. The consent UI a publisher can actually own. |
+
+### ⚠️ This tier obeys this file's licence law — and supplies its cleanest proof
+
+The law recorded across passes 4–8: **the pipeline and standards layer is permissive, the turnkey
+platform layer is copyleft.** Here it holds, with a twist worth selling:
+
+- **Transport and orchestration are permissive**: Postal (MIT), Mailu (MIT), Novu (MIT), react-email
+  and MJML (MIT), Unomi and c15t (Apache-2.0).
+- **List management — the turnkey platform — is copyleft**: listmonk (AGPL), Mautic (GPLv3+), Mailtrain
+  (GPLv3), Keila (AGPL). The single MIT exception, SendPortal, has **9%** of the leader's adoption.
+- **The two exceptions both have a funder.** Ghost (MIT, 55,925★) and Coral (Apache-2.0, 2,005★) are
+  permissive *turnkey platforms* — and both exist because an organisation with a publishing business
+  paid for them (Ghost Foundation; Mozilla + the Washington Post, now Vox Media). **Permissive
+  platform software in media appears where a publisher funded it, not where a community formed.**
+
+**Practical posture:** put the copyleft list manager behind a service boundary the client's
+proprietary code calls over HTTP; keep the permissive layers (Postal, Novu, Unomi, Coral, c15t) in the
+client's own build, where the differentiation is.
+
+### Gap: there is no open publisher CRM, and the reason is the same as the royalty gap
+
+Searched 2026-11-26 for a media/publisher-specific CRM or ERP under a permissive licence. **Nothing
+exists.** The closest results are general-purpose: Dolibarr (Apache-2.0, general ERP), Open Mercato
+(MIT, general), Flectra (GPLv3), Ever Gauzy (AGPLv3), and a "Cream CRM" aimed at media agencies whose
+licence could not be established. Mautic is marketing automation, not a subscriber CRM.
+
+This mirrors pass 5's finding that there is **no open rights-management or royalty platform**: the
+systems that touch the **recurring charge and the subscriber record** are the ones nobody
+open-sources, because they carry the money and the liability. A publisher subscriber CRM is a
+build-on-Unomi engagement, not an adopt-a-platform one.
+
+### Gap: no IAB-registered open-source CMP, and this one has a date attached
+
+A publisher integrating the IAB TCF needs a **registered** CMP. None of the open options are
+registered. `c15t` (Apache-2.0) and `iabtcf-es` (Apache-2.0, 156★) produce a valid TC string and a
+consent UI; they do not produce standing in the framework. Against **TCF v2.3 mandatory since 1 March
+2026** and **v2.4's website deadline of 23 October 2026**, this is the gap most likely to be
+discovered late in an EMEA engagement. State it in week one.
+
+### How to add the AI layer to this tier
+
+The agent layer here is a measured near-zero (`agents/top.md` pass 24: best repo 915★ and dead 16
+months), so **the AI work in this tier is an integration, not an adoption**:
+
+1. **Coral + [unitaryai/detoxify](https://github.com/unitaryai/detoxify)** (Apache-2.0, 1,320★) — an
+   open moderation assistant over the newsroom comment queue. Both Apache-2.0; **nothing currently
+   wires them together.** Smallest unbuilt component in the plane.
+2. **Unomi + the recommender stack** in `repos/foundations.md` — segments as features, consent state
+   as a hard filter on activation.
+3. **listmonk/SendPortal + an LLM editorial step** — generate the digest *draft* from the day's CMS
+   output; never the send decision. See `compose/patterns.md` Pattern 24.1.
+4. **parsedmarc + an ops agent** — the deliverability triage loop nobody has built (Pattern 24.3).

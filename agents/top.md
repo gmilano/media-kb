@@ -2453,3 +2453,134 @@ rest of this plane is trying to add.**
    noise.** Of 66 repo URLs written in this pass, 66 resolve; of 6 repos cited by name as search
    contamination, 5 resolve and this one does not, and it is annotated in place rather than
    removed, because the search *count* it illustrates is still real.
+
+## The owned-channel & audience-relationship plane — measured 2026-11-26 (pass 24), and the KB's largest vocabulary gap to date
+
+**How this plane was found.** The vocabulary probe (two Bash calls, ~120 terms, run *before* any web
+search — the method fixed in pass 22) returned a result no earlier pass has produced: the string
+**`email` occurred ZERO times in 20,389 lines** of this KB. So did `Listmonk`, `Mautic`, `Coral`,
+`web push`, `Novu`, `ntfy`, `Discourse`, `customer data platform`, `cookieless`, `UID2`,
+`Unified ID` and `Privacy Sandbox`. Meanwhile `Snowplow`, `Matomo`, `PostHog`, `Plausible`,
+`Keycloak` and `Jitsu` were all **present**.
+
+That asymmetry is the finding, and it is sharper than pass 22's `fingerprint` gap:
+
+> **This KB could already measure an audience. It had nothing that could contact one.**
+> The observation half of first-party data was built out across passes 7 and 10; the **activation**
+> half — the owned channel the audience is actually reached through — did not exist in any file.
+
+It is also the gap that matters most right now, because the owned channel is where the industry is
+retreating to. Publishers report revenue declines of **50–90%** where referral traffic evaporated,
+Google Discover referrals fell **21% YoY** (Reuters Institute, via Digiday), and the April 2026 IAB
+survey of **109 US publishers** found news publishers prioritising **subscriptions, attribution and
+direct audience ownership**. Email is the answer the industry gave, and the KB had no word for it.
+
+### The agent layer for this plane — measured, and it is the weakest in twenty-four passes
+
+Searched 2026-11-26. This is **everything** that turned up on-topic, not a selection. Verified by
+GitHub API (stars, forks, last push, archived flag) with licence files read where the API returned
+`NONE`/`NOASSERTION`.
+
+| Agent | Repo | License | Stars | Last push | State |
+|---|---|---|---|---|---|
+| auto-news | [finaldie/auto-news](https://github.com/finaldie/auto-news) | MIT | 915 | **2025-07-19** | Personal news aggregator: multi-source pull + LLM (ChatGPT/Gemini/Ollama) summarisation into a digest. **The best-starred agent in this plane, and it has been dead for 16 months.** |
+| aginews | [ericciarla/aginews](https://github.com/ericciarla/aginews) | **NONE** | 274 | 2024-11-15 | Agent + Resend + Firecrawl newsletter pipeline. **No licence file: all rights reserved by default.** Two years stale. |
+| AIPulse | [raghavkv85/AIPulse](https://github.com/raghavkv85/AIPulse) | **NONE** | 17 | 2026-04-07 | Curated AI newsletter generator. No licence. |
+| weekly-ai-news-digest | [elbruno/weekly-ai-news-digest](https://github.com/elbruno/weekly-ai-news-digest) | MIT | 11 | 2026-11-25 | Agentic daily digest auto-generated via GitHub Agentic Workflows. **The only permissive, actively-pushed agent in the plane — and it has 11 stars.** |
+| newsletter-ai-agent | [ahmadhuss/newsletter-ai-agent](https://github.com/ahmadhuss/newsletter-ai-agent) | **NONE** | 7 | 2024-08-14 | Researcher + chief-editor + HTML-writer crew. No licence. |
+| thegist | [p55d2k/thegist](https://github.com/p55d2k/thegist) | MIT | 0 | 2026-10-11 | RSS → thematic sections → personalised email digest, on GitHub Actions. Licensed, alive, **zero stars**. |
+| myfeed | [MatDagommer/myfeed](https://github.com/MatDagommer/myfeed) | **NONE** | 0 | 2026-04-25 | LangGraph + Mistral RSS picker. No licence. |
+
+Seven rows. **Permissive AND pushed in the last 90 days: two of seven, with 11 and 0 stars between
+them.** Four of seven carry **no licence file at all**. That is written as seven rows because seven
+is what exists.
+
+### The gradient — and this is the most precise statement the KB's structural law has had
+
+Twenty-three passes have recorded the same law in different words. This plane orders it by a single
+variable that no earlier pass isolated: **who carries the liability for the record the code keeps.**
+
+| Function in the plane | Best open implementation | Stars | Licence | Who carries the liability |
+|---|---|---|---|---|
+| **Deliver a byte to an inbox** | [postalserver/postal](https://github.com/postalserver/postal) | 16,982 | MIT | Nobody — it is a protocol |
+| **Send to a list** | [knadh/listmonk](https://github.com/knadh/listmonk) | 24,473 | AGPL-3.0 | Nobody |
+| **Render the message** | [resend/react-email](https://github.com/resend/react-email) | 20,008 | MIT | Nobody |
+| **Host a conversation (generic)** | [discourse/discourse](https://github.com/discourse/discourse) | 48,117 | GPL-2.0 | The operator, weakly |
+| **Host a *newsroom* conversation** | [coralproject/talk](https://github.com/coralproject/talk) | **2,005** | Apache-2.0 | The publisher — editorially and legally |
+| **Encode consent lawfully (TCF)** | [InteractiveAdvertisingBureau/iabtcf-es](https://github.com/InteractiveAdvertisingBureau/iabtcf-es) | **156** | Apache-2.0 | The publisher, under GDPR |
+| **Carry consent across jurisdictions** | [IAB GPP](https://github.com/InteractiveAdvertisingBureau/Global-Privacy-Platform) | **128** | **CC-BY-3.0 — a spec, not code** | The publisher |
+| **Replace the cookie / operate identity** | [IABTechLab/uid2-operator](https://github.com/IABTechLab/uid2-operator) | **18** | Apache-2.0 | The operator, fully |
+| **Write the thing (agent)** | [finaldie/auto-news](https://github.com/finaldie/auto-news) | 915 **dead** | MIT | The editor |
+
+**24,473 → 2,005 → 156 → 18.** A **1,360× collapse** across one plane, and it tracks liability
+almost perfectly. Two sub-findings worth quoting to a client:
+
+1. **The same function, with and without liability, differs 24×.** Hosting comments generically is
+   48,117 stars. Hosting comments *in a newsroom*, where every published comment is the publisher's
+   problem, is 2,005 — and that repo exists only because Mozilla and the Washington Post paid for it
+   and Vox Media now maintains it. This is the cleanest control case the KB has: **one function, two
+   liability regimes, 24× the code.**
+2. **The thing that replaces the third-party cookie for the entire open web has 18 stars.**
+   `uid2-operator` is Apache-2.0 and was pushed *today*. It is not abandoned — it is simply not
+   something anyone self-serves, because running an identity operator means holding hashed email
+   addresses for other people under GDPR and LGPD. The code is free; the liability is not.
+
+### ⚠️ The licence finding of this pass — a *sixth* way a licence hides, and it is a star-count decoy
+
+This is a new category and it nearly put a wrong row in this file.
+
+Searching for the Maizzle email framework surfaces **`maizzle/maizzle`, 2,864 stars** — the
+better-starred of the two repos, and the one every directory links. Checked properly:
+
+- `maizzle/maizzle` has **no licence file** — `LICENSE`, `LICENSE.md`, `License.md`, `LICENSE-MIT`,
+  `packages/framework/LICENSE` and `.github/LICENSE` all return **404** on `master`.
+- Its README says "licensed under the MIT license" and links to **`./LICENSE`** — **that link 404s.**
+- `package.json` has **no `license` field**.
+- The npm registry entry for `@maizzle/framework` points at a **different repository**:
+  `github.com/maizzle/framework`.
+- **`maizzle/framework`, 1,624 stars, has a real MIT `LICENSE` file** (Copyright Cosmin Popovici) and
+  was pushed 2026-11-25.
+
+So `maizzle/maizzle` is the **starter template**, not the framework, and it is unlicensed. **The rule,
+reusable across all twelve industries:** when a project name resolves to two repos, find out which
+one the package registry points at **before** quoting either the stars or the licence. The
+more-starred repo is often the scaffold, and scaffolds are the repos people forget to license.
+
+The five earlier ways a licence hides are in `repos/foundations.md` (pass 4), plus Chromaprint's
+build-flag licence (pass 5), OpenUSD (pass 6), the directory-vs-repo mismatch (pass 8) and pass 23's
+`composer.json`-only declaration.
+
+### ⛔ Two Elastic License 2.0 repos in one plane, both in the privacy layer
+
+| Repo | Stars | Licence (file read) | Why it matters |
+|---|---|---|---|
+| [rudderlabs/rudder-server](https://github.com/rudderlabs/rudder-server) | 4,521 | **Elastic License 2.0** | The CDP that **every 2026 "open source Segment alternative" listicle recommends**. ELv2 forbids providing the software to third parties as a managed service. |
+| [ConsentOS/consentos](https://github.com/ConsentOS/consentos) | 25 | **Elastic License 2.0** | Self-hosted CMP with TCF v2.3, GPP v1 and Consent Mode v2. Same restriction. |
+
+Neither is OSI open source, and ELv2's managed-service limitation is aimed precisely at what a
+systems integrator does for a client. **Use [jitsucom/jitsu](https://github.com/jitsucom/jitsu) (MIT,
+5,140★) or [apache/unomi](https://github.com/apache/unomi) (Apache-2.0, 382★) instead** — and note
+the gradient again: the only genuinely Apache-licensed CDP in the plane has **382 stars**.
+
+### ⚠️ Contamination — three queries in this plane return a different industry
+
+| Query | What comes back | Why |
+|---|---|---|
+| `AI newsletter agent` | **Sales/outbound and growth-hacking tooling**, plus dozens of 0-star hobby digests. Almost nothing editorial. | "Newsletter" in open source means *marketing send*, not *publication*. The editorial newsletter has no open agent layer; the marketing one has hundreds. |
+| `open source CDP` | **Elastic-licensed and source-available products** presented as open source by comparison blogs (see above). | The category is vendor-defined, and the vendors write the listicles. |
+| `email agent` | **Inbox assistants** — triage, auto-reply, calendar. Zero publisher relevance. | The word "email" collocates to *receiving*, not *publishing*. Search the verb (`send`, `digest`, `curate`), never the medium. |
+
+### Informed gaps from this pass — searched, and genuinely not found
+
+- **No open-source agent for newsletter *operations*** — list hygiene, send-time optimisation,
+  deliverability triage, churn-risk scoring on an owned list. Searched; nothing on-topic and licensed.
+  This is the most commercially obvious unbuilt agent found in twenty-four passes, because the
+  substrate under it (`parsedmarc` Apache-2.0, `postal` MIT) is permissive and healthy.
+- **No IAB-registered open-source CMP.** A publisher integrating TCF needs a *registered* CMP;
+  nothing in the open set is registered. `iabtcf-es` (156★) gives you the string, not the standing.
+- **No open comment-moderation agent built on an open toxicity model.** Coral ships AI moderation
+  inside the platform and [unitaryai/detoxify](https://github.com/unitaryai/detoxify) (Apache-2.0,
+  1,320★) is the open model, but **nothing wires them together** as an agent. Smallest buildable gap
+  in this plane.
+- **No open-source WhatsApp/LINE publisher-distribution agent**, despite those being the owned channel
+  in LATAM and parts of APAC (see `intel/market.md`). Searched per region; genuinely absent.

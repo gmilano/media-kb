@@ -2378,3 +2378,165 @@ label; they are different data models, and a single "AI disclosure" field satisf
   unverified, **not** as permissive.
 - **RawTherapee's and fontbakery's star counts are unknown** (search index returns 422 while git
   serves normally). Written `n/a` rather than estimated.
+
+## Pass 24 (2026-11-26) — the owned-channel & audience-relationship plane: what is actually changing
+
+### 1. The industry trend that created this plane: discovery collapsed, so publishers are buying back the relationship
+
+This is the clearest cause-and-effect chain in the KB, and every link is sourced:
+
+- **AI answers replaced the click.** Google's AI Overviews cite news publications but produce fewer
+  clicks to the source (Reuters Institute, *Journalism, media and technology trends and predictions
+  2026*). Google **Discover** referrals fell **21% YoY**. Facebook referrals to publisher sites had
+  already halved over a year (Chartbeat/Similarweb).
+- **The revenue effect is not marginal.** Trade reporting puts declines at **50–90%** for publishers
+  most exposed to referral traffic.
+- **The response is owned channels.** The April 2026 **IAB survey of 109 US publishers** found news
+  publishers prioritising **subscriptions, attribution and direct audience ownership**; large
+  publishers scaling licensing and third-party distribution instead. Newsletter revenue grew **~30%**
+  in a year at one marketplace (Paved, via The Current). The Guardian's stated goal is moving readers
+  from one-off sends to **always-on weekly products**; Punchbowl's CEO says **even site visits are
+  driven through the newsletter**.
+- **And the industry framing has changed with it.** eMarketer now describes newsletters as
+  **"first-party media"** — an inventory class, not a retention tactic.
+
+**What this means for an engagement:** the owned channel has stopped being a marketing deliverable and
+become **infrastructure**. Piano's guidance is the right opening diagnostic to run with a client:
+*what percentage of your current audience can you reach without a referral source?* Most clients do
+not know, and the number is the business case for everything in this plane.
+
+### 2. The structural law of this KB, now with a single explanatory variable: **liability**
+
+Twenty-three passes recorded the same law in different vocabularies — by layer (pass 4), by lineage
+(pass 23), by distance from the recurring charge (pass 13), by where the code runs (pass 12), by what
+the code owns (pass 22). This plane isolates the variable, because it contains one function measured
+under two liability regimes:
+
+| Function | Open implementation | Stars | Who answers for the record |
+|---|---|---|---|
+| Deliver a byte to an inbox | postal | 16,982 | nobody |
+| Send to a list | listmonk | 24,473 | nobody |
+| Host a conversation, generically | discourse | 48,117 | the operator, weakly |
+| **Host a *newsroom* conversation** | **coralproject/talk** | **2,005** | **the publisher, fully** |
+| Encode consent lawfully | iabtcf-es | 156 | the publisher, under GDPR |
+| Carry consent across jurisdictions | IAB GPP | 128 (**not software**) | the publisher |
+| Operate identity without a cookie | uid2-operator | **18** | the operator, fully |
+
+**1,360× across one plane.** And the middle two rows are the control case: *the same function*,
+hosting comments, differs **24×** depending only on whether the operator answers for what gets
+published. No earlier pass had two implementations of one function under different liability.
+
+**The corollary that sells:** open source stops at the point where someone must stand behind the
+record. That is where an integrator's work is actually worth money — the code is free and the
+accountability is not.
+
+### 3. The cookie replacement for the open web has 18 stars, and it is not abandoned
+
+`IABTechLab/uid2-operator` is **Apache-2.0 and was pushed 2026-11-26**. This is not a dormancy
+finding — it is an **adoption** finding, and a different shape from anything in passes 1–23.
+
+The reason is in the operator model: UID2's code has been open since The Trade Desk published it, but
+the **public operator role went unfilled**. Prebid.org was slated to be the first public operator and
+**paused** its integration; participants such as Fubo, Optable, InfoSum and AWS run **private or
+closed** operators over their own users' emails. Governance reporting conflicts — one source says UID2
+moved to Prebid.org's independent governance, AdExchanger reported Prebid stepping back — **so treat
+UID2's governance as unsettled and verify it against a primary source before advising a client.**
+Adoption: **1,000+ publisher and technology partners** as of mid-2025 per The Trade Desk's own
+disclosures (the most recent figure found; **no 2026 primary figure surfaced**).
+
+**The read:** the code is free, the liability of holding other parties' hashed email addresses under
+GDPR and LGPD is not, and that is why eighteen people starred it. For a client, **operating** an
+identity graph is a decision about indemnity, not about software.
+
+### 4. The measurement the owned channel was built on is being destroyed as it is adopted
+
+The sharpest irony in the plane: publishers moved to email to escape platform intermediation, and the
+inbox is being intermediated.
+
+- **Apple Mail** writes **pre-open** summaries with Apple Intelligence that *replace the preheader* —
+  the publisher's own subject-line craft is overwritten before anyone opens anything.
+- **Gmail** shows **post-open** Gemini summaries, and appears to **auto-open** messages to generate
+  them: **opens inflate while clicks fall**, because a reader satisfied by the summary never clicks.
+- **Apple MPP** already broke opens; vendor estimates put inflation at **4–8 percentage points**
+  (unverified — treat as directional).
+- **Gmail Postmaster Tools v2** retired High/Medium/Low domain and IP reputation for a **compliance
+  checklist plus a deliverability verdict**.
+
+**Consequence, and it is actionable:** the open rate is no longer a metric a client can plan on.
+What remains is **clicks, conversions, replies and DMARC evidence** — which is why
+[domainaware/parsedmarc](https://github.com/domainaware/parsedmarc) (Apache-2.0, 1,321★) is the most
+under-starred useful repo found this pass. **Caveat to carry:** these are vendor-blog findings. No
+independent 2026 dataset on publisher open/click rates under AI summaries surfaced; searched, not found.
+
+### 5. A new licence shape: the star-count decoy
+
+Five ways a licence hides were already recorded (pass 4's three channels, Chromaprint's build flags,
+OpenUSD, the directory-vs-repo mismatch, pass 23's `composer.json`-only declaration). This pass adds a
+sixth, and it is the first that is a **naming** problem rather than a **location** problem:
+
+`maizzle/maizzle` (**2,864★**) — the repo search returns, the repo directories link — has **no licence
+file** (six paths checked, all 404), **no `license` field in `package.json`**, and a README asserting
+MIT while linking to a `./LICENSE` that **404s**. The npm registry points at a different repository:
+**`maizzle/framework` (1,624★), which has a real MIT LICENSE file.** The better-starred repo is the
+**starter template**, and starters are what maintainers forget to license.
+
+**Reusable across all twelve industries:** when a project name resolves to two repos, resolve it
+through the **package registry** before quoting either the stars or the licence.
+
+### 6. "Open source" is now a marketing claim in the privacy layer specifically
+
+Two **Elastic License 2.0** projects sit in this plane, both in privacy infrastructure:
+`rudderlabs/rudder-server` (**4,521★** — the CDP recommended by essentially every 2026 "open source
+Segment alternative" listicle) and `ConsentOS/consentos` (25★). Licence files read; neither is OSI
+open source, and ELv2's prohibition on providing the software to third parties as a managed service is
+aimed precisely at integrator work.
+
+**Why the privacy layer specifically?** Because that is where the commercial value of *trust* is
+highest and the code is cheapest to copy. The pattern to expect: as a layer becomes compliance-bearing,
+its vendors relicense to source-available. The permissive survivors in this plane are the ones with
+institutional owners — **Apache Unomi (382★, ASF)** and **c15t (Apache-2.0)**.
+
+### 7. The consent clock has already struck, and nothing open is registered
+
+**TCF v2.3 mandatory** for TC strings generated on/after **1 March 2026** (Google publisher guidance;
+iubenda gives 28 February 2026). **TCF v2.4 specs + updated GVL published 23 July 2026**; **website
+deadline 23 October 2026**, later for apps and CTV. Both dates are **in the past**.
+
+And the structural problem underneath: **no open-source CMP is IAB-registered.** The open stack gives
+a client a consent *string* (`iabtcf-es`, 156★) and a consent *UI* (`c15t`, `cookieconsent`) and no
+*standing in the framework*. This is the single most likely late-stage surprise in an EMEA engagement
+in this plane.
+
+Meanwhile the EU is actively relitigating consent itself: media bodies **EMMA, ENPA, EPC and NME**
+jointly objected to the **Digital Omnibus**'s Articles 88a/88b, arguing the media exemption does not
+preserve publishers' ability to ask readers directly for consent; EU governments **dropped
+browser-level cookie-consent preferences** (October 2026), which publishers read as a win; and the
+European Publishers Council wants low-risk first-party processing to run on **legitimate interest**
+rather than consent. **Adoption of the broader package is not expected before 2028** — so design the
+consent layer to be *re-configurable*, not correct-for-today.
+
+### 8. The agent layer does not exist, and the vocabulary makes it look like it does
+
+Searching `AI newsletter agent` returns hundreds of results and **almost nothing editorial**: sales
+and outbound growth tooling, plus a long tail of 0-star personal digests. The entire on-topic,
+licensed set is **seven repos**, whose best-starred member (`finaldie/auto-news`, MIT, 915★) **has not
+been pushed since 2025-07-19**, and whose only permissive active member has **11 stars**. Four of the
+seven carry **no licence file at all**.
+
+The adjacent zero is worth more than the seven rows: **there is no open agent for newsletter
+operations** — list hygiene, send-time optimisation, deliverability triage, churn-risk scoring on an
+owned list — even though the substrate beneath it (`parsedmarc` Apache-2.0, `postal` MIT, `novu` MIT)
+is permissive, healthy and pushed this week. That is the most commercially obvious unbuilt agent found
+in twenty-four passes.
+
+### 9. Informed gaps from this pass — searched, and genuinely not found
+
+- **No independent 2026 data on publisher email engagement under AI inbox summaries.** All findings
+  trace to email-vendor blogs. Recorded as directional.
+- **No newsletter *advertising* market figure.** Searched; the vendors size email-marketing
+  *software* ($1.6B–$13.7B depending on scope, see `intel/market.md` pass 24 addendum) and nobody
+  sizes newsletter sponsorship revenue, which is the number a publisher actually wants.
+- **No open publisher CRM or media ERP** under any permissive licence (see `verticals/solutions.md`).
+- **No open WhatsApp/LINE publisher-distribution tooling**, despite messaging being *the* owned
+  channel in LATAM and parts of APAC.
+- **No 2026 primary figure for UID2 adoption**, and conflicting reporting on its governance.

@@ -1209,3 +1209,63 @@ services** — so §13 is live, not theoretical. Two consequences for an engagem
 - **For the AGPL platforms, the cleanest posture is "we operate it for you, unmodified, and build
   our value beside it"** — agents that call the platform's API, not forks of the platform. That is
   how every pattern in `compose/patterns.md` for this plane is wired.
+
+---
+
+## Spatial & immersive platforms — measured 2026-11-26 (pass 21)
+
+The brief for this file is the Odoo/OpenMRS/Moodle shape: a **real system you can stand up and
+customise with AI on top**. For immersive media that system mostly does not exist, and the honest
+finding is the custodianship history rather than the feature list.
+
+### Group 1 — Social/immersive-space platforms you can self-host
+
+| Platform | Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|---|
+| Hubs (Community Edition) | https://github.com/Hubs-Foundation/hubs | 2,228★ / 1,387f | MPL-2.0 | 2026-10-29 | The closest thing to an "Odoo of immersive" — rooms, avatars, scene upload, WebXR in-browser. **Custodian changed: Mozilla shut the hosted service on 2024-05-31 and the codebase is now maintained by the Hubs Foundation** (Mozilla's own support pages state both) |
+| Overte | https://github.com/overte-org/overte | 289★ / 83f | Apache-2.0 (`LICENSE`) | 2026-11-23 | Full 3D social platform with its own server stack. **Governed by Overte e.V., a German association — the only EMEA-domiciled open immersive platform found** |
+| Vircadia | https://github.com/vircadia/vircadia-native-core | 543★ / 173f | Apache-2.0 (`LICENSE`) | 2025-07-01 | Overte's predecessor, **17 months without a push** — use Overte instead |
+
+**The lineage is the risk disclosure.** Read the copyright headers in sequence: High Fidelity, Inc.
+(2013–2019) → Vircadia contributors / DigiSomni LLC (2019–2022) → Overte e.V. (2022–2026). The same
+codebase has been handed down through **two abandonments**, and the category's most-starred entry
+(Hubs) survived a third when its corporate sponsor withdrew. Any client proposal that puts a social-VR
+platform at the centre of a multi-year engagement has to carry a maintenance plan, because **every
+platform in this category has already outlived at least one owner.** The permissive licences (MPL-2.0,
+Apache-2.0) are what made each handover legally possible — which is the argument for insisting on them.
+
+### Group 2 — 3D asset management and publishing (the DAM layer for spatial)
+
+| Platform | Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|---|
+| Manyfold | https://github.com/manyfold3d/manyfold | 2,264★ / 152f | AGPL-3.0 | 2026-11-26 | Self-hosted 3D asset manager (Rails + three.js); tagging, previews, library organisation. AGPL reaches a hosted offering |
+| xeokit SDK | https://github.com/xeokit/xeokit-sdk | 969★ / 335f | AGPL-3.0 | 2026-11-25 | Web viewer SDK for very large models; BIM-focused but format-general. AGPL — dual licensing is sold commercially |
+| CesiumJS | https://github.com/CesiumGS/cesium | 15,990★ / 3,906f | Apache-2.0 | 2026-11-26 | Streams massive 3D Tiles datasets; the permissive option when the scene is bigger than memory |
+| `<model-viewer>` | https://github.com/google/model-viewer | 8,360★ / 965f | Apache-2.0 | 2026-11-18 | One tag to put a glTF on a page with an AR handoff on both mobile platforms — the lowest-effort production surface in this plane |
+
+### Group 3 — Engines as platforms
+
+| Platform | Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|---|
+| Godot | https://github.com/godotengine/godot | 120,865★ / 27,647f | MIT | 2026-11-25 | The only large engine under MIT; with `GodotVR/godot-xr-tools` (MIT, 749★) the entire XR chain is permissive end to end |
+| O3DE | https://github.com/o3de/o3de | 9,929★ / 2,601f | **Apache-2.0 OR MIT, licensee elects** | 2026-11-26 | Linux Foundation governance; the cleanest licence terms of any engine here |
+| PlayCanvas | https://github.com/playcanvas/engine | 17,382★ / 2,075f | MIT | 2026-11-26 | Web-first; same house as SuperSplat, so the splat path is native |
+| Babylon.js | https://github.com/BabylonJS/Babylon.js | 26,457★ / 3,748f | Apache-2.0 | 2026-11-26 | Strongest out-of-the-box WebXR feature coverage |
+
+### What does not exist — stated as gaps, not omissions
+
+- **There is no open-source volumetric-video *platform*.** Ingest, process, store, version, transcode
+  and deliver a volumetric asset: no single system does this. `ASU-NEM-Labs/open4dgs-core` (MIT,
+  161★) is the only permissive production 4D pipeline found, and it is a pipeline, not a platform.
+  This is a build opportunity, not an integration.
+- **No open media-asset-management system handles spatial assets as first-class.** Manyfold is built
+  for 3D-print libraries; the broadcast MAM layer catalogued in earlier passes has no notion of a
+  splat, a point cloud or a USD stage.
+- **No open-source Apple Immersive Video / MV-HEVC production chain.** Verified absent this pass; the
+  only live broadcast encoder announced in 2026 is proprietary (SpatialGen, AWE USA).
+- **Monado** — the leading open OpenXR runtime, and the piece that would make a self-hosted headset
+  stack complete — **could not be verified from this session**: `gitlab.freedesktop.org` was refused
+  by the egress proxy (HTTP 403). Recorded as not investigated. Treat as "exists, terms unconfirmed
+  here", not as absent.
+- **`opensimulator/opensim` is not on GitHub** (`git ls-remote` negative). OpenSimulator is hosted
+  elsewhere and was not verified this pass.

@@ -2042,3 +2042,148 @@ it: `ClaimVerify` 0★ (no licence), `Ai-Claim-Verification` 0★ (no licence), 
 The control group is in the same measurement: the same channel returns `sherlock-project/sherlock` at
 **117,843★** for OSINT username search. Open source is not weak at investigation; it is weak at
 **adjudicating a claim** — which is judgement, the thing the content law says stays closed.
+
+---
+
+## Pass 21 (2026-11-26) — the spatial, immersive & volumetric-capture plane
+
+A ~60-term vocabulary probe over the eight live files found this plane almost entirely absent.
+Word-boundary counts (the earlier passes' own lesson about `grep -i` without `-w`): **`Quest` 0,
+`Godot` 0, `WebXR` 0, `glTF` 0, `photogrammetry` 0, `point cloud` 0, `gaussian splat` 0, `NeRF` 0,
+`lightfield` 0, `mocap` 0, `rigging` 0, `scene graph` 0, `USDZ` 0, `MV-HEVC` 0, `360 video` 0,
+`digital human` 0, `Apple Vision` 0, `XR` 1, `Unity` 2, `volumetric` 1** — and that single
+`volumetric` hit is a one-line description of OpenVDB. Pass 6 covered LED-volume virtual production
+and pass 12 covered immersive *audio*, so the KB held the stage and the soundfield but nothing about
+capturing a real subject in three dimensions or delivering it to a headset.
+
+### Tier 1 — permissive, active, shippable
+
+| Name | Repo | Stars | Licence (verified) | HEAD | What it does |
+|---|---|---|---|---|---|
+| gsplat | https://github.com/nerfstudio-project/gsplat | 5,961★ / 1,026f | Apache-2.0 | 2026-09-19 | Clean-room CUDA rasteriser for 3D Gaussian splatting — **the component that makes 3DGS commercially usable at all** |
+| Brush | https://github.com/ArthurBrussee/brush | 5,392★ / 359f | Apache-2.0 | 2026-11-23 | Rust/WebGPU 3DGS trainer + viewer; **no CUDA**, runs in a browser — the portability escape hatch |
+| SuperSplat | https://github.com/playcanvas/supersplat | 10,731★ / 1,242f | MIT | 2026-11-19 | Browser-based splat editor/cleanup/compression; the de-facto post-capture tool |
+| 3DGRUT | https://github.com/nv-tlabs/3dgrut | 2,515★ / 293f | Apache-2.0 | 2026-11-06 | NVIDIA's ray-traced Gaussian primitives — see Finding 3 on NVIDIA's own licence reversal |
+| TripoSplat | https://github.com/VAST-AI-Research/TripoSplat | 1,489★ / 160f | MIT | 2026-08-13 | Single image → 3D Gaussians; the cheapest generative entry to the plane |
+| Three-Live | https://github.com/google/three-live | 516★ / 67f | Apache-2.0 | 2026-11-25 | Google's AI-first runtime + JIT compiler: Three.js → glTF, USDZ and WebXR; **released this month** |
+| MediaPipe | https://github.com/google-ai-edge/mediapipe | 37,873★ / 6,253f | Apache-2.0 | 2026-11-25 | Face/hand/pose landmarks — the markerless performance-capture front end |
+| UniVRM | https://github.com/vrm-c/UniVRM | 3,432★ / 493f | MIT | 2026-10-19 | VRM avatar runtime; the only avatar interchange format with a permissive reference implementation |
+| SplatXR | https://github.com/splatxr/splatxr | 39★ / — | MIT | 2026-10-29 | On-headset splat rendering with physics, shadows and portals (PSI Lab). Tiny, but the only permissive *on-device* XR splat toolkit found |
+
+### Tier 2 — read, cite, do not ship into a client deliverable
+
+| Name | Repo | Stars | Licence (verified) | HEAD | Why it is gated |
+|---|---|---|---|---|---|
+| gaussian-splatting (original) | https://github.com/graphdeco-inria/gaussian-splatting | 24,564★ / 3,511f | **Gaussian-Splatting License** (Inria + MPII) | 2025-10-17 | Research/evaluation only; commercial use requires Inria's explicit consent via tech transfer |
+| instant-ngp | https://github.com/NVlabs/instant-ngp | 17,604★ / 2,067f | **NVIDIA Source Code License** | 2026-02-02 | Non-commercial |
+| EasyVolcap | https://github.com/zju3dv/EasyVolcap | 1,600★ / 101f | **PRL v1.0** | 2026-09-15 | Neural volumetric video library — commercial use *allowed* but gated on prior registration; see Finding 2 |
+| EasyMocap | https://github.com/zju3dv/EasyMocap | 4,993★ / 575f | **PRL v1.0** | 2026-09-15 | Markerless multi-view motion capture, same gate |
+| SadTalker | https://github.com/OpenTalker/SadTalker | 14,224★ / 2,714f | Apache-2.0 **with third-party carve-outs** | 2024-06-26 | Talking-head avatars; Apache for Tencent's own code only, and **dormant 29 months** |
+| OpenSplat | https://github.com/pierotofy/OpenSplat | — | AGPL-3.0 | — | Permissive-looking alternative to the Inria code, but copyleft reaches the service |
+
+### Finding 1 — this plane's encumbrance sits at the ORIGIN, not at the registry
+
+The previous twenty passes converged on a law about *content*: the regulator creates the obligation,
+but the licence of the **knowledge content** (CPT, MedDRA, ISRC, MeSH) decides whether open source can
+discharge it. This plane inverts the location of the problem. There is no registry and no membership
+body here. The encumbrance is **the research licence on the originating implementation**, and the
+market resolved it the only way it can be resolved — by reimplementing.
+
+Measured: the most-starred artefact in the plane, `graphdeco-inria/gaussian-splatting`, holds
+**24,564★ and cannot be shipped**. The thing that actually ships, `nerfstudio-project/gsplat`, holds
+**5,961★ — 24% of the stars of the repo it replaces** — and is the reason a 3DGS engagement is legal
+at all. **Star count in this plane is an inverse proxy for usability.** Any sweep that ranks by
+popularity will hand a client the one repo they may not use.
+
+### Finding 2 — a licence category this KB has never recorded: the registration gate
+
+`zju3dv/EasyVolcap` and `zju3dv/EasyMocap` both carry **Project Registration License (PRL) v1.0**,
+copyright 2026 — read in full, not inferred. It is **not** a non-commercial licence, and reading it
+as one (the obvious mistake) would wrongly discard the best open neural-volumetric-video codebase:
+
+- Research, education, evaluation and personal use: free, **no registration**.
+- Any use by a company or organisation in any internal or external project: free, **but the project
+  must be registered before use begins** — explicitly regardless of whether it is commercial,
+  internal, revenue-generating or merely in testing.
+- Registration is a Google Form naming the entity, a contact, the project and the intended use.
+  **No fee, no approval, no response required** — permission is automatic on submission.
+- One registration per materially distinct project; versions and deployments inside it are covered.
+- **No patent grant, no trademark grant.**
+
+The operational consequence is specific: GitHub reports `NOASSERTION` for both repos, so **no SPDX
+field, licence badge or SBOM scan of the source tree can express this obligation**. It is a
+compliance step that lives in the engagement-setup checklist, not in CI — and it must happen
+*before* work starts, which means it belongs in the proposal, not the retro. First instance recorded
+in this KB; worth watching as a template other labs may copy.
+
+### Finding 3 — the same vendor, opposite terms, and the newer one is permissive
+
+NVIDIA appears twice in this plane with contradictory licences. `NVlabs/instant-ngp` (17,604★, last
+pushed 2026-02-02) is under the **NVIDIA Source Code License** and is non-commercial.
+`nv-tlabs/3dgrut` (2,515★, pushed 2026-11-06) is **Apache-2.0**. The permissive one is newer and
+alive; the gated one is larger and slowing. **Vendor identity predicts nothing about licence
+terms — the repo must be read every time**, and a stale internal note saying "NVIDIA research code
+is non-commercial" would have cost the usable option.
+
+### Finding 4 — the spec repositories have no licence grant, and this is now a cross-industry pattern
+
+Pass 5 recorded `rslstandard/rsl` — the official repo of a licensing standard — as having no licence
+file. That looked like an anecdote. It is not. Verified this pass with the control test the earlier
+cycles established (13 filename variants × `main` and `master`, with `README.md` fetched as a control
+and a known-good positive control):
+
+| Spec repo | Stars | Licence file | README control |
+|---|---|---|---|
+| https://github.com/KhronosGroup/glTF | 7,907★ | **none found** (13 names × 2 branches) | 200 on both branches |
+| https://github.com/CesiumGS/3d-tiles | 2,653★ | **none found** | 200 |
+| https://github.com/KhronosGroup/glTF-Sample-Assets | 1,180★ | **none found** | 200 |
+| https://github.com/needle-tools/needle-engine-support | 613★ | **none found** | 200 |
+
+Because `README.md` returns 200 where all thirteen licence names return 404, this is **not** the
+naming-convention false negative that cycle 8 warned about — the files are genuinely absent from the
+repo root. glTF is *the* 3D interchange standard for this plane. The practical rule: **take the terms
+from the published Khronos/OGC specification, never from the spec repository**, and never let a
+dependency scanner's reading of these repos stand as the answer.
+
+### Finding 5 — the measured zeros, placed on the time axis
+
+The honest shape of this plane is a gradient along **time**, not along region or licence:
+
+- **Static capture** — permissive and healthy. gsplat (Apache-2.0, 5,961★), Brush (Apache-2.0,
+  5,392★, pushed 2026-11-23), SuperSplat (MIT, 10,731★), COLMAP (new BSD, 13,302★, pushed
+  2026-11-26).
+- **Temporal capture — actual volumetric *video*** — this is the hole. `hustvl/4DGaussians`
+  (Apache-2.0, 4,047★) has not been pushed since **2024-10-27, 25 months**. The permissive
+  alternative with a production pipeline, `ASU-NEM-Labs/open4dgs-core`, is **MIT and alive
+  (2026-11-21) at 161★**. The strongest 4D codebase, EasyVolcap, is behind the PRL gate.
+- **Delivery to a headset** — permissive and enormous. three.js (MIT, 119,448★), Godot (MIT,
+  120,865★), OpenXR-SDK (Apache-2.0), Babylon.js (Apache-2.0, 26,457★).
+
+So the industry can photograph a static scene and can deliver to a device, and **the one layer that
+turns 3D photography into volumetric video — the temporal layer — thins to 161 permissive, active
+stars.** That is the measurement to put in front of a client, and it is falsifiable: if
+`4DGaussians` is revived or open4dgs crosses ~1k★ in the next two quarters, this finding expires.
+
+### Informed gaps — searched, not found
+
+- **No open-source production encoder for Apple Immersive Video / MV-HEVC was found.** The only open
+  paths are x265's multiview encoder plus an ffmpeg remux, and small project-level work
+  (`mrgnw/spatial-maker`, `simon-lowes/montage`) where the author states Vision Pro playback was not
+  tested and hardware encoding is unsupported. The one live MV-HEVC broadcast encoder announced in
+  2026 (SpatialGen, AWE USA) is **proprietary**. Treat spatial-video delivery as a build, not an
+  integration.
+- **Monado, the leading open OpenXR runtime, could not be verified from this session.** Its canonical
+  home is `gitlab.freedesktop.org`, which the egress proxy refused (HTTP 403, host not permitted).
+  The GitHub hits for "monado" are unrelated forks (top result 5★, last pushed 2022-03-16). Recorded
+  as **not investigated**, not as absent.
+- **`opensimulator/opensim` does not exist on GitHub** (`git ls-remote` negative). OpenSimulator is
+  hosted outside GitHub; not verified this pass.
+
+### Method correction — the GitHub search index is not an existence oracle, and now not a metadata one either
+
+Earlier cycles established `git ls-remote` as the only existence oracle. This pass sharpens it:
+`search/repositories` with `q=repo:<slug>` returned **HTTP 422 "resources do not exist"** for three
+repositories that `git ls-remote` confirms **do** exist — `nerfstudio-project/viser`,
+`pierotofy/OpenSplat` and `mozilla/hubs`. So the index's silence is not evidence of absence *or* of
+missing metadata; when it 422s, fall back to `ls-remote` for existence and to the raw licence probe
+for terms. Both fallbacks were used here and both resolved in one call each.

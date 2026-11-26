@@ -2890,3 +2890,116 @@ point, not a greenfield build.
    newsroom's own journalism — unless the work explicitly indicates otherwise. Do not place it in a
    client's newsroom. Read it for the skill inventory; write your own under terms the client's
    counsel has seen.
+
+## Pattern 44 — The licence-clean splat pipeline (capture to headset, nothing gated)
+
+**Problem.** A client wants photoreal 3D capture of a real location or object, delivered to a browser
+and a headset. The obvious stack — the Inria reference implementation everyone cites — cannot be
+shipped, and the mistake is usually discovered after the pilot.
+
+**The gate, first.** Do not start from `graphdeco-inria/gaussian-splatting` (24,564★,
+**Gaussian-Splatting License, research only**) or `NVlabs/instant-ngp` (17,604★, **NVIDIA Source
+Code License, non-commercial**). Both are reference reading. Neither goes into a deliverable.
+
+**Wiring.**
+
+1. **Pose the cameras** — `colmap/colmap` (new BSD, 13,302★, pushed 2026-11-26) for
+   structure-from-motion. Read its `LICENSE`: it warns that *building COLMAP with its dependencies may
+   affect the resulting licence*, so pin the build and record the linked libraries, exactly as cycle 8
+   required for Chromaprint. For an aerial or large-site capture, `OpenDroneMap/ODM` is capable but
+   **AGPL-3.0** — if the output is delivered as a hosted service, use COLMAP instead.
+2. **Train the splats** — `nerfstudio-project/gsplat` (**Apache-2.0**, 5,961★). This is the
+   substitution that makes the engagement legal. If the client's infrastructure has no NVIDIA GPUs, use
+   `ArthurBrussee/brush` (**Apache-2.0**, 5,392★, pushed 2026-11-23) instead: Rust + WebGPU, no CUDA,
+   and it trains in a browser. If you want ray-traced quality and have NVIDIA hardware,
+   `nv-tlabs/3dgrut` (**Apache-2.0**, 2,515★) — note it is Apache while its own stablemate instant-ngp
+   is not.
+3. **Clean and compress** — `playcanvas/supersplat` (MIT, 10,731★) to crop, denoise and cut the splat
+   count. This is the step that decides whether the asset loads on a headset at all.
+4. **Convert and optimise for delivery** — `donmccurdy/glTF-Transform` (MIT) as the scriptable build
+   step, with `zeux/meshoptimizer` (MIT) and `google/draco` (Apache-2.0) for geometry and
+   `KhronosGroup/KTX-Software` (Apache-2.0) for textures. Take the glTF **terms from the published
+   Khronos specification, not from `KhronosGroup/glTF`** — that repo has no licence file (verified).
+5. **Deliver** — `google/model-viewer` (Apache-2.0) for the one-tag web/AR embed;
+   `playcanvas/engine` (MIT) or `BabylonJS/Babylon.js` (Apache-2.0) for an interactive scene;
+   `mkkellogg/GaussianSplats3D` (MIT) or `antimatter15/splat` (MIT) if you want a splat renderer
+   inside an existing three.js app.
+6. **On-headset** — `KhronosGroup/OpenXR-SDK` (Apache-2.0) as the device API so the build is not
+   locked to one vendor, `godotengine/godot` + `GodotVR/godot-xr-tools` (both MIT) for a native app,
+   or `splatxr/splatxr` (MIT, 39★) for on-device splat rendering with physics and portals — small, but
+   the only permissive option of its kind.
+
+**Licence table for the proposal.** Every component above is MIT, Apache-2.0 or new BSD. **No
+copyleft, no research licence, no registration gate.** That sentence is the pattern's whole value in a
+procurement review, and it is the thing a competitor arriving with the Inria stack cannot say.
+
+## Pattern 45 — The volumetric-video build (and the honest conversation that precedes it)
+
+**Problem.** The client says "volumetric video" and means a moving subject, not a static scene. The
+market narrative says this is a solved product category. It is not.
+
+**What to say first.** Static capture is a healthy permissive ecosystem. The **temporal** layer is
+not: `hustvl/4DGaussians` is Apache-2.0 with 4,047★ and **has not been pushed since 2024-10-27**, and
+the only permissive, actively maintained production 4D pipeline found is
+`ASU-NEM-Labs/open4dgs-core` (**MIT, 161★, pushed 2026-11-21**). The strongest 4D research codebase,
+`zju3dv/EasyVolcap`, is usable commercially but **only after registering the project** under PRL v1.0.
+This is a build with a research dependency, priced accordingly — not an integration.
+
+**Wiring.**
+
+1. **Multi-camera rig and sync** — the hard, unglamorous part, and no open project solves it. Budget
+   it as hardware plus bespoke integration.
+2. **Per-frame pose** — `colmap/colmap` (new BSD).
+3. **Temporal reconstruction** — `ASU-NEM-Labs/open4dgs-core` (**MIT**) as the spine, since it is both
+   permissive and alive. Its web editor derives from PlayCanvas SuperSplat, so step 5 of Pattern 44
+   carries over unchanged.
+4. **If quality forces it** — `zju3dv/EasyVolcap` (**PRL v1.0**). Then, *before any engineer clones
+   it*: register the project by name with the lab. One registration per distinct project, free, no
+   approval needed, and it must precede use. **Put this in the SOW, not the sprint board.**
+5. **Performance capture of the subject** — `google-ai-edge/mediapipe` (Apache-2.0, 37,873★) for
+   landmarks. Avoid `freemocap/freemocap` (AGPL-3.0) and `zju3dv/EasyMocap` (PRL v1.0) in a
+   proprietary deliverable unless the respective obligation has been accepted deliberately.
+6. **Compression and carriage — stop here and be explicit.** `MPEGGroup/mpeg-pcc-tmc2` is the ISO/IEC
+   V-PCC reference implementation under a **BSD licence that grants no patent rights**, at 177★. The
+   spatial-video consumer path (MV-HEVC) runs through x265 multiview over a patent pool. **Do not
+   promise an end-to-end open volumetric pipeline** — the capture is open and the carriage is not.
+   Deliver as splats over HTTP to a controlled client, or price the codec licensing explicitly.
+
+**Falsifiable prediction attached to this pattern.** If `4DGaussians` revives or `open4dgs-core`
+crosses ~1,000★ within two quarters, step 3 becomes an integration rather than a build and this
+pattern should be rewritten. Re-measure both before reusing it.
+
+## Pattern 46 — The 20-minute licence gate for any spatial or 3D proposal
+
+Run this before writing a line of a spatial proposal. It is four commands and it has caught a
+shippability error in every repo class in this plane.
+
+1. **Existence** — `git ls-remote --exit-code -h https://github.com/<slug>`. This is the only oracle.
+   `search/repositories` returned **HTTP 422 "resources do not exist"** this pass for three repos that
+   do exist (`nerfstudio-project/viser`, `pierotofy/OpenSplat`, `mozilla/hubs`); its silence proves
+   nothing.
+2. **Metadata** — `gh api -X GET search/repositories -f q='repo:<slug>'` for stars, forks, `pushed_at`
+   and the SPDX field in one call. **Treat `pushed_at` as the primary signal, not stars** — this plane's
+   most important defect is a 4,047★ Apache-2.0 repo that has been dormant 25 months.
+3. **Terms — read the file, never the field.** Probe `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `COPYING`,
+   `COPYING.md`, `NOTICE` **and the lowercase `license` and `license.txt`** across both `main` and
+   `master`. The lowercase variants are not optional: `zju3dv/EasyVolcap` keeps its licence in
+   lowercase `license`, and cycle 8 lost two repos to exactly this. If every name 404s, **fetch
+   `README.md` as a control**: 200 on the README with 404s on all licence names means the licence is
+   genuinely absent (four spec repos this pass), while 404s on both mean your names or branch are
+   wrong.
+4. **Classify into four buckets, not three.** This plane forced a fourth:
+   - **Shippable** — MIT / Apache-2.0 / BSD / MPL-2.0.
+   - **Copyleft** — GPL-3.0 / AGPL-3.0 (`LichtFeld-Studio`, `OpenSplat`, `manyfold`, `xeokit-sdk`,
+     `freemocap`): usable, but the obligation reaches a hosted service. Decide deliberately.
+   - **Research-only** — Gaussian-Splatting License, NVIDIA Source Code License. **Reference reading,
+     never a deliverable.**
+   - **Permissive-with-a-gate** — PRL v1.0: free for commercial use, but **registration precedes
+     use**. Belongs in engagement setup, and no SBOM scan can see it.
+
+**Two things this gate catches that nothing else does.** A *dual* grant that reads as ambiguous and
+is not (`o3de/o3de`: Apache-2.0 **or** MIT, licensee elects — stated in `LICENSE.txt`). And a name
+that is wrong in a client-facing licence table: **`PixarAnimationStudios/OpenUSD` is not Apache-2.0**,
+it is the **Tomorrow Open Source Technology License 1.0**, Apache-2.0 with §6 "Trademarks" replaced.
+Permissive in substance — but cite it correctly, because the one thing that loses a procurement review
+is a licence table that is confidently wrong.

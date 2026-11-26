@@ -2534,3 +2534,86 @@ Two corrections to this KB's own verification oracle, both found by contradictio
 - **Reusable workaround found:** canonical licence texts are reachable through the raw channel at
   `raw.githubusercontent.com/spdx/license-list-data/main/text/<SPDX-ID>.txt` when the licence's own
   site is blocked. That is how the modified Unlicense in `agents/top.md` was proven to be modified.
+
+---
+
+## Pass 21 (2026-11-26) — foundations of the spatial, immersive & volumetric plane
+
+Every row below was verified this pass: existence by `git ls-remote`, stars/forks/HEAD by
+`search/repositories`, and **licence by reading the file**, not by trusting the SPDX field. Where
+GitHub reported `NOASSERTION` the real terms are given with the file they came from.
+
+### Photogrammetry and structure-from-motion — the capture substrate
+
+| Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|
+| https://github.com/colmap/colmap | 13,302★ / 2,241f | new BSD (`LICENSE`, self-declared; GitHub says NOASSERTION) | 2026-11-26 | The SfM/MVS reference everything else poses cameras with. **Its own licence text warns that building with its dependencies may affect the resulting licence** — the linked-library problem cycle 8 recorded for Chromaprint, stated here by the project itself |
+| https://github.com/alicevision/Meshroom | 13,116★ / 1,243f | MPL-2.0 (`COPYING.md`) | 2026-11-26 | Node-graph photogrammetry GUI over AliceVision; weak copyleft, file-level |
+| https://github.com/openMVG/openMVG | 6,609★ / 1,723f | MPL-2.0 | 2026-11-07 | Multiple-view geometry library |
+| https://github.com/OpenDroneMap/ODM | 6,645★ / 1,332f | AGPL-3.0 | 2026-11-24 | Aerial/drone photogrammetry; copyleft reaches a hosted service |
+
+### Radiance fields and splatting — see `agents/top.md` for the licence split
+
+| Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|
+| https://github.com/nerfstudio-project/gsplat | 5,961★ / 1,026f | Apache-2.0 | 2026-09-19 | The permissive rasteriser the whole commercial stack rests on |
+| https://github.com/nerfstudio-project/nerfstudio | 12,264★ / 1,698f | Apache-2.0 | 2025-07-29 | Framework around it; **13 months without a push — slowing while gsplat continues** |
+| https://github.com/ArthurBrussee/brush | 5,392★ / 359f | Apache-2.0 | 2026-11-23 | Rust/WebGPU, CUDA-free |
+| https://github.com/MrNeRF/LichtFeld-Studio | 4,040★ / 529f | GPL-3.0 | 2026-11-26 | Native train/inspect/edit/export; pushed the day of measurement, but GPL |
+| https://github.com/harry7557558/spirula-studio | 2,624★ / 257f | GPL-3.0 | 2026-11-26 | Cross-vendor trainer, video→splat→mesh, Vulkan or CUDA |
+| https://github.com/hustvl/4DGaussians | 4,047★ / 393f | Apache-2.0 | **2024-10-27** | The permissive 4D/temporal implementation — **dormant 25 months**, and the plane's central defect |
+| https://github.com/ASU-NEM-Labs/open4dgs-core | 161★ / 17f | MIT | 2026-11-21 | The only permissive, *active* production 4D pipeline found |
+
+### 3D interchange, compression and delivery — permissive and healthy
+
+| Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|
+| https://github.com/mrdoob/three.js | 119,448★ / 37,033f | MIT | 2026-11-26 | The web 3D runtime; the single largest permissive asset in this plane |
+| https://github.com/godotengine/godot | 120,865★ / 27,647f | MIT | 2026-11-25 | The only MIT engine with a credible XR path; see `GodotVR/godot-xr-tools` |
+| https://github.com/pmndrs/react-three-fiber | 33,957★ / 2,140f | MIT | 2026-10-21 | React renderer for three.js |
+| https://github.com/BabylonJS/Babylon.js | 26,457★ / 3,748f | Apache-2.0 | 2026-11-26 | Engine with first-class WebXR |
+| https://github.com/playcanvas/engine | 17,382★ / 2,075f | MIT | 2026-11-26 | Engine behind SuperSplat; strong glTF extension coverage |
+| https://github.com/aframevr/aframe | 17,721★ / 4,407f | MIT | 2026-07-13 | Declarative WebXR; slowing but not dormant |
+| https://github.com/CesiumGS/cesium | 15,990★ / 3,906f | Apache-2.0 | 2026-11-26 | Geospatial 3D Tiles streaming at planet scale |
+| https://github.com/o3de/o3de | 9,929★ / 2,601f | **Apache-2.0 OR MIT, licensee elects** (`LICENSE.txt`) | 2026-11-26 | Linux Foundation engine; the dual grant is explicit and unusually clean |
+| https://github.com/zeux/meshoptimizer | 8,948★ / 770f | MIT | 2026-11-25 | Mesh optimisation + the `EXT_meshopt_compression` path |
+| https://github.com/google/model-viewer | 8,360★ / 965f | Apache-2.0 | 2026-11-18 | `<model-viewer>` web component with AR handoff |
+| https://github.com/google/draco | 7,569★ / 1,092f | Apache-2.0 | 2026-11-16 | Geometry compression |
+| https://github.com/PixarAnimationStudios/OpenUSD | 7,676★ / 1,486f | **Tomorrow Open Source Technology License 1.0** (`LICENSE.txt`, 49,827 B) | 2026-11-25 | **Correction to earlier passes: this is not plain Apache-2.0.** It is Apache-2.0 with §6 "Trademarks" replaced. Permissive in substance; cite it by its real name in any client licence table |
+| https://github.com/AcademySoftwareFoundation/MaterialX | 2,316★ / 472f | Apache-2.0 | 2026-11-23 | Material interchange |
+| https://github.com/AcademySoftwareFoundation/OpenPBR | 845★ / 47f | Apache-2.0 | 2026-11-16 | The shading model MaterialX now targets |
+| https://github.com/CesiumGS/gltf-pipeline | 2,138★ / 261f | Apache-2.0 | 2026-06-23 | glTF conversion/optimisation CLI |
+| https://github.com/donmccurdy/glTF-Transform | 2,104★ / 230f | MIT | 2026-10-20 | The scriptable glTF pipeline; the practical choice for a build step |
+| https://github.com/KhronosGroup/KTX-Software | 1,413★ / 328f | Apache-2.0 (`LICENSE.md`, mixed copyright holders) | 2026-11-17 | GPU texture containers — the difference between a 40 MB and a 4 MB asset |
+| https://github.com/AcademySoftwareFoundation/OpenImageIO | 2,409★ / 727f | Apache-2.0 | 2026-11-26 | Image I/O across the pipeline |
+| https://github.com/AcademySoftwareFoundation/openvdb | 3,556★ / 808f | Apache-2.0 | 2026-11-25 | Sparse volumes; already in this KB, re-verified |
+
+### Headset runtimes, streaming and performance capture
+
+| Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|
+| https://github.com/google-ai-edge/mediapipe | 37,873★ / 6,253f | Apache-2.0 | 2026-11-25 | Pose/face/hand landmarks; the permissive markerless capture front end |
+| https://github.com/freemocap/freemocap | 10,912★ / 1,056f | AGPL-3.0 | 2026-11-14 | Full markerless mocap system — capable, but copyleft |
+| https://github.com/alvr-org/ALVR | 8,134★ / 778f | MIT | 2026-11-23 | Streams PC VR to standalone headsets; the cheapest way to demo without a tethered rig |
+| https://github.com/vrm-c/UniVRM | 3,432★ / 493f | MIT | 2026-10-19 | VRM avatar interchange runtime |
+| https://github.com/WiVRn/WiVRn | 1,882★ / 258f | GPL-3.0 | 2026-11-25 | OpenXR streaming server |
+| https://github.com/KhronosGroup/OpenXR-SDK | 1,175★ / 204f | Apache-2.0 | 2026-10-16 | The vendor-neutral device API; the anti-lock-in layer |
+| https://github.com/StereoKit/StereoKit | 1,095★ / 138f | MIT | 2026-11-04 | C# XR app framework on OpenXR |
+| https://github.com/GodotVR/godot-xr-tools | 749★ / 113f | MIT | 2026-10-10 | Locomotion/interaction toolkit; completes the all-MIT Godot XR chain |
+| https://github.com/MPEGGroup/mpeg-pcc-tmc2 | 177★ / 54f | **BSD text that grants no patent rights** (`COPYING`) | 2026-11-17 | V-PCC point-cloud compression reference software. See the note below — this is the plane's patent trap |
+
+### The patent trap, stated precisely
+
+`MPEGGroup/mpeg-pcc-tmc2` is the ISO/IEC reference implementation of V-PCC, the standard for
+compressing volumetric point clouds. Its `COPYING` file is a BSD licence whose second sentence reads:
+*"This software may be subject to other third party and contributor rights, including patent rights,
+and no such rights are granted under this licence."* So the **code** is open and the **codec** is
+not. At 177★ it also has no meaningful installed base.
+
+This is the same shape as the HEVC/MV-HEVC path for spatial video: the open encoder route runs through
+x265, whose GitHub mirror is **GPL-2.0 and last pushed 2023-09-11** (canonical development is at
+VideoLAN, outside GitHub — verify there, not here), over a patent pool. Combined with cycle 8's
+Chromaprint finding — where the licence belonged to the *compilation*, not the repository — the rule
+for this industry is now general: **for any codec or native dependency, resolve the terms of the
+linked libraries and the patent pool, never the SPDX field of the source tree.** No badge, scanner or
+SBOM of the source tree can see either.

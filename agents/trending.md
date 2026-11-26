@@ -9,6 +9,69 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 21: the spatial, immersive & volumetric-capture plane (**the most-starred repo in the plane cannot be shipped**)
+
+**What is new to this KB.** A ~60-term word-boundary probe found the plane missing almost entirely:
+`Quest` 0, `Godot` 0, `WebXR` 0, `glTF` 0, `photogrammetry` 0, `point cloud` 0, `gaussian splat` 0,
+`NeRF` 0, `mocap` 0, `rigging` 0, `USDZ` 0, `MV-HEVC` 0, `digital human` 0, `XR` 1, `volumetric` 1
+(a single OpenVDB description). Pass 6 held LED-volume virtual production and pass 12 held immersive
+audio, so the KB had the stage and the soundfield and nothing in between.
+
+**Pushed within 72 hours of measurement:**
+
+| Name | Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|---|
+| LichtFeld-Studio | https://github.com/MrNeRF/LichtFeld-Studio | 4,040★ | GPL-3.0 | 2026-11-26 | Native splat train/edit/export; pushed the day of measurement |
+| Spirula Studio | https://github.com/harry7557558/spirula-studio | 2,624★ | GPL-3.0 | 2026-11-26 | Video→splat→mesh, Vulkan or CUDA, cross-vendor |
+| Three-Live | https://github.com/google/three-live | 516★ | Apache-2.0 | 2026-11-25 | **Released this month.** Three.js → glTF/USDZ/WebXR via an on-device JIT compiler; Google's explicit bet that 3D assets get generated, not authored |
+| Brush | https://github.com/ArthurBrussee/brush | 5,392★ | Apache-2.0 | 2026-11-23 | Rust/WebGPU 3DGS, CUDA-free — the portability play |
+| SuperSplat | https://github.com/playcanvas/supersplat | 10,731★ | MIT | 2026-11-19 | The editor the rest of the stack post-processes with |
+| open4dgs-core | https://github.com/ASU-NEM-Labs/open4dgs-core | 161★ | MIT | 2026-11-21 | The only permissive **and active** production 4D (temporal) pipeline found |
+| 3DGRUT | https://github.com/nv-tlabs/3dgrut | 2,515★ | Apache-2.0 | 2026-11-06 | NVIDIA's ray-traced Gaussians — **Apache, unlike its own instant-ngp** |
+| SplatXR | https://github.com/splatxr/splatxr | 39★ | MIT | 2026-10-29 | On-headset splats with physics/shadows/portals (PSI Lab) |
+
+**The headline, and it inverts how a popularity sweep reads this plane.** The original
+`graphdeco-inria/gaussian-splatting` holds **24,564★** under the **Gaussian-Splatting License**
+(Inria + MPII): research and evaluation only, commercial use by explicit consent through Inria's tech
+transfer office. The repo that actually makes 3DGS shippable, `nerfstudio-project/gsplat`, is
+Apache-2.0 at **5,961★ — 24% of the stars of the repo it replaces.** `NVlabs/instant-ngp` repeats the
+pattern at 17,604★ under the non-commercial NVIDIA Source Code License. **In this plane star count is
+an inverse proxy for usability**, and any ranked-by-popularity recommendation hands a client the one
+thing they may not use.
+
+**A licence category not previously recorded in this KB: the registration gate.** `zju3dv/EasyVolcap`
+(1,600★) and `zju3dv/EasyMocap` (4,993★) carry **Project Registration License (PRL) v1.0**, dated
+2026 and read in full. It is *not* non-commercial — organisational use of any kind is free, but the
+project must be **registered via a Google Form before use begins**, one registration per materially
+distinct project, with no fee and no approval needed. There is **no patent grant**. GitHub reports
+`NOASSERTION`, so no SPDX field or SBOM scan of the tree can carry the obligation: it belongs in the
+engagement-setup checklist, before work starts. Reading it as "non-commercial" — the obvious
+mistake — would have wrongly discarded the strongest open neural-volumetric-video codebase.
+
+**Where the plane actually breaks, measured on the time axis.** Static capture is permissive and
+healthy (gsplat Apache-2.0 5,961★; Brush Apache-2.0 pushed 2026-11-23; COLMAP new BSD pushed
+2026-11-26). Delivery to a headset is permissive and enormous (three.js MIT 119,448★; Godot MIT
+120,865★; OpenXR-SDK Apache-2.0). **The temporal layer in between — the thing that makes volumetric
+*video* rather than 3D photography — is the hole:** `hustvl/4DGaussians` is Apache-2.0 at 4,047★ and
+has not been pushed since **2024-10-27 (25 months)**; the permissive active alternative is
+**161★**. Falsifiable: if 4DGaussians revives or open4dgs passes ~1k★ within two quarters, this
+expires.
+
+**Informed gaps.** No open-source production encoder for Apple Immersive Video / MV-HEVC exists — only
+x265 multiview plus an ffmpeg remux, and small project-level work whose own authors note Vision Pro
+playback is untested; the one live MV-HEVC broadcast encoder announced in 2026 (SpatialGen, AWE USA)
+is proprietary. **Monado**, the leading open OpenXR runtime, **could not be verified from this
+session**: its canonical home `gitlab.freedesktop.org` was refused by the egress proxy (HTTP 403,
+host not permitted), and every GitHub "monado" hit is an unrelated fork (top result 5★, pushed
+2022-03-16). Recorded as not investigated, not as absent.
+
+**Oracle correction.** `search/repositories` with `q=repo:<slug>` returned HTTP 422 "resources do not
+exist" for three repos that `git ls-remote` confirms exist (`nerfstudio-project/viser`,
+`pierotofy/OpenSplat`, `mozilla/hubs`). The index's silence is evidence of nothing; `ls-remote` for
+existence and the raw licence probe for terms both resolved in one call each.
+
+---
+
 ## 2026-11-26 — pass 20: the investigative-journalism, source-protection & fact-checking plane (**the agent layer is finally permissive and alive — and still not shippable**)
 
 **What is new this week in this plane, and what is new only to this KB.** A ~90-term vocabulary probe

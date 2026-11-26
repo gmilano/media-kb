@@ -10,6 +10,74 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 21: spatial, immersive & volumetric infrastructure (**71 slugs probed, 69 resolve, 2 absent; 17 licence files read, 5 licence categories corrected**)
+
+**Probe results.** 71 candidate slugs; **69 exist** by `git ls-remote`, **2 do not**
+(`tracel-ai/brush` — the correct slug is `ArthurBrussee/brush`; `opensimulator/opensim` — hosted
+outside GitHub). GitHub reported `NOASSERTION` or `NONE` for **nineteen** of them; **seventeen
+licence files were read directly** and **four** were control-tested as having no licence file at all.
+Reading changed the answer in every case where a file existed.
+
+**The infrastructure layer is permissive and very large — it is the capture layer that is gated.**
+
+| Repo | Stars | Licence (verified) | HEAD | Layer |
+|---|---|---|---|---|
+| https://github.com/godotengine/godot | 120,865★ | MIT | 2026-11-25 | Engine |
+| https://github.com/mrdoob/three.js | 119,448★ | MIT | 2026-11-26 | Web runtime |
+| https://github.com/pmndrs/react-three-fiber | 33,957★ | MIT | 2026-10-21 | Web runtime |
+| https://github.com/BabylonJS/Babylon.js | 26,457★ | Apache-2.0 | 2026-11-26 | Engine + WebXR |
+| https://github.com/playcanvas/engine | 17,382★ | MIT | 2026-11-26 | Engine |
+| https://github.com/aframevr/aframe | 17,721★ | MIT | 2026-07-13 | Declarative WebXR |
+| https://github.com/CesiumGS/cesium | 15,990★ | Apache-2.0 | 2026-11-26 | 3D Tiles streaming |
+| https://github.com/colmap/colmap | 13,302★ | new BSD (read) | 2026-11-26 | SfM substrate |
+| https://github.com/alicevision/Meshroom | 13,116★ | MPL-2.0 (`COPYING.md`) | 2026-11-26 | Photogrammetry |
+| https://github.com/o3de/o3de | 9,929★ | **Apache-2.0 OR MIT, elected** | 2026-11-26 | Engine |
+| https://github.com/zeux/meshoptimizer | 8,948★ | MIT | 2026-11-25 | Compression |
+| https://github.com/google/draco | 7,569★ | Apache-2.0 | 2026-11-16 | Compression |
+| https://github.com/PixarAnimationStudios/OpenUSD | 7,676★ | **Tomorrow OSS Technology License 1.0** | 2026-11-25 | Scene interchange |
+| https://github.com/openMVG/openMVG | 6,609★ | MPL-2.0 | 2026-11-07 | Multi-view geometry |
+| https://github.com/KhronosGroup/OpenXR-SDK | 1,175★ | Apache-2.0 | 2026-10-16 | Device API |
+| https://github.com/MPEGGroup/mpeg-pcc-tmc2 | 177★ | **BSD, no patent grant** | 2026-11-17 | V-PCC codec |
+
+**Five licence corrections that an SPDX field would have got wrong.**
+
+1. **`PixarAnimationStudios/OpenUSD` is not Apache-2.0.** Its `LICENSE.txt` (49,827 B) is the
+   **Tomorrow Open Source Technology License 1.0**, which differs from Apache-2.0 in §6
+   ("Trademarks"). Permissive in substance, but earlier passes citing it as Apache need this
+   correction in any client-facing licence table.
+2. **`o3de/o3de` is a genuine dual grant** — `LICENSE.txt` states Apache-2.0 by default with the
+   licensee free to elect MIT, and requires contributions under both. The cleanest terms in the plane.
+3. **`colmap/colmap` is new BSD**, and its own licence text warns that *"building COLMAP with these
+   dependencies may affect the resulting COLMAP license"* — the linked-library problem cycle 8 found
+   in Chromaprint, here declared by the project itself.
+4. **`MPEGGroup/mpeg-pcc-tmc2`** is BSD **that explicitly grants no patent rights**. Open code,
+   closed codec, 177★ installed base.
+5. **`zju3dv/EasyVolcap` and `zju3dv/EasyMocap`** are **PRL v1.0** — permissive with a pre-use
+   project registration gate, not non-commercial. See `agents/trending.md` for the full terms.
+
+**Four spec repositories with no licence grant at all — control-tested.** `KhronosGroup/glTF`
+(7,907★), `CesiumGS/3d-tiles` (2,653★), `KhronosGroup/glTF-Sample-Assets` (1,180★) and
+`needle-tools/needle-engine-support` (613★) return 404 for **thirteen licence filenames across both
+`main` and `master`**, while `README.md` returns 200 on both branches and a known-good positive
+control passes. So the files are genuinely absent, not misnamed — the false negative cycle 8 warned
+about is ruled out. This is the **second industry** in which a standards repository whose entire
+purpose is interoperability ships without a licence (pass 5: `rslstandard/rsl`), which makes it a
+pattern rather than an anecdote. **Take the terms from the published specification, never from the
+spec repo.**
+
+**The dormancy sits exactly on the temporal axis.** `hustvl/4DGaussians` (Apache-2.0, 4,047★) last
+pushed **2024-10-27**; `nerfstudio-project/nerfstudio` (Apache-2.0, 12,264★) last pushed
+**2025-07-29** while its own `gsplat` component stays current — the framework is slowing and the
+component is not. The only permissive, active 4D production pipeline is
+`ASU-NEM-Labs/open4dgs-core` at **161★**.
+
+**Unverifiable from this session, recorded as such.** `gitlab.freedesktop.org` is refused by the
+egress proxy (HTTP 403), so **Monado** — the leading open OpenXR runtime — is **not investigated**
+rather than absent. `videolan/x265`, the open MV-HEVC multiview path, has a GitHub mirror **last
+pushed 2023-09-11**; canonical development is at VideoLAN and must be verified there.
+
+---
+
 ## 2026-11-26 — pass 20: investigative-journalism & source-protection infrastructure (**40 slugs probed, 40 resolve, 0 absent; 1 rename redirect, 4 licence files read, 2 oracle corrections**)
 
 **Infrastructure recorded this pass** (platform and substrate repos; the agent/skill layer is in

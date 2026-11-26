@@ -2059,3 +2059,89 @@ product is the audit trail, and it is sellable precisely because the policy alre
 > resolves from this session (DNS failure, verified by probe), so none was read at source. Treat
 > every number here as **reported, not verified**, and re-check before putting one in a client
 > deliverable.
+
+---
+
+## The spatial, immersive & volumetric plane — trends measured 2026-11-26 (pass 21)
+
+### 1. The research licence, not the registry, is what gates this plane — and the market already routed around it
+
+Twenty passes of this KB converged on a law about content: the regulator creates the obligation and
+the **licence of the knowledge content** decides whether open source can discharge it. This plane has
+no registry and no membership body, and it is still gated — at the **origin**. The reference
+implementation of 3D Gaussian splatting (`graphdeco-inria/gaussian-splatting`, **24,564★**) is
+research-and-evaluation-only under the Inria/MPII **Gaussian-Splatting License**, with commercial use
+by explicit consent through tech transfer. `NVlabs/instant-ngp` (**17,604★**) is non-commercial under
+the NVIDIA Source Code License.
+
+The resolution was reimplementation, and it worked: `nerfstudio-project/gsplat` is Apache-2.0 and is
+why a 3DGS engagement is legal at all. But it carries **5,961★ — 24% of the stars of the repo it
+replaces.** The trend to state plainly: **in this plane popularity and usability are inversely
+correlated**, because the famous artefact is the paper's code and the usable one is the clean-room
+rewrite. Every tool that ranks by stars gets this exactly backwards.
+
+### 2. A new licence shape is appearing: permissive with a pre-use registration gate
+
+`zju3dv/EasyVolcap` and `zju3dv/EasyMocap` carry **Project Registration License (PRL) v1.0**,
+copyright 2026. Commercial and organisational use is **free and allowed**; what is required is
+**registration of each distinct project before use begins**, by form, with no fee and no approval
+step. No patent grant. GitHub renders it `NOASSERTION`.
+
+Two things make this a trend worth watching rather than a curiosity. First, it is **invisible to the
+entire compliance toolchain** — no SPDX identifier, no badge, no SBOM scan of the source tree can
+express "register before you start", so it can only be caught by reading the file, and it must be
+handled in engagement setup rather than in CI. Second, it is a **rational response by research labs**
+to the Inria problem: it preserves commercial adoption while giving the lab the one thing a
+non-commercial licence was really buying them, which is knowing who is using their work. If it
+spreads, the binary "permissive vs copyleft vs non-commercial" taxonomy this KB has used for twenty
+passes acquires a fourth column.
+
+### 3. The dormancy is on the time axis, and that is exactly where the product is
+
+Measured, not assumed:
+
+| Layer | Best permissive option | Stars | HEAD | State |
+|---|---|---|---|---|
+| Static capture (SfM) | `colmap/colmap` (new BSD) | 13,302★ | 2026-11-26 | Healthy |
+| Static splatting | `nerfstudio-project/gsplat` (Apache-2.0) | 5,961★ | 2026-09-19 | Healthy |
+| Static splatting, CUDA-free | `ArthurBrussee/brush` (Apache-2.0) | 5,392★ | 2026-11-23 | Healthy |
+| **Temporal / 4D capture** | `hustvl/4DGaussians` (Apache-2.0) | 4,047★ | **2024-10-27** | **Dormant 25 months** |
+| **Temporal / 4D production** | `ASU-NEM-Labs/open4dgs-core` (MIT) | **161★** | 2026-11-21 | Active, tiny |
+| Headset delivery | `three.js` (MIT) / `godot` (MIT) | 119,448★ / 120,865★ | 2026-11-26 | Enormous |
+
+The industry can photograph a static scene and can deliver to a device. **The layer that converts 3D
+photography into volumetric video — time — collapses to 161 permissive, active stars.** Everything the
+market narrative calls "volumetric video" sits on that 161. This is the plane's single most sellable
+measurement and it is **falsifiable**: if `4DGaussians` is revived or `open4dgs-core` passes ~1,000★
+within two quarters, the finding expires and should be rewritten rather than defended.
+
+### 4. Standards bodies ship specs without licence grants — now confirmed across two industries
+
+`KhronosGroup/glTF` (7,907★), `CesiumGS/3d-tiles` (2,653★),
+`KhronosGroup/glTF-Sample-Assets` (1,180★) and `needle-tools/needle-engine-support` (613★) have **no
+licence file at the repo root** — 404 across thirteen filenames and both branches, with `README.md`
+returning 200 and a positive control passing, so the naming-convention false negative is ruled out.
+Pass 5 found the same thing in `rslstandard/rsl`, the repo of a licensing standard. Two industries,
+same shape: **the artefacts whose entire purpose is interoperability are the ones shipped without
+terms.** Operational rule: cite the published specification, never the spec repository, and never let
+a dependency scanner's reading of these repos stand as the answer in a client licence table.
+
+### 5. Vendor identity has stopped predicting licence terms
+
+NVIDIA ships `instant-ngp` (17,604★, non-commercial, slowing) and `nv-tlabs/3dgrut` (2,515★,
+**Apache-2.0**, pushed 2026-11-06) in the same plane. The newer, permissive one is the smaller one.
+Google shipped `three-live` (Apache-2.0) **this month** as an explicitly "AI-first" 3D runtime,
+compiling generated Three.js into glTF, USDZ and WebXR — a bet that spatial assets will be generated
+rather than authored. The practical consequence is a method rule, not a market opinion: **read the
+licence file on every repo, every pass**; a remembered vendor policy is now a liability.
+
+### 6. The delivery format for spatial video is proprietary where it matters
+
+Spatial/immersive video's consumer format is MV-HEVC. Open tooling reaches it only through x265's
+multiview encoder plus an ffmpeg remux (GitHub mirror of x265 is GPL-2.0 and **last pushed
+2023-09-11**; canonical development is at VideoLAN), and small project-level efforts whose own authors
+note that headset playback is untested. The first **live** MV-HEVC broadcast encoder announced in 2026
+is **proprietary** (SpatialGen, AWE USA). Meanwhile the ISO/IEC reference software for volumetric
+point-cloud compression, `MPEGGroup/mpeg-pcc-tmc2`, is BSD-licensed text that **explicitly grants no
+patent rights** and has 177★. So: capture is open, carriage is patent-encumbered. Any "end-to-end
+open volumetric pipeline" claim should be refused at the delivery step.

@@ -758,6 +758,42 @@ capability-equivalent permissive chain exists and is current — `huridocs/uwazi
 **Informed gap:** no US-specific open fact-checking deployment was found. The one non-trivial open
 system, `DEFAME` (Apache-2.0), is from a European research lab and dormant since 2025-09-30.
 
+**Pass 21 (2026-11-26) — the spatial, immersive & volumetric plane.** North America is the revenue
+centre of this plane and the sources disagree on by how much: one analyst puts the region at
+**36.37% of 2026 XR revenue**, another at **~41% for 2025**. Consumer depth is the more useful
+number and it is modest — one 2026 industry report has **48% of US consumers having tried VR but
+only 13% of households owning a headset** — so the near-term buyer is enterprise and production, not
+consumer reach. AWE USA 2026 (Long Beach) is the region's anchor event, with Snap, Qualcomm and
+XREAL as the named hardware actors.
+
+**Regulation: there is effectively none specific to XR.** No federal statute reaches immersive
+capture or spatial telemetry. The only identified federal instrument is the **Leadership in Immersive
+Technology Act of 2024**, which would establish an Immersive Technology Advisory Panel; its current
+legislative status could not be confirmed from available sources and should be treated as
+unverified. What binds in practice is state privacy law over biometric-adjacent data — eye tracking,
+gaze, hand and body geometry — which is why a US engagement's governance work is a data-minimisation
+argument rather than a compliance filing.
+
+**Opportunity, specific to this region: the open delivery gap under a proprietary format.** The
+consumer format for spatial video is MV-HEVC, and the first **live** MV-HEVC broadcast encoder
+announced in 2026 — SpatialGen, launched at AWE USA — is **proprietary**. Open tooling reaches the
+format only through x265's multiview encoder plus an ffmpeg remux, and the GitHub mirror of x265 was
+**last pushed 2023-09-11**. Meanwhile the ISO/IEC volumetric codec reference, `mpeg-pcc-tmc2`, is BSD
+text that **grants no patent rights** and has **177★**. For a US client that means the capture side
+can be assembled from permissive parts and the carriage side cannot: the sellable work is the
+**capture-to-controlled-client pipeline** (splats over HTTP into a managed app), with codec licensing
+priced explicitly rather than assumed away.
+
+**Second opportunity: the licence-cleanliness play, sharper here than in any other plane.** US
+enterprise procurement runs the deepest open-source legal review of any region, and the stack a
+competitor will arrive carrying in this plane is **not merely copyleft — it is research-only**. The
+default citation, `graphdeco-inria/gaussian-splatting` (24,564★), is usable for research and
+evaluation only; `NVlabs/instant-ngp` (17,604★) is non-commercial. The capability-equivalent
+permissive chain exists and is current — `gsplat` (Apache-2.0), `brush` (Apache-2.0, pushed
+2026-11-23), `supersplat` (MIT), `3dgrut` (Apache-2.0), `colmap` (new BSD), `glTF-Transform` (MIT),
+`model-viewer` (Apache-2.0), `OpenXR-SDK` (Apache-2.0) — and Pattern 44 is wired entirely from it.
+Being able to say "no copyleft, no research licence, no registration gate" is the differentiator.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1598,6 +1634,44 @@ agent layer, which is a credible door into the EBU membership.
 session, so the Future Newsrooms and imec-SMIT figures above are **from search snippets, not read at
 source**. Treat as reported, not verified.
 
+**Pass 21 (2026-11-26) — the spatial, immersive & volumetric plane.** EMEA is the only region where
+immersive telemetry is **already constrained by binding law**, and that is this region's commercial
+story. **Regulation (EU) 2024/1689 (the AI Act), in force since 2024-08-01**, prohibits emotion
+recognition in workplaces and educational settings and certain biometric categorisation. XR is the
+technology that reads exactly those signals continuously: eye tracking, gaze dwell, gesture and body
+geometry are not optional extras in a headset, they are how it works. European analysis of the Act
+states its implications for XR directly, and policy alignment work ties it to the **EU Virtual Worlds
+Strategy** and the **European Accessibility Act**, funded through Horizon Europe and the DIGITAL
+Europe Programme.
+
+No XR-specific European rule was identified as adopted or amended during 2026 — stated as a finding,
+not a gap in searching. The constraint is the AI Act plus GDPR, applied to a device class that
+happens to be a biometric sensor array.
+
+**The region's institutional presence is real and verifiable.** `overte-org/overte` (Apache-2.0,
+pushed 2026-11-23) is governed by **Overte e.V., a German registered association** — the only
+EMEA-domiciled open immersive platform found in this pass, and the third custodian of a codebase whose
+copyright headers run High Fidelity (2013–2019) → Vircadia/DigiSomni (2019–2022) → Overte e.V.
+(2022–2026). Khronos runs **UnitedXR Europe in Brussels, 7–9 December 2026**, with OpenXR positioned
+as the vendor-neutral substrate; **Immersive Tech Week (Rotterdam)** and **XR Expo (Stuttgart)** are
+the other recurring venues.
+
+**Opportunity, specific to this region: the telemetry-minimising capture and playback profile.** In
+NA the data-minimisation argument is a prudent choice; in EMEA it is a legal requirement with a
+named instrument behind it. No open project found in this pass implements gaze/gesture minimisation
+as a configurable profile — the engines expose the sensors and leave the policy to the application.
+The product is therefore a **documented, auditable XR telemetry profile** built on
+`KhronosGroup/OpenXR-SDK` (Apache-2.0), with on-device landmark processing via
+`google-ai-edge/mediapipe` (Apache-2.0) so that raw biometric streams never leave the headset, and
+evidence output a DPO can file. The same argument that made pass 8's rights-reservation work sellable
+in EMEA applies here: **whoever has written the policy has committed to being able to evidence it.**
+
+**Second opportunity: accessibility, already a statutory hook here.** The European Accessibility Act
+is named in the same alignment work as the AI Act, and this KB already holds an accessibility plane
+(pass 3). Immersive content has no established accessibility conformance practice — captioning,
+audio description and comfort/motion mitigation in a 3D scene are unsolved in the open stack. EMEA is
+the only region where that gap has a legal lever attached to it.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -2394,6 +2468,44 @@ and the ACMA report's contents are **from search snippets, not read at source** 
 report directly before putting that number in a client deliverable. No APAC-specific open
 source-protection or fact-checking project was found; the tools deployed in the region are built
 elsewhere, which is itself the regional gap.
+
+**Pass 21 (2026-11-26) — the spatial, immersive & volumetric plane.** APAC is the growth region on
+every source consulted: one analyst projects a **~41% CAGR for 2027–2032**, the fastest of any
+region, against North America's larger current base. Regional volumetric-video figures are smaller
+and more concrete than the global ones: **USD 1.16B (2025) rising to USD 1.52B (2026)** for APAC, with
+country-level 2026 estimates of roughly **USD 0.381B (China)**, **USD 0.323B (Japan)** and
+**USD 0.202B (India)**. These come from market-research summaries and do not reconcile with the global
+totals, so use them for relative weight, not as absolutes.
+
+**Country roles, as reported.** **China**: volumetric activity attached to 5G build-out, live
+commerce, virtual influencers and smart-venue experiences — the highest-volume applied market.
+**South Korea**: strong 5G penetration, esports, virtual production and immersive broadcasting
+readiness, with continued **government-backed spatial-computing development** cited for 2026.
+**Japan**: demand tied to gaming, entertainment and creator tooling, with public programmes (the MITOU
+programme recognised XR projects in 2025) as a funding route.
+
+**Regulation: little published, and that is the finding.** No XR-specific statute in any APAC market
+surfaced in this pass's searches. What is documented instead is **government funding and industrial
+policy** as the lever — China and Japan supporting immersive development through programmes rather
+than rules. The practical consequence for a proposal is the inverse of EMEA: the asset is not a
+compliance profile but **alignment with a funded programme**, and the buyer is often a
+public-private consortium rather than a studio.
+
+**Opportunity, specific to this region: the temporal layer, built where the capture volume already
+exists.** APAC has the live-commerce and virtual-influencer volume that makes a moving-subject capture
+pipeline economically rational, and this is precisely the layer the open stack does not serve:
+`hustvl/4DGaussians` (Apache-2.0, 4,047★) has been **dormant since 2024-10-27**, and the only
+permissive active 4D production pipeline, `ASU-NEM-Labs/open4dgs-core` (MIT), stands at **161★**. A
+regionally-built 4D pipeline on a permissive base — Pattern 45 — has a clearer buyer here than
+anywhere else, and Korea's virtual-production and immersive-broadcasting capacity is the natural
+delivery partner.
+
+**Informed gap.** The strongest 4D research codebase in the plane, `zju3dv/EasyVolcap`, and its
+companion `zju3dv/EasyMocap`, are **APAC-origin** (Zhejiang University) and carry the new **PRL v1.0**
+registration gate. If this licence shape spreads among Chinese and Japanese university labs — which
+is plausible, since it preserves commercial adoption while telling the lab who its users are — then
+**APAC becomes the region where the registration step is a routine part of engagement setup**. Watch
+for it; it is currently one lab.
 
 ### LATAM
 
@@ -3235,6 +3347,48 @@ was found**, at any star level, despite LATAM being the most streaming-committed
 plane. The region is a buyer here, not a producer of this tooling — which is the commercial argument
 for Globant building it regionally rather than integrating something that already exists.
 
+**Pass 21 (2026-11-26) — the spatial, immersive & volumetric plane.** LATAM is a buyer and a
+production location in this plane, not a producer of the tooling. The regional anchor is concrete and
+dated: the **Virtual Production LATAM Summit runs 11–13 December 2026 at 555 Studios, São Paulo**.
+Regional overviews place **Mexico, Colombia, Brazil, Chile and Argentina** as the markets expanding
+virtual-production capacity, supported by **government incentives and international co-production
+treaties** — the same incentive machinery this KB recorded for the production plane in pass 6, now
+pointed at LED volumes and 3D capture.
+
+**Figures, with their confidence stated.** One consultancy puts South American immersive
+entertainment at **~USD 1.8B for 2026**; the methodology is not published and the figure should not be
+quoted to a client without a primary source. Location-based VR is the one segment with named, dated
+events: **Mixtou and Hopi Hari opened a dedicated VR area in January 2026**, with a reported plan of
+60 new units in Brazil over five years. Volumetric video specifically is described across sources as
+**early and gradual** in the region, with no country-level detail available.
+
+**A caveat that changes how the Mexico evidence should be used.** The strongest-sounding Mexican
+claims in this plane come from **vendor self-description** — a Mexico City studio describing itself as
+the country's leading immersive studio with a 60 m² LED volume. That is a real capability signal but
+not independent evidence, and Brazil's evidence base is materially stronger than Mexico's. Treat
+Mexico as under-measured rather than as the second market by default.
+
+**Opportunity, specific to this region: capture-for-export, on a licence-clean base.** The regional
+logic that made virtual production work here — skilled crews, incentives, co-production treaties, cost
+differential against US production — applies identically to 3D and volumetric capture, which is more
+labour-intensive and less capital-intensive than an LED stage. A **LATAM capture service producing
+permissively-licensed splat and 3D assets for NA and EMEA clients** is the most direct offer in this
+plane, and Pattern 44 is the delivery spine: COLMAP (new BSD) → gsplat or brush (Apache-2.0) →
+SuperSplat (MIT) → glTF-Transform (MIT) → model-viewer (Apache-2.0). Because the whole chain is
+permissive, the asset can be handed to a client in any jurisdiction without a licence negotiation —
+which is exactly what a research-licensed pipeline cannot do.
+
+**Second opportunity: the LBE venue as the repeatable unit.** As in pass 19's sports finding, the
+regional product is not one enterprise platform but **the same deployment sold many times**: a venue
+capture-and-playback stack built once on Hubs Community Edition (MPL-2.0) or Godot (MIT) and installed
+per site, against a named pipeline of new VR locations.
+
+**Informed gap, stated explicitly: no LATAM-origin open-source project in this plane surfaced in any
+of this pass's 71 repository probes**, at any star level. Every permissive component in Patterns 44
+and 45 originates in North America, EMEA or APAC. The region is a buyer and a capture location here,
+which is the commercial argument for Globant building the regional capability rather than integrating
+something that already exists locally.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -3633,3 +3787,39 @@ session — every figure and date in this section comes from **search snippets, 
 The SiPreBA/Böll report was not read. No LATAM-built open source project in this plane was found: as
 in APAC, the tools are built in North America and Europe and deployed here, and that asymmetry is
 itself the regional finding.
+
+## Market size — pass 21 addendum (2026-11-26): volumetric video, and the widest source spread in this KB
+
+The volumetric-video segment has the **worst source agreement of any figure this KB has recorded** —
+worse than pass 12's dubbing spread, because here the sources disagree on the *same base year*:
+
+| Source framing | 2026 base | Forecast | Implied CAGR |
+|---|---|---|---|
+| Market-research release, July 2026 | **USD 3.21B** | USD 7.01B by **2032** | **13.27%** |
+| Second analyst | **USD 4.67B** | USD 13.87B by **2030** | **31.3%** |
+| Third analyst | not given | — | **23.2%** (2026–2035) |
+
+The two base-year figures are **45% apart** and the CAGRs differ by a factor of **2.4**. A single
+number from this segment cannot be defended, so **do not put one in a deck**. What can be defended is
+the direction and the mechanism: every source names the same cost lever — **AI reconstruction reducing
+the camera count**, with Gaussian splatting cited explicitly as what makes capture cheaper. Claims of
+specific rendering-speed gains (~39–40%) appear only in vendor-style market blogs with no primary
+technical source and should not be repeated.
+
+**The regional split is also contested**, though less wildly: North America is given as **36.37% of
+2026 XR revenue** by one analyst and **~41% of 2025** by another, with APAC projected fastest-growing
+at **~41% CAGR (2027–2032)**. APAC volumetric is put at **USD 1.16B (2025) → USD 1.52B (2026)**, which
+does not reconcile with either global total.
+
+**The one figure this pass will stand behind** is not a market size at all, because it was measured
+rather than modelled: **the permissive, actively-maintained open-source capacity for *temporal* 3D
+capture is 161 stars** (`ASU-NEM-Labs/open4dgs-core`, MIT, pushed 2026-11-21), while the Apache-2.0
+alternative with 4,047★ has been dormant since **2024-10-27** and the field's most-cited
+implementation (24,564★) is **research-licensed**. Whatever the volumetric market is worth in 2026,
+the open substrate underneath the word "volumetric" is that thin — and that gap, not the forecast, is
+the commercial argument.
+
+**Consumer-depth reality check, for any deck that opens with headset growth:** one 2026 industry
+report has **48% of US consumers having tried VR and 13% of households owning a headset**, and a
+separate analysis describes headset adoption as **behind schedule** — which is the counterweight to
+every CAGR above.

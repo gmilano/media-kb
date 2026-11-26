@@ -9,6 +9,45 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 16: the avails, windowing & distribution-rights plane (an agent layer **born in one quarter, adopted by nobody**)
+
+### A new shape: six agents, all permissive, all at zero
+
+Fourteen passes found agent layers that were *absent*. Pass 15 found one that was *vendor-captured*. This
+plane has the third shape: **the agent layer exists, is cleanly MIT/Apache licensed, and has no users.**
+
+| Agent | Repo | Stars | Licence | Created | Last push |
+|---|---|---|---|---|---|
+| evangeline-legal-agent | falcoschaefer99-eng/evangeline-legal-agent | 3* | Apache-2.0 | 2026-06 | 2026-06-30 |
+| Rights-Clearance-Scanner | IBR4H33M/Rights-Clearance-Scanner | 0* | MIT | 2026-09-06 | 2026-10-12 |
+| soundwave_cue_sheet_palooza | lucylow/soundwave_cue_sheet_palooza | 0* | MIT | 2026-09 | 2026-09-16 |
+| screenplay-clearance-agent | Priyanka-Purushotham5/screenplay-clearance-agent | 0* | MIT | 2026-09 | 2026-09-09 |
+| cueclear | buildwithtolu/cueclear | 0* | MIT | 2026-08-21 | 2026-09-09 |
+| rights-clearance-scout | nawaltahir/rights-clearance-scout | 0* | MIT | 2026-08 | 2026-08-22 |
+
+**Every one was created between June and October 2026.** That is not a trend line, it is a single
+quarter's worth of simultaneous attempts at the same problem, with no survivor yet. Zero stars at three
+to five months is unvalidated code, not early code.
+
+**What they all do, and what none of them does.** All six do *discovery* — scan a screenplay, sweep a
+trademark register, derive a cue sheet from an edit. **None evaluates an availability window and none
+computes a payment.** The agent layer stopped exactly where this KB's structural law predicts it
+stops: at the judgment steps that carry liability.
+
+**Falsifiable prediction, recorded for scoring.** By **2027-05-31**, either one of these six exceeds
+**25 stars**, or the 2026-Q3/Q4 clearance-agent cohort is confirmed abandoned. A later pass should check
+and write down which.
+
+**Best-shaped of the six:** `cueclear`, because it ingests an **EDL/XML** — an artefact that genuinely
+falls out of a locked edit — instead of asking a human to describe the problem in prose. Prior art for a
+design, not a dependency.
+
+**Method note carried forward.** `rights clearance` returns 40 repos in total; the remainder are one
+author's duplicated workbench (`williamsahoo1`, three slugs, no licence) and a false friend
+(`draron-dare-045/Final_Rights` — secondary-school certificate clearance in Kenya). The six rows above
+are all that survive reading the results.
+
+
 ## 2026-11-26 — pass 15: the out-of-home, signage & retail-media plane (the agent layer is **present but vendor-captured** — a new shape)
 
 ### The agent layer exists, and that is the bad news — a shape not seen in fourteen prior passes

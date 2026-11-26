@@ -2181,3 +2181,87 @@ Four checks, each of which caught a real error this pass:
 4. **Read every star count.** `topic:dooh` has 35 repos and four of this plane's genuinely relevant
    transaction repos have **0 stars**. Permissive plus pushed-today plus zero stars means *read it*,
    never *depend on it*.
+
+## The avails, windowing & distribution-rights plane — patterns from pass 16 (2026-11-26)
+
+These three recipes are the first in this KB for a plane with **no vertical platform to extend**. They
+are built from a licensed anchor (`MovieLabs/mddf`, MIT) plus horizontal engines, and each one names the
+step where open source runs out.
+
+### P16.1 — The avails ingest gate: stop bad availability data at the door
+
+**Problem.** A distributor receives EMA Avails sheets from dozens of licensors in inconsistent shape.
+Bad avails cause the two most expensive errors in distribution: a title published where it has no rights
+(legal exposure) and a title withheld where it does (lost revenue, and nobody notices for months).
+
+**Wiring.**
+1. **Validate** the incoming Avails file with `MovieLabs/mddf` (MIT, 38*). It is Java; run `mddf-lib` as
+   a service behind a thin HTTP wrapper. This is a *conformance* check against the published MDDF
+   schemas — use it before any parsing of your own.
+2. **Normalise** validated records into OMC entities using `MovieLabs/OMC` (Apache-2.0, 35*) as the
+   ontology, and `survos/omc` (MIT) for ready-made 2.8 DTOs and schema validation if it proves alive.
+   Join each avail to a title identity; note from pass 5 that EIDR has **no open client**, so title
+   identity resolution stays a manual or vendor step — do not promise automation here.
+3. **Decide** with `open-policy-agent/opa` (Apache-2.0, 12529*). One Rego package per question:
+   `avails.permitted(title, territory, date, deal)`. Keep the window arithmetic in Rego, not in
+   application code, so a rights analyst can read and a test suite can cover it.
+4. **Report** exposure in `apache/superset` (Apache-2.0): titles live outside a window, windows expiring
+   in 30 days, territories with no avail on a licensed title.
+
+**Where it runs out.** Step 3's *engine* is free; the *policy model* does not exist in open source and is
+the actual deliverable. Budget it as modelling work with a rights analyst, not as configuration.
+Validate the estimate against `MovieLabs/mddf`'s own limit: it checks conformance, never commercial
+sense — a perfectly valid Avails file can assert a window your deal does not grant.
+
+**Licence note.** Anchor is MIT, engines Apache-2.0. This pattern is clean for a client deliverable.
+
+### P16.2 — The AVMSD Article 13 catalogue-composition reporter (the EMEA asset)
+
+**Problem.** Every VOD service in the EU must secure **≥30% European works in its catalogue and give
+them prominence**. The Commission's 2020 guidelines count by **total number of titles**, and require the
+30% to hold **in each national catalogue** of a multi-country provider — not as a group average. Most
+providers answer this question with a spreadsheet and an annual scramble.
+
+**Wiring.**
+1. Take the catalogue from the ingest gate of P16.1 — avails already carry territory, so national
+   catalogues are derivable rather than guessed.
+2. Classify each title as a European work. **This is the judgment step**: the qualifying test is about
+   production origin and is not a lookup. Use `MovieLabs/OMC` participant and organisation entities to
+   hold the provenance you will need to defend, and keep the classification auditable per title.
+3. Compute share per national catalogue by **title count**, matching the Commission's method. Publish in
+   `apache/superset` with the per-country breakdown and a documented trail for each classification.
+4. Add the prominence half, which most implementations skip: evidence of *placement*, not just presence.
+5. Extend the same report to LATAM if Brazil's PL 8.889 passes — a ~10% Brazilian-title quota with half
+   from independent producers is the identical computation with different constants.
+
+**Why this is sellable.** The obligation is in force in 17 Member States (COM(2024)261, 2020–21 reference
+period), it is measurable, and there is a **published measured gap**: European works are ~30% of
+catalogues but only ~25% of *consumption* (EU works 28%, UK adding 9%). A provider meeting the catalogue
+duty while missing on consumption has a prominence problem it can be shown on a chart. Nothing open
+source computes this today.
+
+**Honest limit.** The classification test drives the whole number and is contestable. Ship it as
+*auditable*, never as *authoritative*, and keep the per-title trail — the defensibility is the product.
+
+### P16.3 — The clearance-agent gate, with the human signature made structural
+
+**Problem.** Music and rights clearance on a locked edit is slow, and six open agents now attack it.
+All six are at zero stars and none should be trusted with a clearance decision.
+
+**Wiring.**
+1. Take the **EDL/XML** from the edit as input — the artefact `buildwithtolu/cueclear` (MIT) already
+   expects, and the reason it is the most credibly shaped of the six.
+2. Run extraction to a **draft** cue sheet. Treat every row as a *candidate*, with a confidence and a
+   source for each cue.
+3. Cross-check against rights registries. Pass 5's finding binds here: ISRC/ISWC/CWR have no usable open
+   implementation, so this step is a vendor or manual lookup. Do not design it as automated.
+4. **Require a named human signature** on the cue sheet before it leaves the system, stored as part of
+   the record. Not a review queue that can be bulk-approved — a per-sheet attestation.
+5. Settlement is out of scope by measurement, not by choice: there is **no** open residuals or royalty
+   engine (`residuals calculation film` = 0 repositories). Hand off to the client's existing system.
+
+**Why the signature is structural rather than procedural.** Clearance is a liability transfer. An agent
+that reduces research time by 70% and introduces one unsignalled miss per hundred cues is *negative
+value*, because the miss surfaces as an infringement claim after distribution. The signature is what
+makes the speed-up safe to sell, and it is also what keeps the pattern honest about the gradient: this
+recipe automates discovery and leaves judgment exactly where the open source leaves it.

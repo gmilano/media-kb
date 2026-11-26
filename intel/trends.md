@@ -1685,3 +1685,62 @@ treated as a cheap regression check, not as a source of findings.
 9. **The agent layer is forming as vendor adapters.** See the measured table in `agents/top.md`: of
    14 `signage mcp` repos, the identifiable ones bridge to closed SaaS CMSs. The window to define a
    neutral abstraction is open **now** and will close as those adapters accumulate users.
+
+## The avails, windowing & distribution-rights plane — trends measured 2026-11-26 (pass 16)
+
+### The industry-wide framing for 2026, and why this plane contradicts it
+
+The analyst consensus for 2026 is that adoption is settled and value capture is the open question.
+Akamai's *State of AI in Media 2026* puts it as: AI adoption is no longer the question; the challenge is
+turning widespread experimentation into business value. TVBEurope's year-ahead roundup calls 2026 "very
+much the era of agentic AI". TV Tech predicts the generative "shiny object" phase gives way to scaling
+across the enterprise, with **several false starts in agentic advertising** and creative production as
+the first genuine breakthrough. Deloitte's 2026 outlook links more than half its predictions to AI.
+
+**This plane inverts that framing, and the inversion is the finding.** Here the agent layer did not
+mature — it was *born*, all at once, in 2026-Q3/Q4, and has **zero users**. Six rights-clearance agents,
+every one created between June and October 2026, every one still at 0 stars except one at 3. "Agentic AI
+is scaling" is true of production and advertising; in rights it is not yet true of a single repository.
+
+### Three trends with evidence, and one measured non-trend
+
+**1. Clearance is being attacked from the research end, not the decision end.** All six 2026 agents do
+*discovery* — scan a screenplay, scan a trademark register, derive a cue sheet from an EDL. None makes
+an availability decision and none computes a payment. That is consistent with where LLMs are actually
+strong, and it predicts where the open layer will keep stopping: judgment steps that carry liability.
+
+**2. Content identification standards keep arriving without implementations — and 2026 added another
+instance.** Pass 5 established that ISRC, ISWC, ISAN, EIDR and CWR have no usable open implementation
+because what is scarce is *registry assignment*, not parsing. This plane adds the distribution-side
+proof: the **EMA Avails** interchange has four open implementations and **three of the four are dormant**
+(2016, 2017, 2023). The one maintained authoring tool found (`UltimateAvailMaker`, pushed 2026-11-12) has
+**no licence**. Standards activity and code activity have decoupled in this plane for a decade.
+
+**3. The regulatory direction of travel is toward catalogue composition as a measurable duty.** EMEA
+already requires it (AVMSD Art. 13, ≥30% European works, counted by title and enforced per national
+catalogue). Brazil's PL 8.889/2017 would add a ~10% national quota. Both turn "what is in my catalogue,
+by territory" from a commercial question into a **reportable** one. That is the trend most likely to
+create budget in this plane, because a report is a deliverable with a deadline.
+
+**4. The measured non-trend: settlement.** `residuals calculation film` = **0 repositories**.
+`film royalty statement` = **1**, off-topic. Pass 8 measured the music half of the same hole
+(`music royalty accounting` = 14 results, top six summing to **0 stars**). Two passes, two years of
+GitHub, and the film/TV settlement layer has produced nothing at all. There is no emerging trend here to
+watch; there is an absence to stop re-checking hopefully. If a client needs residuals, that is bespoke
+work, and this KB should say so in the first meeting.
+
+### What to watch, with dates
+
+- **The French `chronologie des médias` litigation.** Windows are statutory in France and tiered by
+  investment commitment; Netflix and Prime Video have gone to court seeking alignment to 12 months. The
+  current month values are **disputed across sources** (see `intel/market.md`, EMEA). A resolution would
+  be the first court ruling anywhere on a *legally mandated* release window, and it either entrenches or
+  dismantles the only jurisdiction where a window engine must encode statute rather than contract.
+- **Brazil's PL 8.889-C/2017 in the Senate.** Approved by the Chamber of Deputies 2025-11-05. Enactment
+  would make LATAM the second region with a machine-checkable catalogue-composition duty.
+- **The Commission's AVMSD evaluation.** Industry submissions on revising Art. 13 are in (CCIA,
+  DIGITALEUROPE arguing for technology-neutral horizontal rules instead of sector-specific expansion);
+  no outcome confirmed. A revision changes the counting method, which changes every compliance report
+  built against it.
+- **`survos/omc`** — created 2026-11-24, MIT, OMC 2.8 DTOs. One day old when measured. If it is alive in
+  three months it is the first new permissively-licensed entrant in this plane since 2023.

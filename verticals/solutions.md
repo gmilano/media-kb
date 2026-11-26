@@ -919,3 +919,73 @@ has Odoo — each a permissive, decade-old, deployable platform. Out-of-home *do
 in **Concerto** (Apache-2.0, 2008, pushed today), and almost nobody names it, because the search
 results and the comparison blogs lead with Anthias and Xibo, which are the two least licence-friendly
 options in the plane. **That gap between what ranks and what is usable is itself the finding.**
+
+## The avails, windowing & distribution-rights tier — measured 2026-11-26 (pass 16)
+
+**The headline for a studio engagement: there is no open-source rights-management platform.** Not a weak
+one, not a dormant one — none. The systems that actually hold avails and deal terms in production are all
+proprietary: **FilmTrack**, **Whip Media**, **Rightsline**, **FADEL**, **Vistex**. A search for
+`content licensing rights platform` returns 11 repositories, whose on-topic entries are one GPL-2.0
+TypeScript DRM experiment at 1 star and a commercial product's marketing repo at 0.
+
+That changes the shape of the engagement. In every other plane in this KB the question is *which open
+platform do we extend*. Here the question is **what do we build beside the incumbent**, and the answer
+depends on its API surface.
+
+### The substrate you actually compose from
+
+Since no vertical platform exists, this plane is assembled from horizontal pieces. All verified
+2026-11-26:
+
+| Platform | Repo | Stars | Licence | Role in this plane |
+|---|---|---|---|---|
+| Open Policy Agent | https://github.com/open-policy-agent/opa | 12529* | Apache-2.0 | The window/territory decision engine. Rego expresses "title X, territory Y, date Z, deal D → permitted?" cleanly; this is the only credible answer to step 2 of the gradient |
+| Cerbos | https://github.com/cerbos/cerbos | 4669* | Apache-2.0 | Same role, policy-as-config rather than policy-as-code; easier to hand to a rights analyst who is not an engineer |
+| Apache Superset | https://github.com/apache/superset | 75692* | Apache-2.0 | Catalogue-composition reporting — the AVMSD 30% share, the Brazilian quota, window-gap exposure by territory |
+| ERPNext | https://github.com/frappe/erpnext | 41645* | GPL-3.0 | Where deal and settlement records would land if the client wants one system of record. GPL-3.0 — raise before designing |
+| Odoo | https://github.com/odoo/odoo | 56111* | **NOASSERTION** | Contract and subscription modules are the nearest ERP fit. Repo-level licence does not resolve to a single SPDX id; the community/enterprise split must be settled with counsel before it is proposed |
+| Metabase | https://github.com/metabase/metabase | 50557* | **NOASSERTION** | Alternative to Superset for analyst-facing avails reporting; same licence caveat — the open-core boundary is the risk, not the code |
+
+### Digital asset management: live, and not licensed for this
+
+Avails records point at assets, so DAM is adjacent. Two real systems are actively maintained, and
+**neither is usable under the MIT/Apache/BSD bar this KB works to**:
+
+| Platform | Repo | Stars/Forks | Licence as published | Last push |
+|---|---|---|---|---|
+| Phraseanet | https://github.com/alchemy-fr/Phraseanet | 276*/106f | **GPL, version unspecified** — its own `LICENSE` reads "Licensed under GPL license" with no version | 2026-11-25 |
+| ResourceSpace | https://github.com/resourcespace/resourcespace | 95*/29f | **Unresolved** — `license.txt` says only "Please see the documentation/licenses folder for all applicable licenses" | 2026-11-26 |
+
+Both are **NOASSERTION** on the GitHub API, and this pass establishes *why* in each case, which is the
+part a badge cannot tell you:
+
+- **Phraseanet names a licence family without a version.** "GPL" is not a licence; GPL-2.0-only and
+  GPL-3.0-or-later have materially different implications for a hosted deployment. An SBOM will happily
+  record "GPL" and a reviewer will happily approve it.
+- **ResourceSpace defers to a folder** — the compilation-owned licence pattern pass 8 recorded for
+  `acoustid/chromaprint`. The effective licence is the *union* of whatever is in that directory, and the
+  directory is not readable from an unauthenticated API call. Clone it and read the folder before
+  quoting a licence to a client.
+
+Open-source DAM built *specifically for media* is dead: `myabc/mediateca` (2015), `mymam/mymam` (2013),
+`jcftang/hydradam` — WGBH's own — (2012). Nothing since.
+
+### ⚠️ Kaltura's GitHub repositories no longer resolve
+
+`kaltura/server` and `kaltura/platform-install-packages` — for a decade the standard citation for "the
+open-source video platform" — both return **nothing from `git ls-remote`**. They are gone or no longer
+public.
+
+This KB has **never** cited Kaltura (checked: 0 mentions across all eight files), so there is nothing to
+correct. It is recorded here so that no future pass, reaching for the obvious open-source video platform
+from memory, writes a row that 404s. A decade-old reflex citation is exactly the kind of thing that
+survives in a model's memory long after it stops being true on disk.
+
+### Why "no vertical platform" is the sellable finding
+
+A client in this plane already owns FilmTrack or Whip Media and is not replacing it. The opportunity is
+**the layer beside it**: validated avails ingest, a window-decision service, and catalogue-composition
+compliance reporting. API Evangelist published independent public-API profiles for both
+`api-evangelist/filmtrack` (2026-10-30) and `api-evangelist/whip-media-group` (2026-11-01) — 0 stars, no
+licence, and not code, but they confirm the thing that matters commercially: **the incumbents expose
+public API surfaces**, so integration is a real design and not a hope.

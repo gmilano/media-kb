@@ -10,6 +10,61 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 16: avails & distribution-rights infrastructure (24 slugs checked, 22 resolve, 2 do not)
+
+### The anchor this KB had never named
+
+`MovieLabs` appeared **once** in 1.1 MB of KB before this pass. `MovieLabs/mddf` — **MIT, 38*/11f** — is
+the reference implementation for **Avails, CMM, MMC, MEC and AOD**, i.e. the interchange the entire
+title-licensing industry delivers to retailers. Confirmed from its own README's overview, not inferred.
+
+### Movement, dormancy and the two that do not resolve
+
+| Repo | Stars/Forks | Licence | Last push | Signal |
+|---|---|---|---|---|
+| MovieLabs/mddf | 38*/11f | MIT | 2025-12-19 | Anchor. **Push date flatters it** — own README tops out at "2023-Jul-2: v2.0.8 released" |
+| MovieLabs/OMC | 35*/6f | Apache-2.0 | 2026-02-07 | Live ontology, the production-side join target |
+| survos/omc | 0*/0f | MIT | 2026-11-25 | **Created 2026-11-24** — one day old when measured. OMC 2.8 DTOs. First new permissive entrant since 2023 |
+| MovieLabs/omc-util | 1*/0f | **NONE** | 2026-11-03 | Active, unlicensed |
+| MichaelBrandonFalk/UltimateAvailMaker | 0*/0f | **NONE** | 2026-11-12 | The **only maintained** avails authoring tool found — and unlicensed, so unusable |
+| MovieLabs/cmr-ratings | 1*/0f | **NONE** | 2026-06-17 | Common Metadata Ratings, active-ish, unlicensed |
+| thomas-shirley/ema-avails-generator | 0*/0f | Apache-2.0 | 2023-03-21 | Dormant 3 years |
+| playmoviespartner/emavalidator | 3*/2f | **NONE** | 2017-04-20 | Google Play's own Avails validator. Dormant 9 years, no licence |
+| pivotshare/avails | 1*/1f | MIT | 2016-10-31 | Dormant 10 years. Small, readable reference for the sheet format |
+| omi/RAIDAR | 21*/4f | MIT | 2021-01-12 | Berklee music-licensing platform. Dormant 5 years |
+| **kaltura/server** | — | — | — | ⚠️ **`git ls-remote` returns nothing.** Gone or no longer public |
+| **kaltura/platform-install-packages** | — | — | — | ⚠️ **Does not resolve either** |
+
+**The Kaltura note matters even though this KB never cited it** (checked: 0 mentions across all eight
+files). For a decade "the open-source video platform" meant Kaltura; that reflex survives in memory long
+after it stops being true on disk. Recorded so no future pass writes a row that 404s.
+
+### Two measured zeros and one record for false abundance
+
+- `residuals calculation film` → **0 repositories.**
+- `film royalty statement` → **1**, and it is a scripture-governance project.
+- `rights windowing` → **681 repositories, zero relevant.** Every hit is Microsoft Windows privilege
+  tooling (`gtworek/Priv2Admin` 2534*, `jborean93/PSPrivilege`, portable installers that avoid needing
+  "administrator rights on Windows").
+
+**681/0 is this KB's new record for false abundance**, beating pass 8's `isan` (1942/0) on
+*plausibility*: "rights windowing" is the industry's own term of art, so the query looks safe. **New
+rule:** when any noun in a query is also an OS, platform or language name (`windows`, `rust`, `go`,
+`swift`), the total is noise by construction — add a disambiguating industry noun or the search has told
+you nothing.
+
+### Licence-file probe, sixth confirmation that the badge is not the licence
+
+Run across `master` and `main` with the full six-name set that pass 8 corrected into this KB:
+
+- `Phraseanet` (276*/106f, active 2026-11-25) → `LICENSE` reads **"Licensed under GPL license"** with
+  **no version**. GPL-2.0-only and GPL-3.0-or-later differ materially for a hosted deployment.
+- `resourcespace` (95*/29f, active 2026-11-26) → `license.txt` says only *"Please see the
+  documentation/licenses folder for all applicable licenses."* The compilation-owned-licence pattern
+  pass 8 found in `acoustid/chromaprint`. Clone and read the folder.
+- Both show as **NOASSERTION** on the API. The badge was right to refuse; only reading the file says why.
+
+
 ## 2026-11-26 — pass 15: out-of-home & signage infrastructure (37 slugs checked, 36 resolve, 1 does not)
 
 ### Headline: the first plane in this KB where the open source is in the **screen** and the vacuum is in the **transaction**

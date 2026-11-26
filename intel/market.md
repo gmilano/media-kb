@@ -578,6 +578,43 @@ operational complexity.
 measurement implementation built against the IAB guide is the single most sellable asset in this
 plane, and NA is the only region where the specification to build against is already agreed.
 
+
+#### Avails, windowing & distribution rights — pass 16 (2026-11-26)
+
+**The incumbents are all North American, and none of them is open.** FilmTrack, Whip Media, Rightsline,
+FADEL and Vistex are the systems that hold avails and deal terms in production. There is no open-source
+competitor to any of them (see `verticals/solutions.md`). NA is therefore the region where the
+engagement is **integration beside an incumbent**, never replacement.
+
+**Confirmed integration surface.** API Evangelist published independent third-party profiles of the
+public API surfaces of `api-evangelist/filmtrack` (2026-10-30) and `api-evangelist/whip-media-group`
+(2026-11-01). Both are 0 stars with no licence and are **profiles, not code** — but they establish that
+these incumbents expose public APIs, which is what makes a side-by-side build designable rather than
+speculative.
+
+**The settlement layer here is contractual, not software, and that is a structural fact about NA.**
+Residuals are set by guild agreement — SAG-AFTRA and the WGA — and the recently negotiated Hollywood
+guild contracts now carry explicit AI terms (Chambers *Media & Entertainment 2026*, USA–New York trends).
+There is also state-level legislation protecting musicians from unauthorised AI voice clones. So the
+rules that decide what is owed are bargained, change on a contract cycle, and are not expressible as a
+stable schema. This is the clearest reason the settlement step of the gradient is a literal zero in open
+source: the spec itself is renegotiated every three years.
+
+**Regulation is otherwise light and that cuts against budget.** There is no federal AI statute bearing
+on distribution rights. Grant Thornton's 2026 media AI survey finds regulatory uncertainty is a *lower*
+concern in media (34%) than across sectors generally (44%). Unlike EMEA, NA has **no catalogue-composition
+duty** — nothing obliges a US VOD service to report what share of its catalogue is domestic. There is no
+compliance deadline to sell against.
+
+**EIDR is a North American institution with no open client** (established pass 5, unchanged). The
+canonical title registry for this plane is headquartered in the region and reachable only by membership.
+
+**Opportunity — ranked for NA.** The sellable asset is *not* compliance, it is **exposure control**:
+titles live outside their window, windows expiring unnoticed, territories licensed but unpublished. That
+is a revenue-and-liability dashboard built on P16.1, sold on money rather than on a deadline. It is a
+harder sale than EMEA's statutory report and a larger one, because it touches the catalogue of the
+companies that own the incumbents' biggest contracts.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1191,6 +1228,57 @@ regulatory regime. The sellable asset is a **privacy-by-construction measurement
 on-device, discard frames, emit aggregates, never form a biometric template — P15.4) plus per-city
 permitting workflow. Both are judgment work, which is exactly what has no open-source substitute.
 
+
+#### Avails, windowing & distribution rights — pass 16 (2026-11-26)
+
+**EMEA is the only region on earth where catalogue composition is a measurable statutory duty, and the
+only one where release windows are law rather than contract.** For this plane that makes it the strongest
+of the four regions by a wide margin.
+
+**AVMSD Article 13 — the duty, with its counting method.** Article 13(1) requires on-demand providers to
+"secure at least a 30% share of European works in their catalogues and ensure prominence of those works".
+The specifics that make it buildable:
+
+- The Commission's **2020 guidelines count the share by total number of titles** — not by hours, not by
+  catalogue value.
+- The 30% must hold **in each national catalogue** of a multi-country provider, not as a group average.
+  The Commission's stated view is that the objective "can only be effectively achieved if the 30% share
+  is secured in each of the national catalogues offered by multi-country VOD providers."
+- Article 13(2) permits member states to impose **financial contributions**, reaching services
+  established in another member state but targeting their audience.
+- Article 13(6) exempts providers with **low turnover or low audience**.
+- **17 Member States** had implementing measures in force during the 2020–21 reference period
+  (COM(2024)261).
+
+**The measured gap — the most sellable number in this plane.** European works are reported at roughly
+**30% of VOD catalogues but only ~25% of actual consumption**; a separate breakdown puts EU works at 28%
+of catalogues with UK works adding a further 9%. A provider can therefore satisfy the catalogue duty and
+still fail the *prominence* half, and the gap is demonstrable on a chart. Treat these as secondary
+reporting, not Commission data — but the shape of the gap is corroborated across sources.
+
+**France: the one jurisdiction where a window engine must encode statute.** The `chronologie des médias`
+fixes release windows by law, tiered by each platform's investment commitment to French production.
+⚠️ **The 2026 month values are disputed and this KB will not assert one.** Trade press places Netflix at
+15 months and Prime Video at 17 on grounds of insufficient investment in French cinema, and reports both
+platforms **litigating for alignment to 12 months**; a French observatory page states the SVOD window
+changed on **2026-01-01**, ending Netflix's 15-month position. Sources also conflict on the framework's
+origin (an interprofessional agreement of 2022-01-24 vs. one signed 2025-02-06, each made binding by
+ministerial order). **No official text was located from this session.** Verify against the **CNC** and
+**Légifrance** before quoting any number to a client. What is *not* in doubt: the windows are statutory,
+they are tiered by investment, and they are under active litigation.
+
+**Regulatory direction.** The European Parliament adopted its position on the AI Act Omnibus
+simplification proposal by **569 to 45**. DIGITALEUROPE is arguing for technology-neutral horizontal
+regulation rather than expanding sector-specific AVMSD rules; CCIA has filed recommendations for the
+Commission's AVMSD evaluation. An Art. 13 revision would change the counting method and therefore every
+compliance report built against it — watch this before committing to an implementation.
+
+**Opportunity — ranked first across all four regions.** An **auditable AVMSD Art. 13 catalogue-composition
+reporter** (P16.2). The obligation is in force, the counting method is published, the computation is
+mechanical, the per-title European-works classification is the defensible judgment layer, and **nothing
+open source computes it today**. France adds a second, narrower asset: a window engine whose rules are
+statutory, which is the only place that work can be sold as compliance rather than as operations.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1772,6 +1860,49 @@ compliance mode.
 **Opportunity.** Highest digital share plus the most fragmented regulation plus a 4× disagreement about
 market size means the buyer's first problem is *not* more screens — it is knowing what they own and
 what they may legally measure. A screen inventory and per-jurisdiction policy engine is the wedge.
+
+
+#### Avails, windowing & distribution rights — pass 16 (2026-11-26)
+
+**The regulatory picture makes a single compliance mode impossible, so the asset is a policy engine per
+jurisdiction.** Latham & Watkins (September 2026) finds "a significant acceleration in the enactment of
+AI regulation across the Asia-Pacific region" and sorts it into divergent categories: binding,
+risk-based frameworks with tiered compliance obligations (**South Korea**, **Vietnam**) versus targeted
+AI regulation (**China**). CX Network covers nine APAC countries separately, with **disclosure and
+labelling of generative AI** as a recurring theme. For this plane the consequence is concrete: a window
+and territory engine for APAC must be **multi-jurisdictional by construction** — one Rego package per
+country, not one compliance mode with country flags. That is a design decision worth making on day one,
+because retrofitting it is a rewrite.
+
+**No catalogue-composition duty of the AVMSD kind was found in the region from this session.** For media
+specifically, an ASEAN policy brief notes that while policymakers recognise the need for regional
+cooperation in media regulation, "the progress is slow". ⚠️ Recorded as an **informed gap**: this pass
+did not locate an APAC national VOD quota comparable to AVMSD Art. 13 or Brazil's PL 8.889. Several APAC
+markets have historically operated local-content rules for broadcast; whether any extends to on-demand
+catalogues with a reportable share was **not established** and should be checked per country (Korea,
+Australia and Indonesia are the likeliest candidates) before a regional compliance pitch.
+
+**The format that breaks the avails model.** APOS 2026 in Bali frames the year around **AI and
+microdrama**, with global streamers, Indian conglomerates, Chinese tech platforms and "a wave of AI and
+microdrama upstarts". This matters structurally and is the most distinctive APAC finding in this plane:
+**the classical avails model assumes a sequence — theatrical → PVOD → SVOD → FTA — and short-form
+vertical microdrama has no such sequence.** An avails schema inherited from Hollywood distribution does
+not describe the fastest-growing APAC format at all. A greenfield rights model for short-form is an open
+design question in the region with the most volume behind it.
+
+**Scale and the monetisation gap.** Variety reports the Asia-Pacific screen economy racing toward **$200
+billion**, with a monetisation gap defining the decade. One market report describes the region as second
+only to North America in generative-AI adoption pace, and names **Tencent Video** and **iQIYI** as
+investing in generative AI. Public broadcasters in **Australia** and **Singapore** are exploring AI for
+newsroom workflows, archiving and verification (ABU). Kantar ranks Google first for consumer ad equity
+across APAC, followed by Netflix, YouTube, TikTok and Instagram. Treat the market-research figures as
+commercial estimates.
+
+**Opportunity — ranked third, but with the most upside.** Two assets, both design-led rather than
+compliance-led: (1) a **per-jurisdiction policy engine** for windows and territories, which the
+divergence documented by Latham makes necessary rather than nice; (2) a **rights model for short-form
+vertical**, where no incumbent schema fits and the volume is growing fastest. Neither has a deadline
+attached, which makes them harder to sell than the EMEA report and more valuable if won.
 
 ### LATAM
 
@@ -2471,6 +2602,53 @@ anywhere in the world: a buyer with a compliance deadline weeks away, a measurem
 with no open-source answer, and newly programmatic regional inventory. The P15.4 privacy-by-
 construction measurement design sells into Chile first and then ports to Brazil under LGPD.
 
+
+#### Avails, windowing & distribution rights — pass 16 (2026-11-26)
+
+**Brazil is about to become the second jurisdiction in the world with a machine-checkable
+catalogue-composition duty, and that is the whole LATAM opportunity in this plane.**
+
+**PL 8.889/2017 — status and terms.** The Chamber of Deputies approved the final text on **2025-11-05**
+and sent it to the Senate as **PL 8.889-C/2017**. As reported, it would require a minimum share of
+Brazilian titles in streaming catalogues — **~10%, with half from independent producers** — and extend
+the **Condecine** levy to VOD, with proposals also reaching content-sharing platforms such as YouTube and
+TikTok.
+
+⚠️ **The Condecine rate is disputed across every source consulted and this KB will not assert one.**
+Reported figures: **3%** of annual revenue (Protecting Taxpayers), **4%** (The Brazilian Report), and
+**6%** of gross revenue with up to **60% creditable** against direct local production spend (FICDC/CCIA);
+earlier IIPA analysis cited a 6% ceiling. Senate passage and any 2026 enactment are **unverified** here.
+Check the current text and status of PL 8.889-C/2017 on the Senate or Chamber site before any figure
+reaches a client. Note also that most available analysis is advocacy: CCIA and IIPA (2026 Special 301)
+argue the quota and levy are trade barriers and ask Brazil to drop or reduce them, which is a position,
+not a forecast.
+
+**Why this is the same build as EMEA.** A ~10% national-title quota with an independent-producer
+sub-share is **the identical computation** to AVMSD Art. 13 with different constants: classify titles by
+origin, count per national catalogue, report with an audit trail. P16.2 covers both. A reporter built
+for an EU client is re-pointable at a Brazilian one for the cost of a classification ruleset — which is
+the strongest cross-regional reuse argument this plane offers.
+
+**Regional regulatory frame.** LATAM broadly follows the EU model (IBA), but no country yet has a fully
+mature harmonised AI regime. **Uruguay** became the first in the region to sign the Council of Europe's
+Framework Convention on AI (2025). **Chile** has an AI bill before its Congress and hosts **Latam-GPT**,
+the first open-source LLM trained on Latin American data. Baker McKenzie tracks emerging AI rules across
+the region for multinationals.
+
+**Where the buyer actually is today.** Until PL 8.889 passes, the active LATAM buyer in media AI is the
+**newsroom**, not the distributor — a finding this KB established in pass 8 and which holds: IAPA
+describes adoption guided by editorial need with strong human oversight; Peru's **El Comercio** adopted a
+near-10-page AI guide in early 2026; Colombia's **FLIP** and Argentina's **ADEPA** research adoption
+while tracking regulation; **SiPreBA** co-produced a May 2026 report with the Heinrich Böll Foundation;
+**IFPIM** launched **CTRL+J** convenings on AI regulation and media sustainability. Distribution-rights
+work in LATAM is a *2027 pipeline* contingent on the Senate, not a 2026 sale.
+
+**Opportunity — ranked second, contingent on one vote.** Pre-build the Brazilian variant of the P16.2
+reporter now and hold it. If the Senate passes PL 8.889, every VOD service operating in Brazil acquires a
+reporting obligation on a statutory clock with no open-source tool to meet it — and the asset is already
+written. If it stalls, the same code still serves EU clients, so the downside is bounded. That asymmetry
+is the reason to build before the vote rather than after it.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -2661,3 +2839,30 @@ ordering even where they disagree on absolute size:
 drive **~56% of total DOOH growth 2025–2029**. The open-source implementation of retail media is a
 **3-star list of links**. That combination — fastest-growing ad channel, zero open tooling — is the
 clearest build-versus-integrate signal in this KB.
+
+## Market size — pass 16 addendum (2026-11-26): the avails & rights-administration segment, and a refusal
+
+**This pass declines to give a market-size figure for the avails and rights-administration segment, and
+the refusal is the finding.**
+
+Every credible datum located is about the *media AI* market as a whole, not this segment. The segment's
+revenue sits inside privately held vendors (FilmTrack, Whip Media, Rightsline, FADEL) and inside studio
+business-affairs cost centres that are not reported separately. No analyst figure for "rights
+administration software" was found from this session that could be traced to a primary source, and this
+KB has recorded enough laundered market-research numbers to know what an untraceable one is worth.
+
+**What can be stood behind, with its provenance:**
+
+| Figure | Value | Source and caveat |
+|---|---|---|
+| European works share of EU VOD catalogues | ~30% catalogue, ~25% consumption | Secondary reporting (March 2026 analysis); corroborated in shape by a separate breakdown giving EU 28% + UK 9%. Not Commission data |
+| Member States with Art. 13 measures in force | 17 | COM(2024)261, 2020–21 reference period — **primary**, and the most defensible number in this plane |
+| Brazilian-title quota proposed in PL 8.889 | ~10%, half independent | Reported; bill passed Chamber 2025-11-05, Senate pending |
+| Condecine rate on VOD in PL 8.889 | **Disputed: 3% / 4% / 6%** | Four sources, four figures. Do not quote |
+| APAC screen economy | approaching $200B | Variety; regional total, **not** this segment |
+| NA share of global AI-in-media market | 33.6%–40.6% | Grand View 2024 / Precedence 2025 generative scope; ranges by scope definition |
+| Mid-sized firm AI integration cost | ~$2.4M | Single commercial market report, unverified — recorded only because it recurs |
+
+**The one number that should drive a proposal in this plane is 17, not a market size.** Seventeen member
+states with an in-force catalogue-composition duty, a published counting method, and no open-source
+implementation is a better qualified-pipeline estimate than any TAM figure available for this segment.

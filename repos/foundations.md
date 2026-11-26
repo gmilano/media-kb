@@ -1944,3 +1944,96 @@ references are included with their staleness stated rather than hidden.**
 |---|---|---|---|---|
 | [dividuum/info-beamer](https://github.com/dividuum/info-beamer) | 230\* / 49f | **BSD-2-Clause** | archived, 2020-05-01 | Permissive after all — GitHub said NOASSERTION, the file says BSD-2-Clause |
 | [eerotal/LibreSignage](https://github.com/eerotal/LibreSignage) | 695\* / 132f | BSD-3-Clause | archived 2021-08-26 | The former permissive favourite, gone |
+
+## The avails, windowing & distribution-rights plane — foundations measured 2026-11-26 (pass 16)
+
+**The anchor exists and this KB had never named it.** `MovieLabs` appeared exactly **once** across 1.1 MB
+of KB before this pass. The MovieLabs Digital Distribution Framework is the reference implementation of
+the Avails interchange the entire title-licensing industry sends to retailers, and it is **MIT**.
+
+### Verified foundations
+
+Every row below: existence confirmed by `git ls-remote` (HEAD resolves), licence confirmed by fetching
+the licence file and counting bytes — not by trusting an SPDX badge.
+
+| Repo | Stars/Forks | Licence | Last push | Role in this plane |
+|---|---|---|---|---|
+| https://github.com/MovieLabs/mddf | 38*/11f | MIT (`LICENSE`, 1144 B) | 2025-12-19 | **The anchor.** Java library + tools for Avails, Common Media Manifest (CMM), Media Manifest Core (MMC), Media Entertainment Core (MEC) and Asset Order & Delivery (AOD). Validates and generates the actual interchange files |
+| https://github.com/MovieLabs/OMC | 35*/6f | Apache-2.0 (`LICENSE`, 11357 B) | 2026-02-07 | Ontology for Media Creation — the production-side entity model (assets, participants, tasks) that an avails record must join back to |
+| https://github.com/pivotshare/avails | 1*/1f | MIT (`LICENSE`, 1081 B) | 2016-10-31 | Parser/generator for EMA Avails. Dormant ten years; valuable as a readable, small reference for the sheet format |
+| https://github.com/thomas-shirley/ema-avails-generator | 0*/0f | Apache-2.0 (`LICENSE`, 11357 B) | 2023-03-21 | Shell automation for producing EMA avails documents for digital video retail |
+| https://github.com/survos/omc | 0*/0f | MIT | 2026-11-25 | OMC 2.8 DTOs, schema validation and production catalogue JSON. **Created 2026-11-24** — the freshest thing in this plane, and one day old at time of writing |
+| https://github.com/MovieLabs/cmr-ratings | 1*/0f | **NONE** | 2026-06-17 | Common Metadata Ratings: the ratings specifications and data. Ratings gate what may be exploited where, so this is in-plane — but see the licence warning below |
+| https://github.com/MovieLabs/omc-util | 1*/0f | **NONE** | 2026-11-03 | OMC utilities, actively pushed. No licence file |
+| https://github.com/MovieLabs/DCNC-to-CPL | 3*/0f | MIT | 2016-05-09 | Digital Cinema Naming Convention string to SMPTE 429-7 CPL. Bridges this plane to the theatrical plane of pass 10 |
+| https://github.com/playmoviespartner/emavalidator | 3*/2f | **NONE** | 2017-04-20 | Google Play Movies' own EMA Avails validator. Historically the de-facto conformance check for anyone delivering to Play — and it has **no licence file** |
+| https://github.com/omi/RAIDAR | 21*/4f | MIT | 2021-01-12 | Music licensing platform out of Berklee. Dormant since 2021; the highest-starred permissively-licensed music-licensing codebase found |
+
+Ten verified rows. `MichaelBrandonFalk/UltimateAvailMaker` (0*/0f, **no licence**, pushed 2026-11-12) also
+resolves and is the only *currently maintained* avails authoring tool found — a browser app for Standard
+EMA and YouTube avails — but with no licence it cannot be built on, so it is listed here as intelligence
+rather than as a foundation.
+
+### ⚠️ Licence warnings specific to this plane
+
+- **Three of the four MovieLabs satellite repos carry no licence file at all** (`cmr-ratings`,
+  `omc-util`, `comfyui-movielabs-util`), while the two flagship repos are cleanly licensed (`mddf` MIT,
+  `OMC` Apache-2.0). Do not infer the org's licence from its best repo. Checked across `master` and
+  `main` with the full six-name probe (`LICENSE`, `LICENSE.md`, `LICENSE.txt`, `license.txt`, `COPYING`,
+  `COPYING.md`) that pass 8 corrected into this KB.
+- **`playmoviespartner/emavalidator` has no licence and is the one a delivery engineer is most likely to
+  reach for**, because it is the validator a major retailer published. No grant means default copyright:
+  all rights reserved. Read it for behaviour, do not vendor it.
+- **`MovieLabs/mddf` is maintained at the repo but stalled at the release.** `pushed_at` is 2025-12-19,
+  which looks healthy; its own README's "What's New" section tops out at **"2023-Jul-2: v2.0.8
+  released"**. Freshness of the default branch is not freshness of a shipped artefact — check the
+  release notes, not the push date. This is a new instance of a trap this KB keeps re-finding.
+
+### The three-step gradient — sixth confirmation of this KB's structural law, and the cleanest yet
+
+The law: within a single plane, the further a task moves from **format** toward **judgment**, the thinner
+the open source gets. This plane splits into three steps that are unusually clean, because each one is a
+different verb applied to the same avail.
+
+1. **DECLARE the avail — a format problem.** Solved and permissively licensed: `MovieLabs/mddf` MIT
+   38*/11f, plus three smaller MIT/Apache parsers. You can read, write and validate the interchange today.
+2. **EVALUATE the window — a judgment problem.** **Nothing avails-specific exists.** There is no open
+   source that takes a title, a territory, a date and a deal and answers "may I exploit this?". The only
+   route is to borrow a general-purpose policy engine — `open-policy-agent/opa` (Apache-2.0, 12529*) or
+   `cerbos/cerbos` (Apache-2.0, 4669*) — and encode the windows yourself. The engine is free; the
+   *policy model* is the work, and nobody has published one for avails.
+3. **SETTLE the money — pure judgment.** **Zero, literally.** `residuals calculation film` returns **0
+   repositories**. `film royalty statement` returns **1**, and it is a scripture-governance project.
+   `royalty accounting` returns 47 whose top hits are crypto NFT royalty splitters
+   (`mdcryptonfts/royalty_contract`, `sdoddler/XRPSiphon`) and whose only on-topic entries are three
+   0-star music-royalty apps pushed in 2026 by one author (`Nasglobal/premier-royalty-accounting-*`).
+
+So: the industry can **state** an availability, cannot **evaluate** one without building the model
+itself, and cannot **settle** one at all. Pass 5 found the identical shape for rights reservation
+(declare → honour → liquidate). That is now two planes in this KB with the same three-step collapse, and
+in both the collapse bottoms out at **the money**.
+
+### New record for false abundance — and a new rule
+
+`rights windowing` returns **681 repositories and not one is relevant**. Every result is Microsoft
+Windows privilege tooling: `gtworek/Priv2Admin` (2534*), `jborean93/PSPrivilege`, `lkarlslund/hashmuncher`,
+portable-runtime installers that avoid needing "administrator rights on Windows".
+
+This beats pass 8's `isan` (1942 results, zero relevant) on **plausibility**, which is what makes it
+dangerous: "rights windowing" is the industry's own term of art, so a careless pass would not even
+suspect the query. The collision is total — both words are overloaded by one operating system.
+
+**New rule for all twelve industries:** when any term in a query is also the name of an operating
+system, platform or language (`windows`, `rust`, `go`, `swift`, `kotlin`, `android`), the result total is
+noise by construction. Add a disambiguating industry noun (`avails`, `EMA`, `distribution`) or the search
+has told you nothing. Pass 8's rule was "read the results, not the total"; this pass adds **"and predict
+which of your nouns the platform already owns."**
+
+### Adjacent and deliberately not promoted: the CLM cluster
+
+Deal terms live in contracts, so contract-lifecycle management is the nearest adjacent layer. It has
+real 2026 activity but is **licence-hostile for Globant's purposes**: `AniketTati/draft-legal` (23*,
+NOASSERTION), `aaked-app/aakd` (12*, **AGPL-3.0**), `bytecrunch-io/openclm` (4*, **AGPL-3.0**),
+`0xyz-exe/contractflow` (1*, MIT). The only permissive entry has one star. AGPL on a service that
+would hold a studio's deal terms is a conversation with a client's counsel, not a default. Recorded so a
+later pass does not re-discover it as an opportunity.

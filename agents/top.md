@@ -1536,3 +1536,77 @@ not survive verification: `screenrig/screenrig` **fails `git ls-remote`**, and a
 search returns 9 results, none of them this project. It may exist as a product off GitHub, but
 **nothing was written as a table row for it.** This is the exact shape that has previously compiled
 fabricated entities into this KB.
+
+## The avails, windowing & distribution-rights plane — measured 2026-11-26 (pass 16), and the first plane whose **agent layer was all born in one quarter and adopted by nobody**
+
+**What this plane is.** Not "who owns this content" (pass 5, identification & rights-reservation) and not
+"who may stream it today" (pass 13, subscription & entitlement). This is the layer in between, and it is
+the one every studio and distributor actually runs a department for: **which title may be exploited, in
+which territory, in which window, under which deal, and who gets paid downstream.** In the trade it is
+the *avails* plane.
+
+**Why it was missed for fifteen passes.** The grep below was run against all eight KB files *before* any
+web search, and it is the largest single-plane vocabulary hole this KB has recorded:
+
+| Term | Hits across all 8 files before this pass |
+|---|---|
+| `avails` | 0 |
+| `distribution right` | 0 |
+| `license window` | 0 |
+| `VOD window` | 0 |
+| `theatrical window` | 0 |
+| `output deal` | 0 |
+| `first-run` | 0 |
+| `rightsholder` | 0 |
+| `sublicens` | 0 |
+| `performing right` | 0 |
+| `residual` | 0 |
+| `music licens` | 0 |
+| `deal memo` | 0 |
+| `Entertainment Identifier` | 0 |
+| `licensing deal` | 1 |
+| `cue sheet` | 1 |
+| `sync licens` | 1 |
+| `MovieLabs` | 1 |
+| `rights holder` | 3 |
+| `rights management` | 5 |
+
+**A false friend caught in the probe itself, worth recording as method.** `EMA ` returned 75 hits and
+**every one is noise**: the trailing-space guard does not stop `cinema `/`cinemas `. The Entertainment
+Merchants Association — the body whose Avails spec defines this plane — was in fact mentioned **zero**
+times. A probe term that is a substring of a common industry word cannot be read off the count.
+
+### The agent layer: six repos, all real, all MIT or Apache, and all at zero stars
+
+This is a shape no prior pass has seen. Fourteen passes found agent layers that were *absent*; pass 15
+found one that was *vendor-captured*. Here the agent layer **exists, is permissively licensed, and has no
+users at all** — and every single entry was created between June and October 2026, i.e. this quarter.
+
+| Agent | Repo | Stars/Forks | Licence | Last push | What it does |
+|---|---|---|---|---|---|
+| evangeline-legal-agent | https://github.com/falcoschaefer99-eng/evangeline-legal-agent | 3*/0f | Apache-2.0 | 2026-06-30 | Legal counsel agent covering contract lifecycle and compliance; the only entry above 0 stars |
+| Rights-Clearance-Scanner | https://github.com/IBR4H33M/Rights-Clearance-Scanner | 0*/0f | MIT | 2026-10-12 | Multi-agent trademark and rights clearance sweep |
+| cueclear | https://github.com/buildwithtolu/cueclear | 0*/0f | MIT | 2026-09-09 | Music rights clearance for locked edits: EDL/XML in, cue sheet out — the only entry wired to a real post-production artefact |
+| screenplay-clearance-agent | https://github.com/Priyanka-Purushotham5/screenplay-clearance-agent | 0*/0f | MIT | 2026-09-09 | Screenplay rights clearance |
+| soundwave_cue_sheet_palooza | https://github.com/lucylow/soundwave_cue_sheet_palooza | 0*/0f | MIT | 2026-09-16 | Mobile-first audiovisual music-rights workflow for production teams |
+| rights-clearance-scout | https://github.com/nawaltahir/rights-clearance-scout | 0*/0f | MIT | 2026-08-22 | Rights clearance research agent (no description published) |
+
+Six real rows. There is no seventh — `rights clearance` returns 40 repos in total and the remainder are
+either duplicate pushes of one author's workbench (`williamsahoo1`, three slugs, no licence) or false
+friends (`draron-dare-045/Final_Rights` is secondary-school certificate clearance in Kenya).
+
+**How to read this table.** These are **signals, not foundations.** Zero stars at three to five months
+old is not "early", it is unvalidated: nobody has run this code but its author. Use them as evidence
+that the clearance problem is being attacked and as prior art for a design, never as a dependency. The
+one with a defensible shape is `cueclear`, because it takes an **EDL/XML** — an artefact that genuinely
+falls out of an edit — rather than asking a human to describe the problem in prose.
+
+**Falsifiable prediction, recorded so a later pass can score it.** By **2027-05-31**, either at least one
+of these six repos exceeds **25 stars**, or the clearance-agent layer of 2026-Q3/Q4 is confirmed
+abandoned. Both outcomes are informative; the KB should check and write down which happened.
+
+### Where the agent layer stops, and why
+
+Clearance is the *researchable* end of this plane, which is why six people tried to agent it. Nothing in
+the table evaluates a window, and nothing settles money. Those two are the subject of the gradient
+recorded in `repos/foundations.md` for this pass, and the second of them is a literal zero.

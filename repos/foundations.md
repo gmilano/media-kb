@@ -1559,3 +1559,127 @@ the file is **`readme.md`, lowercase**, and there is no licence file at all — 
 `readme.md` and in every source header. Add lowercase `readme.md` to the control set. Running total
 of conventions this KB has had to learn: `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `license.txt`,
 `COPYING`, `COPYING.md`, and now `readme.md` for the control.
+
+## The sound, music & immersive-audio plane — measured 2026-11-26 (pass 12)
+
+Everything between the microphone and the loudness meter. Loudness *measurement* is pass 4 and is not
+repeated here; `pyannote` and `librosa` arrived in passes 7 and 5 and are cross-referenced, not
+re-listed. All 65 URLs in this pass resolve by `git ls-remote`; every licence below was read from the
+repository's own licence file, not from a directory or an API field.
+
+### ⛔ Read this before choosing anything in this plane
+
+The licence outcome is predicted by **where the code runs**, not by who wrote it:
+
+- Runs **beside** the proprietary host (library, renderer, converter, reference implementation) →
+  **permissive**, 7/7 measured.
+- Runs **inside** the proprietary host (VST/AU/AAX plugin, plugin framework, DAW engine) → **dual or
+  copyleft**, 6/6 measured, no counterexample.
+
+Design the deliverable accordingly. A rendering or analysis service is clean; a plugin in the client's
+DAW drags AGPL or a commercial fee underneath it.
+
+### Immersive / next-generation audio — the standards layer, permissive and institutional
+
+This is the healthiest permissive corner found in any audio layer, and it is **EMEA-built**: the EBU,
+the BBC and the (now closed) IRT wrote most of it.
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| https://github.com/ebu/ebu_adm_renderer | BSD-3-Clause-Clear | 105 | 2026-02-11 | **The reference ITU ADM Renderer (ITU-R BS.2127) in Python.** The normative implementation — what "correct" means for object-based audio |
+| https://github.com/ebu/bear | Apache-2.0 | 32 | 2026-08-14 | **Binaural EBU ADM Renderer**, BBC copyright. The permissive path to headphone rendering of ADM |
+| https://github.com/ebu/libadm | Apache-2.0 | 51 | 2026-08-07 | C++ library for the ADM metadata model (ITU-R BS.2076) |
+| https://github.com/ebu/libbw64 | Apache-2.0 | 43 | 2024-04-13 | BW64 (Broadcast Wave 64-bit) container I/O. **Dormant two years — stable format, low churn; verify before depending** |
+| https://github.com/immersive-audio-live/ADM-OSC | MIT | 91 | 2026-10-16 | Object positions over OSC — the live/show-control bridge for immersive audio |
+| https://github.com/GoogleChrome/omnitone | Apache-2.0 | 919 | 2026-10-22 | Browser ambisonic renderer; the highest-starred permissive spatial renderer |
+| https://github.com/polarch/JSAmbisonics | BSD-3-Clause | 182 | 2026-09-17 | Higher-order ambisonic processing in Web Audio |
+| https://github.com/hoene/libmysofa | BSD-3-Clause (API reports `NOASSERTION`) | 180 | 2026-10-25 | Reads SOFA HRTF files — the input any binaural renderer needs |
+
+**Constrained, and each for a different reason:**
+
+| Repo | License | Stars | Last push | Constraint |
+|---|---|---|---|---|
+| https://github.com/ebu/ear-production-suite | **GPL-3.0-or-later** | 126 | 2026-11-18 | The actual ADM **production** toolset (VST plugins, Reaper-optimised). Active, 62 open issues. Licence file is at **`packaging/LICENSE.md`, not the root** |
+| https://github.com/leomccormack/Spatial_Audio_Framework | **ISC core, GPL-2.0 with optional modules** | 771 | 2026-05-30 | The licence **is decided by your build configuration** — second instance of this category after Chromaprint (p5) |
+| https://github.com/videolan/libspatialaudio | **LGPL-2.1+ or commercial** | 325 | 2026-07-14 | Ambisonic encode/decode/binauralise. Note the owner is `videolan`, **not** `videolabs` |
+| https://github.com/resonance-audio/resonance-audio | Apache-2.0 | 543 | 2022-09-08 | **ARCHIVED.** Google's spatial engine — permissive and dead; read it, do not depend on it |
+| https://github.com/spatialaudio/python-sofa | MIT | 28 | 2021-03-08 | Dormant five years |
+| https://github.com/tu-studio/IEMPluginSuite | GPL-3.0 | 12 | 2026-10-13 | **A fork.** The canonical IEM Plugin Suite lives on `git.iem.at`, unreachable through this proxy — recorded as unverifiable, not absent |
+
+### Speech & dialogue restoration — the permissive layer that actually does post-production work
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| https://github.com/xiph/rnnoise | BSD-3-Clause | 5,982 | 2025-02-22 | The classic recurrent denoiser; embedded everywhere, low churn |
+| https://github.com/Rikorose/DeepFilterNet | MIT **or** Apache-2.0 | 5,107 | 2026-11-06 | Real-time full-band suppression — current best permissive dialogue cleanup |
+| https://github.com/k2-fsa/sherpa-onnx | Apache-2.0 | 16,241 | 2026-11-24 | On-device runtime for ASR/TTS/enhancement; the deployment layer |
+| https://github.com/speechbrain/speechbrain | Apache-2.0 | 11,951 | 2026-11-25 | Separation, enhancement, diarisation in one toolkit |
+| https://github.com/asteroid-team/asteroid | MIT | 2,605 | 2026-11-03 | Source separation, maintained |
+| https://github.com/deezer/spleeter | MIT | 28,539 | 2026-10-28 | Stem separation; **the maintained alternative to archived Demucs** |
+
+Cross-reference: `pyannote/pyannote-audio` (MIT, 10,842★, 2026-11-24) for diarisation — already in
+this KB from pass 7; it is the speaker-attribution step of every dialogue workflow below.
+
+### Audio I/O, codecs and DSP substrate
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| https://github.com/xiph/opus | BSD-3-Clause (read from `COPYING`) | 3,395 | 2026-11-26 | The codec; IETF-standard, pushed the day of this pass |
+| https://github.com/libsndfile/libsndfile | LGPL-2.1 | 1,736 | 2026-10-28 | The file-I/O layer under most audio tooling |
+| https://github.com/pure-data/pure-data | "Standard Improved BSD" | 2,130 | 2026-11-19 | Dataflow audio environment — **permissive, unusually for this tier** |
+| https://github.com/csound/csound | LGPL-2.1 | 1,533 | 2026-11-25 | Synthesis engine, embeddable under LGPL |
+| https://github.com/grame-cncm/faust | GPL-2.0 + exception | 3,222 | 2026-11-25 | DSP language that **compiles to plugins** — the exception is what makes that usable |
+| https://github.com/Tonejs/Tone.js | MIT | 14,959 | 2026-11-20 | Web Audio framework; the permissive choice for browser-delivered audio |
+| https://github.com/jackaudio/jack2 | GPL-2.0 / LGPL | 2,461 | 2026-01-07 | Low-latency audio server for studio routing |
+
+### The host tier — and it is copyleft or dual, without exception
+
+Listed as **context rows**, not recommendations. Each is a real system a client may already run.
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| https://github.com/juce-framework/JUCE | **AGPL-3.0 or commercial** | 9,180 | 2026-11-24 | The industry's default plugin framework. **Price the commercial licence before promising a plugin** |
+| https://github.com/Tracktion/tracktion_engine | **GPL-3.0 or commercial** | 1,471 | 2026-11-25 | Embeddable DAW engine, same model |
+| https://github.com/audacity/audacity | GPL-3.0 | 19,185 | 2026-11-25 | The most-installed audio editor on earth |
+| https://github.com/LMMS/lmms | GPL-2.0 | 10,736 | 2026-11-25 | Pattern-based DAW |
+| https://github.com/sonic-pi-net/sonic-pi | **MIT source, GPLv3 by linkage** | 12,293 | 2026-11-25 | The headline licence is not the distribution obligation |
+| https://github.com/supercollider/supercollider | GPL-3.0 | 6,858 | 2026-11-26 | Synthesis server + language |
+| https://github.com/mixxxdj/mixxx | GPL-2.0-or-later | 7,445 | 2026-11-25 | DJ/playout system |
+| https://github.com/Ardour/ardour | GPL-2.0 (read from `COPYING`) | 5,459 | 2026-11-25 | Full DAW with surround and Dolby-capable busses |
+| https://github.com/zrythm/zrythm | **AGPL-3.0 + §7 additional terms** (REUSE pointer) | 3,223 | 2026-11-26 | Licence declared by reference, not inline |
+| https://github.com/spotify/pedalboard | GPL-3.0 | 6,513 | 2026-11-09 | Python audio effects — **GPL, despite the permissive habits of its publisher** |
+
+### Music, notation and MIR — permissive at the library, copyleft at the application
+
+The same gradient, one tier down: the *formats and libraries* are permissive; the *applications
+musicians install* are GPL.
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| https://github.com/librosa/librosa | ISC | 9,166 | 2026-11-25 | The audio-analysis baseline (already cited in p5) |
+| https://github.com/cuthbertLab/music21 | BSD-3-Clause | 2,635 | 2026-11-18 | Computational musicology toolkit, MIT-origin |
+| https://github.com/spotify/basic-pitch | Apache-2.0 | 6,127 | 2025-11-13 | Audio-to-MIDI transcription — permissive, unlike its sibling `pedalboard` |
+| https://github.com/mido/mido | MIT | 1,662 | 2026-11-09 | MIDI objects/IO in Python |
+| https://github.com/craffel/pretty-midi | MIT | 1,052 | 2026-11-08 | MIDI manipulation and analysis |
+| https://github.com/Natooz/MidiTok | MIT | 909 | 2026-11-25 | MIDI tokenisation for sequence models — the bridge from music to an LLM |
+| https://github.com/0xfe/vexflow | MIT (read from `LICENSE`) | 4,409 | 2025-03-05 | Music notation rendering in the browser |
+| https://github.com/paulrosen/abcjs | MIT (read from `LICENSE.md`) | 2,378 | 2026-11-18 | ABC-notation rendering and playback |
+| https://github.com/rism-digital/verovio | LGPL-3.0 | 984 | 2026-11-25 | MEI/MusicXML engraving library — the bridge to the description plane (p11) |
+| https://github.com/beetbox/beets | MIT | 15,983 | 2026-11-26 | Music library management and metadata — permissive, and pushed the day of this pass |
+| https://github.com/metabrainz/picard | GPL-2.0 | 5,408 | 2026-11-25 | MusicBrainz tagger; pairs with the fingerprinting layer in p5 |
+| https://github.com/musescore/MuseScore | **GPL-3.0 with a font exception** | 15,489 | 2026-11-25 | Notation application. The added exception is why GitHub reports `NOASSERTION` |
+| https://github.com/lilypond/lilypond | GPL-3.0 | 711 | 2026-11-26 | Engraving system; the GitHub repo is a mirror of a GitLab-hosted project |
+| https://github.com/aubio/aubio | GPL-3.0 | 3,792 | 2026-04-10 | Onset, pitch and beat detection |
+| https://github.com/MTG/essentia | **AGPL-3.0** | 3,819 | 2026-11-18 | Large MIR feature library; AGPL reaches a hosted service |
+| https://github.com/CPJKU/madmom | **BSD code / CC BY-NC-SA 4.0 models** | 1,745 | 2026-03-20 | **Do not ship.** The pretrained models — which is the whole product — are non-commercial |
+
+### Standards bodies and documents, not code — demoted on sight (the rule from pass 4 holds)
+
+- **ITU-R BS.2076** (Audio Definition Model), **BS.2127** (ADM Renderer), **BS.2051** (loudspeaker
+  configurations) — the normative specifications the EBU repos implement. Specifications, not
+  dependencies.
+- **ATSC A/342 Part 3** (MPEG-H system) and the **ATSC 3.0 suite approved 2026-04-14** — the North
+  American carriage standard. The encoder implementations are Fraunhofer's and are **not open**; the
+  open stack reaches ADM and stops.
+- **`w3c/musicxml`** exists (confirmed by `ls-remote`) but is not resolvable through this session's
+  search index; it is a specification repository in any case.

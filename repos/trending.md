@@ -10,6 +10,100 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 12: sound, music & immersive-audio infrastructure (65 repos, 65/65 resolve)
+
+### Headline: the first plane whose licence outcome is predicted by a *mechanism*
+
+Sorted by whose process the code runs inside. No counterexample in either direction:
+
+| Tier | Repos | Licence outcome |
+|---|---|---|
+| Runs **beside** the host — reference implementations, libraries, renderers | `ebu/bear`, `ebu/libadm`, `ebu/libbw64`, `ebu/ebu_adm_renderer`, `ADM-OSC`, `omnitone`, `JSAmbisonics` | **7/7 permissive** (Apache-2.0 / BSD / MIT) |
+| Runs **inside** the host — plugins, plugin frameworks, DAW engines | `JUCE`, `tracktion_engine`, `libspatialaudio`, `Spatial_Audio_Framework`, `ear-production-suite`, `zrythm` | **6/6 dual-licensed or copyleft** |
+
+The immersive-audio standards layer is also the most **institutionally European** corner of this KB:
+the EBU, the BBC and the former IRT wrote nearly all of it, and it is permissive by policy.
+
+### The ADM / next-generation-audio stack, verified
+
+| Repo | License | Stars | Push |
+|---|---|---|---|
+| ebu/ebu_adm_renderer | BSD-3-Clause-Clear | 105 | 2026-02-11 |
+| ebu/ear-production-suite | GPL-3.0-or-later | 126 | 2026-11-18 |
+| ebu/libadm | Apache-2.0 | 51 | 2026-08-07 |
+| ebu/libbw64 | Apache-2.0 | 43 | 2024-04-13 |
+| ebu/bear | Apache-2.0 | 32 | 2026-08-14 |
+| immersive-audio-live/ADM-OSC | MIT | 91 | 2026-10-16 |
+| GoogleChrome/omnitone | Apache-2.0 | 919 | 2026-10-22 |
+| videolan/libspatialaudio | LGPL-2.1+ **or commercial** | 325 | 2026-07-14 |
+| polarch/JSAmbisonics | BSD-3-Clause | 182 | 2026-09-17 |
+| hoene/libmysofa | BSD-3-Clause | 180 | 2026-10-25 |
+| leomccormack/Spatial_Audio_Framework | ISC core / GPL-2.0 optional | 771 | 2026-05-30 |
+| resonance-audio/resonance-audio | Apache-2.0 | 543 | **ARCHIVED 2022-09-08** |
+| spatialaudio/python-sofa | MIT | 28 | dormant 2021-03-08 |
+| tu-studio/IEMPluginSuite | GPL-3.0 | 12 | 2026-10-13 (**a fork**; canonical on `git.iem.at`) |
+
+Note the star ceiling: **the normative renderer for all object-based audio has 105 stars.** The
+standard that NBC's Olympics and Super Bowl Atmos deliverables and the 2026 World Cup sit on top of is
+implemented, in the open, by a project the size of a weekend hobby repo. That is the supply picture,
+not an insult to it.
+
+### Speech, restoration and music — the new permissive rows
+
+| Repo | License | Stars | Push |
+|---|---|---|---|
+| deezer/spleeter | MIT | 28,539 | 2026-10-28 |
+| k2-fsa/sherpa-onnx | Apache-2.0 | 16,241 | 2026-11-24 |
+| beetbox/beets | MIT | 15,983 | 2026-11-26 |
+| Tonejs/Tone.js | MIT | 14,959 | 2026-11-20 |
+| speechbrain/speechbrain | Apache-2.0 | 11,951 | 2026-11-25 |
+| librosa/librosa | ISC | 9,166 | 2026-11-25 |
+| spotify/basic-pitch | Apache-2.0 | 6,127 | 2025-11-13 |
+| xiph/rnnoise | BSD-3-Clause | 5,982 | 2025-02-22 |
+| Rikorose/DeepFilterNet | MIT **or** Apache-2.0 | 5,107 | 2026-11-06 |
+| 0xfe/vexflow | MIT | 4,409 | 2025-03-05 |
+| xiph/opus | BSD-3-Clause | 3,395 | 2026-11-26 |
+| asteroid-team/asteroid | MIT | 2,605 | 2026-11-03 |
+| cuthbertLab/music21 | BSD-3-Clause | 2,635 | 2026-11-18 |
+| paulrosen/abcjs | MIT | 2,378 | 2026-11-18 |
+| pure-data/pure-data | Standard Improved BSD | 2,130 | 2026-11-19 |
+| libsndfile/libsndfile | LGPL-2.1 | 1,736 | 2026-10-28 |
+| mido/mido | MIT | 1,662 | 2026-11-09 |
+| craffel/pretty-midi | MIT | 1,052 | 2026-11-08 |
+| rism-digital/verovio | LGPL-3.0 | 984 | 2026-11-25 |
+| Natooz/MidiTok | MIT | 909 | 2026-11-25 |
+
+### ⛔ Three licences that resolve differently from what the API says — and one that is not at the root
+
+- **`ebu/ear-production-suite`**: 404 on all **ten** conventional licence filenames at the repo root,
+  with `README.md` = 200 as the control. The file is real, 110,524 B, GPL-3.0-or-later (BBC/EBU/IRT),
+  at **`packaging/LICENSE.md`**. Found by one `search/code` call with `filename:LICENSE`. **A ninth
+  way a licence hides: it is not at the root, and the raw-root probe cannot see it.**
+- **`musescore/MuseScore`**: `NOASSERTION` → **GPL-3.0 with a font exception.** The added clause is
+  what defeats the classifier — which is the general cause of `NOASSERTION` in this plane.
+- **`sonic-pi-net/sonic-pi`**: `NOASSERTION` → **MIT main source that links GPLv3 code**, so the
+  distribution obligation is GPLv3. The inverse of the usual trap.
+- **`zrythm/zrythm`**: `NOASSERTION` → AGPL-3.0 plus §7 additional terms, declared as a **REUSE
+  pointer** (`LICENSES/LicenseRef-ZrythmLicense.txt`), not inline.
+
+### ⚙️ Measurement notes — two oracles corrected
+
+1. **Batched `repo:` queries fail whole-batch on one bad name** (`422 Validation Failed`), returning
+   nothing for the valid repos alongside it. Efficient, but it fails in the direction of a false
+   negative. On 422, re-probe individually.
+2. **The github.com HTML channel is dead in this environment**: `curl -sI https://github.com/<o>/<r>`
+   returns **403 for every repo, existing or not**. It cannot confirm, deny, or detect a rename here.
+   `git ls-remote` and the search API are the only usable oracles. And a 422 is not proof of a
+   rename — two of three this pass were **my own wrong owner** (`videolabs` → **`videolan`**).
+
+### Where the repos live when they are not on GitHub
+
+`git.iem.at` (IEM Plugin Suite) is unreachable through this proxy — a uniform `000`, which is a
+network verdict and not a project verdict. LilyPond's GitHub presence is a mirror of a GitLab
+project. Pass 10 retired the MXF container layer for a similar reason. **The habit of equating "not
+on GitHub" with "does not exist" would have dropped the reference ambisonic plugin suite from this
+KB entirely.**
+
 ## 2026-11-26 — pass 11: description, cataloguing & syndication infrastructure (52 repos, 52/52 exist)
 
 **Verification channel for this pass, stated because it had to change.** `curl -sI` returned **403

@@ -738,3 +738,33 @@ structure and annotation and cannot take copyleft** — it is the exception to t
   integration work, not adoption.
 - **No open implementation of EBUCorePlus tooling** was found beyond the ontology itself — the only
   Java port, `jebu-core`, targets the old EBUCore and died in 2018.
+
+## Audio & music platforms — added 2026-11-26 (pass 12)
+
+Real systems a client may already be running, that can be customised with AI on top. Note the
+licence column harder than usual: in this plane the **applications** are copyleft almost without
+exception, so "customise and ship" is a different proposition from "customise and operate".
+
+| Platform | Repo | License | Stars | What it is | How AI layers onto it |
+|---|---|---|---|---|---|
+| **Ardour** | https://github.com/Ardour/ardour | GPL-2.0 | 5,459 | Full professional DAW with surround/Atmos-capable busses; Linux-first, used in broadcast post | Drive it over Lua/OSC for batch dialogue cleanup and conform; keep models out-of-process so the GPL boundary stays clean |
+| **Audacity** | https://github.com/audacity/audacity | GPL-3.0 | 19,185 | The most-installed audio editor on earth; standard in newsroom and podcast workflows | Ships a plugin interface; the realistic AI pattern is a **sidecar service** (DeepFilterNet/Whisper) the editor calls, not in-tree model code |
+| **EBU EAR Production Suite** | https://github.com/ebu/ear-production-suite | GPL-3.0-or-later | 126 | **The open object-based (ADM) production toolset** — VST plugins + renderer, Reaper-optimised | The only open route from a mix to a conformant ADM/BW64 deliverable. Automate the authoring, render with `bear`/`ebu_adm_renderer` |
+| **Zrythm** | https://github.com/zrythm/zrythm | AGPL-3.0 + §7 terms | 3,223 | Modern DAW, active daily | Licence is declared by REUSE pointer — read `LICENSES/` before any derivative |
+| **LMMS** | https://github.com/LMMS/lmms | GPL-2.0 | 10,736 | Pattern-based production suite | Generation models (YuE, ACE-Step) produce stems; LMMS is the arrangement surface |
+| **Mixxx** | https://github.com/mixxxdj/mixxx | GPL-2.0+ | 7,445 | DJ and radio playout system | Beat/key analysis is built in; `basic-pitch` and `aubio` extend it |
+| **MuseScore** | https://github.com/musescore/MuseScore | GPL-3.0 + font exception | 15,489 | Notation application with a very large install base | Pair with `basic-pitch` (audio→MIDI) and `verovio`/`music21` for score interchange |
+| **beets** | https://github.com/beetbox/beets | **MIT** | 15,983 | Music library management, tagging, metadata | **The one permissive platform in this table.** Plugin architecture; the natural host for an AI cataloguing step — and the bridge to the description plane (p11) |
+| **MusicBrainz Picard** | https://github.com/metabrainz/picard | GPL-2.0 | 5,408 | Reference music tagger over the MusicBrainz database | Pairs with the fingerprinting layer from pass 5 (Chromaprint/AcoustID) |
+| **Sonic Pi** | https://github.com/sonic-pi-net/sonic-pi | MIT source, **GPLv3 by linkage** | 12,293 | Live-coding music environment; strong education footprint | Education engagements; note the real distribution obligation is GPLv3 |
+
+**The pattern that works commercially in this plane.** Every application above except `beets` is
+copyleft, so the safe architecture is the same one in all of them: **keep the AI out of the
+application process.** Run models as a service, have the DAW or editor call it, and ship your own
+code under your own terms. The permissive substrate for that service is in `repos/foundations.md` —
+`sherpa-onnx`, `DeepFilterNet`, `speechbrain`, `spleeter`, `bear`, `libadm`.
+
+**And the reverse warning:** if the client's ask is literally "a plugin in our Pro Tools rig", there
+is no permissive plugin framework. `JUCE` is AGPL-3.0 or a paid commercial licence, and
+`tracktion_engine` is the same model. That is a budget line, and it should appear in the proposal
+rather than in the third sprint.

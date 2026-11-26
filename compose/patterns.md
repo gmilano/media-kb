@@ -1676,3 +1676,118 @@ headings traceable to a named vocabulary concept, AI-involvement provenance, and
 first sector-specific AI regulation, and a new audiovisual law extended oversight to **VOD platforms**
 for the first time; Peru's **Law 31814** regulation took effect **January 2026**. Sector-specific
 rules plus VOD-in-scope create description and labelling duties on a clock.
+
+## Sound, music & immersive-audio recipes — added 2026-11-26 (pass 12)
+
+Every repo named below was verified this pass by `git ls-remote`, and every licence was read from the
+repository's own licence file. **The architectural rule that governs all five recipes:** in this plane
+the licence hardens wherever code runs *inside* a proprietary host, so these patterns keep the AI in
+a **separate process** and let the DAW or editor call it. That one decision is what keeps the output
+shippable under your own terms.
+
+### Pattern 12.1 — Rights-clean dubbing pipeline (the LATAM-grade one)
+
+**Problem.** Dub a catalogue into Spanish for a Mexican or regional broadcaster, under a statute
+(DOF 2026-05-14) that requires express consent and specific remuneration for any cloned performer
+voice, and under EU AI Act disclosure if the same asset ships into EMEA.
+
+**Wiring.**
+1. **Separate** dialogue from music and effects — `deezer/spleeter` (MIT) or
+   `asteroid-team/asteroid` (MIT). Keeps the original M&E bed intact, which is what makes a dub
+   mixable at all.
+2. **Clean** the dialogue stem — `Rikorose/DeepFilterNet` (MIT **or** Apache-2.0). For archive-grade
+   or telephone-grade source, add `haoheliu/versatile_audio_super_resolution` (MIT).
+3. **Attribute** speakers — `pyannote/pyannote-audio` (MIT, already in this KB from p7).
+4. **Transcribe and time** — Whisper (MIT, already in this KB); align with the caption-plane tooling
+   from pass 3 so the dub inherits conformant timing.
+5. **Synthesise** the target-language voice. **This is the licence decision point, not a model
+   choice.** `fishaudio/fish-speech` is the strongest open option and its licence permits delivering
+   *finished audio* as an agency or studio, while **forbidding** on-premises deployment to a client
+   over USD 500k revenue and **any** hosted TTS service without a separate agreement. If the client
+   wants the model in their infrastructure, use the permissive path instead: Chatterbox or Kokoro
+   (both already in this KB) served through `k2-fsa/sherpa-onnx` (Apache-2.0).
+6. **Record consent as an artefact, not a spreadsheet.** Bind performer consent — who, what use, what
+   remuneration — to the asset using the C2PA provenance tooling from pass 9, so the permission
+   travels with the file through every downstream transcode.
+7. **Disclose.** Emit the synthetic-content declaration the EU AI Act expects, in the same manifest.
+8. **Mix and verify loudness** with the pass-4 ebur128 tooling before delivery.
+
+**Why it is defensible:** steps 1-4 and 8 are fully permissive; step 5 is the only licence-bearing
+choice and the recipe gives both branches; steps 6-7 are what the client cannot buy anywhere.
+
+### Pattern 12.2 — Object-based (immersive) audio delivery on the open stack
+
+**Problem.** A sports or event client needs an ADM/BW64 immersive deliverable, and the budget will
+not carry a per-seat proprietary authoring chain.
+
+**Wiring.**
+1. **Author** the object-based mix in `ebu/ear-production-suite` (GPL-3.0-or-later; VST plugins,
+   Reaper-optimised). Note the licence is at `packaging/LICENSE.md`, not the repo root.
+2. **Model and write** the metadata and container with `ebu/libadm` + `ebu/libbw64` (both
+   Apache-2.0) — this is your own code's permissive path, independent of the GPL authoring tool.
+3. **Render** to the target layout with `ebu/ebu_adm_renderer` (BSD-3-Clause-Clear) — the normative
+   ITU-R BS.2127 implementation, i.e. the definition of correct.
+4. **Binaural check** with `ebu/bear` (Apache-2.0) for headphone monitoring and OTT.
+5. **Live object positions**, if the show is live, over `immersive-audio-live/ADM-OSC` (MIT).
+6. **Browser preview** for review-and-approval with `GoogleChrome/omnitone` (Apache-2.0) or
+   `polarch/JSAmbisonics` (BSD-3), loading HRTFs via `hoene/libmysofa` (BSD-3).
+
+**The honest limit, state it to the client up front.** This chain ends at **ADM/BW64**. There is **no
+open MPEG-H encoder**; for ATSC 3.0 carriage the encode step is Fraunhofer's and must be licensed.
+Scope the engagement to *authoring, rendering and conformance* and name the encoder as a third-party
+dependency in the proposal.
+
+**Licence boundary:** keep your deliverable in the libraries (Apache/BSD, step 2-4). The GPL-3.0
+authoring suite is a **tool you operate**, not a component you redistribute.
+
+### Pattern 12.3 — Archive audio restoration and enrichment at catalogue scale
+
+**Problem.** A broadcaster or national archive has decades of tape with poor intelligibility, no
+speaker labels and no searchable description.
+
+**Wiring.**
+1. **Restore**: `xiph/rnnoise` (BSD-3) for cheap bulk denoise, `Rikorose/DeepFilterNet` where quality
+   matters, `haoheliu/versatile_audio_super_resolution` (MIT) for bandwidth extension on
+   narrow-band sources.
+2. **Separate** music beds from speech with `deezer/spleeter` (MIT) so the music can be identified
+   separately.
+3. **Diarise and transcribe**: `pyannote-audio` (MIT) → Whisper (MIT), both already in this KB.
+4. **Identify the music** with the fingerprinting layer from pass 5 (Chromaprint/AcoustID) and resolve
+   it against MusicBrainz via `metabrainz/picard` (GPL-2.0, operated as a tool) or `beetbox/beets`
+   (**MIT** — the permissive option, and the one to embed).
+5. **Describe and catalogue** by handing the transcript to the description plane from pass 11:
+   `NatLibFi/Annif` (Apache-2.0) for subject indexing against a controlled vocabulary.
+6. **Preserve** into the OAIS repository layer from pass 4.
+
+**This is the highest-value, lowest-licence-risk composition in the plane** — every embedded
+component is MIT/BSD/Apache/ISC, and it spans four passes of this KB without a copyleft dependency.
+
+### Pattern 12.4 — Loudness and delivery conformance as a service
+
+**Problem.** Every deliverable must hit a loudness target (EBU R128 / ATSC A/85) and failures are
+caught late, by a human, after the mix is locked.
+
+**Wiring.** Measure with the pass-4 ebur128 tooling, decode/transcode with FFmpeg (already in this
+KB), and wrap both in a service the DAW calls. **The gap this pass measured: there is no open agent
+that decides what to do about a failing measurement.** Build the remediation rules explicitly — they
+are client-specific and they are the actual deliverable — and keep the model, if you use one, advisory
+with a human sign-off. Do not sell this as autonomous; nothing open supports that claim today.
+
+### Pattern 12.5 — Music understanding for catalogue and sync, with the trap called out
+
+**Problem.** Tag a music catalogue with tempo, key, structure and instrumentation for search and
+placement.
+
+**Wiring.** `librosa/librosa` (ISC) for features; `spotify/basic-pitch` (Apache-2.0) for
+audio-to-MIDI; `Natooz/MidiTok` (MIT) to tokenise for a sequence model; `cuthbertLab/music21`
+(BSD-3) for symbolic analysis; `rism-digital/verovio` (LGPL-3.0) to render scores.
+
+**⛔ The trap, and it will catch a team that does not read this.** The obvious choice for beat and
+downbeat tracking is `CPJKU/madmom` — and **its pretrained models are CC BY-NC-SA 4.0**, explicitly
+including pickled Processors, while its source is BSD. **madmom without its models does nothing, so
+it cannot ship in a commercial product as-is.** Use `aubio` (GPL-3.0, operated as a tool) or
+`librosa` (ISC, embeddable) instead, or license madmom's models from JKU. `MTG/essentia` is excellent
+and **AGPL-3.0** — which reaches a hosted service, so it is a tool you run, not a library you embed.
+
+**Rule of thumb for this recipe:** in MIR, check the **model** licence and the **library** licence
+separately, every time. They differ more often than not.

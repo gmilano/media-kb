@@ -1363,3 +1363,72 @@ Blacklight Apache-2.0, Fedora Apache-2.0 — and **IIIF, where three of four com
 Apache-2.0, Universal Viewer MIT, Cantaloupe NCSA) are permissive and all four were pushed within six
 days of this pass.** If a client refuses AGPL for a hosted service, there is no open newsroom CMS for
 them, and the honest answer is Wagtail (BSD-3) plus custom workflow.
+
+## Sound, music & immersive audio — added 2026-11-26 (pass 12)
+
+### 1. Immersive audio stopped being a differentiator and became a deliverable requirement
+
+SMPTE's March 2026 position is that immersive sound is "table stakes" rather than a premium feature,
+and the 2026 delivery calendar is what made it so: NBC carried the **2026 Winter Olympics and the
+Super Bowl** in Dolby Atmos on Peacock, **Brazil's DTV+** demonstrated MPEG-H as a core feature at
+CES 2026, and the **FIFA World Cup 2026** is the next milestone across both broadcast and OTT. The
+**ATSC 3.0 suite approved on 2026-04-14** standardises MPEG-H audio for North America.
+
+**The consequence this KB can measure:** demand is now contractual, and the open supply is the EBU's
+ADM stack — whose normative renderer has **105 stars**. The encoder side (MPEG-H) is Fraunhofer's and
+is not open. Teams will meet an immersive deliverable with proprietary tools or with a 105-star
+reference implementation; there is no third option today.
+
+### 2. The licence constraint in audio is positional, not ideological
+
+The finding of this pass, stated as a trend because it is a stable property of the market: code that
+runs **beside** a proprietary host stays permissive (7/7 measured), code that must run **inside** one
+is dual-licensed or copyleft (6/6 measured, no exception). Plugin frameworks sell exceptions because
+their customers ship closed plugins. Expect this to hold wherever a plane's deliverable is an
+in-process extension of someone else's product — it is the most portable prediction this KB has made.
+
+### 3. The restriction keeps migrating to the weights — now found inside a single licence file
+
+Pass 9 recorded the licence moving from the code into the model. Pass 12 adds the sharpest instance:
+`madmom` ships **BSD source and CC BY-NC-SA 4.0 models in one `LICENSE` file**, naming pickled
+Processors explicitly. No repo-level scanner, directory or awesome-list can see a split that lives in
+the prose of a licence file. **Licence due-diligence that stops at the repository badge is no longer
+sufficient in the model era** — and this is now the third independent confirmation across three
+planes.
+
+### 4. Revenue-threshold licences have arrived in media models, and they are written at service firms
+
+`fish-speech`'s **Fish Audio Community License v1.0** (2026-10-13, 33,872★) caps free commercial use
+at **USD 500,000 annual revenue** and writes explicit rules for *"contractor, integrator, consultant,
+or on-premises vendor"* delivery — extending the licence to that work only if **the client** is also
+under the threshold, while carving out agencies that deliver finished audio. This is a licence drafted
+with systems integrators in view. Expect more of them: it lets a model vendor court the open-source
+community while charging exactly the enterprises a studio sells to.
+
+### 5. Voice is the most-regulated AI modality in media, and the rules diverge sharply by region
+
+Synthetic voice now carries real statutory exposure, and — unusually — **the strictest sector-specific
+law is in LATAM, not North America or the EU.** Mexico's decree (DOF **2026-05-14**, in force the
+following day) requires express consent and specific remuneration to clone a performer's voice or
+image, and introduces *"actor de doblaje"* as a legal concept. See `intel/market.md` for the regional
+breakdown. The practical effect: **voice is the one AI capability where the legal review must precede
+the technical pilot**, and where the answer differs per market.
+
+### 6. The agent layer is absent for the twelfth consecutive plane — and here the vocabulary hides it
+
+`audio post production agent` returns **six repositories in all of GitHub**, top-six star sum **7**.
+But the more useful observation is *why the absence is hard to see*: audio's vocabulary is homonymous
+with agent vocabulary. "Supervision" means music clearance to a studio and sub-agent routing to a
+framework. "Dialogue" means production sound to post and conversation to AI. A casual search returns
+plausible-looking, well-starred repositories from entirely different domains — which is how a plane
+this empty can appear populated.
+
+### 7. AI dubbing is growing fast and the market sizing is unusable without a named scope
+
+Six firms, same year, for overlapping definitions: **USD 52m** (Intel Market Research, AI video
+dubbing), **USD 600.8m** for 2025 (Astute Analytica), **USD 750m** (Mordor, AI dubbing for OTT),
+**USD 1.15bn** for 2025 (The Business Research Company, AI dubbing tools), **USD 5.29bn** (Mordor,
+generative AI in media localisation). CAGRs cluster **17-31%**. That is a **greater than 100× spread**
+between the narrowest and widest scopes — wider than pass 11's 3.7× MAM spread, and the same lesson:
+**never quote a dubbing figure without naming the firm and the scope.** Mordor also notes quality
+still limits AI dubbing in premium scripted work, which is the honest ceiling on the pitch.

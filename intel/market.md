@@ -446,6 +446,36 @@ shipping maintained open cataloguing tools for media. The region sets the *vocab
 *tooling*; EMEA builds the tooling. For a North American engagement, expect to supply the cataloguing
 layer from European open source and the schema layer from schema.org itself.
 
+#### Pass 12 (2026-11-26) — the sound & immersive-audio plane: a standardised deadline with no open encoder
+
+**The deadline is real and dated.** The **ATSC 3.0 suite was approved 2026-04-14** and standardises
+**MPEG-H** as the next-generation audio system for North American broadcast (ATSC A/342 Part 3).
+Deliverables already assume it: NBC carried the **2026 Winter Olympics and the Super Bowl** in Dolby
+Atmos on Peacock, and the **FIFA World Cup 2026** is the next milestone across broadcast and OTT.
+SMPTE's March 2026 read is that immersive sound is now "table stakes".
+
+**The supply gap, measured rather than asserted.** There is **no open MPEG-H encoder** — the
+implementations are Fraunhofer's. The open stack reaches ADM/BW64 and stops: `ebu/ebu_adm_renderer`
+(BSD-3-Clause-Clear, **105★**), `ebu/bear` (Apache-2.0, 32★), `ebu/libadm` (Apache-2.0, 51★). **A
+continental broadcast mandate is served, on the open side, by repositories in the double digits.**
+
+**Voice regulation is state-level and fragmented.** Tennessee's **ELVIS Act** (in force 2024-07-01)
+was the first statute to name voice in AI cloning, extending the right of publicity to AI voice
+replicas. California's **AB 2602** makes digital-replica contract clauses unenforceable without
+specific, informed consent, with **AB 1836** covering deceased performers. The federal **NO FAKES
+Act** was reported advanced by the Senate Judiciary Committee on 2026-06-18 but **is not law** — do
+not plan against it. There is still no comprehensive federal AI voice statute, so exposure is
+per-state and contractual.
+
+**Opportunity for Globant in this region.**
+1. **ADM/BW64 conformance and delivery tooling** against the 105-star reference implementation —
+   the gap between "we must ship immersive" and "the open stack is a reference renderer" is
+   billable integration work, and it is permissive (Apache/BSD) end to end.
+2. **Rights-clean voice pipelines**: the technical work is small, the consent/provenance
+   recordkeeping is what a studio cannot buy off the shelf, and it is what AB 2602 makes
+   contractually necessary.
+3. **Avoid** promising DAW plugins without pricing `JUCE` (AGPL-3.0 or commercial) first.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -903,6 +933,38 @@ differ in commercial usability.
   and regional media players risk being left behind. That is the pitch for giving a regional
   broadcaster its own description layer rather than renting one.
 
+#### Pass 12 (2026-11-26) — the sound & immersive-audio plane: **this region builds the open stack**
+
+**The finding for EMEA is a supply finding, and it is the strongest in this file.** The entire open
+object-based-audio stack is European public-service infrastructure: the **EBU**, the **BBC** and the
+former German **IRT** wrote `ebu_adm_renderer` (BSD-3-Clause-Clear), `bear` (Apache-2.0, BBC
+copyright), `libadm`, `libbw64` (Apache-2.0) and the `ear-production-suite` (GPL-3.0-or-later, BBC/
+EBU/IRT, licence at `packaging/LICENSE.md`). Nowhere else in this KB does a region so clearly *own*
+a plane's permissive substrate. An EMEA engagement in immersive audio is working with the
+standard-setters' own code, under Apache and BSD terms, with the specifications (ITU-R BS.2076,
+BS.2127, BS.2051) public.
+
+**Regulation: transparency duties apply to synthetic audio.** The EU AI Act's transparency
+obligations for synthetic content reportedly took effect **2026-08-02**, and one market report states
+the practical consequence plainly — user-facing synthetic dubbing must disclose that it is
+artificial. **ACT**, the commercial broadcasters' association, argues in its June 2026 issue paper
+that broadcasters' own AI use should fall under existing editorial-responsibility rules and that
+blanket Article 50 labelling would be disproportionate; the **EBU** has separately called for clearer
+rules on big tech and AI. The direction of travel is settled; the detail for broadcasters is still
+contested.
+
+**Market context.** The DPP's *European Media Trends 2026* reports AI as the dominant driver of
+strategic change and that **a quarter of European media companies have shifted toward in-house
+development** — which is a direct read on buying behaviour: more integration, fewer black boxes.
+
+**Opportunity for Globant in this region.**
+1. **Be the integrator of the EBU/BBC stack** — it is permissive, institutionally credible, and
+   under-tooled. The reference renderer at 105 stars is an opportunity, not a risk, when the client
+   is the institution that wrote it.
+2. **Synthetic-audio disclosure plumbing**: Article 50 compliance is a metadata-and-provenance
+   problem, which connects directly to the C2PA work recorded in pass 9.
+3. The in-house-development shift favours **capability transfer engagements** over managed services.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1331,6 +1393,39 @@ metadata obligations, and they differ by country.
 monetisation gap defining the decade (Variety); APOS 2026 in Bali ran AI through the whole programme,
 with Tencent Video and iQIYI named as generative-AI investors. Kantar finds roughly **one in three
 APAC consumers** use AI to research brands, varying widely by market.
+
+#### Pass 12 (2026-11-26) — the sound & immersive-audio plane: labelling is enforced, not announced
+
+**APAC is the region where synthetic-audio rules have actually been enforced.** China's AI content
+labelling measures (issued 2025-03-14, in force **2025-09-01**) run alongside the mandatory national
+standard **GB 45438-2025**, and require **both** a visible label and **embedded metadata for
+tracing**, with content sorted into confirmed / possible / suspected tiers. Audio is in scope as one
+of the covered formats. Enforcement is documented: in **April 2026 the CAC acted against the Jianying
+and Maoxiang apps and the Jimeng AI website** for failing to implement labelling properly, issuing
+rectification orders and warnings. State-aligned reporting claims **150 billion+ pieces** of content
+labelled across text, images, audio and video — treat the figure as platform-reported, but the
+enforcement actions are specific and dated.
+
+**Elsewhere in the region the picture is thinner but real:** Australia's **ACMA** published an *AI in
+media* report in **April 2026**; the ABU notes public broadcasters in Australia and Singapore
+exploring AI for newsroom, archiving and verification workflows. Commentary places APAC second only
+to North America in adoption pace, and Mordor projects APAC as the **fastest-growing AI-dubbing-for-
+OTT region at 27.96% CAGR**.
+
+**An honest gap, stated rather than left silent:** none of the sources surfaced describes
+**audio-specific technical requirements** under GB 45438-2025 — audio appears only as a covered
+format. The watermarking and metadata field specifics would have to be read from the standard text
+itself, which this pass did not obtain. **Do not quote audio-specific Chinese technical requirements
+to a client on the strength of secondary reporting.**
+
+**Opportunity for Globant in this region.**
+1. **Label-and-trace pipelines for synthetic audio** — the one market where the obligation is
+   enforced, and where "we can prove the label and the embedded metadata survived the transcode" is a
+   procurement answer, not a nice-to-have.
+2. **Dubbing at the region's growth rate**, with the licence caveat from this pass: an on-premises
+   model delivery into a large APAC broadcaster is exactly the case `fish-speech`'s licence excludes.
+3. **Brazil's DTV+ MPEG-H demonstrations** (CES 2026) make the APAC/LATAM standards split worth
+   tracking jointly — see the LATAM section.
 
 ### LATAM
 
@@ -1852,6 +1947,49 @@ Spanish, two of three LATAM- or EU-public-institution maintained.** Latam-GPT (C
 institutions across 8 countries) is the regional model to pair with them. Adoption headroom is real:
 only **6% of Latin Americans access news through AI tools**.
 
+#### Pass 12 (2026-11-26) — the sound & immersive-audio plane: **the world's strictest AI-voice law is here, and so is the exposure**
+
+**This is the clearest case in the KB of regulation following industrial concentration.** Mexico
+holds, by its own industry council's (CEMID) account, **about 60% of the global Spanish-language
+dubbing market**. It is also, as of 2026, the jurisdiction with **the most specific AI-voice statute
+in the world**:
+
+- A decree reforming the **Ley Federal del Derecho de Autor** and the **Ley Federal del Trabajo** was
+  published in the **DOF on 2026-05-14** and entered into force the following day.
+- It requires **express consent and specific remuneration** to use AI to clone the voice or image of
+  performers, and introduces **"actor de doblaje"** as a legal category.
+- Reporting puts the scope at **7 articles of the LFT and 20 of the LFDA**; the Chamber of Deputies
+  approved it in April 2026 by **368 votes**, with PAN and PRI abstaining and calling it ambiguous.
+- It is **not a ban**: digitally generated voices remain permitted **with the performer's express
+  permission**. Penalty figures reported in the press (up to 40,000 days of salary) appeared in a
+  single headline and should be verified against the decree before being quoted.
+
+**The commercial tension is live, not theoretical.** TelevisaUnivision has publicly moved to AI
+dubbing for its catalogue; the dubbing industry has been lobbying through 2026 for fiscal incentives
+and warning about exclusion from Mexico's audiovisual incentive policy; and in **November 2026** a
+dispute surfaced over a Netflix promotional piece allegedly using voice actor Diana Gálvan's voice
+without permission. Bloomberg Línea frames the stake as the livelihood of **~10,000 families**.
+
+**Standards:** **Brazil's DTV+** demonstrated **MPEG-H** as a core feature at CES 2026 — so LATAM is
+adopting next-generation audio on a different standards track from North America's ATSC 3.0, and a
+regional deliverable may need both.
+
+**An honest data gap:** CEMID's market-size figure (reported as "more than USD 60 million") is
+inconsistent with a 60% share of global Spanish dubbing, and no published methodology was found. **Do
+not use that number in a proposal** — use the share and the regulation, which are better sourced.
+
+**Opportunity for Globant in this region.**
+1. **Consent-and-remuneration infrastructure for voice.** Mexico's law creates a *recordkeeping*
+   obligation — who consented, to what use, for what payment — that no open tool covers. This is the
+   highest-conviction opportunity in this pass, because the statute is in force, the industry is
+   concentrated, and the tooling does not exist.
+2. **Rights-clean dubbing pipelines**, built so the consent artefact travels with the asset — wiring
+   this plane to the identification and provenance planes (p5, p9).
+3. **The licence point matters most here**: a studio delivering *finished dubbed audio* to a client
+   is explicitly permitted under `fish-speech`'s licence; delivering *the model* on-premises to a
+   large broadcaster is not. In the region where dubbing volume is concentrated, that distinction is
+   the difference between a compliant engagement and an unlicensed one.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -1912,3 +2050,35 @@ tagging, content indexing, quality control and rights management**; Technavio de
 orchestration hubs." Both are describing *the judgment layer this pass measured as one repo deep.*
 The demand is priced in; the open supply is Annif. That gap is the commercial opportunity, and it is
 also the reason not to promise it as off-the-shelf.
+
+## Market size — pass 12 addendum (2026-11-26): AI dubbing, and a 100× scope spread
+
+Pass 11 recorded a 3.7× spread between firms sizing MAM for the same year. This plane is worse, and
+the lesson is identical.
+
+| Source | Figure | Scope | Forecast |
+|---|---|---|---|
+| Intel Market Research | **USD 52m (2026)** | AI *video dubbing* | → USD 620m by 2034, ~31% CAGR |
+| Astute Analytica | **USD 600.8m (2025)** | AI dubbing & localization | → USD 8.16bn by 2035, 29.8% CAGR |
+| Mordor Intelligence | **USD 750m (2026)** | AI dubbing **for OTT** | → USD 2.45bn by 2031, 26.71% CAGR |
+| The Business Research Company | **USD 1.15bn (2025)** | AI dubbing *tools* | → USD 2.56bn by 2030, 17.3% CAGR |
+| Mordor Intelligence | **USD 5.29bn (2026)** | GenAI in media **localisation** (broad) | 28.41% CAGR to 2031 |
+| Coherent Market Insights | **USD 70.2m (2026)** | *Localization strategies* | → USD 155.2m by 2033, 12.0% CAGR |
+
+**The narrowest and widest 2026 scopes differ by more than 100×.** They are not measuring the same
+thing: "dubbing tools", "dubbing for OTT", "localisation" and "GenAI in localisation" are four
+different markets wearing similar names. CAGRs are the only thing the firms agree on — **17-31%**.
+
+Two qualifications worth carrying into any pitch:
+- **Mordor states that quality differences continue to limit AI dubbing in premium scripted
+  programming.** The volume is in catalogue, unscripted and short-form, not in prestige drama.
+- **Astute flags the EU AI Act**: by August 2026, user-facing synthetic dubbing must disclose that it
+  is artificial. Disclosure is a *feature* of the deliverable, not a legal footnote.
+
+**Regional growth:** Mordor puts APAC fastest at **27.96% CAGR** for AI dubbing in OTT. LATAM's
+significance is not growth rate but concentration and regulation — see the LATAM subsection above.
+
+**No usable sizing was found for immersive/next-generation audio as a segment.** Searches returned
+adoption evidence (ATSC 3.0 approval 2026-04-14, NBC Atmos deliverables, Brazil DTV+ MPEG-H demos)
+but no market figure that separates immersive audio from broader broadcast equipment spend. **Stated
+as a gap rather than filled with a proxy number.**

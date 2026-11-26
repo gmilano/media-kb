@@ -9,6 +9,148 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 12: the sound, music & immersive-audio plane (the law gets a mechanism)
+
+### How the gap was found — the vocabulary probe, two Bash calls, 95 terms
+
+Seventh consecutive step-5 failure on this industry: the remote already held passes 8-11, four of
+them dated today, while `rotation.json` still read `next=4, last_industry=healthcare`. Probe first,
+web second.
+
+| Term group | Hits across the 8 files | Verdict |
+|---|---|---|
+| `spatial audio`, `Atmos`, `binaural`, `ambisonic`, `object-based audio`, `next-generation audio` | **0** | Immersive audio absent |
+| `Ardour`, `Audacity`, `JUCE`, `SuperCollider`, `Csound`, `Faust`, `Pure Data`, `DAW`, `Zrythm`, `LMMS` | **0** | The authoring/host layer absent |
+| `MuseScore`, `LilyPond`, `music21`, `Verovio`, `VexFlow`, `MusicXML`, `music notation` | **0** | The music layer absent |
+| `Spleeter`, `Magenta`, `Basic Pitch`, `RNNoise`, `DeepFilterNet`, `foley`, `dialogue edit`, `audio post` | **0** | Restoration & MIR absent |
+| `loudness` 39 · `pyannote` 19 · `ebur128` 14 · `Essentia` 11 · `librosa` 10 | present | **Covered already** — measurement (p4), identification (p5), diarisation (p7) |
+
+The KB could measure, identify and generate audio. It could not **author** it.
+
+### The headline: the licence hardens by *where the code runs*, and this time with a mechanism
+
+Eleven planes established *that* openness collapses at the platform tier. This one establishes *why*.
+Sorted by whose process the code executes inside, with no counterexample in either direction:
+
+| Layer | Runs… | Licence outcome | Count |
+|---|---|---|---|
+| Reference implementations (`ebu/bear`, `libadm`, `libbw64`, `ebu_adm_renderer`, `ADM-OSC`, `omnitone`, `JSAmbisonics`) | *beside* the host | Apache-2.0 / BSD / MIT | **7/7 permissive** |
+| Plugins & plugin frameworks (`JUCE`, `tracktion_engine`, `libspatialaudio`, `Spatial_Audio_Framework`, `ear-production-suite`, `zrythm`) | *inside* a proprietary DAW | AGPL/GPL/LGPL **or paid commercial** | **6/6 dual or copyleft** |
+| Models & corpora (`madmom` weights, `fish-speech`) | — | Non-commercial / revenue-capped | restricted |
+| Agents | — | `audio post production agent` = **6 results on all of GitHub**, top-6 star sum **7** | **twelfth consecutive near-zero** |
+
+> Dual licensing in this plane is not ideology, it is the business model of **selling an exception to
+> people shipping closed plugins.** Consequence for delivery: a renderer or analysis service is clean;
+> a plugin inside the client's Pro Tools rig puts AGPL or a commercial fee under the deliverable.
+
+### ⛔ The licence finding of this pass: permissive repo, non-commercial weights, one file
+
+`CPJKU/madmom` (1,745★), the standard beat/downbeat/tempo library in MIR, has **one** `LICENSE` file
+that splits by file extension: source (`.py`, `.pyx`, `.c`) BSD-3; **data and models (`.npy`, `.h5`,
+`.pkl`) CC BY-NC-SA 4.0**, the text naming *"pickled Processors (i.e. saved models)"* explicitly and
+directing commercial users to contact JKU. madmom without its models tracks nothing, so **the
+permissive repo badge is true and useless** — and no repo-level licence scanner can see the split,
+because it is inside the licence file's prose. Third confirmation of pass 9's "licence in the
+weights", first instance found *within a single file*.
+
+### ⛔ The Globant-specific clause of the pass: a licence that turns on the delivery model
+
+`fishaudio/fish-speech` (**33,872★** — the biggest repo in the plane, reported by GitHub as
+`NOASSERTION`) ships the **Fish Audio Community License Agreement v1.0**, dated 2026-10-13.
+Commercial use is free only under **USD 500,000 annual revenue**, and Section III(a) addresses our
+exact business:
+
+- Deploying it *"as a contractor, integrator, consultant, or on-premises vendor"* is licensed **only
+  if the client's revenue is also under USD 500k** → an enterprise on-prem delivery is **unlicensed**.
+- Delivering *only output* — *"as an agency, studio, or freelancer producing voiceovers, dubbing, or
+  audiobooks"* — is **explicitly carved out and permitted**.
+- Any **Hosted Service** (self-serve TTS/voice-cloning API) needs a separate written agreement
+  **regardless of revenue**.
+
+Same software, same studio: **the licence turns on whether you hand over the model or the mix.**
+
+### New agents verified this pass
+
+| Agent | Repo | License | Stars | Push |
+|---|---|---|---|---|
+| sherpa-onnx | k2-fsa/sherpa-onnx | Apache-2.0 | 16,241 | 2026-11-24 |
+| YuE | multimodal-art-projection/YuE | Apache-2.0 | 13,742 | 2026-11-01 |
+| speechbrain | speechbrain/speechbrain | Apache-2.0 | 11,951 | 2026-11-25 |
+| DeepFilterNet | Rikorose/DeepFilterNet | MIT **or** Apache-2.0 | 5,107 | 2026-11-06 |
+| ACE-Step | ace-step/ACE-Step | Apache-2.0 | 5,113 | 2026-02-15 |
+| ClearerVoice-Studio | modelscope/ClearerVoice-Studio | Apache-2.0 | 4,659 | 2025-08-14 |
+| stable-audio-tools | Stability-AI/stable-audio-tools | MIT | 3,920 | 2026-11-01 |
+| spleeter | deezer/spleeter | MIT | 28,539 | 2026-10-28 |
+| matchering | sergree/matchering | GPL-3.0 | 2,741 | 2026-10-07 |
+| asteroid | asteroid-team/asteroid | MIT | 2,605 | 2026-11-03 |
+
+Archived-but-cited: `magenta` (Apache-2.0, 19,781★, archived 2026-01-06) and `demucs` (MIT, 10,425★,
+archived 2024-04-24). Both are quality leaders and neither is a safe dependency.
+
+### ⚙️ Method corrections, reusable across all twelve industries
+
+1. **A batched `repo:` search query dies whole on one bad name.** `repo:a/b repo:c/d` is an efficient
+   way to probe ten repos in one call — until one name is wrong, when GitHub returns
+   `422 Validation Failed` and **the valid repos in the batch return nothing.** It fails silently in
+   the direction of "nothing found". Hit twice this pass. **Rule: on a 422, re-probe the batch
+   one repo at a time** — never record the batch as empty.
+2. **A 422 is not automatically a rename.** Earlier passes read `422` as a rename detector. In two of
+   three cases this pass it was **my own wrong owner** — `videolabs/libspatialaudio` does not exist;
+   the repo is **`videolan/libspatialaudio`** (325★, LGPL-2.1+ or commercial). **Rule: before calling
+   a 422 a rename, search the bare repo name.**
+3. **The github.com HTML channel carries no signal in this environment.** `curl -sI
+   https://github.com/<owner>/<repo>` returned **403 for every repo tried, including ones that exist
+   and are indexed.** The proxy, not the repo, produces that status. Only `git ls-remote` (git
+   protocol) and the search API are usable oracles here. **Never read a 403 as "gone".**
+4. **A NINTH way a licence hides, and the root probe is structurally blind to it: the licence file is
+   not at the repository root.** `ebu/ear-production-suite` returns **404 for all ten conventional
+   licence filenames at the root** while `README.md` returns 200 — the control that earlier passes
+   established as proof the filenames are not at fault. The file is real and it is at
+   **`packaging/LICENSE.md`**, 110,524 B, GPL-3.0-or-later, BBC/EBU/IRT. Found with **one**
+   `search/code` call: `repo:<r> filename:LICENSE`. **Rule: when the root probe comes back empty on
+   all names and README is 200, the next call is a code search, not a clone.**
+5. **`NOASSERTION` has a diagnosable cause, and in this plane it is usually "a clause was added".**
+   19 of 59 repos came back `NOASSERTION`, and every one resolved on reading the file:
+   `MuseScore` = **GPL-3.0 with a font exception** (the exception defeats the classifier);
+   `sonic-pi` = **MIT main source that links GPLv3 code**, so the distribution obligation is GPLv3
+   despite the MIT headline; `Ardour` = GPL-2.0 in `COPYING`; `faust` = GPL-2.0 + exception in
+   `COPYING.txt`; `pure-data` = "Standard Improved BSD"; `opus` = BSD-3; `zrythm` = AGPL-3.0 plus §7
+   additional terms, declared by **REUSE pointer** (`LICENSES/LicenseRef-ZrythmLicense.txt`) rather
+   than inline. **`NOASSERTION` is a signal to read, not a verdict of "unknown".**
+
+### Licence traps found this pass
+
+| Repo | Reported | Actually | Why it matters |
+|---|---|---|---|
+| juce-framework/JUCE | `NOASSERTION` | **AGPL-3.0 or commercial JUCE 9 EULA** | The default plugin framework for the industry. AGPL on a client plugin is usually a blocker |
+| CPJKU/madmom | `NOASSERTION` | BSD code / **CC BY-NC-SA models** | Unusable commercially as shipped |
+| fishaudio/fish-speech | `NOASSERTION` | Revenue-capped bespoke licence | See above |
+| leomccormack/Spatial_Audio_Framework | `NOASSERTION` | **ISC by default, GPL-2.0 once optional modules are enabled** | **Second instance of pass 5's "licence decided by your build"** (Chromaprint was the first) — so it is a category, not an anecdote |
+| videolan/libspatialaudio | `NOASSERTION` | **LGPL-2.1+ or commercial** | |
+| Tracktion/tracktion_engine | `NOASSERTION` | **GPL-3.0 or commercial** | |
+| sonic-pi-net/sonic-pi | `NOASSERTION` | MIT source, **GPLv3 by linkage** | The inverse of the usual trap: permissive file, copyleft outcome |
+
+### ⚠️ Contamination — audio vocabulary is almost entirely homonymous with agent vocabulary
+
+`music supervision AI` → **#1 is a customer-support multi-agent repo (27★)**, and rank 5 is the
+LangGraph **supervisor** pattern: one word colliding twice in one result set. `dialogue editing AI` →
+#1 is `ludo-npc-ai` (104★), NPC chat, because *dialogue* means conversation to AI and production
+sound to post. `sound design agent LLM` → #1 is a 3D-animation skill (83★). `spatial audio agent` →
+per-app config helpers. And rank 3 of `dialogue editing AI` is a **pirated-commercial-software lure**
+(`...SpectraLayers-Pro-13-Free-AI-Audio-Editing`, 9★, no licence). **This plane's queries surface
+warez dressed as tooling — open the repo before you clone it.**
+
+### Informed gaps — searched and genuinely not found
+
+- **No open MPEG-H authoring/encoder.** ATSC 3.0's 2026 suite (approved 2026-04-14) standardises
+  MPEG-H audio; the open stack is ADM/EAR-based and the encoder side is Fraunhofer's. Largest supply
+  gap in the plane, sitting under a live North American deadline.
+- **No open loudness-compliant mixing agent** — measurement solved (p4), remediation unbuilt.
+- **No open music clearance / cue-sheet tooling** — consistent with p5's music-royalty zero.
+- **IEM Plugin Suite is not canonically on GitHub.** It lives on `git.iem.at`, unreachable through
+  this proxy (uniform `000`); GitHub has only forks, largest `tu-studio/IEMPluginSuite` 12★ GPL-3.0.
+  Recorded as unverifiable from here, **not** as absent.
+
 ## 2026-11-26 — pass 11: the description & semantic-interchange plane (the law's control case)
 
 ### How the gap was found — the vocabulary probe, now at two calls and 110 terms

@@ -476,6 +476,43 @@ per-state and contractual.
    contractually necessary.
 3. **Avoid** promising DAW plugins without pricing `JUCE` (AGPL-3.0 or commercial) first.
 
+#### Pass 13 (2026-11-26) — the subscription layer: enforcement without a rule
+
+**The regulatory position is the inverse of the UK's, and that is the whole opportunity.** The FTC's
+"click-to-cancel" amendments to the Negative Option Rule were **vacated in full by the Eighth Circuit
+on 2025-07-08** (*Custom Communications, Inc. v. FTC*) on **procedural** grounds — the Commission
+skipped a required preliminary regulatory analysis — so they never took effect. Reporting indicates
+the FTC then removed the 2024 amendments from the CFR on **2026-02-12** and issued an **Advance
+Notice of Proposed Rulemaking in March 2026**, asking whether to re-adopt provisions of the vacated
+rule. **No replacement rule has been proposed**; commentary suggests a final rule could run into 2027
+or later. *(Sources are law-firm commentary; the CFR removal date in particular should be checked
+against the Federal Register before it is quoted to a client.)*
+
+Meanwhile **enforcement has not paused**: the FTC continues to bring cases under **ROSCA** and
+**Section 5** over undisclosed material terms, charges without express informed consent, and
+deliberately difficult cancellation.
+
+**Why this is commercially sharper than a prescriptive rule, not weaker.** A rule tells a client what
+to build. Enforcement without a rule tells them only that they will be judged later, on facts. What
+survives that is **evidence**: a recorded, replayable cancellation journey showing what was disclosed,
+when consent was captured, and how many steps cancellation took. That is an engineering artefact, and
+nothing open source produces it (see Pattern 13.1).
+
+**Demand context.** Deloitte reports that as of March 2026, **68% of SVOD-subscribing households have
+at least one ad-supported service, up from 54% a year earlier** — plan-switching between ad and paid
+tiers is now the normal subscriber motion, and each switch is a billing, entitlement *and* disclosure
+event. Grant Thornton's survey of 950 business leaders reports **87% of M&E boards have approved
+major AI investments**, while Forrester's North America spotlight finds firms "bullish on genAI but
+bogged down in early experimentation" — budget exists, deployment does not.
+
+**Opportunity for Globant in this region.**
+1. **The evidentiary cancellation journey** — build the artefact that survives a ROSCA enquiry.
+   Highest-value because the duty is live and the specification is absent.
+2. **Dunning and involuntary churn** on Kill Bill (Apache-2.0): failed-payment recovery is the most
+   automatable task in the plane, and `dunning agent` returns 57 repos with nothing above 200★.
+3. **Ad-tier / paid-tier switching** as a first-class entitlement and disclosure flow, not a billing
+   edge case — this is where the 68% figure turns into engineering work.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -965,6 +1002,54 @@ development** — which is a direct read on buying behaviour: more integration, 
    problem, which connects directly to the C2PA work recorded in pass 9.
 3. The in-house-development shift favours **capability transfer engagements** over managed services.
 
+#### Pass 13 (2026-11-26) — the subscription layer: a dated statutory deadline, five weeks out
+
+**The UK DMCCA subscription regime is the most concrete near-term compliance deadline in this entire
+KB.** Draft regulations — the **Consumer Subscription Contracts (Cancellation and Information)
+Regulations 2026** — were **laid before Parliament on 2026-10-19** and come into force on
+**2027-01-01**, subject to approval. They apply to subscription contracts **entered into on or after
+that date**; existing contracts and B2B contracts are out of scope.
+
+What the regime requires, as drafted:
+
+| Duty | Detail |
+|---|---|
+| **Reminder notices** | Roughly every six months on rolling contracts; before a trial or discount ends; before renewal onto a term of 12 months or more, with an additional earlier reminder for long-term renewals |
+| **Two cooling-off periods** | A 14-day *initial* right at the start, **and a new 14-day *renewal* cooling-off right** at certain renewal payment dates |
+| **Exit parity** | Online cancellation must be available where the consumer signed up online |
+| **Charging** | A consumer may end a subscription at any time and cannot be charged for a renewal before the contract actually renews |
+
+The **renewal** cooling-off right is the part worth flagging to any client: it is not a sign-up-time
+checkbox but a **recurring, date-triggered obligation on every qualifying renewal**, which means it
+lands in the billing scheduler, not in the marketing site. *(The date has moved more than once —
+Spring 2027 and an unspecified January were both briefed earlier in 2026 — so confirm against the
+final SI before contracting.)*
+
+**No open-source tooling implements any of this.** The reminder calendar, the dual cooling-off clock
+and the exit-parity audit trail are all absent from Kill Bill, Lago and REMP alike.
+
+**Wider EMEA context.** Member States are pressing for an overhaul of the **AVMSD**; the Commission
+has consulted on EU copyright rules bearing on AI training and licensing; and the proposed **EU KIDS
+Act** (child safety, not an AI-media rule) had a feedback period running to **2026-12-03**, with
+adoption not expected before 2028. On capability, an **imec/VUB report (May 2026)** finds Europe's
+media sector most active at the *application* layer — archive search, newsroom productivity,
+audience-facing products — and **DPP's European Media Trends 2026** reports that **a quarter of
+European media companies have shifted strategy toward building in-house or taking greater
+integration responsibility**. That is a direct demand signal for an integration partner.
+
+**A regional asset worth naming in a pitch:** the only open reader-revenue platform that exists,
+[REMP](https://github.com/remp2020/remp) (MIT, 138★), is **EMEA-origin** — built and run by
+Denník N in Slovakia. An EMEA publisher engagement can start from a European reference
+implementation rather than a US SaaS.
+
+**Opportunity for Globant in this region.**
+1. **The DMCCA compliance build** — a dated deadline, a specified artefact, and zero open tooling.
+   This is the highest-urgency item in this pass and it has roughly five weeks to run.
+2. **REMP integration and modernisation** for European publishers, including replacing its dead,
+   unlicensed churn component (`pythia-tools`, no licence, dormant since 2023) with `lifelines` (MIT).
+3. **Avoid** proposing Lago or flexprice (AGPL-3.0) as an embedded component for a client who intends
+   to modify them — Kill Bill (Apache-2.0) is the permissive equivalent.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1426,6 +1511,43 @@ to a client on the strength of secondary reporting.**
    model delivery into a large APAC broadcaster is exactly the case `fish-speech`'s licence excludes.
 3. **Brazil's DTV+ MPEG-H demonstrations** (CES 2026) make the APAC/LATAM standards split worth
    tracking jointly — see the LATAM section.
+
+#### Pass 13 (2026-11-26) — the subscription layer: a commercial story, and an explicit regulatory gap
+
+**Stated as a gap, not left as silence: no APAC-wide subscription-contract regime was found.** The
+searches run for this plane returned no equivalent of the UK DMCCA regime or the US ROSCA/FTC
+position for any APAC jurisdiction. An ASEAN policy brief notes that regional cooperation on media
+regulation is recognised as necessary but **progressing slowly**. Country-level consumer-contract
+rules (Australia, Japan, Korea, India) were **not** covered by these searches and should be checked
+per-engagement rather than assumed absent — the gap recorded here is in *this pass's evidence*, not
+necessarily in the law.
+
+**The APAC story in this plane is commercial, and it is about monetisation mix.** Variety frames the
+Asia-Pacific screen economy as racing toward **$200 billion** with a "monetisation gap" defining the
+decade. Media Partners Asia puts the premium streaming market for Netflix, Prime Video, Disney+ and
+HBO Max at about **$10 billion annually in APAC by end-2026**. The transition **from
+subscription-first to hybrid monetisation** is described as the defining commercial story in the
+region right now, and Kantar reported **Netflix with ads topping APAC marketers' list for the first
+time**. Omdia forecasts **Asia & Oceania as the strongest region for revenue expansion in 2026**.
+
+**Adoption is production-grade, not pilot-grade.** The headline example from APOS 2026 (Bali, June)
+is **JioHotstar's conversational discovery feature, built with OpenAI, reporting 60% voice adoption
+at scale**. Tencent Video and iQIYI are investing in generative AI; microdramas and AI-native
+production were standing agenda items.
+
+**The permissive-substrate inversion holds again.** Trend 50 recorded that APAC owns the permissive
+substrate in the live & delivery plane. It repeats here: the **largest permissive project anywhere in
+this plane is [Hyperswitch](https://github.com/juspay/hyperswitch) (Apache-2.0, 45,917★), built by
+Juspay in India** — payments orchestration across PSPs, self-hostable. For an APAC engagement the
+payments layer can be open, regional and permissive, which is not true in any other region measured.
+
+**Opportunity for Globant in this region.**
+1. **Hybrid plan mechanics** — ad-tier/paid-tier switching, downgrade paths and win-back, which is
+   precisely the "monetisation gap" the regional analysis names, and which no open platform models.
+2. **Hyperswitch-centred payment orchestration** for multi-country launches: many PSPs, many
+   currencies, one permissive Apache-2.0 layer.
+3. **Per-jurisdiction consumer-contract review before any cancellation-flow build** — the absence of
+   a regional regime is not the absence of national ones, and this pass did not measure them.
 
 ### LATAM
 
@@ -1990,6 +2112,50 @@ not use that number in a proposal** — use the share and the regulation, which 
    large broadcaster is not. In the region where dubbing volume is concentrated, that distinction is
    the difference between a compliant engagement and an unlicensed one.
 
+#### Pass 13 (2026-11-26) — the subscription layer: two enacted laws, and the most hostile open-source environment measured
+
+**Mexico has moved first, and it is enacted law, not proposal.** Amendments to the **Federal Copyright
+Law (LFDA)** and the **Federal Labour Law (LFT)** were **published on 2026-05-14**, described as
+Mexico's first sector-specific AI regulation. A separate **audiovisual law published on 2026-05-22**
+introduces regulatory obligations for **VOD platforms** — meaning the platform layer this pass
+measures is directly in scope.
+
+**Brazil's fight is over the streaming bill's tax provisions.** Global SVOD services (Netflix,
+Amazon, Disney+, HBO Max) are seeking to block parts of a streaming-regulation bill approved in the
+Senate, on the basis that it would roughly double their taxation in the country; trade coverage
+reports streamers accepting regulation in principle while demanding equal rules across the market.
+Separately, Brazil's advertising self-regulator updated its influencer guidance in 2026 to cover
+**avatars, virtual profiles and AI-generated content**.
+
+**There is no harmonised regional regime.** No Latin American country has a fully mature,
+cross-sector AI framework; Brazil, Argentina, Chile, Colombia and Costa Rica are each advancing their
+own, and 15 LAC countries agreed a regional AI roadmap at a UNESCO summit in late 2024.
+
+**⚠️ The finding that is specific to this region, and it is uncomfortable.** The open-source
+circumvention ecosystem measured in `agents/top.md` is **disproportionately aimed at the Brazilian
+press**. Of the top ten `topic:paywall` repositories by stars, the two largest non-English projects
+are **[marreta](https://github.com/manualdousuario/marreta) (GPL-3.0, 1,229★, pushed 2026-11-20)** and
+**[burlesco](https://github.com/burlesco/burlesco) (MIT, 948★, pushed 2026-11-22)** — both
+Brazilian-Portuguese, both actively maintained *this month*, both built to read paywalled Brazilian
+news without subscribing. A LATAM publisher's subscription funnel is under live, popular,
+well-maintained attack in a way no other region measured matches. **This is a reason to sell paywall
+*resilience* in LATAM, and it is evidence a client can verify in thirty seconds.**
+
+**Players.** Vix (TelevisaUnivision) holds exclusive FIFA World Cup 2026 streaming rights in Mexico
+and is investing heavily in originals; Globo announced a free ad-supported **vertical micro-drama
+app** in January 2026 to compete with Kwai and TikTok; Netflix has described a microseries strategy
+plus more live events for the region. *(One industry claim that online piracy accounts for ~80% of
+total economic impact, with ~$2.5bn/year of government losses, comes from a truncated
+rights-holder-sourced item and is **not** treated as verified here.)*
+
+**Opportunity for Globant in this region.**
+1. **Paywall resilience and circumvention-aware funnel design** — the only region where this is
+   demonstrably urgent, and the evidence is public and current.
+2. **Mexican VOD-platform compliance** against the 2026-05-22 audiovisual law, wired to the
+   entitlement layer rather than bolted onto the front end.
+3. **Spanish/Portuguese-language reader-revenue builds on REMP** (MIT) — a European publisher's
+   production tooling, not a US SaaS, which matters for both cost and data residency.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -2082,3 +2248,40 @@ significance is not growth rate but concentration and regulation — see the LAT
 adoption evidence (ATSC 3.0 approval 2026-04-14, NBC Atmos deliverables, Brazil DTV+ MPEG-H demos)
 but no market figure that separates immersive audio from broader broadcast equipment spend. **Stated
 as a gap rather than filled with a proxy number.**
+
+## Market size — pass 13 addendum (2026-11-26): the subscription segment, and why growth has stopped being the story
+
+Treat every figure as a range from a named source, not a number. Sources disagree on scope, and the
+disagreement is itself the finding.
+
+| Figure | Source | Scope caveat |
+|---|---|---|
+| **6.7%** online subscription growth in 2026 | Omdia | Omdia also says the industry is "nearing maturity with growth in single digits" |
+| **5%** global OTT growth in 2026 | AlixPartners | Lower than Omdia's; different basket |
+| **$10bn/yr** APAC premium streaming by end-2026 | Media Partners Asia | Netflix + Prime Video + Disney+ + HBO Max only — four services, one region |
+| **~$200bn** Asia-Pacific screen economy | Variety | Whole screen economy, not subscription — not comparable to the row above |
+| **68%** of SVOD households with ≥1 ad-supported service (Mar 2026) | Deloitte | US households; up from 54% a year earlier |
+| **~$277bn** global streaming video revenue 2026 | SQ Magazine | ⚠️ **Low-confidence secondary source — do not quote to a client.** Recorded only so a later pass does not rediscover it as new |
+
+**The structural read, which matters more than any single number.** Subscriber *growth* has fallen to
+mid-single digits in every credible source, and AlixPartners reports that Netflix and Disney+ now
+optimise for **profitability, engagement and ARPU rather than subscriber count**. Deloitte's framing
+is the same: as subscription growth slows, ad-supported tiers take the lead, and AlixPartners adds
+that hybrid ad–subscription models have expanded reach **but not consistent profits**.
+
+**What that means for where the work is.** When growth stops being the lever, the levers that remain
+are **retention, involuntary churn, plan mix and ARPU** — every one of which lives in the layer this
+pass measured, and every one of which is unserved by open tooling:
+
+- retention → no open churn system for media (`lifelines` is a statistics library, not a product),
+- involuntary churn → no open dunning agent (57 repos, none above 200★),
+- plan mix → no open model of ad-tier/paid-tier switching,
+- ARPU → no open entitlement schema expressing what a subscriber may actually watch.
+
+The commercial argument writes itself: **the industry's own analysts have named the four levers that
+matter in 2026, and the open-source estate implements none of them.**
+
+**Not found, and stated as a gap:** no sizing was located for *subscription-management software* as a
+segment within M&E — every figure available sizes the subscription *revenue*, not the spend on the
+systems that run it. A later pass should not fill this with an adjacent SaaS-billing TAM figure,
+which would be a scope substitution of the kind recorded in the pass-12 addendum.

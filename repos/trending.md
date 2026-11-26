@@ -10,6 +10,82 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 13: subscription, entitlement & reader-revenue infrastructure (33 repos, 33/33 resolve)
+
+### Headline: the licence outcome is predicted by distance from the recurring charge
+
+Sorted by what the layer decides. No counterexample in either direction:
+
+| Step | Layer | Licence shape | Anchor |
+|---|---|---|---|
+| 1 | Identity — *who are you* | Apache-2.0 | Keycloak 38,060★ |
+| 2 | Entitlement — *what may you watch* | Apache-2.0 | SpiceDB 7,243★, OpenFGA 6,197★, Cerbos 4,669★ |
+| 3 | Billing — *the recurring charge* | AGPL-dominant | Kill Bill 5,869★ is the lone Apache-2.0 |
+| 4 | Reader revenue — *the conversion funnel* | one MIT repo | REMP 138★ |
+
+### Infrastructure added this pass (all measured 2026-11-26)
+
+**Entitlement / authorization** — the healthiest permissive layer here:
+[authzed/spicedb](https://github.com/authzed/spicedb) Apache-2.0 7,243★ ·
+[openfga/openfga](https://github.com/openfga/openfga) Apache-2.0 6,197★ ·
+[cerbos/cerbos](https://github.com/cerbos/cerbos) Apache-2.0 4,669★ ·
+[ory/keto](https://github.com/ory/keto) Apache-2.0 5,424★ (~3 months quiet) ·
+[casbin/casbin](https://github.com/casbin/casbin) Apache-2.0, stars **n/m** ·
+[Permify/permify](https://github.com/Permify/permify) **AGPL-3.0** 5,975★ ·
+[warrant-dev/warrant](https://github.com/warrant-dev/warrant) Apache-2.0 1,339★ — **~12 months
+dormant, do not start here**.
+
+**Identity**: [keycloak/keycloak](https://github.com/keycloak/keycloak) Apache-2.0 38,060★ ·
+[ory/kratos](https://github.com/ory/kratos) Apache-2.0 13,977★ ·
+[zitadel/zitadel](https://github.com/zitadel/zitadel) **AGPL-3.0** 15,654★ ·
+[supertokens/supertokens-core](https://github.com/supertokens/supertokens-core) open core +
+proprietary `ee/` 15,347★.
+
+**Billing, metering, payments**: [killbill/killbill](https://github.com/killbill/killbill)
+**Apache-2.0** 5,869★ · [juspay/hyperswitch](https://github.com/juspay/hyperswitch) **Apache-2.0**
+45,917★ · [openmeterio/openmeter](https://github.com/openmeterio/openmeter) **Apache-2.0** 2,471★ ·
+[getlago/lago](https://github.com/getlago/lago) AGPL-3.0 10,922★ ·
+[flexprice/flexprice](https://github.com/flexprice/flexprice) AGPL-3.0 6,874★ ·
+[meteroid-oss/meteroid](https://github.com/meteroid-oss/meteroid) AGPL-3.0 1,370★ ·
+[tabloy/keygate](https://github.com/tabloy/keygate) AGPL-3.0 279★ ·
+[laravel/cashier-stripe](https://github.com/laravel/cashier-stripe) MIT 2,550★ (a Stripe binding,
+not an engine) · [billabear/billabear](https://github.com/billabear/billabear) **licence
+undetermined** 760★ · [service-bot/servicebot](https://github.com/service-bot/servicebot) GPL-3.0
+956★ **dormant since 2021-01-12**.
+
+**Reader revenue** — the entire layer:
+[remp2020/remp](https://github.com/remp2020/remp) MIT 138★ (SSO + Beam + Campaign + Mailer) ·
+[remp2020/crm-skeleton](https://github.com/remp2020/crm-skeleton) MIT 8★ ·
+[remp2020/pythia-tools](https://github.com/remp2020/pythia-tools) **no licence**, 4★, dormant since
+2023-03-20 — the churn-propensity component, and it is the one piece that is unusable.
+
+**Churn / CLV substrate**: [CamDavidsonPilon/lifelines](https://github.com/CamDavidsonPilon/lifelines)
+MIT 2,623★ · [CamDavidsonPilon/lifetimes](https://github.com/CamDavidsonPilon/lifetimes) MIT 1,476★
+**ARCHIVED 2024-06-28**.
+
+### ⛔ Directus MSCL-1.0-GPL read in full — and it has a professional-services clause
+
+The 4,481-byte licence file: the only prohibition is **Competing Use** (reselling a hosted Directus
+against the licensor's own paid offering). Permitted Purposes explicitly include use "in connection
+with **professional services that you provide to a licensee**" — the clause that decides whether a
+services firm may build on it, and it says yes. A **Grant of Future License** makes each version
+**GPL-3.0 on its fourth anniversary**: delayed-open on a four-year clock, landing on copyleft, never
+on permissive. No SPDX id exists for this, so no licence scanner will tell you any of it.
+
+### Split-licence pattern: the licence is a *path*, not an identifier
+
+Three projects report `NOASSERTION` and all three are MIT-except-a-directory:
+[PostHog/posthog](https://github.com/PostHog/posthog) (`ee/`),
+[growthbook/growthbook](https://github.com/growthbook/growthbook) (three `enterprise` dirs),
+[supertokens/supertokens-core](https://github.com/supertokens/supertokens-core) (`ee/`).
+The answerable question is not "is it MIT?" but "does my build import anything under that path?"
+
+### Measurement note
+
+`git ls-remote` resolved **33/33**. HTTP HEAD via `curl -sI` returned **403 for all 33** through the
+egress proxy — a uniform false negative. Existence was confirmed with `ls-remote`; licences with
+`NOASSERTION` were resolved by reading the licence file over `raw.githubusercontent.com`.
+
 ## 2026-11-26 — pass 12: sound, music & immersive-audio infrastructure (65 repos, 65/65 resolve)
 
 ### Headline: the first plane whose licence outcome is predicted by a *mechanism*

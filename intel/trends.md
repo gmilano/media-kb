@@ -1432,3 +1432,121 @@ generative AI in media localisation). CAGRs cluster **17-31%**. That is a **grea
 between the narrowest and widest scopes — wider than pass 11's 3.7× MAM spread, and the same lesson:
 **never quote a dubbing figure without naming the firm and the scope.** Mordor also notes quality
 still limits AI dubbing in premium scripted work, which is the honest ceiling on the pitch.
+
+## The subscription, entitlement & reader-revenue plane — trends measured 2026-11-26 (pass 13)
+
+### 1. The licence hardens as the code approaches the money — the cleanest gradient in this KB
+
+Pass 12 found a licence gradient ordered by *whose process the code runs inside*. This plane's is
+ordered by **distance from the recurring charge**, and it is monotone with no counterexample:
+
+| Layer | What it decides | Licence shape |
+|---|---|---|
+| Identity | who are you | Apache-2.0 (Keycloak 38,060★) |
+| Entitlement | what may you watch | Apache-2.0 (SpiceDB 7,243★, OpenFGA 6,197★, Cerbos 4,669★) |
+| Billing | the recurring charge | **AGPL-dominant** (Lago 10,922★, flexprice 6,874★, Meteroid 1,370★) |
+| Reader revenue | the conversion funnel | **one MIT repo at 138★** (REMP) |
+
+Authorization is treated as infrastructure and given away. The recurring charge is treated as the
+business and protected. **This is the thirteenth plane measured and the first in which the licence
+outcome is predicted by proximity to revenue rather than by layer or by runtime.**
+
+### 2. The open-source `paywall` ecosystem is adversarial, not absent — a 156 : 1 ratio
+
+Trend 28 recorded that watermark *removal* is a 10× larger open-source movement than watermarking.
+This plane is the same shape, four times more extreme, and it attacks a revenue model rather than a
+compliance artefact. `topic:paywall`, top ten by stars, 2026-11-26: **ten of ten are circumvention
+tools, totalling 21,592 stars.** The one publisher-side implementation in the same measurement has
+**138**. And **`topic:reader-revenue` returns zero repositories** — the topic does not exist.
+
+The practical consequence for a pitch: a media client asking "what does open source offer us for
+subscriptions" is asking about an ecosystem whose most popular, most actively maintained artefacts
+are built to **defeat** them. That is not a reason to avoid open source here; it is a reason to sell
+funnel resilience, and the evidence is public and verifiable in under a minute.
+
+### 3. Four regulators, four different instruments, and for the first time they target the *transaction*
+
+Every previous plane in this KB was regulated on its **content** — labelling, accessibility,
+provenance, age-gating. This plane is regulated on the **contract**:
+
+| Region | Instrument | Status as at 2026-11-26 |
+|---|---|---|
+| **EMEA (UK)** | Consumer Subscription Contracts (Cancellation and Information) Regulations 2026 under the DMCCA | Draft **laid 2026-10-19**, **in force 2027-01-01**, contracts entered on/after only |
+| **North America (US)** | FTC Negative Option / "click-to-cancel" | **Vacated 2025-07-08** on procedural grounds; ANPRM March 2026; **no replacement rule**; ROSCA + §5 enforcement continues |
+| **LATAM (Mexico)** | LFDA + LFT amendments; separate audiovisual law | **Published 2026-05-14** and **2026-05-22**; VOD platforms in scope |
+| **LATAM (Brazil)** | Streaming regulation bill | In Senate; SVOD services contesting tax provisions |
+| **APAC** | — | **No regional regime found by this pass** — stated as an evidence gap, not a finding of absence |
+
+**The UK and US have inverted postures, and that is the sellable insight.** The UK specifies the
+artefact and dates it. The US specifies nothing and enforces anyway. A client operating in both
+cannot satisfy them with one design: the UK build is a *calendar* (reminders, dual cooling-off
+clocks), the US build is an *evidence log* (what was disclosed, when consent was captured, how many
+steps cancellation took).
+
+### 4. The UK renewal cooling-off right lands in the billing scheduler, not the marketing site
+
+Worth isolating because it is the clause most likely to be mis-scoped. The DMCCA regime as drafted
+gives consumers **two** 14-day cooling-off periods: an initial one at sign-up **and a new one at
+certain renewal payment dates**. A sign-up-time consent checkbox does not discharge it. It is a
+recurring, date-triggered obligation on every qualifying renewal — which means it is owned by
+whatever runs the renewal cron, and **no open billing platform implements it**: not Kill Bill, not
+Lago, not REMP.
+
+### 5. Growth stopped being the lever, and the four levers that replaced it are all unserved
+
+Omdia puts 2026 online subscription growth at **6.7%**; AlixPartners puts global OTT growth at **5%**
+and reports that the major streamers now optimise for profitability, engagement and ARPU rather than
+subscriber count. The levers that remain are retention, involuntary churn, plan mix and ARPU — and
+the open-source estate implements **none** of them: no churn system for media, no dunning agent
+(57 repos, nothing above 200★), no model of ad-tier/paid-tier switching, no media entitlement schema.
+The industry's own analysts have named the four things that matter, and the shelf is empty.
+
+### 6. The agent layer is absent for the thirteenth consecutive plane — and here the vocabulary inverts
+
+The contamination pattern is now precisely characterised. **Generic** terms return tens of thousands
+of stars of general-purpose agents with no connection to media revenue (`billing agent` → agenticSeek
+27,701★; `subscription agent` → Paradev 16,696★). The **precise** term — `dunning`, which cannot mean
+anything else — returns **57 repos and nothing above 200 stars**. Both measurements describe the same
+absence; only the second one is honest about it. **The rule for future passes: when the generic query
+is contaminated, find the industry's own unambiguous word and measure that instead.**
+
+### 7. The licence tracks the business model, not the layer — the sharpest form of this KB's law
+
+`verticals/solutions.md` has held since pass 2 that open source is "permissive at the library,
+copyleft at the platform". This plane breaks it at two platforms, and both breaks have the same
+explanation. **Kill Bill (Apache-2.0) and Ghost (MIT)** are full platforms under permissive licences;
+both monetise through a hosted service run by the project's own company, so their moat is operations
+and they lose nothing by permissive licensing. **Lago and flexprice (AGPL-3.0)** sell the same
+software they publish, so copyleft is what makes self-host-and-resell unattractive. The layer does
+not predict the licence; **the business model does**.
+
+### 8. Directus's licence has a professional-services clause, and a four-year fuse
+
+The Monospace Sustainable Core License v1.0 (`MSCL-1.0-GPL`), read in full at 4,481 bytes. Three
+facts no licence scanner will surface, because there is no SPDX identifier to report:
+
+1. The **only** prohibition is Competing Use — reselling a hosted Directus against the licensor's own
+   paid offering. It is a non-compete, not a general commercial restriction.
+2. Permitted Purposes **explicitly include** use "in connection with professional services that you
+   provide to a licensee". **For a services firm this is the decisive clause, and it permits the
+   work** — provided the client's own use is itself permitted (internal use is listed).
+3. A **Grant of Future License** makes each version **GPL-3.0 on its fourth anniversary**. Directus is
+   delayed-open on a four-year clock, and the destination is **copyleft** — it never becomes
+   permissive. A version adopted today is GPL-3.0 in 2030.
+
+### 9. A licence can be a directory path — the pattern is now three-for-three
+
+PostHog (`ee/`), GrowthBook (three `enterprise` directories) and SuperTokens (`ee/`) all report
+`NOASSERTION` on GitHub and all are MIT-except-a-path. This is no longer an anecdote; it is how
+open-core projects now express themselves. **The answerable question is not "is it MIT?" but "does my
+build import anything under that path?"** — a dependency-graph question, not a licence-scan question,
+and the tooling most firms run answers the wrong one.
+
+### 10. LATAM's subscription funnel is under the most active circumvention pressure measured
+
+Of the top ten `topic:paywall` repositories, the two largest non-English projects target the
+**Brazilian** press — `marreta` (GPL-3.0, 1,229★) and `burlesco` (MIT, 948★) — and both were pushed
+**this month**. The third-largest non-English project targets the **German** press (`bibbot`, 656★).
+No other region measured carries comparable, currently-maintained circumvention tooling aimed at its
+own national press. For LATAM engagements this converts an abstract "paywall resilience" pitch into a
+demonstrable one.

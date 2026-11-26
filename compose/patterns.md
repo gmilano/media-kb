@@ -1791,3 +1791,143 @@ and **AGPL-3.0** — which reaches a hosted service, so it is a tool you run, no
 
 **Rule of thumb for this recipe:** in MIR, check the **model** licence and the **library** licence
 separately, every time. They differ more often than not.
+
+## Subscription, entitlement & reader-revenue recipes — added 2026-11-26 (pass 13)
+
+Every component below was measured and resolved on 2026-11-26 (`git ls-remote` 33/33). The agent
+layer in this plane is a measured zero, so each recipe is an **build**, not an integration — which
+is the point: there is nothing to be undercut by.
+
+### Pattern 13.1 — The dual-regime cancellation journey (the deadline build: UK, 2027-01-01)
+
+**The problem.** The UK DMCCA subscription regime comes into force **2027-01-01** for contracts
+entered on or after that date, and the US position is its exact inverse — no rule, continuing ROSCA
+and §5 enforcement. One codebase has to satisfy a **calendar** in the UK and an **evidence log** in
+the US. No open billing platform implements either.
+
+**Stack.**
+- [killbill/killbill](https://github.com/killbill/killbill) (Apache-2.0, 5,869★) — subscriptions,
+  renewal schedule, invoicing, dunning. Permissive, so the compliance logic can be embedded rather
+  than kept at arm's length (which is exactly what Lago's AGPL would force).
+- [keycloak/keycloak](https://github.com/keycloak/keycloak) (Apache-2.0, 38,060★) — identity, and
+  the session that proves *who* cancelled.
+- An append-only evidence store — any immutable log; the KB's provenance plane (`repos/foundations.md`)
+  already carries the signing primitives if the client wants the log notarised.
+
+**Wiring.**
+1. **Model the obligations as scheduled entities in Kill Bill, not as UI copy.** Three timers per
+   subscription: the ~6-month rolling reminder, the pre-trial/pre-discount-end reminder, and the
+   pre-renewal reminder for terms of 12 months or more (with the extra earlier reminder on long
+   renewals). Kill Bill already owns the renewal clock; these hang off it.
+2. **Implement the renewal cooling-off right as a billing state, not a flag.** The UK regime grants a
+   *second* 14-day cooling-off window at qualifying renewal payment dates. Model it as a reversible
+   charge state with a 14-day horizon, because it is a refund obligation, not a consent record.
+3. **Enforce exit parity in routing.** If sign-up was online, an online cancellation route must exist
+   and be reachable; assert this in tests, not in policy documents.
+4. **Emit an evidence record at every step** — what was disclosed, the exact text shown, when consent
+   was captured, the click-count to cancellation, and the outcome. This record is what answers a US
+   ROSCA enquiry, where there is no rule to comply with and only facts to be judged on.
+5. **Gate by contract date.** The UK rules bind only contracts entered on or after 2027-01-01, so the
+   subscription record needs a regime discriminator from day one. Retrofitting it later means
+   reconstructing which regime applied to which cohort — the expensive failure mode.
+
+**Why it is differentiated.** The duty is dated, the artefact is specified in the UK and absent in
+the US, and no open project implements the calendar or the log. *Confirm against the final SI before
+contracting: the in-force date has moved more than once during 2026.*
+
+### Pattern 13.2 — The media entitlement graph (the schema that does not exist)
+
+**The problem.** SpiceDB, OpenFGA and Cerbos are excellent and permissive, and **none of them ships a
+schema for what a video service actually sells.** Every operator rebuilds it.
+
+**Stack.** [authzed/spicedb](https://github.com/authzed/spicedb) (Apache-2.0, 7,243★) — or
+[openfga/openfga](https://github.com/openfga/openfga) (Apache-2.0, 6,197★) if lighter operations
+matter more than expressiveness — behind [keycloak/keycloak](https://github.com/keycloak/keycloak).
+
+**Wiring.** Model as relationships, which is what they actually are:
+- `subscriber → plan → tier` (ad-supported vs paid — the switch is a relationship change, not a flag)
+- `title → window → territory` (licensing windows are time-bounded relations; make the bound explicit)
+- `subscriber → device` with a cardinality check for concurrency and registration limits
+- `subscriber → download → expiry` for offline rights
+- `household → profile` for shared-account policy
+
+Then expose one question the business can ask directly: **"why can this subscriber not play this
+title, on this device, in this territory, right now?"** A relationship graph can answer that with a
+decision path. No commercial subscriber platform exposes it, and support organisations spend real
+money guessing at it.
+
+**Why it is differentiated.** The engines are free, permissive and mature; **the media semantics are
+the asset**, they are reusable across every operator engagement, and this pass confirmed by
+measurement that they do not exist in the open.
+
+### Pattern 13.3 — Dunning triage (the most automatable unbuilt task in the plane)
+
+**The problem.** Involuntary churn — failed payments, expired cards, issuer declines — is a large
+share of total churn and is pure operations. `dunning agent` returns **57 repositories and not one
+above 200 stars**. It is the cleanest zero measured in this pass.
+
+**Stack.** [killbill/killbill](https://github.com/killbill/killbill) (Apache-2.0) for the payment
+and retry events; [juspay/hyperswitch](https://github.com/juspay/hyperswitch) (Apache-2.0, 45,917★)
+if the client needs multi-PSP routing — a declined charge at one acquirer is not always declined at
+another, and that is a real recovery lever. Both permissive, so the agent can sit inside the process.
+
+**Wiring.**
+1. Consume Kill Bill payment-failure events with the decline reason attached.
+2. Classify by cause — expired card, insufficient funds, soft vs hard decline, issuer fraud block —
+   because the correct action differs completely and a fixed retry ladder ignores all of it.
+3. Choose per-case: retry timing, PSP re-route via Hyperswitch, card-update prompt, or stop.
+4. **Record every decision.** Retry behaviour is itself regulated conduct in the UK regime
+   (a consumer cannot be charged for a renewal before it renews), so the agent's log is a compliance
+   artefact, not just telemetry.
+
+**Why it is differentiated.** It is bounded, measurable in recovered revenue within one billing
+cycle, and it has no open competitor at all.
+
+### Pattern 13.4 — Churn scoring that replaces a dead component
+
+**The problem.** [remp2020/pythia-tools](https://github.com/remp2020/pythia-tools) — the
+churn-propensity layer of the only open reader-revenue platform — has **no licence file** and has not
+been pushed since **2023-03-20**. The platform is MIT and alive; its churn component is unusable.
+
+**Stack.** [remp2020/remp](https://github.com/remp2020/remp) (MIT, 138★) for Beam's pageview and
+conversion events and its segment model; [CamDavidsonPilon/lifelines](https://github.com/CamDavidsonPilon/lifelines)
+(MIT, 2,623★) for the model; [CamDavidsonPilon/lifetimes](https://github.com/CamDavidsonPilon/lifetimes)
+(MIT, 1,476★, **archived**) only if BG/NBD lifetime-value is needed — vendor it and expect no fixes.
+
+**Wiring.**
+1. Beam already emits the events and already computes segments — do not rebuild that.
+2. Fit **survival models, not classifiers.** Subscriber data is censored by construction (most
+   subscribers have not churned *yet*), and a binary classifier silently mis-handles exactly that.
+   This is why `lifelines` is the right dependency and a generic ML pipeline is not.
+3. Write risk scores back as **Beam segments**, so REMP's Campaign module can target retention offers
+   through the path that already exists.
+4. Close the loop through Kill Bill: a save offer is a plan change, with its own disclosure duties
+   under Pattern 13.1.
+
+**Why it is differentiated.** It is a small, well-scoped build that restores a capability the
+platform was designed for, it is MIT end to end, and it is directly reusable for any REMP publisher —
+which, as `intel/market.md` records, is an **EMEA-origin** reference implementation.
+
+### Pattern 13.5 — Paywall resilience (the LATAM build with public evidence)
+
+**The problem.** The top ten `topic:paywall` repositories are ten circumvention tools totalling
+**21,592 stars**, and the two largest non-English ones target the **Brazilian press**:
+[marreta](https://github.com/manualdousuario/marreta) (GPL-3.0, 1,229★) and
+[burlesco](https://github.com/burlesco/burlesco) (MIT, 948★), both pushed this month.
+
+**Wiring.** This is a design review, not a product, and it is deliberately defensive rather than
+adversarial:
+1. **Read the circumvention source.** It is public, and it documents precisely which implementation
+   shortcuts fail — server-rendering the full article then hiding it with CSS, trusting a referrer,
+   trusting a cookie, exposing the body in a meta tag or JSON-LD block for SEO.
+2. **Move the enforcement boundary server-side**, into the entitlement decision from Pattern 13.2.
+   Content a reader is not entitled to should not reach the client at all.
+3. **Keep the SEO obligation explicit.** Publishers must expose something to crawlers, and that
+   requirement is what most bypass tools actually exploit. Decide deliberately how much, rather than
+   leaking the article by accident.
+4. **Instrument bypass attempts as a metric** and feed it to the same segment store as churn risk —
+   a reader who repeatedly attempts circumvention is a conversion target, not just an abuse case.
+
+**Why it is differentiated.** Globally it is a reasonable hygiene pitch; in LATAM it is urgent and
+**the evidence is public, current and verifiable by the client in under a minute** — which is a
+materially different conversation from a generic security recommendation.

@@ -1683,3 +1683,114 @@ musicians install* are GPL.
   open stack reaches ADM and stops.
 - **`w3c/musicxml`** exists (confirmed by `ls-remote`) but is not resolvable through this session's
   search index; it is a specification repository in any case.
+
+## The subscription, entitlement & reader-revenue plane — measured 2026-11-26 (pass 13)
+
+Everything below was measured on 2026-11-26 via `search/repositories`, with existence confirmed by
+`git ls-remote` (33/33) and every `NOASSERTION` resolved by reading the actual licence file. This
+plane is the subscriber half of media revenue; pass 2 covered the advertising half.
+
+### ⛔ Read this before choosing anything in this plane
+
+The licence shape is **positional**, and the position that matters is distance from the recurring
+charge. Identity and entitlement are Apache-2.0 and healthy. Billing is AGPL-dominant with exactly
+one permissive anchor. The publisher-facing funnel is one MIT repo at 138 stars. Choose the layer
+you need before you choose a project, because the licence answer changes completely between layers —
+the full gradient table is in `agents/top.md`.
+
+### Entitlement & authorization — the healthiest permissive layer in this plane
+
+The Zanzibar-style engines are the right abstraction for subscriber rights: territory, concurrency,
+device count, windowing and offline rights are all *relationships*, not roles.
+
+| Repo | License | Stars | Last push | Why it matters here |
+|---|---|---|---|---|
+| [authzed/spicedb](https://github.com/authzed/spicedb) | Apache-2.0 | 7,243 | 2026-11-24 | Zanzibar-style relationship database. Best fit for entitlement graphs with territory and device limits. |
+| [openfga/openfga](https://github.com/openfga/openfga) | Apache-2.0 | 6,197 | 2026-11-25 | CNCF-hosted; lighter operationally, same modelling idea. |
+| [ory/keto](https://github.com/ory/keto) | Apache-2.0 | 5,424 | 2026-09-04 | Permission server. Permissive, real, slower cadence (~3 months). |
+| [cerbos/cerbos](https://github.com/cerbos/cerbos) | Apache-2.0 | 4,669 | 2026-11-25 | Policy-as-code decisions, externalised to policy files. Open-core; engine is Apache-2.0. |
+| [casbin/casbin](https://github.com/casbin/casbin) | Apache-2.0 | n/m | n/m | Embeddable authz library, many languages. Licence read from the LICENSE file; stars/push **not measurable** (absent from the search index — see `agents/top.md` method correction). |
+| [Permify/permify](https://github.com/Permify/permify) | **AGPL-3.0** | 5,975 | 2026-11-26 | The one non-permissive engine of the group. Prefer SpiceDB/OpenFGA. |
+| [warrant-dev/warrant](https://github.com/warrant-dev/warrant) | Apache-2.0 | 1,339 | 2025-12-05 | Centralized authorization service. **~12 months without a push** — do not start new work here. |
+
+### Identity — the gate in front of entitlement
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [keycloak/keycloak](https://github.com/keycloak/keycloak) | Apache-2.0 | 38,060 | 2026-11-26 | The permissive default for a subscriber estate. |
+| [ory/kratos](https://github.com/ory/kratos) | Apache-2.0 | 13,977 | 2026-07-29 | Headless identity. Apache-2.0, ~4 months quiet. |
+| [zitadel/zitadel](https://github.com/zitadel/zitadel) | **AGPL-3.0** | 15,654 | 2026-11-25 | Capable, but AGPL at the identity tier. |
+| [supertokens/supertokens-core](https://github.com/supertokens/supertokens-core) | **Open core + proprietary `ee/`** | 15,347 | 2026-11-25 | GitHub says `NOASSERTION`; LICENSE.md says everything outside `ee/` is open and `ee/` has separate terms. |
+
+### Billing, metering & payments — AGPL-dominant, with one Apache-2.0 anchor
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [killbill/killbill](https://github.com/killbill/killbill) | **Apache-2.0** | 5,869 | 2026-11-26 | **The anchor.** Plans, trials, proration, dunning, invoicing. The only mature permissive billing engine found in this plane. |
+| [juspay/hyperswitch](https://github.com/juspay/hyperswitch) | **Apache-2.0** | 45,917 | 2026-11-26 | Payments orchestration across PSPs. Largest permissive project in the plane. APAC-origin (Juspay, India). |
+| [openmeterio/openmeter](https://github.com/openmeterio/openmeter) | **Apache-2.0** | 2,471 | 2026-11-26 | Usage metering/aggregation — meter consumption without adopting an AGPL platform. |
+| [getlago/lago](https://github.com/getlago/lago) | AGPL-3.0 | 10,922 | 2026-11-25 | Most-starred billing platform here. Network copyleft. |
+| [flexprice/flexprice](https://github.com/flexprice/flexprice) | AGPL-3.0 | 6,874 | 2026-11-26 | Usage-based pricing/billing, very active. |
+| [meteroid-oss/meteroid](https://github.com/meteroid-oss/meteroid) | AGPL-3.0 | 1,370 | 2026-11-26 | Pricing and billing infrastructure. |
+| [tabloy/keygate](https://github.com/tabloy/keygate) | AGPL-3.0 | 279 | 2026-11-23 | Licence/subscription key management. |
+| [laravel/cashier-stripe](https://github.com/laravel/cashier-stripe) | MIT | 2,550 | 2026-11-17 | MIT, but a Stripe binding — a single PSP as a hard dependency, not a billing engine. |
+| [billabear/billabear](https://github.com/billabear/billabear) | **Undetermined** | 760 | 2026-09-13 | `NOASSERTION` and **no retrievable LICENSE file** at the default branch. Unresolved, not merely unlabelled. |
+| [service-bot/servicebot](https://github.com/service-bot/servicebot) | GPL-3.0 | 956 | 2021-01-12 | **Dormant ~5 years.** Recorded so it is not re-adopted. |
+
+### Reader revenue — the whole layer, and it is one repository
+
+| Repo | License | Stars | Last push | What it contains |
+|---|---|---|---|---|
+| [remp2020/remp](https://github.com/remp2020/remp) | **MIT** | 138 | 2026-11-25 | README read in full. A monorepo of four services: **SSO** (auth across the tools), **Beam** (pageview/conversion event tracking, aggregation, user segments), **Campaign** (banner and offer targeting, driven by Beam segments), **Mailer** (newsletter templates, batch send, A/B testing, subscription APIs). Docker-compose install. Built and run by **Denník N (Slovakia)** — EMEA-origin. |
+| [remp2020/crm-skeleton](https://github.com/remp2020/crm-skeleton) | MIT | 8 | 2026-11-06 | CRM skeleton with core modules — the subscriber-record side of REMP. |
+| [remp2020/pythia-tools](https://github.com/remp2020/pythia-tools) | **NONE** | 4 | 2023-03-20 | Churn-propensity aggregation over Beam data. **No licence and dormant since 2023** — the one piece that would have been the churn layer is the one piece that is unusable. |
+
+That last row is the sharpest single fact in this pass: the only open reader-revenue platform in
+existence *did* build a churn-propensity component, and it is unlicensed and three years dead.
+
+### Churn & lifetime-value — permissive substrate, no media wiring
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [CamDavidsonPilon/lifelines](https://github.com/CamDavidsonPilon/lifelines) | MIT | 2,623 | 2026-03-07 | Survival analysis. The statistically honest way to model subscriber tenure — censoring is the whole problem in churn, and this handles it. |
+| [CamDavidsonPilon/lifetimes](https://github.com/CamDavidsonPilon/lifetimes) | MIT | 1,476 | 2024-06-28 | **ARCHIVED.** BG/NBD and Gamma-Gamma CLV models. Vendor it; expect no fixes. |
+
+### ⛔ The licence finding of this pass: Directus's MSCL-1.0-GPL, read in full — and it has a professional-services clause
+
+`verticals/solutions.md` already carries the correction that Directus is **not** BSL and **not**
+OSI-approved. This pass read the 4,481-byte licence file itself, and three clauses matter to a
+services firm:
+
+1. **Competing Use is the only prohibition.** A "Permitted Purpose is any purpose other than a
+   Competing Use", where a Competing Use means making the Software available to a party "that
+   competes with the Licensor's commercial offerings of the Software itself, where Licensor imposes
+   a license fee". It is a non-compete, not a general commercial restriction.
+2. **Professional services are explicitly permitted.** The Permitted Purposes list names, verbatim,
+   use "in connection with professional services that you provide to a licensee using the Software
+   in accordance with these Terms and Conditions". **This is the clause that decides whether Globant
+   may build on Directus for a client, and it says yes** — provided the client's own use is itself a
+   Permitted Purpose. Internal use by the client is explicitly listed as one.
+3. **There is a dated escape hatch.** A "Grant of Future License" irrevocably licenses each version
+   under **GPL-3.0 on the fourth anniversary** of the date that version was made available. So
+   Directus is delayed-open on a four-year clock, and the destination is GPL-3.0 — copyleft, not
+   permissive. A version adopted today becomes GPL-3.0 in 2030; it never becomes MIT or Apache.
+
+This is the KB's **delayed-open** category (trend 34) with its terms finally pinned down, and the
+professional-services carve-out is a genuinely useful fact that no licence scanner will surface,
+because scanners report the SPDX id — and here there isn't one.
+
+### Split licences confirmed by directory boundary — three projects, one pattern
+
+GitHub reports `NOASSERTION` for all three. In each case the LICENSE file says the same thing: the
+project is MIT **except** for named directories, which carry separate commercial terms. The licence
+is a *path*, not an identifier.
+
+| Repo | Open part | Carved-out path |
+|---|---|---|
+| [PostHog/posthog](https://github.com/PostHog/posthog) | MIT Expat | `ee/` |
+| [growthbook/growthbook](https://github.com/growthbook/growthbook) | MIT Expat | `packages/back-end/src/enterprise`, `packages/front-end/enterprise`, `packages/shared/src/enterprise` |
+| [supertokens/supertokens-core](https://github.com/supertokens/supertokens-core) | open | `ee/` |
+
+The practical rule: **for these projects, "is it MIT?" is the wrong question. "Does my build import
+anything under that path?" is the right one** — and it is answerable with a dependency graph, not a
+licence scan.

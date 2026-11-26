@@ -550,7 +550,7 @@ describing the obligations for three passes.
 ### ⚠️ This tier **breaks** this file's licence law — and the replacement is better
 
 Since pass 2 this file has recorded that **the platform tier is copyleft** (PeerTube AGPL, MediaCMS
-AGPL, Castopod AGPL, Funkwhale AGPL, Janus GPL, OpenMontage AGPL, Directus BSL). In the trust &
+AGPL, Castopod AGPL, Funkwhale AGPL, Janus GPL, OpenMontage AGPL, Directus MSCL-1.0-GPL). In the trust &
 safety tier, **every platform is Apache-2.0 or MIT**.
 
 The exception is systematic, not random, and it rewrites the law into something that predicts rather
@@ -768,3 +768,77 @@ code under your own terms. The permissive substrate for that service is in `repo
 is no permissive plugin framework. `JUCE` is AGPL-3.0 or a paid commercial licence, and
 `tracktion_engine` is the same model. That is a budget line, and it should appear in the proposal
 rather than in the third sprint.
+
+## The subscription & reader-revenue tier — added 2026-11-26 (pass 13)
+
+Real, deployable platforms a client can run for the **subscriber** side of media revenue. Pass 2
+covered ad serving; this covers identity, entitlement, billing and the publisher's conversion funnel.
+
+| Platform | License | Repo | Stars | Last push | What it is |
+|---|---|---|---|---|---|
+| Kill Bill | **Apache-2.0** | [killbill/killbill](https://github.com/killbill/killbill) | 5,869 | 2026-11-26 | Subscription billing and payments platform: plans, trials, proration, invoicing, **dunning**. Plugin architecture for PSPs. The permissive anchor of this tier. |
+| Keycloak | **Apache-2.0** | [keycloak/keycloak](https://github.com/keycloak/keycloak) | 38,060 | 2026-11-26 | Identity and access management — OIDC/SAML, federation, social login. The subscriber front door. |
+| Hyperswitch | **Apache-2.0** | [juspay/hyperswitch](https://github.com/juspay/hyperswitch) | 45,917 | 2026-11-26 | Payments orchestration across PSPs, self-hostable, PCI-compliant posture. APAC-origin (Juspay, India). |
+| SpiceDB | **Apache-2.0** | [authzed/spicedb](https://github.com/authzed/spicedb) | 7,243 | 2026-11-24 | Zanzibar-style permission database — the entitlement brain for territory, concurrency and device limits. |
+| OpenMeter | **Apache-2.0** | [openmeterio/openmeter](https://github.com/openmeterio/openmeter) | 2,471 | 2026-11-26 | Usage metering and aggregation; pairs with Kill Bill to keep the whole chain permissive. |
+| **REMP** | **MIT** | [remp2020/remp](https://github.com/remp2020/remp) | 138 | 2026-11-25 | **The only open reader-revenue platform in existence.** Four services: SSO, Beam (events, conversions, segments), Campaign (offer/banner targeting on those segments), Mailer (newsletters, A/B). Docker-compose. Run in production by Denník N (Slovakia). |
+| Lago | AGPL-3.0 | [getlago/lago](https://github.com/getlago/lago) | 10,922 | 2026-11-25 | Metering and usage-based billing. The most-starred billing platform here, and network copyleft. |
+| flexprice | AGPL-3.0 | [flexprice/flexprice](https://github.com/flexprice/flexprice) | 6,874 | 2026-11-26 | Usage-based pricing and billing, self-host or cloud. |
+| ZITADEL | AGPL-3.0 | [zitadel/zitadel](https://github.com/zitadel/zitadel) | 15,654 | 2026-11-25 | Identity infrastructure — the AGPL alternative to Keycloak. |
+| Ghost | MIT | [TryGhost/Ghost](https://github.com/TryGhost/Ghost) | 55,913 | 2026-11-26 | Publishing with **native memberships, subscriptions and newsletters**. Already in this file as a CMS; it belongs here too — it is the one mainstream MIT platform that ships a paid-membership funnel out of the box. |
+
+### ⚠️ This tier obeys this file's licence law — and names the exception precisely
+
+The law recorded across passes 2–12 is "permissive at the library, copyleft at the platform". Here it
+holds at the billing tier (Lago, flexprice, Meteroid, keygate all AGPL) and **breaks cleanly at two
+platforms**: Kill Bill is a full platform under Apache-2.0, and Ghost is a full platform under MIT.
+
+The distinguishing factor is visible in both cases: Kill Bill and Ghost both monetise through a
+**hosted service run by the project's own company**, and neither needs copyleft to protect that,
+because the moat is operations rather than source. Lago and flexprice sell the same software they
+publish, so they use AGPL to make self-hosting-and-reselling unattractive. **The licence tracks the
+business model, not the layer** — which is the sharpest version of this file's law so far.
+
+### Gap: there is no open subscriber-management platform built for video
+
+Searched `topic:subscription-management`, `topic:billing`, `topic:membership` and
+`subscription paywall publisher` (6 results). Everything found is either **generic SaaS billing**
+(Kill Bill, Lago, flexprice, Meteroid — built for API metering and seat-based plans) or **publisher
+reader-revenue** (REMP). Nothing models what a video service actually sells:
+
+- concurrent-stream limits and device registration,
+- territory and windowing rights,
+- offline-download entitlements with expiry,
+- hybrid ad-tier/paid-tier plan switching,
+- pause/win-back flows, which is where streaming churn is actually fought.
+
+A video operator today assembles this from Keycloak + SpiceDB + Kill Bill and writes the media
+semantics itself. **That assembled schema is the reusable asset, and it does not exist in the open.**
+
+### Gap: the one open churn component is unlicensed and dead
+
+[remp2020/pythia-tools](https://github.com/remp2020/pythia-tools) — churn-propensity aggregation over
+REMP's Beam data — has **no licence file at all** (4★) and has not been pushed since **2023-03-20**.
+The only open reader-revenue platform did build a churn layer; it is the single unusable piece of it.
+
+### Correction to an earlier cycle of this file
+
+Line ~553 of this file still lists "Directus BSL" in a summary of copyleft/source-available
+platforms. **Directus is not BSL**, as the platform table above (line ~40) already records — it is
+the **Monospace Sustainable Core License v1.0 (MSCL-1.0-GPL)**. Pass 13 read the licence in full;
+its terms, including a professional-services permission and a four-year GPL-3.0 change date, are in
+`repos/foundations.md`.
+
+### How to add the AI layer to this tier, specifically
+
+The agent layer here is a measured zero (13th consecutive plane — see `agents/top.md`), so every item
+below is a build, not an integration:
+
+1. **Dunning triage** over Kill Bill's failed-payment events — the most obviously automatable task in
+   the plane, and `dunning agent` returns 57 repos with nothing above 200★.
+2. **Churn-risk scoring** on `lifelines` (MIT) fed by REMP Beam events, replacing the dead
+   `pythia-tools`.
+3. **Entitlement reasoning** over a SpiceDB graph: "why can this subscriber not play this title in
+   this territory on this device" is a question the graph can answer and no product asks.
+4. **Cancellation-journey compliance** — see Pattern 13.1 in `compose/patterns.md`; the UK regime
+   starts **1 January 2027**.

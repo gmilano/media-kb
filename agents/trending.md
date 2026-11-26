@@ -9,6 +9,72 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 13: the subscription, entitlement & reader-revenue plane (the licence hardens toward the money)
+
+### Headline: the thirteenth consecutive near-zero agent layer, and the cleanest licence gradient yet
+
+Measured the subscriber half of media revenue — identity, entitlement, billing, dunning, churn and the
+publisher's conversion funnel. Pass 2 covered the advertising half; this had no row anywhere in the KB.
+
+**Agent-layer probe (`search/repositories`, 2026-11-26):**
+
+| Query | Total | Top result >200★ |
+|---|---|---|
+| `billing agent` | 2,869 | `Fosowl/agenticSeek` (27,701★) — general assistant |
+| `subscription agent` | 2,687 | `ParadevAI/Paradev` (16,696★) — coding agent |
+| `revenue agent` | 3,230 | `claude-ops` (563★) — devops |
+| `churn agent` | 764 | a coursework repo (228★) |
+| **`dunning agent`** | **57** | **none** |
+| `subscriber retention AI` | 28 | none |
+
+The generic terms are contaminated by general-purpose agents; `dunning` — unambiguous industry
+vocabulary — is a clean zero. Thirteen planes, thirteen near-zeros.
+
+### The gradient — new this pass, and ordered by distance from the recurring charge
+
+| Layer | Licence shape | Evidence |
+|---|---|---|
+| Identity | Apache-2.0, large | Keycloak 38,060★ |
+| Entitlement | Apache-2.0, crowded | SpiceDB 7,243★, OpenFGA 6,197★, Cerbos 4,669★ |
+| Billing | **AGPL-dominant** | Lago 10,922★, flexprice 6,874★, Meteroid 1,370★ — vs Kill Bill 5,869★ Apache-2.0 |
+| Reader revenue | **one MIT repo, 138★** | REMP, and nothing else |
+
+Authorization is infrastructure and gets given away; the recurring charge is the business and gets
+protected. Monotone, no counterexample.
+
+### New this pass, verified 2026-11-26 (`git ls-remote` 33/33)
+
+- **Kill Bill** [killbill/killbill](https://github.com/killbill/killbill) — Apache-2.0, 5,869★,
+  pushed today. The only mature permissive billing engine in the plane.
+- **SpiceDB** [authzed/spicedb](https://github.com/authzed/spicedb) — Apache-2.0, 7,243★. Best fit
+  for territory/device/windowing entitlement graphs.
+- **Hyperswitch** [juspay/hyperswitch](https://github.com/juspay/hyperswitch) — Apache-2.0, 45,917★.
+  Largest permissive project in the plane; APAC-origin (Juspay, India).
+- **REMP** [remp2020/remp](https://github.com/remp2020/remp) — MIT, 138★. The only open
+  reader-revenue platform that exists. EMEA-origin (Denník N, Slovakia).
+- **lifelines** [CamDavidsonPilon/lifelines](https://github.com/CamDavidsonPilon/lifelines) — MIT,
+  2,623★. Survival analysis; the honest basis for tenure/churn modelling.
+
+### ⚠️ The contamination finding: `paywall` is adversarial, not merely noisy
+
+`topic:paywall` top ten by stars are **ten out of ten circumvention tools**, totalling **21,592
+stars**. The one publisher-side implementation in the same measurement (REMP) has **138**. Ratio
+≈ **156 : 1 against the business model**. `topic:reader-revenue` returns **zero repositories**.
+
+Regional edge worth carrying into a pitch: the two largest non-English bypass projects target the
+**Brazilian** press (`marreta` 1,229★, `burlesco` 948★) and the third targets the **German** press
+(`bibbot` 656★).
+
+### ⚙️ Method corrections — both reusable across all twelve industries
+
+1. **The `repo:` 422 is not only a rename detector.** `casbin/casbin` resolves via `git ls-remote`,
+   serves an Apache-2.0 LICENSE, and its org siblings are searchable — yet `repo:casbin/casbin`
+   returns 422. A live public repo can be **absent from the search index while present on GitHub**.
+   Its stars/push date are therefore *not measurable*, recorded as `n/m` rather than inherited.
+2. **`curl -sI https://github.com/...` is a broken oracle here.** All 33 URLs returned a uniform
+   **403** to HTTP HEAD through the egress proxy, including repos that plainly exist. `git ls-remote`
+   returned 33/33 OK on the same list. Verify with `ls-remote`, never with HEAD.
+
 ## 2026-11-26 — pass 12: the sound, music & immersive-audio plane (the law gets a mechanism)
 
 ### How the gap was found — the vocabulary probe, two Bash calls, 95 terms

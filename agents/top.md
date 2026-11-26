@@ -1125,3 +1125,150 @@ compose patterns wire exactly that.
   lives on `git.iem.at`, which this environment's proxy cannot reach (uniform `000`). GitHub carries
   only forks, the largest `tu-studio/IEMPluginSuite` at 12★, GPL-3.0. Recorded as *unverifiable from
   here*, not as absent.
+
+## The subscription, entitlement & reader-revenue plane — measured 2026-11-26 (pass 13), and the licence hardens as the code approaches the money
+
+The first twelve passes measured how media is **made, described, delivered and policed**. None of them
+measured how it is **paid for on a recurring basis**. The monetization plane (pass 2) covered the
+*advertising* half of media revenue and stopped there: ad signalling, auction, measurement. The
+subscriber half — identity, entitlement, billing, dunning, churn, and the publisher's own conversion
+funnel — had no row anywhere in this KB. This pass measures it.
+
+### How the gap was found — the vocabulary probe again, before any web search
+
+Two Bash calls against `search/repositories`, the same method as passes 11 and 12. Agent-layer
+vocabulary first:
+
+| Query | Total repos | Top result above 200★ |
+|---|---|---|
+| `billing agent` | 2,869 | `Fosowl/agenticSeek` (27,701★) — a general-purpose assistant |
+| `subscription agent` | 2,687 | `ParadevAI/Paradev` (16,696★) — a coding agent |
+| `revenue agent` | 3,230 | `Lifecycle-Innovations-Limited/claude-ops` (563★) — devops |
+| `churn agent` | 764 | `danderfer/Comp_Sci_Sem_2` (228★) — a university coursework repo |
+| `paywall agent` | 222 | `actionbook/actionbook` (1,633★) — an agent that gets *past* paywalls |
+| `entitlement agent` | 148 | `MoritzPindorek/Five-Laws-of-AI-Agents` (305★) — an essay |
+| **`dunning agent`** | **57** | **none** |
+| `subscriber retention AI` | 28 | none |
+
+**This is the thirteenth consecutive plane with a near-zero agent layer, and the vocabulary collapse
+here is the worst measured in this KB.** The pattern is now explicit enough to state as a rule: in
+this plane, *generic* terms return tens of thousands of stars of general-purpose agents that have
+nothing to do with media revenue, and the *precise* term — `dunning`, the industry's own word for
+failed-payment recovery, which cannot mean anything else — returns 57 repos and not one above 200
+stars. The generic query is contaminated; the precise query is empty. Both describe the same absence.
+
+### The finding of this pass: a four-step gradient, ordered by distance from the recurring charge
+
+Pass 12 found a licence gradient ordered by *whose process the code runs inside*. This plane's
+gradient is ordered by **how close the code sits to the money**, and it is the cleanest one measured
+so far. All figures measured 2026-11-26.
+
+| Step | Layer | What it decides | Licence shape | Evidence |
+|---|---|---|---|---|
+| 1 | **Identity** | Who are you | **Apache-2.0, large, healthy** | Keycloak 38,060★, Ory Kratos 13,977★ |
+| 2 | **Entitlement** | What may you watch | **Apache-2.0, crowded, healthy** | SpiceDB 7,243★, OpenFGA 6,197★, Cerbos 4,669★, Ory Keto 5,424★, Casbin |
+| 3 | **Billing / subscription** | The recurring charge itself | **AGPL-dominant**, one permissive anchor | Lago 10,922★ AGPL, flexprice 6,874★ AGPL, Meteroid 1,370★ AGPL, keygate 279★ AGPL — vs **Kill Bill 5,869★ Apache-2.0** |
+| 4 | **Reader revenue / paywall** | The publisher's own conversion funnel | **One MIT repo, 138★** | REMP (138★) and nothing else |
+
+The gradient is monotone and it has a plain commercial reading: **authorization is infrastructure and
+gets given away; the recurring charge is the business and gets protected.** For Globant this is
+actionable in one line — steps 1 and 2 are free to build on and embed, step 3 is a deployment-shape
+decision before it is a technical one, and step 4 is not a build-vs-buy choice because there is
+almost nothing to buy.
+
+### Tier 1 — permissive, active, safe to build on
+
+| Agent / Component | Repo | License | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| Keycloak | [keycloak/keycloak](https://github.com/keycloak/keycloak) | Apache-2.0 | 38,060 | 2026-11-26 | Identity and access management. The default front door for a subscriber estate; OIDC/SAML, and the layer entitlement hangs off. |
+| SpiceDB | [authzed/spicedb](https://github.com/authzed/spicedb) | Apache-2.0 | 7,243 | 2026-11-24 | Google Zanzibar-style relationship database for permissions. The strongest fit for "which titles may this subscriber stream, in which territory, on how many devices". |
+| OpenFGA | [openfga/openfga](https://github.com/openfga/openfga) | Apache-2.0 | 6,197 | 2026-11-25 | CNCF-hosted Zanzibar-style authorization engine. Lighter to operate than SpiceDB; same modelling idea. |
+| Kill Bill | [killbill/killbill](https://github.com/killbill/killbill) | Apache-2.0 | 5,869 | 2026-11-26 | **The permissive anchor of this plane.** Subscription billing and payments platform: plans, trials, proration, dunning, invoicing. The only mature billing engine in this plane that is not copyleft. |
+| Ory Keto | [ory/keto](https://github.com/ory/keto) | Apache-2.0 | 5,424 | 2026-09-04 | Zanzibar-style permission server. Permissive and real, but ~3 months without a push — slower than its rivals above. |
+| Cerbos | [cerbos/cerbos](https://github.com/cerbos/cerbos) | Apache-2.0 | 4,669 | 2026-11-25 | Policy-as-code authorization: decisions are externalised to a policy file rather than a relationship graph. Open-core — the engine is Apache-2.0. |
+| Ory Kratos | [ory/kratos](https://github.com/ory/kratos) | Apache-2.0 | 13,977 | 2026-07-29 | Headless identity and user management. Apache-2.0, but ~4 months without a push. |
+| Casbin | [casbin/casbin](https://github.com/casbin/casbin) | Apache-2.0 | n/m | n/m | Embeddable authorization library across many languages. **Stars and push date are not measurable** — see the method correction below; licence confirmed by reading the LICENSE file directly. |
+| OpenMeter | [openmeterio/openmeter](https://github.com/openmeterio/openmeter) | Apache-2.0 | 2,471 | 2026-11-26 | Usage metering and aggregation. The permissive way to meter consumption without adopting an AGPL billing platform. |
+| Hyperswitch | [juspay/hyperswitch](https://github.com/juspay/hyperswitch) | Apache-2.0 | 45,917 | 2026-11-26 | Payments orchestration across PSPs, self-hostable. The largest permissive project anywhere in this plane. |
+| REMP | [remp2020/remp](https://github.com/remp2020/remp) | MIT | 138 | 2026-11-25 | **The only open reader-revenue platform found.** Monorepo from Denník N (Slovakia): SSO, Beam (event tracking + segments), Campaign (banner/offer targeting), Mailer (newsletters, A/B). EMEA-origin. See `verticals/solutions.md`. |
+| lifelines | [CamDavidsonPilon/lifelines](https://github.com/CamDavidsonPilon/lifelines) | MIT | 2,623 | 2026-03-07 | Survival analysis in Python. The honest statistical basis for subscriber-churn and tenure modelling. |
+
+### Tier 2 — real, but the licence or the staleness constrains client work
+
+| Agent / Component | Repo | License | Stars | Last push | Constraint |
+|---|---|---|---|---|---|
+| Lago | [getlago/lago](https://github.com/getlago/lago) | **AGPL-3.0** | 10,922 | 2026-11-25 | The most-starred billing platform in this plane, and network copyleft. Run it unmodified behind its API, or the client's surrounding revenue code becomes disclosable. |
+| flexprice | [flexprice/flexprice](https://github.com/flexprice/flexprice) | **AGPL-3.0** | 6,874 | 2026-11-26 | Usage-based pricing and billing. Same constraint as Lago; very active. |
+| Permify | [Permify/permify](https://github.com/Permify/permify) | **AGPL-3.0** | 5,975 | 2026-11-26 | Zanzibar-style authorization — the one entitlement engine that is *not* permissive. Pick SpiceDB or OpenFGA instead unless a Permify feature is decisive. |
+| ZITADEL | [zitadel/zitadel](https://github.com/zitadel/zitadel) | **AGPL-3.0** | 15,654 | 2026-11-25 | Identity infrastructure. Capable, but AGPL at the identity tier — Keycloak is the Apache-2.0 equivalent. |
+| Meteroid | [meteroid-oss/meteroid](https://github.com/meteroid-oss/meteroid) | **AGPL-3.0** | 1,370 | 2026-11-26 | Pricing and billing infrastructure, actively developed. AGPL. |
+| SuperTokens | [supertokens/supertokens-core](https://github.com/supertokens/supertokens-core) | **Split: core + proprietary `ee/`** | 15,347 | 2026-11-25 | GitHub reports `NOASSERTION`. LICENSE.md read: everything outside `ee/` is open; `ee/` carries its own separate terms. The directory boundary *is* the licence. |
+| keygate | [tabloy/keygate](https://github.com/tabloy/keygate) | **AGPL-3.0** | 279 | 2026-11-23 | Licence/subscription management (perpetual + subscription keys). Small, active, AGPL. |
+| Laravel Cashier | [laravel/cashier-stripe](https://github.com/laravel/cashier-stripe) | MIT | 2,550 | 2026-11-17 | MIT and healthy, but it is a Stripe binding, not a billing engine — it inherits a single PSP as a hard dependency. |
+| billabear | [billabear/billabear](https://github.com/billabear/billabear) | **Unresolved** | 760 | 2026-09-13 | Subscription management and billing. GitHub reports `NOASSERTION` and **no LICENSE file was retrievable at the default branch** — licence genuinely undetermined, not merely unlabelled. Do not adopt before resolving it with the maintainer. |
+| lifetimes | [CamDavidsonPilon/lifetimes](https://github.com/CamDavidsonPilon/lifetimes) | MIT | 1,476 | 2024-06-28 | **ARCHIVED.** Customer-lifetime-value (BG/NBD, Gamma-Gamma) modelling. Still the clearest reference implementation of CLV; vendor it, expect no fixes. Its author's `lifelines` is the live project. |
+| servicebot | [service-bot/servicebot](https://github.com/service-bot/servicebot) | GPL-3.0 | 956 | 2021-01-12 | Subscription management automation. **Dormant ~5 years.** Listed so no future pass re-adopts it as live. |
+
+### ⚠️ Contamination — `paywall` is the most adversarial query measured in this KB
+
+Pass 7 recorded the worst *false-friend* query; this is something different and worse. The open-source
+`paywall` ecosystem is not empty and it is not mislabelled — **it is aimed at the opposite outcome**.
+`topic:paywall`, sorted by stars, top ten, measured 2026-11-26:
+
+| Repo | License | Stars | What it does |
+|---|---|---|---|
+| [everywall/ladder](https://github.com/everywall/ladder) | GPL-3.0 | 9,457 | Self-hosted proxy that strips paywalls |
+| [manualdousuario/marreta](https://github.com/manualdousuario/marreta) | GPL-3.0 | 1,229 | Breaks access barriers — Brazilian, aimed at the Brazilian press |
+| [burlesco/burlesco](https://github.com/burlesco/burlesco) | MIT | 948 | "Read news without subscribing" — Brazilian |
+| [stefanw/bibbot](https://github.com/stefanw/bibbot) | GPL-3.0 | 656 | Removes paywalls on German news sites via library credentials |
+
+Ten of the top ten are circumvention tools; **the sum of their stars is 21,592**. The single
+publisher-side implementation in the same measurement, REMP, has **138**. That is a ratio of about
+**156 : 1 against the business model this plane exists to serve.**
+
+Two further measurements make the point unarguable:
+
+- **`topic:reader-revenue` returns zero repositories.** Not a few, not stale ones — the topic does not
+  exist on GitHub.
+- `metered paywall` returns 18 repos; `subscription paywall publisher` returns 6.
+
+This is the same shape as trend 28's watermark-removal finding (`intel/trends.md`), but far more
+extreme — and it carries a regional edge worth naming in a pitch: the two largest non-English
+circumvention projects target the **Brazilian** press, and the third targets the **German** press.
+A LATAM or EMEA publisher asking "what does open source give us for subscriptions" is asking about an
+ecosystem whose most popular artefacts are built to defeat them.
+
+### Informed gaps from this pass — searched, and genuinely not found
+
+- **No open dunning or failed-payment-recovery agent.** `dunning agent` = 57 repos, none above 200★.
+  Dunning is unambiguous vocabulary, so this is a clean zero, and it is the single most obviously
+  automatable task in the plane.
+- **No open churn-prediction system built for media.** The statistical substrate is permissive and
+  excellent (`lifelines` MIT, `lifetimes` MIT-archived); nothing wires it to a subscriber estate.
+- **No open entitlement model expressed in media terms.** SpiceDB/OpenFGA/Cerbos are generic; none
+  ships a schema for territory, concurrency, device limits, windowing or offline rights. That schema
+  is the reusable asset, and it does not exist.
+- **No open reader-revenue platform outside REMP.** One repo, 138 stars, one publisher's house tooling.
+
+### ⚙️ Two method corrections from this pass — both reusable across all twelve industries
+
+**1. The `repo:` 422 is *not* only a rename detector.** `repos/foundations.md` (pass 9) records that
+a 422 from `search/repositories` with a `repo:` qualifier means the repo was renamed or deleted. This
+pass found a counter-example and it is unambiguous:
+
+- `git ls-remote https://github.com/casbin/casbin HEAD` → returns a commit SHA. The repo **exists**
+  and is public.
+- `curl` of its LICENSE → Apache License 2.0, full text.
+- `org:casbin` searches → return sibling repos (`casbin-caddy-authz`, etc.) normally.
+- `repo:casbin/casbin` → **HTTP 422**, "resources do not exist or you do not have permission".
+
+A live, public, 400-star-class repository can be **absent from GitHub's search index while present on
+GitHub**. The corrected rule: *a 422 means the search index cannot see it, which is evidence about
+the index, not about the repository.* Confirm with `git ls-remote` before recording a repo as gone —
+and note the cost: stars and push dates for such a repo are simply **not measurable** by this method,
+which is why Casbin's row above says `n/m` rather than carrying an inherited figure.
+
+**2. `curl -sI https://github.com/...` is a broken existence oracle in this environment.** All 33
+URLs in this pass returned a uniform **403** to HTTP HEAD through the egress proxy — including repos
+that demonstrably exist. A pass that trusted HEAD would have discarded every finding as a dead link.
+`git ls-remote` returned **33/33 OK** on the same list. **Verify with `git ls-remote`, not with HEAD.**

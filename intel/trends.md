@@ -2938,3 +2938,101 @@ for broadcast); the UK carries `BBFC` for film while AppStream maps `GB → PEGI
 rated through the games mapping is **wrong in Germany and wrong in the UK**. Any client-facing model
 must key ratings by `(territory, medium, system)` — and the open estate keys them by country alone.
 
+
+## Pass 29 (2026-11-26) — the interactive, branching & playable-story plane: what is actually changing
+
+### 1. The buyer left before the technology did — and that is the whole story of this plane
+
+Netflix removed most of its interactive titles on **2024-12-01** and the final two — *Black Mirror:
+Bandersnatch* and *Unbreakable Kimmy Schmidt: Kimmy vs. the Reverend* — on **2025-05-12**, stating
+that the interactive-TV technology "served its purpose, but is now limiting as we focus on
+technological efforts in other areas". The pivot was to games, where branching fiction continues
+inside *Netflix Stories* as downloaded games rather than as a watched video stream. Some Bear Grylls
+interactive specials returned as **linear** cut-downs.
+
+Read what that implies, because it is unusual: the open-source substrate for this plane is *healthier
+than the commercial channel*. 190,000+ stars of permissive narrative tooling, pushed daily, serving a
+format the largest streamer publicly abandoned. **Any 2026 proposal that opens with "interactive
+video for a streaming service" is pitching into a category its biggest buyer exited.** The same
+components are worth real money pointed elsewhere; see patterns 29.1–29.6.
+
+⚠️ **Source hygiene:** an SEO page claiming a 2026 "interactive boom", a "400% engagement increase"
+and a "Branch Manager 2.0" could not be corroborated by any Netflix statement or major outlet. Do not
+quote it. It is exactly the kind of fabricated revival narrative this plane attracts.
+
+### 2. The money moved from interactive *video* to interactive *characters*
+
+The commercial energy in 2026 is in real-time digital humans, and it is overwhelmingly APAC-origin
+and permissively licensed: [lipku/LiveTalking](https://github.com/lipku/LiveTalking) (Apache-2.0,
+11,338★, pushed the day of this pass, **supports being interrupted mid-sentence**),
+[datascale-ai/opentalking](https://github.com/datascale-ai/opentalking) (Apache-2.0, 3,421★),
+[HumanAIGC-Engineering/OpenAvatarChat](https://github.com/HumanAIGC-Engineering/OpenAvatarChat)
+(Apache-2.0, 3,907★). `digital human interactive` returns 314 repositories;
+`second screen companion tv` returns **2**. That ratio is the trend in one line.
+
+The licence trend inside it is the warning: the two highest-starred avatar runtimes —
+`duixcom/Duix-Mobile` (8,362★) and `Tencent-Hunyuan/HunyuanVideo-Avatar` (2,226★) — are **both**
+under bespoke community licences, not OSI licences.
+
+### 3. Disclosure duties now attach to the *character*, not just the content
+
+Three regimes landed within one year, and they bite hardest exactly where this plane operates — a
+synthetic performer that improvises:
+
+- **EU:** AI Act Article 50 transparency obligations applied from **2026-08-02** (Commission guidance
+  **2026-07-21**); the amending regulation the Council approved on **2026-06-29** gives systems
+  already on the market until **2026-12-02**. The duty reaches production companies and rights
+  holders *deploying* AI to generate or manipulate content, and reaches non-EU businesses whose
+  content is distributed in the EU.
+- **Korea:** the **AI Basic Act**, live **2026-01-22**, is described as the first in Asia to impose
+  mandatory disclosure on AI-generated *or AI-assisted* content, reaching global services counting
+  Korea as a market (Webtoon, Tapas, Tappytoon), with watermark disclosure under a **one-year grace
+  period** for webtoon creators and platforms.
+- **LATAM:** Mexico published amendments to the Federal Copyright Law and Federal Labour Law on
+  **2026-05-14** — its first sector-specific AI rules — and Brazil's CONAR extended its 2026
+  influencer guidance to **avatars, virtual profiles and AI-generated content**, including child
+  participation and transparency duties.
+
+**The branching case is the unsolved one.** Disclosure regimes assume a *fixed* work that can carry a
+label. An interactive experience generates a path per viewer, and an AI character generates lines that
+existed nowhere at publication. Nothing in the open stack emits a per-path or per-utterance
+disclosure record. That is a product, and it is unbuilt.
+
+### 4. Authoring consolidated on two languages, and both are MIT
+
+`ink` (5,067★) and Yarn Spinner (2,883★) have become the de-facto pair — ink for branching prose
+structure, Yarn for screenplay-shaped dialogue — each with engine bindings maintained separately
+(`inkjs` 673★, `godot-ink` 793★, `YarnSpinner-Unity` 856★). Both MIT. For a studio, this is the rare
+case where **the standard question has a safe answer**: pick ink for structure-heavy narrative, Yarn
+for performance-heavy dialogue, and neither choice creates licence exposure.
+
+The tooling *around* them is the weak point: the only open node-graph design tool,
+[mhgolkar/Arrow](https://github.com/mhgolkar/Arrow) (MIT, 1,378★), has not been pushed since
+**2025-09-05**, and the in-editor Unity option, `radiatoryang/merino`, has been **archived since
+2021**. Writers get a language; they do not get a maintained GUI.
+
+### 5. The narrative-QA agent is the clearest unbuilt product in the plane
+
+A branching story is a graph, and graphs have coverage. [chaoz23/inkcheck](https://github.com/chaoz23/inkcheck)
+(MIT, 2★, pushed 2026-10-26) already compiles an ink story, **playtests every branch exhaustively**
+and reports dead content. Six MCP servers touch narrative at all and sum to **36 stars**. Meanwhile
+the substrate carries 190,000+. The capability gap in this plane is not generation — it is
+**verification**: dead ends, unreachable nodes, contradictory state, and branches that break a
+territory's age rating (the pass 28 junction, unbuilt on both sides).
+
+### 6. Visual novels are the format that never stopped working — and the open source is APAC's
+
+While interactive video collapsed, the VN format kept shipping: `renpy` (MIT, 7,065★, pushed
+2026-11-26), `WebGAL` (MPL-2.0, 4,054★), `VoidNovelEngine` (MIT, 1,715★), `dialogic` (MIT, 6,194★).
+Two of the four are CN-origin with bilingual documentation. `visual novel engine` returns 1,204
+repositories — six times `object based media` (187) and 600× `second screen companion tv` (2). The
+format with no broadcaster, no standard and no platform deal is the one with a living ecosystem.
+
+### 7. Interactive narrative is where "AI slop" is most visible, which raises the value of structure
+
+EY's 2026 M&E read is that AI is accelerating volume, speed and personalisation while **flattening**
+content, making credibility and emotional resonance more valuable; McKinsey expects growth in more
+immersive, personalised and participatory entertainment. Both point the same way for this plane: the
+differentiator is **authored structure** — a graph a human designed, verified and signed off — with
+AI filling performance, localisation and variation inside it. That is also the only version of this
+plane that survives a disclosure audit, because the structure is reviewable.

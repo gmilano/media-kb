@@ -3409,3 +3409,131 @@ industry's buyers — **has not been validated since 2013**. And the ladders are
 *label pairs* (long name plus short code), which is why the rung counts look inflated: `JP/EIRIN`'s
 "8" is four ratings with two labels each. **Count ratings, not labels**, or a conformance test will
 report twice the rungs that exist.
+
+## The interactive, branching & playable-story plane — measured 2026-11-26 (pass 29)
+
+78 repository slugs were probed this pass; **78/78 resolve** (`git ls-remote` on each, plus a licence
+read for every row whose SPDX field came back `None` or `NOASSERTION`). This is the healthiest
+substrate in the KB and also the one with the most licence surprises, so the tables below are ordered
+by **what the licence lets Globant do**, not by stars.
+
+### Narrative scripting & dialogue runtimes — permissive, active, and the strongest layer in this plane
+
+| Repo | Licence | Stars | Last push | Why it matters |
+|---|---|---|---|---|
+| [inkle/ink](https://github.com/inkle/ink) | MIT | 5,067★ | 2026-11-16 | The industry-standard narrative scripting language (*80 Days*, *Heaven's Vault*). **Middleware, not an engine** — it slots into your runtime and leaves the UI to you, which is exactly what a client integration needs. |
+| [y-lohse/inkjs](https://github.com/y-lohse/inkjs) | MIT | 673★ | 2026-11-20 | The JavaScript port. This is how an ink story reaches a browser, a CTV app or a web player without C#. |
+| [inkle/inky](https://github.com/inkle/inky) | MIT (stated in README; **no LICENSE file at the repo root**) | 2,758★ | 2026-05-05 | The writer-facing editor. Hand this to the client's writers room; it is the reason ink gets adopted. |
+| [inkle/ink-unity-integration](https://github.com/inkle/ink-unity-integration) | MIT — in **`LICENCE.md`**, British spelling, which is why GitHub reports `NOASSERTION` | 733★ | 2026-07-08 | Unity binding. See the method note below: the licence is real, the probe was wrong. |
+| [paulloz/godot-ink](https://github.com/paulloz/godot-ink) | MIT | 793★ | 2026-07-04 | ink inside Godot. With Godot itself MIT, this is the only fully-MIT authoring-to-runtime path in the plane. |
+| [YarnSpinnerTool/YarnSpinner](https://github.com/YarnSpinnerTool/YarnSpinner) | MIT | 2,883★ | 2026-11-26 | Screenplay-shaped dialogue language (*Night in the Woods*, *A Short Hike*). Engine-agnostic compiler + runtime; **pushed the day of this pass**. |
+| [YarnSpinnerTool/YarnSpinner-Unity](https://github.com/YarnSpinnerTool/YarnSpinner-Unity) | MIT | 856★ | 2026-11-25 | The official Unity integration, equally alive. |
+| [dialogic-godot/dialogic](https://github.com/dialogic-godot/dialogic) | MIT | 6,194★ | 2026-11-19 | Dialogue, characters and visual-novel flow as a Godot addon — the highest-starred *authoring* tool in the plane after the engines. |
+| [nathanhoad/godot_dialogue_manager](https://github.com/nathanhoad/godot_dialogue_manager) | MIT | 4,005★ | 2026-11-25 | The leaner Godot alternative: nonlinear dialogue as plain text files, diffable in git. |
+| [mhgolkar/Arrow](https://github.com/mhgolkar/Arrow) | MIT | 1,378★ | 2025-09-05 | Node-graph narrative design tool — the only open answer to Articy draft. **14 months without a push**: usable, not maintained. |
+| [radiatoryang/merino](https://github.com/radiatoryang/merino) | MIT (confirmed in `LICENSE`, 1,307 B) | 298★ | **2021-12-21, archived** | In-editor Yarn authoring for Unity. Archived — listed so a later pass does not rediscover it as live. |
+
+### The Twine family — the authoring tool actual writers already know, and a GPL seam
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [klembot/twinejs](https://github.com/klembot/twinejs) | **GPL-3.0** | 2,964★ | 2026-10-07 | Twine itself. The most widely taught interactive-narrative tool in the world, and **copyleft** — fine as a tool you *use*, a licence problem if you embed or fork it into a client product. |
+| [tmedwards/sugarcube-2](https://github.com/tmedwards/sugarcube-2) | BSD-2-Clause | 272★ | 2026-03-02 | The story format that actually ships Twine games. Permissive, unlike the editor above. |
+| [tmedwards/tweego](https://github.com/tmedwards/tweego) | BSD-2-Clause | 169★ | 2024-06-15 | CLI compiler — the piece that lets Twine stories live in CI instead of a GUI. 17 months stale but a stable format. |
+| [klembot/chapbook](https://github.com/klembot/chapbook) | MIT | 103★ | 2026-11-10 | The readable, MIT-licensed story format. The right default when the output must be embeddable. |
+| [videlais/extwee](https://github.com/videlais/extwee) | MIT | 44★ | 2026-11-20 | Parsing/compilation toolchain for Twee. Small, alive, and the programmatic entry point for an agent. |
+| [iftechfoundation/twine-specs](https://github.com/iftechfoundation/twine-specs) | **no licence statement found** | 104★ | 2024-07-04 | The Twee 3 / story-format specs. Documents, not code — demoted on sight, per this file's standing rule. |
+
+### Visual-novel & interactive-fiction engines — where APAC's open source is strongest
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [renpy/renpy](https://github.com/renpy/renpy) | **MIT for most of it** — stated in `sphinx/source/license.rst`; **no root LICENSE file**, portions under other licences | 7,065★ | 2026-11-26 | The Ren'Py visual-novel engine: two decades old, pushed the day of this pass, and the default for commercial VN production. |
+| [OpenWebGAL/WebGAL](https://github.com/OpenWebGAL/WebGAL) | MPL-2.0 | 4,054★ | 2026-11-21 | Browser-native VN engine, CN-origin, bilingual docs. MPL-2.0 = file-level copyleft: you may embed it, you must publish changes to *its* files. |
+| [VoidmatrixHeathcliff/VoidNovelEngine](https://github.com/VoidmatrixHeathcliff/VoidNovelEngine) | MIT | 1,715★ | 2026-11-26 | Modern MIT VN engine, also CN-origin, also pushed today. |
+| [Monogatari/Monogatari](https://github.com/Monogatari/Monogatari) | MIT | 897★ | 2026-11-15 | Web VN engine in plain JS — the lightest path to a branching story inside an existing web product. |
+| [ganelson/inform](https://github.com/ganelson/inform) | Artistic-2.0 | 1,671★ | 2026-06-24 | Inform 7, the literate IF compiler. Artistic-2.0 is permissive but unusual — flag it in legal review rather than assuming MIT. |
+| [garglk/garglk](https://github.com/garglk/garglk) | **aggregate**: `License.txt` states the package combines components under several licences | 439★ | 2026-11-25 | The cross-platform IF interpreter. "Several components, several licences" is a per-component review, not a single answer. |
+| [erkyrath/glkote](https://github.com/erkyrath/glkote) | MIT | 29★ | 2025-06-25 | The JS display layer for IF interfaces. Tiny, and the only permissive piece of the web-IF stack. |
+| [le-doux/bitsy](https://github.com/le-doux/bitsy) | MIT | 1,065★ | **2026-07-22, archived** | The little engine that taught a generation to ship a tiny world. Archived — history, not a dependency. |
+| [dfabulich/choicescript](https://github.com/dfabulich/choicescript) | ⛔ **ChoiceScript Licence (CSL) v1.0 — non-commercial use only** | 464★ | 2026-05-29 | The language behind Choice of Games. **Explicitly forbids commercial use.** It is the single clearest "do not ship" in this plane, and it is also the most likely to be suggested by a search. |
+| [pistacchio/Dedalus](https://github.com/pistacchio/Dedalus) | **no licence detected** | 185★ | 2024-04-02 | JS/HTML CYOA system. No licence = all rights reserved. Listed so nobody re-finds it hopefully. |
+
+### Interactive video — the thinnest layer, and the one the market retreated from
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [Comedian1926/OpenFMV](https://github.com/Comedian1926/OpenFMV) | MIT | 241★ | 2026-06-26 | Local-first visual editor for interactive video and branching scenes. **Copyright line reads 2026** — this is a new project, and the best open starting point for branching video that exists. |
+| [mohetios/BandersnatchInteractive](https://github.com/mohetios/BandersnatchInteractive) | MIT | 255★ | 2026-10-18 | An HTML5 interactive player modelled on the format Netflix retired. Useful as a reference implementation of the *mechanics*. |
+| [bbc/storyplayer](https://github.com/bbc/storyplayer) | **GPL-3.0** | 19★ | 2026-11-03 | BBC R&D's object-based media player — the only broadcaster-grade interactive runtime that is open at all. 19 stars, GPL-3.0, still pushed this month. |
+| [bbc/audio-orchestrator](https://github.com/bbc/audio-orchestrator) | **GPL-3.0** | 11★ | 2026-11-12 | BBC R&D production tool for orchestrated/companion-device audio. The closest thing to a second-screen toolchain in open source, and it is a prototype. |
+| [hyperaudio/hyperaudio-lite](https://github.com/hyperaudio/hyperaudio-lite) | MIT | 183★ | 2026-10-30 | Interactive transcript player — the navigable-media primitive that *did* survive, because it serves accessibility and search as well as interactivity. |
+| [NUKnightLab/StoryMapJS](https://github.com/NUKnightLab/StoryMapJS) | MPL-2.0 | 254★ | 2026-09-13 | Knight Lab's map-driven story tool. Still the default for a non-linear editorial story. |
+| [mozilla/popcorn-js](https://github.com/mozilla/popcorn-js) | MIT | 2,126★ | **2017-09-21, archived** | The ancestor of all web interactive video, dead for nine years. Quoted here as **history**: this plane has buried a generation of tooling already, and a client deserves to know that before funding the next one. |
+| [videojs/video.js](https://github.com/videojs/video.js) | **Apache-2.0** (read from `LICENSE`; GitHub reports `NOASSERTION`) | 40,260★ | 2026-11-26 | The player you will actually extend to get branching behaviour, because no standard provides it. |
+
+### Runtimes that deliver a playable story — the CTV and web tier
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [godotengine/godot](https://github.com/godotengine/godot) | MIT | 120,887★ | 2026-11-26 | The MIT engine. With dialogic/Dialogue Manager/godot-ink above it, the whole authoring-to-runtime chain is permissive. |
+| [pixijs/pixijs](https://github.com/pixijs/pixijs) | MIT | 48,914★ | 2026-11-26 | 2D web renderer — the right substrate for a playable story inside a publisher's own page. |
+| [phaserjs/phaser](https://github.com/phaserjs/phaser) | MIT | 40,791★ | 2026-08-21 | HTML5 game framework; the fastest route from a narrative script to something that runs on a phone browser. |
+| [cocos/cocos-engine](https://github.com/cocos/cocos-engine) | **MIT** (read from `LICENSE.md`; GitHub reports `NOASSERTION`) | 9,949★ | 2026-11-25 | Strong in APAC and in mini-game channels, which is where interactive stories actually monetise there. |
+| [defold/defold](https://github.com/defold/defold) | ⚠️ **Defold Licence v1.0** (bespoke, 9,976 B) — *not* an OSI licence | 6,491★ | 2026-11-26 | Free to use, and **not** Apache-2.0 as it is often listed. Legal review before it enters a client estimate. |
+| [rdkcentral/Lightning](https://github.com/rdkcentral/Lightning) | Apache-2.0 | 204★ | 2026-10-12 | The WPE/RDK UI framework for TV apps. **This is how an interactive experience reaches a set-top box or smart TV** without a native SDK per vendor. |
+| [rdkcentral/Lightning-SDK](https://github.com/rdkcentral/Lightning-SDK) | Apache-2.0 | 138★ | 2026-10-06 | The SDK layer above it. Two repos, 342 stars between them, and they carry the CTV side of this plane. |
+| [rive-app/rive-runtime](https://github.com/rive-app/rive-runtime) | MIT | 1,270★ | 2026-11-26 | State-machine-driven interactive animation. The permissive way to make a character *react* without a game engine. |
+| [vrm-c/UniVRM](https://github.com/vrm-c/UniVRM) | MIT | 3,432★ | 2026-10-19 | VRM avatar format for Unity — the interoperable character container APAC standardised on. |
+| [pixiv/three-vrm](https://github.com/pixiv/three-vrm) | MIT | 2,309★ | 2026-11-24 | The same format on three.js, i.e. in a browser. |
+| [jarikomppa/soloud](https://github.com/jarikomppa/soloud) | **zlib/libpng** (stated in `LICENSE`; GitHub reports `NOASSERTION`) | 2,200★ | 2024-08-13 | Easy embeddable audio engine. The permissive stand-in for Wwise/FMOD when the story needs adaptive sound. |
+| [libpd/libpd](https://github.com/libpd/libpd) | **"Standard Improved BSD"** (stated in `LICENSE.txt`) | 1,257★ | 2026-09-20 | Pure Data as an embeddable synthesis library — procedural, state-reactive audio for a branching scene. |
+
+### ⚠️ The licence findings of this pass — four new ways a licence hides, all measured byte by byte
+
+1. **`LICENCE.md`, with a C.** `inkle/ink-unity-integration` is MIT and GitHub reports
+   `NOASSERTION`, purely because the file uses British spelling. **Add `LICENCE`, `LICENCE.md` and
+   `LICENCE.txt` to every licence probe in all twelve industries** — pass 4's probe, pass 8's
+   extension and pass 27's byte-reader all missed this spelling.
+2. **The licence lives in the documentation tree.** `renpy/renpy` has *no* root LICENSE file; its MIT
+   grant is in `sphinx/source/license.rst`, with explicit carve-outs for derived components. A
+   root-only probe reports "no licence" for a 7,065-star engine that is in fact MIT.
+3. **The non-commercial OSS trap, twice in one plane.** `dfabulich/choicescript` (CSL v1.0) and
+   `tegnike/aituber-kit` (custom dual licence) both read as open source on GitHub and both **forbid
+   commercial use by default**. Neither is flagged by the SPDX field.
+4. **The bespoke "community licence" tier.** `duixcom/Duix-Mobile` (8,362★) and
+   `Tencent-Hunyuan/HunyuanVideo-Avatar` (2,226★) ship 6 KB bespoke agreements. The stars say
+   "safe", the file says "read me". In this plane the two highest-starred avatar runtimes are both in
+   this tier.
+
+### The H5P seam — the single most useful licence fact in this plane
+
+H5P is how branching narrative is *actually* shipped at scale today (learning, training, museum and
+brand experiences), and its licence changes depending on which half you take:
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [h5p/h5p-branching-scenario](https://github.com/h5p/h5p-branching-scenario) | **MIT** (stated in README) | 36★ | 2026-10-30 | The branching content type itself — decision trees over video and text. |
+| [h5p/h5p-interactive-video](https://github.com/h5p/h5p-interactive-video) | MIT | 267★ | 2026-11-26 | Interactive video content type; pushed the day of this pass. |
+| [h5p/h5p-php-library](https://github.com/h5p/h5p-php-library) | **GPL-3.0** | 156★ | 2026-11-26 | ⚠️ The **core host library**. The content types are MIT; the thing that runs them is copyleft. |
+| [h5p/h5p-editor-php-library](https://github.com/h5p/h5p-editor-php-library) | no SPDX; same GPL family as the core | 83★ | 2026-11-26 | The authoring half of the host. |
+| [Lumieducation/H5P-Nodejs-library](https://github.com/Lumieducation/H5P-Nodejs-library) | **GPL-3.0** (35,146 B, full GPLv3 text) | 207★ | 2026-11-26 | The Node/TypeScript host — the one a web team would reach for, and also GPL-3.0. |
+| [h5p/moodle-mod_hvp](https://github.com/h5p/moodle-mod_hvp) | GPL-3.0 | 160★ | 2026-11-18 | The Moodle plugin (Moodle is GPL anyway, so no new constraint there). |
+| [h5p/h5p-wordpress-plugin](https://github.com/h5p/h5p-wordpress-plugin) | no LICENSE file at probed names (WordPress plugins are GPL by platform convention) | 77★ | 2026-10-27 | The WordPress route. |
+
+**Read it once and remember it: in H5P the *content types* are MIT and every *host implementation* is
+GPL-3.0.** Secondary sources say "H5P is MIT" — that is true of the pieces that do not run anything.
+If a client wants branching scenarios inside a closed product, the authoring/runtime host is the
+licence decision, and the options are (a) accept GPL-3.0 for that service, (b) run H5P as a separate
+service behind an API boundary, or (c) build the player on `h5p-branching-scenario`'s MIT content
+type and skip the GPL host entirely. Option (c) is the one no vendor will tell you about.
+
+### Measured absences — searched, and genuinely missing
+
+| Searched | GitHub result | Reading |
+|---|---|---|
+| `second screen companion tv` | **2 repositories total**, both 0★ | No companion-device layer exists. The nearest real artefact is BBC's GPL-3.0 `audio-orchestrator` (11★). |
+| `interactive fiction MCP` | **7 repositories total** | The entire agent bridge; see `agents/top.md` pass 29. |
+| `branching scenario authoring` | **8 repositories**, none in-plane (top hits are unrelated student projects) | The capability is real and the vocabulary is not indexed — H5P does not describe itself with these words. |
+| `object based media` | 187 repositories, none in-plane in the top results | BBC's own player ranks far below noise. Search by repo, not by concept. |
+| interactive-video standard in HLS/DASH | nothing found | **There is no branching primitive in either standard.** Any proposal implies a player you own. |

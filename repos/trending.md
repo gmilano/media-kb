@@ -10,6 +10,100 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 29: interactive, branching & playable-story infrastructure (**78 slugs probed, 78/78 resolve; a licence hidden behind British spelling, a licence hidden in a docs tree, and the MIT/GPL seam that decides every H5P proposal**)
+
+Verification for this pass: `git ls-remote` on **78** slugs — **78/78 resolve** — plus a byte-level
+licence read for every row whose SPDX field came back `None` or `NOASSERTION`. Four licence
+categories were resolved by hand; all four are reusable across the twelve industries.
+
+### 🔴 Four new ways a licence hides — the method finding of this pass
+
+1. **`LICENCE.md`, with a C.** [inkle/ink-unity-integration](https://github.com/inkle/ink-unity-integration)
+   (733★) is **MIT**, and GitHub reports `NOASSERTION` only because the file uses British spelling.
+   Pass 4 built this KB's licence probe, pass 8 extended it, pass 27 read licences byte by byte —
+   **all three missed this spelling.** Add `LICENCE`, `LICENCE.md`, `LICENCE.txt` to the probe list.
+2. **The licence lives in the documentation tree.** [renpy/renpy](https://github.com/renpy/renpy)
+   (7,065★) has **no root LICENSE file**; the MIT grant is in `sphinx/source/license.rst` with
+   carve-outs for derived components. A root-only probe calls the plane's flagship engine unlicensed.
+3. **Non-commercial, twice, dressed as open source.**
+   [dfabulich/choicescript](https://github.com/dfabulich/choicescript) ships `LICENSE.txt` reading
+   "CHOICESCRIPT LICENSE (CSL) v1.0 — Non-commercial usage and modification…" and
+   [tegnike/aituber-kit](https://github.com/tegnike/aituber-kit) ships a 1,589 B custom dual licence
+   that is non-commercial by default. Neither is visible in the SPDX field.
+4. **The bespoke community-licence tier is now the top of the avatar category.**
+   [duixcom/Duix-Mobile](https://github.com/duixcom/Duix-Mobile) (8,362★, 6,198 B "DUIX.COM COMMUNITY
+   LICENSE AGREEMENT") and [Tencent-Hunyuan/HunyuanVideo-Avatar](https://github.com/Tencent-Hunyuan/HunyuanVideo-Avatar)
+   (2,226★, Tencent community terms). The two highest-starred interactive-avatar runtimes in open
+   source are **both** outside OSI licensing.
+
+Three more SPDX corrections in the other direction, all read from the file:
+[videojs/video.js](https://github.com/videojs/video.js) is **Apache-2.0**,
+[cocos/cocos-engine](https://github.com/cocos/cocos-engine) is **MIT** (`LICENSE.md`),
+[jarikomppa/soloud](https://github.com/jarikomppa/soloud) is **zlib/libpng** — and
+[defold/defold](https://github.com/defold/defold) (6,491★) is **neither**: a bespoke "Defold Licence
+v1.0", frequently listed as Apache-2.0 and not.
+
+### Pushed within days of this pass — the live edge
+
+| Repo | Licence | Stars | Last push |
+|---|---|---|---|
+| [godotengine/godot](https://github.com/godotengine/godot) | MIT | 120,887★ | 2026-11-26 |
+| [pixijs/pixijs](https://github.com/pixijs/pixijs) | MIT | 48,914★ | 2026-11-26 |
+| [videojs/video.js](https://github.com/videojs/video.js) | Apache-2.0 (file-read) | 40,260★ | 2026-11-26 |
+| [renpy/renpy](https://github.com/renpy/renpy) | MIT (docs-tree) | 7,065★ | 2026-11-26 |
+| [YarnSpinnerTool/YarnSpinner](https://github.com/YarnSpinnerTool/YarnSpinner) | MIT | 2,883★ | 2026-11-26 |
+| [VoidmatrixHeathcliff/VoidNovelEngine](https://github.com/VoidmatrixHeathcliff/VoidNovelEngine) | MIT | 1,715★ | 2026-11-26 |
+| [rive-app/rive-runtime](https://github.com/rive-app/rive-runtime) | MIT | 1,270★ | 2026-11-26 |
+| [h5p/h5p-interactive-video](https://github.com/h5p/h5p-interactive-video) | MIT | 267★ | 2026-11-26 |
+| [h5p/h5p-php-library](https://github.com/h5p/h5p-php-library) | **GPL-3.0** | 156★ | 2026-11-26 |
+| [Lumieducation/H5P-Nodejs-library](https://github.com/Lumieducation/H5P-Nodejs-library) | **GPL-3.0** | 207★ | 2026-11-26 |
+| [nathanhoad/godot_dialogue_manager](https://github.com/nathanhoad/godot_dialogue_manager) | MIT | 4,005★ | 2026-11-25 |
+| [cocos/cocos-engine](https://github.com/cocos/cocos-engine) | MIT (file-read) | 9,949★ | 2026-11-25 |
+| [YarnSpinnerTool/YarnSpinner-Unity](https://github.com/YarnSpinnerTool/YarnSpinner-Unity) | MIT | 856★ | 2026-11-25 |
+| [pixiv/three-vrm](https://github.com/pixiv/three-vrm) | MIT | 2,309★ | 2026-11-24 |
+| [OpenWebGAL/WebGAL](https://github.com/OpenWebGAL/WebGAL) | MPL-2.0 | 4,054★ | 2026-11-21 |
+| [adorablelovelymia/twine-play-mcp](https://github.com/adorablelovelymia/twine-play-mcp) | MIT | 0★ | 2026-11-21 |
+| [inkle/ink](https://github.com/inkle/ink) | MIT | 5,067★ | 2026-11-16 |
+
+### The H5P seam — the decision point for every branching-scenario proposal
+
+Branching narrative ships at scale today through H5P, and **its two halves are licensed
+differently**: the content types are **MIT**
+([h5p-branching-scenario](https://github.com/h5p/h5p-branching-scenario) 36★,
+[h5p-interactive-video](https://github.com/h5p/h5p-interactive-video) 267★) while **every host
+implementation is GPL-3.0** ([h5p-php-library](https://github.com/h5p/h5p-php-library) 156★,
+[H5P-Nodejs-library](https://github.com/Lumieducation/H5P-Nodejs-library) 207★ with the full 35,146 B
+GPLv3 text, [moodle-mod_hvp](https://github.com/h5p/moodle-mod_hvp) 160★). Secondary sources say
+"H5P is MIT"; that is true only of the parts that do not run anything. Full analysis and the three
+escape routes are in `repos/foundations.md` pass 29.
+
+### The CTV tier nobody lists — 342 stars carrying every set-top deployment
+
+[rdkcentral/Lightning](https://github.com/rdkcentral/Lightning) (Apache-2.0, 204★) and
+[rdkcentral/Lightning-SDK](https://github.com/rdkcentral/Lightning-SDK) (Apache-2.0, 138★) are the
+WPE/RDK UI framework for TV apps — the only open path from an interactive experience to a set-top box
+without a native SDK per vendor. They are the thinnest-starred load-bearing repos recorded since
+pass 25.
+
+### The archaeology, stated because a client deserves it
+
+[mozilla/popcorn-js](https://github.com/mozilla/popcorn-js) (MIT, 2,126★) — **archived 2017-09-21**.
+The ancestor of web interactive video, dead nine years. [le-doux/bitsy](https://github.com/le-doux/bitsy)
+(MIT, 1,065★) — archived 2026-07-22. [radiatoryang/merino](https://github.com/radiatoryang/merino)
+(MIT, 298★) — archived 2021-12. This plane has buried a generation of tooling already; that history
+belongs in the first conversation, not the third.
+
+### Measured absences
+
+| Searched | Result | Reading |
+|---|---|---|
+| `second screen companion tv` | **2 repos total, both 0★** | No companion-device layer. Nearest artefact: BBC's GPL-3.0 `audio-orchestrator`, 11★. |
+| `branching scenario authoring` | 8 repos, none in-plane | The capability exists (H5P) and does not use these words. |
+| interactive-video primitive in HLS/DASH | nothing | **No standard has one.** Every proposal implies a player you own. |
+| `object based media` | 187 repos, none in-plane in top results | `bbc/storyplayer` (GPL-3.0, 19★) is the whole category. |
+
+---
+
 ## 2026-11-26 — pass 28: age-rating vocabulary, territory mapping & enforcement (**the open vocabulary for this plane ships in the Linux desktop, and the media industry's own dataset — 110 systems, 77 territories — has no licence**)
 
 18 slugs probed, **18/18 resolve** by `git ls-remote`. Licences read as bytes at 8 names × 2 branches.

@@ -9,6 +9,104 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 29: the interactive, branching & playable-story plane (**the whole agent bridge is 36 stars wide, and the plane's best-shaped agent has 2 of them**)
+
+The gap grep came first, as pass 8 prescribed. Twelve candidate terms, twelve zeros across all eight
+files: `interactive video`, `branching`, `visual novel`, `interactive fiction`, `dialogue tree`,
+`narrative design`, `transmedia`, `second screen`, `companion app`, `Ren'Py`, `inkle`,
+`Yarn Spinner`. The KB said `playout` 83 times and `branching` zero times. Widest hole in 28 passes.
+
+### The headline: this plane inverts the KB's structural law
+
+Twenty-eight passes have recorded the same shape — a healthy horizontal layer above an empty vertical
+one. **Pass 29 is the first inversion.** The vertical layer is the healthy part: `inkle/ink` (MIT,
+5,067★), `YarnSpinner` (MIT, 2,883★, pushed today), `dialogic` (MIT, 6,194★), `renpy` (MIT, 7,065★,
+pushed today), `godot_dialogue_manager` (MIT, 4,005★, pushed yesterday). Over 190,000 stars of
+permissive, actively-maintained, media-native narrative tooling.
+
+What collapsed is **the buyer**. Netflix removed most of its interactive titles on **2024-12-01** and
+the last two — *Bandersnatch* and *Kimmy vs. the Reverend* — on **2025-05-12**, saying the
+interactive-TV technology "served its purpose, but is now limiting as we focus on technological
+efforts in other areas", and pivoting to games. So for the first time this KB is recording a plane
+where **the open source is not the gap; the channel is**. Do not pitch branching video to a streamer.
+Pitch the authoring substrate into the channels that kept paying.
+
+### The entire agent bridge, in one table — 36 stars for a plane with 190,000★ of substrate
+
+| MCP server | Licence | Stars | Last push |
+|---|---|---|---|
+| [fritzprix/role-playing-mcp-server](https://github.com/fritzprix/role-playing-mcp-server) | MIT | 17★ | 2026-10-04 |
+| [shawnrushefsky/dmcp](https://github.com/shawnrushefsky/dmcp) | MIT | 15★ | 2026-01-06 |
+| [triptych/opera-omnia-mcp](https://github.com/triptych/opera-omnia-mcp) | MIT | 2★ | 2025-03-23 |
+| [chaoz23/inkcheck](https://github.com/chaoz23/inkcheck) | MIT | 2★ | 2026-10-26 |
+| [adorablelovelymia/twine-play-mcp](https://github.com/adorablelovelymia/twine-play-mcp) | MIT | **0★** | 2026-11-21 |
+| [kehindeBankole/game-writer-mcp-server](https://github.com/kehindeBankole/game-writer-mcp-server) | **no LICENSE** | **0★** | 2025-08-24 |
+
+`interactive fiction MCP` → **7 repositories in total** on GitHub. And the one with the right shape —
+`inkcheck`, which compiles an ink story, **exhaustively playtests every branch** and reports dead
+content — has **2 stars** and was pushed last month. In this plane the agent layer is not missing
+because the job is unclear. It is missing because nobody starred the person who did it.
+
+### 🔴 A search-result correction worth carrying to the other eleven industries
+
+A web search for "Twine MCP server" answers **"none exists"**. GitHub search returns
+`adorablelovelymia/twine-play-mcp` — MIT, pushed **2026-11-21, five days before this pass**, 0 stars.
+Zero stars makes a repo invisible to every listicle and every LLM trained on them, **and visible to a
+registry query**. Pass 25 learned the inverse (the KB had declared a live anchor dead); this is the
+same lesson from the other side: *a plane with no stars is not a plane with no code*. Query the
+registry, not the commentary.
+
+### The live edge — what was pushed within days of this pass
+
+- [YarnSpinnerTool/YarnSpinner](https://github.com/YarnSpinnerTool/YarnSpinner) (MIT, 2,883★) and
+  [renpy/renpy](https://github.com/renpy/renpy) (MIT, 7,065★) — **both pushed 2026-11-26**, the day
+  of this pass. A twenty-year-old VN engine and the leading dialogue compiler, both still daily.
+- [lipku/LiveTalking](https://github.com/lipku/LiveTalking) (Apache-2.0, 11,338★) — pushed
+  2026-11-26. Real-time interactive digital human that **can be interrupted mid-sentence**, which is
+  the single hardest requirement in a live character.
+- [elizaOS/eliza](https://github.com/elizaOS/eliza) (MIT, 19,925★) — pushed 2026-11-26. Its unit of
+  configuration is a *character file*; it is the closest permissive thing to a hostable cast.
+- [Tencent-Hunyuan/HunyuanVideo-Avatar](https://github.com/Tencent-Hunyuan/HunyuanVideo-Avatar) —
+  trended on Trendshift daily **2026-11-10 → 2026-11-15**, #1 on one of those days. Licence is
+  Tencent community terms, **not** Apache-2.0.
+
+### ⛔ Four rows a careless pass would have shipped
+
+| Repo | Looks like | Actually is |
+|---|---|---|
+| [dfabulich/choicescript](https://github.com/dfabulich/choicescript) (464★) | the obvious branching language | **ChoiceScript Licence v1.0 — non-commercial use only.** Hard stop for client work. |
+| [tegnike/aituber-kit](https://github.com/tegnike/aituber-kit) (1,149★) | MIT-ish AI-character kit | **Custom dual licence, non-commercial by default**; commercial use needs a separate grant. |
+| [duixcom/Duix-Mobile](https://github.com/duixcom/Duix-Mobile) (8,362★) | the best-starred on-device avatar | **DUIX.COM Community Licence Agreement**, 6,198 B of bespoke terms. The plane's star-count decoy. |
+| [NVIDIA/Audio2Face-3D](https://github.com/NVIDIA/Audio2Face-3D) (582★) | open-sourced NVIDIA model | **No LICENSE file; README points at NVIDIA's product-specific software terms.** It is on "open source digital human" lists anyway. |
+
+### Contamination records — one of them the worst in the KB
+
+- `choose your own adventure` → **5,873 repositories**, top three are a Next.js demo, a licence-less
+  JS toy and a *conference-presentation* generator. **Highest contaminated total recorded in any
+  plane**, beating pass 25's `rate card` (2,013).
+- `transmedia` → 522 repositories, **zero in-plane**; top hit is a visual-programming art tool.
+- `object based media` → 187 repositories, zero in-plane in the top results, while the real artefact
+  (BBC R&D's player) sits at 19 stars.
+
+### Measured zeros — stated so silence is not read as coverage
+
+- `second screen companion tv` → **2 repositories in total, both 0★.** Smallest total this KB has
+  recorded for any named capability, below pass 27's four-repo finance layer.
+- No **interactive-video standard** exists: HLS and DASH have no branching primitive. The only open
+  players are `OpenFMV` (MIT, 241★, new in 2026) and a `Bandersnatch` reimplementation (MIT, 255★).
+- No agent in this plane knows that **a branch can change a title's age rating** — the junction with
+  pass 28, and unbuilt on both sides.
+
+### Falsifiable prediction, recorded so a later pass can score it
+
+`inkcheck` (2★) is the correct shape for this plane's agent layer: narrative-as-graph, with branch
+coverage as a test suite. **Prediction: by 2027-05, either (a) `inkcheck` or a direct equivalent
+passes 100 stars, or (b) the plane's agent bridge is still under 100 stars in total.** No middle
+outcome is likely, because the substrate is already permissive and already mature — the only missing
+input is attention.
+
+---
+
 ## 2026-11-26 — pass 28: the age-rating, classification & child-audience plane (**an empty agent layer for a reason no previous pass has recorded: legal attribution of judgment**)
 
 Agents and classifiers only; the vocabulary, mapping and enforcement repos for this plane are in

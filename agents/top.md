@@ -2812,3 +2812,109 @@ age*. A national rating ladder weighs violence, drugs, language, discrimination,
 Brazil's case — a closed list of exactly ten permitted content descriptors. **No open model emits a
 territory's descriptor set.** That is the unbuilt thing, and the EU's published-methodology duty is
 what would make a client pay for it.
+
+## The interactive, branching & playable-story plane — measured 2026-11-26 (pass 29), and **the first plane in this KB where the supply is healthy and the *buyer* withdrew**
+
+Pass 29 took the gap grep before the web search, per the pass-8 method. The result was the widest
+vocabulary hole measured in twenty-eight passes: across all eight files, `interactive video`,
+`branching`, `visual novel`, `interactive fiction`, `dialogue tree`, `narrative design`,
+`transmedia`, `second screen`, `companion app`, `Ren'Py`, `inkle` and `Yarn Spinner` scored
+**zero occurrences each**. The KB could say `playout` 83 times and `branching` zero times.
+
+**Read this plane differently from the other twenty-eight.** Everywhere else, this KB has recorded a
+healthy horizontal layer above an empty vertical one. Here the vertical layer is *the healthy part* —
+narrative authoring is mature, permissive, actively pushed and nearly all MIT — and what collapsed is
+the **distribution channel**: Netflix removed most of its interactive titles on **2024-12-01** and
+the final two, *Black Mirror: Bandersnatch* and *Kimmy vs. the Reverend*, on **2025-05-12**, stating
+that the interactive-TV technology "served its purpose, but is now limiting as we focus on
+technological efforts in other areas", and pivoting to games. So the correct pitch in this plane is
+**never "branching video for a streamer"**. It is the authoring and dialogue substrate pointed at the
+channels that *did* keep paying: games, learning and brand experience, AI characters, and public-service
+object-based media.
+
+### Tier 1 — permissive, active, safe to build on (interactive-character & story-runtime agents)
+
+| Agent / runtime | Repo | Licence | Stars | Last push | What it actually does |
+|---|---|---|---|---|---|
+| elizaOS (Eliza) | [elizaOS/eliza](https://github.com/elizaOS/eliza) | MIT | 19,925★ | 2026-11-26 | Agentic OS whose unit of configuration is a **character file**. The closest thing to a persistent cast of characters you can host yourself. |
+| Pipecat | [pipecat-ai/pipecat](https://github.com/pipecat-ai/pipecat) | BSD-2-Clause | 17,458★ | 2026-11-26 | Realtime voice/multimodal pipeline. The transport layer under a spoken interactive character. |
+| LiveKit Agents | [livekit/agents](https://github.com/livekit/agents) | Apache-2.0 | 15,355★ | 2026-11-26 | Realtime voice/video agent framework with the WebRTC plumbing already solved. |
+| LiveTalking | [lipku/LiveTalking](https://github.com/lipku/LiveTalking) | Apache-2.0 | 11,338★ | 2026-11-26 | Real-time interactive streaming digital human; supports being **interrupted mid-sentence**, which is the hard part of a live character. |
+| AI Town | [a16z-infra/ai-town](https://github.com/a16z-infra/ai-town) | MIT | 10,866★ | 2026-11-25 | Deployable starter kit for a populated world of interacting agents. The cheapest honest demo of emergent narrative. |
+| OpenAvatarChat | [HumanAIGC-Engineering/OpenAvatarChat](https://github.com/HumanAIGC-Engineering/OpenAvatarChat) | Apache-2.0 | 3,907★ | 2026-07-31 | Modular real-time avatar conversation stack (ASR→LLM→TTS→face). |
+| OpenTalking | [datascale-ai/opentalking](https://github.com/datascale-ai/opentalking) | Apache-2.0 | 3,421★ | 2026-09-04 | Industrial-grade digital-human pipeline: LLM, TTS, WebRTC, pluggable model backends. |
+| Story-to-game | [Shanyin-ai/Story-to-game](https://github.com/Shanyin-ai/Story-to-game) | MIT | 503★ | 2026-06-02 | Toolkit for creating **and running** branch-narrative games — the only permissive repo found that spans authoring *and* runtime. |
+| ludo-npc-ai | [koronto11/ludo-npc-ai](https://github.com/koronto11/ludo-npc-ai) | MIT | 103★ | 2026-10-11 | Visual workspace for game narratives and NPCs: arrange worlds, wire characters. Small, but in-plane and alive. |
+
+Nine rows, all verified by `git ls-remote` plus a licence read on 2026-11-26. That is the first time
+in this KB that a plane's agent layer has had **nine permissive, actively-pushed rows** — the
+opposite of pass 27's "one repo, one star, all rights reserved".
+
+### Tier 2 — real and widely used, but the licence or the staleness constrains client work
+
+| Agent | Repo | Licence | Stars | Last push | Constraint |
+|---|---|---|---|---|---|
+| SillyTavern | [SillyTavern/SillyTavern](https://github.com/SillyTavern/SillyTavern) | AGPL-3.0 | 36,122★ | 2026-11-22 | The most-starred character-interaction frontend in existence, and **AGPL-3.0** — network copyleft. It is a reference implementation, not a shippable component. |
+| Generative Agents | [joonspk-research/generative_agents](https://github.com/joonspk-research/generative_agents) | Apache-2.0 | 22,425★ | **2024-08-05** | The paper everyone cites for believable agents. Permissive and **16 months without a push** — cite the method, do not fork the code. |
+| Duix-Mobile | [duixcom/Duix-Mobile](https://github.com/duixcom/Duix-Mobile) | **DUIX.COM Community License Agreement** (6,198 B, bespoke) | 8,362★ | 2026-08-05 | On-device real-time avatar, and the plane's **star-count decoy**: 8,362★ behind a bespoke community licence, not OSI-approved. Read it before it reaches a proposal. |
+| Hallo | [fudan-generative-vision/hallo](https://github.com/fudan-generative-vision/hallo) | MIT | 8,678★ | **2024-09-14** | Audio-driven portrait animation. MIT and genuinely good; 26 months stale. |
+| HunyuanVideo-Avatar | [Tencent-Hunyuan/HunyuanVideo-Avatar](https://github.com/Tencent-Hunyuan/HunyuanVideo-Avatar) | NOASSERTION (Tencent community terms) | 2,226★ | 2025-12-16 | Trended daily on Trendshift 2026-11-10→15 and hit #1 on one of those days. The **licence is the community licence, not Apache-2.0** — same trap as the other Hunyuan drops recorded in pass 6. |
+| RisuAI | [kwaroran/RisuAI](https://github.com/kwaroran/RisuAI) | GPL-3.0 | 1,874★ | 2026-11-26 | Active daily. GPL-3.0 — fine for an internal tool, not for embedding in a client product. |
+| AITuber Kit | [tegnike/aituber-kit](https://github.com/tegnike/aituber-kit) | **Custom dual licence: non-commercial by default** (1,589 B) | 1,149★ | 2026-11-23 | The best-documented AI-character streaming kit out of Japan, and **commercial use requires a separate licence**. ⛔ Do not ship without one. |
+| ChatVRM | [pixiv/ChatVRM](https://github.com/pixiv/ChatVRM) | MIT | 847★ | 2025-05-27 | **Archived.** The reference 3D-avatar chat web app. Read it, do not depend on it. |
+
+### The agent bridge for narrative tooling exists — and it is **36 stars wide in total**
+
+This is the measurement to quote. Six MCP servers touch interactive narrative at all, and here is
+every one of them:
+
+| MCP server | Repo | Licence | Stars | Last push |
+|---|---|---|---|---|
+| role-playing-mcp-server | [fritzprix/role-playing-mcp-server](https://github.com/fritzprix/role-playing-mcp-server) | MIT | 17★ | 2026-10-04 |
+| dmcp (AI dungeon master) | [shawnrushefsky/dmcp](https://github.com/shawnrushefsky/dmcp) | MIT | 15★ | 2026-01-06 |
+| opera-omnia-mcp | [triptych/opera-omnia-mcp](https://github.com/triptych/opera-omnia-mcp) | MIT | 2★ | 2025-03-23 |
+| inkcheck (CI for ink stories) | [chaoz23/inkcheck](https://github.com/chaoz23/inkcheck) | MIT | 2★ | 2026-10-26 |
+| twine-play-mcp | [adorablelovelymia/twine-play-mcp](https://github.com/adorablelovelymia/twine-play-mcp) | MIT | **0★** | 2026-11-21 |
+| game-writer-mcp-server | [kehindeBankole/game-writer-mcp-server](https://github.com/kehindeBankole/game-writer-mcp-server) | **no LICENSE file** | **0★** | 2025-08-24 |
+
+**17 + 15 + 2 + 2 + 0 + 0 = 36 stars** for the entire agent bridge of a plane whose substrate carries
+over 190,000 stars. `interactive fiction MCP` returns **7 repositories in total** on GitHub search.
+
+Two readings, both actionable:
+
+1. **`inkcheck` is the right shape and nobody noticed.** It compiles an ink story, **playtests every
+   branch exhaustively** and reports dead content — i.e. it treats a narrative as a graph with test
+   coverage. That is precisely the job an agent should do in this plane, it is MIT, it was pushed
+   2026-10-26, and it has **2 stars**. The gap is adoption, not invention.
+2. **`twine-play-mcp` corrects a wrong answer.** A web search for a Twine MCP server returns "none
+   exists"; GitHub search returns one, MIT, pushed **five days before this pass**, with zero stars.
+   *Absence in a listicle is not absence in the registry* — the same lesson pass 25 recorded when it
+   found this plane's anchor alive after the KB had declared it dead.
+
+### ⚠️ Contamination warnings — three queries in this plane are traps
+
+- **`choose your own adventure` → 5,873 repositories, essentially none of them infrastructure.** The
+  top three are a Next.js demo (222★), a JS toy (185★, no licence) and a *conference-presentation*
+  generator (174★). This is the highest contaminated total recorded in any plane so far.
+- **`transmedia` → 522 repositories, zero in-plane.** The top hit is `d3cod3/Mosaic` (519★), a
+  visual-programming art tool. The word is academic vocabulary, not a software category.
+- **`object based media` → 187 repositories, zero in-plane in the top results.** The real artefact —
+  BBC R&D's own player — has **19 stars** and is three pages down. Rank by relevance in this plane,
+  never by stars.
+
+### Informed gaps from this pass — searched, and genuinely not found
+
+- **There is no second-screen / companion-TV layer at all.** `second screen companion tv` returns
+  **2 repositories in total**, both at **0 stars**. This is the smallest total this KB has ever
+  recorded for a named capability — smaller than pass 27's four-repo finance layer. If a client asks
+  for a companion-app experience, every line is bespoke.
+- **No open interactive-video *standard* exists.** HLS and DASH have no branching primitive, and the
+  only open players found are `Comedian1926/OpenFMV` (MIT, 241★, first commits 2026) and
+  `mohetios/BandersnatchInteractive` (MIT, 255★) — a clone of the format Netflix retired. Pitch a
+  **player you own**, not conformance to a standard that does not exist.
+- **No agent writes a *territory-legal* interactive flow.** Pass 28's finding carries straight in:
+  nothing in this plane knows that a branch leading to a drug-use scene changes a title's rating.
+  That is the junction between pass 28 and pass 29, and it is unbuilt.
+- **`NVIDIA/Audio2Face-3D` is not open source.** 582★, no LICENSE file at any probed name, and the
+  README points at **NVIDIA's product-specific software terms**. It appears on "open source digital
+  human" lists anyway. ⛔ Do not put it in a client stack on the strength of those lists.

@@ -4379,3 +4379,216 @@ is the audit trail behind every rating in the catalogue; for a US children's tie
 Kids" determination record the amended COPPA rule expects from **2026-04-22**. One artefact, three
 regions, three different regulators — which is exactly the portability this KB keeps saying is the
 scarce property.
+
+## Interactive, branching & playable-story recipes — added 2026-11-26 (pass 29)
+
+Every repo named below was verified on 2026-11-26 (`git ls-remote` + licence read). The licence note
+on each line is load-bearing: this plane's authoring tools are copyleft and its runtimes are
+permissive, which is the reverse of the rest of this file.
+
+### P43 — When the open source is healthier than the channel, the gap is a *buyer*, not a component
+
+Twenty-eight passes recorded the same law: a healthy horizontal layer above an empty vertical one, and
+the gap was always something unbuilt. Pass 29 is the first inversion in this KB. The vertical layer
+here is excellent — ink (MIT, 5,067★), Yarn Spinner (MIT, 2,883★), Ren'Py (MIT, 7,065★), dialogic
+(MIT, 6,194★), all pushed within days — and the thing that disappeared is the **customer**: Netflix
+removed its interactive catalogue in stages ending **2025-05-12**, calling the technology "limiting".
+
+**The operational rule:** before proposing anything in a plane whose open source looks unusually
+healthy, check whether the commercial channel is still there. A mature, permissive, actively-pushed
+substrate with no commercial deployments is **evidence of a failed market, not of an easy win**. The
+correct response is not to avoid the plane — it is to **re-point the same components at the channels
+that still pay**, which is what every pattern below does.
+
+### P44 — In a split-licence plane, adopt the copyleft half as a *tool* and ship only the permissive half
+
+This plane's authoring tier is GPL-3.0 (Twine, the H5P hosts, BBC StoryPlayer) and its runtime tier is
+permissive (ink, Yarn, Godot, Ren'Py, Lightning, OpenFMV). The naive reading — "GPL in the stack,
+walk away" — loses the best writer-facing tools in the industry. The correct reading: **nobody ships
+an authoring GUI to a customer.** Use Twine and H5P as internal production tools, keep the GPL host
+behind a service boundary or on a GPL platform (Moodle is GPL anyway), and build the artefact the
+client embeds on the MIT content types and MIT runtimes. State which side of the boundary each
+component is on *in the proposal*, before the first commit.
+
+### Pattern 29.1 — Narrative QA as a release gate (the plane's clearest unbuilt product)
+
+**Problem.** A branching story is a graph and nobody tests it like one. Writers ship dead ends,
+unreachable nodes and contradictory state, and the defect is found by a viewer.
+
+**Wire it together.**
+1. Author in [`inkle/ink`](https://github.com/inkle/ink) (MIT) — `inklecate` compiles from CI; or
+   [`YarnSpinnerTool/YarnSpinner`](https://github.com/YarnSpinnerTool/YarnSpinner) (MIT) for
+   screenplay-shaped dialogue.
+2. Gate every commit with [`chaoz23/inkcheck`](https://github.com/chaoz23/inkcheck) (MIT, 2★) — it
+   compiles the story, **exhaustively playtests every branch** and reports dead content. It is also
+   an MCP server, so an agent can run it.
+3. Add the coverage artefact nobody ships: for each release, the node/edge inventory, the unreachable
+   set, the dead-end set, state-contradiction findings, and a **sign-off line a showrunner can read**.
+4. Compile to the target with [`y-lohse/inkjs`](https://github.com/y-lohse/inkjs) (MIT) for web/CTV or
+   [`paulloz/godot-ink`](https://github.com/paulloz/godot-ink) (MIT) for a shipped app.
+
+**Why it sells.** The North American blocker is the writers room (54% of M&E leaders in Grant
+Thornton's 2026 survey say the frontline needs adoption support most) under a board that has already
+approved the money (87%). This pattern gives a writers room a safety net instead of a replacement —
+and the whole chain is MIT.
+
+### Pattern 29.2 — The per-path disclosure ledger (the EMEA play, and it has a live deadline)
+
+**Problem.** AI Act Article 50 transparency applied from **2026-08-02** (guidance 2026-07-21; systems
+already on the market have until **2026-12-02** under the amendment the Council approved 2026-06-29),
+and it reaches production companies and rights holders *deploying* AI to generate or manipulate
+content, including non-EU businesses distributing into the EU. But the duty assumes **a fixed work
+that can carry a label**, and a branching experience produces a path per viewer while an AI character
+produces lines that existed nowhere at publication.
+
+**Wire it together.**
+1. Enumerate the graph from the compiled story (ink/Yarn/Twee via
+   [`videlais/extwee`](https://github.com/videlais/extwee), MIT) — every node, every edge, every
+   reachable path class.
+2. Tag each node with its generation provenance, reusing the C2PA/provenance work already in this KB
+   (pass 5): human-authored, AI-assisted, AI-generated, and for performance assets the consent
+   reference.
+3. For AI characters, log **per-utterance** records at runtime from the agent layer
+   ([`elizaOS/eliza`](https://github.com/elizaOS/eliza) MIT, or
+   [`pipecat-ai/pipecat`](https://github.com/pipecat-ai/pipecat) BSD-2 /
+   [`livekit/agents`](https://github.com/livekit/agents) Apache-2.0 for voice).
+4. Emit the Article 50 artefact as a **queryable record per transmission**, not a badge on a frame,
+   and keep it joinable to the per-path inventory from step 1.
+5. If delivery is object-based, [`bbc/storyplayer`](https://github.com/bbc/storyplayer) (**GPL-3.0**)
+   plus the Object Based Media Schema is the only open broadcaster-grade runtime — scope it as a
+   deployed service, per P44.
+
+**Why it sells.** The duty is in force, the EU's own Apply AI approach names "interactive and
+immersive media storytelling" as a funding priority, and **nobody has modelled disclosure over a
+graph**. The buyer is a public broadcaster or its production supplier.
+
+### Pattern 29.3 — Branching scenarios inside a closed product, without the GPL host (the H5P escape route)
+
+**Problem.** The client wants branching decision-trees over video inside their own closed product.
+Every H5P host implementation is **GPL-3.0** ([`h5p-php-library`](https://github.com/h5p/h5p-php-library)
+156★, [`H5P-Nodejs-library`](https://github.com/Lumieducation/H5P-Nodejs-library) 207★ with the full
+35,146 B GPLv3 text), while the **content types are MIT**
+([`h5p-branching-scenario`](https://github.com/h5p/h5p-branching-scenario) 36★,
+[`h5p-interactive-video`](https://github.com/h5p/h5p-interactive-video) 267★). Secondary sources
+flatten this to "H5P is MIT", which is how a licence breach reaches a sprint.
+
+**Three routes, in order of preference.**
+1. **Build on the MIT content type, skip the host.** Render `h5p-branching-scenario`'s MIT package
+   inside your own player ([`videojs/video.js`](https://github.com/videojs/video.js), Apache-2.0,
+   file-read) and keep authoring in the client's existing CMS. No copyleft enters the product.
+2. **Service boundary.** Run the GPL host as a standalone service behind an API, consumed over HTTP —
+   the product does not link it.
+3. **Platform-native.** If the client is on Moodle or WordPress, use
+   [`moodle-mod_hvp`](https://github.com/h5p/moodle-mod_hvp) (GPL-3.0) — the platform is already GPL,
+   so the licence costs nothing.
+
+**Why it sells.** Learning, onboarding, compliance training, museum and brand experiences are where
+branching narrative kept its budget after streaming left. This is the pattern with the shortest path
+to delivery in the plane.
+
+### Pattern 29.4 — Interactive on the operator's box (the CTV play nobody lists)
+
+**Problem.** A participatory format has to run on a set-top box or smart TV, and there is no
+interactive primitive in HLS or DASH to lean on.
+
+**Wire it together.**
+1. App shell in [`rdkcentral/Lightning`](https://github.com/rdkcentral/Lightning) +
+   [`Lightning-SDK`](https://github.com/rdkcentral/Lightning-SDK) (both Apache-2.0, 342★ combined) —
+   the only open route onto RDK/WPE devices without a native SDK per vendor.
+2. Story logic as a compiled ink JSON bundle via `inkjs` (MIT) — small, no engine required.
+3. Video playback through the operator's existing player; treat each branch as a separate rendition
+   and pre-buffer the candidate next segments, which is the mechanic
+   [`mohetios/BandersnatchInteractive`](https://github.com/mohetios/BandersnatchInteractive) (MIT,
+   255★) demonstrates and [`Comedian1926/OpenFMV`](https://github.com/Comedian1926/OpenFMV) (MIT,
+   241★) authors.
+4. Measurement through the Apache-2.0 analytics stack already recorded in pass 7 — per-branch
+   completion is the only metric that justifies the format.
+
+**Scope honestly.** State in the proposal that the player is **yours**, because no standard provides
+one, and that the second-screen layer is bespoke: `second screen companion tv` returns **2
+repositories in all of open source, both at 0 stars**. The nearest real artefact,
+[`bbc/audio-orchestrator`](https://github.com/bbc/audio-orchestrator), is a **GPL-3.0 prototype with
+11 stars**.
+
+### Pattern 29.5 — The interactive character with a consent and disclosure trail (APAC-first)
+
+**Problem.** Korea's **AI Basic Act** (live **2026-01-22**) requires disclosure of AI-generated **and
+AI-assisted** content, reaching platforms counting Korea as a market (Webtoon, Tapas, Tappytoon), with
+watermark disclosure under a **one-year grace period**; for partial AI use the standard is still
+self-regulation and contract. Brazil's CONAR 2026 guidance covers **avatars and virtual profiles**.
+Nothing open records *partial* assistance.
+
+**Wire it together.**
+1. Character runtime: [`lipku/LiveTalking`](https://github.com/lipku/LiveTalking) (Apache-2.0,
+   11,338★ — interruptible mid-sentence) or
+   [`HumanAIGC-Engineering/OpenAvatarChat`](https://github.com/HumanAIGC-Engineering/OpenAvatarChat)
+   (Apache-2.0) / [`datascale-ai/opentalking`](https://github.com/datascale-ai/opentalking)
+   (Apache-2.0).
+2. Avatar container: [`vrm-c/UniVRM`](https://github.com/vrm-c/UniVRM) (MIT) for Unity or
+   [`pixiv/three-vrm`](https://github.com/pixiv/three-vrm) (MIT) in a browser — VRM is the
+   interoperable format APAC standardised on.
+3. Dialogue spine: authored ink/Yarn for the parts that must be deterministic (legal lines, product
+   claims, age-sensitive content), the model only inside those bounds.
+4. The artefact: a **graduated assistance record** — per panel, per line, per frame — with the
+   consent reference for any likeness or voice, watermark emission under the grace period, and a
+   disclosure record that survives localisation into Japan (**49.5% of K-webtoon exports**).
+5. ⛔ **Keep these out of delivery:** [`tegnike/aituber-kit`](https://github.com/tegnike/aituber-kit)
+   (custom, **non-commercial by default**), [`duixcom/Duix-Mobile`](https://github.com/duixcom/Duix-Mobile)
+   (**DUIX.COM Community Licence**), [`Tencent-Hunyuan/HunyuanVideo-Avatar`](https://github.com/Tencent-Hunyuan/HunyuanVideo-Avatar)
+   (Tencent community terms), [`NVIDIA/Audio2Face-3D`](https://github.com/NVIDIA/Audio2Face-3D)
+   (NVIDIA product terms, **no LICENSE file**), [`pixiv/ChatVRM`](https://github.com/pixiv/ChatVRM)
+   (MIT but **archived**).
+
+**Why it sells.** The duty is in force, the platforms in scope are named in the law, and the
+graduated record is the part no vendor ships. Adoption data says the creators are not the buyers here
+(**18.3%** of 800 webtoon artists had used genAI; **36.1%** intended to) — sell to the platform, whose
+exposure is statutory.
+
+### Pattern 29.6 — Zero-licence-exposure narrative delivery for a funded games sector (LATAM-first)
+
+**Problem.** A Brazilian or Mexican studio with public funding (Brazil's 2024 games reclassification
+opened cultural-funding access; grants are now reaching studios) needs a narrative pipeline, and
+cannot take on licence risk it has no counsel to assess.
+
+**Wire it together — and note that every component is MIT.**
+1. Engine: [`godotengine/godot`](https://github.com/godotengine/godot) (MIT, 120,887★).
+2. Narrative: [`dialogic`](https://github.com/dialogic-godot/dialogic) (MIT, 6,194★) or
+   [`godot_dialogue_manager`](https://github.com/nathanhoad/godot_dialogue_manager) (MIT, 4,005★), or
+   [`godot-ink`](https://github.com/paulloz/godot-ink) (MIT) if the writers prefer ink.
+3. Design: [`mhgolkar/Arrow`](https://github.com/mhgolkar/Arrow) (MIT, 1,378★) for the node graph —
+   with the caveat that it has not been pushed since **2025-09-05**; treat it as a stable tool, not a
+   dependency.
+4. Localisation: the pass 14 stack, unchanged.
+5. Web build for a publisher's page: [`pixijs/pixijs`](https://github.com/pixijs/pixijs) (MIT) or
+   [`phaserjs/phaser`](https://github.com/phaserjs/phaser) (MIT).
+
+**The sentence to put in the proposal:** *"This stack is MIT end to end — authoring, runtime,
+localisation and web delivery — so there is no copyleft obligation and no commercial-use
+restriction."* It is rare in this KB and it is true here. Secondary play for the same region: the
+**virtual-influencer compliance kit** in `intel/market.md` pass 29, built on UniVRM/three-vrm (MIT)
+and LiveTalking (Apache-2.0), aimed at CONAR's avatar and child-participation duties.
+
+### Pattern 29.7 — The 20-minute gate for any interactive-narrative proposal
+
+Run this before estimating. Each line is a measured fact from pass 29, and each one has killed a bad
+proposal shape:
+
+1. **Is the client asking for interactive video on a streaming service?** If yes, say out loud that
+   Netflix exited the category (final removals **2025-05-12**, technology called "limiting") and
+   re-point to games, learning, brand experience, CTV or AI characters. Do not open with a revival
+   narrative.
+2. **Is a market-size number in the deck?** Interactive *video* has **no published figure**. The
+   adjacent segments disagree by **1.9×** and **2.1×** on the same base year. Quote the spread or
+   quote the substrate counts instead.
+3. **Which side of the licence seam is each component on?** ink/Yarn/Godot/Ren'Py/Lightning/OpenFMV =
+   permissive, ship it. Twine/H5P hosts/StoryPlayer = GPL-3.0, tool-only or service boundary.
+   ChoiceScript and aituber-kit = **non-commercial, never ship**.
+4. **Does the scope assume a standard?** There is **no branching primitive in HLS or DASH**. The
+   player is yours; price it.
+5. **Does the scope assume a second screen?** `second screen companion tv` = **2 repositories, both
+   0★**. Every line of that is bespoke.
+6. **Does a disclosure duty apply?** EU Article 50 (in force; **2026-12-02** for existing systems),
+   Korea AI Basic Act (**2026-01-22**, AI-*assisted* included), Brazil CONAR (avatars). If yes, the
+   per-path or per-utterance record is in scope — and it is the part nobody has built.
+7. **Does a branch change the title's age rating?** Pass 28's ladders apply per path. No open tool
+   knows this. Either exclude it explicitly or sell it as the junction product.

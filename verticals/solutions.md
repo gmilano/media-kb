@@ -1656,3 +1656,45 @@ healthcare KB.
 the territory mapping, Seerr/Jellyfin for enforcement, the board's own submission process for the
 certificate, and **a typed `(system, value)` store of your own in the middle**, because nothing in the
 open estate provides one. That middle piece is the billable work, and it is small.
+
+## The interactive & branching-story tier — added 2026-11-26 (pass 29)
+
+This tier answers one question: **if a client wants a branching experience in production next
+quarter, what existing system do we customise?** All rows verified 2026-11-26 (`git ls-remote` plus a
+licence read).
+
+| Platform | Repo | Licence | Stars | What it is, and who runs it |
+|---|---|---|---|---|
+| **H5P** (content types) | [h5p/h5p-branching-scenario](https://github.com/h5p/h5p-branching-scenario) · [h5p/h5p-interactive-video](https://github.com/h5p/h5p-interactive-video) | **MIT** | 36★ / 267★ | The de-facto platform for branching scenarios in learning, onboarding, museum and brand experiences. Decision trees over video, with scoring. |
+| **H5P** (host — PHP) | [h5p/h5p-php-library](https://github.com/h5p/h5p-php-library) | **GPL-3.0** | 156★ | The core runtime/host. ⚠️ Different licence from the content types above. |
+| **H5P** (host — Node/TS) | [Lumieducation/H5P-Nodejs-library](https://github.com/Lumieducation/H5P-Nodejs-library) | **GPL-3.0** | 207★ | The host a web team would actually pick. Also copyleft. |
+| **H5P in Moodle / WordPress** | [h5p/moodle-mod_hvp](https://github.com/h5p/moodle-mod_hvp) · [h5p/h5p-wordpress-plugin](https://github.com/h5p/h5p-wordpress-plugin) | GPL-3.0 / platform-GPL | 160★ / 77★ | The two deployment routes that need no new infrastructure. Moodle is GPL already, so the host licence costs nothing there. |
+| **Twine** | [klembot/twinejs](https://github.com/klembot/twinejs) | **GPL-3.0** | 2,964★ | The authoring platform the client's writers may already know (it is taught in schools and newsrooms). Use it as a tool; do not embed it. |
+| **Twine, headless** | [tmedwards/tweego](https://github.com/tmedwards/tweego) · [videlais/extwee](https://github.com/videlais/extwee) · [klembot/chapbook](https://github.com/klembot/chapbook) | BSD-2 / MIT / MIT | 169★ / 44★ / 103★ | The permissive half: compile Twine stories in CI and ship them inside your own product. |
+| **Ren'Py** | [renpy/renpy](https://github.com/renpy/renpy) | MIT (docs-tree grant) | 7,065★ | The commercial visual-novel platform. Ships to Windows/macOS/Linux/Android/iOS/web from one script. |
+| **WebGAL** | [OpenWebGAL/WebGAL](https://github.com/OpenWebGAL/WebGAL) | MPL-2.0 | 4,054★ | Browser-native VN platform, CN-origin, bilingual. The right pick when the deliverable is a URL. |
+| **Godot + dialogue stack** | [godotengine/godot](https://github.com/godotengine/godot) + [dialogic](https://github.com/dialogic-godot/dialogic) + [godot_dialogue_manager](https://github.com/nathanhoad/godot_dialogue_manager) + [godot-ink](https://github.com/paulloz/godot-ink) | **all MIT** | 120,887★ / 6,194★ / 4,005★ / 793★ | The only **fully-MIT** authoring-to-shipping chain in this plane, across desktop, mobile, console and web. |
+| **RDK Lightning** | [rdkcentral/Lightning](https://github.com/rdkcentral/Lightning) · [rdkcentral/Lightning-SDK](https://github.com/rdkcentral/Lightning-SDK) | Apache-2.0 | 204★ / 138★ | The TV/set-top app framework. This is the *only* open answer to "and how does it run on the operator's box?". |
+| **BBC StoryPlayer** | [bbc/storyplayer](https://github.com/bbc/storyplayer) | **GPL-3.0** | 19★ | Broadcaster-grade object-based media player plus the Object Based Media Schema. Public-service R&D, still pushed this month, and the only broadcaster-shaped runtime that is open. |
+| **BBC Audio Orchestrator** | [bbc/audio-orchestrator](https://github.com/bbc/audio-orchestrator) | **GPL-3.0** | 11★ | Companion-device orchestrated audio. A prototype, and the only one. |
+| **OpenFMV** | [Comedian1926/OpenFMV](https://github.com/Comedian1926/OpenFMV) | MIT | 241★ | Local-first editor for interactive video and branching scenes; the project is new in 2026. The best permissive starting point for branching *video* specifically. |
+
+### This tier does **not** obey this file's licence law — and that is the finding
+
+Every earlier tier in this file bent one way: permissive at the edges, copyleft in the middle. Here it
+is **split by role**: the *authoring* tools are copyleft (Twine GPL-3.0, H5P hosts GPL-3.0,
+StoryPlayer GPL-3.0) while the *runtimes and formats* are permissive (ink, Yarn, Godot, Ren'Py,
+Lightning, OpenFMV). The practical consequence is the opposite of the usual advice: **adopt the
+copyleft tools as tools** — nobody ships Twine to a customer — **and build the shipped artefact on
+the permissive runtimes.** A proposal that embeds an authoring UI is a GPL conversation; a proposal
+that embeds a player is not.
+
+### Gap: there is no open interactive-experience *delivery platform*
+
+There is no interactive equivalent of PeerTube or Owncast — nothing that stores, versions, serves,
+measures and A/B-tests a branching experience. The pieces exist separately (a player, a story format,
+an analytics pipeline from pass 7) and nothing joins them. Note that **the market retreated from this
+category**: Netflix withdrew its interactive catalogue in stages ending 2025-05-12, citing the
+technology as "limiting". So the honest reading is not "an obvious product is missing" but **"the
+platform shape failed once already"** — which is why `compose/patterns.md` pass 29 points the same
+components at learning, brand experience, CTV and AI characters instead.

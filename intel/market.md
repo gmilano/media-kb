@@ -1058,6 +1058,48 @@ same evidence-pack shape, and the same buyer.
 ⚠️ **Channel note:** `ESRB API` returns **zero relevant repositories** (all IGDB/RAWG hobby
 projects). There is no open integration to ESRB. Do not promise one.
 
+#### The interactive, branching & playable-story plane — added 2026-11-26 (pass 29). **The region that abandoned the format and is now buying the capability back through gaming**
+
+This is the region where the format died commercially. Netflix removed most interactive titles on
+**2024-12-01** and the last two on **2025-05-12**, saying the interactive-TV technology "served its
+purpose, but is now limiting", and pivoting to games. Branching fiction survived inside *Netflix
+Stories* as **downloaded games**, not as streamed video, and some Bear Grylls interactive specials
+were re-released as **linear** cut-downs.
+
+What the region is buying instead, measured:
+
+- **Interactive is an M&A thesis, not a programming slate.** Chambers' 2026 New York guide reports
+  that strategic buyers now prioritise deals that **bridge premium IP with interactive ecosystems —
+  gaming, creator platforms and proprietary ad-tech**. The capability is being acquired, not
+  commissioned.
+- **Board-level AI money with a frontline gap.** Grant Thornton's 2026 survey of 950 leaders found
+  **87% of M&E boards have approved major AI investments**, while **54%** say the frontline — writers,
+  editors, production staff — is where adoption most urgently needs support. Regulatory uncertainty
+  registers at only **34%**, the sector being more lightly regulated than banking or insurance.
+  Forrester's North America spotlight finds firms "bullish on genAI but bogged down in early
+  experimentation".
+- **The one scheduled mass-participation event.** PwC flags the **2026 World Cup in North America**
+  as likely among the longest shared-reality experiences in history — the region's clearest near-term
+  demand for second-screen and participatory formats, and the layer with **2 repositories in all of
+  open source**.
+
+**The structural gap, and it is the sellable one.** North America has the IP, the buyers and the
+budget, and no runtime: there is no interactive-video standard in HLS or DASH, the only open players
+are `OpenFMV` (MIT, 241★) and a `Bandersnatch` reimplementation (MIT, 255★), and
+`second screen companion tv` returns **2 repositories, both 0★**. Every participatory experience in
+this region is bespoke today.
+
+**Opportunity (NA):** the **narrative-QA and branch-coverage service** — a branching story treated as
+a graph with a test suite: unreachable nodes, dead ends, contradictory state, and a signed-off
+coverage report per release. `chaoz23/inkcheck` (MIT, 2★) proves the shape; the buyer is a studio or
+publisher whose writers room is the stated adoption bottleneck (54%), and the artefact is the thing a
+showrunner can approve. Sell it against the 87% board mandate, not as an interactive-video revival.
+Pair it with the digital-replica consent work already recorded in this region: same buyer, same
+evidence-pack shape.
+
+⚠️ **Channel note:** do not open a North American conversation with "interactive video for
+streaming". The region's largest buyer exited the category publicly, and the client will know.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2243,6 +2285,43 @@ that no incumbent sells it, and Article 17's code-of-conduct route means **early
 write the criteria everyone else will adopt.** Sell it to an app-store or large-catalogue operator
 before the code of conduct is drafted, not after.
 
+#### The interactive, branching & playable-story plane — added 2026-11-26 (pass 29). **The only region whose public funder names this plane as a priority — and the only one with a labelling duty that a branching work cannot satisfy**
+
+EMEA is where this plane has an actual policy tailwind, and the evidence is first-party:
+
+- **The European Commission's Apply AI approach commits support for European AI models "focusing on
+  interactive and immersive media storytelling".** That is this plane, named, in a funding instrument.
+  No other region's public sector names it.
+- **Public-service R&D is the open source.** BBC R&D's [storyplayer](https://github.com/bbc/storyplayer)
+  (**GPL-3.0**, 19★, pushed 2026-11-03) and [audio-orchestrator](https://github.com/bbc/audio-orchestrator)
+  (**GPL-3.0**, 11★) are the only broadcaster-grade object-based-media tools that are open at all,
+  along with the Object Based Media Schema. BBC Click's 1000th episode shipped as an interactive
+  factual programme on this stack. **30 stars carry the entire category**, and both are copyleft.
+- **The labelling duty, with dates.** AI Act Article 50 transparency obligations applied from
+  **2026-08-02**, with Commission guidance published **2026-07-21**; the amending regulation approved
+  by the Council on **2026-06-29** gives systems already on the market until **2026-12-02**. The duty
+  reaches production companies and rights holders *deploying* AI to generate or manipulate content,
+  and reaches non-EU businesses whose content is distributed in the EU. EACA has published practical
+  Article 50 guidance for agencies.
+
+**The structural gap, and it is specific to this plane.** Disclosure law assumes a **fixed work** that
+can carry a label. A branching experience generates a *path per viewer*; an AI character generates
+lines that existed nowhere at publication. Nothing in the open stack emits a per-path or
+per-utterance disclosure record — and the EMEA-origin runtime that would host one is GPL-3.0 with 19
+stars.
+
+**Opportunity (EMEA):** the **per-path disclosure ledger** — an Article 50 artefact for non-linear
+work: every path a viewer could take, every AI-generated or AI-manipulated element on it, the
+provenance records (C2PA work already in this KB), and a queryable record per transmission rather
+than a badge on a frame. The buyers are public broadcasters and their production suppliers; the
+deadline is already in force; the competitive moat is that **nobody has modelled disclosure over a
+graph**. Sell the ledger as the compliance evidence pack, and the object-based player as the delivery
+option — noting the GPL-3.0 boundary before the first commit, exactly as pass 26 did with ODbL data.
+
+⚠️ **Licence note for this region:** the EMEA stack here is copyleft (StoryPlayer, Audio Orchestrator,
+Twine, the H5P hosts). Scope it as a service deployment or behind an API boundary, not as embedded
+components in a closed product.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3360,6 +3439,52 @@ region's (8 rungs in Australia, 4 in Japan, a contested set in Korea, 3 in Singa
 market runs on private broadcaster standards, and the Australian regulator has conceded its control
 under-performs. **The asset is a rules engine with a per-market ruleset and an evidence trail, not a
 compliance mode.**
+
+#### The interactive, branching & playable-story plane — added 2026-11-26 (pass 29). **The region that owns the open source and already regulates AI-assisted interactive content**
+
+APAC is the only region where this plane's open source, its commercial format and its regulation are
+all live at once.
+
+**The open source is APAC's.** Two of the four leading visual-novel engines are CN-origin with
+bilingual documentation — [WebGAL](https://github.com/OpenWebGAL/WebGAL) (MPL-2.0, 4,054★) and
+[VoidNovelEngine](https://github.com/VoidmatrixHeathcliff/VoidNovelEngine) (MIT, 1,715★) — as is the
+interactive-avatar tier: [LiveTalking](https://github.com/lipku/LiveTalking) (Apache-2.0, 11,338★),
+[OpenTalking](https://github.com/datascale-ai/opentalking) (Apache-2.0, 3,421★),
+[OpenAvatarChat](https://github.com/HumanAIGC-Engineering/OpenAvatarChat) (Apache-2.0, 3,907★). The
+avatar *format* is APAC's too: [UniVRM](https://github.com/vrm-c/UniVRM) (MIT, 3,432★) and
+[three-vrm](https://github.com/pixiv/three-vrm) (MIT, 2,309★). Japan's AI-character production
+tooling is real but licence-trapped: [aituber-kit](https://github.com/tegnike/aituber-kit) (1,149★)
+is **non-commercial by default**, and [pixiv/ChatVRM](https://github.com/pixiv/ChatVRM) (MIT, 847★)
+is **archived**.
+
+**The regulation is already in force, and it covers AI *assistance*, not just AI generation.** Korea's
+**AI Basic Act** took effect **2026-01-22** and is described as the first in Asia to impose mandatory
+disclosure on AI-generated **or AI-assisted** content, reaching every service that counts Korea as a
+market — including Webtoon, Tapas and Tappytoon — with watermark disclosure under a **one-year grace
+period** for webtoon creators and platforms. Concrete standards are still missing for synthesising an
+actor's face or a singer's voice and for training-data use; where AI is used for only *part* of
+production, the disclosure level is left largely to self-regulation and private contracts.
+
+**Adoption is split between the firm and the creator, and the numbers are far apart.** A 2025 labour
+survey found **34.1% of content businesses** formally incorporate AI, and a separate report puts AI in
+content production at **1 in 3 companies**. But KOCCA's 2024 survey of **800 webtoon artists** found
+only **18.3%** had ever used generative AI and only **36.1%** intended to. Naver Webtoon's *Toon
+Filter* drew organised artist objection, and Korean cartoonists took AI consent and copyright demands
+to UNESCO in **October 2026**. Export concentration matters commercially: **49.5% of K-webtoon
+exports go to Japan**.
+
+**The structural gap.** Korea mandates disclosure of **partial** AI assistance, and the plane's
+tooling has no concept of partial provenance: no open webtoon or VN pipeline records *which panels,
+lines or frames were AI-assisted*, at what stage, under whose consent. The duty is per-asset and
+graduated; the tooling is per-file and binary.
+
+**Opportunity (APAC):** a **partial-assistance provenance pipeline for serialised interactive content**
+— per-panel/per-line assistance records, consent references for any likeness or voice, watermark
+emission under the Korean grace period, and a disclosure artefact that survives localisation into
+Japan (where half the exports go). The buyers are the webtoon and VN platforms already inside the
+Act's reach; the open substrate (VRM, WebGAL, Ren'Py) is permissive; and the piece nobody has built is
+the **graduated** record. Build it on the MIT/MPL engines, and keep `aituber-kit` and `Duix-Mobile`
+out of the delivery — both are non-OSI licensed.
 
 ### LATAM
 
@@ -4523,6 +4648,53 @@ serving Brazil, the deadline is public and fixed, no open implementation exists,
 re-points at Argentina for the cost of a ruleset — provided the `(system, value)` pair is modelled
 properly, which is the one thing none of the open implementations does.
 
+#### The interactive, branching & playable-story plane — added 2026-11-26 (pass 29). **The region where this plane is a *games* conversation, with public money behind it and an avatar rule nobody has implemented**
+
+The honest regional finding first: **LATAM has no interactive-video market to address, and it does
+have a fast-growing narrative-games sector.** A targeted search for Latin American visual-novel or
+webcomic studios and their market size returned **nothing usable** — no 2026 figures, no Mexico
+narrative-market number. That is an informed gap, not coverage: the region is **not investigated for
+this format, not absent from it**.
+
+What is measurable:
+
+- **Narrative games are the channel.** gamescom latam 2026 (São Paulo, Distrito Anhembi,
+  **30 April – 3 May 2026**) listed **28 competing Latin American titles — 15 from Brazil, 3 from
+  Argentina**, plus Mexico, Colombia, Costa Rica and Uruguay. Narrative entries named in coverage
+  include Brazil's *ARIDA 2* (survival narrative) and Colombia's *SOPA* (narrative adventure).
+  Brazilian studio counts in 2026 reporting run from **~1,042 to ~1,200**.
+- **There is public money, because of a legal reclassification.** Brazil recategorised the legal
+  framework for games in **2024**, which opened access to cultural funding programmes, and grants are
+  now reaching studios. Abragames is explicitly pushing internationalisation and foreign investment.
+  This is the same "public money as the sizeable number" pattern pass 27 recorded for production
+  finance.
+- **The regulation that lands on this plane is about avatars.** Brazil's **CONAR** extended its 2026
+  influencer-advertising guidance to **avatars, virtual profiles and AI-generated content**, including
+  child participation and transparency duties. Mexico published **LFDA + LFT amendments on
+  2026-05-14** (its first sector-specific AI rules) and has a **proposed film/audiovisual law**
+  reaching exhibitors, streaming platforms, producers and creative labour. Region-wide there is **no
+  harmonised AI regime**; Uruguay was the first LATAM signatory to the Council of Europe's AI
+  convention (2025).
+- **Timing caution worth quoting internally:** practitioners describe LATAM as adopting US standards
+  and protocols **six to twelve months** after they settle — which means the EU/Korea disclosure work
+  above is a preview of this region's 2027 requirement, not an irrelevance.
+
+**The structural gap.** CONAR's rule now covers a **virtual influencer**, and there is no open tooling
+anywhere that produces the disclosure record it implies — nothing that ties an avatar's utterances to
+a transparency artefact or to child-participation safeguards. Combine that with the plane's measured
+zeros (`second screen companion tv` = 2 repos, no interactive-video standard) and the region's real
+asset (a funded, growing narrative-games sector) and the shape of the work is clear.
+
+**Opportunity (LATAM):** a **virtual-influencer compliance kit for Brazil** — per-campaign records of
+which avatar said what, which parts were AI-generated, the transparency labelling CONAR expects, and
+the child-participation safeguards it names — built on the permissive avatar stack (UniVRM/three-vrm
+MIT, LiveTalking Apache-2.0) and deliberately **not** on `Duix-Mobile` (bespoke community licence).
+The buyers are agencies and brand teams already running avatar campaigns; the rule is already
+published; and no open implementation exists. Secondary play: narrative-tooling delivery for the
+funded Brazilian games sector — the whole authoring chain (Godot + dialogic + godot-ink + Yarn) is
+MIT, so a studio engagement carries **no licence exposure at all**, which is a rare sentence in this
+KB.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -5331,3 +5503,62 @@ method pass 27 used for public money and pass 25 used for channel counts:
 
 That produces a number a client can check against their own catalogue, which is worth more here than
 a vendor total addressable market for a market no vendor has yet defined.
+
+## Market size — pass 29 addendum (2026-11-26): interactive storytelling is sized four ways, and **branching video is not sized at all**
+
+Added 2026-11-26 (pass 29). Searched for sizing on the interactive, branching and playable-story
+plane. The result is this KB's familiar pattern with a new twist: the *adjacent* categories are sized
+generously and inconsistently, and **the specific thing a media client would commission — interactive
+film or branching video — has no figure anywhere.**
+
+### ⛔ The refusal first
+
+**Do not quote a market size for interactive video, interactive film or branching video.** No figure
+was found in any source. The reason is visible in this plane's history rather than in its research:
+the category's largest buyer exited it (Netflix, staged removals ending **2025-05-12**), so the
+analysts sizing "interactive media" are sizing games, social and immersive formats, not branching
+video. A number borrowed from those reports would be **two or three categories wide** of the thing
+being proposed.
+
+### What exists — and the spreads, which are the real information
+
+| Segment | Figure quoted | Source shape |
+|---|---|---|
+| Interactive media (broad) | **$61.34B (2026) → $157.30B (2033), 14.4% CAGR** | Single vendor estimate; the category includes games and social, so it is an **upper bound on everything**, not this plane. |
+| Interactive story apps | **$4.2B (2025) → $9.8B (2034)** *vs* **$7.8B (2025) → $21.4B (2034)** | Two vendors, **same base year, ~1.9× apart**. |
+| Interactive fiction | **$6.4B (2025) → $14.8B (2034)** | Single vendor estimate. |
+| AI-generated interactive storybooks | **$3.2B (2025) → $18.7B (2034), 21.8% CAGR** | Single vendor; the only segment that is explicitly AI-native. |
+| Digital storytelling platforms | **$2.81B (2026)** *vs* **$1.33B (2026)** | Two vendors, **same year, ~2.1× apart**. |
+
+**Two spreads on the same base year, 1.9× and 2.1×.** Treat every figure above as a direction, and
+state the spread whenever one is quoted — a client who hears "$7.8B" and later reads "$4.2B" stops
+believing the rest of the deck.
+
+### What can be stood behind instead — count the substrate, not the market
+
+This plane is unusually easy to evidence without analyst numbers, because the supply side is
+measurable and was measured this pass:
+
+- **190,000+ GitHub stars** of permissive, actively-maintained narrative tooling (ink 5,067★,
+  Ren'Py 7,065★, dialogic 6,194★, Godot Dialogue Manager 4,005★, WebGAL 4,054★, Yarn Spinner 2,883★,
+  Twine 2,964★ …), with **five of those repos pushed on 2026-11-26**.
+- **36 stars** across the entire agent bridge (six MCP servers).
+- **2 repositories** in all of open source for second-screen/companion TV.
+- **0** interactive-video primitives in HLS or DASH.
+
+That contrast — a mature substrate, no agent layer, no standard, no platform — is a stronger argument
+than any sized market, and every number in it is reproducible in an afternoon.
+
+### Global players — pass 29 addendum (the interactive & playable layer)
+
+| Player | Position in this plane |
+|---|---|
+| **Netflix** | Exited interactive video (final removals 2025-05-12); branching fiction continues inside *Netflix Stories* as downloaded games. The reference case for why this plane is a games/learning conversation. |
+| **BBC R&D** | The only broadcaster with an open object-based-media stack (`storyplayer`, `audio-orchestrator`, Object Based Media Schema — all GPL-3.0, 30★ combined). The EMEA partner of record. |
+| **inkle** | Owns the plane's de-facto scripting language (`ink`, MIT) and its editor (`inky`, MIT). A dependency, not a competitor. |
+| **Yarn Spinner Pty Ltd / Secret Lab** | Owns the dialogue language (MIT) and sells the commercial tooling around it. |
+| **H5P / Joubel + Lumi Education** | The platform through which branching narrative actually ships at scale — content types MIT, **hosts GPL-3.0**. |
+| **Naver Webtoon / Kakao** | The serialised-interactive buyers inside Korea's AI Basic Act disclosure duty; Naver's *Toon Filter* is the region's reference AI-assistance controversy. |
+| **Tencent / Alibaba (HumanAIGC) / Duix** | The interactive-avatar runtime tier. Two of the three ship **bespoke community licences**, not OSI licences. |
+| **RDK / Comcast (Lightning)** | The Apache-2.0 CTV app framework — the only open route onto an operator set-top box. |
+| **Unity / Epic** | The commercial runtimes clients name, both outside this KB's licence remit; the MIT alternative (Godot) now has a complete narrative stack above it. |

@@ -10,6 +10,75 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 22: podcast & spoken-audio infrastructure (**44 slugs probed, 42 resolve on GitHub, 2 live off-GitHub; the substrate is the most permissive in this KB and the money layer is empty**)
+
+Infrastructure and platform repos for the podcast plane. Agents are in `agents/trending.md` pass 22.
+
+### Moving this week (measured 2026-11-26, pushed within 10 days)
+
+| Repo | License | Stars | Last push | What moved |
+|---|---|---|---|---|
+| [skymethod/op3](https://github.com/skymethod/op3) | MIT | 144 | **2026-11-26** | Open Podcast Prefix Project — pushed the day of this pass. The only open measurement-of-record implementation. |
+| [Podcastindex-org/web-ui](https://github.com/Podcastindex-org/web-ui) | MIT | 73 | **2026-11-26** | Public index front end. |
+| [Podcastindex-org/helipad](https://github.com/Podcastindex-org/helipad) | MIT | 37 | **2026-11-26** | Boostagram receiver; the v4v payment rail. |
+| [advplyr/audiobookshelf](https://github.com/advplyr/audiobookshelf) | GPL-3.0 | 15,123 | 2026-11-19 | The plane's largest project; self-hosted audiobook + podcast server. |
+| [AntennaPod/AntennaPod](https://github.com/AntennaPod/AntennaPod) | GPL-3.0 | 8,357 | 2026-11-25 | Reference open Android client, still shipping. |
+| [microfeed/microfeed](https://github.com/microfeed/microfeed) | AGPL-3.0 | 4,143 | 2026-11-24 | Cloudflare-hosted agentic CMS for feeds. |
+| [martinrotter/rssguard](https://github.com/martinrotter/rssguard) | GPL-3.0 | 2,858 | 2026-11-24 | Desktop feed reader + podcast player. |
+| [gpodder/gpodder](https://github.com/gpodder/gpodder) | GPL-3.0 | 1,457 | 2026-11-24 | The original desktop podcast client, 20 years on and still pushed. |
+| [SkyD666/PodAura](https://github.com/SkyD666/PodAura) | GPL-3.0 | 1,278 | 2026-11-23 | Material You Android podcast app. |
+| [madeofpendletonwool/PinePods](https://github.com/madeofpendletonwool/PinePods) | GPL-3.0 | 1,089 | 2026-11-25 | Rust self-hosted podcast management system. |
+| [ubuntu-flutter-community/musicpod](https://github.com/ubuntu-flutter-community/musicpod) | GPL-3.0 | 673 | 2026-11-23 | Flutter music/radio/podcast player. |
+| [podverse/podverse-rn](https://github.com/podverse/podverse-rn) | AGPL-3.0 | 287 | 2026-11-16 | The most complete open Podcasting 2.0 client stack (`-web` 100★, `-api` 34★, all AGPL). |
+| [podlove/podlove-publisher](https://github.com/podlove/podlove-publisher) | MIT | 310 | 2026-11-17 | **The only MIT publishing platform in the plane.** |
+| [opawg/user-agents-v2](https://github.com/opawg/user-agents-v2) | MIT | 69 | 2026-11-24 | Current user-agent corpus for server-side audience measurement. |
+| [opawg/podcast-rss-useragents](https://github.com/opawg/podcast-rss-useragents) | MIT | 65 | 2026-11-17 | Feed-fetching agents, so crawlers are not counted as listeners. |
+| [Podcastindex-org/podping.cloud](https://github.com/Podcastindex-org/podping.cloud) | MIT | 50 | 2026-11-25 | Publish-notification bus. |
+| [vpetersson/podcast-rss-generator](https://github.com/vpetersson/podcast-rss-generator) | MIT | 54 | 2026-11-23 | Compliant feed generator for self-hosted media. |
+| [opawg/podcast-prefixes](https://github.com/opawg/podcast-prefixes) | MIT | 14 | 2026-11-10 | Prefix providers + their privacy policies. |
+
+### Stable, not trending — and load-bearing
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [Podcastindex-org/podcast-namespace](https://github.com/Podcastindex-org/podcast-namespace) | **CC0-1.0** | 496 | 2026-10-10 | The Podcasting 2.0 namespace. Public domain. Adopted by Apple (`transcript` Mar 2024, now `chapters` + Chapters JSON) and Spotify (`transcript`). |
+| [Podcastindex-org/docs-api](https://github.com/Podcastindex-org/docs-api) | MIT | 78 | 2026-07-08 | API docs for the open catalogue. |
+| [opawg/user-agents](https://github.com/opawg/user-agents) | MIT | 123 | 2025-01-07 | Superseded by v2; kept for historical mappings. |
+| [opawg/podcast-hosts](https://github.com/opawg/podcast-hosts) | MIT | 52 | 2026-09-22 | Host identification from audio URL patterns. |
+| [akhilrex/podgrab](https://github.com/akhilrex/podgrab) | GPL-3.0 | 1,990 | 2026-07-16 | Self-hosted archiver/downloader. |
+| [amugofjava/anytime_podcast_player](https://github.com/amugofjava/anytime_podcast_player) | **BSD-3-Clause** | 627 | 2026-04-22 | **The only living permissive listener-facing app in the plane.** Flutter/Dart. |
+| [getAlby/nostr-wallet-connect](https://github.com/getAlby/nostr-wallet-connect) | Apache-2.0 | 115 | — | Wallet-connect rail used by the v4v boost ecosystem. |
+| [valcanobacon/BoostBots](https://github.com/valcanobacon/BoostBots) | BSD-3-Clause | 15 | — | Boostagram bots. |
+| [v4v-info/v4v-info.github.io](https://github.com/v4v-info/v4v-info.github.io) | MIT | 32 | — | value4value reference/documentation site. |
+
+### Dead or legally unavailable — recorded so a later pass does not "discover" them
+
+| Repo | License | Stars | Last push | Why it is excluded |
+|---|---|---|---|---|
+| [GetStream/Winds](https://github.com/GetStream/Winds) | BSD-3-Clause | 9,078 | **2021-10-11** | The only large permissive podcast app, **dead five years**. The exception that proves layer 3's rule. |
+| [Yetangitu/Spodcast](https://github.com/Yetangitu/Spodcast) | GPL-3.0 | 373 | 2024-06-04 | Spotify→RSS proxy. Dormant, and its premise is ToS-hostile for client work. |
+| [leandromoreira/scte-35-scte-104-scte-67](https://github.com/leandromoreira/scte-35-scte-104-scte-67) | BSD-3-Clause | 35 | **2021-04-13** | The top hit for `dynamic ad insertion` in all of GitHub — and it is **documentation** about broadcast markers, not an implementation. The whole DAI result set is this thin. |
+| [panyanyany/Twocast](https://github.com/panyanyany/Twocast) | **NONE** | 1,292 | 2025-07-01 | Most-starred AI podcast generator; **no licence file** → all rights reserved. |
+| [Mtillmann/chaptertool](https://github.com/Mtillmann/chaptertool) | **NONE** | 45 | 2026-01-24 | Active and genuinely useful; unlicensed, so not vendorable. |
+| [cclawton/podcastindex-mcp-server](https://github.com/cclawton/podcastindex-mcp-server) | **NONE** | 3 | — | The entire MCP layer over the open podcast index: 3★, unlicensed. |
+
+### Off-GitHub, and therefore not measured here
+
+- **Castopod** — AGPL-3.0, canonical home `code.castopod.org`; project docs give 1.15.0 (Feb 2026)
+  as current, with ActivityPub federation and built-in analytics. The dead `Castopod/castopod`
+  GitHub slug was already recorded by pass 21 in this file; `ls-remote` confirms it still does not
+  resolve. **No star or push figure is asserted.**
+- **Funkwhale** — AGPL-3.0, `dev.funkwhale.audio`. `ls-remote` on the GitHub slug fails.
+- Both hosts are **blocked by this session's egress proxy** (403 `connect_rejected`), so neither
+  could be read directly. Recorded as an informed gap, not as coverage.
+
+### Verification note
+
+44 slugs probed with `git ls-remote`: **42 resolve, 2 absent** (the two off-GitHub platforms above).
+All stars, licences and push dates measured 2026-11-26 via `search/repositories`. `nostr-wallet-connect`,
+`BoostBots` and `v4v-info` were measured for stars and licence but their push dates were not captured
+in this pass — the cell reads `—` rather than carrying a guess.
+
 ## 2026-11-26 — pass 21: spatial, immersive & volumetric infrastructure (**71 slugs probed, 69 resolve, 2 absent; 17 licence files read, 5 licence categories corrected**)
 
 **Probe results.** 71 candidate slugs; **69 exist** by `git ls-remote`, **2 do not**

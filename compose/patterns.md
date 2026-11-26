@@ -3003,3 +3003,143 @@ that is wrong in a client-facing licence table: **`PixarAnimationStudios/OpenUSD
 it is the **Tomorrow Open Source Technology License 1.0**, Apache-2.0 with §6 "Trademarks" replaced.
 Permissive in substance — but cite it correctly, because the one thing that loses a procurement review
 is a licence table that is confidently wrong.
+
+## Pattern 47 — The podcast ad-and-measurement spine (building the one layer that does not exist)
+
+**When to propose it.** A network, broadcaster or large publisher monetises podcasts with ads and
+cannot reconcile what it sold with what was delivered. Strongest in **North America** ($2.9 bn US ad
+revenue, IAB/PwC 2025) where the revenue justifies the build.
+
+**Why it is a build and not an integration.** Measured 2026-11-26:
+`audio ad insertion server stars:>=20` → **0 repos**. `dynamic ad insertion` → 37 repos, top hit
+`leandromoreira/scte-35-scte-104-scte-67` (BSD-3, 35★) which is **documentation about broadcast
+markers, last pushed 2021-04-13**. There is no open podcast ad server to adopt, fork or displace.
+Every commercial system in the slot is proprietary (Megaphone, Acast, Triton, ART19, Spreaker).
+**All the inputs, however, are permissive.**
+
+**The wiring.**
+
+1. **Catalogue + feed truth** — `Podcastindex-org/podcast-namespace` (**CC0-1.0**) as the schema;
+   validate emitted feeds with `atelier-socle/podcast-feed-maker` (Apache-2.0) or
+   `vpetersson/podcast-rss-generator` (MIT).
+2. **Ingest signal, not polling** — subscribe to `Podcastindex-org/podping.cloud` (MIT) so new
+   episodes arrive as a push rather than a crawl of the whole catalogue.
+3. **Request identification (the part everyone gets wrong)** — classify every media request with
+   `opawg/user-agents-v2` (MIT); exclude feed-fetchers and crawlers using
+   `opawg/podcast-rss-useragents` (MIT); attribute the serving host via `opawg/podcast-hosts` (MIT).
+   Without step 3 the download count is inflated by bots and the number is not defensible.
+4. **Counting of record** — self-host `skymethod/op3` (MIT) as the prefix, so the client owns the
+   log. Audit the incumbent prefix provider's terms against `opawg/podcast-prefixes` (MIT).
+5. **Conform to the written standard** — compute downloads, audience and ad delivery per **IAB Tech
+   Lab Podcast Technical Measurement Guidelines v2.3** (server-side log basis; comment closed
+   2026-08-19). This is the deliverable the buyer can certify.
+6. **Insertion** — the only proprietary component, and therefore where Globant's IP belongs:
+   stitching or manifest-level insertion keyed to the identification in step 3, with per-impression
+   logs feeding step 5.
+
+**What to say.** "Your measurement and ad logic will be built on a permissive, auditable base you
+own — the index, the identification corpus and the prefix are MIT and CC0 — and the only closed part
+is the part that is your competitive advantage." **Licence surface: zero copyleft.**
+
+## Pattern 48 — The Article 50 disclosure chain for AI-voiced audio (EMEA first, and it contributes a tag upstream)
+
+**When to propose it.** Any client distributing podcasts into the EU with AI-generated voice,
+synthetic reads, cloned presenters or AI-produced ad spots. The duty applies **since 2026-08-02**;
+audio counsel reads it as covering cloned voices, synthetic dialogue, podcast ads and AI jingles even
+in partly-synthetic productions. Verify the penalty figures against the regulation before quoting
+them.
+
+**The gap that makes it a project.** `podcast-namespace` is **CC0-1.0** and has tags for transcripts,
+chapters, funding, credits and `alternateEnclosure` — and **no tag for AI-generated or synthetic
+content**. The law wants a machine-readable mark; the open distribution format has no field for one.
+
+**The wiring.**
+
+1. **Mark the asset** — C2PA provenance at render time using the permissive chain this KB already
+   holds (`contentauth/c2pa-rs`, pass 5). The mark lives in the audio file, so it survives
+   re-hosting.
+2. **Declare it in the feed** — implement a `podcast:aiDisclosure`-shaped element (per-item: what
+   was synthetic — voice, script, music; which segments; whether a licensed voice was used) and
+   **take the proposal to the namespace repo in the open**. Public-domain standard, visible
+   first-mover position, and the compliance artefact and the contribution are the same work.
+3. **Speak it where required** — generate the spoken first-use disclosure with the same TTS path
+   that produced the episode, placed per the IAB's 2026 guidance (adjacent to AI segments).
+   Guidance, not law — label it as such in the deliverable.
+4. **Hold the consent** — a per-voice licence register: consenting performer, scope, territory,
+   expiry, revocation. Required in its own right by **Mexico's performer-voice law (effective
+   2026-05-15)**; see Pattern 49.
+5. **Evidence** — per-episode record (asset hash, disclosure text, voice licence ID, publish
+   timestamp) in a form a DPO can file.
+6. **Publish through a permissive path** — `podlove/podlove-publisher` (MIT), **not** Castopod or
+   microfeed (both AGPL-3.0), if the client is running it as a service.
+
+**What to say.** "Whoever has written the disclosure policy has committed to being able to evidence
+it — and we will put the field you need into the open standard so your pipeline stops being bespoke."
+
+## Pattern 49 — The newsroom-to-podcast pipeline (built for LATAM, permissive end to end)
+
+**When to propose it.** A news organisation in Latin America — **news is 32 % of podcast
+listening/downloads and 42 % of new episodes** in the region (Triton Digital, 2026 LATAM Audio
+Insights), the highest news concentration in this KB — or any publisher with a large text archive
+and no audio operation. Audience scale: **135.2 m regional listeners (2023)**, Brazil 51.8 m, Mexico
+27.5 m.
+
+**The wiring, and every component is MIT / Apache-2.0 / CC0.**
+
+1. **Source** — the day's published articles from the newsroom platform (pass 20's rows).
+2. **Script** — `souzatharsis/podcastfy` (Apache-2.0) for multi-speaker conversational scripting; or
+   `MODSetter/SurfSense` (Apache-2.0) when the corpus is confidential and must stay air-gapped.
+3. **Voice** — the permissive TTS already in `agents/top.md` Tier 1 (`F5-TTS` MIT, `Kokoro` Apache-2.0,
+   `chatterbox` MIT). **If a real presenter's cloned voice is used, Pattern 48 step 4 is mandatory,
+   not optional** — Mexico's amended Federal Copyright and Federal Labour Laws (effective
+   2026-05-15) govern AI use of a performer's voice, and a cloned presenter is exactly that.
+4. **Enrich** — chapters, show notes and pull-quotes with `navotvolkgroundup/sofit` (MIT); social
+   cutdowns with `zhouxiaoka/autoclip` (MIT); video cutdowns with `HKUDS/VideoAgent` (MIT).
+5. **Chapters into the file** — `dskrad/mp3chaps` (MIT) for ID3 marks; emit Chapters JSON per the
+   namespace. (`Mtillmann/chaptertool` is the better tool and is **unlicensed** — use it by hand,
+   do not vendor it.)
+6. **Publish** — `podlove/podlove-publisher` (MIT), emitting `podcast:transcript` and
+   `podcast:chapters` (both now honoured by Apple and Spotify).
+7. **Measure** — self-hosted `skymethod/op3` (MIT) + the OPAWG corpora, per Pattern 47 steps 3–5.
+8. **Disclose** — Pattern 48 if any voice is synthetic.
+
+**Why it closes.** Budgets here favour self-hosting, which is where AGPL bites hardest (Castopod,
+microfeed, Funkwhale, Podverse all AGPL-3.0). This chain is **MIT/Apache/CC0 end to end**: the
+client owns the deployment and inherits no network copyleft. That is the sentence that wins the
+meeting.
+
+## Pattern 50 — The 20-minute licence gate for any podcast or spoken-audio proposal
+
+Run this **before** any estimate. It has four questions and each one has a measured answer, so it is
+a checklist, not a discussion.
+
+1. **Does the client need an app that owns the listener?**
+   If yes, stop and choose deliberately. Every **living** open podcast app is GPL-3.0 or AGPL-3.0
+   (`AntennaPod` 8,357★, `PodAura` 1,278★, `gpodder`, `PinePods`, `musicpod`, `podverse/*`). The only
+   large permissive one, `GetStream/Winds` (BSD-3, 9,078★), **has not been pushed since 2021-10-11**.
+   The one living permissive base is **`amugofjava/anytime_podcast_player` (BSD-3-Clause, 627★,
+   Flutter)** — smaller and slower-moving, and the alternative is the client publishing their source.
+   **Never quote "fork AntennaPod".**
+
+2. **Will it be offered as a hosted, multi-tenant service?**
+   Then Castopod, microfeed, Funkwhale and the whole Podverse stack are **out** — AGPL-3.0 reaches
+   users over the network. Publishing path becomes `podlove-publisher` (MIT).
+
+3. **Does the engagement touch ad insertion, ad serving or ad measurement?**
+   There is **no open implementation** (`audio ad insertion server stars:>=20` → 0). Price it as a
+   greenfield build on permissive inputs (Pattern 47), not as an integration. If the proposal assumes
+   an open DAI component exists, it is wrong.
+
+4. **Will any voice be synthetic, or any presenter cloned?**
+   Then **two separate duties** may apply and they need different artefacts:
+   **EU** — Article 50 transparency since 2026-08-02: machine-readable marking + first-use
+   disclosure, *per episode*. **Mexico** — performer-voice consent since 2026-05-15: a consent and
+   licensing record, *per voice*. A show distributed in both needs both. **APAC: treat labeling as
+   probable and unconfirmed** — this pass found no podcast-specific rule for India, Japan or China,
+   and pass 21's four regional labeling regimes would plausibly reach an AI host but no source says
+   so. Check the national rule before designing the disclosure.
+
+**Deliverable of the gate:** one page naming, for this client, the publishing platform, the app base,
+the measurement path and the disclosure obligations — with licences attached. If the answer to Q1 is
+"yes, permissive, and alive", there is exactly one row in this KB that satisfies it; make sure the
+client knows that before they discover it in a legal review.

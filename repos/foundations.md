@@ -2617,3 +2617,73 @@ Chromaprint finding — where the licence belonged to the *compilation*, not the
 for this industry is now general: **for any codec or native dependency, resolve the terms of the
 linked libraries and the patent pool, never the SPDX field of the source tree.** No badge, scanner or
 SBOM of the source tree can see either.
+
+## The podcast & spoken-audio substrate — measured 2026-11-26 (pass 22)
+
+Podcasting's open substrate is **unusually clean**: the specification, the notification bus, the
+analytics prefix and the entire user-agent identification corpus are **CC0 or MIT**, every one of
+them, with no copyleft and no registration gate anywhere. This is the most permissive substrate
+measured in any plane of this KB. The constraint in this plane is not the substrate — it is layer 3
+(the listener-facing app, uniformly copyleft) and layer 4 (ad insertion, which does not exist). See
+`agents/top.md` pass 22.
+
+### The specification and its reference infrastructure — all CC0 / MIT
+
+| Repo | License | Stars | Last push | Why it is foundational |
+|---|---|---|---|---|
+| [Podcastindex-org/podcast-namespace](https://github.com/Podcastindex-org/podcast-namespace) | **CC0-1.0** | 496 | 2026-10-10 | **The Podcasting 2.0 RSS namespace.** Public-domain dedication — no attribution, no licence compatibility question, nothing to clear. The tags behind transcripts, chapters, funding, soundbites, person credits and `alternateEnclosure`. Apple adopted `podcast:transcript` (Mar 2024) and now `podcast:chapters`; Spotify supports the transcript tag. |
+| [skymethod/op3](https://github.com/skymethod/op3) | MIT | 144 | 2026-11-26 | **The Open Podcast Prefix Project** — an open, auditable download-analytics prefix. The only open implementation of podcast measurement-of-record. Pushed the day of this pass. |
+| [Podcastindex-org/podping.cloud](https://github.com/Podcastindex-org/podping.cloud) | MIT | 50 | 2026-11-25 | Publish-notification bus: replaces polling 4 M feeds with a push signal. The piece that makes near-real-time podcast ingest affordable. |
+| [Podcastindex-org/docs-api](https://github.com/Podcastindex-org/docs-api) | MIT | 78 | 2026-07-08 | Developer docs for the podcastindex.org API — the open alternative to Apple's and Spotify's closed catalogues. |
+| [Podcastindex-org/web-ui](https://github.com/Podcastindex-org/web-ui) | MIT | 73 | 2026-11-26 | Reference front end over that index. |
+| [Podcastindex-org/helipad](https://github.com/Podcastindex-org/helipad) | MIT | 37 | 2026-11-26 | Boost/boostagram receiver — the value4value payment rail, MIT. |
+| [podlove/podlove-publisher](https://github.com/podlove/podlove-publisher) | MIT | 310 | 2026-11-17 | **The one MIT publishing platform in the plane.** WordPress-based; emits standards-compliant feeds. Where Castopod is AGPL and microfeed AGPL, this is the permissive publishing base. |
+
+### The measurement corpus — OPAWG, and all of it is MIT
+
+Podcast measurement is server-side by necessity: most apps never confirm playback client-side, so a
+download log plus a user-agent corpus **is** the audience number. That corpus is open and permissive.
+
+| Repo | License | Stars | Last push | Why it is foundational |
+|---|---|---|---|---|
+| [opawg/user-agents](https://github.com/opawg/user-agents) | MIT | 123 | 2025-01-07 | The original Open Podcast Analytics Working Group regex corpus: maps a request's user-agent to an app/bot. Frozen — use v2. |
+| [opawg/user-agents-v2](https://github.com/opawg/user-agents-v2) | MIT | 69 | 2026-11-24 | **The current corpus** and the one to build on. Actively maintained. |
+| [opawg/podcast-rss-useragents](https://github.com/opawg/podcast-rss-useragents) | MIT | 65 | 2026-11-17 | Agents that fetch *feeds* (as opposed to media) — needed to avoid counting crawlers as listeners. |
+| [opawg/podcast-hosts](https://github.com/opawg/podcast-hosts) | MIT | 52 | 2026-09-22 | JSON list of hosting providers + URL patterns: identifies which host serves a show from its audio URL. |
+| [opawg/podcast-prefixes](https://github.com/opawg/podcast-prefixes) | MIT | 14 | 2026-11-10 | Prefix-analytics providers and their privacy policies — the input to a GDPR review of a client's existing measurement. |
+
+### Feed, chapter and client libraries — permissive, small, and that is the honest framing
+
+Nothing here is big. They are listed because they are the **only licensed implementations** of steps
+a podcast build needs, and because a 5★ MIT client beats writing an API wrapper from scratch.
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [vpetersson/podcast-rss-generator](https://github.com/vpetersson/podcast-rss-generator) | MIT | 54 | 2026-11-23 | Generates a compliant feed for self-hosted audio/video. Active. |
+| [dskrad/mp3chaps](https://github.com/dskrad/mp3chaps) | MIT | 82 | 2022-03-12 | Writes ID3 chapter marks. Dormant but the format has not changed. |
+| [Mtillmann/chaptertool](https://github.com/Mtillmann/chaptertool) | **NONE** | 45 | 2026-01-24 | Chapter conversion CLI + web, incl. Chapters JSON. Active, useful, **no licence file** → do not vendor. |
+| [fnayou/podcastify](https://github.com/fnayou/podcastify) | MIT | 9 | 2026-11-13 | Private/self-hosted feed generator from a directory of audio. |
+| [atelier-socle/podcast-feed-maker](https://github.com/atelier-socle/podcast-feed-maker) | Apache-2.0 | 3 | 2026-05-14 | Swift library: generate, parse **and validate** podcast RSS. The only validator-grade library found. |
+| [jasonyork/podcast-index](https://github.com/jasonyork/podcast-index) | MIT | 5 | 2026-11-16 | Ruby client for the podcastindex.org API. |
+| [brb3/PodcastIndexSharp](https://github.com/brb3/PodcastIndexSharp) | MIT | 5 | 2025-09-06 | .NET client for the same API. |
+| [aws-samples/amazon-transcribe-comprehend-podcast](https://github.com/aws-samples/amazon-transcribe-comprehend-podcast) | MIT-0 | 137 | 2023-07-25 | Transcribe → index → search reference architecture. MIT-0 (no attribution). Dormant; useful as a shape, not a dependency. |
+
+### The transcript and clipping layer
+
+Covered elsewhere in this KB and **not duplicated here**: Whisper-family ASR and diarisation
+(`pyannote`) are in pass 7's rows; `Demucs`/`Essentia`/`librosa` in pass 12's. For podcasting
+specifically, the pieces that matter are `podcast:transcript` (CC0 spec, above) plus the clipping
+agents in `agents/top.md` pass 22 (`autoclip` MIT, `VideoAgent` MIT).
+
+### What is NOT here, stated explicitly
+
+- **No open podcast ad server, ad-insertion service or ad-measurement system exists.**
+  `audio ad insertion server stars:>=20` → **0 results**. `dynamic ad insertion` → 37, top hit a
+  BSD-3 *documentation* repo on broadcast SCTE markers, last pushed **2021-04-13**.
+- **No permissive, living, listener-facing app exists.** The permissive one (`GetStream/Winds`,
+  BSD-3, 9,078★) died in **2021**; the living ones are GPL/AGPL. The single exception is
+  `amugofjava/anytime_podcast_player` (BSD-3, 627★, 2026-04-22) — small, Flutter, and the only
+  clean white-label base in the plane.
+- **Two major platforms are not on GitHub and were not measured:** Castopod (AGPL-3.0,
+  `code.castopod.org`) and Funkwhale (AGPL-3.0, `dev.funkwhale.audio`). Both hosts are blocked by
+  this session's egress proxy; figures for them are **not** restated as measured here.

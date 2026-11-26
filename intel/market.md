@@ -794,6 +794,41 @@ permissive chain exists and is current — `gsplat` (Apache-2.0), `brush` (Apach
 `model-viewer` (Apache-2.0), `OpenXR-SDK` (Apache-2.0) — and Pattern 44 is wired entirely from it.
 Being able to say "no copyleft, no research licence, no registration gate" is the differentiator.
 
+
+**Pass 22 — the podcast plane, and North America is where the missing layer has a price tag.**
+The US is the centre of gravity of this business: **$2.9 bn of podcast ad revenue in 2025 inside
+$8.4 bn of digital audio, +10.2 % YoY** (IAB/PwC), out of **$9.2 bn globally with ~$6 bn of it in the
+US** (Owl & Co., 2025, up from $7.5 bn in 2024). Against that, the open-source ad and measurement
+layer is **zero repos** (`audio ad insertion server stars:>=20` → 0, measured 2026-11-26).
+
+- **First opportunity: measurement-of-record, and the standard arrived this year.** IAB Tech Lab
+  circulated **Podcast Technical Measurement Guidelines v2.3** in 2026 — downloads, audience and ad
+  delivery computed from **server-side log data** — with public comment closing **2026-08-19**.
+  Podcast measurement is server-side by necessity: most apps never confirm playback client-side, so
+  a download log plus a user-agent corpus *is* the audience figure. Every input to a compliant
+  implementation is permissive and open: `opawg/user-agents-v2` (MIT), `opawg/podcast-rss-useragents`
+  (MIT, to exclude crawlers), `opawg/podcast-hosts` (MIT), `opawg/podcast-prefixes` (MIT) and
+  `skymethod/op3` (MIT, pushed 2026-11-26). **There is no open incumbent.** A certified
+  IAB-v2.3-conformant measurement service is a buildable, auditable product and the one piece of
+  this plane a US buyer is already being asked about — the trade press reads the Upfront as
+  "measurement has not kept pace, because the definitions keep shifting".
+- **Second opportunity: the video-podcast fork in the road, and it is an RSS question.** ~**71 % of
+  US podcasters now produce video versions**, and Edison's Infinite Dial has **YouTube at 33 % of US
+  weekly podcast listeners against Spotify's 26 %** (reported via secondary summaries — treat the
+  split as directional). The strategic datapoint is the counter-move: **iHeartRadio is adding video
+  through standard RSS feeds and supporting `alternateEnclosure`**, so one feed carries both audio
+  and video and the creator keeps hosting their own video (Podnews). `alternateEnclosure` is a
+  **CC0** tag in `podcast-namespace`. That makes "keep your catalogue platform-independent while
+  shipping video" an implementable engagement rather than a slogan, and it is the opposite of a
+  YouTube-first migration.
+- **Third: the ad stack itself.** Zero open repos touch podcast DAI. The US is the only region where
+  the revenue justifies building one, and the signalling inputs are free. See Pattern 47.
+- **Informed gap.** Searches for **US regulation of AI-generated podcast audio** returned nothing
+  podcast-specific — no disclosure rule, no FTC action on synthetic hosts surfaced. The nearest hook
+  is **industry guidance, not law**: the IAB's early-2026 framework recommends a **spoken disclosure
+  adjacent to AI-generated segments**. Written down as a gap: a US client asking "must we disclose
+  our AI host?" has a *reputational* answer today, not a statutory one — unlike EMEA (below).
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1672,6 +1707,43 @@ is named in the same alignment work as the AI Act, and this KB already holds an 
 audio description and comfort/motion mitigation in a 3D scene are unsolved in the open stack. EMEA is
 the only region where that gap has a legal lever attached to it.
 
+
+**Pass 22 — the podcast plane, and EMEA is the only region where disclosure of a synthetic host is
+law rather than etiquette.**
+
+- **First opportunity: Article 50 compliance for synthetic voice, and the date has passed.** The EU
+  AI Act's transparency duties took effect **2026-08-02**: users must be told when they are dealing
+  with a machine, and synthetic content must be **marked in a machine-readable way and labelled on
+  first use**. Audio-industry counsel reads the scope as covering **cloned voices and synthetic
+  dialogue**, and explicitly **podcast ads, synthetic voice-overs and AI-generated jingles** — even
+  where only part of a production is synthetic (Gleiss Lutz; Production Expert). An open podcast feed
+  reaches the EU by default, so the duty attaches to any show the client distributes publicly.
+  Penalties are reported at **up to €15 m or 3 % of global turnover**; that figure comes from vendor
+  commentary and **should be checked against the regulation before it enters a deck**.
+- **Why this is a build and not a memo: the namespace has no disclosure tag.** This is the sharpest
+  finding of the pass for EMEA. `Podcastindex-org/podcast-namespace` is **CC0-1.0** and carries tags
+  for transcripts, chapters, funding, person credits and `alternateEnclosure` — and **nothing for
+  AI-generated or synthetic content**. The law now requires a machine-readable mark; the open
+  distribution format for podcasting has no field to carry it. Because the namespace is public-domain
+  and takes proposals in the open, **the compliance artefact and the standards contribution are the
+  same piece of work**: specify a disclosure tag, implement it in a publishing path (Podlove
+  Publisher, MIT), and emit per-episode evidence a DPO can file. That is a first-mover position in a
+  CC0 standard, which is cheap to take and hard to take twice.
+- **Second opportunity: GDPR-defensible audience measurement.** Prefix analytics means a third party
+  sees every listener request. `opawg/podcast-prefixes` (MIT) exists precisely to list prefix
+  providers **and their privacy policies**, and `skymethod/op3` (MIT) is self-hostable. An EMEA
+  broadcaster can therefore be given measurement that runs **inside its own infrastructure** with the
+  transfer question answered in the architecture rather than in an addendum — the same argument that
+  made rights-reservation work sellable in this region.
+- **Market context, and a platform shift.** Edison's UK data has **YouTube now the UK's most-used
+  podcast platform, narrowly ahead of Spotify** — the same inversion as the US, in a market with
+  stricter content duties. The **EBU** convened a joint session of its Legal & Policy AI Group and
+  its Audio & Radio Futures Network in **June 2026**, which is the access route to public
+  broadcasters on exactly this topic.
+- **Informed gap.** No EMEA-specific podcast **market-size or adoption** figures surfaced in this
+  pass's searches — the retrievable material was legal commentary, not measurement. Recorded rather
+  than estimated.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -2506,6 +2578,39 @@ registration gate. If this licence shape spreads among Chinese and Japanese univ
 is plausible, since it preserves commercial adoption while telling the lab who its users are — then
 **APAC becomes the region where the registration step is a routine part of engagement setup**. Watch
 for it; it is currently one lab.
+
+
+**Pass 22 — the podcast plane, and APAC is the growth case with the thinnest regulatory and
+open-source story.**
+
+- **The growth is the opportunity, and it is early-stage.** Vendor forecasts put APAC at the
+  highest regional growth rate for podcasting — **KBV Research: 26.0 % CAGR 2024–2031, India 26.7 %,
+  Japan 25.3 %**, with China the largest market by value. **India's listenership is reported to have
+  risen 22 points in one year to 52 % (2025)**, and YouGov's 2025 data has **Indonesia at 59 % of
+  consumers listening ≥1 h/week, with Thailand and India at 54 %**. These are paid-research and
+  survey figures on different bases and **they do not reconcile with each other** — use them as
+  direction, not as a number in a model. The recurring obstacle named in the same sources is **low
+  consumer awareness**, not capacity.
+- **First opportunity: the white-label client, and it is a licence problem before it is a product
+  problem.** APAC growth is app-mediated — commuter-friendly short episodes, telco and OEM bundles,
+  Japanese corporates running branded shows with executive hosts. Every living open podcast app is
+  **GPL-3.0 or AGPL-3.0** (`AntennaPod` 8,357★, `PodAura` 1,278★, `Podverse` ×5, `gpodder`,
+  `PinePods`, `musicpod`), so the default engineering instinct — fork the best Android client —
+  **makes the client's app disclosable** and is incompatible with most OEM and carrier deals. The
+  only living permissive base in the plane is **`amugofjava/anytime_podcast_player` (BSD-3-Clause,
+  627★, Flutter)**. For this region that single row is the most commercially consequential line in
+  the pass: it is the difference between a shippable white-label and a legal dead end.
+- **Second opportunity: vernacular audio at catalogue scale.** The generation layer is permissive
+  and runs locally — `podcastfy` (Apache-2.0), `video-podcast-maker` (MIT, local TTS, no external
+  API), `autoclip` (MIT) — which suits markets where per-call API economics do not work and
+  multi-language output is the whole product. Pairs with the localization plane (pass 14).
+- **Informed gap, stated explicitly.** Searches for **podcast or audio-platform regulation in India,
+  Japan and China returned nothing podcast-specific.** No disclosure rule for synthetic hosts, no
+  measurement standard, no platform duty surfaced for this plane. The nearest adjacent hook is the
+  **four synthetic-media labeling regimes pass 21 recorded for this region** — which would, if read
+  across, reach an AI-voiced podcast, but **no source in this pass says so**. Written down as a gap
+  because silence here looks exactly like coverage: an APAC engagement should treat labeling as
+  *probable and unconfirmed*, and check the national rule before committing to a disclosure design.
 
 ### LATAM
 
@@ -3823,3 +3928,38 @@ the commercial argument.
 report has **48% of US consumers having tried VR and 13% of households owning a headset**, and a
 separate analysis describes headset adoption as **behind schedule** — which is the counterweight to
 every CAGR above.
+
+
+**Pass 22 — the podcast plane, and LATAM is the region where this KB's existing law already applies
+to it.**
+
+- **Audience scale is real and under-monetised.** The region had **135.2 m podcast listeners (2023,
+  Podnews)** — **Brazil 51.8 m** and **Mexico 27.5 m**, the world's third- and fourth-largest
+  podcast audiences — while podcast advertising remains a small share of digital ad spend. The gap
+  between audience and revenue is the commercial opening, and it is a **measurement and ad-serving**
+  gap before it is a sales gap, which is exactly the layer this pass found empty everywhere.
+- **First opportunity: the news-podcast pipeline, because news is what this region listens to.**
+  Triton Digital's **2026 LATAM Audio Insights** finds **news is 32 % of podcast listening/downloads
+  and 42 % of new episodes** on the networks it measures — the highest news concentration of any
+  region in this KB. That makes a **newsroom-to-podcast pipeline** the highest-fit build here:
+  published article set → script → multi-voice episode → chapters, transcript and show notes →
+  compliant feed, assembled from `podcastfy` (Apache-2.0), `sofit` (MIT), `autoclip` (MIT) and
+  Podlove Publisher (MIT), and wired to the newsroom platforms pass 20 catalogued. Pattern 49.
+- **Second opportunity, and it is a legal one this KB already holds: Mexico's performer-voice law
+  lands squarely on synthetic podcast hosts.** The amendments to the Federal Copyright Law and
+  Federal Labour Law **published 2026-05-14, effective 2026-05-15** create a framework for AI use of
+  a performer's **voice**, image and performances. An AI-voiced podcast host, a cloned presenter for
+  a branded show, or a synthetic read of a sponsor spot is **precisely** that use. LATAM is therefore
+  the **second** region after EMEA where synthetic-voice podcasting has a statutory hook — and
+  unlike the EU's horizontal transparency duty, Mexico's is a **performer-consent** duty, which
+  requires a different artefact: a consent and licensing record per voice, not a label per episode.
+  A Mexican engagement needs both if it distributes into the EU.
+- **Third: the permissive path matters more here.** Budgets in the region favour self-hosting, which
+  is exactly where AGPL bites (Castopod, microfeed, Funkwhale, Podverse). The permissive route —
+  Podlove Publisher (MIT) + OP3 (MIT) + the CC0 namespace + Anytime (BSD-3) — is the one that lets a
+  LATAM client own the deployment without inheriting network copyleft. State it in the proposal; it
+  is the difference between a platform they own and a platform they must publish.
+- **Informed gap.** Statista's LATAM digital-audio ad-spend series runs through 2026 but its figures
+  were **not retrievable** in this pass, and no 2026 regional ad-revenue total could be verified. The
+  2023 listener counts are the strongest anchors available here; **no 2026 LATAM revenue figure is
+  asserted.**

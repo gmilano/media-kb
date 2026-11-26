@@ -2145,3 +2145,94 @@ is **proprietary** (SpatialGen, AWE USA). Meanwhile the ISO/IEC reference softwa
 point-cloud compression, `MPEGGroup/mpeg-pcc-tmc2`, is BSD-licensed text that **explicitly grants no
 patent rights** and has 177★. So: capture is open, carriage is patent-encumbered. Any "end-to-end
 open volumetric pipeline" claim should be refused at the delivery step.
+
+## Pass 22 (2026-11-26) — the podcast & spoken-audio plane: what is actually changing
+
+### 1. The open podcast standard is winning adoption where it costs the platforms nothing
+
+The Podcasting 2.0 namespace (`Podcastindex-org/podcast-namespace`, **CC0-1.0**, 496★) is being
+absorbed by the closed platforms one tag at a time: **Apple adopted `podcast:transcript` in March
+2024 and now supports `podcast:chapters` plus the Chapters JSON format**, and auto-generates chapters
+from a show's transcript; **Spotify supports the transcript tag** and auto-chapters episodes that
+lack them. **iHeartRadio is going further** — adding video to its app via **standard RSS with
+`alternateEnclosure`**, so one feed carries audio and video and the creator keeps hosting their own
+video (Podnews).
+
+Read the pattern, not the individual wins: the platforms adopt the tags that **describe** content
+and ignore the tags that would **move money or listeners**. Nothing in the namespace carries ad
+signalling, and nothing carries an AI-disclosure field (see item 3). Adoption of a CC0 standard is
+real but **selective, and the selection is commercial.**
+
+Reported adoption of the tags themselves is still low and the figures are weak: one vendor analysis
+citing Podcast Industry Insights puts **~7.74 m episodes (≈4.84 % of 160.07 m discovered episodes)**
+pointing at a transcript file, and **65,185 podcasts / 1.62 m episodes** using chapters — with the
+per-episode chapter data **dated April 2024**. Directional only; not verified against a primary
+source.
+
+### 2. The licence gradient completes: at the money, open source stops existing
+
+Measured this pass across four layers of one plane, same day, same method:
+
+| Layer | What it owns | Licence | Living example |
+|---|---|---|---|
+| Standard | nothing | **CC0 / MIT** | `podcast-namespace` CC0; `op3`, `opawg/*`, `podping.cloud`, `podlove-publisher` MIT |
+| Library / generator | one pipeline step | **Apache-2.0 / MIT** | `podcastfy` Apache-2.0 6,860★; `notebookllama` MIT |
+| App | the listener relationship | **GPL / AGPL** | `audiobookshelf` GPL-3.0 15,123★; `AntennaPod` GPL-3.0 8,357★; `podverse/*` AGPL |
+| Ad server | the revenue | **nothing exists** | `audio ad insertion server stars:>=20` → **0** |
+
+Pass 13 recorded that the licence hardens as code approaches the money. **The end of that gradient
+is not AGPL — it is absence.** And the control case is unusually clean: the community *did* build a
+permissive payment rail (`helipad` MIT, `BoostBots` BSD-3, `nostr-wallet-connect` Apache-2.0) for
+**value4value** micropayments, a rounding error of industry revenue, while writing **nothing** for
+the **$2.9 bn** of US podcast advertising (IAB/PwC 2025). Open source followed the ideology, not the
+revenue. Expect no open DAI project to appear; the incentive that would create one is absent.
+
+### 3. Synthetic voice became a compliance object this year, and the open format has no field for it
+
+The EU AI Act's **Article 50 transparency duties have applied since 2026-08-02**: synthetic content
+must be machine-readably marked and disclosed on first use, which audio counsel reads as reaching
+**cloned voices, synthetic dialogue, podcast ads and AI jingles** even in partly-synthetic
+productions. In parallel, licensed-voice supply became normal: **ElevenLabs' Iconic Voices
+marketplace**, **McConaughey and Caine licensing their voices**, and the **Stan Lee Universe deal
+(2026-05-27)** for a deceased performer's voice and likeness.
+
+The gap between those two facts is the finding: **an AI-voiced podcast is now legally required to
+declare itself, and the CC0 RSS namespace that the whole open ecosystem publishes through has no tag
+to declare it with.** Marking has to happen somewhere — in the audio (C2PA, pass 5), in the feed (a
+tag that does not exist), or in prose nobody can parse. This is the most concrete standards-shaped
+opening this KB has found: the namespace is public domain and takes proposals in the open.
+
+### 4. Measurement is being standardised, and the standard is server-side — which suits open source
+
+IAB Tech Lab circulated **Podcast Technical Measurement Guidelines v2.3** in 2026 (downloads,
+audience and ad delivery from **server-side log data**; public comment closed **2026-08-19**), and
+the trade consensus is that measurement has lagged consumption because the definitions keep moving.
+Because podcast apps mostly do not confirm playback client-side, the audience number *is* a log plus
+a user-agent corpus — and that corpus is **MIT and open** (`opawg/user-agents-v2`,
+`podcast-rss-useragents`, `podcast-hosts`, `podcast-prefixes`), with `op3` (MIT) as the only open
+prefix implementation. **This is the one layer of the plane where a permissive open base and a fresh
+written standard coincide and no incumbent holds the ground.**
+
+### 5. Video is eating podcasting's distribution, and RSS is the hedge
+
+~**71 % of US podcasters** now make video versions; **Edison has YouTube ahead of Spotify** among US
+weekly podcast listeners (33 % vs 26 %) and **YouTube is now the UK's most-used podcast platform**.
+One 2026 newsletter reports Spotify podcast listening **down 26 %**, which could not be verified and
+is noted only as a claim. Meanwhile ad effectiveness readings **conflict**: eMarketer has audio
+outperforming video on purchase conversion by **18–25 %**, while another trade source reports video
+converting modestly better. Do not build a recommendation on either.
+
+What is not in dispute: the shows moving to platform-hosted video **leave the measurable RSS
+ecosystem**, which is why `alternateEnclosure` and iHeart's open-RSS video move matter more than
+their size suggests. "Ship video without leaving the open feed" is a defensible engagement for any
+rights-holder who intends to keep its audience data.
+
+### 6. The ops agent layer does not exist — and the vocabulary makes it look like it does
+
+Measured: `podcast ad agent` 11 results (top **1★**), `podcast discovery agent` 5 (top **3★**, and it
+is an **unlicensed** MCP server), `podcast seo agent` 6 (top **4★**), `podcast monetization` 59 (top
+**2★**). `show notes agent` returns 85 and the top two are a **SARS-CoV-2 mRNA sequence archive**
+(3,352★) and a GitHub Desktop release-notes mirror — collision, not a field. Meanwhile the
+*generation* agents are permissive and healthy (`SurfSense` Apache-2.0 16,962★, `autoclip` MIT
+16,708★, `podcastfy` Apache-2.0 6,860★). The asymmetry is consistent with every other plane in this
+KB: **open source generates; it does not run the business.**

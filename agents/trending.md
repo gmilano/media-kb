@@ -9,6 +9,69 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 22: the podcast & spoken-audio distribution plane (**the money layer is a literal zero, and the community built a payment rail for the revenue it doesn't have**)
+
+**Probe before search, as in passes 11–21.** 61 vocabulary terms across six candidate planes.
+`podcast-namespace`, `Podcasting 2.0`, `AntennaPod`, `Podverse`, `dynamic ad insertion`,
+`PodcastIndex`, `value4value`, `chapters` — **0 hits out of 8**. The word "podcast" was in five
+files; the ecosystem was in none. Five other candidate planes (GLAM/IIIF, playout/EPG, data
+journalism, comics, heritage) came back **already covered** by passes 4, 8, 16, 18 and 20, which is
+why this one was chosen.
+
+### New this pass — the generation agent layer (permissive, alive)
+
+| Agent | Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| SurfSense | [MODSetter/SurfSense](https://github.com/MODSetter/SurfSense) | Apache-2.0 | 16,962 | 2026-11-24 | Air-gapped NotebookLM alternative; the only one of these built for confidential corpora. |
+| autoclip | [zhouxiaoka/autoclip](https://github.com/zhouxiaoka/autoclip) | MIT | 16,708 | 2026-11-26 | Local-first clipping + MCP server; pushed the day of this pass. |
+| Podcastfy | [souzatharsis/podcastfy](https://github.com/souzatharsis/podcastfy) | Apache-2.0 | 6,860 | 2026-05-04 | Reference open implementation of the NotebookLM podcast feature. Dormant 7 months. |
+| VideoAgent | [HKUDS/VideoAgent](https://github.com/HKUDS/VideoAgent) | MIT | 2,073 | 2026-07-22 | EMNLP 2026; video-podcast cutdowns. |
+| NotebookLlama | [run-llama/notebookllama](https://github.com/run-llama/notebookllama) | MIT | 1,982 | 2026-03-02 | MIT end to end. |
+| video-podcast-maker | [Agents365-ai/video-podcast-maker](https://github.com/Agents365-ai/video-podcast-maker) | MIT | 1,733 | 2026-10-01 | Topic → 4K narrated episode; local TTS, no external API. |
+| InsightsLM | [theaiautomators/insights-lm-public](https://github.com/theaiautomators/insights-lm-public) | MIT | 661 | 2026-01-16 | Self-hosted, audio overviews. |
+| sofit | [navotvolkgroundup/sofit](https://github.com/navotvolkgroundup/sofit) | MIT | 31 | 2026-11-05 | Chapters + show notes + pull-quotes. The **only** licensed show-notes agent with a 2026 push. |
+
+### The agent layer over podcast *operations* — measured, and it is a near-zero
+
+| Query | Total repos | Top result | Verdict |
+|---|---|---|---|
+| `podcast ad agent` | **11** | `leo777-debug/Kruvim` (**1★**) | Nothing exists. |
+| `podcast discovery agent` | **5** | `cclawton/podcastindex-mcp-server` (**3★, no licence**) | The MCP layer over the open podcast index is 3 stars and unlicensed. |
+| `podcast seo agent` | **6** | `adhenawer/video-to-text` (**4★**) | Nothing exists. |
+| `podcast monetization` | 59 | `AshutoshBhawsar/Automated-Sentiment-Analysis…` (**2★**) | Noise, not software. |
+| `show notes agent` | 85 | a **SARS-CoV-2 mRNA sequence archive** (3,352★) | **Contaminated, not populated** — collision on "notes". |
+| `ai podcast generator stars:>=500` | **1** | `panyanyany/Twocast` (1,292★, **no licence**) | The one result is legally unusable. |
+| `audiobook agent stars:>=10` | **4** | `jettbrains/-L-` (176★) | **The same collision pass 4 flagged** in `archive metadata agent`. Second plane it has polluted. |
+
+### The structural finding — licence hardens by *what the code owns*
+
+Four layers, four regimes, measured the same day:
+
+1. **The standard owns nothing → CC0/MIT, without exception.** `Podcastindex-org/podcast-namespace`
+   CC0-1.0 496★; `podping.cloud` MIT; `op3` MIT; `opawg/*` MIT ×5; `podlove-publisher` MIT.
+2. **The library owns one step → Apache-2.0/MIT.** The eight rows above.
+3. **The app owns the listener → GPL-3.0/AGPL-3.0, with no living exception.** `audiobookshelf`
+   GPL-3.0 15,123★; `AntennaPod` GPL-3.0 8,357★; `microfeed` AGPL-3.0 4,143★; `podverse/*` AGPL ×5;
+   `gpodder`/`PinePods`/`PodAura`/`podgrab`/`rssguard`/`musicpod` all GPL-3.0. The only large
+   permissive app, `GetStream/Winds` (BSD-3, 9,078★), **has not been pushed since 2021-10-11**.
+4. **The ad server owns the money → it does not exist.** `audio ad insertion server stars:>=20`
+   returns **0**.
+
+Pass 13 found the licence hardening as code approaches the money. **Pass 22 reaches the end of that
+gradient and finds not AGPL but absence** — and the clearest proof is that the community *did* build
+a permissive payment rail (`helipad` MIT, `BoostBots` BSD-3, `nostr-wallet-connect` Apache-2.0,
+`v4v-info` MIT) for **value4value micropayments**, while writing nothing for the **$2.9 bn** of US
+podcast advertising (IAB/PwC, 2025). Open source followed the ideology, not the revenue.
+
+### Verification
+
+36 slugs probed with `git ls-remote`, **36 resolve, 0 absent**. All stars/licences/push dates
+measured on 2026-11-26 via `search/repositories`, not inherited from listicles. Two slugs could not
+be measured because they are **not on GitHub at all**: `Castopod` (AGPL-3.0, canonical home
+`code.castopod.org`, latest release 1.15.0 / Feb 2026 per project docs — the dead GitHub slug was
+already recorded in `repos/trending.md`) and `Funkwhale` (AGPL-3.0, `dev.funkwhale.audio`). Both
+hosts are blocked by this session's egress proxy, so their figures are **not** restated as measured.
+
 ## 2026-11-26 — pass 21: the spatial, immersive & volumetric-capture plane (**the most-starred repo in the plane cannot be shipped**)
 
 **What is new to this KB.** A ~60-term word-boundary probe found the plane missing almost entirely:

@@ -2187,3 +2187,118 @@ repositories that `git ls-remote` confirms **do** exist — `nerfstudio-project/
 `pierotofy/OpenSplat` and `mozilla/hubs`. So the index's silence is not evidence of absence *or* of
 missing metadata; when it 422s, fall back to `ls-remote` for existence and to the raw licence probe
 for terms. Both fallbacks were used here and both resolved in one call each.
+
+## The podcast & spoken-audio distribution plane — measured 2026-11-26 (pass 22), and the licence hardens by **what the code owns**
+
+`media-kb` arrived with the remote carrying **passes 19, 20 and 21, all three dated today**, while
+`rotation.json` still read `next=4, last_industry=healthcare` — the **eighth consecutive failure of
+step 5** on this industry (pass 12 counted seven). Same-day passes again mean the right move is
+neither a rewrite nor a re-verification but **finding the missing vocabulary plane**, so the probe
+ran first.
+
+### How the gap was found — the vocabulary probe, two Bash calls, 61 terms, before any web search
+
+| Term group | Files with a hit | Verdict |
+|---|---|---|
+| `podcast-namespace`, `Podcasting 2.0`, `AntennaPod`, `Podverse`, `dynamic ad insertion`, `PodcastIndex`, `value4value`, `chapters` | **0 of 8** | The open podcast ecosystem is **entirely absent** |
+| `IIIF`, `Omeka`, `Islandora`, `ArchivesSpace`, `AtoM`, `DSpace`, `Fedora` | 5–8 each | Already covered (passes 4, 18) |
+| `CasparCG`, `playout`, `EPG`, `FAST`, `Rundown` | 3–8 each | Already covered (passes 8, 16) |
+| `Datasette`, `OpenRefine`, `Superset`, `data journalism` | 2–5 each | Already covered (pass 20) |
+| `Kavita`, `Komga`, `comic`, `manga` | 1–6 each | Already covered (pass 18) |
+| `Castopod`, `Audiobookshelf`, `Funkwhale` | 2–4 each | Present as **vertical rows only** — never measured as a plane |
+
+The word "podcast" appears in five files of this KB. **The podcast ecosystem does not.** Audiobook­shelf
+was carried as a self-hosting vertical, Castopod as a dead slug (`repos/trending.md`), Funkwhale as a
+federation example — and nothing anywhere described how a show is published, found, measured or paid
+for. Podcasting is a **$9.2 bn global business** (Owl & Co., 2025, up from $7.5 bn in 2024) with
+**$2.9 bn of US ad revenue alone** (IAB/PwC, 2025, +10.2 % YoY). It had no plane.
+
+### The finding: four layers, four licence regimes, and the ordering is by *ownership*, not by proximity
+
+Every figure below was measured on **2026-11-26** via GitHub `search/repositories`; every slug was
+confirmed to resolve with `git ls-remote`. 36 slugs probed, **36 resolve, 0 absent**.
+
+| Layer | What the code owns | Licence regime measured | Evidence |
+|---|---|---|---|
+| **1. The standard** | Nothing — it wants universal adoption | **CC0 / MIT, no exceptions** | `podcast-namespace` CC0-1.0; `podping.cloud`, `docs-api`, `web-ui`, `helipad`, `op3`, 5× `opawg/*`, `podlove-publisher` all MIT |
+| **2. The library / generator** | One step of a pipeline | **Apache-2.0 / MIT** | `podcastfy` Apache-2.0 6,860★; `notebookllama` MIT 1,982★; `SurfSense` Apache-2.0 16,962★ |
+| **3. The app that owns the listener** | The audience relationship | **GPL-3.0 / AGPL-3.0, no live exception** | `audiobookshelf` GPL-3.0 15,123★; `AntennaPod` GPL-3.0 8,357★; `microfeed` AGPL-3.0 4,143★; `podverse/*` AGPL ×5; `gpodder`, `PinePods`, `PodAura`, `podgrab`, `rssguard`, `musicpod` all GPL-3.0 |
+| **4. The money** | The $2.9 bn | **Does not exist in the open** | `audio ad insertion server stars:>=20` → **TOTAL = 0** |
+
+This is the first plane in this KB where the licence gradient has a **stated mechanism rather than a
+correlation**, and the mechanism is not proximity to the money — pass 13 proposed that — but
+**ownership**. A spec that charges nothing and claims nothing is published CC0 so that Apple and
+Spotify can implement it without a lawyer. A generator is a library, and libraries chase adoption, so
+they are permissive. A podcast *app* is a direct competitor to Spotify and YouTube, and its authors
+pick AGPL **deliberately**, as a defence against enclosure. And the ad server — the only layer that
+touches the industry's actual revenue — **was never written in the open at all**.
+
+Pass 13's law survives as a special case: the licence does harden toward the money. Pass 22 shows
+what is at the end of that gradient. **It is not AGPL. It is absence.**
+
+### The money layer, measured four ways, because a single zero is an anecdote
+
+| Query | Total repos | Top result | Verdict |
+|---|---|---|---|
+| `audio ad insertion server stars:>=20` | **0** | — | Literal zero. Nothing exists above the noise floor. |
+| `dynamic ad insertion` | 37 | `leandromoreira/scte-35-scte-104-scte-67` (BSD-3-Clause, 35★, **last push 2021-04-13**) | The top hit is a **documentation repo about broadcast SCTE markers**, abandoned 5 years, not a podcast DAI implementation. |
+| `podcast analytics stars:>=20` | **2** | `aws-samples/amazon-transcribe-comprehend-podcast` (MIT-0, 137★, push 2023-07-25); `opawg/user-agents` (MIT, 123★) | One is an AWS demo; the other is **a list of regexes**, not an analytics system. |
+| `podcast monetization` | 59 | `AshutoshBhawsar/Automated-Sentiment-Analysis-of-Web-Multimedia` (**2★**) | Noise. Nothing in the first page is monetization software. |
+
+**The sharpest single fact in this plane:** the open-source community built a complete,
+permissively-licensed **payment rail** — `helipad` (MIT, 37★), `BoostBots` (BSD-3-Clause, 15★),
+`getAlby/nostr-wallet-connect` (Apache-2.0, 115★), `v4v-info` (MIT, 32★) — for *value4value*
+micropayments, a revenue model worth a rounding error of the industry. For the **$2.9 bn that
+podcasting actually earns from advertising, it wrote nothing.** Open source here followed the
+*ideology*, not the money.
+
+### Tier 1 (pass 22) — permissive, alive, and usable as-is for the generation layer
+
+| Agent / Tool | Repo | License | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| SurfSense | [MODSetter/SurfSense](https://github.com/MODSetter/SurfSense) | Apache-2.0 | 16,962 | 2026-11-24 | Air-gapped NotebookLM alternative; document corpus → chat → generated audio overview. The most-starred permissive repo in this plane and the only one built for confidential material. |
+| autoclip | [zhouxiaoka/autoclip](https://github.com/zhouxiaoka/autoclip) | MIT | 16,708 | 2026-11-26 | Local-first clipping + MCP server: long audio/video → short social cuts. The repurposing half of podcast distribution. |
+| Podcastfy | [souzatharsis/podcastfy](https://github.com/souzatharsis/podcastfy) | Apache-2.0 | 6,860 | 2026-05-04 | Multimodal content → multi-speaker conversational podcast audio. The reference open NotebookLM-podcast implementation. **7 months without a push** — vendor it, don't depend on it. |
+| VideoAgent | [HKUDS/VideoAgent](https://github.com/HKUDS/VideoAgent) | MIT | 2,073 | 2026-07-22 | EMNLP 2026 agentic framework for video understanding + editing; the practical base for video-podcast cutdowns. |
+| NotebookLlama | [run-llama/notebookllama](https://github.com/run-llama/notebookllama) | MIT | 1,982 | 2026-03-02 | Fully open LlamaCloud-backed NotebookLM alternative, incl. audio generation. MIT end to end. |
+| video-podcast-maker | [Agents365-ai/video-podcast-maker](https://github.com/Agents365-ai/video-podcast-maker) | MIT | 1,733 | 2026-10-01 | Topic → 4K narrated video episode, local TTS (no external API required). Built to be driven *by* a coding agent. |
+| InsightsLM | [theaiautomators/insights-lm-public](https://github.com/theaiautomators/insights-lm-public) | MIT | 661 | 2026-01-16 | Self-hosted NotebookLM alternative: chat with documents, generate audio overviews. |
+| sofit | [navotvolkgroundup/sofit](https://github.com/navotvolkgroundup/sofit) | MIT | 31 | 2026-11-05 | Auto-generates chapters, show notes and pull-quotes from an episode. Hebrew-first — **the only show-notes agent found with a real licence and a 2026 push.** |
+
+### Tier 2 (pass 22) — real, and the licence or the silence is the constraint
+
+| Tool | Repo | License | Stars | Last push | Constraint |
+|---|---|---|---|---|---|
+| Audiobookshelf | [advplyr/audiobookshelf](https://github.com/advplyr/audiobookshelf) | **GPL-3.0** | 15,123 | 2026-11-19 | The plane's largest project and the de-facto self-hosted audiobook/podcast server. GPL-3.0: ship as a separate service, do not link client code into it. |
+| AntennaPod | [AntennaPod/AntennaPod](https://github.com/AntennaPod/AntennaPod) | **GPL-3.0** | 8,357 | 2026-11-25 | The reference open Android podcast client, actively developed. A white-label client fork inherits GPL-3.0 — fatal to most app-store OEM deals. |
+| Winds | [GetStream/Winds](https://github.com/GetStream/Winds) | BSD-3-Clause | 9,078 | **2021-10-11** | **The exception that proves the rule.** The only large permissive podcast app — and it has been dead five years. Permissive + listener-owning + alive does not exist in this plane. |
+| microfeed | [microfeed/microfeed](https://github.com/microfeed/microfeed) | **AGPL-3.0** | 4,143 | 2026-11-24 | Agentic CMS for podcasts/blogs on Cloudflare. Network copyleft — the worst possible licence for a hosted multi-tenant product. |
+| PodAura | [SkyD666/PodAura](https://github.com/SkyD666/PodAura) | **GPL-3.0** | 1,278 | 2026-11-23 | Modern Material You Android podcast app, very active. Same copyleft constraint as AntennaPod. |
+| Podverse | [podverse/podverse-rn](https://github.com/podverse/podverse-rn) | **AGPL-3.0** | 287 | 2026-11-16 | Cross-platform client; the only full open stack with Podcasting 2.0 features end to end (`-rn`, `-web` 100★, `-api` 34★ — **all five repos AGPL-3.0**). |
+| anytime_podcast_player | [amugofjava/anytime_podcast_player](https://github.com/amugofjava/anytime_podcast_player) | BSD-3-Clause | 627 | 2026-04-22 | **The one clean base for a white-label client.** Flutter/Dart, BSD-3. Smaller and slower-moving than the GPL options, and that is exactly the trade to put in front of a client. |
+| Twocast | [panyanyany/Twocast](https://github.com/panyanyany/Twocast) | **NONE** | 1,292 | 2025-07-01 | Bilingual AI podcast generator, 1,292★ and **no licence file at all** → all rights reserved, unusable. The most-starred AI podcast generator in the plane is legally unavailable. |
+| podcast-transcriber | [wendy7756/podcast-transcriber](https://github.com/wendy7756/podcast-transcriber) | NOASSERTION | 248 | 2026-04-12 | Podcast → transcript + AI summary. GitHub cannot classify the licence; read it before use. |
+
+### Contamination warnings — two of them, and one is a repeat offender
+
+- **`show notes agent` returns 85 results and the top two are a SARS-CoV-2 mRNA sequence archive
+  (3,352★) and a GitHub Desktop release-notes mirror.** Pure keyword collision on "notes" and
+  "release notes". There is no show-notes agent layer; the query only looks populated.
+- **`audiobook agent stars:>=10` returns 4, and the second is `jettbrains/-L-` (GPL-3.0, 176★) —
+  the exact repo pass 4 flagged as a collision in `archive metadata agent`.** The same unrelated
+  repo now contaminates two different planes of this KB. **Recorded so a later pass does not
+  "discover" it a third time.**
+
+### What this means for a client engagement
+
+The plane splits cleanly into work Globant can take and work it cannot:
+
+- **Take the generation and the measurement.** Both are permissive and both are weak. An
+  IAB-compliant server-side measurement service built on `opawg/*` + `op3` (all MIT) has no open
+  incumbent, and the generation layer is Apache/MIT down to the model wrappers.
+- **Never fork the player.** Layer 3 is copyleft by design, not by accident. The only permissive
+  live base is `anytime_podcast_player` (BSD-3); everything else makes the client's app
+  disclosable.
+- **The ad stack is a greenfield build, and that is the proposal.** Zero open repos touch podcast
+  ad insertion. The input signals (`podcast-namespace` CC0, OPAWG regexes MIT, OP3 MIT) are all
+  free. Pattern 47 wires exactly that.

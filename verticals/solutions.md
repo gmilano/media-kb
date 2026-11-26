@@ -1269,3 +1269,49 @@ Apache-2.0) are what made each handover legally possible — which is the argume
   here", not as absent.
 - **`opensimulator/opensim` is not on GitHub** (`git ls-remote` negative). OpenSimulator is hosted
   elsewhere and was not verified this pass.
+
+## Podcast & spoken-audio platforms — measured 2026-11-26 (pass 22)
+
+Real, customizable systems for publishing, hosting, serving and measuring podcasts. The pattern that
+governs this file's earlier rows holds here too, and harder: **every platform that owns the listener
+relationship is copyleft, and the one permissive publishing platform is the smallest of them.**
+
+| Platform | Repo / home | License | Stars | What it is | AI layer Globant can add |
+|---|---|---|---|---|---|
+| **Podlove Publisher** | [podlove/podlove-publisher](https://github.com/podlove/podlove-publisher) | **MIT** | 310 | WordPress-based podcast publishing: episode management, standards-compliant feed generation, chapters, contributors. **The only MIT publishing platform in this plane** — and therefore the default base for a client-owned, white-labelled podcast CMS. | Auto chapters + show notes + transcript (`sofit`, `autoclip`), episode SEO, feed validation against `podcast-namespace`. |
+| **Audiobookshelf** | [advplyr/audiobookshelf](https://github.com/advplyr/audiobookshelf) | **GPL-3.0** | 15,123 | Self-hosted audiobook and podcast server with its own clients. The plane's biggest project and the practical choice for an internal/enterprise spoken-audio library. | Semantic search over transcripts, per-title summarisation. Deploy unmodified and integrate over its API; **do not link client code in**. |
+| **Castopod** | `code.castopod.org` (**not GitHub**) | **AGPL-3.0** | not measured | Purpose-built open podcast *hosting* platform (PHP/CodeIgniter 4) with ActivityPub federation, built-in analytics, RSS generation; project docs give **1.15.0, Feb 2026**. | Fediverse-native distribution + auto-transcripts. **Network copyleft: unsuitable as the base of a hosted multi-tenant product.** Host blocked by this session's proxy — terms from project docs, figures not asserted. |
+| **microfeed** | [microfeed/microfeed](https://github.com/microfeed/microfeed) | **AGPL-3.0** | 4,143 | Lightweight CMS on Cloudflare for podcasts, blogs and media; self-hosted, "agentic". | Same AGPL constraint as Castopod, with the same consequence for SaaS. Viable for a client hosting their *own* single tenant. |
+| **PinePods** | [madeofpendletonwool/PinePods](https://github.com/madeofpendletonwool/PinePods) | **GPL-3.0** | 1,089 | Rust, self-hosted podcast management + playback for a household or team, with sync. | Internal "listening library" for a research or comms team; recommendation over the team's own feed set. |
+| **Podverse** | [podverse/podverse-rn](https://github.com/podverse/podverse-rn) | **AGPL-3.0** | 287 | The most complete open **Podcasting 2.0** stack: app (`-rn`), web (`-web`, 100★), API (`-api`, 34★), ops (`-ops`, 17★) — all AGPL-3.0. Chapters, transcripts, cross-app playlists, v4v. | The reference to *read* when implementing namespace features. Not a fork candidate: AGPL across all five repos. |
+| **AntennaPod** | [AntennaPod/AntennaPod](https://github.com/AntennaPod/AntennaPod) | **GPL-3.0** | 8,357 | The reference open Android podcast client, actively developed. | Nothing shippable: a white-label fork inherits GPL-3.0, which kills most OEM and app-store arrangements. Listed so that it is **ruled out on purpose**, not by omission. |
+| **Anytime Podcast Player** | [amugofjava/anytime_podcast_player](https://github.com/amugofjava/anytime_podcast_player) | **BSD-3-Clause** | 627 | Flutter/Dart podcast player, cross-platform. | **The only clean white-label client base in the plane.** Smaller and slower-moving than the GPL options — that trade-off is the conversation to have with the client, and it is a short one, because the alternative is disclosing their source. |
+| **OP3** | [skymethod/op3](https://github.com/skymethod/op3) | **MIT** | 144 | The Open Podcast Prefix Project: a self-hostable analytics prefix that counts downloads transparently. | The base for an auditable, GDPR-reviewable measurement service — see `intel/market.md` EMEA and Pattern 48. |
+| **Funkwhale** | `dev.funkwhale.audio` (**not GitHub**) | **AGPL-3.0** | not measured | Federated audio hosting (music + podcasts), ActivityPub. Already carried in this file's main table. | Host blocked by this session's proxy; no figures asserted this pass. |
+
+### The licence law of this file, tested again and confirmed
+
+This file's earlier passes established that **self-hostable media platforms are copyleft by default**
+(PeerTube AGPL, MediaCMS AGPL, Owncast, Funkwhale AGPL, Castopod AGPL, Janus GPL, OpenMontage AGPL).
+Pass 22 tested it against a plane the file had never measured and it held — with a refinement worth
+recording:
+
+> The copyleft is not a property of "self-hostable". It is a property of **owning the audience
+> relationship**. In the podcast plane the *spec* is CC0, the *analytics prefix* is MIT, the
+> *publishing plugin* is MIT — and every single artefact that sits between a listener and a show is
+> GPL or AGPL, with the only permissive large exception (`GetStream/Winds`, BSD-3, 9,078★) dead
+> since **2021-10-11**.
+
+**Consequence for a proposal.** There is a permissive path through this plane, but it is narrow and
+it has to be chosen deliberately: **Podlove Publisher (MIT) to publish, OP3 (MIT) to measure, the
+namespace (CC0) to describe, Anytime (BSD-3) if a client-branded app is required.** Any other
+combination of this plane's platforms puts GPL or AGPL into the client's delivery, and in the hosted
+case the AGPL ones put it into their service.
+
+### What does not exist as a platform at all
+
+There is **no open-source podcast ad server, dynamic-ad-insertion service, or ad-measurement
+platform** — not a weak one, not an abandoned one, none (`audio ad insertion server stars:>=20`
+→ 0 results, measured 2026-11-26). Every commercial system in that slot is proprietary
+(Megaphone, Acast, Triton, ART19, Spreaker). For a client who needs it, that is not an integration;
+it is a build, and the inputs for it are all permissive. Pattern 47.

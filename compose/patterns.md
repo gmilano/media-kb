@@ -4592,3 +4592,140 @@ proposal shape:
    per-path or per-utterance record is in scope — and it is the part nobody has built.
 7. **Does a branch change the title's age rating?** Pass 28's ladders apply per path. No open tool
    knows this. Either exclude it explicitly or sell it as the junction product.
+
+---
+
+## Pass 30 (2026-11-26) — the AI-answer-engine discovery, citation & referral-measurement plane
+
+### P45 — When the dominant surface emits no event, stop designing a dashboard and start designing a *refusal*
+
+Twenty-nine passes have recorded planes where the terminal step had **no code**. This is the first
+with **no measurable event**. Google's AI Overviews and AI Mode serve from `google.com`: they emit
+**no referrer** (so no referrer taxonomy can ever classify them, however many entries it gains) and
+Google's own Search Console gen-AI reports give **impressions without clicks**. No amount of tooling
+closes that.
+
+**The reusable rule:** before composing a measurement stack, determine for each question *which
+channel could physically answer it*, and write the unanswerable ones into the deliverable as explicit
+refusals. A four-row table beats a dashboard, because a dashboard that silently reports zero where
+the event is unobservable **will be read as "no AI impact"** — the single most expensive
+misunderstanding available in this plane.
+
+| Question | Only channel that can answer | Open tooling | Verdict |
+|---|---|---|---|
+| Did an AI crawler fetch my content? | server / CDN logs | `goaccess` + `crawler-user-agents` (MIT) | ✅ answerable today |
+| Did a human arrive *from* a chatbot? | referrer / UTM | `referer-parser` `chatbot:` (⚠️ GPL-3.0 data) | ⚠️ answerable, 9 engines only |
+| Did I appear inside an AI Overview? | Search Console gen-AI reports | none | ⚠️ impressions only, from 2026-05-18, **no backfill** |
+| How many clicks did that appearance earn? | — | — | ⛔ **not emitted** |
+| What was the appearance worth? | — | — | ⛔ **nothing exists** |
+
+### P46 — The tooling for a brand-new standard is disproportionately likely to be unlicensed (second instance → now a rule)
+
+Pass 5 found `rslstandard/rsl` — the official repo of the RSL 1.0 licensing standard, whose entire
+purpose is machine-readable terms — **with no licence file**. Pass 30 finds the same shape:
+[firecrawl/llmstxt-generator](https://github.com/firecrawl/llmstxt-generator), **the most-starred
+dedicated `llms.txt` generator (540★), has no licence file** (10 names × 2 branches; `README.md`
+returns 200 on both, so the channel works; shallow-cloned and confirmed — nothing licence-like at
+root). **Check the tool, not just the spec**, and treat an unlicensed tool for a standard as the
+expected case rather than the surprise.
+
+### P47 — Extending P40: the licence can be inherited from the data's *ancestor*, declared only in prose
+
+P40 established that licence risk enters through **bundled facts** that carry their own licence files.
+[snowplow-referer-parser/referer-parser](https://github.com/snowplow-referer-parser/referer-parser)
+is a third vector and the worst yet: **the repo declares nothing** (API: `NONE`, no licence file at
+root), while its README's *"Copyright and license"* section states that **`referers.yml` derives from
+Matomo's `SearchEngines.php`/`Socials.php`, copyright 2012 Matthieu Aubry, under GPL-3.0.** The 85 KB
+dataset — *the exact file you would extend with AI referrers* — is **copyleft by inheritance**, and
+the only record of that is a sentence of prose.
+
+**Operational rule:** when a repo reports no licence **but ships a substantial dataset**, read the
+README's copyright section before concluding the data is unencumbered. Absence of a licence file is
+not absence of an obligation; it may mean the obligation was inherited and never restated. Mitigation
+here: **read the nine-entry list and re-implement it; do not vendor the YAML.** A list of nine domain
+names is not itself the copyrightable asset — the 424-entry compilation is.
+
+### Pattern 30.1 — The answer-engine ledger (the product that does not exist in open source)
+
+**For:** any publisher, broadcaster or brand newsroom that has been asked "what is AI search doing to
+us?" and cannot answer with evidence.
+
+**Stack — every component MIT, self-hostable, no data leaves the client:**
+1. [allinurl/goaccess](https://github.com/allinurl/goaccess) (MIT, 21,158★) — parse origin and CDN
+   logs. **This is the load-bearing component:** an AI crawler never executes JavaScript, so it is
+   invisible to every tag-based analytics tool the client already owns.
+2. [monperrus/crawler-user-agents](https://github.com/monperrus/crawler-user-agents) (MIT, 1,416★,
+   pushed 2026-11-26) — classify those hits by crawler identity. Verify forward/reverse DNS for the
+   bots that publish IP ranges; record spoofable user agents as *claimed*, not *confirmed*.
+3. [snowplow-referer-parser/referer-parser](https://github.com/snowplow-referer-parser/referer-parser)
+   — the `chatbot:` taxonomy (9 engines). ⚠️ **Per P47: read it, re-implement the list, do not vendor
+   `referers.yml`.** Add the measured absences yourself: **Grok/xAI, DeepSeek, You.com, Phind.**
+4. [umami-software/umami](https://github.com/umami-software/umami) (MIT, 40,403★) — the human-session
+   half, and the only permissive general analytics base (`plausible` is AGPL-3.0, `matomo` GPL-3.0).
+5. **Google Search Console gen-AI impressions** — manual export. ⚠️ Whether this is reachable via the
+   **Search Console API is UNVERIFIED**: `developers.google.com` does not resolve from this session
+   (outside allowed network domains). **Scope iteration one around a manual export** and say so.
+
+**The deliverable is four columns and one paragraph of refusals:** crawl events · chatbot referrals ·
+AI impressions · human sessions — plus P45's explicit statement that AI Overview **clicks cannot be
+measured**. Ship the refusal paragraph; it is what makes the ledger trustworthy rather than another
+dashboard.
+
+**Do first, before anything else:** extend log retention. Google's instrument has **no backfill**
+before 2026-05-18, so the client's own logs are the only route to a pre-AI baseline, and every week
+of un-retained logs is a week that cannot be reconstructed. This is a one-sprint fix that protects an
+asset the client does not know is expiring.
+
+### Pattern 30.2 — The machine-readability audit (and what *not* to sell)
+
+**For:** a client asking to "optimise for AI search".
+
+**Stack:**
+1. [Auriti-Labs/geo-optimizer-skill](https://github.com/Auriti-Labs/geo-optimizer-skill) (MIT,
+   1,398★, pushed 2026-11-26) — the audit of schema, meta tags and content structure. It **ships an
+   MCP server**, so it drops into an agent workflow rather than staying a one-off CLI run.
+2. [jina-ai/reader](https://github.com/jina-ai/reader) (Apache-2.0) or
+   [unclecode/crawl4ai](https://github.com/unclecode/crawl4ai) (Apache-2.0, 87,986★) — fetch the
+   client's **own** pages as an engine would read them.
+3. [adbar/trafilatura](https://github.com/adbar/trafilatura) (Apache-2.0, 7,182★) — show what
+   survives boilerplate stripping, i.e. which part of the page is even eligible to be quoted.
+4. [microsoft/markitdown](https://github.com/microsoft/markitdown) (MIT, 198,609★) +
+   [docling-project/docling](https://github.com/docling-project/docling) (MIT, 71,109★) — the
+   back-catalogue and PDF conversion.
+5. `schemaorg/schemaorg` (Apache-2.0, already in this KB — `NewsArticle`, `VideoObject`,
+   `ClaimReview`) + [ekalinin/sitemap.js](https://github.com/ekalinin/sitemap.js) (MIT) for sitemaps
+   and **news sitemaps**.
+
+**Deliverable:** a side-by-side *"what you publish vs what the engine retains"* per template — which
+is persuasive in a way no score is, because the client sees its own article reduced to what survives.
+
+⛔ **Do not headline `llms.txt`.** It is the artefact clients name, and the evidence is against it:
+Google states in writing that Search does not use such files; **Ahrefs found 97% of `llms.txt` files
+across 137,210 domains received zero traffic in May 2026, with 96% of arriving requests being bots**;
+SE Ranking measured **10.13% adoption**; the spec repo's last push was **2026-09-24** and the leading
+generator is unlicensed and dormant since **2025-06-17**. Ship it only for **developer
+documentation**, where coding agents genuinely do read it — and bill it as a 30-minute task, not a
+strategy. Being able to say this with numbers is worth more to the client relationship than the work
+it declines.
+
+### Pattern 30.3 — The reservation/arrival reconciliation gate (joins pass 5 to pass 30)
+
+**For:** an EMEA publisher that has declared a machine-readable reservation under **DSM Article 4**.
+
+**Stack:** `ai-robots-txt/ai.robots.txt` (MIT, 4,272★, already in this KB) declares the refusal →
+`goaccess` (MIT) proves what actually fetched → `crawler-user-agents` (MIT) attributes it → the
+**compliance delta** is the deliverable: *crawlers you blocked that crawled anyway*, with timestamps,
+verified identity where the operator publishes IP ranges, and claimed-only identity where it does not.
+
+**Why this is EMEA-first and genuinely unbuilt:** pass 5 established that EMEA is the only region
+where **reserving** rights is a legal instrument. Pass 30 adds that the same crawler's **arrival** is
+measurable with MIT tooling. So EMEA is **the only region where the gap between a declared refusal and
+an observed crawl is a legal fact** rather than a curiosity — and nobody ships the reconciliation. All
+components are permissive; the integration is the product. Keep it **self-hosted**: the DPP's
+digital-sovereignty finding means a stack shipping logs to a non-European AI service can fail the
+client's own procurement.
+
+**Sequencing across the three patterns:** 30.3 is the sharpest EMEA opener, 30.1 is the universal
+one, 30.2 is the cheapest to deliver and the best qualifier. All three share the same two MIT
+components (`goaccess`, `crawler-user-agents`), so the second engagement is largely the first one's
+infrastructure pointed at a new question.

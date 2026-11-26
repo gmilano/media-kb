@@ -2918,3 +2918,79 @@ Two readings, both actionable:
 - **`NVIDIA/Audio2Face-3D` is not open source.** 582★, no LICENSE file at any probed name, and the
   README points at **NVIDIA's product-specific software terms**. It appears on "open source digital
   human" lists anyway. ⛔ Do not put it in a client stack on the strength of those lists.
+
+---
+
+## Pass 30 (2026-11-26) — the AI-answer-engine discovery, citation & referral-measurement plane
+
+**The gap grep, run before any web search (pass 8's method).** Thirteen candidate terms against all
+eight files: `llms.txt` **0**, `zero-click` **0**, `generative engine optimization` **0**,
+`search console` **0**, `voice-clone` 0, `fandom` 0, `creator economy` 0, `merchandising` 0,
+`stock footage` 0, `sitemap` **1**, `answer engine` 2, `referral traffic` 2, `Perplexity` **1**,
+`Google-Extended` **0**. The KB already carried the *symptom* in prose — "AI Overviews cite news
+publications but send fewer clicks", publisher revenue declines of 50–90% where referral traffic
+evaporated — and **none of the plane's tooling.** This is the exact inverse of pass 5: that plane was
+about telling a crawler **no**; this one is about being **found, cited and counted** by the same
+crawler. Both halves of one crawler, 25 passes apart.
+
+### The agents that exist — all seven verified twice (search API metadata + `git ls-remote`)
+
+| Agent / tool | Repo | Licence | Stars / forks | Last push | What it actually does in this plane |
+|---|---|---|---|---|---|
+| **GEO Optimizer** | https://github.com/Auriti-Labs/geo-optimizer-skill | MIT | 1,398★ / 166f | 2026-11-26 | The only purpose-built, permissively-licensed **answer-engine visibility auditor** found. Ships as CLI + Python library + **MCP server** + Astro integration; audits schema, meta tags and content structure. The MCP server is what makes it composable into an agent stack. |
+| **Crawl4AI** | https://github.com/unclecode/crawl4ai | Apache-2.0 | 87,986★ / 9,181f | 2026-11-23 | LLM-oriented crawler. In this plane you point it at **your own** site to see what an answer engine retains — not to harvest someone else's. |
+| **Jina Reader** | https://github.com/jina-ai/reader | Apache-2.0 | 12,283★ / 901f | 2026-05-22 | URL → LLM-readable text. The reference implementation of "what the engine sees". Note the **6-month gap since last push**. |
+| **Trafilatura** | https://github.com/adbar/trafilatura | Apache-2.0 | 7,182★ / 520f | 2026-11-23 | Main-content extraction. Shows what survives boilerplate stripping — i.e. which of your page is even eligible to be quoted. |
+| **MarkItDown** | https://github.com/microsoft/markitdown | MIT | 198,609★ / 15,085f | 2026-11-07 | Microsoft's converter to clean Markdown. The highest-starred repo in this plane by two orders of magnitude, and MIT. |
+| **Docling** | https://github.com/docling-project/docling | MIT | 71,109★ / 5,449f | 2026-11-26 | Document → structured text for AI consumption. Pairs with MarkItDown for archive and PDF back-catalogue. |
+| **Loamly** | https://github.com/loamly/loamly | MIT | **21★** / 1f | **2026-01-28** | AI *traffic* detection — visits originating from ChatGPT, Claude, Perplexity, Gemini. The right shape for this plane and **the whole open-source answer is 21 stars and has been dormant for ten months.** |
+
+### The headline: this plane's substrate is enormous and its *measurement* layer is 21 stars wide
+
+Read that table as two blocks. **Being readable** is solved and permissively licensed — MarkItDown,
+Docling, Crawl4AI, Trafilatura and Reader total over **375,000 stars**, all MIT or Apache-2.0, nearly
+all pushed within the last three weeks. **Knowing whether it worked** is `loamly` at 21★, dormant
+since January. The industry is thoroughly equipped to be ingested and almost entirely unequipped to
+find out what the ingestion earned.
+
+### ⛔ The standard built for this plane is a *measured* dud — do not sell it
+
+`llms.txt` is the one artefact a client will ask for by name, and the KB must be able to say no with
+numbers:
+
+| Evidence | Finding |
+|---|---|
+| The spec repo | https://github.com/AnswerDotAI/llms-txt — Apache-2.0, 2,702★ / 189f, **last push 2026-09-24** (the only repo in this plane with a multi-month gap on the *standard* itself) |
+| Google, in writing (June 2026) | Machine-readable AI files **are not needed** to appear in Google Search, because Search does not use them. Gary Illyes (Jul 2025): no support, no plans. John Mueller later compared it to the **keywords meta tag**. |
+| Ahrefs, 137,210 domains | **97% of `llms.txt` files received zero traffic in May 2026**, and **96% of the requests that did arrive were bots.** |
+| SE Ranking, 300,000 domains | **10.13% adoption.** Ahrefs' own higher 28% figure is stated by Ahrefs as an **upper bound** (its analytics customers skew technical). |
+| The leading generator | https://github.com/firecrawl/llmstxt-generator — 540★ / 71f, **NO LICENCE FILE**, **dormant since 2025-06-17** |
+
+The surviving honest use case is narrow and worth stating precisely: **developer documentation**, where
+coding agents and docs assistants genuinely do read it. For a media or publishing client it is not a
+discovery strategy. ⚠️ Both Ahrefs and SE Ranking are **vendor studies**, and Ahrefs did not check
+whether the files followed the spec — cite them as the best available measurement, not as neutral.
+
+### ⛔ Licence traps — two, and one is a category this KB has not recorded before
+
+**1. `firecrawl/llmstxt-generator` (540★) has no licence at all.** Probed 10 filenames × 2 branches
+through the raw channel; `README.md` returned **200 on both `main` and `master`**, so the channel
+works and the 404s are real absences. Shallow-cloned and looked, per pass 5's rule: root holds
+`README.md app components components.json hooks lib next.config.ts package.json …` and **nothing
+licence-like.** Without a grant, default copyright applies — all rights reserved. This is the **second
+instance** of pass 5's `rslstandard/rsl` trap, so it is promoted to a rule: **when a new standard
+appears, its most-starred tooling is disproportionately likely to be unlicensed.** Check the tool, not
+just the spec.
+
+**2. `snowplow-referer-parser/referer-parser` (383★) — NEW CATEGORY: the licence lives in the data
+file's ancestry, declared only in README prose.** The API reports `NONE` and there is no licence file
+at root. But the README's own *"Copyright and license"* section states that **`referers.yml` is based
+on Matomo's `SearchEngines.php` and `Socials.php`, copyright 2012 Matthieu Aubry, available under the
+GNU General Public License v3.** So the 85 KB YAML — *the single file you would want to extend with
+AI referrers* — carries **GPL-3.0 by inheritance** while the repository declares nothing at all. Pass
+5 found a licence owned by **the compilation** (Chromaprint/FFmpeg); this is a licence owned by **the
+dataset's ancestor**, and no SPDX field, badge or SBOM scan of the source tree can see it. **Rule:
+for any vendored dataset, resolve the licence of the data's provenance, not the repo's.**
+
+⚠️ Also NOASSERTION in this plane: `mitchellkrogza/nginx-ultimate-bad-bot-blocker` (4,848★),
+`ua-parser/uap-core` (827★).

@@ -9,6 +9,52 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 30: AI-answer-engine discovery & citation (**the plane's measurement agent is 21 stars and ten months dormant, while its readability layer is 375,000 stars and pushed this week**)
+
+Gap grep first, as always. Thirteen terms, and the four that mattered were absolute zeros across all
+eight files: `llms.txt`, `zero-click`, `generative engine optimization`, `search console`. `Perplexity`
+appeared **once** in the whole KB; `Google-Extended` **never**. The KB had carried the symptom since
+pass 7 — AI Overviews citing news and sending fewer clicks — without a single tool for it.
+
+### New this pass
+
+| Agent / tool | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [Auriti-Labs/geo-optimizer-skill](https://github.com/Auriti-Labs/geo-optimizer-skill) | MIT | 1,398★ | 2026-11-26 | The only purpose-built permissive answer-engine visibility auditor; **ships an MCP server** |
+| [microsoft/markitdown](https://github.com/microsoft/markitdown) | MIT | 198,609★ | 2026-11-07 | Highest-starred repo in the plane by 2 orders of magnitude |
+| [unclecode/crawl4ai](https://github.com/unclecode/crawl4ai) | Apache-2.0 | 87,986★ | 2026-11-23 | Point it at your *own* site to see what an engine retains |
+| [docling-project/docling](https://github.com/docling-project/docling) | MIT | 71,109★ | 2026-11-26 | Back-catalogue and PDF conversion |
+| [jina-ai/reader](https://github.com/jina-ai/reader) | Apache-2.0 | 12,283★ | 2026-05-22 | ⚠️ 6-month gap |
+| [adbar/trafilatura](https://github.com/adbar/trafilatura) | Apache-2.0 | 7,182★ | 2026-11-23 | What survives boilerplate stripping |
+| [loamly/loamly](https://github.com/loamly/loamly) | MIT | **21★** | **2026-01-28** | AI traffic detection — the right shape, and **the entire open answer** |
+
+### The momentum reading — the asymmetry is the trend
+
+This is the clearest spike-vs-sustain picture any trending section has recorded, because the two
+halves of one plane diverge by four orders of magnitude. **Readability**: 375,000+ stars, MIT/Apache,
+almost all pushed within three weeks. **Measurement**: 21 stars, dormant since January. Watch
+`loamly` specifically — if the referral-measurement problem is going to get an open answer, it starts
+from a repo shaped like that one, and ten months of silence is the signal to track.
+
+### The dud, with receipts — `llms.txt`
+
+Recorded here because it is the item a client names and the honest answer is no. Spec repo
+[AnswerDotAI/llms-txt](https://github.com/AnswerDotAI/llms-txt) Apache-2.0 2,702★ **last push
+2026-09-24**. Google stated in writing (June 2026) that Search does not use such files; Mueller
+likened it to the keywords meta tag. **Ahrefs, 137,210 domains: 97% of `llms.txt` files got zero
+traffic in May 2026, and 96% of the requests that arrived were bots.** SE Ranking, 300,000 domains:
+**10.13% adoption.** The leading generator,
+[firecrawl/llmstxt-generator](https://github.com/firecrawl/llmstxt-generator) 540★, has **no licence
+file** and has been **dormant since 2025-06-17**. Surviving use case: developer documentation only.
+
+### Falsifiable prediction, to be checked 2027-06-30
+
+(1) No major answer engine will document `llms.txt` as a retrieval or ranking input. (2) The
+`chatbot:` category in `referer-parser` will exceed **20 entries** (today: 9). (3) Google's AI
+surfaces will **still** emit no referrer and no click. If (2) happens and (3) does not, this plane's
+architecture changes and the KB should be re-cut.
+
+
 ## 2026-11-26 — pass 29: the interactive, branching & playable-story plane (**the whole agent bridge is 36 stars wide, and the plane's best-shaped agent has 2 of them**)
 
 The gap grep came first, as pass 8 prescribed. Twelve candidate terms, twelve zeros across all eight

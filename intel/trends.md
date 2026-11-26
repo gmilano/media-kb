@@ -3036,3 +3036,92 @@ immersive, personalised and participatory entertainment. Both point the same way
 differentiator is **authored structure** — a graph a human designed, verified and signed off — with
 AI filling performance, localisation and variation inside it. That is also the only version of this
 plane that survives a disclosure audit, because the structure is reviewable.
+
+---
+
+## Pass 30 (2026-11-26) — the discovery trend: the click is disappearing faster than any replacement arrives
+
+### The one-paragraph version
+
+Search referrals to publishers are collapsing at measured double-digit rates, AI referrals are
+replacing **approximately none** of them, and the dominant AI surface emits no click to count. This
+is not a channel shift. **A channel shift would show up as substitution, and the substitution is not
+in the data.**
+
+### The numbers, with their sources and their disagreements
+
+| Measurement | Source | Period |
+|---|---|---|
+| Search referrals **−60% small / −47% medium / −22% large** publishers | **Chartbeat** (via Axios, 2026-03-17) | over two years; "small" = <10,000 daily page views |
+| Global publisher Google traffic **down by a third**; Discover **−21% YoY**, search **−33%** | **Press Gazette** | to Nov 2025 |
+| Regional split: **US −38% vs Europe −17%** | Press Gazette | 2025–26 |
+| Publishers forecast search traffic **−43% over three years**; a fifth expect **>75%** losses | **Reuters Institute** survey | 2026 |
+| **ChatGPT = 0.02% of total referral traffic** | **Reuters Institute** | 2026 |
+| **All AI platforms combined ≈ 1% of publisher traffic** | Conductor | 2026 |
+| UK: news publishers **−5% average quarterly** vs **−18%** consumer/B2B | **AOP** (8 leading UK publishers) | Jul 2026 |
+| 25.11% of Google searches triggered an AI Overview | Contently | Q1 2026 — *recorded in this file at pass 7; re-stated for continuity* |
+
+**Read the 0.02% and the 1% next to the −60%.** That juxtaposition is the whole trend: the inbound
+channel is being withdrawn and nothing is arriving in its place. Any client deck that frames AI
+search as "a new traffic source to optimise for" is mis-stating the measured position. The honest
+framing is **loss mitigation plus direct-audience substitution** — which is why this plane routes
+straight into pass 13 (subscription/reader revenue) and pass 24 (owned channel) rather than standing
+alone.
+
+⚠️ **Google disputes the causality**, and the KB should carry the dispute rather than suppress it:
+Google states that data linking referral declines to AI Overviews is *"often based on flawed
+methodologies, isolated examples, or traffic changes that occurred prior to the roll out of AI
+features in Search."* Note also that the figures above use **different baselines, windows and
+publisher mixes** and are not directly comparable. The defensible claim is the **direction and rough
+magnitude**, not any single percentage.
+
+### The instrument that appeared in June 2026 — and what it refuses to tell you
+
+Google launched **Search Generative AI performance reports** in Search Console (announced
+**2026-06-03**, since rolled out to all sites worldwide):
+
+- Covers **impressions inside AI Overviews, AI Mode and generative features in Discover**
+- Breakdowns by **pages and countries**; the Search report adds **devices**
+- Data begins **2026-05-18**, with **no historical backfill** — nobody can measure their own
+  pre-AI baseline from this instrument
+- **Impressions, not clicks.** It shows where your pages appear inside AI features and **not how many
+  clicks those appearances produced**
+- Page-level impressions **do not sum** to the property total
+- Position reflects **where the AI block sat on the page**, not where your link sat inside the block
+- Opt-out exists and is **total**: excluded content gets no traffic and no impressions. It is
+  **separate from `Google-Extended`**, which governs training
+
+So the industry's authoritative new instrument measures **appearance** and is structurally silent on
+**value**. That silence is the plane.
+
+### The structural law — sixth confirmation, and the most extreme terminal step yet
+
+Pass 5 recorded a three-step gradient on the *reservation* side. Pass 30 is the same gradient on the
+*discovery* side, and its final step is worse than any previously recorded:
+
+| Step | Problem type | State |
+|---|---|---|
+| **Be readable** by an engine | format | ✅ **Solved, permissive, thriving** — MarkItDown MIT 198,609★, Docling MIT 71,109★, Crawl4AI Apache-2.0 87,986★, Trafilatura Apache-2.0 7,182★ (375,000★+, nearly all pushed within three weeks) |
+| **Declare** yourself via the purpose-built standard | format | ❌ **Measured dud** — `llms.txt`: Google says Search does not use it; **97% of files got zero traffic** (Ahrefs, 137,210 domains); leading generator **unlicensed and dormant since 2025-06-17** |
+| **Count** the referral | judgment | ⚠️ **Partial, licence-trapped** — `referer-parser` `chatbot:` = **9 entries vs `search:` 232**, and the data is **GPL-3.0 by provenance** |
+| **Measure** the dominant surface | — | ⛔ **Structurally impossible.** AI Overviews/AI Mode serve from `google.com`: **no referrer, no click.** Impressions only, UI-confirmed, API unverified |
+| **Liquidate** the value | judgment | ⛔ **Nothing.** No open tool turns an AI impression into money. ChatGPT referrals = **0.02%** |
+
+Five previous passes recorded planes whose terminal step had **zero code**. This is the first plane
+whose terminal step has **zero measurable event**. You cannot write the settlement software for an
+interaction that emits nothing — which is the precise, technical reason the pay-per-crawl zero that
+pass 5 measured has not moved.
+
+### The 2026 industry frame this sits inside
+
+Akamai's *State of AI in Media 2026* argues adoption is no longer the question — converting
+experiments into **business value** is; Sensor Tower measured time spent in gen-AI apps **doubling**
+between H1 2025 and H1 2026. TV Tech's panel calls 2026 the year of **scaling** AI across media
+enterprises and expects **several false starts in agentic advertising**. Deloitte's 2026 outlook has
+gen-AI lowering content-creation barriers, with more than half its predictions tied to AI. EY reads
+AI as accelerating volume and personalisation while **flattening** content, making credibility and
+emotional resonance more valuable — which, for this plane, is the argument for **attribution as a
+product**: if everything is abundant, being *identifiably the source* is the scarce asset. Reuters
+Institute expects news media squeezed further; Nieman Lab frames the year as opportunity-and-threat.
+DPP's *European Media Trends 2026* names AI the dominant driver of change and records rising
+**digital-sovereignty** concern — the EMEA-specific reading in `intel/market.md`.

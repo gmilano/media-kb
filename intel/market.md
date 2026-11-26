@@ -1100,6 +1100,44 @@ evidence-pack shape.
 ⚠️ **Channel note:** do not open a North American conversation with "interactive video for
 streaming". The region's largest buyer exited the category publicly, and the client will know.
 
+
+### Pass 30 (2026-11-26) — the answer-engine discovery layer in North America
+
+The region where the referral collapse is **measured hardest, disputed loudest, and now litigated.**
+
+| Finding | Source |
+|---|---|
+| Search referrals over two years: **−60% small / −47% medium / −22% large** publishers ("small" = <10,000 daily page views) | Chartbeat, via Axios 2026-03-17 |
+| **US decline −38%**, against Europe's −17% | Press Gazette |
+| **ChatGPT = 0.02% of total referral traffic**; all AI platforms ≈1% | Reuters Institute; Conductor |
+| **Search Console generative-AI reports** launched **2026-06-03**, worldwide; impressions only, data from **2026-05-18**, no backfill | Google Search blog |
+| Penske Media (Rolling Stone, Variety, Billboard) suing Google over AI Overviews | *recorded earlier in this file* |
+| Google rejects the causality as *"flawed methodologies, isolated examples, or traffic changes that occurred prior to the roll out"* | Google |
+
+**The region-specific structural fact:** North America is where the *instrument* and the *dispute*
+coexist. Google's own Search Console gen-AI reports are the only authoritative record of appearing
+inside an AI answer — and they report **impressions and not clicks**, from a start date of
+2026-05-18 with **no historical backfill**. So in the one jurisdiction where publishers are suing
+over the harm, **no party can reconstruct its own pre-AI baseline from the official instrument.** The
+baseline has to be built from the publisher's own server logs, which most publishers either discard
+on a short retention window or never parsed by crawler identity.
+
+The gradient reading for NA: the region leads on **readability** tooling (MarkItDown MIT 198,609★ is
+Microsoft's; the heavyweight permissive stack is substantially North American) and has **nothing** on
+settlement — the pay-per-crawl zero pass 5 measured is a North American zero.
+
+**Opportunity (NA):** the **litigation-grade referral baseline** — a defensible, documented
+reconstruction of a publisher's pre- and post-AI inbound position, built from **server and CDN logs**
+(`goaccess` MIT + `monperrus/crawler-user-agents` MIT) rather than from any vendor's dashboard, with
+the methodology written to survive challenge: retention window, crawler-identity method, verified vs
+spoofed user agents, and an explicit statement of what cannot be measured. The buyer is a publisher
+whose counsel needs numbers that Google's stated objection does not dissolve, and the deliverable is
+the methodology document as much as the figures. Two reasons this sells here and nowhere else:
+Google has **publicly pre-committed to attacking methodology**, which makes a rigorous one an asset;
+and log retention is an **engineering** problem Globant can fix in weeks. Secondary, same buyer:
+extend retention and start the crawler-identity ledger **now**, because the official instrument has
+no backfill and every week undocumented is a week unrecoverable.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2322,6 +2360,49 @@ option — noting the GPL-3.0 boundary before the first commit, exactly as pass 
 Twine, the H5P hosts). Scope it as a service deployment or behind an API boundary, not as embedded
 components in a closed product.
 
+
+### Pass 30 (2026-11-26) — the answer-engine discovery layer in EMEA
+
+The only region where **both halves of the same crawler are legal instruments** — and the only one
+whose own trade body says the damage is **not yet quantified**.
+
+| Finding | Source |
+|---|---|
+| European publishers report traffic and ad-revenue decline post-AI-search, but there is **no quantitative consensus on scale or economic impact within Europe** | **IAB Europe**, Mar 2026 |
+| In IAB Europe's own early European traffic dataset, changes were **driven primarily by adjustments within traditional channels, with AI referrals still marginal**; it states the dataset is **not exhaustive** | IAB Europe |
+| UK: news publishers **−5% average quarterly** vs **−18%** consumer/B2B; **guide and how-to content hit hardest, opinion and commentary held up** | **AOP**, Jul 2026, 8 leading UK publishers |
+| Projection: search traffic to leading UK publishers roughly **halves by Q3 2027** | Press Gazette / AOP |
+| **Europe −17%** against the US −38% | Press Gazette |
+| AI Act **Article 50** transparency duties; Parliament adopted the **AI Act Omnibus** simplification position **569–45** | European Parliament; trade press |
+| Rising **digital-sovereignty** concern in media tech strategy; cloud DAM tools routing to third-party AI engines on **extra-European servers** | DPP *European Media Trends 2026*; VSN |
+
+**Why EMEA is structurally different.** Pass 5 established that EMEA is the one region where
+*reserving* rights is a legal instrument — **DSM Article 4** requires machine-readable reservation.
+Pass 30 adds the other half: the same crawler's *arrival* is now measurable with permissive tooling.
+Put together, EMEA is **the only region where the gap between a declared refusal and an observed
+crawl is a legal fact rather than a curiosity.** No other region has the declaration side in statute.
+
+**The AOP genre finding is the most commercially actionable number in this region** and it is widely
+overlooked: exposure is **not uniform across a publisher's catalogue**. Guide and how-to content —
+precisely what an AI Overview answers completely — fell hardest, while opinion and commentary held.
+That converts a boardroom panic into an **asset-level triage question**, and triage is schema and
+taxonomy work, which is buildable.
+
+⚠️ Note the EMEA-specific evidentiary gap honestly in any proposal: **IAB Europe says the European
+scale is not established.** A consultant quoting US figures into a European boardroom is quoting the
+wrong region by roughly a factor of two (−38% vs −17%).
+
+**Opportunity (EMEA):** the **reservation/arrival reconciliation gate** — the compliance delta
+between what a publisher declared under DSM Art. 4 (`ai.robots.txt` MIT, already in this KB) and
+which crawlers actually fetched, proven from logs (`goaccess` + `crawler-user-agents`, both MIT).
+Nobody ships this, every component is permissive, and in EMEA alone the output is **evidence of a
+breach of a statutory reservation** rather than a dashboard. Pair it with the second deliverable the
+AOP data unlocks: a **genre-level exposure map** of the client's own catalogue — which content types
+are answerable-and-therefore-exposed versus defensible — ranked for investment and paywalling, which
+routes into pass 13's reader-revenue work with the same taxonomy. ⚠️ Keep sovereignty in scope: the
+DPP finding means a stack sending logs or content to a non-European AI service can fail the client's
+own procurement, so self-hosted `umami`/`goaccess` is a **requirement** here, not a preference.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3485,6 +3566,50 @@ Japan (where half the exports go). The buyers are the webtoon and VN platforms a
 Act's reach; the open substrate (VRM, WebGAL, Ren'Py) is permissive; and the piece nobody has built is
 the **graduated** record. Build it on the MIT/MPL engines, and keep `aituber-kit` and `Duix-Mobile`
 out of the delivery — both are non-OSI licensed.
+
+
+### Pass 30 (2026-11-26) — the answer-engine discovery layer in APAC
+
+The region with the clearest **demand-side** case for answer-engine presence and the **thinnest
+referral measurement** — and this pass must record the measurement gap explicitly.
+
+| Finding | Source |
+|---|---|
+| **Australian publishers report a double-digit decline in search traffic** attributed to new AI models | **AdNews** |
+| Framing: *"the great clarification"* — publishers **trading reach for relevance**, shifting from volume to **value-based audiences** | AdNews |
+| **~1 in 3 APAC consumers use AI to research brands and products**, varying considerably by market | Kantar |
+| Public broadcasters in **Australia and Singapore** testing AI for newsrooms, archiving and verification | ABU (Asia-Pacific Broadcasting Union) |
+| **Three divergent regulatory categories** — binding risk-based tiers (South Korea, Vietnam), targeted rules (China), and a third; sharp increase in AI legislation including **content-labelling rules** | **Latham & Watkins**, Sep 2026 |
+| APOS 2026 (Bali): global streamers, Indian conglomerates, Chinese platforms, AI and microdrama upstarts, with AI the central theme | Hollywood Reporter |
+
+⚠️ **Informed gap, searched and missing — do not read silence as coverage.** Beyond Australia, **no
+China, Japan, Korea, India or Southeast Asia referral figures were found** in this pass. Searched in
+English including a CJK-term query. For a Japan, Korea or India engagement the referral baseline
+**does not exist publicly and must be measured first** — which is itself the first deliverable, not a
+gap in the proposal.
+
+**The region-specific inversion.** Everywhere else this plane is a loss story. In APAC the Kantar
+figure makes it partly a **demand** story: if a third of consumers are already asking an AI assistant
+about brands and products, then **presence inside AI answers has commercial value even when it sends
+no click** — brand consideration rather than traffic. That reframes the deliverable from referral
+recovery to **share-of-answer measurement**, and it is the one region where that framing is supported
+by consumer data rather than vendor assertion.
+
+Pass 5's APAC conclusion carries in unchanged and now has a second application: with three divergent
+regulatory categories plus content-labelling duties, **the asset is a per-jurisdiction policy engine,
+not a single compliance mode** — and the same engine that decides per-territory *reservation* can
+decide per-territory *disclosure* of AI-assisted content.
+
+**Opportunity (APAC):** **share-of-answer measurement as a brand-equity instrument**, not a traffic
+tool — a repeatable harness that asks the region's answer engines a fixed prompt set per market and
+records whether the client is named, cited, or absent, built on `crawl4ai` (Apache-2.0, 87,986★) with
+`Auriti-Labs/geo-optimizer-skill` (MIT, 1,398★) supplying the on-site audit. The buyers are the
+brand and consumer-insight teams the Kantar data describes, **plus** the broadcasters ABU names, and
+the pitch does not depend on referral traffic that in this region has not been measured. Second
+play, for the Australian market where the decline *is* measured: instrument the **volume-to-value
+pivot** — if a publisher is deliberately trading reach for relevance, it needs the engaged-audience
+metrics (pass 7) and the reader-revenue stack (pass 13) to prove the trade is working, and today it
+is asserting the strategy without a scoreboard.
 
 ### LATAM
 
@@ -4695,6 +4820,52 @@ funded Brazilian games sector — the whole authoring chain (Godot + dialogic + 
 MIT, so a studio engagement carries **no licence exposure at all**, which is a rare sentence in this
 KB.
 
+
+### Pass 30 (2026-11-26) — the answer-engine discovery layer in LATAM
+
+The region with the **highest structural exposure** to this plane, a **live factual dispute** over it,
+and **no public measurement at all.**
+
+| Finding | Source |
+|---|---|
+| Pressure is strongest in **Latin American newsrooms dependent on Google search for ad-generating traffic** | Latin Times |
+| LatAm publishers have been **slower to adapt to digital and multiplatform working**, leaving them less ready for AI-driven disruption | **Nic Newman**, Reuters Institute |
+| **Brazil: Google publicly rejected accusations from Brazilian journalism groups** that AI Overviews caused sharp traffic drops to news outlets | MLex, Mar 2026 |
+| **Mexico: amendments to the Federal Copyright Law and Federal Labour Law published 2026-05-14** — the first sector-specific AI regulation in Mexico | Chambers; EC IP Helpdesk |
+| Calls for **shared regional AI assets and coalitions on attribution and licensing** to strengthen bargaining position | **Aspen Digital**, *Mind the Gap*, Jan 2026 |
+| Newsroom AI policies being written at FLIP (Colombia), ADEPA (Argentina), SiPreBA (May 2026) | *recorded earlier in this file, pass 5* |
+
+⚠️ **Informed gap, searched and missing.** **No LATAM-specific referral-decline percentage was
+found** — searched in English and with Spanish-language terms. The region that is described as most
+exposed is the region with **no published number.** State this plainly to a client rather than
+substituting the US figure (−38%), which would overstate it, or the European figure (−17%), which may
+understate it.
+
+**The region-specific structural fact, and it is the strongest commercial hook in this plane.** In
+Brazil there is now a **named, public, factual disagreement**: journalism groups assert AI Overviews
+caused sharp traffic drops; **Google denies it.** Pass 5's law reappears here in a new form — what is
+scarce is not the tooling but **an agreed measurement**. Both sides are arguing about a number that
+nobody has produced to a standard either would accept. That is a measurement-methodology engagement,
+and it exists because of the dispute, not in spite of it.
+
+Compounding it: Newman's point means the region is **least instrumented** — publishers slower to
+adapt digitally are precisely those least likely to retain parsed server logs, which (per the NA
+section) is the only surviving route to a pre-AI baseline now that Google's instrument offers **no
+backfill**. Every month of un-retained logs is a month of the dispute that cannot be reconstructed.
+
+**Opportunity (LATAM):** the **neutral referral-measurement baseline for a publisher coalition** —
+one documented methodology, applied identically across several outlets, producing the number that the
+Brazilian dispute lacks and that Aspen Digital's call for regional **attribution and licensing**
+coalitions needs as its evidentiary floor. Built entirely on permissive, self-hostable tooling
+(`goaccess` MIT, `crawler-user-agents` MIT, `umami` MIT) so no participant has to route its traffic
+data through a competitor or a vendor — which is the governance precondition that makes a *coalition*
+measurement possible at all. The buyers are the associations already writing AI policy (ADEPA, FLIP,
+SiPreBA, IAPA) rather than any single newsroom, because a coalition number is worth more than any
+member's own, and the second deliverable is **log retention and crawler-identity instrumentation** at
+each member — unglamorous, urgent, and the thing that stops the evidence expiring. Mexico is the
+separate, nearer-term play: with copyright **and labour** law amended on 2026-05-14, a Mexican
+engagement has a statutory hook that no other LATAM market yet offers.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -5562,3 +5733,64 @@ than any sized market, and every number in it is reproducible in an afternoon.
 | **Tencent / Alibaba (HumanAIGC) / Duix** | The interactive-avatar runtime tier. Two of the three ship **bespoke community licences**, not OSI licences. |
 | **RDK / Comcast (Lightning)** | The Apache-2.0 CTV app framework — the only open route onto an operator set-top box. |
 | **Unity / Epic** | The commercial runtimes clients name, both outside this KB's licence remit; the MIT alternative (Godot) now has a complete narrative stack above it. |
+
+## Market size — pass 30 addendum (2026-11-26): the discovery segment is sized **7.3× apart on the same base year**, and the number publishers actually need is unsized
+
+### What exists — five vendor estimates, one base year, and a definitional gap doing all the work
+
+| Estimate (2026 base unless noted) | Source | Stated scope |
+|---|---|---|
+| **GEO software: $370M (2026)** → $4.12B by 2036, **27.3% CAGR**; 2025 base $210M | **Meticulous Research** | **Software licences only** — the narrow cut |
+| **GEO platform: $2.70B (2026)** → $26.85B by 2033, **13.6% CAGR** | **Coherent Market Insights** | **Software + analytics tools + services** — the broad cut |
+| GEO overall: **~$1.09B (2026)** | Dimension Market Research (via Superlines) | Unstated middle |
+| GEO **services**: $1.23B (2025) → **$1.78B (2026)** | Intel Market Research | Services only |
+| GEO **services**: **$1.966B (2026)**, **42.0% CAGR** to 2032 | QY Research | Services only |
+
+### The scope artefact: ~7.3×, and it is the question to ask before quoting anything
+
+**$2.70B (platform) ÷ $370M (software) = 7.3× on the same base year**, and as with pass 24's email
+artefact (~8×) and pass 3's captioning artefact (an order of magnitude), the gap is **definitional,
+not empirical**: the broad figure counts **analytics tools and services**, the narrow one counts
+**licences**. The two services-only figures ($1.78B, $1.966B) agree within ~10% and both **exceed the
+entire software figure by ~5×** — which is the single most useful fact in this table. **This segment
+is overwhelmingly a services market.** For Globant that is favourable and should be said plainly: the
+money here is in delivery, not in a licence, and the two independent services estimates corroborate
+each other more tightly than anything else in this file.
+
+⚠️ The **CAGR spread is 13.6% to 42.0% — a 3.1× disagreement on growth**, which is wider than the
+spread on size. When vendors disagree more about the rate than the level, the category is too young
+to forecast; quote the base year and refuse the horizon.
+
+⚠️ Coherent segments **"AI visibility monitoring" at 35.0% of the GEO platform market in 2026**,
+implying ~$945M. That is a **vendor's own segmentation of a vendor's own aggregate** — recorded for
+completeness, not corroborated, and it should not be re-quoted as a measured figure.
+
+### ⛔ The refusal: what a publisher actually wants to know is unsized
+
+Every figure above sizes **spend on GEO tooling and services**. **No source found sizes the thing a
+media client asks about: the revenue lost to zero-click answers, or the value of an AI-answer
+citation.** That is not an oversight in this pass's searching — it follows from the structural
+finding in `intel/trends.md`: **an AI Overview emits no click and no referrer**, and Google's own
+instrument reports **impressions without clicks**. You cannot size a market in events that are not
+emitted. So the honest position for a proposal is:
+
+- ✅ **Quotable:** the segment's own spend, as a **services** market, ~$1.78–1.97B in 2026 (two
+  independent, mutually corroborating estimates), with the 7.3× scope caveat stated.
+- ✅ **Quotable:** the measured referral declines in `intel/trends.md` (Chartbeat −60/−47/−22%,
+  Press Gazette US −38% vs Europe −17%), with Google's stated methodological objection attached.
+- ⛔ **Refuse:** any figure for "value of an AI citation", "revenue lost to AI Overviews" per
+  publisher, or an ROI multiple on GEO work. These do not exist, and a number invented here is the
+  one a client's CFO will test first.
+
+### Global players — pass 30 addendum (the discovery & measurement layer)
+
+| Player | Position in this plane |
+|---|---|
+| **Google** | Owns both sides: the surface that removes the click (AI Overviews, AI Mode) **and** the only authoritative instrument for observing it (Search Console gen-AI reports, 2026-06-03, impressions only, no backfill). Also the defendant in the Penske action and the public disputant of the causality. |
+| **Cloudflare** | The CDN-layer measurement and enforcement tier (Attribution Business Insights; pay-per-crawl). **Proprietary**, and pass 5's measured zero on settlement is still unmoved. |
+| **Ahrefs / Semrush / Conductor** | The commercial measurement tier, and — notably — the main **publishers of evidence** about this plane (Ahrefs' 137,210-domain `llms.txt` study; Conductor's ~1% figure). Vendors with a stake, producing the best available data. ⚠️ Cite with the conflict noted. |
+| **AthenaHQ / Rankscale / Profound / Writesonic** | The pure-play AI-visibility vendors. All closed-source; they define buyer expectations for the category. |
+| **Microsoft** | Owns the highest-starred permissive readability tool in the plane (**MarkItDown**, MIT, 198,609★) and a listed `chatbot:` referrer (Copilot). |
+| **Answer.AI (AnswerDotAI)** | Author of the `llms.txt` standard (Apache-2.0, 2,702★). Recorded as the plane's **measured failure**, not as an incumbent. |
+| **Matomo / Umami / GoAccess (allinurl)** | The open measurement substrate. Only **Umami and GoAccess are MIT**; Matomo is GPL-3.0. The licence line runs straight through this tier. |
+| **IAB Europe / AOP / Chartbeat / Reuters Institute** | The evidence institutions. For this plane they matter more than most vendors, because **the dispute is about measurement** — and AOP's genre-level finding and IAB Europe's explicit "no European consensus" are the two most useful things any of them has published. |

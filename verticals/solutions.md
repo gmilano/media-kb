@@ -1698,3 +1698,49 @@ category**: Netflix withdrew its interactive catalogue in stages ending 2025-05-
 technology as "limiting". So the honest reading is not "an obvious product is missing" but **"the
 platform shape failed once already"** — which is why `compose/patterns.md` pass 29 points the same
 components at learning, brand experience, CTV and AI characters instead.
+
+---
+
+## Pass 30 (2026-11-26) — platforms for answer-engine discovery & referral measurement
+
+### ⛔ The platform refusal, stated first
+
+**There is no open-source "AI visibility platform" in the sense this file normally means the word** —
+no Odoo, no OpenMRS, no Moodle for this plane. Searched and measured. What exists is three tiers, and
+the shape of the tiering is the commercial finding:
+
+| Tier | What's in it | Licence reality |
+|---|---|---|
+| **Permissive, self-hostable, general-purpose** | `umami` (MIT, 40,403★), `goaccess` (MIT, 21,158★), `lissy93/web-check` (MIT, 35,661★) | ✅ Buildable. But **none of them is about AI discovery** — they are analytics and inspection tools you must *extend* into this plane. |
+| **Copyleft analytics** | `matomo` (GPL-3.0, 22,064★), `plausible` (AGPL-3.0, 29,945★), `matomo-org/device-detector` (LGPL-3.0) | ⚠️ Matomo is the most *customisable* platform here and the most licence-constrained. AGPL on a hosted service is the hard one. |
+| **Purpose-built for AI visibility** | `loamly` (MIT, **21★**, dormant since 2026-01-28); a handful of WordPress plugins (RowanWeb Bot Traffic, Referenced, Crawlantix, BotSieve) | ❌ Not a platform tier. Several plugins ship data to an external service on a token, which is a **data-governance question before it is a feature question**. |
+| **Proprietary** | Ahrefs Bot Analytics, Cloudflare Attribution Business Insights, Semrush AI Visibility Toolkit, AthenaHQ, Rankscale, Writesonic | 🔒 Closed. These define what buyers expect the category to do. |
+
+**The consequence for a Globant engagement is unusually clean:** in most planes this KB records, the
+advice is "customise the incumbent open platform." Here the incumbent open platform **does not
+exist**, and the two permissive bases (`umami`, `goaccess`) are generic. So this is a **build**
+engagement on permissive foundations, not a customisation engagement — and it is one of the few
+planes in this KB where that is the honest recommendation rather than a sales preference.
+
+### Where the discovery metadata is actually emitted — the CMS tier
+
+The platforms that decide whether a media client is machine-readable are the ones already recorded in
+this file: **WordPress** and **Drupal** (both carry `llms.txt` modules/plugins — note pass 30's
+finding that the file is a measured dud before installing one), plus the headless tier. The practical
+point: schema.org markup, news sitemaps and clean main-content extraction are **CMS template work**,
+not a separate product. `schemaorg/schemaorg` (Apache-2.0, 6,320★, already in this KB) and
+`ekalinin/sitemap.js` (MIT, 1,710★) are the artefacts; the CMS is where they ship.
+
+### The one platform-shaped gap worth naming
+
+**A publisher-side "answer-engine ledger" product does not exist in open source**: one place that
+joins (a) crawler hits from logs, (b) chatbot referrals, (c) Google Search Console generative-AI
+impressions, and (d) human sessions, into a single weekly view with an explicit, honest statement of
+what is **unmeasurable**. Every component is permissive and available (`goaccess`,
+`crawler-user-agents`, `umami`), the demand is evidenced by the proprietary tier's existence, and the
+integration is the product. See `compose/patterns.md` pass 30, pattern **P17**.
+
+⚠️ One hard dependency is **unverified**: whether Search Console's generative-AI data is reachable
+through the **Search Console API** or only the UI could not be confirmed — `developers.google.com`
+does not resolve from this session (outside the allowed network domains). Treat the API as **not
+confirmed**; scope the first iteration around a manual export and say so in the proposal.

@@ -10,6 +10,58 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 30: discovery & referral-measurement infrastructure (**the referrer taxonomy of the channel replacing search holds 9 entries against search's 232 — and Google's AI surfaces cannot be entered into it at all**)
+
+Infrastructure half of pass 30. 22 slugs probed this pass; **19 resolve, 3 do not** — and the three
+that don't are the finding, because they are the plausible-looking slugs a listicle-driven pass would
+have written as rows: `cloudflare/ai.txt`, `usewebsights/llms-txt`, `nalgeon/llms-txt`. All three
+**do not exist.** (`mendableai/firecrawl` also no longer resolves under that owner; the project moved
+to the `firecrawl` org.)
+
+### New infrastructure this pass
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [allinurl/goaccess](https://github.com/allinurl/goaccess) | MIT | 21,158★ | 2026-11-26 | Log analyser — **the only channel that sees an AI crawler**; load-bearing repo of the plane |
+| [monperrus/crawler-user-agents](https://github.com/monperrus/crawler-user-agents) | MIT | 1,416★ | 2026-11-26 | Crawler UA database; pushed today |
+| [umami-software/umami](https://github.com/umami-software/umami) | MIT | 40,403★ | 2026-11-26 | The only permissive general analytics base |
+| [snowplow-referer-parser/referer-parser](https://github.com/snowplow-referer-parser/referer-parser) | ⚠️ none declared; data **GPL-3.0 by provenance** | 383★ | 2026-07-30 | Holds the `chatbot:` taxonomy |
+| [lissy93/web-check](https://github.com/lissy93/web-check) | MIT | 35,661★ | 2026-11-23 | One-pass site inspection — headers, robots, crawlability |
+| [JayBizzle/Crawler-Detect](https://github.com/JayBizzle/Crawler-Detect) | MIT | 2,413★ | 2026-11-26 | PHP detection — matters because publishing runs on PHP |
+| [omrilotan/isbot](https://github.com/omrilotan/isbot) | Unlicense | 1,169★ | 2026-11-24 | JS bot detection; public domain, no attribution duty |
+| [ekalinin/sitemap.js](https://github.com/ekalinin/sitemap.js) | MIT | 1,710★ | 2026-11-01 | Sitemaps and **news sitemaps** — the boring artefact that still works |
+
+### The measured headline, counted from the cloned file rather than inferred
+
+`referers.yml` (85 KB, 424 entries) has six categories: `unknown` 3, `email` 45, `social` 90,
+**`search` 232**, `paid` 45, **`chatbot` 9**. The `chatbot:` block was created **2026-07-30**. Its
+nine: Character.AI, ChatGPT, Claude.ai, Google Gemini, META.ai, Microsoft Copilot, Mistral.ai,
+Perplexity.ai, Poe. Absent and measured: **Grok/xAI, DeepSeek, You.com, Phind.**
+
+The trend to record is genuinely two-sided. **Positive:** the industry's reference referrer taxonomy
+now models AI answer engines as their **own channel**, not a sub-type of `search:` — correct shape,
+shipped July 2026. **Structural:** it will never be sufficient, because **AI Overviews and AI Mode
+are served from `google.com`** and so have no referrer to classify. The largest AI-answer surface is
+unobservable in principle through this channel, which is why this plane's infrastructure is a **log
+analyser plus a UA database**, not a JavaScript tag.
+
+### ⛔ Licence trap of the pass — a new category
+
+`referer-parser` reports `NONE` at repo level and has no licence file. Its README's own *"Copyright and
+license"* section states that **`referers.yml` derives from Matomo's `SearchEngines.php`/`Socials.php`,
+copyright 2012 Matthieu Aubry, under GPL-3.0.** The dataset you would extend is **copyleft by
+inheritance** while the repo declares nothing. Pass 5 found a licence owned by *the compilation*;
+this is one owned by *the dataset's ancestor*, invisible to any SPDX field or SBOM scan of the tree.
+**Read the list, re-implement it, do not vendor the YAML.**
+
+### Copyleft note for the analytics tier
+
+Only **two** permissive bases exist here: `umami` (MIT) and `goaccess` (MIT). The obvious
+alternatives are all copyleft — `plausible/analytics` **AGPL-3.0** (29,945★), `matomo-org/matomo`
+**GPL-3.0** (22,064★), `matomo-org/device-detector` **LGPL-3.0** (3,562★). Also NOASSERTION:
+`mitchellkrogza/nginx-ultimate-bad-bot-blocker` (4,848★), `ua-parser/uap-core` (827★).
+
+
 ## 2026-11-26 — pass 29: interactive, branching & playable-story infrastructure (**78 slugs probed, 78/78 resolve; a licence hidden behind British spelling, a licence hidden in a docs tree, and the MIT/GPL seam that decides every H5P proposal**)
 
 Verification for this pass: `git ls-remote` on **78** slugs — **78/78 resolve** — plus a byte-level

@@ -3537,3 +3537,71 @@ type and skip the GPL host entirely. Option (c) is the one no vendor will tell y
 | `branching scenario authoring` | **8 repositories**, none in-plane (top hits are unrelated student projects) | The capability is real and the vocabulary is not indexed — H5P does not describe itself with these words. |
 | `object based media` | 187 repositories, none in-plane in the top results | BBC's own player ranks far below noise. Search by repo, not by concept. |
 | interactive-video standard in HLS/DASH | nothing found | **There is no branching primitive in either standard.** Any proposal implies a player you own. |
+
+---
+
+## Pass 30 (2026-11-26) — foundations of the answer-engine discovery & measurement plane
+
+Nine foundational repos, each verified twice (search-API metadata + `git ls-remote`). The split that
+matters is the **licence** column: only two of the four analytics bases are permissive.
+
+| Repo | URL | Licence | Stars / forks | Last push | Role in this plane |
+|---|---|---|---|---|---|
+| **GoAccess** | https://github.com/allinurl/goaccess | **MIT** | 21,158★ / 1,213f | 2026-11-26 | Real-time log analyser. **The only channel that sees an AI crawler at all** — a bot that never executes JavaScript is invisible to every tag-based analytics tool. This is the load-bearing repo of the plane. |
+| **crawler-user-agents** | https://github.com/monperrus/crawler-user-agents | **MIT** | 1,416★ / 299f | 2026-11-26 | The crawler user-agent database. Pushed today. The identification substrate: without it, a log line is just a hit. |
+| **Umami** | https://github.com/umami-software/umami | **MIT** | 40,403★ / 8,664f | 2026-11-26 | Self-hosted analytics, MIT, pushed today. **The only permissively-licensed general analytics base** — already referenced elsewhere in this KB; recorded here for its role as the human-session half of the ledger. |
+| **referer-parser** | https://github.com/snowplow-referer-parser/referer-parser | ⚠️ **no licence file; `referers.yml` is GPL-3.0 by provenance** | 383★ / 148f | 2026-07-30 | Holds the **`chatbot:` referrer taxonomy** — see the measured asymmetry below. Read it, re-implement the list; do not vendor the YAML. |
+| **llms-txt (spec)** | https://github.com/AnswerDotAI/llms-txt | Apache-2.0 | 2,702★ / 189f | 2026-09-24 | The standard itself. Recorded as a **foundation that measurably failed** — see `agents/top.md` pass 30. Kept in the KB so the refusal is citable. |
+| **Crawler-Detect** | https://github.com/JayBizzle/Crawler-Detect | **MIT** | 2,413★ / 283f | 2026-11-26 | PHP crawler detection. Relevant because a very large share of the world's publishing runs on PHP/WordPress. |
+| **isbot** | https://github.com/omrilotan/isbot | **Unlicense** (public domain) | 1,169★ / 86f | 2026-11-24 | JS-side bot detection. Unlicense is *more* permissive than MIT — no attribution duty at all. |
+| **web-check** | https://github.com/lissy93/web-check | **MIT** | 35,661★ / 2,961f | 2026-11-23 | Site inspection — headers, robots, security, crawlability — in one pass. The fastest way to open a client conversation with evidence. |
+| **sitemap.js** | https://github.com/ekalinin/sitemap.js | **MIT** | 1,710★ / 157f | 2026-11-01 | Sitemap and **news sitemap** generation. The boring artefact that still works when the fashionable one (`llms.txt`) does not. |
+
+### The measured headline: the taxonomy of the channel replacing search is 3.9% the size of search
+
+`referers.yml` was cloned and counted directly — not inferred. It has **six top-level categories**:
+
+| Category | Entries |
+|---|---|
+| `unknown` | 3 |
+| `email` | 45 |
+| `social` | 90 |
+| **`search`** | **232** |
+| `paid` | 45 |
+| **`chatbot`** | **9** |
+
+**232 versus 9.** And `chatbot:` is new: the commit that created it is dated **2026-07-30**, *"Add
+utm_sources for chatbot providers"*. The nine, in full: **Character.AI, ChatGPT, Claude.ai, Google
+Gemini, META.ai, Microsoft Copilot, Mistral.ai, Perplexity.ai, Poe.** Measured absences in the same
+file: **Grok/xAI 0, DeepSeek 0, You.com 0, Phind 0** (and `anthropic` as a token: **0** — only
+`claude.ai` is listed).
+
+The good news is real and should be said: **the vocabulary now models AI answer engines as a distinct
+channel rather than filing them under `search:`.** That is the correct shape, it arrived in July 2026,
+and it is the substrate any honest AI-referral dashboard rests on.
+
+### ⛔ The structural blind spot — and why "add the AI engines to your referrer list" is not a fix
+
+**Google AI Overviews and AI Mode are served from `google.com`, the same host as organic search.**
+They therefore **cannot be represented in a referrer taxonomy at all**, however many entries it
+gains. A zero-click answer emits **no referrer and no click**. So the single largest AI-answer surface
+in the world is *structurally* invisible to referrer analytics — not under-counted, but unobservable
+in principle through that channel.
+
+This is the finding that dictates the plane's architecture, and it is why the two load-bearing repos
+above are a **log analyser** and a **user-agent database** rather than a JavaScript tag:
+
+| What you want to know | Only channel that can answer it | Open tooling |
+|---|---|---|
+| Did an AI crawler fetch my content? | Server / CDN logs | `goaccess` + `crawler-user-agents` (both MIT) ✅ |
+| Did a user arrive *from* a chatbot? | Referrer / UTM | `referer-parser` `chatbot:` ⚠️ GPL-3.0 data |
+| Did I appear inside an AI Overview? | **Google Search Console gen-AI reports only** | **none** — impressions, and *no clicks* |
+| What was that appearance worth? | — | **nothing exists** |
+
+### Measured search zeros and non-zeros for this plane
+
+| Query | Result | Reading |
+|---|---|---|
+| open-source "AI visibility platform" comparable to Odoo/Moodle | **does not exist** | The commercial tier is proprietary (Ahrefs Bot Analytics, Cloudflare Attribution Business Insights, Semrush AI Visibility Toolkit, AthenaHQ, Rankscale). The open tier is a handful of WordPress plugins plus `loamly` (21★). |
+| `cloudflare/ai.txt`, `usewebsights/llms-txt`, `nalgeon/llms-txt` | **all three do not exist** | Checked precisely because plausible-looking slugs appear in listicles. Three rows that a careless pass would have invented. |
+| permissive self-hosted analytics | **two only**: `umami` MIT, `goaccess` MIT | `plausible` is **AGPL-3.0**, `matomo` **GPL-3.0**, `matomo-org/device-detector` **LGPL-3.0** (3,562★). The default choices are all copyleft. |

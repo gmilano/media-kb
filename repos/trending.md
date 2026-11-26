@@ -10,6 +10,92 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 20: investigative-journalism & source-protection infrastructure (**40 slugs probed, 40 resolve, 0 absent; 1 rename redirect, 4 licence files read, 2 oracle corrections**)
+
+**Infrastructure recorded this pass** (platform and substrate repos; the agent/skill layer is in
+`agents/trending.md`). All values 2026-11-26: stars/licence from `gh api search/repositories`,
+**default-branch HEAD by shallow clone**, licence files read where the API returned `NOASSERTION`.
+
+| Repo | Stars | Licence (verified) | Default-branch HEAD | Layer |
+|---|---|---|---|---|
+| https://github.com/sherlock-project/sherlock | 117,843★ | MIT | 2026-11-26 | OSINT — the plane's control group |
+| https://github.com/TryGhost/Ghost | 55,920★ | MIT | 2026-11-26 | Publishing + membership |
+| https://github.com/ggml-org/whisper.cpp | 55,542★ | MIT | 2026-11-26 | Transcription substrate |
+| https://github.com/m-bain/whisperX | 25,695★ | BSD-2-Clause | 2026-11-21 | Transcription + diarization |
+| https://github.com/OpenRefine/OpenRefine | 12,120★ | BSD-3-Clause | 2026-11-24 | Record cleaning/reconciliation |
+| https://github.com/simonw/datasette | 11,670★ | Apache-2.0 | 2026-11-26 | Dataset publishing/exploration |
+| https://github.com/onionshare/onionshare | 7,247★ | GPL-3.0 (`LICENSE.txt`, 35,285 B) | 2026-11-26 | Anonymous transfer over Tor |
+| https://github.com/freedomofpress/dangerzone | 5,858★ | AGPL-3.0 | 2026-11-23 | Untrusted-document disarm |
+| https://github.com/exiftool/exiftool | 5,320★ | GPL-3.0 | 2026-11-16 | Metadata forensics |
+| https://github.com/freedomofpress/securedrop | 3,897★ | AGPL-3.0 (`LICENSE`, 34,629 B) | 2026-11-24 | Source intake |
+| https://github.com/alephdata/aleph | 2,516★ | MIT | **2025-12-19** (`develop`) | Entity investigation — dormant |
+| https://github.com/bellingcat/telegram-phone-number-checker | 1,934★ | MIT | 2026-08-17 | OSINT |
+| https://github.com/globaleaks/globaleaks-whistleblowing-software | 1,529★ | AGPL-3.0 (`LICENSE`, 41,172 B) | 2026-11-20 (`stable`) | Whistleblowing platform — **canonical name, see rename note** |
+| https://github.com/ICIJ/datashare | 784★ | AGPL-3.0 | **2026-11-26** | Self-hosted doc search + NER |
+| https://github.com/superdesk/superdesk | 760★ | AGPL-3.0 | 2026-11-26 | Newsroom CMS |
+| https://github.com/bellingcat/ShadowFinder | 631★ | MIT | 2026-09-03 | Chronolocation |
+| https://github.com/mysociety/alaveteli | 421★ | AGPL-3.0 (`LICENSE.txt`, 36,128 B) | 2026-11-25 | FOI platform (UK) |
+| https://github.com/okfde/froide | 413★ | **MIT** | 2026-11-09 | FOI platform (Germany) |
+| https://github.com/huridocs/uwazi | 330★ | MIT (`LICENSE`, 1,073 B) | **2026-11-26** | Documentation database |
+| https://github.com/alephdata/followthemoney | 311★ | MIT | **2025-06-27** | Aleph ontology — dormant |
+| https://github.com/ICIJ/extract | 257★ | MIT | 2026-11-23 | Distributed OCR |
+| https://github.com/bellingcat/EDGAR | 219★ | GPL-3.0 | 2025-05-15 | Corporate filings |
+| https://github.com/scidsg/hushline | 140★ | AGPL-3.0 | 2026-11-14 | Small-desk tip line |
+| https://github.com/meedan/check | 131★ | MIT | 2026-09-23 | Tipline/annotation — **dev environment, not the backend** |
+| https://github.com/MuckRock/muckrock | 124★ | AGPL-3.0 | 2026-11-24 | US records requests |
+| https://github.com/Horizontal-org/Tella-Android | 118★ | MIT | 2026-11-17 | Offline encrypted field capture |
+| https://github.com/freedomofpress/securedrop-client | 59★ | AGPL-3.0 | 2026-11-25 | Journalist workstation (Qubes) |
+| https://github.com/MuckRock/documentcloud | 54★ | AGPL-3.0 | 2026-11-24 | Document publication |
+| https://github.com/ICIJ/prophecies | 31★ | AGPL-3.0 | 2026-10-15 | Human validation workflow |
+| https://github.com/meedan/check-api | 21★ | MIT | 2026-11-24 | **The actual Check backend** |
+
+**THE RENAME, AND WHY IT CORRECTS THIS KB'S ORACLE.** `globaleaks/globaleaks` resolves perfectly on
+both the `ls-remote` and raw channels (default branch `stable`) — and it is a redirect. The canonical
+repository is `globaleaks/globaleaks-whistleblowing-software`; both HEADs are the identical SHA
+`efa0161c40a6ab4b273caf0e19ca828ebb25e7ad`, which is the proof. GitHub honours renames
+indefinitely, so **`ls-remote` success proves reachability, never canonical naming**, and the search
+index knows only the new name — which is why `repo:globaleaks/globaleaks` returns "resources do not
+exist" against a repository that plainly does. Pass 17 recorded 4 repos "reached only via rename
+redirect"; this pass adds the detection rule: **an ls-remote success on a name the search index
+rejects is a rename to be resolved, not a repo to be written.**
+
+**`pushed_at` IS NOT LIVENESS — the second oracle correction.** `alephdata/aleph` reported
+`pushed_at=2026-02-20`; its default branch `develop` last moved **2025-12-19**, and `main` — a stale
+release branch — sits at **2025-08-07** (release 4.1.6). `pushed_at` counts a push to *any* ref,
+including bot and release branches, so it overstated liveness by six months on the most-recommended
+repository in the plane. `multimodal-ai-lab/DEFAME` showed the same gap (`pushed_at` 2026-05-21, HEAD
+2025-09-30). **Resolve the default branch and read its last commit; `git clone --depth 1
+--single-branch` gives both in one call.** Every HEAD column in this pass was produced that way.
+
+**FOUR LICENCE FILES READ, THREE `NOASSERTION` CAUSES, NONE A MISSING LICENCE.** OnionShare prepends
+a third-party-licences note above the GPL-3.0 text; SecureDrop prepends a multi-party copyright
+header above the AGPL-3.0 text; Alaveteli ships a multi-licence explainer that resolves to AGPL-3.0;
+`buriedsignals/spotlight` appends a methodology-attribution section to an MIT grant (1,940 B). Cycle
+8 established that *a 404 on the raw channel is not proof a licence is missing*; this pass adds the
+symmetric rule — **a `NOASSERTION` from the API is an instruction to read the file, not a finding.**
+
+**THE DORMANCY, STATED NARROWLY BECAUSE THE WIDE VERSION IS FALSE.** The two **Aleph-family**
+permissive repos are stale (`aleph` 2025-12-19; `followthemoney` 2025-06-27, its last commit a revert
+of "begin project re-homing") while every AGPL peer is current (Datashare today, DocumentCloud
+2026-11-24, Prophecies 2026-10-15). The tempting generalisation — *MIT is the dead licence here* — is
+**contradicted by this pass's own table**: Uwazi (MIT) today, `extract` (MIT) 2026-11-23, Tella (MIT)
+2026-11-17, Froide (MIT) 2026-11-09, sherlock (MIT) today. The claim holds for the **Aleph family
+only**, and matters only because Aleph is what every guide recommends first.
+
+**STAR COUNTS CAME FROM THE SEARCH CHANNEL BECAUSE THE DIRECT API IS SCOPED.** Every
+`api.github.com/repos/<third-party>` call in this session returns "GitHub access to this repository
+is not enabled for this session", and `github.com` HTML returns **403** — so no star count is
+obtainable by the routes earlier passes may have used. `gh api -X GET search/repositories` with
+`repo:` qualifiers **does** serve stars, licence and `pushed_at`, in batches. Recording it because a
+future pass hitting the blocked API should not conclude the metadata is unobtainable.
+
+**CHANNEL GAP, STATED AS A GAP.** No non-GitHub host resolves from this session — `cnti.org`,
+`unlicense.org`, `reutersinstitute.politics.ox.ac.uk`, `latamjournalismreview.org`, `acma.gov.au`,
+`securedrop.org`, `globaleaks.org`, `icij.org`, `opensource.org` and `spdx.org` all return curl `000`
+/ DNS `ENOTFOUND` (probed, not assumed). **Reusable workaround:** canonical licence texts are
+reachable at `raw.githubusercontent.com/spdx/license-list-data/main/text/<SPDX-ID>.txt` — that is how
+the modified Unlicense in `agents/trending.md` was proven modified without reaching `unlicense.org`.
+
 ## 2026-11-26 — pass 19: sports-media & live-event infrastructure (**~65 slugs recorded, 0 absent; 15 licence-channel investigations, 3 traps and 5 false negatives**)
 
 **Method this pass, and it reverses pass 18's conclusion.** Pass 18 reported the GitHub API

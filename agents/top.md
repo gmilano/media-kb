@@ -1919,3 +1919,126 @@ sharper:
   personal details at `statsbomb.com/resource-centre`. This pass declined to submit any user details
   to a third party, so the agreement's terms are recorded as unread. What *is* verified is that the
   agreement exists as a binary PDF in-repo (see `repos/foundations.md`).
+
+## The investigative-journalism, source-protection & fact-checking plane — measured 2026-11-26 (pass 20), the **first plane in this KB whose agent layer is permissive, alive, and still not safely shippable**
+
+**Why this plane, and the vocabulary probe that found it.** Nineteen passes covered distribution,
+rights, delivery, monetization, production, measurement, theatrical, audio, localization, signage,
+avails, publishing and sport. A grep of ~90 candidate terms over the eight live files found the
+newsroom's own craft absent: **`journalism` appeared 4 times in the entire KB, all four in
+`intel/market.md`**. `SecureDrop`, `GlobaLeaks`, `OSINT`, `data journalism`, `Aleph`, `Datasette`,
+`Bellingcat`, `InVID`, `press freedom`, `source protection`, `whistleblow` and `reverse image` were
+**all zero**. Every one of the 73 hits for `verification` was age-verification (pass 15) or file
+conformance (pass 4) — not editorial verification of a claim. The gap mattered because pass 8 had
+already identified the **newsroom** as LATAM's hottest buyer; the KB was selling to a buyer whose
+working tools it had never catalogued.
+
+**All rows below verified 2026-11-26**: existence by `git ls-remote`, stars/licence/last-push by the
+GitHub `search/repositories` channel, **default-branch HEAD date by shallow clone** (see the method
+correction below — `pushed_at` is not liveness), and licence by reading the LICENSE file wherever the
+API returned `NOASSERTION`.
+
+### Tier 1 — the agent layer that actually exists here
+
+This is the first plane in twenty where the agent layer is **permissive and currently maintained**
+rather than absent or vendor-captured. It is also the first where being permissive is **not enough**,
+for the reason in finding 2.
+
+| Name | Repo | Stars | Licence (verified) | Default-branch HEAD | What it does |
+|---|---|---|---|---|---|
+| claude-skills-journalism | https://github.com/jamditis/claude-skills-journalism | 462★ | MIT (LICENSE, 1,068 B) | 2026-11-25 | Skill set for verification, FOIA drafting, interview transcription (Whisper/WhisperX + diarization), data journalism |
+| Spotlight | https://github.com/buriedsignals/spotlight | 67★ | **MIT code + CC BY-ND 4.0 methodology** — see finding 2 | 2026-11-25 | OSINT investigation orchestrator: structured briefs, methodology approval, sourced findings, independent fact-checking |
+| ArkhamMirror | https://github.com/mantisfury/ArkhamMirror | 509★ | MIT | 2026-01-25 (10 months stale) | Local-first AI document-intelligence platform for investigative journalism |
+| JornAI | https://github.com/MatheusBomtempo/JornAI | 116★ | MIT | 2026-10-04 | AI-assisted breaking-news publishing for newsrooms, human in the loop |
+| newsflow-oss | https://github.com/Yaogui415/newsflow-oss | 104★ | MIT | 2026-07-22 | Newsroom workflow: event tracking, evidence organization, approval chains, corrections, post-publication monitoring |
+| DEFAME | https://github.com/multimodal-ai-lab/DEFAME | 64★ | Apache-2.0 | 2025-09-30 (14 months stale) | Multimodal (text + image) automated fact-checking research system |
+| data2story-skill | https://github.com/QinghongLin/data2story-skill | 163★ | MIT | 2026-07-05 | Data-to-narrative skill, the storytelling end of data journalism |
+
+### Tier 2 — the agent layer to read but not ship
+
+| Name | Repo | Stars | Licence (verified) | HEAD | Why it is here and not Tier 1 |
+|---|---|---|---|---|---|
+| newsroom-extension | https://github.com/ehurrn/newsroom-extension | 11★ | **Modified Unlicense** — dedication reaches the software's *output* (finding 2) | 2026-06-21 | 18 skills (OSINT, FOIA, evidence preservation, libel defence). The licence modification is the problem, not the code |
+| newsroom-agents | https://github.com/Juanangara/newsroom-agents | 0★ | **No licence file in root — all rights reserved** | 2026-11-07 | Researcher→summarizer→fact-verifier→editor chain; verifier must quote source text. Good design, unusable terms |
+| muckrock-mcp | https://github.com/morisy/muckrock-mcp | 3★ | **No licence file** | 2025-06-05 | The only FOIA MCP bridge found. Its own author describes it as "highly experimental, insecure, and unstable" |
+
+### Finding 1 — this plane inverts the law the previous nineteen passes established
+
+The standing law of this KB has been *strong substrate, empty agent layer*. Here the substrate is
+strong **and** the agent layer is real: `claude-skills-journalism` (462★, MIT) and `spotlight` (67★)
+were both pushed **the day before this measurement**. But note what that agent layer *is* — it is a
+**skills-and-prompt layer, not a code layer**. Its competence lives in methodology prose, not in
+functions. That single fact relocates the licence question from the code to the content, which is
+exactly where the healthcare passes found the binding constraint (CPT, MedDRA). The law did not
+break; it moved.
+
+### Finding 2 — two licence traps, one of them a category this KB has not recorded before
+
+**(a) THE LICENCE THAT REACHES THE OUTPUT — new category.** `ehurrn/newsroom-extension` ships a file
+named `LICENSE` whose first two paragraphs are the Unlicense verbatim. It is not the Unlicense.
+Diffed word-by-word against the canonical SPDX text (obtained from `spdx/license-list-data` via the
+raw channel, because `unlicense.org` does not resolve from this session), the canonical third
+paragraph — *"for the benefit of the public at large and to the detriment of our heirs and
+successors… an overt act of relinquishment in perpetuity"* — is **replaced**, and this clause is
+**added**:
+
+> "We dedicate any and all copyright and related or neighboring rights to this work to the public
+> domain worldwide. **This dedication applies to any work produced by the software**, unless such
+> work explicitly indicates otherwise."
+
+A public-domain dedication that reaches the tool's **output**. For a newsroom the output is the
+journalism, and the newsroom's only asset is copyright in its reporting — the same copyright on
+which, per pass 5, every AI-training claim and every rights reservation depends. The default is
+therefore exactly inverted for this buyer. It is escapable (the clause carries an opt-out: the work
+must "explicitly indicate otherwise"), but it is an opt-out you must know exists. **No SBOM scan can
+see it**: GitHub reports `NOASSERTION`, the file is named `LICENSE`, and it reads like the Unlicense
+until the third paragraph. This is licence category 12 for this KB, and the first one whose subject
+is the artefact the software produces rather than the software.
+
+**(b) THE CONTENT LAW, NOW INSIDE AN AGENT'S SKILL FILES.** `buriedsignals/spotlight` is MIT in its
+header — and its own LICENSE file (1,940 B, which is why GitHub says `NOASSERTION`) then declares
+that the skills *"adapt or synthesize methodology from"*:
+
+- `jamditis/claude-skills-journalism` (MIT) — web-archiving, content-access, social-media-intelligence skills
+- **GIJN methodology publications — Patrucic & Cosic, "Introduction to Investigative Journalism: Following the Money," Nov 2024, `CC BY-ND 4.0`**
+- Bellingcat training materials; Jim Shultz / Revenue Watch (2005); Derek Bowler, EBU Eurovision News Spotlight (Dec 2025)
+
+**CC BY-ND is NoDerivatives.** A repository whose licence file states that its skill text adapts and
+synthesizes an ND-licensed work, while offering that text under MIT, has an unresolved tension on
+its face: ND does not permit distributing adaptations. This is a **diligence item, not a legal
+conclusion** — but it is the sharpest instance this KB has recorded of its own content law, because
+for an *agent* the methodology prose **is** the product. MIT on the repository settles nothing about
+whether the skills may be shipped or modified. Any engagement that reuses `spotlight`'s skill text
+should resolve the GIJN terms first, and the honest answer to a client is that the code licence and
+the knowledge licence are two different questions.
+
+### Finding 3 — the measured zeros, and the first plane where the obvious query is actively misleading
+
+| Query (`search/repositories`, sorted by stars) | Results | Top-6 star sum | What it hides |
+|---|---|---|---|
+| `whistleblower submission platform` | 8 | **2★** | SecureDrop (3,897★) and GlobaLeaks (1,529★) — the two world standards — do not appear at all |
+| `claim verification fact check newsroom` | **1** | 1★ | one repo, 1 star, no licence file |
+| `FOIA freedom of information request` | 19 | 35★ (5 of 6 unlicensed; top result last pushed **2017-12-11**) | Alaveteli (421★), Froide (413★), MuckRock (124★) |
+| `investigative journalism documents` | 10 | 546★ (509 of it is one repo) | Datashare, Aleph, Uwazi, DocumentCloud |
+| `fact-checking journalism` | 94 | 929★ | — this is the one query that works |
+
+**Cycle 8's lesson, now with its mirror image.** Pass 15 learned: *search the obvious term or you
+will miss a whole layer* (age verification). This plane teaches the inverse — **here the obvious term
+is a trap**. A pass that had probed `whistleblower submission platform` and stopped would have
+written "no open whistleblowing tooling exists" over a layer containing a 3,897★ and a 1,529★
+institutional standard. The reason is structural and reusable: **institutional tools are named, not
+described.** Their READMEs say "SecureDrop", not "whistleblower submission platform".
+
+> **Rule for all twelve industries:** in any plane with institutional incumbents, query the
+> **institution**, not the function — `freedomofpress`, `ICIJ`, `MuckRock`, `bellingcat`,
+> `mysociety`, `huridocs`, `meedan`, `globaleaks`. The functional keyword returns the vanity layer.
+
+### Finding 4 — the fact-checking agent layer is the plane's real zero, and it has a control group
+
+Fact-checking is the one sub-layer where the agent story collapses. `DEFAME` (64★, Apache-2.0) is
+the only non-trivial open system, and its default branch has not moved since **2025-09-30**. Below
+it: `ClaimVerify` 0★ (no licence), `Ai-Claim-Verification` 0★ (no licence), `claimcheck` 0★ (MIT),
+`ClaimLedger` 0★ (MIT) — **four literal zeros, three of them pushed within the last eight weeks**.
+The control group is in the same measurement: the same channel returns `sherlock-project/sherlock` at
+**117,843★** for OSINT username search. Open source is not weak at investigation; it is weak at
+**adjudicating a claim** — which is judgement, the thing the content law says stays closed.

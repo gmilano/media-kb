@@ -1172,3 +1172,40 @@ Searched this pass and **not found at any usable star level**:
 *which* open platform to extend. In sports it is the opposite: the platform layer is the deliverable.
 Globant can build the sports-aware layer — rights, fixtures, fan identity — on a generic AGPL event
 platform held at arm's length, with the permissive CV and data stack doing the sport-specific work.
+
+## Newsroom & investigation platforms — measured 2026-11-26 (pass 20)
+
+> Real, running systems a newsroom already operates, that an agentic layer can sit on top of — the
+> journalism equivalent of Odoo for ERP. All verified 2026-11-26 (existence, stars, licence file,
+> default-branch HEAD).
+
+| Platform | Repo | Stars | Licence | HEAD | What it is, and who runs it |
+|---|---|---|---|---|---|
+| Superdesk | https://github.com/superdesk/superdesk | 760★ | AGPL-3.0 | 2026-11-26 | Headless newsroom CMS — end-to-end news creation, curation, distribution (Sourcefabric) |
+| Ghost | https://github.com/TryGhost/Ghost | 55,920★ | MIT | 2026-11-26 | Publishing + membership/subscription platform; the permissive option at the publishing end |
+| Datashare | https://github.com/ICIJ/datashare | 784★ | AGPL-3.0 | 2026-11-26 | Self-hosted document search with OCR and NER; built and run by ICIJ for cross-border investigations |
+| Uwazi | https://github.com/huridocs/uwazi | 330★ | MIT | 2026-11-26 | Structured documentation database (HURIDOCS); the permissive platform in this tier |
+| DocumentCloud | https://github.com/MuckRock/documentcloud | 54★ | AGPL-3.0 | 2026-11-24 | Document hosting, annotation and embedding for publication (MuckRock) |
+| Alaveteli | https://github.com/mysociety/alaveteli | 421★ | AGPL-3.0 | 2026-11-25 | Public FOI request platform; mySociety, deployed across many jurisdictions |
+| Froide | https://github.com/okfde/froide | 413★ | MIT | 2026-11-09 | FOI platform of Open Knowledge Foundation Deutschland — **the permissive FOI option** |
+| MuckRock | https://github.com/MuckRock/muckrock | 124★ | AGPL-3.0 | 2026-11-24 | US federal/state records requests, with a public request archive |
+| Meedan Check | https://github.com/meedan/check | 131★ | MIT | 2026-09-23 | Collaborative media-annotation and tipline platform used by fact-checking orgs |
+| SecureDrop | https://github.com/freedomofpress/securedrop | 3,897★ | AGPL-3.0 | 2026-11-24 | The source-intake system a newsroom installs; Freedom of the Press Foundation |
+
+**Read this before quoting Meedan Check.** The 131★ repo `meedan/check` is, by its own description,
+the *"development environment for Meedan Check"* — a compose wrapper. The application backend is
+**`meedan/check-api` (21★, MIT, pushed 2026-11-24)**. Both are real and both are MIT; the star count
+that looks like adoption belongs to the scaffolding. Quote the component you intend to deploy.
+
+**The licence shape of this tier, and why it differs from the rest of the KB.** Nine of the eleven
+rows above are the *turnkey platform* layer, and seven of those are copyleft — consistent with the
+pattern this file recorded in pass 1 (permissive pipelines, copyleft platforms). What is specific to
+journalism is that the copyleft here is **AGPL rather than GPL**, and the deployments are **hosted
+services** — so §13 is live, not theoretical. Two consequences for an engagement:
+
+- **Froide (MIT) and Uwazi (MIT) are the two escape hatches in this tier.** If a client needs a
+  records-access portal or a documentation database inside a proprietary product, those are the
+  starting points, and they are both currently maintained.
+- **For the AGPL platforms, the cleanest posture is "we operate it for you, unmodified, and build
+  our value beside it"** — agents that call the platform's API, not forks of the platform. That is
+  how every pattern in `compose/patterns.md` for this plane is wired.

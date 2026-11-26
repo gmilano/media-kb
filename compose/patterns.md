@@ -2763,3 +2763,130 @@ gh api -X GET search/repositories -f q='repo:<slug> repo:<slug2>' \
 **The rule, stated for reuse across all twelve industries:** *existence comes from `ls-remote`;
 metadata comes from `search/repositories`; the licence comes from reading the file — and a missing
 file is only proven by a control request that succeeds.*
+
+---
+
+## Pattern 40 — The secure intake chain (leak to searchable corpus, nothing leaving the newsroom)
+
+**The buyer:** any newsroom or NGO that accepts documents from sources and has written an AI policy
+it now has to evidence. Named buyers from pass 20 research: El Comercio (Lima), Listín Diario
+(Dominican Republic), SiPreBA member newsrooms (Argentina), any GIJN member.
+
+**Why it is wired this way:** the GIJN technology agenda records the requirement verbatim — triage
+leaks **without exposing sensitive data to third-party platforms**. Every component below is
+self-hostable, and no document crosses a vendor boundary.
+
+| Step | Component | Licence | Why this one |
+|---|---|---|---|
+| 1. Intake | `freedomofpress/securedrop` (3,897★) | AGPL-3.0 | Tor-based submission; the standard a source has heard of |
+| 2. Disarm | `freedomofpress/dangerzone` (5,858★) | AGPL-3.0 | Converts the untrusted file to a safe PDF **before** anyone opens it |
+| 3. Extract | `ICIJ/extract` (257★) | **MIT** | Distributed OCR/text extraction at collection scale |
+| 4. Index + NER | `ICIJ/datashare` (784★) | AGPL-3.0 | Self-hosted search with named-entity extraction; pushed 2026-11-26 |
+| 5. Validate | `ICIJ/prophecies` (31★) | AGPL-3.0 | Routes the labour-intensive checks to humans and records who checked what |
+| 6. Publish | `MuckRock/documentcloud` (54★) | AGPL-3.0 | Annotate and embed the documents in the story |
+
+**Wiring:** SecureDrop's journalist workstation (`securedrop-client`, AGPL) exports to a watched
+directory; Dangerzone runs as the conversion step; `extract` feeds Datashare's index; Datashare's
+REST API is the only surface an agent touches. **Do not fork the AGPL components** — operate them
+unmodified and build beside them (see the licence posture in `verticals/solutions.md`).
+
+**Where Globant's value sits:** steps 3→5. The agent reads Datashare's API, proposes the entity
+graph and the check queue, and writes back to Prophecies — so every machine judgement lands in a
+human validation record. That record is the evidence the AI policy demands, and it is the
+deliverable.
+
+**Do not substitute Aleph for Datashare without saying so.** Aleph (MIT, 2,516★) is the platform
+every guide recommends; its default branch last moved **2025-12-19** (`repos/foundations.md`). If a
+client wants MIT in this slot, the honest options are **Uwazi** (MIT, pushed 2026-11-26) or
+operating Datashare unmodified.
+
+---
+
+## Pattern 41 — The records-access desk (FOIA/FOI at scale, with the agent on the drafting side)
+
+**The gap this fills, measured:** the query `FOIA freedom of information request` returns 19
+repositories; the top six hold **35 stars between them**, five of the six carry **no licence file**,
+and the most-starred was last pushed **2017-12-11**. The only FOIA MCP bridge found,
+`morisy/muckrock-mcp` (3★), has **no licence file** and is described *by its own author* as "highly
+experimental, insecure, and unstable". Meanwhile the real platforms are healthy. **This is the
+clearest build-vs-adopt hole in the plane.**
+
+| Step | Component | Licence | Role |
+|---|---|---|---|
+| Portal | `okfde/froide` (413★, 2026-11-09) | **MIT** | The permissive FOI platform — use this when the portal must sit inside a product |
+| Portal (alt) | `mysociety/alaveteli` (421★, 2026-11-25) | AGPL-3.0 | Use when the deployment is a public FOI site in its own right |
+| US requests | `MuckRock/muckrock` (124★, 2026-11-24) | AGPL-3.0 | Federal + state request routing with a public archive |
+| Drafting agent | `jamditis/claude-skills-journalism` (462★) | **MIT** | Its `foia-requests` skill carries federal and state templates |
+| Response triage | `ICIJ/datashare` + `ICIJ/prophecies` | AGPL-3.0 | Released records arrive as scanned PDFs — Pattern 40 steps 3→5 |
+
+**Wiring:** Froide exposes the request lifecycle; the drafting agent proposes the request text and
+the appeal text against Froide's jurisdiction metadata; responses enter the Pattern 40 chain. The
+agent never files unreviewed — a records request is a legal act in the newsroom's name.
+
+**The honest build note:** a licensed, tested MCP bridge for records-request platforms **does not
+exist**. Building one against Froide (MIT) is a small, self-contained, publishable piece of work,
+and it is the piece a client cannot buy today. Do not wire `muckrock-mcp` into a deliverable; read
+it for the tool surface and write your own.
+
+---
+
+## Pattern 42 — Field capture to structured evidence (the offline-first chain, built for LATAM and APAC)
+
+**The buyer:** investigations where the reporter is in the field, the network is hostile or absent,
+and the device may be inspected. Horizontal's own user stories record a custom Tella build for
+**forest defenders in Brazil** with a simplified UI and a default connection to the monitoring
+organisation's servers, and Belarusian/Russian translations for other deployments.
+
+| Step | Component | Licence | Role |
+|---|---|---|---|
+| 1. Capture | `Horizontal-org/Tella-Android` (118★, 2026-11-17) | **MIT** | Encrypts and hides photos, video and forms on-device; works offline |
+| 2. Receive | `huridocs/uwazi` (330★, 2026-11-26) | **MIT** | Tella's documented upload target; structured documentation database |
+| 3. Verify time/place | `bellingcat/ShadowFinder` (631★) | **MIT** | Chronolocation from shadow length — narrows when/where a photo was taken |
+| 4. Verify file | `exiftool/exiftool` (5,320★) | GPL-3.0 | EXIF/GPS/device metadata; run as a separate process, not linked |
+| 5. Clean records | `OpenRefine/OpenRefine` (12,120★) | BSD-3-Clause | Reconcile names, places and dates across the corpus |
+
+**Why this one is unusual in this KB: the whole chain is permissive.** Steps 1, 2, 3 and 5 are MIT or
+BSD, and step 4's GPL-3.0 is reached by **invoking a binary, not linking a library** — so it does not
+reach the surrounding code. This is the one pattern in the plane that can be embedded in a
+proprietary product without an AGPL conversation, which makes it the right opening offer when the
+client's general counsel is the blocker.
+
+**Agent role:** summarise an incoming batch, propose the Uwazi entity and template, and flag items
+whose metadata contradicts the submitted account (step 3 against step 4) — surfaced to a human, never
+auto-resolved.
+
+---
+
+## Pattern 43 — The verification desk, with the fact-check left to the human
+
+**Read the licence findings before building this one.** The temptation is to reach for an automated
+fact-checker. The measurement says there is nothing to reach for: one non-trivial open system
+(`DEFAME`, 64★, Apache-2.0) dormant since **2025-09-30**, and below it four zero-star repositories.
+Build the **evidence assembly**, not the verdict.
+
+| Step | Component | Licence | Role |
+|---|---|---|---|
+| 1. Transcribe | `ggml-org/whisper.cpp` (55,542★) or `m-bain/whisperX` (25,695★) | MIT / BSD-2-Clause | Interview and broadcast transcription; WhisperX adds diarization |
+| 2. Archive the source | `jamditis/claude-skills-journalism` web-archiving skill | **MIT** | Capture before it changes or disappears |
+| 3. Provenance | C2PA tooling already catalogued in pass 9 (`agents/trending.md`) | — | Content Credentials on anything inbound |
+| 4. Image forensics | `exiftool/exiftool` | GPL-3.0 | Metadata first; it answers more questions than any detector |
+| 5. Collaborative check | `meedan/check-api` (21★, MIT, 2026-11-24) | **MIT** | The annotation/tipline backend — **not** the 131★ dev-environment wrapper |
+| 6. Adjudicate | **a human editor** | — | Per finding 4 in `agents/top.md`, this step has no open implementation and the KB does not pretend otherwise |
+
+**Regional note:** Meedan's Check is the component with real deployment history in **APAC and
+LATAM** — tipline programmes run with AFP, BOOM, India Today and Africa Check across India, Brazil,
+South Africa, Kenya and Nigeria, including roughly 335,000 questions across four WhatsApp tiplines
+during India's 2021 election cycle. If the engagement is a tipline, this is the proven starting
+point, not a greenfield build.
+
+**Two licence gates before you ship any of this.**
+
+1. **`buriedsignals/spotlight` (67★) is MIT in its header and its own LICENSE file then states the
+   skills "adapt or synthesize" GIJN methodology published under `CC BY-ND 4.0` — NoDerivatives.**
+   Resolve the GIJN terms before reusing that skill text. The code licence and the knowledge licence
+   are two separate questions, and only one of them is answered.
+2. **`ehurrn/newsroom-extension` (11★) is not under the Unlicense**, though the file says so for two
+   paragraphs. Its modified dedication reaches **"any work produced by the software"** — i.e. the
+   newsroom's own journalism — unless the work explicitly indicates otherwise. Do not place it in a
+   client's newsroom. Read it for the skill inventory; write your own under terms the client's
+   counsel has seen.

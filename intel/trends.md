@@ -1991,3 +1991,71 @@ and last touched **2023-12-12**. The most-starred open odds library has been **d
 2022-12-08**. Against a $65.82bn rights market and documented nine-figure fan-monetization spend,
 this is the largest gap between money and code anywhere in this KB — larger than cycle 8's music
 royalty accounting, because there the spend was contested and here it is not.
+
+## The investigative-journalism & verification plane — trends measured 2026-11-26 (pass 20)
+
+### 1. The agent layer arrived here, and it arrived as skills rather than code
+
+Measured, not asserted. The two most active journalism-agent repositories were both pushed the day
+before this measurement: `jamditis/claude-skills-journalism` (462★, MIT, 2026-11-25) and
+`buriedsignals/spotlight` (67★, 2026-11-25). Nineteen previous passes over this KB found agent layers
+that were absent, dormant or vendor-captured; this is the first that is permissive **and** alive.
+
+The shape matters more than the fact. Both ship **skills — methodology prose an agent follows** — not
+libraries. `spotlight`'s own licence file names its sources: GIJN publications, Bellingcat training
+material, an EBU Eurovision News piece. The competence is in the text. That is why the licence
+analysis in `agents/top.md` lands on the content rather than the code, and it is a trend worth
+tracking across all twelve industries: **as agent layers mature, the binding licence moves from the
+dependency tree to the prompt.** Nothing in an SBOM sees that move.
+
+### 2. Automated fact-checking has not happened, and the measurement has a control group
+
+`DEFAME` (64★, Apache-2.0) is the only non-trivial open fact-checking system and its default branch
+has not moved since **2025-09-30**. Beneath it, four repositories with **literally zero stars**
+(`ClaimVerify`, `Ai-Claim-Verification`, `claimcheck`, `ClaimLedger`), three pushed within the last
+eight weeks — new work, no adoption. The query `claim verification fact check newsroom` returns
+**one repository in the world**, with one star and no licence.
+
+The control group is in the same channel on the same day: `sherlock-project/sherlock` at
+**117,843★**. Open source is not weak at investigation — it is weak at **adjudicating a claim**.
+This is the content law of the healthcare passes in its purest form: gathering is a format problem
+and it gets built; judgement stays closed.
+
+### 3. The live layer is self-hosted copyleft, because the buyer asked for that
+
+The GIJN technology agenda from the GIJC25 pre-conference records practitioners asking for ways to
+analyse large document troves, connect datasets and **triage leaks without exposing sensitive data
+to third-party platforms**. That requirement selects the architecture, and the measurement matches:
+Datashare (AGPL) pushed today, DocumentCloud (AGPL) 2026-11-24, Prophecies (AGPL) 2026-10-15,
+SecureDrop/Dangerzone/GlobaLeaks (AGPL) all current. **In this plane, "we will host it in your
+infrastructure" is the price of entry, not a differentiator** — and a SaaS-first proposal is
+disqualified before the licence conversation starts.
+
+### 4. The newsroom's AI problem in 2026 is governance it can evidence, not capability
+
+Three independent 2026 signals, all pointing the same way:
+
+- **EMEA:** the Future Newsrooms Study (July 2026) found **52%** of surveyed newsrooms name cultural
+  resistance or scepticism as the main barrier to AI adoption and **61%** a lack of technical skills
+  — not cost, and not capability. The imec-SMIT (VUB) mapping study (May 2026) argues adoption alone
+  delivers no value; **control of infrastructure, data, models and rights** does.
+- **LATAM:** legacy outlets are writing policies rather than restricting use — Listín Diario
+  (Dominican Republic) announced AI guidelines to its readers in January 2026, El Comercio (Lima)
+  put a roughly 10-page guide in place in early 2026, and SiPreBA with the Heinrich Böll Foundation
+  published "Notes Toward Regulating Artificial Intelligence in the Media" in May 2026. At the IAPA
+  midyear meeting (April 2026) the reported friction was **everyday use against absent institutional
+  frameworks**.
+- **MENA/APAC:** reporting on the Arab media market puts AI spending at **$520M in 2026** while
+  noting that most journalists using AI have had little or no formal training and nearly **eight in
+  ten** work in newsrooms with no formal AI policy.
+
+Pass 8's insight holds and sharpens: **an organisation that has published a policy has committed to
+being able to evidence it.** This plane is where that evidence is produced — provenance of a
+document, chain of custody of a leak, the record of which claim was checked against what. The
+product is the audit trail, and it is sellable precisely because the policy already exists.
+
+> ⚠️ **Attribution discipline.** The figures in §4 come from **search-result snippets**. None of
+> `cnti.org`, `reutersinstitute.politics.ox.ac.uk`, `latamjournalismreview.org` or `acma.gov.au`
+> resolves from this session (DNS failure, verified by probe), so none was read at source. Treat
+> every number here as **reported, not verified**, and re-check before putting one in a client
+> deliverable.

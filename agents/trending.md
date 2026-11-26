@@ -9,6 +9,95 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 20: the investigative-journalism, source-protection & fact-checking plane (**the agent layer is finally permissive and alive — and still not shippable**)
+
+**What is new this week in this plane, and what is new only to this KB.** A ~90-term vocabulary probe
+over the eight live files found the newsroom's own craft missing entirely: **`journalism` occurred 4
+times in the whole KB, all four in one file**, while `SecureDrop`, `GlobaLeaks`, `OSINT`,
+`data journalism`, `Aleph`, `Datasette`, `Bellingcat`, `press freedom`, `source protection`,
+`whistleblow` and `reverse image` were **all zero**, and all 73 occurrences of `verification` were
+age-verification (pass 15) or file conformance (pass 4). Pass 8 had already named the **newsroom** as
+LATAM's hottest buyer, so the KB was selling to a buyer whose tools it had never recorded.
+
+**Genuinely new this week (pushed within 48 hours of measurement):**
+
+| Name | Repo | Stars | Licence (verified) | HEAD | Note |
+|---|---|---|---|---|---|
+| claude-skills-journalism | https://github.com/jamditis/claude-skills-journalism | 462★ | MIT | 2026-11-25 | Verification, FOIA, transcription, data-journalism skills |
+| Spotlight | https://github.com/buriedsignals/spotlight | 67★ | MIT code / **CC BY-ND 4.0 methodology** | 2026-11-25 | OSINT orchestrator; see the licence trap below |
+| Datashare | https://github.com/ICIJ/datashare | 784★ | AGPL-3.0 | 2026-11-26 | ICIJ's self-hosted document platform, pushed the day of measurement |
+| Uwazi | https://github.com/huridocs/uwazi | 330★ | MIT | 2026-11-26 | HURIDOCS documentation database, also pushed that day |
+| OnionShare | https://github.com/onionshare/onionshare | 7,247★ | GPL-3.0 | 2026-11-26 | Anonymous transfer over Tor |
+
+**THE HEADLINE: the law of the previous nineteen passes inverts here, and then reasserts itself one
+level up.** The standing law has been *strong substrate, empty agent layer*. This plane has a strong
+substrate **and** a live permissive agent layer — the first in twenty passes. But the agent layer is
+a **skills-and-prompt layer, not a code layer**: its competence is methodology prose. So the binding
+licence moves off the dependency tree and onto the text, which is exactly where the healthcare
+passes found it (CPT, MedDRA). **Prediction, falsifiable: every industry in this rotation will show
+the same migration as its agent layer matures — permissive code, encumbered knowledge — and an SBOM
+will see none of it.**
+
+**LICENCE CATEGORY 12, AND THE FIRST ONE WHOSE SUBJECT IS THE SOFTWARE'S OUTPUT.**
+`ehurrn/newsroom-extension` (11★) ships a `LICENSE` whose first two paragraphs are the Unlicense
+verbatim. Diffed word-by-word against the canonical SPDX text, the third paragraph is replaced and
+this is added: *"We dedicate any and all copyright and related or neighboring rights to this work to
+the public domain worldwide. **This dedication applies to any work produced by the software**, unless
+such work explicitly indicates otherwise."* A public-domain dedication reaching the **output** — for
+a newsroom, its journalism, the one asset it has and the basis of every rights reservation in pass 5.
+Escapable via the opt-out, invisible to every scanner: GitHub says `NOASSERTION`, the file is named
+`LICENSE`, and it reads like the Unlicense until you get to the clause.
+
+**THE CONTENT LAW, NOW INSIDE AN AGENT'S SKILL FILES.** `buriedsignals/spotlight` is MIT, and its own
+licence file declares the skills *"adapt or synthesize methodology from"* GIJN's Patrucic & Cosic,
+"Introduction to Investigative Journalism: Following the Money" (Nov 2024), **`CC BY-ND 4.0`** —
+NoDerivatives — plus Bellingcat training material and an EBU Eurovision News piece (Dec 2025). A repo
+offering adapted ND-licensed text under MIT has an unresolved tension on its face. Diligence item,
+not a legal conclusion — but for an agent the methodology **is** the product, so MIT on the repo
+settles nothing.
+
+**THE MEASURED ZEROS, WITH A CONTROL GROUP IN THE SAME CHANNEL ON THE SAME DAY.** Automated
+fact-checking is this plane's real void: `DEFAME` (64★, Apache-2.0) dormant since **2025-09-30**, and
+below it **four literal zeros** — `ClaimVerify`, `Ai-Claim-Verification`, `claimcheck`, `ClaimLedger`
+— three pushed in the last eight weeks. `claim verification fact check newsroom` returns **one
+repository on Earth** (1★, no licence). Control: `sherlock-project/sherlock`, **117,843★**. Open
+source is not weak at investigation; it is weak at **adjudicating a claim**.
+
+**METHOD FINDING THAT CHANGES HOW THIS KB SEARCHES — cycle 8's lesson has a mirror image.** Pass 15
+learned *search the obvious term or you will miss a layer* (age verification). Here the obvious term
+is **a trap**: `whistleblower submission platform` returns 8 repos whose top six hold **2 stars
+between them**, while SecureDrop (3,897★) and GlobaLeaks (1,529★) — the two world standards — do not
+appear at all. Same for `FOIA freedom of information request`: top-6 = 35★, five of six unlicensed,
+top result last pushed **2017-12-11**, while Alaveteli (421★) and Froide (413★) are current. The
+reason is structural: **institutional tools are named, not described.** New rule for all twelve
+industries: in any plane with institutional incumbents, query the **institution** —
+`freedomofpress`, `ICIJ`, `MuckRock`, `bellingcat`, `mysociety`, `huridocs`, `meedan` — because the
+functional keyword returns only the vanity layer.
+
+**TWO CORRECTIONS TO THIS KB'S OWN VERIFICATION ORACLE, both found by contradiction.**
+(1) **`pushed_at` is not liveness.** The search channel reported `alephdata/aleph` at
+`pushed_at=2026-02-20`; its default branch `develop` last moved **2025-12-19** and `main` is older
+still (**2025-08-07**, release 4.1.6). A six-month overstatement on the most-recommended repo in the
+plane; `DEFAME` showed the same gap. Resolve the **default branch** and read **its** last commit —
+`git clone --depth 1 --single-branch` answers both at once.
+(2) **`ls-remote` proves reachability, not canonical naming.** `globaleaks/globaleaks` resolves on
+both the ls-remote and raw channels and is a **rename redirect**; the canonical repo is
+`globaleaks/globaleaks-whistleblowing-software` (1,529★, AGPL-3.0), proven by identical HEAD SHA
+`efa0161c`. GitHub honours renames forever, so ls-remote cannot detect one — which is also why
+`repo:globaleaks/globaleaks` fails in the search index while the repository plainly exists.
+
+**Also recorded:** `morisy/muckrock-mcp` (3★) is the only FOIA MCP bridge in existence and has **no
+licence file**, its own author calling it "highly experimental, insecure, and unstable" — the
+clearest publishable build gap found this pass. `Juanangara/newsroom-agents` (0★) has a sound
+researcher→verifier→editor design whose verifier must quote source text, and **no licence file at
+all**. `mantisfury/ArkhamMirror` (509★, MIT) is the best-starred journalism agent platform and has
+not moved since **2026-01-25**.
+
+**VERIFICATION: 40/40 repository URLs in this pass resolve** via `git ls-remote --exit-code`; every
+star/licence/push value from the `gh api search/repositories` channel; every default-branch HEAD by
+shallow clone; four licence files read in full where the API said `NOASSERTION`
+(SecureDrop → AGPL-3.0, OnionShare → GPL-3.0, Alaveteli → AGPL-3.0, Spotlight → MIT + ND methodology).
+
 ## 2026-11-26 — pass 19: the sports-media, live-event & fan-engagement plane (**the first plane with a control group, and the crudest zero yet**)
 
 **What is new this week in this plane, and what is simply new to this KB.** A vocabulary probe over

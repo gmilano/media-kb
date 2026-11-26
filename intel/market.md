@@ -720,6 +720,44 @@ rights payment.
 licence. `USSoccerFederation/ussf_ssac_23_soccer_gnn` (MIT) shows a federation *can* publish
 permissively — it is research code, not a feed.
 
+
+#### Investigative journalism & source protection — pass 20 (2026-11-26). The region that **builds** this plane, and the one clear build gap
+
+**This plane's institutional core is North American, and it is almost entirely AGPL.** The
+**Freedom of the Press Foundation** maintains `securedrop` (3,897★, AGPL-3.0, pushed 2026-11-24),
+`dangerzone` (5,858★, AGPL-3.0) and `securedrop-client` (59★, AGPL-3.0); **MuckRock** maintains
+`documentcloud` (54★, AGPL-3.0) and `muckrock` (124★, AGPL-3.0); **ICIJ** — headquartered in
+Washington, operating globally — maintains `datashare` (784★, AGPL-3.0, pushed the day of
+measurement), `extract` (257★, MIT) and `prophecies` (31★, AGPL-3.0). A US engagement in this plane
+is therefore an **AGPL operating engagement**, not a licensing one: operate unmodified, build beside.
+
+**Regulatory gate is contractual and state-level, not federal.** Consistent with pass 19's finding
+for sport: there is no federal AI statute reaching newsroom practice. What binds instead is state
+privacy law over source and audience data, shield-law variation by state, and — for anything touching
+talent — the WGA/SAG-AFTRA/DGA agreements already catalogued. For this plane the operative constraint
+is evidentiary rather than statutory: **a newsroom must be able to show chain of custody**, and no
+statute defines the format, which is precisely why the audit trail is a product rather than a
+compliance checkbox.
+
+**Opportunity, specific to this region: the records-access bridge.** The measurement is unambiguous.
+`FOIA freedom of information request` returns 19 repositories whose top six hold **35 stars**, five
+of six carry **no licence file**, and the most-starred was last pushed **2017-12-11**. The only FOIA
+MCP bridge in existence, `morisy/muckrock-mcp` (3★), has **no licence file** and is described by its
+own author as "highly experimental, insecure, and unstable" — while MuckRock's actual platform is
+healthy and pushed 2026-11-24. US federal and state records work is the highest-volume, most
+template-driven task in American journalism, and it has **no licensed, tested agent surface**.
+Building one against `okfde/froide` (MIT) or MuckRock's API is small, self-contained and publishable.
+
+**Second opportunity: the licence-cleanliness play, same shape as pass 19.** US enterprise
+procurement runs the deepest open-source legal review of any region, and the default investigative
+stack a competitor will arrive carrying is AGPL (SecureDrop, Datashare, DocumentCloud). The
+capability-equivalent permissive chain exists and is current — `huridocs/uwazi` (MIT, pushed
+2026-11-26), `ICIJ/extract` (MIT), `Horizontal-org/Tella-Android` (MIT), `OpenRefine` (BSD-3),
+`simonw/datasette` (Apache-2.0) — and Pattern 42 in `compose/patterns.md` is wired entirely from it.
+
+**Informed gap:** no US-specific open fact-checking deployment was found. The one non-trivial open
+system, `DEFAME` (Apache-2.0), is from a European research lab and dormant since 2025-09-30.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1513,6 +1551,53 @@ licence shape point the same way, and the buyer is the mid-tier league the imec 
 football-analytics tooling is maintained by individuals and small groups across several countries
 rather than by any European institution.
 
+
+#### Investigative journalism & source protection — pass 20 (2026-11-26). **The institutional heartland, and the only region where the FOI platform layer is permissive**
+
+**The civic-tech institutions of this plane are European, and unlike North America's they are not all
+copyleft.** `globaleaks/globaleaks-whistleblowing-software` (1,529★, AGPL-3.0, Hermes Center, Italy);
+`mysociety/alaveteli` (421★, AGPL-3.0, UK, pushed 2026-11-25); **`okfde/froide` (413★, MIT, Open
+Knowledge Foundation Deutschland, pushed 2026-11-09)**; `huridocs/uwazi` (330★, MIT, pushed
+2026-11-26). Froide and Uwazi are **the two permissive platforms in a tier that is otherwise
+copyleft worldwide** — which makes EMEA the region where a records-access or documentation capability
+can be embedded in a proprietary product without an AGPL conversation. That is a regionally specific
+commercial fact, not a general one.
+
+**The regulatory stack is the densest of the four regions**, and this plane sits where three
+instruments overlap: the **AI Act**, the **DSA**, and the **European Media Freedom Act** — of which
+reporting one year after entry into force describes public-service broadcasters as still under severe
+pressure, raising doubts about its practical effect. Add the pass-5 finding that EMEA is the only
+region where rights reservation is a **legal instrument** (DSM Art. 4 requiring machine-readable
+form), and the result is a buyer who must evidence compliance across several regimes at once.
+
+**Two 2026 studies that together make the sales argument.** The **imec-SMIT (VUB)** mapping study
+(May 2026) argues that adopting AI delivers no value by itself — **control of infrastructure, data,
+models and rights** is what does. The **Future Newsrooms Study** (July 2026) measures the blocker:
+**52%** of surveyed newsrooms name cultural resistance or scepticism as the main barrier and **61%**
+a lack of technical skills — neither of which is cost or capability. A buyer like that does not want
+a model; it wants **an architecture it controls and staff who can run it**, which is exactly the
+self-hosted chain in Pattern 40 plus training.
+
+**MENA, within this region's bucket.** Reporting puts Arab media AI spending at **$520M in 2026**,
+with UAE and Saudi adoption projected to exceed 95% by 2030, while most journalists using AI have
+had little or no formal training and nearly **eight in ten** work in newsrooms with **no formal AI
+policy**. Saudi Arabia's Ministry of Media and SDAIA launched a Media Innovation Bootcamp and an **AI
+Principles in Media** document in **February 2026**. This is the one sub-region where the policy
+itself is still being written — so the sellable asset is **the policy-plus-implementation pair**, not
+an audit trail for a policy that does not yet exist.
+
+**Opportunity, specific to this region:** the compliance-evidence layer, sold against three overlapping
+regimes rather than one. Pattern 40's human-validation record (`ICIJ/prophecies`, AGPL-3.0) is the
+artefact that answers "show me" under the AI Act, the DSA and an EMFA-era editorial-independence
+question with the same data. **And note the provenance already inside the agent layer**:
+`buriedsignals/spotlight`'s licence file cites a **Derek Bowler, EBU Eurovision News Spotlight**
+piece (Dec 2025) — European broadcast institutions are already the methodology source for the OSINT
+agent layer, which is a credible door into the EBU membership.
+
+**Informed gap:** `reutersinstitute.politics.ox.ac.uk` and `acma.gov.au` do not resolve from this
+session, so the Future Newsrooms and imec-SMIT figures above are **from search snippets, not read at
+source**. Treat as reported, not verified.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -2267,6 +2352,48 @@ largest unserved rights market.
 corporate contribution found in this plane is **`line/lighthouse`** (LINE, Apache-2.0, 274★) for
 video moment retrieval — not sports-specific, but the most research-credible highlight component in
 the plane and a live indication that the capability exists regionally.
+
+
+#### Investigative journalism & source protection — pass 20 (2026-11-26). **The region where journalism is nearly absent from AI law — measured, and the number is 2 of 23**
+
+**The regulatory finding, and it is the hardest number in this pass.** A CNTI review of East Asia and
+Pacific AI policy proposals found that of **23 proposals reviewed, only 2 specifically mention
+journalism**, and that Fiji, Laos, Mongolia and Myanmar have begun planning for AI regulation without
+publishing official documents. CNTI's warning is the operative part: the absence of clear rules,
+**especially in jurisdictions with lower press freedom**, can make it harder for journalists both to
+report on AI and to use it. Regional coordination is slow — an ASEAN policy brief (April 2026)
+records that policymakers recognise the need for cooperation on media regulation while progress
+remains slow — and **Australia's ACMA published an AI in media report in April 2026** with a section
+on news-media adoption.
+
+**Adoption is fragmented by newsroom size, language and infrastructure**, with reporting that more
+than **80% of Southeast Asia** remains at an early adoption stage. In the Philippines most news
+organisations adopted AI in the early 2020s, private outlets leading. At the **India AI Impact Summit
+(February 2026)** the Digital News Publishers Association argued that journalism should not be
+treated as free input for AI systems — the same reservation-of-rights argument pass 5 placed in EMEA,
+arriving here as an industry position rather than a statute.
+
+**The one component in this plane with proven APAC deployment at scale is a tipline.** Meedan's
+**Check** (`meedan/check` 131★ MIT — the dev environment; **`meedan/check-api` 21★ MIT, pushed
+2026-11-24** — the actual backend) ran WhatsApp tiplines with AFP, BOOM, India Today and Africa
+Check, including roughly **335,000 questions across four WhatsApp tiplines** during India's 2021
+election cycle, with Meedan reporting Check tiplines supporting 34 languages and dialects across 58
+tiplines. For an APAC engagement this is a **proven starting point, not a greenfield build** — and
+the multilingual requirement is the part most likely to be underestimated.
+
+**Opportunity, specific to this region — and it is the same shape pass 8 found, now confirmed on a
+second plane.** With 23 jurisdictions diverging and only 2 naming journalism, the sellable asset is a
+**policy engine per jurisdiction**, not a single compliance mode: one deployment, per-country rules
+for what may be automated, what must be disclosed, and what must never leave the country. Pair it
+with the Pattern 40 chain, because in lower-press-freedom jurisdictions **self-hosting is a safety
+requirement, not a procurement preference** — and `Horizontal-org/Tella-Android` (MIT, offline-first,
+hides files on-device) exists precisely for the case where the device may be inspected.
+
+**Informed gap:** `cnti.org` and `acma.gov.au` do not resolve from this session. The "2 of 23" figure
+and the ACMA report's contents are **from search snippets, not read at source** — verify the CNTI
+report directly before putting that number in a client deliverable. No APAC-specific open
+source-protection or fact-checking project was found; the tools deployed in the region are built
+elsewhere, which is itself the regional gap.
 
 ### LATAM
 
@@ -3454,3 +3581,55 @@ creator-broadcasters in LATAM.
 this whole plane depends on. No public pricing exists and none was reachable from this session.
 Following the discipline cycle 8 applied to DDEX: **treat as not investigated, not free.** Any
 proposal that assumes a data-feed cost is guessing, and should say so to the client.
+
+#### Investigative journalism & source protection — pass 20 (2026-11-26). **The buyer pass 8 identified, now with its tooling catalogued**
+
+**Why this plane closes a loop in this KB.** Pass 8 concluded that LATAM's hottest buyer is the
+**newsroom**, because an organisation that has written an AI policy has committed to being able to
+**evidence** it. Twelve passes later the KB still had no entry for the tools that produce that
+evidence — `journalism` occurred four times in the entire knowledge base. This section is the other
+half of that argument.
+
+**The policy wave is real, dated, and attributable.** **Listín Diario** (Dominican Republic)
+announced AI guidelines to its readers in **January 2026**. **El Comercio** (Lima) put a roughly
+10-page AI guide in place in **early 2026**. **SiPreBA** (Argentine press workers' federation) with
+the **Heinrich Böll Foundation** published *"Notes Toward Regulating Artificial Intelligence in the
+Media"* in **May 2026**. At the **IAPA midyear meeting (April 2026)** the reported friction was
+precisely **everyday use against absent institutional frameworks**. **Derechos Digitales** filed a
+submission on AI and freedom of expression. The regional pattern is governance-first: outlets are
+writing policies rather than restricting use.
+
+**The regulatory measurement, including a tension this KB will not smooth over.** CNTI's analysis of
+Latin American and Caribbean AI policy found that **only 5 of 80 policies mention journalism**,
+calling the effect on the press an open question given how few have been enacted — while a separate
+CNTI item states that **Latin America leads in mentions of journalism in AI laws**. Both come from
+the same body of work and both can hold (leading a field in which nearly nobody legislates for
+journalism is a low bar), but **no source consulted states that reconciliation**, so this KB does not
+assert it. Use the figures separately and attribute each. Most regional measures focus on labelling
+or consent for manipulated content and differ on who is responsible and when journalism is exempt.
+
+**Field deployment already exists here, and it is permissive.** Horizontal's user stories record a
+custom **Tella** build for **forest defenders in Brazil** — simplified UI, default connection to the
+monitoring organisation's own servers — alongside Belarusian and Russian translations for other
+deployments. `Horizontal-org/Tella-Android` is **MIT** and pushed 2026-11-17. Meedan brought on
+Brazilian fact-checking partners and reported **fewer** public verification requests than expected at
+the close of Brazil's 2024 municipal elections — a demand-side caution worth carrying into any
+tipline proposal.
+
+**Opportunity, specific to this region.** The buyer has a written policy, little technical staff and
+no audit trail — so the deliverable is **Pattern 42 plus Pattern 40's validation record**: offline
+encrypted capture (Tella, MIT) → structured documentation (Uwazi, MIT) → human-validated entity
+review (Prophecies, AGPL, operated unmodified). The entire Pattern 42 chain is **MIT/BSD** except an
+ExifTool invocation that does not reach the surrounding code, which matters here because LATAM
+engagements are more likely to need embedding in a client product than a hosted operation.
+
+**And the regional reason to lead with evidence rather than capability:** per CNTI most enacted
+measures in the region turn on **labelling and consent for manipulated content**. A newsroom that can
+produce provenance for its own material is complying with the rule that actually exists, rather than
+the one being debated.
+
+**Informed gap:** `cnti.org`, `latamjournalismreview.org` and the IAPA site do not resolve from this
+session — every figure and date in this section comes from **search snippets, not primary sources**.
+The SiPreBA/Böll report was not read. No LATAM-built open source project in this plane was found: as
+in APAC, the tools are built in North America and Europe and deployed here, and that asymmetry is
+itself the regional finding.

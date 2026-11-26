@@ -2418,3 +2418,119 @@ the `repos/{owner}/{repo}/...` endpoints. **`search/repositories` with `repo:<sl
 for arbitrary repositories** and returns stars, forks, SPDX id and `pushed_at` in a single call —
 which is how every figure in this pass was obtained, and it accepts several `repo:` qualifiers at
 once. Pass 18's star data was lost unnecessarily; later passes should not repeat that.
+
+## The investigative-journalism & source-protection plane — measured 2026-11-26 (pass 20)
+
+> The substrate under the newsroom's craft: secure intake, document mining, records access,
+> verification. Verified 2026-11-26 — existence by `git ls-remote`, stars/licence by the
+> `search/repositories` channel, **default-branch HEAD by shallow clone**, licence files read
+> wherever the API returned `NOASSERTION`.
+>
+> **The finding that shapes this file:** this plane's live layer is **copyleft and self-hosted**, and
+> that is a demand signal, not an accident. The GIJN technology agenda from the GIJC25 pre-conference
+> records practitioners asking for ways to analyse large document troves, connect datasets and
+> **triage leaks without exposing sensitive data to third-party platforms**. A buyer whose stated
+> requirement is "nothing leaves my infrastructure" selects self-hosted AGPL tools, and a SaaS-first
+> proposal loses this plane on the first question.
+
+### Secure intake and source protection
+
+| Repo | Stars | Licence (verified) | HEAD | Role |
+|---|---|---|---|---|
+| https://github.com/onionshare/onionshare | 7,247★ | GPL-3.0 (`LICENSE.txt`, 35,285 B) | 2026-11-26 | Anonymous file transfer / drop over Tor |
+| https://github.com/freedomofpress/dangerzone | 5,858★ | AGPL-3.0 | 2026-11-23 | Converts untrusted documents to safe PDFs — the step between a leak and opening it |
+| https://github.com/freedomofpress/securedrop | 3,897★ | AGPL-3.0 (`LICENSE`, 34,629 B) | 2026-11-24 | The whistleblower submission system; Tor-based, 22 languages |
+| https://github.com/globaleaks/globaleaks-whistleblowing-software | 1,529★ | AGPL-3.0 (`LICENSE`, 41,172 B) | 2026-11-20 (branch `stable`) | Multi-tenant whistleblowing platform, Hermes Center (Italy) |
+| https://github.com/scidsg/hushline | 140★ | AGPL-3.0 | 2026-11-14 | Encrypted tip line for an individual or small desk |
+| https://github.com/Horizontal-org/Tella-Android | 118★ | MIT | 2026-11-17 | Offline-first encrypted field capture; hides files on-device |
+| https://github.com/freedomofpress/securedrop-client | 59★ | AGPL-3.0 | 2026-11-25 | Journalist workstation client (Qubes) |
+
+**Licence note, and a correction to this KB's own probe.** Three of these report `NOASSERTION` on the
+GitHub API for three *different* reasons, none of which is a missing licence: OnionShare prepends a
+third-party-licences note above the GPL text; SecureDrop prepends a multi-party copyright header
+above the AGPL text; Alaveteli (below) ships a multi-licence explainer. **A `NOASSERTION` is a
+signal to read the file, never a finding in itself** — the same conclusion cycle 8 reached from the
+opposite direction (a 404 on the raw channel is not proof a licence is missing).
+
+### Document mining and entity investigation
+
+| Repo | Stars | Licence | HEAD | Role |
+|---|---|---|---|---|
+| https://github.com/OpenRefine/OpenRefine | 12,120★ | BSD-3-Clause | 2026-11-24 | The data-cleaning standard for messy records |
+| https://github.com/simonw/datasette | 11,670★ | Apache-2.0 | 2026-11-26 | Publish and explore a dataset as a queryable site |
+| https://github.com/alephdata/aleph | 2,516★ | MIT | **2025-12-19** (develop) | Entity-centric investigation platform — **see the dormancy finding** |
+| https://github.com/ICIJ/datashare | 784★ | AGPL-3.0 | **2026-11-26** | Self-hosted document search, OCR + named-entity extraction (ICIJ) |
+| https://github.com/huridocs/uwazi | 330★ | MIT (`LICENSE`, 1,073 B) | 2026-11-26 | Structured documentation database (HURIDOCS); Tella's upload target |
+| https://github.com/alephdata/followthemoney | 311★ | MIT | **2025-06-27** | The Aleph entity ontology; last commit reverts "begin project re-homing" |
+| https://github.com/ICIJ/extract | 257★ | MIT | 2026-11-23 | Distributed OCR/text extraction at collection scale |
+| https://github.com/MuckRock/documentcloud | 54★ | AGPL-3.0 | 2026-11-24 | Document hosting, annotation and publication for newsrooms |
+| https://github.com/ICIJ/prophecies | 31★ | AGPL-3.0 | 2026-10-15 | Collaborative data-validation workflow for labour-intensive checking |
+
+### Records access (FOIA / FOI)
+
+| Repo | Stars | Licence | HEAD | Jurisdiction it was built for |
+|---|---|---|---|---|
+| https://github.com/mysociety/alaveteli | 421★ | AGPL-3.0 (`LICENSE.txt`, 36,128 B) | 2026-11-25 | UK (mySociety); deployed in many countries |
+| https://github.com/okfde/froide | 413★ | MIT | 2026-11-09 | Germany (Open Knowledge Foundation DE) |
+| https://github.com/MuckRock/muckrock | 124★ | AGPL-3.0 | 2026-11-24 | US federal + state records requests |
+
+### Verification and OSINT
+
+| Repo | Stars | Licence | HEAD | Role |
+|---|---|---|---|---|
+| https://github.com/sherlock-project/sherlock | 117,843★ | MIT | 2026-11-26 | Username search across ~400 networks — the plane's control group |
+| https://github.com/exiftool/exiftool | 5,320★ | GPL-3.0 | 2026-11-16 | Metadata extraction (EXIF/GPS/device) — the first step of image verification |
+| https://github.com/bellingcat/telegram-phone-number-checker | 1,934★ | MIT | 2026-08-17 | Telegram account checks from phone numbers |
+| https://github.com/bellingcat/ShadowFinder | 631★ | MIT | 2026-09-03 | Chronolocation: narrows where/when a photo was taken from shadow length |
+| https://github.com/bellingcat/EDGAR | 219★ | GPL-3.0 | 2025-05-15 | SEC EDGAR filings retrieval for corporate investigation |
+
+### Finding — the Aleph-family dormancy, stated narrowly because the wide version is false
+
+The two **Aleph-family** permissive repos are stale while every AGPL peer in the same sub-layer is
+current: `aleph` (MIT, 2,516★) last moved on its default branch `develop` on **2025-12-19**, and
+`followthemoney` (MIT, 311★) on **2025-06-27**, its final commit a revert of "begin project
+re-homing". Against that: `datashare` (AGPL) pushed **today**, `documentcloud` (AGPL) 2026-11-24,
+`prophecies` (AGPL) 2026-10-15.
+
+**The tempting generalisation — "in this plane MIT is the dead licence" — is wrong, and the
+measurement says so.** `uwazi` (MIT) pushed today, `extract` (MIT) 2026-11-23, `Tella-Android` (MIT)
+2026-11-17, `froide` (MIT) 2026-11-09, `sherlock` (MIT) today. The true claim is confined to the
+**Aleph family specifically**, and it matters only because Aleph is the platform every guide
+recommends first. **Recommend Datashare or Uwazi for new work and say why; propose Aleph only with
+the maintenance position stated to the client.**
+
+### Method correction — `pushed_at` is not liveness, and `ls-remote` is not canonicality
+
+Two corrections to this KB's own verification oracle, both found by contradiction this pass:
+
+1. **`pushed_at` counts any ref, including stale release branches and bot branches.** The search
+   channel reported `alephdata/aleph` at `pushed_at=2026-02-20`. Its default branch `develop` last
+   moved **2025-12-19**, and `main` is older still — **2025-08-07** (release 4.1.6). A 6-month
+   overstatement of liveness on the single most-recommended repo in the plane. `DEFAME` showed the
+   same gap (`pushed_at` 2026-05-21, HEAD 2025-09-30). **Rule: resolve the default branch and read
+   its last commit — `git clone --depth 1 --single-branch` answers both in one call.**
+2. **`git ls-remote` proves reachability, not canonical naming.** `github.com/globaleaks/globaleaks`
+   resolves on both the `ls-remote` and raw channels (default branch `stable`) — and it is a
+   **rename redirect**. The canonical repository is
+   `globaleaks/globaleaks-whistleblowing-software` (1,529★); both HEADs are the identical SHA
+   `efa0161c`, which is the proof. GitHub honours renames forever, so `ls-remote` cannot detect one,
+   and the search index knows only the new name — which is also why a `repo:globaleaks/globaleaks`
+   query fails while the repository plainly exists. **Rule: write the name the search index returns,
+   and treat an `ls-remote` success on a name the index rejects as a rename to be resolved.**
+
+### Channel gaps, stated as gaps
+
+- **`api.github.com` is scoped to this session's own repositories** (every third-party call returns
+  "GitHub access to this repository is not enabled for this session"), and `github.com` HTML returns
+  **403**. All stars, licences and `pushed_at` values in this file therefore come from the sanctioned
+  **`gh api search/repositories`** channel, which does serve them. Recording this because it is the
+  only metadata oracle currently available, and a future pass that finds the direct API blocked
+  should not conclude that star counts are unobtainable.
+- **No non-GitHub host resolves from this session.** Verified by probe: `cnti.org`, `unlicense.org`,
+  `reutersinstitute.politics.ox.ac.uk`, `latamjournalismreview.org`, `acma.gov.au`, `securedrop.org`,
+  `globaleaks.org`, `icij.org`, `opensource.org` and `spdx.org` all return curl `000` / DNS
+  `ENOTFOUND`. Consequence: the regional policy figures in `intel/market.md` are attributed to
+  **search-result snippets, not primary sources**, and are flagged there as such.
+- **Reusable workaround found:** canonical licence texts are reachable through the raw channel at
+  `raw.githubusercontent.com/spdx/license-list-data/main/text/<SPDX-ID>.txt` when the licence's own
+  site is blocked. That is how the modified Unlicense in `agents/top.md` was proven to be modified.

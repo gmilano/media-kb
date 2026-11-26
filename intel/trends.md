@@ -1132,3 +1132,146 @@ the European Commission under EUPL-1.2 and Apache-2.0 — so it is legally reusa
 EU's compliance code is, in practice, **the only open age-assurance toolkit on earth**, and that is
 an export opportunity rather than a European curiosity. Details and dates by region in
 `intel/market.md`.
+
+## 56. The tenth plane is the first that is copyleft end to end — and it inverts trend 4 completely
+
+Trend 4 of this file says *permissive at the pipeline, copyleft at the platform*. It has held, with
+named exceptions, across nine planes. **The theatrical chain reverses it outright.** Every DCP
+authoring tool, every validator but one, and every key manager is GPL-2.0, GPL-3.0 or AGPL-3.0:
+`dcpomatic` (GPL-2.0, 175★, pushed 2026-11-24), `libdcp` (GPL-2.0), `libsub` (GPL-2.0+), `opendcp`
+(GPL-3.0), `backports`/`dcp_inspect` (GPL-3.0), `dcpdoctor` (AGPL-3.0), `kdmcourier` (AGPL-3.0). The
+permissive licences sit **beneath** the pipeline, in the codec and container (`openjpeg` BSD-2,
+`asdcplib` BSD-3), and in exactly one tool: **`ClairMeta`, BSD-3-Clause — the validator.**
+
+The practical consequence is unusually clean, so it belongs in the first week of any theatrical
+engagement rather than the last: **validation can be built permissively and embedded in a client's
+own stack; authoring cannot.** The fortunate part is that validation is also where the client's pain
+is highest. The unfortunate part is that nobody planned it that way, so the alignment should be
+verified per-component rather than assumed.
+
+## 57. The key that gates every cinema screening on earth has three stars
+
+A KDM (Key Delivery Message) is the dated, per-screen cryptographic key without which a film does
+not play. `KDM cinema` returns **eight repositories whose star counts are 1, 1, 1, 0, 0, 0, 0, 0.**
+
+Three stars, total, for the lifecycle management of the instrument that gates roughly **$34.6bn of
+box office** across every commercial screen on the planet. It **ties healthcare's `medical
+necessity` (3)** as the crudest number ever recorded in this knowledge base, and it is attached to a
+materially harder object: medical necessity is a contested judgement, a KDM is **a file with a
+published SMPTE schema**. `asdcplib` can write them, permissively. Nothing open manages their
+windows, expiry or per-screen reissue. For a circuit running 400 screens against 30 distributors,
+key expiry is a daily operational risk with no open tooling and no open commercial alternative — and
+the artifact is typed, which is precisely the shape an agent can reason over.
+
+## 58. Absence of a licence file is evidence of *neither* answer — the rule this KB had half-right
+
+Pass 5 found `rslstandard/rsl` with no licence file and correctly concluded **all rights reserved**.
+Pass 8 established that **a 404 from the raw channel is never by itself proof a licence is missing**.
+This pass supplies the half that was still missing, and it reversed a verdict mid-pass:
+
+- `cth103/libsub` (9★) has **nothing licence-shaped at root** — a shallow clone confirms it — and
+  **73 source files carrying a full GPL-2.0-or-later header.** It is unambiguously GPL-2.0+.
+- `wolfgangw/backports` (`dcp_inspect`, 40★, active) has no `LICENSE`, `LICENCE` or `COPYING` — it
+  has **`gpl.txt`**, 32,473 bytes of GNU GPL **v3**. A fourteen-filename probe across two branches
+  missed it; the GitHub API reports `NONE`; the README is silent. **This was written down as
+  "unlicensed" until a shallow clone corrected it.**
+
+Put the two side by side and the rule is finally right: `rsl` = no file, no headers → default
+copyright; `libsub` = no file, 73 headers → GPL-2.0+. **"No licence file" means you have not
+finished looking.** The resolving step is reading the source tree, it costs one shallow clone, and
+it finds both failure modes in the same call. Ways nine and ten a licence can hide, for a KB that
+had catalogued eight.
+
+## 59. The container layer under every DCP and every broadcast master has been retired by its maintainers
+
+Measured, not inferred, and three of the four data points are from the last fourteen months:
+
+| Project | Licence | ★ | State |
+|---|---|---|---|
+| `bbc/bmx` | BSD-3-Clause | 88★ | **ARCHIVED** 2025-09-29 |
+| `sandflow/regxmllib` (MXF→XML, SMPTE ST 2001-1) | BSD-2-Clause | 39★ | **ARCHIVED 2026-11-22 — four days before this pass** |
+| `bbc/libMXF` | BSD-3-Clause | 15★ | **Relocated into the BBC's `-archive` org** |
+| `Limecraft/ebu-libmxf` | BSD-3-Clause | 17★ | The EBU's library last moved in **2013**; survives only as a Belgian vendor's fork |
+
+**The format every DCP and every broadcast master is wrapped in is permissively licensed and no
+longer maintained by anyone holding a public mandate.** This is the clearest case in this KB of
+**permissive-and-abandoned being the worse risk than copyleft-and-alive** — and the two risks sit one
+layer apart in the same stack: the container beneath the DCP is free to use and unmaintained, while
+the tools that write the DCP are maintained and copyleft. Neither condition appears in a licence
+scan, an SPDX field or an SBOM. A new corollary for the method: **when a repo's 422 resolves to an
+`*-archive` org, the relocation is itself the finding** — it means the maintainer has formally
+retired the project.
+
+## 60. In open source, "cinema" means "cinematic" — the sharpest false friend measured in this KB
+
+`cinema AI agent` returns **205 results with 526 stars in the top six and zero relevance to cinema.**
+The hits are a ComfyUI creative studio (262★ MIT), an agent skill for *website* design (119★ MIT),
+and three "cinematic look" prompt skills for video models. Not one concerns theatrical exhibition.
+
+This is worse than pass 7's false friend — which was merely numerous — because these results are
+**numerous, well-starred, permissively licensed and actively maintained: every property a pass uses
+as a quality signal.** A careless hour writes five plausible rows and all five are about video
+generation. Two companion lessons:
+
+- **The artifact name is the only query that works.** `DCP`, `KDM`, `asdcplib`, `digital cinema
+  package`. Pass 6's rule — *the standard's name is the query* — holds exactly.
+- **Shortening a query can manufacture a false abundance, not just cure a false zero.**
+  `cinema ticketing platform` returns **350 results** whose top five are 12★/6★/6★/4★/4★, all student
+  CRUD. Pass 8 said read the results, not the total. This plane is the strongest case for it: the
+  350 results are *why* the absence of an open TMS went unnoticed for ten passes.
+
+## 61. Theatrical accessibility: a zero-star ceiling under a mandate that is nine years old
+
+Pass 3 recorded a 56-star ceiling for audio-description tooling under a statutory mandate and called
+it the largest unmet mandate in media. Theatrical beats it. The US DOJ's ADA Title III rule
+(published **2016-12-02**) requires every US theatre with a digital auditorium to acquire and
+maintain closed-captioning and audio-description equipment delivered to a patron's individual seat,
+on a published scaling table. `cinema accessibility app captioning` returns **one repository, with
+zero stars.**
+
+The rule's own limiting clause explains the market, and it is the part worth selling against: the
+rule **does not require theatres to add captions or audio description to films not already
+distributed with those features.** The equipment duty lands on the exhibitor, the content duty on
+the distributor, and **the artifact that joins them — an accessibility track correctly authored into
+the DCP and verified before the key is issued — has no platform, open or commercial, that treats it
+as a first-class object.** Trend 18 of this file applies verbatim: the regulator mandates the
+artefact and is silent on the method, which is standing permission to automate.
+
+## 62. LATAM has the most concrete theatrical compliance calendar on earth, and zero tooling for it
+
+Earlier passes recorded Brazil's *"in all formats in which cinematographic works are presented"* and
+Mexico's new cinema law as **regulatory** intelligence. This pass supplies the missing half: **the
+tooling that would discharge those duties does not exist anywhere.**
+
+- **Brazil**: **Decree 12.796 of 2025-12-23** makes exhibition of Brazilian features mandatory in
+  cinemas for the 2026 calendar year, Ancine enforcing — and Ancine has already issued **Instrução
+  Normativa 175** to update the quota after finding **Cinemark had exploited a loophole**.
+  Accessibility is separately binding on distributors *and* exhibitors under **IN 165/2022**, with
+  Ancine's good-practice guide published July 2026.
+- **Mexico**: a new **Federal Film and Audiovisual Act** retains the **10% national screen-time
+  minimum** with stricter exhibitor enforcement and reportedly covers accessibility for visual and
+  hearing impairments. **Enactment status is contradicted between sources and is flagged, not
+  asserted.**
+
+**A quota that was gamed and re-regulated inside twelve months is the strongest evidence a market
+can give that the evidence trail is the product.** Nobody is selling it one.
+
+## 63. The theatrical recovery is a price story, not an attendance story — in every region measured
+
+The headline numbers look like recovery: global box office **$34.6bn in 2025, up 7%** (Futuresource),
+2026 forecast ~**$34.55bn** (Gower Street, revised down from $35bn). Underneath, attendance is
+falling almost everywhere:
+
+- **Europe**: admissions **down 5.3% to 863.6m** (UNIC) while box office held **stable at €6.9bn**.
+- **LATAM**: revenue **+9% to $2.65bn** for 2026 while **admissions fell 8%** in 2025.
+- **China**: industry revenue **+6.6% to $7.9bn** in 2026 while the **business count has shrunk at a
+  0.7% CAGR since 2021**, and box office is forecast **down 5%**. Omdia's reading is structural —
+  young audiences leaving for cheaper, more interactive uses of time.
+- **India** is the exception that proves the dependency: growth is real, and **~90% of it is national
+  titles.**
+
+Every one of those gaps is price, premium formats and mix. The commercial reading for a studio is
+that **yield management and title-supply analytics are the live questions**, and the open estate for
+both is 103 repositories of 2017–2020 coursework summing **29 stars**. One caution on citation: UNIC
+reports 863.6m admissions and the European Audiovisual Observatory reports 796m **for the same
+year**, because their territory coverage differs. **Cite the body, not the number.**

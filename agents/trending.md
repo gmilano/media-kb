@@ -9,6 +9,110 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 10: the theatrical & digital-cinema plane (six literal zeros)
+
+### How the gap was found — the vocabulary probe, now confirmed as the cheapest tool in this workflow
+
+`media-kb` arrived at this pass with **four passes never recorded in `rotation.json`** (passes 6 and
+7 on 2026-11-25, passes 8 and 9 on 2026-11-26) and the remote already carrying two commits from
+today. Pass 8's corollary applies exactly: when the remote has same-day passes, the correct pass is
+neither a rewrite nor a re-verification but **finding the missing vocabulary plane**. One grep of 51
+candidate terms against the eight files, before a single web search, produced the answer:
+
+| Term | Files | Hits | Verdict |
+|---|---|---|---|
+| `digital cinema`, `asdcplib`, `dcp-o-matic`, `KDM`, `box office`, `theatrical`, `SMPTE ST 429`, `projector`, `TMS` | 0 | **0** | The plane is absent |
+| `DCP` | 4 | 4 | **False positive — all four are `HDCP`** (pass 8's copy protection) |
+| `cinema` | 6 | 20 | **False positive — OpenEXR, plus Brazilian/Mexican statute prose** |
+| `OpenJPEG`, `MXF`, `JPEG 2000`, `ST 2067`, `asdcp` | 0 | **0** | The substrate is absent too |
+
+Cost: one Bash call. **And the probe must check its own hits** — `DCP` looked like 4 hits of
+coverage and was 4 hits of `HDCP`. A term-count probe that does not read its matches manufactures
+false coverage exactly as fast as it finds real gaps.
+
+### The headline: the tenth consecutive near-zero agent layer, and the first with *six literal zeros*
+
+`DCP automation agent`, `theatrical distribution automation`, `digital cinema LLM`,
+`subtitle cinema DCP agent`, `SMPTE DCP interop`, `preshow advertising cinema`,
+`cinema exhibitor data` and `movie theater point of sale open source` **all return zero results.**
+`projection automation cinema` returns one: a Minecraft mod, 0★. Against a channel worth **$34.6bn
+in 2025 box office** (Futuresource; Gower Street forecasts ~$34.55bn for 2026).
+
+### ⛔ The finding of this pass: the first plane in this KB that is copyleft end to end
+
+Every authoring tool, validator and key manager in the theatrical chain is GPL-2.0, GPL-3.0 or
+AGPL-3.0. The only permissive licences sit in the substrate (`openjpeg` BSD-2, `asdcplib` BSD-3) and
+in **exactly one validator** (`ClairMeta` BSD-3). This inverts trend 4 ("permissive at the pipeline,
+copyleft at the platform") — here the *pipeline* is the copyleft part. Consequence, stated plainly
+for engagement planning: **a proprietary client deliverable cannot be built on the DCP authoring
+chain.** Validation can. Full reasoning and the escape route in `repos/foundations.md`.
+
+### ⛔ Two new ways a licence hides — and the second one reverses this KB's own default
+
+Ways nine and ten for this KB, both verified by reading the bytes:
+
+- **The licence file is named after the licence.** `wolfgangw/backports` (`dcp_inspect`, 40★, active)
+  carries **`gpl.txt`** — 32,473B of GNU GPL **v3** — and no `LICENSE`, `LICENCE` or `COPYING`.
+  Fourteen filenames across two branches missed it; GitHub reports `NONE`. **I had this recorded as
+  "unlicensed" before a shallow clone corrected it.**
+- **The licence can live only in the source headers.** `cth103/libsub` (9★) has nothing licence-shaped
+  at root, and **73 source files carrying a full GPL-2.0-or-later header.**
+
+**Together these fix a rule this KB had half-right.** Pass 8 established that a 404 is never by
+itself proof a licence is missing. Pass 5 established that `rslstandard/rsl`, with no licence file,
+is all-rights-reserved by default. Put side by side: `rsl` = no file, no headers → default copyright;
+`libsub` = no file, 73 headers → GPL-2.0+. **Absence of a licence file is evidence of *neither*
+answer.** The resolving step is reading the source, and it costs one shallow clone — which also
+caught `gpl.txt` in the same call. Use it before writing either "unlicensed" or "no licence found".
+
+### ⚙️ Method correction: the 422 "rename detector" is real but does not self-diagnose
+
+Passes 8 and 9 recorded a `repo:<slug>` 422 + successful `ls-remote` as a rename detector. It fired
+twice this pass and was right twice (`Ymagis/ClairMeta` → `ClairMeta/ClairMeta`; `bbc/libMXF` →
+`BBC-archive/libMXF`). **The correction is to the follow-up:** `gh api repos/<slug>` returns
+`403 "GitHub access to this repository is not enabled for this session"` for *both* cases, which
+reads like a session-permissions problem and is not one. Do not conclude "out of scope" from it. The
+resolver is an **unqualified keyword search** (`q='libMXF'`), which returned the new location and its
+forks in one call. New corollary: if the new owner is an `*-archive` org, **the move is the finding.**
+
+### ⚠️ Contamination — the sharpest false friend measured in this KB, and an abundance trap beside it
+
+`cinema AI agent`: **205 results, 526 stars in the top six, zero relevance.** Every hit is
+generative-video prompt styling — a ComfyUI studio (262★ MIT), an agent skill for *website* design
+(119★ MIT), three "cinematic look" prompt skills. **In open source "cinema" means "cinematic", never
+"movie theatre".** Worse than pass 7's false friend because these results are numerous, well-starred,
+permissive and actively maintained: every property a careless pass uses as a quality signal.
+
+`cinema ticketing platform`: **350 results**, top five 12★/6★/6★/4★/4★, all student CRUD. This is
+pass 8's lesson again — shortening a query can convert a false zero into a **false abundance**. Read
+the results, never the total.
+
+### The real estate, in one table
+
+| Layer | What exists | Licence shape |
+|---|---|---|
+| Authoring | `dcpomatic` 175★ (pushed 2 days before this pass), `libdcp` 29★, `opendcp` 134★ **dormant since 2020-04-28** | **All GPL** |
+| Validation | `ClairMeta` 106★, `backports`/`dcp_inspect` 40★, `dcpdoctor` 1★ | **BSD-3 / GPL-3 / AGPL-3** |
+| Substrate | `openjpeg` 1,123★, `asdcplib` 99★ (active 2026-11-19), `grok` 300★ | **BSD-2 / BSD-3 / AGPL-3** |
+| Container | `bmx` 88★ **ARCHIVED**, `regxmllib` 39★ **ARCHIVED 4 days ago**, `BBC-archive/libMXF` 15★ | BSD, and retired |
+| Keys (KDM) | 3 repos, **3 stars between them** | AGPL-3 / GPL-3 / none |
+| Exhibition (TMS) | `CineTMS` 5★ (APAC, Apache-2.0) and nothing else real | — |
+
+### Informed gaps from this pass
+
+- **No open TMS or cinema playout automation.** One 5★ APAC candidate; everything else is coursework.
+- **No open cinema accessibility tooling — under a US federal mandate since December 2016.** One repo,
+  **zero stars**. Sharper than pass 3's 56★ audio-description ceiling.
+- **No open box-office forecasting.** 103 results, top-6 = 29★, all 2017–2020 coursework, no licences.
+- **No open KDM lifecycle management.** Three stars across the whole layer.
+- **No open preshow/cinema-advertising stack.** Zero results, against a tracked ad category.
+- **`new.isdcf.com` and the UNIC/Omdia screen databases were not reachable or are paywalled**, so
+  **2026 country-level screen counts are NOT verified** and are recorded as an informed gap in
+  `intel/market.md` rather than estimated. SMPTE's own `DPROVE2` verifier is a member tool, not open
+  source — noted so nobody searches for its repo.
+
+---
+
 ## 2026-11-26 — pass 9: the trust & safety plane (the licence moved into the weights)
 
 Scope: hash matching → classification → rules → review queue → enforcement → statutory report.

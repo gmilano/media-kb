@@ -373,6 +373,51 @@ the newest obligations are state-level and about AI labelling.**
   not re-import them from the same vendor page as established.
 
 
+
+#### Theatrical & digital cinema — added 2026-11-26 (pass 10)
+
+**The channel.** Global box office was **$34.6bn in 2025, up 7%** (Futuresource), with 2026
+forecast at roughly **$34.55bn** — Gower Street revised down from an initial $35bn, mostly on a weak
+Chinese Q1. Every figure in every source remains **below the 2017–2019 average**; the European
+Audiovisual Observatory puts 2025 at about €29.6bn and ~30% below the pre-pandemic average. Treat
+as a range, not a number.
+
+**The regulatory artifact that matters here, and it is nine years old.** The DOJ's ADA Title III
+rule (published **2016-12-02**) requires every US movie theatre with an auditorium showing digital
+movies to **acquire and maintain** closed-captioning and audio-description equipment, delivered to
+an individual patron's seat, on a scaling table (a single-auditorium site: 4 captioning devices and
+1 audio-description device; 16+ auditoriums: 12 and 8 or more). The rule's limiting clause is the
+commercial opening: it **does not require theatres to add captioning or audio description to films
+not already produced or distributed with those features.** So the equipment duty sits on the
+exhibitor and the content duty sits with the distributor, and **nothing joins them.** Open tooling
+for cinema accessibility: **one repository, zero stars.**
+
+**The standards position.** NATO required domestic exhibitors to be SMPTE-DCP-ready by
+**2019-04-09**, and ISDCF's registry now states that most DCPs are distributed in SMPTE format.
+SMPTE's own `DPROVE2` verifier has **dropped Interop support** — and is a member tool, not open
+source. North America is the region furthest through the transition, which makes it the region where
+**Interop fallbacks can be removed from a pipeline** rather than maintained.
+
+**Opportunities — North America**
+
+1. **Accessibility conformance gate (highest urgency, lowest build).** Verify that mandated caption
+   and audio-description tracks are present, correctly labelled and actually render, *before* the
+   key ships. The duty is nine years old, the enforcement surface is ADA litigation, and the open
+   estate is one 0-star repo. Pattern 29.
+2. **Ingest triage for circuits and distributors.** `ClairMeta` (BSD-3, so embeddable in a client's
+   own stack) emits structured validation per DCP; an agent clusters hundreds of weekly results into
+   supplier-systematic versus one-off failures. Pattern 28.
+3. **KDM lifecycle management.** The entire open estate is **3 stars across three repos** against an
+   artifact without which no screening happens. Pattern 30.
+4. **The identifier landing zone.** EIDR is a North American institution with no open client (pass
+   5); theatrical is where EIDR and ISAN identifiers are actually *used*. A permissive bridge from
+   DCP metadata to EIDR is small and nobody has built it.
+
+**Informed gap — North America.** No 2026 US screen count was verifiable from this session: the
+Omdia Cinema Sites & Screens database is paywalled. **Not estimated.** Also unverified: any
+2025–2026 DOJ enforcement action or amendment to the 2016 rule — searched, nothing found, so the
+rule is treated as in force and unamended.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -743,6 +788,51 @@ regulator. That makes it the only region where a fixed-price compliance build is
   where the reference implementation for every other region's age-assurance build comes from.
 
 
+
+#### Theatrical & digital cinema — added 2026-11-26 (pass 10)
+
+**The channel, with a measured disagreement worth carrying.** UNIC's **Annual Report 2026**
+(published at CineEurope, June 2026; UNIC covers **39 territories**) reports 2025 European
+admissions **down 5.3% to 863.6m** with box office **stable at €6.9bn**. France fell 13.6% to
+156.8m, Spain 11% to 65m, both attributed to "a lack of strong local titles". The European
+Audiovisual Observatory reports the same year as **796m, down 5.5% from 843m.** The two numbers
+differ by ~68m admissions because the territory coverage differs. **Cite the body, not the number** —
+a deck that quotes "European admissions" without saying whose is wrong by 8% whichever it picked.
+
+**EMEA is where the permissive theatrical code is actually being written.** This is a small finding
+with a disproportionate consequence, and it is the second confirmation of a pattern this KB first
+recorded in pass 8:
+
+- [`Limecraft/ebu-libmxf`](https://github.com/Limecraft/ebu-libmxf) (BSD-3, 17★, 2024-11-15) — a
+  **Belgian vendor's fork**, and the most recently touched copy of the MXF container library in
+  existence. The EBU's own last moved in 2013; the BBC's is in an `-archive` org.
+- [`brightfish-be/DcpToolkit`](https://github.com/brightfish-be/DcpToolkit) (**MIT**, 3★, 2026-06-22)
+  — a Belgian cinema-technology company's DCP read/write library, and **the only permissively
+  licensed authoring-side code in the entire theatrical plane.**
+
+So the one escape route from a copyleft-end-to-end plane is being built by two small Belgian
+companies, at 17 and 3 stars. **That is a partnership or contribution target, not a dependency** —
+but it is the only one on the map.
+
+**Opportunities — EMEA**
+
+1. **Validation-as-a-service, permissively licensed.** `ClairMeta` is BSD-3 and European in origin
+   (Ymagis/Éclair). A European exhibitor or post house can have validation embedded in its own stack
+   with no copyleft obligation — the one thing this plane permits. Pattern 28.
+2. **Back the Belgian permissive cluster.** Contributing to `DcpToolkit` and `ebu-libmxf` buys
+   influence over the only non-copyleft authoring path at a cost of single-digit stars.
+3. **Local-title analytics for a market that just proved it depends on them.** UNIC's own explanation
+   for the French and Spanish declines is title supply. The open box-office estate is 103 repos of
+   2017–2020 coursework summing 29 stars.
+
+**Informed gaps — EMEA, stated rather than filled.** (a) **Whether the European Accessibility Act
+reaches cinema exhibition was searched and not established** — the search returned the US DOJ rule
+and nothing connecting the EAA to theatres. Treated as *not investigated*, not as "no duty".
+(b) The Observatory's FOCUS 2026 screen-density figure appeared only in a garbled form in the
+retrieved snippet and is **not recorded here** rather than guessed at. (c) `new.isdcf.com` does not
+resolve from this session, so **ISDCF commercial terms and the current Interop-deprecation status
+are unverified** — the May 2026 ISDCF minutes are indexed but their contents were not readable here.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1082,6 +1172,58 @@ opportunity, and it is a build, not an integration.**
   Roblox's RoGuard — is **research-only licensed**. Stated as a gap: the region with the hardest
   deadlines has the thinnest open stack.
 
+
+
+#### Theatrical & digital cinema — added 2026-11-26 (pass 10)
+
+**The channel, split in two.** APAC is simultaneously the drag on the global number and the growth
+story, and conflating them produces a wrong strategy:
+
+- **China is the drag.** IBISWorld puts the Chinese cinema industry at **$7.9bn in 2026, up 6.6%**,
+  while its **business count has declined at a 0.7% CAGR from 2021 to 2026** — revenue up, estate
+  shrinking. Futuresource estimates China **down 5% against 2025**, and Gower Street attributed its
+  downgrade of the global 2026 forecast largely to a disappointing Chinese New Year and Q1. Omdia's
+  explanation is structural rather than cyclical: young audiences are leaving for cheaper and more
+  interactive uses of their time.
+- **India and the rest are the growth.** India's box office crossed **INR 13,000 crore**, with
+  **national titles at ~90% market share** in 2025 — the most locally-dependent major market in the
+  world. Hong Kong, South Korea and India all improved while China moved sharply the other way. IMAX
+  is expanding across APAC and broadening its **PVR Inox** partnership to additional exhibitors.
+- One vendor report puts APAC at **over 40% of new global screen installations.** Flagged as
+  vendor-sourced and directional.
+
+**Second confirmation: APAC owns the permissive substrate.** Pass 8 recorded this for live delivery
+and called it the first inversion of the KB's usual pattern. It holds again here, and more starkly,
+because the sample is the whole tier: **the only real open theatre-management system found anywhere
+is [`1105821037/CineTMS`](https://github.com/1105821037/CineTMS) — 影院自动化放映控制系统, Apache-2.0
+(verified, 11,357B `LICENSE`), 5★, 2026-07-30.** In a plane that is GPL/AGPL end to end, the single
+Apache-2.0 platform-shaped artifact is Chinese.
+
+**APAC is also the one region where Interop DCP persistence is documented.** ISDCF's October 2024
+minutes recommend that the move to SMPTE for **Japanese subtitle cases** wait until fixes are
+verified in theatres still running Interop. A pipeline serving Japan cannot drop Interop on the
+schedule North America can — this is a concrete, dated, region-specific engineering requirement, and
+the only one of its kind found in this plane.
+
+**Regulation.** Latham & Watkins (September 2026) describes **three divergent categories** across
+APAC: binding risk-based frameworks with tiered obligations (South Korea, Vietnam), targeted AI
+regulation (China), and a third grouping. The consequence carried from pass 8 is unchanged and
+applies here too: **the sellable asset is a per-jurisdiction policy engine, not a single compliance
+mode.**
+
+**Opportunities — APAC**
+
+1. **The permissive TMS bet.** `CineTMS` is Apache-2.0 at 5 stars. Either it becomes the base of an
+   open exhibition stack or nothing does — there is no second candidate on earth.
+2. **A Japan-aware DCP pipeline.** Interop-and-SMPTE dual-path authoring with subtitle verification,
+   against a documented ISDCF caution. Narrow, dated, and defensible.
+3. **Local-title dependency analytics for India.** 90% national share means title supply *is* the
+   business, and the open forecasting estate is coursework.
+
+**Informed gap — APAC.** No verifiable 2026 country-level screen count for China or India: Omdia's
+tracker is paywalled and Statista's China series was not retrievable. One snippet reporting "active
+screens falling by 42 year over year to 498" **names no country and is therefore not recorded.**
+Deliberately left as a gap rather than estimated.
 
 ### LATAM
 
@@ -1499,6 +1641,63 @@ minor-protection law outside the EU. It is also the LATAM engagement most likely
   newsroom, because an organisation that has written a policy has committed to being able to
   **evidence** it.
 
+
+
+#### Theatrical & digital cinema — added 2026-11-26 (pass 10)
+
+**The channel.** Gower Street puts **Latin America at $2.65bn for 2026, up 9% on its 2025 estimate
+and still 5% below the 2017–2019 average.** The important detail is the composition: **admissions
+fell 8% in 2025** while revenue rose, so the growth is **price and premium formats, not attendance.**
+LATAM is also named across the sources as one of the Hollywood-driven markets carrying global
+growth, and — per an undated SMPTE note — one of the regions **still in transition to SMPTE-DCP**
+while North America is largely through it.
+
+**LATAM has the most concrete theatrical compliance calendar on earth, and zero tooling for it.**
+This is the sharpest regional finding of the pass. Three instruments, all real, all current:
+
+- **Brazil — screen quota.** **Decree 12.796 of 2025-12-23** makes the exhibition of Brazilian
+  feature films mandatory in cinemas nationwide **for the 2026 calendar year**, signed by President
+  Lula, with **Ancine** responsible for enforcement and for setting criteria for award-winning or
+  broad-audience works. Ancine then published **Instrução Normativa 175** to update the 2026 quota
+  rules after finding that **Cinemark had exploited a loophole** in the original framing. A
+  compliance obligation that was *already gamed and re-regulated inside one year* is the strongest
+  possible signal that the evidence trail is the product.
+- **Brazil — accessibility.** Ancine's accessibility obligations for commercial screenings are set
+  by **Instrução Normativa nº 165, de 2022**, binding on **both distributors and exhibitors**, with
+  Ancine's accessibility good-practice guide published in **July 2026**.
+- **Mexico — the new Film and Audiovisual Act.** A new **Federal Film and Audiovisual Law** replaces
+  the 1992 framework, retaining the **10% minimum screen time for national films** (Article 19 of the
+  1992 law) with **stricter enforcement on exhibitors**, monitored by the Ministry of the Interior,
+  and reportedly covering **accessibility for people with visual or hearing impairments**. **Status
+  flagged as unconfirmed**: a February 2026 source describes it as a proposal still advancing, a July
+  2026 summary describes it as enacted. Verify before a client commitment. This sits alongside the
+  Mexican copyright and labour amendments of **2026-05-14** already recorded in this file.
+
+**Note how this closes a loop in this KB.** `intel/market.md` already carried the Brazilian
+accessibility phrase *"in all formats in which cinematographic works are presented"* and Mexico's
+new cinema law — recorded as *regulatory* intelligence in earlier passes. This pass supplies the
+other half: **the tooling that would discharge those duties does not exist.** Open cinema
+accessibility code is **one repository with zero stars**, worldwide. The duty was in the KB for
+months with nothing to point at.
+
+**Opportunities — LATAM**
+
+1. **The quota-and-accessibility evidence trail (the flagship LATAM build).** One pipeline producing
+   two regulator-ready artifacts: a per-screening record proving the Brazilian quota was met under
+   IN 175, and a per-title record proving the IN 165 accessibility tracks were present and rendered.
+   Built on `ClairMeta` (BSD-3, so the client can own it). Pattern 29 and Pattern 30.
+2. **An Interop-and-SMPTE dual-path pipeline.** LATAM is still mid-transition; North American
+   pipelines are dropping Interop. A regional distributor needs both for longer than a US one does.
+3. **Premium-format yield analytics.** Revenue is rising on falling admissions, which is a pricing
+   and format-mix question, and the open box-office estate is 29 stars of 2017–2020 coursework.
+4. **Follow the Mexican statute.** If the Act is enacted as summarised, it pairs a 10% screen quota
+   with an accessibility duty and *stricter exhibitor enforcement* — the same artifact as the
+   Brazilian build, in a second large market, on a different legal basis.
+
+**Informed gap — LATAM.** Brazil's exact 2026 accessibility percentages and audio-description
+quotas under IN 165 were **not retrievable** (the Ancine guide is a `.docx` behind a gov.br
+download handler); the enactment status of Mexico's Act is **contradicted between sources**. Both
+recorded as gaps. No LATAM screen count was verifiable either.
 
 ## Globant positioning
 

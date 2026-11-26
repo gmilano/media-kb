@@ -793,3 +793,88 @@ file. A client engagement is commercial advantage. That benchmark cannot ship.
   agent that reads a platform's own age policy and decides a case.
 - **No open deepfake detector trained on 2026-era generators.** The three detection repos that exist
   are from 2020–2025 and the usable ones are non-commercial or stale. Measured, not assumed.
+
+## The theatrical & digital-cinema plane — measured 2026-11-26 (pass 10), and it is the emptiest plane in this KB
+
+This KB had, until today, no row for the distribution channel every studio release still starts in.
+Nine passes covered streaming, broadcast, live, podcast, archive, production, measurement, delivery
+and trust & safety. **The theatrical chain — the DCP that is shipped to a cinema, the key that
+unlocks it, and the validator that says it will play — was a literal zero.** The vocabulary probe
+that found it is recorded in `agents/trending.md`; the short version is that `digital cinema`,
+`asdcplib`, `dcp-o-matic`, `KDM`, `box office`, `theatrical`, `SMPTE ST 429`, `projector` and `TMS`
+all returned **zero hits across all eight files**, while the four apparent `DCP` hits were every one
+of them **HDCP** (copy protection, from pass 8) and the twenty `cinema` hits were OpenEXR and
+Brazilian and Mexican statute prose.
+
+### The agent layer, measured — and this is the tenth consecutive near-zero, by a distance
+
+| Query | Results | Top-6 star sum | What is actually there |
+|---|---|---|---|
+| `DCP automation agent` | **0** | 0 | Literal zero |
+| `theatrical distribution automation` | **0** | 0 | Literal zero |
+| `digital cinema LLM` | **0** | 0 | Literal zero |
+| `subtitle cinema DCP agent` | **0** | 0 | Literal zero |
+| `projection automation cinema` | 1 | 0 | A **Minecraft** cinema mod, 0★ |
+| `SMPTE DCP interop` | **0** | 0 | Literal zero |
+| `preshow advertising cinema` | **0** | 0 | Literal zero |
+| `cinema exhibitor data` | **0** | 0 | Literal zero |
+| `movie theater point of sale open source` | **0** | 0 | Literal zero |
+
+**Six literal zeros and three near-zeros in one plane.** Pass 4 reported "two literal zeros" as the
+record; pass 8's `pay-per-crawl` top-6 summed 9 stars; pass 9's thinnest query still returned
+something. This plane returns *nothing at all* for the automation of a chain that gates roughly
+**$34.6bn of 2025 box office** (Futuresource) across every commercial screen on earth. It is not a
+thin agent layer. It is an absent one.
+
+### ⚠️ Contamination — `cinema AI agent` is the sharpest false friend measured in this KB
+
+`cinema AI agent` returns **205 results and 526 stars in the top 6, and not one of them is about
+cinema.** Every hit is generative-video *prompt styling*:
+
+| Repo | Licence | ★ | What it actually is |
+|---|---|---|---|
+| [workingprototype/Fuobe](https://github.com/workingprototype/Fuobe) | MIT | 262★ | A ComfyUI creative studio |
+| [akseolabs-seo/cinematic-ui](https://github.com/akseolabs-seo/cinematic-ui) | MIT | 119★ | An agent skill for **website** design |
+| [Leo414x/AI_Cinematic_Prompt](https://github.com/Leo414x/AI_Cinematic_Prompt) | NOASSERTION | 87★ | HBO-look prompt skill |
+| [aedev-tools/kling-3-prompting-skill](https://github.com/aedev-tools/kling-3-prompting-skill) | MIT | 30★ | Kling 3 prompt skill |
+| [DenisHumen/cinema-skills](https://github.com/DenisHumen/cinema-skills) | MIT | 19★ | Claude skills for AI video |
+
+**In open source, "cinema" means "cinematic look" and never "movie theatre".** This is worse than
+pass 7's false friend, because the results are numerous, well-starred, permissively licensed and
+actively maintained — a careless pass would have written five plausible rows and all five would have
+been about video generation. The query that finds the real plane is the **artifact name**: `DCP`,
+`KDM`, `asdcplib`, `digital cinema package`. The pass-6 rule holds exactly: *the standard's name is
+the query.*
+
+A second abundance trap in the same plane: `cinema ticketing platform` returns **350 results** whose
+top five are 12★, 6★, 6★, 4★, 4★ — all student and portfolio CRUD apps. Read the results, not the
+total.
+
+### What stands in for an agent layer today
+
+Nothing, and the reason is worth stating because it is commercially useful rather than
+discouraging. The theatrical chain is **deterministic and already automated** — `dcp-o-matic` builds
+a package, `ClairMeta` validates it, a KDM unlocks it on a dated window. What is missing is not
+intelligence inside those steps but **judgement across them**: which of 400 incoming DCPs failed and
+why, which keys expire before which booking, which accessibility track is absent for which mandated
+screening. That is an orchestration problem over typed artifacts, which is the one shape agents are
+actually good at. See Patterns 28–30 in `compose/patterns.md`.
+
+### Informed gaps from this pass — searched, and genuinely not found
+
+- **No open theatre management system (TMS) or playout automation for cinema.** 350+ results across
+  two queries, ceiling 12★, every one a booking-form exercise. The single real candidate is
+  [1105821037/CineTMS](https://github.com/1105821037/CineTMS) (Apache-2.0, 5★, 2026-07-30), an APAC
+  cinema automation project — verified Apache-2.0 in its own `LICENSE` (11,357B), but at 5 stars it
+  is a bet, not a base.
+- **No open cinema accessibility tooling, under a US federal mandate.** `cinema accessibility app
+  captioning` returns **one repo with zero stars**. The DOJ's ADA Title III rule has required
+  captioning and audio-description equipment at the patron's seat in every digital auditorium since
+  December 2016. **A 0-star ceiling under a nine-year-old federal mandate** — sharper than pass 3's
+  56-star audio-description ceiling.
+- **No open box-office forecasting of any currency.** 103 results, top-6 sum **29 stars**, every one
+  student coursework from 2017–2020, none with a licence.
+- **No open KDM lifecycle manager with a user base.** See `repos/foundations.md`: the entire key
+  layer is 3 stars across its top eight repos.
+- **No open preshow/cinema-advertising stack.** Zero results. Cinema advertising is a real market
+  (Statista tracks it as its own APAC category) with no open substrate at all.

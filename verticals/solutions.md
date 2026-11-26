@@ -584,3 +584,86 @@ are [ello/ncmec_reporting](https://github.com/ello/ncmec_reporting) (7★, no li
 2022-03-29) and [afkzonagroup/rationale](https://github.com/afkzonagroup/rationale) (0★, Apache-2.0,
 2026-11-22). **The gap between "we removed it" and "we told the regulator we removed it" is
 unbuilt**, and it is the half with legal consequences.
+
+## The theatrical & exhibition tier — added 2026-11-26 (pass 10)
+
+This is the shortest tier in this file, and the shortness **is** the finding. Theatrical exhibition
+is a ~$34.6bn channel (2025 box office, Futuresource) running on roughly 200,000 screens worldwide,
+and it has **no open-source platform layer at all.** Not a weak one — an absent one.
+
+| Platform | Licence | ★ / forks | Last push | What it is |
+|---|---|---|---|---|
+| [1105821037/CineTMS](https://github.com/1105821037/CineTMS) | Apache-2.0 | 5★ / 1f | 2026-07-30 | 影院自动化放映控制系统 — cinema automation and theatre management. **The only real open TMS candidate found, anywhere.** Apache-2.0 verified in its own `LICENSE` (11,357B). APAC-origin |
+| [cth103/dcpomatic](https://github.com/cth103/dcpomatic) | GPL-2.0 | 175★ / 38f | 2026-11-24 | Not a platform, but the de-facto standard *application* of the tier: the tool festivals, distributors and post houses actually run to produce a DCP |
+| [ClairMeta/ClairMeta](https://github.com/ClairMeta/ClairMeta) | **BSD-3-Clause** | 106★ / 30f | 2026-10-10 | The validation service a platform would wrap. The only permissively licensed component in the whole tier |
+| [PostPerfection/kdmcourier](https://github.com/PostPerfection/kdmcourier) | AGPL-3.0 | 1★ / 0f | 2026-11-13 | KDM distribution for distributors — cinemas from FLM files, bookings. Two weeks old, 1 star. The nearest thing to a distribution platform |
+
+Four rows, and three of them are libraries or applications rather than platforms. Compare the
+trust & safety tier added in pass 9, which had a healthy permissive platform layer that arrived by
+donation; this tier has nothing to donate.
+
+### ⚠️ This tier does not merely break this file's licence law — it inverts it
+
+The law stated at the top of this file is *permissive at the component, copyleft at the platform*.
+Pass 8 recorded the first plane where it failed twice. **In the theatrical tier the inversion is
+total**: the applications and distribution tools are GPL/AGPL, and the only permissive licences are
+the validator and the codec substrate. The commercial consequence is concrete and belongs in the
+first week of any engagement:
+
+- **Validation, metadata and QC → can be built permissively** on `ClairMeta` (BSD-3) and
+  `asdcplib` (BSD-3). This is also where the client's pain is highest, which is a fortunate
+  alignment rather than a designed one.
+- **Authoring and packaging → cannot.** `dcpomatic`/`libdcp`/`libsub` are GPL-2.0(+),
+  `opendcp` GPL-3.0, `DcpToolkit` is MIT but 3★. Either contribute upstream, keep the copyleft
+  boundary at a process boundary (a service the client calls, not a library they link), or rewrite on
+  `asdcplib`.
+- **Key management → does not exist.** 3 stars across the entire open estate.
+
+### Gap: there is no open theatre management system, and the query proves why nobody noticed
+
+`theatre management system cinema` returns **31 results** and `cinema ticketing platform` returns
+**350** — and the ceiling across both is **12 stars**. They are student projects, bootcamp
+capstones and portfolio pieces, in volume. The abundance is what has kept this gap invisible: a
+search looks productive, and every result is a seat-booking form. The real artifacts of the tier —
+**TMS, LMS, playout scheduling, KDM ingest, FLM (Facility List Message) exchange** — have, between
+them, one 5-star Apache-2.0 repo.
+
+The incumbents are entirely proprietary: GDC, Dolby (CineAsset / CineInspect), Unique, Barco, Sony.
+**SMPTE's own `DPROVE2` DCP verifier is a member tool, not open source** — noted so nobody spends a
+pass looking for its repository.
+
+### Gap: no open cinema accessibility platform, under a nine-year-old US federal mandate
+
+The DOJ's ADA Title III rule (published 2016-12-02) requires every US movie theatre with a digital
+auditorium to **own and maintain** closed-captioning and audio-description equipment delivered to
+the patron's individual seat, on a scaling table — 4 captioning devices and 1 audio-description
+device for a single-auditorium site, 12 and 8+ for sixteen or more. `cinema accessibility app
+captioning` returns **one repository, with zero stars.**
+
+This is the **hardest version of pass 3's finding** anywhere in this KB. Pass 3 recorded a 56-star
+ceiling for audio description under a statutory mandate and called it the largest unmet mandate in
+media. Theatrical accessibility has a **0-star ceiling under a mandate nine years old**, and the
+rule's own limiting clause explains the market precisely: theatres must have the *equipment*, but
+the rule **does not require them to add captions or audio description to films not already
+distributed with those features.** So the obligation sits on the exhibitor, the content duty sits
+with the distributor, and the artifact that connects them — an accessibility track correctly
+authored into the DCP and verified before the key is issued — **has no platform, open or
+commercial, that treats it as a first-class object.** LATAM has gone further than the US here (see
+`intel/market.md`: Brazil's IN 165/2022 and Mexico's new Federal Film and Audiovisual Act), with the
+same zero tooling.
+
+### How to add the AI layer to this tier, specifically
+
+The chain is deterministic and already automated; what is missing is judgement *across* steps. Do
+not put a model inside `asdcplib`. Put an agent above the pipeline:
+
+1. **Ingest triage.** `ClairMeta` emits structured validation output per DCP. An agent reads 400 of
+   those a week, clusters failure modes, and tells an operations team which are reissues, which are
+   supplier-systematic and which are one-off — the pass-9 pattern of an agent over typed results.
+2. **Key-window reasoning.** KDMs carry dated validity per screen. An agent that joins bookings to
+   key windows and flags "this Thursday 19:40 screening has no valid key" is a small build against a
+   daily operational risk with **no open competitor at all**.
+3. **Accessibility conformance gate.** Check that mandated caption and audio-description tracks are
+   present, correctly labelled and actually render, *before* the key ships. This is Pattern 29.
+
+Full recipes: Patterns 28–30 in `compose/patterns.md`.

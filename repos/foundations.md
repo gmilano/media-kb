@@ -1333,3 +1333,136 @@ case. **Write the canonical path in a KB, because the old one is what a client's
 | [data-privacy-stack/presidio](https://github.com/data-privacy-stack/presidio) | MIT | 12,065★ / 1,472f | 2026-11-24 | PII detection, redaction, masking and anonymisation. **The largest permissive repo in this plane**, and the one most media clients actually need first — subtitle files, transcripts and UGC are full of personal data. Moved from `microsoft/presidio`. |
 | [NVIDIA/garak](https://github.com/NVIDIA/garak) | Apache-2.0 | 10,186★ / 1,523f | 2026-11-25 | LLM vulnerability scanner. The pre-launch test harness for any generative feature shipped to the public. |
 | [microsoft/PyRIT](https://github.com/microsoft/PyRIT) | MIT | 5,088★ / 1,128f | 2026-11-25 | AI red-teaming toolkit with automated scanning. |
+
+## The theatrical & digital-cinema plane — measured 2026-11-26 (pass 10)
+
+The channel this KB had no row for. 25 repos verified this pass, **25/25 URLs resolve**
+(`git ls-remote`, the only existence oracle that works from this session — see the measurement note).
+
+### ⛔ The finding of this pass: this is the first plane in this KB that is **copyleft end to end**
+
+Every other plane in this file obeys some version of "permissive at the pipeline, copyleft at the
+platform" (trend 4). **The theatrical chain inverts it completely: the authoring tools, the
+validators and the key managers are GPL-2.0, GPL-3.0 or AGPL-3.0 without exception, and the only
+permissive licences in the plane sit in the *substrate* — the codec, the container and one
+validator.** For Globant this is the single most important commercial fact in the plane:
+
+> **You cannot ship a proprietary client deliverable built on the DCP authoring chain.** `dcpomatic`,
+> `libdcp`, `libsub`, `opendcp`, `backports`/`dcp_inspect`, `dcpdoctor` and `kdmcourier` are all
+> copyleft. A client engagement that touches DCP authoring is either an open-source contribution, a
+> hosted-service play where the copyleft boundary is the process boundary, or a rewrite on top of
+> `asdcplib` + `openjpeg` (both permissive). Decide which in week one, not at delivery.
+
+The one escape hatch is real and worth naming: **ClairMeta is BSD-3-Clause**, so *validation* — the
+step a client is most likely to want embedded in their own pipeline — can be built permissively even
+though authoring cannot.
+
+### DCP authoring and packaging — GPL, and the canonical tool is active this week
+
+| Repo | Licence | ★ / forks | Last push | Notes |
+|---|---|---|---|---|
+| [cth103/dcpomatic](https://github.com/cth103/dcpomatic) | GPL-2.0 | 175★ / 38f | 2026-11-24 | **DCP-o-matic** — the canonical open-source DCP authoring application, and the tool every film-school and festival guide points at. Pushed **two days before this pass**: the most active project in the plane. |
+| [cth103/libdcp](https://github.com/cth103/libdcp) | GPL-2.0 | 29★ / 18f | 2026-11-03 | The read/write library underneath DCP-o-matic. This is the layer to call if you are building your own tool and can accept GPL. |
+| [cth103/libsub](https://github.com/cth103/libsub) | **GPL-2.0-or-later, in the file headers only** | 9★ / 3f | 2026-10-14 | Subtitle read/write. **No licence file of any kind** — see the licence finding below. |
+| [tmeiczin/opendcp](https://github.com/tmeiczin/opendcp) | GPL-3.0 | 134★ / 51f | **2020-04-28** | **OpenDCP.** Still the second-most-starred DCP tool and still recommended by QC guides, but **dormant for six and a half years.** Do not start new work here. |
+| [cth103/dcpomatic1](https://github.com/cth103/dcpomatic1) | GPL-2.0 | 8★ / 4f | 2020-06-27 | Legacy v1 line. Context row, not a recommendation. |
+| [brightfish-be/DcpToolkit](https://github.com/brightfish-be/DcpToolkit) | **MIT** | 3★ / 1f | 2026-06-22 | PHP library to read and write DCPs, from a Belgian (EMEA) cinema-tech company. **The only permissive authoring-side code in the plane** — and at 3★ it is a seed, not a base. Worth watching precisely because of its licence. |
+| [ruhrmann/dcp-renamer](https://github.com/ruhrmann/dcp-renamer) | GPL-3.0 | 3★ / 1f | 2021-03-11 | Renames DCPs to the ISDCF naming convention. Tiny, dormant, and solves a real daily annoyance. |
+| [adrievx/DCPInfo](https://github.com/adrievx/DCPInfo) | **none** | 0★ / 0f | 2025-04-25 | C# DCP parser. No licence — all rights reserved. Listed so nobody rediscovers it and assumes otherwise. |
+
+### Validation and QC — the one permissive layer, and the one with a user base
+
+| Repo | Licence | ★ / forks | Last push | Notes |
+|---|---|---|---|---|
+| [ClairMeta/ClairMeta](https://github.com/ClairMeta/ClairMeta) | **BSD-3-Clause** | 106★ / 30f | 2026-10-10 | **The only permissive DCP validator, and the most important row in this plane.** Python; checks asset integrity (MIME, size, hash), XSD schema validation of every XML, and digital-signature/certificate validation. Depends on `asdcplib`. **Moved org**: was `Ymagis/ClairMeta` — licence confirmed in its own `LICENSE` (1,470B, "Copyright © 2017 YMAGIS S.A."). |
+| [wolfgangw/backports](https://github.com/wolfgangw/backports) | **GPL-3.0** | 40★ / 2f | 2026-10-03 | **`dcp_inspect`** — deep inspection and validation of DCPs, the tool the BAVC QC guide pairs with DCP-o-matic. Active. Licence is real but **named `gpl.txt`** — see the finding below. |
+| [wolfgangw/digital_cinema_tools](https://github.com/wolfgangw/digital_cinema_tools) | **no licence file** | 100★ / 41f | 2024-01-15 | The predecessor distribution, and still the higher-starred of the two. Superseded by `backports`; **unlicensed and dormant two years.** Cite the successor, not this. |
+| [PostPerfection/dcpdoctor](https://github.com/PostPerfection/dcpdoctor) | AGPL-3.0 | 1★ / 0f | 2026-11-13 | A brand-new validator whose own site claims "135+ validation checks, KDM and IMF support". **1 star, 0 forks.** The claim is self-reported marketing; the adoption is measured. Watch it, do not stake a programme on it. |
+
+### ⛔ Two new ways a licence hides, both found in this plane, and one of them reverses a verdict
+
+This KB has catalogued eight ways a licence hides. This pass adds two, and the first one **nearly
+produced a wrong row in this file**:
+
+1. **The licence file is named after the licence.** `wolfgangw/backports` has no `LICENSE`, no
+   `LICENCE`, no `COPYING` — it has **`gpl.txt`** (32,473B, GNU GPL **version 3**, verified by
+   reading it). A fourteen-name probe across both `master` and `main` missed it, the GitHub API
+   reports `NONE`, and the README says nothing about licensing. The tool is GPL-3.0. **A shallow
+   clone and `ls` resolved in one call what eleven HTTP requests could not.**
+2. **The licence can live only in the source headers.** `cth103/libsub` has **no licence file at
+   all** — the shallow clone shows nothing licence-shaped at root — yet **73 of its source files
+   carry a full GPL-2.0-or-later header** (`Copyright (C) 2014 Carl Hetherington … either version 2
+   of the License, or (at your option) any later version`). It is unambiguously GPL-2.0+.
+
+   **This is the inverse of the `rslstandard/rsl` trap from pass 5, and the pair is now the rule:**
+   a repo with no licence file is *not* automatically all-rights-reserved, and a repo with no licence
+   file is *not* automatically licensed either. `rsl` had no file and no headers → default copyright
+   applies. `libsub` has no file and 73 headers → GPL-2.0+. **The distinguishing step is reading the
+   source, and it costs one shallow clone.** Pass 8 established that a 404 is never by itself proof a
+   licence is missing; this pass establishes the positive half: *absence of a licence file is not
+   evidence of either answer.*
+
+### The substrate — permissive, and the only place in this plane that is
+
+| Repo | Licence | ★ / forks | Last push | Notes |
+|---|---|---|---|---|
+| [uclouvain/openjpeg](https://github.com/uclouvain/openjpeg) | **BSD-2-Clause** (reported `NOASSERTION`) | 1,123★ / 543f | 2026-09-05 | **The DCI-mandated codec.** Digital cinema is JPEG 2000 by specification, and this is the reference open implementation. Licence hides in a **ninth** way: `LICENSE` exists but opens with `/*` — the text is **wrapped in a C comment block**, so every scanner reads it as source and reports `NOASSERTION`. Verified by reading: "the 2-clauses BSD License, included below". |
+| [cinecert/asdcplib](https://github.com/cinecert/asdcplib) | **BSD-3-Clause** (reported `NOASSERTION`) | 99★ / 65f | 2026-11-19 | **AS-DCP and AS-02 file access library — the industry's actual DCP/MXF implementation**, maintained by CineCert with support from D-Cinema manufacturers, and `ClairMeta`'s dependency. Licence is in `COPYING` (3,047B, "Copyright (c) 2003-2012, John Hurst", clause 3 = no-endorsement). **Permissive, active this month, and the correct foundation for a permissive theatrical build.** |
+| [GrokImageCompression/grok](https://github.com/GrokImageCompression/grok) | **AGPL-3.0** (reported `NOASSERTION`) | 300★ / 63f | 2026-11-23 | Self-describes as "World's Leading Open Source JPEG 2000 Codec", and it is the fastest. **It is AGPL-3.0** (37,281B licence file, verified). Faster than OpenJPEG and unusable in a proprietary deliverable: the performance/licence trade-off in this plane is explicit and unavoidable. |
+| [Netflix/photon](https://github.com/Netflix/photon) | Apache-2.0 | 259★ / 82f | 2026-11-20 | IMF validator — **already in this file**, and the bridge into this plane: IMF is the mastering format a DCP is made *from*. Apache-2.0, so the IMF side of the chain is permissive while the DCP side is not. |
+| [IMFTool/IMFTool](https://github.com/IMFTool/IMFTool) | GPL-3.0 | 145★ / 16f | 2026-11-19 | Editing IMF CPLs and creating new versions of an existing IMF package. Active, and the copyleft counterpart to Photon. |
+
+### ⚠️ The MXF container layer has been retired by its maintainers — measured, not assumed
+
+The broadcast-grade MXF toolchain this plane depends on has been **archived or relocated across the
+board**, and the most recently touched copy is a vendor fork:
+
+| Repo | Licence | ★ / forks | Last push | State |
+|---|---|---|---|---|
+| [bbc/bmx](https://github.com/bbc/bmx) | BSD-3-Clause | 88★ / 41f | 2025-09-29 | **ARCHIVED** — the BBC's MXF read/write utilities, the highest-starred of the set |
+| [Limecraft/ebu-libmxf](https://github.com/Limecraft/ebu-libmxf) | BSD-3-Clause | 17★ / 6f | 2024-11-15 | Active-ish; **EMEA vendor fork (Limecraft, Belgium) and the most recently touched copy in the family** |
+| [BBC-archive/libMXF](https://github.com/BBC-archive/libMXF) | BSD-3-Clause | 15★ / 7f | 2023-11-22 | **Relocated to the BBC's `-archive` org** — the relocation is itself the finding |
+| [sandflow/regxmllib](https://github.com/sandflow/regxmllib) | BSD-2-Clause | 39★ / 15f | 2026-11-22 | **ARCHIVED** — MXF→XML (RegXML, SMPTE ST 2001-1). Archived *four days before this pass* |
+
+**The pattern**: the container format every DCP and every broadcast master is wrapped in is
+permissively licensed and **no longer maintained by anyone with a public mandate.** The BBC retired
+its stack into an archive org; the EBU's library last moved in 2013 and lives on only through a
+Belgian vendor's fork; `regxmllib` was archived this month. This is the clearest case in the KB of
+**permissive and abandoned beating copyleft and alive** — and it is the opposite risk from the
+authoring layer above, where everything is alive and nothing is permissive.
+
+### Key delivery (KDM) — the crudest measured zero in this entire KB
+
+A KDM (Key Delivery Message) is the dated, per-screen cryptographic key **without which a film
+does not play.** It gates every commercial screening on earth. The open-source estate for managing
+them, in full:
+
+| Repo | Licence | ★ | Last push | Notes |
+|---|---|---|---|---|
+| [PostPerfection/kdmcourier](https://github.com/PostPerfection/kdmcourier) | AGPL-3.0 | 1★ | 2026-11-13 | KDM manager for distributors; cinemas from FLM files, bookings. The most serious attempt, two weeks old |
+| [theantiz/dcpkdm](https://github.com/theantiz/dcpkdm) | **none** | 1★ | 2026-03-06 | Automates KDM generation. Unlicensed |
+| [tobiasmiosczka/KdmManager](https://github.com/tobiasmiosczka/KdmManager) | GPL-3.0 | 0★ | 2026-04-16 | For projectionists, auto-downloads KDMs |
+
+`KDM cinema` returns **8 results whose star counts are 1, 1, 1, 0, 0, 0, 0, 0 — a top-eight sum of
+three stars.** That ties healthcare's `medical necessity` (3) as the crudest number ever recorded in
+this knowledge base, and it is attached to a harder object: medical necessity is a judgement, a KDM
+is **a file with a published SMPTE schema**. The capability exists in exactly one place —
+`asdcplib` can write KDMs, permissively — and **nothing open manages their lifecycle.** For a
+circuit running 400 screens against 30 distributors, key-window expiry is a daily operational risk
+with no open tooling and no commercial open alternative.
+
+### Measurement note — the oracle, and a correction to this KB's 422 rule
+
+- **`curl -sI https://github.com/<slug>` is useless from this session**: the agent proxy answers
+  `HTTP/1.1 200 Connection Established` and then GitHub's HTML returns **403**, for repos that
+  plainly exist. `git ls-remote https://github.com/<slug> HEAD` is the existence oracle (25/25 this
+  pass), and `raw.githubusercontent.com` serves licence files normally (control request: 200).
+- **The 422 rule from passes 8 and 9 holds but needed sharpening.** A `repo:<slug>` search returning
+  422 while `git ls-remote` succeeds does mean the slug no longer serves under that name — it caught
+  `Ymagis/ClairMeta` → `ClairMeta/ClairMeta` and `bbc/libMXF` → `BBC-archive/libMXF` this pass. **But
+  `gh api repos/<slug>` does not disambiguate it:** both returned an identical
+  `403 "GitHub access to this repository is not enabled for this session"`, which reads like a
+  permissions problem and is not one. **The resolver is an unqualified keyword search** (`q='libMXF'`),
+  which surfaced the new location and its forks in one call. And a new consequence worth watching
+  for: when the new owner is an `*-archive` org, **the relocation is the finding** — it means the
+  maintainer has formally retired the project.

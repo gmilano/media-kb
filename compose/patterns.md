@@ -1298,6 +1298,131 @@ synthetic-content rules in APAC, now confirmed from minor protection — **two i
 
 ---
 
+## Pattern 28 — DCP ingest triage: an agent over 400 validation reports a week
+
+**The problem.** A circuit, distributor or post house receives hundreds of DCPs a week. Each either
+plays or does not, and finding out costs a validation run plus a human reading its output. The
+failures are a mix of supplier-systematic (one vendor's encoder always mislabels reels),
+one-off corruption, and naming-convention drift. Nobody has time to see the pattern.
+
+**Why this is the right first build in the plane.** Validation is **the only step in the theatrical
+chain that can be built permissively** (trend 56), so the client can own and embed the result.
+
+**The stack.**
+
+| Role | Component | Licence | Why this one |
+|---|---|---|---|
+| Validator | [`ClairMeta/ClairMeta`](https://github.com/ClairMeta/ClairMeta) | **BSD-3-Clause** | The only permissive DCP validator. Checks asset integrity (MIME, size, hash), XSD schema validation of every XML, and digital signature/certificate validation. Python, so it embeds directly |
+| Low-level access | [`cinecert/asdcplib`](https://github.com/cinecert/asdcplib) | **BSD-3-Clause** | `ClairMeta`'s own dependency; the industry's real AS-DCP/MXF implementation, active 2026-11-19. Reach for it when you need per-essence detail ClairMeta does not surface |
+| Codec probe | [`uclouvain/openjpeg`](https://github.com/uclouvain/openjpeg) | **BSD-2-Clause** | The DCI-mandated JPEG 2000 reference implementation, for frame-level inspection |
+| Second opinion | [`wolfgangw/backports`](https://github.com/wolfgangw/backports) (`dcp_inspect`) | **GPL-3.0** | Deep inspection; the tool QC guides pair with DCP-o-matic. **GPL-3.0 — run it as a subprocess behind a service boundary, do not link it** |
+| Orchestration | Your agent framework | — | Reads structured validation output, not pixels |
+
+**Wiring.**
+
+1. Watch the ingest drop. For each package, run `ClairMeta` → structured JSON per check.
+2. For anything that fails, run `dcp_inspect` **as a separate process** for a deeper report. The
+   process boundary is the copyleft boundary: keep it, and GPL-3.0 does not reach your service.
+3. The agent's job is **across** reports, never inside one: cluster this week's failures by supplier,
+   encoder version, reel count and failure class; distinguish "this vendor's last 11 packages all
+   mislabel audio channels" from "this one package is corrupt".
+4. Emit two artifacts: an operations queue (what to reject, reissue, or accept with a note) and a
+   supplier scorecard. The scorecard is what renews the engagement.
+
+**Do not** put a model inside the validation step. The checks are deterministic and schema-defined;
+an LLM there adds nondeterminism to the one part of the chain that currently has none. The judgement
+is in the triage.
+
+**The measured opportunity.** `DCP automation agent` returns **zero results**. There is no open
+competitor, and the artifact is typed.
+
+---
+
+## Pattern 29 — The accessibility conformance gate: verify the mandated track before the key ships
+
+**The problem, and it is a legal one in three regions.** A mandated caption or audio-description
+track is either present in the DCP, correctly labelled, and actually renders — or the screening
+breaches a duty. Today nobody checks systematically, because the duties and the content sit with
+different parties:
+
+- **North America**: the DOJ ADA Title III rule (2016-12-02) obliges theatres to maintain
+  captioning and audio-description equipment at the patron's seat — but **explicitly does not**
+  oblige them to add those features to films not distributed with them.
+- **Brazil**: Ancine **IN 165/2022** binds **distributors and exhibitors** for commercial screenings.
+- **Mexico**: the new Federal Film and Audiovisual Act reportedly covers accessibility for visual and
+  hearing impairments (status flagged, see `intel/market.md`).
+
+**The equipment duty and the content duty are held by different parties and nothing joins them.**
+That join is the product.
+
+**The stack.**
+
+| Role | Component | Licence | Notes |
+|---|---|---|---|
+| DCP structural + subtitle asset validation | [`ClairMeta/ClairMeta`](https://github.com/ClairMeta/ClairMeta) | BSD-3-Clause | Validates the subtitle/caption assets' schema and signatures as first-class DCP assets |
+| Subtitle read/write | [`cth103/libsub`](https://github.com/cth103/libsub) | **GPL-2.0-or-later — in the source headers only, no licence file** | Use behind a service boundary. See trend 58: the absence of a `LICENSE` does **not** make this permissive |
+| Essence access | [`cinecert/asdcplib`](https://github.com/cinecert/asdcplib) | BSD-3-Clause | Reads the timed-text and audio essence the accessibility tracks live in |
+| Caption/IMSC rendering check | the accessibility stack already in `repos/foundations.md` (pass 3) | permissive | **Reuse, do not rebuild** — pass 3 already verified the interchange and rendering layer |
+| Evidence store | the OAIS-grade ingest from Pattern 14 | Apache-2.0 | The trail has to outlive the release window |
+| Reasoning | Your agent framework | — | Decides *sufficiency*, which is the one judgement call here |
+
+**Wiring.**
+
+1. On ingest, inventory every track in the package: picture, audio, subtitle, closed caption, audio
+   description, and their language and `Intrinsic`/`Type` labelling.
+2. Compare against the obligation for the **booking's jurisdiction** — not the distributor's home
+   market. This is a policy engine per jurisdiction, exactly as pass 8 concluded for APAC.
+3. Render-check, do not presence-check. A declared caption track that fails to render is the failure
+   mode that produces complaints, and presence in the CPL is not rendering.
+4. **Gate the key on the result.** This is the pattern's whole leverage: the KDM is the one
+   chokepoint in theatrical distribution that everyone already respects. An accessibility failure
+   that blocks key issuance gets fixed; a warning in a report does not.
+5. Emit a per-screening, per-title evidence record: what was present, what rendered, what was
+   missing, under which instrument, with timestamps.
+
+**The measured opportunity.** Open cinema-accessibility tooling worldwide: **one repository, zero
+stars**, against a US mandate nine years old and two active LATAM instruments (trend 61).
+
+---
+
+## Pattern 30 — KDM lifecycle reasoning: the 3-star layer under every screening on earth
+
+**The problem.** A KDM is valid for a named screen, for a dated window. A circuit runs hundreds of
+screens against dozens of distributors, each issuing keys on its own schedule and its own portal.
+The failure is specific, public and expensive: **a sold-out Thursday 19:40 show with no valid key.**
+
+**The measured void.** The entire open estate for KDM lifecycle management is **three repositories
+totalling three stars** (`kdmcourier` AGPL-3.0 1★, `dcpkdm` unlicensed 1★, `KdmManager` GPL-3.0 0★).
+This ties the crudest number in this knowledge base, and unlike `medical necessity` the object is
+**a file with a published SMPTE schema** (trend 57).
+
+**The stack.**
+
+| Role | Component | Licence | Notes |
+|---|---|---|---|
+| KDM/certificate handling | [`cinecert/asdcplib`](https://github.com/cinecert/asdcplib) | **BSD-3-Clause** | **The critical row: the capability to read and write KDMs exists, permissively, and is actively maintained (2026-11-19).** Build here, not on the AGPL tooling |
+| Package identity | [`ClairMeta/ClairMeta`](https://github.com/ClairMeta/ClairMeta) | BSD-3-Clause | Resolves which CPL a key must match |
+| Prior art to read, not to link | [`PostPerfection/kdmcourier`](https://github.com/PostPerfection/kdmcourier) | **AGPL-3.0** | Two weeks old, 1★. Read it for the FLM/booking model it assumes; **do not link it** — AGPL reaches a hosted service |
+| Exhibition-side state | [`1105821037/CineTMS`](https://github.com/1105821037/CineTMS) | Apache-2.0 | The only open TMS-shaped project in existence (5★, APAC). The permissive place to get screen and session state |
+| Reasoning | Your agent framework | — | Joins bookings × screens × key windows |
+
+**Wiring.**
+
+1. Build a key inventory: for every KDM, the target screen certificate, the CPL it unlocks, and its
+   validity window — parsed with `asdcplib`, stored as typed records.
+2. Join against the booking schedule (from `CineTMS` or the client's TMS).
+3. The agent reasons over the join: which sessions have no valid key, which keys expire mid-run,
+   which screens were re-certified after a projector swap and so need reissue, which distributor is
+   systematically late.
+4. Escalate with a specific ask per distributor — "reissue CPL *X* for screens 4, 7, 11, window
+   starting Thursday" — rather than a dashboard nobody reads at 18:00.
+
+**Licence discipline for this pattern.** `asdcplib` (BSD-3) is permissive and does the cryptographic
+work; every *product* in this layer is AGPL/GPL or unlicensed. **Build on the library, read the
+products.** That is the whole reason this pattern is buildable at all.
+
+---
+
 ## Anti-patterns — learned the hard way in this KB
 
 1. **Don't ship HunyuanVideo to EMEA or South Korea.** Its license excludes the EU, UK and KR by name.
@@ -1396,3 +1521,27 @@ synthetic-content rules in APAC, now confirmed from minor protection — **two i
    succeeds means a rename, which caught `facebook/ThreatExchange` → `meta/ThreatExchange`,
    `NVIDIA/NeMo-Guardrails` → `NVIDIA-NeMo/Guardrails` and `microsoft/presidio` →
    `data-privacy-stack/presidio` in a single pass.
+
+- **Do not promise a theatrical pipeline "all open source" without naming the licence boundary.**
+  Added 2026-11-26 (pass 10). The DCP chain is **copyleft end to end**: `dcpomatic`, `libdcp`,
+  `libsub`, `opendcp`, `dcp_inspect`, `dcpdoctor` and `kdmcourier` are GPL-2.0, GPL-3.0 or AGPL-3.0,
+  and the fastest JPEG 2000 codec (`grok`, 300★) is **AGPL-3.0**. Only the substrate (`openjpeg`
+  BSD-2, `asdcplib` BSD-3) and one validator (`ClairMeta` BSD-3) are permissive. A proprietary
+  client deliverable can be built on validation; it cannot be built on authoring. Decide in week
+  one. This is the same mistake as the pass-5 rule about rights and royalty stacks, in a new plane.
+- **Do not search for cinema with the word "cinema".** Added 2026-11-26 (pass 10). `cinema AI agent`
+  returns 205 results and 526 top-six stars, every one about *cinematic look* in video generation —
+  permissively licensed, actively maintained and completely irrelevant. Search the **artifact name**:
+  `DCP`, `KDM`, `asdcplib`, `digital cinema package`. And never read a result total as coverage:
+  `cinema ticketing platform` returns 350 student CRUD apps with a 12-star ceiling.
+- **Do not conclude "unlicensed" from a missing `LICENSE` file, and do not conclude "licensed"
+  either.** Added 2026-11-26 (pass 10). `wolfgangw/backports` is GPL-3.0 via a file named
+  **`gpl.txt`** that a fourteen-name probe missed; `cth103/libsub` has no licence file at all and
+  **73 GPL-2.0+ source headers**; `rslstandard/rsl` (pass 5) has neither and is therefore
+  all-rights-reserved. One shallow clone distinguishes all three. **The absence of a licence file is
+  the start of the check, not its result.**
+- **Do not treat a permissive licence as a safety signal on its own.** Added 2026-11-26 (pass 10).
+  The MXF container layer under every DCP and broadcast master is BSD-licensed and **retired**:
+  `bbc/bmx` archived 2025-09-29, `sandflow/regxmllib` archived 2026-11-22, `bbc/libMXF` relocated
+  into an `-archive` org, the EBU's library last touched in 2013. Permissive-and-abandoned is a
+  worse dependency risk than copyleft-and-alive, and no licence scan, SPDX field or SBOM reports it.

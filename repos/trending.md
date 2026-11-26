@@ -10,6 +10,78 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 10: the theatrical & digital-cinema infrastructure (25 verified repos, 25/25 resolved)
+
+### Headline: the first plane in this KB that is **copyleft end to end**, and the keys are a 3-star layer
+
+The channel this KB had never recorded. Nine passes covered streaming, broadcast, live, podcast,
+archive, production, measurement, delivery and trust & safety; **the DCP shipped to a cinema, the
+KDM that unlocks it and the validator that clears it were a literal zero across all eight files.**
+
+| Layer | Repos | Licence shape | State |
+|---|---|---|---|
+| Authoring | `dcpomatic` 175★, `libdcp` 29★, `libsub` 9★, `opendcp` 134★, `DcpToolkit` 3★ | **GPL-2.0 / GPL-3.0**, one MIT outlier | `dcpomatic` pushed **2026-11-24**; `opendcp` dormant since **2020-04-28** |
+| Validation | `ClairMeta` 106★, `backports` 40★, `digital_cinema_tools` 100★, `dcpdoctor` 1★ | **BSD-3 / GPL-3 / AGPL-3 / none** | `ClairMeta` is the only permissive one |
+| Substrate | `openjpeg` 1,123★, `asdcplib` 99★, `grok` 300★ | **BSD-2 / BSD-3 / AGPL-3** | all active; `asdcplib` 2026-11-19 |
+| Container | `bmx` 88★, `regxmllib` 39★, `BBC-archive/libMXF` 15★, `Limecraft/ebu-libmxf` 17★ | BSD-2 / BSD-3 | **three of four archived or relocated** |
+| IMF bridge | `Netflix/photon` 259★, `IMFTool` 145★ | Apache-2.0 / GPL-3.0 | both active |
+| Keys (KDM) | `kdmcourier` 1★, `dcpkdm` 1★, `KdmManager` 0★ | AGPL-3 / none / GPL-3 | **3 stars in the whole layer** |
+| Exhibition | `CineTMS` 5★ | Apache-2.0 | APAC-origin, and the only real candidate |
+
+### The KDM layer — ties the crudest number ever recorded in this KB
+
+`KDM cinema` returns **8 results with star counts 1, 1, 1, 0, 0, 0, 0, 0 — three stars in total.**
+That equals healthcare's `medical necessity` (3) and beats pass 8's `pay-per-crawl` (9), and it is
+attached to a *harder* object than either: a KDM is a file with a published SMPTE schema, not a
+judgement call, and **no film plays in any commercial cinema on earth without one.** `asdcplib` can
+write them, permissively. Nothing open manages their lifecycle — windows, expiry, per-screen
+reissue, 400 screens against 30 distributors.
+
+### ⚠️ The MXF container layer has been formally retired by its maintainers
+
+Measured, not inferred. [`bbc/bmx`](https://github.com/bbc/bmx) (BSD-3, 88★) is **ARCHIVED**
+(2025-09-29). [`sandflow/regxmllib`](https://github.com/sandflow/regxmllib) (BSD-2, 39★, MXF→XML per
+SMPTE ST 2001-1) was **ARCHIVED on 2026-11-22 — four days before this pass.**
+[`bbc/libMXF`](https://github.com/BBC-archive/libMXF) has been **relocated into the BBC's `-archive`
+org**. The EBU's own library last moved in 2013 and survives only through
+[`Limecraft/ebu-libmxf`](https://github.com/Limecraft/ebu-libmxf) (BSD-3, 17★, 2024-11-15), a
+Belgian vendor's fork — **the most recently touched copy in the family is maintained by a company,
+not a standards body.**
+
+This is the clearest instance in this KB of **permissive-and-abandoned versus copyleft-and-alive**,
+and the two risks sit one layer apart: the container beneath the DCP is free to use and unmaintained;
+the tools that write the DCP are maintained and copyleft. Neither is the risk a licence scanner
+reports.
+
+### ⛔ Three licences that resolve differently from what the API says
+
+| Repo | API says | Actually is | Where it hides |
+|---|---|---|---|
+| [`uclouvain/openjpeg`](https://github.com/uclouvain/openjpeg) | `NOASSERTION` | **BSD-2-Clause** | `LICENSE` exists but **opens with `/*`** — the text is wrapped in a C comment block, so scanners read it as source. **A ninth way a licence hides.** |
+| [`cinecert/asdcplib`](https://github.com/cinecert/asdcplib) | `NOASSERTION` | **BSD-3-Clause** | `COPYING`, 3,047B, "Copyright (c) 2003-2012, John Hurst", clause 3 = no-endorsement |
+| [`GrokImageCompression/grok`](https://github.com/GrokImageCompression/grok) | `NOASSERTION` | **AGPL-3.0** | 37,281B `LICENSE`. The fastest open JPEG 2000 codec is **AGPL** — the performance/licence trade-off in this plane is explicit |
+
+Plus the two new hiding places carried into `repos/foundations.md`: `wolfgangw/backports` licensed by
+**`gpl.txt`** (GPL-3.0, missed by a 14-name probe) and `cth103/libsub` licensed **only in 73 source
+headers** (GPL-2.0+). The second one **reversed a verdict mid-pass** — it was written down as
+unlicensed until a shallow clone showed the headers.
+
+### Measurement note — the probe needed extending for the seventh time, and the oracle changed
+
+- **`curl -sI` does not work against github.com from this session.** The agent proxy answers
+  `200 Connection Established` and GitHub's HTML then returns **403** for repos that plainly exist.
+  **`git ls-remote` is the existence oracle** — 25/25 this pass — and `raw.githubusercontent.com`
+  serves licence files normally (control: 200). Recorded because the standing instruction to verify
+  URLs with `curl -sI` would have failed every one of these 25 real repos.
+- **Licence-name filenames join the probe** (`gpl.txt`, and by extension `agpl.txt`, `mit.txt`,
+  `apache-2.0.txt`). The probe now covers 15 names across two branches and **still** needs a shallow
+  clone as the fallback, because a per-file-header licence cannot be found over HTTP at all.
+- **The 422 rename detector holds but does not self-diagnose**: `gh api repos/<slug>` answers
+  `403 "not enabled for this session"` for a renamed repo, which reads like a scope problem. Resolve
+  with an **unqualified keyword search**, not the repos endpoint.
+
+---
+
 ## 2026-11-26 — pass 9: the trust & safety infrastructure (62 verified repos, 62/62 resolved)
 
 The enforcement substrate under the minor-protection, illegal-content and transparency duties this

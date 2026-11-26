@@ -9,6 +9,52 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 28: the age-rating, classification & child-audience plane (**an empty agent layer for a reason no previous pass has recorded: legal attribution of judgment**)
+
+Agents and classifiers only; the vocabulary, mapping and enforcement repos for this plane are in
+`repos/trending.md` pass 28.
+
+**What this plane is.** Not *is this viewer old enough* (that was pass 9's age-assurance work, and the
+EU shipped code for it). This plane is **what rating a title carries in which territory, how it
+travels in the metadata, and what the player does with it.** 69 terms were grepped against all eight
+files before any web search: `age rating`, `COPPA`, `PEGI`, `BBFC`, `FSK`, `ESRB`, `KMRB`,
+`parental control`, `kids content` and `classificação indicativa` came back at **literal zero**.
+
+**The measurement, and it is the starkest agent-layer zero in twenty-eight passes:**
+`content classification agent MCP` returns **nothing at all** — an empty result set, not a contaminated
+one. `age rating MCP server`, `age rating agent LLM` and `video content moderation agent` return
+hobby projects at 0 stars. `OARS rating` returns **exactly one repository in all of GitHub**.
+
+**The new reason, and it generalises to all twelve industries.** Passes 3, 5, 7 and 16 explained empty
+agent layers by regulatory burden, closed content licences and operating cost. This plane adds a
+fourth and cleaner mechanism: **judgment that is legally attributed to a named party cannot be
+delegated to a model.** The proposed EU KIDS Act would require an app-store operator to *publish the
+methodology, criteria and sources* behind its age ratings. "The classifier returned 16" is not a
+methodology, and a model is not a party that can be held to one. Where the law demands an
+*explanation*, the opportunity is a **data model**, not an agent.
+
+**What exists instead — and the licence is the whole story.** Every open artefact in this plane
+detects nudity or estimates a face's age. [infinitered/nsfwjs](https://github.com/infinitered/nsfwjs)
+(**MIT**, 9,038★/596f, 2026-10-29) is the only permissive, maintained, widely-adopted detector and
+the one to build on; [WildChlamydia/MiVOLO](https://github.com/WildChlamydia/MiVOLO)
+(**Apache-2.0**, 546★/99f, 2026-06-04) is the best-licensed age estimator;
+[notAI-tech/NudeNet](https://github.com/notAI-tech/NudeNet) (**AGPL-3.0**, 2,510★/443f) is the trap —
+in the request path of a hosted service the copyleft reaches the service.
+[EmotionEngineer/EmotionPlayer](https://github.com/EmotionEngineer/EmotionPlayer) (**MIT**, 57★/15f,
+2025-12-18) is the only repo found anywhere that tries to derive a *title-level age rating from the
+content itself*. 57 stars. Cite it as evidence the idea is unclaimed, not as a component.
+
+**The unbuilt thing, named precisely:** no open model emits a *territory's descriptor set*. A board
+weighs violence, drugs, language, discrimination and horror; Brazil accepts a closed list of exactly
+ten content descriptors and *"all other reasons are considered invalid"* (MovieLabs' own note, citing
+the gov.br ClassInd 2021 guide). Detectors emit classes; regulators consume descriptors. **The
+mapping between them is the product, and nobody has built it.**
+
+⚠️ **Contamination, and two of these are the sharpest false friends in this KB.** `PEGI api` → 6
+results, **0 relevant**, every one a misspelling of *pagination* (`PegiskaAPI`, `peginationBloc`,
+`Pegion-News`). `ESRB API` → 6 results, **0 relevant**, all IGDB/RAWG hobby projects. `age rating` →
+**1,147 total results, ~5 relevant**: pass 8's rule restated — **read the results, not the total.**
+
 ## 2026-11-26 — pass 27: the production-finance, soft-money & cost-accounting plane (**the thinnest agent layer in the KB: one media-specific repo, one star, and a LICENSE that says "all rights reserved"**)
 
 Agents only; the ledger, rules-as-code and solver repos for this plane are in `repos/trending.md` pass 27.

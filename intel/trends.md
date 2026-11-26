@@ -2853,3 +2853,88 @@ makes it the best-licensed plain-text ledger of the three. **The API's `NOASSERT
 it concealed a BSL trap, a dual-edition copyleft and a clean BSD grant in the same search.** Pass 5's
 rule stands and now has a commercial edge: in this category, **read the file before you quote the
 licence** — the most-starred result is the one most likely to be unusable.
+
+## The age-rating & classification plane — trends, measured 2026-11-26 (pass 28)
+
+### T1 — The rating itself is becoming a regulated artefact, not a courtesy label
+
+For thirty years an age rating was a board's advisory output, printed on a box. In 2026 four
+jurisdictions moved it into the compliance surface at once, and in two of them **the obligation is
+specifically about the rating's presence in the metadata**:
+
+- **Brazil, Portaria 1.048/2025.** Main provisions in force since **2025-11-17**; **articles 48–57
+  take effect 2026-03-17.** Ratings must be displayed before the work *and be available in catalogue
+  descriptions, trailers and promotional materials*, covering streaming and VOD. **This is a metadata
+  obligation, not a display obligation** — it is satisfied by a catalogue pipeline, which is exactly
+  what this plane is.
+- **EU, the proposed KIDS Act** (COM(2026) 681, procedure **2026/0286 (COD)**, Commission text
+  September 2026, Council working documents October 2026). App-store providers would have to operate
+  an age-rating system **and publish, in clear and accessible terms, the methodology, criteria and
+  sources used.** Article 17 provides for voluntary EU codes of conduct to harmonise age-rating
+  methods. **Still a proposal — not adopted law.**
+- **AVMSD** is formally scheduled for revision in **Q3 2026**, and a Council working document notes
+  the directive refers only to *age verification* and does not mention *age estimation* as an
+  alternative assurance method.
+- **Korea.** Per Microsoft's publishing guidance, **before January 2026 the GCRB could only rate
+  titles below 19+; it has since expanded to rate 19+ alongside GRAC.** For digital-only content IARC
+  ratings can apply **unless the title is rated 19**, which requires a GRAC rating.
+
+**The trend to sell against:** a rating is becoming a *data-quality and traceability* problem with a
+statutory deadline attached. The firm that treats it as a metadata pipeline wins; the firm that
+treats it as a UI badge rebuilds it in March.
+
+### T2 — The duty is shifting from "restrict" to "explain", and that favours open vocabularies
+
+The KIDS Act's distinctive feature is not the restriction — it is the **publication of methodology,
+criteria and sources.** A board certificate is a black box: it yields a rung and no reasoning. A
+model is worse: it yields a rung and unreproducible reasoning. **An OARS-style declared-criteria
+vocabulary is the only one of the three that is natively explainable**, because the criteria *are*
+the data.
+
+This is the most commercially useful inference in the pass: **where regulation demands explanation,
+the deliverable is a data model, not a classifier.** It also explains the empty agent layer — see T4.
+
+### T3 — Age *assurance* got code from a regulator; age *rating* got nothing from anyone
+
+Pass 9 recorded the European Commission shipping the **Age Verification Blueprint as working
+software** (EUPL-1.2 / Apache-2.0, nine repos). Set that against this plane: the equivalent artefact
+for *rating* does not exist anywhere. **The regulator published code for checking the user and
+nothing for classifying the content** — even though the KIDS Act would impose duties on both.
+
+The asymmetry is the opportunity. Checking the viewer is a solved, commoditised, well-funded problem
+(age-assurance platforms are a multi-billion-dollar market; see `intel/market.md` pass 28). Rating
+the title is unsolved, unfunded and about to be mandatory in two regions.
+
+### T4 — Fourth mechanism for an empty agent layer: legal attribution of judgment
+
+This KB has now explained empty agent layers four ways: regulatory burden (pass 3), closed content
+licence (passes 5, 16), operating cost (pass 7) and — new here — **legal attribution**. A statutory
+classification is an act attributed to a named party. `content classification agent MCP` returns
+**literally nothing**; `OARS rating` returns **one repository in all of GitHub**.
+
+**Generalisable rule for the other eleven industries:** before promising an agent, ask whether the
+judgment it would make is one a *named party must sign*. If it is, the agent can prepare the
+evidence, draft the declaration and check consistency — but a human or an institution issues it, and
+the product is the **evidence pack**, not the decision.
+
+### T5 — The open estate's deprecation debt is now measurable
+
+Three findings in this plane are the same finding: **open rating data outlives the ladders it
+describes, and nothing carries the expiry.** Jellyfin's `br.json` has a `9` rung that is not on
+ClassInd's current ladder, inherited from an upstream entry flagged `Deprecated=true` whose flag did
+not travel. The MovieLabs dataset's newest `LastChecked` anywhere is **2023-07-11**, with 25 of 110
+systems carrying none at all and the **US/MPAA entry unvalidated since 2013**. AppStream's authority
+is a Wikipedia article.
+
+**The practical control:** any ratings table a client depends on needs a `validAsOf` date and an owner,
+and a test that fails when it ages past a threshold. None of the open implementations has one. This is
+a small, concrete, sellable piece of engineering hygiene — and it is the kind of thing that turns a
+compliance finding into a maintenance contract.
+
+### T6 — One ladder per medium, not one per country — and the open mapping gets this wrong
+
+Measured in the dataset: Germany carries **three** systems (`USK` for games, `FSK` for film, `FSF`
+for broadcast); the UK carries `BBFC` for film while AppStream maps `GB → PEGI`. A film catalogue
+rated through the games mapping is **wrong in Germany and wrong in the UK**. Any client-facing model
+must key ratings by `(territory, medium, system)` — and the open estate keys them by country alone.
+

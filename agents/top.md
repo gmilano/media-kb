@@ -2745,3 +2745,70 @@ who gets paid back first — has **no agent at all, in any licence**.
 | Recoupment-waterfall agent (who recoups, in what order, at what corridor) | `recoupment waterfall` = **2 repositories on all of GitHub.** The better one, [0xSplits/splits-recoup](https://github.com/0xSplits/splits-recoup) (6★), has **no licence file** — probed 8 filenames × 2 branches — and is a 2023 Solidity contract for crypto splits, not a film waterfall |
 | Audit-evidence agent (assemble the cost report, ledger and payroll into a certifiable claim pack) | No repo. This is the plane's **shortest path to delivery** because the client already owns every input and the deliverable is a document, not a system: **Pattern 27.5** |
 | Completion-bond / E&O risk agent | `completion bond film` = **0 repositories, literal zero.** `errors and omissions insurance` = 6, **0 relevant** (five are `api-evangelist` API-profile stubs, one is a 2018 university assignment). The entire risk-transfer layer of film finance is absent from open source |
+
+## The age-rating & classification plane has no agent layer — measured 2026-11-26 (pass 28)
+
+Scope of this plane: **what rating a title carries, in which territory, how that rating travels in the
+metadata, and what the player does with it.** This is the inverse of pass 9 (trust & safety), which
+asked *is this user old enough* and *is this user-generated post harmful*. This pass asks
+*what is this title rated in Brazil, and did the right number arrive in the catalogue*.
+
+The plane was still open after twenty-seven passes. Before searching the web, 69 candidate terms were
+grepped against all eight files. `age rating`, `COPPA`, `PEGI`, `BBFC`, `FSK`, `ESRB`, `KMRB`,
+`parental control`, `kids content` and `classificação indicativa` all scored **literal zero**. The
+only artefact anywhere in the KB was a single row for `MovieLabs/cmr-ratings` added in pass 16 —
+1 star, no licence, one line of description. That row turned out to be the most under-described
+artefact in this KB, and sizing it is the main result of this pass (see `repos/foundations.md`).
+
+### The eighth consecutive confirmation of this KB's structural law — and the first time the blocker is *legal attribution*
+
+| Query | Result |
+|---|---|
+| `content classification agent MCP` | **0 results — literally empty** |
+| `age rating MCP server` | 6 results, **0 relevant** (agent-reputation scores, a news MCP, App Store Connect) |
+| `age rating agent LLM` | 6 results, **0 relevant**, top hit is a pull-request review agent |
+| `video content moderation agent` | 6 results, **all 0 stars**, all student or demo projects |
+| `OARS rating` | **1 result** in all of GitHub — `hughsie/oars` itself |
+
+There is no agent layer, and this time the reason is neither regulatory burden (pass 3), nor a closed
+content licence (passes 5 and 16), nor operating cost (pass 7). It is **legal attribution of
+judgment**. A statutory age rating is an act attributed to a *named authority* — a board, or, under
+the proposed EU KIDS Act, an app-store operator who must **publish the methodology, criteria and
+sources** behind its rating. A probabilistic classifier cannot hold an attribution duty: "the model
+said 16" is not a methodology a regulator can read, and it is not a party anyone can hold to it.
+
+**The sellable consequence, and it is the most useful sentence in this pass:** an *open, declared*
+criteria vocabulary satisfies a published-methodology duty far more naturally than a closed board
+certificate or a black-box classifier does. The duty the EU is drafting is a duty to *explain*, and
+explanation is a data-model problem.
+
+### ⚠️ Contamination warnings — two of the sharpest false friends in this KB
+
+- **`PEGI api` → 6 results, 0 relevant.** Every hit is a misspelling of *pagination*:
+  `PegiskaAPI`, `peginationBloc`, `API-handling-Pegination`, `Pegion-News`. The European games rating
+  system collides totally with a typo of the commonest word in web development.
+- **`ESRB API` → 6 results, 0 relevant.** All are IGDB/RAWG game-database hobby projects at 0 stars.
+- **`age rating` → 1,147 total results, roughly 5 relevant.** Pass 8's rule holds and is worth
+  restating: **read the results, not the total.** Shortening a query can turn a false zero into a
+  false abundance.
+- **`maturity rating API` → 1 result**, a personal book-tracking project from 2020.
+
+### What stands in for an agent layer today — generic classifiers, and the licence is the whole story
+
+None of these is an age-rating system. They are signal detectors a human classifier can use as
+evidence, and the licence decides whether a client can ship them.
+
+| Repo | Licence | Stars / forks | Pushed | What it is, and the honest limit |
+|---|---|---|---|---|
+| [infinitered/nsfwjs](https://github.com/infinitered/nsfwjs) | **MIT** (`LICENSE`, 1,075 B) | 9,038★ / 596f | 2026-10-29 | Client-side NSFW detection in TensorFlow.js. **The only permissive, maintained, widely-adopted detector in this plane** — and the one to build on. Five classes, not an age ladder. |
+| [serengil/deepface](https://github.com/serengil/deepface) | **MIT** | 23,740★ / 3,222f | 2026-11-20 | Face analysis including age estimation. Relevant to *age assurance of the viewer*, not to rating the title. Pass 9's plane, listed here because teams conflate the two. |
+| [WildChlamydia/MiVOLO](https://github.com/WildChlamydia/MiVOLO) | **Apache-2.0** (11,357 B) | 546★ / 99f | 2026-06-04 | Age & gender transformer. The strongest-licensed age *estimator* found. Same caveat: viewer, not title. |
+| [notAI-tech/NudeNet](https://github.com/notAI-tech/NudeNet) | **AGPL-3.0** (34,523 B) | 2,510★ / 443f | 2026-06-09 | Nudity detection. Already in this KB from pass 9. **AGPL — if it is in the request path of a hosted service, the copyleft reaches your service.** Do not put it in a client SaaS without counsel. |
+| [GantMan/nsfw_model](https://github.com/GantMan/nsfw_model) | **NOASSERTION** | 2,113★ / 304f | 2024-02-26 | Keras NSFW detector. Two years stale and the licence does not resolve to a known SPDX id. Read the stars as history. |
+| [EmotionEngineer/EmotionPlayer](https://github.com/EmotionEngineer/EmotionPlayer) | **MIT** (`LICENSE`, 1,069 B) | 57★ / 15f | 2025-12-18 | A video player that analyses content to derive an age rating. **The only repo found that attempts title-level rating from the content itself.** 57 stars — a demonstration of the idea, not a product. Cite it as proof the idea is unclaimed, not as a component. |
+
+**The gap worth naming to a client:** every artefact above detects *nudity* or estimates a *face's
+age*. A national rating ladder weighs violence, drugs, language, discrimination, horror and — in
+Brazil's case — a closed list of exactly ten permitted content descriptors. **No open model emits a
+territory's descriptor set.** That is the unbuilt thing, and the EU's published-methodology duty is
+what would make a client pay for it.

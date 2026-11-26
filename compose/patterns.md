@@ -4244,3 +4244,138 @@ Read the file. **And the finance-specific corollary: in the accounting/ERP categ
 correlates with licence risk** — the most-starred result is the one most likely to be
 source-available-but-not-open, because that is the business model that funds the marketing that earns
 the stars. The 10,349★ result was the only unusable one in its tier.
+
+## Age-rating, classification & child-audience recipes — added 2026-11-26 (pass 28)
+
+All four recipes assume the central finding of this plane: **a rating is a `(system, value)` pair and
+nothing in the open estate models it as one.** That single schema decision is what makes these
+patterns work and its absence is what breaks every open implementation surveyed.
+
+## Pattern 28.1 — The territory-correct rating resolver: the small fix that makes everything else safe
+
+**The problem, measured not assumed.** `jellyfin/jellyfin` (GPL-2.0, 59,787★) ships 45 per-territory
+rating tables and **none carries a `system` field**. When the viewer's country table misses, the
+source falls back — verbatim — to *"check all ratings systems, starting with US"*, then walks every
+other country. The token `16` is a valid rung on the PEGI, USK, DJCTQ, GRAC and Russian ladders and
+means different things on each. **A German `16` can be scored by the US table.**
+
+**The recipe.**
+
+1. **Model the pair.** One table: `(territory, medium, system, value, min_age, min_age_supervised,
+   deprecated, valid_as_of, source_uri)`. `medium` is not optional — Germany runs `USK` (games),
+   `FSK` (film) and `FSF` (broadcast), and the UK runs `BBFC` for film where the open mapping sends
+   `GB → PEGI`.
+2. **Seed the ladders** from [MovieLabs/cmr-ratings](https://github.com/MovieLabs/cmr-ratings) —
+   110 systems, 77 territories — **as a worklist, never as a vendored dependency.** It has no licence
+   file and no README: default copyright applies. Use it to know which boards exist and what their
+   rungs look like, then **re-derive each ladder you actually ship from that board's own publication**
+   and record the URI in `source_uri`.
+3. **Port the mapping logic** from [ximion/appstream](https://github.com/ximion/appstream)
+   (LGPL-2.1) — `as-content-rating.c`, with `as_content_rating_system_from_locale()` as the reference
+   for territory selection. Port the *structure*; re-source the *data*, because AppStream's own
+   comment names Wikipedia as its authority.
+4. **Resolve strictly, and fail loudly.** An unqualified rating string must raise, never guess. Delete
+   the US fallback. If a title arrives with `16` and no system, that is a **data-quality incident at
+   ingest**, not a runtime decision.
+5. **Add the control nobody has:** a test that fails when any ladder's `valid_as_of` ages past a
+   threshold. The reason is in the data — the dataset's newest `LastChecked` anywhere is
+   **2023-07-11**, and its US/MPAA entry has not been validated since **2013-09-28**.
+
+**Deliverable:** a resolver library plus a seeded ladder table with provenance. Days of work, and it
+is the precondition for 28.2, 28.3 and 28.4.
+
+## Pattern 28.2 — The published-methodology rating engine (the EMEA play, and the strongest in this plane)
+
+**Why it sells.** The proposed EU KIDS Act (COM(2026) 681, 2026/0286 (COD)) would require an app-store
+provider to operate an age-rating system **and publish, in clear and accessible terms, the
+methodology, criteria and sources used.** A board certificate cannot discharge that duty — it yields a
+rung and no reasoning. A classifier is worse — unreproducible reasoning. **Declared criteria can,
+because the criteria are the data.**
+
+**The wiring.**
+
+1. **Criteria vocabulary:** [hughsie/oars](https://github.com/hughsie/oars) (LGPL-2.1, 28★) as the
+   shape — per-criterion severity for violence, sex, drugs, language, gambling, social features.
+   Extend it for film/TV criteria the games vocabulary lacks; keep the OARS identifiers for the
+   overlap so the AppStream mapping still applies.
+2. **Ladder projection:** the 28.1 resolver, with **the projection loss recorded explicitly per
+   territory.** Measured examples to encode as known limits: AppStream emits 3 Argentine rungs where
+   INCAA has 5 (no `mayores de 16`, no `condicionada`) and 3 Australian rungs where the NCS has 8
+   (no `G`, `M`, `CTC`, `X 18+`, **no `RC`**). **Never emit an OARS-derived rating as a board
+   rating** — label it `self-declared`, and keep `board-issued` as a separate, provenanced field.
+3. **Decision record per title:** criteria values, the evidence behind each, the resolved rung per
+   territory, the ruleset version, the human who signed it. This is the artefact — see 28.4.
+4. **Generate the public methodology page from the ruleset**, so duty (2) is discharged by a build
+   step rather than by a document that drifts from the code.
+5. **Carry the assurance integration:** the KIDS Act also requires stores to carry the certified EU
+   age-verification solution. Pass 9's EMEA estate (the Commission's Age Verification Blueprint,
+   EUPL-1.2 / Apache-2.0) is the component — **this plane does not rebuild it, it consumes it.**
+
+**The timing argument to make to the buyer:** Article 17 routes harmonisation through voluntary codes
+of conduct that have not been drafted. **An early implementer helps write the criteria everyone else
+will later adopt.** That is worth more than the compliance saving.
+
+## Pattern 28.3 — The ClassInd conformance pipeline (the LATAM play, with a fixed date)
+
+**The deadline is real and public:** Portaria 1.048/2025, **articles 48–57 in force 2026-03-17**,
+requiring ratings to be **available in catalogue descriptions, trailers and promotional materials**
+for streaming and VOD. That is a metadata-propagation requirement, not a badge.
+
+**The wiring.**
+
+1. **Ladder:** `L, 10, 12, 14, 16, 18` via the 28.1 resolver, keyed `(BR, film|tv, ClassInd)`. Note
+   two traps already measured: AppStream still names the system **`DJCTQ`** (the retired board name),
+   and Jellyfin's `br.json` carries a **`9`** rung that is not on the current ladder — inherited from
+   an upstream `Deprecated=true` entry whose flag did not travel. **Reject `9` at ingest.**
+2. **Descriptors are the hard part, and they are closed.** MovieLabs' Brazilian entry records that
+   **"only 10 reasons are currently accepted in Brazil. All other reasons are considered invalid,"**
+   citing the gov.br ClassInd 2021 practical guide. Build an explicit map from detector output to
+   those ten permitted descriptors, and **make anything unmapped a human-review queue item**, never a
+   silent drop.
+3. **Evidence, not inference.** Use [infinitered/nsfwjs](https://github.com/infinitered/nsfwjs) (MIT,
+   9,038★) — the only permissive, maintained, widely-adopted detector in the plane — to flag
+   candidate scenes with timecodes. **Avoid [notAI-tech/NudeNet](https://github.com/notAI-tech/NudeNet)
+   in a hosted request path: AGPL-3.0 reaches the service.** The detector proposes; a human
+   classifier decides and signs.
+4. **Propagate to every surface the Portaria names:** catalogue feed, trailer assets, promo
+   cut-downs, partner deliveries. One rating source, many renderings — and a conformance report that
+   asserts each surface carries the current value.
+5. **Enforce** with [seerr-team/seerr](https://github.com/seerr-team/seerr) (MIT, 13,359★) for
+   per-profile ceilings and the unrated-titles toggle, on Jellyfin with the 28.1 resolver patched in.
+
+**Why this engagement is attractive:** no open implementation of Brazilian classification exists —
+`classificacao indicativa` returns 8 repositories, **all at 0 stars** — the deadline is fixed, Brazil
+is LATAM's largest streaming market at 40M+ VOD households, and the same engine re-points at
+Argentina for the cost of a ruleset.
+
+## Pattern 28.4 — The classification evidence pack: what to build when the decision must stay human
+
+**The principle this plane taught the KB:** where judgment is **legally attributed to a named party**,
+the product is never the decision. `content classification agent MCP` returns literally nothing, and
+that is not a market gap to fill with an agent — it is a constraint. An agent that *issues* a
+statutory rating is unsellable; an agent that *prepares the evidence for the person who signs it* is
+the whole job.
+
+**What the agent does.**
+
+- **Assembles candidate evidence:** scene timecodes and classes from `nsfwjs`, language flags from the
+  transcript (the subtitle and transcript estate from passes 3 and 14), and the per-criterion OARS
+  draft declaration.
+- **Drafts the declaration** against the territory's descriptor list, with a citation for each
+  criterion — the timecode, the line, the frame.
+- **Checks consistency**, which is where it earns its keep: the same title rated across 20
+  territories should not be `12` in one and `18` in a neighbour on identical criteria without a
+  recorded reason. **Flag the divergence; do not resolve it.**
+- **Detects drift:** when a ladder's `valid_as_of` ages or a board republishes, re-open the affected
+  titles for review.
+
+**What the human does:** signs. The record keeps who, when, on which ruleset version, with which
+evidence.
+
+**What this is worth.** It is the same artefact shape as pass 20's source-protection evidence pack and
+pass 27's claim-evidence pack, and the same reason applies: **the deliverable is admissibility.** For
+an EU app-store operator it discharges the published-methodology duty; for a Brazilian VOD operator it
+is the audit trail behind every rating in the catalogue; for a US children's tier it is the "Made for
+Kids" determination record the amended COPPA rule expects from **2026-04-22**. One artefact, three
+regions, three different regulators — which is exactly the portability this KB keeps saying is the
+scarce property.

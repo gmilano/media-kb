@@ -3192,3 +3192,220 @@ totals instead of results would have reported the plane as well served and writt
 coursework. Pass 8's rule — *read the results, not the total* — and pass 5's corollary that shortening
 a query can manufacture false abundance both earn their keep here, on terms a domain expert would
 consider unambiguous.
+
+## The age-rating, classification & child-audience plane — foundations, measured 2026-11-26 (pass 28)
+
+**The finding of this pass, stated first: the only open, machine-readable, multi-territory age-rating
+vocabulary in existence ships in the Linux desktop app-store stack, not in the media industry.** The
+media industry's own dataset is broader, is published, and carries no licence at all.
+
+### The four-step gradient — the sharpest statement this KB's structural law has had
+
+Earlier passes found two- and three-step gradients (pass 5: declare / honour / liquidate). This plane
+has four steps, and each one degrades predictably:
+
+| Step | Problem type | State of the open estate |
+|---|---|---|
+| **1. DECLARE** the criteria | Format | **Solved and permissive** — `hughsie/oars` + `ximion/appstream`, LGPL-2.1, pushed within the last five weeks |
+| **2. MAP** criteria → territory ladder | Table lookup | **Open and maintained, but sourced from Wikipedia** — 16 systems in AppStream (see the caveat below) |
+| **3. ENFORCE** in the player | Engineering | **Open, huge, and structurally unsound** — Jellyfin at 59,787★ resolves ratings by bare string and falls back to the US ladder |
+| **4. ALLOCATE** the certificate | Authority | **Closed. Zero.** `IARC age rating` → 2 repos, both 0★. No open client for ESRB, PEGI, USK, GRAC, CERO or ClassInd submission |
+
+The pattern is the one this KB has now confirmed eight times: **the closer a layer sits to an act of
+authority, the emptier the open estate gets.** Writing the criteria down is free; being the party
+whose signature the rating carries is not.
+
+### Step 1–2 — the vocabulary and the mapping (the find of the pass)
+
+| Repo | Licence | Stars / forks | Pushed | What it actually contains |
+|---|---|---|---|---|
+| [hughsie/oars](https://github.com/hughsie/oars) | **LGPL-2.1** (`LICENSE`, 26,526 B) | 28★ / 12f | 2026-10-20 | **The Open Age Ratings Service.** The OARS vocabulary itself — the per-criterion scheme (violence, sex, drugs, language, gambling, social features) that an author self-declares. 28 stars for the only open age-rating vocabulary on earth. |
+| [ximion/appstream](https://github.com/ximion/appstream) | **LGPL-2.1** (`COPYING`, 26,419 B) | 283★ / 147f | 2026-11-24 | **The mapping layer, and the reason this plane is tractable at all.** `as-content-rating.c` (67,649 B) converts an OARS declaration into a **territory-specific ladder for 16 national systems**, and `as_content_rating_system_from_locale()` picks the system from the locale. Pushed two days before this pass. |
+
+**The 16 systems AppStream maps, with the ladders verified by reading the source table:**
+
+| System | Territory | Ladder exactly as the source table implements it |
+|---|---|---|
+| INCAA | Argentina | `ATP, +13, +18` → ages `0, 13, 18` |
+| DJCTQ | Brazil | `L, 10, 12, 14, 16, 18` → ages `0, 10, 12, 14, 16, 18` |
+| ACB | Australia | `PG, MA15+, R18+` → ages `0, 15, 18` |
+| GSRR | Taiwan | `普通, 保護, 輔12, 輔15, 限制` → `0, 6, 12, 15, 18` |
+| PEGI | Europe (not DE/FI) | `3, 7, 12, 16, 18` |
+| KAVI | Finland | `3+, 7+, 12+, 16+, 18+` |
+| USK | Germany | `0, 6, 12, 16, 18` |
+| ESRA | Iran | `+3, +7, +12, +15, +18` |
+| CERO | Japan | `A, B, C, D, Z` |
+| OFLCNZ | New Zealand | `G, R13, R15, R16, R18` |
+| Russia | Russia | `0+, 6+, 12+, 16+, 18+` |
+| MDA | Singapore | `General, ADV, M18` |
+| GRAC | South Korea | `ALL, 12, 15, 18` |
+| ESRB | United States | `Early Childhood, Everyone, Everyone 10+, Teen, Mature, Adults Only` — the source notes these are *"just the locale-independent parts"* and that ESRB needs further locale-specific handling |
+| IARC | **fallback** | `3+, 7+, 12+, 16+, 18+` — returned for any locale that cannot be parsed |
+
+**Why this matters to Globant specifically: the mapping covers all four regions.** INCAA and DJCTQ
+are LATAM; PEGI, USK, KAVI and Russia are EMEA; ACB, CERO, GRAC, GSRR and MDA are APAC; ESRB is
+North America. A rating component built on OARS + AppStream is **regionally portable by
+construction** — which is exactly what passes 24 and 27 identified as the scarce property in a
+multi-market engagement.
+
+#### ⚠️ The mapping is a *projection*, not a translation — measured against the industry dataset
+
+This is the caveat that matters most, and it is measurable because both open sources were read side
+by side. **AppStream emits only the rungs an OARS declaration can reach, not the rungs a board can
+issue** — and the rungs it drops are disproportionately the ones with legal consequence.
+
+| Territory | AppStream emits | The board's actual ladder (from `MovieLabs/cmr-ratings`) | What is unreachable |
+|---|---|---|---|
+| **Argentina** | 3 rungs — `ATP, +13, +18` | **5 rungs** — `Todo público, mayores de 13, mayores de 16, mayores de 18, condicionada` | `mayores de 16` and **`condicionada`** (conditional exhibition) |
+| **Australia** | 3 rungs — `PG, MA15+, R18+` | **8 rungs** — `G, PG, M, MA 15+, R 18+, CTC, X 18+, RC` | `G`, `M`, `CTC`, `X 18+` and **`RC` (Refused Classification)** |
+
+**`Refused Classification` and `condicionada` are the two outcomes a distribution system absolutely
+must act on** — one forbids distribution outright, the other constrains it — and neither is
+expressible in the open mapping. **Never present an OARS-derived rating to a client as a board
+rating.** It is a self-declaration projected onto a board's scale, and the projection is lossy at
+exactly the rungs that carry consequence.
+
+#### Three further caveats, in descending order of seriousness
+
+1. **AppStream's own source comment names its authority — twice: `/* data obtained from
+   https://en.wikipedia.org/wiki/Video_game_rating_system */`** appears at both line 298 and line 693
+   of `as-content-rating.c`, covering the ladder table *and* the locale→system mapping. The only open
+   multi-territory age-rating mapping in existence is sourced from Wikipedia. It is well-maintained
+   and actively pushed — but **it is not a primary source, and a client who must publish "the
+   methodology, criteria and sources" under the proposed EU KIDS Act cannot cite it as the source.**
+   Use the code; re-derive each ladder from the board's own publication before shipping.
+   *(Verification note: the quoted comment was read directly from the source file. The Wikipedia URL
+   itself is **not reachable from this session**, so the article's current content is unverified —
+   which is immaterial to the finding, since the finding is what the code cites, not what the article
+   says.)*
+2. **It is a *games and apps* vocabulary, and the territory data proves the divergence.** The
+   industry dataset carries **three separate German systems** — `DE_USK` (games), `DE_FSK` (film,
+   6 rungs) and `DE_FSF` (broadcast) — and for the UK it carries `GB_BBFC` (7 rungs) where AppStream
+   maps `GB → PEGI`. **One country is not one ladder; it is one ladder per medium.** A film catalogue
+   rated through the games mapping is wrong in Germany and wrong in the UK.
+3. **The unparseable-locale default is IARC**, a membership body with no open client. A silent
+   default to a closed system is the kind of thing that ships to production unnoticed.
+
+### Step 3 — enforcement: the biggest repos in this plane, and the defect they share
+
+| Repo | Licence | Stars / forks | Pushed | Finding |
+|---|---|---|---|---|
+| [jellyfin/jellyfin](https://github.com/jellyfin/jellyfin) | **GPL-2.0** (`LICENSE`, 18,014 B) | 59,787★ / 5,879f | 2026-11-26 | **Ships 45 per-territory rating files** in `Emby.Server.Implementations/Localization/Ratings/` (44 country codes plus `0-prefer.json`) — a wider territory set than AppStream's 16. Enumerated by shallow sparse clone, not inferred. **But see the defect below.** |
+| [seerr-team/seerr](https://github.com/seerr-team/seerr) | **MIT** (`LICENSE`, 1,060 B) | 13,359★ / 1,169f | 2026-11-26 | The live request/discovery manager for Jellyfin, Plex and Emby. Carries per-user maximum movie and TV rating ceilings with an unrated-titles toggle. **MIT and pushed the day of this pass — the best-licensed enforcement surface in the plane.** |
+| [sct/overseerr](https://github.com/sct/overseerr) | **MIT** | 4,952★ / 557f | 2026-02-15 | **ARCHIVED.** The predecessor Seerr forked from. Its long-running rating-restriction feature request is the origin of the Seerr implementation. Do not start here; it is read-only history. |
+| [xbmc/xbmc](https://github.com/xbmc/xbmc) (Kodi) | **NOASSERTION** (GPL-2.0 in practice) | 21,551★ / 6,692f | 2026-11-26 | The other large open player. **The GitHub API reports NOASSERTION** — resolve the licence from the tree, not the badge. Pass 8's native-linking rule applies: Kodi links a large set of third-party libraries. |
+| [varthe/Redirecterr](https://github.com/varthe/Redirecterr) | **NONE** | 146★ / 9f | 2026-10-14 | Routes media requests by requester, keyword **and age rating**. **No licence file at 8 probed names across `master` and `main`, while `README.md` returns 200** — so the names are right and the grant is genuinely absent. 146 stars of code nobody may legally redistribute. **Do not ship it.** |
+
+#### The defect, quoted from the source, and it is the most citable engineering finding of this pass
+
+Jellyfin resolves a rating string against the viewer's country, then:
+
+```
+// If we don't find anything, check all ratings systems, starting with US
+if (_allParentalRatings.TryGetValue("us", out var usRatings) && usRatings.TryGetValue(rating, out var usValue))
+    return usValue;
+
+foreach (var dictionary in _allParentalRatings.Values)
+    if (dictionary.TryGetValue(rating, out var value))
+        return value;
+```
+*(`Emby.Server.Implementations/Localization/LocalizationManager.cs`, read 2026-11-26)*
+
+**None of the 45 rating files carries a `system` field** — they are keyed by country code only, and
+a rating is matched as a **bare string**. The consequence is concrete and testable: the token `16`
+is a valid rung on the PEGI, USK, DJCTQ, GRAC and Russian ladders, and it does **not** mean the same
+thing on all of them. A title tagged `16` with no territory qualifier resolves against whichever
+dictionary matches first — **US first, then an unordered walk of every other country.** A German
+`16` can be scored by the US table, and a parental control can silently pass a title it should block.
+
+Two further details found in the same tree, both worth knowing before you build on it:
+
+- **`gb.json` and `uk.json` both exist**, so the United Kingdom is represented twice under two keys.
+- **`br.json` contains a `9` band**, which is not on the current ClassInd ladder
+  (`L / 10 / 12 / 14 / 16 / 18`). It is not a bug: the MovieLabs dataset's Brazilian entry carries
+  entries flagged `Deprecated=true`, one of which has `MinRecAge 9`. **The open implementations have
+  inherited deprecated rungs without inheriting the deprecation flag** — a general hazard when a
+  ladder is modelled as a flat string list.
+
+**The reusable rule for all twelve industries:** a rating, a code or a classification is never a
+string. It is a **pair** — `(system, value)` — and any schema that stores only the value will resolve
+correctly in testing and incorrectly in a second territory.
+
+### Step 4 — the authoritative dataset: 110 systems, 77 territories, and no licence
+
+Pass 16 added `MovieLabs/cmr-ratings` as a one-line row with a licence warning. **Nobody had opened
+it.** It was cloned and measured for this pass:
+
+| Measurement | Value |
+|---|---|
+| Rating systems (`xml/*.xml`) | **110** |
+| Distinct territories (ISO prefixes) | **77** — `AE AR AT AU BE BG BH BN BO BR BY CA CH CL CO CR CZ DE DK EC EE EG ES FI FR GB GR HK HN HR HU ID IE IL IN IS IT JO JP KE KH KR KW KZ LB LT LU LV MT MV MX MY NG NL NO NZ PE PH PL PT RO RU SA SE SG SK SV TH TR TW UA US UY VE VN ZA ZZ` |
+| Total files | **506** (plus an `imageCache/` of board logos and a `toBeReviewed/` of 12 more systems) |
+| Newest `LastChecked` anywhere in the dataset | **2023-07-11** |
+| Systems with **no** `LastChecked` at all | **25 of 110** |
+| Systems whose `lastValidated` is **2013** | **54** |
+| Licence file | **NONE** — 8 names (`LICENSE`, `LICENSE.md`, `LICENSE.txt`, `license.txt`, `LICENCE`, `COPYING`, `COPYING.md`, `COPYING.txt`) × 2 branches. `README.md` also 404s: **the repo has no README either** |
+| Stars / forks | **1★ / 0f** |
+
+The data itself is good. Brazil's entry (`xml/BR_DJCTQ_Ratings.xml`, version 6) models
+`Region`, `System`, `Usage` (Film/Game/TV × Home/Theater/Broadcast/App), per-rung `MinAge`,
+`MinRecAge`, `MinAgeSupervised`, `Deprecated`, board logos, and a `Notes` block that links the
+**gov.br ClassInd 2021 practical guide** and records that *"Only 10 reasons are currently accepted in
+Brazil. All other reasons are considered invalid."* This is better modelling than anything else in
+the plane — `LastChecked 2023-06-01`, `lastValidated 2013-10-12`.
+
+**Three conclusions, and they are the ones to take to a client:**
+
+1. **It is the broadest ratings dataset in the world and it cannot be used.** 110 systems against
+   AppStream's 16 and Jellyfin's 44 — and with no licence grant, default copyright applies: all
+   rights reserved. **Do not vendor it into a client deliverable.** Use it to know what to go and
+   verify from each board directly.
+2. **It is stale exactly where 2026 moved.** Nothing has been re-checked since **2023-07-11**. Since
+   then: Brazil's Portaria 1.048/2025 took effect (with articles 48–57 landing **17 March 2026**),
+   Korea's GCRB gained 19+ rating authority in **January 2026**, Australia's under-16 regime went
+   live in **December 2025**, and the EU proposed the KIDS Act in **September 2026**. The dataset
+   predates all four.
+3. **Its own ChangeLog is admirably honest, and quoting it is the fastest way to end an argument
+   about whether to trust it.** It records systems taken *"from paramount database"* that *"could not
+   be confirmed"*, ratings that *"differ slightly from both news articles"*, and boards that have
+   *"internal documents, but [do] not have a public present or post papers."* A vendor would never
+   write that down. Treat `toBeReviewed/` as what it says it is.
+
+### Step 1 alternative — a normative bet worth watching, not adopting
+
+| Repo | Licence | Stars / forks | Pushed | Read |
+|---|---|---|---|---|
+| [R8rly/show](https://github.com/R8rly/show) | **CC-BY-SA-4.0** (20,139 B) | 22★ / 6f | 2026-11-05 | "The SHOW Standard" — an open content-rating vocabulary for books, audiobooks, film and stories (spice level, heat, content warnings). **Same shape as ISCC in pass 5: a normative bet, not an installed base.** And note the licence class: **CC-BY-SA on a *vocabulary* means share-alike reaches the derived metadata**, which is a real constraint on a client catalogue. Flagged, not recommended. |
+
+### Supporting infrastructure already in this KB, now placed in this plane
+
+- **[XMLTV/xmltv](https://github.com/XMLTV/xmltv)** — GPL-2.0 (`COPYING`, 18,092 B), 425★ / 108f,
+  2026-10-13. Already in the KB from the EPG work. Relevant here because the XMLTV DTD carries a
+  `<rating system="...">` element — **it is the one widely-deployed interchange format in this plane
+  that models the `(system, value)` pair correctly.** Use its shape as the schema reference.
+- **[endlessm/malcontent](https://github.com/endlessm/malcontent)** — LGPL-2.1, 5★ / 0f,
+  **2022-03-21 (stale)**. A parental-controls library that filters apps by OARS rating.
+  **Channel note: the canonical malcontent is hosted on GNOME's GitLab, not GitHub**, so a
+  GitHub-only survey of this plane will conclude, wrongly, that enforcement-by-rating has no library.
+  The GitHub copy is a four-year-old Endless fork. Do not judge the project by it.
+
+### Verified ladder reference — six territories, read directly from the dataset 2026-11-26
+
+Useful on day one of an engagement, and recorded here so the next pass does not have to re-read the
+XML. Every row was extracted from `MovieLabs/cmr-ratings`; `lastChecked` is the dataset's own field,
+and it is why each row needs re-verification against the board before it is shipped.
+
+| Territory / system | Rungs | Ladder | Dataset `lastChecked` |
+|---|---|---|---|
+| **AU / NCS** | 8 | `General (G)`, `Parental Guidance (PG)`, `Mature (M)`, `Mature Accompanied (MA 15+)`, `Restricted (R 18+)`, `Check the Classification (CTC)`, `Restricted (X 18+)`, `Refused Classification (RC)` | 2023-05-31 |
+| **GB / BBFC** | 7 | `Universal`, `Parental Guidance`, `12 and Older`, `Accompanied under 12`, `15 and Older`, `18 and Older`, `RESTRICTED 18 and Older` | 2023-07-10 |
+| **DE / FSK** | 6 | `ab 0 freigegeben / ohne Altersbeschränkung`, `ab 6`, `ab 12`, `ab 16`, `ab 18 / Keine Jugendfreigabe`, `Keine Kennzeichnung` | 2023-05-31 |
+| **JP / EIRIN** | 8 (4 pairs) | `General (G)`, `Parental guidance – 12 and Above (PG12)`, `15 and above only (R15+)`, `18 and above only (R18+)` | 2023-07-10 |
+| **KR / KMRB** | 12 | `전체 관람가 (All)`, `12세 이상 관람가 (12)`, `15세 이상 관람가 (15)`, `19`, `관람등급`, `청소년 관람불가` | 2023-07-10 |
+| **US / MPAA** | 8 | `General Audiences`, `Parental Guidance Suggested`, `Parents Strongly Cautioned`, `Restricted`, `No One 17 and Under Admitted`, plus `Mature Audiences` | **2013-09-28** |
+
+**Two things to notice in that last column.** The US entry — the home market of most of this
+industry's buyers — **has not been validated since 2013**. And the ladders are stored as
+*label pairs* (long name plus short code), which is why the rung counts look inflated: `JP/EIRIN`'s
+"8" is four ratings with two labels each. **Count ratings, not labels**, or a conformance test will
+report twice the rungs that exist.

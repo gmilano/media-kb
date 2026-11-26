@@ -1020,6 +1020,44 @@ layer is **zero repos** (`audio ad insertion server stars:>=20` → 0, measured 
   survive audit, at what discount — has **no open-source tooling at all** (`film tax credit` = 7 repos,
   the one buyer-side repo 0★/unlicensed), and PolicyEngine has already proven the 50-state
   rules-as-code pattern for a different statute. That is the most directly fundable build in the plane.
+
+#### The age-rating & child-audience plane — added 2026-11-26 (pass 28). The region with the most statutory motion and the least classification infrastructure
+
+**What moved in 2026, and it is privacy law doing the work rather than classification law:**
+
+- **The FTC's amended COPPA rule carries a compliance date of 2026-04-22** — the first major overhaul
+  of the rule in more than a decade, tightening notice and parental-consent standards and extending
+  coverage to biometrics and government identifiers. Reported consistently across several practice
+  summaries; **one secondary source states it requires separate parental consent before children's
+  data is used for AI training — treat that specific claim as unverified** against the FTC text.
+- **Federal legislation is unfinished.** The House Energy and Commerce Committee advanced the
+  **KIDS Act (H.R. 7757)** and **COPPA 2.0 (H.R. 6291)**; the Senate passed its own **COPPA 2.0
+  (S. 836)**. The chambers diverge on the strength of the protections, so **do not plan a client
+  roadmap around a federal standard landing in 2026.**
+- **State AI-companion law is already in force: California SB 243 took effect 2026-01-01** (AI
+  disclosure, restrictions on sexually explicit content for minors, crisis protocols); New York
+  passed its own AI-companion law at the end of 2025.
+- **The AI-content-in-kids-catalogues fight is live:** over 200 organisations have asked YouTube to
+  ban AI-generated content from YouTube Kids, and COPPA's "Made for Kids" designation applies whether
+  the content is AI-generated or not.
+
+**The structural gap, and it is the sellable one.** North America regulates the **child's data** hard
+and the **content's classification** barely at all — MPA ratings remain a voluntary industry scheme,
+and there is **no open client for ESRB submission**. Meanwhile the one dataset that models the US
+ladder, MovieLabs' `US_MPAA_Ratings.xml`, **has not been validated since 2013-09-28**. So a US
+streamer faces a strict consent-and-data regime layered on top of a classification layer that is
+voluntary, undocumented in code and stale in every open dataset.
+
+**Opportunity (NA):** a **kids-catalogue compliance pipeline** — "Made for Kids" determination
+evidence, per-title descriptor records, AI-provenance flags on children's content, and the consent
+artefacts the amended COPPA rule now expects — delivered as an auditable record rather than a UI
+badge. The buyer is a platform with a children's tier and an April deadline. Pair it with the
+C2PA/consent-ledger work already recorded in this region from the digital-replica plane: it is the
+same evidence-pack shape, and the same buyer.
+
+⚠️ **Channel note:** `ESRB API` returns **zero relevant repositories** (all IGDB/RAWG hobby
+projects). There is no open integration to ESRB. Do not promise one.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2157,6 +2195,54 @@ obligation that binds harder than legislation while not being legislation at all
   sets differ most per euro of spend. It is also the region where **AGPL is least often a blocker**,
   because deployments are typically client-owned and single-tenant: OpenFisca and PolicyEngine-core
   are usable here in ways a North American multi-tenant SaaS could not risk.
+
+#### The age-rating & classification plane — added 2026-11-26 (pass 28). **The only region where the age rating itself becomes a published-methodology duty — and that makes it the best region in this plane**
+
+**The headline, and it is new since any previous pass.** The European Commission has proposed the
+**EU KIDS Act** — **COM(2026) 681, procedure 2026/0286 (COD)**, Commission text September 2026,
+Council working documents October 2026. For providers of **software application stores** it would
+require:
+
+1. **an age-rating system** for every application distributed through the service;
+2. **publication, "in clear and accessible terms, [of] the methodology, criteria and sources used"**
+   for that rating system;
+3. **prevention of minors accessing or purchasing apps rated inappropriate for their age**;
+4. **carriage of the EU age-verification solution**, certified as conforming with the EU Age
+   Verification Scheme;
+5. **Article 17** — voluntary EU-level **codes of conduct** to harmonise age-rating methods and
+   criteria, Commission-facilitated and multi-stakeholder.
+
+Council working documents also record exemptions (not-for-profit encyclopaedias; scientific, research
+and primarily educational platforms; services run by public authorities) and note that **for services
+within scope of the minimum age, the age rating need not be the same**.
+
+**This is a proposal, not adopted law.** Say so to clients. But the *direction* is the asset: it is
+the first instrument anywhere that treats an age rating as something that must be **explained**, and
+an explanation is a data model.
+
+**Supporting EMEA motion:**
+
+- **AVMSD is formally scheduled for revision in Q3 2026.** A Council working document notes the
+  directive refers only to *age verification* and **does not mention *age estimation*** as an
+  alternative assurance method — a live drafting gap.
+- **National activity through 2026:** Spain signed a **co-regulation agreement on classifying
+  audiovisual content in June 2026**; Belgium's CSA advisory board was reviewing **draft age-rating
+  criteria in March 2026**; **Poland and Greece notified draft age-limit laws** to the Commission.
+  One source reports **France's under-15 social-media ban was struck down by the Conseil
+  constitutionnel in August 2026** — **flagged as requiring primary-source verification** before use
+  with a client.
+- **The ladder fragmentation is in the data, not just the law:** Germany runs **three** systems
+  (`USK` games, `FSK` film, `FSF` broadcast) and the UK runs `BBFC` for film while the open mapping
+  sends `GB → PEGI`. EMEA is where the "one ladder per medium" error does the most damage.
+
+**Opportunity (EMEA), and it is the strongest in this plane.** A **published-methodology age-rating
+engine**: declared criteria in an OARS-shaped vocabulary, a versioned per-territory ladder with
+`validAsOf` provenance, a per-title decision record, and a generated public methodology page that
+discharges duty (2). Nothing in the open estate produces that artefact, the duty is unusual enough
+that no incumbent sells it, and Article 17's code-of-conduct route means **early implementers help
+write the criteria everyone else will adopt.** Sell it to an app-store or large-catalogue operator
+before the code of conduct is drafted, not after.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3223,6 +3309,58 @@ open-source story.**
   citation-carrying rule set** where every number links to the government page it came from and
   carries a commencement date — which is precisely what Catala's literate style produces by
   construction, and precisely what a spreadsheet cannot.
+
+#### The age-rating & classification plane — added 2026-11-26 (pass 28). The region that is enforcing hardest, with the most divergent ladders and a private-standard trap in Japan
+
+**Australia — the live enforcement case, and the most consequential one anywhere:**
+
+- The **under-16 social-media ban took effect 2025-12-10**. Platforms must take "reasonable steps" to
+  keep under-16s off; the named services include YouTube, Instagram, TikTok and Snapchat. **Penalties
+  reach A$50M and fall on companies, not families.**
+- **It is being tested in court:** Reddit and a Sydney rights group have challenged the ban, and the
+  Australian government defended it in court in **November 2026**.
+- **The government has conceded the circumvention problem** — an Al Jazeera report of November 2026
+  records the admission that many under-16s still reach social media by getting around
+  age-verification processes. **This is the most useful sentence in the region for a client
+  conversation:** the regulator has publicly accepted that the control under-performs, which moves
+  the discussion from *whether* to assure age to *how to evidence reasonable steps.*
+- **The ladder matters here and the open mapping cannot express it.** Australia's National
+  Classification Scheme has **8 rungs** including **`RC` — Refused Classification**, which forbids
+  distribution. AppStream's Australian projection carries **3** and **cannot represent `RC` at all.**
+
+**South Korea — a 2026 change with direct product consequences.** Per Microsoft's publishing
+guidance, **before January 2026 the GCRB could only rate titles below 19+; it has since expanded to
+rate 19+ alongside GRAC.** For digital-only content **IARC ratings can apply unless the title is
+rated 19**, which requires a GRAC rating. On the film side, **the 19 rating replaced the 18 rating on
+2024-05-01, retrospectively.** Sources conflict on the bodies' names and histories (GCRB / GRAC /
+GRB / KMRB) — **resolve the body before quoting the ladder.** The dataset's `KR_KMRB` entry carries
+12 label entries across `전체 관람가 / 12 / 15 / 19 / 청소년 관람불가`.
+
+**Japan — the trap in this region, and it is a licence-shaped one.** Eirin operates four categories
+(`G`, `PG12`, `R15+`, `R18+`), but **Eirin classifications do not automatically apply to TV or video
+channels: those outlets reference Eirin ratings and maintain their own internal standards.** So for
+Japanese VOD **the operative rating is a private standard**, and there is nothing public to implement
+against. An engagement that assumes a national VOD ladder exists in Japan will not find one — budget
+for per-broadcaster rule capture instead.
+
+**Singapore — the clearest obligation to implement.** IMDA requires pay-TV and video-on-demand
+services to offer a **PIN-based parental lock** restricting NC16 and M18 content. The open mapping's
+Singapore ladder (`General, ADV, M18`) is the shortest of the 16 and does not carry NC16 — another
+instance of projection loss, in the one APAC market with an explicit technical mandate.
+
+**Informed gap, recorded rather than left silent:** no 2026 official rule was found on how KMRB or
+GRAC ratings apply to **streaming services** specifically, and nothing on Eirin VOD classification.
+The searches that returned nothing relevant were `KMRB streaming rating 2026` and `Japan streaming
+age rating`; the board sites (`kmrb.or.kr`, `grac.or.kr`, `eirin.jp`) were **not** reachable or
+checked from this session. **Treat Korea-streaming and Japan-VOD as not investigated, not as absent.**
+
+**Opportunity (APAC):** a **per-jurisdiction policy engine** — the same conclusion pass 5 reached for
+this region, now confirmed from a second direction. APAC's ladders diverge more than any other
+region's (8 rungs in Australia, 4 in Japan, a contested set in Korea, 3 in Singapore), one major
+market runs on private broadcaster standards, and the Australian regulator has conceded its control
+under-performs. **The asset is a rules engine with a per-market ruleset and an evidence trail, not a
+compliance mode.**
+
 ### LATAM
 
 - **Mexico now has the region's first sector-specific AI law for entertainment.** Amendments to the
@@ -4332,6 +4470,59 @@ something that already exists locally.
   **calendar-plus-evidence engine**: which calls are open, what each demands, and whether this
   production's own documents already satisfy it. `docassemble` (MIT, 1,019★) is a better fit for the
   *prestação de contas* shape than any accounting tool, and nothing in the market does this.
+
+#### The age-rating & classification plane — added 2026-11-26 (pass 28). **The region with a hard 2026 deadline, a metadata-shaped obligation, and a measured open-source zero**
+
+**Brazil — the deadline, and it is the most concrete date in this plane.** Portaria **1.048/2025**
+(Ministério da Justiça) governs *classificação indicativa*. Its main provisions took effect
+**2025-11-17**, and **articles 48–57 take effect 2026-03-17.** The rule requires ratings to be
+**displayed before the start of works and to be available in catalogue descriptions, trailers and
+promotional materials**, and it applies to **streaming and video-on-demand platforms** as well as
+games, apps and public shows. Bands: **`L, 10, 12, 14, 16, 18`**, assessed on sex and nudity,
+violence, drugs and interactivity. Later-hours guidance (20h for 12, 21h for 14) applies to
+free-to-air TV, not streaming.
+
+**Why this is the best-shaped obligation in the whole plane.** It is not a display requirement that a
+front-end team can satisfy with a badge. *"Available in catalogue descriptions, trailers and
+promotional materials"* means the rating has to be **correct in the metadata, everywhere the title
+appears** — catalogue feeds, trailer assets, promo cut-downs, partner deliveries. **That is a
+pipeline problem with a date on it**, and Brazil is the largest streaming market in LATAM with more
+than **40 million households** on at least one VOD platform.
+
+**And there is a precision detail worth carrying into the pitch.** The MovieLabs dataset's Brazilian
+entry records that **"only 10 reasons are currently accepted in Brazil. All other reasons are
+considered invalid,"** citing the gov.br ClassInd 2021 practical guide. A closed descriptor list is
+exactly the thing a generic nudity-or-violence classifier cannot emit. **The deliverable is a mapping
+from detector output to Brazil's ten permitted descriptors, with the evidence retained per title.**
+
+**The measured open-source zero — an informed gap, not silence.** `classificacao indicativa` returns
+**8 repositories, every one at 0 stars**, all student or coursework projects (Flask demos, cinema
+exercises, a games-classification analysis). **There is no open implementation of Brazilian
+classification — none.** This is the cleanest regional zero recorded in this plane, and it sits
+against a statutory deadline eleven weeks after this pass.
+
+**The rest of the region is covered by data, not by code.** The MovieLabs dataset carries **13 LATAM
+territories** — `AR BO BR CL CO CR EC HN MX PE SV UY VE` — and AppStream maps `AR → INCAA` and
+`BR → DJCTQ`. Two caveats, both measured:
+
+- **AppStream still calls Brazil's system `DJCTQ`**, the retired board name, where the current
+  identity is ClassInd.
+- **AppStream's Argentine projection has 3 rungs where INCAA has 5** — it cannot express
+  `mayores de 16` or **`condicionada`**, the conditional-exhibition outcome that constrains
+  distribution. For a LATAM rollout, that is a correctness bug, not a cosmetic one.
+
+**Informed gap:** no 2026 regulatory change was found for **Mexico**, and no harmonised LATAM
+standard exists. The search `regulación clasificación edad contenido México 2026` returned Brazilian
+material only. **Mexico is not investigated, not absent** — and it is the obvious second market to
+check before a regional proposal.
+
+**Opportunity (LATAM):** a **ClassInd conformance pipeline** sized to the 2026-03-17 deadline —
+per-title descriptor records drawn from Brazil's ten permitted reasons, rating propagation into
+catalogue, trailer and promo metadata, and an audit trail per asset. The buyer is any VOD operator
+serving Brazil, the deadline is public and fixed, no open implementation exists, and the same engine
+re-points at Argentina for the cost of a ruleset — provided the `(system, value)` pair is modelled
+properly, which is the one thing none of the open implementations does.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -5089,3 +5280,54 @@ software** is a proprietary payroll company. The gap between them is one layer w
 versioned, citation-carrying incentive rules plus the evidence pack that proves a claim against them.**
 It has no open-source incumbent in any jurisdiction, the public bodies will never build it, and the
 payroll incumbents have no commercial reason to make it portable. See **P41** and **P42**.
+
+## Market size — pass 28 addendum (2026-11-26): age assurance is sized nine ways, and **age *rating* is not sized at all**
+
+Added 2026-11-26 (pass 28). Searched for sizing on the age-rating and classification plane. The
+result splits cleanly into one over-sized adjacent market and one **refusal**, and the gap between
+them is the commercially interesting part.
+
+### What exists — age assurance / age verification, with a ~9× spread on the same base year
+
+| Estimate (2026 unless noted) | Source | Scope note |
+|---|---|---|
+| **$6.11B (2026) → $13.97B (2031), 17.99% CAGR** | Mordor Intelligence — *age assurance platforms* | Platform cut |
+| **$6.14B (2026) → $13.37B (2031)** | Mordor Intelligence — *age verification* | Software was **66.45%** of 2025 revenue; services growing faster |
+| **$2.5B (2026) → $6.32B (2035), 12.35% CAGR** | Business Research Insights — *age verification software* | The narrow, licences-only cut |
+| **$1.5B (2026) → $20.0B (2036), 29.6% CAGR** | Fact.MR via OpenPR — *verification + online-safety compliance **services*** | **Services, not software.** The outlier growth rate |
+| **$12.4B (2025) → $32.6B (2034), 11.3% CAGR** | Dataintelo — *age verification systems* | The widest scope; its e-commerce variant reaches $38.6B by 2034 |
+| **~$13.8B (2026)** | Incode (vendor blog) | Vendor marketing; the top of the range |
+| **9.8B transactions/yr and >$7.37B revenue/yr by 2028** | Biometric Update, 2026 Age Assurance & Digital Age Credentials report | **Transactions rather than market size** — a different and more auditable unit |
+
+**The scope artefact to raise before anyone quotes a number: the 2026 figures span roughly
+$1.5B to $13.8B — about 9× — on the same base year.** The spread is definitional (services vs
+software vs full platforms), not empirical. Pass 24 recorded an ~8× artefact in the owned-channel
+segment; this is the same failure mode and slightly worse. **Ask which of the three scopes a figure
+uses before repeating it.** Growth rates are tighter and more quotable: most cluster at **11–18%
+CAGR**, with one services outlier at 29.6%.
+
+### ⛔ The refusal — content classification and age *rating* is unsized
+
+**No standalone forecast was found for content-classification or age-rating software.** Not a wide
+range, not a disputed figure: nothing. None of the seven sources above addresses it, and none of their
+scope definitions states whether title classification is included or excluded.
+
+**Do not substitute an age-assurance figure for it.** They are different buyers solving different
+problems: age assurance checks the *viewer* at the gate and is a multi-billion-dollar, vendor-dense,
+well-funded market; age rating classifies the *title* in the catalogue and has — as measured in
+`repos/foundations.md` — one vocabulary at 28 stars, one unlicensed dataset at 1 star, and no agent
+layer at all.
+
+**What can be stood behind instead.** Size this plane bottom-up from the obligation, which is the
+method pass 27 used for public money and pass 25 used for channel counts:
+
+- **titles in catalogue × territories served × ladders per medium** = the classification decisions a
+  client must hold evidence for, each one a record that must exist and be defensible;
+- **the two fixed deadlines** — Brazil's Portaria articles 48–57 on **2026-03-17** and the FTC's
+  amended COPPA compliance date on **2026-04-22** — which bound the delivery window rather than the
+  market;
+- **the 110 systems / 77 territories** in the industry dataset as the upper bound on ladder
+  complexity, with the caveat that its newest validation is **2023-07-11**.
+
+That produces a number a client can check against their own catalogue, which is worth more here than
+a vendor total addressable market for a market no vendor has yet defined.

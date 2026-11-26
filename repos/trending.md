@@ -10,6 +10,87 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 28: age-rating vocabulary, territory mapping & enforcement (**the open vocabulary for this plane ships in the Linux desktop, and the media industry's own dataset — 110 systems, 77 territories — has no licence**)
+
+18 slugs probed, **18/18 resolve** by `git ls-remote`. Licences read as bytes at 8 names × 2 branches.
+Two datasets cloned and measured rather than described.
+
+**The finding, stated first because it is the whole pass.** The only open, machine-readable,
+multi-territory age-rating vocabulary in existence is **not** a media-industry artefact. It is
+[hughsie/oars](https://github.com/hughsie/oars) (**LGPL-2.1**, `LICENSE` 26,526 B, 28★/12f,
+2026-10-20) — the Open Age Ratings Service — plus
+[ximion/appstream](https://github.com/ximion/appstream) (**LGPL-2.1**, `COPYING` 26,419 B, 283★/147f,
+**2026-11-24**, two days before this pass), whose `as-content-rating.c` maps an OARS self-declaration
+onto **16 national rating systems**. It exists to put age ratings on Linux desktop applications.
+**It is the best thing available for rating a film catalogue, and that is an indictment of this
+industry, not a compliment to GNOME.**
+
+**Why it matters commercially:** the 16 systems span all four regions — INCAA (AR) and DJCTQ (BR) in
+LATAM, PEGI/USK/KAVI/Russia in EMEA, ACB/CERO/GRAC/GSRR/MDA in APAC, ESRB in North America. A
+component built on it is **regionally portable by construction**, the property passes 24 and 27
+identified as scarce in multi-market work.
+
+**But it is a projection, not a translation — and this was measured, not assumed.** Read side by side
+with the industry dataset: AppStream emits **3 Argentine rungs** where INCAA has **5**, and **3
+Australian rungs** where the National Classification Scheme has **8**. The dropped rungs are
+disproportionately the consequential ones — **`condicionada`** (AR) and **`RC — Refused
+Classification`** (AU), the two outcomes a distribution system must actually act on. And AppStream's
+own source comment names its authority **twice** — `/* data obtained from
+https://en.wikipedia.org/wiki/Video_game_rating_system */` at lines 298 and 693, covering both the
+ladder table and the locale mapping. **Never present an OARS-derived rating to
+a client as a board rating.**
+
+**The enforcement layer is enormous and structurally unsound.**
+[jellyfin/jellyfin](https://github.com/jellyfin/jellyfin) (**GPL-2.0**, 59,787★/5,879f, pushed the day
+of this pass) ships **45 per-territory rating files** — enumerated by shallow sparse clone — a wider
+territory set than AppStream's. **None of them carries a `system` field.** Ratings are matched as bare
+strings, and when the viewer's country misses, the source says, verbatim: *"If we don't find
+anything, check all ratings systems, starting with US"*, then walks every other country's table. The
+token `16` is a valid rung on the PEGI, USK, DJCTQ, GRAC and Russian ladders and means different
+things on each. **A German `16` can be scored by the US table and a parental control can silently
+pass a title it should block.** `gb.json` and `uk.json` both exist. `br.json` carries a `9` band that
+is not on the current ClassInd ladder — inherited from a `Deprecated=true` entry upstream, with the
+deprecation flag left behind.
+
+**The reusable rule, for all twelve industries:** a rating, code or classification is never a string.
+It is a **pair — `(system, value)`** — and a schema that stores only the value resolves correctly in
+testing and incorrectly in the second territory.
+
+**The dataset nobody had opened.** Pass 16 added `MovieLabs/cmr-ratings` as a one-line row. Cloned and
+measured for this pass: **110 rating systems, 77 territories, 506 files**, structured XML modelling
+usage by medium and environment, per-rung `MinAge` / `MinRecAge` / `MinAgeSupervised` / `Deprecated`,
+board logos, and sourcing notes. It is **the broadest ratings dataset in the world and it cannot be
+used**: no licence file at 8 names × 2 branches, and **no README either** — default copyright, all
+rights reserved, 1★/0f. It is also stale precisely where 2026 moved: **newest `LastChecked` anywhere
+is 2023-07-11**, 25 systems have none at all, 54 were last *validated* in **2013**, and the **US/MPAA
+entry has not been validated since 2013-09-28**. Its own ChangeLog is candid in a way no vendor would
+be — systems taken *"from paramount database"* that *"could not be confirmed"*, ratings that *"differ
+slightly from both news articles"*, boards with *"internal documents, but [no] public present or post
+papers"* — plus a `toBeReviewed/` of 12 more. **Mine it to know what to verify; never vendor it.**
+
+| Repo | Licence | Stars / forks | Pushed | Role in this plane |
+|---|---|---|---|---|
+| [hughsie/oars](https://github.com/hughsie/oars) | **LGPL-2.1** (26,526 B) | 28★ / 12f | 2026-10-20 | The vocabulary. The only one. |
+| [ximion/appstream](https://github.com/ximion/appstream) | **LGPL-2.1** (26,419 B) | 283★ / 147f | 2026-11-24 | OARS → 16 territory ladders |
+| [jellyfin/jellyfin](https://github.com/jellyfin/jellyfin) | **GPL-2.0** (18,014 B) | 59,787★ / 5,879f | 2026-11-26 | 45 territory files; the US-fallback defect |
+| [seerr-team/seerr](https://github.com/seerr-team/seerr) | **MIT** (1,060 B) | 13,359★ / 1,169f | 2026-11-26 | Per-user rating ceilings + unrated toggle. **Best-licensed enforcement surface** |
+| [sct/overseerr](https://github.com/sct/overseerr) | **MIT** | 4,952★ / 557f | 2026-02-15 | **ARCHIVED** — the predecessor. Read-only history; start at Seerr |
+| [xbmc/xbmc](https://github.com/xbmc/xbmc) | **NOASSERTION** | 21,551★ / 6,692f | 2026-11-26 | Kodi. Resolve the licence from the tree, not the badge |
+| [MovieLabs/cmr-ratings](https://github.com/MovieLabs/cmr-ratings) | **NONE** (no README either) | 1★ / 0f | 2026-06-17 | 110 systems / 77 territories / 506 files. Unusable as code; invaluable as a map |
+| [R8rly/show](https://github.com/R8rly/show) | **CC-BY-SA-4.0** (20,139 B) | 22★ / 6f | 2026-11-05 | "SHOW Standard" — a normative bet. **Share-alike reaches derived catalogue metadata** |
+| [varthe/Redirecterr](https://github.com/varthe/Redirecterr) | **NONE** | 146★ / 9f | 2026-10-14 | Routes requests by age rating. Licence genuinely absent (`README` 200, 8 names 404). **Do not ship** |
+| [endlessm/malcontent](https://github.com/endlessm/malcontent) | **LGPL-2.1** | 5★ / 0f | **2022-03-21** | Stale fork. **Canonical malcontent is on GNOME GitLab, not GitHub** |
+| [XMLTV/xmltv](https://github.com/XMLTV/xmltv) | **GPL-2.0** (18,092 B) | 425★ / 108f | 2026-10-13 | Already in the KB. Its `<rating system="...">` is **the one deployed format that models the pair correctly** |
+
+**Channel notes for the next pass.** `gh api repos/{slug}` is **blocked** this session for
+out-of-repo slugs — `gh api -X GET search/repositories -f q='repo:owner/name'` works and returns
+stars, forks, SPDX id, `pushed_at` and `archived` in one call; use it as the only API channel.
+**`www.movielabs.com` does not resolve from this session** (same class as `new.ddex.net` in pass 5),
+so CMR's published HTML tables and any terms-of-use statement are **not verified** — but the GitHub
+mirror carries the data, so the dataset itself was read directly rather than described. And pass 8's
+licence-probe rule earned its keep again in reverse: six `raw` 404s for Jellyfin's rating files were
+**my filename guess** (`.csv`, not `.json`); a shallow sparse clone settled it in one call.
+
 ## 2026-11-26 — pass 27: production-finance, rules-as-code & ledger infrastructure (**45 slugs probed, 45/45 resolve; a 10,349★ BSL trap, two rename redirects, and a plane whose generic layer beats its vertical layer**)
 
 **The finding, stated first because it inverts the plane.** Searched as a *media* problem, production

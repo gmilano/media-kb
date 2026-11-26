@@ -1626,3 +1626,33 @@ tracker, computes qualification per jurisdiction as versioned rules-as-code, and
 submission-ready claim pack with every number traceable to its source document. It is permissively
 licensable end to end (Catala Apache-2.0 + Frappe MIT + ledger BSD-3 + Timefold Apache-2.0), the
 client owns the rule sets, **no incumbent sells it**, and it is the subject of **Patterns 27.1–27.5**.
+
+## Platforms that enforce age ratings — added 2026-11-26 (pass 28)
+
+The question this section answers: **if a client needs a catalogue where every title carries the right
+rating in every territory and the player acts on it, what real system can be customised?** The answer
+is honest and slightly uncomfortable: the enforcement platforms are the self-hosted media servers,
+and the vocabulary comes from the Linux desktop.
+
+| Platform | Licence | Scale | What it gives you in this plane | The catch |
+|---|---|---|---|---|
+| **Jellyfin** | **GPL-2.0** | 59,787★ / 5,879f, pushed 2026-11-26 | The most complete open enforcement surface: **45 per-territory rating tables**, per-user profiles, rating ceilings, and a working parental-control UI. Already in this KB as a media server; **this is the first pass to place it as a ratings platform.** | GPL-2.0 — fine for a self-hosted client deployment, a decision to make deliberately for a product. And the string-matching defect in `repos/foundations.md` must be fixed before it is trusted across territories. |
+| **Seerr** | **MIT** | 13,359★ / 1,169f, pushed 2026-11-26 | Request and discovery layer in front of Jellyfin/Plex/Emby, with **per-user maximum movie and TV rating ceilings and an unrated-titles toggle**. Ratings are centralised in one constants file, which makes a territory-aware refactor tractable. | MIT and active — **the best-licensed starting point in the plane.** Its predecessor Overseerr is archived; do not start there. |
+| **Kodi** (`xbmc/xbmc`) | **NOASSERTION** on the API (GPL-2.0 in practice) | 21,551★ / 6,692f, pushed 2026-11-26 | The client-side player with the widest device reach, where a rating has to actually gate playback. | Resolve the licence from the tree, and apply pass 8's rule: for a native stack, the licences that bind are those of the **linked** libraries, not the repo. |
+| **AppStream / Flathub** | **LGPL-2.1** | 283★ / 147f, pushed 2026-11-24 | Not a media platform — **the vocabulary and the territory mapping.** This is where OARS becomes a per-country ladder. Treat it as the reference implementation to port, not a dependency to adopt. | A games/apps ladder, and a lossy projection of each board's real one. See the measured rung loss for AR and AU. |
+| **Nebula** (`nebulabroadcast/nebula`) | already in this KB (pass 25) | — | The broadcast MAM/playout system where a rating has to reach the schedule and the on-air compliance log. | Its rating field is a free-text metadata key, not a typed `(system, value)` pair — the same defect as everything else in the plane. |
+
+### What does **not** exist, stated plainly so nobody promises it
+
+There is **no open-source equivalent of a classification-submission system** — no open client for
+lodging a title with ESRB, PEGI, USK, GRAC, CERO, the BBFC or Brazil's ClassInd, and no open
+implementation of the IARC questionnaire that Google Play, the Microsoft Store and Nintendo use to
+issue ratings across territories from one self-declaration. `IARC age rating` returns **two
+repositories, both at 0 stars**. The allocation of the certificate is the closed step, exactly as the
+registry allocation was the closed step for ISRC and ISWC in pass 5 and for CPT and MedDRA in the
+healthcare KB.
+
+**So the honest architecture for a client is a hybrid:** OARS/AppStream for the declared criteria and
+the territory mapping, Seerr/Jellyfin for enforcement, the board's own submission process for the
+certificate, and **a typed `(system, value)` store of your own in the middle**, because nothing in the
+open estate provides one. That middle piece is the billable work, and it is small.

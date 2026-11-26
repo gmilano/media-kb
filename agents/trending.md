@@ -9,6 +9,96 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 14: the localization & translation-management plane (the streak of fourteen near-zero agent layers **ends**)
+
+### Headline: the first plane in this KB with a real, maintained, permissive agent layer
+
+Thirteen consecutive passes measured a near-zero agent layer. This one does not, and the reason is
+structural rather than lucky: **translation is the only media task with a forty-year commercial
+tooling industry behind it.** The scarcity has not disappeared — it has moved from the tooling to the
+*agreement* (see the quality measurement below).
+
+Measured the industrial substrate under dubbing and subtitling — formats, memories, termbases,
+routing and quality contracts. **49 slugs checked with `git ls-remote`, 47 resolve, 2 do not, and
+0 of the 47 already appeared anywhere in this KB.** The widest true gap found in any pass: before
+today `xliff`, `tmx`, `translation memory`, `termbase`, `terminology`, `glossary`, `MQM`,
+`post-editing`, `quality estimation`, `Weblate`, `Okapi` and `OmegaT` were **all at zero hits**
+across all eight files, while `dubbing` sat at 46, `subtitle` at 61 and `caption` at 126. This KB
+knew how to *make* a dub and nothing about how to *run a localization programme*.
+
+| Agent / tool | Repo | Licence | Stars | Pushed | Note |
+|---|---|---|---|---|---|
+| LibreTranslate | [LibreTranslate/LibreTranslate](https://github.com/LibreTranslate/LibreTranslate) | AGPL-3.0 | 17,851 | 2026-11-25 | The headline MT server — and the licence is in the wrapper, not the engine |
+| argos-translate | [argosopentech/argos-translate](https://github.com/argosopentech/argos-translate) | **MIT** | 6,696 | 2026-11-17 | The MIT engine LibreTranslate pins. The pick. |
+| BallonsTranslator | [dmMaze/BallonsTranslator](https://github.com/dmMaze/BallonsTranslator) | GPL-3.0 | 5,321 | 2026-11-21 | CJK comic CAT: OCR → inpaint → MT → typeset. The most active *applied* localization engineering found. |
+| Transub | [dlsandy/Transub](https://github.com/dlsandy/Transub) | ⚠️ "MIT (Core)" | 222 | 2026-11-25 | Subtitle generation + QC + burn-in. Prompts excluded from MIT — see below. |
+| LTEngine | [LibreTranslate/LTEngine](https://github.com/LibreTranslate/LTEngine) | AGPL-3.0 | 215 | 2026-11-20 | LLM-backed local MT, LibreTranslate-compatible |
+| DeepTrans Studio | [hint-lab/deeptrans-studio](https://github.com/hint-lab/deeptrans-studio) | MIT | 173 | 2026-07-26 | Multi-agent platform aimed at professional localization |
+| argos-train | [argosopentech/argos-train](https://github.com/argosopentech/argos-train) | MIT | 158 | 2026-06-26 | Route to a client-owned, domain-tuned engine |
+| BasicCAT | [xulihang/BasicCAT](https://github.com/xulihang/BasicCAT) | GPL-2.0 | 141 | 2026-04-14 | Open CAT tool |
+| ImageTrans docs | [xulihang/ImageTrans-docs](https://github.com/xulihang/ImageTrans-docs) | ❌ **no grant** | 128 | 2026-11-21 | Docs for an image-CAT tool, same APAC ecosystem. 10 licence filenames probed on both branches with a passing control (`README.md` master=200) — **genuinely unlicensed, so default copyright: all rights reserved.** |
+| Swordfish | [maxprograms-com/Swordfish](https://github.com/maxprograms-com/Swordfish) | EPL-1.0 | 101 | 2026-11-07 | Standards-based CAT (XLIFF/TMX/TBX) |
+| Lokalize | [KDE/lokalize](https://github.com/KDE/lokalize) | GPL-2.0-or-later | 32 | 2026-11-26 | Pushed the day of this pass. GitHub reports *no* licence and is **wrong** — REUSE layout. |
+| Silhouette | [xulihang/Silhouette](https://github.com/xulihang/Silhouette) | GPL-3.0 | 23 | 2026-08-30 | The only CAT tool found for **audio and video** |
+| Game Localization QA | [memolyviza2012-max/game-localization-qa](https://github.com/memolyviza2012-max/game-localization-qa) | MIT | 9 | 2026-10-16 | A written QA protocol, not a library |
+
+### The law, measured inside one discipline — the tightest control case in this KB
+
+Split "translation quality" by **who has to agree on the number**. Licence is not the variable (all
+four are Apache-2.0 or MIT); only the nature of the judgment is.
+
+- **Computable from text** → `mjpost/sacrebleu` (Apache-2.0, 1,266★, 2026-08-20) + `Unbabel/COMET`
+  (Apache-2.0, 792★, 2026-04-21) = **2,058★, alive.**
+- **Predicted without a reference** → `Unbabel/OpenKiwi` (AGPL-3.0, 236★) **dead since 2022-06-23**;
+  `NJUNLP/njuqe` (MIT, 12★).
+- **Contractual — the MQM typology real localization SLAs are written against** →
+  `BYU-TRG-Team/mqm-scorecard` + `-api`, both Apache-2.0, **1★ each**, both last pushed 2025-06-11.
+
+**≈1,000:1 inside a single discipline.** The scarce thing is never the computation; it is the
+agreement.
+
+### Two licence findings, both generalisable to all twelve industries
+
+**1. `NOASSERTION` is four different things.** Four platforms carry the identical GitHub label and
+four genuinely different regimes — read on 2026-11-26: `tolgee/tolgee-platform` (4,164★) is
+**Apache-2.0 by default** with only `ee/` and `/webapp/src/ee` carved out, i.e. *more* usable than
+its badge; `txty-io/texterify` (203★) is **BSL 1.1 with Additional Use Grant: None** and is
+effectively proprietary; `serge-community/serge` (228★) grants "the same terms as Perl 5.10.0";
+`dlsandy/Transub` (222★) says "MIT License **(Core)**". **The label is an instruction to open the
+file, never a verdict** — it cleared one of these and disqualified another.
+
+**2. The prompts can be the proprietary asset while the code is MIT.** Transub's LICENSE, verbatim:
+*"Transub Pro algorithms, prompts, and the closed module shipped as `_advanced/` are NOT licensed
+under MIT."* Every source file scans MIT, an SBOM reports clean, and the thing that makes the tool
+work is withheld. Pass 12 found a licence belonging to the *compilation*; this is a licence excluding
+the *artefacts the code loads*. **Rule: grep LICENSE and NOTICE for `prompt`, `model`, `weights`,
+`Pro` before trusting any AI-era repo's badge.**
+
+### Method corrections recorded this pass
+
+- ⚠️ **`gh api repos/<slug>` is not an existence oracle in this environment.** It returned
+  `Not Found` for **all eleven** well-known repos tested, including `WeblateOrg/weblate` — which
+  `search/repositories` simultaneously reported at 6,185★. The endpoint is scoped to the session's
+  own repositories, so its 404 carries **no information**. A pass trusting it would have deleted
+  Weblate, Pontoon, LibreTranslate and COMET as dead links. Use `git ls-remote` for existence and
+  `search/repositories q=repo:<slug>` for metadata.
+- **The licence probe needs a fourth location: `LICENSES/<SPDX-ID>.txt` (the REUSE spec).**
+  `KDE/lokalize` carries `LICENSES/GPL-2.0-or-later.txt` (17,277 B) and the API reports it
+  unlicensed. The control request confirmed the channel was fine (`README.md` on `master` = 200,
+  `main` = 404) — only the filenames were wrong. REUSE is an FSFE standard, so this
+  under-reports **European** projects specifically.
+- **Name collisions here are high-star and plausible, which is worse than pass 8's zero-relevant
+  cases:** `localization platform` → rank 1 is `cartographer-project/cartographer` (8,021★, robotics
+  SLAM); `translation memory` → rank 2 is `dlbeer/dhara` (508★, a NAND **flash** translation layer);
+  `omegat` → rank 1 is a piracy megathread list (392★). Read descriptions, never counts.
+- **Two incumbents are not on GitHub at all**, so no GitHub-shaped sweep can see them: the **Okapi
+  Framework** (Bitbucket) and **OmegaT** (SourceForge). This blind spot is shaped like *mature,
+  pre-2010, standards-implementing open source* and it affects all twelve industries in this rotation.
+- **The four mandated generic global searches returned nothing media-specific** — general agent
+  roundups (OpenHands, browser-use, DeerFlow) and vendor outlook PDFs. Recorded so the silence is not
+  read as coverage. Generic industry queries have saturated for media; value now comes from naming an
+  unexamined plane and measuring it.
+
 ## 2026-11-26 — pass 13: the subscription, entitlement & reader-revenue plane (the licence hardens toward the money)
 
 ### Headline: the thirteenth consecutive near-zero agent layer, and the cleanest licence gradient yet

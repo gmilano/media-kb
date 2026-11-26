@@ -1272,3 +1272,83 @@ which is why Casbin's row above says `n/m` rather than carrying an inherited fig
 URLs in this pass returned a uniform **403** to HTTP HEAD through the egress proxy — including repos
 that demonstrably exist. A pass that trusted HEAD would have discarded every finding as a dead link.
 `git ls-remote` returned **33/33 OK** on the same list. **Verify with `git ls-remote`, not with HEAD.**
+
+## The localization & translation-management plane — measured 2026-11-26 (pass 14), and the first plane this KB had **half** of
+
+This KB already knew, in detail, how to *generate* a dub or a subtitle: Whisper for ASR, GPT-SoVITS
+and the TTS layer for voice, MuseTalk for lip-sync, VideoLingo and pyvideotrans for orchestration.
+What it had **nothing** of was the industrial substrate underneath that output — the formats,
+memories, termbases, routing systems and quality contracts that turn one translated asset into a
+repeatable localization *programme*.
+
+The gap was measured before it was filled. Across all eight KB files, before this pass:
+`xliff` 0 hits, `tmx` 0, `translation memory` 0, `termbase` 0, `terminology` 0, `glossary` 0,
+`MQM` 0, `post-editing` 0, `quality estimation` 0, `Weblate` 0, `Okapi` 0, `OmegaT` 0.
+Against `dubbing` 46, `subtitle` 61, `caption` 126. **34 repos were verified this pass and 0 of
+the 34 already appeared anywhere in this KB** — the cleanest true-gap result of any pass.
+
+### The agent layer, and why this plane breaks the streak
+
+Thirteen consecutive passes found a near-zero agent layer. This one does not. There are real,
+maintained, high-star tools that do translation work — because translation is the one media task
+with a forty-year commercial tooling industry behind it. The scarcity has moved somewhere else
+(see the quality table below, and §Trends).
+
+| Agent / tool | Repo | Licence | Stars | Pushed | What it actually does |
+|---|---|---|---|---|---|
+| LibreTranslate | [LibreTranslate/LibreTranslate](https://github.com/LibreTranslate/LibreTranslate) | AGPL-3.0 | 17,851 | 2026-11-25 | Self-hosted, offline-capable MT API. ⚠️ Network copyleft — see the engine/wrapper note below. |
+| argos-translate | [argosopentech/argos-translate](https://github.com/argosopentech/argos-translate) | MIT | 6,696 | 2026-11-17 | Offline translation **library**. The permissive engine the AGPL server above is built on. |
+| BallonsTranslator | [dmMaze/BallonsTranslator](https://github.com/dmMaze/BallonsTranslator) | GPL-3.0 | 5,321 | 2026-11-21 | Comic/manga CAT: OCR → text detection → inpaint → MT → typeset. The highest-star *applied* CAT tool found. |
+| Transub | [dlsandy/Transub](https://github.com/dlsandy/Transub) | ⚠️ "MIT (Core)" | 222 | 2026-11-25 | Batch subtitle generation, automated QC, editor and burn-in. Licence carve-out — see below. |
+| DeepTrans Studio | [hint-lab/deeptrans-studio](https://github.com/hint-lab/deeptrans-studio) | MIT | 173 | 2026-07-26 | Multi-agent translation platform aimed at professional localization. |
+| BasicCAT | [xulihang/BasicCAT](https://github.com/xulihang/BasicCAT) | GPL-2.0 | 141 | 2026-04-14 | Open computer-aided-translation tool. |
+| Swordfish | [maxprograms-com/Swordfish](https://github.com/maxprograms-com/Swordfish) | EPL-1.0 | 101 | 2026-11-07 | CAT tool built on open standards (XLIFF/TMX/TBX). |
+| argos-train | [argosopentech/argos-train](https://github.com/argosopentech/argos-train) | MIT | 158 | 2026-06-26 | Training scripts for Argos models — the path to a client-specific engine. |
+| LTEngine | [LibreTranslate/LTEngine](https://github.com/LibreTranslate/LTEngine) | AGPL-3.0 | 215 | 2026-11-20 | Local LLM-backed MT, LibreTranslate-API-compatible. |
+| Lokalize | [KDE/lokalize](https://github.com/KDE/lokalize) | GPL-2.0-or-later | 32 | 2026-11-26 | KDE's computer-aided translation tool. Pushed the day of this pass. GitHub reports *no* licence — it is wrong; see the REUSE note below. |
+| Silhouette | [xulihang/Silhouette](https://github.com/xulihang/Silhouette) | GPL-3.0 | 23 | 2026-08-30 | CAT tool specifically for **audio and video** — the only one found. |
+| Game Localization QA | [memolyviza2012-max/game-localization-qa](https://github.com/memolyviza2012-max/game-localization-qa) | MIT | 9 | 2026-10-16 | A written QA protocol ("7 QA pillars") for AI game translation, not a library. |
+
+**All twelve URLs above were verified with `git ls-remote` on 2026-11-26.**
+
+### The engine/wrapper licence inversion — the most actionable finding in this plane
+
+`LibreTranslate`'s own `pyproject.toml` pins **`argos-translate-lt ==1.12.1`** and
+`argos-translate-files ==1.4.4`. The AGPL-3.0 licence is therefore in the **API wrapper**, while the
+**translation engine is MIT** (`argosopentech/argos-translate`, verified MIT in its LICENSE file).
+
+This is the exact inverse of the Chromaprint finding in pass 12, where a permissively-licensed repo
+was hardened by its LGPL/GPL *dependencies*. Here the permissive core is *wrapped* in network
+copyleft. The consequence for Globant is concrete and favourable:
+
+- Deploying **LibreTranslate itself** as a client-facing hosted service triggers AGPL-3.0 §13 —
+  users interacting over the network must be offered the corresponding source.
+- Building a service **directly on `argos-translate` (MIT)** carries no such duty. It is the same
+  engine, one layer down.
+
+⚠️ **Informed gap:** the pinned `argos-translate-lt` is a fork distributed as a **PyPI package**; no
+GitHub repository resolves at `LibreTranslate/argos-translate-lt` (checked 2026-11-26, `ls-remote`
+FAIL). Confirm that fork's own licence on the PyPI artefact before shipping it — do not assume it
+inherited upstream MIT.
+
+### A third extension to the licence probe: the `LICENSES/` directory (REUSE)
+
+Pass 12 established that a GitHub licence 404 is never, by itself, proof that a licence is missing,
+and added `license.txt` (lowercase) and `COPYING.md` to the probe list. This pass adds a fourth
+location, and it is the one that defeats every probe built so far:
+
+**`KDE/lokalize` carries `LICENSES/GPL-2.0-or-later.txt` (17,277 bytes) — an entire `LICENSES/`
+directory of SPDX-named files.** This is the **REUSE specification**, published by the Free Software
+Foundation Europe. The GitHub API reports the repository as unlicensed because it does not look
+inside `LICENSES/`; the control request (`README.md` on `master` = 200, `main` = 404) proves the
+branch and channel were correct and the file names were the only thing wrong.
+
+**Rule, now in its final form — probe all four shapes before recording "no licence":**
+1. `LICENSE` / `LICENSE.md` / `LICENCE` (and **`license.txt`**, lowercase),
+2. `COPYING` / **`COPYING.md`**,
+3. **`LICENSES/<SPDX-ID>.txt`** (REUSE — new this pass),
+4. and if all 404 *while `README.md` returns 200*, clone shallow and look.
+
+This matters most in **EMEA**: REUSE is an FSFE standard and is disproportionately adopted by
+European and EU-funded projects, which is exactly the estate a sovereignty-driven engagement draws
+from. A licence sweep tuned only to American repo conventions will under-report European compliance.

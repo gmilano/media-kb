@@ -513,6 +513,43 @@ bogged down in early experimentation" — budget exists, deployment does not.
 3. **Ad-tier / paid-tier switching** as a first-class entitlement and disclosure flow, not a billing
    edge case — this is where the 68% figure turns into engineering work.
 
+#### Localization substrate — added 2026-11-26 (pass 14)
+
+**The regional distinction that decides the pitch:** Grant Thornton's *2026 Media & Entertainment AI
+Impact Survey* reports that M&E is **less exposed to regulatory uncertainty than sectors such as
+banking**, because it operates under lighter statutory regulation. Forrester's AWS-sponsored *State
+of GenAI in Media and Entertainment — North America* spotlight describes North American M&E firms as
+bullish on generative AI but **still largely in early experimentation**.
+
+Read together: in North America the localization buy is **not** compliance-driven — it is margin- and
+capability-driven. That is the opposite of EMEA (sovereignty and the AI Act) and of LATAM
+(a dated statutory calendar). Do not reuse the EMEA deck here.
+
+What *is* regulated in NA is **the voice, not the translation**. Chambers' *Media & Entertainment
+2026* guide (USA–New York) records new protections against unauthorised AI voice clones, alongside
+the 2026 WGA, SAG-AFTRA and DGA agreements already documented in this section. For a dubbing
+programme that means the consent artefact attaches to the performer, while the text pipeline above it
+is commercially unconstrained.
+
+**Openings, in order of how ready the buyer is:**
+
+1. **Translation-memory recovery and audit.** The highest-value, least-contested work in this plane.
+   NA enterprises buy localization on SLAs and hold a decade of TMX, and there is no maintained open
+   tool to read, merge or audit it (`bitextor` GPL-3.0 dormant since 2024-11-11; nothing above 17★
+   alive). Deliverable: the client's own memory, deduped, quality-scored and portable — which is also
+   the asset that breaks vendor lock-in. See Pattern 34.
+2. **The MQM gate as a contractual instrument.** Because NA localization is bought on contracts, the
+   `2★` state of the open MQM scorecard is a *sellable* gap here specifically. COMET (Apache-2.0) as
+   an automatic pre-filter deciding what reaches human MQM review is buildable now. See Pattern 36.
+3. **Union-safe synthetic voice**, wired to the existing consent-artefact pattern (12.1) rather than
+   rebuilt — the guild agreements make provenance the deliverable, not the audio.
+
+⚠️ **Unverified, do not quote:** an Intel Market Research page claims "82% of media organisations use
+AI in at least one production workflow", attributed to an IAB survey; the primary source was not
+located. A companieshistory.com roundup puts NA at 33.6%–40.6% of global AI-in-media revenue
+depending on firm and scope — secondhand, with the scope spread doing all the work. Treat both as
+unsourced until the originals are read.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1050,6 +1087,48 @@ implementation rather than a US SaaS.
 3. **Avoid** proposing Lago or flexprice (AGPL-3.0) as an embedded component for a client who intends
    to modify them — Kill Bill (Apache-2.0) is the permissive equivalent.
 
+#### Localization substrate — added 2026-11-26 (pass 14)
+
+**EMEA is the only region where a self-hosted localization stack is a *sovereignty* product rather
+than a cost product** — and that reframing is worth more than the cost saving.
+
+- The DPP's *European Media Trends 2026* report finds a **growing appetite for digital sovereignty as
+  part of business-resilience planning** inside European media companies — i.e. sovereignty has moved
+  from a policy topic to a procurement criterion.
+- A VSN analysis makes the specific technical complaint: **standard cloud DAM offerings rely on
+  third-party public AI engines that aggregate data on extra-European servers.** Translation is
+  exactly such a call — every segment sent to a hosted MT API is content leaving the jurisdiction.
+- Legislative state, dated: the **European Parliament voted 569–45 to adopt its position on the AI
+  Act Omnibus simplification proposal**, so the Act's obligations are being actively reshaped rather
+  than settled. A 2026 engagement should treat the compliance surface as *moving*, and build a policy
+  engine rather than hard-code a compliance mode. Article 50 transparency and the August 2026
+  synthetic-dubbing disclosure duty are already recorded above (pass 12) and are unchanged.
+- Convening bodies to track: the **EBU AI Forum, 25 March 2026, Brussels**; the European Commission's
+  Futurium initiative on *Supporting AI Adoption in Europe's Cultural and Creative Sectors*; and
+  DIGITALEUROPE's call for technology-neutral horizontal regulation in the AVMSD evaluation.
+- A May 2026 **imec** study supplies the sharpest line for a sovereignty pitch: *adoption does not
+  automatically translate into control, revenue, or strategic autonomy.*
+
+**The buildable asset — a fully on-premises localization stack with no permissive-licence problem:**
+
+| Layer | Pick | Licence | Why this one in EMEA |
+|---|---|---|---|
+| MT engine | `argosopentech/argos-translate` | **MIT** | Runs offline. No content leaves the client's estate — and no AGPL duty, unlike LibreTranslate above it. |
+| Platform | `mozilla/pontoon` | **BSD-3-Clause** | The only mature *permissive* platform in the tier; the client can own and relicense the result. |
+| Platform (alt) | `WeblateOrg/weblate` | GPL-3.0 | More capable and actively pushed; GPL is acceptable for a self-hosted deployment the client does not redistribute. |
+| Termbase | `gaois/terminologue` | MIT | Per-market terminology, which in EMEA is per-language *and* per-regulator. |
+| Linguist desktop | `vslavik/poedit` | MIT | What the human actually uses. |
+
+**MENA, which this KB has been thin on:** media AI spending in the MENA region is reported as
+expected to reach **USD 520 million in 2026** (Khaleej Times, trade reporting — single secondhand
+source, treat the figure as indicative). Arabic adds a bidirectional-text and dialect dimension that
+the open stack above handles poorly, which is a differentiator rather than a blocker.
+
+**Regional method note:** the REUSE licence layout (`LICENSES/<SPDX-ID>.txt`) that defeated the
+licence probe this pass is an **FSFE** standard, disproportionately used by European and EU-funded
+projects. A licence sweep tuned to American repo conventions will systematically under-report
+compliance in exactly the estate a sovereignty engagement draws from. Probe `LICENSES/` here.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1548,6 +1627,56 @@ payments layer can be open, regional and permissive, which is not true in any ot
    currencies, one permissive Apache-2.0 layer.
 3. **Per-jurisdiction consumer-contract review before any cancellation-flow build** — the absence of
    a regional regime is not the absence of national ones, and this pass did not measure them.
+
+#### Localization substrate — added 2026-11-26 (pass 14)
+
+**APAC is where this plane has the most volume and the worst tooling fit**, because the binding
+constraint is the *number of languages*, not the cost per language.
+
+- Adoption pace: APAC is reported **second only to North America** in generative-AI adoption
+  (AsiaTechX broadcasting trends, 2026), with AI described as moving into the core of production,
+  operations and viewer experience.
+- Consumer-side signal: Kantar's *Media Reactions 2026* finds roughly **one in three APAC consumers
+  use AI to research brands and products**, with wide variation by market. Google ranks first for
+  consumer Ad Equity across APAC, followed by Netflix, YouTube, TikTok and Instagram.
+- Public-broadcaster demand is specific and matches this plane: the ABU reports public broadcasters
+  in **Australia and Singapore** exploring AI for **newsroom workflows, archiving and verification** —
+  all three of which are translation-adjacent in multilingual markets.
+- Commercial AI investment named by market reporting: **Tencent Video and iQIYI** investing in
+  generative AI.
+- Regulatory shape is unchanged from pass 8 and still governs the build: Latham & Watkins (September
+  2026) sorts APAC into **divergent regulatory categories** — binding risk-based regimes (South
+  Korea, Vietnam), targeted regulation (China), and lighter-touch approaches — so **the asset is a
+  per-jurisdiction policy engine, not a single compliance mode.** The ASEAN policy brief adds that
+  regional cooperation on media regulation is recognised as needed but **slow**, so do not design for
+  a harmonised ASEAN rule that does not exist.
+
+**Why the open stack fits APAC badly, stated as a gap rather than glossed:** every platform in the
+tier is built around European-style string catalogues and Latin-script segmentation. The specific
+weaknesses — measured, not assumed, from what the repos are and are not —
+
+- Segmentation for languages without spaces (Chinese, Japanese, Thai) is handled by the *filter*
+  layer, and the filter layer's incumbent (**Okapi**) is not on GitHub at all, so the GitHub-native
+  stack has no mature segmenter to inherit.
+- The highest-star *applied* CAT tool in the whole plane is **`dmMaze/BallonsTranslator` (GPL-3.0,
+  5,321★, pushed 2026-11-21)** — a Chinese-language comic/manga translation tool with OCR, inpainting
+  and typesetting. ⚠️ GPL-3.0, so it informs an architecture rather than shipping inside a product.
+  Its existence is the evidence: **the most active applied localization engineering in open source is
+  happening in APAC, on CJK content, outside the Western TMS tradition entirely.**
+  See also `xulihang/BasicCAT` (GPL-2.0, 141★) from the same ecosystem and `dlsandy/Transub` (222★,
+  "MIT (Core)", pushed 2026-11-25) for subtitles. ⚠️ `xulihang/ImageTrans-docs` (128★, pushed
+  2026-11-21) has **no licence file at all** — 10 filenames probed on both branches against a
+  passing control — so default copyright applies and it is readable reference, not reusable code.
+
+**Openings:**
+
+1. **Low-resource and offline MT.** `argos-translate` (MIT) plus `argos-train` (MIT) is the only
+   permissive path to a *client-owned, per-language* engine, which matters most where commercial MT
+   coverage is thinnest. This is the strongest technical fit of the pass to this region.
+2. **Archive-and-verify for public broadcasters** (ABU demand above), wired to the description
+   backfill already in this KB as Pattern 31 — translation is the step that makes a multilingual
+   archive searchable at all.
+3. **The per-jurisdiction policy engine**, reused from pass 8 rather than rebuilt.
 
 ### LATAM
 
@@ -2156,6 +2285,58 @@ rights-holder-sourced item and is **not** treated as verified here.)*
 3. **Spanish/Portuguese-language reader-revenue builds on REMP** (MIT) — a European publisher's
    production tooling, not a US SaaS, which matters for both cost and data residency.
 
+#### Localization substrate — added 2026-11-26 (pass 14)
+
+**This is the plane where LATAM's existing industrial advantage and an explicit regional policy ask
+line up exactly** — and it is the strongest LATAM argument in this KB that is not about compliance.
+
+**The statutory instrument, now precisely dated.** This section already records Mexico as the
+jurisdiction with the most specific AI-voice provisions. The instrument: **amendments to the Federal
+Copyright Law and the Federal Labour Law, published 14 May 2026**, reported as the **first
+sector-specific AI regulation in Mexico** (Chambers *Media & Entertainment 2026*, Mexico — Trends and
+Developments). Cite the instrument and the date, not "Mexico regulates AI voices".
+
+**The regional policy ask that this plane answers directly.** Aspen Digital's January 2026 report
+*Mind the Gap: AI and the Future of News in Latin America* argues for experimenting boldly while
+**standardising carefully**, and specifically calls for **shared regional AI assets and licensing
+frameworks.** That is a request for pooled language infrastructure — which is what a translation
+memory and a termbase *are*. Supporting context, all previously recorded here and unchanged: SiPreBA
++ Heinrich Böll (May 2026), FLIP (Colombia) and ADEPA (Argentina) newsroom-adoption research, Uruguay
+as the first LATAM signatory of the Council of Europe AI treaty (2025), Chile's Latam-GPT, and the
+ITU's *AI Trends in LAC* report.
+
+**The asset nobody is competing for.** LATAM is the centre of global Spanish- and
+Portuguese-language dubbing (the frequently-quoted ~60% share of Spanish dubbing remains
+**unverified** — no published methodology was found, and this KB should keep saying so). Decades of
+that work sit in the dubbing houses' **translation memories and glossaries**. Per §64, there is no
+maintained open tooling to read, merge, dedupe or audit a TMX file anywhere in the world. So:
+
+- the region holds the largest Spanish/Portuguese parallel corpora in the industry,
+- those corpora are the only multilingual training asset the region owns outright,
+- the tool that would consolidate them does not exist in open source,
+- and the region's own convening body has just asked for shared regional language assets.
+
+**The terminology point is the specific, buildable version of this.** Spanish is not one target:
+es-MX, es-AR, es-CO, es-ES and neutral "español latino" differ in exactly the way a **termbase**
+exists to manage. Terminology is also the one tier of this plane with live permissive tooling —
+**`gaois/terminologue` (MIT, 76★, pushed 2026-11-24)**. A shared Spanish-variant termbase, built on
+MIT code, is a concrete answer to the Aspen ask and is deliverable at a studio's scale.
+
+**Openings:**
+
+1. **Dubbing-house TM consolidation** (Pattern 34) — recover and audit the memory before anyone
+   trains on it, and keep the consent artefact travelling with the asset per Pattern 12.1.
+2. **The shared es-variant termbase** on `terminologue` (MIT) — small, fundable, and answers a
+   published regional request rather than a hypothesis.
+3. **Newsroom localization for the Spanish-language press**, reusing Pattern 33's evidencing
+   approach: the outlets that wrote AI policies in 2026 now have to demonstrate compliance, and
+   translation provenance is part of that evidence.
+
+⚠️ **Keep the licence discipline that this region's buyers cannot absorb:** a dubbing house is not a
+large broadcaster and cannot carry an AGPL or BSL surprise. In this plane that means **Pontoon
+(BSD-3-Clause) over Traduora (AGPL-3.0)**, **argos-translate (MIT) over LibreTranslate (AGPL-3.0)**,
+and **never Texterify** (BSL 1.1, no use grant).
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -2285,3 +2466,37 @@ matter in 2026, and the open-source estate implements none of them.**
 segment within M&E — every figure available sizes the subscription *revenue*, not the spend on the
 systems that run it. A later pass should not fill this with an adjacent SaaS-billing TAM figure,
 which would be a scope substitution of the kind recorded in the pass-12 addendum.
+
+## Market size — pass 14 addendum (2026-11-26): the localization segment, and the one figure this KB can stand behind
+
+This KB already records media localization at **USD 5.6B (2024) → USD 12.8B (2033), APAC fastest at
+12.3% CAGR** (DataIntelo, secondhand) and the AI-dubbing sizing spread of **>100×** across six firms
+documented in the pass-12 addendum. Nothing found this pass changes either, and this addendum
+deliberately adds **no new vendor TAM figure** — the pass-12 lesson was that "dubbing tools",
+"dubbing for OTT", "localisation" and "GenAI in localisation" are four different scopes quoted as one
+number, and adding a fifth would repeat the error.
+
+What this pass adds instead is a **supply-side measurement**, which is more defensible than any of
+the demand-side forecasts because it was counted rather than projected:
+
+| Layer of the localization stack | Best maintained open option | Stars | Alive? |
+|---|---|---|---|
+| Job format (XLIFF) | `vslavik/poedit` MIT | 2,061 | Yes — 2026-11-09 |
+| Platform / TMS | `WeblateOrg/weblate` GPL-3.0 | 6,185 | Yes — 2026-11-26 |
+| MT engine | `argosopentech/argos-translate` MIT | 6,696 | Yes — 2026-11-17 |
+| Terminology | `gaois/terminologue` MIT | 76 | Yes — 2026-11-24 |
+| Automatic quality | `mjpost/sacrebleu` Apache-2.0 | 1,266 | Yes — 2026-08-20 |
+| **Translation memory (TMX)** | `bitextor/bitextor` GPL-3.0 | 302 | **No — 2024-11-11** |
+| **Contractual quality (MQM)** | `BYU-TRG-Team/mqm-scorecard` Apache-2.0 | **1** | Barely — 2025-06-11 |
+| **Format filters (Okapi)** | — | — | **Not on GitHub at all** |
+
+**Five of eight layers are healthy and permissively licensed. Three are not — and the three are the
+client's accumulated asset, the contract the work is judged against, and the converter that feeds the
+whole pipeline.** That is a precise, countable statement of where paid engineering is needed, and it
+does not depend on anyone's CAGR.
+
+**Not found, and stated as a gap:** no sizing was located for *translation-management software* or
+*TMS* as a segment within M&E specifically. Every figure available sizes localization **services**
+(what gets spent on translating) rather than the **systems** that route and store it — the same
+scope defect recorded for subscription management in the pass-13 addendum. A later pass should not
+substitute a general enterprise-TMS or language-services TAM here.

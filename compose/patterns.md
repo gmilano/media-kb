@@ -1931,3 +1931,113 @@ adversarial:
 **Why it is differentiated.** Globally it is a reasonable hygiene pitch; in LATAM it is urgent and
 **the evidence is public, current and verifiable by the client in under a minute** — which is a
 materially different conversation from a generic security recommendation.
+
+## Localization & translation-management recipes — added 2026-11-26 (pass 14)
+
+These three patterns compose only repos verified by `ls-remote` on 2026-11-26, and each one names the
+licence boundary that decides how it can be delivered.
+
+### Pattern 34 — The translation-memory recovery and audit (own the asset before you own the account)
+
+**The opportunity, restated from §64 of `intel/trends.md`:** the client's translation memory is their
+switching cost, their only wholly-owned multilingual corpus, and the one artefact with **no
+maintained open tooling anywhere in the world**. Walking in able to read it is a differentiator that
+costs a week.
+
+**Who buys it:** any broadcaster, streamer, publisher or dubbing house with more than ~5 years of
+outsourced localization. Strongest in **North America** (bought on SLAs, memory held per-vendor) and
+**LATAM** (decades of Spanish/Portuguese dubbing memory, plus the Aspen Digital ask for shared
+regional assets).
+
+**The wiring:**
+
+1. **Extract from the incumbent.** If the memory is locked in a proprietary tool, the exit route is
+   [`GregoryVigoTorres/sdltm2tmx`](https://github.com/GregoryVigoTorres/sdltm2tmx) (GPL-3.0, 8★) —
+   `.sdltm` → TMX 1.4. ⚠️ 8 stars and dormant since 2023: read it, expect to fix it, run it as a
+   **separate process** so its GPL-3.0 does not reach your code.
+2. **Normalise the source formats** with [`maxprograms-com/OpenXLIFF`](https://github.com/maxprograms-com/OpenXLIFF)
+   (EPL-1.0, 86★, 2026-11-03) — XLIFF 1.2/2.0/2.1/2.2 create, merge and validate. This is the
+   GitHub-available substitute for Okapi, which is not on GitHub (§66). EPL-1.0 is weak, file-level
+   copyleft: invoking it and shipping it alongside proprietary code is fine.
+3. **Parse and normalise the TMX.** [`yasslab/konjak`](https://github.com/yasslab/konjak) (MIT, 12★)
+   is readable Ruby and MIT-clean; [`maxprograms-com/HybridTM`](https://github.com/maxprograms-com/HybridTM)
+   (EPL-1.0, 7★, 2026-07-26) is a live TM engine. **Budget for writing this layer.** That is the
+   honest recommendation: nothing here is production-grade, and §64 is why.
+4. **Align and mine additional parallel text** with [`bitextor/bitextor`](https://github.com/bitextor/bitextor)
+   (GPL-3.0, 302★) — ⚠️ dormant since 2024-11-11. Use it **read-only, in its own container**; do not
+   link it.
+5. **Score what you recovered** with [`Unbabel/COMET`](https://github.com/Unbabel/COMET) (Apache-2.0,
+   792★) and [`mjpost/sacrebleu`](https://github.com/mjpost/sacrebleu) (Apache-2.0, 1,266★). This is
+   the step that converts "we have a TMX file" into "here is which 18% of your memory is worth
+   keeping" — the actual deliverable.
+6. **Land it in a platform the client can own**: [`mozilla/pontoon`](https://github.com/mozilla/pontoon)
+   (BSD-3-Clause, 1,680★) when ownership and relicensing matter, or
+   [`WeblateOrg/weblate`](https://github.com/WeblateOrg/weblate) (GPL-3.0, 6,185★) when capability
+   matters and the deployment is self-hosted and not redistributed.
+
+**Deliverable:** a deduped, quality-scored, portable memory plus the audit that says what it is worth.
+**Licence boundary:** steps 1 and 4 are GPL-3.0 and must stay separate processes; everything you
+build on is MIT, BSD-3, Apache-2.0 or EPL-1.0.
+
+### Pattern 35 — The sovereign localization stack (the EMEA build)
+
+**Why it sells in EMEA specifically:** the DPP's *European Media Trends 2026* finds digital
+sovereignty has become a business-resilience criterion, and VSN's analysis names the exact defect —
+cloud DAM offerings call **third-party public AI engines that aggregate data on extra-European
+servers**. Every segment sent to a hosted MT API is content leaving the jurisdiction. This stack
+removes that call entirely.
+
+| Layer | Component | Licence | Why |
+|---|---|---|---|
+| MT engine | [`argosopentech/argos-translate`](https://github.com/argosopentech/argos-translate) | **MIT** | Runs fully offline, and avoids the AGPL above it (§67) |
+| Model training | [`argosopentech/argos-train`](https://github.com/argosopentech/argos-train) | MIT | Client-specific engine, client-owned weights |
+| Platform | [`mozilla/pontoon`](https://github.com/mozilla/pontoon) | BSD-3-Clause | Mature *and* permissive — the client can relicense |
+| Termbase | [`gaois/terminologue`](https://github.com/gaois/terminologue) | MIT | Per-market and per-regulator terminology |
+| Linguist desktop | [`vslavik/poedit`](https://github.com/vslavik/poedit) | MIT | What the human reviewer actually uses |
+| Quality | [`Unbabel/COMET`](https://github.com/Unbabel/COMET) + [`mjpost/sacrebleu`](https://github.com/mjpost/sacrebleu) | Apache-2.0 | Scoring that runs in-estate too |
+
+**The critical substitution, and the money in it:** do **not** deploy
+[`LibreTranslate`](https://github.com/LibreTranslate/LibreTranslate) (AGPL-3.0, 17,851★) as the
+client-facing service. Its own `pyproject.toml` pins `argos-translate-lt==1.12.1`, so the engine
+underneath is MIT. Building the API layer yourself over `argos-translate` delivers the same
+capability **without AGPL-3.0 §13's duty to offer source to every network user.** ⚠️ Confirm the
+pinned fork's licence on its PyPI artefact if you use the fork rather than upstream — no GitHub repo
+resolves for it.
+
+**Also applies to:** any LATAM or APAC client that cannot absorb a copyleft obligation — which, per
+the LATAM notes, is most dubbing houses.
+
+### Pattern 36 — The MQM gate: sell the gap that §65 measured
+
+**The gap, measured:** quality a machine can compute has 2,058★ of live Apache-2.0 tooling. Quality a
+**buyer and vendor must sign** — the MQM error typology that localization contracts are written
+against — has **two repositories at one star each**
+([`BYU-TRG-Team/mqm-scorecard`](https://github.com/BYU-TRG-Team/mqm-scorecard) and
+[`BYU-TRG-Team/mqm-scorecard-api`](https://github.com/BYU-TRG-Team/mqm-scorecard-api), both
+Apache-2.0, both last pushed 2025-06-11).
+
+**So do what pass 8 concluded about rights standards: use the published typology as a *spec*, not the
+repo as a *dependency*.**
+
+1. **Treat MQM as the schema.** Implement the error typology (accuracy, fluency, terminology, style,
+   locale conventions) as your own data model. The two Apache-2.0 repos above are a **reference for
+   the data model**, not a library to depend on at 1★.
+2. **Put the automatic metric in front of the human.** Score every segment with COMET
+   (Apache-2.0, 792★). This is the triage, and it is the step that makes the economics work.
+3. **Route by threshold.** Below the COMET threshold → full human MQM review. Above it → sampled
+   spot-check. The threshold is calibrated per language pair against the memory recovered in
+   Pattern 34, which is why the two patterns are sold together.
+4. **Enforce terminology separately**, because it is the one MQM category a metric cannot see:
+   a term either matches the client's termbase or it does not. Check against
+   [`gaois/terminologue`](https://github.com/gaois/terminologue) (MIT, 76★) as a hard gate, not a score.
+5. **Emit the scorecard as the contractual artefact** — per-vendor, per-language, per-period. This is
+   what the client is actually unable to produce today.
+
+**Why this is defensible work rather than a wrapper:** steps 1, 3 and 5 are judgment that no open
+repo implements, and step 2 is a solved commodity. That is the whole shape of the law this KB keeps
+confirming — **build where the agreement is, integrate where the computation is.**
+
+⚠️ **Anti-pattern, and it would be an easy sale to make badly:** do not promise an
+"all-open-source localization platform". Three of the eight layers in the pass-14 addendum table are
+dormant, one-star, or absent from GitHub entirely. Promise the five healthy layers and *quote* the
+other three as engineering.

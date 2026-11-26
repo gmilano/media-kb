@@ -1550,3 +1550,103 @@ Of the top ten `topic:paywall` repositories, the two largest non-English project
 No other region measured carries comparable, currently-maintained circumvention tooling aimed at its
 own national press. For LATAM engagements this converts an abstract "paywall resilience" pitch into a
 demonstrable one.
+
+## The localization & translation-management plane — trends measured 2026-11-26 (pass 14)
+
+### 64. The job format is maintained; the asset format is abandoned — and the asset is what the client owns
+
+This is the finding to lead a localization conversation with, because it is a measured fact and it
+reframes the purchase.
+
+Translation runs on two interchange formats from the same standards lineage. **XLIFF** carries *this
+week's job* out to linguists and back. **TMX** carries the *translation memory* — every segment the
+client has ever paid to have translated, accumulated over a decade.
+
+| | Carries | Best maintained open tooling | State |
+|---|---|---|---|
+| **XLIFF** | this week's work | `vslavik/poedit` MIT **2,061★**, pushed 2026-11-09 | Healthy, permissive, boring |
+| **TMX** | ten years of paid output | `bitextor/bitextor` GPL-3.0 302★, pushed **2024-11-11** | **Dead.** Nothing above 17★ is alive |
+
+The full TMX estate, by stars: `302 (dormant) → 17 → 12 → 8 → 7 → 6 → 6 → 4`.
+
+Why it matters commercially: **the translation memory is the client's switching cost.** It is the one
+asset that determines whether they can leave their current localization vendor, and the only
+multilingual corpus they own outright — including for training. There is no maintained open tool to
+read it, merge it, dedupe it, or audit it for quality. Whoever reconstructs that asset owns the
+account, and nobody is competing for the job.
+
+### 65. Split "translation quality" by who signs the number, and the open estate splits 1,000:1
+
+The law this KB has recorded across six industries — *format problems get maintained code, judgment
+problems get none* — was measured this pass **inside a single discipline**, which is the tightest
+control case yet. All four rows are Apache-2.0 or MIT, so licence is not the variable. Only the
+nature of the judgment is.
+
+| Kind of quality | Who has to agree | Repos | Stars | Alive? |
+|---|---|---|---|---|
+| Computable from text | nobody — it is arithmetic | `mjpost/sacrebleu`, `Unbabel/COMET` | **2,058** | Yes (2026-08, 2026-04) |
+| Predicted without a reference | a model | `Unbabel/OpenKiwi`, `NJUNLP/njuqe` | 248 | **No** (OpenKiwi dead 2022-06) |
+| **Contractual (MQM typology)** | **the buyer and the vendor** | `BYU-TRG-Team/mqm-scorecard` + its API | **2** | Barely (2025-06) |
+
+MQM is not academic: it is the error typology that commercial localization contracts and SLAs are
+actually written against. The open implementation is **two repositories at one star each, from a
+single university team.** Meanwhile the metric a machine can compute unaided has a thousand times
+the investment. The scarce thing is never the computation; it is the agreement.
+
+### 66. GitHub-only discovery cannot see this industry's incumbents — a method defect, not a market fact
+
+Two of the most important tools in this plane are **not on GitHub at all**:
+
+- **The Okapi Framework** — the standard open filter/segmentation toolkit that converts ~50
+  proprietary formats into XLIFF — is on **Bitbucket**. `okapiframework/okapi` was the only failure
+  in the first 35 `ls-remote` checks. GitHub holds three satellites, the largest at 7★.
+- **OmegaT**, the most widely used open-source CAT tool, is a **SourceForge** project. GitHub returns
+  only plugins (41★, 30★) and name collisions.
+
+Thirteen prior passes of this KB, and every pass of the other eleven industries, used GitHub-shaped
+discovery. That method has a blind spot shaped exactly like **mature, pre-2010, standards-implementing
+open source** — which is disproportionately where industrial standards tooling lives. The correction
+is cheap: *when a plane has an obvious incumbent and the sweep does not return it, check another
+forge before concluding absence.*
+
+### 67. The restrictive licence is in the wrapper, and the engine underneath it is MIT
+
+`LibreTranslate` (AGPL-3.0, 17,851★) is the self-hosted MT API the whole market names. Its own
+`pyproject.toml` pins **`argos-translate-lt==1.12.1`** — and `argosopentech/argos-translate` is
+**MIT** (6,696★, pushed 2026-11-17).
+
+So the network-copyleft obligation lives in the API server, one layer above an engine that has none.
+This is the **mirror image of pass 12's Chromaprint finding**, where a permissive repo was hardened
+by its GPL/LGPL dependencies. Both break the same lazy assumption — that a project's licence
+describes the stack. Here the direction of the error is in Globant's favour, and it is worth real
+money: the same translation capability is available without AGPL §13 duties by building one layer
+lower. ⚠️ The pinned fork ships via **PyPI** with no resolving GitHub repo, so confirm *its* licence
+on the published artefact before shipping.
+
+### 68. Name collisions in this plane are severe enough to fabricate a table
+
+Pass 8 recorded `eidr` (160 results, zero relevant) and `isan` (1,942, zero relevant). This plane is
+worse, because the collisions are *high-star and plausible*:
+
+- **`localization platform`** → rank 1 is **`cartographer-project/cartographer`, 8,021★** — robotics
+  SLAM. "Localization" means *knowing where the robot is*.
+- **`omegat`** → rank 1 is `THE-OMEGATHREAD`, 392★, a piracy-megathread list; rank 3 `omegatube`.
+- **`translation memory`** → rank 2 is `dlbeer/dhara`, 508★, a **NAND flash translation layer**.
+
+A pass that read result counts instead of results would have written robotics and flash-memory repos
+into a media localization table. **Read the descriptions. The count is not the finding.**
+
+### 69. What the mandated generic searches returned this pass: nothing media-specific
+
+Recorded so the silence is not mistaken for coverage. The four required global queries
+(`top open source AI agents media 2026 github MIT`, `github trending media AI 2026`,
+`open source platform media ERP CRM MIT Apache`, `AI media industry trends 2026`) returned, at this
+point in the rotation, **general-purpose agent-framework roundups** (OpenHands, browser-use, DeerFlow,
+LangGraph) and vendor outlook PDFs — nothing media-specific that fourteen passes had not already
+covered. Two useful confirmations only: Akamai's *State of AI in Media 2026* reports time spent in
+generative-AI apps **doubled between H1 2025 and H1 2026**, and the sector's own commentary (TV Tech,
+TVBEurope) now frames 2026 as scaling and "agentic", with several false starts expected.
+
+**The honest read:** generic industry queries have saturated for media. Value now comes from naming
+an unexamined plane and measuring it, which is what this pass did. The generic sweep should be
+treated as a cheap regression check, not as a source of findings.

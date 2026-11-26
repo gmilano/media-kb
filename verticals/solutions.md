@@ -842,3 +842,58 @@ below is a build, not an integration:
    this territory on this device" is a question the graph can answer and no product asks.
 4. **Cancellation-journey compliance** — see Pattern 13.1 in `compose/patterns.md`; the UK regime
    starts **1 January 2027**.
+
+## The localization & translation-management tier — added 2026-11-26 (pass 14)
+
+These are the Odoo-equivalents of this plane: complete, deployable, self-hostable systems that run a
+localization programme end to end, and that AI can be layered **on top of** rather than replacing.
+All are real products with real deployments — Weblate and Pontoon run the localization of major open
+source estates, and Pontoon is Mozilla's production system.
+
+| Platform | Repo | Licence | Stars | Forks | Pushed | Why it matters |
+|---|---|---|---|---|---|---|
+| **Weblate** | [WeblateOrg/weblate](https://github.com/WeblateOrg/weblate) | GPL-3.0 | 6,185 | 1,392 | 2026-11-26 | The reference self-hosted continuous-localization server, with tight VCS integration. Highest-star platform in the tier and pushed the day of this pass. GPL-3.0: fine to deploy and to extend for a client; a derived work you distribute is GPL. |
+| **Pontoon** | [mozilla/pontoon](https://github.com/mozilla/pontoon) | **BSD-3-Clause** | 1,680 | 620 | 2026-11-25 | Mozilla's own production localization platform. **The only permissively-licensed mature platform in this tier** — the default pick when the client must own and relicense the result. |
+| **Lingo.dev** | [lingodotdev/lingo.dev](https://github.com/lingodotdev/lingo.dev) | Apache-2.0 | 5,400 | 812 | 2026-11-20 | Localization-engineering toolchain (CLI/CI oriented). Apache-2.0 core; connects to the vendor's paid engine, so check which half you are depending on. |
+| **Tolgee** | [tolgee/tolgee-platform](https://github.com/tolgee/tolgee-platform) | ⚠️ Apache-2.0 **+ `ee/`** | 4,164 | 381 | 2026-11-25 | Developer- and translator-friendly platform. GitHub says `NOASSERTION`; the LICENSE file says **Apache-2.0 by default**, with everything under `ee/` and `/webapp/src/ee` under a separate enterprise licence. Usable — *better* than its badge implies. |
+| **Traduora** | [ever-co/ever-traduora](https://github.com/ever-co/ever-traduora) | AGPL-3.0 | 2,140 | 224 | 2026-11-25 | Open translation-management platform. ⚠️ AGPL-3.0: offering it as a hosted service to a client's users triggers the source-offer duty. |
+| **inlang** | [generaltranslation/inlang](https://github.com/generaltranslation/inlang) | MIT | 2,012 | 184 | 2026-11-24 | Git-based translation management — the memory and the review history live in the repo. MIT, actively pushed. |
+| **Mojito** | [box/mojito](https://github.com/box/mojito) | Apache-2.0 | 389 | 73 | 2026-11-09 | Box's continuous-localization automation platform. Apache-2.0, real corporate maintenance, string-centric. |
+| **Localess** | [Lessify/localess](https://github.com/Lessify/localess) | MIT | 75 | 20 | 2026-11-25 | Translation management **plus** CMS in one — unusual and directly relevant to a publisher. MIT, small, current. |
+| **Texterify** | [txty-io/texterify](https://github.com/txty-io/texterify) | ⚠️ **BSL 1.1** | 203 | 17 | 2026-10-09 | ❌ **Do not build on this.** See the licence table below. |
+| **Serge** | [serge-community/serge](https://github.com/serge-community/serge) | ⚠️ "same terms as Perl 5.10.0" | 228 | 48 | 2024-06-13 | Continuous localization, originally from Evernote. Dormant since mid-2024 and the grant is prose, not SPDX. Reference architecture only. |
+
+### ⚠️ Four platforms, four different licences, one identical GitHub label
+
+Every one of the four rows below is reported by the GitHub API as **`NOASSERTION`**. They are not
+remotely the same thing, and the spread runs from *more* permissive than advertised to effectively
+proprietary. All four licence files were fetched and read on 2026-11-26.
+
+| Repo | GitHub API says | The LICENSE file actually says | Can Globant build on it? |
+|---|---|---|---|
+| [tolgee/tolgee-platform](https://github.com/tolgee/tolgee-platform) | NOASSERTION | Apache-2.0 by default; `ee/` and `/webapp/src/ee` under `ee/LICENSE` | **Yes**, outside the `ee/` directories. The label understates it. |
+| [txty-io/texterify](https://github.com/txty-io/texterify) | NOASSERTION | **Business Source License 1.1**, *Additional Use Grant: **None***, four-year change date | **No.** BSL with no use grant is proprietary until the change date. |
+| [serge-community/serge](https://github.com/serge-community/serge) | NOASSERTION | "the same terms as Perl 5.10.0" → Artistic-1.0 / GPL-1.0-or-later dual | Legally yes, but the grant is unparseable prose and the project is dormant. |
+| [dlsandy/Transub](https://github.com/dlsandy/Transub) | NOASSERTION | "MIT License **(Core)**" — with `_advanced/`, "Pro algorithms" and **prompts** excluded | Partially. The MIT half is real; the half that works is not. |
+
+**Rule: `NOASSERTION` is never a verdict. It is an instruction to open the file.** Reading it costs
+one request and changes the answer in both directions — it *cleared* Tolgee for use and it
+*disqualified* Texterify, and no badge, SPDX field or SBOM scan distinguishes the two.
+
+### A new licence category for this KB: the prompts are the proprietary asset
+
+Pass 12 recorded that a licence can belong to the **compilation** rather than the repository
+(Chromaprint: MIT source, LGPL as a whole). `dlsandy/Transub` adds a category that only exists in
+the AI era. Its LICENSE reads, verbatim:
+
+> *Transub Pro algorithms, prompts, and the closed module shipped as `_advanced/` are NOT licensed
+> under MIT. See LICENSE-PRO and NOTICE.*
+
+**The code is MIT and the prompts are not.** In a repo whose product *is* a prompt chain, that
+inverts the usual assumption: the source tree scans clean, every `.py` file is MIT, an SBOM reports
+no issue — and the asset that makes the tool work is withheld. Clone it and you have an engine with
+the tuning removed.
+
+**Rule, generalisable to all twelve industries: for any AI-era repository, grep the LICENSE and
+NOTICE for `prompt`, `model`, `weights` and `Pro` before accepting the badge.** A permissive licence
+over code says nothing about the artefacts the code loads.

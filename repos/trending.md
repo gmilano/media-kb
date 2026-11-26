@@ -10,6 +10,90 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 14: localization substrate infrastructure (49 slugs checked, 47 resolve, 2 do not)
+
+### Headline: within one standards family, the format that carries the job is maintained and the format that carries the client's asset is abandoned
+
+The plane under dubbing and subtitling: interchange formats, translation memories, termbases,
+translation-management platforms, MT engines and quality tooling. **0 of the 47 resolving repos
+appeared anywhere in this KB before today.**
+
+The structural result is a *within-family* comparison, which is stronger evidence than the
+cross-domain comparisons earlier passes relied on. XLIFF and TMX come from the same standards
+lineage, the same decade and the same vendors. XLIFF carries **this week's job**; TMX carries **ten
+years of paid translation** — the client's switching cost and only wholly-owned multilingual corpus.
+
+| | Carries | Best maintained open tooling | State |
+|---|---|---|---|
+| **XLIFF** | this week's work | `vslavik/poedit` MIT **2,061★** | Healthy — pushed 2026-11-09 |
+| **TMX** | a decade of paid output | `bitextor/bitextor` GPL-3.0 302★ | **Dead — pushed 2024-11-11** |
+
+Full TMX estate by stars: `302 (dormant) → 17 → 12 → 8 → 7 → 6 → 6 → 4`. **Nothing above 17★ is alive.**
+
+### Platforms — the tier that can actually be deployed
+
+| Repo | Licence | Stars | Forks | Pushed |
+|---|---|---|---|---|
+| [WeblateOrg/weblate](https://github.com/WeblateOrg/weblate) | GPL-3.0 | 6,185 | 1,392 | 2026-11-26 |
+| [lingodotdev/lingo.dev](https://github.com/lingodotdev/lingo.dev) | Apache-2.0 | 5,400 | 812 | 2026-11-20 |
+| [tolgee/tolgee-platform](https://github.com/tolgee/tolgee-platform) | ⚠️ Apache-2.0 + `ee/` | 4,164 | 381 | 2026-11-25 |
+| [ever-co/ever-traduora](https://github.com/ever-co/ever-traduora) | AGPL-3.0 | 2,140 | 224 | 2026-11-25 |
+| [generaltranslation/inlang](https://github.com/generaltranslation/inlang) | MIT | 2,012 | 184 | 2026-11-24 |
+| [mozilla/pontoon](https://github.com/mozilla/pontoon) | **BSD-3-Clause** | 1,680 | 620 | 2026-11-25 |
+| [box/mojito](https://github.com/box/mojito) | Apache-2.0 | 389 | 73 | 2026-11-09 |
+| [serge-community/serge](https://github.com/serge-community/serge) | ⚠️ "terms of Perl 5.10.0" | 228 | 48 | 2024-06-13 |
+| [txty-io/texterify](https://github.com/txty-io/texterify) | ❌ **BSL 1.1, no use grant** | 203 | 17 | 2026-10-09 |
+| [Lessify/localess](https://github.com/Lessify/localess) | MIT | 75 | 20 | 2026-11-25 |
+
+`mozilla/pontoon` is the find of the pass: **the only mature *permissive* platform in the tier**, in
+production at Mozilla, and therefore the default when the client must own and relicense the result.
+
+### Formats, memory, terminology and quality
+
+| Repo | Licence | Stars | Pushed | Layer |
+|---|---|---|---|---|
+| [vslavik/poedit](https://github.com/vslavik/poedit) | MIT | 2,061 | 2026-11-09 | XLIFF/PO/JSON editor |
+| [daniel-sc/ng-extract-i18n-merge](https://github.com/daniel-sc/ng-extract-i18n-merge) | MIT | 224 | 2026-10-20 | XLIFF extract/merge |
+| [locize/xliff](https://github.com/locize/xliff) | MIT | 91 | 2026-10-31 | XLIFF ↔ JS converters |
+| [microsoft/XLIFF2-Object-Model](https://github.com/microsoft/XLIFF2-Object-Model) | ⚠️ NOASSERTION | 92 | 2023-06-06 | XLIFF 2.0 model; dormant |
+| [maxprograms-com/OpenXLIFF](https://github.com/maxprograms-com/OpenXLIFF) | EPL-1.0 | 86 | 2026-11-03 | XLIFF 1.2–2.2 create/merge/validate — the Okapi substitute |
+| [bitextor/bitextor](https://github.com/bitextor/bitextor) | GPL-3.0 | 302 | 2024-11-11 | TM mining; **dormant** |
+| [yasslab/konjak](https://github.com/yasslab/konjak) | MIT | 12 | 2021-08-21 | TMX tools (Ruby) |
+| [GregoryVigoTorres/sdltm2tmx](https://github.com/GregoryVigoTorres/sdltm2tmx) | GPL-3.0 | 8 | 2023-10-13 | `.sdltm` → TMX: the vendor-exit tool |
+| [maxprograms-com/HybridTM](https://github.com/maxprograms-com/HybridTM) | EPL-1.0 | 7 | 2026-07-26 | TM engine; alive at 7★ |
+| [camertron/tmx-parser](https://github.com/camertron/tmx-parser) | ⚠️ none per API (unprobed) | 6 | 2015-07-24 | TMX parser; last touched 2015 |
+| [gaois/terminologue](https://github.com/gaois/terminologue) | MIT | 76 | 2026-11-24 | Termbase — best permissive pick in its tier |
+| [translate/terminator](https://github.com/translate/terminator) | GPL-3.0 | 49 | 2022-04-22 | Termbase; dormant |
+| [diegoberaldin/MetaTerm](https://github.com/diegoberaldin/MetaTerm) | GPL-3.0 | 19 | 2023-06-11 | Termbase; dormant |
+| [mjpost/sacrebleu](https://github.com/mjpost/sacrebleu) | Apache-2.0 | 1,266 | 2026-08-20 | Computable quality (BLEU) |
+| [Unbabel/COMET](https://github.com/Unbabel/COMET) | Apache-2.0 | 792 | 2026-04-21 | Computable quality (neural) |
+| [Unbabel/OpenKiwi](https://github.com/Unbabel/OpenKiwi) | AGPL-3.0 | 236 | 2022-06-23 | Quality estimation; **dead** |
+| [NJUNLP/njuqe](https://github.com/NJUNLP/njuqe) | MIT | 12 | 2025-09-10 | Quality estimation |
+| [BYU-TRG-Team/mqm-scorecard](https://github.com/BYU-TRG-Team/mqm-scorecard) | Apache-2.0 | **1** | 2025-06-11 | **Contractual quality (MQM)** |
+| [BYU-TRG-Team/mqm-scorecard-api](https://github.com/BYU-TRG-Team/mqm-scorecard-api) | Apache-2.0 | **1** | 2025-06-11 | **Contractual quality (MQM) API** |
+| [NiuTrans/NiuTrans.SMT](https://github.com/NiuTrans/NiuTrans.SMT) | GPL-2.0 | 163 | 2024-07-17 | Statistical MT; historical |
+
+### The two that do not resolve — recorded, not dropped
+
+- **`okapiframework/okapi` → `ls-remote` FAIL.** The Okapi Framework, the standard open
+  filter/segmentation toolkit that converts ~50 proprietary formats into XLIFF, is on **Bitbucket**.
+  GitHub holds only satellites: [spartansw/okapi-worldserver-components](https://github.com/spartansw/okapi-worldserver-components)
+  (MIT, 7★, 2024-07-17), [dameikle/okapi-maven-plugin](https://github.com/dameikle/okapi-maven-plugin)
+  (Apache-2.0, 7★, 2024-10-23), [sheep-works/Suffolk](https://github.com/sheep-works/Suffolk)
+  (0★, 2026-11-20, an early Rust port of Okapi's Tikal filter).
+- **`LibreTranslate/argos-translate-lt` → `ls-remote` FAIL.** The fork LibreTranslate pins
+  (`argos-translate-lt==1.12.1`) ships via **PyPI** with no resolving GitHub repo. Confirm its
+  licence on the published artefact; do not assume it inherited upstream MIT.
+- **OmegaT** has no primary GitHub repo either — a **SourceForge** project. Search returns only
+  plugins ([yoyicue/omegat-tencent-plugin](https://github.com/yoyicue/omegat-tencent-plugin) GPL-3.0
+  41★, [inertia42/omegat-openaitrans-plugin](https://github.com/inertia42/omegat-openaitrans-plugin)
+  GPL-3.0 30★) and name collisions.
+
+**The method consequence, which applies to all twelve industries:** GitHub-only discovery has a blind
+spot shaped exactly like *mature, pre-2010, standards-implementing open source*, which is
+disproportionately where industrial standards tooling lives. When a plane has an obvious incumbent
+and the sweep does not return it, **check another forge before concluding absence.**
+
 ## 2026-11-26 — pass 13: subscription, entitlement & reader-revenue infrastructure (33 repos, 33/33 resolve)
 
 ### Headline: the licence outcome is predicted by distance from the recurring charge

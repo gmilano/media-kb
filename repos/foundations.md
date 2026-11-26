@@ -1794,3 +1794,107 @@ is a *path*, not an identifier.
 The practical rule: **for these projects, "is it MIT?" is the wrong question. "Does my build import
 anything under that path?" is the right one** — and it is answerable with a dependency graph, not a
 licence scan.
+
+## The localization substrate — measured 2026-11-26 (pass 14)
+
+**49 distinct repository slugs were checked with `git ls-remote` on 2026-11-26: 47 resolve, 2 do
+not** — and both failures are recorded as informed gaps below rather than dropped silently.
+Metadata (stars, forks, licence, push date) was read from the GitHub `search/repositories` API the
+same day. **None of the 47 appeared anywhere in this KB before this pass.**
+
+⚠️ **Method warning for every future pass of every industry in this rotation:**
+`gh api repos/<owner>/<name>` returned **`Not Found` for all eleven well-known repos tested through
+it**, including `WeblateOrg/weblate` — which the `search/repositories` endpoint simultaneously
+reported at 6,185★. In this environment the GitHub *repos* endpoint is scoped to the session's own
+repositories, so **its 404 is an access artefact and carries no information about existence.** A pass
+that trusted it would have deleted Weblate, Pontoon, LibreTranslate and COMET from this KB as dead
+links. `git ls-remote` is the existence oracle; `search/repositories` with `q=repo:<slug>` is the
+metadata oracle. Nothing else.
+
+### Tier 1 — the job formats: XLIFF and friends (maintained, permissive, boring, reliable)
+
+XLIFF is the format that carries **this week's work** out to translators and back. It is well served.
+
+| Repo | Licence | Stars | Pushed | Role |
+|---|---|---|---|---|
+| [vslavik/poedit](https://github.com/vslavik/poedit) | MIT | 2,061 | 2026-11-09 | The desktop editor for PO, XLIFF and JSON. The single most-starred permissive tool in this plane, and the one a human linguist actually sits in front of. |
+| [locize/xliff](https://github.com/locize/xliff) | MIT | 91 | 2026-10-31 | `xliff2js` / `js2xliff` converters. Small, current, MIT — the right pick for a pipeline step. |
+| [maxprograms-com/OpenXLIFF](https://github.com/maxprograms-com/OpenXLIFF) | EPL-1.0 | 86 | 2026-11-03 | Java filters to **create, merge and validate** XLIFF 1.2, 2.0, 2.1 **and 2.2**. The most standards-complete converter found, and the practical substitute for Okapi (below). |
+| [daniel-sc/ng-extract-i18n-merge](https://github.com/daniel-sc/ng-extract-i18n-merge) | MIT | 224 | 2026-10-20 | Extract/merge XLIFF for Angular. Framework-specific, but proof the format has live tooling. |
+| [microsoft/XLIFF2-Object-Model](https://github.com/microsoft/XLIFF2-Object-Model) | ⚠️ NOASSERTION | 92 | 2023-06-06 | Microsoft's XLIFF 2.0 object model. **Dormant since 2023** and licence unresolved — reference only. |
+
+### Tier 2 — the asset format: TMX, and the emptiest table in this file
+
+TMX is the format that carries the **accumulated translation memory** — the client's decade of paid
+translation, and the only artefact that makes them portable between vendors. It is abandoned.
+
+| Repo | Licence | Stars | Pushed | State |
+|---|---|---|---|---|
+| [bitextor/bitextor](https://github.com/bitextor/bitextor) | GPL-3.0 | 302 | 2024-11-11 | Generates translation memories from multilingual websites. **The #1 result for both "translation memory" and "tmx translation memory" — and dormant two years.** Strong GPL: keep it a separate process. |
+| [maxprograms-com/HybridTM](https://github.com/maxprograms-com/HybridTM) | EPL-1.0 | 7 | 2026-07-26 | A hybrid translation-memory **engine**. Alive, permissive-ish (weak file-level copyleft) — and seven stars. |
+| [yasslab/konjak](https://github.com/yasslab/konjak) | MIT | 12 | 2021-08-21 | TMX tools for Ruby. MIT and readable; dormant since 2021. |
+| [GregoryVigoTorres/sdltm2tmx](https://github.com/GregoryVigoTorres/sdltm2tmx) | GPL-3.0 | 8 | 2023-10-13 | Converts proprietary SDL `.sdltm` memories to TMX 1.4 — i.e. the **vendor-exit tool**. 8 stars. |
+| [camertron/tmx-parser](https://github.com/camertron/tmx-parser) | ⚠️ none per API (unprobed) | 6 | 2015-07-24 | TMX parser. Last touched 2015. |
+
+**The measurement:** the entire TMX estate is `302★ (dead) → 17 → 12 → 8 → 7 → 6 → 6 → 4`.
+**Nothing above 17 stars is alive.** Compare Tier 1, where the job format alone carries 2,061★ of
+maintained MIT tooling. Same discipline, same decade, same standards body — opposite outcome.
+
+### Tier 3 — the MT engines (where the licence decides the business model)
+
+| Repo | Licence | Stars | Pushed | Note |
+|---|---|---|---|---|
+| [LibreTranslate/LibreTranslate](https://github.com/LibreTranslate/LibreTranslate) | AGPL-3.0 | 17,851 | 2026-11-25 | The self-hosted MT API everyone names. Network copyleft. |
+| [argosopentech/argos-translate](https://github.com/argosopentech/argos-translate) | **MIT** | 6,696 | 2026-11-17 | The engine underneath it. **Pinned by LibreTranslate's own `pyproject.toml` as `argos-translate-lt==1.12.1`.** |
+| [argosopentech/argos-train](https://github.com/argosopentech/argos-train) | MIT | 158 | 2026-06-26 | Training scripts — the route to a client-specific, domain-tuned engine. |
+| [LibreTranslate/LTEngine](https://github.com/LibreTranslate/LTEngine) | AGPL-3.0 | 215 | 2026-11-20 | LLM-backed local MT, API-compatible with LibreTranslate. |
+| [NiuTrans/NiuTrans.SMT](https://github.com/NiuTrans/NiuTrans.SMT) | GPL-2.0 | 163 | 2024-07-17 | Statistical MT. Historical interest; superseded by neural. Dormant. |
+
+### Tier 4 — terminology: small, permissive, and alive at the margin
+
+Terminology (which word the brand uses in es-MX versus es-AR) is a *judgment* asset, and the pattern
+holds — but less brutally than elsewhere, because termbases have an ISO interchange format (TBX).
+
+| Repo | Licence | Stars | Pushed | State |
+|---|---|---|---|---|
+| [gaois/terminologue](https://github.com/gaois/terminologue) | MIT | 76 | 2026-11-24 | Open terminology-management tool. **MIT and actively pushed** — the single best permissive pick in this tier. |
+| [translate/terminator](https://github.com/translate/terminator) | GPL-3.0 | 49 | 2022-04-22 | Terminology-management web platform. Dormant since 2022. |
+| [diegoberaldin/MetaTerm](https://github.com/diegoberaldin/MetaTerm) | GPL-3.0 | 19 | 2023-06-11 | Terminology-management desktop solution. Dormant since 2023. |
+
+### Tier 5 — quality, and the sharpest measurement of the law in this KB
+
+Split the single word "quality" by **who has to agree on the number**, and the estate splits with it.
+
+| Repo | Licence | Stars | Pushed | What kind of quality |
+|---|---|---|---|---|
+| [mjpost/sacrebleu](https://github.com/mjpost/sacrebleu) | Apache-2.0 | 1,266 | 2026-08-20 | **Computable.** Reference BLEU with versioned, reproducible test sets. |
+| [Unbabel/COMET](https://github.com/Unbabel/COMET) | Apache-2.0 | 792 | 2026-04-21 | **Computable.** Neural MT evaluation — the current state of the art metric. |
+| [Unbabel/OpenKiwi](https://github.com/Unbabel/OpenKiwi) | AGPL-3.0 | 236 | 2022-06-23 | **Predictive** (quality estimation without a reference). **Dead since 2022.** |
+| [NJUNLP/njuqe](https://github.com/NJUNLP/njuqe) | MIT | 12 | 2025-09-10 | **Predictive.** MIT, 12 stars. |
+| [BYU-TRG-Team/mqm-scorecard](https://github.com/BYU-TRG-Team/mqm-scorecard) | Apache-2.0 | **1** | 2025-06-11 | **Contractual.** The MQM error-typology scorecard that real localization contracts are written against. |
+| [BYU-TRG-Team/mqm-scorecard-api](https://github.com/BYU-TRG-Team/mqm-scorecard-api) | Apache-2.0 | **1** | 2025-06-11 | **Contractual.** Its API sibling. |
+
+**Quality a machine can compute on its own: 2,058★, alive, Apache-2.0.
+Quality a buyer and a vendor must sign: 2★, from one university team, untouched since mid-2025.**
+A ratio of roughly **1,000:1 inside a single discipline** — the most precise confirmation yet of the
+law this KB has now recorded across six industries.
+
+### Informed gaps — searched, and genuinely not on GitHub
+
+- **The Okapi Framework is not on GitHub.** `okapiframework/okapi` was the *only* failure in 35
+  `ls-remote` checks. Okapi is the industry-standard open filter/segmentation toolkit — the thing
+  that turns ~50 proprietary file formats into XLIFF — and it is hosted on Bitbucket. GitHub holds
+  only satellites: [spartansw/okapi-worldserver-components](https://github.com/spartansw/okapi-worldserver-components)
+  (MIT, 7★, 2024-07-17), [dameikle/okapi-maven-plugin](https://github.com/dameikle/okapi-maven-plugin)
+  (Apache-2.0, 7★, 2024-10-23), and [sheep-works/Suffolk](https://github.com/sheep-works/Suffolk)
+  (0★, 2026-11-20), an early Rust port of Okapi's Tikal filter.
+- **OmegaT is not on GitHub either.** The most widely used open-source CAT tool returns only
+  plugins ([yoyicue/omegat-tencent-plugin](https://github.com/yoyicue/omegat-tencent-plugin) GPL-3.0
+  41★; [inertia42/omegat-openaitrans-plugin](https://github.com/inertia42/omegat-openaitrans-plugin)
+  GPL-3.0 30★) and unrelated name collisions. It is a SourceForge project.
+- **This is a method defect, not a market fact, and it affects all twelve industries in this
+  rotation.** GitHub-only discovery has a blind spot shaped precisely like *mature, pre-2010,
+  standards-implementing open source* — which is disproportionately where industrial standards
+  tooling lives. Every prior pass of this KB, and of the other eleven, inherits that blind spot.
+  **Rule: when a plane has an obvious incumbent and the search does not return it, the next check is
+  a different forge, not a conclusion of absence.**

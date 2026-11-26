@@ -2041,3 +2041,143 @@ confirming — **build where the agreement is, integrate where the computation i
 "all-open-source localization platform". Three of the eight layers in the pass-14 addendum table are
 dormant, one-star, or absent from GitHub entirely. Promise the five healthy layers and *quote* the
 other three as engineering.
+
+## The out-of-home, signage & retail-media plane — patterns from pass 15 (2026-11-26)
+
+Every repo named below was verified this pass: existence by `git ls-remote`, licence by reading the
+file when GitHub reported `NOASSERTION`.
+
+### P15.1 — The permissive signage stack that deliberately avoids the flagship
+
+**Problem.** Anthias (3,745\*) is what every comparison recommends, and it is **GPLv2 + Commercial** —
+so it cannot go into a proprietary client deliverable without buying the commercial licence. Xibo, the
+other default, is AGPL-3.0.
+
+**Recipe.**
+1. **CMS:** [concerto/concerto](https://github.com/concerto/concerto) (Apache-2.0, 485\*, pushed
+   2026-11-26) — Rails + Docker. Use `screentinker/screentinker` (MIT, 281\*) instead when
+   multi-tenancy is needed on day one.
+2. **Player runtime:** [ardera/flutter-pi](https://github.com/ardera/flutter-pi) (MIT, 2,012\*) on
+   Pi-class hardware. It renders Flutter directly on KMS/DRM with no X11 or desktop session, which is
+   what makes it cheap on idle CPU across a large fleet — and what makes it defensible under EMEA
+   energy scoring.
+3. **Web creative fallback:** [RushB-fr/freekiosk](https://github.com/RushB-fr/freekiosk) (MIT, 765\*)
+   when the creative is already HTML and a Flutter client buys nothing.
+4. **Wire-up:** Concerto serves playlists and schedules over HTTP; the player polls and renders. Keep
+   the content contract in your own schema, not the CMS's, so the CMS stays replaceable.
+
+**Exclusions, with reasons:** Xibo and `garlic-*` (AGPL-3.0) for any closed deliverable;
+`jeremiaa/magic-frame` (**Polyform Noncommercial**) in all commercial work; `dividuum/info-beamer`
+(BSD-2-Clause but **archived 2020**) and `eerotal/LibreSignage` (**archived 2021**) as dependencies.
+
+### P15.2 — SMIL interop without taking AGPL into the client's product
+
+**Problem.** If the client already owns commercial SMIL-compatible players, the only maintained open
+SMIL family is `garlic-*`, and all of it is AGPL-3.0.
+
+**Recipe.** Use [garlic-signage/garlic-player](https://github.com/garlic-signage/garlic-player)
+(AGPL-3.0, 150\*) and [garlic-hub](https://github.com/garlic-signage/garlic-hub) (AGPL-3.0, 151\*)
+**as a conformance test harness** against the client's own players, not as shipped components. The
+harness runs in your CI and never reaches the client's product, so the AGPL obligation never attaches
+to their deliverable. Add `garlic-proxy` (5\*) when testing fleet caching behaviour.
+
+**If SMIL playback must actually ship,** deliver it as a separately-licensed network service with its
+source offer honoured, and tell the client that before the contract — not after.
+
+### P15.3 — Proof-of-play: build it, and know why you cannot shop for it
+
+**Measured, not assumed.** `proof of play` = **751 results, zero relevant**.
+`openooh/measurement-spec` is **dormant since 2021 and carries no licence file**;
+`openooh/screen-id` likewise. The entire open proof-of-play corpus is one **0-star** repo.
+
+**Recipe.**
+1. Take [openooh/venue-taxonomy](https://github.com/openooh/venue-taxonomy) (**Apache-2.0** — the one
+   piece of this layer you may legally build on) for venue typing.
+2. Carry venue IDs in **OpenRTB 2.6**: `dooh.venuetype`, or `device.ext.dooh.venuetypelist` /
+   `device.ext.dooh.venuetypeid` per taxonomy spec 1.2. When no `venuetax` is supplied, **OpenOOH is
+   the assumed default** — so conforming to it is the cheapest interop you will ever buy.
+3. Run the auction on [prebid/prebid-server](https://github.com/prebid/prebid-server) (Apache-2.0,
+   595\* / 986f), which already carries DOOH support.
+4. **Write the play-log schema yourself.** Read
+   [trillboards/proof-of-play-verifier](https://github.com/trillboards/proof-of-play-verifier) (MIT,
+   **0\***) and [WhimsicalCoder/dooh-bid-validator](https://github.com/WhimsicalCoder/dooh-bid-validator)
+   (Apache-2.0, **0\***) as references; both are permissive and neither has a user base.
+5. Build against the **IAB DOOH Measurement Guide (July 2025)**, the only agreed specification in this
+   layer.
+
+**The hard rule:** do **not** take a dependency on `openooh/screen-id` or `openooh/measurement-spec`.
+Dormant since 2021 *and* unlicensed means default copyright. Read them as statements of intent,
+re-implement, and keep that decision in the architecture record.
+
+### P15.4 — Audience measurement that is lawful in all four regions by construction
+
+**Measured.** No production-grade open footfall stack exists: `footfall analytics` = 184 results whose
+top genuine entry has **10 stars**; `people counting` = 4,970 results led by a Wi-Fi-sniffing novelty
+dead since 2024.
+
+**Recipe.** Port the algorithms from
+[NVIDIA-AI-IOT/deepstream-occupancy-analytics](https://github.com/NVIDIA-AI-IOT/deepstream-occupancy-analytics)
+(MIT, 240\*) or [saimj7/People-Counting-in-Real-Time](https://github.com/saimj7/People-Counting-in-Real-Time)
+(MIT, 613\*) — **both stale since 2023, so port, do not depend** — into an architecture fixed by four
+rules:
+
+1. Count **on-device**; video never leaves the player.
+2. **Discard frames** after counting; persist no images.
+3. Emit **aggregates only** (counts per interval), never per-person records.
+4. Generate **no biometric template** and perform no identification or re-identification.
+
+**Why these four and not a library choice:** this is the one design that simultaneously survives GDPR,
+Brazil's LGPD, **Chile's Law 21,719 (fully enforceable December 2026)** and APAC's three divergent
+regimes. It is a judgment artefact, which is precisely why no repo hands it to you — and precisely why
+it is billable.
+
+### P15.5 — Own the agent abstraction; do not adopt the vendor MCPs
+
+**Measured.** `signage mcp` = **14 repos, top 2 stars**, and the identifiable ones are adapters for
+closed SaaS CMSs (Sklera, Yodeck, Cast-Hub, RevelDigital, easysignage).
+
+**Recipe.** Define **one MCP tool surface over the client's own CMS API** — Concerto's if you built
+P15.1, Xibo's if the client already runs it — with roughly these tools: `list_screens`,
+`get_screen_status`, `publish_playlist`, `schedule_campaign`, `fetch_play_log`. Read
+[arnibj/InfoSlides.MCP](https://github.com/arnibj/InfoSlides.MCP) (MIT),
+[Cast-Hub/mcp-server](https://github.com/Cast-Hub/mcp-server) (MIT),
+[RevelDigital/reveldigital-webapp-skill](https://github.com/RevelDigital/reveldigital-webapp-skill)
+(MIT), [timerise-ai/digital-signage](https://github.com/timerise-ai/digital-signage) (MIT, 1\*) and
+[trillboards/dooh-agent-example](https://github.com/trillboards/dooh-agent-example) (MIT, 1\*) as
+**shape references only**.
+
+**Why it matters now.** Adopting a vendor MCP imports that vendor's lock-in into the agent layer, the
+most expensive layer to migrate off later. This is the first plane in the KB where the agent layer is
+being defined by incumbents rather than left empty — so the window to define a neutral abstraction is
+open today and narrows as those adapters gain users.
+
+### P15.6 — Retail media on in-store screens: the commercial wedge
+
+**Measured.** `retail media network` = **37 results**, the only genuine entry a **3-star MIT
+link-list**. There is no open-source retail-media platform at any licence, while in-store DOOH is
+forecast to drive **~56% of DOOH growth 2025–2029**.
+
+**Recipe.** `concerto/concerto` (Apache-2.0) for screen and playlist control + `prebid/prebid-server`
+(Apache-2.0) for the auction + `openooh/venue-taxonomy` (Apache-2.0) for venue classification + the
+**retailer's own loyalty and SKU data** as the targeting signal + P15.3's play log as the billing
+substrate. Every component is permissive, so the whole stack can be delivered closed.
+
+**Why this is a build and not an integration:** the differentiator is the retailer's first-party data,
+which is exactly why no open-source product exists here and never will. Pitch it as a build; the
+absence of a competing platform is the argument, not a caveat.
+
+### P15.7 — The licence gate for this plane (run it before any estimate)
+
+Four checks, each of which caught a real error this pass:
+
+1. **Never trust `NOASSERTION`.** Open `LICENSE`, `LICENSE.md`, `LICENSE.txt`, **`license.txt`
+   (lowercase)**, `LICENCE`, `COPYING`, `COPYING.md`, `NOTICE` on **both `main` and `master`**. Four
+   probes gave four different answers, in both directions.
+2. **A raw 404 is never by itself proof of a missing licence.** Fetch `README.md` as a control: if the
+   README returns 200 and no licence filename does, the absence is real. That control is what made the
+   OpenOOH no-licence finding safe to publish.
+3. **Check `archived`.** `info-beamer` is permissive *and* archived; a licence check alone would have
+   greenlit it.
+4. **Read every star count.** `topic:dooh` has 35 repos and four of this plane's genuinely relevant
+   transaction repos have **0 stars**. Permissive plus pushed-today plus zero stars means *read it*,
+   never *depend on it*.

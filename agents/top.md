@@ -1352,3 +1352,187 @@ branch and channel were correct and the file names were the only thing wrong.
 This matters most in **EMEA**: REUSE is an FSFE standard and is disproportionately adopted by
 European and EU-funded projects, which is exactly the estate a sovereignty-driven engagement draws
 from. A licence sweep tuned only to American repo conventions will under-report European compliance.
+
+## The out-of-home, signage & retail-media plane — measured 2026-11-26 (pass 15), and the first plane whose **open source sits in the screen while the vacuum sits in the transaction**
+
+### Headline: the first plane in this KB where the open source is in the **screen** and the vacuum is in the **transaction**
+
+Fourteen passes measured planes where the *capability* was missing. This one inverts that. The
+display layer is abundant, maintained and permissive: `topic:digital-signage` returns **576 repos**,
+led by Screenly/Anthias at **3,745\***, with four MIT players pushed within the last two weeks. The
+*transaction* layer — buying a screen, identifying it, proving the ad played, settling the bill — is
+a measured near-zero: `topic:dooh` returns **35 repos in total**, and below OpenOOH's 56-star venue
+taxonomy **nothing exceeds 10 stars**.
+
+You can build the screen from open source today. You cannot buy, measure or bill it from open source
+at all.
+
+### The sharpest evidence of the structural law in fifteen passes — and it is *inside one standards body*
+
+Every prior pass inferred the law across repos from different owners. Here the whole gradient sits in
+a single GitHub org, so maintenance and licence cannot be blamed on differing project cultures. The
+only variable is **what kind of problem each spec solves**.
+
+| Spec | What it decides | Stars / forks | Last push | Licence | State |
+|---|---|---|---|---|---|
+| [openooh/venue-taxonomy](https://github.com/openooh/venue-taxonomy) | **Targeting** — what kind of place a screen is (a *format* problem) | 56\* / 40f | 2026-11-16 | **Apache-2.0** | **Alive** |
+| [openooh/creative-formats](https://github.com/openooh/creative-formats) | What a creative may look like | 4\* / 1f | 2021-03-08 | **NONE** | Dormant |
+| [openooh/screen-id](https://github.com/openooh/screen-id) | **Identity** — which physical screen this is | 1\* / 2f | 2021-07-29 | **NONE** | Dormant |
+| [openooh/measurement-spec](https://github.com/openooh/measurement-spec) | **Measurement** — what counts as a play (a *judgment* problem) | 0\* / 0f | 2021-04-07 | **NONE** | Dormant |
+
+Four specs, one alive. The one that is alive is the one that is a pure format question, and it is the
+one with a licence. **The three that are dormant carry no licence file at all** — which means default
+copyright, all rights reserved, on the very documents a buyer would need to settle a bill.
+
+**Verified, not assumed.** Per the cycle-8 rule that a raw 404 is never by itself proof of a missing
+licence, each dormant repo was checked on both `main` and `master` for eight filenames (`LICENSE`,
+`LICENSE.md`, `LICENSE.txt`, `license.txt`, `LICENCE`, `COPYING`, `COPYING.md`, `NOTICE`). All 48
+probes returned 404 **while `README.md` returned 200 on every one of them**, and the control
+(`venue-taxonomy/main/LICENSE`) returned 200. The raw channel works and the filenames are right: the
+licences are genuinely absent.
+
+**This refines the law rather than repeating it.** Pass 13 found that *the licence hardens as the code
+approaches the money*. In this plane it does not harden — **it disappears**. Not copyleft, not
+commercial, simply absent, because nobody maintained the spec long enough to add one. Absence is
+worse than copyleft for a client engagement: AGPL tells you the rules, no-licence tells you nothing
+and defaults to "you may not".
+
+**P17 — falsifiable prediction, recorded for a later pass to kill.** If DOOH's transaction layer is
+empty because the registry and consortium control the asset — not because the engineering is hard —
+then twelve months from now `topic:dooh` will *still* contain no repo above 100 stars implementing
+measurement or proof-of-play, even while `topic:digital-signage` keeps growing. Re-measure at roughly
+pass 27 and write down the counts either way.
+
+### A new licence category for this KB, and it ranks above the honest projects
+
+[jeremiaa/magic-frame](https://github.com/jeremiaa/magic-frame) — **532\* / 22f, pushed 2026-11-22** —
+appears in `topic:digital-signage` *above* both Xibo and Concerto. GitHub's licence field reports
+`NOASSERTION`. Its own `LICENSE.md` (5,556 B) reads:
+
+> `# Magic Frame License` … `This software is released under the **Polyform Noncommercial License**`
+
+**Source-available, actively maintained, highly starred, and unusable in any client engagement.** This
+is the first Polyform Noncommercial project this KB has recorded. A screen that ranks by stars and
+recent activity — the screen most people actually apply — passes it. Only opening the file catches it.
+
+### `NOASSERTION` resolved four times, with four different answers
+
+`NOASSERTION` is not a synonym for "no licence"; it means *GitHub's classifier declined*. Four probes,
+four outcomes, each with a different consequence for Globant:
+
+| Repo | Stars | GitHub says | The file actually says | Consequence |
+|---|---|---|---|---|
+| [Screenly/Anthias](https://github.com/Screenly/Anthias) | 3,745\* | NOASSERTION | **dual GPLv2 + Commercial** (stated in its own 18,232 B `LICENSE` header) | The flagship of open signage is **not permissive** — proprietary client work needs the commercial licence |
+| [dividuum/info-beamer](https://github.com/dividuum/info-beamer) | 230\* | NOASSERTION | **BSD-2-Clause** (`LICENSE.txt`, 2,393 B) | Fully permissive — but **archived since 2020-05-01** |
+| [concerto/concerto](https://github.com/concerto/concerto) | 485\* | Apache-2.0 | **Apache-2.0** confirmed on both branches | Clean; the best permissive CMS in the plane |
+| [jeremiaa/magic-frame](https://github.com/jeremiaa/magic-frame) | 532\* | NOASSERTION | **Polyform Noncommercial** | Unusable commercially |
+
+Note the two *inverted* errors in that table: web search told us info-beamer had "no license
+information" when it is in fact BSD-2-Clause, and told us Anthias was plausibly GPLv3 when it is
+GPLv2-plus-commercial. **A permissive licence was missed and a copyleft one was understated — the
+error runs in both directions, so neither optimism nor pessimism about `NOASSERTION` is safe.**
+
+### Slug correction
+
+The canonical Concerto repository is **`concerto/concerto`** (485\*, Apache-2.0, pushed 2026-11-26).
+Comparison blogs this pass implied `concerto-signage/concerto`, which **does not resolve**. Prior
+cycles have been bitten by exactly this; the `ls-remote` check is what caught it.
+
+### The agent layer exists, and that is the bad news — a shape not seen in fourteen prior passes
+
+`signage mcp` returns **14 repos; the top one has 2 stars.** But the striking part is not the size, it
+is the *ownership*. Almost every identifiable entry is an MCP adapter for a **proprietary** CMS:
+
+| Repo | Stars | Licence | Last push | What it bridges to |
+|---|---|---|---|---|
+| [DaScheife/Sklera-Digital-Signage-MCP-Server](https://github.com/DaScheife/Sklera-Digital-Signage-MCP-Server) | 2\* | NONE | 2026-06-18 | Sklera (closed SaaS) |
+| [SUDARSHANCHAUDHARI/SignageQAMCPServer](https://github.com/SUDARSHANCHAUDHARI/SignageQAMCPServer) | 1\* | MIT | 2026-11-25 | QA harness |
+| [Cast-Hub/mcp-server](https://github.com/Cast-Hub/mcp-server) | 0\* | MIT | 2026-06-30 | Cast-Hub (closed SaaS) |
+| [TomsFaire/Yodeck-MCP](https://github.com/TomsFaire/Yodeck-MCP) | 0\* | NONE | 2026-11-13 | Yodeck (closed SaaS) |
+| [RevelDigital/reveldigital-webapp-skill](https://github.com/RevelDigital/reveldigital-webapp-skill) | 0\* | MIT | 2026-06-21 | RevelDigital (closed SaaS) |
+| [arnibj/InfoSlides.MCP](https://github.com/arnibj/InfoSlides.MCP) | 0\* | MIT | 2026-11-22 | InfoSlides |
+| [timerise-ai/digital-signage](https://github.com/timerise-ai/digital-signage) | 1\* | MIT | 2026-10-25 | agent skill, self-hosted |
+| [trillboards/dooh-agent-example](https://github.com/trillboards/dooh-agent-example) | 1\* | MIT | 2026-03-12 | DOOH buying demo |
+
+In the fourteen earlier planes the agent layer was simply *absent*. Here it is being **defined by the
+SaaS vendors whose lock-in it extends**. For Globant that is the opposite of leverage: adopting a
+vendor MCP imports that vendor's lock-in into the agent layer, which is the most expensive layer to
+migrate off later. The recommendation in `compose/patterns.md` (P15.5) is therefore to own the
+abstraction and read these only as shape references.
+
+### The display layer — real, maintained, and mostly permissive (this is the part you can build on)
+
+All rows verified this pass: existence by `git ls-remote`, metadata by `search/repositories`, and
+every `NOASSERTION` opened by hand.
+
+| Repo | Stars / forks | Licence | Last push | What it is | Verdict for client work |
+|---|---|---|---|---|---|
+| [concerto/concerto](https://github.com/concerto/concerto) | 485\* / — | **Apache-2.0** | 2026-11-26 | Rails signage CMS, Docker-deployable; originated at Rensselaer in 2008 | **Best permissive CMS in the plane.** Oldest, still pushed today |
+| [ardera/flutter-pi](https://github.com/ardera/flutter-pi) | 2,012\* / 210f | **MIT** | 2026-11-15 | Flutter runtime on KMS/DRM — no X11, no desktop | **Best permissive player runtime** for Pi-class hardware |
+| [RushB-fr/freekiosk](https://github.com/RushB-fr/freekiosk) | 765\* / 145f | **MIT** | 2026-11-24 | Android kiosk/web-view player | Use when the creative is already web |
+| [screentinker/screentinker](https://github.com/screentinker/screentinker) | 281\* / 76f | **MIT** | 2026-11-26 | Multi-tenant signage CMS, self-hostable | Multi-tenancy out of the box; single-maintainer risk |
+| [screenlite/screenlite](https://github.com/screenlite/screenlite) | 368\* / 18f | **MIT** | 2026-05-08 | Self-hosted signage CMS | Permissive but **~6 months quiet** — check before depending |
+| [home-screens/home-screens](https://github.com/home-screens/home-screens) | 114\* / 21f | **MIT** | 2026-11-26 | Lightweight dashboard/screen renderer | Small but pushed today |
+| [debloper/xiosk](https://github.com/debloper/xiosk) | 349\* / 42f | MPL-2.0 | 2026-02-17 | Chromium kiosk wrapper | Weak copyleft — file-level, usually acceptable |
+| [Screenly/Anthias](https://github.com/Screenly/Anthias) | 3,745\* / 735f | **GPLv2 + Commercial** | 2026-11-26 | The best-known open signage player (ex-Screenly OSE) | **Most popular, least usable.** Needs the commercial licence for proprietary work |
+| [xibosignage/xibo-cms](https://github.com/xibosignage/xibo-cms) | 520\* / 368f | AGPL-3.0 | 2026-11-24 | The most established open signage CMS | AGPL; some players additionally need a commercial player licence |
+| [xibosignage/xibo](https://github.com/xibosignage/xibo) | 745\* / 184f | AGPL-3.0 | 2026-11-25 | Xibo umbrella/meta repo | As above |
+| [garlic-signage/garlic-player](https://github.com/garlic-signage/garlic-player) | 150\* / 34f | AGPL-3.0 | 2026-11-24 | **The only maintained open SMIL player** | Essential for SMIL interop; see P15.2 for the AGPL-safe use |
+| [garlic-signage/garlic-hub](https://github.com/garlic-signage/garlic-hub) | 151\* / — | AGPL-3.0 | 2026-11-22 | SMIL-compatible CMS (new codebase, active development) | Pair with garlic-player |
+| [dividuum/info-beamer](https://github.com/dividuum/info-beamer) | 230\* / 49f | **BSD-2-Clause** | 2020-05-01 | Lua-scripted renderer, the developer favourite | **Archived.** Permissive and worth reading; do not depend |
+| [jeremiaa/magic-frame](https://github.com/jeremiaa/magic-frame) | 532\* / 22f | **Polyform Noncommercial** | 2026-11-22 | Polished display/frame app | **Excluded from all commercial work** — see the licence-trap table |
+| [eerotal/LibreSignage](https://github.com/eerotal/LibreSignage) | 695\* / 132f | BSD-3-Clause | 2021-02-03 | Former permissive favourite | **Archived 2021.** Historical reference only |
+
+**Fifteen real rows, no placeholders.** Two more maintained SMIL satellites exist and are listed in
+`repos/foundations.md`: `garlic-signage/garlic-proxy` (5\*) and `garlic-signage/garlic-creator` (4\*),
+both AGPL-3.0.
+
+### The transaction layer — everything that exists, which is almost nothing
+
+| Repo | Stars | Licence | Last push | Role | Honest verdict |
+|---|---|---|---|---|---|
+| [openooh/venue-taxonomy](https://github.com/openooh/venue-taxonomy) | 56\* | **Apache-2.0** | 2026-11-16 | Venue types for OpenRTB DOOH bid requests; spec 1.1 accepted, 1.2 targets OpenRTB 2.6 | **The one piece of this layer you may legally build on** |
+| [prebid/prebid-server](https://github.com/prebid/prebid-server) | 595\* / 986f | **Apache-2.0** | 2026-11-25 | Server-side header bidding; already carries DOOH support | The auction half of any pDOOH build |
+| [vistarmedia/dynamic-creative-spec](https://github.com/vistarmedia/dynamic-creative-spec) | 10\* | Apache-2.0 | 2022-11-22 | Dynamic-creative spec from a major DOOH SSP | Dormant 4 years; read as documentation |
+| [WhimsicalCoder/dooh-bid-validator](https://github.com/WhimsicalCoder/dooh-bid-validator) | 0\* | Apache-2.0 | 2026-11-26 | Validates DOOH bid requests | Pushed today, **0 stars** — read, do not depend |
+| [trillboards/proof-of-play-verifier](https://github.com/trillboards/proof-of-play-verifier) | 0\* | MIT | 2026-03-12 | Proof-of-play verification | **The entire open proof-of-play corpus.** Reference only |
+| [RayTrunk/OpenSMIL](https://github.com/RayTrunk/OpenSMIL) | 0\* | MIT | 2026-03-28 | SMIL implementation attempt | Permissive, unproven |
+
+Six rows, and after the first two the star counts are 10, 0, 0, 0. **There is no open-source billing,
+settlement or measurement for DOOH.** Any client promise in that area is a build, not an integration.
+
+### False abundance, measured four times — read the results, never the total
+
+Cycle 8 established that shortening a query can convert a false zero into a *false abundance*. This
+plane produced the four crudest examples the KB has recorded:
+
+| Query | Results | Relevant | What actually ranks |
+|---|---|---|---|
+| `proof of play` | **751** | **0** | `D4stiny/ForkPlayground` (229\*), Minecraft help threads, and `proofofplay/piratenation-game` (97\*) — a web3 games studio *named* Proof of Play |
+| `retail media network` | **37** | **~0** | Minecraft support threads, a `dxdiag` dump, a Windows-7 issue tracker. The single genuine hit is a **3\*** MIT link-list, not code |
+| `people counting` | **4,970** | low | Top hit `schollz/howmanypeoplearearound` (**7,089\***, MIT) is a Wi-Fi-sniffing novelty **dead since 2024**, not audience measurement |
+| `footfall analytics` | **184** | ~0 | 67\* hackathon repo, then 10\*, 6\*, 6\*, 4\*, 3\* — student coursework only |
+
+**Retail media deserves emphasis.** It is the fastest-growing advertising channel in the world, and
+its open-source implementation is *a three-star list of links*
+([ishandutta2007/Awesome-Retail-Media-Network-Platform](https://github.com/ishandutta2007/Awesome-Retail-Media-Network-Platform),
+MIT, 2026-09-11). That is cruder than this KB's previous worst — music royalty accounting, where the
+top six summed to zero — because here the category is not niche, it is the centre of ad-industry
+growth.
+
+### A recurring cross-plane false friend, worth a KB-wide note
+
+**`danderfer/Comp_Sci_Sem_2` (228\*) ranked in BOTH `proof of play` AND `people counting`.** A generic
+coursework dump matches many short, plain-English media queries. Combined with the pass-11 note that
+the placeholder regex needs word boundaries, the rule is: **a plain-English multi-word query on
+GitHub search returns coursework and tutorial repos before it returns industry code.** Pair every such
+query with a `topic:` query, which is curated and gave the honest counts above.
+
+### One unverifiable vendor claim, recorded as a gap rather than a row
+
+The first search of this pass named **"screenRIG"** — described as a signage CLI shipping an "official
+plugin for Claude Code and Codex" — as its single most relevant AI-agent-for-signage match. It does
+not survive verification: `screenrig/screenrig` **fails `git ls-remote`**, and a `screenrig` repo
+search returns 9 results, none of them this project. It may exist as a product off GitHub, but
+**nothing was written as a table row for it.** This is the exact shape that has previously compiled
+fabricated entities into this KB.

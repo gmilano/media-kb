@@ -897,3 +897,25 @@ the tuning removed.
 **Rule, generalisable to all twelve industries: for any AI-era repository, grep the LICENSE and
 NOTICE for `prompt`, `model`, `weights` and `Pro` before accepting the badge.** A permissive licence
 over code says nothing about the artefacts the code loads.
+
+## The out-of-home, signage & retail-media plane — measured 2026-11-26 (pass 15)
+
+The customisable-platform question for this plane has an unusually clean answer: **three permissive
+CMSs you can put AI on top of, one copyleft family you cannot ship closed, and no retail-media
+platform at any licence.**
+
+| Platform | Licence | Stars | Last push | Customisable for AI-on-top? |
+|---|---|---|---|---|
+| [concerto/concerto](https://github.com/concerto/concerto) | **Apache-2.0** | 485\* | 2026-11-26 | **Yes — the Odoo-equivalent of this plane.** Rails + Docker, 18 years of deployment history, permissive |
+| [screentinker/screentinker](https://github.com/screentinker/screentinker) | **MIT** | 281\* | 2026-11-26 | Yes, and multi-tenant already — the fastest route to a managed offering |
+| [screenlite/screenlite](https://github.com/screenlite/screenlite) | **MIT** | 368\* | 2026-05-08 | Yes, but confirm the project is still moving (quiet ~6 months) |
+| [xibosignage/xibo-cms](https://github.com/xibosignage/xibo-cms) | AGPL-3.0 | 520\* | 2026-11-24 | Technically the most capable and complete; **AGPL blocks a closed deliverable** |
+| [garlic-signage/garlic-hub](https://github.com/garlic-signage/garlic-hub) | AGPL-3.0 | 151\* | 2026-11-22 | Only if SMIL interop is a hard requirement |
+| [Screenly/Anthias](https://github.com/Screenly/Anthias) | GPLv2 + Commercial | 3,745\* | 2026-11-26 | Only under the commercial licence |
+| **Retail media network** | — | — | — | **Nothing exists.** `retail media network` = 37 results, the only genuine hit a 3\* link-list. This is a greenfield build |
+
+**The comparison that matters for a studio pitch:** healthcare has OpenMRS, education has Moodle, ERP
+has Odoo — each a permissive, decade-old, deployable platform. Out-of-home *does* have its equivalent
+in **Concerto** (Apache-2.0, 2008, pushed today), and almost nobody names it, because the search
+results and the comparison blogs lead with Anthias and Xibo, which are the two least licence-friendly
+options in the plane. **That gap between what ranks and what is usable is itself the finding.**

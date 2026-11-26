@@ -10,6 +10,104 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 15: out-of-home & signage infrastructure (37 slugs checked, 36 resolve, 1 does not)
+
+### Headline: the first plane in this KB where the open source is in the **screen** and the vacuum is in the **transaction**
+
+Fourteen passes measured planes where the *capability* was missing. This one inverts that. The
+display layer is abundant, maintained and permissive: `topic:digital-signage` returns **576 repos**,
+led by Screenly/Anthias at **3,745\***, with four MIT players pushed within the last two weeks. The
+*transaction* layer — buying a screen, identifying it, proving the ad played, settling the bill — is
+a measured near-zero: `topic:dooh` returns **35 repos in total**, and below OpenOOH's 56-star venue
+taxonomy **nothing exceeds 10 stars**.
+
+You can build the screen from open source today. You cannot buy, measure or bill it from open source
+at all.
+
+### The sharpest evidence of the structural law in fifteen passes — and it is *inside one standards body*
+
+Every prior pass inferred the law across repos from different owners. Here the whole gradient sits in
+a single GitHub org, so maintenance and licence cannot be blamed on differing project cultures. The
+only variable is **what kind of problem each spec solves**.
+
+| Spec | What it decides | Stars / forks | Last push | Licence | State |
+|---|---|---|---|---|---|
+| [openooh/venue-taxonomy](https://github.com/openooh/venue-taxonomy) | **Targeting** — what kind of place a screen is (a *format* problem) | 56\* / 40f | 2026-11-16 | **Apache-2.0** | **Alive** |
+| [openooh/creative-formats](https://github.com/openooh/creative-formats) | What a creative may look like | 4\* / 1f | 2021-03-08 | **NONE** | Dormant |
+| [openooh/screen-id](https://github.com/openooh/screen-id) | **Identity** — which physical screen this is | 1\* / 2f | 2021-07-29 | **NONE** | Dormant |
+| [openooh/measurement-spec](https://github.com/openooh/measurement-spec) | **Measurement** — what counts as a play (a *judgment* problem) | 0\* / 0f | 2021-04-07 | **NONE** | Dormant |
+
+Four specs, one alive. The one that is alive is the one that is a pure format question, and it is the
+one with a licence. **The three that are dormant carry no licence file at all** — which means default
+copyright, all rights reserved, on the very documents a buyer would need to settle a bill.
+
+**Verified, not assumed.** Per the cycle-8 rule that a raw 404 is never by itself proof of a missing
+licence, each dormant repo was checked on both `main` and `master` for eight filenames (`LICENSE`,
+`LICENSE.md`, `LICENSE.txt`, `license.txt`, `LICENCE`, `COPYING`, `COPYING.md`, `NOTICE`). All 48
+probes returned 404 **while `README.md` returned 200 on every one of them**, and the control
+(`venue-taxonomy/main/LICENSE`) returned 200. The raw channel works and the filenames are right: the
+licences are genuinely absent.
+
+**This refines the law rather than repeating it.** Pass 13 found that *the licence hardens as the code
+approaches the money*. In this plane it does not harden — **it disappears**. Not copyleft, not
+commercial, simply absent, because nobody maintained the spec long enough to add one. Absence is
+worse than copyleft for a client engagement: AGPL tells you the rules, no-licence tells you nothing
+and defaults to "you may not".
+
+**P17 — falsifiable prediction, recorded for a later pass to kill.** If DOOH's transaction layer is
+empty because the registry and consortium control the asset — not because the engineering is hard —
+then twelve months from now `topic:dooh` will *still* contain no repo above 100 stars implementing
+measurement or proof-of-play, even while `topic:digital-signage` keeps growing. Re-measure at roughly
+pass 27 and write down the counts either way.
+
+### A new licence category for this KB, and it ranks above the honest projects
+
+[jeremiaa/magic-frame](https://github.com/jeremiaa/magic-frame) — **532\* / 22f, pushed 2026-11-22** —
+appears in `topic:digital-signage` *above* both Xibo and Concerto. GitHub's licence field reports
+`NOASSERTION`. Its own `LICENSE.md` (5,556 B) reads:
+
+> `# Magic Frame License` … `This software is released under the **Polyform Noncommercial License**`
+
+**Source-available, actively maintained, highly starred, and unusable in any client engagement.** This
+is the first Polyform Noncommercial project this KB has recorded. A screen that ranks by stars and
+recent activity — the screen most people actually apply — passes it. Only opening the file catches it.
+
+### `NOASSERTION` resolved four times, with four different answers
+
+`NOASSERTION` is not a synonym for "no licence"; it means *GitHub's classifier declined*. Four probes,
+four outcomes, each with a different consequence for Globant:
+
+| Repo | Stars | GitHub says | The file actually says | Consequence |
+|---|---|---|---|---|
+| [Screenly/Anthias](https://github.com/Screenly/Anthias) | 3,745\* | NOASSERTION | **dual GPLv2 + Commercial** (stated in its own 18,232 B `LICENSE` header) | The flagship of open signage is **not permissive** — proprietary client work needs the commercial licence |
+| [dividuum/info-beamer](https://github.com/dividuum/info-beamer) | 230\* | NOASSERTION | **BSD-2-Clause** (`LICENSE.txt`, 2,393 B) | Fully permissive — but **archived since 2020-05-01** |
+| [concerto/concerto](https://github.com/concerto/concerto) | 485\* | Apache-2.0 | **Apache-2.0** confirmed on both branches | Clean; the best permissive CMS in the plane |
+| [jeremiaa/magic-frame](https://github.com/jeremiaa/magic-frame) | 532\* | NOASSERTION | **Polyform Noncommercial** | Unusable commercially |
+
+Note the two *inverted* errors in that table: web search told us info-beamer had "no license
+information" when it is in fact BSD-2-Clause, and told us Anthias was plausibly GPLv3 when it is
+GPLv2-plus-commercial. **A permissive licence was missed and a copyleft one was understated — the
+error runs in both directions, so neither optimism nor pessimism about `NOASSERTION` is safe.**
+
+### Slug correction
+
+The canonical Concerto repository is **`concerto/concerto`** (485\*, Apache-2.0, pushed 2026-11-26).
+Comparison blogs this pass implied `concerto-signage/concerto`, which **does not resolve**. Prior
+cycles have been bitten by exactly this; the `ls-remote` check is what caught it.
+
+### Movement worth watching
+
+| Repo | Stars | Licence | Last push | Signal |
+|---|---|---|---|---|
+| [concerto/concerto](https://github.com/concerto/concerto) | 485\* | Apache-2.0 | 2026-11-26 | An 18-year-old Rails CMS pushed **today** — the permissive anchor nobody cites |
+| [screentinker/screentinker](https://github.com/screentinker/screentinker) | 281\* | MIT | 2026-11-26 | Multi-tenant MIT CMS, pushed today, single maintainer |
+| [home-screens/home-screens](https://github.com/home-screens/home-screens) | 114\* | MIT | 2026-11-26 | Small, new, pushed today — watch the trajectory |
+| [WhimsicalCoder/dooh-bid-validator](https://github.com/WhimsicalCoder/dooh-bid-validator) | 0\* | Apache-2.0 | 2026-11-26 | Pushed today into an empty layer; zero users yet |
+| [jeremiaa/magic-frame](https://github.com/jeremiaa/magic-frame) | 532\* | **Polyform Noncommercial** | 2026-11-22 | Rising fast and **commercially unusable** — the trap of this pass |
+| [openooh/venue-taxonomy](https://github.com/openooh/venue-taxonomy) | 56\* | Apache-2.0 | 2026-11-16 | The alive spec; its three siblings are dormant and unlicensed |
+| [screenlite/screenlite](https://github.com/screenlite/screenlite) | 368\* | MIT | 2026-05-08 | **Went quiet ~6 months ago** — was a top recommendation; re-check next pass |
+
+
 ## 2026-11-26 — pass 14: localization substrate infrastructure (49 slugs checked, 47 resolve, 2 do not)
 
 ### Headline: within one standards family, the format that carries the job is maintained and the format that carries the client's asset is abandoned

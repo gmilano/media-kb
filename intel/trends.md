@@ -1650,3 +1650,38 @@ TVBEurope) now frames 2026 as scaling and "agentic", with several false starts e
 **The honest read:** generic industry queries have saturated for media. Value now comes from naming
 an unexamined plane and measuring it, which is what this pass did. The generic sweep should be
 treated as a cheap regression check, not as a source of findings.
+
+## The out-of-home, signage & retail-media plane — trends measured 2026-11-26 (pass 15)
+
+1. **Retail media is colonising physical space, and in-store screens are where the growth is.**
+   In-store DOOH is forecast to drive **~56% of total DOOH growth between 2025 and 2029**. Retailers
+   are extending their media networks into DOOH with programmatic creative that reacts to local
+   conditions such as weather. *(Vendor forecast — directional, not measured.)*
+2. **Programmatic is becoming the default buying mode, not the innovation.** US programmatic reached
+   **24% of DOOH spend in 2024** and is projected at **65% by 2029**; one trade report has US
+   programmatic DOOH spend rising **49%** as budgets shift. Global programmatic DOOH was
+   **US$1.339B in 2025** (World Out of Home Organization — the most credible figure found this pass).
+3. **AI's real effect is on the sell side, not the creative.** The most defensible argument found is
+   that AI's largest DOOH impact is **matching inventory to demand** — real-time pricing and yield
+   control for media owners — rather than generating artwork.
+4. **The "25% of campaigns planned by AI agents in 2026" figure is a prediction with no traceable
+   method.** It recurs across vendor posts and originates in a guest article. **Do not put it in a
+   client deck as measured.** Recorded here specifically so a later pass does not relaunder it.
+5. **Measurement is the stated blocker across every region.** Buyers want DOOH measurement comparable
+   to Meta and Amazon. The IAB's **July 2025 DOOH Measurement Guide** set shared standards, but
+   adoption is early-stage — and the open-source measurement spec has been **dormant since 2021 and
+   carries no licence** (see `agents/top.md`). The standard exists on paper; the implementation does
+   not exist at all.
+6. **Platform consolidation is the trade-show theme.** DMEXCO and IDOOH World 2026 produced three
+   recurring themes: consolidation, retail media becoming central to DOOH sales, and measurement
+   catching up.
+7. **Self-serve is opening DOOH to local advertisers.** Lower entry barriers are bringing convenience-
+   store and ATM screens into the addressable pool — which multiplies the number of screens needing
+   cheap, permissive playback software, the one layer open source already serves well.
+8. **Sustainability is becoming an EMEA procurement criterion.** Media owners are scoring screens for
+   energy use and reporting real-time emissions. This is a *requirement* that favours efficient
+   players — and is a direct argument for `flutter-pi` (MIT, KMS/DRM, no desktop stack) over a
+   full-browser player on the same hardware.
+9. **The agent layer is forming as vendor adapters.** See the measured table in `agents/top.md`: of
+   14 `signage mcp` repos, the identifiable ones bridge to closed SaaS CMSs. The window to define a
+   neutral abstraction is open **now** and will close as those adapters accumulate users.

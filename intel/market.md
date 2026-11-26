@@ -550,6 +550,34 @@ located. A companieshistory.com roundup puts NA at 33.6%–40.6% of global AI-in
 depending on firm and scope — secondhand, with the scope spread doing all the work. Treat both as
 unsourced until the originals are read.
 
+
+
+#### Pass 15 (2026-11-26) — out-of-home, signage & retail media
+
+**The most programmatic DOOH market in the world, and the one where the measurement standard exists.**
+EMARKETER forecasts **~US$4.8B of US DOOH ad spend in 2026**. Programmatic reached **24% of US DOOH
+spend in 2024**, projected to **65% by 2029**; a trade report has programmatic spend rising **49%** as
+marketers shift budgets. North America's share of global DOOH revenue is reported inconsistently
+(**~35%–42%** depending on publisher) — quote the range, never one figure. Digital is **~36.9% of
+2025 OOH revenue** here (WOO-based).
+
+**Players.** Lamar Advertising and OUTFRONT Media dominate inventory; newer entrants include Wow Media
+in premium digital formats and OBM's *Ike* smart-city kiosks. Buying runs through DV360 and The Trade
+Desk. JCDecaux and Clear Channel are also present.
+
+**Standards.** The **IAB DOOH Measurement Guide (July 2025)** is the region's distinguishing asset —
+shared standards exist here that do not exist elsewhere — but adoption is early-stage.
+
+**Regulation — two fronts, neither federal.** There is no federal AI statute bearing on DOOH. The real
+constraints are **local permitting for physical installations** and **privacy rules for audience
+measurement**. Compliance with municipal rules is repeatedly cited as a cause of approval delay and
+operational complexity.
+
+**Opportunity.** The measurement *standard* is published and the open *implementation* is absent
+(`openooh/measurement-spec`: dormant since 2021, no licence). A credible proof-of-play and
+measurement implementation built against the IAB guide is the single most sellable asset in this
+plane, and NA is the only region where the specification to build against is already agreed.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1129,6 +1157,40 @@ licence probe this pass is an **FSFE** standard, disproportionately used by Euro
 projects. A licence sweep tuned to American repo conventions will systematically under-report
 compliance in exactly the estate a sovereignty engagement draws from. Probe `LICENSES/` here.
 
+
+
+#### Pass 15 (2026-11-26) — out-of-home, signage & retail media
+
+**The regulated region, and the only one with a measured programmatic-penetration league table.**
+Europe's DOOH market was **~US$3.6–3.73B in 2025**, with projected CAGR **~9.5%–10.7%**. Of the
+**US$1.339B** global programmatic DOOH spend in 2025 (World Out of Home Organization), **EMEA
+generated US$521M at 9.4% penetration** — and **Germany led all major markets at 31.8% penetration**,
+the highest figure of its kind found in any region this pass.
+
+**Players.** JCDecaux (with its **VIOOH** SSP) is the structural incumbent; it launched an AI-powered
+programmatic DOOH platform in January 2025 and expanded high-resolution networks across European
+transport hubs in June 2026. **Displayce** was the first specialist platform to add generative AI for
+suggesting DOOH strategies (September 2024). Clear Channel is also present.
+
+**Regulation is the binding constraint, and it is municipal rather than EU-level.** Frameworks differ
+widely by country *and by city*: limits on digital billboard placement and on lighting near
+residential and sensitive areas. A pan-European rollout is therefore a per-city permitting programme,
+not one compliance exercise.
+
+**Sustainability is a procurement criterion unique to this region.** Media owners score screens for
+energy use and report real-time emissions — which makes player efficiency a *commercial* requirement,
+not an engineering preference.
+
+**Informed gap, stated rather than implied.** Two searches found **no EU-level rule specific to AI in
+DOOH**. The adjacent hook is the AI Act's treatment of biometric categorisation, but **no DOOH-specific
+provision was verified in this pass** — treat it as *unresearched*, not as *absent*, and go to primary
+sources before advising a client.
+
+**Opportunity.** Germany's 31.8% penetration is the proof that programmatic DOOH scales in a strict
+regulatory regime. The sellable asset is a **privacy-by-construction measurement design** (count
+on-device, discard frames, emit aggregates, never form a biometric template — P15.4) plus per-city
+permitting workflow. Both are judgment work, which is exactly what has no open-source substitute.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -1677,6 +1739,39 @@ weaknesses — measured, not assumed, from what the repos are and are not —
    backfill already in this KB as Pattern 31 — translation is the step that makes a multilingual
    archive searchable at all.
 3. **The per-jurisdiction policy engine**, reused from pass 8 rather than rebuilt.
+
+
+
+#### Pass 15 (2026-11-26) — out-of-home, signage & retail media
+
+**The most digitised region in the world by share, and the one where the market numbers cannot be
+trusted to a single figure.** APAC digital is **55.7% of OOH revenue — the highest of any region**
+(WOO, via secondary source). Market-size estimates for 2026 **diverge about fourfold**: Mordor
+Intelligence puts APAC DOOH at **~US$23.93B** (9.62% CAGR to 2031) while Marketdataforecast puts it at
+**~US$6.05B** (11.5% CAGR to 2034). **Never quote a single APAC number** — the spread is the finding.
+
+**Players.** JCDecaux's **VIOOH** SSP expanded to **over 30,000 digital screens** (February 2026).
+Also active: Hivestack; **Moving Walls** (Indonesia, Malaysia, Philippines); **CodyOOH** (Hong Kong,
+AI audience tracking); Broadsign; **Times Innovative Media** (India). Clear Channel opened a Singapore
+network in July 2026, and **NTT DOCOMO launched DOOH in Ho Chi Minh City in April 2026** via a joint
+venture. Japan is repeatedly named as an AI-driven DOOH leader, though the supporting statistic found
+was weak and is not repeated here as fact.
+
+**Regulation — an explicit, informed gap.** Two targeted searches returned **no concrete APAC
+regulatory detail** for camera-based signage measurement. What exists is an industry *initiative* to
+harmonise privacy frameworks, measurement protocols and content approval across APAC nations — an
+aspiration, not a rule. **The primary sources a client engagement must go to directly: Japan's PPC
+(APPI), Singapore's PDPC (PDPA), India's DPDP Act and its rules, and China's PIPL.** This KB has not
+verified any of them for DOOH and should not be read as having done so.
+
+**Carried forward from pass 8 of this KB:** a Latham & Watkins analysis (September 2026) found **three
+divergent regulatory categories** across APAC. That conclusion holds here and sharpens the
+recommendation: for APAC the deliverable is **a per-jurisdiction policy engine**, not a single
+compliance mode.
+
+**Opportunity.** Highest digital share plus the most fragmented regulation plus a 4× disagreement about
+market size means the buyer's first problem is *not* more screens — it is knowing what they own and
+what they may legally measure. A screen inventory and per-jurisdiction policy engine is the wedge.
 
 ### LATAM
 
@@ -2337,6 +2432,45 @@ large broadcaster and cannot carry an AGPL or BSL surprise. In this plane that m
 (BSD-3-Clause) over Traduora (AGPL-3.0)**, **argos-translate (MIT) over LibreTranslate (AGPL-3.0)**,
 and **never Texterify** (BSL 1.1, no use grant).
 
+
+
+#### Pass 15 (2026-11-26) — out-of-home, signage & retail media
+
+**The least digitised of the four regions, which is precisely the opportunity, and the region with the
+most concrete dated event of this pass.** LATAM digital is **~27.7% of 2025 OOH revenue**, against
+~36.9% in North America and 55.7% in APAC. **Brazil is the largest market (~45% of regional base-year
+revenue)**, with Brazil and Mexico leading. Forecasts diverge badly — one report runs **~US$1.72B
+(2025) → ~US$4.86B (2034)**, another puts regional OOH/DOOH at **US$1.33B by 2030** — so use the range
+and say it is a range.
+
+**The dated event to build a pitch around.** On **2026-07-20 JCDecaux connected 100% of its DOOH
+inventory to programmatic across nine Latin American markets** — including Panama, Costa Rica,
+Guatemala and Ecuador — sold through **VIOOH**, which is integrated with **50+ DSPs**. JCDecaux México
+and VIOOH also ran a Mazda CX-70 launch campaign in Mexico City. The regional inventory became
+programmatically addressable this year; the tooling around it did not.
+
+**Regulation — the most distinctive regime in the world, and an imminent deadline.**
+- **São Paulo's Lei Cidade Limpa (2006)** remains among the world's most restrictive outdoor
+  advertising laws: its article 18 prohibits outdoor advertising, which pushed signage operators
+  indoors and into other Brazilian cities, while **digital panels integrated into bus shelters are
+  permitted**. Regulation is **municipal**, so it varies city by city.
+- **Brazil's LGPD** enforcement scope continues to expand through updated ANPD guidance in 2026.
+- **Chile's Law No. 21,719 — "Chile's GDPR" — becomes fully enforceable in December 2026.** This is a
+  hard, dated trigger, now weeks away. It bites **pDOOH audience-extension tactics that use mobile
+  IDs**, even though DOOH itself is IP-free.
+- Facial recognition on screens is a live regional debate, with facial-recognition boarding trials in
+  Rio bus depots foreshadowing contextually triggered advertising under unsettled oversight.
+
+**Claims deliberately NOT asserted.** A reported **midnight curfew on outdoor screens in Chile**
+(single market-report mention, uncorroborated) and **Mexican rules on electronic-screen billboards**
+(source dated) could not be verified. Recorded as leads; verify against São Paulo, Mexico City and
+Santiago municipal ordinances before using either with a client.
+
+**Opportunity.** Chile's December 2026 enforcement date is the most actionable item in this plane
+anywhere in the world: a buyer with a compliance deadline weeks away, a measurement design problem
+with no open-source answer, and newly programmatic regional inventory. The P15.4 privacy-by-
+construction measurement design sells into Chile first and then ports to Brazil under LGPD.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -2500,3 +2634,30 @@ does not depend on anyone's CAGR.
 (what gets spent on translating) rather than the **systems** that route and store it — the same
 scope defect recorded for subscription management in the pass-13 addendum. A later pass should not
 substitute a general enterprise-TMS or language-services TAM here.
+
+## Market size — pass 15 addendum (2026-11-26): out-of-home, and the one figure to stand behind
+
+**Stand behind this one:** global programmatic DOOH spend was **US$1.339B in 2025**, from the **World
+Out of Home Organization** — an industry body publishing a measured figure, with the regional split
+that makes it usable (**EMEA US$521M at 9.4% penetration; Germany highest at 31.8%**). It was the only
+figure this pass that came with a method and a breakdown.
+
+**Treat everything else as a range.** Global DOOH ad spend for 2026 is given as **">US$33B"** by one
+source and **"US$28B"** by another. Regional 2026 figures disagree by up to **4×** (APAC: US$23.93B vs
+US$6.05B). A long-range projection of **US$194.67B by 2033** circulates via press release and should
+not be repeated to a client.
+
+**The structurally useful number is the digital-share ladder**, because the three sources agree on the
+ordering even where they disagree on absolute size:
+
+| Region | Digital share of OOH revenue (2025) | Reading |
+|---|---|---|
+| APAC | **55.7%** | Most digitised; fragmented regulation |
+| North America | **~36.9%** | Most programmatic; measurement standard published |
+| LATAM | **~27.7%** | Least digitised — the conversion opportunity |
+| EMEA | *not isolated in sources found* | Programmatic penetration measured instead: **9.4%**, Germany 31.8% |
+
+**Retail media is the growth vector and has no open-source layer at all.** In-store DOOH is forecast to
+drive **~56% of total DOOH growth 2025–2029**. The open-source implementation of retail media is a
+**3-star list of links**. That combination — fastest-growing ad channel, zero open tooling — is the
+clearest build-versus-integrate signal in this KB.

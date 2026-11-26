@@ -1898,3 +1898,49 @@ law this KB has now recorded across six industries.
   tooling lives. Every prior pass of this KB, and of the other eleven, inherits that blind spot.
   **Rule: when a plane has an obvious incumbent and the search does not return it, the next check is
   a different forge, not a conclusion of absence.**
+
+## The out-of-home, signage & retail-media plane — foundations measured 2026-11-26 (pass 15)
+
+Scope of the measurement: `topic:digital-signage` = **576 repos**; `topic:dooh` = **35 repos**;
+`SMIL signage` = **5 repos**; `org:openooh` = **6 repos**. 37 slugs checked with `git ls-remote`, **36
+resolve, 1 does not** (`screenrig/screenrig` — see the gap note in `agents/top.md`). Every
+`NOASSERTION` licence was opened by hand rather than inferred.
+
+### Permissive foundations you can build a client deliverable on
+
+| Repo | Stars / forks | Licence | Last push | Why it is foundational |
+|---|---|---|---|---|
+| [ardera/flutter-pi](https://github.com/ardera/flutter-pi) | 2,012\* / 210f | **MIT** | 2026-11-15 | Flutter on bare KMS/DRM — no X11, no desktop. The efficient player runtime, and the answer to EMEA energy scoring |
+| [RushB-fr/freekiosk](https://github.com/RushB-fr/freekiosk) | 765\* / 145f | **MIT** | 2026-11-24 | Android kiosk player for web creative |
+| [concerto/concerto](https://github.com/concerto/concerto) | 485\* / — | **Apache-2.0** | 2026-11-26 | Rails CMS, Docker, 2008 origin, pushed today — the platform anchor of this plane |
+| [screenlite/screenlite](https://github.com/screenlite/screenlite) | 368\* / 18f | **MIT** | 2026-05-08 | Self-hosted CMS; permissive, currently quiet |
+| [screentinker/screentinker](https://github.com/screentinker/screentinker) | 281\* / 76f | **MIT** | 2026-11-26 | Multi-tenant CMS — fastest path to a managed offering |
+| [prebid/prebid-server](https://github.com/prebid/prebid-server) | 595\* / 986f | **Apache-2.0** | 2026-11-25 | Server-side bidding with DOOH support — the auction half of pDOOH |
+| [openooh/venue-taxonomy](https://github.com/openooh/venue-taxonomy) | 56\* / 40f | **Apache-2.0** | 2026-11-16 | The venue vocabulary the whole buy side assumes; spec 1.2 targets OpenRTB 2.6 |
+| [home-screens/home-screens](https://github.com/home-screens/home-screens) | 114\* / 21f | **MIT** | 2026-11-26 | Lightweight screen/dashboard renderer |
+| [NVIDIA-AI-IOT/deepstream-occupancy-analytics](https://github.com/NVIDIA-AI-IOT/deepstream-occupancy-analytics) | 240\* | **MIT** | 2023-10-19 | Occupancy counting reference for measurement work — **stale, port the approach** |
+| [saimj7/People-Counting-in-Real-Time](https://github.com/saimj7/People-Counting-in-Real-Time) | 613\* | **MIT** | 2023-08-15 | Counting reference — **stale, port the approach** |
+
+Ten permissive foundations, all verified. **Nine exceed the five-repo bar; the two counting
+references are included with their staleness stated rather than hidden.**
+
+### Copyleft and constrained foundations — real, useful, and not shippable closed
+
+| Repo | Stars | Licence | Last push | Constraint |
+|---|---|---|---|---|
+| [xibosignage/xibo-cms](https://github.com/xibosignage/xibo-cms) | 520\* | AGPL-3.0 | 2026-11-24 | AGPL; certain players need a commercial player licence |
+| [xibosignage/xibo](https://github.com/xibosignage/xibo) | 745\* | AGPL-3.0 | 2026-11-25 | AGPL umbrella repo |
+| [garlic-signage/garlic-player](https://github.com/garlic-signage/garlic-player) | 150\* / 34f | AGPL-3.0 | 2026-11-24 | The only maintained open SMIL player |
+| [garlic-signage/garlic-hub](https://github.com/garlic-signage/garlic-hub) | 151\* | AGPL-3.0 | 2026-11-22 | SMIL CMS, active development |
+| [garlic-signage/garlic-proxy](https://github.com/garlic-signage/garlic-proxy) | 5\* | AGPL-3.0 | 2025-09-17 | Caching proxy for SMIL fleets |
+| [garlic-signage/garlic-creator](https://github.com/garlic-signage/garlic-creator) | 4\* | AGPL-3.0 | 2025-09-17 | SMIL authoring |
+| [nktnet1/webview-kiosk](https://github.com/nktnet1/webview-kiosk) | 319\* / 67f | AGPL-3.0 | 2026-11-25 | Maintained kiosk web view |
+| [debloper/xiosk](https://github.com/debloper/xiosk) | 349\* / 42f | MPL-2.0 | 2026-02-17 | Weak copyleft — file-level, usually acceptable |
+| [Screenly/Anthias](https://github.com/Screenly/Anthias) | 3,745\* / 735f | GPLv2 + Commercial | 2026-11-26 | The plane's most popular repo; commercial licence required for closed work |
+
+### Archived — read, cite, never depend
+
+| Repo | Stars | Licence | Archived / last push | Note |
+|---|---|---|---|---|
+| [dividuum/info-beamer](https://github.com/dividuum/info-beamer) | 230\* / 49f | **BSD-2-Clause** | archived, 2020-05-01 | Permissive after all — GitHub said NOASSERTION, the file says BSD-2-Clause |
+| [eerotal/LibreSignage](https://github.com/eerotal/LibreSignage) | 695\* / 132f | BSD-3-Clause | archived 2021-08-26 | The former permissive favourite, gone |

@@ -9,6 +9,71 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 15: the out-of-home, signage & retail-media plane (the agent layer is **present but vendor-captured** — a new shape)
+
+### The agent layer exists, and that is the bad news — a shape not seen in fourteen prior passes
+
+`signage mcp` returns **14 repos; the top one has 2 stars.** But the striking part is not the size, it
+is the *ownership*. Almost every identifiable entry is an MCP adapter for a **proprietary** CMS:
+
+| Repo | Stars | Licence | Last push | What it bridges to |
+|---|---|---|---|---|
+| [DaScheife/Sklera-Digital-Signage-MCP-Server](https://github.com/DaScheife/Sklera-Digital-Signage-MCP-Server) | 2\* | NONE | 2026-06-18 | Sklera (closed SaaS) |
+| [SUDARSHANCHAUDHARI/SignageQAMCPServer](https://github.com/SUDARSHANCHAUDHARI/SignageQAMCPServer) | 1\* | MIT | 2026-11-25 | QA harness |
+| [Cast-Hub/mcp-server](https://github.com/Cast-Hub/mcp-server) | 0\* | MIT | 2026-06-30 | Cast-Hub (closed SaaS) |
+| [TomsFaire/Yodeck-MCP](https://github.com/TomsFaire/Yodeck-MCP) | 0\* | NONE | 2026-11-13 | Yodeck (closed SaaS) |
+| [RevelDigital/reveldigital-webapp-skill](https://github.com/RevelDigital/reveldigital-webapp-skill) | 0\* | MIT | 2026-06-21 | RevelDigital (closed SaaS) |
+| [arnibj/InfoSlides.MCP](https://github.com/arnibj/InfoSlides.MCP) | 0\* | MIT | 2026-11-22 | InfoSlides |
+| [timerise-ai/digital-signage](https://github.com/timerise-ai/digital-signage) | 1\* | MIT | 2026-10-25 | agent skill, self-hosted |
+| [trillboards/dooh-agent-example](https://github.com/trillboards/dooh-agent-example) | 1\* | MIT | 2026-03-12 | DOOH buying demo |
+
+In the fourteen earlier planes the agent layer was simply *absent*. Here it is being **defined by the
+SaaS vendors whose lock-in it extends**. For Globant that is the opposite of leverage: adopting a
+vendor MCP imports that vendor's lock-in into the agent layer, which is the most expensive layer to
+migrate off later. The recommendation in `compose/patterns.md` (P15.5) is therefore to own the
+abstraction and read these only as shape references.
+
+### Why this is a different finding from the previous fourteen passes
+
+Passes 1–13 measured agent layers that were *absent*. Pass 14 found the first real one. Pass 15 finds the first one that is **occupied by incumbents**: 14 repos, top 2 stars, and the identifiable entries are MCP bridges into closed SaaS signage platforms. Absence leaves a greenfield; occupation sets a default. The practical consequence is in `compose/patterns.md` P15.5 — own the abstraction, read the vendor MCPs as shape references, and do not take one as a dependency.
+
+### False abundance, measured four times — read the results, never the total
+
+Cycle 8 established that shortening a query can convert a false zero into a *false abundance*. This
+plane produced the four crudest examples the KB has recorded:
+
+| Query | Results | Relevant | What actually ranks |
+|---|---|---|---|
+| `proof of play` | **751** | **0** | `D4stiny/ForkPlayground` (229\*), Minecraft help threads, and `proofofplay/piratenation-game` (97\*) — a web3 games studio *named* Proof of Play |
+| `retail media network` | **37** | **~0** | Minecraft support threads, a `dxdiag` dump, a Windows-7 issue tracker. The single genuine hit is a **3\*** MIT link-list, not code |
+| `people counting` | **4,970** | low | Top hit `schollz/howmanypeoplearearound` (**7,089\***, MIT) is a Wi-Fi-sniffing novelty **dead since 2024**, not audience measurement |
+| `footfall analytics` | **184** | ~0 | 67\* hackathon repo, then 10\*, 6\*, 6\*, 4\*, 3\* — student coursework only |
+
+**Retail media deserves emphasis.** It is the fastest-growing advertising channel in the world, and
+its open-source implementation is *a three-star list of links*
+([ishandutta2007/Awesome-Retail-Media-Network-Platform](https://github.com/ishandutta2007/Awesome-Retail-Media-Network-Platform),
+MIT, 2026-09-11). That is cruder than this KB's previous worst — music royalty accounting, where the
+top six summed to zero — because here the category is not niche, it is the centre of ad-industry
+growth.
+
+### A recurring cross-plane false friend, worth a KB-wide note
+
+**`danderfer/Comp_Sci_Sem_2` (228\*) ranked in BOTH `proof of play` AND `people counting`.** A generic
+coursework dump matches many short, plain-English media queries. Combined with the pass-11 note that
+the placeholder regex needs word boundaries, the rule is: **a plain-English multi-word query on
+GitHub search returns coursework and tutorial repos before it returns industry code.** Pair every such
+query with a `topic:` query, which is curated and gave the honest counts above.
+
+### One unverifiable vendor claim, recorded as a gap rather than a row
+
+The first search of this pass named **"screenRIG"** — described as a signage CLI shipping an "official
+plugin for Claude Code and Codex" — as its single most relevant AI-agent-for-signage match. It does
+not survive verification: `screenrig/screenrig` **fails `git ls-remote`**, and a `screenrig` repo
+search returns 9 results, none of them this project. It may exist as a product off GitHub, but
+**nothing was written as a table row for it.** This is the exact shape that has previously compiled
+fabricated entities into this KB.
+
+
 ## 2026-11-26 — pass 14: the localization & translation-management plane (the streak of fourteen near-zero agent layers **ends**)
 
 ### Headline: the first plane in this KB with a real, maintained, permissive agent layer

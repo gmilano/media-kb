@@ -10,6 +10,98 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 27: production-finance, rules-as-code & ledger infrastructure (**45 slugs probed, 45/45 resolve; a 10,349★ BSL trap, two rename redirects, and a plane whose generic layer beats its vertical layer**)
+
+**The finding, stated first because it inverts the plane.** Searched as a *media* problem, production
+finance is a desert — `completion bond film` **0**, `production incentive eligibility` **0**,
+`ERPNext media production` **0**, `film production ERP` 5 results all at 0★ and unlicensed. Searched as
+a *computation* problem, it holds some of the best-licensed, best-maintained code in this KB. **This is
+the only plane in twenty-seven passes where the horizontal layer is stronger than the vertical layer**,
+and the missing piece is a mapping, not a platform.
+
+### Rules-as-code — the correct substrate for an incentive engine, and unclaimed for screen
+
+| Repo | Stars / Forks | Licence | Last push |
+|---|---|---|---|
+| [CatalaLang/catala](https://github.com/CatalaLang/catala) | 2,456★ / 126f | **Apache-2.0** | 2026-11-26 (measurement day) |
+| [apache/incubator-kie](https://github.com/apache/incubator-kie) (Drools/DMN) | 6,344★ / 2,608f | **Apache-2.0** | 2026-11-26 |
+| [CacheControl/json-rules-engine](https://github.com/CacheControl/json-rules-engine) | 3,151★ / 511f | **ISC** | 2026-02-16 |
+| [gorules/zen](https://github.com/gorules/zen) | 2,154★ / 237f | **MIT** | 2026-11-26 |
+| [jhpyle/docassemble](https://github.com/jhpyle/docassemble) | 1,019★ / 324f | **MIT** | 2026-11-25 |
+| [openfisca/openfisca-core](https://github.com/openfisca/openfisca-core) | 252★ / 100f | AGPL-3.0 | 2026-11-24 |
+| [PolicyEngine/policyengine-us](https://github.com/PolicyEngine/policyengine-us) | 178★ / 224f | AGPL-3.0 | 2026-11-26 |
+| [PolicyEngine/policyengine-core](https://github.com/PolicyEngine/policyengine-core) | 22★ / **31f** | AGPL-3.0 | 2026-11-25 |
+
+`policyengine-us` carries **more forks (224) than stars (178)**, and `policyengine-core` the same
+(31f/22★) — the signature of components used as a base rather than admired. It models US federal **and
+state** tax law as executable code: **the closest prior art anywhere to a 39-state incentive engine**.
+
+### Ledgers — seven engines, and the licence spread is the decision
+
+| Repo | Stars / Forks | Licence | Last push |
+|---|---|---|---|
+| [tigerbeetle/tigerbeetle](https://github.com/tigerbeetle/tigerbeetle) | 17,467★ / 945f | **Apache-2.0** | 2026-11-25 |
+| [beancount/beancount](https://github.com/beancount/beancount) | 6,210★ / 491f | GPL-2.0 | 2026-08-23 |
+| [ledger/ledger](https://github.com/ledger/ledger) | 6,081★ / 554f | **BSD-3-Clause** (API said `NOASSERTION`; `LICENSE.md` 1,492 B read) | 2026-11-24 |
+| [hledgerorg/hledger](https://github.com/hledgerorg/hledger) | 4,837★ / 427f | GPL-3.0 | 2026-11-26 |
+| [beancount/fava](https://github.com/beancount/fava) | 2,615★ / 429f | **MIT** | 2026-11-23 |
+| [formancehq/ledger](https://github.com/formancehq/ledger) | 1,489★ / 230f | **MIT** | 2026-11-26 |
+| [flash-oss/medici](https://github.com/flash-oss/medici) | 364★ / 101f | **MIT** | 2026-07-29 |
+
+### Solvers — where "which territory do we shoot in" is actually answered
+
+| Repo | Stars / Forks | Licence | Last push |
+|---|---|---|---|
+| [apache/incubator-kie-optaplanner](https://github.com/apache/incubator-kie-optaplanner) | 3,512★ / 972f | **Apache-2.0** | 2026-07-14 |
+| [TimefoldAI/timefold-solver](https://github.com/TimefoldAI/timefold-solver) | 1,882★ / 245f | **Apache-2.0** (`LICENSE.txt` 11,358 B read) | 2026-11-24 |
+
+### ⚠️ The licence trap of this pass — the highest-starred one in twenty-seven passes
+
+[akaunting/akaunting](https://github.com/akaunting/akaunting), **10,349★ / 3,029f**, pushed
+2026-11-26, is **not open source**. `LICENSE.txt` (3,654 B, read in full) is the **Business Source
+License**: MariaDB BSL text, *Licensor: Akaunting, Inc.*, with a limited Additional Use Grant. GitHub's
+API says `NOASSERTION`. It ranks second for "open source accounting" and will surface in front of any
+client or junior engineer searching this category.
+
+**Same pass, same `NOASSERTION`, three different truths** — which is the real lesson:
+`akaunting` → **BSL (unusable)**; `odoo/odoo` (56,124★) → **LGPL-3.0, Community only**
+(`LICENSE` 43,529 B); `ledger/ledger` → **BSD-3-Clause, fully permissive**. The API's `NOASSERTION` is
+**directionless**: it hid a trap, a dual-edition copyleft and a clean permissive grant in one search.
+Also read this pass: `Gnucash/gnucash` → GPL-2.0-**or**-3.0 (19,423 B), `ledgersmb/LedgerSMB` →
+GPL-2.0 (12,339 B), `koosoli/OpenShotDesigner` (47★) → **GPL-3.0** (35,809 B).
+
+### 🔧 Two rename redirects, fresh instances of pass 17's oracle rule
+
+`ls-remote` EXISTS **+** `search/repositories repo:<slug>` returns no item ⇒ stale slug:
+
+| Stale slug (as published in docs, registries and blogs) | Canonical | What it hides |
+|---|---|---|
+| `simonmichael/hledger` | [hledgerorg/hledger](https://github.com/hledgerorg/hledger) | Person → org; 4,837★ GPL-3.0 invisible via the stale slug |
+| `kiegroup/drools` **and** `apache/incubator-kie-drools` | [apache/incubator-kie](https://github.com/apache/incubator-kie) | **Both** legacy slugs still answer `ls-remote`; Drools is now an Apache monorepo |
+
+**A 200 is never by itself proof a slug is canonical** — the mirror of pass 5's rule, confirmed twice.
+
+### Platform layer (full table in `verticals/solutions.md` pass 27)
+
+[frappe/erpnext](https://github.com/frappe/erpnext) 41,661★ GPL-3.0 · [frappe/frappe](https://github.com/frappe/frappe)
+11,164★ **MIT** (the licence split that makes this tier usable) · [odoo/odoo](https://github.com/odoo/odoo)
+56,124★ LGPL-3.0 · [firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii) 25,348★ AGPL-3.0 ·
+[Dolibarr/dolibarr](https://github.com/Dolibarr/dolibarr) 7,903★ GPL-3.0 · [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
+4,429★ GPL-2/3 · [espocrm/espocrm](https://github.com/espocrm/espocrm) 3,674★ AGPL-3.0 ·
+[apache/ofbiz-framework](https://github.com/apache/ofbiz-framework) 1,151★ **Apache-2.0** (the only fully
+permissive ERP in the tier) · [ledgersmb/LedgerSMB](https://github.com/ledgersmb/LedgerSMB) 579★ GPL-2.0 ·
+[cgwire/kitsu](https://github.com/cgwire/kitsu) 779★ + [cgwire/zou](https://github.com/cgwire/zou) 203★ AGPL-3.0 ·
+[ChrisTempel/CineSpend](https://github.com/ChrisTempel/CineSpend) 8★ MIT (unchanged since pass 17).
+
+### Measured absences — full gap table in `repos/foundations.md` pass 27
+
+`completion bond film` **0** · `production incentive eligibility` **0** · `ERPNext media production`
+**0** · `film tax credit` **7** (4 relevant, all proprietary or unlicensed) · `recoupment waterfall`
+**2** (1 relevant, unlicensed) · `cost report film production` 5/**0** · `errors and omissions
+insurance` 6/**0** · `film production ERP` 5/**0** · `royalty accounting` 47/**0**. **False
+abundance:** `production accounting` **1,946/0** and `residuals` **11,617/0** — 13,563 repositories,
+zero relevant, on the two terms a domain expert would call unambiguous.
+
 ## 2026-11-26 — pass 26: energy, carbon & environmental-footprint infrastructure (**21 slugs probed, 21/21 resolve; 3 compilation-licence cases read byte by byte, and one of them collides with DRM**)
 
 Verification for every row below: existence by `git ls-remote` (21/21 OK, 0 absent), stars/forks/last-push

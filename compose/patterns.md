@@ -4046,3 +4046,201 @@ somewhere in this plane.
    chain — and both have mature permissive tooling (Patterns 26.1, 26.2) while the mandated production
    footprint has **zero**. **Measure where the energy is, report where the mandate is**, and do not let
    the mandate decide the engineering.
+
+---
+
+# Pass 27 — the production-finance, soft-money & cost-accounting plane (2026-11-26)
+
+Every repo named below appears with its verified licence, stars and last-push date in
+`repos/foundations.md`, `verticals/solutions.md` or `agents/top.md` under pass 27. **45/45 slugs
+resolve via `git ls-remote`.** The plane's own agent layer is one proprietary repo at one star, so
+every recipe here composes **permissive general-purpose engines plus domain modelling** — which is the
+whole opportunity, not a workaround.
+
+## Pattern 27.1 — The incentive-eligibility engine: statute as versioned code, not a spreadsheet
+
+**The problem.** "Does this budget qualify in Georgia, BC, Spain, NSW or Antioquia, and for how much?"
+`production incentive eligibility` returns **0 repositories**. The free lookup tables that Wrapbook,
+EP and GreenSlate publish already answer *what the rate is* — **never compete there**. What nobody
+sells is a **machine-checkable answer for this specific budget, with a citation and a commencement
+date attached to every rule**.
+
+**The wiring.**
+1. **Rules layer — [CatalaLang/catala](https://github.com/CatalaLang/catala) (Apache-2.0, 2,456★).**
+   One Catala module per jurisdiction. Catala is literate: the statute text and the executable rule sit
+   side by side in the same file, so the artefact *is* its own audit trail. Published work already
+   expresses parts of the US Internal Revenue Code, so the ambition is proven on harder statutes.
+   Model, per jurisdiction: qualifying-spend definition, minimum-spend floor, caps (per-work **and**
+   per-company — Italy now has both), uplifts (UK VFX, French VFX > €2M), residency tests,
+   above/below-the-line split, and **commencement dates** (Colombia's Decreto 876 de 2026 changed
+   eligibility mid-year; Japan's JLOX+ closed to applications 2026-01-31).
+2. **If the client's finance team must own the rules** —
+   [apache/incubator-kie](https://github.com/apache/incubator-kie) (Apache-2.0, 6,344★) DMN decision
+   tables, or [gorules/zen](https://github.com/gorules/zen) (MIT) for JDM models editable without a
+   compiler. Catala for correctness, DMN for client ownership; the choice is governance, not tech.
+3. **Prior art to copy, not rebuild** —
+   [PolicyEngine/policyengine-us](https://github.com/PolicyEngine/policyengine-us) (AGPL-3.0) already
+   models US federal **and state** tax law as code, with 224 forks against 178 stars. **Read its
+   per-jurisdiction parameter layout before designing yours.** ⚠️ AGPL: study the pattern, or deploy
+   client-owned and single-tenant — do not vendor it into a multi-tenant SaaS.
+4. **Front door — [jhpyle/docassemble](https://github.com/jhpyle/docassemble) (MIT, 1,019★).** Turn
+   the rule set into a guided interview that emits the filing pack. This is a solved problem in legal
+   aid and completely unused in screen finance.
+5. **Budget input.** No open parser for EP Budgeting exists, and its format is a de facto standard with
+   no open specification. Accept **CSV/XLSX exports** and map to a canonical schema;
+   [ChrisTempel/CineSpend](https://github.com/ChrisTempel/CineSpend) (MIT, 8★) is a usable reference
+   for budget *data shape*. That CreditScout reads EP Budgeting directly confirms the integration seam
+   is the export, not the database.
+
+**Licence posture:** Catala Apache-2.0 + Zen MIT + docassemble MIT ⇒ **fully permissive, client owns
+the rule sets.** Do not touch akaunting (BSL) anywhere near this.
+
+**Deliberately out of scope:** telling the client what rate applies. That is free, from several
+vendors, and more current than you will keep it.
+
+## Pattern 27.2 — Cost report as a diffable ledger: the auditor-facing artefact nobody has built
+
+**The problem.** `cost report film production` = **5 results, 0 relevant**. Production accounting is
+double-entry bookkeeping with an industry chart of accounts and a specific weekly report
+(actuals vs. budget vs. estimate-to-complete) on top. The engines are excellent and free; **the chart
+of accounts is what is missing**, and it is domain modelling, not engineering.
+
+**The wiring.**
+1. **Ledger — [ledger/ledger](https://github.com/ledger/ledger) (**BSD-3-Clause**, 6,081★)** when the
+   deliverable must stay permissive, or
+   [beancount/beancount](https://github.com/beancount/beancount) (GPL-2.0, 6,210★) when the richer
+   ecosystem matters more than the licence. Both keep the ledger as **plain text in git**, which makes
+   a production's books diffable, reviewable and blame-able with the same tooling as code — an
+   unusually strong fit for an artefact an incentive auditor will later contest line by line.
+2. **Reporting — [beancount/fava](https://github.com/beancount/fava) (MIT, 2,615★)** for the web
+   surface. Note the licence split: the UI is permissive even where the engine is GPL.
+3. **Chart of accounts.** The missing asset. Build it from the standard budget topsheet structure
+   (above-the-line / below-the-line / post / other), per-episode and per-department cost centres.
+   [Gnucash/gnucash](https://github.com/Gnucash/gnucash) is the best open **reference** for
+   chart-of-accounts semantics; it is not a deployment target here.
+4. **Reconcile against production reality —
+   [cgwire/kitsu](https://github.com/cgwire/kitsu) + [cgwire/zou](https://github.com/cgwire/zou)
+   (AGPL-3.0).** Kitsu holds man-days and bids; the cost report must agree with it or the variance is
+   fiction. ⚠️ AGPL: integrate over its **API**, do not fork it into the deliverable.
+5. **Agent layer — the AP clerks, used honestly.**
+   [tahasiddiquii/invoice-ap-agent](https://github.com/tahasiddiquii/invoice-ap-agent) (MIT, 5★),
+   [sujalmallick/probity-ai](https://github.com/sujalmallick/probity-ai) (MIT, 5★) and
+   [Devanshjoshi2804/ap-verify](https://github.com/Devanshjoshi2804/ap-verify) (MIT, 2★) are
+   **5-star-and-below prior art, not dependencies.** Read them, then write the coding agent against
+   your own chart of accounts. At these star counts, adopting is riskier than rebuilding.
+
+**The hard constraint, and it is commercial.** Where a payroll incumbent (EP, Cast & Crew, Wrapbook,
+GreenSlate) is in place, **the cost report shapes auditors expect are theirs.** Never propose replacing
+the system of record. Build the report *alongside* it and reconcile; a client who cannot produce an
+auditor-recognised cost report because a bespoke ledger disagreed with payroll can lose the credit.
+
+## Pattern 27.3 — Recoupment waterfalls on a programmable ledger
+
+**The problem.** Who recoups, in what order, at what corridor — across financiers, gap lenders,
+pre-sales, sales agents and profit participants. `recoupment waterfall` returns **2 repositories on
+all of GitHub**; the better one (6★) is an unlicensed 2023 Solidity contract for crypto splits.
+
+**The wiring.**
+1. **[formancehq/ledger](https://github.com/formancehq/ledger) (MIT, 1,489★)** — a *programmable*
+   financial ledger with a DSL for modelling money movement between many parties. The closest thing in
+   open source to a waterfall engine: express each tier as a transaction script, so the waterfall is
+   executable and replayable rather than a spreadsheet nobody can re-derive.
+2. **High volume → [tigerbeetle/tigerbeetle](https://github.com/tigerbeetle/tigerbeetle)
+   (Apache-2.0, 17,467★)** when postings run to millions/day (residual and royalty splits). Purpose-built
+   double-entry with strict serialisability.
+3. **Embedded → [flash-oss/medici](https://github.com/flash-oss/medici) (MIT, 364★)** for a Node
+   product that needs double-entry inside it.
+4. **Validate against the KB's own prior finding.** Pass 5 measured `music royalty accounting` at
+   **six top results summing to 0 stars**; this pass measured `royalty accounting` at **47 results, 0
+   relevant**. Two independent measurements, same answer: **nothing open computes what is owed.** Do
+   not promise an off-the-shelf royalty or waterfall engine in any pitch.
+
+⚠️ **Never state a waterfall as "verified" output.** It is a contractual interpretation. The ledger
+proves arithmetic and replay; a lawyer owns the tiers.
+
+## Pattern 27.4 — The soft-money optimiser: the plane's most valuable unbuilt product
+
+**The problem.** "Split this production across territories to maximise net benefit." Nobody sells it
+and no repo in any licence does it. It is a **constraint-optimisation** problem, and both halves are
+mature and permissive.
+
+**The wiring.**
+1. **[TimefoldAI/timefold-solver](https://github.com/TimefoldAI/timefold-solver) (Apache-2.0,
+   1,882★)** — or [apache/incubator-kie-optaplanner](https://github.com/apache/incubator-kie-optaplanner)
+   (Apache-2.0, 3,512★) for a Java/KIE-native client. Decision variables: which scenes/units/post
+   stages in which jurisdiction. Hard constraints: minimum-spend floors (Japan IP360 **¥800M**
+   domestic), caps (Spain €20M/film, France €30M/project, Italy per-work **and** per-company),
+   residency and local-hire quotas, **window availability** (Germany's 2026 pot exhausted
+   **2026-08-20**), and creative immovables. Soft constraints: crew depth, travel cost, carbon
+   (links to Pattern 26.1), schedule risk.
+2. **Scoring function = Pattern 27.1's Catala rules**, called per candidate allocation. The optimiser
+   must not re-implement eligibility; it must *invoke* it, or the two will drift.
+3. **Output.** A ranked allocation with, per territory, the rule that bound it and the citation behind
+   that rule. The explanation is the product; the number alone is a guess the client cannot defend.
+
+**Why now.** Pass 27's trend finding: incentives moved from **pricing to rationing** — exhaustion,
+caps, clawback, pre-certification, minimum-spend floors. Rationing is a scheduling-under-constraints
+problem. Rate comparison was consulting; **availability optimisation is software.**
+
+## Pattern 27.5 — The claim-evidence pack: the shortest path to delivery in this plane
+
+**Build this first.** The client already owns every input, the deliverable is a document rather than a
+system, and the risk it removes is measured in millions.
+
+**The wiring.**
+1. **Inputs, all already in the client's hands:** the budget/cost report (Pattern 27.2), the payroll
+   export (incumbent system, read-only), the production tracker (Kitsu API), vendor invoices and POs
+   (ERP — [frappe/erpnext](https://github.com/frappe/erpnext) GPL-3.0, with
+   [frappe/frappe](https://github.com/frappe/frappe) **MIT** underneath, so a custom app stays
+   permissive), and contracts/chain-of-title documents.
+2. **Qualification** — run Pattern 27.1's rule set over every cost line; emit **qualified /
+   non-qualified / needs-review** with the governing rule cited per line.
+3. **Evidence binding** — each qualified line links to its source document and the system it came from.
+   This is the entire product: **traceability, not arithmetic.**
+4. **Assembly** — [jhpyle/docassemble](https://github.com/jhpyle/docassemble) (MIT) builds the
+   submission pack in the administrator's required shape.
+5. **Agreement check** — where the administrator publishes an official calculator (**Ontario Creates**
+   does), the engine must **agree with it**. Disagreement is a defect in your rules, not theirs.
+
+**Why it is the strongest opening offer.** Italy **revoked €66M of credits in 2025** and then capped
+the scheme; Manitoba now requires **pre-certification**. The question shifted from *"will we qualify"*
+to *"can we still prove it eighteen months later"*. A claim pack where every number traces to a source
+document is the artefact that answers the second question, and **no incumbent sells it** — the payroll
+companies have no commercial reason to make a claim portable between them.
+
+---
+
+### P41 — When the vertical layer is empty but the horizontal layer is strong, the gap is a vocabulary, not a platform
+
+Twenty-six passes found the same shape: a mature **generic** layer and a thin **vertical** layer, with
+the advice to own the pipeline. Production finance inverts it. The vertical layer is a desert
+(`completion bond film` **0**, `production incentive eligibility` **0**, `ERPNext media production`
+**0**, `film tax credit` **7 repos / best 1★ / all unusable**) while the horizontal layer is among the
+strongest in this KB: Catala 2,456★ Apache-2.0, TigerBeetle 17,467★ Apache-2.0, Drools 6,344★
+Apache-2.0, Frappe 11,164★ **MIT**, Timefold 1,882★ Apache-2.0, ledger 6,081★ **BSD-3**.
+
+**The rule.** When a plane's generic engines are mature *and* permissive while its vertical repos are
+0-star and unlicensed, **the missing artefact is a domain vocabulary — a chart of accounts, a rule set,
+a report shape — not a platform.** That reframes the estimate from a build to weeks of modelling on
+proven engines, and it is the cheapest high-value position found in twenty-seven passes.
+
+**How to test it on another industry before trusting it.** Run the plane's terms twice: once in
+industry language, once in computation language. If the industry query returns 0-star unlicensed repos
+and the computation query returns multi-thousand-star permissive ones, P41 applies. **It is the direct
+inverse of the KB's content law** (pass 5: scarcity is the registry, not the parser) — here scarcity is
+the *mapping*, and unlike a registry allocation, a mapping is something Globant can simply build.
+
+### P42 — `NOASSERTION` is directionless, and in finance the star count predicts the risk
+
+One pass, one API value, three incompatible truths: **akaunting** (10,349★) `NOASSERTION` ⇒ **BSL, not
+open source**; **odoo/odoo** (56,124★) `NOASSERTION` ⇒ **LGPL-3.0, Community edition only**;
+**ledger/ledger** (6,081★) `NOASSERTION` ⇒ **BSD-3-Clause, fully permissive**. Also read this pass:
+**OpenShotDesigner** (47★) `NOASSERTION` ⇒ **GPL-3.0**; **GnuCash** ⇒ GPL-2.0-**or**-3.0;
+**film-tax-credit-agent** `NOASSERTION` ⇒ **"all rights reserved … proprietary and confidential"**.
+
+**The rule.** `NOASSERTION` carries **no** directional information — it conceals permissive grants and
+commercial traps equally, and treating it as "probably fine" or "probably bad" is wrong half the time.
+Read the file. **And the finance-specific corollary: in the accounting/ERP category, star count
+correlates with licence risk** — the most-starred result is the one most likely to be
+source-available-but-not-open, because that is the business model that funds the marketing that earns
+the stars. The 10,349★ result was the only unusable one in its tier.

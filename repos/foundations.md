@@ -3096,3 +3096,99 @@ substrate of six repos with over a thousand stars each.
 | `render farm energy` | 2 | **1** | The one real hit is the 3-star MIT Deadline plugin above |
 | `emission factor database api` | 1 | **0** | An API-profile stub. Factor data arrives bundled in libraries or from commercial APIs, not from an open database repo |
 | **False abundance** — `huella de carbono` / `pegada de carbono` | **467 / 177** | **0** | Every first-page result is a student or personal project at 0–4 stars, mostly unlicensed, **none audiovisual**. Pass 8's rule earns its keep: read the results, not the total |
+
+## The production-finance & cost-accounting substrate — measured 2026-11-26 (pass 27)
+
+**The finding that shapes this section, and it inverts the plane's apparent emptiness.** Pass 17 wrote
+*"Tier 4 — the money: effectively nothing"* after searching for **film** budgeting and accounting
+repos. That conclusion is correct and incomplete. Searched as a *media* problem the plane is a desert;
+searched as a **computation** problem it has some of the most mature, most permissive code in this
+entire knowledge base. Money is the one plane where the generic layer is **stronger** than the
+vertical layer, not weaker — and the whole engineering opportunity is the thin mapping between them.
+
+### Tier 1 — rules-as-code: the correct substrate for an incentive engine, and nobody has pointed it at film
+
+An incentive is a **statute**, not a spreadsheet: eligibility tests, qualifying-spend definitions,
+caps, uplifts, carve-outs and commencement dates. There is a mature open-source discipline for
+exactly this, and it has never been applied to screen incentives.
+
+| Repo | Licence | Stars / Forks | Last push | Why it belongs under this plane |
+|---|---|---|---|---|
+| [CatalaLang/catala](https://github.com/CatalaLang/catala) | **Apache-2.0** | 2,456★ / 126f | 2026-11-26 | A DSL for **deriving correct-by-construction implementations from legislative text**, literate-programming style: the statute and the code sit side by side. Published work expresses sections of the **US Internal Revenue Code** and the whole of French family benefits. Pushed on measurement day. **The single best-licensed, best-maintained foundation in the plane** |
+| [apache/incubator-kie](https://github.com/apache/incubator-kie) | **Apache-2.0** | 6,344★ / 2,608f | 2026-11-26 | The **Drools** rule engine and DMN runtime, now consolidated into the Apache KIE monorepo. The pragmatic choice when the client's finance team needs decision tables they can read and edit themselves |
+| [CacheControl/json-rules-engine](https://github.com/CacheControl/json-rules-engine) | **ISC** | 3,151★ / 511f | 2026-02-16 | Rules as JSON. The lightest way to ship a per-jurisdiction eligibility check inside an existing app; dormant nine months but complete and stable |
+| [gorules/zen](https://github.com/gorules/zen) | **MIT** | 2,154★ / 237f | 2026-11-26 | Rust business-rules engine with JDM decision models and bindings for Node/Python/Go. Permissive **and** fast enough to evaluate a rule set per budget line |
+| [openfisca/openfisca-core](https://github.com/openfisca/openfisca-core) | **AGPL-3.0** | 252★ / 100f | 2026-11-24 | The reference rules-as-code engine for tax and benefit legislation; a recognised **Digital Public Good**. ⚠️ **AGPL** — fine for an internal or client-owned deployment, a licensing problem for a hosted multi-tenant product |
+| [PolicyEngine/policyengine-us](https://github.com/PolicyEngine/policyengine-us) | **AGPL-3.0** | 178★ / 224f | 2026-11-26 | The largest live OpenFisca-family model: US federal **and state** tax law as executable code. **The closest existing prior art to a 39-state incentive engine** — the per-jurisdiction modelling pattern is already solved here, for a different statute |
+| [PolicyEngine/policyengine-core](https://github.com/PolicyEngine/policyengine-core) | **AGPL-3.0** | 22★ / 31f | 2026-11-25 | The engine underneath it. **Forks (31) exceed stars (22)** — the signature of a component used as a base rather than admired |
+| [jhpyle/docassemble](https://github.com/jhpyle/docassemble) | **MIT** | 1,019★ / 324f | 2026-11-25 | Guided-interview and document-assembly platform used widely in legal aid. The permissive way to turn an incentive application into an interview that emits the filing pack — the **front door** to Pattern 27.1 |
+
+### Tier 2 — double-entry ledgers: seven real engines, and the licence spread is the whole decision
+
+Production cost accounting is double-entry bookkeeping with an industry chart of accounts and a
+different report on top. The engines are excellent; **what does not exist is the chart of accounts.**
+
+| Repo | Licence — read where the API was unclear | Stars / Forks | Last push | Shape |
+|---|---|---|---|---|
+| [tigerbeetle/tigerbeetle](https://github.com/tigerbeetle/tigerbeetle) | **Apache-2.0** | 17,467★ / 945f | 2026-11-25 | A purpose-built **financial accounting database**: double-entry primitives, strict serialisability, very high throughput. Permissive and the most serious engineering in the tier. Right choice when postings are millions/day (residuals, royalties, per-stream splits) |
+| [beancount/beancount](https://github.com/beancount/beancount) | GPL-2.0 | 6,210★ / 491f | 2026-08-23 | Plain-text double-entry language. The ledger is a **file in git** — which makes a production's books diffable, reviewable and auditable by the same tooling as its code. The deepest ecosystem in plain-text accounting |
+| [ledger/ledger](https://github.com/ledger/ledger) | **BSD-3-Clause** — API said `NOASSERTION`; `LICENSE.md` (1,492 B) read in full: BSD-3-Clause, © 2003-2025 John Wiegley | 6,081★ / 554f | 2026-11-24 | The original CLI double-entry tool. **The only permissively licensed plain-text ledger of the three**, and the API hides that |
+| [hledgerorg/hledger](https://github.com/hledgerorg/hledger) | GPL-3.0 | 4,837★ / 427f | 2026-11-26 | Haskell reimplementation, strong reporting and a stable file format. ⚠️ **Slug correction below** |
+| [formancehq/ledger](https://github.com/formancehq/ledger) | **MIT** | 1,489★ / 230f | 2026-11-26 | A **programmable** financial ledger with a transaction DSL for modelling money movement between many parties. The closest thing in open source to a recoupment-waterfall engine — see Pattern 27.3 |
+| [beancount/fava](https://github.com/beancount/fava) | **MIT** | 2,615★ / 429f | 2026-11-23 | Web UI and reporting over a Beancount ledger. **Permissive even though the engine it reads is GPL** — the usual split in this tier |
+| [flash-oss/medici](https://github.com/flash-oss/medici) | **MIT** | 364★ / 101f | 2026-07-29 | Embeddable double-entry for Node/MongoDB. The library to reach for when the ledger lives *inside* a product rather than beside it |
+
+### Tier 3 — allocation and optimisation: where the soft-money question is actually answered
+
+| Repo | Licence | Stars / Forks | Last push | Use in this plane |
+|---|---|---|---|---|
+| [TimefoldAI/timefold-solver](https://github.com/TimefoldAI/timefold-solver) | **Apache-2.0** — `LICENSE.txt`, 11,358 B, read | 1,882★ / 245f | 2026-11-24 | Constraint solver, the maintained successor to OptaPlanner. Jurisdiction/spend allocation under caps, minimum-spend floors and local-hire quotas is a textbook constraint problem: **Pattern 27.4** |
+| [apache/incubator-kie-optaplanner](https://github.com/apache/incubator-kie-optaplanner) | **Apache-2.0** | 3,512★ / 972f | 2026-07-14 | The Apache-held predecessor. Still the better citation when a client's stack is already Java/KIE; four months since last push |
+
+### 🔧 Two oracle corrections this pass, both fresh instances of pass 17's rule
+
+Pass 17's rule — *`ls-remote` says EXISTS **+** `search/repositories` with `repo:<slug>` returns no
+item ⇒ the slug is a rename/transfer redirect that `ls-remote` followed silently* — fired twice here,
+and in one case the canonical target is a **different organisation**:
+
+| Slug as published by package registries, docs and blogs | Canonical repository | What the stale slug hides |
+|---|---|---|
+| `simonmichael/hledger` | [hledgerorg/hledger](https://github.com/hledgerorg/hledger) | Owner changes from a person to an org. 4,837★ GPL-3.0 — the stale slug reports **nothing at all** through the search API |
+| `kiegroup/drools` and `apache/incubator-kie-drools` | [apache/incubator-kie](https://github.com/apache/incubator-kie) | **Both** legacy slugs still answer `ls-remote`. Drools was consolidated into the Apache KIE monorepo; a KB that recorded either would publish a slug with no searchable metadata and an outdated governance story |
+
+**A 200 is never by itself proof a slug is canonical.** Two oracles; the disagreement is the signal.
+
+### ⚠️ Licence trap of this pass, and it is the highest-starred trap found in twenty-seven passes
+
+[akaunting/akaunting](https://github.com/akaunting/akaunting) — **10,349★**, the second-most-starred
+result for open-source accounting — **is not open source.** `LICENSE.txt` (3,654 B, read in full) is
+the **Business Source License**: *"License text copyright (c) 2020 MariaDB Corporation Ab … Licensor:
+Akaunting, Inc. Licensed Work: Akaunting"*, with an Additional Use Grant limiting production use.
+GitHub's API reports `NOASSERTION`. At ten thousand stars it will surface in any search a client or a
+junior engineer runs, and a BSL dependency in a delivered platform is a commercial problem discovered
+at the worst possible moment. **Do not build on it.** `firefly-iii` (AGPL) and `LedgerSMB` (GPL-2.0)
+are genuinely open; `ledger`, `tigerbeetle`, `formance`, `medici` and `fava` are genuinely permissive.
+
+### Measured gaps — searched and absent, written down so silence is not read as coverage
+
+| Query (GitHub `search/repositories`, 2026-11-26) | Total | Relevant | Reading |
+|---|---|---|---|
+| `completion bond film` | **0** | 0 | The instrument that unlocks most independent film financing has **no open-source presence whatsoever** |
+| `production incentive eligibility` | **0** | 0 | The highest-value agent in the plane has no prior art in any licence |
+| `ERPNext media production` | **0** | 0 | **No media vertical exists for the world's most-starred open ERP** (41,661★). The gap is the chart of accounts, and it is unclaimed |
+| `film tax credit` | **7** | 4 | Seven repos on all of GitHub; best is 1★; all four relevant are proprietary or unlicensed |
+| `recoupment waterfall` | **2** | 1 | The one hit is an unlicensed 2023 Solidity contract for crypto splits |
+| `film finance` | 51 | ~3 | All at 0-1★; the best-starred result (78★) is a 2022 LGPL **DCP** tool that merely matched on "film" |
+| `cost report film production` | 5 | **0** | Three market-research spam repos, one 2023 C++ student project (GPL-3.0, 0★), one API stub |
+| `errors and omissions insurance` | 6 | **0** | Five `api-evangelist` API-profile stubs, one 2018 university assignment |
+| `film production ERP` | 5 | **0** | All five at **0★ and with no licence file** — the signature of freshly generated single-author projects |
+| `royalty accounting` | 47 | **0** | Confirms pass 5's identical finding in the rights plane, now in the cost plane too |
+| **False abundance** — `production accounting` | **1,946** | **0** | Every first-page result is unrelated: a 2,909★ MIT coding-assistant repo, CS coursework, an Instagram MCP server, an AWS break-glass role. **"Production" means *software* production to GitHub** |
+| **False abundance** — `residuals` | **11,617** | **0** | Entirely **ResNet and super-resolution machine learning**. The single worst false friend recorded in this KB — worse than pass 5's `isan` (1,942/0) — and it sits on the exact term a media-finance client uses for performer payments |
+
+**The two false-abundance rows are the method lesson of this pass.** `production accounting` and
+`residuals` return **13,563 repositories between them and zero relevant results.** A pass that read
+totals instead of results would have reported the plane as well served and written filler rows from
+coursework. Pass 8's rule — *read the results, not the total* — and pass 5's corollary that shortening
+a query can manufacture false abundance both earn their keep here, on terms a domain expert would
+consider unambiguous.

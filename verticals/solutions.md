@@ -1577,3 +1577,52 @@ StudioBinder, all already catalogued in this file), the payroll and accounting s
 the CDN logs — assemble it into a submission-ready pack, and keep the per-asset numbers the client owns
 and the certifier never sees. That layer is permissively licensable, client-owned, and the subject of
 **Patterns 26.1 through 26.5**.
+
+## The production-finance platform layer — added 2026-11-26 (pass 27)
+
+**The structural fact for this plane.** There is **no open-source vertical platform for media
+finance** — `ERPNext media production` and `film production ERP` return **zero usable projects**
+(5 results, all 0★, all unlicensed). What exists is the horizontal ERP/accounting layer, which is
+large, mature, actively maintained and in two cases **permissively licensed at the framework level**.
+This is the Odoo-for-ERP / OpenMRS-for-healthcare position the KB asks for, and in media finance it
+is **unoccupied**: the customisation is an industry chart of accounts plus a cost-report shape, not a
+new platform.
+
+| Platform | Repo | Licence — read where the API was unclear | Stars / Forks | Last push | What it gives a production-finance build |
+|---|---|---|---|---|---|
+| **ERPNext** | [frappe/erpnext](https://github.com/frappe/erpnext) | GPL-3.0 | 41,661★ / 13,646f | 2026-11-26 | Full ERP: GL, AP/AR, purchase orders, projects, timesheets, multi-currency, multi-company. The general ledger posts automatically from every submitted transaction. **The strongest starting point in the tier** — and its framework is separately MIT |
+| **Frappe Framework** | [frappe/frappe](https://github.com/frappe/frappe) | **MIT** | 11,164★ / 5,561f | 2026-11-26 | The platform ERPNext is built on, and **permissive**. A production-accounting app can be built as a Frappe app and stay MIT-compatible; this licence split is the most useful fact in this section |
+| **Odoo** (Community) | [odoo/odoo](https://github.com/odoo/odoo) | **LGPL-3.0** — API said `NOASSERTION`; `LICENSE` (43,529 B) read: *"Odoo is published under the GNU LESSER GENERAL PUBLIC LICENSE, Version 3"* | 56,124★ / 34,425f | 2026-11-26 | Analytic accounting is the key module: cost centres per production, per episode, per department. ⚠️ Community only — **Odoo Enterprise is separately licensed**, and the two are routinely confused in client conversations |
+| **Dolibarr** | [Dolibarr/dolibarr](https://github.com/Dolibarr/dolibarr) | GPL-3.0 | 7,903★ / 3,634f | 2026-11-26 | Lighter ERP/CRM with accounting, projects and expense reports. Realistic for a single production company or a regional studio rather than a group |
+| **Apache OFBiz** | [apache/ofbiz-framework](https://github.com/apache/ofbiz-framework) | **Apache-2.0** | 1,151★ / 771f | 2026-11-26 | The only **fully permissive** ERP framework in the tier, with a real accounting module. Lower adoption and a steeper build, but no copyleft question ever arises — the right answer when the deliverable must ship closed |
+| **Firefly III** | [firefly-iii/firefly-iii](https://github.com/firefly-iii/firefly-iii) | AGPL-3.0 | 25,348★ / 2,415f | 2026-11-26 | Personal/small-entity finance manager with a strong API. Useful as a **cashflow and petty-cash surface** for a single production, not as a group ledger. ⚠️ AGPL |
+| **LedgerSMB** | [ledgersmb/LedgerSMB](https://github.com/ledgersmb/LedgerSMB) | GPL-2.0 — `LICENSE` (12,339 B) read | 579★ / 178f | 2026-11-25 | Double-entry accounting/ERP with a long operational history. Dependable, unfashionable, genuinely open |
+| **GnuCash** | [Gnucash/gnucash](https://github.com/Gnucash/gnucash) | GPL-2.0-or-3.0 — `LICENSE` (19,423 B) read: *"mutually-compatible set of licenses … GNU General Public License, Version 2, or (at your option) Version 3"* | 4,429★ / 1,010f | 2026-11-26 | Desktop double-entry with proper accounting semantics. Its real value here is as a **reference implementation of a chart of accounts**, not as a deployment target |
+| **EspoCRM** | [espocrm/espocrm](https://github.com/espocrm/espocrm) | AGPL-3.0 | 3,674★ / 1,060f | 2026-11-26 | The CRM half: financier, sales-agent, distributor and co-producer relationships — the pipeline that *precedes* the ledger. ⚠️ AGPL |
+| **Kitsu / Zou** | [cgwire/kitsu](https://github.com/cgwire/kitsu) · [cgwire/zou](https://github.com/cgwire/zou) | AGPL-3.0 (both) | 779★ / 190f · 203★ / 148f | 2026-11-26 (both) | Production tracking with real man-day and bid data — the **operational source of truth a cost report must reconcile against**. Already catalogued in this file for the production plane; it is listed again because it is the join point for Pattern 27.5 |
+| **CineSpend** | [ChrisTempel/CineSpend](https://github.com/ChrisTempel/CineSpend) | **MIT** | 8★ / 1f | 2026-10-06 | The only open film **budgeting** app, ten currencies, macOS-only. Unchanged since pass 17: prior art and a data-shape reference, **not** a base to build a client platform on |
+| **Open Shot Designer** | [koosoli/OpenShotDesigner](https://github.com/koosoli/OpenShotDesigner) | **GPL-3.0** — API said `NOASSERTION`; `LICENSE` (35,809 B) read: GPL-3.0-or-later | 47★ / 9f | 2026-11-26 | Production-planning suite (scheduling, call sheets). Now the **best-starred** open production-planning tool found; pushed on measurement day. Carries no accounting, and GPL-3.0 constrains redistribution |
+
+### 🚫 Not open source, despite appearing in every search
+
+**[akaunting/akaunting](https://github.com/akaunting/akaunting) — 10,349★ — is licensed under the
+Business Source License** (`LICENSE.txt`, 3,654 B, read in full: MariaDB BSL text, Licensor
+"Akaunting, Inc.", with a limited Additional Use Grant). GitHub reports `NOASSERTION`. It is the
+highest-starred licence trap in this knowledge base and it sits in the exact category a media-finance
+engagement searches first. See `repos/foundations.md` pass 27 for the full reading.
+
+### What to propose, and what never to propose
+
+**Never propose replacing the production accounting system of record** where one is in place.
+Movie Magic Budgeting, Showbiz, Wrapbook, Cast & Crew, GreenSlate and Entertainment Partners are not
+merely incumbent — they are **wired into payroll, union reporting and the auditors' expectations**,
+and in several jurisdictions the incentive auditor expects reports in their shapes. A client who
+cannot produce an auditor-recognised cost report because a bespoke ledger disagreed with the payroll
+company has been actively harmed, and the credit itself can be delayed or lost.
+
+**The defensible proposal is the layer those systems do not occupy**: an **incentive-eligibility and
+claim-evidence layer** that reads the budget, the ledger, the payroll export and the production
+tracker, computes qualification per jurisdiction as versioned rules-as-code, and emits a
+submission-ready claim pack with every number traceable to its source document. It is permissively
+licensable end to end (Catala Apache-2.0 + Frappe MIT + ledger BSD-3 + Timefold Apache-2.0), the
+client owns the rule sets, **no incumbent sells it**, and it is the subject of **Patterns 27.1–27.5**.

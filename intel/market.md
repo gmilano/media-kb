@@ -984,6 +984,42 @@ layer is **zero repos** (`audio ad insertion server stars:>=20` → 0, measured 
   Alliance`. The trade-body surveys that would settle it are not public. **Treat regional AI-adoption
   figures as unresearched, not as zero.**
 
+
+#### The production-finance & soft-money plane — added 2026-11-26 (pass 27). The region where the *federal* layer is a live legislative question and the state layer is the product
+
+- **Section 181 expired on 2025-12-31 and has not been reinstated** — reported as still unreinstated as
+  of September 2026. It allowed an immediate deduction of up to **$15M** of production cost ($20M in
+  designated distressed areas). Its lapse is why the federal conversation reopened at all, and why a
+  2026 engagement cannot assume it in a model.
+- **Two federal vehicles are in play, and they are different instruments.** The **CREATE Act**,
+  announced 2026-08-01 with four bipartisan sponsors, would extend Section 181 (a *deduction*) through
+  2030. Separately, a **bipartisan bill reported 2026-10-06 would create a transferable federal tax
+  credit of up to 30%** for qualifying US productions — described as **uncapped**, which would favour
+  productions with large US labour costs far more than §181 ever did. A *transferable* credit implies a
+  secondary market, a buyer-side diligence problem, and a per-claim evidence burden — all three are
+  software problems, and the only GitHub repo touching the credit **buyer** side is 0★ and unlicensed.
+- ⚠️ **Verification state, stated plainly.** These are trade-press, law-firm-newsletter and tax-guide
+  readings, not bill text. A reported presidential endorsement (2026-08-31) appeared in a **single
+  low-quality source** and should not be quoted. Commentators split on whether anything attaches to a
+  year-end 2026 extenders package or slips to 2027. **Do not build a client business case on the
+  federal credit existing**; build it on the state layer, which is enacted.
+- **The state layer is the real market and it is large and fragmented: incentives in 39 states plus
+  DC and Puerto Rico.** California more than doubled its programme from **$330M to $750M** in July
+  2025, and a **standalone post-production credit was signed 2026-09-19** (effective 2027) — the
+  state's first. ⚠️ Sources disagree on the bill number (AB vs. SB 2319) and on the post rate
+  (35–50%); a further proposal to raise the main programme to **$1B** is a proposal, not law.
+- **Canada moved on administration, not just rates**, and administration is where the software lives:
+  **BC**'s 2026 motion-picture credit changes became official **2026-04-16** (Production Services Tax
+  Credit plus a new **Major Production Tax Credit**); **Manitoba** announced **mandatory
+  pre-certification**; **Ontario** proposed restricting OCASE eligibility to film and television
+  producers only. Pre-certification and narrowed eligibility both convert a finance question into a
+  **documentation workflow with a deadline** — the exact shape Pattern 27.1 and 27.5 address.
+- **The opportunity, placed.** North America is the only region where a single production routinely
+  claims against **two or three jurisdictions with different qualifying-spend definitions** and where
+  credits are **transferable and therefore traded**. The buyer-side diligence pack — does this claim
+  survive audit, at what discount — has **no open-source tooling at all** (`film tax credit` = 7 repos,
+  the one buyer-side repo 0★/unlicensed), and PolicyEngine has already proven the 50-state
+  rules-as-code pattern for a different statute. That is the most directly fundable build in the plane.
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2083,6 +2119,44 @@ obligation that binds harder than legislation while not being legislation at all
   alternative, [report-analyst](https://github.com/climateandtech/report-analyst) (42★, pushed today),
   has **no licence file at all**. An AV group that must file ESRS has no adoptable open tool.
 
+
+#### The production-finance & soft-money plane — added 2026-11-26 (pass 27). The region where the binding constraint is a **cap and a closed window**, not a rate
+
+- **The rate stopped being the differentiator in EMEA during 2026; availability did.** Three of the
+  four largest schemes now ration rather than price, and rationing is a scheduling and
+  evidence-sequencing problem — which is software — rather than a tax-planning one.
+- **Germany is the sharpest case: the federal pot was doubled to €250M for 2026 and was exhausted on
+  2026-08-20.** The window for shoots starting in 2027 opened in **November 2026**. A production that
+  misses a window does not get a smaller credit; it gets **none this year**. ⚠️ One source describes a
+  restructured DFFF under a new film law — single-sourced, treat as unconfirmed.
+- **Italy tightened in both directions at once.** The 2026 budget law cut the national cinema fund
+  from **€700M to €610M** with a further cut projected for 2027, and introduced the country's
+  **first-ever cap on production tax credits** — per-work and per-company caps, a closed annual budget
+  and **fixed application windows** — after the authorities **revoked €66M of credits in 2025**.
+  Revocation after the fact is the single strongest argument in Europe for a traceable, per-line,
+  auditable claim pack: the risk is no longer "will we qualify" but "will it be clawed back".
+- **UK** replaced legacy Film Tax Relief with **AVEC**, reported as fully applying to commercial
+  productions from **2026-04-01**, with a **VFX uplift whose qualifying costs are exempt from the 80%
+  cap** — a structural gift to VFX-heavy work and to Globant's own delivery shape. ⚠️ **The published
+  rates are a gross/net minefield**: trade sources give 39% gross ≈ 29.25–29.5% net for AVEC, and for
+  the Independent Film Tax Credit both "AVEC raised to 39.75% for budgets ≤ £15M" **and** "53%"
+  appear. These are almost certainly gross and net expressions of the same relief, but **the KB does
+  not assert which**; confirm against HMRC before quoting a number to a client.
+- **France** (TRIP/C2I): 30%, rising to **40% when French VFX spend exceeds €2M**, capped at €30M per
+  project — unchanged in these sources. **Spain**: 30% on the first €1M of eligible Spanish spend and
+  25% above, capped at €20M per film, with the **Canary Islands** higher (sources give ~45–50%, and
+  they disagree — do not quote a Canaries rate without the ICAA/Canaries primary document).
+- **The primary source worth more than any aggregator.** The **Council of Europe / European
+  Audiovisual Observatory IRIS** consolidated report, *Fiscal incentives and cash rebates in the
+  audiovisual sector*, is a public, cross-border, institutionally maintained comparison. Every other
+  figure in this subsection came from commercial blogs that **contradict each other**, which is itself
+  the finding: **EMEA's incentive data is published by vendors with an interest in the answer.** For a
+  rules-as-code build, the IRIS report is the citation that survives review.
+- **The opportunity, placed.** EMEA is where an incentive engine must model **caps, closed windows,
+  budget exhaustion and clawback** rather than just a percentage — and where the per-jurisdiction rule
+  sets differ most per euro of spend. It is also the region where **AGPL is least often a blocker**,
+  because deployments are typically client-owned and single-tenant: OpenFisca and PolicyEngine-core
+  are usable here in ways a North American multi-tenant SaaS could not risk.
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3115,6 +3189,40 @@ open-source story.**
   "carbon film" manufacturing reports (heating film, protective film) — **a false-friend query class to
   avoid**: use *screen production* or *audiovisual*, never *film*, when searching this plane in APAC.
 
+
+#### The production-finance & soft-money plane — added 2026-11-26 (pass 27). The region with the cleanest primary sources and the least verifiable trade press
+
+- **Australia is the best-documented incentive regime found in any region, and the source is the tax
+  authority itself.** The **ATO**'s *Film industry incentives 2026* confirms the **Location Offset
+  rose to 30%** of qualifying Australian expenditure (Treasury Laws Amendment … Act 2024), with the
+  **Producer Offset at 40% for features and 20% for other formats**. Ausfilm and Screen Australia
+  publish current factsheets alongside it. ⚠️ **Any source still citing 16.5% for the Location Offset
+  is out of date** — a live trap, since older aggregator pages remain highly ranked.
+- **Japan changed instrument, not just rate, and the old one is closed.** **JLOX+** (reported at 50%
+  with a ¥1B cap) **closed to applications on 2026-01-31**. Support now runs through **IP360**, which
+  subsidises **half of eligible Japanese production spend**, capped at **¥1.5B per project**, and
+  requires at least **¥800M of domestic spend**. A minimum-spend floor of that size is an eligibility
+  *gate*, not a sliding scale — exactly the kind of rule a decision table expresses well and a
+  spreadsheet expresses badly.
+- **India and South Korea: informed gaps, and they are the honest answer.** For **India**, sources
+  conflict — one reports the federal incentive rising from 30% to **40% reimbursement in 2026** with a
+  **$3.6M cap**, another gives 30–40% with a ₹30,000,000 minimum spend, and **no official source was
+  found confirming a 2026 change**. For **Korea**, **no 2026 rate change was found at all**; a
+  directory lists a 25% cash rebate with a ₩400,000,000 minimum, and its KOFIC detail is vague and
+  unverified. **Both are recorded as unverified rather than written as data.** Needed next:
+  India's Ministry of Information & Broadcasting and **KOFIC** primary pages.
+- **Regulatory context for the same region, carried from pass 5 and still the governing frame.** The
+  Latham & Watkins alert of September 2026 groups APAC into **three divergent regulatory categories**
+  (binding risk-based frameworks — Korea, Vietnam; targeted regulation — China; and a third), which
+  means an APAC incentive engine and an APAC AI-compliance engine have the **same architecture**: a
+  per-jurisdiction policy engine, not a single compliance mode. The same Catala/Drools substrate
+  serves both, which is a genuine reuse argument for a regional engagement.
+- **The opportunity, placed.** APAC pairs the region's **best primary-source hygiene** (ATO, KOFIC,
+  Screen Australia) with the **worst aggregator reliability**, and two of its four major markets
+  switched or capped instruments inside twelve months. The defensible build is a **versioned,
+  citation-carrying rule set** where every number links to the government page it came from and
+  carries a commencement date — which is precisely what Catala's literate style produces by
+  construction, and precisely what a spreadsheet cannot.
 ### LATAM
 
 - **Mexico now has the region's first sector-specific AI law for entertainment.** Amendments to the
@@ -4176,6 +4284,54 @@ something that already exists locally.
   repos found anywhere in the plane are generic. A pass that reported those totals as coverage would have
   called LATAM the best-served region here; it is the worst.
 
+
+#### The production-finance & soft-money plane — added 2026-11-26 (pass 27). The region where the money grew fastest and the incentive is being **simplified by decree**
+
+- **Colombia is the strongest incentive story in the region this year, and it has two separate
+  instruments that are routinely conflated.** **CINA** (the transferable tax-credit certificate) was
+  allocated **COP 350,000 million for 2026 — a 49% rise over 2025 and the largest since the incentive
+  began** — and offers a **35% transferable tax credit** on eligible audiovisual and logistical
+  services for foreign productions. The **FFC** (Colombia Film Fund) is a much smaller **cash** scheme
+  at **COP 6,680 million (~USD 2M)** for 2026, paying **40% on audiovisual services and 20% on
+  logistical services**. One is a credit you sell; the other is cash you receive — different balance
+  sheet, different timeline, different evidence.
+- ✅ **This narrows a gap the KB itself recorded.** The pass-6 LATAM note states the *"frequently cited
+  Colombian 40% cash rebate was found only in vendor material and could not be verified against a
+  film-commission source."* It is now corroborated by **non-vendor** reporting (Hollywood Reporter
+  España, Yahoo Finance) and by coverage quoting **Proimágenes Colombia**, the body that administers
+  the schemes — and the 40% is specifically the **FFC**, not CINA. It is **still not the primary
+  administrative document**, so the figure is now *well-corroborated trade reporting attributed to the
+  administering body*, not *verified against the regulation*. Treat it as the former.
+- **Colombia also simplified access by decree, which is the operationally interesting part.**
+  **Decreto 876 de 2026**, signed **2026-07-29**, amends **six articles of Decreto 1080 de 2015** to
+  simplify the domestic film-law tax incentive, extending it to national features and shorts
+  **regardless of the contributor's line of business**. A decree that changes eligibility mid-year is
+  the canonical argument for **versioned, date-effective rules** rather than a hard-coded calculator.
+- **Sub-national incentives are real in LATAM and are usually missed.** **Medellín**'s municipal
+  scheme (**ICAM**, via the Comisión Fílmica) awarded **more than COP 2,700 million to 131 projects**
+  in its 2026-I call, with a further **COP 1,300 million** pool in 2026-II. A claim engine that models
+  only national schemes understates the achievable benefit in exactly the territories where Globant's
+  LATAM delivery sits.
+- **Brazil's largest instrument is not a rebate, and calling it one is a costly error.** The **Lei
+  Paulo Gustavo** is **Complementary Law 195 of 2022**, **R$3.862 billion** in total with
+  **R$2.797 billion ring-fenced for audiovisual**. The Union **transfers funds to states, the Federal
+  District and municipalities, which each run their own calls, tenders and awards** — so it is a
+  **distributed public-selection programme with hundreds of local windows and accountability
+  (*prestação de contas*) obligations**, not an automatic rebate. Separately, **Spcine** runs the City
+  of São Paulo's production-attraction programme, described as **Brazil's first audiovisual cash
+  rebate** — municipal, and distinct from LPG. **No 2026 change to LPG was found.**
+- ⚠️ **Informed gaps, stated so silence is not read as coverage.** **Mexico's EFICINE** and
+  **Argentina's INCAA** were searched explicitly in this pass **and returned nothing usable** —
+  unresearched, not absent. Both are needed before any LATAM-wide incentive engine could claim
+  coverage. Note the adjacent live risk already in this file: the Mexican dubbing sector spent 2026
+  lobbying for fiscal incentives and warning about **exclusion from Mexico's audiovisual incentive
+  policy**, so Mexico's incentive perimeter is itself contested.
+- **The opportunity, placed.** LATAM's defining feature in this plane is **many small windows with
+  short deadlines and heavy accountability paperwork** — national, state and municipal — rather than a
+  few large automatic schemes. The highest-value artefact is therefore not a rate calculator but a
+  **calendar-plus-evidence engine**: which calls are open, what each demands, and whether this
+  production's own documents already satisfy it. `docassemble` (MIT, 1,019★) is a better fit for the
+  *prestação de contas* shape than any accounting tool, and nothing in the market does this.
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -4872,3 +5028,64 @@ exactly one layer wide: **the connector that turns a media company's own operati
 evidence a certifier or a regulator will accept.** That layer is permissively licensable, client-owned,
 has no incumbent, and is the subject of Patterns 26.1 to 26.6. It is also the reason this plane's
 open-source count for the mandated task is zero without the opportunity being zero — see **P39**.
+
+## Market size — pass 27 addendum (2026-11-26): the production-finance segment, and **the first segment this KB can size from government money rather than vendor estimates**
+
+### The refusal first
+
+**There is no defensible figure for "film production accounting software" or "incentive management
+software" as a market, and this pass will not invent one.** The incumbents — Entertainment Partners,
+Cast & Crew, Wrapbook, GreenSlate, Movie Magic/Showbiz — are private, several are PE-held, and none
+publishes segment revenue. Every "market size" page returned for these terms was a generated
+market-research listing of the kind pass 26 already caught selling an order-of-magnitude disagreement.
+
+### What can be stood behind instead — the public money, which is published by governments
+
+The addressable value in this plane is not software seats; it is **the incentive money that must be
+qualified, documented and defended**. Those numbers are published by the bodies that allocate them:
+
+| Jurisdiction | Published 2026 allocation or terms | Source type |
+|---|---|---|
+| California | **$750M/yr** main programme (up from $330M, July 2025); standalone post credit signed 2026-09-19, effective 2027 | State legislation / trade |
+| Germany (federal) | **€250M for 2026**, doubled — and **exhausted 2026-08-20** | Trade press, consistent across sources |
+| Italy (national cinema fund) | **€610M for 2026**, cut from €700M; first-ever per-work and per-company credit caps; **€66M revoked in 2025** | Budget law / trade |
+| Colombia CINA | **COP 350,000M** (+49% YoY, largest ever), 35% transferable credit | Trade press quoting Proimágenes |
+| Colombia FFC | **COP 6,680M (~USD 2M)**, 40% audiovisual / 20% logistics cash | Trade press quoting Proimágenes |
+| Brazil Lei Paulo Gustavo | **R$3.862B** total, **R$2.797B audiovisual**, disbursed via state/municipal calls | Statute (LC 195/2022) + Ministry of Culture |
+| Japan IP360 | 50% of eligible Japanese spend, **¥1.5B cap/project**, **¥800M minimum domestic spend** (JLOX+ closed 2026-01-31) | Programme terms |
+| Australia | Location Offset **30%**; Producer Offset **40%** features / **20%** other | **ATO**, *Film industry incentives 2026* |
+| US states | Incentives in **39 states + DC + Puerto Rico** | Trade aggregate |
+
+**The honest framing for a client conversation.** These are *allocations and rates*, not a software
+market, and they should never be presented as TAM — a 35% credit is not revenue to a services vendor.
+What they do establish, defensibly, is that **the cost of getting a claim wrong is measured in
+millions per production**, that **three of these schemes ration or claw back** (Germany exhausted,
+Italy capped and revoking €66M, Manitoba requiring pre-certification), and that the **penalty for bad
+documentation is now larger than the cost of good documentation**. That is the whole business case,
+and it rests on published government figures rather than on an estimate anyone sells.
+
+### Why this segment is unusual in this KB
+
+Every other plane measured in twenty-seven passes had the same shape: a commercial market with vendor
+estimates and no open source. This one has **public, primary, per-jurisdiction numbers** — and still
+no open source. It is the cleanest separation yet between *the money is documented* and *the code does
+not exist*.
+
+### Global players — pass 27 addendum (the production-finance & incentive layer)
+
+| Player | Type | What they hold | Constraint for an open build |
+|---|---|---|---|
+| **Entertainment Partners (EP)** | Commercial, global | Payroll, EP Budgeting (the de facto budget format), a global incentives database and comparison tools, Production Lot | Proprietary and **deeply wired into union reporting and auditor expectations**. The budget *format* is a near-standard with no open specification |
+| **Cast & Crew** (incl. Media Services) | Commercial, NA | Payroll, production accounting (Movie Magic / Showbiz lineage), incentive advisory | Proprietary; owns the incumbent **cost report shapes** auditors expect |
+| **Wrapbook** · **GreenSlate** | Commercial, NA | Modern payroll + production accounting; both publish free incentive centres and credit-management tools | Proprietary. Their **free** incentive trackers are the real competitive fact: the lookup layer is already commoditised, so **no open build should compete on lookup** — only on qualification and evidence |
+| **SceneIQ** · **Jarvus CreditScout** · **Vitrina** | Commercial tooling | Incentive comparison across jurisdictions (SceneIQ cites 23; CreditScout reads EP Budgeting directly) | Proprietary. CreditScout reading EP Budgeting files confirms where the integration seam is |
+| **Proimágenes Colombia** · **Spcine** · **Screen Australia / Ausfilm** · **KOFIC** · **ICAA** · **CNC** · **FFA** · **Ontario Creates** · **BC/Manitoba** | Public administrators | The **rule sets, the windows, the certification and the audit** | Not competitors and never to be displaced. They are the **authoritative source a rules-as-code engine must cite**, and several publish official calculators (Ontario Creates) that an engine should agree with, not replace |
+| **Council of Europe / European Audiovisual Observatory (IRIS)** | Public research body | The only institutionally maintained cross-border comparison of audiovisual fiscal incentives and cash rebates | Free and citable. **The reference that makes an EMEA rule set reviewable** |
+| **Completion-bond and E&O underwriters** | Commercial, opaque | Risk transfer that gates most independent financing | `completion bond film` = **0 repositories**. Entirely absent from open source; not a software gap Globant should attack first |
+
+**The structural observation for positioning, and it mirrors pass 26's exactly.** Every player holding
+a **rule or a mandate** is a government body publishing prose, and every player holding **working
+software** is a proprietary payroll company. The gap between them is one layer wide: **executable,
+versioned, citation-carrying incentive rules plus the evidence pack that proves a claim against them.**
+It has no open-source incumbent in any jurisdiction, the public bodies will never build it, and the
+payroll incumbents have no commercial reason to make it portable. See **P41** and **P42**.

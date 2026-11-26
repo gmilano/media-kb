@@ -9,6 +9,65 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 27: the production-finance, soft-money & cost-accounting plane (**the thinnest agent layer in the KB: one media-specific repo, one star, and a LICENSE that says "all rights reserved"**)
+
+Agents only; the ledger, rules-as-code and solver repos for this plane are in `repos/trending.md` pass 27.
+
+**What this plane is, and why it was still open after twenty-six passes.** Pass 17 opened the
+development plane, found budgeting software, wrote *"Tier 4 — the money: effectively nothing"* and
+moved on. This pass takes the money itself: **financing, soft money (incentives), cost accounting and
+audit.** 33 terms grepped against all eight files first; **25 returned literal zero**, including
+`film financ*`, `soft money`, `recoupment`, `completion bond`, `section 181`, `chart of accounts`,
+`double-entry` and `errors and omissions` — **25 of 33 probed terms at literal zero** (pass 17, for
+comparison, recorded 14 of 27).
+
+### The media-specific agent layer, in full — four repos, zero usable
+
+| Agent | Stars / Forks | Licence (read, not inferred) | Last push | Note |
+|---|---|---|---|---|
+| [jorgedoiany/film-tax-credit-agent](https://github.com/jorgedoiany/film-tax-credit-agent) | 1★ / 0f | 🚫 **Proprietary** — `LICENSE` 817 B: *"All rights reserved … proprietary and confidential"* | 2026-10-22 | The only film-tax-credit agent in existence on GitHub, and it is closed |
+| [marcusg999/Film-financing-agent](https://github.com/marcusg999/Film-financing-agent) | 0★ / 0f | ⚠️ No licence file | 2026-07-23 | |
+| [samjohnr-bot/greenlight-engine](https://github.com/samjohnr-bot/greenlight-engine) | 0★ / 0f | ⚠️ No licence file | 2026-08-20 | 1 of only **2** results for `recoupment waterfall` on GitHub |
+| [tahokovi-s/hollywood-film-tax-credit-buyers-demo](https://github.com/tahokovi-s/hollywood-film-tax-credit-buyers-demo) | 0★ / 0f | ⚠️ No licence file | 2026-05-26 | Credit **buyer** side — the transferable-credit secondary market |
+
+**`film tax credit` returns seven repositories on all of GitHub.** Not seven relevant out of many —
+seven total, best one star.
+
+### The permissive agents that do exist, and what they are
+
+| Agent | Stars / Forks | Licence | Last push |
+|---|---|---|---|
+| [tahasiddiquii/invoice-ap-agent](https://github.com/tahasiddiquii/invoice-ap-agent) | 5★ / 0f | **MIT** | 2026-07-01 |
+| [sujalmallick/probity-ai](https://github.com/sujalmallick/probity-ai) | 5★ / 1f | **MIT** | 2026-10-05 |
+| [Devanshjoshi2804/ap-verify](https://github.com/Devanshjoshi2804/ap-verify) | 2★ / 2f | **MIT** | 2026-06-21 |
+| [northkeellabs/invoice-intake-agent](https://github.com/northkeellabs/invoice-intake-agent) | 1★ / 0f | **MIT** | 2026-11-23 |
+| [alihdrndm/ledgic](https://github.com/alihdrndm/ledgic) | 0★ / **4f** | **MIT** | 2026-11-25 |
+| [Mohanbabu82/GuardLedger](https://github.com/Mohanbabu82/GuardLedger) | 0★ / 0f | **MIT** | 2026-11-25 |
+| [MurtazaBhutta/django-invoice-agent](https://github.com/MurtazaBhutta/django-invoice-agent) | 0★ / 0f | **MIT** | 2026-11-26 (measurement day) |
+
+**Seven permissive agents, 13 stars between them, and every one is an accounts-payable clerk.** Not
+one computes an incentive, tests eligibility, builds a cost report or models a waterfall. Three of the
+seven were pushed within four days of measurement, which is the freshly-generated-single-author
+signature pass 17 named — momentum to re-check, not an ecosystem.
+
+### Falsifiable prediction, recorded so a later pass can score it
+
+By **2027-05-31**, either (a) a permissively licensed incentive-eligibility or cost-report agent for
+screen production exists at **≥10 stars**, or (b) this plane is confirmed as one where the agent layer
+never formed and the value stays in the rules-as-code substrate. **Prediction: (b).** Reason — the
+scarce input is *jurisdictional rule text plus an auditor's acceptance*, not model capability, which is
+the same mechanism pass 5 measured for ISRC/ISWC and pass 17 for residuals. Both outcomes inform; the
+next pass should check and write down which happened.
+
+### Method note reusable across all twelve industries
+
+**Two terms in this plane return 13,563 repositories between them and zero relevant results**:
+`production accounting` (**1,946** — "production" means *software* production to GitHub; top hit is a
+2,909★ MIT coding assistant) and `residuals` (**11,617** — entirely ResNet and super-resolution). The
+second is the worst false friend recorded in this KB, worse than pass 5's `isan` (1,942/0), and it sits
+on the exact word a media-finance client uses for performer payments. **A pass that read totals would
+have reported this plane as well served.**
+
 ## 2026-11-26 — pass 26: the energy, carbon & environmental-footprint plane (**a hard, enforced mandate, free input data, and still zero implementations**)
 
 Agents only; the measurement and infrastructure repos for this plane are in `repos/trending.md` pass 26.

@@ -2678,3 +2678,70 @@ and **P39** explains why it has persisted.
 | Render-farm carbon scheduler (shift a queue into a clean-grid window) | The two halves both exist and permissive — [cats](https://github.com/GreenScheduler/cats) (MIT) + [carbon-aware-sdk](https://github.com/Green-Software-Foundation/carbon-aware-sdk) (MIT) — and the only media-native connector is a **3-star** MIT Deadline plugin. This is the shortest path to a working product in the plane (Pattern 26.2) |
 | GenAI-footprint disclosure agent (what did this AI-assisted sequence cost in energy?) | [codecarbon](https://github.com/mlco2/codecarbon) (MIT) measures it; nothing maps it to a broadcaster deliverable, **even though the 2025 Green Animation Guide already documents a studio appending an AI traceability annex to production reports for broadcasters** (Pattern 26.4) |
 | CSRD/ESRS evidence agent for an AV group | Partial: [esrs-xbrl-parser](https://github.com/aimabel-ai/esrs-xbrl-parser) (**ISC**, dormant 23 months) is the only permissive, correctly-licensed piece; the best-starred alternative has no licence at all |
+
+## The production-finance, soft-money & cost-accounting plane — measured 2026-11-26 (pass 27): **the agent layer is one repository, it has one star, and its LICENSE says "all rights reserved"**
+
+This is the plane pass 17 found and declined to open. Its own words, still live in
+`repos/foundations.md`: *"Tier 4 — the money: effectively nothing."* Pass 17 was looking for film
+**budgeting** software and found one MIT repo at 8 stars. This pass takes the whole money plane —
+**how a production is financed, how soft money is qualified and claimed, how cost is booked and
+reported, and how the claim is audited** — and measures it properly.
+
+**Before any web search, 33 candidate terms were grepped against all eight KB files.** Literal zero:
+`film financ*`, `production financ*`, `soft money`, `cost report`, `waterfall`, `recoupment`,
+`gap financing`, `pre-sale`, `minimum guarantee`, `co-production treaty`, `section 181`, `AVEC`,
+`CPTC`, `above-the-line`, `below-the-line`, `chart of accounts`, `general ledger`, `double-entry`,
+`bookkeeping`, `trial balance`, `timecard`, `petty cash`, `completion bond`, `escrow`,
+`errors and omissions`. **Twenty-five of thirty-three probed terms returned literal zero.** `insurance` (3) and `audit` (8)
+were checked and are **unrelated senses** — French-language insurance repos and audit *logging*. For
+comparison, pass 17 recorded 14 zeros from 27 probed terms and called that the largest gap at the time;
+this pass does not re-rank the intervening passes, it just records the count.
+
+### Tier 1 — the media-specific agent layer: four repositories, and not one is usable
+
+Existence via `git ls-remote`; stars/forks/last-push via GitHub `search/repositories`; **licence by
+reading the LICENSE file** in every case where the API returned `NOASSERTION` or `NONE`.
+
+| Repo | Licence — **read, not inferred** | Stars / Forks | Last push | State |
+|---|---|---|---|---|
+| [jorgedoiany/film-tax-credit-agent](https://github.com/jorgedoiany/film-tax-credit-agent) | 🚫 **Proprietary.** `LICENSE` (817 B, read in full): *"Copyright (c) 2026 … All rights reserved. This software and its associated documentation files (the 'Software') are **proprietary and confidential**"* | 1★ / 0f | 2026-10-22 | The **only** film-tax-credit agent on GitHub, and it is explicitly closed. GitHub's API reports `NOASSERTION`, which reads as "unknown" — it is not unknown, it is reserved |
+| [marcusg999/Film-financing-agent](https://github.com/marcusg999/Film-financing-agent) | ⚠️ **No licence file** | 0★ / 0f | 2026-07-23 | Default copyright applies: all rights reserved |
+| [samjohnr-bot/greenlight-engine](https://github.com/samjohnr-bot/greenlight-engine) | ⚠️ **No licence file** | 0★ / 0f | 2026-08-20 | One of only **two** results for `recoupment waterfall` on all of GitHub |
+| [tahokovi-s/hollywood-film-tax-credit-buyers-demo](https://github.com/tahokovi-s/hollywood-film-tax-credit-buyers-demo) | ⚠️ **No licence file** | 0★ / 0f | 2026-05-26 | A demo for *buyers* of credits — the secondary market, not the claim |
+
+**`film tax credit` returns seven repositories in total across all of GitHub.** Not seven relevant
+ones out of many — seven, full stop, and the best of them has one star. Two are the rows above; the
+rest are a 2018 Rails exercise, a dormant Bloomberg data dump, an unrelated iOS app and a US state
+marketing site. **This is the thinnest agent layer any plane in this KB has recorded**, thinner than
+pass 23's still-image desk (one repo, one star) because here the single repo is also legally shut.
+
+### Tier 2 — the generic finance agents that *are* permissive, and what they actually cover
+
+None of these knows what a production is. They are listed because they are the **only permissively
+licensed, agent-shaped code in the plane**, and Patterns 27.2 and 27.3 compose them deliberately.
+
+| Agent | Repo | Licence | Stars / Forks | Last push | What it does |
+|---|---|---|---|---|---|
+| invoice-ap-agent | [tahasiddiquii/invoice-ap-agent](https://github.com/tahasiddiquii/invoice-ap-agent) | **MIT** | 5★ / 0f | 2026-07-01 | Accounts-payable invoice intake and extraction. Best-starred permissive agent in the plane — at five stars |
+| probity-ai | [sujalmallick/probity-ai](https://github.com/sujalmallick/probity-ai) | **MIT** | 5★ / 1f | 2026-10-05 | Invoice coding and anomaly flagging over an AP queue |
+| ap-verify | [Devanshjoshi2804/ap-verify](https://github.com/Devanshjoshi2804/ap-verify) | **MIT** | 2★ / 2f | 2026-06-21 | Three-way match verification (invoice / PO / receipt) |
+| invoice-intake-agent | [northkeellabs/invoice-intake-agent](https://github.com/northkeellabs/invoice-intake-agent) | **MIT** | 1★ / 0f | 2026-11-23 | Document intake → structured AP record; pushed three days before measurement |
+| ledgic | [alihdrndm/ledgic](https://github.com/alihdrndm/ledgic) | **MIT** | 0★ / 4f | 2026-11-25 | Ledger-posting assistant. **Four forks against zero stars** — the inverse ratio, which usually means coursework, not adoption |
+| GuardLedger | [Mohanbabu82/GuardLedger](https://github.com/Mohanbabu82/GuardLedger) | **MIT** | 0★ / 0f | 2026-11-25 | Ledger-integrity and fraud checks over postings |
+| django-invoice-agent | [MurtazaBhutta/django-invoice-agent](https://github.com/MurtazaBhutta/django-invoice-agent) | **MIT** | 0★ / 0f | 2026-11-26 | Django AP agent, pushed **on measurement day** |
+
+**Seven permissive agents, 13 stars between them, and every one of them is an accounts-payable
+clerk.** Not one computes an incentive, tests eligibility, builds a cost report, or models a
+recoupment waterfall. The plane's actual economics — which jurisdiction to shoot in, what qualifies,
+who gets paid back first — has **no agent at all, in any licence**.
+
+### The agents a media-finance client will ask for, and their measured state on 2026-11-26
+
+| The agent the client will ask for | Measured state |
+|---|---|
+| Incentive-eligibility agent ("does this budget qualify in Georgia, BC, Spain or NSW, and for how much?") | `production incentive eligibility` = **0 repositories**. `film tax credit` = 7, best 1★, all four relevant ones unlicensed or proprietary. **The substrate exists and is permissive** — [Catala](https://github.com/CatalaLang/catala) (Apache-2.0, 2,456★) — and nothing has been written on it for this domain: **Pattern 27.1** |
+| Cost-report agent (weekly actuals vs. budget, estimate-to-complete, variance narrative) | `cost report film production` = **5 results, 0 relevant** (three market-research spam repos, one 2023 C++ student project, one API stub). The incumbents — Movie Magic, Showbiz, Wrapbook, Cast & Crew, GreenSlate, EP — are **entirely proprietary**, exactly as pass 17 recorded |
+| Soft-money optimiser ("split this shoot across territories to maximise net benefit") | No repo in any licence. Both halves of the engine are permissive and mature — [Timefold](https://github.com/TimefoldAI/timefold-solver) (Apache-2.0, 1,882★) for the allocation, Catala for the rules: **Pattern 27.4**. This is the plane's most valuable unbuilt product |
+| Recoupment-waterfall agent (who recoups, in what order, at what corridor) | `recoupment waterfall` = **2 repositories on all of GitHub.** The better one, [0xSplits/splits-recoup](https://github.com/0xSplits/splits-recoup) (6★), has **no licence file** — probed 8 filenames × 2 branches — and is a 2023 Solidity contract for crypto splits, not a film waterfall |
+| Audit-evidence agent (assemble the cost report, ledger and payroll into a certifiable claim pack) | No repo. This is the plane's **shortest path to delivery** because the client already owns every input and the deliverable is a document, not a system: **Pattern 27.5** |
+| Completion-bond / E&O risk agent | `completion bond film` = **0 repositories, literal zero.** `errors and omissions insurance` = 6, **0 relevant** (five are `api-evangelist` API-profile stubs, one is a 2018 university assignment). The entire risk-transfer layer of film finance is absent from open source |

@@ -2802,3 +2802,54 @@ disclosure is beginning to be *asked for* — and the only measurement tool with
 [codecarbon](https://github.com/mlco2/codecarbon) (MIT, 1,955★), is generic, with nothing mapping its
 output to a broadcaster-shaped deliverable. **This is the plane's clearest unbuilt product** (Pattern
 26.4), and it sits exactly where this KB's own industry is heading.
+
+## 9. Incentives moved from pricing to rationing — and that changes what software the plane needs
+
+Measured across four jurisdictions in 2026, and it is the clearest directional shift this pass found:
+
+| Jurisdiction | 2026 move | Mechanism |
+|---|---|---|
+| Germany | Federal pot doubled to €250M and **exhausted on 2026-08-20**; next window opened Nov 2026 for 2027 shoots | **First-come exhaustion** |
+| Italy | Fund cut €700M → €610M; **first-ever per-work and per-company caps**, closed annual budget, fixed windows — after **revoking €66M of credits in 2025** | **Caps + clawback** |
+| Manitoba (CA) | **Mandatory pre-certification** announced | **Gate before spend** |
+| Japan | JLOX+ **closed to applications 2026-01-31**; IP360 requires **¥800M minimum domestic spend**, ¥1.5B cap | **Instrument switch + eligibility floor** |
+
+For twenty years the incentive question was *"what rate can we get?"* — a tax-planning question
+answered by a spreadsheet and a consultant. In 2026 it is increasingly *"is the window open, do we
+clear the floor, are we under the cap, and can we survive a clawback?"* — **four questions about
+state, deadlines and evidence**, none of which a spreadsheet answers and all of which are ordinary
+software. The trend is what converts this plane from advisory work into a buildable product, and
+Italy's €66M revocation is the number that makes it urgent rather than tidy.
+
+## 10. The money plane's open source is strong, permissive and pointed somewhere else
+
+The inversion measured in pass 27, and worth stating as a trend because it is the opposite of every
+other plane in this KB. Searched as *media*, the plane is a desert: `completion bond film` = **0**,
+`production incentive eligibility` = **0**, `ERPNext media production` = **0**, `film tax credit` =
+**7 repos total** with the only agent among them licensed *"all rights reserved … proprietary and
+confidential"*. Searched as *computation*, the same plane holds
+[Catala](https://github.com/CatalaLang/catala) (Apache-2.0, 2,456★, pushed on measurement day),
+[tigerbeetle](https://github.com/tigerbeetle/tigerbeetle) (Apache-2.0, 17,467★),
+[apache/incubator-kie](https://github.com/apache/incubator-kie) (Apache-2.0, 6,344★),
+[frappe/frappe](https://github.com/frappe/frappe) (**MIT**, 11,164★) and
+[Timefold](https://github.com/TimefoldAI/timefold-solver) (Apache-2.0, 1,882★).
+
+**Everywhere else in this KB the generic layer is weaker than the vertical layer and the advice is to
+own the pipeline. Here it is the reverse**: the generic layer is stronger, better licensed and better
+maintained than anything vertical, and the entire missing piece is the **mapping** — an industry chart
+of accounts, a cost-report shape, and per-jurisdiction eligibility rules. That is weeks of domain
+modelling on top of mature permissive engines, not a platform build. It is the cheapest high-value
+position identified in twenty-seven passes.
+
+## 11. "Open source accounting" is where the licence traps have moved
+
+Three readings this pass, and the pattern is that **star count now correlates with licence risk** in
+this category. [akaunting](https://github.com/akaunting/akaunting) — **10,349★**, top-of-search for
+open-source accounting — is **Business Source License**, not open source (`LICENSE.txt`, 3,654 B,
+MariaDB BSL text, read in full). [odoo/odoo](https://github.com/odoo/odoo) reports `NOASSERTION` and
+is **LGPL-3.0** for Community only, with Enterprise separately licensed. [ledger/ledger](https://github.com/ledger/ledger)
+also reports `NOASSERTION` and is in fact **BSD-3-Clause** — the API hides a *permissive* licence that
+makes it the best-licensed plain-text ledger of the three. **The API's `NOASSERTION` is directionless:
+it concealed a BSL trap, a dual-edition copyleft and a clean BSD grant in the same search.** Pass 5's
+rule stands and now has a commercial edge: in this category, **read the file before you quote the
+licence** — the most-starred result is the one most likely to be unusable.

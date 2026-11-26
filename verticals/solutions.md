@@ -1478,3 +1478,48 @@ months), so **the AI work in this tier is an integration, not an adoption**:
 3. **listmonk/SendPortal + an LLM editorial step** — generate the digest *draft* from the day's CMS
    output; never the send decision. See `compose/patterns.md` Pattern 24.1.
 4. **parsedmarc + an ops agent** — the deliverability triage loop nobody has built (Pattern 24.3).
+
+---
+
+## The traffic, sales-order-to-air & billing tier — added 2026-11-26 (pass 25)
+
+Real running systems for the commercial administration of linear and FAST inventory, and an honest
+statement of where the tier stops. All rows verified 2026-11-26 (existence, canonical slug, stars,
+forks, last push; licence files read where the API returned `NONE`/`NOASSERTION`).
+
+### ⚠️ Correction to this file
+
+Line ~94 of this file records `immstudios/nebula` as **ARCHIVED** and dead. The project is alive at a
+new org: **[nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula)**, GPL-3.0, **332★**,
+38 forks, pushed **2026-11-23**, in 24/7 broadcast use since 2012. The old entry is left in place
+(this file's history is not rewritten); treat the row below as the current one.
+
+| Component | Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|---|
+| **Nebula** (the anchor) | [nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula) | **GPL-3.0** | 332 | 2026-11-23 | **The platform to start from in this plane.** Broadcast automation + MAM for TV, radio and VOD: linear planning, scheduling, playout and asset management in one system. Python + React; worker and (deprecated) desktop client in sibling repos. GPL-3.0 ⇒ deploy unmodified behind a service boundary and integrate over its API. |
+| AzuraCast | [AzuraCast/AzuraCast](https://github.com/AzuraCast/AzuraCast) | **AGPL-3.0** | **4,118** | 2026-11-25 | **New to this KB.** Self-hosted web radio management suite, turnkey installers for the full stack — the most widely adopted broadcast-operations platform in the plane. Station, playlist and scheduling operations; **no rate cards, no invoicing.** AGPL ⇒ unmodified, integrate over HTTP. |
+| Rivendell | [ElvishArtisan/rivendell](https://github.com/ElvishArtisan/rivendell) | **GPL-2.0** (read from `COPYING`, 17,992 B; API says `NONE`) | 250 | 2026-08-26 | Professional radio automation. **Read its README before proposing anything in this plane:** it imports schedules from *third-party traffic and music scheduling systems* — the reference open platform assumes the traffic system is **somebody else's proprietary product.** |
+| LibreTime | [libretime/libretime](https://github.com/libretime/libretime) | AGPL-3.0 | 941 | 2026-11-22 | Already catalogued above (pass 5). Radio automation/scheduling, maintained Airtime fork. |
+| 9eye | [9eye9/9eye](https://github.com/9eye9/9eye) | **AGPL-3.0** | 2 | 2026-11-26 | The **only** open system that models traffic as such: layouts → scheduling → frame-accurate playlists → **clients, deals, campaigns and spot booking** → playout XML export, with an MCP server and agents under a per-action approval table. **Seven days old; as-run, BXF and billing are roadmap.** Evaluate for its design; do not propose as a client core yet. |
+| BEAMS | [efeone/beams](https://github.com/efeone/beams) | **MIT** (lowercase `license.txt`, 1,069 B) | 21 | 2026-04-30 | **Not what the name suggests, and the row that would have become wrong data.** A Frappe/ERPNext app whose README is four lines; characterised by reading its doctypes: `job_portal`, `roster`, `manpower_transaction_log`, `substitute_booking`, **`stringer_bill`**, `courier_log`, `vehicle_log_detail`, `fuel_card_log`, `key_log`, `visitor_log`, `security_patrol_log`, plus ERPNext's inherited `sales_order`/`sales_invoice`. So: a broadcaster **back-office** system — HR, rostering, fleet, security, and settling with freelance correspondents. **Not traffic, not ad sales.** Still notable as the only MIT-licensed broadcast-specific business app in 25 passes, and `stringer_bill` models an object no other repo here does. |
+| adam-RMS | [adam-rms/adam-rms](https://github.com/adam-rms/adam-rms) | **AGPL-3.0** | 64 | 2026-11-17 | Rental/asset management for theatre, AV and broadcast: crew and kit booking. **Books the kit, not the airtime** — adjacent to this plane. Fork:star ratio 0.73 means people actually deploy it. |
+| Kill Bill | [killbill/killbill](https://github.com/killbill/killbill) | **Apache-2.0** | **5,870** | 2026-11-26 | The billing platform this plane has to borrow, because no broadcast-specific open one exists. Invoices reconciled spots; carries makegood obligations as credits. Permissive ⇒ the client owns the integration. |
+| Aureus ERP | [aureuserp/aureuserp](https://github.com/aureuserp/aureuserp) | **MIT** | **12,301** | 2026-11-24 | **New to this KB.** Laravel ERP with invoicing/accounting — the permissive accounting back end when the client will not adopt a Java billing platform. |
+
+### Where this tier stops — state this before a proposal, not during it
+
+There is **no open-source broadcast traffic-and-billing system.** The tier above covers *what airs*
+(Nebula, AzuraCast, Rivendell, LibreTime) and, in one seven-day-old repo, *what was booked* (9eye).
+Nothing covers **proving it aired and collecting for it**:
+
+- `broadcast as-run reconciliation` → **0 GitHub results**; `spot booking advertising` → **0**.
+- 9eye's own roadmap lists *as-run and reconciliation*, *BXF export* and *sales and billing* as **not
+  built**.
+- The only as-run repo that exists is unlicensed, undocumented and dead since **2016**.
+- `makegood`, `pre-empt`, `affidavit`, `post-log` → **0 hits** anywhere in this KB or inside 9eye.
+
+**Never promise a broadcaster an "all open source" order-to-cash stack.** The defensible proposal is
+the one a third-party build-vs-buy analysis independently reaches (see `intel/market.md` pass 25):
+**keep the incumbent traffic core (WideOrbit, Marketron, Imagine LandmarkOSI) and build the
+cross-platform order and reconciliation layer around it** — which is permissively licensable,
+client-owned, and the subject of Patterns 25.1 and 25.2.

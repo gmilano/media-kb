@@ -2944,3 +2944,63 @@ Dates matter here more than in any other plane in this KB, because they are alre
 - **No open-source CMP is IAB-registered.** A publisher integrating TCF needs a *registered* CMP;
   `c15t` and `iabtcf-es` give you the string and the UI, not the registration. **Say this before a
   client assumes the open stack discharges the obligation — it does not.**
+
+---
+
+## The traffic, sales-order-to-air & billing substrate — measured 2026-11-26 (pass 25)
+
+The substrate under the commercial administration of linear and FAST inventory. All rows verified
+2026-11-26: `git ls-remote` for existence, `search/repositories -f q='repo:<slug>'` for canonical slug
++ stars + forks + last push + SPDX, and **licence files read** wherever the API returned `NONE` or
+`NOASSERTION`. 20/20 slugs resolved; 20/20 indexed at the slug written here.
+
+### The scheduling and playout substrate (step 1 of the gradient — healthy)
+
+| Repo | License | Stars | Forks | Last push | Why it matters |
+|---|---|---|---|---|---|
+| [nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula) | **GPL-3.0** (35,141 B) | 332 | 38 | 2026-11-23 | **The anchor of this plane, and a correction to this KB**, which recorded the old `immstudios/nebula` slug as "dead". Broadcast automation + MAM for TV, radio and VOD; *"since 2012 … used by TV and production companies worldwide"*; Python 3.14 + React. Does linear **planning, scheduling, playout and asset management together** — no other open system does. |
+| [nebulabroadcast/nebula-worker](https://github.com/nebulabroadcast/nebula-worker) | **GPL-3.0** | 6 | 3 | 2026-11-15 | The media-processing worker. Required for a real deployment, not optional. |
+| [nebulabroadcast/firefly](https://github.com/nebulabroadcast/firefly) | **GPL-3.0** | 29 | 6 | 2026-10-30 | Desktop client for linear planning/scheduling/playout. **Being phased out** per its own README (web UI has feature parity). Choose it only against a hard desktop requirement. |
+| [nebulabroadcast/nebula-tutorial](https://github.com/nebulabroadcast/nebula-tutorial) | **NONE** | 13 | 9 | 2025-12-20 | The official starting point (compose file, default settings, plugins) — **with no licence file** (11 names × 2 branches; control README = 200). Read it, do not copy it into a client repo. |
+| [ElvishArtisan/rivendell](https://github.com/ElvishArtisan/rivendell) | **GPL-2.0** — API says `NONE`; verified by reading `COPYING` (17,992 B) | 250 | 76 | 2026-08-26 | Full-featured radio automation for professional broadcast. **Its README is the architectural evidence of this pass:** it *"supports importation of schedule information from a wide variety of third-party traffic and music scheduling systems"* — i.e. the most mature open radio automation system **delegates traffic to proprietary vendors by design.** |
+| [AzuraCast/AzuraCast](https://github.com/AzuraCast/AzuraCast) | **AGPL-3.0** | **4,118** | 764 | 2026-11-25 | **New to this KB.** Self-hosted web radio management suite with turnkey installers for the whole stack. The highest-starred broadcast-operations platform in the plane. Operations and scheduling, **not** traffic: no rate cards, no invoicing. |
+| [libretime/libretime](https://github.com/libretime/libretime) | AGPL-3.0 | 941 | 251 | 2026-11-22 | Already catalogued (pass 5). Listed to complete the tier. |
+| [mint-dewit/folderplayout](https://github.com/mint-dewit/folderplayout) | **MIT** | 64 | 7 | 2023-12-31 | CasparCG client for scheduled recurring playlist playback — **the one permissive link between a schedule and a playout engine.** Dormant since 2023, small enough to read and fork. |
+| [itsoumya-d/rcs-music-scheduler](https://github.com/itsoumya-d/rcs-music-scheduler) | **MIT** | **0** | — | 2026-11-06 | C# .NET 10 radio music scheduler: rotation, separation, **dayparts**, conflict explanations. **The only repo in this KB that contains the word *daypart*** — and it has zero stars. Recorded as a measured zero, not a recommendation. |
+| [mickaelmonsieur/openstudio](https://github.com/mickaelmonsieur/openstudio) | **GPL-3.0** | **0** | — | 2026-06-14 | Rust desktop radio-automation **prototype** with a PostgreSQL-backed library. Zero stars; listed for the record. |
+
+### The billing substrate the plane has to borrow (step 3 — empty, so compose it)
+
+None of these is media-specific, and that is precisely the finding: the broadcaster's revenue step has
+to be assembled from general-purpose permissive engines because no broadcast-specific open one exists.
+
+| Repo | License | Stars | Forks | Last push | Why it matters |
+|---|---|---|---|---|---|
+| [killbill/killbill](https://github.com/killbill/killbill) | **Apache-2.0** | **5,870** | — | 2026-11-26 | Subscription billing and payments. The invoice/credit engine for reconciled spots and makegood obligations. |
+| [killbill/killbill-admin-ui](https://github.com/killbill/killbill-admin-ui) | **MIT** | 70 | — | 2026-11-26 | Admin UI engine for Kill Bill. |
+| [killbill/killbill-commons](https://github.com/killbill/killbill-commons) | **Apache-2.0** | 145 | — | 2026-10-06 | Reusable Java components. |
+| [killbill/killbill-cloud](https://github.com/killbill/killbill-cloud) | **Apache-2.0** | 68 | — | 2026-11-19 | Deployment utilities. |
+| [aureuserp/aureuserp](https://github.com/aureuserp/aureuserp) | **MIT** | **12,301** | — | 2026-11-24 | **New to this KB.** Laravel ERP with invoicing and accounting — the most-starred MIT ERP found in 25 passes. Relevant because the missing step in this plane is an accounting step. |
+| [openmeterio/openmeter](https://github.com/openmeterio/openmeter) | **Apache-2.0** | 2,471 | 247 | 2026-11-26 | Already catalogued. Usage metering — the delivered-impressions side of addressable and CTV breaks. |
+
+### The interchange substrate — and why it is a licence gate, not a library choice
+
+| Repo | License | Stars | Forks | Last push | Finding |
+|---|---|---|---|---|---|
+| [SMPTE/st2021-4](https://github.com/SMPTE/st2021-4) | **All Rights Reserved** (API: `NOASSERTION`; `LICENSE.md`, 269 B, read in full) | 2 | 1 | 2026-11-11 | Official BXF (SMPTE ST 2021-4) schema documentation. *"All rights reserved. No part of this material may be reproduced, by any means whatsoever, without the prior written permission of the Society of Motion Picture and Television Engineers."* **Public on GitHub, not redistributable.** |
+| [JoeldelPilar/bxf-manager](https://github.com/JoeldelPilar/bxf-manager) | **NONE** (11 names × 2 branches; control README = 200 → real absence) | 4 | 1 | 2025-10-09 | The only BXF tool on GitHub. No grant ⇒ all rights reserved by default. |
+
+**There is no usable open BXF implementation and the schema cannot be vendored.** BXF support is built
+from the specification under the client's own SMPTE entitlement — see Pattern 25.3, which states the
+gate before anyone estimates the work.
+
+### Measured absences in the substrate
+
+`broadcast as-run reconciliation` → **0 results.** `spot booking advertising` → **0 results.**
+The sole as-run artefact on GitHub is [alochbaum/CheckAsRun](https://github.com/alochbaum/CheckAsRun)
+(**0★, no licence, no README, 2016-04-21**), confirmed by cloning rather than by inferring from a 404.
+`broadcast erp` → [stukenov/broadcast-erp](https://github.com/stukenov/broadcast-erp) (**MIT, 0★**,
+2026-11-16), one of six same-author playout repos all pushed the same day with 0–3 stars: unproven,
+recorded for completeness only. Contaminated totals that look like coverage and are not:
+`broadcast traffic` 163/**0 relevant**, `radio traffic` 246/**0**, `rate card` **2,013**/**0**,
+`traffic billing` 136/**0**, `advertising sales management` 51/**0**.

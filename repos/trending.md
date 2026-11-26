@@ -10,6 +10,137 @@ updated: 2026-11-26
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-26 — pass 25: the traffic, sales-order-to-air & billing plane (**the KB had recorded this plane's anchor as dead; it has 332 stars and was pushed three days ago**)
+
+Infrastructure and platform repos. The agent layer for this plane is in `agents/trending.md` pass 25.
+All rows verified 2026-11-26 via `git ls-remote` (existence), `search/repositories -f q='repo:<slug>'`
+(canonical slug, stars, forks, last push, SPDX) and **by reading the licence file** wherever the API
+returned `NONE` or `NOASSERTION`. 20/20 slugs resolved and 20/20 were indexed at the slug written here.
+
+### ⚠️ A correction to this KB's own record — the anchor of this plane is alive
+
+`repos/trending.md` (pass 5 history, line ~2057) and `verticals/solutions.md` (~line 94) both record:
+
+> `immstudios/nebula` | GPL-3.0 | 20★ | 2023-04-26 | **ARCHIVED.** Recommended by current search
+> results as an open MAM + broadcast automation system; **it is dead at this slug.**
+
+**That is true of the slug and wrong about the project.** Nebula moved org. It is alive, maintained
+and in production:
+
+| Repo | License | Stars | Forks | Last push | Why it matters |
+|---|---|---|---|---|---|
+| [nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula) | **GPL-3.0** (35,141 B) | 332 | 38 | **2026-11-23** | **The anchor of this plane.** Broadcast automation + MAM for television, radio and VOD. Its README: *"Since 2012 Nebula has proven stable and reliable software in 24/7 broadcast environment and it is now used by TV and production companies worldwide."* Python backend + React frontend, Python 3.14, maintained-2026 badge. **16× the stars of the slug this KB called dead.** |
+| [nebulabroadcast/nebula-worker](https://github.com/nebulabroadcast/nebula-worker) | **GPL-3.0** | 6 | 3 | 2026-11-15 | The media-processing worker node. Required for a real deployment. |
+| [nebulabroadcast/firefly](https://github.com/nebulabroadcast/firefly) | **GPL-3.0** | 29 | 6 | 2026-10-30 | Desktop client for **linear broadcast planning, scheduling and playout**. **Being phased out** — the README states the web interface now has full feature parity. Take it only if a desktop client is a hard requirement. |
+| [nebulabroadcast/nebula-tutorial](https://github.com/nebulabroadcast/nebula-tutorial) | **NONE** | 13 | 9 | 2025-12-20 | Example `docker-compose.yml`, default settings and plugins — "the best starting point". **No licence file** (11 filenames × 2 branches probed; control `README.md` = 200, so this is a real absence, not a naming miss). **Do not copy its files into a client repository.** |
+
+**Method lesson, reusable in all twelve industries:** when a repo looks archived, search the
+**project name as an owner**, not just the slug. `immstudios` → `nebulabroadcast` was one call. A pass
+that stops at the dead slug writes off the live anchor of an entire plane — which is what happened
+here, and it stood in the KB until this pass.
+
+### The platform tier for this plane
+
+| Repo | License | Stars | Forks | Last push | Why it matters |
+|---|---|---|---|---|---|
+| [AzuraCast/AzuraCast](https://github.com/AzuraCast/AzuraCast) | **AGPL-3.0** | **4,118** | 764 | 2026-11-25 | **New to this KB** (0 prior mentions). Self-hosted web radio management suite with turnkey installers for the full stack. **The highest-starred broadcast-operations platform in the plane** — by a factor of 12 over Nebula. Station/playlist/scheduling operations, not traffic: no rate cards, no invoicing. |
+| [ElvishArtisan/rivendell](https://github.com/ElvishArtisan/rivendell) | **GPL-2.0** — API says `NONE`; verified by reading `COPYING` (17,992 B, "GNU GENERAL PUBLIC LICENSE Version 2") | 250 | 76 | 2026-08-26 | **The architectural evidence of this whole pass.** The most mature open-source radio automation system in the world, and its README says it *"supports importation of schedule information from a wide variety of **third-party traffic and music scheduling systems**."* It does not implement traffic — **it delegates it to proprietary vendors, by design.** Open source' own architecture concedes the commercial layer. |
+| [libretime/libretime](https://github.com/libretime/libretime) | AGPL-3.0 | 941 | 251 | 2026-11-22 | Already in this KB (pass 5). Radio automation/scheduling, the maintained Airtime fork. Shown here for completeness of the tier. |
+| [mint-dewit/folderplayout](https://github.com/mint-dewit/folderplayout) | **MIT** | 64 | 7 | 2023-12-31 | CasparCG client for scheduled recurring playlist playback. **The permissive bridge between a schedule and a playout engine** — the one MIT-licensed piece in the chain. Dormant since 2023; small enough to read and fork. |
+| [efeone/beams](https://github.com/efeone/beams) | **MIT** — in **lowercase `license.txt`** (1,069 B), not `LICENSE` | 21 | 15 | 2026-04-30 | A Frappe/ERPNext app, **and not what its name suggests.** See the characterisation note below — this row would have become wrong data if taken from the title. |
+| [adam-rms/adam-rms](https://github.com/adam-rms/adam-rms) | **AGPL-3.0** | 64 | 47 | 2026-11-17 | Rental/asset management for theatre, AV and broadcast: crew and kit booking. Adjacent, not in-plane — **it books the kit, not the airtime.** Unusually high fork:star ratio (0.73), which means people deploy it. |
+
+**BEAMS, characterised from its doctypes rather than its title.** "Broadcast Enterprise Administration
+Management System" with `frappe`/`erpnext`/`broadcasting` topics sounds like a broadcast ERP covering
+ad sales. Its README is four lines and documents nothing, so the repo was cloned and its doctypes
+read. What is actually there: `job_portal`, `roster`, `manpower_transaction_log`, `substitute_booking`,
+`stringer_bill` + `stringer_bill_detail`, `courier_log`, `vehicle_log_detail`, `fuel_card_log`,
+`key_log`, `visitor_log`, `security_patrol_log`, plus `sales_order`/`sales_invoice` **inherited from
+ERPNext**. So BEAMS is a broadcaster **back-office** system — HR, rostering, fleet, security, and
+paying freelance correspondents — **not a traffic or ad-sales system.** It is nonetheless the only
+**MIT-licensed broadcast-specific business application** found in 25 passes, and `stringer_bill`
+(settling with freelance correspondents) is a media-specific object no other repo in this KB models.
+
+### The permissive billing tier — because the plane's own billing step is empty
+
+Step 3 of the gradient has no open-source implementation, so it must be **composed**. These are the
+permissive engines to compose it from (none is media-specific; that is the point):
+
+| Repo | License | Stars | Forks | Last push | Role in this plane |
+|---|---|---|---|---|---|
+| [killbill/killbill](https://github.com/killbill/killbill) | **Apache-2.0** | **5,870** | — | 2026-11-26 | Subscription billing and payments platform. The invoice/credit engine for reconciled spots and makegood obligations. Pushed on measurement day. |
+| [killbill/killbill-admin-ui](https://github.com/killbill/killbill-admin-ui) | **MIT** | 70 | — | 2026-11-26 | Admin UI engine for the above. |
+| [killbill/killbill-commons](https://github.com/killbill/killbill-commons) | **Apache-2.0** | 145 | — | 2026-10-06 | Reusable Java components. |
+| [openmeterio/openmeter](https://github.com/openmeterio/openmeter) | **Apache-2.0** | 2,471 | 247 | 2026-11-26 | Already in this KB. Usage metering/aggregation — the delivered-impressions side for addressable and CTV breaks. |
+| [aureuserp/aureuserp](https://github.com/aureuserp/aureuserp) | **MIT** | **12,301** | — | 2026-11-24 | **New to this KB.** Laravel ERP with invoicing/accounting. The most-starred **MIT** ERP found; relevant because this plane's missing step is an accounting step. |
+
+### The BXF trap — a licence category this KB has not recorded before
+
+BXF (SMPTE ST 2021) is the XML interchange format between traffic, playout and automation — exactly
+the integration a traffic engagement must build. There is **no usable open implementation, and the
+schema itself may not be redistributed:**
+
+| Repo | License | Stars | Forks | Last push | Finding |
+|---|---|---|---|---|---|
+| [SMPTE/st2021-4](https://github.com/SMPTE/st2021-4) | **All Rights Reserved** — API says `NOASSERTION`; `LICENSE.md` (269 B) **read in full** | 2 | 1 | 2026-11-11 | The official BXF schema documentation. Its licence: *"Copyright © by the Society of Motion Picture and Television Engineers. **All rights reserved. No part of this material may be reproduced, by any means whatsoever, without the prior written permission** of the Society of Motion Picture and Television Engineers."* **Published on GitHub and not redistributable.** |
+| [JoeldelPilar/bxf-manager](https://github.com/JoeldelPilar/bxf-manager) | **NONE** (11 filenames × 2 branches probed; control `README.md` = 200 → real absence) | 4 | 1 | 2025-10-09 | The only BXF *tool* on GitHub. No licence grant ⇒ default copyright, all rights reserved. |
+
+**New licence category: free of charge, published openly, and still not redistributable.** Pass 5
+recorded two *taxed* content layers (CPT in healthcare, MedDRA in healthcare). This is the first where
+the artefact costs nothing to view, sits in a public GitHub repo, and **still cannot be vendored** —
+which is far easier to get wrong, because nothing about the retrieval feels like a licence event. No
+SPDX field, badge or SBOM scan of the source tree catches it. See Pattern 25.3 for the gate.
+
+### Two reusable method corrections
+
+**(1) `git ls-remote` follows GitHub's rename/transfer redirects, so it is an existence oracle and
+*not* a canonicity oracle.** The web search for this plane returned `mrtero22/9eye`. `ls-remote` said
+**OK**. But `search/repositories -f q='repo:mrtero22/9eye'` returns **422 — "cannot be searched
+either because the resources do not exist or you do not have permission"**, while
+`repo:9eye9/9eye` returns **1**. Both slugs serve the **same HEAD sha**
+`bd151c528cd695131d038653ccd4476406946772`, and 9eye's own README badges still point at the old
+slug. This refines pass 5's rule ("`ls-remote` is the only existence oracle"): it proves the
+repository **exists**, never that the **slug is current**. Cross-check every URL with
+`search/repositories -f q='repo:<slug>'` before writing it — a redirect slug is not a 404 today and
+breaks the day the old name is reused. All 20 slugs in this pass were checked this way.
+
+**(2) In this environment, use `search/repositories`, not `repos/<slug>`, for third-party metadata.**
+`gh api repos/9eye9/9eye` returns **403** ("GitHub access to this repository is not enabled for this
+session") for any repo outside the session's own scope, while
+`gh api -X GET search/repositories -f q='repo:9eye9/9eye'` returns stars, forks, SPDX, created and
+pushed dates for the **same** repo in one call. A pass that only tries `repos/` will wrongly conclude
+a repo is inaccessible.
+
+Also re-confirmed for the third time: **lowercase `license.txt`** must stay in the probe list —
+`efeone/beams` has no `LICENSE`, and its MIT grant is in `license.txt` (1,069 B).
+
+### Measured zeros for infrastructure (what was searched, what was missing)
+
+`broadcast as-run reconciliation` → **0 results**. `spot booking advertising` → **0 results**.
+`EPG schedule generator` → 3 results, top is 0★. `music scheduling rotation` → 5, and the only
+on-topic repos are [itsoumya-d/rcs-music-scheduler](https://github.com/itsoumya-d/rcs-music-scheduler)
+(**MIT**, **0★**, 2026-11-06 — "C# .NET 10 radio music scheduler: rotation, separation, **dayparts**
+and conflict explanations"; the only repo anywhere that contains the word *daypart*, and nobody has
+starred it) and [mickaelmonsieur/openstudio](https://github.com/mickaelmonsieur/openstudio)
+(**GPL-3.0**, **0★**, 2026-06-14, a Rust radio-automation **prototype**). Recorded as zeros, not as
+recommendations. `broadcast erp` surfaced [stukenov/broadcast-erp](https://github.com/stukenov/broadcast-erp)
+(**MIT**, **0★**, 2026-11-16, Laravel, claims schedules/programs/sales/inventory) — one of a cluster of
+six same-author playout repos all pushed 2026-11-16 with 0–3 stars; **unproven, listed for the record
+only.**
+
+### Contaminated-total record: `rate card` → 2,013 results, zero relevant
+
+Pass 5's corollary was *read the results, not the total* (`eidr` 160/0, `isan` 1942/0). This plane
+sets the new record and explains why: **"traffic" and "rate card" are the most contaminated terms in
+this KB.** `broadcast traffic` 163/**0** (satellite ship detection, V2X signal decoders, mDNS, virtual
+ATC); `radio traffic` 246/**0** (ADS-B, FLARM, SOCKS proxies); `rate card` **2,013**/**0** (virtual
+displays, GPU monitors, heart-rate clients); `traffic billing` 136/**0** (ISP bandwidth billing);
+`advertising sales management` 51/**0**. In media these words mean commercial inventory
+administration; everywhere else in software they mean packets or vehicles. A pass that trusted totals
+would have reported this plane as **richly served**. It is empty.
+
+---
+
 ## 2026-11-26 — pass 24: the owned-channel & audience-relationship plane (**the transport layer is permissive and shipping daily; the consent and identity layer at the end of it has 18 stars**)
 
 Infrastructure and platform repos. The agent layer for this plane is in `agents/trending.md` pass 24.

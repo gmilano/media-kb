@@ -9,6 +9,105 @@ updated: 2026-11-26
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-26 — pass 25: the traffic, sales-order-to-air & billing plane (**the KB could say `SCTE-35` 25 times and `makegood` zero times**)
+
+Agents only; the platform and infrastructure repos for this plane are in `repos/trending.md` pass 25.
+All rows verified 2026-11-26: existence via `git ls-remote`, canonical slug cross-checked via
+`search/repositories -f q='repo:<slug>'`, stars/forks/last-push from the same call, and licence by
+**reading the licence file** where the API returned `NONE` or `NOASSERTION`.
+
+**Why this plane.** The KB already knew how to *put a spot on air*: `SCTE-35` appeared 25 times,
+`SSAI` 14, `ad insertion` 23, `playout` 51, `prebid` 71. It had no word for **who sold the spot, at
+what rate, whether it actually aired, and who gets invoiced.** Measured before searching the web:
+`makegood`, `pre-empt`, `rate card`, `daypart`, `sales order`, `insertion order`, `post-log`,
+`affidavit`, `traffic log`, `commercial log`, `sellout`, `scatter`, `BXF`, `program schedule`,
+`traffic system` = **0 hits each across all eight files**; `as-run` = **1 hit**. In broadcast,
+"traffic" is not the network kind — it is the commercial administration of inventory, and it is the
+revenue system of record for every linear and FAST channel on earth.
+
+### The one agent-native repo in the plane
+
+| Agent | Repo | License | Stars | Forks | Last push | State |
+|---|---|---|---|---|---|---|
+| 9eye | [9eye9/9eye](https://github.com/9eye9/9eye) | **AGPL-3.0** (34,523 B) | 2 | 0 | 2026-11-26 | Broadcast scheduling + TV traffic, **agent-native by design**: MCP server at `/api/mcp` for Claude/ChatGPT/Grok, 75+ tools "named after the work, not the endpoints", a per-company permission table, every change previewed and held for human approval. **Created 2026-11-19 — seven days old.** |
+
+That is **one** agent, and it is the whole list. No padding: the searches are recorded below.
+
+**9eye is worth reading even though you must not propose it as a core.** Its permission design is the
+most carefully specified human-in-the-loop model in any agent repo in this KB:
+
+- a table **per company**: part × action (Read · Change · Create and delete · Approve · Export), each
+  set to *Allowed*, *Ask first* or *Off* — and **tokens and agents can only ever be narrower** than
+  the person who issued them;
+- every change carries a **preview and an undo** and lands in an audit log;
+- agent changes wait in a **"Waiting for you"** queue until a person approves;
+- agents run on **the company's own model key**, encrypted at rest (AES-256-GCM); personal access
+  tokens are stored as **SHA-256 only**.
+- frame-accurate throughout: every length and time is an integer number of frames, 23.976–59.94 fps,
+  drop-frame timecode, broadcast days that start at any hour and run past midnight.
+
+**The honest reading:** AGPL-3.0 + multi-tenant + 2 stars + 0 forks + a consultancy behind it
+("9eye Studio — available for broadcast and workflow automation projects worldwide") is a
+**normative and commercial bet, not an installed base.** Same shape as ISCC in pass 5. Recommend its
+**permission model as the design to copy**; evaluate the code only behind a service boundary, and only
+if the client accepts AGPL.
+
+### Where the agent layer stops — measured inside 9eye's own repository
+
+9eye is the only repo that even *names* the commercial half, and its own `README.md` **Roadmap** says
+it is not built:
+
+> - **As-run and reconciliation:** air logs matched against the playlist; broadcast history from them.
+> - **More exports:** BXF and the other playout formats, XMLTV EPG.
+> - **Sales and billing:** prices, ad rates and invoices.
+
+And grepping the 9eye working tree itself: `makegood` = **0**, `pre-empt`/`preempt` = **0**,
+`affidavit` = **0**, `ratecard` = **0**, `rate card` = **1** (the roadmap line above). The vocabulary
+of settling what is owed is absent from the one open-source agent in the plane.
+
+### The measured zeros (what was searched, and what was missing)
+
+| GitHub search | Total results | Relevant | What the results actually were |
+|---|---|---|---|
+| `broadcast as-run reconciliation` | **0** | 0 | **Literal empty set.** |
+| `spot booking advertising` | **0** | 0 | **Literal empty set.** |
+| `ad booking broadcast` | 1 | 1 | Only 9eye. |
+| `tv traffic scheduling` | 2 | 1 | 9eye, plus an Apache-TVM compiler project. |
+| `as-run log` | 9 | 1 | Top result 2★; the one on-topic repo is below. |
+| `broadcast traffic` | 163 | **0** | Ship detection from satellite imagery, V2X traffic-signal decoders, mDNS forwarders, virtual air-traffic ATC. |
+| `radio traffic` | 246 | **0** | ADS-B/FLARM aviation proximity, SOCKS proxies, HD Radio weather. |
+| `rate card` | **2,013** | **0** | Virtual displays, GPU monitors, heart-rate clients. |
+| `traffic billing` | 136 | **0** | Network bandwidth billing, VoIP/ISP BSS. |
+| `advertising sales management` | 51 | **0** | Regression tutorials and SEO spam. |
+| `music scheduling rotation` | 5 | 1 | Top hit is a World-of-Warcraft addon at 1★. |
+
+**The only as-run repo that exists on GitHub**, and it is the crudest artefact this KB has recorded:
+
+| Repo | License | Stars | Forks | Last push | What it is |
+|---|---|---|---|---|---|
+| [alochbaum/CheckAsRun](https://github.com/alochbaum/CheckAsRun) | **NONE** (no licence file; verified by clone, not by 404) | 0 | 0 | **2016-04-21** | A Visual Studio solution named `CheckAsRunForRoundingError` — "designed to fix time errors in ITX Asrun logs for some traffic systems". **No README at all.** Dead for ten years. |
+
+**This is the crudest zero in the KB to date.** Pass 5's record was `music royalty accounting` — 14
+results whose top six summed to 0 stars. This pass beats it twice with an **empty result set**: the
+query that describes the single function deciding whether a broadcaster gets paid returns **nothing**.
+
+### The law, sixth confirmation — and the cleanest three-step gradient yet, inside one plane
+
+Pass 5 established the gradient on rights reservation (declare → honour → liquidate). This plane
+reproduces it exactly, on different vocabulary, and the steps are sharper because they are all
+*inside the same product category*:
+
+| Step | What it is | Nature of the problem | Open-source state |
+|---|---|---|---|
+| **1. Plan what airs** | Layouts, series plans, frame-accurate playlists | **Format + arithmetic** | **Healthy.** Nebula GPL-3.0, 332★/38f, pushed 2026-11-23, in 24/7 broadcast use **since 2012**. |
+| **2. Book the inventory** | Clients, deals, campaigns, spots into real breaks | **Constrained placement** — still arithmetic | **Exists, barely.** 9eye's Ads module: auto-place with room, position order and "never back to back" rules, unfitted spots reported with a reason. **7 days old, 2★.** |
+| **3. Prove it aired, reconcile, bill** | As-run matching, pre-empts, makegoods, affidavits, invoices | **Judgment** — the tolerance that counts as "aired" is commercial policy | **Empty.** Two literal zero-result searches; roadmap in the only repo that names it; the sole as-run artefact unlicensed and dead since 2016. |
+
+The broadcaster is equipped to decide what airs, poorly equipped to book it, and **not equipped at all
+to prove it aired or collect for it** — which is the only step that produces revenue.
+
+---
+
 ## 2026-11-26 — pass 24: the owned-channel & audience-relationship plane (**the KB had no word for `email`, and the agent that writes the newsletter has been dead for 16 months**)
 
 Agents only. The sending, rendering, delivery, push, community, consent and identity infrastructure

@@ -2584,3 +2584,46 @@ the gradient again: the only genuinely Apache-licensed CDP in the plane has **38
   in this plane.
 - **No open-source WhatsApp/LINE publisher-distribution agent**, despite those being the owned channel
   in LATAM and parts of APAC (see `intel/market.md`). Searched per region; genuinely absent.
+
+---
+
+## The traffic, sales-order-to-air & billing plane — measured 2026-11-26 (pass 25), and **the agent layer is one repo, seven days old**
+
+The KB could say `SCTE-35` 25 times and `makegood` zero times. This plane is the commercial system of
+record for linear and FAST inventory: who sold the spot, at what rate, whether it aired, and who is
+invoiced. All rows verified 2026-11-26 (existence via `git ls-remote`, canonical slug via
+`search/repositories -f q='repo:<slug>'`, licence files **read** where the API returned `NONE`).
+
+### The agent
+
+| Agent | Repo | License | Stars | Last push | State |
+|---|---|---|---|---|---|
+| 9eye | [9eye9/9eye](https://github.com/9eye9/9eye) | **AGPL-3.0** | 2 | 2026-11-26 | Broadcast scheduling + TV traffic with an MCP server at `/api/mcp` (Claude/ChatGPT/Grok), 75+ tools, a per-company permission table (part × action, each *Allowed*/*Ask first*/*Off*), preview + undo + audit log on every change, and an approval queue. Created **2026-11-19**. Multi-tenant, frame-accurate (23.976–59.94 fps, drop-frame, broadcast day crossing midnight). Agents run on the company's own model key, encrypted. |
+
+**One agent, and that is the entire list for this plane.** Not padding — the searches are tabulated in
+`agents/trending.md` pass 25, including two that return a **literal empty set**
+(`broadcast as-run reconciliation`, `spot booking advertising`).
+
+**Use it for its design, not as a core.** AGPL-3.0 + 2★ + 0 forks + 7 days old + a consultancy behind
+it is a normative bet, not an installed base (the ISCC shape from pass 5). Its permission model —
+agents and tokens can only ever be **narrower** than the issuing person, and every agent change waits
+for human approval — is the best-specified human-in-the-loop design in any agent repo in this KB and
+is the thing to copy into a client build. See Pattern 25.2.
+
+### What the agent layer does *not* do, per 9eye's own roadmap
+
+> - **As-run and reconciliation:** air logs matched against the playlist; broadcast history from them.
+> - **More exports:** BXF and the other playout formats, XMLTV EPG.
+> - **Sales and billing:** prices, ad rates and invoices.
+
+Grepped inside 9eye's own working tree: `makegood` **0**, `pre-empt`/`preempt` **0**, `affidavit` **0**,
+`ratecard` **0**. The vocabulary of settling what is owed is absent from the only agent in the plane.
+
+### The agents that do not exist (recorded as measured absences)
+
+| The agent a client will ask for | Measured state |
+|---|---|
+| As-run reconciliation agent (match the log to the booking, classify aired / aired-wrong / pre-empted) | `broadcast as-run reconciliation` = **0 GitHub results.** The only as-run repo in existence is [alochbaum/CheckAsRun](https://github.com/alochbaum/CheckAsRun) — **0★, no licence, no README, last push 2016-04-21**, a Visual Studio project for rounding errors in iTX as-run logs. |
+| Makegood proposal agent (price a pre-empted spot, find equivalent replacement inventory) | **0 hits anywhere**, including inside 9eye. The incumbents are building this and none of it is open (see `intel/trends.md` pass 25). |
+| Rate-card / yield agent (price an avail by daypart and demand) | `rate card` = **2,013 results, zero relevant.** The only repo in this KB containing the word *daypart* is [itsoumya-d/rcs-music-scheduler](https://github.com/itsoumya-d/rcs-music-scheduler) (MIT, **0★**) and it is a music rotation scheduler, not a pricing engine. |
+| BXF export agent | No usable implementation, **and the schema is All Rights Reserved** — see Pattern 25.3. |

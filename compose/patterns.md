@@ -3555,3 +3555,237 @@ are the **render → CI-proof → owned-MTA → evidence** chain, and all of it 
 **One thing not to automate:** send-time and frequency decisions on a list that is the client's last
 unintermediated relationship with its audience. Pattern 24.3's agent *files recommendations*; a human
 presses send.
+
+---
+
+## Traffic, sales-order-to-air & billing recipes — added 2026-11-26 (pass 25)
+
+Every repo named below appears with its verified licence, stars and last-push date in
+`repos/foundations.md` or `verticals/solutions.md` (pass 25). **Four of these five patterns build
+something that does not exist in open source at all** — two of the defining searches
+(`broadcast as-run reconciliation`, `spot booking advertising`) return a **literal empty set** — so
+they are specifications for client-owned work on top of healthy copyleft platforms, not adoptions.
+
+**The licence rule for this whole plane, stated once.** Every platform worth starting from is
+copyleft: **Nebula GPL-3.0**, **9eye AGPL-3.0**, **AzuraCast / LibreTime AGPL-3.0**, **Rivendell
+GPL-2.0**. So they run **unmodified, as separate processes, behind a service boundary** that the
+client's code calls over HTTP or exchanges files with. Keep client modifications in **separate
+services, never patches**, or the distribution question arrives at go-live. Everything the client
+should own and differentiate is permissive: **Kill Bill (Apache-2.0)**, **OpenMeter (Apache-2.0)**,
+**Aureus ERP (MIT)**, **folderplayout (MIT)**, and the reconciliation and policy services you write.
+
+---
+
+### Pattern 25.1 — The as-run reconciliation service (the empty set, and therefore the product)
+
+**Why:** `broadcast as-run reconciliation` returns **zero GitHub repositories**. 9eye lists *"as-run
+and reconciliation"* as a roadmap item. The only as-run artefact in existence —
+[alochbaum/CheckAsRun](https://github.com/alochbaum/CheckAsRun) — is **0★, unlicensed, has no README
+and has been dead since 2016-04-21**. Meanwhile this is the function that decides whether the
+broadcaster gets paid.
+
+**What it is:** a service that ingests two things and emits three.
+
+- **In (a):** the **intended** log — the approved playlist for the broadcast day, exported from
+  [nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula) (GPL-3.0) or
+  [9eye9/9eye](https://github.com/9eye9/9eye) (AGPL-3.0), or from the incumbent (WideOrbit, Marketron,
+  LandmarkOSI).
+- **In (b):** the **as-run** log the playout system actually produced — CasparCG via
+  [mint-dewit/folderplayout](https://github.com/mint-dewit/folderplayout) (**MIT**), or the station's
+  proprietary automation.
+- **Out:** every spot classified **AIRED AS BOOKED** / **AIRED WRONG** (late, short, wrong break,
+  wrong rotation position, back-to-back with a competitor) / **NOT AIRED** (pre-empted), each with the
+  frame-accurate evidence attached.
+
+**Wire it:**
+
+```
+Nebula or 9eye (copyleft, unmodified)        incumbent traffic (WO / Marketron / LandmarkOSI)
+        │ intended log (export)                      │ intended log (file/API)
+        └──────────────┬──────────────────────────────┘
+                       ▼
+        reconciliation service  ← CLIENT-OWNED, any licence
+         (frame-accurate matching + tolerance policy)
+                       ▲
+        as-run log ────┘  (CasparCG via folderplayout MIT, or proprietary automation)
+                       │
+        ┌──────────────┴───────────────┐
+        ▼                              ▼
+  Kill Bill (Apache-2.0)        OpenMeter (Apache-2.0)
+  invoice lines + credits       delivered impressions
+                                (addressable / CTV breaks)
+```
+
+**Why it is defensible work rather than a commodity:** the matching rules *are* commercial policy —
+how late is still "aired", what counts as an equivalent position, which discrepancies are billable.
+That judgment is the client's, which is exactly why no open-source project has it and why it should be
+the client's IP. **Frame accuracy is not optional**: 9eye stores every length and time as an integer
+number of frames across 23.976–59.94 fps with drop-frame timecode and broadcast days that cross
+midnight — copy that model, because a reconciliation service that stores seconds will disagree with
+the log it is auditing.
+
+**Start here in every region.** In EMEA, point the same service at a compliance question instead of an
+invoice (what was transmitted, in which territory and language, with which disclosures) and the
+billing half is not needed at all.
+
+---
+
+### Pattern 25.2 — The makegood engine, with 9eye's permission model copied verbatim
+
+**Why:** `makegood` has **zero hits** in this entire KB and **zero inside 9eye's own working tree**;
+`pre-empt`, `affidavit` and `post-log` are also zero. Yet every broadcaster that pre-empts a spot
+(breaking news, a sports overrun) **owes a replacement of equivalent value**, and the incumbents'
+agentic launches (Fox AdStudio, NBCU/FreeWheel, Magnite/ITN) are all **proprietary**.
+
+**What it is:** an obligation ledger plus a constrained search.
+
+1. Pattern 25.1 emits **NOT AIRED** → create an **obligation** (what was owed: audience, daypart,
+   value).
+2. Search candidate future breaks with room, honouring the same placement rules a traffic system
+   enforces (position order, separation, "never back to back", airing limits — 9eye implements these
+   and reports unfittable spots **with the reason**, which is the behaviour to copy).
+3. Propose a **makegood**; hold it for advertiser approval; on approval, write the credit in
+   **[killbill/killbill](https://github.com/killbill/killbill)** (Apache-2.0) and the placement back
+   into Nebula or 9eye.
+
+**This is the one genuinely agent-shaped job in the plane** — constrained search over inventory with a
+commercial objective — **and the approval must be human.** Copy 9eye's design rather than inventing
+one: a permission table of **part × action** (Read · Change · Create and delete · Approve · Export)
+with each cell *Allowed* / *Ask first* / *Off*; **agents and tokens can only ever be narrower than the
+person who issued them**; every change carries a **preview and an undo**, lands in an **audit log**,
+and waits in a **"Waiting for you"** queue. An agent may **propose** a makegood; it must never
+**book** one.
+
+---
+
+### Pattern 25.3 — BXF without redistributing the schema (the licence gate — run it before estimating)
+
+**Why:** BXF (SMPTE ST 2021) is the XML interchange between traffic, playout and automation, so it is
+the integration a traffic engagement must build. And it is a **licence event disguised as a
+download**:
+
+- [SMPTE/st2021-4](https://github.com/SMPTE/st2021-4) — the official schema documentation — carries a
+  269-byte `LICENSE.md` reading **"All rights reserved. No part of this material may be reproduced, by
+  any means whatsoever, without the prior written permission of the Society of Motion Picture and
+  Television Engineers."** The GitHub API reports `NOASSERTION`.
+- [JoeldelPilar/bxf-manager](https://github.com/JoeldelPilar/bxf-manager) — the only BXF tool on
+  GitHub — has **no licence file at all** (11 filenames × 2 branches probed; control `README.md`
+  returns 200, so the absence is real). No grant ⇒ all rights reserved.
+
+**The gate, in order:**
+
+1. **Before estimating**, confirm the client holds a **SMPTE entitlement** for ST 2021-4. If not, that
+   is a procurement task with a lead time, not a development task.
+2. **Do not vendor the `.xsd`** into the client repository, a Docker image, or a public artefact.
+3. Fetch it at build time from the member channel into a **gitignored** path under the client's own
+   entitlement; generate bindings; **ship only generated code**, with the client's counsel signing off
+   on whether generated bindings are a derivative of the schema.
+4. Write the entitlement and the counsel sign-off into the proposal as **assumptions**.
+
+**Falsifiable prediction, recorded for a later pass to check:** any proposal that estimates "BXF
+export" as a two-week task without naming the schema entitlement will discover the licence at
+integration time, and the schedule slip will be procurement, not engineering.
+
+**Note the new licence category this establishes** (see `intel/trends.md` pass 25): after CPT and
+MedDRA, which are *taxed*, BXF is the first artefact in this KB that is **free of charge, published
+openly on GitHub, and still not redistributable** — which is easier to get wrong, because nothing
+about fetching a public file feels like a licence decision. No SPDX field, badge or source-tree SBOM
+scan detects it.
+
+---
+
+### Pattern 25.4 — The political-spot compliance gate on the booking screen (LATAM-first, and it has a hard date)
+
+**Why:** the obligation attaches to an object the **traffic system** owns — a spot that is booked,
+logged, aired and invoiced — and the broadcaster **does not control the creative**. Brazil's electoral
+court approved rules for the **October 2026 elections**: AI-altered content changing a candidate's
+image, voice or statements is **banned in the 72 hours before a vote and 24 hours after**, and any
+campaign ad using AI must carry a **clear and visible notice**; free electoral advertising on radio and
+TV runs **until 1 October**. A broadcaster carrying mandatory free electoral advertising can control
+only **when a spot may be placed** and **what it can prove afterwards**.
+
+**What it is:** a **policy object per jurisdiction**, attached to the campaign/spot, holding
+
+- the **prohibited windows** (Brazil: −72 h / +24 h around a vote),
+- the **notice requirement** (present? wording? placement?),
+- the **evidence to retain**, and for how long,
+- the **provenance rule** — *preserve, never strip*, C2PA metadata and signatures through editing and
+  publishing (explicit broadcast-counsel advice in the US).
+
+…enforced at **two points only**: it **blocks placement** inside a prohibited window at booking time,
+and it **emits the evidence record** from the log afterwards.
+
+**Build it on:** the campaign/spot model in [9eye9/9eye](https://github.com/9eye9/9eye) (AGPL — behind
+a service boundary) or [nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula) (GPL-3.0),
+with the policy object and evidence store as the **client-owned permissive** part, and Pattern 25.1's
+reconciliation service supplying the proof.
+
+**It must be configurable, not correct** — the whole point is that the rule differs by jurisdiction:
+
+| Region | Why one compliance mode fails |
+|---|---|
+| **LATAM** | Brazil −72 h/+24 h + visible notice (**October 2026, fixed date**); Mexico's proposed labelling + INE takedown powers; Chile, Colombia, Brazil's AI bill all at different speeds. |
+| **North America** | **31 states** regulate AI in political ads and **only ~half** require disclosure, while federal **reasonable-access** rules mean a station cannot censor a federal candidate's ad — so the policy varies **per station and per state** and can contradict itself on one spot. |
+| **APAC** | A patchwork of three approaches: Korea's "clearly recognise" labelling (2026 effectively a pilot year), India's February 2026 IT-rules amendment, China's layered rules, Vietnam's decree. |
+| **EMEA** | EU AI Act **Article 50** machine-readable marking, pre-August cohort due **2 December**, disclosure no later than first exposure. |
+
+**This is the second plane in which APAC's sellable asset turns out to be a policy engine rather than
+a compliance setting** (pass 5 found the same for rights reservation) — which makes it a regional
+pattern worth naming, not a coincidence.
+
+---
+
+### Pattern 25.5 — Resurrect the plane's anchor, correctly: Nebula, not the dead slug
+
+**Why:** this KB told a prior reader that Nebula was **archived and dead**. It recorded
+`immstudios/nebula` (20★, last push 2023-04-26). The project moved org and is alive:
+**[nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula)**, **GPL-3.0, 332★, 38 forks,
+pushed 2026-11-23**, *"since 2012 … used by TV and production companies worldwide"*. It is the **only**
+open system that does linear **planning + scheduling + playout + MAM** together, which makes it the
+starting point for this entire plane.
+
+**The stack:**
+
+| Piece | Repo | Licence | Take it? |
+|---|---|---|---|
+| Server (core) | [nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula) | GPL-3.0 | **Yes** — unmodified, behind a service boundary, integrate over its API. |
+| Worker | [nebulabroadcast/nebula-worker](https://github.com/nebulabroadcast/nebula-worker) | GPL-3.0 | **Yes** — required for real media processing, not optional. |
+| Web UI | in the server repo | GPL-3.0 | **Yes** — the README states it now has full feature parity with the desktop client. |
+| Desktop client | [nebulabroadcast/firefly](https://github.com/nebulabroadcast/firefly) | GPL-3.0 | **Only** against a hard desktop requirement — **it is being phased out** per its own README. |
+| Tutorial / starter files | [nebulabroadcast/nebula-tutorial](https://github.com/nebulabroadcast/nebula-tutorial) | **NONE** | **Read, do not copy.** No licence file (11 names × 2 branches; control README = 200 ⇒ real absence). Do not lift its compose file or settings into a client repo. |
+
+**Then add the permissive layer beside it, over the API:** Pattern 25.1's reconciliation service,
+Pattern 25.2's makegood engine with 9eye's permission table, Pattern 25.4's policy object, and
+**[killbill/killbill](https://github.com/killbill/killbill)** (Apache-2.0) or
+**[aureuserp/aureuserp](https://github.com/aureuserp/aureuserp)** (MIT) for invoicing.
+
+**And the sentence to say out loud in the first meeting:** *"the open-source platform will schedule
+your channel; it will not sell your inventory, prove the spot aired, or raise the invoice — that part
+we build, and you own it."* The measured basis for that sentence is in `verticals/solutions.md`
+pass 25. **Never promise a broadcaster an all-open-source order-to-cash stack.**
+
+---
+
+### Pattern 25.6 — The 20-minute gate for any broadcast traffic proposal
+
+Run these six checks before writing an estimate. Each one has cost somebody a schedule slip.
+
+1. **Is "traffic" the media meaning?** In this plane the word is the most contaminated term in the KB:
+   `broadcast traffic` → 163 GitHub results, **zero relevant**; `radio traffic` → 246, **zero**;
+   `rate card` → **2,013**, **zero**. Searching it naively returns satellite ship detection and ADS-B
+   decoders. **Read the results, never the total.**
+2. **Which step of the gradient is actually in scope?** Plan what airs (**healthy** — Nebula, 14 years
+   in production) / book inventory (**2★, 7 days old** — 9eye) / prove-and-bill (**empty set**). The
+   third is a build, and pricing it as an integration is the classic error here.
+3. **Does the client hold a SMPTE entitlement for ST 2021-4?** If BXF is in scope and the answer is
+   no, see Pattern 25.3 — procurement lead time, not engineering.
+4. **Is the incumbent staying?** If WideOrbit, Marketron or LandmarkOSI is staying (usually the right
+   answer — an independent build-vs-buy analysis recommends keeping the core), the deliverable is the
+   **cross-platform order and reconciliation layer**, and the integration contract with the incumbent
+   is the project's main risk.
+5. **Is copyleft acceptable at all?** Every startable platform is GPL/AGPL. If the client cannot
+   tolerate a copyleft process anywhere in the estimate, there is **no open starting point** in this
+   plane, and that must be said before the proposal, not during delivery.
+6. **Is there a political or regulated-advertising window in the engagement's calendar?** If yes
+   (Brazil **October 2026**, any US election cycle), Pattern 25.4 is not an enhancement — it is the
+   deadline that sets the delivery date.

@@ -2540,3 +2540,130 @@ in twenty-four passes.
 - **No open WhatsApp/LINE publisher-distribution tooling**, despite messaging being *the* owned
   channel in LATAM and parts of APAC.
 - **No 2026 primary figure for UID2 adoption**, and conflicting reporting on its governance.
+
+---
+
+## Pass 25 (2026-11-26) — the traffic, sales-order-to-air & billing plane: what is actually changing
+
+> **Source note for this section.** Repo facts are verified (`ls-remote`, canonical-slug check,
+> licence files read). The market and regulatory facts below come from **web-search result extracts**:
+> the publisher domains (`thedesk.net`, `tech.ebu.ch`, `ebu.ch`, `mediapost.com`, `adexchanger.com`,
+> `ppc.land`, `lw.com`, `bnamericas.com`, `radioworld.com`, `wideorbit.com`, `bitmovin.com`,
+> `playboxtechnology.com`, `akamai.com`, `digitalheroesco.com`) are **outside this session's allowed
+> network domains**, so the URLs could not be opened and the claims are **attributed but not
+> independently confirmed**. Verify any figure against the primary source before putting it in front
+> of a client. Marked **†** throughout.
+
+### 1. The commercial layer is where 2026's money went — and all of it went proprietary
+
+This is the widest incumbent-vs-open-source gap recorded in any plane of this KB.
+
+- **Fox** launched what it and the trade press call the TV industry's **first end-to-end agentic
+  advertising platform on 2026-06-17**, built on Fox AdStudio: agents handle planning, transactions
+  and activation across linear and streaming, with **agent-to-agent negotiation replacing the phone
+  calls, faxes and spreadsheets** linear buys have traditionally required.†
+- **NBCUniversal + FreeWheel** completed what they describe as the **first AI-agent-led programmatic
+  guaranteed deal**, covering live sports across **linear and streaming**: a buy-side agent sends
+  campaign goals to a sell-side agent, which returns matching linear and streaming proposals.†
+- **Magnite + ITN** announced agentic **local linear** buying on **2026-09-10**, full integration in
+  **Q4 2026**, one RFP across local linear and CTV — reportedly cutting buying from weeks to hours.†
+- **WBD** applied agentic automation in **Q2 2026** to direct-response workflows and audience
+  forecasting, against advertising revenue down **7% YoY in Q1 2026 to $1.85 bn** on linear declines.†
+
+**Against that: the open-source total for the same plane is a 2-star repo created seven days ago whose
+billing step is a roadmap item.** Every incumbent initiative above is closed. The thing being
+automated — negotiating, booking and settling linear inventory — is exactly the step this KB measured
+as an empty set.
+
+### 2. The scepticism is on the record, and it is the reason to sell the layer *underneath*
+
+Quote these to a client rather than the launch announcements:
+
+- Magnite's CEO capped a **2027 agentic ad-spend forecast at "somewhere between negligible and
+  $700 million"** (reported August 2026).†
+- A Yahoo DSP finding: **55%** of marketers trust the technology to plan and execute tasks, while
+  **about one in five actively distrust** agentic AI.†
+- TV Tech's 2026 outlook expects **"several false starts"** with agentic advertising and names
+  **creative production** as the likelier first real breakthrough.†
+- Akamai's *State of AI in Media 2026*: adoption is no longer the question; **turning widespread
+  experimentation into business value** is. Time spent in generative-AI apps **doubled** between H1
+  2025 and H1 2026 (Sensor Tower via Akamai).†
+
+**The implication is the commercially useful one.** The honest pitch is not "agentic ad sales now". It
+is the **reconciliation and evidence layer underneath** agentic selling: if agents negotiate the buy,
+somebody still has to prove what aired and settle what is owed — and nobody, open or closed, has
+built that in a way a client can own. Patterns 25.1 and 25.2.
+
+### 3. FAST turned the schedule into the cost centre — the economic driver of this plane
+
+- **~2,170 FAST channels globally** as of July 2026, **+17.5% YoY** from ~1,850 (Gracenote Data Hub).
+  A second source gives 2,120 in Q2 2026 at +19%; treat ~2,100–2,200 as the range.†
+- **Programming volume is growing much faster than channel count**: sports channels **+13.8%** while
+  unique sports titles **+31.2%** and individual games/events **+37.5%**.†
+- Therefore **the bottleneck moved from launching channels to operating them** — one analysis puts it
+  as the challenge shifting to *reliably operating increasingly complex* channels.†
+- And the revenue base is thinning: PlayBox (October 2026) argues **supply has outrun demand**; one
+  vendor model puts **effective CPMs near $5** at a ~10-minute-per-hour ad load and a **sustainable
+  ceiling near 400 channels per platform**.†
+- Operating cost, vendor estimates only: **$250–500 per channel** to start on managed playout,
+  **~$1,500–2,000/month** for a serious single channel before content; AWS MediaTailor at **$0.10/hr**
+  VOD-only and **$0.35/hr** with live sources.†
+
+**More channels × far more events × thinning CPMs = scheduling and reconciliation labour is now the
+margin.** That is the business case for this plane, and it does not depend on agentic hype.
+
+### 4. The incumbent stack is consolidating — which is when replatforming budget appears
+
+- **Imagine Communications** (LandmarkOSI for traffic and billing, xG Linear for MVPD traffic,
+  GamePlan ad decisioning) was reported **acquired by Lumine Group on 2026-07-01**. **Single secondary
+  source — verify before citing.†** Its CEO publicly conceded in February 2026 that *"we set ambitious
+  expectations that our delivery didn't fully meet."*†
+- **WideOrbit** (WO Traffic v24.0, WO Fusion cross-platform sales, WO Aurora radio automation) is
+  moving customers from **CapEx to subscription OpEx** (vendor's own framing) and partnered with
+  Pattison Media in **September 2026** on programmatic for broadcast radio.†
+- **Operative** (AOS) sits in an older Imagine partnership connecting order management to ad
+  execution; current status unconfirmed.†
+- A third-party build-vs-buy analysis concludes that **WideOrbit and Marketron are "the backbone of
+  American broadcast traffic"** and recommends groups **keep the core system and build a
+  cross-platform order and reconciliation layer around it.**†
+
+**That last sentence is the engagement shape, written by someone other than us** — and it is precisely
+the layer this KB measured as having no open-source implementation.
+
+### 5. The provenance obligation has landed on the traffic desk, and no traffic system has a field for it
+
+This is the most concrete unbuilt thing in the plane, and it is a *data-model* gap, not a model gap.
+
+- A political or AI-disclosed spot is **traffic's object**: it is booked, logged, aired and invoiced
+  by the traffic system.
+- **North America:** at least **31 states** regulate AI in political ads and **only about half**
+  require disclosure; federal **reasonable-access** rules mean a broadcaster **cannot censor a federal
+  candidate's ad**, which collides with state laws prescribing specific disclosure wording. Broadcast
+  counsel's advice includes **preserving rather than stripping** standards-compliant provenance
+  metadata and signatures through editing and web publishing.†
+- **EMEA:** EU AI Act **Article 50** requires machine-readable marking of synthetic output, with
+  systems already on the market before 2 August due to comply by **2 December**; deepfakes disclosed
+  no later than first exposure.†
+- So the duty attaches to an object the traffic system owns, varies **per state and per
+  jurisdiction**, and **cannot live in the creative** — the broadcaster does not control it. It has to
+  be enforced where the spot is **booked** and proven from the **log**. No open traffic system models
+  it. Pattern 25.4, which has a hard deadline in LATAM.
+
+### 6. What this pass confirms about the KB's structural law — sixth time, and the sharpest gradient yet
+
+The law: **the regulator or the market creates the obligation; the licence of the content and the
+nature of the problem decide whether open source can discharge it.** This plane reproduces pass 5's
+three-step gradient inside a single product category:
+
+**plan what airs (format → healthy: Nebula 332★, 14 years in production) → book the inventory
+(constrained placement → 2★, 7 days old) → prove it aired and bill it (judgment → literal zero).**
+
+Open source solves the arithmetic and stops exactly where commercial *policy* begins — because the
+tolerance that counts as "aired", the value of a pre-empted spot and the equivalence of a makegood are
+the client's judgment, not a shared format. **That is also why this step is worth selling: it cannot be
+commoditised by the next open-source release, and it is the step that produces revenue.**
+
+And a seventh data point for the **content-licence** half of the law: after CPT and MedDRA (taxed
+content, pass 11 healthcare), BXF adds a new category — **free of charge, published on GitHub, and
+still All Rights Reserved.** Easier to get wrong than a paywall, because nothing about fetching it
+feels like a licence event.

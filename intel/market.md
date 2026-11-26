@@ -911,6 +911,51 @@ layer is **zero repos** (`audio ad insertion server stars:>=20` → 0, measured 
   including why that figure sizes *tooling* and not publisher revenue.
 
 
+
+#### The traffic, sales-order-to-air & billing plane — added 2026-11-26 (pass 25). The region where this plane *is* the business, and where political advertising makes it urgent
+
+> Non-repo facts in this block come from web-search extracts; the publisher domains were **outside
+> this session's allowed network domains**, so URLs could not be opened. Attributed, not independently
+> confirmed — marked **†**.
+
+- **The incumbent core is North American and named.** A third-party build-vs-buy analysis calls
+  **WideOrbit and Marketron "the backbone of American broadcast traffic"**, alongside **Imagine
+  Communications** (LandmarkOSI traffic and billing, xG Linear for MVPD, GamePlan ad decisioning) and
+  **Operative** (AOS order management).† There is **no open-source alternative** to any of them — see
+  the measured zeros in `verticals/solutions.md` pass 25.
+- **The same analysis states the engagement shape for us:** groups should **keep the core traffic
+  system and build a cross-platform order and reconciliation layer around it.**† Written by someone
+  with no stake in our proposal, and it describes exactly the layer that has no open implementation.
+- **Consolidation is the opening.** Imagine Communications was reported **acquired by Lumine Group on
+  2026-07-01** (single secondary source — **verify first**), and its CEO conceded in February 2026
+  that *"we set ambitious expectations that our delivery didn't fully meet."*† WideOrbit is pushing
+  customers from **CapEx to subscription OpEx**.† Platform transitions are when reconciliation layers
+  get funded.
+- **Opportunity 1 — the as-run reconciliation service (Pattern 25.1).** The highest-value unbuilt
+  thing in the plane: `broadcast as-run reconciliation` returns **zero** GitHub repos, and the only
+  as-run artefact in existence is unlicensed and dead since 2016. Spot-level matching of the intended
+  log against the playout as-run log, emitting *aired as booked / aired wrong / not aired*. Client-owned,
+  permissively licensable, and it is what the invoice depends on.
+- **Opportunity 2 — the makegood engine (Pattern 25.2).** `makegood` has **zero hits** in this entire
+  KB and **zero inside 9eye's own codebase**. Every US broadcaster owes makegoods on pre-empted spots
+  and settles them in spreadsheets or in the incumbent's rigid module.
+- **Opportunity 3 — the political-spot compliance gate, and it is sharper here than anywhere.** At
+  least **31 states** regulate AI in political advertising and **only about half** require disclosure;
+  meanwhile federal **reasonable-access** rules mean a station **cannot censor a federal candidate's
+  ad**, so a state law prescribing disclosure wording collides with federal law on the same spot.†
+  Counsel's advice is to **preserve rather than strip** provenance metadata and signatures through
+  editing and publishing.† The logic therefore cannot live in the creative — it must live in **booking
+  and the log**, configured **per station and per state**. See Pattern 25.4.
+- **Legal posture: state law, FCC and the FTC — not a federal AI statute.** **Informed gap:** searches
+  for a federal AI-disclosure mandate for advertising found **none in force** — efforts have stalled in
+  Congress and at the FEC, which **lacks a quorum**. The **FTC** is the active federal enforcer,
+  focused on AI-washing and undisclosed AI-generated endorsements (a "double disclosure" where a paid
+  relationship and AI generation coincide).† **A US client asking "what must we disclose?" has a
+  fifty-state + FCC + FTC answer, not a federal one** — which is the same shape as pass 24's consent
+  finding and the reason the policy object in Pattern 25.4 must be configurable rather than correct.
+- **Unverifiable claim flagged:** sources conflict on New York's synthetic-performer law (signed
+  December 2025 and effective 2026-06-09 then repealed/replaced in May 2026, versus signed January
+  2026). **Do not cite New York specifics without reading the statute.†**
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -1914,6 +1959,51 @@ law rather than etiquette.**
   official Commission or Council documents before quoting it to a client.
 
 
+
+#### The traffic, sales-order-to-air & billing plane — added 2026-11-26 (pass 25). The region where the buyer is a public broadcaster, the constraint is sovereignty, and **ad traffic is the wrong pitch**
+
+> Non-repo facts from web-search extracts; publisher domains (`ebu.ch`, `tech.ebu.ch`) were **outside
+> this session's allowed network domains** and could not be opened. Marked **†**.
+
+- **The structural fact: much of EMEA broadcast has no ad traffic to sell.** Licence-fee-funded public
+  service media do not book spots — so pitching ad sales automation here misreads the region. **What
+  they do have is the hardest scheduling and obligation problem in the world:** programming quotas,
+  multi-language and multi-region opt-outs, archive obligations and now AI labelling. Sell
+  **scheduling + provable compliance**, not order-to-cash.
+- **Sovereignty is the buying criterion, and it favours what we can deploy.** The **EBU and NVIDIA**
+  expanded a **sovereign-AI framework for public service media**, announced at a Berlin event on
+  **19 October**, aimed at giving European media technological autonomy; the EBU network is cited at
+  **110+ media organisations** reaching **over 1 billion people**.† **Informed gap / conflict:** one
+  source dates the original partnership to **June 2025** and another presents an **October 2026**
+  announcement — **verify against the primary EBU release.†**
+- **Why that matters commercially:** a sovereignty requirement **disqualifies a US SaaS traffic
+  system** and favours a **self-hosted, European-origin, GPL-3.0 platform**. That is exactly
+  **Nebula** ([nebulabroadcast/nebula](https://github.com/nebulabroadcast/nebula), 332★, pushed
+  2026-11-23, in 24/7 use since 2012) — the one row this KB had previously written off as dead. EMEA
+  is the region where that correction has the most commercial consequence.
+- **The regulatory load is real and dated.** EU AI Act **Article 50** requires machine-readable
+  marking of synthetic output; systems on the market before **2 August** must comply by **2 December**;
+  deepfakes must be disclosed **no later than first exposure**, with a lighter standard for artistic or
+  satirical work.†
+- **And the broadcasters are pushing back, which is itself the opening.** In **June 2026** the **EBU**
+  with private broadcaster groups **VAUNET** and **ACT** wrote to the European Commission asking it to
+  **narrow the deepfake definition and reduce labelling burdens**.† The EBU has separately pushed
+  **C2PA** provenance and, in **April 2026**, called for an **AVMSD revision** addressing Big Tech and
+  AI gatekeeping of media services.† **A client lobbying to narrow an obligation is a client who will
+  have to evidence the obligation that survives.**
+- **Opportunity 1 — the obligation-evidence layer on the schedule.** Quotas, opt-outs and Article 50
+  marking all resolve to: *prove what was transmitted, in which territory, in which language, with
+  which disclosures.* That is Pattern 25.1's reconciliation service pointed at a compliance question
+  instead of an invoice — the same build, a different buyer, and the EMEA version does not need a
+  billing engine at all.
+- **Opportunity 2 — shared tooling, because this region actually shares.** Public broadcasters are
+  piloting common tools: a **France Télévisions metadata tool** made available to EBU members, and a
+  **BBC–EBU toolkit** for benchmarking AI assistants' news integrity.† A component built for one EBU
+  member has a distribution path to 110+ others, which is unlike any other region in this KB.
+- **Informed gap:** no source found giving **adoption rates for AI in European broadcast traffic or
+  scheduling operations specifically**. EBU material covers newsroom, metadata, provenance and
+  recommendation; the commercial/scheduling desk is unmeasured here. Treat EMEA traffic-desk adoption
+  as **not researched, not absent**.
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -2866,6 +2956,51 @@ open-source story.**
   fall back on: price the platform risk explicitly.
 
 
+
+#### The traffic, sales-order-to-air & billing plane — added 2026-11-26 (pass 25). The region where the break is addressable per household, which makes reconciliation a *harder* problem, not an easier one
+
+> Non-repo facts from web-search extracts; publisher domains (`lw.com`, `asiatechxsg.com` and others)
+> were **outside this session's allowed network domains**. Marked **†**.
+
+- **The adoption shape: operational, not generative — and it lands on this plane.** APAC broadcast AI
+  adoption is described as **practical rather than generative**, with **AI recommendation engines
+  deployed for live linear broadcasting, tailoring content and advertising to individual households
+  via addressable-TV technologies**.† That is a traffic statement: **a household-addressable break
+  cannot be reconciled with a single as-run line.** The more addressable the inventory, the more the
+  missing step in this plane becomes the binding constraint.
+- **Integration is shallower than the announcements suggest.** Only **~30% of agencies, brands and
+  publishers had fully integrated AI across the media campaign lifecycle in 2025**, with many
+  intending to during 2026.† Sell the plumbing, not the transformation.
+- **Regulation is per-jurisdiction, so the asset is a policy engine — the pass 5 finding, instantiated
+  on the traffic desk.** The regional landscape as of mid-2026 is characterised as **a patchwork of
+  three broad approaches** (Latham & Watkins).† Specifics:
+  - **South Korea** requires realistic synthetic video or audio to be labelled so users can
+    **"clearly recognise"** its AI origin; MSIT has signalled **2026 as effectively a pilot period
+    with limited enforcement**.†
+  - **India** amended its **IT rules in February 2026**, placing obligations on platforms hosting
+    AI-generated content.†
+  - **China** operates layered, targeted rules; **Vietnam** has issued a decree.†
+- **Opportunity 1 — the per-jurisdiction labelling policy engine, wired into booking (Pattern 25.4).**
+  A broadcaster or platform operating across KR/IN/CN/VN cannot run one compliance mode. The sellable
+  asset is a **policy object per jurisdiction** (what must be labelled, how, from when, what evidence
+  to retain) attached to the campaign and enforced at placement. **This is the same asset pass 5
+  identified for APAC rights reservation — the second plane in which APAC's answer is a policy engine
+  rather than a compliance setting, which makes it a regional pattern rather than a one-off.**
+- **Opportunity 2 — addressable-break reconciliation (Pattern 25.1, hard mode).** Per-household
+  delivery means reconciliation moves from "did the spot air" to "which households were served, and
+  does that match what was sold". [openmeterio/openmeter](https://github.com/openmeterio/openmeter)
+  (Apache-2.0, 2,471★) is the permissive metering substrate for the impression side; the matching
+  policy is the client's IP.
+- **Market context.** Generative AI in APAC media and entertainment is projected from **~$1.97 bn
+  (2024) to ~$20.7 bn (2034)** per one study, and regional **digital ad spend is on a path to
+  $489.3 bn by 2029**, with AI in campaign execution named as a growth driver.† Treat both as
+  single-source ranges. **SMPTE ST 2110** is described as firmly established as the IP broadcast
+  standard in the region† — relevant because an ST 2110 facility has the signal plumbing to support
+  addressable insertion and still no commercial system to settle it.
+- **Informed gap:** results named **innovation hubs (Shenzhen, Seoul, Hyderabad)** and tech-readiness
+  leaders (**Singapore, Japan, South Korea**) but **no specific APAC traffic/ad-sales vendors**.† The
+  incumbent vendor map for APAC broadcast traffic is **unresearched** — do not assume WideOrbit and
+  Imagine hold the region as they do North America.
 ### LATAM
 
 - **Mexico now has the region's first sector-specific AI law for entertainment.** Amendments to the
@@ -3845,6 +3980,49 @@ something that already exists locally.
   such. Reuters Institute's Digital News Report would be the place to close this gap next pass.
 
 
+
+#### The traffic, sales-order-to-air & billing plane — added 2026-11-26 (pass 25). **The most time-boxed opportunity in this KB: an electoral deadline that makes a traffic-system rule mandatory**
+
+> Non-repo facts from web-search extracts; publisher domains (`bnamericas.com` and others) were
+> **outside this session's allowed network domains**. Marked **†**.
+
+- **Brazil has turned a traffic-desk rule into law with a date on it.** Brazil's electoral court
+  approved AI rules for the **October 2026 elections**: publishing or boosting AI-altered content that
+  changes a candidate's **image, voice or statements** is **banned in the 72 hours before a vote and
+  the 24 hours after**, and **any campaign advertisement using AI must carry a clear and visible
+  notice**.† Free election advertising on radio and TV runs **until 1 October**, three days before the
+  first round.†
+- **Why this is a traffic problem and nothing else.** A broadcaster carrying **free, mandatory
+  electoral advertising does not control the creative.** It cannot fix the spot; it can only control
+  **when the spot may be placed** and **what it can prove afterwards**. A 72-hour prohibition window
+  and a notice requirement are therefore enforced **at booking** and evidenced **from the log** — the
+  two functions this KB measured as having no open-source implementation. **Pattern 25.4.**
+- **Mexico is moving the same way.** A proposed reform provides for **labels on AI-generated content**
+  and **expanded INE powers to remove disinformation**.† Regionally, Brazil's AI bill, **Chile's**
+  framework, **Colombia's CONPES** on AI and **Mexico's** sectoral rules are advancing at different
+  speeds† — so, as in APAC, the asset is a **policy object per country**, not one compliance mode.
+- **Opportunity 1 — the electoral-window booking gate, delivered before October 2026 (Pattern 25.4).**
+  Smallest credible scope in the plane and the only one with an externally fixed deadline: a policy
+  object (window, notice requirement, evidence to retain) attached to the spot in Nebula or 9eye,
+  blocking placement inside a prohibited window and emitting the evidence record a regulator or court
+  would request. Reusable afterwards for NA's fifty-state patchwork and APAC's divergence.
+- **Opportunity 2 — reconciliation as the entry product (Pattern 25.1).** LATAM broadcasters are the
+  least likely in this KB to be running a modern incumbent traffic suite, which makes the
+  **reconciliation layer sellable on its own**, without a replatform: it reads the existing log and the
+  existing as-run file and produces the exception report nobody has.
+- **Advertising demand signal:** OpenAI said in **May 2026** that its **ChatGPT ads pilot** would
+  expand to the UK, **Mexico**, **Brazil**, Japan and South Korea — making Brazil and Mexico the first
+  named Latin American markets for paid advertising inside ChatGPT.† Relevant to this plane because a
+  new inventory surface arrives with **no as-run concept at all**.
+- **Consumer adoption, for sizing conversations only:** a 2025 Google/Ipsos survey found **44% in
+  Mexico**, **39% in Chile** and **35% in Brazil** had used AI in the previous 12 months; a different
+  measure puts **5–10%** of the general population using AI tools daily.† Different measures, not
+  contradictory figures — do not merge them.
+- **Informed gaps, stated plainly.** (1) **No source was found on AI adoption in LATAM television
+  advertising operations specifically** — the evidence is consumer adoption and electoral regulation,
+  not traffic-desk practice. Treat it as **unresearched, not absent**. (2) One frequently surfaced
+  LATAM "AI impact 2026" source **ships unfilled `[VERIFY]` placeholders where its adoption statistics
+  should be — do not cite it**, and treat any figure traceable to it as fabricated.
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -4416,3 +4594,70 @@ across many independent vendors; the **magnitudes are not independently verified
 frequently-quoted "**4–8 percentage points**" of MPP open-rate inflation traces to a single secondary
 source. **No independent 2026 dataset on publisher open or click rates under AI inbox summaries
 exists** — searched, not found. Quote the mechanism, not the magnitude.
+
+---
+
+## Market size — pass 25 addendum (2026-11-26): the traffic & billing segment, and **a refusal**
+
+> All figures below come from **web-search extracts**. The publisher domains (`thedesk.net`,
+> `bitmovin.com`, `playboxtechnology.com`, `wideorbit.com`, `digitalheroesco.com`, `akamai.com`,
+> `adexchanger.com`, `mediapost.com`, `ppc.land`) are **outside this session's allowed network
+> domains**, so no URL could be opened to confirm them. Attributed, **not** independently verified.
+
+### The refusal
+
+**No credible sizing of the broadcast traffic-and-billing software segment surfaced, and this KB will
+not invent one.** The queries that would price it return vendor listicles and review-aggregator pages
+("Best Broadcast Traffic Software: 2026 Comparison"), which are not evidence. There is no analyst
+figure here comparable to the ones this KB carries for localization, subscriptions or out-of-home.
+**Do not put a TAM number on this plane.**
+
+### What can be stood behind instead — channel count × cost per channel
+
+The defensible framing is bottom-up, and both inputs are sourced:
+
+| Input | Figure | Source quality |
+|---|---|---|
+| Global FAST channels | **~2,170** as of July 2026, **+17.5% YoY** from ~1,850 | Gracenote Data Hub via trade press.† A second source gives **2,120** in Q2 2026 at **+19%** — use **~2,100–2,200** as the range. |
+| Sports growth inside that | Channels **+13.8%**, unique titles **+31.2%**, individual games/events **+37.5%** | Same.† The spread between channel growth and event growth is the operational load. |
+| Managed playout, start-up | **$250–500 per channel** | Vendor blog.† |
+| A serious single channel | **~$1,500–2,000/month** before content | Vendor blog.† |
+| AWS MediaTailor | **$0.10/hr** VOD-only, **$0.35/hr** with live sources | Vendor blog.† |
+| Sustainable ceiling | **~400 channels per platform**; effective CPMs **~$5** at ~10 min/hr ad load | One vendor's model, explicitly not an industry standard.† |
+
+**Read it as a labour argument, not a software-market argument:** channel count is rising ~17–19% a
+year while programming volume inside those channels rises 30–38%, and the revenue per channel is
+thinning (PlayBox, October 2026: supply has outrun demand†). The cost being added is **scheduling and
+reconciliation labour** — which is what this plane automates and what has no open-source
+implementation.
+
+### Adjacent figures that are *not* this segment (do not substitute them)
+
+- **Agentic advertising spend, 2027: "somewhere between negligible and $700 million"** — Magnite's
+  CEO, reported August 2026.† This is the *ceiling a seller's own CEO put on the hype*, and it is the
+  single most useful number in this plane for managing a client's expectations. It is **not** a
+  traffic-software figure.
+- **APAC digital ad spend on a path to $489.3 bn by 2029**† and **GenAI in APAC M&E ~$1.97 bn (2024)
+  → ~$20.7 bn (2034)**† — regional advertising and AI totals, orders of magnitude away from the
+  traffic-software segment. Carried in the APAC block above with the same caveat.
+- **WBD advertising revenue −7% YoY in Q1 2026 to $1.85 bn** on linear declines.† A demand-side
+  pressure indicator, not a market size.
+
+### Global players — pass 25 addendum (the traffic & billing layer)
+
+| Player | Products in this plane | Note |
+|---|---|---|
+| **WideOrbit** | WO Traffic (v24.0), WO Fusion (cross-platform sales), WO Aurora (radio automation) | Described with Marketron as **"the backbone of American broadcast traffic"**.† Moving customers CapEx → subscription OpEx; partnered with Pattison Media (Sept 2026) on programmatic for broadcast radio.† |
+| **Imagine Communications** | LandmarkOSI (traffic **and billing**), xG Linear (MVPD traffic), GamePlan (ad decisioning) | Reported **acquired by Lumine Group 2026-07-01 — single secondary source, verify.†** CEO conceded Feb 2026 that delivery had not met expectations.† |
+| **Operative** | AOS (order management) | Older Imagine partnership feeding GamePlan orders into AOS; **current status unconfirmed.†** |
+| **Marketron** | Traffic/billing for radio and local TV | Named as co-backbone of US broadcast traffic.† |
+| **Fox** (seller-side entrant) | Fox AdStudio agentic advertising platform | Launched **2026-06-17**, described as the TV industry's first end-to-end agentic advertising platform; agent-to-agent negotiation for linear and streaming.† |
+| **NBCUniversal + FreeWheel** | Agent-led programmatic guaranteed | First AI-agent-led PG deal including live sports across linear and streaming.† |
+| **Magnite + ITN** | Agentic local linear buying | Announced **2026-09-10**, full integration **Q4 2026**, one RFP across local linear and CTV.† |
+
+**The structural observation for positioning:** every player in the table is proprietary, and the two
+newest entrants are **sellers building their own agents** rather than vendors selling software. A
+broadcaster that is not Fox or NBCU cannot buy what Fox and NBCU built — and the open-source total for
+the same function is a 2-star repo whose billing step is a roadmap item. **That asymmetry is the
+opening, and it is why the sellable artefact is the reconciliation and evidence layer (Patterns 25.1,
+25.2, 25.4) rather than an agentic sales platform.**

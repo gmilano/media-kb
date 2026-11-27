@@ -9,6 +9,43 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 49: the local & community news plane (**the agent layer is being rebuilt from scratch by four separate people this month**)
+
+Plane located by grepping ~95 candidate terms against all eight files before any web search. Zero
+cluster: `news desert`, `news deserts`, `hyperlocal`, `philanthropy`, `cooperative`,
+`shared services`, `Newspack`, `Largo`, `Klaxon`, `openstates`, `city council`, `public meeting`,
+`media literacy`, `biglocalnews` — all **zero**; `local news` 2, `nonprofit` 2.
+
+**New this week on the plane:**
+
+| Agent / tool | Repo | License | ★ | Pushed | Why it is trending-relevant |
+|---|---|---|---|---|---|
+| Klaxon | https://github.com/themarshallproject/klaxon | **MIT** | 685 | **2026-11-27** | Pushed the day of the pass. Page-change monitoring for reporters — the plane's only mature watchdog agent |
+| openstates-scrapers | https://github.com/openstates/openstates-scrapers | **GPL-3.0** | 929 | **2026-11-27** | Most active repo in the plane; pushed the day of the pass. Copyleft, in an otherwise permissive org |
+| morph | https://github.com/openaustralia/morph | **AGPL-3.0** | 483 | **2026-11-27** | Scraping-as-a-service, APAC-origin, pushed the day of the pass |
+| theyvoteforyou | https://github.com/openaustralia/theyvoteforyou | **AGPL-3.0-or-later** (file read) | 169 | **2026-11-27** | Live parliamentary voting records |
+| newspack-workspace | https://github.com/Automattic/newspack-workspace | **GPL-2.0** | 28 | **2026-11-27** | Where Newspack's live code actually is — the famous `newspack-plugin` is **archived** |
+| SaskatoonMinutes | https://github.com/bradsk88/SaskatoonMinutes | none declared | 0 | 2026-11-26 | One day old at time of pass. Ingests municipal meeting minutes |
+| council-watch | https://github.com/brooksmcmillin/council-watch | none declared | 0 | 2026-11-21 | Six days old. Scrape agendas/minutes, summarise |
+| louisville-co-city-council-minutes | https://github.com/plc/louisville-co-city-council-minutes | none declared | 2 | 2026-11-09 | Weekly AI pass over a city's council YouTube channel |
+
+**The trend, and it is a negative one worth logging:** `council minutes summarization` returns **7
+repos in the world** and the top four hold **2, 0, 0 and 0 stars** — yet three of them were pushed in
+the three weeks before this pass. `public meeting agenda scraper` returns **3 repos total**.
+`city council meeting transcript` returns 19, top four summing to **7 stars**. Four people are
+independently rebuilding the same meeting-to-story agent this month and none of them has found the
+others. The gathering layer below them is mature, permissive and twelve years old. **This is demand
+with no consolidation point — the clearest greenfield recorded in this KB.**
+
+**False friend for the index:** `news desert` (18 results) is unusable as a query — its 228★ top hit
+is the **Bee Movie script** (`danderfer/Comp_Sci_Sem_2`), followed by a 2019 voter-desert analysis and
+a quantitative *trading* system named "Treasure-in-the-Desert". Reach this plane through `civic`,
+`legistar`, `gazette` and per-city vocabulary instead.
+
+**Licence note carried into the agent layer:** six repos in this plane report `NOASSERTION` and all six
+have licence files. The mechanism is identified in `repos/foundations.md` this pass. Any agent built
+here must resolve licences by reading files, not by reading SPDX fields.
+
 ## 2026-11-27 — pass 48: the post-publication plane (**the first plane in this KB where the judgment layer matured and was then archived**)
 
 Plane located by grepping ~120 candidate terms against all eight files before any web search. Dense

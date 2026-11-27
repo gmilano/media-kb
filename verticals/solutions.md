@@ -2659,3 +2659,47 @@ and *subject-data export/erasure* (privacy plumbing). The gap between them is th
 checks and `laravel-gdpr-dsar`'s statutory clock. Nothing here knows what a *news archive* is — that an
 article has a URL that must keep resolving, a search-engine footprint that must stop, and a public-interest
 defence that must be recorded. That is the build.
+
+## Pass 49 (2026-11-27) — the local & community news plane: **the one plane where the turnkey platform exists, is fundable, and is GPL by inheritance**
+
+Unlike most planes in this file, local news *does* have deployable turnkey platforms. The catch is
+structural rather than accidental: they are **WordPress derivatives**, so they inherit WordPress's
+GPL-2.0 and there is no permissive equivalent — the same shape as the ERP market, where Odoo's
+copyleft core defines the licence of everything built as a module inside it.
+
+| Platform | License | Repo | ★ / forks | Last push | What it is |
+|---|---|---|---|---|---|
+| **Newspack** (live code) | **GPL-2.0** | [Automattic/newspack-workspace](https://github.com/Automattic/newspack-workspace) | 28 / 21 | **2026-11-27** | Automattic's publishing + revenue platform for small and mid-sized local newsrooms. Founded March 2019 with Google News Initiative money |
+| **Newspack** (deployable bundle) | **GPL-2.0** (file read: WordPress `license.txt`, "Copyright 2011-2026") | [OpenProducer/newspack-platform](https://github.com/OpenProducer/newspack-platform) | 17 / 5 | 2026-11-26 | The full platform bundle — what you actually deploy |
+| **Largo** | **GPL-2.0** (`trunk/license.txt`, 15,410 B) | [INN/largo](https://github.com/INN/largo) | metadata unavailable (see `repos/trending.md`) | HEAD `04e55ed` | The Institute for Nonprofit News WordPress theme for member newsrooms. Default branch `trunk` |
+| **Alaveteli** | **AGPL-3.0-or-later + MIT carve-out** (file read, 36,128 B) | [mysociety/alaveteli](https://github.com/mysociety/alaveteli) | 421 / 209 | 2026-11-26 | Turnkey Freedom-of-Information request platform, designed to be stood up per jurisdiction |
+| **MuckRock** | **AGPL-3.0** | [MuckRock/muckrock](https://github.com/MuckRock/muckrock) | 124 / 30 | 2026-11-24 | FOI filing, tracking and publishing at scale |
+| **Councilmatic** | **MIT** | [datamade/django-councilmatic](https://github.com/datamade/django-councilmatic) | 26 / 16 | 2026-11-19 | Django app behind the `*.councilmatic.org` council-tracking sites. **The one permissive platform here** |
+| **Querido Diário** | **MIT** | [okfn-brasil/querido-diario](https://github.com/okfn-brasil/querido-diario) + [API](https://github.com/okfn-brasil/querido-diario-api) + [frontend](https://github.com/okfn-brasil/querido-diario-frontend) | 1,429 / 492 | 2026-10-12 | Municipal-gazette platform: scrapers, FastAPI service, search UI. **Permissive, complete, and the plane's world leader** |
+| **PlanningAlerts** | **GPL-2.0** (file read, 18,147 B) | [openaustralia/planningalerts](https://github.com/openaustralia/planningalerts) | 117 / 54 | 2026-11-26 | Development-application alerts per address — a civic-notification platform |
+| **morph** | **AGPL-3.0** | [openaustralia/morph](https://github.com/openaustralia/morph) | 483 / 82 | **2026-11-27** | Hosted scraping-as-a-service. AGPL means running it as a service for a client triggers the network clause |
+
+### The procurement fact for this plane
+
+**The two layers have opposite licences, and that is the architecture.** The gathering layer is
+permissive (MIT/Apache/BSD/CC0: `city-scrapers`, `civic-scraper`, `pupa`, `python-legistar-scraper`,
+`querido-diario`, `ocd-division-ids`), while the publishing and hosted-service layer is copyleft
+(GPL-2.0 WordPress derivatives, AGPL-3.0 civic services). So:
+
+- **Build the agent and gathering layer as a separate, permissively-licensed service.** It is where the
+  differentiation is, and it stays yours.
+- **Integrate with the CMS over its REST API, never as a plugin inside it.** A plugin compiled into a
+  GPL-2.0 WordPress tree inherits GPL-2.0. The REST boundary is the licence boundary.
+- **Treat AGPL platforms as hosted-service obligations, not shipped-code obligations.** mySociety
+  chose AGPL *because* the deliverable is a website (quoted in `repos/foundations.md`). Standing up
+  Alaveteli or morph for a client is exactly the case the network clause was written for.
+- **`Automattic/newspack-plugin` is ARCHIVED (2026-08-18).** Starting there is the single most likely
+  mistake in this plane, because it is the URL the funder and CMS-directory pages still cite.
+
+### The one priced number in this layer
+
+Newspack's managed service is tied to **3–6% of publisher revenue** (Google News Initiative CMS
+directory listing), while the plug-ins themselves are GPL and self-hostable with no licence fee.
+Google's News Initiative put **$1.2M** into building it (Google blog); a funding round reported at
+**$2.4M** total included other partners (WP Tavern). That is a real revenue-share benchmark for a
+local-news platform, and it is the number to argue against when a client asks why they should build.

@@ -10,6 +10,37 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 49: the local & community news plane (**a CC0 identifier registry with a healthy permissive ecosystem — the law of this KB confirmed with its sign reversed**)
+
+| Repo | License | ★ / forks | Pushed | Why it moved onto the radar |
+|---|---|---|---|---|
+| https://github.com/openstates/openstates-scrapers | **GPL-3.0** | 929 / 522 | **2026-11-27** | Pushed the day of the pass. The plane's most active repo, and its licence outlier |
+| https://github.com/themarshallproject/klaxon | **MIT** | 685 / 190 | **2026-11-27** | Pushed the day of the pass; the most-starred permissive repo in the plane |
+| https://github.com/mysociety/fixmystreet | **AGPL-3.0-or-later** (file read, 36,018 B) | 628 / 295 | **2026-11-27** | Live. API reports `NOASSERTION` |
+| https://github.com/openaustralia/morph | **AGPL-3.0** | 483 / 82 | **2026-11-27** | The API's control case: detected correctly because its licence file starts at byte 0 with the AGPL text |
+| https://github.com/mysociety/alaveteli | **AGPL-3.0-or-later + MIT carve-out** (file read, 36,128 B) | 421 / 209 | 2026-11-26 | Licence is **not uniform across the repo** — `lib/acts_as_xapian` is MIT |
+| https://github.com/City-Bureau/city-scrapers | **MIT** | 381 / 324 | 2026-11-24 | Fork ratio 1.18 — deployed, not admired |
+| https://github.com/opencivicdata/ocd-division-ids | **CC0-1.0** (file read, 1,253 B) | 186 / 99 | 2026-11-13 | **The CC0 identifier registry.** The reason this plane's tooling exists at all |
+| https://github.com/openstates/people | **CC0-1.0** | 162 / 126 | 2026-11-26 | Legislator/governor data, public domain, forks near-equal to stars |
+| https://github.com/okfn-brasil/querido-diario | **MIT** | 1,429 / 492 | 2026-10-12 | LATAM-origin and the world's only consolidated municipal-gazette platform (see `intel/market.md`) |
+| https://github.com/biglocalnews/civic-scraper | **Apache-2.0** (553 B notice; API `NOASSERTION`) | 82 / 27 | 2026-09-11 | Stanford Big Local News. Best permissive document-acquisition library here |
+| https://github.com/Automattic/newspack-plugin | GPL-2.0 | 13 / 1 | 2026-08-18 | **ARCHIVED.** Logged so no future pass recommends the URL every funder page still cites |
+| https://github.com/okfn-brasil/serenata-de-amor | **MIT** | 4,627 / 654 | **2024-01-31** | The negative trend: LATAM's most-starred civic-AI repo, **22 months without a push**; its `rosie` and `jarbas` components are ARCHIVED |
+| https://github.com/INN/largo | **GPL-2.0** (`trunk/license.txt`, 15,410 B) | **unavailable** | HEAD `04e55ed` | Default branch is **`trunk`**; `repo:` search returns **HTTP 422** while `ls-remote` resolves it |
+
+**Two method corrections this pass, both reusable across the twelve industries.** (1) Resolve the
+default branch with `git ls-remote --symref` before probing licence paths — `INN/largo` uses `trunk`,
+and a `main`/`master`-only probe reports a false "no licence" on a GPL-2.0 repo. (2) **The GitHub
+search index can return a false negative for a repository that exists**: `repo:INN/largo` 422s, yet
+`ls-remote` resolves it and `raw` serves its files. `ls-remote` and `raw` are authoritative on
+existence; the search index is not. Consequence recorded honestly: stars/forks for `INN/largo` are
+**unavailable**, not estimated.
+
+**And the trap to remember:** `Automattic/newspack-plugin` was archived **2026-08-18** with a last
+push only three months before this pass — recent enough that a staleness heuristic passes it. The live
+code is `Automattic/newspack-workspace` (GPL-2.0, pushed 2026-11-27) and
+`OpenProducer/newspack-platform` (GPL-2.0, 2026-11-26). **Check the `archived` flag, not just the date.**
+
 ## 2026-11-27 — pass 48: the post-publication layer (**a mature platform archived, and a standards ceiling of three enum values**)
 
 | Repo | License | ★ | Pushed | Why it moved onto the radar |

@@ -4495,3 +4495,67 @@ Short queries, results *read* rather than counted — because this plane is dens
 The pattern that matters for a buyer: the vocabulary of this plane exists in open source **only in its
 SEO sense**. The legal sense — a publisher instructed by a court to make a lawfully-published article
 untraceable while keeping it in the archive — has no implementation anywhere.
+
+## Pass 49 (2026-11-27) — the local & community news plane: **the first plane in this KB where the gathering layer is solved and permissive, and the agent layer is literally unbuilt**
+
+Plane located by grepping ~95 candidate terms against all eight files before any web search. The zero
+cluster that chose it: `news desert` 0, `news deserts` 0, `hyperlocal` 0, `philanthropy` 0,
+`cooperative` 0, `shared services` 0, `Newspack` 0, `Largo` 0, `Klaxon` 0, `openstates` 0,
+`city council` 0, `public meeting` 0, `media literacy` 0, `biglocalnews` 0, `nonprofit` 2,
+`local news` 2. Reader revenue (pass 13) and investigative/source-protection (pass 20) are covered;
+**municipal coverage capacity — who attends the council meeting when there is no reporter — was not.**
+
+### The agent layer, measured rather than asserted
+
+There is no consolidated open-source meeting-to-story agent. This is the measurement, taken this pass
+via GitHub `search/repositories` (`total_count`, then the top rows by stars):
+
+| Query | Total repos | Top-4 stars | Reading |
+|---|---|---|---|
+| `public meeting agenda scraper` | **3** | 1, 0, 0 | The thinnest query recorded in this KB |
+| `council minutes summarization` | **7** | 2, 0, 0, 0 | Three of the four pushed in the last three weeks |
+| `city council meeting transcript` | **19** | 3, 2, 1, 1 | Top four sum to **7 stars** |
+| `news desert` | 18 | 228, 13, 3, 1 | **Zero relevant.** See the false friend below |
+| `civic journalism` | 32 | 82, 15, 7, 2 | One real repo, `biglocalnews/civic-scraper` |
+| `legistar` | 70 | 53, 23, 9, 9 | The agenda *vendor* has a real ecosystem; one maintained client |
+
+**False friend, in the lineage of `isan`, `eidr` and `residuals`:** the 228★ top hit for `news desert`
+is [danderfer/Comp_Sci_Sem_2](https://github.com/danderfer/Comp_Sci_Sem_2) — the **Bee Movie script**
+("According to all known laws of aviation, there is no way that a bee should be able to fly"). The
+rest are a 2019 voter-desert analysis, a quantitative *trading* system called "Treasure-in-the-Desert",
+and a 1★ model. A careless pass writes a row from one of those. `news desert` is not a usable query
+term; the plane is reachable only through `civic`, `legistar`, `gazette` and per-city vocabulary.
+
+### Tier 1 — the agent-shaped repos that are real, permissive and alive
+
+| Agent / tool | Repo | License | ★ / forks | Last push | What it does |
+|---|---|---|---|---|---|
+| Klaxon | [themarshallproject/klaxon](https://github.com/themarshallproject/klaxon) | **MIT** | 685 / 190 | **2026-11-27** | Monitors scores of web pages for changes and alerts reporters. The closest thing in the plane to a working watchdog agent, from The Marshall Project. Pushed the day of this pass. |
+| civic-scraper | [biglocalnews/civic-scraper](https://github.com/biglocalnews/civic-scraper) | **Apache-2.0** (licence file read; API says `NOASSERTION`) | 82 / 27 | 2026-09-11 | Downloads agendas, minutes and other documents produced by local government. Stanford Big Local News. The best *permissive* document-acquisition library in the plane. |
+| City Scrapers | [City-Bureau/city-scrapers](https://github.com/City-Bureau/city-scrapers) | **MIT** | 381 / 324 | 2026-11-24 | Scrapes, standardises and shares public meetings from local-government sites. City Bureau + ProPublica Illinois. Feeds the paid Documenters programme. |
+| pupa | [opencivicdata/pupa](https://github.com/opencivicdata/pupa) | **BSD-3-Clause** | 91 / 43 | 2026-11-13 | The framework for scraping legislative/government data — the scheduler and data-model layer under the individual scrapers. |
+| python-legistar-scraper | [opencivicdata/python-legistar-scraper](https://github.com/opencivicdata/python-legistar-scraper) | **BSD-3-Clause** | 53 / 30 | 2026-11-06 | Scrapes Legistar, the agenda/minutes system a large share of US municipalities actually run. The one maintained client for it. |
+| Querido Diário | [okfn-brasil/querido-diario](https://github.com/okfn-brasil/querido-diario) | **MIT** | 1,429 / 492 | 2026-10-12 | Collects, normalises and publishes Brazilian municipal official gazettes. The most-starred live repo in this plane anywhere in the world — and it is LATAM-origin. |
+
+### Tier 2 — the judgment layer: live, independent, and all at zero stars
+
+These are not recommendations. They are the evidence that the demand is real and the supply has not
+consolidated: four separate people are building the same meeting-to-story agent right now, alone.
+
+| Repo | License | ★ | Last push | Note |
+|---|---|---|---|---|
+| [brooksmcmillin/council-watch](https://github.com/brooksmcmillin/council-watch) | none declared | 0 | 2026-11-21 | Scrape agendas/minutes, summarise. Six days old at time of pass |
+| [bradsk88/SaskatoonMinutes](https://github.com/bradsk88/SaskatoonMinutes) | none declared | 0 | 2026-11-26 | Ingests Saskatoon meeting minutes. One day old |
+| [plc/louisville-co-city-council-minutes](https://github.com/plc/louisville-co-city-council-minutes) | none declared | 2 | 2026-11-09 | Weekly AI pass over a city's YouTube channel |
+| [abhijeetsant/City_Council_Intelligence](https://github.com/abhijeetsant/City_Council_Intelligence) | **MIT** | 1 | 2026-03-04 | Civic transparency platform for San Ramon, CA |
+| [akgood/a2council_transcripts](https://github.com/akgood/a2council_transcripts) | **MIT** | 1 | 2025-12-24 | Closed-caption parser for Ann Arbor council meetings |
+| [danielwdunn/agenda-auditor](https://github.com/danielwdunn/agenda-auditor) | **Unlicense** | 0 | 2024-07-23 | Checks whether local governments post agendas on time |
+
+### The incumbent proof point: there is no model moat in this plane
+
+Hearst's **Assembly** — the most-deployed system in the plane — automates transcription, keyword
+detection and summaries for city-council, school-board and other public meetings, and its
+transcription runs on a **self-hosted instance of OpenAI's open Whisper model** (INMA; Hearst's own
+account). The incumbent's differentiator is therefore *not* the model: it is the per-jurisdiction
+ingest and the editorial review step. Both are addressable. `whisper` already appears 58× in this KB
+and `pyannote` 17× — the ASR layer was banked by earlier passes and needs no new row here.

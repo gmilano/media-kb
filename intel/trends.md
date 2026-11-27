@@ -4767,3 +4767,85 @@ imec-SMIT (May 2026) finds Europe's media sector most active at the application 
 is this plane's liability surface — the better the archive search, the more findable the article somebody
 has a legal right to make unfindable. Adoption of retrieval and exposure to erasure duties are the same
 project, and nobody is selling them as one.
+
+## Pass 49 (2026-11-27) — trends in the local & community news plane
+
+### Trend 1 — **The supply of local coverage is collapsing on a measured curve, and the demand signal is now unambiguous**
+
+United States, from the Medill State of Local News 2026 report published **2026-10-13**, as reported by
+Poynter, Editor & Publisher and Radio Ink (see the sourcing caveat below):
+
+| Measure | 2026 figure |
+|---|---|
+| Counties with no locally based professional news source | **238** — up 26 year-on-year, the largest single-year jump in Medill's research |
+| Newspapers closed or merged in the past year | **170** — more than three a week |
+| People with limited or no access to local news | **~47 million** |
+| New local news operations launched in the year | **75**, most of them digital-only |
+| Traffic to the websites of the 100 largest local newspapers | **−50% over four years** |
+| Share of local commercial TV newsrooms owned by 10 chains | **75%** |
+
+Poynter attributes the desert spike primarily to consolidation at two smaller Midwest newspaper
+chains, and Medill links the traffic decline to growing consumer use of AI platforms. Illinois has lost
+more newspapers than any other state.
+
+**Sourcing caveat, stated rather than hidden:** the Medill primary report is **not reachable from this
+session** (`localnewsinitiative.northwestern.edu` is outside the allowed network domains), so these
+figures come from secondary reporting. The secondary sources **disagree on the prior-year baseline** —
+one gives the 2025 desert count as 212, Poynter gives the prior year's closures as 136, and Medill's
+own 2025 report is cited at 148. The **2026 figures above are consistent across sources; the
+year-on-year deltas are not.** Quote the levels, not the deltas.
+
+### Trend 2 — **The gathering layer is twelve years mature and permissive; the judgment layer does not exist**
+
+Measured this pass, not asserted: `public meeting agenda scraper` returns **3 repos in the world**;
+`council minutes summarization` returns **7**, top four holding **2, 0, 0, 0** stars;
+`city council meeting transcript` returns **19**, top four summing to **7** stars. Below them sits a
+mature, permissive, actively-pushed stack — `city-scrapers` (MIT, 381★, 2026-11-24), `pupa` (BSD-3,
+91★, 2026-11-13), `python-legistar-scraper` (BSD-3, 53★, 2026-11-06), `civic-scraper` (Apache-2.0,
+82★), `klaxon` (MIT, 685★, pushed the day of this pass).
+
+And the demand is live: **three of the seven** `council minutes summarization` repos were pushed in the
+three weeks before this pass, all at 0–2 stars, by people who have evidently not found each other.
+The plane's shape is therefore the inverse of the generative-media planes: *the plumbing is solved and
+free; the editorial judgment layer is unbuilt.*
+
+### Trend 3 — **The incumbent runs on an open model, so the moat is ingest and review, not AI**
+
+Hearst's **Assembly** automates transcription, keyword detection and summarisation of city-council,
+school-board and other public meetings, and its transcription runs on a **self-hosted Whisper**
+instance (INMA, reporting Hearst's own account); its newsroom guidance still tells journalists to
+refer to the source material before publishing. Independent reporting on AI-native newsrooms (iMEdD
+Lab) describes the same pattern — a live transcription-to-draft pipeline with a human editing and
+fact-checking every draft. One small newsroom's published pipeline goes further and **kills the post**
+if the generated summary attributes a statement to an official that is not in the transcript.
+
+Three consequences. The model layer is commodity and already banked in this KB (`whisper` 58×,
+`pyannote` 17×). The defensible work is per-jurisdiction ingest and the verification gate. And the
+**verification gate is the sellable artefact**, because it is what makes the output publishable.
+
+### Trend 4 — **A CC0 registry produced a healthy ecosystem: the first positive instance of this KB's own law**
+
+Eleven passes recorded the law negatively — paywalled registries (CPT, MedDRA) and membership-closed
+identifiers (ISRC, ISWC, ISAN, EIDR) each produced a tooling vacuum. Here the jurisdiction identifier
+is **CC0-1.0** (`opencivicdata/ocd-division-ids`, 186★/99f) and the legislator dataset is **CC0-1.0**
+(`openstates/people`, 162★/126f) — and the surrounding tooling is permissive and alive. **The law
+predicts both directions, and this is the control case it previously lacked.**
+
+### Trend 5 — **Stars are the wrong metric here; forks are the installed base**
+
+`City-Bureau/city-scrapers-template` has **42 stars and 94 forks** (0.45 ★/fork). `openstates-core`
+30/44. `openstates/people` 162/126. `scrapers-ca` 36/30. In the generative-media planes this KB
+records ratios of 5–20×. A template forked more often than it is starred is a template being **run**,
+once per jurisdiction. Corollary for every future pass in this plane: a 3★ repo pushed yesterday
+(`city-scrapers-atl`, `city-scrapers-det`) is a live newsroom deployment, not a toy.
+
+### Trend 6 — **Money is arriving as public and philanthropic funding, which changes what the deliverable is**
+
+The UK prices council coverage directly: the BBC's Local Democracy Reporting Service funds **165
+reporters** across **118 contract areas** at **£40,790 per reporter per year** outside London and
+**£43,190** in London, +2% annually from year two, under contracts running to **end-2027** —
+coterminous with the BBC Charter. In the EU, EMFA requires public funding of media to be allocated on
+**public, proportionate and non-discriminatory criteria** and to be adequate, sustainable and
+predictable, preferably multi-year. In both cases the buyer is accountable for *how the money was
+allocated*, which makes an auditable allocation-and-output record part of the product rather than a
+nice-to-have. See `intel/market.md` for the regional detail and `compose/patterns.md` Pattern 108.

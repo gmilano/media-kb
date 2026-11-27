@@ -1823,6 +1823,51 @@ content ahead of an EU–Canada summit.
   numbers available are global or European; do not present a NA adoption rate from this KB.
 
 
+### Pass 49 (2026-11-27) — the local & community news layer in North America
+
+**This is the region where the demand is measured and the supply is permissive — the strongest
+alignment of the two in this plane anywhere in the world.**
+
+Demand, from the Medill State of Local News 2026 report (published **2026-10-13**; figures via Poynter,
+Editor & Publisher and Radio Ink — the primary site is not reachable from this session, and the
+secondary sources disagree on the prior-year baseline, so quote levels and not deltas):
+
+- **238 counties** with no locally based professional news source, up 26 year-on-year — the largest
+  single-year jump Medill has recorded.
+- **170 newspapers** closed or merged in one year: more than three a week.
+- **~47 million** people with limited or no access to local news.
+- **75 new local news operations** launched in the year, mostly digital-only — the buyer that has
+  capacity appetite but no staff.
+- Traffic to the **100 largest local newspaper sites fell 50% over four years**, which Medill links to
+  rising consumer use of AI platforms.
+- **10 chains own 75%** of local commercial TV newsrooms — a concentrated, reachable buying centre.
+- Illinois has lost more newspapers than any state; Poynter attributes the desert spike mainly to
+  consolidation at two smaller Midwest chains.
+
+Supply: the whole permissive gathering stack is North American in origin — `City-Bureau/city-scrapers`
+(MIT, 381★/324f, 2026-11-24) with its per-city instances, `biglocalnews/civic-scraper` (Apache-2.0,
+82★, Stanford), the `opencivicdata` family (`pupa` BSD-3 91★, `python-legistar-scraper` BSD-3 53★,
+`scrapers-us-municipal` MIT 117★), `themarshallproject/klaxon` (MIT, 685★, pushed the day of this
+pass), plus the **CC0** identifier assets (`ocd-division-ids` 186★, `openstates/people` 162★).
+**Canada is served inside the same family** by `opencivicdata/scrapers-ca` (MIT, 36★/30f, 2026-10-05).
+
+**Opportunities.**
+
+1. **The meeting-to-story desk with a verification gate** (Pattern 105). Hearst already built this
+   in-house on self-hosted Whisper; the 75 startups and the mid-tier chains cannot. Sell the gate, not
+   the transcription — the gate is what makes output publishable.
+2. **The per-jurisdiction scraper factory** (Pattern 106). `city-scrapers-template` has **94 forks to
+   42 stars**: the fork-per-jurisdiction model is already the norm, and industrialising it — onboarding
+   a new county in hours, not weeks — is a repeatable, billable unit of work.
+3. **Legistar coverage as the wedge.** `legistar` returns 70 repos but exactly one maintained client
+   (BSD-3). Whoever keeps that client healthy touches a large share of US municipalities.
+4. **Local-TV chains as the consolidated buyer.** Ten owners controlling 75% of newsrooms means the
+   same build sells ten times, which is the opposite of the fragmented publisher market.
+
+**Caution.** The cheapest competitor is not a vendor, it is in-house: Hearst's Assembly proves a
+newsroom with engineers will build this on open models. Target the tier that has neither, and bring
+the ingest library and the evidence trail rather than a model.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3840,6 +3885,68 @@ an audit trail — because the measured liability here is **delay**, not refusal
 - No verified figure for the size of the European DSAR/compliance-tooling segment specific to media.
 
 
+### Pass 49 (2026-11-27) — the local & community news layer in EMEA
+
+**This is the only region that has put a published unit price on the thing this plane automates, and
+that price is the most useful number in the pass.**
+
+The BBC's **Local Democracy Reporting Service** places reporters inside local outlets: the BBC funds
+them, local and regional publishers employ and train them, and the copy is shared with all qualifying
+partners. From the 2025 supplier reselection (UK Find a Tender records) and press reporting:
+
+| Parameter | Value |
+|---|---|
+| Annual BBC funding | **~£8M/year** |
+| Reporters funded | **165**, across **118 contract areas** |
+| Price per reporter (outside London) | **£40,790 per annum** |
+| Price per reporter (London) | **£43,190 per annum** |
+| Uplift | **+2% annually from year two** |
+| Contract term | From **1 July**, two-and-a-half years, to **end-2027** — coterminous with the BBC Charter |
+| Largest partners | Reach, Newsquest, National World; four organisations managing LDRs for the first time |
+
+**Why it matters commercially:** £40,790 is the published cost of one council-reporter-year. Any
+automation proposal in this plane can finally be priced against a real alternative instead of against
+a guess — and the **end-2027 Charter boundary is a hard procurement window**, with the BBC's
+director-general already discussing expanding the scheme beyond local authorities and consulting
+partners first.
+
+**Regulatory frame.** The **European Media Freedom Act** entered into force 7 May 2024 with most
+provisions applying from **8 August 2025**. Its funding provisions require public funds for media to be
+allocated on **public, proportionate and non-discriminatory criteria**, and to be **adequate,
+sustainable and predictable, preferably multi-year**. The EBU, commenting on the 2026 EU Rule of Law
+Report (July 2026), says national implementation remains **slow and uneven**. The Liberties Media
+Freedom Report (April 2026) flags the mirror risk: **over-dependence of local media on public funds is
+itself an EMFA sustainability concern.**
+
+**EU money for this plane is small and should be sized honestly:** a **€2M** line for innovation in
+local and regional media and pluralism; **€5M** of Creative Europe Journalism Partnerships regranting
+for local and investigative journalism; and the **€3M** `PPPA-2026-MEDIA-FREEDOM-HUB` call, which
+closed **28 May 2026** with evaluation results expected September 2026. An August 2026 Media Support
+(PM4D) report argues funding alone does not produce sustainability and that local funds should be
+redesigned around the capacities of smaller outlets.
+
+Supply: the EMEA civic stack is mySociety's, and it is **copyleft by deliberate choice** —
+`alaveteli` AGPL-3.0-or-later with an MIT carve-out (421★/209f), `fixmystreet` AGPL
+(628★/295f, pushed the day of this pass) — with `theyworkforyou` (265★) the **permissive** exception
+at BSD-3-style. mySociety's licence file states the reasoning: they use AGPL precisely because the
+deliverable is a hosted website.
+
+**Opportunities.**
+
+1. **The EMFA-conformant allocation-and-output evidence pack** (Pattern 108). "Public, proportionate
+   and non-discriminatory" is an auditable artefact, and nobody is selling it. It applies to every
+   member state distributing media support, and the EBU says implementation is uneven — which is where
+   advisory work lives.
+2. **Price against £40,790.** A coverage-capacity build that credibly extends 165 reporters across 118
+   areas has a defensible business case before the Charter boundary at end-2027.
+3. **AGPL-safe architecture as a deliverable in itself.** Clients standing up Alaveteli or morph for
+   citizens are inside the network-copyleft clause. Draw the REST boundary, and keep the permissive
+   agent layer separate and theirs.
+
+**Gap, stated.** No 2026 Commission assessment of how local and regional outlets have actually fared
+under EMFA was found this pass; the available material is advocacy and NGO reporting. Do not present
+EMFA's local-media effect as measured — only its obligations are.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -5834,6 +5941,65 @@ and the only sane architecture is one that treats the rule as data.
 - The Delhi judgment's text was not read directly — the account here rests on legal reporting
   (SCC Online, Verdictum). The case citation should be verified against the judgment before client use.
 
+
+### Pass 49 (2026-11-27) — the local & community news layer in APAC
+
+**This is the region where the civic stack is almost entirely copyleft, so the licence constraint
+bites harder here than anywhere else in the plane.**
+
+Supply, all of it OpenAustralia Foundation and all pushed within days of this pass:
+
+| Repo | License | ★ / forks | Last push |
+|---|---|---|---|
+| [openaustralia/morph](https://github.com/openaustralia/morph) | **AGPL-3.0** | 483 / 82 | **2026-11-27** |
+| [openaustralia/theyvoteforyou](https://github.com/openaustralia/theyvoteforyou) | **AGPL-3.0-or-later** (file read, 35,278 B) | 169 / 40 | **2026-11-27** |
+| [openaustralia/planningalerts](https://github.com/openaustralia/planningalerts) | **GPL-2.0** (file read, 18,147 B; API `NOASSERTION`) | 117 / 54 | 2026-11-26 |
+| [openaustralia/openaustralia](https://github.com/openaustralia/openaustralia) | **AGPL-3.0** | 26 / 12 | **2026-11-27** |
+| [openaustralia/twfy](https://github.com/openaustralia/twfy) | **BSD-3-Clause** | 17 / 14 | **2026-11-27** |
+| [openaustralia/morph-cli](https://github.com/openaustralia/morph-cli) | **MIT** | 10 / 9 | 2026-11-10 |
+
+The two permissive pieces hold **27 stars between them**. Everything with real adoption is AGPL or
+GPL. An engagement that hosts `morph` as a scraping service for a client is squarely inside the AGPL
+network clause — in this region that is the default, not the edge case.
+
+**Money and regulation.** Australia enacted the **News Bargaining Incentive**: platforms with more than
+**A$250M** in Australian digital advertising revenue are pushed to strike deals with eligible news
+businesses or pay a charge redistributed to the news sector, with the government stating it does not
+intend to raise revenue from the policy. Two discrepancies worth carrying rather than smoothing over:
+sources give the date as **passed 20 August 2026** versus **enacted 26 August 2026** (KPMG), and the
+rate as **2.25%** on consolidated revenue attributable to Australia in the April exposure draft versus
+**2.5% on digital-ad revenue** in the August design, which also adds LinkedIn and treats AI separately.
+A **5%** grant component is built in. The Conversation's critique is the relevant one for this plane:
+the scheme **excludes many small and independent outlets** and is insufficient for **regional**
+publishers specifically — i.e. the money lands with the incumbents, and regional coverage capacity
+stays unfunded.
+
+Regionally, AI regulation is accelerating and diverging. Latham & Watkins (September 2026) groups it
+into binding risk-based frameworks with tiered obligations (**South Korea**, **Vietnam**) and targeted
+AI regulation (**China**), noting significant acceleration across the past year. The Asia-Pacific
+Broadcasting Union reports public broadcasters in **Australia** and **Singapore** exploring AI for
+newsroom workflows, archiving and verification — which is the public-service entry point for this
+plane. An April 2026 ASEAN policy brief finds regional cooperation on media regulation recognised but
+progressing slowly.
+
+**Opportunities.**
+
+1. **Public-service broadcasters as the first buyer.** ABU reporting puts ABC/Australia and Singapore
+   already inside newsroom-workflow AI; a verification-gated meeting-coverage build fits their remit
+   and their governance appetite.
+2. **Regional-publisher coverage capacity, funded by the Incentive's 5% grant component.** The gap the
+   critics name — regional and small publishers excluded from platform deals — is exactly the gap a
+   shared, multi-tenant gathering service closes at a cost those outlets can carry.
+3. **Licence-clean rebuilds.** Where a client needs to own and embed the code, the APAC stack's AGPL
+   core makes the permissive North American family (`city-scrapers` MIT, `pupa` BSD-3,
+   `civic-scraper` Apache-2.0) the better foundation, re-pointed at Australian jurisdictions. That is
+   a concrete, defensible reason to start from the US repos in an APAC engagement.
+
+**Gap, stated explicitly.** This pass searched for **India's regional-language local-news AI adoption**
+and found nothing usable: the `AI media APAC` sweeps returned platform, consumer and market-research
+material, and the targeted search returned Australian results only. India is the largest local-language
+news market in the region and this KB has **no measured supply or demand data for it** in this plane.
+That is an informed gap, not coverage — and it is the first thing the next APAC pass should close.
 
 ### LATAM
 
@@ -7919,6 +8085,77 @@ Latin America the defensible act is usually the refusal, not the deletion.**
 - No LATAM figure for compliance-tooling spend in media.
 
 
+### Pass 49 (2026-11-27) — the local & community news layer in LATAM
+
+**The finding of this pass, and it reverses the usual regional story: the world's only consolidated
+municipal-gazette platform is Brazilian, MIT-licensed, and the most-starred live repo in this plane
+anywhere.**
+
+[okfn-brasil/querido-diario](https://github.com/okfn-brasil/querido-diario) — Open Knowledge Brasil —
+is **MIT**, **1,429★/492f**, last pushed **2026-10-12**, with a matching MIT API (66★) and frontend
+(59★). It collects, classifies and publishes the official gazettes of Brazilian municipal executives;
+a mySociety write-up puts coverage at roughly **350 cities**, and it is listed by the Digital Public
+Goods Alliance and in the IDB's open-source solutions catalogue.
+
+The measurement that makes it remarkable: `official gazette scraper` returns **10 repos in the whole
+world**, and every other one is a single-country one-off — Germany's Bundesanzeiger (10★, 2024),
+Spain's BOE (4★), Algeria's JORADP (Apache-2.0, 1★), Jordan's gazette (0★). **Brazil is the only place
+where gazette ingestion was turned into maintained, reusable, permissive infrastructure.** For a
+LATAM engagement this is a local asset of genuine international standing; for an EMEA or APAC
+engagement it is the reference implementation to port.
+
+**Demand, measured by a primary regional source.** The **Atlas da Notícia** (Projor), 7th edition:
+
+| Measure | Figure |
+|---|---|
+| Municipalities surveyed | **5,570** |
+| News deserts identified | **2,504 — ~45% of municipalities** |
+| Population in news deserts | **20.6 million — 10.2% of Brazilians** |
+| Two-year change | **−7.7%** (251 municipalities left desert status, 43 entered) |
+| Regional detail | Nordeste had the largest absolute reduction; **Sudeste has the highest proportion**, near 50% |
+
+**Two caveats that must travel with those numbers.** First, **there is no 2026 edition with new
+figures** — the 7th edition (2025 data) is the most recent consolidated release, and the announced 8th
+edition will extend the census to social-native, newsletter and podcast initiatives. Second, a
+competing April 2026 analysis by NexOS, cross-referencing Atlas with other bases, reports **1,974
+municipalities with no local outlet** against Atlas's 2,504; **the methodological difference is not
+explained in either source, so the two must not be mixed or averaged.**
+
+**Regulation.** Mexico published **copyright and labour amendments on 14 May 2026** — described as its
+first sector-specific AI regulation — and an **audiovisual law on 22 May 2026** adding obligations for
+video-on-demand platforms. **Uruguay** was the first country in the region to sign the Council of
+Europe's AI framework convention (2025). Brazil, Argentina, Chile, Colombia and Costa Rica are all
+developing AI governance frameworks, and Baker McKenzie's assessment is that **no Latin American
+country yet has a mature, harmonised regime across sectors**.
+
+**The ecosystem is organised and is explicitly asking for what this plane sells.** Aspen Digital's
+*Mind the Gap: AI and the Future of News in Latin America* (January 2026) argues for **regional
+coalitions that share AI assets** and work jointly on attribution and licensing. IFPIM backs regional
+AI initiatives and runs the **CTRL+J** convenings on AI regulation and media sustainability. Colombia's
+**FLIP** and Argentina's **ADEPA** research adoption while tracking national regulatory debates, and
+**SiPreBA** with the Heinrich Böll Foundation published *Notes Toward Regulating Artificial
+Intelligence in the Media* (May 2026). The Inter American Press Association's 2026 meetings frame the
+open questions as intellectual property, audience relationships and financial sustainability.
+
+**Opportunities.**
+
+1. **Gazette-to-alert as a productised service** (Pattern 107). Querido Diário solves acquisition and
+   normalisation under MIT; what no one has built is the **judgment layer** on top — classify the act,
+   detect what matters to a given municipality, alert the reporter or the citizen. The corpus is
+   already there and the licence permits everything.
+2. **Shared regional infrastructure, which is the stated ask.** Aspen Digital's recommendation of
+   coalitions sharing AI assets maps directly onto a multi-tenant deployment: one gathering service,
+   many small outlets, costs divided — for a market where 45% of municipalities have no outlet at all.
+3. **Port the Brazilian pattern.** A gazette platform that works across 5,570 municipalities is a
+   template for any country with municipal official-journal publication, and the MIT licence makes
+   that portable without negotiation.
+
+**Caution, and it is a specific one.** [okfn-brasil/serenata-de-amor](https://github.com/okfn-brasil/serenata-de-amor)
+is the region's most-starred civic-AI repo at **4,627★/654f** — and it has **not been pushed since
+2024-01-31**, nearly 22 months. Its intelligence component (`rosie`, 406★) and its API (`jarbas`,
+292★) are both **ARCHIVED**, and `perfil-politico` (166★) is archived too. Serenata is the name a
+client or a careless pass will reach for first; **it is not a live foundation.** Querido Diário is.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -9718,3 +9955,29 @@ that is the better outcome: the engagement is the build and the policy work, not
 post-publication segment. It is not sized by anyone, and the adjacent DSAR figure covers enterprise
 subject-access software — a different buyer with a different budget. Quoting it as a media number would
 be the same scope error this file has refused eleven times before.
+
+## Market size — pass 49 addendum (2026-11-27): the plane with **no market figure and a published per-unit price**, which is the better number
+
+No market-research figure exists for local/community news coverage tooling. Searched this pass; nothing
+found, and consistent with this file's eleven prior refusals, **no size is published here.** The
+adjacent segments that are sized (newsroom CMS, media monitoring) have different buyers and quoting
+them for this plane would be the same scope error refused before.
+
+What this plane has instead is rarer and more useful: **a published price for the human alternative.**
+
+| Priced item | Figure | Source | Why it is the number to quote |
+|---|---|---|---|
+| **One council reporter-year, UK** | **£40,790** (non-London) / **£43,190** (London), +2%/yr from year two | BBC Local Democracy Reporting Service supplier contracts, 2025 reselection (UK Find a Tender) | The published cost of the capacity this plane automates. Automation proposals can be priced against it rather than against a guess |
+| LDRS programme total | **~£8M/year** for **165** reporters across **118** contract areas, contracts to **end-2027** | BBC / News Media Association Local News Partnership | Sizes the whole UK council-coverage market and sets the procurement window |
+| Newspack managed service | **3–6% of publisher revenue** (plug-ins themselves GPL and free to self-host) | Google News Initiative CMS directory | The revenue-share benchmark a platform build argues against |
+| Newspack build cost | **$1.2M** from Google News Initiative; **$2.4M** round reported with partners | Google blog; WP Tavern | What it cost to build the incumbent local-news platform |
+| EU local/regional media innovation line | **€2M** | European Commission | Sizes the EU's direct money for this plane — small, and worth saying so |
+| Creative Europe Journalism Partnerships regranting | **€5M** | European Commission | The larger adjacent pot for local and investigative journalism |
+| `PPPA-2026-MEDIA-FREEDOM-HUB` | **€3M**, closed **28 May 2026**, results expected September 2026 | EU Funding & Tenders Portal | A live, dated funding instrument |
+| US local-news coverage tooling | **No figure exists** | — | Searched; nothing found |
+
+**The finding is the £40,790.** Every other plane in this KB is argued with vendor CAGRs that disagree
+by factors of two to twenty-eight. This one can be argued with a procurement record: a public
+broadcaster publishes what it pays, per reporter, per year, under contract to a known end date. That is
+the strongest commercial footing of any plane in this file — and it exists because the buyer is
+accountable for public money, not because the market is better measured.

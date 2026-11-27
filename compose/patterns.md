@@ -7570,3 +7570,185 @@ de-indexing propagation: the standard cannot express it.**
 **Sell it as:** EMEA first (Italy, and the measured liability is latency), then Canada within NA (global
 de-indexing of judicial records), then India (court-ordered masking). In Brazil, pair it with Pattern 103
 and lead with the refusal.
+
+---
+
+## Pattern 105 — The council-meeting desk: agenda to publishable story, with the verification gate as the product
+
+**For:** a local publisher, a chain, or a public broadcaster that needs coverage of municipal meetings
+nobody currently attends. This is the plane's flagship build.
+
+**Why the gate and not the transcript:** Hearst's Assembly already does transcription, keyword
+detection and summarisation of council and school-board meetings on a **self-hosted Whisper** — the
+model layer is commodity. What makes output *publishable* is the step that proves every attributed
+statement exists in the source. One published newsroom pipeline **kills the post** when the summary
+attributes a statement to an official that is not in the transcript; that behaviour is the deliverable.
+
+```
+[Discovery]  City-Bureau/city-scrapers (MIT, 381*)  ── meetings, standardised
+             biglocalnews/civic-scraper (Apache-2.0, 82*) ── agendas/minutes documents
+             opencivicdata/python-legistar-scraper (BSD-3, 53*) ── for Legistar municipalities
+                     │
+                     ▼
+[Join key]   opencivicdata/ocd-division-ids (CC0-1.0, 186*) ── canonical jurisdiction ID
+             openstates/people (CC0-1.0, 162*) ── officials, for attribution checking
+                     │
+                     ▼
+[Audio/ASR]  whisper / whisper.cpp + pyannote (already in this KB: agents/top.md)
+                     │                             speaker turns → named officials
+                     ▼
+[GATE]       claim-by-claim check: every quoted statement must match a transcript span,
+             every named official must match an openstates/people record.
+             No match → the item does not publish. Log the refusal with the span offsets.
+                     │
+                     ▼
+[Publish]    CMS over REST ONLY — Newspack (GPL-2.0) / Largo (GPL-2.0) stay behind an API boundary
+             Alert path: themarshallproject/klaxon (MIT, 685*) for page-change watching
+```
+
+**Licence boundary, and it is the whole architecture:** everything left of `[Publish]` is
+MIT/Apache/BSD/CC0 and stays yours. The CMS is GPL-2.0 by WordPress inheritance, so integrate over its
+REST API and **never as a plugin compiled into the tree**. The REST boundary is the licence boundary.
+
+**What to bill:** per-jurisdiction onboarding, and the gate. Not the ASR.
+
+**Qualifying question:** *"when a council meeting happens in your smallest market tomorrow, who is in
+the room?"* If the answer is nobody, the build has a measurable before/after. If the answer is a
+reporter, price against them — in the UK that price is published (£40,790/year; see Pattern 108).
+
+---
+
+## Pattern 106 — The per-jurisdiction scraper factory: industrialise the fork
+
+**For:** any engagement covering more than three jurisdictions — a chain, a state/provincial
+broadcaster, a regional coalition.
+
+**The evidence this is the right shape:** `City-Bureau/city-scrapers-template` has **42 stars and 94
+forks** — forks outnumber stars 2.2×. The fork-per-jurisdiction pattern is already how this ecosystem
+works; City Bureau runs its own instances that way (`city-scrapers-cle` 17★ pushed 2026-11-24,
+`city-scrapers-det` 4★ 2026-11-24, `city-scrapers-atl` 3★ 2026-10-20). Nobody has industrialised it.
+
+```
+[Template]   City-Bureau/city-scrapers-template (MIT, 42*/94f) ── fork per jurisdiction
+[Core lib]   City-Bureau/city-scrapers-core (MIT) ── shared behaviour, upgraded centrally
+[Framework]  opencivicdata/pupa (BSD-3, 91*) ── scheduling + data model
+[Vendor]     opencivicdata/python-legistar-scraper (BSD-3, 53*) ── Legistar municipalities
+             (`legistar` = 70 repos, exactly ONE maintained client: this is the leverage point)
+[Identity]   opencivicdata/ocd-division-ids (CC0-1.0) ── every jurisdiction gets a canonical ID
+[Runner]     GitHub Actions (the template already ships this) or openaustralia/morph (AGPL-3.0 —
+             fine to run internally; hosting it as a service for a client triggers the network clause)
+```
+
+**The engineering work that is actually billable:** a jurisdiction-onboarding harness — given a council
+URL, identify the platform (Legistar, BoardDocs, Granicus, bespoke), generate the scraper, validate
+against a known meeting, and register the OCD division ID. Onboarding in hours instead of weeks is the
+product; the scrapers themselves are commodity and permissive.
+
+**Do not rank candidate repos by stars in this plane.** A 3★ repo pushed yesterday is a live newsroom
+deployment (see `intel/trends.md` Trend 5).
+
+---
+
+## Pattern 107 — Gazette-to-alert: the LATAM build that has a corpus waiting for a judgment layer
+
+**For:** a Brazilian or Spanish-speaking LATAM publisher, a civic organisation, or a regional coalition.
+
+**Why this one is unusually ready:** `okfn-brasil/querido-diario` (**MIT**, 1,429★/492f, pushed
+2026-10-12) has already solved acquisition and normalisation of municipal official gazettes at roughly
+350 cities, with an MIT API (66★) and frontend (59★). Globally, `official gazette scraper` returns only
+**10 repos** and every other one is a single-country one-off. The corpus exists, the licence permits
+everything, and **the classification-and-alerting layer on top does not exist.**
+
+```
+[Corpus]     okfn-brasil/querido-diario (MIT) ── gazettes, normalised
+[Access]     okfn-brasil/querido-diario-api (MIT) ── FastAPI over the corpus
+                     │
+                     ▼
+[Classify]   act type (contract award, tender, appointment, budget change, land decision)
+             + the municipality's own thresholds (value, department, named entities)
+                     │
+                     ▼
+[GATE]       every alert cites the gazette, the date, the page and the verbatim span.
+             A gazette is a legal record: no paraphrase without the citation attached.
+                     │
+                     ▼
+[Deliver]    reporter alert (newsroom) / citizen subscription (civic) / dataset (coalition)
+             Monitoring companion: themarshallproject/klaxon (MIT) for the pages that are not gazetted
+```
+
+**Demand to size it against:** Atlas da Notícia's 7th edition counts **2,504 news deserts among 5,570
+municipalities (~45%)** and **20.6M people (10.2%)** in them. Those municipalities still publish
+gazettes even when no journalist reads them — **the public record outlives the newsroom**, and that is
+the premise of this pattern.
+
+**Two cautions.** Do not build on `serenata-de-amor` (4,627★ but **no push since 2024-01-31**;
+`rosie` and `jarbas` ARCHIVED) — it is the name clients reach for and it is not maintained. And do not
+mix the Atlas figure (2,504) with NexOS's April 2026 figure (1,974): different methodologies, neither
+reconciled.
+
+**Portability is the upside:** any country with municipal official-journal publication can run this
+pattern, and the MIT licence means porting needs no negotiation.
+
+---
+
+## Pattern 108 — The funding-evidence pack: making public money for local news auditable
+
+**For:** a public broadcaster, a media regulator, a ministry or a foundation that distributes money for
+local coverage — and for the publishers that have to account for it.
+
+**Why it sells:** EMFA requires public funding of media to be allocated on **public, proportionate and
+non-discriminatory criteria** and to be **adequate, sustainable and predictable, preferably
+multi-year**. The EBU reports national implementation is **slow and uneven** (2026 EU Rule of Law
+Report), and the Liberties Media Freedom Report (April 2026) flags over-dependence of local media on
+public funds as itself an EMFA sustainability concern. Meanwhile the UK already runs the model
+transaction: **165 reporters, 118 contract areas, £40,790 per reporter-year**, contracts to **end-2027**.
+Both sides need the same artefact and neither has tooling for it.
+
+```
+[Allocation record]  criteria, weights, applicants, scores, decisions — published, versioned,
+                     diffable. "Non-discriminatory" is only demonstrable if the rule predates
+                     the decision, so VERSION the criteria and timestamp them.
+[Output record]      what the money produced: meetings covered, jurisdictions reached, stories
+                     published, per contract area. Sourced from Pattern 105/106 telemetry,
+                     not self-reported.
+[Coverage baseline]  the gap being closed, measured — Medill-style county/area counts (NA),
+                     contract areas (UK), Atlas da Notícia municipalities (BR)
+[Join key]           opencivicdata/ocd-division-ids (CC0-1.0) / openstates/people (CC0-1.0)
+                     so allocation, output and baseline all reconcile to the same jurisdiction
+```
+
+**The deliverable is the evidence trail, not a dashboard.** It must answer, for one contract area and
+one year: what was the rule, who applied, who got the money, what coverage appeared, and what the gap
+was before. Every element is derivable from permissive components plus the client's own records.
+
+**Where it lands by region:** EMEA on EMFA conformance and the Charter window; North America for the
+philanthropic and chain-level funders (the 75 new outlets must report to funders); LATAM as the shared
+accountability layer Aspen Digital's January 2026 report explicitly calls for.
+
+**Qualifying question:** *"if a regulator asked you to show why this outlet received funding and that
+one did not, what would you send?"*
+
+---
+
+## ⛔ What not to promise in this plane (pass 49)
+
+- **Do not promise a permissively-licensed turnkey platform.** The deployable local-news platforms are
+  WordPress derivatives and therefore **GPL-2.0** (Newspack, Largo); the civic-service platforms are
+  **AGPL-3.0** (Alaveteli, morph, MuckRock). The only permissive platform here is
+  `datamade/django-councilmatic` (MIT, 26★) and it is a council tracker, not a publishing system.
+- **Do not start from `Automattic/newspack-plugin`** — **ARCHIVED 2026-08-18**, and still the URL most
+  funder and CMS-directory pages cite. Live code: `Automattic/newspack-workspace`,
+  `OpenProducer/newspack-platform`.
+- **Do not build on `okfn-brasil/serenata-de-amor`** (no push since 2024-01-31; `rosie`/`jarbas`
+  archived) however impressive its 4,627 stars look.
+- **Do not claim an AI moat.** The incumbent (Hearst Assembly) runs on self-hosted Whisper. The moat is
+  per-jurisdiction ingest and the verification gate.
+- **Do not read licences from SPDX fields in this plane.** Six repos report `NOASSERTION` and all six
+  have licence files; `INN/largo`'s is at `trunk/license.txt` on a `trunk` default branch, and its
+  `repo:` search query returns HTTP 422 outright. Read the files.
+- **Do not quote Medill year-on-year deltas.** The 2026 levels are consistent across secondary sources;
+  the prior-year baselines are not (212 vs 148 vs 136), and the primary report is unreachable from this
+  environment.
+- **Do not mix the two Brazilian news-desert counts** (Atlas 2,504 vs NexOS 1,974) — unreconciled
+  methodologies.
+- **Do not size this plane.** No market figure exists. Use the published £40,790 reporter-year instead.

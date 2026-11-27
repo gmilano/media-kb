@@ -5312,3 +5312,173 @@ be read" is a three-value enum.
 **Nine rows, and only three of them are alive** (`newsinjson`, `schemaorg`, `arx` — and `arx` last moved
 in Oct 2025). Every artefact on this plane that tried to model *the request itself* is archived, dead or
 unlicensed. Stated plainly because it is the buyable fact: a client cannot adopt this layer, only build it.
+
+## Pass 49 (2026-11-27) — the local & community news plane: **the law of this KB confirmed with its sign reversed, and the NOASSERTION mechanism finally identified**
+
+Every row verified this pass: existence via `git ls-remote`, stars/forks/last-push via GitHub
+`search/repositories`, and **licence by reading the actual licence file** wherever the API returned
+`NOASSERTION` — which in this plane it did for six repos, all six of which do have one.
+
+### The structural finding: the law holds, and here it points the other way
+
+Eleven prior passes established the law negatively: *the regulator creates the obligation, but the
+licence of the knowledge content decides whether open source can satisfy it* — CPT in healthcare,
+MedDRA in pharmacovigilance, ISRC/ISWC/ISAN/EIDR in rights. Every instance was a **zero**: the
+registry was paywalled or membership-closed, so the tooling never appeared.
+
+This plane is the **first positive confirmation**. The identifier layer here is *public domain*:
+
+| Identifier / data asset | Repo | License | ★ / forks | Last push |
+|---|---|---|---|---|
+| Open Civic Data division IDs — the canonical jurisdiction identifier | [opencivicdata/ocd-division-ids](https://github.com/opencivicdata/ocd-division-ids) | **CC0-1.0** (licence file read; API says `NOASSERTION`) | 186 / 99 | 2026-11-13 |
+| Curated data on every US state legislator & governor | [openstates/people](https://github.com/openstates/people) | **CC0-1.0** | 162 / 126 | 2026-11-26 |
+
+And the tooling around it is healthy and permissive — `pupa` BSD-3, `python-legistar-scraper` BSD-3,
+`python-opencivicdata` BSD-3, `scrapers-us-municipal` MIT, `city-scrapers` MIT, `civic-scraper`
+Apache-2.0. **When the identifier registry is CC0, the permissive gathering layer exists.** Same law,
+opposite sign, and it is the strongest argument this KB has for why the rights planes are empty.
+
+### Foundational repos — the permissive gathering layer
+
+| Repo | License | ★ / forks | Last push | Why it matters |
+|---|---|---|---|---|
+| [City-Bureau/city-scrapers](https://github.com/City-Bureau/city-scrapers) | **MIT** | 381 / 324 | 2026-11-24 | The reference implementation: public meetings scraped, standardised, shared. Built with ProPublica Illinois |
+| [City-Bureau/city-scrapers-template](https://github.com/City-Bureau/city-scrapers-template) | **MIT** | 42 / **94** | 2026-08-26 | **Forks outnumber stars 2.2×** — see the ratio finding below. The intended way to start a new jurisdiction |
+| [City-Bureau/city-scrapers-core](https://github.com/City-Bureau/city-scrapers-core) | **MIT** | 8 / 10 | 2026-11-13 | The shared library the per-city projects depend on |
+| [biglocalnews/civic-scraper](https://github.com/biglocalnews/civic-scraper) | **Apache-2.0** (file read: 553 B Apache *notice*, not the full text; API `NOASSERTION`) | 82 / 27 | 2026-09-11 | Stanford Big Local News. Agenda/minutes acquisition as a library, not a site |
+| [opencivicdata/pupa](https://github.com/opencivicdata/pupa) | **BSD-3-Clause** | 91 / 43 | 2026-11-13 | The scraping framework and data model beneath the ecosystem |
+| [opencivicdata/scrapers-us-municipal](https://github.com/opencivicdata/scrapers-us-municipal) | **MIT** | 117 / 73 | 2026-04-13 | Municipal scrapers at scale. Healthy fork ratio, slower cadence |
+| [opencivicdata/python-legistar-scraper](https://github.com/opencivicdata/python-legistar-scraper) | **BSD-3-Clause** | 53 / 30 | 2026-11-06 | Legistar is the incumbent municipal agenda system; this is its one maintained open client |
+| [opencivicdata/python-opencivicdata](https://github.com/opencivicdata/python-opencivicdata) | **BSD-3-Clause** | 39 / 31 | 2026-11-06 | The Python data-model utilities |
+| [opencivicdata/scrapers-ca](https://github.com/opencivicdata/scrapers-ca) | **MIT** | 36 / 30 | 2026-10-05 | **Canadian** legislative scrapers — the one non-US permissive member of this family |
+| [themarshallproject/klaxon](https://github.com/themarshallproject/klaxon) | **MIT** | 685 / 190 | **2026-11-27** | Page-change monitoring for reporters. Highest-starred permissive repo in the plane |
+| [openstates/openstates-core](https://github.com/openstates/openstates-core) | **MIT** | 30 / 44 | 2026-11-25 | Data model + scraper backend. Forks exceed stars |
+| [openstates/openstates.org](https://github.com/openstates/openstates.org) | **MIT** | 70 / 63 | 2026-11-20 | The public site and its API surface |
+| [openstates/api-v3](https://github.com/openstates/api-v3) | **MIT** | 26 / 19 | 2026-10-24 | The current API version |
+| [okfn-brasil/querido-diario](https://github.com/okfn-brasil/querido-diario) | **MIT** (`LICENSE.md`; `LICENSE` is 404) | 1,429 / 492 | 2026-10-12 | Brazilian municipal gazettes, normalised. See the LATAM finding — this is the plane's world leader |
+| [okfn-brasil/querido-diario-api](https://github.com/okfn-brasil/querido-diario-api) | **MIT** | 66 / 38 | 2026-10-31 | FastAPI service over the gazette corpus |
+| [okfn-brasil/querido-diario-frontend](https://github.com/okfn-brasil/querido-diario-frontend) | **MIT** | 59 / 50 | 2026-10-31 | The search UI |
+| [mysociety/theyworkforyou](https://github.com/mysociety/theyworkforyou) | **BSD-3-Clause-style, custom** (file read, 1,894 B; API `NOASSERTION`) | 265 / 61 | 2026-11-17 | UK parliamentary monitoring. **Permissive — and in the same org as an AGPL repo** |
+| [openaustralia/twfy](https://github.com/openaustralia/twfy) | **BSD-3-Clause** | 17 / 14 | **2026-11-27** | The web-app component of OpenAustralia |
+| [openaustralia/morph-cli](https://github.com/openaustralia/morph-cli) | **MIT** | 10 / 9 | 2026-11-10 | CLI for morph; the only MIT piece of the APAC stack |
+| [datamade/django-councilmatic](https://github.com/datamade/django-councilmatic) | **MIT** | 26 / 16 | 2026-11-19 | Django app behind the `*.councilmatic.org` council-tracking sites |
+
+### The copyleft half — the platform and hosted-service layer
+
+| Repo | License | ★ / forks | Last push | Note |
+|---|---|---|---|---|
+| [openstates/openstates-scrapers](https://github.com/openstates/openstates-scrapers) | **GPL-3.0** | 929 / 522 | **2026-11-27** | The most active repo in the plane, pushed the day of the pass — and the one copyleft piece in an otherwise permissive org |
+| [mysociety/fixmystreet](https://github.com/mysociety/fixmystreet) | **AGPL-3.0-or-later**, per-file caveat (file read, 36,018 B) | 628 / 295 | **2026-11-27** | Map-based civic reporting; the most-starred mySociety repo |
+| [mysociety/alaveteli](https://github.com/mysociety/alaveteli) | **AGPL-3.0-or-later + documented MIT carve-out** (file read, 36,128 B) | 421 / 209 | 2026-11-26 | The international FOI-request platform. Licence is **not uniform** — see below |
+| [openaustralia/morph](https://github.com/openaustralia/morph) | **AGPL-3.0** | 483 / 82 | **2026-11-27** | Scraping-as-a-service. Correctly detected by the API — and that is the control case |
+| [openaustralia/theyvoteforyou](https://github.com/openaustralia/theyvoteforyou) | **AGPL-3.0-or-later** (file read, 35,278 B) | 169 / 40 | **2026-11-27** | Parliamentary voting records, built on the UK Public Whip lineage |
+| [openaustralia/planningalerts](https://github.com/openaustralia/planningalerts) | **GPL-2.0** (file read, 18,147 B; API `NOASSERTION`) | 117 / 54 | 2026-11-26 | Development-application alerts |
+| [MuckRock/muckrock](https://github.com/MuckRock/muckrock) | **AGPL-3.0** | 124 / 30 | 2026-11-24 | FOI filing at scale. Already referenced 20× in this KB from pass 20; listed here with its licence pinned |
+| [mysociety/mapit](https://github.com/mysociety/mapit) | `NOASSERTION` — **not file-verified this pass** | 274 / 90 | 2026-09-28 | Postcode→boundary service. Treat the licence as unresolved until read |
+| [mysociety/parlparse](https://github.com/mysociety/parlparse) | `NOASSERTION` — **not file-verified this pass** | 72 / 23 | 2026-11-26 | The parser producing TheyWorkForYou's data |
+
+### FINDING 1 — the `NOASSERTION` mechanism, identified with a controlled comparison
+
+Six repos in this plane report `NOASSERTION` and **all six have a licence file**. Earlier cycles knew
+that a `NOASSERTION` is not evidence of a missing licence; this pass identifies *why* it happens:
+
+> **GitHub's detector matches the licence file against known texts from byte 0. Anything that is not
+> a verbatim standard text from the first byte — a prepended copyright line, or a short-form notice
+> in place of the full text — comes back `NOASSERTION`.**
+
+The control case is inside a single organisation, so nothing else varies:
+
+| Repo (same org) | Licence file begins with | API verdict |
+|---|---|---|
+| `openaustralia/morph` | `GNU AFFERO GENERAL PUBLIC LICENSE` / `Version 3, 19 November 2007` | **AGPL-3.0 — detected** |
+| `openaustralia/planningalerts` | `Copyright (C) OpenAustralia Foundation Limited and original contributors to PlanningAlerts.com`, *then* `GNU GENERAL PUBLIC LICENSE Version 2` | `NOASSERTION` — **missed** |
+
+Same foundation, same era, same conventions; the only difference is the prepended copyright notice.
+`opencivicdata/ocd-division-ids` fails the same way (a CC0 summary sentence above the CC0 text).
+`biglocalnews/civic-scraper` fails by the second route: its `LICENSE` is a **553-byte Apache-2.0
+notice** ("Copyright 2020 Big Local News" + the standard "Licensed under the Apache License,
+Version 2.0" paragraph) rather than the full 11 KB text — a valid grant that the matcher cannot score.
+**CI rule:** an SBOM or licence gate reading SPDX fields alone will mark this plane's Apache-2.0,
+GPL-2.0 and CC0 assets as unlicensed, and a procurement process that treats "no SPDX" as "no grant"
+will reject exactly the permissive repos you most want.
+
+### FINDING 2 — licence varies by repository *within one organisation*, and deployment shape decides it
+
+`mysociety/alaveteli` is **AGPL-3.0-or-later**; `mysociety/theyworkforyou` is **BSD-3-Clause-style**.
+Same org, both `NOASSERTION`, opposite ends of the licence spectrum. mySociety states the reasoning in
+its own licence file, and it is worth quoting because it describes Globant's own delivery model:
+
+> "We offer the source code of our websites to our users. The GNU Affero GPL has the requirement that
+> anyone else using that code for their own websites also does the courtesy of offering the source
+> code to their users. … Since users of websites never get the binary, just HTML pages, [the GPL] is
+> no better a license than a BSD style license would be for them. For this reason, we use the GNU
+> Affero GPL."
+
+So the org picked AGPL **deliberately because the deliverable is a hosted website** — which is
+precisely how a civic-news service would be delivered. The network-copyleft clause attaches to the
+deployment, not to a shipped binary. Corollary: **you cannot infer a repo's licence from its
+organisation**, and in this plane the determinant is *what the code is* — a hosted service trends
+AGPL, a parser or data library trends BSD/MIT.
+
+And `alaveteli` is not uniform even within itself. Its licence file says "Unless otherwise stated in
+particular files or directories…" and then carves out: "acts_as_xapian in lib/acts_as_xapian is
+licensed with an MIT license." This is the `chromaprint` class of defect from pass 5 — **directory-scoped
+licensing that no SPDX field can express.** Resolve per directory before vendoring any part of it.
+
+### FINDING 3 — the default branch can be neither `main` nor `master` (method correction)
+
+[INN/largo](https://github.com/INN/largo), the Institute for Nonprofit News WordPress theme, defeated
+the probe three separate ways and is worth recording as the generalised fix:
+
+1. `git ls-remote --symref` reports its default branch as **`trunk`** — a WordPress-ecosystem
+   convention this KB's probe had never encountered. A `main`/`master`-only probe sees nothing.
+2. Its licence is at **`trunk/license.txt`** — lowercase, the filename pass 48 added to the probe.
+   It is **GPL-2.0**, 15,410 B. (`README.md` 404s on `master`, which is the tell that the branch, not
+   the file, is wrong.)
+3. `repo:INN/largo` returns **HTTP 422** from `search/repositories` — "the listed users and
+   repositories cannot be searched" — and a name search does not list it either, while `ls-remote`
+   resolves it and `raw` serves its files.
+
+**Two reusable rules.** First: resolve the default branch with `git ls-remote --symref` before probing
+paths; do not assume `main`/`master`. Second, and new: **the search index can return a false negative
+for a repository that exists.** `ls-remote` and `raw` are authoritative on existence; the search index
+is authoritative on nothing. Stars/forks/last-push for `INN/largo` are therefore **unavailable this
+pass** — recorded as unavailable rather than guessed. Its HEAD on `trunk` is `04e55ed`.
+
+### FINDING 4 — the archived-canonical trap: Newspack
+
+**[Automattic/newspack-plugin](https://github.com/Automattic/newspack-plugin) is ARCHIVED** as of
+**2026-08-18** (GPL-2.0, 13★/1f) — and it is the URL that external write-ups, funder pages and CMS
+directories still point to. The live code moved:
+
+| Repo | License | ★ / forks | Last push | Status |
+|---|---|---|---|---|
+| [Automattic/newspack-workspace](https://github.com/Automattic/newspack-workspace) | **GPL-2.0** | 28 / 21 | **2026-11-27** | Live — "all the code that's fit to ship" |
+| [OpenProducer/newspack-platform](https://github.com/OpenProducer/newspack-platform) | **GPL-2.0** (file read: `license.txt` is the WordPress licence, "Copyright 2011-2026") | 17 / 5 | 2026-11-26 | Live — the deployable platform bundle |
+| [Automattic/newspack-migration-tools](https://github.com/Automattic/newspack-migration-tools) | **no SPDX declared** | 20 / 5 | **2026-11-27** | Live — licence unresolved, do not vendor yet |
+| [Automattic/newspack-elections](https://github.com/Automattic/newspack-elections) | **GPL-2.0** | 12 / 6 | 2026-11-24 | Live |
+| [Automattic/newspack-content-converter](https://github.com/Automattic/newspack-content-converter) | **GPL-2.0** | 49 / 14 | 2026-08-20 | Live, slower |
+| [Automattic/newspack-plugin](https://github.com/Automattic/newspack-plugin) | GPL-2.0 | 13 / 1 | 2026-08-18 | **ARCHIVED — do not start here** |
+
+A pass that trusted the famous name would have shipped an archived repo as its recommendation. **Check
+`archived` on every row, not just the push date**: this repo's last push is only three months old, so
+a staleness heuristic alone would have passed it.
+
+### FINDING 5 — the fork-to-star inversion is this plane's installed-base signal
+
+In the generative-media planes this KB records star/fork ratios of 5–20× (admiration). Here:
+
+| Repo | ★ | Forks | ★/fork |
+|---|---|---|---|
+| `City-Bureau/city-scrapers-template` | 42 | **94** | **0.45** |
+| `openstates/openstates-core` | 30 | 44 | 0.68 |
+| `openstates/people` | 162 | 126 | 1.29 |
+| `opencivicdata/python-opencivicdata` | 39 | 31 | 1.26 |
+| `opencivicdata/scrapers-ca` | 36 | 30 | 1.20 |
+| `City-Bureau/city-scrapers` | 381 | 324 | 1.18 |
+
+A **template whose forks outnumber its stars by 2.2×** is the strongest installed-base evidence in
+this KB: nobody bookmarks a template, they fork it to run their own jurisdiction. City Bureau's own
+per-city instances confirm it — `city-scrapers-cle` (17★, pushed 2026-11-24), `city-scrapers-det`
+(4★, 2026-11-24), `city-scrapers-atl` (3★, 2026-10-20), `city-scrapers-fresno` (2★, 2026-06-23).
+**Do not rank this plane by stars.** A 3★ repo pushed yesterday is a running newsroom deployment.

@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 
 # 🏭 Vertical Platforms — Media & Entertainment
@@ -1744,3 +1744,49 @@ integration is the product. See `compose/patterns.md` pass 30, pattern **P17**.
 through the **Search Console API** or only the UI could not be confirmed — `developers.google.com`
 does not resolve from this session (outside the allowed network domains). Treat the API as **not
 confirmed**; scope the first iteration around a manual export and say so in the proposal.
+
+## The live-event, show-control & stagecraft tier — added 2026-11-27 (pass 31)
+
+These are the "Odoo for live events": complete, installable systems that a venue, touring production
+or installation already runs, and that an AI layer can sit on top of. **The licence shape of this tier
+breaks the rule that holds elsewhere in this file** — the KB's standing finding is *permissive at the
+pipeline, copyleft at the platform*, and here the single most complete platform, QLC+, is
+**Apache-2.0**. It is the clearest counter-example in the whole KB, and it is the reason this plane is
+worth leading with commercially.
+
+| Platform | Repo | Licence | Stars | What it replaces | AI layer to add |
+|---|---|---|---|---|---|
+| **QLC+** | [mcallegari/qlcplus](https://github.com/mcallegari/qlcplus) | **Apache-2.0** | 1,593★ | An entry/mid-tier lighting console (dot2, Onyx-class) | Cue generation from a script or audio; natural-language patching. `lights-pi` already bridges MCP→QLC+ |
+| **Bitfocus Companion** | [bitfocus/companion](https://github.com/bitfocus/companion) | MIT + CLA | 2,376★ | Proprietary control-surface middleware | Agent-authored button pages per show; anomaly alerts on device state |
+| **Chataigne** | [benkuper/Chataigne](https://github.com/benkuper/Chataigne) | GPL-3.0 | 1,718★ | QLab-class cueing for installations and museums | Sensor→state-machine authoring; the agent writes the state machine, a human approves it |
+| **xLights** | [xLightsSequencer/xLights](https://github.com/xLightsSequencer/xLights) | GPL-3.0 | 768★ | Pixel-show sequencing suites | Music→sequence generation; this is the one place the agent layer already has traction (32★, 10 forks) |
+| **Falcon Player (FPP)** | [FalconChristmas/fpp](https://github.com/FalconChristmas/fpp) | ⚠️ GPL-2 + LGPL-2.1 + **CC-BY-ND** | 747★ | Dedicated show-playback appliances | **Read the licence manifest before any client work** — some components may not be modified at all |
+| **Open Lighting Architecture** | [OpenLightingProject/ola](https://github.com/OpenLightingProject/ola) | LGPL-2.1 (in `COPYING`) | 773★ | Proprietary protocol-conversion boxes | The integration substrate: one daemon between an agent and every DMX transport |
+| **Linux Show Player** | [FrancescoCeruti/linux-show-player](https://github.com/FrancescoCeruti/linux-show-player) | GPL-3.0 | 314★ | QLab (macOS-only, proprietary) for sound playback | Cue-list generation from a script; auto-levelling |
+| **BlenderDMX** | [open-stage/blender-dmx](https://github.com/open-stage/blender-dmx) | GPL-3.0 | 291★ | Proprietary pre-visualisation (WYSIWYG-class) | Pre-vis from an MVR scene; render a look before the rig is built |
+| **MapMap** | [mapmapteam/mapmap](https://github.com/mapmapteam/mapmap) | GPL-3.0 | 731★ | MadMapper / Resolume-class mapping | Automated surface calibration; content fitting |
+| **WLED** | [wled/WLED](https://github.com/wled/WLED) | **EUPL-1.2** | 19,132★ | Proprietary LED controllers | Scene generation; but note the EU-law copyleft before embedding |
+
+### How to add the AI layer in this tier
+
+The integration seam is unusually clean, and it is the reason this plane is a good first engagement:
+**QLC+ exposes a web API, OLA exposes a daemon, and both speak sACN/Art-Net.** An agent never has to
+touch a fixture directly — it writes to a console or a daemon that already knows how to. That is the
+opposite of the generative-media planes, where the agent *is* the pipeline.
+
+Sequence it: (1) agent proposes, (2) console holds the authoritative show file, (3) a human programmer
+reviews in pre-vis, (4) the rig executes. The reviewable artefact in step 2–3 is **MVR**
+([python-mvr](https://github.com/open-stage/python-mvr), MIT) — treat it exactly as this KB treats
+`.otio` in the editorial handoff.
+
+### Gaps in this tier — stated as gaps
+
+- **There is no open venue-operations platform.** Ticketing has open options already recorded in this
+  file from pass 19; **crewing, scheduling, equipment inventory and stage management do not** —
+  `stage management`, `front of house` and `touring` were absolute zeros across 1.9 MB of this KB
+  before this pass, and the search produced no open platform for any of them. The industry runs on
+  spreadsheets and proprietary SaaS. This is the largest unserved platform gap found in this plane.
+- **Ride and attraction control is not open and should not be proposed as such** — safety-rated PLC
+  engineering with injury liability. See `repos/foundations.md`.
+- **Fixture data is registration-gated** (GDTF Share account, per-manufacturer terms). The platform is
+  free; the data that makes it useful is not. Resolve this before quoting any live-event build.

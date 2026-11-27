@@ -1,13 +1,49 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 
 # 📈 Trending Media AI Agents — append-only log
 
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
+
+## 2026-11-27 — pass 31: live-event show control (**the whole agent layer of this plane is eight repos born in 2026 holding ~38 stars, and one of them paywalls the write path**)
+
+Gap grep first. ~90 terms; the zero cluster was `DMX`, `sACN`, `Art-Net`, `GDTF`, `MVR`, `LTC`,
+`show control`, `projection mapping`, `lighting control`, `stagecraft`, `theme park`, `touring`,
+`stage management`, `front of house`. The KB held the **commerce** of live entertainment (`venue` 30
+hits, `concert` 45, ticketing from pass 19) and none of the **machinery**.
+
+### New this pass
+
+| Agent / tool | Licence | Stars | Created | Last push | Note |
+|---|---|---|---|---|---|
+| [JohnBreault/xlights-mcp-server](https://github.com/JohnBreault/xlights-mcp-server) | MIT | **32★** | 2026-04-04 | 2026-11-12 | 10 forks — **the only adoption in the plane**; writes show files rather than driving the rig |
+| [restonauta/freeshow-mcp](https://github.com/restonauta/freeshow-mcp) | MIT | 2★ | 2026-06-26 | 2026-06-26 | Created and abandoned the same day |
+| [guillegar/show_designer](https://github.com/guillegar/show_designer) | NOASSERTION | 2★ | 2026-06-03 | 2026-07-06 | Natural-language lighting design; **no resolvable licence** |
+| [gfargo/lights-pi](https://github.com/gfargo/lights-pi) | MIT | 1★ | 2026-03-05 | 2026-11-26 | Pushed the day before this pass; **the only one wired to QLC+** |
+| [bawaaaaah/light-mcp-server](https://github.com/bawaaaaah/light-mcp-server) | MIT | 1★ | 2026-10-14 | 2026-11-22 | Self-declared v0 |
+| [crownemmanuel/stagelight](https://github.com/crownemmanuel/stagelight) | **none** | 0★ | 2026-10-26 | 2026-11-16 | Best design in the plane, **no licence file at all** |
+| [Gamartinhos/lumina-ai-controller](https://github.com/Gamartinhos/lumina-ai-controller) | **none** | 0★ | 2026-10-03 | 2026-10-03 | One push, no licence |
+| [raydeoliveira/luxdmx](https://github.com/raydeoliveira/luxdmx) | NOASSERTION | 0★ | 2026-11-24 | 2026-11-26 | **Open-core: dry-run free, live apply behind a Pro licence** |
+
+**The reusable finding, and it generalises past media:** this is the first **paywalled MCP tool
+surface** this KB has measured. Read-only and dry-run tools are free; the call that actually changes
+the world is paid. An evaluation that probes an MCP server with read-only calls scores it as working
+and meets the wall in production. **Test the write path on every MCP dependency, in all twelve
+industries.**
+
+**The second finding: the agent layer here is misaimed.** All eight are control bridges — prose in,
+DMX out. None produces a **reviewable show file** for a human programmer to take over, which is the
+artefact a lighting designer would actually buy, and is the role `OpenTimelineIO` plays in the
+generative pipeline. The exception is `xlights-mcp-server`, which writes sequences — and it is the
+only one with forks. The market has already voted, on a sample of one.
+
+**Regional note, and it is the first of its kind in this KB:** the only geographic concentration in
+any agent layer measured so far is **LATAM** — `lumina-ai-controller` is documented in Portuguese and
+`show_designer` in Spanish, two of the eight. Both are unlicensed. See `intel/market.md`.
 
 ## 2026-11-26 — pass 30: AI-answer-engine discovery & citation (**the plane's measurement agent is 21 stars and ten months dormant, while its readability layer is 375,000 stars and pushed this week**)
 

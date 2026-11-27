@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 
 # 📡 Trends — Media & Entertainment
@@ -3125,3 +3125,139 @@ product**: if everything is abundant, being *identifiably the source* is the sca
 Institute expects news media squeezed further; Nieman Lab frames the year as opportunity-and-threat.
 DPP's *European Media Trends 2026* names AI the dominant driver of change and records rising
 **digital-sovereignty** concern — the EMEA-specific reading in `intel/market.md`.
+
+## 41. The seventh plane, the seventh identical result — and this time the gated content is a *device definition*
+
+Pass 31 measured the live-event, show control and stagecraft plane. The structural law this KB has
+been testing since healthcare holds again, and it has now been confirmed in seven consecutive planes:
+
+**The regulator or the standards body creates the obligation; the licence of the knowledge content
+decides whether open source can meet it.**
+
+Here the shape is unusually clean, because the gated content is not a code set or an identifier
+registry — it is the **machine-readable description of a physical device**:
+
+- **The format is genuinely open.** GDTF is recognised as **DIN SPEC 15800:2022**. Its parsers are
+  **MIT** (`pygdtf` 16★, `pymvr` 19★), its visualiser is GPL-3.0 (`blender-dmx` 291★).
+- **The library is gated.** GDTF Share requires a **free account with no anonymous download path**,
+  and each manufacturer publishes its fixture files **under its own terms**.
+- **The only ungated channel is Open Fixture Library** (MIT code, 274★) — and the licence of its
+  fixture *data* is unstated in the repo.
+
+A lighting console with no fixture definitions can set channel 37 to 128. It cannot point a specific
+manufacturer's moving head at a specific angle. **The code is free and the knowledge that makes the
+code useful is registration-gated** — identical in shape to CPT in healthcare, MedDRA in
+pharmacovigilance, and ISRC/ISWC/EIDR in pass 5. Seventh plane, seventh identical result. **The law is
+now the single most generalisable finding in this KB, and it should be the first question asked in any
+of the twelve industries: not "is there open code", but "who owns the content the code consumes".**
+
+## 42. A licence can forbid modification outright — the worst instance of the compilation law yet
+
+Pass 8 established that a licence can be a property of the **compilation** rather than the repository
+(Chromaprint: MIT code that is LGPL-2.1 as a whole). Pass 31 found the severe case.
+
+[FalconChristmas/fpp](https://github.com/FalconChristmas/fpp) — 747★, pushed the day before this pass
+— reports `NOASSERTION`. Its `LICENSE` is a **manifest**: the core is LGPL-2.1-or-later, other parts
+are GPL-2, and **some components are CC-BY-ND and "may not be modified and redistributed."**
+
+**CC-BY-ND inside a 747-star "open source" project is stricter than any copyleft in this KB.** GPL
+demands you share your changes; **ND forbids the changes.** And modification is exactly what a client
+engagement is. No SPDX field, no badge, no source-tree SBOM scan surfaces it — only reading the file
+does, and the file does not look like a licence.
+
+Two further licence categories arrived in the same pass, taking this KB's taxonomy to **thirteen**:
+
+- **EUPL-1.2** — `wled/WLED`, 19,132★, the most-starred repo in the plane. Copyleft, drafted by the
+  European Commission, **governed by EU law**. First EUPL repo recorded here. For an EU client,
+  unremarkable; for a US or APAC client embedding it, the governing-law clause is a pre-build question.
+- **MIT + CLA** — `bitfocus/companion`, 2,376★. `LICENSE.md` **Part 1** is plain MIT; **Part 2** is a
+  Contributor Licence Agreement granting the vendor a perpetual, transferable, **sublicensable**
+  copyright licence over contributions. Benign for *use*; material for a consultancy that contributes
+  upstream on a client's time. This is a second distinct reason the API reports `NOASSERTION` — and it
+  means **`NOASSERTION` is not a warning sign, it is an instruction to read.** Across passes 8, 30 and
+  31 it has concealed: a stricter whole-work licence, a missing licence, a British-spelled filename, a
+  grant in `COPYING`, a CLA, and a no-derivatives component.
+
+## 43. Web search cannot find an industrial plane — and the failure mode is newborn repos, not phantom ones
+
+Pass 30's lesson was that listicle-driven research invents **plausible slugs that do not exist**. Pass
+31 found the sharper failure, and it is the more dangerous of the two because the rows it produces
+*verify*.
+
+Four web searches for open-source lighting and show-control software returned **six candidate
+repositories**. Verified against the GitHub search API:
+
+- **Stars: 0, 0, 1, 1, 1, 6. Created: all within the previous seven weeks. Forks: zero, all six.**
+- **One of them does not exist** (`ciechomir/BlindCUE`, returned with a near-identical description to
+  a repo under a different owner).
+
+And the same searches named **none** of: `bitfocus/companion` (2,376★), `benkuper/Chataigne` (1,718★),
+`mcallegari/qlcplus` (1,593★, Apache-2.0, pushed the day before the pass), `OpenLightingProject/ola`
+(773★), `xLightsSequencer/xLights` (768★), `mapmapteam/mapmap` (731★) or `wled/WLED` (19,132★).
+
+**A pass that trusted the search layer would have produced eight rows that all pass a `ls-remote`
+check, all have real licences, and are collectively worthless** — while missing the only fully
+permissive production lighting console in this entire KB. The reason is structural: a repository
+created last month is written to be discovered, and twenty-year-old infrastructure is not.
+
+**The rule, and it costs one API call per organisation:** in any plane with real industrial tooling,
+**source candidates from the GitHub search API by organisation, not from web search**, and gate every
+row on **stars + `created_at` + `forks_count` together**. Stars alone would have passed `typoirl/Lumora`
+(6★); `created_at` alone would have failed `qlcplus` (old) and passed nothing useful. The conjunction
+is what works. Two name collisions in this plane make the same point from the other direction:
+`TheCraftedTech/opencue` (1★ DMX console) vs `AcademySoftwareFoundation/OpenCue` (1,010★ render farm,
+already in this KB), and `raydeoliveira/luxdmx` (0★, open-core) vs `tombueng/LuxDMX` (104★,
+Apache-2.0). **Match on the full `owner/name`, never on the name.**
+
+## 44. The first paywalled MCP tool surface — and it is invisible to a read-only evaluation
+
+`raydeoliveira/luxdmx` exposes DMX control as an MCP server in which **read-only and dry-run tools are
+free, while live apply and atomic scene execution require a paid Pro licence.**
+
+This is the first time this KB has measured **per-tool commercial gating inside an MCP server**, and it
+defeats the obvious evaluation method. An agent harness that probes a new MCP dependency with safe,
+read-only calls — which is exactly what a careful engineer does — will record the server as working,
+and will meet the wall in production on the first call that changes something.
+
+**The rule, and it applies to all twelve industries, not just media: when evaluating any MCP
+dependency, test the write path.** Open-core has arrived at the tool-surface level, where the licence
+file does not describe it and the tool list does not distinguish it.
+
+## 45. This plane breaks the KB's platform rule — the most complete platform in it is Apache-2.0
+
+This KB's standing finding, stated in `repos/foundations.md` and reconfirmed across a dozen planes, is
+**permissive at the pipeline, copyleft at the platform**: the interchange and standards layer is
+Apache/BSD/MIT, and anything turnkey is GPL or AGPL.
+
+Pass 31 is the clearest counter-example found so far. **QLC+ (`mcallegari/qlcplus`, 1,593★) is a full
+production lighting console — patching, cue lists, effects, virtual console, GDTF import — under
+Apache-2.0, and it was pushed the day before this pass.** A client can embed, rebrand and ship it
+without a copyleft conversation. Pass 17's "one MIT platform breaks the rule" (trend 10) was the first
+exception; this is the second and the stronger one, because QLC+ is not a thin platform.
+
+The rest of the tier behaves as the rule predicts (Chataigne GPL-3.0, xLights GPL-3.0, Linux Show
+Player GPL-3.0, MapMap GPL-3.0, BlenderDMX GPL-3.0), so the rule survives — but it is now a tendency
+with two named exceptions rather than a law, and **both exceptions are worth more commercially than
+the rule's compliant cases**, precisely because permissive platforms are rare. **When an exception
+appears, it is the lead, not a footnote.**
+
+## 46. The standards layer of a whole industry is a 44-star repository, published by the incumbent
+
+Every modern lighting rig on earth is controlled over **ANSI E1.31 (sACN)**. The reference
+implementation is [ETCLabs/sACN](https://github.com/ETCLabs/sACN): **Apache-2.0, 44 stars**, pushed
+2026-11-16, maintained by **Electronic Theatre Controls** — the market-leading console manufacturer.
+Device discovery (E1.33, RDMnet) is 56 stars. The RDM message helper is 11.
+
+This is precisely Netflix's posture in the generative tier of this KB — publish the measurement and
+delivery standards (VMAF, Photon/IMF), keep the product — at **one-hundredth of the star count**. And
+ETC adds a governance signal worth reading: **every repository it publishes that is a *tool* rather
+than a *standard* has its description prefixed "UNOFFICIAL"** (`OSCRouter`, `Sound2Light`,
+`ETCDmxTool`, `EosSyncLib`, `lighthack`). The manufacturer open-sources what it must interoperate on
+and disclaims the rest in the shop window.
+
+**Two consequences.** First, star count is worthless as a proxy for load-bearingness in an industrial
+plane — a 44-star repo here carries more production weight than a 100,000-star agent framework.
+Second, the **agent opportunity is on the inventory side**: E1.33/RDMnet makes a rig enumerable and
+configurable over IP, it is Apache-2.0, and nothing in the eight-project agent layer uses it. An agent
+that reads what is *in* a rig and reasons about it has a permissive substrate from the incumbent and
+no competition. See `compose/patterns.md` pattern 31.2.

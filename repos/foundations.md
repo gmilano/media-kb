@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 
 # 🏗️ Foundational Repos — Media & Entertainment
@@ -3605,3 +3605,123 @@ above are a **log analyser** and a **user-agent database** rather than a JavaScr
 | open-source "AI visibility platform" comparable to Odoo/Moodle | **does not exist** | The commercial tier is proprietary (Ahrefs Bot Analytics, Cloudflare Attribution Business Insights, Semrush AI Visibility Toolkit, AthenaHQ, Rankscale). The open tier is a handful of WordPress plugins plus `loamly` (21★). |
 | `cloudflare/ai.txt`, `usewebsights/llms-txt`, `nalgeon/llms-txt` | **all three do not exist** | Checked precisely because plausible-looking slugs appear in listicles. Three rows that a careless pass would have invented. |
 | permissive self-hosted analytics | **two only**: `umami` MIT, `goaccess` MIT | `plausible` is **AGPL-3.0**, `matomo` **GPL-3.0**, `matomo-org/device-detector` **LGPL-3.0** (3,562★). The default choices are all copyleft. |
+
+## The live-event, show-control & stagecraft substrate — measured 2026-11-27 (pass 31)
+
+The finding that shapes this section: **this is one of the healthiest open substrates in the KB and
+the hardest to find.** Twenty-eight repos verified below; the oldest predate every generative-media
+project in this file; nine were pushed in the week of this pass. And the web-search layer surfaced
+**none of them** (see `repos/trending.md` for that measurement). The permissive tier is unusually
+strong — QLC+ is the only fully Apache-2.0 production console in any plane of this KB — while the
+*fixture data* that makes a console able to drive a real light is registration-gated.
+
+### Tier 1 — the network and standards layer: permissive, official, and almost unstarred
+
+ANSI/ESTA standards implementations, published by **Electronic Theatre Controls** — the incumbent
+console manufacturer. This is exactly Netflix's posture in the generative tier (publish the
+measurement and delivery standards, keep the product) at **one-hundredth of the star count**.
+
+| Repo | Licence | Stars | Last push | Why it matters |
+|---|---|---|---|---|
+| [ETCLabs/sACN](https://github.com/ETCLabs/sACN) | Apache-2.0 | 44★ | 2026-11-16 | Implementation of **ANSI E1.31 (sACN)** — lighting control over IP. The network protocol essentially every modern rig runs on, maintained by the market-leading manufacturer, at 44 stars. |
+| [ETCLabs/RDMnet](https://github.com/ETCLabs/RDMnet) | Apache-2.0 | 56★ | 2026-09-25 | **ANSI E1.33** — device discovery, configuration and management over IP. The layer that makes a rig inventoriable, which is the precondition for any agent that reasons about it. |
+| [ETCLabs/RDM](https://github.com/ETCLabs/RDM) | Apache-2.0 | 11★ | 2026-09-25 | Helper library for the **ANSI E1.20 (RDM)** message format — bidirectional DMX. |
+| [ETCLabs/EtcPal](https://github.com/ETCLabs/EtcPal) | Apache-2.0 | 21★ | 2026-09-25 | Platform abstraction layer the three libraries above share. Pin it deliberately; it is the common dependency. |
+| [OpenLightingProject/libartnet](https://github.com/OpenLightingProject/libartnet) | LGPL-2.1 | 151★ | 2025-12-16 | Reference implementation of **Art-Net**, the UDP transport that carries DMX512-A. LGPL — link, do not fork into a proprietary binary. |
+| [ETCLabs/OSCRouter](https://github.com/ETCLabs/OSCRouter) | MIT | 197★ | 2026-07-08 | UDP/TCP packet router with OSC awareness. The most-starred thing ETC publishes, and marked **UNOFFICIAL**. |
+| [x42/libltc](https://github.com/x42/libltc) | LGPL-3.0 | 255★ | 2022-09-04 | **SMPTE/LTC linear timecode** encode/decode. Dormant since 2022 and that is fine: timecode has not changed. This is the clock that makes lights, audio and video agree. |
+| [Hundemeier/sacn](https://github.com/Hundemeier/sacn) | MIT | 56★ | 2025-02-18 | sACN/E1.31 in pure Python — the fastest permissive path from a Python agent to a real fixture. |
+| [bondagit/aes67-linux-daemon](https://github.com/bondagit/aes67-linux-daemon) | GPL-3.0 | 572★ | 2026-10-26 | **AES67** audio-over-IP with a config web UI. The open counterpart to Dante, which is proprietary (Audinate) and has no open implementation. |
+
+**Governance note worth carrying to other industries:** every ETCLabs repo that is a *tool* rather
+than a *standard* has its description prefixed **"UNOFFICIAL"** — `OSCRouter`, `Sound2Light`,
+`lighthack`, `ETCDmxTool`, `EosSyncLib`. The manufacturer open-sources the standards it is obliged to
+interoperate on, and explicitly disclaims support for everything else. Read that prefix as a support
+statement, not modesty: it is the licence's warranty disclaimer restated in the shop window.
+
+### Tier 2 — consoles, cue players and control hubs: real, old, and mostly copyleft
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [bitfocus/companion](https://github.com/bitfocus/companion) | **MIT + CLA** | 2,376★ | 2026-11-22 | Turns Stream Deck-class controllers into a control surface for hundreds of devices. The most-starred control project in the plane. **Licence read: `LICENSE.md` Part 1 is plain MIT; Part 2 is a Contributor Licence Agreement** granting Bitfocus a perpetual, transferable, sublicensable copyright licence over contributions. Free to use and ship; material if your team contributes upstream. This is why the API reports `NOASSERTION`. |
+| [benkuper/Chataigne](https://github.com/benkuper/Chataigne) | GPL-3.0 | 1,718★ | 2026-11-26 | The show-control hub: any protocol in (OSC, MIDI, DMX, Art-Net, HTTP), any protocol out, with state machines between. The open answer to QLab-class cueing for installations. Pushed the day before this pass. |
+| [mcallegari/qlcplus](https://github.com/mcallegari/qlcplus) | **Apache-2.0** | 1,593★ | 2026-11-26 | **QLC+ — the single most important row in this section.** A full DMX/analogue lighting console: patching, cue lists, effects, virtual console, GDTF import. **Apache-2.0 and pushed the day before this pass.** The only production-grade console in any plane of this KB that a client can embed, rebrand and ship without a copyleft conversation. |
+| [OpenLightingProject/ola](https://github.com/OpenLightingProject/ola) | **LGPL-2.1** (COPYING) | 773★ | 2026-10-14 | Open Lighting Architecture — the protocol-conversion daemon between every DMX transport and interface. **Licence read: the API says `NOASSERTION` because the grant is in `COPYING`, not `LICENSE` (404), and reads LGPL-2.1; the bundled tools are GPL-2.** Third confirmation of the pass-8 naming rule: *a 404 from the raw channel is never by itself proof a licence is missing.* |
+| [xLightsSequencer/xLights](https://github.com/xLightsSequencer/xLights) | GPL-3.0 | 768★ | 2026-11-26 | Sequencer for large pixel/LED shows with E1.31 and USB output. **Repo renamed: `smeighan/xLights` no longer resolves as the project home** — the sixth rename this KB has had to correct, after ComfyUI, KrillinAI, Mochi, firecrawl and OFL's own moves. |
+| [FalconChristmas/fpp](https://github.com/FalconChristmas/fpp) | ⚠️ **compilation: GPL-2 + LGPL-2.1 + CC-BY-ND** | 747★ | 2026-11-26 | Falcon Player — the playback engine for large synchronised light shows. **See the licence warning below. Do not ship this without reading it.** |
+| [FrancescoCeruti/linux-show-player](https://github.com/FrancescoCeruti/linux-show-player) | GPL-3.0 | 314★ | 2026-10-24 | Cue player for stage productions — the open, Linux-side answer to QLab for sound playback. |
+| [OpenLightingProject/rp2040-dmxsun](https://github.com/OpenLightingProject/rp2040-dmxsun) | Apache-2.0 | 128★ | 2025-03-31 | RP2040-based USB-DMX dongle with an onboard web server. Permissive **hardware** interface, which is rarer than permissive software here. |
+| [tombueng/LuxDMX](https://github.com/tombueng/LuxDMX) | Apache-2.0 | 104★ | 2026-11-22 | ESP32 Art-Net/sACN→DMX512 gateway firmware, browser-flashable, with a live 512-channel view and console-conflict detection. Permissive, active, 7 forks. |
+| [wled/WLED](https://github.com/wled/WLED) | **EUPL-1.2** | 19,132★ | 2026-11-26 | Addressable-LED control firmware over WiFi, with E1.31/DDP input. **By far the most-starred repo in this plane — 11× the next one — and under the European Union Public Licence, the first EUPL repo in this KB.** EUPL-1.2 is copyleft, governed by EU law, and on the Commission's compatibility list with GPL-family licences. Treat it as copyleft, and note that its governing-law clause is a live question for a non-EU client. |
+
+### Tier 3 — device description, visualisation and projection
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [OpenLightingProject/open-fixture-library](https://github.com/OpenLightingProject/open-fixture-library) | MIT (code) | 274★ | 2026-11-26 | OFL — library and website of DMX fixture definitions, exporting to many console formats. **The only ungated fixture-data channel found.** Licence read: `LICENSE` is the MIT text (2017, Florian & Felix Edelmann) covering the **code**; the licence of the **fixture definitions themselves is not stated in the repo**, and `open-fixture-library.org` is outside this session's network policy, so it could not be verified. **Recorded as an unresolved gap, not as CC-BY-SA** — see the warning below. |
+| [open-stage/python-gdtf](https://github.com/open-stage/python-gdtf) | MIT | 16★ | 2026-08-23 | pygdtf — parses **GDTF** (General Device Type Format), the device-description standard recognised as **DIN SPEC 15800:2022**. MIT, and the dependency under BlenderDMX. |
+| [open-stage/python-mvr](https://github.com/open-stage/python-mvr) | MIT | 19★ | 2026-08-23 | pymvr — parses **MVR** ("My Virtual Rig"), the scene-exchange half of GDTF: the whole rig, its positions and its patch as one file. **This is the `OpenTimelineIO` of live events** — the clean handoff between a tool and a human designer. |
+| [open-stage/python-psn](https://github.com/open-stage/python-psn) | MIT | 5★ | 2026-08-23 | **PosiStageNet** — live position tracking of performers and moving scenery. 5 stars, and it is the entire open implementation of the protocol that makes followspots and projection track a moving body. |
+| [open-stage/blender-dmx](https://github.com/open-stage/blender-dmx) | GPL-3.0 | 291★ | 2026-11-15 | BlenderDMX — design, visualise and pre-programme a rig inside Blender, importing GDTF fixtures and MVR scenes. The pre-visualisation tier, and the most-starred thing in the GDTF ecosystem. |
+| [cpdt/gdtf-rs](https://github.com/cpdt/gdtf-rs) | MIT | 1★ | 2026-08-11 | GDTF in Rust. **One star — listed for completeness and explicitly not recommended**; use pygdtf. |
+| [kpfaulkner/mvr](https://github.com/kpfaulkner/mvr) | Apache-2.0 | — | — | MVR/GDTF in Go. Resolves and is Apache-2.0; its own docs state several optional GDTF sections (Wheels, Models) are not modelled. Partial by the author's admission. |
+| [mapmapteam/mapmap](https://github.com/mapmapteam/mapmap) | GPL-3.0 | 731★ | 2026-11-26 | Projection mapping — the established open tool, pushed the day before this pass, 202 open issues. |
+| [paperManu/splash](https://github.com/paperManu/splash) | GPL-3.0 | 530★ | 2025-09-26 | Modular video-mapping for multi-projector installations with calibration. **GitHub repo is a declared mirror** — development is on GitLab, so watch upstream there, not here. |
+| [ETCLabs/ETCDmxTool](https://github.com/ETCLabs/ETCDmxTool) | Apache-2.0 | 30★ | 2023-11-22 | DMX/RDM controller and **sniffer**. The diagnostic tool for the "is my agent actually sending what I think" question. UNOFFICIAL, dormant since 2023. |
+
+### ⚠️ The licence warning of this pass: a no-derivatives clause inside a 747-star "open source" player
+
+[FalconChristmas/fpp](https://github.com/FalconChristmas/fpp) reports `NOASSERTION`. Its `LICENSE`
+file is not a licence — it is a **manifest of several licences**, and it states plainly that the core
+is LGPL-2.1-or-later, other components are GPL-2, and **"Other parts of FPP such as those covered
+under the CC-BY-ND license are redistributable in their original form, but may not be modified and
+redistributed."**
+
+This is the **second confirmation, and the more severe instance, of the pass-8 law that a licence can
+be a property of the compilation rather than of the repository.** Chromaprint was MIT code that became
+LGPL-2.1 as a whole; this is worse, because **CC-BY-ND forbids modification outright** — and
+modification is precisely what a client engagement is. No SPDX field, no badge and no source-tree SBOM
+scan surfaces this; only reading the file does. The operational rule, now proven twice in this
+industry: **for any repo reporting `NOASSERTION`, read the licence file before it reaches a proposal,
+and read it looking for the word "components".**
+
+### The gated layer, and the seventh confirmation of the content law
+
+The console code is free. The **device definition** is not — and without it a console cannot control a
+real light, only a channel number.
+
+- **GDTF is a genuinely open standard**: recognised as **DIN SPEC 15800:2022**, with MIT libraries
+  (`pygdtf`, `pymvr`) and a GPL-3.0 visualiser (`blender-dmx`). The *format* is unencumbered.
+- **GDTF Share, the fixture library, requires a free account and has no anonymous download path**, and
+  the files are published **by each manufacturer under its own terms**. Third-party build scripts that
+  need fixtures authenticate with a personal GDTF Share account. (`gdtf-share.com` is outside this
+  session's network policy; this is sourced from the consuming projects' own documentation and from
+  secondary documentation, and the account requirement should be re-verified directly when the host is
+  reachable.)
+- **Open Fixture Library is the only ungated channel**, MIT for its code — and its **data licence is
+  unstated in the repo and could not be verified** this pass.
+
+So: **the spec is open, the parsers are MIT, and the content is registration-gated with per-vendor
+terms.** Identical in shape to CPT in healthcare, MedDRA in pharmacovigilance, and ISRC/ISWC/EIDR in
+the identification plane (pass 5). Seventh plane, seventh identical result. **Never promise a client
+an end-to-end open fixture pipeline without resolving where the fixture definitions come from and
+under whose terms** — that is the one question in this plane that cannot be answered with code.
+
+### Informed gaps — searched, and genuinely not there
+
+- **Ride and attraction show control is closed, and will stay closed.** The only open library surfaced
+  was ShowControl4J, roughly 2.3 years dormant. Ride control is safety-rated PLC engineering carrying
+  personal-injury liability; it is not a candidate for open substitution. Disney filed two AI patent
+  applications in **August 2026** — ML monitoring performers to adjust animatronic responses, and ML
+  for attraction maintenance — which are **filings, not shipped products**. Europa-Park has described
+  working on a comprehensive "AI Suite" rather than a single AI attraction.
+- **OpenLP, the main open worship-presentation platform, is not meaningfully on GitHub** — its
+  canonical home is GitLab, and a GitHub-only sweep returns only sub-2-star derivatives
+  (`Gamusi/OpenLPxx`, `tbc-productions/opal-presenter`, `BlazingAsher/OpenLP-WCAC`). A reminder that
+  **this KB's GitHub-centred method has a systematic blind spot for GitLab-hosted projects**, which in
+  this plane and in pass-5's Panako case has now cost two real findings.
+- **Open Stage Control's GitHub repo is archived** (`jean-emmanuel/open-stage-control`, 7★,
+  read-only). The project is referenced widely in the field; its live home is not GitHub. Do not cite
+  the archived repo as a live dependency.
+- **Dante has no open implementation.** AES67 (`aes67-linux-daemon`, GPL-3.0) is the open path for
+  audio-over-IP; Dante remains proprietary to Audinate. State this before promising audio transport.

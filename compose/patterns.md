@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 
 # 🧩 Composition Patterns — Media & Entertainment
@@ -4729,3 +4729,209 @@ client's own procurement.
 one, 30.2 is the cheapest to deliver and the best qualifier. All three share the same two MIT
 components (`goaccess`, `crawler-user-agents`), so the second engagement is largely the first one's
 infrastructure pointed at a new question.
+
+## Live-event, show-control & stagecraft recipes — added 2026-11-27 (pass 31)
+
+Every repo named below appears with its verified licence, star count and last-push date in
+`agents/top.md`, `repos/foundations.md` or `verticals/solutions.md`, measured 2026-11-27. The
+distinguishing feature of this plane: **the agent never touches a fixture.** It writes to a console or
+a daemon that already knows how. That makes these the lowest-risk recipes in the KB — and it is why
+the licence gate (31.3) matters more here than the architecture.
+
+---
+
+## Pattern 31.1 — The licence-clean show-control spine (the one build that ships in every region)
+
+**Why:** this is the only plane in the KB where a complete, production-grade platform is permissive.
+Every component below is Apache-2.0 or MIT, so there is no copyleft conversation and no AGPL surprise.
+
+```
+[Show intent: script, cue sheet, setlist, or prose brief]
+      ↓
+[Agent layer — MCP server you build]                    ← see 31.2; nothing off-the-shelf is shippable
+      ↓  writes a show file, does NOT drive the rig
+[QLC+ (Apache-2.0, 1,593★)]                             ← authoritative show file: patch, cues, effects
+      ↓  fixture definitions
+[pygdtf (MIT) + pymvr (MIT)]                            ← GDTF device descriptions, MVR scene exchange
+      ↓  ⛔ LICENCE GATE: where do the fixture files come from?  → 31.3
+[BlenderDMX (GPL-3.0) — run as a tool, do not embed]    ← human pre-visualisation and sign-off
+      ↓  approved show
+[ETCLabs/sACN (Apache-2.0) or OLA (LGPL-2.1, link only)] ← E1.31 onto the venue network
+      ↓
+[Rig]   + [x42/libltc (LGPL-3.0)] for SMPTE/LTC sync with audio and video
+```
+
+**Wiring:** QLC+ holds the authoritative show file and exposes a web API — the agent proposes, QLC+
+stores, a human approves in BlenderDMX pre-vis, and only then does sACN carry it to the rig. Use
+`ETCLabs/sACN` (Apache-2.0) when you are embedding transport in your own binary; use OLA when you need
+protocol conversion across many interface types and can **link** LGPL-2.1 rather than fork it. Add
+`python-psn` (MIT) only if followspots or projection must track a moving performer.
+
+**Licence posture:** QLC+ Apache-2.0, pygdtf/pymvr/sACN MIT-or-Apache, libltc LGPL-3.0 (link). The one
+GPL component, BlenderDMX, is a **desktop tool a human opens** — not a library you ship — so it never
+enters your distribution. **This stack can be embedded in a proprietary product.** Keep it that way:
+do not reach for `xLights` (GPL-3.0) or `FPP` (see 31.3) inside a shipped binary.
+
+**Why it ships in all four regions:** it is on-premise by nature. A rig runs on a venue LAN, often
+air-gapped. That satisfies EMEA's digital-sovereignty procurement test **by construction** rather than
+by concession — the easiest sovereignty story in this KB.
+
+---
+
+## Pattern 31.2 — The rig-aware agent: build what the eight existing projects did not
+
+**Why:** the plane's entire agent layer is eight repos born in 2026 holding ~38 stars, and all eight
+are **control bridges** — prose in, DMX out. None of them produces a **reviewable show file**, and
+none of them touches **device discovery**. Both gaps have Apache-2.0 substrates and no competition.
+
+**Build A — the agent that writes a reviewable artefact (the product a designer would buy):**
+
+```
+[Script / setlist / audio stem]
+      ↓
+[Your MCP server]
+   ├── reads: QLC+ workspace (.qxw), MVR scene via pymvr (MIT)
+   ├── reasons: cue structure, timing against LTC, colour per fixture capability from GDTF
+   └── writes: a QLC+ show file + an MVR scene — NOT live DMX
+      ↓
+[Human programmer opens it in QLC+ / BlenderDMX, edits, owns it]
+```
+
+The precedent is measured, not hypothetical: **`JohnBreault/xlights-mcp-server` (MIT, 32★, 10 forks)
+is the only project in the plane with adoption, and it is the only one that writes sequences instead
+of driving a rig.** On a sample of one, the market has already stated its preference. Treat MVR exactly
+as this KB treats `.otio` in the editorial handoff: **the artefact is the deliverable, not the
+execution.**
+
+**Build B — the rig inventory agent (no competition at all):**
+
+```
+[ETCLabs/RDMnet (Apache-2.0, 56★) + ETCLabs/RDM (Apache-2.0)]   ← ANSI E1.33 / E1.20 discovery
+      ↓  enumerated devices: model, address, personality, firmware, errors
+[GDTF definitions via pygdtf (MIT)]                              ← what each device can actually do
+      ↓
+[Agent: reconcile discovered rig vs. the paper patch; flag drift, firmware skew, address conflicts]
+      ↓
+[Report + a corrected patch proposal]  → ETCDmxTool (Apache-2.0) to sniff and confirm
+```
+
+**Why B is the better first engagement:** it is a **diagnostic and documentation** product, not a
+creative one. It does not touch a designer's craft, it does not touch crew scheduling (which in North
+America is a collective-bargaining question — see `intel/market.md`), it is Apache-2.0 end to end from
+the incumbent manufacturer, and nothing in the existing agent layer does it. Sell the pre-show rig
+check: *"here is what is actually plugged in, here is where it disagrees with your paperwork."*
+
+---
+
+## Pattern 31.3 — The 20-minute licence gate for any live-event or show-control proposal
+
+**Run this before the stack is named in a client document.** It is four questions, and in this plane
+each one has already produced a wrong answer somewhere.
+
+**1. Where do the fixture definitions come from, and under whose terms?**
+The format is open (**GDTF = DIN SPEC 15800:2022**) and the parsers are MIT. **The library is not:**
+GDTF Share requires a free account with **no anonymous download path**, and each manufacturer
+publishes its files **under its own terms**. Open Fixture Library (MIT code, 274★) is the only ungated
+channel, and the licence of its fixture **data** is unstated in the repo. ⛔ **Never promise an
+end-to-end open fixture pipeline until this is answered in writing.** This is the seventh plane in
+which the content, not the code, is the constraint.
+
+**2. For every `NOASSERTION` dependency, read the licence file — looking for the word "components".**
+- `FalconChristmas/fpp` (747★): a licence **manifest** declaring GPL-2 + LGPL-2.1 **+ CC-BY-ND
+  components that may not be modified and redistributed.** ⛔ **Disqualifying for most client work**,
+  and invisible to SBOM scanning.
+- `bitfocus/companion` (2,376★): **MIT + a CLA** that gives the vendor a sublicensable licence over
+  contributions. Fine to ship; raise it before your team commits upstream on a client's time.
+- `OpenLightingProject/ola` (773★): the grant is in **`COPYING`**, not `LICENSE` (404), and reads
+  LGPL-2.1 — a 404 from the raw channel is **never** by itself proof a licence is missing.
+
+**3. Check the governing law, not just the copyleft class.**
+`wled/WLED` (19,132★) is **EUPL-1.2** — copyleft **governed by EU law**. Unremarkable for an EU
+client; a question to raise before a US or APAC build.
+
+**4. Match on `owner/name`, never on name; and verify the write path.**
+`TheCraftedTech/opencue` (1★ DMX console) is not `AcademySoftwareFoundation/OpenCue` (1,010★ render
+farm). `raydeoliveira/luxdmx` (0★) is not `tombueng/LuxDMX` (104★ Apache-2.0). And if an MCP server is
+in the stack, **call a write tool**: this plane produced the KB's first MCP server whose dry-run tools
+are free and whose live-apply tools are paid.
+
+**Falsifiable prediction, for the next pass to check:** the fixture-definition gate will not open. By
+the next time this plane is measured, GDTF Share will still require an account, and OFL's data licence
+will still be unstated in-repo. If either changes, the content law has its first counter-example in
+seven planes and this KB should say so loudly.
+
+---
+
+## Pattern 31.4 — The EN 17206-3 drone-show conformance pack (EMEA, and it has a date on it)
+
+**Why now:** **EN 17206-3 — safety for UAS/drones in entertainment — was published by NEN on
+1 October 2026**, tied to the EU Machinery Directive and Regulation 2019/945, as Part 3 of the stage
+machinery family (Part 1 2020, Part 2 stage stands and truss lifts 2024). Drone shows went mainstream
+with no standard; now there is one, in the single region that regulates this plane, and **nothing open
+addresses it.** Dated obligations are rare in this KB and they are the easiest thing to sell.
+
+```
+[Flight plan + rig/stage plan]
+      ↓
+[MVR scene via pymvr (MIT)]            ← the venue, the structures, the exclusion zones, as data
+      ↓
+[Conformance rules as versioned code]  ← EN 17206-3 clauses, one rule per clause, each citing the clause
+      ↓
+[Agent: check the plan against the rules; produce a reviewed exception list, never an approval]
+      ↓
+[Evidence pack: plan + rule version + clause citations + named human sign-off + timestamp]
+      ↓
+[x42/libltc (LGPL-3.0)]                ← timecode-locked show log: what actually ran, when
+```
+
+**Hard constraints.** The human signs off; the agent assembles evidence. Encode the standard's
+**clause numbers and version** in the rules so an auditor can follow a finding back to the text — this
+KB's pass-27 lesson that statute belongs in versioned code applies identically to a published standard.
+And state the limit honestly in the proposal: **EN 17206 adoption and legal enforceability vary by
+member state, and conformance does not automatically satisfy national requirements.** The deliverable
+is an evidence pack for a national authority, not a certificate.
+
+**Sourcing caveat to resolve first:** Part 3's publication status was reported inconsistently across
+sources this pass. **Verify against the CEN/NEN listing before this appears in a client document.**
+
+---
+
+## Pattern 31.5 — The LATAM greenfield venue stack (specify at construction, do not retrofit)
+
+**Why LATAM specifically, and why now:** everywhere else this plane means **retrofitting** a rig and a
+patch that have existed for twenty years. In LATAM the venues are being **built and bought right
+now**, by a consolidating owner, at disclosed prices: Live Nation took **OCESA to 75% for $646M
+(2025)** after **$400M+** for control in 2021, plus a majority of **Movistar Arena Buenos Aires**, a
+stake in a major **Santiago** arena, and entry into **Peru**. **Brazil is the #9 music market
+worldwide** and **Mexico entered the global top ten for the first time**, with concert attendance
+**more than tripling since 2019**.
+
+**The play:** specify the control and operations stack **at construction time**, when the network, the
+patch and the documentation are being created rather than archaeologically recovered.
+
+```
+[Venue build / fit-out]
+      ↓
+[Network: sACN/E1.31 (ETCLabs, Apache-2.0) + RDMnet/E1.33 discovery from day one]
+      ↓
+[As-built rig captured as MVR (pymvr, MIT) — the documentation is born digital, not drawn later]
+      ↓
+[QLC+ (Apache-2.0) as the house console tier; Companion (MIT+CLA) as the operator surface]
+      ↓
+[Rig inventory agent of 31.2-B runs nightly: drift, firmware skew, address conflicts]
+      ↓
+[Touring productions arrive and import MVR instead of re-patching by hand]
+```
+
+**The commercial argument in one line:** a venue whose rig is *documented as data* turns every
+incoming tour's load-in from a re-patch into an import. That is a measurable turnaround saving in the
+region where touring volume is growing fastest, and it can only be built cheaply **before** the walls
+close.
+
+**One thing not to do.** Two of the plane's eight AI agents are LATAM-authored —
+`Gamartinhos/lumina-ai-controller` (Portuguese) and `guillegar/show_designer` (Spanish), the only
+regional concentration in any agent layer this KB has measured. **Both are unlicensed**: one has no
+licence file, the other reports `NOASSERTION`. The appetite is local and already demonstrated, which
+is a reason to engage the authors — **contribute a licence upstream, or rebuild the idea on QLC+. Do
+not fork unlicensed code silently**; with no grant, default copyright applies and all rights are
+reserved.

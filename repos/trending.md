@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 
 # 📈 Trending Media Repos — append-only log
@@ -9,6 +9,76 @@ updated: 2026-11-26
 > Newest section first; history below is never rewritten.
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
+
+## 2026-11-27 — pass 31: show-control infrastructure (**the search layer returned 0–6-star repos born last month and one that does not exist, while every incumbent in the plane went unmentioned**)
+
+Infrastructure half of pass 31. **46 slugs probed by `git ls-remote`; 45 resolve, 1 does not.** But
+the resolution rate is not the finding this pass — **the provenance of the candidates is.**
+
+### The measurement: what web search returned vs. what is actually there
+
+Every repository that the web-search layer surfaced for "open source lighting console / show control",
+verified against the GitHub search API:
+
+| Repo the search layer returned | Stars | Created | Forks | Verdict |
+|---|---|---|---|---|
+| [TheCraftedTech/opencue](https://github.com/TheCraftedTech/opencue) | 1★ | 2026-10-16 | 0 | 6 weeks old; **name-collides with a 1,010★ ASWF project** |
+| [typoirl/Lumora](https://github.com/typoirl/Lumora) | 6★ | 2026-10-18 | 0 | 6 weeks old, no push since 2026-10-31 |
+| [diego-costanzo/BlindCUE](https://github.com/diego-costanzo/BlindCUE) | 1★ | 2026-11-10 | 0 | 17 days old |
+| `ciechomir/BlindCUE` | — | — | — | **DOES NOT EXIST.** Returned with a near-identical description to the row above |
+| [dio99/luxcanvas](https://github.com/dio99/luxcanvas) | 1★ | 2026-10-08 | 0 | AGPL-3.0, no push since 2026-10-23 |
+| [grosserd/lightstage_dmx](https://github.com/grosserd/lightstage_dmx) | 0★ | 2026-11-17 | 0 | 10 days old, NOASSERTION |
+
+**Six candidates: zero to six stars, all created in the last seven weeks, zero forks between them, and
+one of them is not a repository at all.** Meanwhile the search layer named **none** of the following,
+all of which are the actual substrate of this plane:
+
+| Repo it did not mention | Stars | Licence | Last push |
+|---|---|---|---|
+| [bitfocus/companion](https://github.com/bitfocus/companion) | 2,376★ | MIT + CLA | 2026-11-22 |
+| [benkuper/Chataigne](https://github.com/benkuper/Chataigne) | 1,718★ | GPL-3.0 | 2026-11-26 |
+| [mcallegari/qlcplus](https://github.com/mcallegari/qlcplus) | 1,593★ | **Apache-2.0** | 2026-11-26 |
+| [OpenLightingProject/ola](https://github.com/OpenLightingProject/ola) | 773★ | LGPL-2.1 | 2026-10-14 |
+| [xLightsSequencer/xLights](https://github.com/xLightsSequencer/xLights) | 768★ | GPL-3.0 | 2026-11-26 |
+| [FalconChristmas/fpp](https://github.com/FalconChristmas/fpp) | 747★ | GPL-2/LGPL-2.1/**CC-BY-ND** | 2026-11-26 |
+| [mapmapteam/mapmap](https://github.com/mapmapteam/mapmap) | 731★ | GPL-3.0 | 2026-11-26 |
+| [wled/WLED](https://github.com/wled/WLED) | 19,132★ | **EUPL-1.2** | 2026-11-26 |
+
+**This inverts the failure mode the KB has been guarding against.** Pass 30's lesson was that
+listicle-driven passes write *plausible slugs that do not exist*. Pass 31's is sharper: the search
+layer can return **repositories that do exist, are correctly described, and are worthless** — six
+weeks old, unadopted, and in one case unlicensed — while ranking a 1,593-star Apache-2.0 console that
+was pushed yesterday nowhere at all. Newborn repos are optimised for discovery; twenty-year-old
+infrastructure projects are not.
+
+**The operational rule, and it is cheap:** in any plane with real industrial tooling, **do not source
+candidates from web search at all.** Query the GitHub search API by organisation
+(`user:OpenLightingProject`, `user:ETCLabs`, `user:open-stage`) and gate every row on
+**stars + created_at + forks_count** together. One API call per org returned the entire real substrate
+of this plane; four web searches returned six near-empty repos and a phantom. Applies to all twelve
+industries.
+
+### New infrastructure this pass
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [mcallegari/qlcplus](https://github.com/mcallegari/qlcplus) | **Apache-2.0** | 1,593★ | 2026-11-26 | The only fully permissive production lighting console in any plane of this KB |
+| [ETCLabs/sACN](https://github.com/ETCLabs/sACN) | Apache-2.0 | 44★ | 2026-11-16 | ANSI E1.31 — the network protocol every modern rig runs on, at 44 stars |
+| [ETCLabs/RDMnet](https://github.com/ETCLabs/RDMnet) | Apache-2.0 | 56★ | 2026-09-25 | ANSI E1.33 device discovery — the precondition for any rig-aware agent |
+| [open-stage/python-mvr](https://github.com/open-stage/python-mvr) | MIT | 19★ | 2026-08-23 | MVR scene exchange — **the `OpenTimelineIO` of live events** |
+| [open-stage/python-gdtf](https://github.com/open-stage/python-gdtf) | MIT | 16★ | 2026-08-23 | GDTF parser (DIN SPEC 15800:2022) |
+| [open-stage/python-psn](https://github.com/open-stage/python-psn) | MIT | 5★ | 2026-08-23 | PosiStageNet performer tracking — 5★ and it is the whole open implementation |
+| [wled/WLED](https://github.com/wled/WLED) | **EUPL-1.2** | 19,132★ | 2026-11-26 | **First EUPL-1.2 repo in this KB**; most-starred repo in the plane by 11× |
+| [bondagit/aes67-linux-daemon](https://github.com/bondagit/aes67-linux-daemon) | GPL-3.0 | 572★ | 2026-10-26 | AES67 audio-over-IP — the open counterpart to proprietary Dante |
+| [x42/libltc](https://github.com/x42/libltc) | LGPL-3.0 | 255★ | 2022-09-04 | SMPTE/LTC timecode; dormant since 2022 and correctly so |
+
+### Two renames and an archive, recorded so the next pass does not re-derive them
+
+- `smeighan/xLights` → **[xLightsSequencer/xLights](https://github.com/xLightsSequencer/xLights)**.
+  Sixth rename this KB has had to correct.
+- `jean-emmanuel/open-stage-control` is **archived at 7★** and is not the project's live home. Do not
+  cite it as a dependency.
+- `paperManu/splash` is a **declared mirror**; development is on GitLab.
 
 ## 2026-11-26 — pass 30: discovery & referral-measurement infrastructure (**the referrer taxonomy of the channel replacing search holds 9 entries against search's 232 — and Google's AI surfaces cannot be entered into it at all**)
 

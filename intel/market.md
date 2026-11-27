@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 
 # 🗺️ Market Map — Media & Entertainment
@@ -1137,6 +1137,24 @@ Google has **publicly pre-committed to attacking methodology**, which makes a ri
 and log retention is an **engineering** problem Globant can fix in weeks. Secondary, same buyer:
 extend retention and start the crawler-identity ledger **now**, because the official instrument has
 no backfill and every week undocumented is a week unrecoverable.
+
+### Pass 31 (2026-11-27) — the live-event & show-control layer in North America
+
+**The region that writes the standards code, and the region where the AI is still in patent filings.**
+
+| Finding | Detail | Source quality |
+|---|---|---|
+| **The plane's permissive standards layer is maintained from the US** | Electronic Theatre Controls (Wisconsin) publishes Apache-2.0 reference implementations of ANSI E1.31 (sACN, 44★), E1.33 (RDMnet, 56★), E1.20 (RDM, 11★) and EtcPal (21★) — and marks every non-standards tool it publishes **"UNOFFICIAL"** | **Measured directly** via the GitHub search API, 2026-11-27 |
+| **Theme-park AI is at the filing stage, not the shipping stage** | Disney filed two patent applications in **August 2026**: ML monitoring performers to adjust animatronic responses, and ML for attraction maintenance | Trade press reporting on USPTO filings — **filings are not products; do not present these as deployed** |
+| **Venue operations is where AI is actually live** | AEG's O2 Arena runs AI cameras + IoT sensors feeding live foot-traffic heat maps | Vendor/trade case study |
+| **Ticketing is consolidating on AI** | Live Nation has indicated nearly all new Ticketmaster features in development use AI, concentrated on venue value-added services and customer experience | Secondary summary, **not** Live Nation filings — attribute accordingly |
+| **The labour frame carried from pass 37 of `intel/trends.md` applies here too** | This plane is governed by collective agreements (IATSE-class crew terms) rather than an AI statute. A show-control agent touching crew scheduling or performer tracking (PosiStageNet) is a **bargaining** question before it is a technical one | Structural inference from this KB's pass-19 and pass-37 findings |
+
+**The opportunity, and it is narrow and real:** the standards layer is permissive, maintained, and
+**tiny** (44–56 stars). An agent that can read a rig's RDMnet inventory and reason about it has no
+competitor, and the dependency is Apache-2.0 from the market-leading manufacturer. Sell **rig-aware
+diagnostics and documentation**, not creative lighting design — the former is an inventory problem
+with a permissive substrate, the latter is a designer's craft and a labour question.
 
 ### EMEA
 
@@ -2403,6 +2421,37 @@ routes into pass 13's reader-revenue work with the same taxonomy. ⚠️ Keep so
 DPP finding means a stack sending logs or content to a non-European AI service can fail the client's
 own procurement, so self-hosted `umami`/`goaccess` is a **requirement** here, not a preference.
 
+### Pass 31 (2026-11-27) — the live-event & show-control layer in EMEA
+
+**EMEA owns this plane's standards, and it is the only region where they are being written *right
+now*.** This is the strongest regional placement in pass 31.
+
+| Finding | Detail | Source quality |
+|---|---|---|
+| **The device-description standard is German** | **GDTF** (General Device Type Format) is recognised as **DIN SPEC 15800:2022**. The MIT parsers (`pygdtf`, `pymvr`) implement a German standard | Standard identifier, verifiable |
+| **Stage machinery has a live EU standards family** | **EN 17206** — Part 1 (2020) machinery for stages; **Part 2 (2024)** stage stands and truss lifts; **Part 3 (2026)** safety for **UAS/drones in entertainment**, published by NEN **1 October 2026**, tied to the EU Machinery Directive and Regulation 2019/945 | Standards catalogues + trade press; **Part 3's status was reported inconsistently across sources — verify against the CEN/NEN listing before quoting** |
+| **A national standard is being withdrawn in its favour** | **DIN 56950-1** is in the process of withdrawal and replacement by EN 17206 | Trade press |
+| **Enforceability is not uniform** | Adoption and legal enforceability of EN 17206 **varies by member state**, and compliance does not automatically satisfy national requirements | Commercial source — treat as directional, but the variance itself is the point for a pan-European client |
+| **The hardware incumbents are European** | MA Lighting (grandMA, Germany) and Robe (Czech Republic) are among the manufacturers behind GDTF; the ecosystem's news hub is `gdtf.eu` | Industry structure |
+| **Regional AI spend datapoint** | MENA media-company AI spending expected to reach **$520M in 2026** | Trade press, single source |
+
+**The opportunity — and it has a date on it, which is rare in this KB:** **EN 17206-3 (drone shows)
+published 1 October 2026** creates a brand-new documentation and conformance obligation for a
+production technique that has gone mainstream, in the one region that regulates it. Nothing open
+addresses it. See `compose/patterns.md` pattern 31.4.
+
+**The sovereignty angle compounds it.** The DPP's *European Media Trends 2026* finding already in this
+file — rising digital-sovereignty concern in European media procurement — applies with unusual force
+here, because show control is **on-premise by nature**: a rig runs on a local network, in a venue,
+often air-gapped. A self-hosted agent that never leaves the venue LAN is not a compromise in this
+plane; **it is the architecture the plane already has**, and it passes a sovereignty review by
+construction. This is the easiest EMEA procurement story in the whole KB.
+
+**One licence consequence specific to EMEA:** the plane's most-starred repo, `wled/WLED` (19,132★), is
+**EUPL-1.2** — a copyleft licence drafted by the European Commission and governed by EU law. For an
+EU client that is unremarkable; for a US or APAC client embedding it, the governing-law clause is a
+question to raise before the build, not after.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3610,6 +3659,30 @@ play, for the Australian market where the decline *is* measured: instrument the 
 pivot** — if a publisher is deliberately trading reach for relevance, it needs the engaged-audience
 metrics (pass 7) and the reader-revenue stack (pass 13) to prove the trade is working, and today it
 is asserting the strategy without a scoreboard.
+
+### Pass 31 (2026-11-27) — the live-event & show-control layer in APAC
+
+**The region that manufactures the fixtures and is growing the fastest, and the region with no open
+tooling presence at all in this plane.**
+
+| Finding | Detail | Source quality |
+|---|---|---|
+| **Live music has passed its pre-pandemic size** | Pollstar's Asia focus (**October 2026**): a Summer Sonic promoter executive describes the sector as recovered and growing beyond pre-pandemic scale; Live Nation Japan reports strong demand and names **music tourism** (fans pairing concerts with travel) as the major opportunity | **Trade press — the best source in this section** |
+| **The stated obstacle is operational, not creative** | The primary hurdle in international touring is **matching venue capacity to the market** while executing **localised promotion** precisely | Pollstar, same piece |
+| **Market scale (vendor, use with care)** | APAC ≈ **23% of global live music**; 2026 revenue ≈ **$2.7B China / $1.5B Japan / $0.9B South Korea**, growing ~**8–11%/yr** | Cognitive Market Research — **its headline and 2026 figures do not fully reconcile; quote only with that caveat** |
+| **Lighting hardware growth (vendor, multiple disagreeing)** | APAC show/stage lighting ≈ **5.4% CAGR** to 2033; China stage illumination **8.80% CAGR** to 2031; global LED stage lighting ≈ **7.4%**, China ≈ **7.6%** | Four separate market-research vendors; ranges 5–9% |
+| **Demand drivers named without data** | K-pop touring and Japanese anime-music concerts cited as drivers of high-end rig demand, with **no hard figures offered** | Market-research summaries — **recorded as an unsourced claim** |
+
+**The gap, stated as a gap:** none of the 28 verified repos in this plane's substrate originates from
+an APAC organisation, and no APAC open-source lighting or show-control project surfaced in any search
+this pass. The region that **builds most of the world's fixtures** has no presence in the open layer
+that describes and controls them. That is either the clearest supply-side opportunity in pass 31 or a
+sign that the work happens inside manufacturers and never reaches GitHub; **this pass cannot
+distinguish between those two, and says so.**
+
+**The opportunity:** the obstacle Pollstar names — venue-capacity matching and localised promotion
+across many markets — is a **data and planning** problem, not a show-control problem. Lead in APAC
+with touring/routing analytics, and treat the rig as the second engagement.
 
 ### LATAM
 
@@ -4866,6 +4939,33 @@ each member — unglamorous, urgent, and the thing that stops the evidence expir
 separate, nearer-term play: with copyright **and labour** law amended on 2026-05-14, a Mexican
 engagement has a statutory hook that no other LATAM market yet offers.
 
+### Pass 31 (2026-11-27) — the live-event & show-control layer in LATAM
+
+**The demand story of this plane, the region where the venues are being built, and — for the first
+time in this KB — the region that authored part of a plane's agent layer.**
+
+| Finding | Detail | Source quality |
+|---|---|---|
+| **Brazil is the regional anchor** | **#1 in Latin America and #9 worldwide** by music market size (IFPI 2025), described as one of the industry's fastest-growing markets, with legacy artists increasingly routing through South America | **Pollstar South America special, January 2026 — trade press citing IFPI** |
+| **Mexico entered the global top ten for the first time** | Concert attendance has **more than tripled since 2019** | Rolling Stone citing Reuters |
+| **Capital is consolidating, with figures** | Live Nation raised its stake in Mexico's **OCESA to 75% for $646M (2025)**, after paying **over $400M** for a controlling stake in 2021; it also took a majority of **Movistar Arena, Buenos Aires**, bought into a major **Santiago** arena, and entered **Peru** | Rolling Stone + Río Times — **the hardest numbers in this section** |
+| **Regional share (vendor)** | LATAM ≈ **6.0% of the global concert-halls-and-theatres market = ~$2.28B (2026)**, growth tied to venue development and touring in Brazil and Mexico | Fairfield Market Research — single vendor, unverified |
+| **Volume claims to treat with suspicion** | ~28,000 annual concerts and festivals in Brazil; LATAM live-music events up ~40% in 2023 YoY (ILMC) | Dataintelo / Market Data Forecast — **sources unclear, not independently verified** |
+| **LATAM authored two of the plane's eight AI agents** | `Gamartinhos/lumina-ai-controller` (Portuguese) and `guillegar/show_designer` (Spanish). **Both are unlicensed** — one has no licence file, the other reports NOASSERTION | **Measured directly**, 2026-11-27 |
+
+**The strategic read, and it is the sharpest opportunity in pass 31.** Everywhere else in this plane
+an engagement means **retrofitting** a rig and a workflow that already exist. In LATAM the venues are
+being **built and bought right now**, at known prices, by a consolidating owner. A show-control and
+venue-operations stack specified at **construction time** — rather than bolted onto a 20-year-old
+patch — is a greenfield opportunity that does not exist in North America or Europe. See
+`compose/patterns.md` pattern 31.5.
+
+**And the finding that makes this more than a sales line:** the only regional concentration in any
+agent layer this KB has measured across 31 passes is **here** — two of eight projects, both
+Spanish/Portuguese-documented, both built in the last six months. The appetite is local and already
+demonstrated. **Both are unlicensed, so neither can be adopted as-is**; the correct move is to
+contribute a licence upstream or rebuild the idea on QLC+ (Apache-2.0), not to fork them silently.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -5794,3 +5894,57 @@ emitted. So the honest position for a proposal is:
 | **Answer.AI (AnswerDotAI)** | Author of the `llms.txt` standard (Apache-2.0, 2,702★). Recorded as the plane's **measured failure**, not as an incumbent. |
 | **Matomo / Umami / GoAccess (allinurl)** | The open measurement substrate. Only **Umami and GoAccess are MIT**; Matomo is GPL-3.0. The licence line runs straight through this tier. |
 | **IAB Europe / AOP / Chartbeat / Reuters Institute** | The evidence institutions. For this plane they matter more than most vendors, because **the dispute is about measurement** — and AOP's genre-level finding and IAB Europe's explicit "no European consensus" are the two most useful things any of them has published. |
+
+## Market size — pass 31 addendum (2026-11-27): live entertainment is sized, **show control is not sized at all**, and the one number worth quoting is a transaction price
+
+Added 2026-11-27 (pass 31). Searched for sizing on the live-event, show-control and stagecraft plane.
+The pattern is now familiar enough to state as a rule: **the audience-facing market is sized by
+several vendors who disagree, and the technology layer this KB actually builds in is unsized.**
+
+### ⛔ The refusal first
+
+**No show-control market sizing exists.** Searched explicitly for lighting-console, media-server and
+show-control market data; the result was *"I found no dedicated show-control market data (such as
+lighting or media-server console sales)."* The closest proxies are **stage-lighting hardware**
+figures, which measure fixtures and fittings — a different business from the control layer, and not a
+substitute for it. **Do not convert a stage-lighting hardware number into a show-control number.**
+
+This is the ninth plane in this KB whose software layer is unsized while its hardware or audience
+layer is sized, and the explanation is the same every time: analysts size what is purchased in
+catalogues, and control software here is either bundled with a console, free, or built in-house.
+
+| Estimate | Source type | Note |
+|---|---|---|
+| **Global live entertainment: ~5.9% CAGR (2026–2035)** | Market-research vendor | The broad audience-facing cut. Directional only. |
+| **APAC ≈ 23% of global live music; 2026 ≈ $2.7B China / $1.5B Japan / $0.9B South Korea, ~8–11% CAGR** | Cognitive Market Research | **Internally inconsistent** — its headline and 2026 figures do not fully reconcile. Quote only with that caveat. |
+| **LATAM ≈ 6.0% of global concert halls & theatres = ~$2.28B (2026)** | Fairfield Market Research | Single vendor, unverified. |
+| **Stage/show lighting hardware: APAC ~5.4% CAGR to 2033; China stage illumination 8.80% CAGR to 2031; global LED stage lighting ~7.4%, China ~7.6%** | Four separate vendors | A **5–9% spread** on the same question. This is *hardware*, not control software. |
+| **Show-control / console software market** | — | **NO DATA FOUND. The refusal above.** |
+
+### What can be stood behind instead — a transaction price, which beats every estimate in this table
+
+The most defensible numbers in this plane are not market estimates at all; they are **what a buyer
+actually paid**, reported by trade press:
+
+- **Live Nation paid $646M for an additional stake in OCESA (Mexico) in 2025**, taking it to 75%,
+  after **over $400M** for control in 2021.
+- It also took a **majority of Movistar Arena, Buenos Aires**, bought into a major **Santiago** arena,
+  and entered **Peru**.
+- **Brazil is the #9 music market worldwide** (IFPI 2025); **Mexico entered the global top ten for the
+  first time**, with concert attendance **more than tripling since 2019**.
+
+**Use these in a LATAM conversation in preference to anything in the table above.** A disclosed
+transaction price and a federation's market ranking are primary-adjacent facts; a 5.9% CAGR is a
+vendor's model. This is the same preference order this KB applied to the CIMM audience-measurement
+figures in pass 7 and to government incentive data in pass 27 — and it has now held three times.
+
+### Global players — pass 31 addendum (the live-event & show-control layer)
+
+| Company / body | Type | Strength | Weakness |
+|---|---|---|---|
+| Electronic Theatre Controls (ETC) | Console & fixture manufacturer (US) | Publishes the **Apache-2.0 reference implementations** of ANSI E1.31/E1.33/E1.20 — the interoperability layer the whole industry depends on | Labels every non-standards tool "UNOFFICIAL"; the console product itself is proprietary |
+| MA Lighting / Robe | Console & fixture manufacturers (DE / CZ) | Behind **GDTF/MVR**, now DIN SPEC 15800:2022 — EMEA sets the device-description standard | The fixture library (GDTF Share) is **account-gated**, with per-manufacturer terms |
+| Live Nation / Ticketmaster | Promoter, venue owner, ticketing | Consolidating LATAM venue ownership at disclosed prices; AI across ticketing | Dominance is itself a regulatory exposure; its AI claims reach this KB only through secondary summaries |
+| AEG | Venue operator | Running live AI crowd-flow analytics at The O2 | Vendor case-study evidence only |
+| Disney / Europa-Park | Attraction operators | Investing in attraction AI (two Disney patent filings, Aug 2026; Europa-Park's "AI Suite") | **Filings and statements, not shipped products**; ride control stays closed and safety-rated |
+| Audinate (Dante) | Audio-over-IP | De-facto standard for venue audio transport | **No open implementation**; AES67 is the open alternative |

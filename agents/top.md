@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-26
+updated: 2026-11-27
 ---
 
 # 🎯 AI Agents & Generative Media Models — Media & Entertainment
@@ -2994,3 +2994,51 @@ for any vendored dataset, resolve the licence of the data's provenance, not the 
 
 ⚠️ Also NOASSERTION in this plane: `mitchellkrogza/nginx-ultimate-bad-bot-blocker` (4,848★),
 `ua-parser/uap-core` (827★).
+
+## The live-event, show-control & stagecraft plane — measured 2026-11-27 (pass 31), and the **youngest agent layer in this KB: eight projects, all born in 2026, ~38 stars between them**
+
+Gap grep first, as always. Of ~90 terms probed against all eight files, this cluster was a hard zero:
+`DMX`, `sACN`, `Art-Net`, `GDTF`, `MVR`, `LTC`, `projection mapping`, `show control`, `stagecraft`,
+`lighting control`, `theme park`, `touring`, `front of house`, `stage management`. The KB already had
+`venue` (30 hits), `concert` (45) and ticketing — it had the **commerce** of live entertainment and
+none of the **machinery**. CasparCG, Sofie and NRK were already present from pass 25, so broadcast
+graphics is excluded here; this plane is the physical show: lights, cues, projection, timecode.
+
+**The headline, and it is a measurement result rather than an opinion:** the agent layer of this plane
+is real, it is entirely **MCP-shaped**, every single project was created in 2026, and the eight of them
+together hold about **38 stars**. One has adoption; seven have essentially none; one is **paywalled**.
+
+| Agent / tool | Repo | Licence | Stars | Created | Last push | What it does, and the verdict |
+|---|---|---|---|---|---|---|
+| xlights-mcp-server | [JohnBreault/xlights-mcp-server](https://github.com/JohnBreault/xlights-mcp-server) | MIT | 32★ | 2026-04-04 | 2026-11-12 | MCP server that generates xLights sequences from music analysis. **10 forks — the only project in this plane with measurable adoption, and the only one to build on.** |
+| freeshow-mcp | [restonauta/freeshow-mcp](https://github.com/restonauta/freeshow-mcp) | MIT | 2★ | 2026-06-26 | 2026-06-26 | MCP server to drive FreeShow presentation software from an LLM. Single-day repo: pushed once, never again. |
+| show_designer | [guillegar/show_designer](https://github.com/guillegar/show_designer) | NOASSERTION | 2★ | 2026-06-03 | 2026-07-06 | Lighting design with timeline editor, 3D viewer, Art-Net/sACN/USB output and natural-language control over MCP. **No resolvable licence — unusable for client work as published.** Spanish-language repo (see LATAM). |
+| lights-pi | [gfargo/lights-pi](https://github.com/gfargo/lights-pi) | MIT | 1★ | 2026-03-05 | 2026-11-26 | Headless Raspberry Pi DMX controller with natural-language scene generation; MCP over Streamable HTTP, built on QLC+ and an ENTTEC DMX USB Pro. **Pushed the day before this pass — the liveliest of the small ones, and the only one wired to QLC+.** |
+| light-mcp-server | [bawaaaaah/light-mcp-server](https://github.com/bawaaaaah/light-mcp-server) | MIT | 1★ | 2026-10-14 | 2026-11-22 | DMX over Art-Net/sACN driven by MIDI, a WebSocket UI or MCP; imports QLC+ fixtures, exports to Ableton. Self-declared **v0 / in development**. French-language repo. |
+| stagelight | [crownemmanuel/stagelight](https://github.com/crownemmanuel/stagelight) | **none** | 0★ | 2026-10-26 | 2026-11-16 | "Agent-first" lighting control: describe the rig in prose, the agent patches fixtures and programs looks against a 3D preview, Art-Net out. **The most interesting design in the plane and it has no licence file at all** — default copyright, all rights reserved. |
+| lumina-ai-controller | [Gamartinhos/lumina-ai-controller](https://github.com/Gamartinhos/lumina-ai-controller) | **none** | 0★ | 2026-10-03 | 2026-10-03 | Local DMX/Art-Net server exposing endpoints for Claude/Gemini. One push, no licence. Portuguese-language repo (see LATAM). |
+| luxdmx (Mac CLI/MCP) | [raydeoliveira/luxdmx](https://github.com/raydeoliveira/luxdmx) | NOASSERTION | 0★ | 2026-11-24 | 2026-11-26 | Art-Net 4 + sACN control as a macOS CLI and stdio MCP server, with CIE colour science and gel presets. **Open-core: read-only and dry-run tools are free, live apply and atomic scene execution require a Pro licence.** |
+
+### Three warnings that belong with this table
+
+**1. The paywalled tool surface is new to this KB.** `raydeoliveira/luxdmx` is the first MCP server
+measured here that **gates individual tools behind a paid licence**. The agent can look and simulate;
+making a light actually change is the paid call. Any evaluation that tests an MCP server with
+read-only probes will score it as working and discover the wall in production. **Test the write path,
+not the read path**, on every MCP dependency from here on — this applies to all twelve industries.
+
+**2. Two name collisions, both capable of producing a wrong row.** `raydeoliveira/luxdmx` (0★, three
+days old, open-core) is **not** [tombueng/LuxDMX](https://github.com/tombueng/LuxDMX) (104★,
+Apache-2.0, ESP32 Art-Net/sACN→DMX512 gateway firmware, 7 forks, pushed 2026-11-22) — different
+things, same name, and the Apache-2.0 one is the usable one. Worse: `TheCraftedTech/opencue` (1★, a
+GPL-3.0 DMX console created 2026-10-16) is **not**
+[AcademySoftwareFoundation/OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) (1,010★,
+Apache-2.0, the render-farm manager already in this KB's orchestration tier from pass 6). A pass that
+trusted the search layer would have merged **a render farm with a lighting desk**.
+
+**3. What this plane's agent layer is *for* is already settled, and it is not generation.** Every one
+of the eight is a **control bridge**: prose or MCP in, DMX/Art-Net/sACN out. None generates a show
+file as an artefact to hand to a human programmer, which is the one thing a lighting designer would
+actually buy (the editorial-handoff role `OpenTimelineIO` plays in the generative pipeline). The
+nearest thing is `xlights-mcp-server`, which writes sequences — and it is the one with the forks.
+**The unbuilt product is "agent writes a reviewable show file", not "agent drives the rig live".**

@@ -5751,3 +5751,120 @@ film-specific half is stale:
   domains** (DNS refused via the proxy), so every FADGI fact above is **search-attested, not
   primary-verified**. Re-verify against the primary source before putting it in a client deliverable. No
   FIAF or IASA document was retrievable in this pass either.
+
+---
+
+## Pass 53 (2026-11-27) — the security & operational-resilience stack
+
+> **Licences below were read from the file**, via `raw.githubusercontent.com`, on 2026-11-27 — filename and
+> exact byte count recorded so the next pass can detect a relicence by size change alone. **Star counts are
+> GitHub's rounded display values** (`gh api`, `api.github.com` and `git ls-remote` were all blocked this
+> session); they are labelled rounded and must not be written down as exact integers.
+
+### The detection and response layer — healthy, large, and almost entirely copyleft
+
+| Repo | Licence (file, bytes — read today) | Stars (rounded) | Forks | Last commit | What it is |
+|---|---|---|---|---|---|
+| https://github.com/wazuh/wazuh | **Dual: GPL-2.0 for the bulk, AGPL-3.0-or-later for `src/engine/`** (`LICENSE` 26,121 B on `main`; **24,734 B on `master` — the two branches ship different licence text**) | **17.9k** | 2.6k | not captured | The most widely deployed open SIEM/XDR. Agent-based, on-prem capable |
+| https://github.com/SigmaHQ/sigma | **Router, not a grant** (`LICENSE` 384 B): spec + logo **public domain**; **rules under DRL-1.1** | **11.6k** | 3.0k | not captured | The vendor-neutral detection-rule format. The rules are the asset — and the licence follows them, not the repo |
+| https://github.com/OpenCTI-Platform/opencti | **Apache-2.0** (`LICENSE`, 20,097 B) | **10.5k** | 1.5k | not captured | Threat-intelligence platform (STIX2). Community Edition Apache-2.0; **Enterprise Edition is not open source** |
+| https://github.com/graylog2/graylog2-server | **SSPL v1** (`LICENSE`, 30,608 B) — **not an OSI licence** | 8.2k | 1.1k | not captured | Log management. The repo page's sidebar **does not name the licence**; only the README does. See the warning below |
+| https://github.com/mitre/caldera | **Apache-2.0** (`LICENSE`, 15,888 B) | 7.6k | 1.4k | **2026-11-20** (5.4.0 release prep) | Adversary emulation — how you *test* the plant's defences rather than assume them |
+| https://github.com/MISP/MISP | **AGPL-3.0** (`LICENSE`, 34,520 B) | 6.7k | 1.7k | not captured | Threat-indicator sharing. The format ME-ISAC-style sharing actually runs on |
+| https://github.com/Velocidex/velociraptor | **AGPL-3.0** (`LICENSE`, 26,863 B) | 4.5k | 804 | not captured | Endpoint forensics and IR at fleet scale (VQL). The tool that answers "what did they take" |
+| https://github.com/OISF/suricata | **GPL-2.0** (`LICENSE`, 18,092 B) | not captured | not captured | not captured | IDS/IPS. **Not LGPL** — "LESSER" appears only in the GPLv2 appendix |
+| https://github.com/zeek/zeek | **BSD-3-Clause** (`COPYING`, 1,838 B — Regents of the Univ. of California / LBNL) | not captured | not captured | not captured | Network traffic *semantics*, not just signatures. **The most permissive serious tool in this layer** |
+| https://github.com/idaholab/Malcolm | **Apache-2.0** (`LICENSE.txt`, 865 B) | 497 | 78 | not captured | A deployable suite that ties PCAP + Zeek logs + Suricata alerts together. Built for OT/ICS-shaped networks — which is what a broadcast plant is |
+| https://github.com/Shuffle/Shuffle | **AGPL-3.0** (`LICENSE`, 34,523 B) | not captured | not captured | not captured | SOAR / workflow automation |
+| https://github.com/intelowlproject/IntelOwl | **AGPL-3.0** (`LICENSE`, 34,523 B) | not captured | not captured | not captured | Automated indicator enrichment at scale |
+| https://github.com/TheHive-Project/TheHive | **AGPL-3.0** (`LICENSE`, 34,520 B) | not captured | not captured | not captured | Case management. **Check which generation you are getting** before committing — the current product is commercially controlled |
+
+**The licence shape of this layer is the opposite of the rest of this KB, and an integrator must say so
+out loud.** In media the permissive code is the pipeline (OpenEXR, OpenColorIO, OpenTimelineIO, ffmpeg-adjacent
+tooling) and the copyleft sits at the edges. **Here the centre is copyleft:** of the thirteen rows above,
+**six are AGPL-3.0, one is GPL-2.0, one is dual GPL-2.0/AGPL, one is SSPL** — and only **four**
+(Zeek BSD-3, OpenCTI Apache-2.0, Caldera Apache-2.0, Malcolm Apache-2.0) are the permissive licences
+Globant prefers to build products on. **Consequence, and it is a commercial one:** this stack is excellent
+to **operate for** a client and dangerous to **embed in** a product sold onward.
+- **AGPL-3.0 (Wazuh's engine, MISP, Velociraptor, Shuffle, IntelOwl, TheHive):** running it as an internal
+  tool is unproblematic; exposing it *as a service to the client's own customers* triggers the network
+  clause. For a broadcaster's internal SOC that is fine. For a multi-tenant "Globant media security
+  portal" it is a counsel question before a line is written.
+- **SSPL (Graylog) is not open source** by OSI's definition, and its service clause is broader than the
+  AGPL's. **Do not put Graylog under a managed-service offering**; use it on the client's own account or
+  choose Wazuh.
+- **Zeek is the one piece you can build a product around without a licence conversation** — BSD-3-Clause,
+  and it emits structured logs rather than verdicts, which is exactly what an agent wants to read.
+
+### The zero-trust and secrets layer — where the permissive options are, and one relicensing trap
+
+| Repo | Licence (file, bytes) | Stars (rounded) | Forks | Last commit | Note |
+|---|---|---|---|---|---|
+| https://github.com/openziti/ziti | **Apache-2.0** (`LICENSE`, 11,340 B) | 4.5k | 287 | **2026-11-19** | Zero-trust network overlay: services are dialled, not routed. The closest thing to CSAP's "no routable network" idea that you can actually deploy |
+| https://github.com/pomerium/pomerium | **Apache-2.0** (`LICENSE`, 11,337 B) | not captured | not captured | not captured | Identity-aware reverse proxy — per-request authorisation in front of internal tools |
+| https://github.com/openbao/openbao | **MPL-2.0** (`LICENSE`, 15,958 B) | 9.3k | 732 | **2026-11-26** | Secrets management. **This is the permissive path** |
+| https://github.com/hashicorp/vault | **BUSL-1.1** (`LICENSE`, **4,942 B**) | not captured | not captured | not captured | **Not open source.** The licence file is a *tenth* the size of a real one because BUSL is short — a 5 KB licence file is itself a red flag worth probing |
+
+**The trap, stated plainly:** every pre-2023 blog post, tutorial and architecture diagram says "Vault". The
+repository's licence is now **BUSL-1.1**, and the open continuation is **`openbao/openbao` (MPL-2.0)**, which
+was committed to the day before this measurement. **If a client's existing diagram says Vault, the licence
+question is already live in their estate**, and OpenBao is the answer that does not require a conversation
+with HashiCorp's licensing team. Same pattern, different vendor, as Graylog's SSPL above: **in the security
+layer, the relicence is the normal event, not the exception — re-read the licence file at every pass.**
+
+### The recovery layer — the only honest answer to ransomware, and it is cheap and permissive
+
+| Repo | Licence (file, bytes) | Stars (rounded) | Forks | Note |
+|---|---|---|---|---|
+| https://github.com/restic/restic | **BSD-2-Clause** (`LICENSE`, 1,345 B) | **37.5k** | 2.0k | The most-starred repo in this entire pass. Deduplicating, encrypted, append-only-capable backup |
+| https://github.com/borgbackup/borg | **BSD-2-Clause** (`LICENSE`, 1,551 B) | not captured | not captured | Deduplicating archiver; append-only mode is the anti-ransomware feature |
+| https://github.com/kopia/kopia | **Apache-2.0** (`LICENSE`, 10,763 B) | not captured | not captured | Snapshots to object storage with immutability support |
+| https://github.com/vmware-tanzu/velero | **Apache-2.0** (`LICENSE`, 10,255 B) | not captured | not captured | Kubernetes resource and volume backup — for cloud-production workloads |
+
+**Note what this says about the plane's economics.** The detection layer is copyleft, contested and
+expensive to operate. The **recovery** layer — the layer that actually determines whether a station gets
+back on air — is **BSD-2-Clause and Apache-2.0, free, and small enough to read in an afternoon**. A
+broadcaster that cannot restore 400 hours of footage has a backup problem, not a SIEM problem, and the fix
+is the cheapest software in this file. **`restic` at 37.5k★ outstars every detection tool here**, which is
+the market telling you where the real demand is.
+
+### The supply-chain layer (cross-reference, not a new claim)
+
+`aquasecurity/trivy` (**Apache-2.0**, `LICENSE` 11,357 B) and `anchore/syft` (**Apache-2.0**, `LICENSE`
+11,357 B) are the SBOM and vulnerability scanners that MPA CSBP's and EBU R143's supply-chain sections ask
+for evidence of. **Caveat carried forward from pass 8 and still binding:** an SBOM built from the source
+tree **cannot see the licence of natively linked libraries** (the Chromaprint/FFmpeg/FFTW finding). For any
+media component with native dependencies, resolve the **linked** libraries' licences, not the repo's.
+
+### Already in this KB — do not re-table, do bridge to
+
+- **`keycloak/keycloak` (Apache-2.0, 38,060★ as measured in an earlier pass)** — and it is the single most
+  important row for this plane, because **AMWA's own IS-10 security guidance uses Keycloak as the
+  authorization server**. See the IS-10 section below.
+- **`crowdsecurity/crowdsec` (MIT)** and the **OWASP CRS / Coraza** set — already tabled for ad-fraud and
+  bot defence. They are the same control doing double duty; the plane does not need a new row for them.
+
+### The broadcast plant's own security standard — and its one implementation is archived
+
+| Artefact | Repo | Licence (file, bytes) | Stars | Status |
+|---|---|---|---|---|
+| AMWA **IS-10** NMOS Authorization (the spec) | https://github.com/AMWA-TV/is-10 | **Apache-2.0** (`LICENSE`, 11,334 B) | not captured | **Live spec**, v1.0.1. OAuth 2.0 + JWT claims for NMOS control APIs |
+| AMWA **BCP-003-01** (TLS for NMOS APIs) | https://github.com/AMWA-TV/BCP-003-01 | **Apache-2.0** (`LICENSE`, 11,334 B) | not captured | Live. The transport-security companion |
+| BBC NMOS authorization server | https://github.com/bbc/nmos-auth-server | **Apache-2.0** (`LICENSE.md`, 11,362 B) | **11** ★ / 4 f | **ARCHIVED — "archived by the owner on Mar 25, 2025. It is now read-only."** Targets the earlier BCP-003-02 draft |
+| NMOS reference node/registry with OAuth2 | https://github.com/alabou/NMOS-Reference | **Apache-2.0** (`LICENSE`, 10,770 B) | not captured | Python node + registry; fetches JWKS from the AS and enforces IS-10 claim semantics. Reference for the *validation* side |
+| NMOS registry/node (already in KB, pass 44) | https://github.com/sony/nmos-cpp | **Apache-2.0** (`LICENSE`, 11,309 B) | 204★ (earlier pass) | The plant-side implementation to attach authorization to |
+| IS-10 token minting / compliance testing | https://github.com/OfferPk/nmosis10forge-pro | **NO LICENCE FILE** at 6 names | not captured | Repo exists (README 200). Unverifiable provenance **and no grant** — do not build on it |
+
+**The sharpest measurement in this plane.** IS-10 is the **only authorization standard specific to the
+broadcast plant** — the thing that decides whether an unauthenticated device on a ST 2110 network can drive
+a router or a playout node. The **only broadcast-specific authorization-server implementation ever
+published is archived, read-only since 2025-03-25, and has 11 stars**; and `MovieLabs/CSAP` — the repo an
+engineer would reach for after reading about the Common Security Architecture for Production — **does not
+exist** (README 404 on both `main` and `master`).
+
+**This inverts the usual finding of this KB, and the inversion is the useful part.** Elsewhere the vertical
+artefact is the asset and the horizontal tool is a poor substitute. Here the **horizontal product is the
+correct answer**: AMWA's own guidance points at **Keycloak**, and IS-10 is best understood not as a product
+to find but as **a claims profile to configure on an identity server you already have**. An integrator who
+goes looking for "the NMOS security product" will find an archived prototype; one who treats IS-10 as a
+Keycloak configuration ships.

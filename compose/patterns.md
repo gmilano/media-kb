@@ -8205,3 +8205,147 @@ photographic and what is generated.
   **still the 2015/2016 document** and the two ISO standards that define scanner resolution and dynamic
   range are **paid**.
 - **`darbyjohnston/DJV` as a URL.** It is a redirect; the canonical repo is `grizzlypeak3d/DJV`.
+
+---
+
+## Pattern 122 — The TPN / R143 readiness evidence pack, assembled from permissive parts
+
+**Why:** studios push content-security controls down their supply chain, and **no open-source
+implementation of either framework exists** — verified this pass for both the **MPA Content Security Best
+Practices v5.3.1** (gated: assessed through the member-only TPN+ platform; **TPN no longer issues
+certificates**; each content owner still makes its own call) and **EBU R 143 v3.0** (March 2025; **free
+public PDF** plus a **free official "Security Controls Assertion" spreadsheet**, 8 sections: operational
+security, secure development, incident management, physical security, cloud security, business continuity,
+supply chain). The deliverable is therefore **not a tool and not a certificate — it is an evidence pack**,
+and every component below is something the client keeps.
+
+```
+  CONTROL CATALOGUE (not code)                 EVIDENCE PRODUCERS (all self-hosted)
+  MPA CSBP v5.3.1 domains  ----+               +--> wazuh/wazuh        GPL-2.0 (+AGPL engine) 17.9k*
+  (physical, logical,          |               |     log + file-integrity + config evidence
+   network, personnel,         +---- map ----->+--> Velocidex/velociraptor  AGPL-3.0  4.5k*
+   asset management)           |               |     endpoint forensics: "what was touched"
+  EBU R 143 v3.0 xlsx  --------+               +--> aquasecurity/trivy + anchore/syft  Apache-2.0
+  (8 sections, free)                           |     SBOM + vulnerability evidence
+                                               +--> mitre/caldera      Apache-2.0  7.6k*
+                                               |     PROOF the control works, not an assertion
+                                               +--> restic BSD-2 37.5k* / kopia Apache-2.0
+                                                     the restore test, with a dated result
+```
+
+**Steps**
+
+1. **Pick the catalogue by region, not by preference.** Selling into a US studio's vendor list → **MPA
+   CSBP v5.3.1** (mapped by TPN to AICPA TSC 2017, CSA CCM v4.03, ISO/IEC 27001:2022, 27002:2022 and
+   NIST 800-53, so an existing ISO 27001 estate is mostly reusable evidence). Selling into an **EBU-member
+   tender** → **R 143 v3.0** and its assertion spreadsheet, which is written for exactly that procurement
+   moment.
+2. **Produce evidence, not prose.** Each control gets a generated artefact with a date: a Wazuh
+   file-integrity report, a Velociraptor collection, a Trivy SBOM, a Caldera run showing the detection
+   fired.
+3. **Test the restore and put the number in the pack.** Business continuity is a section in both
+   frameworks and the only honest evidence is a timed restore.
+4. **Keep the licence boundary visible.** Wazuh's `src/engine/` is **AGPL-3.0-or-later** and Velociraptor
+   is **AGPL-3.0**: operating them for the client is fine; **exposing them as a multi-tenant service is a
+   counsel question.** Never put **Graylog (SSPL)** under a managed offering.
+
+**Do not promise:** "TPN certification" (the programme does not certify), a Gold Shield as a universal pass
+(it is not), or an open-source tool that fills either questionnaire (none exists in either framework, and
+the free one is as empty as the gated one).
+
+---
+
+## Pattern 123 — IS-10 authorization on an ST 2110 plant, without a media-specific product
+
+**Why:** the IP broadcast plant (pass 44: ST 2110, NMOS, PTP) is a flat, highly regular network where an
+unauthenticated device can drive a router or a playout node. **AMWA IS-10** (NMOS Authorization,
+**Apache-2.0** spec, v1.0.1) is the standard for that, and the **only broadcast-specific implementation
+ever published is archived**: `bbc/nmos-auth-server`, **11★/4f, read-only since 2025-03-25**, targeting the
+earlier BCP-003-02 draft. `MovieLabs/CSAP` **does not exist as a repo**. The answer is a horizontal identity
+server wearing a media claims profile.
+
+```
+  [keycloak/keycloak  Apache-2.0  38,060*]   <- the authorization server; AMWA's own IS-10
+        |   issues JWT with IS-10 claims         guidance uses Keycloak. NOT a bespoke build.
+        v
+  [sony/nmos-cpp  Apache-2.0  204*]  <---- registry + node (pass 44)
+        ^   validates Bearer token against JWKS from the AS
+        |   claim semantics reference: alabou/NMOS-Reference  Apache-2.0
+  [openziti/ziti  Apache-2.0  4.5k*]  <- control plane is DIALLED, not routable
+        |
+  [zeek/zeek BSD-3] + [OISF/suricata GPL-2.0] --> [idaholab/Malcolm Apache-2.0 497*]
+        PTP/NMOS traffic is extremely regular => anomalies are unusually detectable here
+```
+
+**Steps**
+
+1. **Configure, don't build.** Stand up Keycloak as the IS-10 authorization server and model the IS-10
+   claims; use `alabou/NMOS-Reference` (Apache-2.0) as the reference for JWKS fetch and claim enforcement
+   on the node side. Add **BCP-003-01** (Apache-2.0) for TLS on the NMOS APIs.
+2. **Take the control plane off the routable network** with OpenZiti, so an unauthenticated device cannot
+   even reach the control API to be rejected by it.
+3. **Watch the plant with Malcolm**, because ST 2110/PTP traffic is periodic and well-formed: baseline
+   drift is a far stronger signal here than in an office network. This is the one place a media-specific
+   detection set is worth writing — and **no vendor's default ruleset contains it**.
+4. **Cross-check the alerting chain** against the FCC EAS cybersecurity obligations already recorded in
+   this KB (pass 45, in force, deadline **2026-09-29** passed) when the plant carries EAS.
+
+**Do not promise:** a build on `bbc/nmos-auth-server` (archived), anything resting on
+`OfferPk/nmosis10forge-pro` (**no licence file at 6 names** — all rights reserved), or "the NMOS security
+product", which does not exist.
+
+---
+
+## Pattern 124 — An LLM triage agent for a studio SOC that breaches neither the licence nor the perimeter
+
+**Why:** this is the one plane in media where the agentic layer is already permissive and maintained — and
+it carries two constraints that are specific to media and specific to 2026, both of which this pass
+measured rather than assumed.
+
+```
+  detection content: SigmaHQ/sigma  <-- rules are DRL-1.1, NOT the repo's licence
+        |                                 attribution must survive INTO the alert text
+        v
+  [wazuh/wazuh GPL-2.0/AGPL engine]  or  [zeek/zeek BSD-3 -> idaholab/Malcolm Apache-2.0]
+        |
+        v   MCP bridge -- START READ-ONLY
+  [Letos01/Mcp-wazuh  MIT]  (prompt-injection defence; treats every log byte as hostile)
+        |   or gensecaihq/Wazuh-MCP-Server  MIT  282*  (55 tools, read+write)
+        v
+  [beenuar/AiSOC  MIT  8.3k*]  or  [Vigil-SOC/vigil  Apache-2.0  481*]
+        |   LOCAL model, human-approved response, every prompt and tool call logged
+        v
+  analyst  --- approves --->  action        (autonomous response OFF by default)
+```
+
+**The two hard requirements**
+
+1. **Propagate the rule author into the summary.** Sigma's rules are **DRL 1.1**, which requires that
+   *messages based on matches* retain the rule's `author` field. **An LLM summary of a Sigma-matched alert
+   is such a message.** Carry `author` through the summarisation prompt into the rendered alert. This is
+   the only licence in this KB that a paraphrase can breach, and no SBOM scan will catch it.
+2. **The prompt itself is the crown jewel.** A studio's alerts name **unreleased titles, cuts and key
+   art** — the Inception leak-site claim of 2026-11-26 advertised ~5 TB of exactly that (unverified claim,
+   see `intel/trends.md` §52). So **the triage transcript becomes pre-release content** and must stay
+   inside the assessed perimeter. Both AiSOC and Vigil are **local-first and run against your own
+   model**; that property is not a nice-to-have here, it is **the reason these two are the correct choices
+   over any hosted SOC copilot**. Note the generalisation: **an AI SOC for a studio is one of the few AI
+   deployments where the input, not the output, is the asset being protected.**
+
+**Steps**
+
+1. Start with the **read-only** bridge (`Letos01/Mcp-wazuh`) and autonomous response **off** — the default
+   in Vigil and Argus alike. Earn write access later.
+2. Keep the **agent's own runtime** sandboxed: `nolabs-ai/nono` (**Apache-2.0, 5.1k★**) exists for exactly
+   this, and the moment the agent holds credentials it is itself an asset in the TPN-assessed estate.
+3. Log every prompt and tool call (AiSOC does this by default) — that log is also your evidence artefact
+   for Pattern 122's incident-management section.
+4. **Pin versions and re-read licences each pass.** `beenuar/AiSOC` went from a reported ~6,353★ on
+   2026-11-25 to **8.3k★ on 2026-11-27**: that is **velocity, not installed base**, and a project moving
+   that fast can relicence or change posture between engagements.
+
+**Do not promise:** `birhantprkc/AiSOC` or `saledream/wazuh-mcp-server` (**both 404 — surfaced by search,
+do not exist**; AiSOC's real origin is `beenuar/AiSOC`, and three live *forks* of the dead name resolve
+perfectly), `MISP/misp-mcp` as cleared AGPL code (**no licence file**; the grant is README prose only),
+`FiligranHQ/xtm-mcp` (**archived 2026-07-05**), or `SecurityClaw/SecurityClaw` as actively maintained
+(**last commit 2026-07-20**).

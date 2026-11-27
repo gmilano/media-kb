@@ -1962,6 +1962,75 @@ the FADGI draft on content authenticity for AI-impacted audiovisual collections 
 provenance layer (Pattern 121) for catalogue owners who intend to license archive footage for AI training.
 Both are orchestration over permissive code and neither requires a restoration licence.
 
+### Pass 53 (2026-11-27) — the security & operational-resilience layer in North America
+
+**This is the region where the framework lives, and it is private-ordered rather than regulated.** Content
+security for production and post is governed by the **MPA Content Security Best Practices (v5.3.1**, with a
+v5.4 update reported in progress**)**, assessed through the **MPA-run Trusted Partner Network**. Three
+properties matter commercially and all three are commonly misstated in vendor marketing:
+
+- **It is voluntary and it is not a certification.** A Shield records that an assessment and remediation
+  update were completed; **each content owner still makes its own risk decision**, and reporting indicates
+  **TPN programme certificates are no longer issued**. Reports are visible to subscribed **Gold Member
+  Content Owner** security teams.
+- **Shield tiers** run Blue (self-attestation, annual) / Silver / Gold, with assessment domains covering
+  physical, logical, network and personnel security plus asset management. **Secondary sources conflict on
+  the tier mechanics** (one describes Gold as on-site; another describes Silver as a self-assessed
+  questionnaire) — **verify the tier and version against TPN's own materials for any engagement**, because
+  the contract, not the programme, sets the bar.
+- **The real requirement is contractual.** Studios and streamers add their own security exhibits and
+  delivery instructions on top of the Shield. **A vendor blog claim that "virtually every major studio
+  lists TPN Gold as a contractual requirement in 2025–2026 agreements" is marketing and is recorded here as
+  unverified.**
+
+**Zero tooling, measured.** No open-source MPA/TPN questionnaire or evidence tool was located. The
+assessment platform is **TPN+**, and TPN offers a no-cost Partner Resource Center; commercial GRC vendors
+sell TPN modules. **The gap is real and it is an engineering opportunity, not a product gap** (see
+`compose/patterns.md` Pattern 122).
+
+**The architecture standard is American too, and its code is missing.** MovieLabs' **CSAP (Common Security
+Architecture for Production)** is a zero-trust architecture for media creation, derived from the 2030
+Vision's Principle 7 and described by MovieLabs as congruent with **NIST SP 800-207**; TPN and MovieLabs
+collaborated to bring zero trust and CSAP into supply-chain assessments. **`MovieLabs/CSAP` does not exist
+as a repository** (README 404 on `main` and `master`), though `MovieLabs/mddf` (MIT) and `MovieLabs/OMC`
+(Apache-2.0) do and are already in this KB.
+
+**Sharing infrastructure exists and is US-centred.** The **Media & Entertainment ISAC (ME-ISAC)** is a
+member-driven nonprofit operating within the **CDSA**, providing a threat-intelligence fusion centre,
+malware analysis test-bed and automated indicator sharing, and is listed by **CISA** among ISACs offering
+**Automated Indicator Sharing** to members. **Caveat: the sourcing located for ME-ISAC's services dates
+from 2019–2023 and current membership terms were not verified this pass.**
+
+**Regulation, cross-referenced not duplicated:** the **FCC EAS cybersecurity rules** are already recorded
+in this KB (pass 45) as in force with the **2026-09-29** implementation date passed — in this plane they
+matter as the one place where a US broadcaster's security posture is a *legal* obligation rather than a
+contractual one.
+
+**The freshest datum, and it is a claim not an incident.** On **2026-11-26** the **Inception** extortion
+group listed **Paramount** on its leak site alongside Verisk, McDonald's and Mattel, claiming ~**5.9 TB**
+including ~5 TB of **unreleased key art for 2026–27 titles**, CBS financial data, **guild residual
+ledgers**, ~99,000 employee directory records and 47,935 payroll/pension records, with a **2026-11-27**
+deadline and no stated ransom. **No company confirmation and no SEC filing were located; Okta has said it
+could not validate the authenticity of data published by these operators; listings attributed to the group
+have been reported to include fabricated victims.** Record it as an **unverified leak-site claim** — and
+note that the claimed inventory maps onto asset classes this KB already models (key art, pass 37; residuals,
+pass 50).
+
+**Opportunity.** TPN-readiness engineering for the **mid-size vendor** — the post house, VFX boutique or
+sound stage that has a studio exhibit it cannot answer and no budget for a GRC platform. The deliverable is
+the evidence pack of Pattern 122, built from Wazuh + Velociraptor + Trivy/Syft + Caldera + a timed restore,
+mapped to CSBP domains. **Second opportunity:** Kaspersky's 2026 forecast expects attackers to target
+**render farms, plug-ins and small post houses** to take sequences pre-release — that is the same buyer, and
+it is the buyer every studio's supply chain depends on.
+
+**Informed gaps (NA):** **no credible figure isolating security spend for production studios or
+post-production houses** was located — two market-research aggregator figures ($6.80bn for film/TV
+production at 28.7% of the M&E cybersecurity market; $17.89bn for large enterprises at 75.5%) **do not
+reconcile with each other and are not used here**. The usable figure is **IDC's**: global security spend
+**$308bn in 2026**, **$430bn by 2029**, with **M&E among the fastest-growing industries** and spend
+directed at IP protection, piracy and service disruption. **No figure was found for open-source security
+tooling adoption by North American broadcasters.**
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -4120,6 +4189,71 @@ in a way it is not in North America. The European Commission's Media Industry Ou
 broadcasters and national archives; Article 50 provenance tooling (Pattern 121); and partner-side
 engineering around DIAMANT/PFClean rather than against them.
 
+### Pass 53 (2026-11-27) — the security & operational-resilience layer in EMEA
+
+**EMEA is the only region with a free, media-specific, tender-grade security control framework.** **EBU
+R 143** — "Cybersecurity recommendation for media vendors' systems, software & services" — is at
+**version 3.0 (March 2025)**, following a 2024 update that added a requirements list for **SaaS products**
+(access management, data protection, security monitoring, incident remediation). It has **8 sections**
+covering operational security, secure development, incident management, physical security, cloud security,
+business continuity and supply-chain management, and it was drafted by EBU members drawing on national
+security agency guidance such as **ANSSI** and **BSI**.
+
+**Two properties make it commercially different from the MPA framework.** First, **it is free and public**
+(PDF at `tech.ebu.ch`), and the EBU additionally publishes an **R 143 "Security Controls Assertion"
+spreadsheet** (xlsx, 3 worksheets) with a vendor-facing "do you meet this" format and a reviewer-facing
+annex. Second, **it is aimed at procurement**: the EBU recommends members use it to set minimum system
+acceptance levels **in tenders**. It is a **recommendation, not a regulation** — but for a vendor selling
+into European public broadcasters it functions as the gate.
+
+**The prediction this pass made and falsified.** A free framework should, by this KB's standing
+content-licence law, produce more open tooling than a gated one. **It does not: R143 has no open-source
+implementation either** (searches surfaced only an unrelated EU hardware-compliance navigator and a generic
+Apache-2.0 checklist app). See `intel/trends.md` §52 for the boundary this puts on the law — **a completed
+assessment is an assertion about one company's own estate and has no reuse value**, so the missing
+ingredient is not permission but a shareable artefact. **The reusable asset R143 does produce is its
+machine-readable controls spreadsheet**, and that is the thing to build a tool around.
+
+**NIS2: the honest answer is "it depends on the member state", and that is the finding.** Broadcasters are
+**not a named NIS2 sector**. The directive covers medium and large entities (the size test being **50+
+employees or turnover above €10m**) across **18 sectors**; media organisations may be captured indirectly
+as digital infrastructure, cloud/hosting or online platforms, and advisory commentary suggests online news
+platforms, streaming services and distribution platforms **may** fall in scope. Decisively, the **ECSO
+transposition tracker records at least one national transposition that explicitly excludes mass media and
+publishing houses.** **So a pan-European broadcaster's NIS2 position is a country-by-country question, not
+a group-level one** — which is itself the consulting engagement. **This is advisory commentary, not legal
+text: check NIS2 Annexes I and II in EUR-Lex plus the national law.**
+
+**CRA is the one with firm dates, and it lands on vendors, not broadcasters.** The **Cyber Resilience Act**
+is a *product* regulation: **reporting obligations from 2026-09-11** and main obligations from
+**2027-12-11**. Any Globant-built product with digital elements sold into the EU is in scope — including
+tooling delivered to a media client.
+
+**EMEA is also the only region where journalist device security is a regulated matter.** **EMFA Article 4**
+limits spyware deployment against journalists to narrow exceptions (offences carrying at least three years'
+custody, or other serious crimes at least five). Weaknesses are documented: review may be carried out by
+"an independent and impartial decision-making authority" rather than a court, and commentary holds that the
+framework does not create easily enforceable individual rights. A **one-year review in 2026** concluded
+journalists still face spyware, political pressure and physical attacks, citing a **Citizen Lab-confirmed
+case involving an Italian journalist** and **WhatsApp notifying ~90 accounts targeted with Graphite**; an
+Italian analysis found national law does not explicitly bar surveillance of journalists as Article 4(3)
+envisages. **No Commission infringement action or court ruling specific to Article 4 was located.** This
+connects to pass 20's source-protection plane: **in EMEA, hardening a journalist's device is compliance
+support, not just good practice.**
+
+**Opportunity.** Two distinct buyers. **(1) The vendor**: R143 assertion automation — generate the
+controls-assertion spreadsheet from live evidence (Wazuh, Trivy/Syft, Velociraptor, a timed restic restore),
+so a tender response is produced rather than written, and keep the artefact current between tenders.
+**(2) The broadcaster**: a per-country NIS2 scoping assessment plus the EMFA Article 4-adjacent work of
+hardening reporter devices and travel kit — the only region where that has a statutory hook.
+
+**Informed gaps (EMEA):** no figure was located for **open-source security tooling adoption by EBU-member
+broadcasters**, and **no public count of R143 assertions** exists. The EBU document count of 8 sections and
+the v3.0 date are **search-attested from EBU's own site listings; the v3.0 PDF itself was not read in this
+pass** and should be read before a client deliverable quotes a specific control number. `ebu/ebu-tt-live-toolkit`
+is noted here only for the licence-filename lesson it taught (**BSD-3-Clause in `LICENCE.txt`** — British
+spelling), not as a security tool.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -6244,6 +6378,72 @@ region's nearest equivalent to Article 50 for Pattern 121 purposes.
 country by country. The strongest plays are archive triage for the large regional broadcasters and
 platform-side catalogue remastering where streaming budget already exists, plus NFSA-spec-conformant
 digitisation work in Australia where the written specification actually exists to conform to.
+
+### Pass 53 (2026-11-27) — the security & operational-resilience layer in APAC
+
+**APAC holds the strongest *regulatory* finding in this entire plane, and it is media-specific:
+in Australia, broadcasting is a named critical-infrastructure asset class.** Under the **Security of
+Critical Infrastructure (SOCI) Act**, broadcasting is a regulated asset type subject to a **Critical
+Infrastructure Risk Management Program (CIRMP)**, and the **Enhanced CIRMP Rules took effect on
+2026-06-10**, adding a further tier of requirements that explicitly names **broadcasting services**
+(alongside freight and transport). The enhanced tier requires, among other things:
+
+- addressing **legacy and emerging technology risk**,
+- deploying **phishing-resistant multi-factor authentication**,
+- **segregating critical from non-critical systems**,
+- managing **supply-chain and insider risk**.
+
+**And enforcement posture is changing, not just the rules.** From **2026-27** the **Cyber and
+Infrastructure Security Centre (CISC)** is moving from education to enforcement, using regulatory guidance
+notices, formal non-compliance notices and infringement notices. **Tranche 2 reforms are pending**:
+consultation closed **2026-07-31**, following a 2026 independent review of the SOCI Act whose six
+recommendations the government accepted in principle. **Caveat: these findings come from consultancy and
+law-firm commentary; sources disagree on the review's date (31 January vs 2 February 2026). Verify against
+the Federal Register of Legislation and CISC materials before a client deliverable.**
+
+**Why this matters more than it looks.** "Segregate critical from non-critical systems" and
+"phishing-resistant MFA", applied to a broadcaster, land directly on **the IP plant of pass 44** — the
+ST 2110 / NMOS / PTP network — and on the control-plane authorization problem that **AMWA IS-10** exists to
+solve. **Australia is therefore the one jurisdiction where the Pattern 123 recipe (Keycloak as IS-10
+authorization server + OpenZiti to take the control plane off the routable network + Malcolm for plant
+traffic) has a named regulatory driver rather than a best-practice one.**
+
+**Japan: adjacent policy, no broadcaster-specific obligation located.** Japan has relied on **soft law**,
+favouring guidance over binding rules, and its **second AI Basic Plan** calls for stronger defences against
+**AI-enabled cyberattacks**, including testing advanced models and inspecting vulnerabilities in critical
+government systems. **Informed gap, stated explicitly: no Japan-specific cybersecurity obligation on
+broadcasters, and no Japanese media security framework comparable to R143 or CSBP, was located in this
+pass.** That is an absence of evidence from two searches, not evidence of absence.
+
+**India: the region's clearest supply-chain exposure.** **Amagi Media Labs** — a cloud broadcast and
+ad-tech provider used by broadcasters well beyond India — was named as a victim in **October 2026** when
+the **n0n** group claimed to have stolen internal operational data. **Status: an unverified extortion-group
+claim.** Treated carefully it is still the most useful APAC datum in this plane, because it is **a
+third-party cloud playout/ad-tech dependency, i.e. exactly the concentration risk that TPN-style
+supply-chain assessment and SOCI's supply-chain clause both target.** Any APAC broadcaster using a cloud
+playout provider should be able to answer "what happens to our air if they are down for a week".
+Separately, India's **IT intermediary rules amendments on AI-generated content took effect 2026-02-20** —
+that is a labelling obligation and belongs to this KB's provenance plane, not this one; noted so a later
+pass does not double-count it as a security rule.
+
+**Wider APAC context:** regional analyses consistently report **AI deployment in media running ahead of
+governance**, with newsroom AI tools in use across the region while governance remains "incomplete, delayed
+or absent"; **Australia** created an **Office of AI in July 2026** and **ACMA** has published sector papers
+mapping AI use across television, radio and news — a regulatory observation exercise of the kind that
+typically precedes enforcement.
+
+**Opportunity.** **CIRMP evidence engineering for Australian broadcasting asset owners** — the obligation
+is current, the enforcement posture is hardening, and the required controls (MFA, segmentation, supply
+chain, legacy risk) map onto the permissive stack in `repos/foundations.md` without any proprietary
+platform. Deliverables: a segmentation design for the ST 2110 plant, phishing-resistant MFA rollout on the
+control plane via Keycloak, OpenZiti for cross-site control traffic, Malcolm for plant visibility, and a
+timed-restore result for the continuity requirement. **Second opportunity:** third-party concentration
+assessment for broadcasters dependent on cloud playout/ad-tech, which the Amagi claim makes a live board
+question across the region.
+
+**Informed gaps (APAC):** **no APAC-specific figure for open-source security tooling adoption by
+broadcasters** was located; **no Japanese or South Korean broadcaster security obligation** was found; and
+no APAC media-sector ISAC equivalent to ME-ISAC was identified.
 
 ### LATAM
 
@@ -9061,6 +9261,67 @@ implementation.
 - **WBD advertising revenue −7% YoY in Q1 2026 to $1.85 bn** on linear declines.† A demand-side
   pressure indicator, not a market size.
 
+### Pass 53 (2026-11-27) — the security & operational-resilience layer in LATAM
+
+**In LATAM the reportable event is personal data, not loss of signal — and that reframes the whole
+engagement.** No LATAM media-sector security framework was located. What exists and binds is **data
+protection**, and in Brazil it is specific and fast:
+
+- **Brazil / ANPD:** a security incident involving personal data must be notified to the **ANPD** (and to
+  data subjects) **within three working days** of the controller's knowledge, per **Resolution
+  CD/ANPD No. 15/2024, Article 6**. Notification is required only where **three criteria are cumulatively
+  met**: the incident is **confirmed**, it involves **personal data** under the LGPD, and it poses a
+  **relevant risk or damage** to data subjects. The ANPD can order further measures including **broad
+  disclosure of the incident to the media**, and **incidents must be logged even when not reportable**.
+- **The regulator got stronger in 2026.** The **ANPD became a regulatory agency** in **February 2026**
+  (**Lei 15.352 of 2026-02-25**, effective on publication, restructuring the authority), and its
+  enforcement and sanctions powers expanded through 2025–2026 with a **public consultation on the sanctions
+  rulebook open**; one report indicates a new framework raising fines from **November 2026**. **Sources are
+  secondary; verify against ANPD's official publications.**
+
+**What this means for a broadcaster, concretely.** A ransomware event at a LATAM broadcaster generates its
+legal clock from **payroll, subscriber and employee records** — not from the playout outage. The practical
+consequence is that **the incident-response runbook must start with a data-scoping question** ("was personal
+data confirmed affected?") on a **three-working-day** timer, in parallel with the engineering work of
+getting back to air. That is a different runbook from the US one, where the regulated artefact is the
+**EAS/alerting chain** (pass 45), and from Australia's, where it is the **critical-infrastructure asset**.
+**Three regions, three different definitions of the reportable event — this is the most transferable
+regional insight in the plane.**
+
+**The one operational datum found in the region.** The **RJR Gleaner Communications Group** (Jamaica) took
+parts of its IT systems offline **as a precaution** while **radio, television and digital operations
+remained active**. That is a textbook continuity outcome and worth citing to a LATAM client precisely
+because it shows the separation that works: **the business IT estate was isolated and the air chain kept
+running.** It is also the best argument for the segmentation work in Pattern 123 that does not depend on a
+regulator requiring it.
+
+**Adoption context (and the reason security is now the gap).** LATAM newsroom AI adoption has moved from
+exploration into operations: the **IAPA / Google News Initiative AI Product Lab** has concluded, with
+mentors reporting teams now capable of designing **RAG architectures and agents that query their own
+databases**, and **more than 20 outlets** reported transforming newsroom workflows. But **formal internal
+AI policy remains limited and uneven** — **Listín Diario** (Dominican Republic) issued guidelines in
+**January 2026** and **El Comercio** (Peru) published a ~10-page AI guide. **The security consequence is
+direct and is this pass's LATAM argument: agents are already querying production databases in LATAM
+newsrooms, and the governance around them is the thinnest of any region.** `nolabs-ai/nono`
+(**Apache-2.0, 5.1k★** — agent runtime sandboxing) is the cheapest first control for exactly that
+situation.
+
+**Opportunity.** **Agent-era incident readiness for LATAM media groups**: a three-working-day LGPD
+notification runbook wired to actual detection evidence (Wazuh or Zeek + a data-scoping step), plus
+**sandboxing and credential brokering for the newsroom agents already in production** (nono + OpenBao,
+both permissive). This is a smaller, faster engagement than a TPN programme and it matches what the region
+has actually deployed. **Second opportunity:** segmentation of business IT from the air chain, sold on the
+RJR Gleaner outcome rather than on a regulation.
+
+**Informed gaps (LATAM), stated rather than left silent — two searches each:** **no Mexican cybersecurity
+obligation specific to media or broadcasters** was located; **no LATAM media-sector security framework** or
+ISAC equivalent exists in the located sources; **no figure for open-source security tooling adoption by
+LATAM broadcasters** was found; and **no LATAM-specific media security spend figure** exists in any source
+located (the IDC global figures are not broken out by region in what was available). An Argentine press
+union federation (**SiPreBA**, with the Heinrich Böll Foundation) published **"Notes Toward Regulating
+Artificial Intelligence in the Media" in May 2026** — a labour-side policy input, **not a security
+framework**, recorded so a later pass does not mistake it for one.
+
 ### Global players — pass 25 addendum (the traffic & billing layer)
 
 | Player | Products in this plane | Note |
@@ -10511,3 +10772,51 @@ One syndicated source splits the restoration market **North America 38% / Europe
 Treat it as directional only. **Note what it implies and what it omits: the three named regions total 91%,
 and the remaining 9% is not broken out — LATAM is not separately sized by any source located in this pass.**
 That is an informed gap, recorded as such below rather than filled with an estimate.
+
+### Global players — pass 53 addendum (the security & operational-resilience layer)
+
+| Layer | Who holds it | Open alternative (licence read 2026-11-27) | Globant's position |
+|---|---|---|---|
+| Content-security framework for production | **MPA / TPN** (CSBP v5.3.1, TPN+ platform, member-gated reports) | **None** — verified absent | Build the **evidence pack**, not the framework (Pattern 122) |
+| Media vendor security framework, EMEA | **EBU** (R 143 v3.0, free PDF + free controls xlsx) | **None** — also verified absent | Automate the **assertion spreadsheet** from live evidence |
+| Production zero-trust architecture | **MovieLabs** (CSAP, congruent with NIST SP 800-207) | **No `MovieLabs/CSAP` repo exists**; closest deployable is `openziti/ziti` **Apache-2.0** | Implement the *architecture* with permissive parts |
+| Broadcast-plant authorization | **AMWA** (IS-10, spec **Apache-2.0**) | `bbc/nmos-auth-server` **archived 2025-03-25, 11★**; AMWA points to **Keycloak** | **Configure Keycloak to the IS-10 claims profile** (Pattern 123) |
+| SIEM / XDR | Splunk, Microsoft Sentinel, IBM QRadar | `wazuh/wazuh` **GPL-2.0 + AGPL engine**, 17.9k★ | Operate for the client; **do not embed** |
+| Threat intelligence | ThreatConnect, Anomali, Recorded Future | `OpenCTI-Platform/opencti` **Apache-2.0** 10.5k★; `MISP/MISP` **AGPL-3.0** 6.7k★ | OpenCTI is the permissive one — build on it |
+| Detection content | Commercial rule feeds | `SigmaHQ/sigma` 11.6k★ — **rules under DRL-1.1, attribution into the alert** | Usable, **with the author field propagated** |
+| Endpoint forensics / IR | CrowdStrike, SentinelOne | `Velocidex/velociraptor` **AGPL-3.0** 4.5k★ | Internal tooling only |
+| Sector threat sharing | **ME-ISAC** (within CDSA), US-centred | MISP is the format such sharing runs on | Join-and-integrate, not rebuild |
+| Recovery | Veeam, Commvault, Rubrik | `restic` **BSD-2-Clause 37.5k★**, `borg` BSD-2, `kopia`/`velero` Apache-2.0 | **The cheapest, most permissive and most under-sold layer** |
+| Secrets | HashiCorp Vault — now **BUSL-1.1** | `openbao/openbao` **MPL-2.0** 9.3k★ | Migrate; the diagram in most estates still says Vault |
+| Agentic SOC | Microsoft/CrowdStrike copilots (hosted) | `beenuar/AiSOC` **MIT 8.3k★**, `Vigil-SOC/vigil` **Apache-2.0 481★** — both **local-first** | **Local-first is mandatory here: the prompt contains pre-release titles** |
+
+**Market size, with the unreliable numbers excluded rather than quoted.** **IDC**: global security spend
+**$308bn in 2026**, rising to **$430bn by 2029**, with **media & entertainment among the fastest-growing
+industries** and spend concentrated on **IP protection, piracy and service disruption**. **Rejected as
+unusable:** two market-research aggregator figures for M&E cybersecurity ($6.80bn film/TV production at
+28.7%; $17.89bn large enterprises at 75.5%) that **do not reconcile with each other**. **Informed gap: no
+credible sourced figure isolates security spend for production studios or post-production houses**, in any
+region — the most commercially useful number in this plane does not exist publicly.
+
+**Threat direction, by provenance.** Kaspersky's 2026 forecast expects attackers to target **render farms,
+plug-ins and small post-production houses** to take sequences, assets and episodes **pre-release** — i.e.
+the supply chain the frameworks push controls into. A managed-services vendor claims **TPN issued more
+content-security alerts in early 2026 than in all of 2025**, driven by credential attacks and unpatched
+systems; **that is a vendor claim and is recorded as unverified.**
+
+**2026 incident claims — all leak-site or aggregator sourced, none company-confirmed.** **Paramount**
+(Inception, listed 2026-11-26; ~5.9 TB claimed incl. unreleased key art and guild residual ledgers); an
+**unnamed US broadcast television company** (n0n, 2026-11-25); **SRG SSR**, Swiss public media
+(2026-09-28); **Amagi Media Labs**, India cloud broadcast/ad-tech (n0n, October 2026); **CHOC FM 88.7**,
+Canada (February 2026 — reported loss of audio files and interrupted broadcasting); a **German radio
+station** (March 2026); **RJR Gleaner**, Jamaica (IT offline as a precaution, broadcasts continued).
+**Two corrections to anything reusing this list:** the frequently cited **Sinclair** ransomware attack is
+**2021**, and **RTV Noord** is **November 2025** — **neither belongs in a 2026 roundup**, and both appear
+in 2026 search results as though they did.
+
+**The one structural claim this addendum exists to make.** Across all four regions the **tooling is
+identical and horizontal**; what differs is **the definition of the reportable event** — the **EAS/alerting
+chain** in the US (pass 45), **personal data on a three-working-day clock** in Brazil, **a
+critical-infrastructure asset** in Australia, and **a tender requirement** in EBU-member Europe. **Sell the
+same stack four times with four different evidence models.** That is the plane's commercial shape, and it
+is why the deliverable in every pattern here is an **evidence artefact**, not a platform.

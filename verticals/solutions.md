@@ -2816,3 +2816,48 @@ build the triage, orchestration, provenance and QC layer around whichever repair
 we will keep your masters in open formats so you are never locked to that engine again.* Every piece of
 that is permissive (OpenImageIO, OpenColorIO, OpenEXR, DJV) and every piece of it is work the suites do
 badly, because they are single-operator desktop tools in a world where an archive has 40,000 cans.
+
+---
+
+## The security & resilience platform tier — added 2026-11-27 (pass 53)
+
+> The Odoo/OpenMRS question for this plane: **which running systems can a client stand up and an agent sit
+> on top of?** All licences read from the file on 2026-11-27; stars are GitHub's rounded display values.
+
+| Platform | Licence (file, bytes) | Repo | Stars (rounded) | Self-host | What it replaces | Agentic layer to add |
+|---|---|---|---|---|---|---|
+| **Wazuh** | **GPL-2.0**, with **AGPL-3.0-or-later** for `src/engine/` (`LICENSE` 26,121 B) | https://github.com/wazuh/wazuh | 17.9k | Yes, fully | Splunk / Sentinel / QRadar at the SIEM-XDR layer | **MCP bridge exists today**: `gensecaihq/Wazuh-MCP-Server` (MIT) or read-only `Letos01/Mcp-wazuh` (MIT) |
+| **OpenCTI** | **Apache-2.0** (`LICENSE`, 20,097 B); **EE is not open source** | https://github.com/OpenCTI-Platform/opencti | 10.5k | Yes | Commercial TIPs (ThreatConnect, Anomali) | Embedded MCP server shipped with 6.8; the standalone `xtm-mcp` is **archived** |
+| **Graylog** | **SSPL v1** (`LICENSE`, 30,608 B) — **not OSI-approved** | https://github.com/graylog2/graylog2-server | 8.2k | Yes | Log management tier of a SIEM | **Do not wrap in a managed service** — pick Wazuh for that engagement |
+| **MISP** | **AGPL-3.0** (`LICENSE`, 34,520 B) | https://github.com/MISP/MISP | 6.7k | Yes | Commercial indicator feeds and sharing portals | `MISP/misp-mcp` exists from the official org but **ships no licence file** |
+| **Velociraptor** | **AGPL-3.0** (`LICENSE`, 26,863 B) | https://github.com/Velocidex/velociraptor | 4.5k | Yes | Commercial EDR's forensic/IR function | VQL is already a query language — the natural thing for an agent to emit |
+| **Malcolm** | **Apache-2.0** (`LICENSE.txt`, 865 B) | https://github.com/idaholab/Malcolm | 497 | Yes | Commercial NDR for OT networks | Built to ingest Zeek + Suricata + PCAP; **the best fit for a ST 2110 plant** |
+| **Security Onion** | **No licence file at 11 probed names** (README serves; control request passes) | https://github.com/Security-Onion-Solutions/securityonion | not captured | Yes | An all-in-one monitoring distribution | **Resolve the licence before proposing it** — absence of a root licence file is not a permissive grant |
+| **Keycloak** (already tabled) | **Apache-2.0** | https://github.com/keycloak/keycloak | 38,060★ (earlier pass) | Yes | Okta / Entra ID for internal estate | **AMWA's own IS-10 guidance uses Keycloak as the authorization server** — see the plant recipe |
+| **OpenBao** | **MPL-2.0** (`LICENSE`, 15,958 B) | https://github.com/openbao/openbao | 9.3k | Yes | HashiCorp Vault, now **BUSL-1.1** | Secret brokering for agents that hold credentials |
+
+### The platform honest-pitch for this tier
+
+**There is no media-specific security platform, and this pass verified that rather than assuming it.**
+`MovieLabs/CSAP` does not exist as a repository (README 404 on `main` and `master`); the only
+broadcast-specific authorization server, `bbc/nmos-auth-server`, is **archived (2025-03-25) at 11 stars**;
+and **no open-source implementation of either control framework exists** — not for the MPA Content Security
+Best Practices (v5.3.1, assessed through the member-gated TPN+ platform) and not for **EBU R 143 v3.0**
+(March 2025) *even though R143 is a free public PDF with a free official controls-assertion spreadsheet*.
+
+So the pitch is **not** "we will deploy the media security platform". It is: *we will run the horizontal
+stack the rest of the world uses — Wazuh or Zeek plus OpenCTI — and we will do the two things that are
+genuinely media-specific:* **(1)** map its evidence onto the framework your studio customers or your EBU
+tender actually ask for, and **(2)** teach it the plant's own vocabulary (NMOS/ST 2110 control traffic,
+PTP timing, playout and MAM access patterns), which no horizontal vendor's default ruleset contains.
+
+### What this tier must not be sold as
+
+- **A certification.** TPN **no longer issues programme certificates**; a Shield records that an assessment
+  and remediation update were completed, and **each content owner still makes its own risk decision**.
+  Selling "we will get you TPN certified" misdescribes the programme.
+- **A compliance product built on AGPL/SSPL components.** See the licence column. Operating is fine;
+  embedding is a counsel question.
+- **A substitute for backups.** The cheapest, most permissive software in this plane — `restic`
+  (BSD-2-Clause, **37.5k★**, the most-starred repo in the entire pass) — is what determines whether a
+  broadcaster returns to air. Lead with it.

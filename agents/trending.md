@@ -9,6 +9,48 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 53: the security plane (**the first plane in this KB whose agent bridge already exists, and the first licence that binds generated text**)
+
+**Channel note for anyone re-measuring these numbers:** `gh api`, `api.github.com` and `git ls-remote` were
+**all blocked** this session; stars below are GitHub's **rounded** display values, licences were read from
+the file, and dates come from the commits page. Do not treat these as exact integers.
+
+| Agent | Repo | Licence (read today) | Stars (rounded) | Forks | Last commit |
+|---|---|---|---|---|---|
+| AiSOC | https://github.com/beenuar/AiSOC | **MIT** (`LICENSE`, 1,083 B) | **8.3k** | 898 | not captured |
+| nono (agent runtime security) | https://github.com/nolabs-ai/nono | **Apache-2.0** (`LICENSE`, 11,351 B) | 5.1k | 347 | not captured |
+| Vigil | https://github.com/Vigil-SOC/vigil | **Apache-2.0** (`LICENSE`, 11,358 B) | 481 | 115 | **2026-11-27** |
+| Wazuh-MCP-Server | https://github.com/gensecaihq/Wazuh-MCP-Server | **MIT** (`LICENSE`, 1,086 B) | 282 | 74 | not captured |
+| SecurityClaw | https://github.com/SecurityClaw/SecurityClaw | **MIT** (`LICENSE`, 1,068 B) | 279 | 31 | **2026-07-20 — 4 months stale** |
+| Argus | https://github.com/thomasunise/argus | **MIT** (`LICENSE`, 1,075 B) | 153 | 12 | 2026-11-18 |
+| misp-mcp | https://github.com/MISP/misp-mcp | **no licence file**; README prose claims AGPL-3.0-or-later | 17 | 3 | not captured |
+| xtm-mcp (Filigran, official) | https://github.com/FiligranHQ/xtm-mcp | **Apache-2.0** (`LICENSE`, 12,153 B) | 9 | 6 | **ARCHIVED 2026-07-05** |
+
+**What is new this week.** `beenuar/AiSOC` is moving faster than anything else in this pass — a third-party
+trending digest recorded it at **~6,353★ with +446 in a day on 2026-11-25**, and the repo page read **8.3k**
+on **2026-11-27**. **Baseline recorded deliberately so the next pass can test whether this sustained or
+spiked:** AiSOC **8.3k/898f**, nono **5.1k/347f**, Vigil **481/115**, Wazuh-MCP-Server **282/74**,
+SecurityClaw **279/31**, Argus **153/12**. Three of these ship human-approval gates and dry-run defaults,
+which is a meaningfully different posture from the "autonomous agent" framing of 2025.
+
+**The finding worth carrying forward.** Passes 7, 12 and 52 each recorded *no agent bridge exists* for
+recommenders, audio post and restoration. **Here it exists.** The reason is structural, not cultural: a
+SIEM speaks **records and queries over a stable vocabulary**, and that is what an MCP tool wraps; media
+pipelines speak **essence**. Rule for the other eleven industries: **look for the agent bridge where the
+system already speaks records-and-queries.**
+
+**And the licence finding, which is new to this KB entirely.** Sigma's rules are under **Detection Rule
+License 1.1**, whose attribution duty applies **to messages based on matches** — i.e. **into the alert the
+agent writes**, not merely into the source you redistribute. An LLM that summarises a Sigma-matched alert
+must carry the rule's `author` field into its summary. **First licence category in this KB that a model can
+breach by paraphrasing**, and no SPDX field or SBOM scan can detect it.
+
+**Two repos that search returned and that do not exist:** `birhantprkc/AiSOC` (404 on four branches, with
+**three live forks**) and `saledream/wazuh-mcp-server` (404). A fork resolving is not evidence of an
+upstream.
+
+---
+
 ## 2026-11-27 — pass 52: the film restoration plane (**the only plane in this KB where star count is anti-correlated with liveness**)
 
 **New this pass.** Verified 2026-11-27: existence via `git ls-remote`, stars/forks/push via GitHub

@@ -5078,3 +5078,87 @@ paper, while repair requires film-handling knowledge that currently exists only 
 suites and a shrinking number of laboratory operators. **Baselines recorded today for re-measurement:**
 `Advanced-Dirt-Removal` **20★**, `DotKill` **16★**, `RemoveDirt` **14★**, `pinterf/mvtools` **192★ and still
 no licence file**, `SeedVR` **1,469★**, `OpenImageIO` **2,409★**.
+
+## 52. The security plane is where media's agent layer actually shipped — and where a licence first reached into generated text
+
+**The measurement.** Before this pass, 1.1 MB of this KB contained **zero** occurrences of `ransomware`,
+`zero trust`, `incident response`, `SIEM`, `threat intel`, `business continuity`, `disaster recovery`,
+`TPN`, `content security`, `ISAC`, `NIS2`, `Wazuh`, `OpenCTI`, `Zeek` or `Suricata`. The gap mattered
+because this is the one plane where **media's own AI-agent tooling already exists and is maintained**.
+
+**1. The agent bridge exists here, and the reason generalises.** Passes 7 (recommenders), 12 (audio post)
+and 52 (restoration) each recorded *no agent bridge*. This plane has several, permissively licensed and
+currently committed: `gensecaihq/Wazuh-MCP-Server` (MIT, 282★), `Letos01/Mcp-wazuh` (MIT, read-only with
+explicit prompt-injection defence), `beenuar/AiSOC` (MIT, **8.3k★**, ships its own MCP server),
+`Vigil-SOC/vigil` (Apache-2.0, 481★, last commit **2026-11-27**). **Why:** a SIEM exposes a queryable,
+text-shaped API over a stable vocabulary — alerts, rules, indicators, hosts — which is exactly what an MCP
+tool wraps, while a recommender or a restoration chain exposes tensors and essence. **Rule now stated for
+all twelve industries: the agent bridge appears where the system already speaks records-and-queries.**
+Counter-measurement: the *official* bridge is the dead one — Filigran's `xtm-mcp` is **archived
+2026-07-05 at 9★**, superseded by a server embedded in OpenCTI 6.8.
+
+**2. A licence obligation that binds the model's output.** `SigmaHQ/sigma`'s 384-byte `LICENSE` is a
+**router, not a grant**: the specification is public domain, the **rules** are **Detection Rule License
+1.1**. DRL 1.1 grants MIT-shaped rights including sale, then requires that **"messages based on matches
+with the Rules must retain … identification of the author(s)"**. **No MIT, Apache, BSD, MPL, GPL or AGPL
+clause reaches the emitted alert; this one does.** An LLM triage agent that paraphrases a Sigma-matched
+alert must carry the rule's `author` field into its summary. **Twelfth licence category in this KB, and the
+first a model can breach by summarising** — invisible to every SPDX field and SBOM scan, because the
+obligation lives in the content.
+
+**3. A falsifiable prediction, made and falsified in the same pass.** This KB's standing law (passes 5, 8;
+healthcare 11) holds that where the *knowledge content* is licensed shut, open implementations are absent,
+and where it is free they are healthy — measured on CPT, MedDRA, ISRC/ISWC/ISAN/EIDR/CWR and CPIC.
+**Prediction:** the MPA Content Security Best Practices (v5.3.1, gated behind the TPN+ platform, reports
+visible only to subscribed Gold Member Content Owners, **certificates no longer issued**) should have no
+open tooling, while **EBU R 143 v3.0** (March 2025 — a **free public PDF** with a **free official
+"Security Controls Assertion" spreadsheet**, 8 control sections, written to be used in tenders) should have
+some. **Measured: both are zero.** No open-source MPA/TPN questionnaire tool, and no open-source R143 tool
+either — the nearest search results were an unrelated EU hardware-compliance navigator and a generic
+checklist app.
+
+**So the law needs a boundary, and this is the pass that found it.** The content-licence law explains
+missing implementations of **reusable knowledge** — code systems, identifiers, rule sets, anything whose
+value is that *everyone* needs the same artefact. It does **not** explain missing implementations of
+**control frameworks**, because a completed assessment is an **assertion about one company's own estate**
+and has no reuse value to anyone else. The missing ingredient is not permission; it is **a shared artefact
+worth sharing**. This predicts differently and the difference is testable: liberalising MedDRA would
+produce pharmacovigilance code, whereas **no amount of licence liberalisation will produce an open TPN
+tool.** Where frameworks *do* produce open artefacts, it is the machine-readable **control catalogue**, not
+the assessment — which is why R143's reusable contribution is its spreadsheet, not a repo.
+
+**4. The plant's own security standard has one implementation and it is archived.** AMWA **IS-10** (NMOS
+Authorization, OAuth 2.0 + JWT claims, spec **Apache-2.0**) is the only authorization standard specific to
+the broadcast plant. The only broadcast-specific authorization server, `bbc/nmos-auth-server`, is
+**archived — read-only since 2025-03-25 — at 11★/4f**, and targets the earlier BCP-003-02 draft.
+`MovieLabs/CSAP` **does not exist as a repository**. AMWA's own guidance points at **Keycloak**
+(Apache-2.0, already in this KB at 38,060★). **This inverts the KB's usual finding:** here the horizontal
+product is the right answer and the vertical artefact is the dead end — IS-10 is **a claims profile to
+configure, not a product to procure.**
+
+**5. What the attackers are reported to be taking is exactly what this KB already models.** On
+**2026-11-26** the **Inception** extortion group listed **Paramount** on its leak site, claiming ~**5.9 TB**
+including ~5 TB of **unreleased key art for 2026–27 titles**, CBS financial data, **guild residual
+ledgers**, ~99,000 employee directory entries and 47,935 payroll/pension records, with a 2026-11-27
+deadline. **Status: an unverified leak-site claim** — no company confirmation, no SEC filing located, Okta
+has said it could not validate the authenticity of data published by these operators, and listings
+attributed to the group have been reported to include fabricated victims. **Treat it as a claim, not an
+incident.** But note what the *claimed* inventory is: **pre-release key art (pass 37) and guild residual
+ledgers (pass 50)** — two asset classes this KB already has planes for. **Practical consequence: a
+studio's crown-jewel register can be generated from this KB's own entity types**, because the asset an
+extortion group advertises is the asset the KB already models.
+
+Separately and with better provenance for the *direction* of threat: Kaspersky's 2026 forecast expects
+attackers to target **render farms, plug-ins and small post-production houses** to take sequences and
+episodes **before release** — i.e. the supply chain, which is precisely what TPN assessments push controls
+down into. **IDC** puts global security spend at **$308bn in 2026** rising to **$430bn by 2029**, and names
+**media & entertainment among the fastest-growing industries** for it, with the money going to **IP
+protection, piracy and service disruption**.
+
+**6. The cheapest layer is the one that decides the outcome.** `restic` (**BSD-2-Clause, 37.5k★**) outstars
+every detection tool in this plane. A broadcaster that cannot restore its footage has a backup problem, not
+a SIEM problem, and the recovery layer — restic, borg (BSD-2), kopia, velero (Apache-2.0) — is both the
+most permissive and the most ignored. **Baselines recorded for re-measurement:** restic **37.5k**, Wazuh
+**17.9k**, Sigma **11.6k**, OpenCTI **10.5k**, OpenBao **9.3k**, AiSOC **8.3k**, Graylog **8.2k**, Caldera
+**7.6k**, MISP **6.7k**, nono **5.1k**, Velociraptor **4.5k**, OpenZiti **4.5k**, Malcolm **497**, Vigil
+**481**, `bbc/nmos-auth-server` **11 and archived**.

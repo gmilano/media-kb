@@ -4849,3 +4849,114 @@ canonical repo is **`grizzlypeak3d/DJV`**, and `twistedsanity/MOV8mm` resolves b
 **`avisalmon/MOV8mm`**. Both old URLs are absent from the search index while the new ones are present.
 **Rule: write the URL that `search/repositories` returns, not the one the source gave you** — the redirect
 is a courtesy, not a guarantee, and a KB full of redirect URLs rots the day one is dropped.
+
+---
+
+## Pass 53 (2026-11-27) — the security & operational-resilience plane: the first plane in this KB where the agent bridge already exists
+
+> **Verification channel changed for this pass, and it changes what can be claimed.** `gh api`,
+> `api.github.com` **and `git ls-remote` are all blocked** for repositories outside this session's GitHub
+> scope (403 from the agent proxy). What works: **`raw.githubusercontent.com`** (existence, licence
+> filename, exact byte count, full licence text) and **fetching the repo page** (stars/forks — *rounded*
+> by GitHub to three significant figures, e.g. "8.3k" — plus archived notices; `/commits/<branch>/` gives
+> the latest commit date). **Consequence: exact star integers were not obtainable today.** Every count
+> below is marked as rounded, and earlier passes' exact integers are **not** carried forward as if
+> re-measured. Licences, by contrast, are stronger than usual here: each was read from the file itself.
+
+### Why this plane was chosen
+
+`ransomware`, `zero trust`, `incident response`, `SIEM`, `threat intel`, `business continuity`,
+`disaster recovery`, `air gap`, `TPN`, `content security`, `ISAC`, `NIS2`, `Wazuh`, `OpenCTI`, `Zeek` and
+`Suricata` scored **zero occurrences** across all 1.1 MB of this KB before this pass. The only security
+vocabulary present was **EAS cyber compliance** (pass 45) and **journalist source protection**
+(SecureDrop/Tails, pass 20). Both are real and neither is this plane: pass 20 protects the
+*source↔journalist channel*, pass 41 chases content *after* it leaves the perimeter, and this plane
+defends **the estate that holds pre-release material** — the plant, the newsroom, the post house.
+
+### The agent layer, measured
+
+**This is the first plane in this KB where the MCP bridge is real.** Passes 7, 12 and 52 each recorded "no
+agent bridge exists" for recommenders, audio post and restoration. Here it exists, it is permissive, and
+it is dated.
+
+| Agent / bridge | Repo | Licence (file, bytes — read today) | Stars (rounded) | Forks | Last commit | Note |
+|---|---|---|---|---|---|---|
+| AiSOC | https://github.com/beenuar/AiSOC | **MIT** (`LICENSE`, 1,083 B) | **8.3k** | 898 | not captured | Alert fusion, LLM-agent triage, MITRE ATT&CK investigation. **Ships its own MCP server** (Claude/Cursor/Continue), runs against a local model, no API keys. Rising fast — treat as **velocity, not installed base** |
+| Vigil | https://github.com/Vigil-SOC/vigil | **Apache-2.0** (`LICENSE`, 11,358 B) | 481 | 115 | **2026-11-27** (measurement day) | Specialised LLM agents + Markdown playbooks, triage→hunt→**human-approved** response, connects over MCP, local-first |
+| SecurityClaw | https://github.com/SecurityClaw/SecurityClaw | **MIT** (`LICENSE`, 1,068 B) | 279 | 31 | **2026-07-20** | Skill-based SOC agent over OpenSearch/Elasticsearch with RAG behavioural memory. **4 months without a commit — read before adopting** |
+| Argus | https://github.com/thomasunise/argus | **MIT** (`LICENSE`, 1,075 B) | 153 | 12 | 2026-11-18 | Multi-tenant agentic SOC. Autonomous response playbooks **off by default**; typed action broker with approvals, dry-run and rollback |
+| Wazuh MCP Server | https://github.com/gensecaihq/Wazuh-MCP-Server | **MIT** (`LICENSE`, 1,086 B) | 282 | 74 | not captured | 55 tools over Wazuh for triage, hunting, vulnerability and compliance work. The most complete bridge found |
+| Mcp-wazuh | https://github.com/Letos01/Mcp-wazuh | **MIT** (`LICENSE`, 1,070 B) | not captured | not captured | not captured | **Read-only by design**, with explicit prompt-injection defence — "treats every log byte as hostile". The right first deployment |
+| misp-mcp | https://github.com/MISP/misp-mcp | **NO LICENCE FILE** at 6 names; README prose says "AGPL-3.0-or-later – same as MISP" | 17 | 3 | not captured | From the **official MISP organisation**. A README sentence is not a grant — see the trap below |
+| nono | https://github.com/nolabs-ai/nono | **Apache-2.0** (`LICENSE`, 11,351 B) | 5.1k | 347 | not captured | Not a SOC: **agent runtime security** — zero-trust agent sandboxing. Relevant the moment a newsroom or post agent gets tool access |
+
+**Measured, not assumed — why the bridge exists here and nowhere else in media.** A SIEM already exposes a
+**queryable, text-shaped API over a stable vocabulary** (alerts, rules, indicators, hosts), which is
+precisely the shape an MCP tool wraps. A recommender, an audio-post chain or a restoration pipeline exposes
+**tensors, timelines and essence**. **Reusable rule for all twelve industries: the agent bridge appears
+where the underlying system already speaks records-and-queries, and is absent where it speaks media
+essence.** This predicts where to look first in any new industry — and it is testable in the next pass.
+
+**The counter-measurement, which matters as much:** the *official* bridge is the dead one.
+`FiligranHQ/xtm-mcp` (Apache-2.0, `LICENSE` 12,153 B) is **archived — "archived by the owner on Jul 5,
+2026" — at 9★/6f**; OpenCTI's official path moved to a server embedded in the platform (6.8). So in this
+plane the **community** bridges are alive and the **vendor's standalone** one is archived. Cite the
+community repos, and check the platform's embedded server before proposing either.
+
+### The licence finding of this pass, and it is a new category for this KB
+
+**A licence term that binds the product's RUNTIME OUTPUT, not its source.**
+
+`SigmaHQ/sigma`'s `LICENSE` is **384 bytes** and is **not a grant — it is a router**. Read in full today,
+it says the Sigma **specification and logo are public domain** and the **rules** in the SigmaHQ repository
+are released under the **Detection Rule License (DRL) 1.1**. The DRL text (read at
+`SigmaHQ/Detection-Rule-License`, file **`LICENSE.Detection.Rules.md`** — note the non-standard filename)
+grants MIT-shaped permissions *including the right to sell*, then adds two attribution duties. The second
+one has no equivalent anywhere else in this KB:
+
+> "If you **use** the Rules (including in modified form) **on data, messages based on matches with the
+> Rules must retain** […] identification of the author(s) ("author" field) of the Rule […]"
+
+**No MIT, Apache-2.0, BSD, MPL, GPL or AGPL term reaches the emitted alert.** This one does. The
+engineering consequence is concrete and falsifiable: **an LLM triage agent that summarises a Sigma-matched
+alert must carry the matched rule's `author` field into the summary it writes**, or the summary is a
+"message based on a match" distributed without the required attribution. Both `beenuar/AiSOC` (MIT) and
+`Vigil-SOC/vigil` (Apache-2.0) ingest detection content and emit model-written narratives; **whether either
+propagates `author` through the summarisation step is the first thing to check before shipping to a
+client**, and it is not a question any SBOM scan or SPDX field can answer, because the obligation lives in
+the *content*, not the code. Taxonomy entry: **licence obligations that survive into generated text** —
+the twelfth category, and the first that a model can breach by paraphrasing.
+
+### Traps measured in this pass
+
+- **Two repositories surfaced by search do not exist.** `birhantprkc/AiSOC` returns **404 on `main`,
+  `master`, `dev` and `develop`**, and `saledream/wazuh-mcp-server` returns 404 — both were returned as
+  GitHub repositories by search. The AiSOC case is the instructive one: the dead name has **three live
+  forks** (`sec-js/AiSOC`, `altafpasha/AiSOC`, `rios0rios0/AiSOC` — each serving README **and** LICENSE),
+  while the genuine origin is **`beenuar/AiSOC`**. **A fork resolving is not evidence that the upstream
+  exists, and search will name a fork or a dead mirror as readily as the origin.**
+- **An official organisation with no licence file.** `MISP/misp-mcp` — the MISP project's own org — has
+  **no licence file at six probed names** and states its AGPL grant **in README prose only**. Prose is
+  evidence of intent, not a grant. Ask, or use MISP's REST API directly under MISP's own AGPL-3.0.
+- **A repo with a licence file and no licensor.** `OfferPk/nmosis10forge-pro` (IS-10 token minting and
+  compliance testing) and `FunnyWolf/agentic-soc-platform` both **exist** (README 200) and have **no
+  licence file** at 6 and 10 probed names respectively. Default copyright applies: all rights reserved.
+
+### Method correction — third addition to the licence-probe filename list
+
+Cycle 8 added `license.txt` (lower-case) and `COPYING.md`. **This pass adds `LICENCE.txt` — British
+spelling** — found on `ebu/ebu-tt-live-toolkit`, which is **BSD-3-Clause (`LICENCE.txt`, 1,473 B, "Copyright
+(c) 2016, EBU")** and would read as unlicensed under any probe list using only the American spelling. For a
+European standards body this spelling should be the *first* guess, not the last. Current minimum probe set:
+`LICENSE`, `LICENSE.md`, `LICENSE.txt`, `license.txt`, `LICENCE`, **`LICENCE.txt`**, `COPYING`,
+`COPYING.md`, `NOTICE`, plus any `LICENSE.*.md` variant (the DRL lives at `LICENSE.Detection.Rules.md`).
+
+### One self-correction from this pass's own tooling
+
+My first sweep labelled **MISP, TheHive, Shuffle, IntelOwl and Velociraptor as GPL-3.0. All five are
+AGPL-3.0** — the classifier checked for "GNU AFFERO" *before* "GNU GENERAL PUBLIC LICENSE" but let the
+second match overwrite the first, and "GNU AFFERO GENERAL PUBLIC LICENSE" contains the GPL string. It also
+labelled **Suricata as LGPL**; Suricata is **GPL-2.0**, and the word "LESSER" appears only in the GPLv2
+appendix that tells you how to apply the *other* licence. **Rule: classify by the licence's own title line,
+anchored, and never by substring presence anywhere in the file.** The same bug class as the cycle-11
+placeholder-regex false positives, in a new place.

@@ -10,6 +10,44 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 53: the security & resilience infrastructure layer
+
+**Licences read from the file today; stars are GitHub's rounded display values** (`gh api`,
+`api.github.com` and `git ls-remote` all blocked this session).
+
+| Repo | Licence (file, bytes) | Stars (rounded) | Forks | Last commit | Why it is here |
+|---|---|---|---|---|---|
+| https://github.com/restic/restic | **BSD-2-Clause** (`LICENSE`, 1,345 B) | **37.5k** | 2.0k | not captured | The most-starred repo in this pass. Recovery, not detection, is what gets a station back on air |
+| https://github.com/wazuh/wazuh | **GPL-2.0 + AGPL-3.0-or-later for `src/engine/`** (`LICENSE` 26,121 B `main` / 24,734 B `master`) | 17.9k | 2.6k | not captured | The default open SIEM/XDR |
+| https://github.com/SigmaHQ/sigma | **Router**: spec public domain, **rules DRL-1.1** (`LICENSE`, 384 B) | 11.6k | 3.0k | not captured | The detection-content standard — and the licence lives with the content |
+| https://github.com/OpenCTI-Platform/opencti | **Apache-2.0** (`LICENSE`, 20,097 B) | 10.5k | 1.5k | not captured | Threat intel platform; EE is not open source |
+| https://github.com/openbao/openbao | **MPL-2.0** (`LICENSE`, 15,958 B) | 9.3k | 732 | **2026-11-26** | The permissive continuation of Vault, which is now **BUSL-1.1** |
+| https://github.com/graylog2/graylog2-server | **SSPL v1** (`LICENSE`, 30,608 B) — not OSI | 8.2k | 1.1k | not captured | Widely recommended, **not safe to wrap in a managed service** |
+| https://github.com/mitre/caldera | **Apache-2.0** (`LICENSE`, 15,888 B) | 7.6k | 1.4k | **2026-11-20** (5.4.0 prep) | Adversary emulation — proving the plant's controls rather than asserting them |
+| https://github.com/MISP/MISP | **AGPL-3.0** (`LICENSE`, 34,520 B) | 6.7k | 1.7k | not captured | The sharing format behind ISAC-style exchange |
+| https://github.com/Velocidex/velociraptor | **AGPL-3.0** (`LICENSE`, 26,863 B) | 4.5k | 804 | not captured | Fleet forensics — answers "what did they actually take" |
+| https://github.com/openziti/ziti | **Apache-2.0** (`LICENSE`, 11,340 B) | 4.5k | 287 | **2026-11-19** | Zero-trust overlay; the deployable shape of "no routable network" |
+| https://github.com/idaholab/Malcolm | **Apache-2.0** (`LICENSE.txt`, 865 B) | 497 | 78 | not captured | PCAP + Zeek + Suricata in one deployable suite, built for OT-shaped networks — which a broadcast plant is |
+| https://github.com/bbc/nmos-auth-server | **Apache-2.0** (`LICENSE.md`, 11,362 B) | **11** | 4 | **ARCHIVED 2025-03-25** | The only broadcast-specific authorization server ever published |
+
+**The structural reading of this week's table.** The centre of this stack is **copyleft** — six AGPL-3.0,
+one GPL-2.0, one dual, one SSPL — which is the inverse of every other layer in this KB, where media's
+permissive pipeline code sits in the middle. **Operate it for the client; do not embed it in a product.**
+The exceptions you *can* build on are **Zeek (BSD-3-Clause)**, **Malcolm**, **Caldera** and **OpenCTI**
+(Apache-2.0), and the entire **recovery** layer (restic/borg BSD-2, kopia/velero Apache-2.0).
+
+**Two relicensing events sitting in client architecture diagrams right now:** HashiCorp **Vault → BUSL-1.1**
+(continuation: **OpenBao, MPL-2.0**) and **Graylog → SSPL**. In this layer a relicence is the normal event;
+**re-read the licence file every pass** rather than trusting a cached SPDX value. Byte counts are recorded
+above precisely so a relicence shows up as a size change.
+
+**Repo that exists with no grant:** `Security-Onion-Solutions/securityonion` serves its README but has
+**no licence file at eleven probed filenames** — and a control request proves the probe works. Do not
+assume it is open source; a 404 sweep plus a passing control is evidence of *absence of a root licence
+file*, which is a different thing from a known licence.
+
+---
+
 ## 2026-11-27 — pass 52: film restoration infrastructure (**the substrate is pushed daily; the domain layer is three maintainers and a GPL**)
 
 Verified 2026-11-27. Distinct from `agents/trending.md`: this file tracks infrastructure and platform repos.

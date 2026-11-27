@@ -5482,3 +5482,74 @@ this KB: nobody bookmarks a template, they fork it to run their own jurisdiction
 per-city instances confirm it — `city-scrapers-cle` (17★, pushed 2026-11-24), `city-scrapers-det`
 (4★, 2026-11-24), `city-scrapers-atl` (3★, 2026-10-20), `city-scrapers-fresno` (2★, 2026-06-23).
 **Do not rank this plane by stars.** A 3★ repo pushed yesterday is a running newsroom deployment.
+
+---
+
+## Pass 50 (2026-11-27) — foundations of the talent, casting & performer-consent plane: **the declaration substrate is standardised, the settlement substrate does not exist**
+
+The agent-layer measurement is in `agents/top.md`. This section records the substrate a build would
+actually sit on, and it splits cleanly in three: a **declaration** layer that is standardised and
+permissively implemented, an **operations** layer that is young but real, and a **settlement** layer
+that is a measured literal zero.
+
+### The declaration substrate — standards first, because the code is downstream of them
+
+| Artefact | Where | License | Status | What it gives you |
+|---|---|---|---|---|
+| Human Consent Standard (HCS) 1.0 **Draft** | `humanconsent.org/hcs`, companion RSL-MEDIA 1.0 at `rslmedia.org/media` | ⚠️ **Not verified — see the channel gap below** | **Draft, not final** | A machine-readable module extending **Really Simple Licensing (RSL)** to identity rights, with `image` and `likeness` as separate scope tokens, a registry-wide default declaration, and an explicit statement that the standard **does not decide ownership or agency** |
+| Grantmark | [batuhanbulbul/grantmark](https://github.com/batuhanbulbul/grantmark) | **Apache-2.0** (11,357 B) | Prototype, devnet only | The reference wiring: `/.well-known/hcs.xml` + `/registry/…` served by a mock HCS registry, `@grantmark/hcs` parsing and checking declarations, a licence server speaking RSL 1.0's **Open License Protocol**, `@grantmark/stamp` writing a **C2PA manifest with a `cawg.consent` assertion**, and `/v1/verify` reading it back |
+| Consent-authority record profile | in `batuhanbulbul/grantmark` | **Apache-2.0** | Proposal | A JSON Schema **with test vectors** for what a consent authority returns for a living adult's name, image, likeness and voice, digital replicas included |
+| AI identity-licensing primary-source dataset | [socialgravity/state-of-ai-identity-licensing-2026](https://github.com/socialgravity/state-of-ai-identity-licensing-2026) | **CC BY 4.0** (LICENSE.md, 606 B) — a *content* licence | 0★, pushed 2026-11-10 | A versioned dataset of primary sources on identity licensing, digital replicas, consent, disclosure and provenance. Citable in a bid; **not software, and CC BY is not an OSI grant** |
+
+**The connection that matters, and it is already half-built in this KB.** Grantmark's chain ends in a
+**C2PA manifest carrying `cawg.consent`** — the same provenance substrate this KB banked in pass 4
+(conformance & preservation) and pass 8 (identification & rights reservation). The consent record is
+not a parallel universe: it is an assertion inside the manifest the KB already knows how to write,
+sign and verify. That makes "consent" an *extension* of existing pipeline work rather than a new stack.
+
+**Informed channel gap, stated as a gap.** `humanconsent.org` and `rslmedia.org` both return
+**HTTP 403 from this session's agent proxy** ("no rule or network setting allows this host"). The HCS
+1.0 and RSL-MEDIA 1.0 specification texts were therefore **not read directly**; everything above comes
+from secondary legal and trade coverage plus Grantmark's own implementation notes. Treat the spec's
+exact terms as **not verified**. This is the pass-5 `new.ddex.net` situation repeating, and the same
+rule applies: *not investigated is not the same as not restrictive.*
+
+### The operations substrate — young, small, and three of four are permissively licensed
+
+| Repo | License | Stars / Forks | Last push | Created | What it gives you |
+|---|---|---|---|---|---|
+| [gravy42/profitshare](https://github.com/gravy42/profitshare) | **MIT** (LICENSE, 1,068 B) | 0★ / 1f | 2026-11-20 | 2026-09-28 | **The first permissive artefact in this KB that encodes guild economics.** Film budgeting, stripboard and profit-share modelling where every line is cash, deferred or points — with a **SAG-AFTRA low-budget tier check (Ultra Low, Moderate Low, Low Budget, Theatrical Basic at rates effective 7/1/2026)**, California payroll fringes, the Diversity in Casting (DIC) cap uplift, day-out-of-days, and Movie Magic / Final Draft import |
+| [method-production-suite/method-scheduling](https://github.com/method-production-suite/method-scheduling) | **Dual MIT / Apache-2.0** (`LICENSE-MIT` + `LICENSE-APACHE` both resolve) | 1★ / 1f | 2026-11-21 | 2026-10-16 | Local-first film scheduling as a desktop app, **an open file format**, and a CLI. The open format is the part worth having — it is the only neutral interchange in the plane |
+| [opengateapp/opengate](https://github.com/opengateapp/opengate) | ⚠️ **GPL-3.0** (35,148 B) | 1★ / 1f | 2026-11-03 | 2026-10-17 | Screenplay, breakdown, stripboard, calendar, **call sheets**, storyboards and mood boards in one synced project. Copyleft: fine to deploy, a problem to embed in a proprietary client deliverable |
+| [opencats/OpenCATS](https://github.com/opencats/OpenCATS) | **Dual MPL-2.0 + "CATS Project" 2007** (LICENSE.md, 43,228 B) | 789★ / 332f | 2026-11-26 | 2009-07-17 | The only repo in the plane with a real installed base. A staffing ATS: candidate pipeline, CRM, search. Adaptable to a talent roster; knows nothing about sides, availability holds or guild tiers |
+| [frappe/hrms](https://github.com/frappe/hrms) | ⚠️ **GPL-3.0** | 9,123★ / 2,909f | 2026-11-27 | — | Mature open HR and payroll with taxation and attendance. **The only credible payroll substrate for a residuals build**, and it is copyleft and knows nothing about guild agreements |
+
+**`gravy42/profitshare` is the single most significant finding in this plane's substrate, and it
+directly corrects pass 17.** Pass 17 concluded the management end of pre-production "has no permissive,
+maintained base anywhere" and recorded `residuals calculation film` = 0. That conclusion was correct on
+2026-11-26 and is now **partially superseded**: a 0★, MIT-licensed, actively pushed budgeting tool
+exists that encodes SAG-AFTRA tier rules and California fringes in code. It still does not compute a
+residual — but it is the first time guild *rates* appear in a permissively licensed repository in this
+KB. **Stars would have hidden it completely.**
+
+### The settlement substrate — the measured literal zero
+
+There is **no open-source implementation of residuals calculation, union timecard payroll, or
+performer royalty settlement.** `residuals calculation film` returns **zero results** on GitHub and has
+now done so across three independent passes (5, 17, 50). The nearest substrates are `frappe/hrms`
+(GPL-3.0, generic payroll) and `profitshare` (MIT, budget-side tier checks). Everything between them —
+the guild agreement as executable rules, the timecard exception, the residual itself — is a build.
+
+**This is the KB's structural law appearing on identity instead of content, and now with the same
+three-step gradient pass 8 found for rights reservation:**
+
+| Step | Nature of the problem | State of the open source |
+|---|---|---|
+| **DECLARE** a consent | A **format** problem | **Solved and standardised** — HCS 1.0 draft, a live public registry, `grantmark` Apache-2.0 binding it to C2PA `cawg.consent` |
+| **HONOUR** the consent | A **judgment** problem | **Single-repo depth** — `consentor` (MIT, 0★) checks before synthesis; `pratidhvani` (Apache-2.0, 26★) generates with consent and watermark wired in |
+| **SETTLE** the obligation | **Pure judgment** | **LITERAL ZERO** — `residuals calculation film` = 0 results, third confirmation |
+
+Pass 8 measured this gradient on content and found "publishers are equipped to say no, nobody maintains
+the code that listens, and nothing calculates what is owed." **Pass 50 measures it on human identity
+and finds the identical shape.** The law is not about content or identity. It is about the fact that
+declaring is a schema, and paying is a judgment.

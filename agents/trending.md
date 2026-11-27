@@ -9,6 +9,41 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 50: the talent, casting & performer-consent plane (**the agent layer is nine repos at zero stars, and the only real agent in it carries no licence**)
+
+**New this pass.** Verified 2026-11-27: existence via `git ls-remote`, stars/forks/push via GitHub
+`search/repositories`, licence by reading the file wherever the API said `NOASSERTION`/`NONE`.
+
+| Agent | Repo | License | Stars / Forks | Last push | Created | Note |
+|---|---|---|---|---|---|---|
+| Pratidhvani | [svayatta/pratidhvani](https://github.com/svayatta/pratidhvani) | **Apache-2.0** | 26★ / 5f | 2026-11-27 | 2026-11-19 | Consent **and** inaudible watermark as first-class features in an Indian-language voice cloner. **8 days old, 26★, pushed on measurement day** — the fastest-starring artefact in this plane by 13× |
+| auditionwithme | [cranberrymuffin/auditionwithme](https://github.com/cranberrymuffin/auditionwithme) | ⚠️ **No licence file** | 2★ / 2f | 2026-11-27 | 2026-03-30 | Parses PDF sides, voices the other characters, records the self-tape. **The only true agent in the plane, and it has no grant.** Forks equal stars |
+| Grantmark | [batuhanbulbul/grantmark](https://github.com/batuhanbulbul/grantmark) | **Apache-2.0** | 0★ / 0f | 2026-11-20 | 2026-10-28 | The only HCS 1.0 implementation: declare → licence → C2PA `cawg.consent` stamp → verify. Devnet/fictional data by its own README |
+| Filmwright | [dassjaylabs/filmwright](https://github.com/dassjaylabs/filmwright) | **MIT** | 7★ / 1f | 2026-10-29 | 2026-10-15 | "Consented cloned voices" as an explicit voice mode |
+| Consentor | [vishwatejaaverager/consentor](https://github.com/vishwatejaaverager/consentor) | **MIT** | 0★ / 0f | 2026-09-26 | 2026-09-24 | Pre-synthesis biometric-consent check API |
+| CastLab | [mohitarora8181/cst](https://github.com/mohitarora8181/cst) | ⚠️ **No licence file** | 0★ / 0f | 2026-10-30 | 2026-10-29 | Most complete casting pipeline found; unlicensed |
+| Casting & Audition Mgmt | [rohit18morya-stack/Casting-Audition-Management-System](https://github.com/rohit18morya-stack/Casting-Audition-Management-System) | ⚠️ **No licence file** | 0★ / 0f | 2026-11-24 | 2026-11-24 | **Created three days before measurement** |
+| OneTake | [kanishka8590/OneTake](https://github.com/kanishka8590/OneTake) | ⚠️ **No licence file** | 0★ / 0f | 2026-11-22 | 2026-11-15 | Performer-side self-tape prep |
+| likeness-license | [eliem08/likeness-license](https://github.com/eliem08/likeness-license) | 🚫 **"All rights reserved"** | 0★ / 0f | 2026-11-19 | 2026-10-24 | A likeness-licensing tool that reserves all rights in itself |
+
+**The momentum signal, and it is narrow.** Eight of the nine artefacts above were **created in the last
+ninety days** (the exception, `auditionwithme`, in March 2026). This plane is not dormant — it is being
+started, repeatedly, by unconnected people, and abandoned before it acquires a licence. Three of the
+nine were pushed on measurement day itself.
+
+**What to watch, with a falsifiable prediction.** `pratidhvani` took 26★ in 8 days by shipping consent
+and watermarking as features rather than policy. If the structural law of this KB holds, **by the next
+media pass the consent-*declaration* repos (`grantmark`, `consentor`) will still be at or near 0★ while
+consent-*capable generators* keep accruing stars** — because a generator is a product and a registry is
+an obligation. Recorded so it can be checked, not assumed.
+
+**False friend recorded so a later pass does not promote it.**
+[mnvsk97/voice-audition](https://github.com/mnvsk97/voice-audition) (MIT, 7★, pushed 2026-11-27) calls
+itself "the voice casting director for AI agents" and is **cross-provider TTS voice discovery** — it
+casts synthetic voices for software, not performers for productions.
+
+---
+
 ## 2026-11-27 — pass 49: the local & community news plane (**the agent layer is being rebuilt from scratch by four separate people this month**)
 
 Plane located by grepping ~95 candidate terms against all eight files before any web search. Zero

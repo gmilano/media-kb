@@ -2703,3 +2703,32 @@ directory listing), while the plug-ins themselves are GPL and self-hostable with
 Google's News Initiative put **$1.2M** into building it (Google blog); a funding round reported at
 **$2.4M** total included other partners (WP Tavern). That is a real revenue-share benchmark for a
 local-news platform, and it is the number to argue against when a client asks why they should build.
+
+---
+
+## Pass 50 (2026-11-27) — platforms for the talent, casting & performer-consent plane
+
+The pattern this file exists to record — a real, running system you deploy and add an agentic layer to,
+the way Odoo works for ERP or OpenMRS for healthcare — **has exactly one instance in this plane, and it
+was not built for media.**
+
+| Platform | Repo | License | Stars / Forks | Last push | What it is, and what customising it actually means |
+|---|---|---|---|---|---|
+| **OpenCATS** | [opencats/OpenCATS](https://github.com/opencats/OpenCATS) | **Dual: MPL-2.0 + "CATS Project" (2007)** — LICENSE.md, 43,228 B | 789★ / 332f | 2026-11-26 | Applicant tracking system and recruitment CRM, in continuous development since **2009**. The only platform-shaped, adopted, deployable system in the plane. **The Odoo of this plane is a staffing ATS** — it models candidates, pipelines, submissions and search, which maps surprisingly well onto a talent roster. It models nothing about sides, availability holds, guild tiers, residual liabilities or likeness consent. Those are the agentic layer you add |
+| **Frappe HRMS** | [frappe/hrms](https://github.com/frappe/hrms) | ⚠️ **GPL-3.0** | 9,123★ / 2,909f | 2026-11-27 | Mature open HR and payroll — taxation, attendance, leave, salary structures, on the Frappe/ERPNext stack. **The only credible substrate for a production-payroll or residuals build.** Copyleft, so deploy it for the client rather than embedding it in a proprietary deliverable, and budget for the fact that guild agreements are not in it |
+| **Opengate** | [opengateapp/opengate](https://github.com/opengateapp/opengate) | ⚠️ **GPL-3.0** (35,148 B) | 1★ / 1f | 2026-11-03 | Production management as one synced project: screenplay, breakdown, stripboard, calendar, **call sheets**, storyboards, mood boards. Young (created 2026-10-17) and copyleft, but it is the only artefact covering the call-sheet workflow end to end |
+| **Method Schedule** | [method-production-suite/method-scheduling](https://github.com/method-production-suite/method-scheduling) | **Dual MIT / Apache-2.0** | 1★ / 1f | 2026-11-21 | Local-first scheduling desktop app plus a CLI and — the valuable part — **an open file format** for a schedule. Permissive, so it is the one piece here that can be embedded in a client deliverable without licence friction |
+| **Profitshare** | [gravy42/profitshare](https://github.com/gravy42/profitshare) | **MIT** (1,068 B) | 0★ / 1f | 2026-11-20 | Film budgeting, stripboard and profit-share modelling with a **SAG-AFTRA low-budget tier check at rates effective 7/1/2026**, California payroll fringes and the DIC cap uplift. Imports Movie Magic and Final Draft. Its own README is explicit that it **does not replace a payroll company, a SAG-AFTRA signatory rep or an attorney** — quote that limitation rather than discovering it |
+
+### Honest read for an engagement
+
+**There is no casting platform to customise.** The nine purpose-built casting repositories measured in
+`agents/top.md` are all at 0 stars and eight of the nine carry no licence, which rules out every one of
+them as a base regardless of code quality. A casting engagement is therefore either **OpenCATS bent
+toward talent** (adopting a compilation licence and a 2009 data model) or a build.
+
+**The platform risk here is inverted from the rest of this file.** Elsewhere in `media-kb` the mature
+platforms are media-native and the gap is the agent layer. In this plane the mature platforms
+(`OpenCATS`, `frappe/hrms`) are **generic business software**, permissive media-native tooling is
+weeks old at 0–1 stars, and the thing a production actually pays for — booking a performer, recording
+their consent, and settling what is owed — has no deployable system anywhere.

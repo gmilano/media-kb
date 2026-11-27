@@ -4559,3 +4559,137 @@ transcription runs on a **self-hosted instance of OpenAI's open Whisper model** 
 account). The incumbent's differentiator is therefore *not* the model: it is the per-jurisdiction
 ingest and the editorial review step. Both are addressable. `whisper` already appears 58× in this KB
 and `pyannote` 17× — the ASR layer was banked by earlier passes and needs no new row here.
+
+---
+
+## Pass 50 (2026-11-27) — the talent, casting & performer-consent plane: **the plane where the law finally arrived, and the code layer is nine repositories at zero stars**
+
+**Why this plane, and how it was chosen.** `media-kb` already held 49 planes and nineteen passes shipped
+on 2026-11-27 alone, so this pass followed the pass-8 corollary: when the remote already has same-day
+passes, do not rewrite and do not re-verify — **find the missing vocabulary plane**. 33 candidate terms
+were grepped against all eight files before a single web search was run. The result was decisive:
+`audition` **0**, `self-tape` **0**, `talent agency` **0**, `breakdown services` **0**, `Actors Access`
+**0**, `digital double` **0**, `consent registry` **0**, `residual tracking` **0**, `child performer`
+**0**, `talent management` **0**, `model release` **0**, `background actor` **0**, `work permit` **0**,
+and `casting` as a *whole word* **2** (the 66 raw hits were **broad*casting*** and **pod*casting***).
+
+**And the gap has a precise shape, which is the point.** `consent` already appeared **217** times,
+`performer` **52**, `payroll` **26**, `residual` **22**, `likeness` **21**, `SAG-AFTRA` **12** — but
+almost entirely in `intel/market.md` (54) and `compose/patterns.md` (28), i.e. as *prose about the law*.
+In `agents/top.md` the whole vocabulary appeared **6** times across passes 16, 17, 27 and 49. **This KB
+has carried the law of the talent plane for eleven passes without ever measuring its code.** That is the
+gap this pass closes.
+
+### The headline, measured and not assumed
+
+**The casting layer — the operational system a production actually runs — is nine repositories, every
+single one of them at 0 stars, and eight of the nine carry no licence at all.** The only repository in
+the entire plane with an installed base is a **2009 staffing ATS**. Under an industry whose statutory
+and contractual duties both became real in 2026.
+
+### Tier 1 — permissive, and genuinely usable
+
+| Agent | Repo | License | Stars / Forks | Last push | What it actually does |
+|---|---|---|---|---|---|
+| Pratidhvani | [svayatta/pratidhvani](https://github.com/svayatta/pratidhvani) | **Apache-2.0** | 26★ / 5f | 2026-11-27 | Self-hosted voice cloning for Indian languages preserving accent and dialect, built for archival recordings, **with consent and an inaudible watermark as first-class features**. The most-starred purpose-built repo in this plane, pushed on measurement day |
+| Grantmark | [batuhanbulbul/grantmark](https://github.com/batuhanbulbul/grantmark) | **Apache-2.0** (LICENSE, 11,357 B) | 0★ / 0f | 2026-11-20 | The only implementation of the **Human Consent Standard (HCS) 1.0 Draft**: declare → license → stamp → verify, wiring an HCS registry to the **Open License Protocol from RSL 1.0** and a **C2PA manifest carrying `cawg.consent`**. Ships a JSON Schema and test vectors |
+| Consentor | [vishwatejaaverager/consentor](https://github.com/vishwatejaaverager/consentor) | **MIT** (LICENSE, 1,073 B) | 0★ / 0f | 2026-09-26 | A small API a generation platform calls to check whether a person has granted biometric consent **before** synthesising their likeness. SQLite-backed |
+| Filmwright | [dassjaylabs/filmwright](https://github.com/dassjaylabs/filmwright) | **MIT** | 7★ / 1f | 2026-10-29 | Local narrated product films with **preset, described or consented cloned voices** plus talking-head presenter — consent modelled as a voice *mode*, not an afterthought |
+| UGC rights & consent ledger | [mahmoudabdelnaby1/customer-ugc-rights-consent-ledger](https://github.com/mahmoudabdelnaby1/customer-ugc-rights-consent-ledger) | **MIT** (LICENSE, 1,073 B) | 0★ / 0f | 2026-10-31 | A consent ledger for customer/UGC rights — the nearest thing in the plane to a usage-rights audit trail |
+| AI likeness-rights compliance guide | [AgileWoW/ai-likeness-rights-compliance-guide](https://github.com/AgileWoW/ai-likeness-rights-compliance-guide) | **MIT** | 0★ / 0f | 2026-02-19 | A legal/technical framework for digital twins under the NO FAKES Act. **Documentation, not code** — listed because it is permissively licensed prose a bid can quote |
+
+**Six permissive artefacts, and five of them are about consent rather than casting.** The plane's
+permissive energy is entirely on the *rights* side. Not one of the six books a performer, schedules an
+audition, or pays anybody.
+
+### Tier 2 — real, and unusable as a base
+
+| Artefact | Repo | License | Stars | Last push | Why it cannot be built on |
+|---|---|---|---|---|---|
+| CastLab | [mohitarora8181/cst](https://github.com/mohitarora8181/cst) | ⚠️ **No licence file** | 0★ / 0f | 2026-10-30 | The most complete casting platform found: agencies post roles, run an applicant pipeline, schedule auditions; actors submit self-tapes. 14 licence names probed on `main` and `master`, all 404, **control `README.md` = 200** → genuinely unlicensed = all rights reserved |
+| casting-site | [jacobgwilliams/casting-site](https://github.com/jacobgwilliams/casting-site) | ⚠️ **No licence file** | 0★ / 0f | 2026-11-07 | Rails/Postgres platform whose schema models **casting offices, agencies and management companies** — the best data model in the plane, and the best reason to regret the missing grant |
+| castingbackend | [mojadollc/castingbackend](https://github.com/mojadollc/castingbackend) | ⚠️ **No licence file** | 0★ / 0f | 2026-10-14 | NestJS/Postgres backend for a **children's** casting platform (profiles, photos, video, audio) — the only artefact touching the child-performer case, and it carries no grant |
+| talent-agency | [nick227/talent-agency](https://github.com/nick227/talent-agency) | ⚠️ **No licence file** | 0★ / 0f | 2026-10-30 | React/Fastify/MySQL: public performer directory, casting-director enquiry form, agent admin panel |
+| casting-profile-manager | [sfuentes/casting-profile-manager](https://github.com/sfuentes/casting-profile-manager) | ⚠️ **No licence file** | 0★ / 0f | 2026-09-04 | Express/Mongo actor profiles, bookings, availability. **A search result asserted this repo is "MIT-licensed"; it is not** — see the corrections below |
+| Casting & Audition Management System | [rohit18morya-stack/Casting-Audition-Management-System](https://github.com/rohit18morya-stack/Casting-Audition-Management-System) | ⚠️ **No licence file** | 0★ / 0f | 2026-11-24 | Actor profiles, audition video upload, application management, scheduling. Created 2026-11-24 — three days old at measurement |
+| OneTake | [kanishka8590/OneTake](https://github.com/kanishka8590/OneTake) | ⚠️ **No licence file** | 0★ / 0f | 2026-11-22 | Performer-side self-tape prep: headshots, slate recordings, guided auditions, cue-line assistance |
+| auditionwithme | [cranberrymuffin/auditionwithme](https://github.com/cranberrymuffin/auditionwithme) | ⚠️ **No licence file** | 2★ / 2f | 2026-11-27 | **The only true agent in the plane**: parses PDF sides, casts and voices the other characters, reads them aloud, records the self-tape. Pushed on measurement day, and no grant |
+| casting-agency | [jacksondieter/casting-agency](https://github.com/jacksondieter/casting-agency) | ⚠️ **No licence file** | 0★ / 0f | 2023-05-01 | Full-stack casting API backend; dormant since May 2023 |
+| Talent-Agency-Management | [hothanhphuong2512/Talent-Agency-Management](https://github.com/hothanhphuong2512/Talent-Agency-Management) | ⚠️ **No licence file** | 0★ / 0f | 2019-09-19 | Python/SQLAlchemy/Tkinter talent CRUD. **Dormant since 2019** — the plane's only pre-2020 artefact |
+| likeness-license | [eliem08/likeness-license](https://github.com/eliem08/likeness-license) | 🚫 **"proprietary and confidential… All rights reserved"** (LICENSE, 696 B) | 0★ / 0f | 2026-11-19 | Registration, licensing, verification and royalties for a likeness, by SHA-256 fingerprint with HMAC-signed licences and a public revocation list. **A tool for licensing your likeness that affirmatively reserves all rights in itself** |
+| consent | [rishirajrateria/consent](https://github.com/rishirajrateria/consent) | ⚠️ **No licence file** | 0★ / 0f | 2026-10-10 | Likeness/IP permission platform issuing tamper-evident Ed25519 certificates bound to file hashes. **Its default branch is `claude/magical-wozniak-7dojwm`** — an unmerged agent working branch serving as the repository's head |
+
+### The one repo in this plane with an installed base is not a casting system
+
+| Platform | Repo | License | Stars / Forks | Last push | Created |
+|---|---|---|---|---|---|
+| OpenCATS | [opencats/OpenCATS](https://github.com/opencats/OpenCATS) | **Dual: MPL-2.0 + "CATS Project" (circa 2007)** — LICENSE.md, 43,228 B | 789★ / 332f | 2026-11-26 | **2009-07-17** |
+
+**789 stars against a plane whose purpose-built repos total two.** OpenCATS is a general staffing ATS
+and recruitment CRM — candidate pipelines, not sides, availability or guild tiers. It is the only
+realistic starting point in the plane, and adopting it means adopting a **compilation licence**: its
+LICENSE.md states the application is available under two licences, MPL-2.0 for OpenCATS code and a
+bespoke *CATS Project* licence for original 2007 code. The GitHub API reports only `NOASSERTION`.
+
+### The measured zeros — and this plane produced the KB's worst false abundance yet
+
+Totals are from GitHub `search/repositories`; the **relevant** column is the result of reading the
+results, which is the only thing that works.
+
+| Query | Results | Relevant | What actually came back |
+|---|---|---|---|
+| `residuals calculation film` | **0** | **0** | **Literal zero. Third independent confirmation** — pass 5, pass 17, and now pass 50 |
+| `talent release form` | 2 | **0** | `gowtham543/eindiatimes.com` and `mohityadav02/Best-IVF-Centre-in-Delhi`. A news site and a fertility clinic |
+| `right of publicity` | 26 | **0** | Top hits: a marketing platform (26★), a crypto whitepaper (12★), and a repository literally named **`GNU-GENERAL-PUBLIC-LICENSE-Version-3-29-June-2007-Copy`** (9★) |
+| `synthetic performer` | 14 | **0** | **Every hit is an AI-content labelling tagger** — `amazon-synthetic-performer-tagger`, `ai-media-synthetic-marker`. "Synthetic performer" in code means *marking synthetic media*, never the performer |
+| `self-tape` | **106** | **1** | **The top hit is a dotfiles repository** — `zszszszsz/.config` at **373★** — followed by a terminal emulator (32★). Only `auditionwithme` (2★) is real |
+| `performer consent` | 3 | 1 | `gokselozgur5/mina-performance-mask` is performance *monitoring*. "Performer" collides with "performance" |
+| `likeness rights` | 10 | 2 | Top result `Grey59Queen/codev` (1★) — see the metadata defect below |
+| `digital replica consent` | 2 | 2 | Both at 0★ |
+| `casting director` | 91 | ~2 | Mostly NFT video generators and unrelated TalentSearch apps |
+| `voice clone consent` | 51 | 3 | `pratidhvani` (26★), `filmwright` (7★), `ttsnative` (4★) |
+
+**`self-tape` is now the sharpest false abundance in this KB, beating `isan` (1,942/0) on quality rather
+than volume**: 106 results whose top entry outranks every real repo in the plane by **186×** and is a
+personal dotfiles collection. Pass 8's rule held in both halves again — shortening a query turns a false
+zero into a false abundance, so **read the results, never the total.**
+
+### Three licence corrections this pass, all of which a scanner would have got wrong
+
+1. **A search result asserted `sfuentes/casting-profile-manager` is "MIT-licensed". It has no licence
+   file.** 14 filenames probed on `master`, all 404, with `README.md` = 200 as the control. The claim
+   was plausible, specific, and false. **Never carry a licence from prose into a table.**
+2. **`method-production-suite/method-scheduling` is dual-licensed MIT *and* Apache-2.0** —
+   `LICENSE-MIT` and `LICENSE-APACHE` both resolve 200. The API reports only `Apache-2.0`.
+3. **`opencats/OpenCATS` is not `NOASSERTION`** — it is MPL-2.0 plus a bespoke 2007 CATS Project
+   licence, stated in a 43 KB LICENSE.md. This is the pass-8 `chromaprint` mechanism recurring: **the
+   licence belongs to the compilation, not the repository.**
+
+**And a new category of defect worth a rule.** `Grey59Queen/codev` (1★) ranks first for both
+`performer consent` and `likeness rights` with zero relevance, because **its GitHub description field
+contains the entire text of the CC0 licence**. Repository metadata is attacker-free but not
+defect-free: a mis-pasted licence into a description field makes a repo rank for every rights term in
+the vocabulary. **Rank on what the repo does, never on what its metadata contains.**
+
+### The false friend that would have shipped as a casting agent
+
+[mnvsk97/voice-audition](https://github.com/mnvsk97/voice-audition) — **MIT, 7★/1f, pushed
+2026-11-27** — describes itself as "**the voice casting director for AI agents**". It is cross-provider
+TTS voice discovery and recommendation. It casts *synthetic voices for software*, not performers for
+productions. It is the second-most-starred MIT repo returned by this plane's queries and belongs in no
+casting row. Recorded here so the next pass does not promote it.
+
+### What this means for a bid
+
+**Do not promise an open-source casting or residuals stack. There is not one.** The honest, defensible
+position has three parts:
+
+- **The consent-declaration layer is real, permissive and standards-shaped** — `grantmark` (Apache-2.0)
+  binding HCS 1.0 to RSL 1.0's Open License Protocol and to a C2PA `cawg.consent` assertion, which is
+  the provenance layer this KB banked in passes 4 and 8. It is a **prototype on devnet with fictional
+  demo data, by its own README**, and it is still the best starting point in the plane.
+- **The consent-honouring layer exists at single-repo depth** — `consentor` (MIT) to check before
+  synthesis, `pratidhvani` (Apache-2.0) to generate with consent and watermark already wired in.
+- **The casting and residuals layers are a build, not an integration.** Nine casting repos, 0★ each,
+  eight unlicensed; residuals measured at literal zero for the third time. The one repo with adoption
+  is a 2009 ATS under a compilation licence.

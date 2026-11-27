@@ -7752,3 +7752,128 @@ one did not, what would you send?"*
 - **Do not mix the two Brazilian news-desert counts** (Atlas 2,504 vs NexOS 1,974) — unreconciled
   methodologies.
 - **Do not size this plane.** No market figure exists. Use the published £40,790 reporter-year instead.
+
+---
+
+## Pattern 109 — The consent-of-record pipeline: bind consent to the asset at booking, prove it at delivery
+
+**The problem.** Every instrument in this plane — SAG-AFTRA 2026 (written, specific, separately paid
+consent), Mexico's in-force reforms (explicit pre-training consent surviving the contract), Denmark's
+§65a, China's labelling standard — demands the same artefact: **proof that this performer consented to
+this use of their voice or likeness**. Consent is created at **booking**, not in post, and the booking
+layer has nine repositories at 0 stars.
+
+**The recipe, all permissive, every licence read from the file.**
+
+1. **Declare** — [batuhanbulbul/grantmark](https://github.com/batuhanbulbul/grantmark) (**Apache-2.0**).
+   Serve the performer's declaration at `/.well-known/hcs.xml` + `/registry/…` and parse it with
+   `@grantmark/hcs`. Use its **consent-authority record profile** (JSON Schema **with test vectors**)
+   as the record shape for a living adult's name, image, likeness and voice.
+2. **Gate** — [vishwatejaaverager/consentor](https://github.com/vishwatejaaverager/consentor)
+   (**MIT**). Call it *before* synthesis: no consent record, no generation. This is the enforcement
+   point, and it is the one the whole chain is worthless without.
+3. **Generate** — [svayatta/pratidhvani](https://github.com/svayatta/pratidhvani) (**Apache-2.0**,
+   26★) for voice, which already carries consent and an **inaudible watermark**; or
+   [dassjaylabs/filmwright](https://github.com/dassjaylabs/filmwright) (**MIT**) where "consented
+   cloned voice" is an explicit mode.
+4. **Stamp** — `@grantmark/stamp` writes a **C2PA manifest with a `cawg.consent` assertion**. This is
+   the join to work this KB already banked: the C2PA/provenance substrate of passes 4 and 8, and
+   Patterns 4 and 8 built on it. **You are not adding a stack, you are adding an assertion.**
+5. **Verify** — `/v1/verify` reads the manifest back and checks the consent reference against the
+   registry. Ledger the result in
+   [mahmoudabdelnaby1/customer-ugc-rights-consent-ledger](https://github.com/mahmoudabdelnaby1/customer-ugc-rights-consent-ledger)
+   (**MIT**) for the audit trail.
+
+**What to say out loud.** `grantmark`'s own README states it is an **experimental prototype on devnet
+with fictional demo data**, tracking a **draft** standard, and is **not affiliated with or endorsed by**
+the Human Consent Foundation, the RSL Collective or CAWG/C2PA. Steps 1, 4 and 5 are therefore a
+reference design to harden, not a dependency to install. The HCS 1.0 spec text itself could **not be
+read from this session** (`humanconsent.org` returns 403 through the proxy) — treat its exact terms as
+unverified. Say all of this in the proposal; it is still the best starting point that exists.
+
+## Pattern 110 — Casting on OpenCATS: bend the only adopted platform rather than forking a 0★ repo
+
+**The problem.** A client wants a casting or talent-roster system. The nine purpose-built casting
+repositories measured this pass are **all at 0 stars and eight carry no licence**, which eliminates
+them as bases regardless of code quality.
+
+**The recipe.**
+
+1. **Base** — [opencats/OpenCATS](https://github.com/opencats/OpenCATS) (**dual MPL-2.0 + "CATS
+   Project" 2007**, 789★/332f, pushed 2026-11-26, in development since 2009). Candidates become talent;
+   job orders become roles; submissions become auditions; its search becomes the breakdown response.
+   **Adopt the compilation licence knowingly** — MPL-2.0 is weak, per-file copyleft, and the 2007
+   component is bespoke; read the 43 KB LICENSE.md before committing.
+2. **Data model reference, not code** — [jacobgwilliams/casting-site](https://github.com/jacobgwilliams/casting-site)
+   models **casting offices, agencies and management companies**, the relationship OpenCATS lacks.
+   It has **no licence**: read it for schema, write your own.
+3. **Agent layer** — [cranberrymuffin/auditionwithme](https://github.com/cranberrymuffin/auditionwithme)
+   shows the mechanism worth rebuilding (parse PDF sides → cast and voice other characters → record the
+   self-tape). **No licence file — reimplement, do not vendor.**
+4. **Consent at intake** — wire Pattern 109 step 1 into the talent record *at booking*, so consent is
+   captured where the law says it is created.
+5. **Schedule and budget** — [method-production-suite/method-scheduling](https://github.com/method-production-suite/method-scheduling)
+   (**dual MIT/Apache-2.0**) for the open schedule format, and
+   [gravy42/profitshare](https://github.com/gravy42/profitshare) (**MIT**) for the **SAG-AFTRA tier
+   check at rates effective 7/1/2026** plus California fringes.
+
+**What not to promise.** Not a casting product. This is an ATS customisation with a media data model
+bolted on, and the honest estimate says so.
+
+## Pattern 111 — The residuals gate: build the record that makes settlement possible, not the settlement
+
+**The problem.** `residuals calculation film` returns **zero** GitHub results and has done across three
+independent passes. There is no open-source residuals engine, no union timecard payroll, no performer
+royalty settlement. Clients will still ask.
+
+**The recipe — and it deliberately stops short of computing a residual.**
+
+1. **Payroll substrate** — [frappe/hrms](https://github.com/frappe/hrms) (**GPL-3.0**, 9,123★). Deploy
+   it for the client; do not embed it in a proprietary deliverable. It knows nothing about guild
+   agreements, and that is the gap you are being paid for.
+2. **Guild rate tiers as code** — [gravy42/profitshare](https://github.com/gravy42/profitshare)
+   (**MIT**) is the **only permissively licensed artefact in this KB that encodes guild economics**:
+   SAG-AFTRA low-budget tiers at rates effective 7/1/2026, California payroll fringes, the Diversity in
+   Casting cap uplift, every line typed as cash, deferred or points. Its README is explicit that it
+   **does not replace a payroll company, a signatory rep or an attorney** — carry that caveat forward.
+3. **The deliverable: the liability record.** For each performer, each engagement: the tier, the pay
+   type, the consent reference from Pattern 109, the use actually made, and the dated obligation. This
+   is the artefact a residual is computed *from*, and it is what nobody has.
+4. **Do not build the engine.** Residual terms are negotiated, versioned by agreement and
+   jurisdiction, and change with each cycle. The pass-8 finding applies unchanged: **settlement is pure
+   judgment, and judgment is where open source stops.**
+
+**Why this is sellable anyway.** The commercial anchors are published: a replica-generated commercial
+performance is reported at **1.5× the session fee**, and SAG-AFTRA's voice-replica dubbing consent bites
+for pictures commencing principal photography **on or after 2027-07-01**. A buyer with a dated
+obligation and no record system has a procurement problem, not a research problem.
+
+## Pattern 112 — The per-jurisdiction consent policy engine
+
+**The problem.** The five instruments in this plane disagree on nearly everything: Mexico's statute is
+in force and survives contract termination; SAG-AFTRA binds signatories by contract with a 2027 dubbing
+trigger; Denmark's §65a is a bill and is **collectively manageable**; China requires visible **and**
+metadata labels under GB 45438-2025; India's courts refuse blanket relief and want evidence per
+defendant, per item. One compliance mode cannot satisfy these.
+
+**The recipe.**
+
+1. **One record shape** — `grantmark`'s consent-authority record profile (**Apache-2.0**, JSON Schema +
+   test vectors) as the canonical internal representation.
+2. **Policy per jurisdiction, data once** — encode each instrument as rules over that record: *does
+   consent survive contract end?* (Mexico: yes), *is separate payment required?* (SAG-AFTRA: yes), *can
+   the right be collectively managed?* (Denmark §65a: yes), *is a metadata label mandatory?* (China:
+   yes), *must evidence be per-item?* (India: yes).
+3. **Label and watermark at generation** — `pratidhvani` (**Apache-2.0**) already emits an inaudible
+   watermark, which is what China's implicit-metadata requirement and India's per-item evidentiary
+   posture both reward.
+4. **Cite the regime** — [socialgravity/state-of-ai-identity-licensing-2026](https://github.com/socialgravity/state-of-ai-identity-licensing-2026)
+   (**CC BY 4.0** — a *content* licence, not an OSI grant: attribute it, do not treat it as code) is a
+   versioned primary-source dataset for the policy table, and
+   [AgileWoW/ai-likeness-rights-compliance-guide](https://github.com/AgileWoW/ai-likeness-rights-compliance-guide)
+   (**MIT**) is permissively licensed prose you may quote in a deliverable.
+
+**The reusable judgment.** Pass 5 reached the per-jurisdiction policy-engine conclusion for rights
+reservation; pass 50 reaches it independently for identity, from both the strictest regime (Mexico) and
+the most fragmented (APAC). **Two planes, same answer: the portable asset is the policy engine, not the
+compliance mode.**

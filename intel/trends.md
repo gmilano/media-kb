@@ -4849,3 +4849,85 @@ coterminous with the BBC Charter. In the EU, EMFA requires public funding of med
 predictable, preferably multi-year. In both cases the buyer is accountable for *how the money was
 allocated*, which makes an auditable allocation-and-output record part of the product rather than a
 nice-to-have. See `intel/market.md` for the regional detail and `compose/patterns.md` Pattern 108.
+
+---
+
+## Pass 50 (2026-11-27) — trends in the talent, casting & performer-consent plane
+
+### 1. The structural law of this KB now has a second subject, and the shape is identical
+
+Pass 8 measured the rights-reservation gradient on **content**: declaring a reservation is a format
+problem and `ai.robots.txt` has 4,265★; honouring it is a judgment problem and `datadiligence` has 41★
+and has been asleep since 2024; liquidating the obligation is pure judgment and measured **literal
+zero**. Pass 50 measured the same gradient on **human identity** and got the same answer:
+**declare** → HCS 1.0 draft plus a live public registry plus `grantmark` (Apache-2.0) binding it to
+C2PA `cawg.consent`; **honour** → `consentor` (MIT, 0★) and `pratidhvani` (Apache-2.0, 26★);
+**settle** → `residuals calculation film` = **0 results**, now confirmed across passes 5, 17 and 50.
+
+**The law is therefore not about content versus identity. It is that a declaration is a schema and a
+payment is a judgment** — and open source ships schemas. This is the most generalisable finding of
+fifty passes because it predicts, before any search, which half of a new plane will be empty.
+
+### 2. The plane is being started constantly and finished never — and the licence is the tell
+
+Eight of the nine purpose-built artefacts in this plane were **created in the last ninety days**, three
+were **pushed on measurement day**, and **eight of nine carry no licence file at all**. This is not a
+dormant plane and it is not a healthy one. It is a plane where unconnected people repeatedly build a
+casting pipeline, publish it, and never add a grant. The defect is not abandonment — several are
+actively pushed — it is that **the artefacts never become adoptable**, so every new builder starts over
+instead of forking. Nine repositories, 2 stars between all nine.
+
+### 3. The most-starred thing in the plane shipped consent as a feature, not as policy
+
+[svayatta/pratidhvani](https://github.com/svayatta/pratidhvani) took **26★ in eight days** (created
+2026-11-19, 5 forks, pushed 2026-11-27) as a self-hosted Indian-language voice cloner whose headline
+features include **consent and an inaudible watermark**. Every dedicated consent-*registry* repo in the
+plane sits at **0★**. The signal is commercial, not ethical: **a generator with consent built in is a
+product; a consent registry is an obligation, and obligations do not accrue stars.** Prediction
+recorded in `agents/trending.md` so it can be falsified next pass.
+
+### 4. The law arrived in 2026 — in the wrong order, from a North American assumption
+
+For eleven passes this KB treated the US guild agreements as the operative constraint on performer AI.
+That is now only partly right, and the ranking inverts:
+
+| Region | Instrument | Status on 2026-11-27 |
+|---|---|---|
+| **LATAM** | Mexico: Federal Labour Law + Federal Copyright Law reforms | **IN FORCE 2026-05-15.** Statutory, survives the contract, names dubbing actors, IMPI can fine |
+| **North America** | SAG-AFTRA 2026 TV/Theatrical | **In force 2026-07-01**, but **contractual** — it binds signatories, not everyone |
+| **North America** | NO FAKES Act (S.4591 / H.R.8915) | **Still a bill.** On the Senate calendar since 2026-06-24; Congress ends 2027-01-03 |
+| **EMEA** | Denmark L 49 §65a | **Bill**, introduced 2026-10-08, hoped in force start of 2027 |
+| **APAC** | China virtual-human rules | **Draft** (April 2026). Labelling Measures themselves in force since 2025-09-01 |
+
+**The only in-force statute creating a performer's right against AI replication is Mexican.** Any deck
+that presents this plane as a Hollywood compliance story is describing a contract and calling it a law.
+
+### 5. The judgment layer is migrating to courts, which changes what software has to do
+
+India's Delhi High Court issued a run of interim personality-rights orders through 2026 (Kriti Sanon
+2026-10-29, next hearing 2026-12-10; Akira Nandan; Vivek Oberoi; Aman Gupta; Ravi Kishan; Jubin
+Nautiyal over a synthesised singing voice) while **explicitly refusing blanket injunctions** and asking
+for claims framed defendant by defendant and content by content. That is a different software
+requirement from a statute: not a compliance mode but **per-item evidence** — which item, which
+defendant, which date, which consent. It is the same conclusion pass 5 reached about EMEA reservation
+and pass 20 about source protection: **the deliverable is the audit trail.**
+
+### 6. A measurement defect worth a standing rule: repository metadata can fabricate relevance
+
+`Grey59Queen/codev` (1★) ranked **first** for both `performer consent` and `likeness rights` with zero
+relevance, because its GitHub **description field contains the entire text of the CC0 licence** — every
+rights term in the vocabulary, in the field search ranks on. Combined with this pass's other false
+abundances (`self-tape` = 106 results topped by a **373★ dotfiles repo**; `synthetic performer` = 14
+results that are all AI-content *taggers*; `right of publicity` topped by a repo named
+`GNU-GENERAL-PUBLIC-LICENSE-Version-3-29-June-2007-Copy`), the rule hardens: **rank on what a repo
+does, never on what its metadata contains, and never on the total.**
+
+### 7. Three licence readings a scanner got wrong in a single pass
+
+`sfuentes/casting-profile-manager` was **asserted to be MIT by a search result** and has **no licence
+file** (14 names probed, control README 200). `method-scheduling` is **dual MIT/Apache-2.0** where the
+API reports Apache only. `OpenCATS` is **MPL-2.0 plus a bespoke 2007 "CATS Project" licence** where the
+API reports `NOASSERTION` — the pass-8 `chromaprint` mechanism again, **the licence belonging to the
+compilation rather than the repository**. And the plane's sharpest irony: `eliem08/likeness-license`, a
+tool for licensing your likeness, carries a LICENSE reading **"proprietary and confidential… All rights
+reserved."** Licence by file read, every time.

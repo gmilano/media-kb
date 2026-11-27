@@ -10,6 +10,34 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 50: the talent & consent plane (**the only adopted platform in the plane is a 2009 staffing ATS under a compilation licence**)
+
+**Infrastructure and platform repos, verified 2026-11-27.**
+
+| Repo | License | Stars / Forks | Last push | Created | Why it is here |
+|---|---|---|---|---|---|
+| [frappe/hrms](https://github.com/frappe/hrms) | ⚠️ **GPL-3.0** | 9,123★ / 2,909f | 2026-11-27 | — | The only mature payroll substrate reachable from this plane. Generic HR, no guild logic. Copyleft |
+| [opencats/OpenCATS](https://github.com/opencats/OpenCATS) | **Dual MPL-2.0 + "CATS Project" 2007** (LICENSE.md, 43,228 B) | 789★ / 332f | 2026-11-26 | **2009-07-17** | The plane's only adopted, deployable platform — and it is a staffing ATS, not a casting system. **The GitHub API reports `NOASSERTION`; the file says two licences** |
+| [gravy42/profitshare](https://github.com/gravy42/profitshare) | **MIT** (1,068 B) | 0★ / 1f | 2026-11-20 | 2026-09-28 | **First permissive repo in this KB to encode guild economics**: SAG-AFTRA low-budget tiers at rates effective 7/1/2026, California fringes, DIC cap uplift. Forks outnumber stars |
+| [method-production-suite/method-scheduling](https://github.com/method-production-suite/method-scheduling) | **Dual MIT / Apache-2.0** (`LICENSE-MIT` + `LICENSE-APACHE`) | 1★ / 1f | 2026-11-21 | 2026-10-16 | Open file format for a shooting schedule + CLI. **API reported Apache-2.0 only — it is dual** |
+| [opengateapp/opengate](https://github.com/opengateapp/opengate) | ⚠️ **GPL-3.0** (35,148 B) | 1★ / 1f | 2026-11-03 | 2026-10-17 | Breakdown → stripboard → call sheets in one synced project. Copyleft |
+| [socialgravity/state-of-ai-identity-licensing-2026](https://github.com/socialgravity/state-of-ai-identity-licensing-2026) | **CC BY 4.0** (606 B) — *content*, not software | 0★ / 0f | 2026-11-10 | 2026-11-10 | Versioned primary-source dataset on identity licensing, consent, disclosure and provenance. Citable; not an OSI grant |
+| [mahmoudabdelnaby1/customer-ugc-rights-consent-ledger](https://github.com/mahmoudabdelnaby1/customer-ugc-rights-consent-ledger) | **MIT** (1,073 B) | 0★ / 0f | 2026-10-31 | 2026-10-31 | Nearest thing to a usage-rights audit trail in the plane |
+
+**The trend worth recording across this file's history: the three repos in this plane that encode real
+industry rules all have forks ≥ stars.** `profitshare` 0★/1f, `method-scheduling` 1★/1f,
+`opengate` 1★/1f. Pass 49 established that in operational media tooling forks beat stars as an
+adoption signal (City Bureau's `city-scrapers` template at 2.2× forks). The same signal is present
+here at the very bottom of the star range — **which means the plane cannot be ranked by stars at all,
+and a 0★ MIT repo with a fork and a SAG-AFTRA rate table is a more serious artefact than a 373★
+dotfiles repo that outranked it in search.**
+
+**Channel gap, recorded as a gap.** `humanconsent.org` and `rslmedia.org` return **HTTP 403 from this
+session's agent proxy**, so the HCS 1.0 / RSL-MEDIA 1.0 specification texts are **unverified**. Same
+posture as pass 5's `new.ddex.net`: not investigated, not assumed free.
+
+---
+
 ## 2026-11-27 — pass 49: the local & community news plane (**a CC0 identifier registry with a healthy permissive ecosystem — the law of this KB confirmed with its sign reversed**)
 
 | Repo | License | ★ / forks | Pushed | Why it moved onto the radar |

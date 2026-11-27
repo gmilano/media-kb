@@ -9981,3 +9981,146 @@ by factors of two to twenty-eight. This one can be argued with a procurement rec
 broadcaster publishes what it pays, per reporter, per year, under contract to a known end date. That is
 the strongest commercial footing of any plane in this file — and it exists because the buyer is
 accountable for public money, not because the market is better measured.
+
+---
+
+## Market size — pass 50 addendum (2026-11-27): the talent & consent plane has **no sized market and a published per-unit price**, and the price is the better number
+
+**No market figure for casting, talent-management or residuals software was found.** Searched; nothing
+credible returned. Recording that as a gap rather than reaching for an adjacent "AI in media" CAGR,
+which would size the wrong thing. What this plane has instead is **rates and prices published by the
+parties themselves**, which is the strongest commercial footing available — the same situation pass 49
+found with the £40,790 council-reporter-year.
+
+| Anchor | Figure | Source | Why it is usable |
+|---|---|---|---|
+| Replica-generated performance, commercials | **1.5× the session fee**, plus the usual holding and use fees | 2025 SAG-AFTRA Commercials Contracts, via secondary legal/trade summaries — **not read in the primary contract** | A published unit price for the exact thing an AI pipeline produces. Any "AI saves the session" proposal can be priced against it |
+| SAG-AFTRA low-budget theatrical tiers | Ultra Low Budget / Moderate Low Budget / Low Budget / Theatrical Basic, **rates effective 7/1/2026** | Encoded in [gravy42/profitshare](https://github.com/gravy42/profitshare) (MIT), whose README states the effective date | Guild rate tiers available as **code under an MIT licence** — the first time in this KB |
+| 2026 TV/Theatrical ratification | **91.42%** in favour, **2026-06-04**; AI terms effective **2026-07-01**; term to **2030-06-30** | SAG-AFTRA member ratification, via secondary coverage | Fixes the compliance clock for every North American engagement |
+| Voice-replica dubbing consent | Applies to pictures commencing principal photography **on or after 2027-07-01** (clause 39D) | Secondary summaries of the 2026 TV/Theatrical agreement | A **dated future obligation** — the one place in this plane where a buyer has a deadline, not a worry |
+| China draft virtual-human penalties | **¥10,000–200,000** (reported) | Secondary reporting on the CAC April 2026 draft — **draft not finalised** | Indicative only; do not present as enforceable |
+
+**The honest framing for a bid: this plane is not sized, but it is *priced*.** A market-size slide here
+would be invented. A slide that says "a replica-generated commercial performance costs 1.5× the session
+fee and the consent paperwork behind it has no software" is defensible and lands harder.
+
+---
+
+### Pass 50 (2026-11-27) — the talent, casting & performer-consent layer in North America
+
+**The obligation is contractual and dated; the statute is still a bill.** The NO FAKES Act of 2026
+(**S.4591** / **H.R.8915**) was introduced **2026-05-20**, advanced unanimously out of the Senate
+Judiciary Committee in June 2026, and placed on the Senate Legislative Calendar **2026-06-24**, where it
+remains awaiting a floor vote with the House companion in committee. **The 119th Congress ends
+2027-01-03**, so it passes within weeks or starts over. It would create a federal right against
+unauthorised digital replicas of voice or visual likeness, with a private right of action, platform
+liability on knowledge, a **DMCA-style counter-notification process** added in the 2026 revision, and
+contested preemption of some state law.
+
+**What actually binds today is the contract plus state law.** SAG-AFTRA's 2026 TV/Theatrical agreement
+(ratified **91.42%**, AI terms live **2026-07-01**, running to **2030-06-30**) requires clear,
+conspicuous, specific **written consent** before a digital replica is created or used, a description of
+the intended use, and **separate payment** for that use. It distinguishes **employment-based** replicas
+(made from work on the production — a scan, a session) from **independently created** replicas (built
+from material the performer made for other purposes). Synthetic performers carry a justification
+obligation and, where they recognisably resemble a real person, trigger that person's consent rules.
+California **AB 2602** (living performers, in force 2025-01-01) voids contract terms permitting replica
+use without informed consent; **AB 1836** covers the deceased; New York requires disclosure of
+synthetic performers in commercial advertising.
+
+**The opportunity, and it is a recordkeeping opportunity.** Consent under these terms is created **when
+a performer is booked**, not in post — and the measurement in `agents/top.md` shows the booking layer
+has **nine repositories at 0 stars, eight of them unlicensed**, while the only adopted platform is a
+2009 staffing ATS. The sellable deliverable is the **per-performer consent artefact**: a record binding
+the specific consent, the described use and the separate payment to the asset, carried into the C2PA
+`cawg.consent` assertion the KB already knows how to write. **Sell the evidence, not the generation.**
+Market reality check for the pitch: no AI-created performer has a verified agency signing, and the
+casting directors' professional body permits AI for administrative work but not final casting
+decisions — so the demand is for *compliance capacity*, not for synthetic talent.
+
+### Pass 50 (2026-11-27) — the talent, casting & performer-consent layer in EMEA
+
+**EMEA is where the performer right is being written into statute, and it is not law yet.** Denmark's
+bill **L 49**, introduced by culture minister Zenia Stampe on **2026-10-08**, would protect ordinary
+people and performers against realistic digital imitations. Its **§65a** is the performer-specific
+provision: realistic, digitally generated imitations of a performing artist's or entertainer's
+performance may not be made available to the public without consent, it covers **EEA nationals and
+residents**, and — uniquely — **it can be managed collectively**. The minister hopes for entry into
+force at the start of 2027; no date is fixed. Note the framing trap: headlines called it "copyright
+over your face", and a Copenhagen practitioner's reading is that the rule **does not constitute a
+copyright or a related right**. Lawmakers in **Cyprus, Belgium, the Netherlands and Germany** are
+moving on comparable likeness and deepfake measures. Horizontally, **EU AI Act Article 50 transparency
+obligations apply from 2026-08-02**, and the European Parliament adopted its position on the AI Act
+Omnibus simplification proposal **569–45**.
+
+**The opportunity is the collective-management hook, and it is specific to this region.** §65a being
+collectively manageable means a Danish or EEA deployment needs something no other region needs: a
+**rights-holder-to-collecting-society interface** for performer likeness — declaration, mandate,
+and per-use reporting. That is infrastructure, it has a named statutory driver, and this KB's
+measurement says the open-source layer for it is `grantmark` at 0 stars. EMEA is also the one region
+where machine-readable reservation is already a legal instrument (DSM Art. 4, recorded in pass 5), so
+the HCS/RSL declaration stack has a legal home here rather than a voluntary one.
+
+### Pass 50 (2026-11-27) — the talent, casting & performer-consent layer in APAC
+
+**APAC is the only region where this plane's code is being written, and it is the region with the most
+divergent rules.** Latham & Watkins (September 2026) sorts APAC into binding risk-based frameworks
+(**South Korea**, **Vietnam**) and targeted rules (**China**), among others. China's **Measures for
+Labeling AI-Generated and Synthetic Content** took effect **2025-09-01**, backed by mandatory national
+standard **GB 45438-2025**, requiring visible labels where content could mislead and implicit
+**metadata** labels in the file, with platforms checking both; the standard's annex names cloned voice
+among services that may cause public confusion. The CAC published **draft** rules on **"digital virtual
+humans" in April 2026** requiring clear labelling and explicit consent to use a person's likeness or
+voice — **still a draft**, with reported penalties of ¥10,000–200,000. A **September 2026** judicial
+opinion is reported to classify unauthorised identifiable AI clones of a person's voice, likeness or
+persona as personality-rights violations.
+
+**India is producing the case law, order by order.** The Delhi High Court granted interim personality-
+rights protection to **Kriti Sanon on 2026-10-29** (Justice Purushaindra Kumar Kaurav), covering name,
+image, likeness and voice against AI deepfakes, chatbots and voice models, while expressly **not**
+restraining news, review, criticism, commentary, satire, parody, caricature or fan expression, and
+holding that the rights "are available to every individual" with fame not a condition — next hearing
+**2026-12-10**. Comparable 2026 orders cover **Akira Nandan** (2026-01-23, against a full AI film),
+Vivek Oberoi, Aman Gupta, Ravi Kishan, and **Jubin Nautiyal** over a synthesised singing voice. The
+Court has signalled it will **not** grant blanket injunctions and wants claims framed defendant by
+defendant, content by content; an amicus urged it not to treat image as property beyond statute.
+
+**The opportunity, and it is the strongest code-side opportunity in the plane.**
+[svayatta/pratidhvani](https://github.com/svayatta/pratidhvani) — Apache-2.0, **26★ in eight days**,
+pushed on measurement day — is self-hosted Indian-language voice cloning with **consent and an
+inaudible watermark built in**, aimed at archival recordings. It is simultaneously the most-starred
+artefact in this plane and an exact fit for two APAC requirements: China's implicit-metadata labelling
+and India's defendant-specific, content-specific evidentiary posture. **A watermark plus a consent
+record is precisely what a defendant-by-defendant regime makes you prove.** The buildable asset for
+APAC is a **per-jurisdiction policy engine** over that base — pass 5 reached the same conclusion for
+rights reservation, and the divergence has widened since.
+
+### Pass 50 (2026-11-27) — the talent, casting & performer-consent layer in LATAM
+
+**LATAM holds the only in-force statutory performer-replica right of any region in this KB, and it is
+the sharpest regional inversion this file has recorded.** Mexico's reforms to the **Federal Labour Law**
+and the **Federal Copyright Law** took effect **2026-05-15** (Chamber of Deputies 2026-04-07; Senate
+2026-04-15). On the copyright side, performers hold an **exclusive right over their voice and image,
+including where AI is involved** — voice cloning and digital replicas — with narrow exceptions for
+parody, satire and creative imitation provided there is no professional substitution of the artist and
+no risk of confusion. On the labour side, performers **retain rights over AI-generated reproductions of
+their likeness after the underlying contract ends**, and employers must obtain **explicit consent before
+using a worker's image or voice to train AI or create synthetic performances**. The definition of
+performing artist now **expressly includes announcers, commercial announcers and dubbing actors**, and
+**IMPI can fine** breaches committed for direct or indirect profit. A separate cinema and audiovisual
+law was published **2026-05-22**. Peru's regulation of Law No. 31814 took effect in January 2026.
+
+**So the global ranking inverts: Mexico has the statute, the United States has the contract, Denmark has
+a bill.** For eleven passes this file has carried the US guild agreements as the operative constraint on
+performer AI. For a dubbing engagement that is now wrong — **Mexico's is the binding one, it is
+statutory rather than negotiated, it survives the contract, and it names dubbing actors explicitly.**
+Mexico City is the centre of Spanish-language dubbing, which makes this the rare case where the
+strictest law and the densest supply are the same place.
+
+**The opportunity, and the risk to say out loud.** The buildable asset is a **consent-of-record system
+for dubbing and voice work**: explicit pre-training consent per performer, per use, surviving contract
+termination, with an IMPI-defensible audit trail — exactly the artefact `grantmark`'s consent-authority
+record profile proposes and nothing in the plane implements. The risk a commentator has already named
+is **jurisdictional arbitrage**: studios can source voice talent from countries with no equivalent
+protection. That argues for the compliance layer being **portable across jurisdictions**, which is the
+same per-jurisdiction policy-engine conclusion APAC reaches from the opposite direction.

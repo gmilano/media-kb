@@ -3672,3 +3672,81 @@ services, not repositories**: no licence, no self-host, no SLA. So the most cons
 newsroom publishes rests on a commercial feed with no maintained open client — while the *display*
 layer above it (D3, MapLibre, TopoJSON, PMTiles) is entirely free. **The data is the moat; the chart
 never was.**
+
+## Pass 36 (2026-11-27) — the 2D animation plane: four trends, and the law gets its cleanest proof
+
+### Trend 1 — the structural law now has a four-step gradient inside one plane, measured on one day
+
+Five previous passes established that the licence of the *knowledge or registry content* — not
+regulatory pressure — decides whether open source can do a job. This plane proves it without needing a
+second industry for contrast, because all four steps of one craft are measurable at once:
+
+**play** (format) → ~100,000★ of MIT/Apache runtimes, several pushed today;
+**draw** (tool) → healthy but 7-of-9 copyleft, permissive only in the Toonz lineage;
+**inbetween** (judgment) → **55 repos in all of GitHub**, top result 373★ **unlicensed**;
+**schedule** (owned registry) → **six repos, 32★ combined**, public spec frozen at **November 2018**.
+
+The gradient is monotonic and it is the sixth independent confirmation. The refinement this pass adds:
+**the collapse is driven by who owns the artefact, not by how hard the problem is.** Inbetweening is
+genuinely hard and has 55 repos; the exposure sheet is trivially easy — JSON with a text header — and
+has six. Difficulty predicts nothing; ownership predicts everything.
+
+### Trend 2 — the demand pull is landing exactly on the unlicensed step
+
+IMARC's account of Japanese production has AI-assisted work becoming mainstream in **background art,
+in-between frames and quality control**, explicitly because of timelines and a labour shortage. Two of
+those three are well served by permissive open source (background/upscale: `waifu2x` MIT 28,239★,
+`style2paints` Apache-2.0 18,143★; QC/segmentation: `anime-segmentation` Apache-2.0). The third — **the
+in-between** — is served by `AnimeInbet` (373★, **no licence**), `FCVG` (120★, **no licence**),
+`AnimeInterp` (465★, **licence in README prose only**) and `ToonCrafter` (Apache-2.0, 6,071★, **unpushed
+since 2025-03-19**).
+
+**The falsifiable prediction this pass records:** if the demand is real, the gap closes from the
+*permissive* side within 12 months — either ToonCrafter resumes, or a new Apache/MIT line-inbetweening
+model passes 1,000★ before 2027-11-27. If instead the 2026 state persists, the conclusion is that
+inbetweening is being absorbed by **closed** vendors and studios' internal tools, and the open stack
+will never hold the plane's most expensive operation. Checkable with one query.
+
+### Trend 3 — the newest permissive platforms in this plane are Chinese, and they are platforms, not models
+
+The two largest openly-licensed AI animation production systems found in this pass were **both created
+in 2026 and both target China's 短剧/漫剧 vertical-video market**: Toonflow (**MIT, 22,960★**, created
+2026-01-29) and Jellyfish (**Apache-2.0, 7,353★**, created 2026-03-06). They are not weights releases —
+they are script→storyboard→asset→video *pipelines* with production UIs.
+
+This inverts the pattern the KB recorded in earlier media passes, where APAC supplied **models**
+(Wan, CogVideoX, HunyuanVideo) and the West supplied **tooling**. Here APAC supplies the tooling too,
+permissively, at a scale no other region matches in this plane. Any 2026 claim that the open AI
+animation stack is Western is simply false, and the two repositories settle it.
+
+### Trend 4 — the method trend: licence metadata has now failed in **six** distinct ways
+
+Pass 34 recorded four failure modes. This plane adds two more, and one of them inverts the risk direction:
+
+| # | Failure mode | Canonical example from this pass |
+|---|---|---|
+| 1 | Licence of the **compilation**, not the repo | `chromaprint` — MIT code, LGPL-2.1 as a whole, plus the linked FFT library's terms (pass 5) |
+| 2 | **Naming convention** defeats the probe | `Panako` → `license.txt`; `musicbrainz-server` → `COPYING.md` (pass 5) |
+| 3 | Published standard repo with **no licence at all** | `rslstandard/rsl` (pass 5); here, **`lottie/lottie-spec`** — the Lottie spec repo, 120★, no licence file resolving under 13 names while `README.md` returns 200 |
+| 4 | Licence present but **archived/dead** project | `enve` (GPL-3.0, archived 2022); `SVGAPlayer-Android` (Apache-2.0, archived 2023) |
+| 5 | **`EULA.txt`** — a 13th name, and the first failure that points the *dangerous* way | **`aseprite/aseprite`, 41,192★**: no `LICENSE`/`COPYING` under 12 names, terms sitting in `EULA.txt` on both branches. Every earlier miss made a permissive repo look unlicensed (safe); this makes a **forbidden** repo look merely unlicensed |
+| 6 | **Grant exists in prose only** — the inverse of #1 | **`AnimeInterp`**: no licence file, API reports NONE, README says *"released under MIT License"*. Same shape: **`ebsynth`** (1,695★), README says *"released into the public domain"* |
+
+Consolidated rule for CI and for any proposal gate: **the SPDX field is a hint, never an answer.**
+Resolve a licence by reading the repository's own file (13 names × `master`+`main`), then the README if
+no file exists, then the terms of anything the build **links** against. `NOASSERTION` means *the parser
+gave up* — in this plane it flagged four permissive repos (`opentoonz`, `tahoma2d`, `xdts_viewer`,
+`rhubarb-lip-sync`: BSD-3 ×3, MIT ×1) whose files simply open with third-party notices.
+
+### Trend 5 — labelling duties are now in force in the two largest producing markets, and they do not match
+
+Korea's **AI Basic Act took effect 2026-01-22** (AI-content labelling, advance notice for generative and
+high-impact systems); China has had **AI-content-labelling rules since September 2025** with penalties to
+**¥50M**; **Vietnam**'s comprehensive law took effect 2026-03-01; the **EU AI Act Article 50** applies from
+**2026-08-02**; **Peru**'s regulation took effect January 2026 covering AI-generated *or edited* content.
+North America has no federal statute — its binding constraint is a **union contract** instead.
+
+For a 2D plane this is operationally specific: the same drawn asset, co-produced across regions, needs
+**different disclosure in each market and a contractual notification in one of them**. The deliverable
+is a per-jurisdiction policy engine with per-shot AI provenance — pass 8's APAC conclusion, now
+extended by a labour clause that North America can be held to.

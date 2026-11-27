@@ -9,6 +9,73 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 36: the 2D animation plane (**the player is MIT, the pencil is GPL, the inbetween is unlicensed, and the timesheet is 32 stars**)
+
+Measured 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name`; every URL re-checked
+with `git ls-remote` — **69/69 resolved, 0 failures.** Every licence read from the repository's own
+licence file (13 names × `master`+`main`), then from the README where no file exists.
+
+Vocabulary probe that found this plane: across eight files and 35 passes the KB said `MAM` **85**,
+`playout` **89**, `VFX` **83**, `dubbing` **77**, `Blender` **46**, `OpenUSD` **35** — and said
+`inbetween` **0**, `colorization` **0**, `2d animation` **0**, `cel` **0**, `lip sync` **0**,
+`exposure sheet` **0**, `x-sheet` **0**, `onion skin` **0**, `Lottie` **0**, `motion graphics` **0**,
+`OpenToonz` **0**, `Synfig` **0**, `Pencil2D` **0**, `Natron` **0**, `grease pencil` **0**, `sakuga` **0**.
+**Thirty-five passes about shooting, shipping, selling and measuring the frame — nothing about drawing it.**
+
+### What moved this week — pushed in the last seven days (2026-11-20 → 2026-11-27)
+
+| Agent / tool | Repo | Licence | ★ | Last push | Signal |
+|---|---|---|---|---|---|
+| **koharu** | https://github.com/koharu-rs/koharu | **Apache-2.0** | 6,853 | **2026-11-27** | Rust ML manga translator pushed the day of this pass; ★/fork **13.2** |
+| **mcp-for-blender** | https://github.com/ahujasid/mcp-for-blender | **MIT** | 35,944 | 2026-11-26 | Renamed from `blender-mcp` — **the old slug 404s**; LLM control of Blender incl. Grease Pencil |
+| **krita-ai-diffusion** | https://github.com/Acly/krita-ai-diffusion | GPL-3.0 | 10,960 | 2026-11-26 | AI inside the 2D artist's own canvas; the most-adopted "AI in the drawing app" project anywhere |
+| **BallonsTranslator** | https://github.com/dmMaze/BallonsTranslator | GPL-3.0 | 5,321 | 2026-11-26 | Comic translation + editor; ★/fork **14.5** |
+| **Jellyfish** | https://github.com/Forget-C/Jellyfish | **Apache-2.0** | 7,353 | 2026-11-25 | AI short-drama workbench: script breakdown → storyboard → character consistency |
+| **Toonflow** | https://github.com/HBAI-Ltd/Toonflow-app | **MIT** | 22,960 | 2026-11-20 | **The largest permissively-licensed AI animation production platform in existence.** 短剧/漫剧 pipeline, created 2026-01-29, ★/fork 5.5 |
+
+### The five-week-old layer: agents reaching animation *production state*
+
+| Tool | Repo | Licence | ★ | Created | Why it matters |
+|---|---|---|---|---|---|
+| **kitsu-mcp** | https://github.com/EstienneG/kitsu-mcp | **MIT** | 2 | **2026-10-24** | MCP server for Kitsu (CGWire) — the first way an agent reads animation task state. **Five weeks old, 2 stars** |
+| **SehataKuro/xdts** | https://github.com/SehataKuro/xdts | **Apache-2.0** | 2 | — (pushed **2026-11-11**) | The only permissively-licensed XDTS/TDTS reader-writer on Earth, under active work this month |
+| **clip2xdts-rs** | https://github.com/SehataKuro/clip2xdts-rs | **NONE** | 0 | — (pushed **2026-11-18**) | Clip Studio → XDTS. Shows the path; **no grant, cannot ship** |
+
+**The window this implies:** the agent layer for 2D animation production management is being written
+right now, at single-digit star counts, by two or three people. Pass 34 recorded a three-week-old agent
+layer in ad integrity; this is the same shape in a second plane. Whoever vendors and hardens these owns
+the integration before there is an incumbent.
+
+### The core operation, measured — and it is the thinnest result in this KB
+
+`inbetweening` returns **55 repositories in the whole of GitHub**:
+
+| Repo | ★ | Licence | Last push |
+|---|---|---|---|
+| https://github.com/lisiyao21/AnimeInbet | 373 | **NONE** | 2024-04-15 |
+| https://github.com/setarehc/diffusion-motion-inbetweening | 286 | NOASSERTION | 2024-09-17 |
+| https://github.com/Tian-one/FCVG | 120 | **NONE** | 2025-02-27 |
+| https://github.com/victorqin/motion_inbetweening | 115 | MIT | 2023-06-07 |
+| https://github.com/xiaoyu258/Inbetweening | 60 | MIT | 2021-08-12 |
+| https://github.com/Doubiiu/ToonCrafter | 6,071 | **Apache-2.0** | 2025-03-19 |
+
+The top five sum to **954 stars** and the two most on-target carry **no licence grant**. The only
+properly-licensed cartoon interpolator above 1,000★ (ToonCrafter) has been dormant for **20 months**.
+Recorded with a falsifiable prediction in `intel/trends.md` pass 36: if the demand is real, a permissive
+line-inbetweening model passes 1,000★ before **2027-11-27**, or ToonCrafter resumes. Checkable in one query.
+
+### False-friend queries measured this pass — the largest false abundances yet recorded
+
+| Query | Results | Relevant | What it actually returns |
+|---|---|---|---|
+| `animatic` | **110,383** | **0** | substring of "animation": `react-bits`, `aos`, `scrollreveal`, `magicui` |
+| `cel animation` | **527** | **0** | `folding-cell`, `cellular-automaton.nvim`, `YoCelsius`, `celluloid` |
+| `exposure sheet animation` | **6** | **3** | the genuine result — and the field is six repositories wide |
+| `sakuga dataset` | **2** | **2** | `SakugaDataset` (MIT, 89★), `SketchColour` (33★, no licence) |
+
+Pass 8's rule — read the results, not the total — now has its strongest demonstration: **110,383 results,
+zero of them animatics.**
+
 ## 2026-11-27 — pass 35: the data-journalism graphics desk (**the substrate is finished and permissive; the only thing anyone pays for is the iframe**)
 
 Measured 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name`; every URL re-checked

@@ -5564,3 +5564,179 @@ Run this before the stack slide. It has caught something real in every org scann
 7. **If the metadata will not resolve, say "unknown", not "0".** `nprapps/pym.js` exists
    (`ls-remote` OK, raw MIT `LICENSE`, `package.json` v1.3.2) but returns `total_count: 0` from the
    search API — a channel limit, not an abandoned repo.
+
+## Pattern 53 — The inbetween gate: what to promise, and what to refuse, before an AI animation statement of work is signed
+
+**The failure this prevents.** A client asks for "AI inbetweening" because that is where the labour hours
+are. The obvious repos look like an answer. They are not: the two most on-target models carry **no licence
+grant at all**, the third grants MIT **only in its README**, and the one properly-licensed cartoon
+interpolator has not been pushed since **2025-03-19**.
+
+**The gate, in order.**
+
+1. **Separate the two interpolations.** *Camera, background and held-cel motion* is a video-interpolation
+   problem and is solved permissively: [Practical-RIFE](https://github.com/hzwer/Practical-RIFE) (MIT,
+   1,053★, pushed 2026-08-27) or [ECCV2022-RIFE](https://github.com/hzwer/ECCV2022-RIFE) (MIT, 5,740★).
+   *Line inbetweening* — new drawings between two keys — is not. **Promise the first, scope the second as
+   R&D.**
+2. **Licence-quarantine the line models.** [AnimeInbet](https://github.com/lisiyao21/AnimeInbet) (373★)
+   and [FCVG](https://github.com/Tian-one/FCVG) (120★) have no licence file and no README grant: they may
+   be *evaluated* and must not enter a deliverable.
+   [AnimeInterp](https://github.com/lisiyao21/AnimeInterp) (465★) grants MIT in README prose only —
+   usable only with the client's counsel accepting a prose grant, in writing, with the README commit hash
+   recorded.
+3. **Make ToonCrafter the baseline, and say that it is dormant.**
+   [ToonCrafter](https://github.com/Doubiiu/ToonCrafter) (**Apache-2.0**, 6,071★, SIGGRAPH Asia 2024) is
+   the only >1k★ cartoon interpolator with a real OSI licence. Twenty months without a push is a
+   maintenance risk to state in the proposal, not to discover in month three.
+4. **Wire the pipeline so the AI step is replaceable.** Keys and timing live in
+   [OpenToonz](https://github.com/opentoonz/opentoonz) (BSD-3) with the exposure sheet exported via
+   Pattern 55; the interpolation step is a worker behind a queue, so swapping the model is a config change.
+5. **Price the clean-up, not the generation.** Every model in this plane outputs raster frames that need
+   re-inking: [Anime2Sketch](https://github.com/Mukosame/Anime2Sketch) (MIT, 2,146★) for line extraction,
+   [diffvg](https://github.com/BachiLi/diffvg) (Apache-2.0) to get back to vectors.
+   **Do not** reach for `sketch_simplification` (755★): its licence is **academic/non-commercial only**.
+
+**What to write in the SOW.** "Automated interpolation for camera and background motion (MIT), with
+line-inbetweening as a time-boxed evaluation against ToonCrafter (Apache-2.0); no unlicensed model enters
+the delivered pipeline." That sentence is defensible in procurement. "AI inbetweening" is not.
+
+## Pattern 54 — The manga / webtoon / 漫剧 localisation line, built only from permissive parts
+
+**Why this one is worth building first.** It is the healthiest permissive sub-plane found in this pass:
+comic translation has **four stacks above 3,000★**, two of them Apache-2.0, one pushed the day of this
+pass. The volume is APAC→global, and the labelling duties are already in force.
+
+**The build.**
+
+1. **Engine — [koharu](https://github.com/koharu-rs/koharu) (Apache-2.0, 6,853★, pushed 2026-11-27)**,
+   Rust: detection → OCR → inpainting → typesetting. Alternative:
+   [comic-translate](https://github.com/ogkalu2/comic-translate) (Apache-2.0, 3,024★) when a browser
+   extension or desktop app is wanted.
+2. **Do not link the GPL stacks.** [manga-image-translator](https://github.com/zyddnys/manga-image-translator)
+   (GPL-3.0, 10,662★) and [BallonsTranslator](https://github.com/dmMaze/BallonsTranslator) (GPL-3.0,
+   5,321★) are the most-starred options and the wrong ones for a closed client product. Run them as a
+   separate process behind an API if the client wants their quality, and record the boundary.
+3. **Production state — [Kitsu](https://github.com/cgwire/kitsu) (AGPL-3.0, 779★) operated as a service**
+   by the client, never linked. Agent reads via
+   [kitsu-mcp](https://github.com/EstienneG/kitsu-mcp) (MIT, 2★) — five weeks old, so vendor it.
+4. **Human-in-the-loop in the artist's own tool** — [Krita](https://github.com/KDE/krita) (GPL-3.0)
+   for retouch and lettering fixes; the AI assist arrives as a plugin
+   ([krita-ai-diffusion](https://github.com/Acly/krita-ai-diffusion), GPL-3.0, 10,960★), which keeps the
+   copyleft on the plugin side of the boundary.
+5. **The disclosure layer is not optional.** Korea's AI Basic Act (in force **2026-01-22**) requires
+   labelling of AI-generated content; China's labelling rules (September 2025) carry penalties to **¥50M**;
+   EU **Article 50** applies from **2026-08-02**; Peru's rule covers AI-generated *or edited* content.
+   Emit a per-page provenance record from the pipeline and render the market-specific label at publish
+   time — one record, four renderings.
+
+**Deliverable boundary that keeps it clean:** permissive engine in-process; GPL engines out-of-process;
+AGPL platform operated, not embedded; copyleft UI extended by plugin. Four different licence strategies
+in one line, which is why writing them down is the pattern.
+
+## Pattern 55 — The exposure-sheet bridge: the one place in this KB where the open stack can shape an interchange instead of implementing one
+
+**The opening.** **XDTS** (eXchange Digital Time Sheet) was released in 2018 by **Celsys** with **Toei
+Animation**; **TDTS** is Toei's native variant; both are JSON with a text header, carrying cells,
+dialogue and camerawork. The **public spec is still the November 2018 version** although Clip Studio
+Paint 1.13.0 added 2D camera folders. Total world tooling: **six repositories, 32 stars**.
+
+**The build, entirely from verified parts.**
+
+1. **Authoring** — [Krita](https://github.com/KDE/krita) (GPL-3.0) with
+   [KritaToXDTS](https://github.com/konero/KritaToXDTS) (GPL-3.0, 6★): animated paint layers out as image
+   sequences **plus timing as XDTS**. For a full suite, [OpenToonz](https://github.com/opentoonz/opentoonz)
+   (BSD-3) is the permissive base.
+2. **Parse / emit** — [SehataKuro/xdts](https://github.com/SehataKuro/xdts) (**Apache-2.0**, 2★, pushed
+   **2026-11-11**) is the only permissively-licensed XDTS/TDTS reader-writer in existence, and it is being
+   worked on this month. Vendor it and pin the commit; at 2★ there is no upstream to rely on.
+   [clip2xdts-rs](https://github.com/SehataKuro/clip2xdts-rs) (0★, **no licence**) shows the Clip Studio
+   path but cannot be shipped.
+3. **Review** — [xdts_viewer](https://github.com/opentoonz/xdts_viewer) (**BSD-3**, 22★) renders a sheet
+   like paper, which is what a supervisor will actually accept.
+   [vdts-editor](https://github.com/lunafuse/vdts-editor) (MIT, 0★) is a single HTML file that reads and
+   writes XDTS/TDTS with revision history — a working reference for the revisioned editor nobody has built.
+4. **Mind the spec delta.** The camera-folder fields added after the 2018 spec are documented only in
+   [XDTS-uext](https://github.com/shun-iwasawa/XDTS-uext) — "unofficial extension", 2★, **no licence**.
+   Read it for understanding; implement from observed files; **do not copy its code**.
+5. **Join to production** — XDTS rows → Kitsu tasks (AGPL service) → editorial via
+   [OpenTimelineIO](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) (Apache-2.0, 2,122★),
+   which is the only standards-backed way to hand 2D timing to an edit.
+
+**Why it is strategically different from every other pattern in this file.** Everywhere else the open
+stack implements someone else's finished standard. Here the incumbent spec is **eight years stale**, its
+only extension is one individual's unlicensed repo, and the entire ecosystem is 32 stars — so a studio
+that publishes a clean, permissively-licensed XDTS/TDTS library and a revisioned sheet editor becomes the
+reference implementation of a format used across Japanese animation production. State the risk honestly
+too: the **authority** to define the sheet belongs to Celsys and Toei, and no amount of code transfers it.
+
+## Pattern 56 — Lip sync that survives a licence review
+
+**The trap.** The most-starred lip-sync repo is
+[Wav2Lip](https://github.com/Rudrabha/Wav2Lip) (13,291★) and its README says **"Non Commercial
+Open-source Version"** beside a paid API upsell. It cannot go in a client deliverable.
+
+**The build.**
+
+1. **Drawn / 2D mouth charts → [Rhubarb Lip Sync](https://github.com/DanielSWolf/rhubarb-lip-sync)
+   (MIT, 2,816★, pushed 2026-06-16).** Audio in, phoneme timing out, which is exactly what a 2D mouth set
+   consumes. Two licence details worth quoting to a client: GitHub reports NOASSERTION only because
+   `LICENSE.md` is 27,808 B of bundled third-party texts, and the licence states explicitly that **the
+   lip-sync data it produces belongs to you alone**.
+2. **Photoreal / live-action → [LatentSync](https://github.com/bytedance/LatentSync)
+   (Apache-2.0, 6,334★).** Correct licence, wrong tool for drawn mouths; do not mix the two cases in one
+   proposal.
+3. **Do not propose [papagayo-ng](https://github.com/morevnaproject-org/papagayo-ng)** (294★): the
+   traditional phoneme-mapping tool has **no licence file** (12 names × both branches) and was last
+   pushed 2023-04-25.
+4. **Wire the output into the sheet, not into a render.** Rhubarb's timing belongs in the exposure sheet
+   (Pattern 55) so the mouth cells are held like every other cel, which is how a 2D unit reviews it.
+
+## Pattern 57 — Shipping a 2D tool as a product: the copyleft wall, and the two doors through it
+
+**The constraint, stated as a number.** Of the nine authoring repos in this plane, **seven are GPL and
+two are BSD-3-Clause** — and the two permissive ones have the lowest star counts.
+
+| Goal | Legal route | Concrete base |
+|---|---|---|
+| Fork a 2D tool, add proprietary AI, **ship the binary** to a client | **Only via BSD-3** | [OpenToonz](https://github.com/opentoonz/opentoonz) (8,386★) or [Tahoma2D](https://github.com/tahoma2d/tahoma2d) (699★, adds stop-motion capture) |
+| Put AI in front of the artists who are already productive | **Plugin against GPL, plugin licensed separately** | [Krita](https://github.com/KDE/krita) + the proven precedent of [krita-ai-diffusion](https://github.com/Acly/krita-ai-diffusion) (10,960★) and [comfyui-tooling-nodes](https://github.com/Acly/comfyui-tooling-nodes) (683★) |
+| Hybrid 2D/3D series with agent control | GPL tool, **MCP bridge is MIT** | [Blender](https://github.com/blender/blender) Grease Pencil + [mcp-for-blender](https://github.com/ahujasid/mcp-for-blender) (MIT, 35,944★) |
+| Deliver playback inside a client app | **Fully permissive** | [ThorVG](https://github.com/thorvg/thorvg) (MIT) or [dotlottie-web](https://github.com/LottieFiles/dotlottie-web) (MIT) — **not** `lottie-web`, unpushed since 2025-09-01 |
+| 2D skeletal animation in a shipped product | **Permissive only here** | [DragonBonesJS](https://github.com/DragonBones/DragonBonesJS) (MIT, 864★) — because [spine-runtimes](https://github.com/EsotericSoftware/spine-runtimes) requires a **paid Spine editor licence** |
+
+**The OpenToonz footnote that belongs in the contract:** its `LICENSE.txt` grants BSD-3 for project code
+but carves out `thirdparty/`, the bundled MyPaint brushes and Tahoma2D-derived portions. Resolve those
+three before any redistribution — the base is permissive, the tarball is not automatically so.
+
+## Pattern 58 — The 20-minute licence gate for any 2D animation proposal
+
+Run this before the first estimate. It is six commands and it has caught eleven traps in this plane alone.
+
+1. **Resolve existence, not reputation.** `git ls-remote https://github.com/<slug> HEAD`. Reputation
+   lists in this plane contained repositories that do not exist, and `blender-mcp` has been **renamed** to
+   `ahujasid/mcp-for-blender` (the old slug 404s).
+2. **Resolve the licence from the repo, with 13 names.** `LICENSE`, `LICENSE.txt`, `LICENSE.md`,
+   `license.txt`, `license`, `LICENCE`, `LICENSE.TXT`, `COPYING`, `COPYING.txt`, `COPYING.md`,
+   `LICENSE-MIT`, `NOTICE`, **`EULA.txt`** — across `master` **and** `main`.
+   `EULA.txt` is the name that matters most: it is how a 41,192★ repo (`aseprite`) looks unlicensed when
+   it is in fact commercially forbidden.
+3. **If no file resolves, read the README before recording a zero.** `AnimeInterp` grants MIT in prose;
+   `ebsynth` dedicates itself to the public domain in prose. Fetch `README.md` at the same path first — a
+   200 there proves the channel works and your *names* failed, not the repository.
+4. **Treat `NOASSERTION` as "parser gave up", then read the file.** In this plane it flagged four
+   permissive projects (`opentoonz`, `tahoma2d`, `xdts_viewer` → BSD-3; `rhubarb-lip-sync` → MIT) whose
+   licence files simply open with third-party notices.
+5. **Check liveness and quarantine the dead.** `enve` (GPL-3.0) is **archived**;
+   `SVGAPlayer-Android` (Apache-2.0) is **archived**; `lottie-web` is MIT and **14 months stale**. A valid
+   licence on a dead project is not a dependency.
+6. **Read the terms of what you *link*, not what you clone** (the Chromaprint rule, pass 5): for every
+   native dependency resolve the linked libraries' licences, and for every model resolve the weights'
+   terms separately from the code's.
+
+**The eleven findings this gate produces in this plane, as a checklist to hand a reviewer:** `aseprite`
+(EULA), `spine-runtimes` (paid editor licence), `remotion` (fee-bearing above a headcount),
+`sketch_simplification` (non-commercial academic), `Wav2Lip` (non-commercial), `bilibili/ailab` (no
+grant), `AnimeGANv2`/`v3` (no grant), `storyboarder` (no grant — a blog post instead),
+`XDTS-uext` (no grant), `enve` + `SVGAPlayer-Android` (archived), `lottie/lottie-spec` (spec text's
+licence unresolved).

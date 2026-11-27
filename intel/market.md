@@ -1291,6 +1291,40 @@ than technical.
   September 2021 and the repo bearing the name has no licence file. Scope the hosted embed as a
   vendor line item or build a bespoke one; do not plan to fork it.
 
+
+#### Pass 36 (2026-11-27) — the 2D animation plane: **the only region where the labour terms are written down, and they say the animator cannot opt out**
+
+North America is the one region in this plane where the AI question has a *contractual* answer rather
+than a policy aspiration, and that answer is the most sellable fact on this page.
+
+- **The Animation Guild (TAG, IATSE Local 839) 2024–27 contract governs all 2026 work.** Ratified by
+  **76.1% of voting members** — a large dissent for an animation agreement, and two negotiating-committee
+  leaders publicly opposed it over AI.
+- **What the AI clauses actually grant:** written notification when GenAI is used, the right to consult
+  with the production, and the right to identify alternative non-GenAI tools. Studios may implement
+  "technological change" provided they offer **retraining and severance** to displaced workers.
+- **What they do not grant — the part a studio's AI programme turns on:** members **cannot opt out of
+  GenAI use**, and **cannot prevent their work from being used to train models**. Critics' concrete
+  scenario: a board artist is handed an AI-generated script and expected to board it.
+- **The guild's own number:** a TAG-commissioned survey found **29% of animation jobs could be disrupted
+  by AI within three years**.
+- **2026 union activity:** IATSE District 2 convention resolutions reaffirmed that AI "shall be used as a
+  tool to enhance member work, not as a replacement for member labour", and backed federal labelling bills.
+- **The date that matters commercially: 2027**, when TAG negotiates again. Any 2D AI programme designed
+  for a North American studio has a **known contractual expiry**, and the 2027 table will be set by
+  what the 2026 deployments look like.
+
+**The engagement shape this implies.** The contract makes *notification and alternative-tool identification*
+an operational obligation, not a nicety. Nobody sells that system today: there is no open tool that records
+which shots used GenAI, which artist was notified, and what non-GenAI alternative was offered. Built on
+Kitsu (AGPL-3.0, run as a service) with a per-task AI-provenance field, it is a compliance deliverable
+with a named clause behind it — and it is reusable at every TAG signatory.
+
+**Market context for the region:** North America is the largest regional M&E market (estimates put its
+share of global revenue at **33.6%–40.6%** depending on scope), and Forrester/AWS characterise North
+American M&E as bullish on GenAI but **still stuck in early experimentation**. There is no federal AI
+statute; the constraint is collectively bargained, not legislated.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2734,6 +2768,45 @@ in peer-reviewed research rather than vendor marketing.
   disclosure plumbing the generative-video work needs. **Opportunity:** extend the provenance ledger
   already scoped for North American digital replicas to cover agent-produced graphics copy.
 
+
+#### Pass 36 (2026-11-27) — the 2D animation plane: **the region that funds the series and has not decided about the tool**
+
+EMEA is where European 2D series are actually financed, and the 2026 figures are precise because the
+market itself publishes them.
+
+- **Cartoon Forum 2026** (Toulouse, 14–17 September): **66 projects** selected from **111 submissions** —
+  61 TV series and 5 TV specials — with a **combined budget of €283.58M**. By country: **France 32,
+  Ireland 6, Germany 5, Spain 4**.
+- **Historical scale:** Cartoon Forum reports **1,053 animation series financed since 1990**, totalling
+  **more than $4.43B**.
+- **The direction of travel is harder, not easier:** Cartoon Media states financing is *increasingly
+  difficult*, and added an initiative to reconnect producers with buyers and co-producers, plus a new
+  **Ecoprod–Cartoon sustainability award**. Fewer projects, more companies, is how the trade press read
+  the 2026 edition.
+- **AI is explicitly unresolved, publicly.** Euronews (2026-07-12) reported AI as "the elephant in the
+  room" at Annecy, Europe's biggest animation festival, with a French producer stating plainly that
+  plenty of French studios **do not** use generative AI — while Amazon MGM Studios and AWS launched a
+  fund to bankroll AI-made shows. Italian coverage reports a **€4M production funding call** due to open
+  by November and a national training programme that deliberately **combines traditional animation
+  practice with generative AI**.
+- **Regulation:** EU AI Act **Article 50 transparency obligations apply from 2026-08-02** — the operative
+  date for any AI-assisted European series in production now. The European Parliament voted **569–45** to
+  adopt its position on the AI Act Omnibus simplification proposal. DIGITALEUROPE is pressing for
+  technology-neutral horizontal rules rather than extending AVMSD sector rules.
+- **Industry posture:** the DPP's European Media Trends 2026 names AI the dominant driver of strategic
+  change and reports that **a quarter of European media companies have shifted toward building more
+  in-house**, enabled by AI coding tools. An imec–SMIT (VUB) study (May 2026) argues value accrues to
+  whoever controls infrastructure, data, models, interfaces, **rights** and business arrangements.
+- **Recorded as unverified:** commonly-quoted incentive rates (France CNC rebate up to 30% of qualifying
+  spend; UK Animation Tax Relief 25% of qualifying costs) come from a commercial guide in this pass's
+  sources, **not** from CNC or HMRC primary text. Treat as indicative and confirm before quoting to a client.
+
+**The engagement shape this implies.** A European co-production financed at Cartoon Forum must satisfy
+Article 50 from August 2026 while working with partners who may contractually refuse GenAI. That is a
+**per-production AI policy engine plus disclosure artifacts**, not a tooling project — and it pairs
+directly with the plane's permissive base (OpenToonz BSD-3) because a disclosure obligation is far easier
+to satisfy on a pipeline whose components you can read.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -4115,6 +4188,62 @@ locally-built tooling.** That combination is the opportunity and it should be st
   Shanghai and Sydney. **Opportunity:** per-market disclosure configuration in the publishing rig —
   one build, market-specific labelling — for regional broadcasters and the public broadcasters
   (Australia, Singapore) already exploring newsroom AI through the ABU.
+
+
+#### Pass 36 (2026-11-27) — the 2D animation plane: **the centre of gravity, and the two biggest permissive AI animation platforms on Earth are here**
+
+APAC is not a secondary market in this plane; it is the plane. Both of the largest openly-licensed AI
+animation *production platforms* found in this pass are Chinese, and the format that schedules Japanese
+animation production is the KB's crudest measured open-source zero.
+
+- **The repositories, which are the regional story:**
+  **[Toonflow](https://github.com/HBAI-Ltd/Toonflow-app) — MIT, 22,960★, created 2026-01-29**, an AI
+  pipeline for China's **短剧 / 漫剧** (short-drama / comic-drama) vertical-video market: script →
+  storyboard (智能分镜) → character and scene assets → image and video generation.
+  **[Jellyfish](https://github.com/Forget-C/Jellyfish) — Apache-2.0, 7,353★, created 2026-03-06**, the
+  same category as a workbench. Nothing of comparable size and licence exists in any other region.
+- **Japan, from the industry's own trade body (AJA, *Anime Industry Report 2025*, covering 2024):**
+  market **¥3.84 trillion (~$25B), +14.8% — the highest on record**; **overseas revenue ~$14.25B = 56%
+  of the total, +26%**, versus domestic **+2.8%**; the **production-side segment ¥466.2B (~$3.06B), +9.1%**.
+  The overseas majority is the single most important structural fact for a services engagement: the
+  money is already outside Japan.
+- **Japan, AI in production:** IMARC describes AI-assisted production becoming mainstream across
+  **background art, in-between frames and quality control**, tied explicitly to shorter timelines and a
+  **labour shortage** — i.e. the demand pull sits exactly on the operation with no licensed open
+  implementation. **Utopai Studios + DeNA** announced (September 2026) an AI-assisted animation
+  production collaboration in Japan with **artists retaining final creative control**; Utopai is also
+  working with Chinese producer **Huace Film & TV** on a fully AI-generated series (*Journey to the West:
+  The Lost Five Hundred Years*), holding distribution rights outside China, and its Seoul subsidiary
+  **Utopai East acquired Alquimista Media** in February 2026. **Kadokawa** opened **Studio One Base** in
+  Ikebukuro's Sunshine City in autumn 2026.
+- **The registry fact that defines the region's workflow:** **XDTS** (eXchange Digital Time Sheet) was
+  released **in 2018 by Celsys in cooperation with Toei Animation**; **TDTS** is Toei's native variant.
+  The **public specification is still the November 2018 version**, even though Clip Studio Paint 1.13.0
+  added 2D camera-folder data. Total open tooling: **six repositories, 32 stars combined**, with the
+  spec delta carried by one unofficial, **unlicensed** extension. The control surface of Japanese
+  animation production is effectively closed.
+- **Regulation, which is the sharpest in the world here:**
+  **South Korea — AI Basic Act in force 2026-01-22**, the second comprehensive AI law after the EU:
+  advance notice for generative and high-impact AI, **labelling of AI-generated content**, tighter
+  deepfake rules. Korea's government deliberately chose a loose framework and rejected a moratorium.
+  **China** — layered binding regime: generative-AI measures (2023) plus **AI-content-labelling rules
+  (September 2025)**, with penalties up to **¥50M**. **Vietnam** — comprehensive law effective
+  **2026-03-01**. A Latham & Watkins analysis (recorded in pass 8) already established that APAC's
+  categories diverge; for animation this means **content labelling is a hard requirement in the two
+  largest producing markets**, and a Chinese 漫剧 pipeline and a Korean release of the same asset
+  need different disclosure.
+
+**The engagement shape this implies.** Two of them, and they are the most concrete in this pass.
+(1) **The XDTS bridge** — the only place in this KB where the open stack can plausibly *shape* an
+interchange rather than implement one, since the incumbent spec is eight years stale and its only
+extension is one person's. (2) **Labelling-aware localisation for 漫剧/webtoon → global**, because the
+manga/comic translation tier is the healthiest permissive sub-plane found (koharu Apache-2.0 6,853★ pushed
+the day of this pass; comic-translate Apache-2.0 3,024★) while the Korean and Chinese labelling duties are
+already in force.
+
+**Informed gap:** this pass found **no adoption-rate data for AI in animation production across APAC** —
+not for Japan, Korea or China. The regulation is documented, the market is documented by AJA, and the
+penetration is not. Treat any adoption percentage for this plane in APAC as unsourced.
 
 ### LATAM
 
@@ -5573,6 +5702,67 @@ Forum to find out which, before committing a build.**
   account would not appear. It does establish that **the region's best-known data-journalism
   institutions do not publish one**, which is the fact that matters for sourcing a starting point.
 
+
+#### Pass 36 (2026-11-27) — the 2D animation plane: **the usage is real, the largest 2D studio in the region is in distress, and the "AI animation studio" lists are fabricated**
+
+LATAM is the region where this pass had to separate a genuine signal from a dense layer of invented
+content, so both halves are recorded.
+
+**What is verifiable:**
+
+- **Brazil ranks second in the world for GenAI animation projects.** Animaker's 2026 analysis of
+  ~2 million animated videos: **India 154,035, Brazil 36,928, Pakistan 24,215, United States 24,010**.
+  This is **platform usage data from one vendor, not a market study** — but it is a measured count, and
+  it places Brazil ahead of the US on volume.
+- **Brazil has an AI-studio layer.** A Claqueta IA (Substack) survey counts **19 AI studios in Brazil**,
+  with the visible pattern being large production companies and agencies opening their own AI labels.
+  **Purga Studio won a Bronze Lion at Cannes Lions 2026** with an AI-made campaign produced with **GUT
+  México** — a juried international award, which is the hardest evidence of regional AI craft capability
+  in this pass. A **Madrid–Santiago–Mexico City hub** is behind *Pelagius*, presented as the first
+  Spanish feature made end-to-end with AI.
+- **Mexico: the region's biggest 2D animation house is in trouble.** **Ánima Estudios** paused
+  production and announced a corporate restructuring in **July 2026**, with layoffs and unpaid-wage
+  claims it declined to comment on. **Sources disagree on whether it closed or only restructured** — one
+  says it ceased operations, another says it paused and restructured. Either way it is the most important
+  single LATAM data point in this plane: the region's flagship 2D studio contracted in the same year AI
+  tooling arrived.
+- **Mexico added a production tax credit of up to 30% in 2026**, open to domestic and international
+  projects. **Netflix** moved to a larger Buenos Aires office in **April 2026** (first Argentine office 2021).
+- **Regional project volumes** (from Mercado Audiovisual, **year not stated in the source — treat as
+  undated**): Argentina 83, Mexico 44, Colombia 41, Brazil 35. Pixelatl co-founder José Iniesta's quote
+  about the region producing significant animation volume for international studios is **from 2023**.
+- **Festivals, 2026:** Anima (Córdoba) best Latin American short went to ***Kabuki*** (dir. Tiago
+  Minamisawa, Brazil); the Argentine competition was won by ***My Gut Friend*** (Argentina–Mexico
+  co-production); the festival programmed 114 animation pieces.
+- **Regulation:** **Peru's AI law regulation took effect in January 2026**, with labelling obligations
+  covering AI-generated **or edited** content — broader than advertising alone. **Brazil's Superior
+  Electoral Court Resolution 23.732/2024** prohibits digitally generated or altered audio and video
+  intended to favour or harm a candidate. And **EU AI Act Article 50 (from 2026-08-02) reaches LATAM
+  content distributed into Europe** — which is most co-produced animation.
+
+**What this pass refused to write, and why — the informed gaps:**
+
+1. **There is no reliable list of LATAM AI-native animation studios.** The animation-specific pages
+   returned for this query were SEO marketing content (vitrina.ai), naming Brazil and LATAM as "emerging
+   hubs" while giving **no verifiable regional studio names** — the only studio actually named in one such
+   piece was **Toonz Media Group, which is Indian**.
+2. **One source carried literal `[VERIFY]` placeholders where its headline statistics should be.** Its
+   figures are therefore unusable, including an otherwise attractive claim that a regional broadcaster
+   cut subtitle and dubbing turnaround by more than half.
+3. **A Ciencia Latina academic article's claim that "more than 200,000 animators face disruption risk
+   within five years" has no stated methodology** and is **not** recorded as data.
+4. **A trade page's claimed €2.1M Netflix fine and associated specifics could not be verified** and look
+   doubtful. Not used.
+
+**The engagement shape this implies.** Brazil's measured GenAI animation volume plus a Cannes Lion say
+the craft capacity exists; Ánima's contraction says the **studio-scale 2D production capacity is
+shrinking at the same time**. The opportunity is therefore not "bring AI to LATAM animation" — it is
+**service-studio throughput for North American and European series work**, on the permissive base
+(OpenToonz BSD-3) with Kitsu run as a service, sold against Mexico's 30% credit and priced against the
+outsourcing numbers in this file's pass-36 market section. The compliance layer is already required:
+Peru's labelling rule is in force, Brazil's electoral rule binds synthetic audio/video, and anything
+shipped into Europe meets Article 50.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -6793,3 +6983,48 @@ What a client engagement is actually priced against, therefore, is **not** the c
 | **The Guardian** (UK) | The only major publisher open-sourcing its **production website** (Apache-2.0) | Reference architecture for a publisher platform | No chart tooling published; not a graphics vendor. |
 | **Associated Press** (US) | **Owns the election-data layer** | ABC, CBS, NBC, CNN all on AP tabulation for 2026 and 2028 | Commercial feed; its only open client archived in 2022. **The moat in this plane is the data, never the chart.** |
 | **Canner (WrenAI)** | The NL→chart leader by an order of magnitude (Apache-2.0, 18,413★) | Governed text-to-SQL → charts/dashboards over a semantic layer | Young; "governed" is an architecture claim a client will ask you to prove. |
+
+## Market size — pass 36 addendum (2026-11-27): animation is sized four ways **$80B apart**, and the plane's own 2D segment is quoted **5.4× apart** — a scope artefact, not a forecast disagreement
+
+| Scope | Source | 2026 figure | Forward figure | Note |
+|---|---|---|---|---|
+| Global animation market | Research and Markets | **$449.78B** | $580.11B by 2030, **6.6% CAGR** | The mid estimate |
+| Global animation market | Precedence Research | **$492.14B** | $953.31B by 2035 | The high estimate; implies ~7% compounding for a decade |
+| Global animation market | Markwide Research | **$412.6B** | — | The low estimate |
+| **Headline spread** | — | **~$80B (19%)** | — | One analysis found four firms placing the market between **$371B and $472B** on overlapping years, and warns the larger figures fold in **software licences, hardware, gaming and streaming advertising** alongside animation work |
+| Animation **outsourcing** | Mordor Intelligence | **$226.71B** | **10.47% CAGR** to 2031 | The segment a services studio is actually in |
+| Animation **outsourcing** | The Business Research Company | **$263.08B** | $431.29B by 2030, **13.2% CAGR** | Spread of **$36.4B (16%)** against Mordor on the same year |
+| **2D animation segment** | Precedence Research | **$146.36B (2025)** | — | — |
+| **2D animation segment** | Animaker | **$26.9B (2026)** | — | **5.4× below Precedence on an adjacent year** |
+| Game animation outsourcing | Business Research Insights | **$3.9B** | — | With **2D ≈ 40% of outsourced demand** — the only 2D-share figure found this pass |
+| Anime (Japan, primary trade body) | **AJA, Anime Industry Report 2025** (2024 data) | **¥3.84T (~$25B), +14.8%** | — | Overseas **~$14.25B = 56%, +26%**; production segment **¥466.2B (~$3.06B), +9.1%**. The only figure on this page from an industry body rather than a research vendor |
+
+**What to actually quote.** Use the **outsourcing range ($227–263B, growing 10.5–13.2%)**, because it is
+the line a services engagement sits on and the two sources are within 16% of each other. Use **AJA's
+¥3.84T** for anime, because it is primary. **Do not quote a 2D segment number**: the two available
+figures are 5.4× apart on adjacent years, which is a definitional dispute about whether "2D animation"
+means produced content, services, or software seats — a gap of that shape cannot be reconciled by
+picking the middle.
+
+**And the number that does not exist:** nobody sizes **inbetweening, clean-up or timing/exposure-sheet
+work** as a market, even though those are the line items an outsourcing contract is actually written
+against, and even though they are precisely the operations AI is being sold into. The plane's spend is
+visible only as undifferentiated "outsourcing".
+
+### Global players — pass 36 addendum (the 2D animation & cel-production layer)
+
+| Player | Position | Why it matters | The catch |
+|---|---|---|---|
+| **Toon Boom** (Canada) | The 2D production incumbent (Harmony, Storyboard Pro) | The seat every professional 2D pipeline is priced against; the de facto standard in series work | Proprietary, seat-licensed. No self-host or fork path, which is the entire reason OpenToonz's BSD-3 matters |
+| **Celsys** (Japan) | Clip Studio Paint — the drawing tool of the manga/anime workflow, **and the publisher of XDTS** | Defined the exposure-sheet interchange format in 2018 with Toei Animation | **The public XDTS spec is frozen at November 2018** while the product has moved on. Controls the plane's registry and is not maintaining its public form |
+| **Toei Animation** (Japan) | Studio co-author of XDTS; holds the native **TDTS** variant | The format's authority sits inside a production company, not a standards body | No open client for TDTS exists. A studio-owned format is not a standard |
+| **Dwango / OpenToonz project** (Japan) | Released the Toonz lineage as **BSD-3-Clause** (8,386★) | **The single most valuable licence decision in this plane**: the only permissive full 2D authoring base on Earth | `LICENSE.txt` carves out `thirdparty/`, the MyPaint brushes and Tahoma2D portions — resolve those before redistribution |
+| **KDE / Krita Foundation** | Krita (GPL-3.0, 10,816★), pushed daily | Where 2D artists actually work, and where AI arrives via plugins (`krita-ai-diffusion` 10,960★) | GPL-3.0: plugin, don't fork-and-ship |
+| **Airbnb** (US) | Owns the **Lottie** runtimes (MIT/Apache-2.0, ~95k★ combined) | Made the 2D playback layer free and permissive for the whole industry | **`lottie-web` has not been pushed since 2025-09-01.** The most-used player in the tier is its stalest; ThorVG (MIT) and dotLottie (MIT) are the live paths |
+| **Esoteric Software** (Spine) | The 2D skeletal-animation incumbent | `spine-runtimes` is public at 5,384★ and reads as open at a glance | **Spine Runtimes License Agreement requires a paid Spine editor licence.** The most expensive misreading available in this plane |
+| **Adobe** (US) | After Effects defines the format Lottie serialises | The whole runtime tier exists to render *Adobe's* output | The authoring side stays proprietary; open source owns playback only |
+| **HBAI / Toonflow, Forget-C / Jellyfish** (China) | The two largest **permissively licensed** AI animation production platforms (MIT 22,960★; Apache-2.0 7,353★), both created in 2026 | The 短剧/漫剧 boom produced open platforms, not just products — nothing comparable exists in NA, EMEA or LATAM | Both are months old; model dependencies carry their own licences; documentation is substantially Chinese |
+| **Utopai Studios** (US/Korea/Japan) | The best-funded AI-animation pure play: **$60M raised at a ~$1B valuation** (per Wikipedia — secondary) | Working with **DeNA** (Japan, Sept 2026) and **Huace Film & TV** (China); **Utopai East acquired Alquimista Media** (Feb 2026) | Company-reported figures, secondary sourcing. Treat the valuation as unconfirmed |
+| **Cartoon Media** (EU) | Runs Cartoon Forum — the financing venue for European 2D series | **1,053 series financed since 1990, >$4.43B**; 2026 edition: 66 projects, **€283.58M** | A market, not a vendor. Publishes the only precise European animation financing numbers in this file |
+| **The Animation Guild / IATSE Local 839** (NA) | **The binding constraint in North America** | 2024–27 contract sets GenAI notification and consultation duties; guild survey: **29% of animation jobs disruptable within three years** | Members cannot opt out of GenAI, nor stop their work training models. Renegotiation: **2027** |
+| **Ánima Estudios** (Mexico) | Was LATAM's flagship 2D studio | Its July 2026 pause/restructuring with unpaid-wage claims is the region's defining event this year | Sources disagree whether it closed or restructured — do not assert either in a client deck |

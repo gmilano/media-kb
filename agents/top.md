@@ -3381,3 +3381,107 @@ commercial licence file reads, in a hurry, exactly like a permissive dependency.
 compiles to Highcharts options (Chartwright does) inherits that bill. The permissive compile targets
 are Vega-Lite (BSD-3-Clause), ECharts (Apache-2.0), Chart.js (MIT) and Plot (ISC) — all verified in
 `repos/foundations.md` this pass.
+
+## The 2D animation, cel-production, inbetweening & lip-sync plane — measured 2026-11-27 (pass 36), and **the operation AI is supposed to absorb is the one with no licensed implementation**
+
+Vocabulary probe that found this plane (run against all eight files *before* any web search, 36 passes
+of history): `MAM` **85**, `playout` **89**, `VFX` **83**, `dubbing` **77**, `OpenUSD` **35**,
+`Blender` **46**, `screenplay` **37** — and `inbetween` **0**, `in-between` **0**, `colorization` **0**,
+`2d animation` **0**, `cel` **0**, `lip sync` **0**, `exposure sheet` **0**, `x-sheet` **0**,
+`onion skin` **0**, `Lottie` **0**, `motion graphics` **0**, `OpenToonz` **0**, `Synfig` **0**,
+`Pencil2D` **0**, `Natron` **0**, `Glaxnimate` **0**, `grease pencil` **0**, `sakuga` **0**.
+Thirty-five passes about shooting, shipping, selling and measuring the frame — **nothing about drawing it.**
+(`tween` scored 144 and `rive` 216, but both are substring hits inside "between" and "driven" — the
+pass-8 rule holds: read the results, not the total.)
+
+### The four-step gradient inside one plane — the sharpest form the KB's structural law has taken
+
+| Step | The operation | What kind of problem it is | Open-source health, measured 2026-11-27 |
+|---|---|---|---|
+| **Play** it | render a finished 2D animation on a device | **format** | **Healthiest layer in the plane.** Lottie + ThorVG + Rive + dotLottie ≈ **100k★** combined, MIT/Apache-2.0, several pushed the day of this pass |
+| **Draw** it | keyframes, line art, paint, onion skin | **tool** | **Healthy but copyleft.** Krita GPL-3 10,816★, Synfig GPL-3 2,480★, Pencil2D GPL-2 1,930★; permissive only in the Toonz lineage (BSD-3) |
+| **Inbetween** it | generate the frames between two drawings | **judgment** | **`inbetweening` returns 55 repos in all of GitHub.** Top result 373★ **with no licence file**; #3 (120★) also none |
+| **Schedule** it | the exposure sheet / timing sheet that drives the whole unit | **registry** | **Six repos exist on Earth. They sum to 32★.** Public spec frozen at **November 2018** |
+
+Read downward: the further an operation moves from *format* toward *judgment* and *owned registry*,
+the thinner and less licensed the open supply. This is the sixth independent confirmation of the law
+first written in the healthcare passes and refined in media pass 5 — and the first time all four steps
+have been measurable **inside a single plane, on a single day**.
+
+### Agent and model tier — 18 repos, every URL confirmed by `git ls-remote` 2026-11-27
+
+| Agent / model | Repo | Licence | ★ | Last push | What it actually does |
+|---|---|---|---|---|---|
+| **Toonflow** | https://github.com/HBAI-Ltd/Toonflow-app | **MIT** | 22,960 | 2026-11-20 | The largest permissively-licensed AI animation *production platform* in existence: script writing → smart storyboarding (智能分镜) → character & scene asset management → image and video generation, on an infinite canvas. Targets China's 短剧 / 漫剧 (short-drama / comic-drama) vertical. Created 2026-01-29; 4,188 forks (★/fork 5.5 — organic, not purchased) |
+| **mcp-for-blender** | https://github.com/ahujasid/mcp-for-blender | **MIT** | 35,944 | 2026-11-26 | Drives Blender from any LLM over MCP. The 2D relevance is Grease Pencil: an agent that can build and re-time strokes in a 3D scene graph. Renamed from `blender-mcp` — the old slug 404s |
+| **Jellyfish** | https://github.com/Forget-C/Jellyfish | **Apache-2.0** | 7,353 | 2026-11-25 | AI short-drama workbench: script breakdown, storyboard generation, character-consistency management, video generation. Created 2026-03-06 |
+| **koharu** | https://github.com/koharu-rs/koharu | **Apache-2.0** | 6,853 | **2026-11-27** | ML manga translator written in Rust — detection, OCR, inpainting, typesetting. Pushed the day of this pass; ★/fork 13.2 |
+| **LatentSync** | https://github.com/bytedance/LatentSync | **Apache-2.0** | 6,334 | 2025-06-20 | ByteDance diffusion lip-sync. **Photoreal/live-action**, not drawn mouth charts — see the trap table |
+| **ToonCrafter** | https://github.com/Doubiiu/ToonCrafter | **Apache-2.0** | 6,071 | 2025-03-19 | Generative *cartoon* interpolation (SIGGRAPH Asia 2024, Journal Track). The only inbetweening model in the plane with a real OSI licence and >1k★. Unpushed for 20 months |
+| **manga-image-translator** | https://github.com/zyddnys/manga-image-translator | GPL-3.0 | 10,662 | 2026-11-18 | The most-starred comic-translation stack. **GPL-3.0 — cannot be linked into a client's closed product** |
+| **BallonsTranslator** | https://github.com/dmMaze/BallonsTranslator | GPL-3.0 | 5,321 | 2026-11-26 | Deep-learning-aided comic translation with an image/text editor; ★/fork 14.5 |
+| **comic-translate** | https://github.com/ogkalu2/comic-translate | **Apache-2.0** | 3,024 | 2026-11-09 | Comic/manga translator app + browser extension. The permissive alternative to the two GPL stacks above |
+| **krita-ai-diffusion** | https://github.com/Acly/krita-ai-diffusion | GPL-3.0 | 10,960 | 2026-11-26 | Generative inpaint/outpaint/refine **inside the 2D artist's own canvas**. The single most-adopted "AI in the drawing app" project |
+| **Rhubarb Lip Sync** | https://github.com/DanielSWolf/rhubarb-lip-sync | **MIT** | 2,816 | 2026-06-16 | Automatic 2D mouth-shape (phoneme) animation from an audio file. GitHub reports NOASSERTION only because `LICENSE.md` is 27,808 B of bundled third-party texts; the grant is MIT, and the licence states **the lip-sync data it produces belongs to you alone** |
+| **Anime2Sketch** | https://github.com/Mukosame/Anime2Sketch | **MIT** | 2,146 | 2026-10-18 | Line-art extraction from anime/illustration — the clean-up and re-ink step |
+| **anime-segmentation** | https://github.com/SkyTNT/anime-segmentation | **Apache-2.0** | 860 | 2025-05-21 | High-accuracy character matting for drawn frames |
+| **AnimeInterp** | https://github.com/lisiyao21/AnimeInterp | **MIT — in README prose only** | 465 | 2024-03-31 | CVPR'21 "Deep Animation Video Interpolation in the Wild". **No licence file exists**; GitHub reports NONE; the README says "Our code is released under MIT License." See method note 2 |
+| **nijiGPen** | https://github.com/chsh2/nijiGPen | GPL-3.0 | 389 | 2026-11-07 | Blender add-on dedicated to Grease Pencil — 2D NPR workflow inside Blender |
+| **AnimeInbet** | https://github.com/lisiyao21/AnimeInbet | **NONE** | 373 | 2024-04-15 | Inbetweening of *line drawings* (ICCV'23) — the single most on-target repo for the plane's core operation, and **it carries no licence grant at all** |
+| **FCVG** | https://github.com/Tian-one/FCVG | **NONE** | 120 | 2025-02-27 | Frame-level controllable video generation for interpolation. Also no licence grant |
+| **kitsu-mcp** | https://github.com/EstienneG/kitsu-mcp | **MIT** | 2 | 2026-11-15 | MCP server for Kitsu (CGWire) production tracking — lets an agent read animation task state. Created 2026-10-24, i.e. **five weeks old**: the agent layer for animation production management is being born right now, at 2★ |
+
+### The traps — eleven repos that a star-count or SPDX-badge pass would have written as findings
+
+| Repo | ★ | What a scanner says | What the file actually says | Verdict |
+|---|---|---|---|---|
+| https://github.com/aseprite/aseprite | 41,192 | licence **NONE** | no `LICENSE`/`COPYING` under 12 names, but **`EULA.txt` on both `main` and `master`** | **Not open source.** Paid EULA. The most dangerous false negative in the plane: it reads as "unlicensed" when it is "licensed and forbidden" |
+| https://github.com/EsotericSoftware/spine-runtimes | 5,384 | **NOASSERTION** | "Spine Runtimes License Agreement", last updated 2025-04-05 | **Requires a paid Spine editor licence.** The industry-standard 2D skeletal runtime is not usable without purchase |
+| https://github.com/remotion-dev/remotion | 76,008 | **NOASSERTION** | "Remotion License" with company-size terms | Source-available, **fee-bearing above a headcount**. Not a permissive base |
+| https://github.com/bobbens/sketch_simplification | 755 | **NOASSERTION** | "ACADEMIC OR NON-PROFIT ORGANIZATION NONCOMMERCIAL RESEARCH USE ONLY" | **Unusable for client work.** The canonical rough-sketch cleanup model |
+| https://github.com/Rudrabha/Wav2Lip | 13,291 | licence NONE | README: "Non Commercial Open-source Version" + a commercial API upsell | **Non-commercial.** Quarantine |
+| https://github.com/bilibili/ailab | 5,881 | licence NONE | no licence file (12 names × `master`+`main`), no licence statement in README | **No grant.** Real-CUGAN, the upscaler behind much Chinese streaming anime, is unlicensed |
+| https://github.com/TachibanaYoshino/AnimeGANv2 | 5,373 | licence NONE | no licence file; README says "[Open Source]" and nothing more | **No grant.** "Open source" in a README is not a licence |
+| https://github.com/TachibanaYoshino/AnimeGANv3 | 2,056 | licence NONE | same | **No grant** |
+| https://github.com/wonderunit/storyboarder | 3,972 | licence NONE | README's "Notes on Open Source License" links to a **blog post**, not a licence | **No grant.** Default copyright applies |
+| https://github.com/MaurycyLiebner/enve | 1,195 | GPL-3.0 | repo **archived**, last push 2022-09-25 | Dead. Do not propose |
+| https://github.com/svga/SVGAPlayer-Android | 3,258 | Apache-2.0 | repo **archived**, last push 2023-02-06 | Dead runtime; use Lottie or ThorVG |
+
+### Three method corrections, reusable in all twelve industries
+
+**1. There is a thirteenth licence-file name, and it is the worst one to miss: `EULA.txt`.**
+Pass 8 extended the probe to `license.txt` (lowercase) and `COPYING.md`. That 12-name probe reports
+*"no licence file found"* for `aseprite/aseprite` — a 41,192★ animation tool whose terms are a paid
+EULA sitting at `EULA.txt` on both branches. Every previous miss in this KB turned a permissive repo
+into a false negative (safe direction). **This one inverts: it turns a forbidden repo into something
+that merely looks unlicensed, and "unlicensed" is a risk a team sometimes accepts.** The probe list is
+now: `LICENSE`, `LICENSE.txt`, `LICENSE.md`, `license.txt`, `license`, `LICENCE`, `LICENSE.TXT`,
+`COPYING`, `COPYING.txt`, `COPYING.md`, `LICENSE-MIT`, `NOTICE`, **`EULA.txt`**.
+
+**2. The grant can live in prose only — the exact inverse of the Chromaprint case.**
+Chromaprint (pass 5) had a licence file that *understated* its obligations. `lisiyao21/AnimeInterp`
+is the mirror image: no licence file at all, GitHub reports NONE, and the README says *"Our code is
+released under MIT License."* `jamriska/ebsynth` (1,695★) is the same shape — no file, README says
+*"The code is released into the public domain."* **Rule: a repo with no licence file is not a zero
+until you have read its README.** An SBOM or SPDX scan cannot see a prose grant, so it reports the
+opposite of the truth in both directions.
+
+**3. `NOASSERTION` is a parsing signal, not a risk signal.**
+Four repos in this plane report NOASSERTION purely because their licence file opens with third-party
+notices before the grant: `opentoonz/opentoonz` and `tahoma2d/tahoma2d` (both **BSD-3-Clause**, after a
+preamble about `thirdparty/`, the MyPaint brushes and Tahoma2D notices), `opentoonz/xdts_viewer`
+(**BSD-3-Clause**), `rhubarb-lip-sync` (**MIT**). All four are permissive and all four would be dropped
+by a filter that treats NOASSERTION as unknown-risk. Read the file; it costs one request.
+
+### False-friend queries measured in this plane — the false-abundance list now has four entries
+
+| Query | Results returned | Relevant results | What it actually finds |
+|---|---|---|---|
+| `cel animation` | **527** | **0** | `folding-cell`, `cellular-automaton.nvim`, `YoCelsius`, `celluloid`, swipe-action *cells* |
+| `animatic` | **110,383** | **0** | substring of "animation" — React UI libraries, `aos`, `scrollreveal`, `magicui` |
+| `eidr` (pass 5) | 160 | 0 | electronic-ID card readers |
+| `isan` (pass 5) | 1,942 | 0 | NLP libraries (`isanlp`) |
+
+Pass 8's rule was "shortening a query can turn a false zero into a false abundance." These two are the
+largest false abundances yet recorded, and `animatic` — 110,383 results, zero of them animatics — is
+the clearest demonstration in the KB that **a result count is not evidence of a field.**

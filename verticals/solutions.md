@@ -2087,3 +2087,42 @@ which is exactly the part an integrator wants to reuse.
 [guardian/dotcom-rendering](https://github.com/guardian/dotcom-rendering) (**Apache-2.0**, 277★,
 2026-11-26) — the Guardian publishes its production website stack, which no other major publisher
 does. Useful as a reference architecture; it is not a chart tool.
+
+## Pass 36 addendum (2026-11-27) — the 2D animation platform tier (**two permissive bases, and the one platform that matters is AGPL**)
+
+A "vertical solution" in this plane means a system a studio can stand up, customise and put AI on top
+of — the animation equivalent of Odoo for ERP or OpenMRS for health records. All URLs confirmed
+`git ls-remote` 2026-11-27.
+
+| Platform | Repo | Licence | ★ | What it replaces commercially | Customisation reality for a studio engagement |
+|---|---|---|---|---|---|
+| **OpenToonz** | https://github.com/opentoonz/opentoonz | **BSD-3-Clause** | 8,386 | Toon Boom Harmony (seat-licensed) | **The strongest base in the plane.** Full 2D production suite, descended from the Toonz line used at Studio Ghibli; BSD-3 means a studio may fork it, add proprietary AI, and ship the binary. Plugin SDK plus a scripting layer. Note `LICENSE.txt` carves out `thirdparty/`, the MyPaint brushes and Tahoma2D-derived portions — resolve those before redistributing |
+| **Tahoma2D** | https://github.com/tahoma2d/tahoma2d | **BSD-3-Clause** | 699 | Harmony + Dragonframe (stop motion) | The OpenToonz fork that adds stop-motion capture and a friendlier default UI. Same permissive terms, smaller community: pick it when capture matters, OpenToonz when community size does |
+| **Krita** | https://github.com/KDE/krita | GPL-3.0 | 10,816 | Photoshop + TVPaint (for paint/FBF) | The tool artists already have open. GPL-3: **deliver it unmodified and put the AI in a plugin** — which is exactly what `krita-ai-diffusion` (10,960★) and `KritaToXDTS` (6★) do. The plugin route is proven here, not theoretical |
+| **Synfig Studio** | https://github.com/synfig/synfig | GPL-3.0 | 2,480 | Harmony (cut-out/rigged) | Vector tweening and bone rigging for cut-out series work. GPL-3; same plugin-not-fork rule |
+| **Pencil2D** | https://github.com/pencil2d/pencil | GPL-2.0 | 1,930 | Flash/Animate-era hand-drawn tools | The lightest entry; good for rough/animatic stages and for training programmes |
+| **Blender** (Grease Pencil) | https://github.com/blender/blender | GPL-2.0-or-later | 22,610 | Harmony + After Effects, partially | 2D strokes living in a 3D scene graph — the practical answer for 2D/3D hybrid series. Agent-reachable today via `mcp-for-blender` (MIT, 35,944★) |
+| **Natron** | https://github.com/NatronGitHub/Natron | GPL-2.0 | 5,777 | Nuke, After Effects (comp) | Node-graph compositing for the finishing line; OpenFX plugin host, so third-party effects carry their own terms |
+| **Kitsu** (CGWire) | https://github.com/cgwire/kitsu | **AGPL-3.0** | 779 | ShotGrid / Autodesk Flow, ftrack | **The production-tracking platform of record for animation studios**, and the licence that most often surprises a delivery team: AGPL-3.0 reaches network use. Stand it up as a service the client operates; do not link it into a product, and do not embed its code in a closed web app. Agent access now exists via `kitsu-mcp` (MIT, 2★, created five weeks ago) |
+| **Toonflow** | https://github.com/HBAI-Ltd/Toonflow-app | **MIT** | 22,960 | Proprietary AI storyboard/short-drama suites | The newest kind of entry in this tier: an **MIT-licensed AI production platform** (script → storyboard → assets → image/video) rather than a drawing tool. Built for China's 短剧/漫剧 vertical-video market; treat its model dependencies as separate licence questions |
+| **Jellyfish** | https://github.com/Forget-C/Jellyfish | **Apache-2.0** | 7,353 | Same category | Script breakdown, storyboarding and character-consistency management as a workbench |
+
+### What there is no platform for
+
+Three functions in a real 2D studio have **no open platform at all**, and each is a priced seat in
+every commercial pipeline:
+
+1. **The exposure sheet / timing sheet as a system.** Six repos exist worldwide, summing to 32★
+   (`repos/foundations.md` pass 36, tier 5), and the public XDTS spec is frozen at November 2018.
+   There is no multi-user, revisioned, studio-wide timesheet system — the closest thing is
+   `lunafuse/vdts-editor`, a **single HTML file at 0★**.
+2. **Scene/shot assignment and retakes at unit scale.** Kitsu tracks tasks; the retake loop
+   (the drawing comes back with a supervisor's correction, N times) is handled in commercial tools or
+   spreadsheets. Measured: `animation production tracker` returns **50 results**, and after Kitsu the
+   list is `CyclopsVFX-Unity` (18★, last push 2017) and `kitsu-mcp` (2★).
+3. **2D asset/library management for drawn elements** — levels, palettes, reusable cycles. The MAM
+   tier already in this KB (pass 4) is built for video essence, not for a palette-linked cel level.
+
+Each of those is a buildable engagement for a studio with OpenToonz's BSD-3 base and a Kitsu service
+alongside it — and the first one is the only chance in this KB to help *define* the interchange rather
+than implement someone else's.

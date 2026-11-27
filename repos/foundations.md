@@ -4111,3 +4111,121 @@ for the Datawrapper correction that follows from this.
   `search/repositories?q=repo:nprapps/pym.js` returns `total_count: 0`. The dot in the name is **not**
   the cause (`chartjs/Chart.js` resolves fine), and `/repos/{owner}/{repo}` is blocked for
   non-session repos. **Stars and last-push for this one row are therefore unknown rather than zero.**
+
+## Pass 36 addendum (2026-11-27) — the 2D animation substrate: **the player is MIT, the pencil is GPL, and the timesheet does not exist**
+
+Every URL below confirmed with `git ls-remote` on 2026-11-27; every licence read from the repository's
+own licence file, not from the API's SPDX field (four of these report NOASSERTION and are permissive —
+see `agents/top.md` pass 36, method note 3).
+
+### Tier 1 — the playback/runtime layer: the one tier that is finished, permissive and alive
+
+| Repo | Licence | ★ | Last push | Role in the pipeline |
+|---|---|---|---|---|
+| https://github.com/airbnb/lottie-android | **Apache-2.0** | 35,782 | 2026-02-15 | Renders After Effects vector animation natively on Android |
+| https://github.com/airbnb/lottie-web | **MIT** | 32,606 | **2025-09-01** | The web player. **Fourteen months without a push** — the most-used entry in the tier is also its stalest; plan around ThorVG or dotLottie for new work |
+| https://github.com/airbnb/lottie-ios | **Apache-2.0** | 26,952 | 2026-11-24 | iOS renderer; actively maintained |
+| https://github.com/thorvg/thorvg | **MIT** | 1,938 | **2026-11-27** | Production C++ vector engine for SVG **and Lottie**; pushed the day of this pass. The live alternative to `lottie-web` |
+| https://github.com/rive-app/rive-runtime | **MIT** | 1,270 | 2026-11-26 | Low-level C++ runtime/renderer for Rive's 2D/3D state-machine animation |
+| https://github.com/LottieFiles/dotlottie-web | **MIT** | 962 | **2026-11-27** | Rust + WASM Lottie/dotLottie player with React and Vue bindings |
+| https://github.com/LottieFiles/dotlottie-rs | **MIT** | 294 | **2026-11-27** | The Rust core, with Android/iOS/web bindings |
+| https://github.com/DragonBones/DragonBonesJS | **MIT** | 864 | 2026-01-23 | 2D skeletal runtime — **the only permissive skeletal runtime in the plane**, because Spine's is fee-bearing |
+
+**The format's own spec is the weak link in a strong tier.** https://github.com/lottie/lottie-spec
+(120★, forks 32, pushed 2026-06-23) is the Lottie Animation Community's documentation repo, and GitHub
+reports its licence as **NOASSERTION** while **no licence file resolves at the repo root** under any of
+13 names on `main` or `master` (`README.md` and `CONTRIBUTING.md` at the same paths return 200, so the
+channel works and the names are not the problem). **Recorded as an informed gap: the licence of the
+Lottie specification text is unresolved from the repository and must be confirmed with the Lottie
+Animation Community before the spec is redistributed or embedded in a deliverable.** The runtimes are
+unambiguously MIT/Apache-2.0; it is the *document* whose terms are unclear.
+
+### Tier 2 — the drawing/authoring layer: healthy, and almost entirely copyleft
+
+| Repo | Licence | ★ | Last push | Role |
+|---|---|---|---|---|
+| https://github.com/blender/blender | **GPL-2.0-or-later** (`COPYING`; API reports NOASSERTION) | 22,610 | 2026-11-26 | Grease Pencil is production-grade 2D-in-3D; also the render and comp fallback |
+| https://github.com/KDE/krita | **GPL-3.0** | 10,816 | **2026-11-27** | The painting and frame-by-frame animation tool 2D artists actually open |
+| https://github.com/opentoonz/opentoonz | **BSD-3-Clause** (in `LICENSE.txt`, after a third-party preamble) | 8,386 | 2026-11-26 | Full 2D animation production software, descended from the Toonz used at Studio Ghibli. **The only permissive full authoring tool in the plane** |
+| https://github.com/NatronGitHub/Natron | **GPL-2.0** | 5,777 | **2026-11-27** | Node-graph compositor — the open stand-in for After Effects/Nuke in a 2D finishing line |
+| https://github.com/mypaint/mypaint | **GPL-2.0** | 3,005 | 2026-10-20 | Painting app; its brush engine is the one OpenToonz ships |
+| https://github.com/synfig/synfig | **GPL-3.0** | 2,480 | 2026-11-22 | Vector tweening and bone rigging for cut-out animation |
+| https://github.com/pencil2d/pencil | **GPL-2.0** | 1,930 | 2026-11-23 | Lightweight hand-drawn frame-by-frame animation |
+| https://github.com/tahoma2d/tahoma2d | **BSD-3-Clause** (same preamble shape as OpenToonz) | 699 | 2026-10-17 | OpenToonz fork adding stop-motion capture; the second permissive authoring base |
+| https://github.com/mypaint/libmypaint | **ISC** (`COPYING`, 792 B; API reports NOASSERTION) | 393 | 2026-04-14 | "brushlib" — the brush-stroke library embedded by MyPaint, Krita and OpenToonz |
+
+**The licence wall, stated plainly:** of nine authoring repos, **seven are GPL and two are BSD-3**.
+A studio that wants to fork a drawing tool, add proprietary AI, and ship the binary to a client has
+exactly two legal starting points — **OpenToonz and Tahoma2D** — and they are the two with the lowest
+star counts in the tier. Everything more popular must be delivered as an *unmodified* tool plus
+separately-licensed plugins, or kept as an internal fork that is never distributed.
+
+### Tier 3 — the programmatic / motion-graphics layer
+
+| Repo | Licence | ★ | Last push | Role |
+|---|---|---|---|---|
+| https://github.com/3b1b/manim | **MIT** | 97,012 | 2026-09-09 | The original animation engine for explanatory video (author's own branch) |
+| https://github.com/ManimCommunity/manim | **MIT** | 42,964 | 2026-11-26 | The maintained community fork — **use this one**; it is the live project |
+| https://github.com/motion-canvas/motion-canvas | **MIT** | 20,296 | 2026-07-02 | TypeScript library + editor for procedurally animated explainers |
+
+### Tier 4 — the AI model substrate (interpolation, line art, colour, vectorisation)
+
+| Repo | Licence | ★ | Last push | Role, and the caveat |
+|---|---|---|---|---|
+| https://github.com/nagadomi/waifu2x | **MIT** | 28,239 | 2023-05-04 | Super-resolution for anime-style art. Permissive, well-known, **unpushed for 2.5 years** |
+| https://github.com/bloc97/Anime4K | **MIT** | 21,679 | 2024-08-17 | Real-time anime upscaler as GPU shaders — runs in the player, not the pipeline |
+| https://github.com/lllyasviel/style2paints | **Apache-2.0** | 18,143 | 2023-08-01 | Sketch + style → paint (TOG/SIGGRAPH Asia 2018). The reference colourisation work; dormant |
+| https://github.com/hzwer/ECCV2022-RIFE | **MIT** | 5,740 | 2025-09-10 | RIFE real-time intermediate flow estimation — the frame interpolator the community actually ships |
+| https://github.com/hzwer/Practical-RIFE | **MIT** | 1,053 | 2026-08-27 | The maintained, practical RIFE line |
+| https://github.com/BachiLi/diffvg | **Apache-2.0** | 1,294 | 2025-05-17 | Differentiable vector-graphics rasterisation — the bridge from raster AI output back to vectors |
+| https://github.com/alexandre01/deepsvg | **MIT** | 1,168 | 2026-09-04 | Hierarchical generative model for SVG (NeurIPS 2020) |
+| https://github.com/jamriska/ebsynth | **public domain — README only, no licence file** | 1,695 | 2023-06-14 | Example-based synthesis / style transfer; the classic "paint one frame, propagate it" tool |
+| https://github.com/Acly/comfyui-tooling-nodes | **GPL-3.0** | 683 | 2026-11-17 | Turns ComfyUI into a backend for external tools — how an AI step gets into a drawing app |
+| https://github.com/KytraScript/SakugaDataset | **MIT** | 89 | 2024-05-16 | The Sakuga-42M animation dataset repo — the only permissive training-data entry found in the plane |
+
+**The gap this tier makes visible:** the permissive, well-starred models (`waifu2x`, `Anime4K`,
+`style2paints`) all do **pixel finishing** — upscale, colour, style. Every model that attempts the
+**inbetween** is either unlicensed (`AnimeInbet` 373★, `FCVG` 120★), licensed in prose only
+(`AnimeInterp` 465★), or Apache-2.0 but unpushed for 20 months (`ToonCrafter` 6,071★). The craft's
+most expensive operation has no maintained, licensed open implementation.
+
+### Tier 5 — the exposure sheet (XDTS): **the crudest measured zero in this KB**
+
+The exposure sheet — the timing document that tells every department which drawing is held for how
+many frames — is the control surface of Japanese-style animation production. Its interchange format is
+**XDTS (eXchange Digital Time Sheet)**, released **2018 by Celsys (Clip Studio Paint) in cooperation
+with Toei Animation**; **TDTS** is Toei's own native variant, close but not identical. Both are JSON
+with a text header line, and the time table carries three fields: cells, dialogue, camerawork.
+
+Here is every public repository that touches it:
+
+| Repo | Licence | ★ | Last push | What it is |
+|---|---|---|---|---|
+| https://github.com/opentoonz/xdts_viewer | **BSD-3-Clause** (preamble; API says NOASSERTION) | 22 | 2026-07-29 | The only XDTS viewer — displays a sheet like paper and takes notes. By Shun Iwasawa |
+| https://github.com/konero/KritaToXDTS | GPL-3.0 | 6 | 2026-05-19 | Krita plugin: export animated paint layers + timing as XDTS |
+| https://github.com/SehataKuro/xdts | **Apache-2.0** | 2 | **2026-11-11** | Rust crate that reads/writes XDTS and TDTS. The newest work in the tier |
+| https://github.com/shun-iwasawa/XDTS-uext | **NONE** | 2 | 2024-10-17 | **"Unofficial extension of the XDTS file format"** — by the author of the viewer |
+| https://github.com/SehataKuro/clip2xdts-rs | **NONE** | 0 | 2026-11-18 | Clip Studio → XDTS converter |
+| https://github.com/lunafuse/vdts-editor | **MIT** | 0 | 2026-10-04 | Timesheet editor with revision history (VDTS); reads and writes XDTS/TDTS; single HTML file |
+
+**Six repos. Thirty-two stars in total.** For comparison, the Lottie *player* tier above holds roughly
+**100,000**. The format that schedules the world's largest animation tradition has less open tooling
+than a mid-sized colour-picker library.
+
+**And the spec itself is frozen.** The publicly available XDTS specification is the **November 2018**
+version. Clip Studio Paint 1.13.0 added 2D camera-folder information, and as of the XDTS-uext author's
+own note that **updated specification had still not been published**. So the delta between the public
+spec and the shipping implementations is carried by **one individual's unofficial extension, at 2★,
+with no licence grant**, written by the same person who wrote the only viewer.
+
+This is the content/registry law again, in its purest form yet: the parser is trivial, the format is
+JSON, and still nothing exists — because what is scarce is not code, it is **the authority to define
+the sheet**, and that authority belongs to a vendor and a studio.
+
+### Cross-reference — already in this KB, needed by this plane
+
+| Repo | Licence | ★ | Why it belongs in a 2D line |
+|---|---|---|---|
+| https://github.com/AcademySoftwareFoundation/OpenTimelineIO | **Apache-2.0** | 2,122 | Editorial timeline interchange; the only standards-backed way to hand 2D timing to editorial |
+| https://github.com/cgwire/kitsu | **AGPL-3.0** | 779 | Production tracking for animation and VFX. **AGPL — run it as a service, never link it into a client product** |
+| https://github.com/Acly/krita-ai-diffusion | GPL-3.0 | 10,960 | The AI step that reaches the artist where they already work |

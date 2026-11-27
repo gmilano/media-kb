@@ -10,6 +10,79 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 36: 2D animation infrastructure (**six repositories and 32 stars hold the timing sheet of an entire production tradition**)
+
+Measured 2026-11-27; **69/69 URLs confirmed by `git ls-remote`**. This file tracks the **rigs,
+runtimes and formats**; the AI models and agents are in `agents/trending.md` pass 36.
+
+### The playback tier — the healthiest layer in the plane, and its most-used entry is its stalest
+
+| Repo | Licence | ★ | Last push | Note |
+|---|---|---|---|---|
+| https://github.com/airbnb/lottie-android | **Apache-2.0** | 35,782 | 2026-02-15 | — |
+| https://github.com/airbnb/lottie-web | **MIT** | 32,606 | **2025-09-01** | **14 months stale.** The most-deployed 2D animation player on the web |
+| https://github.com/airbnb/lottie-ios | **Apache-2.0** | 26,952 | 2026-11-24 | Actively maintained |
+| https://github.com/thorvg/thorvg | **MIT** | 1,938 | **2026-11-27** | Pushed the day of this pass; SVG **and** Lottie. The live path |
+| https://github.com/LottieFiles/dotlottie-web | **MIT** | 962 | **2026-11-27** | Rust+WASM player, React/Vue bindings |
+| https://github.com/LottieFiles/dotlottie-rs | **MIT** | 294 | **2026-11-27** | The Rust core |
+| https://github.com/rive-app/rive-runtime | **MIT** | 1,270 | 2026-11-26 | State-machine 2D/3D runtime |
+| https://github.com/DragonBones/DragonBonesJS | **MIT** | 864 | 2026-01-23 | **The only permissive 2D skeletal runtime** — Spine's requires a paid editor licence |
+
+**The asymmetry that is the story of this tier:** ~95,000★ of Airbnb-owned runtimes render a format
+authored in **Adobe After Effects**, a proprietary tool. Open source owns the playback of 2D animation
+completely and owns none of its authoring — and the spec repo
+(https://github.com/lottie/lottie-spec, 120★) has **no licence file resolving at its root** under 13
+names, while `README.md` at the same path returns 200. The runtimes are unambiguously permissive; the
+**specification text's licence is unresolved** and is recorded as an informed gap.
+
+### The authoring tier — and the licence wall in one line
+
+| Repo | Licence | ★ | Last push |
+|---|---|---|---|
+| https://github.com/blender/blender | **GPL-2.0-or-later** (`COPYING`) | 22,610 | 2026-11-26 |
+| https://github.com/KDE/krita | GPL-3.0 | 10,816 | **2026-11-27** |
+| https://github.com/opentoonz/opentoonz | **BSD-3-Clause** (`LICENSE.txt`, after a third-party preamble) | 8,386 | 2026-11-26 |
+| https://github.com/NatronGitHub/Natron | GPL-2.0 | 5,777 | **2026-11-27** |
+| https://github.com/mypaint/mypaint | GPL-2.0 | 3,005 | 2026-10-20 |
+| https://github.com/synfig/synfig | GPL-3.0 | 2,480 | 2026-11-22 |
+| https://github.com/pencil2d/pencil | GPL-2.0 | 1,930 | 2026-11-23 |
+| https://github.com/tahoma2d/tahoma2d | **BSD-3-Clause** | 699 | 2026-10-17 |
+| https://github.com/mypaint/libmypaint | **ISC** (`COPYING`, 792 B) | 393 | 2026-04-14 |
+
+**Seven GPL, two BSD-3** — and the two permissive ones are the two smallest. A studio that needs to fork,
+add proprietary AI and ship a binary has exactly two legal starting points in the entire plane.
+
+### The exposure-sheet tier — every repository that exists, worldwide
+
+| Repo | Licence | ★ | Last push |
+|---|---|---|---|
+| https://github.com/opentoonz/xdts_viewer | **BSD-3-Clause** | 22 | 2026-07-29 |
+| https://github.com/konero/KritaToXDTS | GPL-3.0 | 6 | 2026-05-19 |
+| https://github.com/SehataKuro/xdts | **Apache-2.0** | 2 | **2026-11-11** |
+| https://github.com/shun-iwasawa/XDTS-uext | **NONE** | 2 | 2024-10-17 |
+| https://github.com/SehataKuro/clip2xdts-rs | **NONE** | 0 | 2026-11-18 |
+| https://github.com/lunafuse/vdts-editor | **MIT** | 0 | 2026-10-04 |
+
+**Six repositories. 32 stars combined.** XDTS was released in **2018 by Celsys with Toei Animation**;
+the **public spec is still the November 2018 version** although Clip Studio Paint 1.13.0 added 2D
+camera-folder data, and that delta is documented only in one person's **unlicensed** "unofficial
+extension" — written by the author of the only viewer. The format that schedules the world's largest
+animation tradition has less open tooling than a mid-sized colour-picker library.
+
+### Archived or stale rigs — quarantine list added this pass
+
+| Repo | Licence | ★ | State |
+|---|---|---|---|
+| https://github.com/MaurycyLiebner/enve | GPL-3.0 | 1,195 | **Archived**, last push 2022-09-25 |
+| https://github.com/svga/SVGAPlayer-Android | Apache-2.0 | 3,258 | **Archived**, last push 2023-02-06 |
+| https://github.com/airbnb/lottie-web | MIT | 32,606 | Live repo, **no push in 14 months** |
+| https://github.com/nagadomi/waifu2x | MIT | 28,239 | No push since 2023-05-04 |
+| https://github.com/bloc97/Anime4K | MIT | 21,679 | No push since 2024-08-17 |
+| https://github.com/lllyasviel/style2paints | Apache-2.0 | 18,143 | No push since 2023-08-01 |
+
+**A valid licence on a dead project is not a dependency** — and in this plane four of the six
+best-known permissive names are dormant.
+
 ## 2026-11-27 — pass 35: graphics-desk infrastructure (**the newsroom rig is MIT, the shared design system is unlicensed, and the two facts live in the same org**)
 
 Measured 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name`; 77/77 URLs confirmed

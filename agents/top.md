@@ -4960,3 +4960,116 @@ labelled **Suricata as LGPL**; Suricata is **GPL-2.0**, and the word "LESSER" ap
 appendix that tells you how to apply the *other* licence. **Rule: classify by the licence's own title line,
 anchored, and never by substring presence anywhere in the file.** The same bug class as the cycle-11
 placeholder-regex false positives, in a new place.
+
+## Pass 54 (2026-11-27) — the live-commerce & shoppable-content plane: **monetisation by transaction, where the layer that MAKES the content is the healthiest in the KB and the layer that SETTLES the money is eighteen stars wide**
+
+**Why this plane, and why it was missing.** Pass 2 measured monetisation by **advertising**; pass 13 measured
+monetisation by **subscription**. Media's third channel is **transaction** — content whose purpose is that
+something is bought while it plays — and before this pass the KB had **no vocabulary for it at all**:
+`live commerce` 0 hits, `Douyin` 0, `TikTok Shop` 0, `QVC` 0, `home shopping` 0, `product feed` 0,
+`creator storefront` 0, `shoppable` 0, `GMV` 1 across all eight files. The commerce *base* was recorded in
+pass 37 (Medusa, Saleor) for merchandise licensing; what was absent is the **content side** that joins a
+stream to a checkout.
+
+**Verified 2026-11-27.** Existence via `git ls-remote` (19/19 resolve), stars/forks/push via GitHub
+`search/repositories`, and **every licence below read from the file**, not from the API field. All three
+channels (`ls-remote`, `gh api search`, `raw.githubusercontent.com`) worked this session — unlike pass 53,
+where all three were blocked.
+
+### Tier 1 — the generation layer: permissive, alive, and the most actively-pushed code in the plane
+
+| Agent / model | Repo | Licence (file read today) | Stars | Forks | Last push |
+|---|---|---|---|---|---|
+| LiveTalking | [lipku/LiveTalking](https://github.com/lipku/LiveTalking) | **Apache-2.0** — `LICENSE` (11,344 B) | **11,373** | 1,842 | **2026-11-27 — the day of this pass** |
+| GSYVideoPlayer | [CarGuo/GSYVideoPlayer](https://github.com/CarGuo/GSYVideoPlayer) | **Apache-2.0** — `master/LICENSE` (11,359 B) | **21,536** | 4,312 | 2026-11-23 |
+| DPlayer | [DIYgod/DPlayer](https://github.com/DIYgod/DPlayer) | **MIT** — `master/LICENSE` (1,121 B) | **16,551** | 2,482 | 2026-11-05 |
+| TLive-Omni | [TaoLiveAIGC/TLive-Omni](https://github.com/TaoLiveAIGC/TLive-Omni) | **Apache-2.0** — `LICENSE` (11,357 B) | 342 | 13 | 2026-08-24 |
+| Lumi_Nox | [MIO-456/Lumi_Nox](https://github.com/MIO-456/Lumi_Nox) | **MIT** — `LICENSE` (1,060 B) | 248 | 30 | 2026-11-18 |
+| digital-human-livestream | [l11223/digital-human-livestream](https://github.com/l11223/digital-human-livestream) | **Apache-2.0** — `LICENSE` (11,344 B) | 169 | 35 | 2026-02-14 |
+| TUILiveKit | [Tencent-RTC/TUILiveKit](https://github.com/Tencent-RTC/TUILiveKit) | **MIT** — `LICENSE` (1,078 B) | 148 | 109 | **2026-11-27** |
+| live-avatar | [HeiXia2077/live-avatar](https://github.com/HeiXia2077/live-avatar) | **MIT** — `master/LICENSE` (1,081 B) | 136 | 40 | 2026-08-12 |
+
+**What these are.** `LiveTalking` is a real-time interactive streaming digital human — the AI host itself —
+and it is **Apache-2.0 with 11,373 stars and a push on the day of this pass**. `l11223/digital-human-livestream`
+is the applied form of it: a LiveTalking derivative that adds DeepSeek LLM dialogue, **Bilibili danmaku
+interaction, a content-safety filter and a web admin console**, which is as close as open source gets to a
+shippable AI-anchor product. `TLive-Omni` is Taobao Live's own omni-modal understanding model for
+e-commerce livestreaming, Apache-2.0. `DPlayer` and `GSYVideoPlayer` are the **danmaku overlay** layer —
+the live-comment substrate that live commerce runs its interaction on — at 16,551★ MIT and 21,536★
+Apache-2.0 respectively.
+
+### Tier 2 — the operating layer: one real multi-platform seller console, and it is MIT
+
+| Agent | Repo | Licence (file read today) | Stars | Forks | Last push |
+|---|---|---|---|---|---|
+| oba-live-tool | [qiutongxue/oba-live-tool](https://github.com/qiutongxue/oba-live-tool) | **MIT** — `LICENSE` (1,287 B). **API says `NOASSERTION`.** | **1,819** | 346 | 2026-11-26 |
+| livestream-clip-editor | [avisii1680769-cell/livestream-clip-editor](https://github.com/avisii1680769-cell/livestream-clip-editor) | **MIT** — `LICENSE` (1,065 B) | 10 | 3 | 2026-11-14 |
+| taobao_scraper | [lengzhanbao/taobao_scraper](https://github.com/lengzhanbao/taobao_scraper) | **MIT** — `LICENSE` (1,089 B) | 8 | 2 | 2026-11-26 |
+
+`oba-live-tool` is the find of this pass for anyone operating rather than building: a live-selling operator
+console covering **Douyin 小店, 巨量百应, Douyin 团购, Xiaohongshu (RED), WeChat Channels (视频号), Kuaishou
+小店 and Taobao** — seven platforms, all Chinese, 1,819★, pushed the day before this pass. **GitHub reports
+it `NOASSERTION`; the file is plain MIT.** The reason the classifier balks is instructive: the MIT text is
+**prefixed with an attribution paragraph** crediting the `electron-vite-react` project it derives from, so
+the matcher never sees a clean MIT opening. This is the Medusa failure mode from pass 37, with a new cause.
+
+### ⚠️ Tier 3 — the three repositories a careless pass would have written as open source, and none of them is
+
+| Repo | What the API says | What the file actually says | Verdict |
+|---|---|---|---|
+| [WWBN/AVideo](https://github.com/WWBN/AVideo) — 2,115★/1,013f, pushed **2026-11-27** | `NOASSERTION` (and a web search summary called it "MIT") | **The JSON licence** — `LICENSE` (1,155 B) read in full: MIT-shaped text plus *"The Software shall be used for Good, not Evil."* | 🚫 **Not an OSI licence.** Debian treats it as a *"trivially-clear violation of DFSG §6"* and ships a dedicated Lintian error tag, **`license-problem-json-evil`**; Fedora also classes it non-free. Undefined "Evil" = unbounded grant. **Do not vendor.** |
+| [james-a-rob/KodaStream](https://github.com/james-a-rob/KodaStream) — 41★/4f, 2025-02-08 | `NOASSERTION` | **"KodaStream – Proprietary License … All rights reserved."** `LICENSE` (2,173 B) read in full: non-commercial only, no copying/modifying/redistributing, no reverse-engineering, UK governing law, written consent required | 🚫 **Proprietary.** And it is the **only repository in this plane that describes itself as a "headless shoppable video platform."** |
+| [lipku/LiveStream](https://github.com/lipku/LiveStream) — 98★/23f, 2026-08-25 | `NONE` | **No licence file at all** — eleven filename probes across `main` and `master`; `README.md` on `main` returns **200**, so the probe channel is working and the file genuinely is not there | 🚫 **All rights reserved by default.** Same author as LiveTalking, opposite licence position. |
+
+**AVideo is the new licence category this pass contributes, and the KB had zero prior instances** — `grep -ri
+"not evil|json licen"` across all eight files returned **0** before today. It matters more than its star
+count suggests, because AVideo is exactly what a search engine recommends when asked for a self-hosted live
+shopping platform, it was **pushed on the day of this pass**, and the recommendation came with the wrong
+licence attached.
+
+**KodaStream and `lipku/LiveStream` are not new categories — they are the Nth confirmation of a rule this KB
+already states:** *`NOASSERTION` means unmeasured, in both directions.* This KB has repeatedly found
+`NOASSERTION` concealing a **permissive** licence (Medusa, `uap-core`, oba-live-tool above). Here it conceals
+an **all-rights-reserved proprietary** one. The rule needs no amendment; it needs obeying.
+
+### The measurement that defines this plane — and the search traps that nearly hid it
+
+Four queries, and the totals are worthless in both directions. **Read the results, not the count:**
+
+| Query | Total results | Relevant in top 8 | What the top of the list actually is |
+|---|---|---|---|
+| `shoppable` | **433,654** | **0** | OWASP Juice Shop (14,569★), nopCommerce, **a recipe manager** (TandoorRecipes, 8,754★). The token `shop` matched all of e-commerce. |
+| `live shopping` | 3,431 | **1** | Anti-government-propaganda repos (3,381★, 398★, 221★) and a Home Assistant 3D floor-plan tool. Only `TUILiveKit` is in the plane. |
+| `live commerce` | 4,068 | **1** | `claude-seo` at 32,877★. Only `TLive-Omni` is in the plane. |
+| `livestream ecommerce` | **36** | 4 | Honest and tiny: top repo 18★. The *narrow* query was the only one that told the truth. |
+
+**This is pass 8's abundance/scarcity rule confirmed in its sharpest form yet:** shortening the query turned a
+true scarcity into a **false abundance of 433,654**, and the only query that described the plane correctly
+returned **36 results**. A pass that sorted by `total_count` would have reported this plane as the
+healthiest in the KB. It is one of the thinnest.
+
+### The gradient — and it is the third confirmation of the declare → honour → settle law
+
+Measured, layer by layer, all licences file-read:
+
+| Layer | What it does | Best permissive option | Verdict |
+|---|---|---|---|
+| **Generate** | Be the AI host; render the stream | `LiveTalking` **Apache-2.0, 11,373★, pushed today** | ✅ Healthiest layer |
+| **Interact** | Danmaku / live comment overlay | `DPlayer` MIT 16,551★ · `GSYVideoPlayer` Apache-2.0 21,536★ | ✅ Healthy |
+| **Operate** | Run the sale across platforms | `oba-live-tool` **MIT 1,819★** | ⚠️ Real, but **Chinese platforms only** |
+| **Join** | Pin a product, check out in-stream | `livestreamshop_rust` Apache-2.0 **6★**; Google's own `shoppable-video` Apache-2.0 **5★**; the one self-described platform is **proprietary** | ⛔ **Vacuum** |
+| **Settle** | Attribute GMV to a stream moment; pay the creator | [getcoherence/openpartner](https://github.com/getcoherence/openpartner) **MIT** (`LICENSE`, 1,081 B), **18★/11f**, pushed 2026-11-25 | ⛔ **Eighteen stars** |
+| **Comply** | Disclose the AI host; keep the persistent ad disclosure the law now wants | **Nothing.** Closest is `taobao_scraper` (MIT, **8★**) — and it does digital-human **detection from the outside**, not disclosure from the inside | ⛔ **Zero** |
+
+**The law, stated for the twelve industries:** *the closer a layer sits to money changing hands and to a
+legal obligation, the thinner its open source.* Cycle 8 found this in rights reservation
+(declare = 4,265★ / honour = 41★ dormant / settle = 0★). Pass 54 finds the same shape in a completely
+different plane, and adds a sharper endpoint: here the **generation** layer is not merely healthy, it is the
+**single most actively-pushed repository in the plane**, while the layer that must satisfy a regulation that
+took effect **ten months ago** is empty. Open source builds the thing that performs. It does not build the
+thing that answers for it.
+
+**Falsifiable prediction, recorded so a later pass can test it:** `openpartner` (18★, MIT, the only
+permissive settlement layer) will either cross **100★ by 2027-06** as the DFA's disclosure-and-contract
+duties bite, or stay under 40★ — in which case the settlement layer in live commerce is structurally
+proprietary, exactly as royalty accounting is in music.

@@ -2861,3 +2861,62 @@ PTP timing, playout and MAM access patterns), which no horizontal vendor's defau
 - **A substitute for backups.** The cheapest, most permissive software in this plane — `restic`
   (BSD-2-Clause, **37.5k★**, the most-starred repo in the entire pass) — is what determines whether a
   broadcaster returns to air. Lead with it.
+
+## Pass 54 (2026-11-27) — the live-commerce & shoppable-content plane: **the one plane in this KB with no vertical platform at all**
+
+> The Odoo question for this plane — *what running system do we start from and add an agentic layer to?* —
+> has, for the first time in 54 passes, **no answer**. That is the finding, and it is stated here with the
+> measurements rather than left as a thin section.
+
+### What does exist, and is worth starting from
+
+| Platform | Repo | Licence (file read 2026-11-27) | Stars / forks | Last push | What it gives you |
+|---|---|---|---|---|---|
+| **TUILiveKit** | [Tencent-RTC/TUILiveKit](https://github.com/Tencent-RTC/TUILiveKit) | **MIT** — `LICENSE` (1,078 B) | 148 / 109 | **2026-11-27** | The only permissive, vendor-maintained **interactive live SDK** aimed explicitly at live-shopping and social-entertainment rooms. Fork ratio 0.74 — unusually high, i.e. people are actually building on it. |
+| **oba-live-tool** | [qiutongxue/oba-live-tool](https://github.com/qiutongxue/oba-live-tool) | **MIT** — `LICENSE` (1,287 B); API says `NOASSERTION` | 1,819 / 346 | 2026-11-26 | A working **multi-platform seller console** (Douyin 小店, 巨量百应, Douyin 团购, Xiaohongshu, WeChat Channels, Kuaishou 小店, Taobao). The closest thing to a running live-commerce operations product in open source — **and it only speaks to Chinese platforms.** |
+| **digital-human-livestream** | [l11223/digital-human-livestream](https://github.com/l11223/digital-human-livestream) | **Apache-2.0** — `LICENSE` (11,344 B) | 169 / 35 | 2026-02-14 | An assembled **AI-anchor product**: LiveTalking + LLM dialogue + danmaku interaction + content-safety filter + web admin. The nearest thing to a deployable system in the plane. |
+| **openpartner** | [getcoherence/openpartner](https://github.com/getcoherence/openpartner) | **MIT** — `LICENSE` (1,081 B) | 18 / 11 | 2026-11-25 | Affiliate/creator attribution with Stripe Connect payouts. **The entire permissive settlement layer.** |
+
+**Carried forward, not re-listed:** the **commerce base** is `medusajs/medusa` (**MIT**, file-verified) or
+`saleor/saleor` (BSD-3-Clause), both recorded in pass 37; the **streaming base** is `SRS` (MIT) or
+`OvenMediaEngine` (Apache-2.0) from pass 8. Those two bases plus the four rows above **are** the stack. There
+is no product that ships them pre-joined.
+
+### ⚠️ The platform this plane's obvious search recommends, and why you must not deploy it
+
+**[WWBN/AVideo](https://github.com/WWBN/AVideo)** — 2,115★ / 1,013f, **pushed 2026-11-27**, a mature
+self-hosted live-streaming and VOD platform. It is the single most plausible "start here" answer, a web
+search summary described it as **MIT**, and that is wrong.
+
+`LICENSE` (1,155 B) read in full: the **JSON licence**, MIT-shaped, with the clause
+
+> *"The Software shall be used for Good, not Evil."*
+
+**This is not an OSI licence.** Debian's consensus is that the clause is a *"trivially-clear violation of
+DFSG §6"*; Debian ships a dedicated Lintian error tag for it, **`license-problem-json-evil`**, and Fedora
+also classes it non-free. The defect is not that the clause is unusual — it is that **"Evil" is undefined
+while "Software" is defined**, so the scope of the grant cannot be determined, and no client's counsel can
+sign off on a redistribution. SPDX does carry an identifier (`JSON`), which is exactly why an SBOM scan will
+report "a licence was found" and raise nothing.
+
+**Rule for the twelve industries:** a licence that *reads* permissive and *is* catalogued by SPDX can still be
+undeployable. The disqualifying clause was seven words long and sat between two paragraphs of ordinary MIT text.
+
+### ⛔ The refusal, with four independent measurements
+
+**No open-source live-commerce vertical platform exists.** Not "none is good" — none exists:
+
+| Probe | Result | What the top of the list is |
+|---|---|---|
+| `livestream ecommerce` | **36 results total** | Top repo **18★**; nothing above 20 stars. |
+| `woocommerce live stream` | **3 results** | Top is an unrelated self-hosted music platform (1★). The one on-topic repo, `htrxuan/live-shopping-stream-woocommerce-wordpress`, has **0 stars and no licence file.** |
+| `live auction platform` | 537 results | An **IPL cricket auction simulator** (49★) and student full-stack exercises. No sellable platform. |
+| self-described *"headless shoppable video platform"* | 1 repo | `KodaStream` (41★) — **proprietary, non-commercial, all rights reserved.** |
+
+**Why this matters commercially.** In every other plane this KB has measured, the honest answer to a client is
+*"start from this running system and add AI."* Here the honest answer is *"there is no system; the components
+are permissive and excellent, and the assembly is the engagement."* **That is a more valuable thing to be able
+to say with evidence than a platform recommendation would have been** — and it is only sayable because the
+licence files were read and the result lists were read rather than their totals. It is also a materially
+different proposal: integration and compliance work, priced as such, with no vendor lock-in story and no
+upstream to inherit.

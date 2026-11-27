@@ -9,6 +9,58 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 54: the live-commerce & shoppable-content plane (**the plane where the AI host is the most actively-pushed repo in the KB and the thing that counts the money has 18 stars**)
+
+**Channel note, and it is the opposite of pass 53's:** `git ls-remote`, `gh api search/repositories` and
+`raw.githubusercontent.com` **all worked this session**. Every star/fork figure below is an exact integer from
+`search/repositories`, every licence was **read from the file**, and 19/19 repositories resolved by
+`ls-remote`. One exception, stated: `gh api repos/dubinc/dub` returned **HTTP 403** (outside this session's
+repository scope) and `search/repositories` returned **422** for the same slug, while `ls-remote` and `raw`
+both served it — so `dub`'s licence is verified and its metrics are honestly unavailable.
+
+| Agent | Repo | Licence (read today) | Stars | Forks | Last commit |
+|---|---|---|---|---|---|
+| LiveTalking | https://github.com/lipku/LiveTalking | **Apache-2.0** (`LICENSE`, 11,344 B) | **11,373** | 1,842 | **2026-11-27 — day of pass** |
+| oba-live-tool | https://github.com/qiutongxue/oba-live-tool | **MIT** (`LICENSE`, 1,287 B) — API says `NOASSERTION` | 1,819 | 346 | 2026-11-26 |
+| TLive-Omni | https://github.com/TaoLiveAIGC/TLive-Omni | **Apache-2.0** (11,357 B) | 342 | 13 | 2026-08-24 |
+| Lumi_Nox | https://github.com/MIO-456/Lumi_Nox | **MIT** (1,060 B) | 248 | 30 | 2026-11-18 |
+| digital-human-livestream | https://github.com/l11223/digital-human-livestream | **Apache-2.0** (11,344 B) | 169 | 35 | 2026-02-14 |
+| TUILiveKit | https://github.com/Tencent-RTC/TUILiveKit | **MIT** (1,078 B) | 148 | 109 | **2026-11-27** |
+| live-avatar | https://github.com/HeiXia2077/live-avatar | **MIT** (`master/LICENSE`, 1,081 B) | 136 | 40 | 2026-08-12 |
+| openpartner | https://github.com/getcoherence/openpartner | **MIT** (1,081 B) | **18** | 11 | 2026-11-25 |
+| livestream-clip-editor | https://github.com/avisii1680769-cell/livestream-clip-editor | **MIT** (1,065 B) | 10 | 3 | 2026-11-14 |
+| taobao_scraper | https://github.com/lengzhanbao/taobao_scraper | **MIT** (1,089 B) | 8 | 2 | 2026-11-26 |
+
+**What is new this week.** `LiveTalking` (Apache-2.0, 11,373★) and `Tencent-RTC/TUILiveKit` (MIT) both pushed
+**on the day of this pass**; `oba-live-tool` pushed the day before. **Baseline recorded deliberately so the
+next pass can test whether this sustained:** LiveTalking **11,373/1,842**, oba-live-tool **1,819/346**,
+TLive-Omni **342/13**, Lumi_Nox **248/30**, TUILiveKit **148/109**, openpartner **18/11**,
+taobao_scraper **8/2**.
+
+**The finding worth carrying forward.** The plane's layers are permissive and healthy right up until money or
+law is involved: **generate 11,373★ → interact 16,551★ → operate 1,819★ → join 6★ → settle 18★ → comply 0.**
+Third confirmation of cycle 8's **declare → honour → settle** law, now with the generation layer as the single
+most active repo in the plane. **Rule for the other eleven industries: find the plane's settlement layer and
+measure it first — it predicts the whole shape.**
+
+**Three repositories that are not what they appear, all licences read in full.**
+`WWBN/AVideo` (2,115★/1,013f, pushed **2026-11-27**) is **the JSON licence** — *"The Software shall be used for
+Good, not Evil"* — **not OSI, Debian-non-free with its own Lintian tag `license-problem-json-evil`, Fedora
+non-free**, and a web-search summary reported it as **MIT**. **First instance of this licence in the KB: zero
+prior hits.** `james-a-rob/KodaStream` (41★), the **only** repo self-describing as a *"headless shoppable video
+platform"*, is **proprietary — all rights reserved, non-commercial only, UK law**. `lipku/LiveStream` (98★)
+has **no licence file** across eleven probes on two branches while `README.md` returns 200 — same author as
+LiveTalking, opposite position. **`NOASSERTION` means unmeasured in both directions; this pass found it
+hiding MIT once and proprietary once, in the same plane.**
+
+**The search trap, in its most extreme form yet.** `shoppable` → **433,654 results, zero relevant in the top
+8** (OWASP Juice Shop, nopCommerce, **a recipe manager**). `live shopping` → 3,431, one relevant. `live
+commerce` → 4,068, one relevant, top hit `claude-seo` at 32,877★. `livestream ecommerce` → **36 results**, and
+that was the only query that told the truth. **Shortening the query turned a real scarcity into a false
+abundance of 433,654. Read the results, not the total.**
+
+---
+
 ## 2026-11-27 — pass 53: the security plane (**the first plane in this KB whose agent bridge already exists, and the first licence that binds generated text**)
 
 **Channel note for anyone re-measuring these numbers:** `gh api`, `api.github.com` and `git ls-remote` were

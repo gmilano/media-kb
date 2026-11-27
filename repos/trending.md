@@ -10,6 +10,45 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 54: the live-commerce & shoppable-content infrastructure layer
+
+**Channels all available this session** (`ls-remote`, `gh api search`, `raw`) — exact integers below, every
+licence read from the file.
+
+| Repo | Licence (read today) | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| https://github.com/CarGuo/GSYVideoPlayer | **Apache-2.0** (`master/LICENSE`, 11,359 B) | 21,536 / 4,312 | 2026-11-23 | Android player with danmaku — the mobile overlay layer |
+| https://github.com/DIYgod/DPlayer | **MIT** (`master/LICENSE`, 1,121 B) | 16,551 / 2,482 | 2026-11-05 | HTML5 danmaku player — the most permissive piece in the plane |
+| https://github.com/bilibili/DanmakuFlameMaster | **Apache-2.0** (`master/LICENSE`, 10,464 B) | 9,605 / 2,094 | **2020-02-27** | ⚠️ **Dormant 6y 9m.** The reference danmaku engine, unmaintained — logged so no later pass proposes it |
+| https://github.com/WWBN/AVideo | ⚠️ **JSON licence** (`LICENSE`, 1,155 B): *"used for Good, not Evil"* | 2,115 / 1,013 | **2026-11-27** | 🚫 **Not OSI.** Debian-non-free (`license-problem-json-evil`), Fedora non-free. A search summary called it MIT |
+| https://github.com/weihaox/awesome-digital-human | **MIT** (1,063 B) | 2,003 / 180 | 2026-04-18 | Survey index for 2D/3D/4D avatar work — a map, not a runtime |
+| https://github.com/qmcloud/momo | **MIT** | 992 / 392 | **2024-11-16** | ⚠️ Dormant 2y. PHP/Go live + short video + 直播带货 bundle |
+| https://github.com/open-mmlab/Live2Diff | **Apache-2.0** (11,357 B) | 199 / 18 | **2024-07-22** | ⚠️ Dormant 2y 4m. Uni-directional diffusion for live video |
+| https://github.com/getcoherence/openpartner | **MIT** (`LICENSE`, 1,081 B) | **18** / 11 | 2026-11-25 | **The entire permissive settlement layer.** Stripe Connect payouts + attribution chain |
+| https://github.com/kukuhtw/livestreamshop_rust | **Apache-2.0** (11,357 B) | 6 / 1 | 2025-09-06 | The honest permissive attempt at the whole platform |
+| https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws | **MIT-0** — "MIT No Attribution" (`LICENSE`, 947 B) | 6 / 2 | **2024-10-19** | Hyperscaler reference architecture, two years stale |
+| https://github.com/google-marketing-solutions/shoppable-video | **Apache-2.0** (11,357 B) | **5** / 2 | 2026-06-20 | **Google's own shoppable-video accelerator has five stars** — and needs a billed GCP project |
+
+**The headline for this file.** The infrastructure *components* of live commerce are permissive and large —
+overlay at 16,551★ MIT and 21,536★ Apache-2.0, checkout at 37,463★ MIT (`medusa`, pass 37), transport at
+`SRS`/`OvenMediaEngine` (pass 8). **The assembly does not exist.** `livestream ecommerce` returns **36
+results** in total; `woocommerce live stream` returns **3**, and the one on-topic repo has **0 stars and no
+licence file**. For a channel moving **>$1 trn of goods in China alone**, the join layer is 6 and 5 stars and
+the settlement layer is 18.
+
+**One licence category new to this KB, and one confirmed.** **New:** the **JSON licence** on `AVideo` —
+undeployable because *"Software"* is defined and *"Evil"* is not, and **SPDX carries a `JSON` identifier, so an
+SBOM scan reports "licence found" and raises nothing.** **Confirmed, not new:** `dubinc/dub` is
+**directory-scoped** — `(ee)` directories require a paid Enterprise subscription for production use, the same
+shape as `PostHog`'s `ee/`, `tolgee`'s `ee/` and `supertokens`' `ee/` already in this file's history.
+
+**Channel defect worth recording.** `gh api repos/dubinc/dub` → **HTTP 403** (outside session repository
+scope) and `search/repositories` → **422** for the same slug, while `git ls-remote` resolved it and
+`raw.githubusercontent.com` served both licence files. **The repos endpoint is scope-limited in a way
+`ls-remote` and `raw` are not — so a 403 there is not evidence about the repository.**
+
+---
+
 ## 2026-11-27 — pass 53: the security & resilience infrastructure layer
 
 **Licences read from the file today; stars are GitHub's rounded display values** (`gh api`,

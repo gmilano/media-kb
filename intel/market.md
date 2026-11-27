@@ -9322,6 +9322,156 @@ union federation (**SiPreBA**, with the Heinrich Böll Foundation) published **"
 Artificial Intelligence in the Media" in May 2026** — a labour-side policy input, **not a security
 framework**, recorded so a later pass does not mistake it for one.
 
+### Pass 54 (2026-11-27) — the live-commerce & shoppable-content layer in North America
+
+**The headline number everyone quotes is a three-year-old projection, and the independent estimate is 3.4×
+lower.** This is the most important commercial fact in the plane for a North American engagement, and it is
+checkable:
+
+- **Coresight: US livestream e-commerce $68 bn in 2026**, "over 5% of total US online sales" — but tracing it
+  to Coresight's own page, this is a **2023-era forecast**, a ~36% CAGR extrapolated from **$20 bn in 2022**.
+  MediaPost reported the same figure as **$67.8 bn**. **No updated Coresight forecast was located.**†
+- **eMarketer, via CNBC: ~$20 bn for 2026.**† Same market, same year, **3.4× apart**.
+- **Only 36.4% of the $22 bn North America + Europe live-shopping market is backed by a disclosed company
+  figure** — and that one disclosure is **Whatnot's $8 bn live GMV (2025)** (Axis Intelligence).† Nearly
+  two-thirds of the Western market size is modelled, not reported.
+
+**Regulatory position: the lightest of the four regions, and the claims circulating about it are unverified.**
+The FTC's Section 5 authority over unfair and deceptive practices plainly reaches livestream price claims and
+endorsements. **But the specific assertions that a "2026 update to the FTC Endorsement Guides targets
+livestream price claims" and that brands must "retain full livestream recordings including chat logs and
+price overlays" were traced to a single compliance-marketing blog with no primary-source confirmation, and
+FTC.gov's own consumer-protection pages returned no livestream-specific action.** Recorded explicitly as
+**UNVERIFIED — do not put it in a client deck.** A later pass should check the Federal Register directly.
+
+**Opportunity.** **The measurement engagement, not the platform engagement.** A North American retailer or
+network cannot currently answer *"what did this stream sell?"* from open components, because the settlement
+layer is `openpartner` at **18★**. Build the attribution spine — `openpartner` (MIT) wired to `medusa` (MIT)
+with stream-moment timestamps — and the client owns the one number the whole channel is sold on. Pitch it
+against the $68 bn / $20 bn discrepancy itself: **the channel's own size is disputed 3.4× because nobody
+instruments it.** Second opportunity: **counterfeit and claim-integrity monitoring**, since livestream
+formats are documented as defeating the automated brand-protection tooling built for static listings.†
+
+### Pass 54 (2026-11-27) — the live-commerce & shoppable-content layer in EMEA
+
+**EMEA is the only region where the regulation is about to make the *disclosure* a technical requirement —
+and the draft landed 16 days before this pass.**
+
+- **The EU Digital Fairness Act (DFA), draft unveiled 2026-11-11**, at the very start of the legislative
+  process.† **Article 11(1)** would require every commercial communication to carry a clear, prominent
+  disclosure using the words **"advertisement"** or **"commercial collaboration"**. The recitals are what make
+  this a live-commerce engineering problem: the disclosure must go live **with** the content, appear **from the
+  outset**, in the **same medium and language**, and **remain in place throughout the communication**.†
+  **Persistent, in-stream, per-language disclosure — for the entire duration of a stream.** No open component
+  in this plane implements it.
+- **Article 11(6)** would put the duty on the *business*: it must ensure **through its contract** that the
+  creator complies. That converts disclosure from a creator's good manners into a **supply-chain
+  evidence obligation** on the brand.†
+- **Already in force:** the UCPD prohibits surreptitious advertising — paid advertising presented as
+  editorial. The DFA tightens and unifies rules that are today fragmented across consumer protection, digital
+  and audiovisual media law.†
+- ⚠️ **A vendor claim to refuse.** An agency figure that live shopping will reach **"nearly 20% of all digital
+  sales in the EU by end-2026"** (attributed onward to McKinsey) **cannot be reconciled with the same sources'
+  country data: Germany at ~€756 m for 2026**, rising past €1 bn only by 2028.† Twenty per cent of EU digital
+  sales would be three orders of magnitude above that. **Do not quote the 20% figure.**
+- **What can be stood behind:** Germany **~€756 m (2026) → >€1 bn (2028)**†; **66%** of Germans say they are
+  open to buying via livestream†; **Whatnot** operates in the UK, France and Germany with **>$8 bn live GMV
+  (2025)** and its UK GM stating **70% of UK sellers earn the majority of their revenue from live selling**†;
+  **eBay Live** runs in the UK, Germany, France, Italy, Australia and Canada†; **TikTok Shop cleared ~€700 m
+  in its first year in Germany**, with ~**87%** of top-store revenue coming from creator-made videos.†
+- **The sceptical read, recorded because it is the better-sourced one.** ECDB finds **livestreams trail well
+  behind shoppable *videos*** on TikTok Shop, notes German teleshopping has declined since 2021, and concludes
+  live shopping is **not** going mainstream in Europe.† **The asynchronous format is outperforming the live
+  one in the one market with measurable data** — which should change what you build first.
+
+**Opportunity.** **The persistent-disclosure and contract-evidence layer for DFA Article 11.** It is a
+build-from-zero component with a named legal trigger, a defined wording list, and a duration requirement that
+no existing open component satisfies — the clearest greenfield in this plane. Sell it to brands, not
+creators, because 11(6) puts the duty on the brand. **Second opportunity, and the one with better evidence
+behind it: shoppable *video* rather than live**, since that is what the independent European data says is
+actually converting.
+
+### Pass 54 (2026-11-27) — the live-commerce & shoppable-content layer in APAC
+
+**APAC is the market. It is also the only region where the AI host is already regulated, and the regulation
+took effect ten months before this pass.**
+
+- **China is the plane.** 2026 livestream e-commerce GMV ~**¥8.16 trn (~$1.11 trn)**, up from ~¥5 trn
+  (~$682.5 bn) in 2023.† Platform split (2025): **Douyin 47%, Kuaishou 27%, Taobao Live 23%.**† APAC holds
+  roughly **two-thirds** of the global total on every source located.†
+- **SAMR Order No. 117 — "Supervision and Management Measures for Live Streaming E-commerce" — in force
+  2026-02-01.**† Issued jointly by the market regulator and the cyberspace administration. It defines
+  live-streaming e-commerce as selling goods or services via video or audio live streaming. **Article 34**
+  bars room operators and marketers from false or misleading promotion of sales, reviews and past honours;
+  **Article 35** applies the Advertising Law where a stream constitutes commercial advertising. Platforms must
+  manage traffic and penalise violations. **Critically for this plane: AI-generated "digital human" hosts are
+  brought under oversight, with labelling of AI-generated content.**†
+- **It is being enforced.** A **Kuaishou subsidiary was fined ¥26.7 m (~$3.7 m) in January 2026** for seven
+  violations.† A separate, world-first regime for **food** live-streaming followed in February 2026, binding
+  platforms, room operators, marketers and agencies.†
+- **The structural mismatch, and it is this region's finding.** The AI-anchor code is **Chinese, permissive and
+  excellent** — `LiveTalking` (Apache-2.0, 11,373★, pushed the day of this pass), `TLive-Omni` from Taobao Live
+  (Apache-2.0), `live-avatar` (MIT, fully local). **The disclosure that Order 117 requires of exactly those
+  hosts has no open implementation.** The nearest thing is `lengzhanbao/taobao_scraper` (MIT, **8★**), which
+  **detects** digital humans from the outside — i.e. the only code addressing the rule is built for auditing
+  someone else's compliance, not for declaring your own.
+- **Divergent regimes elsewhere in APAC.** Latham & Watkins (Sept 2026) sorts the region into binding
+  risk-based frameworks (South Korea, Vietnam), targeted rules (China) and a third looser category; nine APAC
+  countries regulate AI with **disclosure and labelling of generative AI** among the recurring themes.†
+
+**Opportunity.** **The AI-host disclosure and labelling layer, built against Order 117 and sold first in
+China-facing operations.** The obligation exists, is enforced with published fines, applies to a technology
+whose open implementation is already permissive, and has **no** open compliance component. **Second
+opportunity: a per-jurisdiction policy engine**, not a single compliance mode — the KB's standing APAC
+conclusion (pass 5) holds here exactly, because labelling duties differ by country while the host software
+does not.
+
+### Pass 54 (2026-11-27) — the live-commerce & shoppable-content layer in LATAM
+
+**LATAM is the only region where the incumbent platform shipped the feature *into its own app* this year, and
+where the regulation that arrived is about the performer rather than the sale.**
+
+- **Mercado Libre Live went native in-app, 2026-08-31/09-01** (trade sources differ by one day), linking
+  broadcasts to purchases inside the Mercado Libre app, having first run a live platform in Brazil in 2021.†
+  Its **affiliate programme reportedly exceeds 9 million participants** across Latin America† — which, in a
+  plane whose entire open settlement layer is an 18-star repository, is the most commercially significant
+  attribution network in the region by a wide margin.
+- **The regional base is growing faster than the world.** LATAM online shopping projected at **~$215.31 bn in
+  2026**, growing **1.5× the global average**, with **~85% of that growth from Argentina, Brazil and
+  Mexico** (Endeavor / Mercado Libre).† Brazil specifically: **items sold +56% YoY and FX-neutral GMV +39% in
+  Q2 2026.**† **No LATAM- or Brazil-specific live-commerce revenue figure was located** in any source — stated
+  as a gap, not estimated.
+- **Mexico published the first sector-specific AI rules for media and entertainment in the region, decree of
+  2026-05-14.**† Amendments to the **Federal Copyright Law** extend consent requirements for a person's image
+  and voice to **outputs generated by AI**; amendments to the **Federal Labour Law** set the conditions and pay
+  for using an artist's image or voice through AI systems, **raise severance where a human is replaced by AI**,
+  and require artists' contracts to be read in the manner most favourable to the artist where wording is
+  unclear.† A separate **Federal Law on Cinema and Audiovisual (published 2026-05-22)** adds obligations for
+  VOD platforms.†
+- **Why that lands precisely on this plane.** The cheapest live-commerce host is a **synthetic one**, and
+  Mexico has just made the **voice and likeness of a performer used through an AI system** a matter of
+  copyright consent *and* employment law, with a severance penalty for replacement. **A Mexican brand
+  deploying `LiveTalking` with a presenter's likeness now has a documented consent-and-contract obligation
+  before it has a technical one** — and the KB's talent-and-consent plane (pass 50) is the file that answers
+  it, not this one.
+- **Broader regional regulation** remains unharmonised: no LATAM country has a fully mature cross-sector AI
+  regime; **Peru's regulation of Law 31814 took effect January 2026** on a risk-based model; deepfakes and
+  synthetic media are becoming enforcement priorities.†
+
+**Opportunity.** **Consent-and-disclosure packaging for synthetic hosts in Mexico** — the one engagement in
+this plane where the legal trigger is already published, dated and sector-specific, and where the deliverable
+(a consent record plus contract terms that survive an AI-generated performance) is a document pipeline rather
+than a platform build. **Second opportunity: affiliate-attribution integration against the Mercado Libre
+affiliate network**, because the demand is demonstrably there at 9 million participants while the only
+permissive settlement code in existence has 18 stars.
+
+**Informed gaps (LATAM), stated rather than left silent:** **no LATAM live-commerce GMV figure** was located
+in any source; **no Brazilian or Mexican rule specific to live-stream selling** was located (Mexico's May 2026
+reforms address AI use of performers, not the sale); **no Portuguese- or Spanish-language open-source
+live-commerce project** surfaced in any of the five repository probes run this pass — the entire open estate
+in this plane is Chinese- or English-language.
+
+
 ### Global players — pass 25 addendum (the traffic & billing layer)
 
 | Player | Products in this plane | Note |
@@ -10820,3 +10970,73 @@ chain** in the US (pass 45), **personal data on a three-working-day clock** in B
 critical-infrastructure asset** in Australia, and **a tender requirement** in EBU-member Europe. **Sell the
 same stack four times with four different evidence models.** That is the plane's commercial shape, and it
 is why the deliverable in every pattern here is an **evidence artefact**, not a platform.
+
+## Market size — pass 54 addendum (2026-11-27): live commerce, where the published figures disagree by **8.3×** and the US headline is a 2023 forecast still being quoted as 2026 data
+
+### The headline figures — and why no single one of them can be quoted alone
+
+| Source | Figure | What it is actually measuring |
+|---|---|---|
+| Statista, via secondary reporting | **China ~¥8.16 trn (~$1.11 trn)** for 2026 | **Platform GMV** — the value of goods sold. Up from ~¥5 trn (~$682.5 bn) in 2023. |
+| Grand View Research, via secondary | **$172.9 bn (2025) → $230.3 bn (2026)** global | A blended "live commerce market", APAC ~two-thirds |
+| Research and Markets | **$28.76 bn (2025) → $36.43 bn (2026)** global | **Software and services revenue**, not GMV |
+| Sci-Tech Today | **~$27.79 bn (2026)** global | Same order as Research and Markets |
+| Coresight | **US $68 bn (2026)**, ">5% of US online sales" | **A 2023-era projection** at ~36% CAGR from $20 bn (2022) |
+| eMarketer, via CNBC | **US ~$20 bn (2026)** | Same market, same year, **3.4× lower** |
+
+**The spread between Grand View ($230.3 bn) and Research and Markets ($36.43 bn) for the identical year is
+8.3×**, and it is **not** a disagreement — it is a **scope artefact**, the same defect this KB has now
+recorded in the dubbing (100×), volumetric and owned-channel segments. One side counts **the value of the
+goods that change hands**; the other counts **the software sold to make that happen**. A deck that puts a
+GMV number next to a software-TAM number has misdescribed the opportunity by roughly an order of magnitude.
+
+### ⛔ The refusal — and once again it is the number a buyer would actually want
+
+**There is no defensible figure for what media companies spend on live-commerce technology**, which is the
+only number relevant to a Globant engagement. Neither the GMV series nor the blended "market" series isolates
+it. Worse, the Western figures are substantially unreported: **only 36.4% of the stated $22 bn North America +
+Europe live-shopping market is backed by a disclosed company figure, and that single disclosure is Whatnot's
+$8 bn live GMV for 2025** (Axis Intelligence).† **Nearly two-thirds of the Western market size is modelled.**
+
+Also refused: **no LATAM or Brazil live-commerce revenue figure exists** in any source located this pass, and
+**no EMEA-wide figure** survives contact with its own country data (see the EU "20% of digital sales" claim
+refuted in the EMEA block above).
+
+### What can be stood behind instead — count the platforms, the fines and the obligations
+
+Verifiable, dated, and from named parties rather than modelled:
+
+- **Platform concentration (China, 2025):** Douyin **47%**, Kuaishou **27%**, Taobao Live **23%** — three
+  platforms, **97%** of the largest live-commerce market on earth.†
+- **One disclosed Western GMV:** Whatnot, **>$8 bn live GMV (2025)**, operating in the US, UK, France and
+  Germany; its UK GM states **70% of UK sellers earn the majority of their revenue from live selling**.†
+- **One enforced penalty:** a Kuaishou subsidiary **fined ¥26.7 m (~$3.7 m) in January 2026** for seven
+  violations of the new regime.† A fine is a better indicator of a compliance market than any TAM estimate.
+- **One national figure with an internal check:** Germany **~€756 m (2026) → >€1 bn (2028)**.†
+- **One affiliate network, counted:** Mercado Libre's affiliate programme, **>9 million participants** in
+  Latin America.†
+- **Two regulatory dates:** **China Order No. 117 in force 2026-02-01**; **EU Digital Fairness Act draft
+  published 2026-11-11**.†
+- **The countable open-source estate, which is the most honest number here:** the settlement layer is **18
+  stars** (`openpartner`, MIT), the join layer is **6 and 5 stars** (`livestreamshop_rust`;
+  **Google's own** `shoppable-video`), and the compliance layer is **8 stars** of outside-in detection
+  (`taobao_scraper`). Against a channel moving **>$1 trn of goods in one country**.
+
+### Global players — pass 54 addendum (the live-commerce & shoppable-content layer)
+
+| Player | Position in this plane | Note |
+|---|---|---|
+| **Douyin / ByteDance** | Largest live-commerce platform globally; **47%** of China GMV (2025)† | Also owns the Western vector: **TikTok Shop ~€700 m in its first year in Germany**, with ~87% of top-store revenue from creator videos† |
+| **Kuaishou** | **27%** of China GMV (2025)† | Subsidiary **fined ¥26.7 m (Jan 2026)** under the new regime — the enforcement datapoint of the plane† |
+| **Alibaba / Taobao Live** | **23%** of China GMV (2025)† | **Publishes open permissive research**: `TaoLiveAIGC/TLive-Omni`, Apache-2.0, omni-modal understanding for e-commerce livestreaming |
+| **Whatnot** | The one Western platform with a disclosed number: **>$8 bn live GMV (2025)**† | US, UK, France, Germany. The **only** disclosure behind the $22 bn NA+EU estimate |
+| **eBay (eBay Live)** | Incumbent marketplace running live selling in UK, DE, FR, IT, AU, CA† | ECDB reads its US growth since launch as **only slight** — the sceptical case† |
+| **Mercado Libre** | LATAM incumbent; **Mercado Libre Live** native in-app, Aug/Sep 2026† | **>9 m affiliates**; Brazil items sold **+56% YoY**, FX-neutral GMV **+39%** in Q2 2026† |
+| **Tencent** | **WeChat Channels (视频号)** as a selling surface; and `Tencent-RTC/TUILiveKit` (**MIT**) as the one permissive interactive-live SDK | The rare case of an incumbent shipping the permissive building block |
+| **Xiaohongshu (RED)** | Discovery-led selling surface, covered by `oba-live-tool` | Named platform target in the one open operator console |
+| **About You · Net-a-Porter · Stella McCartney** | European retail/fashion adopters† | About You has live shopping built structurally into app and site; the fashion vertical is where EMEA adoption is real |
+
+† Figure or claim from a single secondary source — trade press, vendor, agency or market-research summary —
+and **not** verified against a primary filing or an official gazette. The regulatory dates (China Order No.
+117; the EU DFA draft) are corroborated by regulatory trackers but the **article numbers of the DFA come from
+leaked-draft commentary and must be re-checked against the Commission's published text** before use.

@@ -5162,3 +5162,105 @@ most permissive and the most ignored. **Baselines recorded for re-measurement:**
 **17.9k**, Sigma **11.6k**, OpenCTI **10.5k**, OpenBao **9.3k**, AiSOC **8.3k**, Graylog **8.2k**, Caldera
 **7.6k**, MISP **6.7k**, nono **5.1k**, Velociraptor **4.5k**, OpenZiti **4.5k**, Malcolm **497**, Vigil
 **481**, `bbc/nmos-auth-server` **11 and archived**.
+
+## Pass 54 (2026-11-27) — trends in the live-commerce & shoppable-content plane
+
+> Media's third monetisation channel. Pass 2 measured **advertising**, pass 13 measured **subscription**;
+> this is **transaction** — content whose purpose is that something is bought while it plays. Before this
+> pass the KB had no vocabulary for it: `live commerce` **0** hits, `Douyin` **0**, `TikTok Shop` **0**,
+> `product feed` **0**, `shoppable` **0** across all eight files.
+
+### Trend 1 — **The generation layer is the healthiest in the KB; the settlement layer is 18 stars.** And the gradient between them is lawful, not accidental
+
+Measured 2026-11-27, every licence read from the file:
+
+| Layer | Best permissive option | Stars | State |
+|---|---|---|---|
+| **Generate** (be the AI host) | `lipku/LiveTalking` Apache-2.0 | **11,373** | Pushed **the day of this pass** |
+| **Interact** (danmaku overlay) | `DIYgod/DPlayer` MIT · `CarGuo/GSYVideoPlayer` Apache-2.0 | **16,551** · **21,536** | Both alive |
+| **Operate** (run the sale) | `qiutongxue/oba-live-tool` MIT | 1,819 | Alive — **Chinese platforms only** |
+| **Join** (pin product → checkout) | `livestreamshop_rust` Apache-2.0 · Google's `shoppable-video` Apache-2.0 | **6** · **5** | Effectively nothing |
+| **Settle** (attribute GMV, pay creator) | `getcoherence/openpartner` MIT | **18** | The entire layer |
+| **Comply** (disclose the AI host) | `taobao_scraper` MIT — and it **detects** others, not declares itself | **8** | Zero, functionally |
+
+**This is the third confirmation of the declare → honour → settle law**, first stated in cycle 8 for rights
+reservation (declare 4,265★ / honour 41★ dormant / settle 0★) and reconfirmed in the security plane. The new
+precision pass 54 adds: **the generation layer is not merely healthy, it is the most actively-pushed code in
+the plane**, while the layer that must satisfy a regulation already in force for ten months is empty. **Open
+source builds what performs; it does not build what answers for the performance.** Expect this shape in any
+industry plane where content and money meet — and look for the gap at *settlement*, every time.
+
+### Trend 2 — **The regulation arrived first in the two places the code is thinnest, and one of it is 16 days old**
+
+- **China, in force 2026-02-01:** SAMR **Order No. 117**, *Supervision and Management Measures for Live
+  Streaming E-commerce*. Article 34 bars false or misleading promotion of sales, reviews and honours; Article
+  35 applies the Advertising Law to qualifying streams; platforms must police traffic and penalise. **And it
+  brings AI "digital human" hosts under oversight with labelling of AI-generated content.**† Enforced: a
+  **Kuaishou subsidiary fined ¥26.7 m (~$3.7 m) in January 2026** for seven violations.†
+- **EU, draft published 2026-11-11 — sixteen days before this pass:** the **Digital Fairness Act**. Article
+  11(1) would mandate the words **"advertisement"** or **"commercial collaboration"**; the recitals require
+  the disclosure to appear **from the outset, in the same medium and language, and to remain in place
+  throughout the communication**. **That is persistent, in-stream, per-language disclosure for a stream's full
+  duration — and no open component in this plane implements it.** Article 11(6) places the compliance duty on
+  the **brand**, enforced through its contract with the creator.†
+- **Mexico, decree of 2026-05-14:** the region's first sector-specific AI rules for M&E — Copyright Law
+  consent for image and voice **extended to AI-generated outputs**, Labour Law terms and pay for AI use of a
+  performer's likeness, and **increased severance where AI replaces a human**.† The cheapest live host is a
+  synthetic one, so this lands directly on the plane.
+- **North America: nothing comparable, and the claims circulating are unverified.** The widely-repeated
+  assertions of a "2026 FTC Endorsement Guides update targeting livestream price claims" and a livestream
+  **recording-retention** requirement trace to **one compliance-marketing blog**, with no primary
+  confirmation and nothing livestream-specific on FTC.gov. **Recorded as unverified.**
+
+### Trend 3 — **The asynchronous format is beating the live one in the only Western market with independent data**
+
+The vendor narrative says live. The independent data says otherwise, and this should change what gets built
+first outside Asia: ECDB finds **livestreams trail well behind shoppable *videos*** on TikTok Shop, notes
+German teleshopping has **declined since 2021**, and concludes live shopping is **not** going mainstream in
+Europe.† In Germany, **~87% of top-store revenue comes from creator-made videos** rather than live rooms.†
+**Build the shoppable-video path before the live-room path in EMEA and North America** — and note that the
+`shoppable` repository estate is a 433,654-result mirage (Trend 5), so that path is as unbuilt as the live one.
+
+### Trend 4 — **A new licence category for this KB, and it was recommended as MIT by a search engine**
+
+`WWBN/AVideo` — 2,115★/1,013f, **pushed on the day of this pass**, the most plausible self-hosted starting
+point in the plane — carries the **JSON licence**: MIT-shaped text plus *"The Software shall be used for Good,
+not Evil."* **`grep -ri "not evil|json licen"` across all eight KB files returned 0 before today.**
+
+Debian calls the clause a *"trivially-clear violation of DFSG §6"* and ships a dedicated Lintian error tag,
+**`license-problem-json-evil`**; Fedora also classes it non-free; it is not OSI-recognised. The defect is
+precise: **"Software" is defined and "Evil" is not**, so the grant's scope is indeterminable. **SPDX does
+carry a `JSON` identifier — which is exactly why an SBOM scan reports "licence found" and raises nothing.**
+
+**Rule for the twelve industries:** a licence can read permissive, be catalogued by SPDX, pass a scanner, and
+still be undeployable. **The disqualifying clause was seven words long, between two paragraphs of ordinary
+MIT text.** Only reading the file catches it. A search summary told this pass it was MIT.
+
+### Trend 5 — **The sharpest abundance/scarcity inversion measured in 54 passes**
+
+| Query | Total | Relevant in top 8 |
+|---|---|---|
+| `shoppable` | **433,654** | **0** — OWASP Juice Shop, nopCommerce, **a recipe manager** |
+| `live shopping` | 3,431 | **1** — the rest is anti-propaganda repos and a 3D floor-plan tool |
+| `live commerce` | 4,068 | **1** — top hit is `claude-seo` at 32,877★ |
+| `livestream ecommerce` | **36** | 4 — honest and tiny; top repo 18★ |
+| `woocommerce live stream` | **3** | 1 — and that one has **0 stars and no licence file** |
+
+**Shortening the query converted a true scarcity into a false abundance of 433,654 results**, while the query
+that described the plane accurately returned **36**. Cycle 8's rule — *read the results, not the total* — gets
+its most extreme instance here. A pass that trusted `total_count` would have filed this as the KB's healthiest
+plane; it is among its thinnest.
+
+### Trend 6 — **The headline market numbers are a scope artefact and a stale forecast**
+
+Global live commerce for **2026** is published as **$230.3 bn** (Grand View) and **$36.43 bn** (Research and
+Markets) — **8.3× apart for the same year**, because one counts **GMV** and the other counts **software and
+services**.† The US headline, **Coresight's $68 bn**, traces back to a **2023-era projection** extrapolated at
+~36% CAGR from $20 bn in 2022, while **eMarketer puts 2026 at ~$20 bn** — **3.4× lower**.† And **only 36.4% of
+the claimed $22 bn North America + Europe market is backed by a disclosed company figure**, that one being
+Whatnot's **$8 bn**.† **The channel's own size is disputed several-fold precisely because nobody instruments
+it — which is the sales argument for building the settlement layer.**
+
+† Single secondary source — trade press, vendor, agency or market-research summary — not verified against a
+primary filing or official gazette. DFA article numbers come from leaked-draft commentary and must be
+re-checked against the Commission's published text.

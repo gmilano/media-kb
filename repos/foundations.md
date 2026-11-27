@@ -5868,3 +5868,70 @@ correct answer**: AMWA's own guidance points at **Keycloak**, and IS-10 is best 
 to find but as **a claims profile to configure on an identity server you already have**. An integrator who
 goes looking for "the NMOS security product" will find an archived prototype; one who treats IS-10 as a
 Keycloak configuration ships.
+
+## Pass 54 (2026-11-27) — foundations for the live-commerce & shoppable-content plane
+
+> The layer under the AI host: the overlay substrate, the commerce base, the attribution ledger. All rows
+> verified 2026-11-27 — existence by `git ls-remote`, stars/forks/push by `search/repositories`, **licence by
+> reading the file**.
+
+### The interaction substrate — permissive, large, and already battle-tested at scale
+
+| Repo | Licence (file read) | Stars | Forks | Last push | Role in this plane |
+|---|---|---|---|---|---|
+| [CarGuo/GSYVideoPlayer](https://github.com/CarGuo/GSYVideoPlayer) | **Apache-2.0** — `master/LICENSE` (11,359 B) | 21,536 | 4,312 | 2026-11-23 | Android player (IJKPlayer/ExoPlayer/MediaPlayer) with **danmaku** and 16k page-size support. The mobile client layer. |
+| [DIYgod/DPlayer](https://github.com/DIYgod/DPlayer) | **MIT** — `master/LICENSE` (1,121 B) | 16,551 | 2,482 | 2026-11-05 | HTML5 danmaku player. The web overlay layer, and the most permissive piece in the plane. |
+| [bilibili/DanmakuFlameMaster](https://github.com/bilibili/DanmakuFlameMaster) | **Apache-2.0** — `master/LICENSE` (10,464 B) | 9,605 | 2,094 | **2020-02-27** | ⚠️ **Dormant 6 years 9 months.** Bilibili's own danmaku engine — the reference implementation, and nobody is maintaining it. Logged so no later pass proposes it as current. |
+| [weihaox/awesome-digital-human](https://github.com/weihaox/awesome-digital-human) | **MIT** — `LICENSE` (1,063 B) | 2,003 | 180 | 2026-04-18 | The survey index for 2D/3D/4D human modelling and avatar generation. A map, not a runtime. |
+| [open-mmlab/Live2Diff](https://github.com/open-mmlab/Live2Diff) | **Apache-2.0** — `LICENSE` (11,357 B) | 199 | 18 | **2024-07-22** | ⚠️ Dormant 2y 4m. Uni-directional video diffusion for **live** streams — the real-time restyling idea, unmaintained. |
+
+### The settlement layer — the whole of it
+
+| Repo | Licence (file read) | Stars | Forks | Last push | Note |
+|---|---|---|---|---|---|
+| [getcoherence/openpartner](https://github.com/getcoherence/openpartner) | **MIT** — `LICENSE` (1,081 B) | **18** | 11 | 2026-11-25 | Affiliate/creator partnership platform with Stripe Connect payouts and a full attribution chain. **The only permissive settlement option located, and this is its real star count.** |
+| [dubinc/dub](https://github.com/dubinc/dub) | **Directory-scoped: core licence + `(ee)` under the Dub.co Commercial Licence** — read from `LICENSE.md` and `apps/web/app/(ee)/LICENSE.md` | not measurable this session | — | — | Link attribution and conversion tracking. **`gh api repos/dubinc/dub` returned HTTP 403** (outside this session's repository scope) and `search/repositories` returned 422 for the same slug, while **`git ls-remote` resolves and `raw.githubusercontent.com` serves the licence files** — so existence and licence are verified and the *metrics* are honestly unavailable. |
+
+**`dub` is not a new licence category — it is a clean confirmation of one this KB already records.** Pass
+notes already carry `PostHog` (*"MIT Expat, except `ee/`"*), `tolgee-platform` (`ee/` under `ee/LICENSE`) and
+`supertokens-core` (open core + proprietary `ee/`). `dub` is the same shape in the attribution layer: the
+`(ee)` directories require a paid Enterprise subscription **for production use**, which is precisely the use
+a live-commerce attribution deployment would be. Resolve per directory before vendoring any of it.
+
+### What this plane reuses from earlier passes rather than re-adding
+
+Deliberately **not** duplicated as new rows — already verified in this KB and still the right answer:
+
+- **Ingest/egress:** `SRS` (MIT), `OvenMediaEngine` (Apache-2.0), `Owncast` (MIT) — recorded in the live &
+  delivery plane (pass 8). A live-commerce stream is an ordinary low-latency stream; this plane adds nothing
+  to the transport problem.
+- **Commerce base:** `medusajs/medusa` (**MIT**, file-verified; API says `NOASSERTION`) and `saleor/saleor`
+  (BSD-3-Clause) — recorded in pass 37. These remain the correct checkout and catalogue layer.
+- **Shot-level retrieval:** `mlfoundations/open_clip` (MIT) and `Grounded-SAM` (Apache-2.0) — the honest
+  substitute for the product-recognition layer that does not exist as a product (see the refusal below).
+
+### ⛔ The refusal — the thing a buyer in this plane would actually want, and it is not there
+
+**There is no open implementation of the join between a playing stream and a transaction.** Stated with the
+measurement behind it, because an informed gap is information and silence looks like coverage:
+
+- `livestream ecommerce` returns **36 results in total**, top repo **18★**.
+- The only repository self-describing as a *"headless shoppable video platform"*
+  (`james-a-rob/KodaStream`, 41★) is **proprietary, non-commercial-only, all rights reserved** — licence file
+  read in full.
+- **Google's own** `google-marketing-solutions/shoppable-video` is **Apache-2.0 and has 5 stars / 2 forks**
+  (pushed 2026-06-20), and it requires a billed Google Cloud project, so it is an accelerator for a managed
+  service rather than a self-hostable component.
+- `kukuhtw/livestreamshop_rust` (**Apache-2.0**, `LICENSE` 11,357 B) is a genuine permissive attempt at the
+  whole platform and it is **6★/1f, last pushed 2025-09-06**.
+- `aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws` is **MIT-0**
+  (`LICENSE`, 947 B — "MIT No Attribution") at **6★/2f, pushed 2024-10-19**: a reference architecture from a
+  hyperscaler, two years stale.
+- `qmcloud/momo` (**MIT**, 992★/392f) bundles live streaming, short video and 直播带货 in PHP/Go but was last
+  pushed **2024-11-16**.
+
+**Conclusion to carry forward.** Every *component* of live commerce exists under a permissive licence — the
+AI host (Apache-2.0, 11,373★), the overlay (MIT, 16,551★), the checkout (MIT, 37,463★). **The assembly does
+not exist at all.** For Globant that is the opportunity and it must be sold honestly: this is an
+**integration build on permissive parts**, never a fork-and-brand of an existing platform, because the
+existing platform is 6 stars, 5 stars, or proprietary.

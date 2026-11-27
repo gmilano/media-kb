@@ -8349,3 +8349,133 @@ do not exist**; AiSOC's real origin is `beenuar/AiSOC`, and three live *forks* o
 perfectly), `MISP/misp-mcp` as cleared AGPL code (**no licence file**; the grant is README prose only),
 `FiligranHQ/xtm-mcp` (**archived 2026-07-05**), or `SecurityClaw/SecurityClaw` as actively maintained
 (**last commit 2026-07-20**).
+
+---
+
+## Pattern 125 — The compliant AI-anchor stack, built only from permissive parts (**and the one component you must build, because it does not exist**)
+
+**The situation.** A client wants a synthetic host presenting products on a live stream. The generation layer
+is permissive, large and actively maintained; the **disclosure** layer that China's Order No. 117 already
+requires and the EU's DFA draft would require **has no open implementation anywhere**.
+
+**Wiring.**
+
+1. **The host.** [`lipku/LiveTalking`](https://github.com/lipku/LiveTalking) — **Apache-2.0** (`LICENSE`,
+   11,344 B), 11,373★, pushed 2026-11-27. Real-time interactive streaming digital human.
+2. **The assembled reference.** [`l11223/digital-human-livestream`](https://github.com/l11223/digital-human-livestream)
+   — **Apache-2.0** (11,344 B), 169★ — a LiveTalking derivative that already wires in LLM dialogue, **danmaku
+   interaction, a content-safety filter and a web admin console**. Read this before building; it is the
+   closest thing to a deployable product and it is permissively licensed. Last push 2026-02-14, so treat it as
+   a blueprint, not a dependency.
+3. **Fully-local variant where data cannot leave the country** (EMEA sovereignty, China hosting):
+   [`HeiXia2077/live-avatar`](https://github.com/HeiXia2077/live-avatar) — **MIT** (`master/LICENSE`, 1,081 B),
+   136★: Qwen + `llama.cpp` + `wav2lip`, no external inference call.
+4. **The room and the overlay.** [`Tencent-RTC/TUILiveKit`](https://github.com/Tencent-RTC/TUILiveKit) —
+   **MIT** (1,078 B), pushed 2026-11-27 — for the interactive room;
+   [`DIYgod/DPlayer`](https://github.com/DIYgod/DPlayer) — **MIT** (`master/LICENSE`, 1,121 B), 16,551★ — for
+   the web danmaku layer; [`CarGuo/GSYVideoPlayer`](https://github.com/CarGuo/GSYVideoPlayer) —
+   **Apache-2.0** (11,359 B), 21,536★ — for Android.
+   ⚠️ **Do not reach for [`bilibili/DanmakuFlameMaster`](https://github.com/bilibili/DanmakuFlameMaster)**
+   (Apache-2.0, 9,605★): it is the reference implementation and it has been **dormant since 2020-02-27**.
+5. **Transport.** `SRS` (MIT) or `OvenMediaEngine` (Apache-2.0) — already recorded in pass 8. Nothing in this
+   plane changes the transport problem.
+6. 🔨 **The component you build: the persistent AI-host disclosure overlay.** Order No. 117 requires labelling
+   of AI-generated content and brings digital-human hosts under oversight; the DFA draft would require the
+   disclosure to appear **from the outset, in the same medium and language, and to remain in place throughout**.
+   Specify it as: a disclosure layer **bound to the stream's own lifecycle** (not a chat message, not a
+   pre-roll), per-language, rendered into the video path so it survives clipping and re-upload, with a signed
+   log of what was displayed when.
+
+**Why this is the right shape.** Every generative component is Apache-2.0 or MIT and verified; the obligation
+is real, dated and enforced (**¥26.7 m Kuaishou fine, January 2026**); and the compliance component is
+**greenfield**. Price it as compliance engineering, not as a streaming build.
+
+**⚠️ Two repositories to exclude explicitly, because they are what a search engine returns.**
+[`WWBN/AVideo`](https://github.com/WWBN/AVideo) (2,115★, pushed 2026-11-27) is **the JSON licence** — *"used
+for Good, not Evil"* — **not OSI, Debian-non-free (`license-problem-json-evil`), undeployable**, and a web
+search called it MIT. [`lipku/LiveStream`](https://github.com/lipku/LiveStream) (98★) has **no licence file at
+all** across eleven filename probes on two branches, with `README.md` returning 200 — same author as
+LiveTalking, opposite licence position. **All rights reserved by default.**
+
+---
+
+## Pattern 126 — The join layer: stream moment → pinned product → checkout → attributed sale (**the assembly nobody ships**)
+
+**The measurement that justifies building rather than buying.** `livestream ecommerce` returns **36 results in
+total**; the only repository self-describing as a *"headless shoppable video platform"*
+([`james-a-rob/KodaStream`](https://github.com/james-a-rob/KodaStream), 41★) is **proprietary,
+non-commercial-only, all rights reserved** (`LICENSE`, 2,173 B, read in full, UK governing law); **Google's
+own** [`google-marketing-solutions/shoppable-video`](https://github.com/google-marketing-solutions/shoppable-video)
+is **Apache-2.0 with 5 stars** and needs a billed GCP project; and
+[`kukuhtw/livestreamshop_rust`](https://github.com/kukuhtw/livestreamshop_rust) (**Apache-2.0**, 11,357 B) is
+the honest permissive attempt at **6★**, last pushed 2025-09-06.
+
+**Wiring — all MIT or BSD, all verified by file read.**
+
+1. **Catalogue and checkout:** [`medusajs/medusa`](https://github.com/medusajs/medusa) — **MIT**
+   (file-verified; the API says `NOASSERTION`), 37,463★ — or [`saleor/saleor`](https://github.com/saleor/saleor)
+   (BSD-3-Clause) where B2B/multi-region is dominant. Both recorded in pass 37.
+2. **The pin event.** Define one primitive: `(stream_id, media_timestamp, product_sku, locale)` emitted when
+   the host pins an item. **This is the whole missing standard** — there is no open interchange format for it,
+   which is why `product feed` and `product tag` both returned **0 hits** in this KB before today.
+3. **Overlay rendering:** `DPlayer` (MIT) web-side, `GSYVideoPlayer` (Apache-2.0) Android-side, consuming the
+   pin event over the same channel that carries danmaku.
+4. **Attribution and payout:** [`getcoherence/openpartner`](https://github.com/getcoherence/openpartner) —
+   **MIT** (`LICENSE`, 1,081 B), **18★/11f**, pushed 2026-11-25 — Stripe Connect payouts with a full
+   attribution chain. **Be explicit with the client that this is an 18-star dependency**: read it before
+   adopting, and budget to maintain a fork.
+   ⚠️ **`dubinc/dub` is the alternative and it is directory-scoped**: the `(ee)` directories fall under the
+   **Dub.co Commercial Licence**, which requires a paid Enterprise subscription **for production use** —
+   exactly this use. Same shape as `PostHog`'s `ee/` and `tolgee`'s `ee/` already recorded in this KB. Resolve
+   per directory before vendoring.
+5. **Retrieval when the catalogue metadata is poor:** `mlfoundations/open_clip` (MIT) for shot-level product
+   retrieval, `Grounded-SAM` (Apache-2.0) for region proposals — both already in this KB. Use these instead of
+   searching for a "product recognition" product: `product recognition video` returns **25 results**, top hit
+   13★ and unrelated.
+6. **Clip the stream into the asset you actually monetise afterwards:**
+   [`avisii1680769-cell/livestream-clip-editor`](https://github.com/avisii1680769-cell/livestream-clip-editor)
+   — **MIT** (1,065 B), 10★, pushed 2026-11-14. **Low star count, correct idea**: the KB's own EMEA evidence
+   says shoppable *video* outperforms the live room in Europe, so the clip is the deliverable, not a byproduct.
+
+**Why it sells.** The channel's size is disputed **3.4×** in the US and **8.3×** globally *because nobody
+instruments it*. A client who can answer *"what did this stream sell, by moment, by creator, by locale"* owns
+the number the entire channel is bought and sold on. **Lead with that, not with the platform.**
+
+---
+
+## Pattern 127 — The disclosure-and-consent evidence pack for synthetic hosts (**two jurisdictions, both already in force, one deliverable**)
+
+**The trigger is published and dated in both regions**, which makes this the rare compliance build that does
+not depend on a forecast.
+
+| Jurisdiction | Instrument | Status | What it demands of a stream |
+|---|---|---|---|
+| **China** | SAMR **Order No. 117**, *Supervision and Management Measures for Live Streaming E-commerce* | **In force 2026-02-01**; ¥26.7 m fine already issued (Jan 2026) | Digital-human hosts under oversight; **labelling of AI-generated content**; no false/misleading promotion (Art. 34); Advertising Law applies (Art. 35) |
+| **EU** | **Digital Fairness Act**, draft | **Published 2026-11-11** — start of the legislative process; **article numbers from leaked-draft commentary, re-verify** | **"advertisement"** or **"commercial collaboration"**, from the outset, same medium and language, **remaining in place throughout** (Art. 11(1)); brand must secure creator compliance **by contract** (Art. 11(6)) |
+| **Mexico** | Decree amending the **Federal Copyright Law** and **Federal Labour Law** | **Published 2026-05-14** — the region's first sector-specific AI rules for M&E | Consent for image and voice **extends to AI-generated output**; contract terms and pay for AI use of a performer's likeness; **increased severance where AI replaces a human** |
+
+**The deliverable — one artefact, three audiences.**
+
+1. **The persistent disclosure layer** from Pattern 125, step 6, with its signed display log. The log is the
+   evidence; the overlay alone proves nothing after the stream ends.
+2. **The consent record for the likeness.** Where the host is synthetic and modelled on a real performer,
+   Mexico now makes this a copyright **and** employment matter. **Do not rebuild this here** — the KB's
+   talent, casting and performer-consent plane (pass 50) is the file that answers it, and this pattern should
+   import its consent-record format rather than invent a second one.
+3. **The contractual clause pack** satisfying DFA Art. 11(6): the brand must be able to show it *required*
+   creator compliance, not merely hoped for it. Pair each clause with the field in the display log that
+   evidences it.
+4. **The audit view.** [`lengzhanbao/taobao_scraper`](https://github.com/lengzhanbao/taobao_scraper) — **MIT**
+   (`LICENSE`, 1,089 B), **8★**, pushed 2026-11-26 — captures Taobao Live streams with danmaku and performs
+   **digital-human detection**. It is tiny, and it is the **only** code located anywhere that engages the
+   AI-host disclosure rule. Note what it tells you about the market: **the only implementation detects
+   somebody else's non-compliance from the outside; nothing declares its own from the inside.** Use it to test
+   your own overlay adversarially — if an open 8-star scraper can tell your host is synthetic while your
+   disclosure layer is silent, you have the finding before the regulator does.
+
+**Falsifiable prediction, recorded for a later pass.** If the DFA's Art. 11 survives to adoption in
+substantially its drafted form, a permissive persistent-disclosure component will appear in this plane within
+twelve months of adoption — because the duty falls on brands, who buy rather than build. **If none appears,
+the disclosure layer is structurally proprietary**, like royalty accounting in music (cycle 8) and settlement
+in rights reservation. `openpartner` at **18★** is the control variable: watch whether it crosses **100★ by
+2027-06**.

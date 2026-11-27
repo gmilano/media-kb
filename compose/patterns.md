@@ -5085,7 +5085,7 @@ Run this before a single estimate goes into a deck. It catches every trap this p
 
 ---
 
-## Pattern 33 — AMEC-conformant earned-media intelligence, self-hosted and permissively licensed
+## Pattern 51 — AMEC-conformant earned-media intelligence, self-hosted and permissively licensed
 
 **Why this pattern exists.** Gartner's first PR & Media Monitoring Magic Quadrant (2026-10-20) names
 **outcome-based earned-media measurement** a reshaping force; AMEC's Integrated Evaluation Framework

@@ -1217,7 +1217,7 @@ as adopt-and-maintain; there is no upstream.
   2026-11-27). Meanwhile the collection substrate beneath it is Apache-2.0 and committed daily
   (`story-indexer`, `trafilatura`, `changedetection.io`). **The build: own the corpus on permissive
   infrastructure, implement AMEC outcomes on top, and retire AVE for metrics a CFO accepts.** This is
-  the plane's flagship North American engagement — see `compose/patterns.md` pattern 33.
+  the plane's flagship North American engagement — see `compose/patterns.md` pattern 51.
 - **Why "own the corpus, rent the analysis" sells here.** The consolidation above is the argument: a
   client whose wire, clipping and listening all sit with one vendor has no leverage and no portable
   history. A self-hosted Apache-2.0 collection tier restores both, without requiring the client to

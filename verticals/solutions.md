@@ -1879,7 +1879,7 @@ product that calls itself "media intelligence" is both AGPL-3.0 and a single-mai
 | [huginn/huginn](https://github.com/huginn/huginn) | MIT (1,097 B) | **2026-11-27** | Self-hosted agent system for watching and acting on events — the permissive orchestration layer between collection and alerting. Committed the day of this pass. |
 | [ArchiveBox/ArchiveBox](https://github.com/ArchiveBox/ArchiveBox) | MIT (1,069 B) | 2026-11-26 | Self-hosted web archiving. **MIT, which makes it the clearance-safe archive tier** — contrast browsertrix-crawler below. |
 | [meilisearch/meilisearch](https://github.com/meilisearch/meilisearch) | MIT | 2026-11-26 | Fast typo-tolerant search. The retrieval surface over a clippings corpus when OpenSearch is heavier than needed. |
-| [ranahaani/GNews](https://github.com/ranahaani/GNews) | MIT (1,068 B) | 2026-10-25 | Google News query client. ⚠️ Small library, and see the **14-edition duplication trap** in `compose/patterns.md` pattern 33 before using it to compute anything. |
+| [ranahaani/GNews](https://github.com/ranahaani/GNews) | MIT (1,068 B) | 2026-10-25 | Google News query client. ⚠️ Small library, and see the **14-edition duplication trap** in `compose/patterns.md` pattern 51 before using it to compute anything. |
 
 ### ⚠️ Copyleft — useful, but keep out of the shipped artifact
 

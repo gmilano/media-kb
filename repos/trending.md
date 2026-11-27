@@ -65,7 +65,7 @@ corpus of 1B+ stories) committed **2026-08-28**; `web-tools` (the interface huma
 that corpus) last committed **2023-12-14 — ~3 years**. Not a licence problem, not a funding problem.
 The half that is a *format* problem is maintained; the half that is a *judgment* problem is not.
 **Operational consequence: build on `story-indexer`, never `web-tools`, and plan to write your own
-analysis surface** (`meilisearch` MIT, or OpenSearch). See `compose/patterns.md` pattern 33 step 6.
+analysis surface** (`meilisearch` MIT, or OpenSearch). See `compose/patterns.md` pattern 51 step 6.
 
 **THE SEARCH-LAYER ARTEFACT WORTH RECORDING, because it will mislead the next pass too.** Querying
 for open-source *PR measurement* tooling returns almost entirely GitHub **pull-request** dashboards

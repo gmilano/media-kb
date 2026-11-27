@@ -2260,3 +2260,51 @@ text layer; everything else is a rendering choice.
 *product*. The components exist (`eynollah` for layout, `kraken`/Tesseract for recognition,
 `ocr-fileformat` for conversion, `dinglehopper` for measurement) and the assembly is work — which is the
 honest shape of a statement of work, not a shrink-wrapped claim.
+
+## Pass 40 (2026-11-27) — platforms for the puzzles & games-desk plane
+
+Real, runnable systems a studio can stand up and put AI on top of — the Odoo/OpenMRS/Moodle question
+for this plane. All verified 2026-11-27 (`git ls-remote --symref`, `--bare --depth 1` clone for
+last-push, licence file read for bytes).
+
+### The honest headline: there is no Odoo here
+
+The platform layer is **one community publishing site, several quiz hosts, and a proprietary vendor**.
+There is **no open-source publisher games CMS** — nothing that does scheduling, archiving,
+entitlement, metering-free embedding and editorial workflow the way a newsroom needs. That is the
+gap AmuseLabs is paid $99/month and up to fill, and it is the most buildable product opportunity in
+this plane.
+
+| Platform | Licence (bytes) | Last push | What it is | AI layer a studio can add |
+|---|---|---|---|---|
+| [crosshare-org/crosshare](https://github.com/crosshare-org/crosshare) | **AGPL-3.0** (34523 B) | 2026-11-25 | The closest thing to a full open crossword platform: construction, publishing, play, stats. Active | Autofill and clue suggestion for constructors; difficulty prediction from solve telemetry |
+| [lichess-org/lila](https://github.com/lichess-org/lila) | **AGPL-3.0** (34523 B) | **2026-11-27** | Production-scale puzzle-and-game platform serving millions, with [database](https://github.com/lichess-org/database) exports and [lichess-puzzler](https://github.com/ornicar/lichess-puzzler) generation | The reference architecture for rating, streaks and daily-item delivery. Read it before designing any daily-puzzle product |
+| [dlareau/puzzlehunt_server](https://github.com/dlareau/puzzlehunt_server) | MIT (1070 B) | 2025-01-20 | Puzzle-hunt platform: teams, unlocking, hints, progress. **Permissive and event-shaped** | Automated hint escalation; difficulty pacing from team progress |
+| [Ralex91/Razzia](https://github.com/Ralex91/Razzia) | MIT (1062 B) | 2026-11-25 | Self-hosted live quiz platform (Node/Docker). The most active permissive quiz host | Question generation from the day's articles; distractor quality scoring |
+| [mawoka-myblock/ClassQuiz](https://github.com/mawoka-myblock/ClassQuiz) | MPL-2.0 (16725 B) | 2026-11-23 | Kahoot-style quiz platform (Svelte + Python). **MPL-2.0 is weak per-file copyleft** — can sit beside proprietary modules | Same, with the friendliest licence posture of the quiz hosts |
+| [Sven65/Open-Kahoot](https://github.com/Sven65/Open-Kahoot) | MIT (1063 B) | 2024-04-13 | Self-hostable trivia with separate server and client. Idle 2+ years | Lighter starting point if the deployment must be fully permissive |
+| [alexis-martel/Open-Crossword](https://github.com/alexis-martel/Open-Crossword) | GPL-3.0 (34888 B) | 2026-08-11 | Play and create crosswords in the browser | Thin: useful as a reference player, not as a platform |
+| [caravaca-labs/puzzletide-cli](https://github.com/caravaca-labs/puzzletide-cli) | MIT (1070 B) | 2026-11-14 | Generates word-search, crossword and sudoku with **printable PDF output** and themed word banks | **The print edition.** The only verified permissive path from generated puzzle to page-ready PDF |
+| **AmuseLabs PuzzleMe** | **Proprietary** | — | The incumbent: games CMS, embeddable player, free WordPress plugin, local-news consortium pricing | Not customisable at source. Listed because it is what a client is probably already paying for — and because its pricing is the cost baseline any build is measured against |
+
+### Choosing between them — the licence decision that actually matters
+
+- **AGPL-3.0 (`crosshare`, `lila`) is network copyleft.** Host a modified version and you owe its
+  users the source of your modifications. For a publisher that wants its games layer to be a visible
+  differentiator, that is a genuine constraint — and it is why, in this plane, the **assembly route
+  from MIT parts** (`exolve` player + `puzpy`/`kotwords` formats + `blacksquare` construction, all in
+  `agents/top.md`) is usually the better engagement shape than forking the one whole platform.
+- **MPL-2.0 (`ClassQuiz`) is the pragmatic middle**: per-file copyleft, so modified MPL files stay
+  open while proprietary modules alongside them do not.
+- **MIT (`puzzlehunt_server`, `Razzia`, `puzzletide-cli`) is the only no-questions route**, and note
+  which parts of the plane that buys you: hunts, live quizzes and print output — *not* a daily
+  crossword publishing system, which does not exist permissively.
+
+### What none of these solve
+
+Scheduling and archive management across a year of dailies; subscriber entitlement and metering;
+streaks and cross-game achievement state; editorial review queues for constructor submissions; and
+**difficulty calibration**, which is the one genuinely hard product problem in the plane and is open
+nowhere for crosswords (`dawsonbooth/sudoku-tools` grades sudoku, and that is the whole of it). A
+studio that builds calibration against real solve telemetry owns something no repo and no vendor
+currently sells.

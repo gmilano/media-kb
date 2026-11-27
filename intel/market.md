@@ -1453,6 +1453,55 @@ AI work available to a US media client.** Public-domain pages, no training-right
 rights, measurable output.
 
 
+
+#### Pass 40 (2026-11-27) — the puzzles & games-desk plane in North America
+
+**This is the region that proved the plane pays.** The New York Times is the benchmark every other
+publisher is now copying: **over one million Games subscriptions** (Digiday — about one million
+before the Wordle acquisition, "over one million" after), a games-only subscription around
+**$50/year**, and — per PocketGamer.biz, a secondary source reading app-store data — **just over
+$24M of mobile app spend in the first four months of 2026**, which it projects to roughly a $100M
+run-rate for the year from mobile alone. The Times added *Pips* in 2026 and shipped its first
+two-player game in January 2026.
+
+The retention mechanism, stated by the people who run it: subscribers engaged with **both** news and
+games in a given week are far likelier to retain long-term than news-only subscribers (NYT head of
+Games, via Digiday), the more games a subscriber plays the better retention gets, and family plans
+test higher on retention still (Nieman Lab, September 2025). Games is bundled deliberately into the
+higher-priced tier. **Followers are already moving**: Time and Business Insider have launched puzzle
+destinations explicitly on the NYT playbook, and The Atlantic launched a suite of daily puzzles with
+a metering strategy to convert free players into subscribers.
+
+**The two rented layers are both American, and both are the arbitrage.**
+1. *The platform.* AmuseLabs' PuzzleMe is the incumbent vendor: a free Personal tier (personal use
+   only), **Plus at $99/month** which is what adds commercial use, a Professional tier for branding,
+   and Enterprise with an SLA; local-news plans "start at $99/month" with 10% off paid upfront.
+   Billing is **metered on page loads** — by the vendor's own description a load counts whenever a
+   user opens a page containing a game or picker, **even if the player never starts the game**.
+   Puzzle *content* is priced separately again, varying "depending on puzzle size, exclusivity,
+   frequency". Note the vendor's own pages disagree on the current model: a 2018 brochure describes
+   a flat per-gameplay fee with a monthly minimum, and the FAQ still calls per-gameplay "preferred",
+   while the pricing page shows tiers. **Get the metering basis in writing before modelling cost.**
+2. *The vocabulary.* The XWord Info word list is the constructor's standard and it is **$50**,
+   behind a paid "Angel"-level account, under terms that read: "for your personal use only! You are
+   **not allowed to give it away or sell it** to others, or **create derivative lists** except for
+   your own use" (© 2007–2026 Jim Horne). A publisher product built on it is outside those terms.
+
+**The opportunity, stated precisely.** The player, the format converters and the solvers are MIT or
+Apache and were pushed within days of this pass (`exolve`, `puzpy`, `kotwords`, `blacksquare` — see
+`agents/top.md`). So the commodity is the part being rented, and the defensible build is the part
+nobody sells: **(a)** a self-hosted games layer with no per-page-load meter, **(b)** difficulty
+calibration and grading — `dawsonbooth/sudoku-tools` (MIT) grades, nothing open grades crosswords —
+and **(c)** the licensed archive pipeline, which is where `century-arcade/xd`'s tier model
+(`repos/foundations.md`) becomes a product design rather than a legal problem.
+
+**Regulation:** there is none specific to puzzles. The live constraints are state privacy law (CCPA)
+on the engagement data that makes the product work, and — for anything with voices, likenesses or
+performers — the WGA, SAG-AFTRA and DGA agreements (Chambers, Media & Entertainment 2026). **One
+trust risk to raise unprompted:** a March 2026 Jordan Center warning (reported via SiGMA) holds that
+news-organisation partnerships with betting platforms can undermine trust in journalism — directly
+relevant now that prediction-market mechanics are appearing inside publisher games (see EMEA).
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3078,6 +3127,43 @@ dominant European strategic driver — a self-hosted OCR pipeline is a sovereign
 since the pages never leave the client's infrastructure.
 
 
+
+#### Pass 40 (2026-11-27) — the puzzles & games-desk plane in EMEA
+
+**The region has the second-largest proven publisher games business and the one defensible
+human-expertise niche in the plane.** The Guardian monetises games through a **separate paid app,
+Guardian Puzzles, which had passed 1.7 million users by 2025**, and in **May 2026** launched a set of
+games on its website — including, per SiGMA (secondary source, flagged), a fantasy prediction-market
+game built on Kalshi and Polymarket data. Marketintelo (vendor source, directional) reports European
+players showing distinct preferences for word games, trivia and strategic puzzles.
+
+**The cryptic crossword is EMEA's asset, and it is the part of this plane AI has not taken.**
+Published results are unambiguous: on single cryptic clues, Gemma2, LLaMA3 and ChatGPT remain
+**significantly below human performance** ([arXiv 2412.09012](https://arxiv.org/abs/2412.09012)),
+even as LLM-plus-search reaches **93% on American-style NYT grids**
+([arXiv 2406.09043](https://arxiv.org/abs/2406.09043)). The gap is the wordplay, not the vocabulary.
+The only active permissively licensed cryptic tooling found anywhere is
+[rjkat/anagrind](https://github.com/rjkat/anagrind) (MIT, pushed 2026-10-11). **The engagement shape
+that follows is human setter + AI assistant, not AI setter** — and it is defensible for exactly as
+long as the published numbers hold, which is a thing to re-measure, not assume.
+
+**Regulation is the live differentiator.** EU AI Act **Article 50** transparency duties attach to
+AI-generated or manipulated content, which puts an AI-generated puzzle or an AI-written clue inside a
+disclosure obligation; the advertising sector's pushback on Article 50 is already documented, and the
+European Parliament adopted its position on the AI Act Omnibus simplification proposal by **569 to
+45**. Separately, **digital sovereignty is now a stated procurement driver** in European media (DPP
+European Media Trends 2026; EBU AI Forum 2026, where Google, NVIDIA and Perplexity presented). That
+changes the self-hosting argument: choosing [crosshare](https://github.com/crosshare-org/crosshare)
+(AGPL-3.0) over a US SaaS games vendor is a **sovereignty** position, not merely a cheaper one.
+**But price the licence honestly** — AGPL-3.0 is network copyleft: a modified hosted version obliges
+you to offer the source of your modifications to its users. For a publisher that wants its games
+layer to be a differentiator, that is a real constraint, and it is why the MIT pieces
+(`exolve`, `puzpy`, `kotwords`) matter more here than the one whole platform.
+
+**Gaps, explicitly:** no European puzzle- or games-desk market figure was found. No open cryptic
+clue corpus was found in any language. Guardian Puzzles' 1.7M figure rests on a single secondary
+source and should be re-sourced before it is quoted to a client.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -4672,6 +4758,50 @@ not a single compliance mode**. For this plane specifically the constraint is mi
 are mostly out of copyright, and the generative-labelling rules that dominate APAC AI regulation do not
 attach to a faithful transcription.
 
+
+
+#### Pass 40 (2026-11-27) — the puzzles & games-desk plane in APAC
+
+**The clearest publisher case in the region is Australian**: Nine uses puzzles to drive its premium
+subscription bundles (INMA) — the same bundling logic as the NYT, in a market where Globant's
+engagement model is familiar.
+
+**Japan is the plane's origin market and carries a constraint most teams will miss.** Nikoli — the
+pencil-puzzle publisher whose flagship magazine launched in 1980 and which has produced over 200
+puzzle books — **holds the trademark on "sudoku" in Japan**. That is an operational fact, not
+trivia: a product shipped into Japan cannot freely use the name for the puzzle type the way it can
+elsewhere (the generic alternative is "number place"). **Check the mark before naming the feature.**
+Nikoli's president, Yoshinao Anpuku, was interviewed by Malay Mail in **May 2026** about Malaysian
+players, which is the clearest public signal of pencil-puzzle expansion beyond Japan.
+
+**The market figures do not reconcile, and the reason is scope.** 6Wresearch puts the **Japan puzzle
+market at USD 87M (2025), CAGR 5.1% for 2026–2032**; Statista's puzzles-and-board-games category for
+Japan is roughly **€133.5M (2025)** — a broader basket. Both are vendor estimates with different
+definitions; use the direction, not the number. The older Atlas Obscura figure of ~30,000 copies per
+quarter for Nikoli's magazine is cited widely and **may well be stale** — flagged rather than
+repeated as current.
+
+**This is the region where the permissive corner of the plane is strongest.** Number and logic
+puzzles have the plane's cleanest licences — [t-dillon/tdoku](https://github.com/t-dillon/tdoku)
+(BSD), [gitctrlx/sodo](https://github.com/gitctrlx/sodo) (dual MIT + Apache-2.0),
+[dawsonbooth/sudoku-tools](https://github.com/dawsonbooth/sudoku-tools) (MIT, and it **grades**) —
+because a sudoku needs **no word list and no clue corpus**. It is generated, not authored, so steps
+3 and 4 of the gradient simply do not apply. **That is the regional fit: the puzzle family that is
+culturally native to APAC is also the one with no content-licence problem.** The thin part is
+difficulty calibration against real solver populations, which is where a studio adds value.
+
+**Regulation is diverging and labelling is the common thread.** Latham & Watkins (September 2026)
+groups the region into binding risk-based frameworks (**South Korea**; **Vietnam's Law No.
+134/2025/QH15, in force 1 March 2026**), targeted rules (**China**), and a lighter remainder; across
+the surveyed economies the recurring obligations are **disclosure and labelling of generative AI
+output** and human oversight. For a games desk that means an AI-generated puzzle or clue is
+label-bearing content in several APAC markets — design the provenance field in from the start rather
+than retrofitting it.
+
+**Gaps, explicitly:** no APAC-wide puzzle or games-desk market figure was found. No open
+crossword-equivalent corpus was located for Japanese, Korean or Chinese, and the word-grid
+assumptions of the English tooling do not transfer to non-alphabetic scripts in any case — an
+unexamined technical question this KB should not pretend to have answered.
 
 ### LATAM
 
@@ -6301,6 +6431,64 @@ bn.gov.ar press items and press coverage via search, **not from the platform its
 reported, not verified at source, and re-check at first client contact.
 
 
+
+#### Pass 40 (2026-11-27) — the puzzles & games-desk plane in LATAM
+
+**LATAM publishers have already adopted the revenue model and skipped the asset.** The model is in
+place: La Nación (Argentina) runs LN Juegos behind the paywall — its own pages say access is
+unlimited *with your subscription* — and Diario de Yucatán (Mexico) publishes a daily *crucigrama*.
+Spanish-language consumer apps monetise the same appetite directly (CodyCross sells ad-removal plus
+unlimited crosswords; Crostic and several "Crucigramas en Español" titles run subscription tiers),
+and Zinio distributes Spanish puzzle magazines such as *Cruzadas y Genial*.
+
+**The dependency worth checking at first client contact.** The search index shows Diario de Yucatán's
+crossword page carrying an AmuseLabs player configuration
+(`PM_Config.PM_BasePath = "https://app.amuselabs.com/app/"`). **This could not be verified
+directly**: `yucatan.com.mx` does not resolve from this session (HTTP 000 — outside the allowed
+network domains), so it is **index-sourced, not confirmed at source**. If it holds, a Mexican
+regional daily is renting a US proprietary games layer **metered on page loads** (see North America
+for the vendor's terms) for a function whose player and format layers are MIT.
+
+**The measured gap, and it is the build that compounds.** Searched on 2026-11-27 in both Spanish and
+Portuguese (`repos/foundations.md` has the full table):
+
+- **Zero** permissively licensed Spanish or Portuguese word data. Of five assets located, **three
+  carry no licence at all** ([javierarce/palabras](https://github.com/javierarce/palabras),
+  dormant since 2014; [m0nt4ld0/crucigrama](https://github.com/m0nt4ld0/crucigrama), recent but
+  unlicensed; [dm03514/open-dictionaries](https://github.com/dm03514/open-dictionaries), dormant
+  since 2013), one is **AGPL-3.0** ([vocably/es](https://github.com/vocably/es)) and one is
+  **MPL-2.0** ([pythonprobr/palavras](https://github.com/pythonprobr/palavras)).
+- Not one of them is a **crossword** word list. They are spell-checker dictionaries and vocabulary
+  sets — `pythonprobr/palavras` comes from the LibreOffice speller and its own documentation warns
+  it carries city and proper names that get in the way of crossword use.
+- There is **no open Spanish- or Portuguese-language clue corpus at all.** `xd` is English and
+  US-centric by construction, and its terms would not permit a derived publishing product anyway.
+- For contrast, English has [dwyl/english-words](https://github.com/dwyl/english-words) in the
+  **public domain**. The substrate the English-language plane takes for granted does not exist in
+  the region's languages.
+
+**So the asset is not the engine.** The engines are MIT, commodity and available this afternoon. The
+asset is a **Spanish-language word list with crossword-grade curation and a clean licence, plus a
+clue corpus** — the one piece no vendor sells, no repo provides, and every LATAM publisher in the
+plane needs. It is the same shape as pass 39's "ground truth as the regional asset" and pass 38's
+multi-script finding: **the engine is global, the language data is regional, and the regional data
+is where the defensible value sits.** It compounds across every publisher in the region and it is
+cheap relative to its leverage. Build it once, licence it deliberately (CC-BY or CC0 for the word
+list buys goodwill and standard-setting; the curation and the clue corpus are the commercial part).
+
+**Regulation.** Mexico published copyright and labour amendments on **14 May 2026** — reported as
+its first sector-specific AI rules — and a new audiovisual law in May 2026 adding VOD obligations.
+The region remains fragmented (Baker McKenzie): **Uruguay** was the first LATAM signatory to the
+Council of Europe AI treaty (2025), **Peru** published implementing rules for its AI law in
+September 2025, and Brazil, Argentina, Chile, Colombia and Costa Rica are still developing
+frameworks. For a games desk the two live questions are **disclosure of AI-generated content** and
+**authorship of generated clues** — the second is unsettled everywhere and should be contracted for
+explicitly rather than assumed.
+
+**Gap, explicitly:** no LATAM puzzle or games-desk market figure was found at any scope. The
+regional revenue case has to be made from the NA and EMEA retention evidence plus the client's own
+subscriber data — say so rather than importing a global number.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -7726,3 +7914,66 @@ market".** It is not. What can be stood behind for a heritage buyer is bottom-up
 count × compute cost per page × measured CER delta, against the institution's own published holdings
 (Argentina's 150,000+ fascicles, Mexico's 8M+ images, Switzerland's 15M pages are all publicly stated).
 That arithmetic is defensible in a way a borrowed enterprise-capture number never is.
+
+## Market size — pass 40 addendum (2026-11-27): the puzzles plane is sized **5.5× apart**, and **not one of the figures sizes the thing a publisher would buy**
+
+| Figure | Source | What it actually counts |
+|---|---|---|
+| **$4.9B** net player spend, puzzle games, **H1 2026** | AppMagic (via PocketGamer.biz) | **Mobile app spend only.** The hardest number here — it is observed store data, not a forecast |
+| Puzzle = **44%** of casual mobile earnings, H1 2026; match-3 = **51%** of puzzle; merge = **$1.3B** H1 2026 | AppMagic (via PocketGamer.biz) | Composition of that same mobile spend. **Note what this implies: the genre is dominated by match-3 and merge, not by word or news-adjacent puzzles** |
+| **$5.8B** (2025), CAGR 8.2%, NA largest share | Marketintelo | "Word games market" — vendor estimate, methodology not disclosed |
+| **$11.8B** (2025) | Marketintelo | "Casual games" — same vendor, broader basket |
+| **$20.88B** (2026) | Deep Market Insights | "Online casual games" |
+| **$22.68B** (2026) | Mordor Intelligence (via GII) | "Online casual games" |
+| **$27.1B** (2026) | Verified Market Reports | "Puzzle games market" — the widest scope |
+| **$87M** (2025), CAGR 5.1% 2026–2032 | 6Wresearch | Japan puzzle market (and Statista's broader Japan basket is ~€133.5M — see APAC) |
+
+**$4.9B to $27.1B is a 5.5× spread on nominally the same genre**, and it is a scope artefact rather
+than a forecasting disagreement: the low figure is half a year of observed mobile store spend, the
+high one is an annual whole-genre estimate across platforms. Quote one, name its scope, and never
+place two of them side by side as a range.
+
+### ⛔ The refusal — the publisher games desk has no market figure at all
+
+Every figure above sizes **consumer game spending**. A publisher buying a games desk is not in that
+market: it is buying **subscription retention**. Nobody publishes that number. What exists is:
+
+- NYT's qualitative statements (subscribers who play *and* read retain far better than news-only;
+  retention improves with the number of games played; family plans test higher) — direction, not
+  magnitude, and from the seller.
+- The ~**$24M in four months of 2026** mobile-app figure for NYT Games, which is **secondary-source
+  app-store estimation**, counts mobile only, and is not the same thing as games-attributable
+  subscription revenue.
+- No audited or disclosed Games revenue or retention figure from any publisher. Explicitly noted in
+  the coverage: the Times has not released subscriber data tied to individual games.
+
+**This is the fourth plane in this KB where the only honest numbers are price lists rather than
+market sizes** (after pass 34's ad-integrity, pass 35's graphics desk and pass 37's licensing
+ratio). What can be stood behind, because each is a published price:
+
+| Priced thing | Price | Source |
+|---|---|---|
+| Games layer, commercial use | **$99/month** (Plus; 10% off paid upfront; Professional and Enterprise above) | AmuseLabs pricing / local-news pages |
+| Metering basis | **Per page load** — counts when the page opens, even if the game is never started | AmuseLabs' own description |
+| Puzzle content | Separate again; varies by "size, exclusivity, frequency" | AmuseLabs FAQ |
+| Constructor word list | **$50**, personal use only, no derivative lists | XWord Info FAQ / WordList pages |
+| Consumer games subscription | **~$50/year** (NYT Games standalone) | Nieman Lab |
+
+A cost model built from those five lines is defensible. A TAM slide built from the table above is not.
+
+### Global players — pass 40 addendum (the puzzles & games-desk layer)
+
+| Player | Region | Role in the plane |
+|---|---|---|
+| **The New York Times (NYT Games)** | North America | The category definer: >1M Games subscriptions, Wordle, Connections, Pips, first two-player game Jan 2026. Every other publisher's business case cites it |
+| **AmuseLabs (PuzzleMe)** | North America (sells globally) | The incumbent proprietary platform for publishers; $99/mo entry, metered on page loads, free WordPress plugin as the funnel |
+| **XWord Info** | North America | The constructor-standard word list and NYT puzzle database — **paid, personal-use-only**; the taxed content layer of this plane |
+| **Guardian Media Group** | EMEA | Guardian Puzzles standalone paid app (>1.7M users by 2025); web games launched May 2026 |
+| **Nikoli** | APAC | The pencil-puzzle publisher; **holds the "sudoku" trademark in Japan**; 200+ books; expansion signals into SE Asia (May 2026) |
+| **Nine Entertainment** | APAC | Puzzles as a driver of premium subscription bundles (INMA) |
+| **La Nación (LN Juegos)** | LATAM | Games gated behind subscription — the regional proof the model travels |
+| **Lichess** | Global (non-profit) | 6,057,356 **public-domain** puzzles + AGPL platform and generation pipeline: the open counter-example that makes the content-licence argument |
+| **Century Arcade / xd corpus** | Global (non-profit) | The crossword corpus and its published tiered-access and AI policy — the rights template |
+| **Every Puzzle Project** | Global (volunteer) | The digitisation effort feeding public-domain puzzles — **12 active repos, all unlicensed** |
+| **The Atlantic / Time / Business Insider** | North America | The fast followers; Atlantic meters free players toward subscription |
+| **CodyCross / Crostic (Spanish-language apps)** | LATAM | Direct-to-consumer Spanish crossword subscriptions — the demand signal under the missing data layer |

@@ -4505,3 +4505,150 @@ and `marker`/`surya` README §Commercial usage for the OpenRAIL-M weights ceilin
 **The rule this keeps re-earning:** a figure's weakest link is its channel, not its plausibility. Record
 which oracle produced each number — `ls-remote` (existence), the search index (metrics), the file itself
 (licence), a blocked domain (nothing) — because the next pass cannot tell the difference afterwards.
+
+## Pass 40 (2026-11-27) — foundations of the puzzles & games-desk plane
+
+The layer under the engines in `agents/top.md`: the corpora, the word substrates, the formats and
+the digitisation effort that feeds them. Verified 2026-11-27 by `git ls-remote --symref` +
+`--bare --depth 1` clone for last-push + licence-file read for bytes. No star counts: the GitHub
+REST API returns `403` through this environment's proxy, and invented numbers are worse than none.
+
+### The corpus layer — and the most carefully documented content-rights position in this KB
+
+[century-arcade/xd](https://github.com/century-arcade/xd) (MIT code, 1081 B, pushed 2026-11-25) is
+the crossword corpus project. Its `docs/` tree — read from a shallow clone on 2026-11-27, drafts
+dated November 2026 — is worth more to a Globant engagement than the code, because it is a
+rights-holder's own written answer to "what may we publish?":
+
+- **The baseline.** "Most of the puzzles in the corpus are copyrighted by their publishers and
+  constructors… we do not publish puzzles that are still under copyright." The corpus exists so
+  crosswords "can be studied and preserved as literary works. It is **not** a source of puzzles to
+  solve."
+- **Tier (a), public full content** — out of copyright only: **459 puzzles** before 1931 (*Judge*
+  1924–1930: 304, digitised by the Every Puzzle Project; the 1924 Simon & Schuster book: 150; 5
+  singles), plus **227** *Judge* puzzles from 1931–1939, where a check of the renewal records found
+  no renewal of any issue.
+- **Tier (b), public derived data** — clue-and-answer pairs, puzzle metadata (`xd-metadata.zip`:
+  `puzzles.tsv`, `stats.tsv`, `similar.tsv`), answer lexicon by year, grid statistics. The governing
+  principle, quoted: "**nothing we publish lets a copyrighted puzzle be rebuilt**."
+- **Tier (c), gated** — a fixed, versioned random sample of **1,000** full puzzles, published on
+  Hugging Face as a *gated* dataset: each person asks, a maintainer approves them by name. The full
+  corpus "is not a dataset" and stays available only by direct arrangement.
+- **The dated self-correction.** US works published 1931–1963 kept copyright only if renewed in the
+  28th year. The renewal check found that **the New York Times renewed every issue from 1942 to
+  1963**, so **5,267 puzzles stay under copyright until 2037–2058**. An earlier `puzzles-pre1965`
+  release had published them "on the belief that the Times had not renewed"; the maintainers are
+  deciding what to do with that release. **A renewal check is a release gate, not a footnote** — and
+  this is the rare case of a corpus documenting its own over-publication with dates and counts.
+
+**Why this belongs in a Globant KB:** it is a reusable template. The publishable artefact is
+*derived, non-reconstitutive* data; the unpublishable artefact is the work itself. That line, drawn
+explicitly and in advance, is what makes an archive-derived AI product defensible.
+
+### The rights-reservation gradient, stated by the declarer — pass 5's law in the owner's own words
+
+Pass 5 established: **declaring** a reservation is a format problem (tooling exists and is active),
+**honouring** it is a judgment problem (dormant), **settling** it is a vacuum (zero). `xd`'s
+`docs/AI.md` is the first document in this KB where the party doing the declaring says so itself:
+
+> "We attach these terms to the data as signals: fields on the Hugging Face dataset card, and
+> machine-readable training opt-outs where the venue supports them. **They are terms we ask people
+> to honor, not locks.**"
+
+The terms asked for: use the public derived data for "research, analysis, tools and solving, **not
+to build systems that generate crosswords or clues for publication**", and cite the corpus. On
+public-domain puzzles the document declines to overclaim: "Anyone may use them for anything,
+including training models. **We cannot restrict them and do not pretend to.**" And the plain
+admission that the asking has already been outrun: "The clue file has been public for years, and has
+**already been used to train crossword-solving models**." The corpus also refuses AI-generated
+puzzles on the way in — collection requires a puzzle be "made by a person" — while using OCR and
+language-model tooling internally for conversion, checking and drafting, never to compose puzzles or
+clues, with human review before any merge. **Declare: yes. Honour: asked, not enforced. Settle:
+absent.** Sixth confirmation, first time from the rights-holder's side of the table.
+
+### The digitisation effort — active, coordinated, and entirely unlicensed
+
+Swept with `gh api -X GET search/repositories -f q='org:EveryPuzzleProject'` on 2026-11-27 (the
+sanctioned search channel; the REST API is 403 here). The [Every Puzzle
+Project](https://github.com/EveryPuzzleProject) is what supplies tier (a):
+
+| Repo | Licence | Stars | Last push | Scope |
+|---|---|---|---|---|
+| [EveryPuzzleProject/census](https://github.com/EveryPuzzleProject/census) | **none** | 0 | 2026-11-25 | Every publication that has ever printed a crossword, counted as found |
+| [EveryPuzzleProject/games](https://github.com/EveryPuzzleProject/games) | **none** | 0 | 2026-11-26 | Every crossword in GAMES magazine, 1977 on |
+| [EveryPuzzleProject/judge](https://github.com/EveryPuzzleProject/judge) | **none** | 0 | 2026-11-20 | Every crossword in *Judge* magazine, 1924–1939 — the source of tier (a) |
+| [EveryPuzzleProject/bostonglobe](https://github.com/EveryPuzzleProject/bostonglobe) | **none** | 0 | 2026-11-07 | Every Boston Globe crossword since 1917 |
+| [EveryPuzzleProject/blitz](https://github.com/EveryPuzzleProject/blitz) | **none** | 0 | 2026-11-26 | Restoring old crosswords from magazine scans with donated LLM usage |
+| [EveryPuzzleProject/bell](https://github.com/EveryPuzzleProject/bell) | **none** | 0 | 2026-11-16 | The Bell Syndicate's crossword, 1924–25: which papers carried it, when |
+| [EveryPuzzleProject/afroamerican](https://github.com/EveryPuzzleProject/afroamerican) | **none** | 0 | 2026-11-19 | The Baltimore Afro-American's crossword, Dec 1924 – Mar 1925 |
+| [EveryPuzzleProject/pittsburghcourier](https://github.com/EveryPuzzleProject/pittsburghcourier) | **none** | 0 | 2026-11-19 | The Pittsburgh Courier's crosswords, 1925–27 |
+| [EveryPuzzleProject/journalandguide](https://github.com/EveryPuzzleProject/journalandguide) | **none** | 0 | 2026-11-19 | The Norfolk Journal and Guide's crossword, 1925 |
+| [EveryPuzzleProject/hancockdemocrat](https://github.com/EveryPuzzleProject/hancockdemocrat) | **none** | 0 | 2026-11-19 | A numbered series in The Hancock Democrat, from Dec 1924 |
+
+**Twelve repos in the org, every one pushed this month, every one at 0 stars, and not one of them
+carries a licence file.** No licence means all rights reserved by default: this work is readable,
+citable and **not reusable** by Globant or anyone else. It is the inverse of the usual failure mode
+in this KB — not a dead project with a clean licence, but a **live, careful, well-documented project
+with no licence at all**. The highest-value, lowest-cost contribution available in this plane is a
+pull request adding CC0 or CC-BY to these repositories; it converts a dozen active archives from
+unusable to usable, and costs nothing but the asking. (Worth noting for the record: the preservation
+of early Black-press crosswords — the *Afro-American*, the *Courier*, the *Journal and Guide* — is
+concentrated here, and is exactly the material that an unlicensed state keeps out of reuse.)
+
+### The word substrate — and the sharpest regional asymmetry measured in this KB
+
+| Repo | Language | Licence | Last push | Note |
+|---|---|---|---|---|
+| [dwyl/english-words](https://github.com/dwyl/english-words) | English | **Unlicense (public domain)** | 2025-01-06 | Unrestricted, commercial use explicit |
+| [tabatkins/wordle-list](https://github.com/tabatkins/wordle-list) | English | MIT | 2022-09-06 | Guessable-word list |
+| [pythonprobr/palavras](https://github.com/pythonprobr/palavras) | Portuguese (BR) | MPL-2.0 (16725 B) | 2019-07-15 | **Spell-checker** list from LibreOffice — includes city and proper names, which its own documentation warns get in the way of crossword use |
+| [vocably/es](https://github.com/vocably/es) | Spanish | **AGPL-3.0** (34523 B) | 2026-11-21 | Active, but AGPL, and it is vocabulary + translations, not a crossword list |
+| [javierarce/palabras](https://github.com/javierarce/palabras) | Spanish | **none** | 2014-07-18 | Word list from the olea.org lemario. Unlicensed, **12 years dormant** |
+| [m0nt4ld0/crucigrama](https://github.com/m0nt4ld0/crucigrama) | Spanish | **none** | 2026-04-04 | A crossword generator — recent, and unlicensed |
+| [dm03514/open-dictionaries](https://github.com/dm03514/open-dictionaries) | Spanish | **none** | 2013-02-09 | Exists because its author found no high-quality open Spanish dictionaries. 13 years dormant |
+
+**The measurement: English has a public-domain word substrate. Spanish and Portuguese have none.**
+Of the five Spanish/Portuguese-facing assets located, **three carry no licence at all**, one is
+AGPL-3.0 and one is MPL-2.0 — **zero are MIT/Apache/BSD**, and not one is a *crossword* word list as
+opposed to a spell-checker dictionary or a vocabulary set. There is **no open Spanish- or
+Portuguese-language clue corpus at all**; `xd` is English and US-centric by construction. Searched
+2026-11-27 in both Spanish and Portuguese; this is a measured absence, not an unexamined one.
+
+### Formats and specs
+
+- **`.ipuz`** — the open JSON interchange format (spec at ipuz.org). Reference Python
+  implementation [svisser/ipuz](https://github.com/svisser/ipuz), MIT, **last pushed 2021-03-20**.
+  The open format has the dormant library; the proprietary legacy format has the maintained one.
+- **`.puz`** — Across Lite's binary format. [alexdej/puzpy](https://github.com/alexdej/puzpy), MIT,
+  pushed 2026-11-22, checksum-enforcing. **This is the format that actually moves puzzles between
+  systems in 2026**, a de-facto standard with no standards body.
+- **`.xd`** — the corpus text format, with `xdlint.py` as its authoritative validator (stdlib-only,
+  no dependencies) and a published rule catalogue including rebus / quantum / Schrödinger square
+  conventions documented as extensions rather than spec.
+- **Conversion between all of them**: [jpd236/kotwords](https://github.com/jpd236/kotwords),
+  Apache-2.0, pushed 2026-11-26. The most permissively licensed active piece of the plane.
+
+### The published research layer (no code to clone, but it sets the ceiling)
+
+- **CrossWordBench** ([arXiv 2504.00043](https://arxiv.org/abs/2504.00043), v2 Aug 2025) —
+  evaluates LLMs *and* vision-language models through controllable puzzle generation; >20 models.
+  Two results that matter operationally: reasoning models substantially outperform non-reasoning
+  ones by exploiting crossing-letter constraints, and solving performance correlates with
+  **grid-parsing accuracy at r = 0.94**. In other words much of the measured "puzzle ability" is
+  document understanding — which ties this plane directly to pass 39's OCR findings.
+- **Language Models are Crossword Solvers** ([arXiv 2406.09043](https://arxiv.org/abs/2406.09043),
+  NAACL 2025) — LLM clue answers combined with a search algorithm reach **93% accuracy on NYT
+  puzzles**; applying length constraints effectively remains unsolved.
+- **What Makes Cryptic Crosswords Challenging for LLMs?** ([arXiv
+  2412.09012](https://arxiv.org/abs/2412.09012)) — on single cryptic clues, Gemma2, LLaMA3 and
+  ChatGPT remain **significantly below human performance**. The cryptic tradition is EMEA's
+  (see `intel/market.md`), and it is the part of the plane AI has not taken.
+**Channel gap — stated as required.** `arxiv.org` **does not resolve from this session** (HTTP 000,
+outside the allowed network domains), so the three arXiv identifiers, titles and reported figures
+above come from the search index, **not from the papers themselves**. They are reported, not verified
+at source; re-check each before quoting a number to a client.
+
+- **Gap, stated:** a search on 2026-11-27 surfaced **no 2026 papers** on this plane — the newest
+  work found is 2025. Either the research moved on or the venues are not indexed for these terms;
+  what is certain is that the newest public result is a year old and the strongest permissive solver
+  implementation, `Berkeley-Crossword-Solver`, is three years stale.

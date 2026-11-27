@@ -6154,3 +6154,184 @@ train on the text you just created, at the moment you create it.*
 - **Not** an ALTO or METS XSD vendored from GitHub — **those repos carry no licence**.
 - **Not** an enterprise document-capture market figure quoted to a library as "your market".
 - **Not** a quality claim without a CER/WER number on **the client's own pages**.
+
+---
+
+# Pass 40 (2026-11-27) — patterns for the puzzles & games-desk plane
+
+Every repo named below appears with its verified licence and last-push date in `agents/top.md`,
+`repos/foundations.md` or `verticals/solutions.md`, all probed 2026-11-27.
+
+## Pattern 71 — The metering-free games desk (replacing the rented layer)
+
+**When:** a publisher pays AmuseLabs PuzzleMe from $99/month, metered on **page loads** — charged
+when the page opens even if the reader never starts the game — and wants the cost off the growth
+path, or wants the games layer to be a differentiator it actually owns.
+
+**Why it works:** every component of the *delivery* path is MIT and was pushed within days of this
+pass. The rented part is the assembly, not the technology.
+
+**Wiring:**
+1. **Player:** [`viresh-ratnakar/exolve`](https://github.com/viresh-ratnakar/exolve) (MIT,
+   2026-11-22) — single-file JS, handles grid interaction and cryptic conventions. Embed directly;
+   no per-load meter exists to pay.
+2. **Format spine:** [`alexdej/puzpy`](https://github.com/alexdej/puzpy) (MIT, 2026-11-22) for
+   `.puz` in and out — this is what syndicators and constructors actually send — with
+   [`jpd236/kotwords`](https://github.com/jpd236/kotwords) (Apache-2.0, 2026-11-26) for everything
+   else and [`svisser/ipuz`](https://github.com/svisser/ipuz) (MIT) for the open JSON format.
+   Normalise on ingest to one internal representation; never let a vendor format reach the player.
+3. **Validation gate:** `xdlint.py` from [`century-arcade/xd`](https://github.com/century-arcade/xd)
+   (MIT, 2026-11-25) — stdlib-only, no dependencies, with a published rule catalogue. Run it in CI
+   on every puzzle before it is scheduled. This is the piece that stops a malformed daily reaching
+   the front page at 06:00.
+4. **Construction (if the desk commissions its own):**
+   [`pmaher86/blacksquare`](https://github.com/pmaher86/blacksquare) (MIT, 2026-09-01) for
+   programmatic grids and autofill. **Supply your own word list — see Pattern 72, and do not point
+   it at a personal-use-only list.**
+5. **Reference architecture, read but not forked:**
+   [`crosshare`](https://github.com/crosshare-org/crosshare) (AGPL-3.0) for the publishing model and
+   [`lichess-org/lila`](https://github.com/lichess-org/lila) (AGPL-3.0) for daily-item delivery,
+   rating and streaks at scale. **Read them; assembling from the MIT parts avoids network copyleft
+   on the differentiator.**
+
+**The AI layer that justifies the project** (not the player, which is commodity): clue suggestion
+for constructors, and **difficulty calibration from solve telemetry** — open nowhere for crosswords,
+and the one product problem in the plane that neither a repo nor a vendor currently solves.
+
+**Cost honesty:** the build replaces a $99+/month line item plus separately priced puzzle content.
+Say that plainly — the saving alone does not fund a bespoke platform, so the case has to rest on
+retention and ownership, which is exactly how the NYT frames it.
+
+## Pattern 72 — The Spanish-language word list as the regional asset (the LATAM build that compounds)
+
+**When:** any LATAM publisher engagement in this plane. It is a prerequisite, not an upsell.
+
+**The measured gap** (`repos/foundations.md`): **zero** permissively licensed Spanish or Portuguese
+word data — three of five located assets carry **no licence at all**, one is AGPL-3.0, one is an
+MPL-2.0 spell-checker list whose own docs warn it is polluted with city and proper names — and **no
+Spanish or Portuguese clue corpus exists at all**. English, by contrast, has
+[`dwyl/english-words`](https://github.com/dwyl/english-words) in the **public domain**.
+
+**Wiring:**
+1. **Start from licensed material only.** [`pythonprobr/palavras`](https://github.com/pythonprobr/palavras)
+   (MPL-2.0) for pt-BR; for Spanish, treat [`vocably/es`](https://github.com/vocably/es) (AGPL-3.0)
+   as a *reference to check against*, not as input to a proprietary list. **Do not ingest the three
+   unlicensed lists** — unlicensed means all rights reserved, and this is precisely the trap this
+   pattern exists to avoid.
+2. **Curate to crossword grade.** Strip proper nouns and place names that the speller lists carry,
+   score entries for fill-friendliness (letter distribution, vowel pattern), and tag register and
+   country variance — `mexicanismos` vs `rioplatense` matters editorially, and no existing asset
+   encodes it.
+3. **Generate the grids** with [`blacksquare`](https://github.com/pmaher86/blacksquare) (MIT) or
+   [`caravaca-labs/puzzletide-cli`](https://github.com/caravaca-labs/puzzletide-cli) (MIT,
+   2026-11-14) when a **print-ready PDF** is the deliverable — still the real requirement at most
+   LATAM dailies.
+4. **Build the clue corpus as the commercial layer.** Clues written in-house, versioned, with
+   provenance per clue (human-written / AI-assisted / AI-generated, model, date) so the Article 50
+   and APAC labelling obligations and Mexico's May 2026 rules are answerable by query.
+5. **Licence deliberately:** CC0 or CC-BY on the **word list** buys standard-setting and goodwill
+   across the region; keep the **curation layer and the clue corpus** commercial. That split is the
+   whole strategy.
+
+**Why it compounds:** the engines are MIT commodities available this afternoon; the language data is
+the scarce part, it is reusable across every publisher in the region, and it gets more valuable with
+each clue written. Same shape as pass 39's ground-truth finding and pass 38's multi-script finding.
+
+## Pattern 73 — The licensed archive revival (and the renewal check that gates it)
+
+**When:** a publisher with a long-running puzzle wants to monetise its own back catalogue — the
+cheapest "new" content a games desk can ship.
+
+**Wiring:**
+1. **Run the copyright-renewal check first, as a release gate.** US works published 1931–1963 kept
+   copyright only if renewed in the 28th year. The xd corpus's `docs/` shows both outcomes: *Judge*
+   1931–39 **cleared** (no issue renewed, 227 puzzles freed) and NYT 1942–63 **blocked** (every
+   issue renewed, **5,267 puzzles under copyright until 2037–2058**) — and an earlier release had
+   already published the latter in error. **The check is the gate, and getting it wrong is a
+   publication incident, not a footnote.**
+2. **Digitise** with the pass-39 OCR stack, then validate every output with `xdlint.py`.
+3. **Adopt the three-tier access model** verbatim from
+   [`century-arcade/xd`](https://github.com/century-arcade/xd)'s `docs/ACCESS.md` and
+   `docs/DATASETS.md`: **(a)** out-of-copyright puzzles published in full; **(b)** derived,
+   non-reconstitutive data published openly under the governing principle "nothing we publish lets a
+   copyrighted puzzle be rebuilt"; **(c)** full modern puzzles gated, approved by name. This is a
+   publishable product architecture that happens to also be the rights position.
+4. **Contribute upstream, and lead with the licence.** The
+   [Every Puzzle Project](https://github.com/EveryPuzzleProject)'s **12 repositories are all active
+   and all unlicensed**. A pull request adding CC0 or CC-BY converts a dozen archives — including
+   early Black-press crosswords — from unusable to usable. Highest leverage per hour available in
+   this plane, and it costs nothing but the asking.
+
+**What not to do:** train a clue generator on the public xd clue file for a publishing product. The
+corpus's `docs/AI.md` asks specifically that the data **not** be used "to build systems that generate
+crosswords or clues for publication". The terms are, in their own words, "not locks" — honour them
+anyway, because the alternative is a client-facing rights argument you will lose on reputation even
+where you win on law.
+
+## Pattern 74 — The cryptic co-pilot (EMEA, and the one place human expertise is the product)
+
+**When:** a UK or Irish publisher with a cryptic tradition, where replacing the setter is both
+impossible and commercially wrong.
+
+**Why it is defensible:** published results put LLMs **significantly below human** on cryptic clues
+([arXiv 2412.09012](https://arxiv.org/abs/2412.09012)) while they reach **93%** on American-style
+grids ([arXiv 2406.09043](https://arxiv.org/abs/2406.09043)). The moat is wordplay.
+
+**Wiring:** [`viresh-ratnakar/exet`](https://github.com/viresh-ratnakar/exet) (MIT, 2026-11-25) as
+the setter's workbench and [`exolve`](https://github.com/viresh-ratnakar/exolve) (MIT) as the player
+— one maintainer, one toolchain, both current. Add
+[`rjkat/anagrind`](https://github.com/rjkat/anagrind) (MIT, 2026-10-11) to **parse and check** the
+setter's own clues: detect the wordplay device, verify the definition and the subsidiary indication
+agree, flag an unsound clue before an editor sees it. The AI validates; it does not compose.
+Calibrate difficulty against solve telemetry.
+
+**Compliance built in:** under EU AI Act Article 50, anything AI-generated carries disclosure. A
+co-pilot that only *checks* human clues keeps the output human-authored — a simpler compliance story
+than generation, and the better editorial product. Record the distinction per clue anyway.
+
+## Pattern 75 — The daily-item engine, learned from chess, applied to number puzzles (APAC)
+
+**When:** an APAC engagement, or any daily-puzzle product being designed from scratch.
+
+**Why this pairing:** number and logic puzzles need **no word list and no clue corpus** — they are
+generated, not authored, so steps 3 and 4 of this plane's gradient vanish, and they are the puzzle
+family culturally native to the region. Meanwhile Lichess has solved daily-item delivery in the open
+at a scale no publisher will reach.
+
+**Wiring:**
+1. **Engine:** [`t-dillon/tdoku`](https://github.com/t-dillon/tdoku) (BSD, with a benchmark suite
+   against the fastest known solvers) for generation and solving;
+   [`dawsonbooth/sudoku-tools`](https://github.com/dawsonbooth/sudoku-tools) (MIT) for **grading**,
+   which is the part that matters editorially; [`gitctrlx/sodo`](https://github.com/gitctrlx/sodo)
+   (dual MIT + Apache-2.0) where a WASM build is wanted in-browser.
+2. **Delivery architecture:** read [`lichess-org/lila`](https://github.com/lichess-org/lila)
+   (AGPL-3.0, pushed 2026-11-27) for rating, streak and daily-item mechanics, and
+   [`ornicar/lichess-puzzler`](https://github.com/ornicar/lichess-puzzler) (AGPL-3.0) for the
+   **generate → review → classify** pipeline shape — the only open puzzle-generation pipeline in
+   existence, and the model for how classification feeds difficulty.
+3. **Calibrate** generated difficulty against real solve-time distributions, not against the
+   generator's own rating. This is where the product earns its keep.
+4. **Print path:** [`puzzletide-cli`](https://github.com/caravaca-labs/puzzletide-cli) (MIT) for
+   page-ready PDFs.
+
+**Two regional constraints to raise in the first week:** **Nikoli holds the "sudoku" trademark in
+Japan** — name the feature carefully for a Japanese launch ("number place" is the generic) — and
+generative-AI **labelling duties** apply across several APAC frameworks (South Korea; Vietnam's Law
+No. 134/2025/QH15, in force 1 March 2026; China's targeted rules), so a generated puzzle is
+label-bearing content. Both are cheap to handle at design time and expensive later.
+
+## What not to promise in this plane (pass 40)
+
+- **Do not promise a market size.** The genre figures span **$4.9B to $27.1B** on scope differences,
+  and **none of them sizes a publisher games desk**. The only defensible numbers are price lists —
+  $99/month for the vendor layer, $50 for the standard word list, ~$50/year for a consumer
+  subscription (`intel/market.md`).
+- **Do not promise retention uplift with a number.** Every public retention claim is qualitative and
+  from the seller. No publisher has disclosed audited games-attributable retention or revenue.
+- **Do not promise AI-generated cryptic clues.** The published evidence says the models are not
+  there, and a client's crossword editor will know within one clue.
+- **Do not build on the standard word list.** XWord Info's terms are personal-use-only with no
+  derivative lists; a publisher product built on it is outside them.
+- **Do not treat an unlicensed repo as open** because it is active and well made. Twelve Every Puzzle
+  Project repositories, `m0nt4ld0/crucigrama`, `javierarce/palabras` and `sofyc/ConQuer` are all
+  readable and all legally unusable. Ask for a licence instead — it is the cheapest win here.

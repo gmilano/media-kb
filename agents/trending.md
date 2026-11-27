@@ -9,6 +9,66 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 40: the puzzles, games-desk & word-play plane (**the tooling is alive this week and the published science is a year stale — the inverse of every other plane in this KB**)
+
+Plane found by grepping ~100 candidate terms against all eight KB files before any web search:
+`crossword`, `sudoku`, `puzzle`, `wordle`, `quiz`, `games desk` all returned **0 hits in 0 files** —
+the widest remaining vocabulary hole, sitting under the best-documented subscription-retention
+product in news media. **39 repos probed, 38 reachable, 1 gone.** No star counts in this pass: the
+GitHub REST API answers `403` through this proxy, and invented numbers are worse than none.
+
+**Pushed within five days of this pass** — the authoring and format layer is unusually awake:
+
+| Repo | Licence | Last push | Why it moved |
+|---|---|---|---|
+| [jpd236/kotwords](https://github.com/jpd236/kotwords) | Apache-2.0 | 2026-11-26 | Puzzle format conversion — the most permissive active piece of the plane |
+| [century-arcade/xd](https://github.com/century-arcade/xd) | MIT | 2026-11-25 | Corpus pipeline + `xdlint`; **November 2026 policy drafts are the real payload** |
+| [viresh-ratnakar/exet](https://github.com/viresh-ratnakar/exet) | MIT | 2026-11-25 | Setter's workbench, dependency-free |
+| [crosshare-org/crosshare](https://github.com/crosshare-org/crosshare) | AGPL-3.0 | 2026-11-25 | The one open crossword publishing platform |
+| [Ralex91/Razzia](https://github.com/Ralex91/Razzia) | MIT | 2026-11-25 | Most active permissive self-hosted quiz host |
+| [mawoka-myblock/ClassQuiz](https://github.com/mawoka-myblock/ClassQuiz) | MPL-2.0 | 2026-11-23 | Kahoot-style; weak per-file copyleft |
+| [viresh-ratnakar/exolve](https://github.com/viresh-ratnakar/exolve) | MIT | 2026-11-22 | Single-file player — the permissive front end |
+| [alexdej/puzpy](https://github.com/alexdej/puzpy) | MIT | 2026-11-22 | `.puz` read/write; the de-facto interchange format |
+| [lichess-org/lila](https://github.com/lichess-org/lila) | AGPL-3.0 | **2026-11-27** | Pushed the day of this pass |
+| [caravaca-labs/puzzletide-cli](https://github.com/caravaca-labs/puzzletide-cli) | MIT | 2026-11-14 | Generator → printable PDF, the print-edition path |
+| [rjkat/anagrind](https://github.com/rjkat/anagrind) | MIT | 2026-10-11 | Cryptic-clue parsing — the only active permissive cryptic tool found |
+
+**Stale where it counts most:** [albertkx/Berkeley-Crossword-Solver](https://github.com/albertkx/Berkeley-Crossword-Solver)
+(MIT) **2023-12-06**, [t-dillon/tdoku](https://github.com/t-dillon/tdoku) (BSD) 2023-05-24,
+[svisser/ipuz](https://github.com/svisser/ipuz) (MIT) **2021-03-20** — the *open* format has the
+dormant library while the proprietary legacy format has the maintained one — and
+[paulgb/crossword-composer](https://github.com/paulgb/crossword-composer) (MIT) 2020-04-18. A
+search on 2026-11-27 found **no 2026 research papers** in this plane; newest located work is 2025.
+
+**The finding of the pass — the gradient runs toward the reader.** Render a puzzle (format problem):
+MIT, active. Fill a grid (algorithmic): solved, permissive half thinner. The word list (content):
+**$50, personal-use-only, no derivative lists**. The clue corpus (content at its hardest): **locked
+by copyright law — 5,267 NYT puzzles until 2037–2058**, full corpus private. The platform:
+**AGPL or $99/month metered on page loads**. The nearer a layer sits to what the reader consumes,
+the less of it anyone may own.
+
+**And the controlled experiment that proves it is the licence, not the difficulty.** A daily
+crossword and a daily chess puzzle are the same product shape. Lichess's puzzles are **public
+domain — 6,057,356 of them** — and its open layer is thriving: `lila` pushed today, `database`
+2026-11-11, `lichess-puzzler` (generate → review → classify) 2026-10-23, **the only open
+puzzle-generation pipeline that exists**. Crossword content is copyrighted and gated, and has none
+of those things. Same mechanic, no regulator anywhere in sight, opposite content licence, opposite
+outcome. **P12 now has a controlled pair: here the content licence alone predicted the ecosystem.**
+
+**Four traps, all new:**
+1. [`607011/sudokuplusplus`](https://github.com/607011/sudokuplusplus) reads as unlicensed and **is
+   MIT** — full grant text, **curly quotes**, no "MIT License" title line. Fourth failure of
+   licence-by-string-match in this KB. **Match the grant, not the title.**
+2. `century-arcade/xd`'s `docs/` 404s on raw for lowercase names; the files are **uppercase**
+   (`ACCESS.md`, `DATASETS.md`). Control request returned 200, so not throttling — the cycle-8 rule
+   held, and cloning settled it in one call.
+3. [`sofyc/ConQuer`](https://github.com/sofyc/ConQuer) (quiz generation) — **no licence file**,
+   probed 2026-11-27. Readable, citable, **unusable**. Not recorded as a finding.
+4. [`cwackerfuss/react-wordle`](https://github.com/cwackerfuss/react-wordle), the most-cited open
+   Wordle clone, **does not resolve**; control request against a comparable repo returned 200.
+   [`lynn/hello-wordl`](https://github.com/lynn/hello-wordl) (MIT) is the verified substitute.
+   **A widely-cited repo is not a verified repo.**
+
 ## 2026-11-27 — pass 39: the digitisation & OCR plane (**the code is permissive, the weights are not — six times over in one plane**)
 
 Plane chosen by grep of ~90 candidate terms against all eight KB files before any web search. The AV

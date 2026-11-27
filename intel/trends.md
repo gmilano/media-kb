@@ -3980,3 +3980,85 @@ repositories with **no licence file**. Three for three in this plane with pass 8
 are properly published by the Library of Congress and are usable; the GitHub copies grant nothing. The
 trend to watch is whether any standards body fixes this, because the same defect in the rights-reservation
 plane (pass 8) has now gone two passes unaddressed.
+
+## Pass 40 (2026-11-27) — trends in the puzzles, games-desk & word-play plane
+
+### 1. Games are now a retention instrument, and publishers are buying the thesis, not testing it
+
+The NYT case is treated as settled across the trade press: subscribers who play **and** read retain
+far better than news-only subscribers, retention rises with the number of games played, and family
+plans test higher still. Games sit deliberately inside the higher-priced bundle. In 2026 the
+followers arrived — **Time** and **Business Insider** launched puzzle destinations explicitly on the
+NYT playbook, **The Atlantic** launched daily puzzles with metering designed to convert free players,
+the **Guardian** added web games in May 2026 on top of a 1.7M-user paid app, and **Nine** (Australia)
+uses puzzles to drive premium bundles. **The caution worth carrying into a pitch:** every retention
+claim in public is qualitative and comes from the seller. No publisher has disclosed an audited
+games-attributable retention or revenue figure (see the refusal in `intel/market.md`).
+
+### 2. AI took the American grid and left the cryptic one
+
+The clearest capability split in this plane, and it is published, not speculated:
+LLM-plus-search reaches **93% on NYT-style puzzles** ([arXiv
+2406.09043](https://arxiv.org/abs/2406.09043)), while on single **cryptic** clues Gemma2, LLaMA3 and
+ChatGPT stay **significantly below human** ([arXiv 2412.09012](https://arxiv.org/abs/2412.09012)).
+Wordplay, not vocabulary, is the barrier. Operationally that makes the EMEA cryptic tradition the
+one part of the plane where human expertise is still the product and AI is the assistant — and makes
+`rjkat/anagrind` (MIT, 2026-10-11) the only active permissive tool pointed at it.
+
+### 3. Much of "AI puzzle ability" turns out to be document understanding
+
+CrossWordBench ([arXiv 2504.00043](https://arxiv.org/abs/2504.00043)) reports that solving
+performance correlates with **grid-parsing accuracy at r = 0.94** across >20 models, and that
+reasoning models beat non-reasoning ones by actually exploiting crossing-letter constraints. The
+practical reading: a large share of measured puzzle skill is *reading the grid*, which puts this
+plane directly downstream of pass 39's OCR and layout findings. A pipeline that hands the model
+structured grid data rather than an image is not a convenience, it is most of the benchmark.
+
+### 4. The research has gone quiet while the tooling woke up
+
+A search on 2026-11-27 surfaced **no 2026 papers** on this plane — the newest located work is 2025 —
+and the strongest permissive solver, `Berkeley-Crossword-Solver` (MIT), has been **untouched since
+2023-12-06**. Meanwhile the *authoring and format* layer moved in the days around this pass: `exet`
+2026-11-25, `kotwords` 2026-11-26, `puzpy` 2026-11-22, `exolve` 2026-11-22, `crosshare` 2026-11-25,
+`xd` 2026-11-25. **The hobbyist tooling is alive and the published science is a year stale** — the
+inverse of most planes in this KB, where research outruns usable code.
+
+### 5. The archive is being opened one copyright renewal at a time
+
+The xd corpus's November 2026 policy drafts show the mechanism in detail: pre-1931 puzzles are public
+domain outright (**459** held), *Judge* 1931–39 cleared because **no issue was renewed** (**227**
+more), and NYT 1942–63 **blocked because every issue was renewed** — **5,267 puzzles locked until
+2037–2058**, with an earlier release having published them by mistake and the maintainers now
+deciding what to do. Simultaneously the **Every Puzzle Project** is digitising pre-1931 material
+across a dozen active repositories, including early Black-press crosswords. **The trend is real but
+slow and legally gated, and the renewal check is the gate.**
+
+### 6. Provenance obligations are arriving before the products do
+
+Three regimes now bear on an AI-generated puzzle or clue: **EU AI Act Article 50** transparency for
+AI-generated content; **APAC labelling duties** across the risk-based and targeted frameworks
+(Latham & Watkins, September 2026 — South Korea, Vietnam's Law No. 134/2025/QH15 in force 1 March
+2026, China's targeted rules); and **Mexico's May 2026** copyright and labour amendments. None names
+puzzles, all cover them. Design the provenance field — generated vs human-set, which model, which
+word list — into the content model now; retrofitting it across a year of dailies is the expensive
+version.
+
+### 7. Rights-holders are declaring terms they openly admit they cannot enforce
+
+The xd corpus states it plainly: terms are attached "as signals: fields on the Hugging Face dataset
+card, and machine-readable training opt-outs where the venue supports them. **They are terms we ask
+people to honor, not locks**" — alongside the acknowledgement that the public clue file "has already
+been used to train crossword-solving models" and, for public-domain puzzles, "we cannot restrict them
+and do not pretend to." This is pass 5's declare → honour → settle gradient, articulated by the
+declaring party. **The trend: content owners are moving from silence to explicit, documented,
+unenforceable asking** — which is still the right move, because it is what makes a licensing
+conversation possible later.
+
+### 8. The engagement mechanic is drifting toward wagering, and it is a trust risk
+
+The Guardian's May 2026 web games reportedly include a fantasy prediction-market game built on
+**Kalshi and Polymarket** data (SiGMA, secondary source). A March 2026 Jordan Center warning, via
+the same outlet, holds that news-organisation partnerships with betting platforms can undermine trust
+in journalism. **Raise this before a client asks for it**: prediction and wagering mechanics are the
+highest-engagement, highest-trust-cost options on the table, and the decision belongs to the
+newsroom, not the growth team.

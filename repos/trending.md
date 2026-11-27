@@ -10,6 +10,77 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 40: puzzles & games-desk infrastructure (**twelve active archive repos, zero licences — and no permissive word data in Spanish or Portuguese at all**)
+
+Infrastructure and data layer under the engines logged in `agents/trending.md`. Verified 2026-11-27
+by `git ls-remote --symref` + `--bare --depth 1 --filter=blob:none` clone for last-push + licence
+file read for bytes. Org sweep via `gh api -X GET search/repositories` (the sanctioned search
+channel; REST is 403 here).
+
+**The headline defect of the plane: the digitisation effort is live and legally unusable.** The
+[Every Puzzle Project](https://github.com/EveryPuzzleProject) supplies the public-domain puzzles the
+corpus publishes — **12 repositories, every one pushed this month, every one at 0 stars, not one
+carrying a licence file**:
+
+| Repo | Licence | Last push | Scope |
+|---|---|---|---|
+| [census](https://github.com/EveryPuzzleProject/census) | **none** | 2026-11-25 | Every publication that ever printed a crossword |
+| [games](https://github.com/EveryPuzzleProject/games) | **none** | 2026-11-26 | Every crossword in GAMES magazine, 1977 on |
+| [blitz](https://github.com/EveryPuzzleProject/blitz) | **none** | 2026-11-26 | Restoring old crosswords from scans with donated LLM usage |
+| [judge](https://github.com/EveryPuzzleProject/judge) | **none** | 2026-11-20 | *Judge* magazine 1924–1939 — the source of the corpus's public-domain tier |
+| [afroamerican](https://github.com/EveryPuzzleProject/afroamerican) | **none** | 2026-11-19 | Baltimore Afro-American, Dec 1924 – Mar 1925 |
+| [pittsburghcourier](https://github.com/EveryPuzzleProject/pittsburghcourier) | **none** | 2026-11-19 | Pittsburgh Courier, 1925–27 |
+| [journalandguide](https://github.com/EveryPuzzleProject/journalandguide) | **none** | 2026-11-19 | Norfolk Journal and Guide, 1925 |
+| [bell](https://github.com/EveryPuzzleProject/bell) | **none** | 2026-11-16 | Bell Syndicate 1924–25: which papers carried it |
+| [bostonglobe](https://github.com/EveryPuzzleProject/bostonglobe) | **none** | 2026-11-07 | Boston Globe crosswords since 1917 |
+
+Not the usual failure in this KB (a dead project with a clean licence) but its inverse: **a live,
+careful, well-documented project with no licence at all**. No licence = all rights reserved. A PR
+adding CC0 or CC-BY converts a dozen archives — including the concentrated record of early
+**Black-press** crosswords — from unusable to usable. Cheapest high-leverage contribution in the plane.
+
+**The word substrate, and the sharpest regional asymmetry this KB has measured:**
+
+| Repo | Language | Licence | Last push | Note |
+|---|---|---|---|---|
+| [dwyl/english-words](https://github.com/dwyl/english-words) | English | **Unlicense / public domain** | 2025-01-06 | Commercial use explicit |
+| [tabatkins/wordle-list](https://github.com/tabatkins/wordle-list) | English | MIT | 2022-09-06 | Guessable-word list |
+| [vocably/es](https://github.com/vocably/es) | Spanish | **AGPL-3.0** | 2026-11-21 | Active; vocabulary + translations, not a crossword list |
+| [pythonprobr/palavras](https://github.com/pythonprobr/palavras) | Portuguese (BR) | MPL-2.0 | 2019-07-15 | LibreOffice **speller** list; its own docs warn of proper/city names |
+| [javierarce/palabras](https://github.com/javierarce/palabras) | Spanish | **none** | 2014-07-18 | Unlicensed, 12 years dormant |
+| [m0nt4ld0/crucigrama](https://github.com/m0nt4ld0/crucigrama) | Spanish | **none** | 2026-04-04 | Recent generator, unlicensed |
+| [dm03514/open-dictionaries](https://github.com/dm03514/open-dictionaries) | Spanish | **none** | 2013-02-09 | Exists because its author found no good open Spanish dictionaries |
+
+**English has a public-domain word substrate. Spanish and Portuguese have none** — three of five
+assets unlicensed, one AGPL, one MPL, **zero permissive**, not one of them a *crossword* list rather
+than a speller or vocabulary set, and **no Spanish or Portuguese clue corpus exists at all**.
+Searched in both languages on 2026-11-27: measured absence, not an unexamined one. This is the
+LATAM build that compounds (`compose/patterns.md`, Pattern 72).
+
+**The corpus layer — the most carefully documented content-rights position in this KB.**
+[century-arcade/xd](https://github.com/century-arcade/xd) (MIT code, pushed 2026-11-25) publishes
+**no in-copyright puzzles**; the full corpus is a **private** repo; three tiers govern release —
+public full content (out of copyright: **459** pre-1931 puzzles + **227** *Judge* 1931–39 cleared by
+renewal check), public **derived** data under the rule "*nothing we publish lets a copyrighted
+puzzle be rebuilt*", and a **gated** 1,000-puzzle sample approved by name on Hugging Face. The
+renewal check cuts both ways and is a release gate: the NYT renewed **every** issue 1942–63, so
+**5,267 puzzles stay under copyright until 2037–2058**, and an earlier `puzzles-pre1965` release had
+published them in error — documented, dated, with the maintainers deciding what to do.
+
+**Rights reservation, stated by the declarer.** `docs/AI.md`: terms are attached "as signals: fields
+on the Hugging Face dataset card, and machine-readable training opt-outs where the venue supports
+them. **They are terms we ask people to honor, not locks**" — asking that derived data not be used
+"to build systems that generate crosswords or clues for publication", conceding that the public clue
+file "has already been used to train crossword-solving models", and declining to overclaim on
+public-domain puzzles: "we cannot restrict them and do not pretend to." Pass 5's **declare → honour →
+settle** gradient, in the rights-holder's own words. Sixth confirmation, first from their side.
+
+**Formats:** `.puz` (legacy, binary, proprietary origin) has the maintained library —
+[puzpy](https://github.com/alexdej/puzpy) MIT 2026-11-22. `.ipuz` (the open JSON standard) has the
+dormant one — [svisser/ipuz](https://github.com/svisser/ipuz) MIT **2021-03-20**. Conversion across
+both: [kotwords](https://github.com/jpd236/kotwords) Apache-2.0 2026-11-26. Validation: `xdlint.py`,
+stdlib-only, published rule catalogue.
+
 ## 2026-11-27 — pass 39: digitisation infrastructure (**the two formats every national programme mandates are published from repos with no licence at all**)
 
 Infrastructure half of pass 39. Figures from `search/repositories` with `repo:` qualifiers on

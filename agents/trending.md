@@ -9,6 +9,50 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 37: the consumer-products & brand-licensing plane (**a $389.8B industry whose settlement layer returns one GitHub result**)
+
+The plane where IP becomes a physical product. Measured by grep against all eight KB files *before* any
+web search: twelve terms at literal zero (`consumer products`, `counterfeit`, `royalty report`,
+`art approval`, `apparel`, `collectible`, `IP licensing`, `franchise`, `character licensing`,
+`brand protection`, `product placement`, `brand licensing`) — the largest vocabulary gap left in this KB.
+
+**The agent layer, in full. Four repositories, 26 stars.**
+
+| Agent / tool | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [PAST2212/brand-protection-analyst-agent](https://github.com/PAST2212/brand-protection-analyst-agent) | MIT | 5★ | 2025-07-07 | The only MIT brand-protection agent that exists. Gemini-backed typosquat/fraudulent-use detection |
+| [leboncoin/trademark-monitor](https://github.com/leboncoin/trademark-monitor) | **MIT** (file-verified; API said NOASSERTION) | 5★ | 2025-01-19 | Social-network trademark monitoring, built by an operating classifieds company |
+| [Ivan-Kouznetsov/DailyMark](https://github.com/Ivan-Kouznetsov/DailyMark) | AGPL-3.0 | 4★ | 2022-12-08 | USPTO trademark-filing watcher |
+| [codexoy/trademark-monitoring-app](https://github.com/codexoy/trademark-monitoring-app) | **none — all rights reserved** | 12★ | 2025-11-24 | Most-starred, and unusable |
+
+**The five-step gradient — the cleanest proof the KB's structural law has had.** Match an image
+(`imagededup`, Apache-2.0, **5,689★**) → identify the product (`biip`, Apache-2.0, **59★**, alive) → see
+the mark (`DeepLogo`, MIT, **529★, dead since 2022**) → judge the infringement
+(`brand-protection-analyst-agent`, MIT, **5★**) → **settle the money (1 search result, 0★, unlicensed)**.
+Five steps, monotonic, none out of order.
+
+**The measured zeros.** `licensee portal` = **1 result in all of GitHub** (0★, unlicensed, unrelated) —
+the crudest zero recorded anywhere in this KB, below media pass 5's `music royalty accounting` and
+healthcare's `medical necessity`. `merchandise licensing` = 3 results, none relevant.
+`product placement detection video` = 2 results, neither relevant. `royalty accounting` top six = **9
+stars**. Against Licensing International's 2026 study: **$389.8B retail sales, +5.45%, 1,068 reporting companies.**
+
+**One live platform, and it is the shape the plane needs.**
+[pwnera/artbucket](https://github.com/pwnera/artbucket) — AGPL-3.0 (34,523 B LICENSE, © Pwnera SAS), 34★,
+pushed **2026-11-24**. *"Your brand's source of truth, open source."* Per-asset licence terms, allowed
+channels, **territories**, embargo dates, last-day-of-use, an answer to "is this use permitted", and an
+**MCP server**. A bet at 34 stars, but the only correct data model in the plane.
+
+**A named project that does not exist:** "UnRoyalty", described by an aggregator as open-source royalty
+management "available on GitHub", returns **TOTAL=0**. Logged because it is exactly the row a hurried pass
+would write into the one tier with no code.
+
+**Three new licence-metadata failure modes (KB total now seven):** `spdx_id` under-reports (Medusa and
+leboncoin are both really MIT); the licence can be declared **by path** in the package manifest
+(ResourceSpace → BSD-3 + trademark clause); and publicly readable source can be **proprietary by default**
+(Pimcore's POCL: *"if not provided for otherwise, a software element is Proprietary Software"* — and its
+default branch is `2026.x`, so probing `master`/`main` reports a false absence).
+
 ## 2026-11-27 — pass 36: the 2D animation plane (**the player is MIT, the pencil is GPL, the inbetween is unlicensed, and the timesheet is 32 stars**)
 
 Measured 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name`; every URL re-checked

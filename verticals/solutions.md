@@ -2126,3 +2126,56 @@ every commercial pipeline:
 Each of those is a buildable engagement for a studio with OpenToonz's BSD-3 base and a Kitsu service
 alongside it — and the first one is the only chance in this KB to help *define* the interchange rather
 than implement someone else's.
+
+## The consumer-products & brand-licensing plane — platforms (pass 37, 2026-11-27)
+
+The structural fact for a client engagement: **the open-source platform layer in this plane stops at the
+storefront and the product catalogue.** Commerce is a solved, permissively licensed problem with tens of
+thousands of stars. Everything that makes a product *licensed* — the style-guide distribution, the art and
+product approval workflow, the licensee portal, the royalty statement, the audit trail — has no open
+implementation at all. Globant builds that layer on top of these, or it builds it against an incumbent's API.
+
+### Platforms that can carry licensed-product work today
+
+| Platform | Licence | Stars / forks | Last push | What it covers, and the gap it leaves |
+|---|---|---|---|---|
+| [frappe/erpnext](https://github.com/frappe/erpnext) | GPL-3.0 | 41,679★ / 13,652f | **2026-11-27** | Full ERP: items, BOM, suppliers, sales orders. Royalty accrual per licensee is a custom DocType — there is no licensing module. Copyleft: fine for a client-hosted deployment, not for a redistributed product |
+| [medusajs/medusa](https://github.com/medusajs/medusa) | **MIT** (file-verified; API says NOASSERTION) | 37,443★ / 5,575f | 2026-11-26 | Headless commerce designed for agent/developer extension. The best permissive base for a licensed-merch DTC build |
+| [bagisto/bagisto](https://github.com/bagisto/bagisto) | MIT | 28,422★ / 3,399f | 2026-11-25 | Laravel e-commerce **with multi-vendor marketplace** built in — the closest shape to a multi-licensee storefront |
+| [saleor/saleor](https://github.com/saleor/saleor) | BSD-3-Clause | 23,612★ / 6,222f | 2026-11-23 | Composable headless commerce API; permissive and enterprise-grade |
+| [spree/spree](https://github.com/spree/spree) | BSD-3-Clause | 15,855★ / 5,319f | 2026-11-26 | DTC + B2B + marketplace + omnichannel on Rails. B2B matters here: licensee wholesale is a B2B flow |
+| [resourcespace/resourcespace](https://github.com/resourcespace/resourcespace) | **BSD-3-Clause + trademark clause** (see note) | 96★ / 29f | **2026-11-27** | Mature DAM for brand/style-guide asset distribution to licensees. Permissive, but derivatives may not be called "ResourceSpace" — use "Powered by ResourceSpace" |
+| [pwnera/artbucket](https://github.com/pwnera/artbucket) | **AGPL-3.0** | 34★ | **2026-11-24** | The only platform modelling per-asset licence terms, allowed channels, **territories**, embargo dates and last-day-of-use, with an **MCP server** for agent access. 34 stars: a bet, not an installed base |
+
+### A platform to stop recommending without a licence review
+
+[**pimcore/pimcore**](https://github.com/pimcore/pimcore) — 3,891★, 1,511 forks, pushed 2026-11-26 — is
+the PIM/MDM/DAM that generic "best open source DAM" roundups still list, and on paper it is the natural
+home for a licensed-product catalogue.
+
+Its current licence, read from `2026.x/LICENSE.md` (the default branch is **`2026.x`**, not `master` or
+`main`), is the **Pimcore Open Core License (POCL)**, last updated June 2025. POCL defines Open Core
+Software as source that is *publicly available but not licensed out as open source software*, and sets the
+default explicitly: **"if not provided for otherwise, a software element is Proprietary Software."**
+
+Publicly readable, proprietary by default. It may still be the right engineering choice for a client who
+buys a Pimcore subscription — it is not an open-source choice, and it must never reach a client deck as one.
+
+### The incumbents that own the missing layer
+
+These are proprietary, and they are the competition and/or the integration surface for anything Globant
+builds here. Named because the market map needs them, not because they were evaluated.
+
+| Vendor | Position |
+|---|---|
+| **Mymediabox** | Contracts, royalties, product approvals and digital assets in one suite; strong in publishing and entertainment licensing |
+| **Flowhaven** | Licensing management on a CRM footing: contracts, approvals, royalties, partner collaboration |
+| **Dependable Solutions** | Enterprise licensing and royalty management for brand owners, licensees, agents and media companies |
+| **BrandComply / FADEL** | Rights and royalty administration with brand-compliance and asset-clearance modules |
+| **Integra IP, Solve, WestEnd Software, Clarivate** | Further entrants in licensing/royalty administration and IP management |
+| **MarqVision, Counterfake, Roboflow** | AI brand protection and counterfeit detection as a service — the commercial answer to this plane's empty judgment tier |
+
+**The honest read for a client conversation:** every one of the vendors above sells the exact capability
+the open-source world does not have. A proposal that claims an all-open-source licensing and royalty stack
+is not deliverable. A proposal that builds approvals and royalty logic as Globant IP on top of a permissive
+commerce base (Medusa, Bagisto, Saleor, Spree) plus a permissive DAM (ResourceSpace) **is**.

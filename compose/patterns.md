@@ -5740,3 +5740,146 @@ Run this before the first estimate. It is six commands and it has caught eleven 
 grant), `AnimeGANv2`/`v3` (no grant), `storyboarder` (no grant — a blog post instead),
 `XDTS-uext` (no grant), `enve` + `SVGAPlayer-Android` (archived), `lottie/lottie-spec` (spec text's
 licence unresolved).
+
+## Pattern 59 — Licensed-merchandise royalty assurance: reconcile the statement against the marketplace
+
+**The problem.** A licensor is paid a royalty on reported net sales. The report comes from the licensee.
+Nothing independently verifies it, and the licensor's audit right is exercised rarely because exercising
+it is manual. Meanwhile the same artwork appears on marketplaces under listings nobody has matched to a
+licence.
+
+**Why this is the pattern to lead with.** It attacks the plane's step 5 — where the measured open-source
+supply is **one GitHub result** — using the plane's step 1, where the supply is **Apache-2.0 and
+5,689 stars**. The scarce half is Globant IP by necessity; the expensive half is free.
+
+**The wiring.**
+
+1. **Asset registry.** Stand up [`resourcespace`](https://github.com/resourcespace/resourcespace)
+   (BSD-3 + trademark clause) as the DAM holding every approved licensed asset and style guide. Register
+   each approved artwork at ingest.
+2. **Fingerprint every approved asset.** [`idealo/imagededup`](https://github.com/idealo/imagededup)
+   (Apache-2.0, 5,689★) — PHash for exact/near-exact reuse, its CNN encoder for transformed reuse. Store
+   the hash beside the asset record.
+3. **Add semantic reach.** [`bentoml/CLIP-API-service`](https://github.com/bentoml/CLIP-API-service)
+   (Apache-2.0, alive 2026-11-09) for embeddings that survive redraws and style copies, which perceptual
+   hashes miss. Two indexes, queried together: hash catches copies, embeddings catch knock-offs.
+4. **Resolve the listing to a SKU.** [`jodal/biip`](https://github.com/jodal/biip) (Apache-2.0) parses
+   GS1/GTIN off listing data and packshots, giving a product identity to join on. **Note the content law:**
+   parsing is free, GTIN *allocation* requires paid GS1 membership — the client already has it, you do not provision it.
+5. **Join to the money.** Royalty statement lines (licensee, SKU, territory, period, units, net sales)
+   land in the commerce/ERP base — [`medusajs/medusa`](https://github.com/medusajs/medusa) (**MIT**) or
+   [`frappe/erpnext`](https://github.com/frappe/erpnext) (GPL-3.0, client-hosted only).
+6. **The agent, scoped to judgment only.** For each unmatched or under-reported listing cluster, an agent
+   drafts the exception: which asset, which licensee's territory it falls in, whether a licence covers it,
+   the units implied, and the citation trail. It **drafts; a licensing manager decides.**
+   [`PAST2212/brand-protection-analyst-agent`](https://github.com/PAST2212/brand-protection-analyst-agent)
+   (MIT, 5★) is the only MIT prior art for the agent shape — read it for structure, not as a dependency.
+
+**What Globant owns:** the reconciliation ledger, the exception taxonomy, the royalty engine and the audit
+trail. That is the deliverable, and it is the part no repository implements.
+
+**The claim to sell:** not "AI finds counterfeits" (crowded: MarqVision, Roboflow, Counterfake) but
+**"your royalty statements and your marketplace reality are reconciled, with an audit trail"**.
+
+---
+
+## Pattern 60 — The Article 50 labelling gate for licensed character art (EMEA, deadline 2026-12-02)
+
+**The problem.** EU AI Act Article 50 transparency obligations took effect 2026-08-02; providers already
+operating have until **2026-12-02**. Deepfakes must be visibly labelled; AI-generated output must be
+marked **machine-readably**. Exposure is extraterritorial and penalties reach **€15M or 3% of global
+turnover**. The exemption covers *artistic, satirical, fictional or creative* works — **which is what
+licensed character art is**. So the exemption does not dispose of the duty; it relocates it into a
+per-asset determination.
+
+**The wiring.**
+
+1. **Make the determination a field, not an opinion.** At approval time every asset gets: AI involvement
+   (none / assisted / generated), whether it depicts a real person, place, entity or event, the channel
+   class it is approved for, and the resulting Article 50 determination with its reason.
+2. **Hold it where rights already live.** [`pwnera/artbucket`](https://github.com/pwnera/artbucket)
+   (**AGPL-3.0**, 34★, pushed 2026-11-24) is the only repository that already models licence terms,
+   allowed channels, **territories**, embargo dates and last-day-of-use, and it exposes an **MCP server**
+   — so an agent can query "is this use permitted" directly. **Licence reality:** AGPL-3.0 means a hosted
+   service built on it owes source to its users. Use it for a client-hosted deployment, negotiate the
+   commercial licence with Pwnera SAS, or model the same fields in your own schema. Do not quietly embed it.
+3. **Mark machine-readably, and reuse what pass 5 already found.** The marking requirement is a format
+   problem, which is the half open source does well — apply the content-credential/provenance tooling
+   already recorded in this KB rather than inventing a marking scheme.
+4. **Allocate the duty by contract.** The licensor marks what it supplies; the licensee marks what it
+   generates downstream. Encode that split per agreement, because legal analysis of the regime points
+   straight at warranties, indemnities, audit rights and termination clauses.
+5. **Retain evidence.** Keep the determination, its reason, who approved it and when. The deliverable is
+   not compliance; it is **provable** compliance.
+
+**Falsifiable prediction, recorded for a later pass to check:** no permissively licensed Article 50
+determination/allocation engine will exist by 2027-06-30. Today the count is zero and `artbucket`
+(AGPL-3.0, 34★) is the only project with the right fields.
+
+---
+
+## Pattern 61 — The licensee portal: build it, because there is one search result
+
+**The problem.** Licensee administration is four flows: onboard the licensee and its agreements; distribute
+style guides and approved assets; run product/art approval rounds; collect royalty statements and pay.
+Every licensor runs these, and **`licensee portal` returns one result in all of GitHub** — 0 stars,
+unlicensed, unrelated.
+
+**Why now, and for whom.** The dated trigger is **Netflix taking licensee relationships in-house in
+Brazil from 2027**, having done Mexico ~18 months earlier. The better *first* customer is a LATAM licensor
+of its own local IP: rising local IP, no incumbent subscription to defend, and a trade agenda where
+financial concerns lead — so the framing is "replace the spreadsheet and the approval email thread", not
+"add AI".
+
+**The wiring.**
+
+1. **Multi-tenant storefront/B2B base, permissive.** [`bagisto`](https://github.com/bagisto/bagisto) (MIT,
+   28,422★) ships multi-vendor marketplace natively — the closest existing shape to many licensees under
+   one licensor. [`spree`](https://github.com/spree/spree) (BSD-3, 15,855★) if the client is a Rails shop
+   and B2B wholesale is the dominant flow. [`saleor`](https://github.com/saleor/saleor) (BSD-3) or
+   [`medusa`](https://github.com/medusajs/medusa) (MIT) for an API-first build.
+2. **Asset distribution.** [`resourcespace`](https://github.com/resourcespace/resourcespace) for style
+   guides and approved artwork, scoped per licensee. **Trademark clause:** the product may not be named
+   "ResourceSpace"; "Powered by ResourceSpace" is the permitted phrasing. Put that in the SOW.
+3. **Approval workflow — Globant IP.** Submission → art approval → pre-production sample → final. There is
+   no open-source implementation; `product approval workflow` surfaces generic workflow builders
+   ([`synergycodes/workflowbuilder`](https://github.com/synergycodes/workflowbuilder), Apache-2.0, 451★)
+   which give you a canvas, not the domain. Model the rounds, the rejection reasons and the SLA yourself.
+4. **Royalty statements — Globant IP.** Minimum guarantees, advances, tiered rates, territory splits,
+   sell-through reporting. `royalty accounting`'s top six results total **9 stars**. Build it.
+5. **Agent layer, where it genuinely helps.** Triage inbound approval submissions against the style guide
+   (an image+text comparison, which is the substrate from Pattern 59) and draft the rejection reason with
+   the specific rule cited. The approval decision stays human; the **drafting** of a consistent, citable
+   rejection is the time saved.
+
+**Scope honestly.** Do not promise an "all open source" licensing and royalty stack — Mymediabox,
+Flowhaven, Dependable Solutions, BrandComply and FADEL each sell exactly the layer the open world lacks,
+and this pass measured the vacuum rather than assuming it. The deliverable claim is a **permissive base
+plus Globant-owned licensing logic**, which is both true and better margin.
+
+---
+
+## Pattern 62 — The 15-minute licence gate for any consumer-products or brand-licensing proposal
+
+Run before the first estimate. Four checks, each of which caught a real trap in this plane.
+
+1. **Resolve the default branch before concluding anything about a licence.**
+   `gh api -X GET search/repositories -f q='repo:<slug>' --jq '.items[]|"\(.default_branch) \(.license.spdx_id)"'`
+   returns branch, licence, stars and forks in one call. **Pimcore's licence file 404s on `master` and
+   `main`; its default branch is `2026.x`** — and the licence there is the finding, not the absence.
+2. **Treat `NOASSERTION` as "parser gave up", then read the file.** It was wrong twice here, both times in
+   the permissive direction: `medusajs/medusa` and `leboncoin/trademark-monitor` are **MIT**. Reading the
+   file *gains* you dependencies.
+3. **If the root licence file is tiny, it is a pointer — follow it, and check the manifest.**
+   ResourceSpace's is 76 bytes and points at a folder of third-party licences; the real grant is named by
+   **path** in `composer.json`/`package.json` (`"license": "documentation/licenses/resourcespace.txt"`) and
+   is **BSD-3 plus a trademark clause**. Any file under ~200 bytes is a redirect, not a grant.
+4. **Verify existence before relevance, especially in an empty tier.** `git ls-remote` every slug, and
+   search the name itself: **"UnRoyalty"**, described by an aggregator as open-source royalty software on
+   GitHub, returns **TOTAL=0**. In a tier with no real code, plausible descriptions of non-existent code
+   are the most likely thing you will find.
+
+**And one non-licence check:** read the search *results*, never the total. `counterfeit detection` returns
+**865** results and not one usable project (all six top hits unlicensed; five last touched 2017–2024);
+`logo detection` returns **1,202** with every usable repo years dead. Conversely `licensee portal` returns
+**1**, and that single digit is the most valuable number in this plane.

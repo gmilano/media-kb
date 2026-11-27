@@ -3485,3 +3485,153 @@ by a filter that treats NOASSERTION as unknown-risk. Read the file; it costs one
 Pass 8's rule was "shortening a query can turn a false zero into a false abundance." These two are the
 largest false abundances yet recorded, and `animatic` — 110,383 results, zero of them animatics — is
 the clearest demonstration in the KB that **a result count is not evidence of a field.**
+
+## The consumer-products, brand-licensing & merchandising plane — measured 2026-11-27 (pass 37), and **the agent layer is five stars wide under a $389.8 billion industry**
+
+This is the plane where an entertainment IP stops being content and becomes a physical object: the
+licensing-out business. Licensing International's **2026 Global Licensing Industry Study** (research by
+Brandar Consulting, **1,068 companies**) puts 2025 retail sales of licensed merchandise and services at
+**$389.8B, +5.45% YoY** — faster than retail overall at +4.52%. Character/entertainment alone is
+**$161.8B (+8%)**.
+
+It was also, before this pass, **the largest vocabulary gap left in this KB**. Measured by grep against
+all eight files *before* any web search, twelve terms returned **literal zero**: `consumer products`,
+`counterfeit`, `royalty report`, `art approval`, `apparel`, `collectible`, `IP licensing`, `franchise`,
+`character licensing`, `brand protection`, `product placement`, `brand licensing`.
+
+### What the plane actually needs, and what exists
+
+The work in this plane is five operations in sequence. Each one was measured separately, and the result
+is **the cleanest monotonic gradient this KB has recorded**: permissive-and-thousands-of-stars at the
+format end, literally one search result at the money end.
+
+| Step | What it is | Nature of the problem | Measured supply |
+|---|---|---|---|
+| 1. Match an image | Is this picture the same as that picture? | Pure format / math | **5,689★ Apache-2.0**, healthy |
+| 2. Identify the product | Which SKU is this? | Format, with a paid registry | **59★ Apache-2.0**, alive, small |
+| 3. See the mark | Is our logo in this image? | Perception | **529★ MIT**, dead since 2022 |
+| 4. Judge the infringement | Is this listing counterfeit? | Judgment | **5★ MIT** |
+| 5. Settle the money | What is owed, to whom, on what audit trail? | Judgment + relationship | **1 search result, 0★, no licence** |
+
+### Step 1 — the substrate is finished and permissive
+
+Image matching is the substrate of every counterfeit-detection and royalty-attribution claim in this
+plane, and it is the healthiest tier measured in any of the 37 planes. All five rows are real, licensed
+and verified by `git ls-remote`.
+
+| Repo | Licence | Stars / forks | Last push | Why it matters here |
+|---|---|---|---|---|
+| [idealo/imagededup](https://github.com/idealo/imagededup) | Apache-2.0 | 5,689★ / 477f | 2025-08-15 | Near-duplicate detection (PHash/CNN). The reference substrate for "is this listing our artwork?" |
+| [jenssegers/imagehash](https://github.com/jenssegers/imagehash) | MIT | 2,060★ / 173f | 2025-09-17 | Perceptual hashing, PHP — drops into a Laravel/Bagisto storefront directly |
+| [corona10/goimagehash](https://github.com/corona10/goimagehash) | BSD-2-Clause | 841★ / 79f | 2024-01-21 | Go perceptual hashing; the choice for a high-throughput marketplace crawler |
+| [KilianB/JImageHash](https://github.com/KilianB/JImageHash) | MIT | 444★ / 87f | 2024-03-08 | JVM perceptual hashing, for shops whose commerce stack is Java |
+| [bentoml/CLIP-API-service](https://github.com/bentoml/CLIP-API-service) | Apache-2.0 | 67★ / 4f | **2026-11-09** | Serve CLIP embeddings as an API — the live, permissive route to semantic (not pixel) similarity |
+
+One adjacent repo is deliberately **excluded from the permissive tier**:
+[dessant/search-by-image](https://github.com/dessant/search-by-image) (3,841★, 2026-06-27) is the
+largest and most actively maintained reverse-image-search tool found, but it is **GPL-3.0** and a browser
+extension — useful for a brand-protection analyst's desk, not for embedding in a client deliverable.
+
+### Step 2 — product identity is permissive, but the numbers are rented
+
+GTIN/GS1 is how a licensed product is identified in retail. The **parsers are free and permissive; the
+numbers are not** — GTIN allocation requires paid GS1 membership. This is the fourth distinct appearance
+of **the content law** in this KB (CPT in healthcare; ISRC/ISWC/ISAN/EIDR in media pass 5): *what is
+scarce is the registry allocation, never the parser.*
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [jodal/biip](https://github.com/jodal/biip) | Apache-2.0 | 59★ | **2026-11-01** | Python GS1/GTIN/SSCC parser; the best-maintained permissive option |
+| [PeterBrockfeld/BarcodeParser](https://github.com/PeterBrockfeld/BarcodeParser) | MIT | 77★ | 2022-04-21 | Most-starred GS1 parser, but unmaintained for three years |
+| [xremix/SwiftGS1Barcode](https://github.com/xremix/SwiftGS1Barcode) | MIT | 30★ | **2026-11-08** | Swift — the in-store / field-inspection path, alive |
+| [lamoda/gs1-barcode-parser](https://github.com/lamoda/gs1-barcode-parser) | MIT | 21★ | **2026-10-27** | PHP, by a real fashion retailer; alive |
+| [ronanguilloux/IsoCodes](https://github.com/ronanguilloux/IsoCodes) | GPL-3.0 | 803★ | 2026-03-20 | Validates GTIN/EAN among ~40 standards — **GPL-3.0, so validation only, not embedded** |
+
+### Step 3 — the mark detector exists and nobody maintains it
+
+Logo detection returns **1,202 results**, so the raw total looks like abundance. Reading the results
+instead of the total (the pass-8 rule) shows every usable repo is **years stale**: the category was
+solved academically and abandoned.
+
+| Repo | Licence | Stars / forks | Last push | State |
+|---|---|---|---|---|
+| [satojkovic/DeepLogo](https://github.com/satojkovic/DeepLogo) | MIT | 529★ / 153f | 2022-08-28 | Best-known brand-logo detector. **Dead 3+ years**; TF Object Detection API era |
+| [FenHua/Robust_Logo_Detection](https://github.com/FenHua/Robust_Logo_Detection) | Apache-2.0 | 77★ / 19f | 2021-10-24 | Adversarially-robust variant. **Dead 5 years** |
+| [nuwandda/yolov7-logo-detection](https://github.com/nuwandda/yolov7-logo-detection) | BSD-3-Clause | 50★ / 12f | 2024-12-02 | Most recent usable baseline; YOLOv7-era |
+
+**The practical consequence:** there is no maintained open logo detector to adopt, but the task is now a
+fine-tune, not a research project. Globant's realistic move is to re-train on a current detector rather
+than revive any of these three.
+
+### Steps 4 and 5 — judgment, then the vacuum
+
+| Repo | Licence | Stars | Last push | What it does |
+|---|---|---|---|---|
+| [PAST2212/brand-protection-analyst-agent](https://github.com/PAST2212/brand-protection-analyst-agent) | MIT | 5★ | 2025-07-07 | **The only MIT-licensed brand-protection *agent* that exists.** Gemini-backed; detects fraudulent/typosquat brand use |
+| [leboncoin/trademark-monitor](https://github.com/leboncoin/trademark-monitor) | **MIT** (see correction) | 5★ | 2025-01-19 | Monitors social networks for trademark keywords. Built by a real classifieds operator |
+| [Ivan-Kouznetsov/DailyMark](https://github.com/Ivan-Kouznetsov/DailyMark) | AGPL-3.0 | 4★ | 2022-12-08 | USPTO trademark-filing watcher; copyleft, so tooling not product |
+| [codexoy/trademark-monitoring-app](https://github.com/codexoy/trademark-monitoring-app) | **none** | 12★ | 2025-11-24 | Most-starred trademark monitor — and **no LICENSE file, so all rights reserved** |
+
+That is the entire judgment tier: **four repositories, 26 stars between them**, one of them unlicensed.
+
+**Step 5 has no tier at all.** Measured, not assumed:
+
+- `licensee portal` → **1 result in all of GitHub**. It is 0★, unlicensed, and unrelated (a GMV portal).
+  **This is the crudest zero recorded anywhere in this KB** — below media pass 5's `music royalty
+  accounting` (14 results, top six summing to 0 stars) and below healthcare's `medical necessity` (3 stars).
+- `merchandise licensing` → **3 results, none relevant** (a sports-management CRUD app, 0★; two unrelated).
+- `royalty accounting` → 47 results; **top six sum to 9 stars**; the top hit is a blockchain contract.
+- `product placement detection video` → **2 results, neither relevant.**
+
+A **$389.8 billion** industry, with 1,068 companies reporting into its own trade study, has **no open
+source implementation of the thing that makes a product licensed**: the approval, the royalty
+calculation, the licensee statement, the audit.
+
+### The one real platform in the plane
+
+[**pwnera/artbucket**](https://github.com/pwnera/artbucket) — **AGPL-3.0** (verified: 34,523 B LICENSE on
+both `master` and `main`, © Pwnera SAS), **34★**, pushed **2026-11-24** (three days before this pass).
+
+Its README opens *"Your brand's source of truth, open source."* It is the only repository found that
+models the plane's actual data: each asset carries **licence terms, allowed channels and territories,
+embargo dates, and a last-day-of-use**, and it will answer whether a planned use is permitted and
+suggest alternatives when it is not. It exposes a web app, **an MCP server**, a REST API, a CLI and Git.
+
+Two caveats a client deck must carry: it is **AGPL-3.0** (Pwnera offers commercial licensing on request),
+and at 34 stars it is **a bet, not an installed base**. But it is the only code in this plane that has
+the right shape, and the MCP server makes it the natural agent target.
+
+### Corrections to the measurement channel — three licence traps, all new
+
+Pass 8 established that a raw-channel 404 is never by itself proof that a licence is missing. This pass
+adds **three further categories**, each of which would have produced a wrong row:
+
+1. **The GitHub API's `spdx_id` is not authoritative — it under-reports.** `search/repositories` returned
+   **NOASSERTION** for both [medusajs/medusa](https://github.com/medusajs/medusa) and
+   [leboncoin/trademark-monitor](https://github.com/leboncoin/trademark-monitor). Both are in fact
+   **MIT** — verified by reading `master/LICENSE` (1,075 B and 1,114 B respectively). Reading the file
+   *upgraded* the single most relevant repo in the judgment tier from "no grant" to MIT.
+2. **The licence can be declared by PATH instead of by identifier.**
+   [resourcespace/resourcespace](https://github.com/resourcespace/resourcespace) has a 76-byte
+   `license.txt` that only says *"Please see the documentation/licenses folder."* That folder holds ~30
+   **third-party** licences. Its own grant is reachable only because `composer.json` and `package.json`
+   set `"license": "documentation/licenses/resourcespace.txt"` — **a file path where SPDX expects an
+   identifier**, which is exactly why every scanner reports NOASSERTION. The actual terms: **BSD-3-Clause
+   plus a fourth trademark clause** (derivatives may not be named "ResourceSpace"; use "Powered by
+   ResourceSpace"). The repository has **no README at all**.
+3. **A repository can be publicly readable and still not be open source, by default.**
+   [pimcore/pimcore](https://github.com/pimcore/pimcore) (3,891★) — the PIM/DAM that general "open source
+   DAM" roundups still recommend — carries the **Pimcore Open Core License (POCL, last updated June
+   2025)** at `2026.x/LICENSE.md`. It defines "Open Core Software" as source that is *publicly available
+   but not licensed out as open source*, and states: **"if not provided for otherwise, a software element
+   is Proprietary Software."** Publicly visible source, proprietary by default. Note the probe detail:
+   `LICENSE.md` 404s on `master` and `main` — Pimcore's default branch is **`2026.x`**. Probing the wrong
+   branch would have reported "no licence" on a repo whose licence is the finding.
+
+### One claimed project that does not exist
+
+A vendor-adjacent aggregator describes **"UnRoyalty"** as an open-source web application for managing
+royalties, copyrights and licensing, *"available on GitHub to extend and modify."* GitHub code search for
+`unroyalty` returns **TOTAL=0**. There is no such repository. It is recorded here because it is precisely
+the row a hurried pass would have written, with a plausible name and a plausible description, into the
+one tier of this plane that has no code in it.

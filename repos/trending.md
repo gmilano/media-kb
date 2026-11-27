@@ -10,6 +10,66 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 37: consumer-products & brand-licensing infrastructure (**the substrate is Apache-2.0 and 5,689 stars; the application layer is one search result**)
+
+The licensing-out plane has no open-source application tier and a genuinely excellent substrate. Both
+halves verified: existence by `git ls-remote` (22/22 resolve), licences read from the repository rather
+than taken from the API's `spdx_id` — which was wrong twice, both times in the permissive direction.
+
+**Substrate — image matching (the healthiest tier measured in any of the 37 planes).**
+
+| Repo | Licence | Stars / forks | Last push |
+|---|---|---|---|
+| [idealo/imagededup](https://github.com/idealo/imagededup) | Apache-2.0 | 5,689★ / 477f | 2025-08-15 |
+| [jenssegers/imagehash](https://github.com/jenssegers/imagehash) | MIT | 2,060★ / 173f | 2025-09-17 |
+| [corona10/goimagehash](https://github.com/corona10/goimagehash) | BSD-2-Clause | 841★ / 79f | 2024-01-21 |
+| [KilianB/JImageHash](https://github.com/KilianB/JImageHash) | MIT | 444★ / 87f | 2024-03-08 |
+| [bentoml/CLIP-API-service](https://github.com/bentoml/CLIP-API-service) | Apache-2.0 | 67★ / 4f | **2026-11-09** |
+
+**Product identity — GS1/GTIN (permissive and alive, and the content law again: parsers free, numbers rented).**
+
+| Repo | Licence | Stars | Last push |
+|---|---|---|---|
+| [PeterBrockfeld/BarcodeParser](https://github.com/PeterBrockfeld/BarcodeParser) | MIT | 77★ | 2022-04-21 |
+| [jodal/biip](https://github.com/jodal/biip) | Apache-2.0 | 59★ | **2026-11-01** |
+| [xremix/SwiftGS1Barcode](https://github.com/xremix/SwiftGS1Barcode) | MIT | 30★ | **2026-11-08** |
+| [lamoda/gs1-barcode-parser](https://github.com/lamoda/gs1-barcode-parser) | MIT | 21★ | **2026-10-27** |
+| [ronanguilloux/IsoCodes](https://github.com/ronanguilloux/IsoCodes) | GPL-3.0 | 803★ | 2026-03-20 |
+
+**Mark detection — 1,202 search results, and every usable repo is years dead.**
+
+| Repo | Licence | Stars / forks | Last push | State |
+|---|---|---|---|---|
+| [satojkovic/DeepLogo](https://github.com/satojkovic/DeepLogo) | MIT | 529★ / 153f | 2022-08-28 | Dead 3+ years — a baseline to re-train, not a dependency |
+| [FenHua/Robust_Logo_Detection](https://github.com/FenHua/Robust_Logo_Detection) | Apache-2.0 | 77★ / 19f | 2021-10-24 | Dead 5 years |
+| [nuwandda/yolov7-logo-detection](https://github.com/nuwandda/yolov7-logo-detection) | BSD-3-Clause | 50★ / 12f | 2024-12-02 | Most recent usable baseline |
+
+**Commerce & catalogue bases that can carry licensed-product work.**
+
+| Repo | Licence | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| [frappe/erpnext](https://github.com/frappe/erpnext) | GPL-3.0 | 41,679★ / 13,652f | **2026-11-27** | No licensing module; royalty accrual is a custom DocType. Client-hosted only |
+| [medusajs/medusa](https://github.com/medusajs/medusa) | **MIT** (file-verified) | 37,443★ / 5,575f | 2026-11-26 | Best permissive API-first base |
+| [bagisto/bagisto](https://github.com/bagisto/bagisto) | MIT | 28,422★ / 3,399f | 2026-11-25 | Multi-vendor marketplace native — closest shape to many licensees |
+| [saleor/saleor](https://github.com/saleor/saleor) | BSD-3-Clause | 23,612★ / 6,222f | 2026-11-23 | Composable headless commerce |
+| [spree/spree](https://github.com/spree/spree) | BSD-3-Clause | 15,855★ / 5,319f | 2026-11-26 | DTC + **B2B** + marketplace; B2B is the licensee wholesale flow |
+| [resourcespace/resourcespace](https://github.com/resourcespace/resourcespace) | **BSD-3 + trademark clause** | 96★ / 29f | **2026-11-27** | Style-guide/asset distribution. Derivatives may not be named "ResourceSpace" |
+| [pwnera/artbucket](https://github.com/pwnera/artbucket) | **AGPL-3.0** | 34★ | **2026-11-24** | The only repo modelling licence terms, territories, embargo dates — **with an MCP server** |
+
+**Quarantined, with the reason:** [pimcore/pimcore](https://github.com/pimcore/pimcore) (3,891★ / 1,511f,
+2026-11-26) is still listed by generic "open source DAM/PIM" roundups. Its `2026.x/LICENSE.md` is the
+**Pimcore Open Core License** (June 2025): *"if not provided for otherwise, a software element is
+Proprietary Software."* Publicly readable, proprietary by default. Probe note: the licence file 404s on
+`master` and `main` — the default branch is **`2026.x`**.
+Also quarantined: [khammal/RealDeal](https://github.com/khammal/RealDeal), the one project the web
+surfaced as open-source counterfeit detection — **0★, no LICENSE file**, so all rights reserved.
+
+**What was searched and is missing:** `licensee portal` = **1 result** (the crudest zero in this KB);
+`merchandise licensing` = 3, none relevant; `product placement detection video` = 2, neither relevant;
+`royalty accounting` top six = 9 stars; `style guide brand assets` top four = 12 stars, all stale or
+unlicensed. `counterfeit detection` = **865 results and a false abundance** — all six top hits unlicensed,
+five last pushed 2017–2024. Read the results, not the total.
+
 ## 2026-11-27 — pass 36: 2D animation infrastructure (**six repositories and 32 stars hold the timing sheet of an entire production tradition**)
 
 Measured 2026-11-27; **69/69 URLs confirmed by `git ls-remote`**. This file tracks the **rigs,

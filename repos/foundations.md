@@ -4229,3 +4229,64 @@ the sheet**, and that authority belongs to a vendor and a studio.
 | https://github.com/AcademySoftwareFoundation/OpenTimelineIO | **Apache-2.0** | 2,122 | Editorial timeline interchange; the only standards-backed way to hand 2D timing to editorial |
 | https://github.com/cgwire/kitsu | **AGPL-3.0** | 779 | Production tracking for animation and VFX. **AGPL — run it as a service, never link it into a client product** |
 | https://github.com/Acly/krita-ai-diffusion | GPL-3.0 | 10,960 | The AI step that reaches the artist where they already work |
+
+## Foundations for the consumer-products & brand-licensing plane — added 2026-11-27 (pass 37)
+
+The licensing-out business (IP → physical product) has no open-source application layer, but it has a
+genuinely strong **substrate**. These are the repositories to start from. Every row was verified to exist
+with `git ls-remote` and every licence below was read from the repository, not taken from the API's
+`spdx_id` field — which was wrong twice in this pass.
+
+### Tier 1 — permissive, maintained, safe to build on
+
+| Repo | Licence | Stars / forks | Last push | Role in the plane |
+|---|---|---|---|---|
+| [idealo/imagededup](https://github.com/idealo/imagededup) | Apache-2.0 | 5,689★ / 477f | 2025-08-15 | Near-duplicate image detection. The substrate for counterfeit-listing matching and artwork-reuse audit |
+| [jenssegers/imagehash](https://github.com/jenssegers/imagehash) | MIT | 2,060★ / 173f | 2025-09-17 | Perceptual hashing in PHP — same runtime as Bagisto/Magento storefronts |
+| [corona10/goimagehash](https://github.com/corona10/goimagehash) | BSD-2-Clause | 841★ / 79f | 2024-01-21 | Perceptual hashing in Go; the marketplace-crawler path |
+| [KilianB/JImageHash](https://github.com/KilianB/JImageHash) | MIT | 444★ / 87f | 2024-03-08 | Perceptual hashing on the JVM |
+| [bentoml/CLIP-API-service](https://github.com/bentoml/CLIP-API-service) | Apache-2.0 | 67★ / 4f | **2026-11-09** | CLIP embeddings behind an API: semantic similarity, for style/character likeness rather than pixels |
+| [jodal/biip](https://github.com/jodal/biip) | Apache-2.0 | 59★ | **2026-11-01** | GS1 / GTIN / SSCC parsing — turns a scanned licensed product into a SKU identity |
+| [lamoda/gs1-barcode-parser](https://github.com/lamoda/gs1-barcode-parser) | MIT | 21★ | **2026-10-27** | GS1 parsing in PHP, maintained by an operating fashion retailer |
+| [xremix/SwiftGS1Barcode](https://github.com/xremix/SwiftGS1Barcode) | MIT | 30★ | **2026-11-08** | GS1 parsing in Swift: the in-store and field-audit path |
+| [PeterBrockfeld/BarcodeParser](https://github.com/PeterBrockfeld/BarcodeParser) | MIT | 77★ | 2022-04-21 | Most-starred GS1 parser; permissive but unmaintained since 2022 |
+
+### Tier 2 — real and useful, but the licence or the staleness constrains client work
+
+| Repo | Licence | Stars / forks | Last push | Constraint |
+|---|---|---|---|---|
+| [pwnera/artbucket](https://github.com/pwnera/artbucket) | **AGPL-3.0** | 34★ | **2026-11-24** | The only repo that models licence terms, territories, embargo dates and last-day-of-use per asset — and ships an MCP server. Copyleft; commercial licence on request from Pwnera SAS |
+| [dessant/search-by-image](https://github.com/dessant/search-by-image) | **GPL-3.0** | 3,841★ / 324f | 2026-06-27 | The largest maintained reverse-image-search tool. Analyst desk tool, not an embeddable component |
+| [ronanguilloux/IsoCodes](https://github.com/ronanguilloux/IsoCodes) | **GPL-3.0** | 803★ | 2026-03-20 | Validates GTIN/EAN plus ~40 other standards. Use to check, not to ship |
+| [satojkovic/DeepLogo](https://github.com/satojkovic/DeepLogo) | MIT | 529★ / 153f | 2022-08-28 | Best-known brand-logo detector; permissive but **dead 3+ years**. Treat as a baseline to re-train, not adopt |
+| [FenHua/Robust_Logo_Detection](https://github.com/FenHua/Robust_Logo_Detection) | Apache-2.0 | 77★ / 19f | 2021-10-24 | Adversarially-robust logo detection; **dead 5 years**. Valuable for its method, not its weights |
+| [nuwandda/yolov7-logo-detection](https://github.com/nuwandda/yolov7-logo-detection) | BSD-3-Clause | 50★ / 12f | 2024-12-02 | The most recent usable logo-detection baseline |
+
+### Tier 3 — the enforcement tier, reported exactly as measured
+
+Four repositories, **26 stars between them**, hold the entire open-source judgment layer of brand
+protection. They are listed because they are real, not because they are sufficient.
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [PAST2212/brand-protection-analyst-agent](https://github.com/PAST2212/brand-protection-analyst-agent) | MIT | 5★ | 2025-07-07 | The only MIT brand-protection agent in existence |
+| [leboncoin/trademark-monitor](https://github.com/leboncoin/trademark-monitor) | **MIT** (file-verified; API says NOASSERTION) | 5★ | 2025-01-19 | Social-network trademark monitoring from a real operator |
+| [Ivan-Kouznetsov/DailyMark](https://github.com/Ivan-Kouznetsov/DailyMark) | AGPL-3.0 | 4★ | 2022-12-08 | USPTO filing watcher |
+| [codexoy/trademark-monitoring-app](https://github.com/codexoy/trademark-monitoring-app) | **none — all rights reserved** | 12★ | 2025-11-24 | Most-starred, and unusable: no LICENSE file |
+
+### What was searched and found missing
+
+Recorded so the gap is informed rather than silent. These are search totals, read as results and not as
+counts:
+
+- `licensee portal` → **1 result in all of GitHub** (0★, unlicensed, unrelated). The crudest zero in this KB.
+- `merchandise licensing` → **3 results, none relevant.**
+- `royalty accounting` → 47 results, **top six sum to 9 stars**, top hit is a blockchain contract.
+- `product placement detection video` → **2 results, neither relevant.**
+- `style guide brand assets` → 38 results, top four sum to 12 stars, all stale or unlicensed.
+- `counterfeit detection` → 865 results and **a false abundance**: all six top hits are unlicensed student
+  projects, five of them last pushed between 2017 and 2024. The one project the web surfaced as
+  open-source brand protection, [khammal/RealDeal](https://github.com/khammal/RealDeal), is **0★ with no
+  LICENSE file** — it exists, and it cannot be used.
+- **"UnRoyalty"**, described by an aggregator as open-source royalty-management software "available on
+  GitHub", returns **TOTAL=0**. It does not exist.

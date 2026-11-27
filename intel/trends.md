@@ -3750,3 +3750,87 @@ For a 2D plane this is operationally specific: the same drawn asset, co-produced
 **different disclosure in each market and a contractual notification in one of them**. The deliverable
 is a per-jurisdiction policy engine with per-shot AI provenance — pass 8's APAC conclusion, now
 extended by a labour clause that North America can be held to.
+
+## Pass 37 (2026-11-27) — the consumer-products & brand-licensing plane: four trends, and **the structural law gets a five-step proof inside a single plane**
+
+### Trend 1 — The law now has a five-step gradient, measured in one plane in one hour
+
+Every pass in this KB has restated the same structural law: **open source solves format problems and
+abandons judgment problems.** Pass 5 found a three-step gradient inside the rights-reservation plane
+(declare → honour → liquidate). This plane produces **five steps, monotonically decreasing**, and it is
+the cleanest proof the law has received.
+
+| Step | Problem type | Supply |
+|---|---|---|
+| Match an image | format / math | `imagededup` **Apache-2.0, 5,689★** |
+| Identify the product | format, paid registry | `biip` **Apache-2.0, 59★**, alive |
+| See the mark | perception | `DeepLogo` **MIT, 529★ — dead since 2022** |
+| Judge the infringement | judgment | `brand-protection-analyst-agent` **MIT, 5★** |
+| Settle the money | judgment + relationship | **1 search result, 0★, no licence** |
+
+Five thousand six hundred and eighty-nine stars down to one search result, in five steps, with no step
+out of order. The slope *is* the finding: it predicts where Globant's work is billable, which is wherever
+the stars run out.
+
+### Trend 2 — Perception got solved and then abandoned, which is a new failure mode
+
+Steps 1 and 3 are both perception problems, and they diverged. Image matching is maintained
+(`imagededup` 2025-08-15, `imagehash` 2025-09-17, `CLIP-API-service` **2026-11-09**). Logo detection is
+**uniformly dead**: 2022-08-28, 2021-10-24, 2024-12-02 for the three usable repositories, against
+**1,202 search results**.
+
+The distinction is that generic image similarity is **infrastructure other things depend on**, while logo
+detection is a **finished academic task** — once the papers were published there was no reason to
+maintain the code. This is a trend worth naming because it inverts the usual advice: a 529★ MIT repository
+with 153 forks looks like a dependency and is actually a **baseline to re-train**. The practical read for
+2026: logo detection is a fine-tune on a current detector, not an adoption decision.
+
+### Trend 3 — The regulatory driver is real, dated, and lands on the exemption that covers this plane
+
+EU AI Act Article 50 transparency took effect **2 August 2026**, with existing providers obliged by
+**2 December 2026** — five days after this pass. Fines reach **€15M or 3% of turnover**, and the reach is
+extraterritorial.
+
+The trend is not "regulation is coming". It is that **the Act's own exemption is where the work is.**
+Article 50 exempts *artistic, satirical, fictional or creative* works, and licensed character art is
+precisely that category. So the duty cannot be discharged by reading the exemption; it has to be
+**determined per asset and per channel**, and then **allocated between licensor and licensee by contract**.
+Determination plus allocation plus retained evidence is a software product. Nobody has built it: the only
+repository in the world with fields for territory, permitted channel and embargo date is
+`pwnera/artbucket`, **AGPL-3.0, 34 stars, pushed 2026-11-24**.
+
+### Trend 4 — The method trend: licence metadata has now failed in **seven** distinct ways
+
+Pass 34 recorded four. This plane adds three more, each of which would have produced a wrong row, and all
+three are worth propagating to the other eleven industries:
+
+5. **`spdx_id` under-reports, so NOASSERTION must be read as "parser gave up".** The GitHub search API
+   returned NOASSERTION for `medusajs/medusa` and `leboncoin/trademark-monitor`; **both are MIT**, verified
+   by reading `master/LICENSE` (1,075 B / 1,114 B). The second one *upgraded the most relevant repository
+   in the plane's judgment tier* from "no grant" to usable. Under-reporting costs findings, not just accuracy.
+6. **The licence can be declared by file path instead of by identifier.** `resourcespace/resourcespace`
+   sets `"license": "documentation/licenses/resourcespace.txt"` in both `composer.json` and `package.json`
+   — a path where SPDX expects an identifier, which is why every scanner reports NOASSERTION. Its 76-byte
+   root `license.txt` is only a pointer to a folder of ~30 **third-party** licences. The real grant is
+   **BSD-3-Clause plus a fourth trademark clause** (no derivative may be called "ResourceSpace"; use
+   "Powered by ResourceSpace"). The repository has **no README at all**.
+7. **Publicly readable source can be proprietary by default.** `pimcore/pimcore` (3,891★) carries the
+   **Pimcore Open Core License** (June 2025) at `2026.x/LICENSE.md`, which states: *"if not provided for
+   otherwise, a software element is Proprietary Software."* Visibility is not a grant. **And the probe
+   detail generalises:** `LICENSE.md` 404s on `master` and `main` because the default branch is `2026.x`.
+   Resolve the default branch **before** concluding a licence is missing — `search/repositories` with
+   `-f q='repo:<slug>'` returns `default_branch` in the same call that returns stars and forks.
+
+**The corollary that keeps earning its place:** a 404 on the raw channel is never, by itself, proof that a
+licence is missing. In this pass it meant the wrong branch (Pimcore), a pointer file (ResourceSpace) and a
+lazy parser (Medusa, leboncoin) — three different causes, zero of them "unlicensed".
+
+### Trend 5 — A named open-source project that does not exist
+
+An aggregator page describes **"UnRoyalty"** as open-source royalty-management software *"available on
+GitHub to extend and modify"*. GitHub search for `unroyalty` returns **TOTAL=0**.
+
+This is recorded as a trend, not an anecdote, because of **where** it appeared: in the one tier of this
+plane that has no code at all. Content describing software that does not exist accumulates fastest
+precisely where real software is absent, and it is shaped to be plausible — a sensible name, a correct
+feature list, a claim of a GitHub repository. **In an empty tier, verify existence before relevance.**

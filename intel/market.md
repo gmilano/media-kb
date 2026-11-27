@@ -1502,6 +1502,50 @@ trust risk to raise unprompted:** a March 2026 Jordan Center warning (reported v
 news-organisation partnerships with betting platforms can undermine trust in journalism — directly
 relevant now that prediction-market mechanics are appearing inside publisher games (see EMEA).
 
+### Pass 41 (2026-11-27) — the content-protection, soft-binding & anti-piracy enforcement layer in North America
+
+**The regional fact that defines the engagement: North America is the only major region in this plane
+with no blocking mechanism in force.** Enforcement runs on notice-and-takedown and on litigation, and
+three competing bills disagree on fundamentals:
+
+| Instrument | Status (checked 2026-11-27) | Scope |
+| --- | --- | --- |
+| **FADPA** — Foreign Anti-Digital Piracy Act, H.R. 791 (119th Congress) | Introduced **2025-01-28** (Rep. Lofgren); **referred to House Judiciary, no later action recorded** | Court-ordered blocking of foreign pirate sites |
+| **DEFEND IP Act** — Senate **S. 5529** | With Senate Judiciary | Merges FADPA and the Block BEARD draft. Orders to **ISPs and large DNS resolvers**; **explicitly excludes VPN providers** |
+| **American Copyright Protection Act of 2026** (Rep. Issa) | Introduced; **official text not published** at time of this pass | **Includes VPN operators** — the central divergence from DEFEND IP |
+
+Opposition is organised (Re:Create, Public Knowledge) and argues over-blocking and technical
+unreliability. Commentary around the **Cox** ruling reads the policy centre of gravity as moving from
+*ISP liability theory* toward *blocking orders* — i.e. toward the model already running in Italy,
+Brazil and India.
+
+**Standards footing.** The NA broadcast watermark standard **`org.atsc.a336` is entry #2 of 80** in
+the C2PA soft-binding registry, and Adobe — a North American registrant — holds six entries
+(`trustmark.Q/C/P/F`, `hiermark`, `flowmark`, `icn.dense`). The reference stack for the whole plane
+(`c2pa-rs`, dual MIT + Apache-2.0) is NA-originated and permissive.
+
+**Opportunities, in priority order.**
+
+1. **The Soft Binding Resolution API as a managed service.** Only **13 of 80** registered algorithms
+   have a live endpoint. NA studios and platforms hold the libraries that most need manifest recovery
+   and the standards bodies sit here. Reference implementations are MIT/Apache-2.0 (Pattern 76).
+2. **The evidence pipeline around a vendor's session mark** (Pattern 78). Guild agreements (WGA,
+   SAG-AFTRA, DGA) already make recordkeeping the deliverable a studio cannot buy off the shelf —
+   this KB recorded that for likeness; it applies identically to leak attribution.
+3. **A legislative-readiness assessment, scoped now and deployed on passage.** Because the three bills
+   disagree on whether VPNs are in scope, a client's blocking pipeline cannot be designed once. Sell
+   the policy engine (Pattern 79) with the US pack **hard-gated to refuse blocking requests** until a
+   law is in force.
+
+**Market figures for this region, with their provenance — not one of them is a measured loss.**
+Kearney's widely-quoted **$75B annual loss rising to $125B by 2028** is a projection. A US figure of
+**$113B by 2027** is likewise projected. The structural numbers are the more defensible ones: roughly
+**130 US subscription-piracy sites** charging **$5–10/month**, and the MPA's estimate that illicit
+streaming operations run at **margins approaching 90%** on about **$2B/year** of combined advertising
+and subscription revenue. **Quote the business-model numbers, not the loss numbers** — they describe
+an adversary with payroll and uptime obligations, which is what makes detection tractable.
+
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3164,6 +3208,57 @@ layer to be a differentiator, that is a real constraint, and it is why the MIT p
 clue corpus was found in any language. Guardian Puzzles' 1.7M figure rests on a single secondary
 source and should be re-sourced before it is quoted to a client.
 
+### Pass 41 (2026-11-27) — the content-protection, soft-binding & anti-piracy enforcement layer in EMEA
+
+**EMEA is the region where this plane is a live legal obligation rather than a risk discussion, and
+where the regulator has published the measurement of its own failure.**
+
+| Instrument | Date | What it establishes |
+| --- | --- | --- |
+| **Recommendation (EU) 2023/1018** | 2023 | Live-event piracy measures — **non-binding** |
+| **Commission assessment of that Recommendation** | **2025-11** | *"Despite the progress made, the Recommendation has not resulted in considerable curbing of the overall level of piracy of live events"*; limited improvement in promptness of notice handling |
+| **European Parliament study** (JURI-commissioned) | **2026-07** | Argues for **strict, binding, EU-wide blocking of illegal live sports streams within 30 minutes**; explicitly acknowledges over-blocking risk |
+| **Targeted copyright consultation** | **2026-09-29** | Open consultation feeding the successor instrument |
+| **AAPA three-layer regulatory proposal** | **2026-11-18** | Industry advocacy: binding 30-minute removal obligation on hosting providers |
+| **Formal Commission recommendation** | expected 2026-11 | **NOT PUBLISHED as of this pass (searched 2026-11-27)** — a dated, falsifiable watch item |
+
+**Italy is the working prototype of the regime the EU is debating, and the only place its cost has
+been priced.** AGCOM's **Piracy Shield** has run since **February 2024** on a **30-minute** blocking
+obligation; AGCOM rules of **February 2025** extended that duty to **VPN services and public DNS
+resolvers**; in **August 2025** scope widened from live sport to **film and TV premieres and live
+music**. In **January 2026 AGCOM fined Cloudflare €14.2 million** over its 1.1.1.1 resolver;
+Cloudflare is appealing and is challenging the legality of the orders in administrative court,
+arguing censorship without judicial oversight. Critics cite a 2025 study finding hundreds of
+legitimate sites affected. **The UK** has a September 2026 study estimating piracy across sport, film
+and TV at about **£1.35 billion a year to the UK economy** — the most defensible single regional
+figure located in this pass, because it is scoped to one economy and one study rather than
+extrapolated.
+
+**Standards footing.** EMEA registrants are present in the C2PA soft-binding registry — including
+`es.lumatrace` and `eu.sasha.softbinding.v1`, the only two of the 80 identifiers carrying an explicit
+European geography marker, alongside Imatag and the European arms of the DRM vendor set
+(castLabs' two entries include the session-bound `castLabs.watermark.1.session-v1`).
+
+**Opportunities, in priority order.**
+
+1. **The 30-minute policy engine with over-blocking controls** (Pattern 79). This is the region's
+   defining build. The deadline is machine-speed by law, so the human approver, reversal path and
+   retained authorisation record are not optional extras — the €14.2M fine and the appeal around it
+   are the commercial argument for building them properly.
+2. **Compliance evidence for the obligation, not just the block.** The Commission's own finding was
+   about *promptness of notice handling*. A client that can evidence its 30-minute performance per
+   notice is positioned for whatever the successor instrument requires; one that cannot is exposed
+   either way.
+3. **Sell against the instrument already in force, not the one expected.** MDR/IVDR-style advice from
+   this KB's healthcare passes transfers exactly: the firm ground is Italy's operating scheme and
+   national court practice; the pending EU recommendation is a pipeline accelerator, not a basis for
+   a signed scope.
+
+**Honest gap:** no EMEA-wide figure for the *cost of compliance* with a 30-minute regime was located —
+only loss estimates and the one Italian fine. A proposal should price the engineering from the SLA,
+not from a published benchmark, because none exists.
+
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -4802,6 +4897,47 @@ than retrofitting it.
 crossword-equivalent corpus was located for Japanese, Korean or Chinese, and the word-grid
 assumptions of the English tooling do not transfer to non-alphabetic scripts in any case — an
 unexamined technical question this KB should not pretend to have answered.
+
+### Pass 41 (2026-11-27) — the content-protection, soft-binding & anti-piracy enforcement layer in APAC
+
+**APAC's distinguishing feature in this plane is that blocking is *judicial and real-time* rather
+than administrative, and India has built the most operationally advanced version of it anywhere.**
+
+| Order | Date | What it establishes |
+| --- | --- | --- |
+| **UTV Software** (Delhi HC) | 2019 | The origin of "dynamic injunctions" — blocking extends to new mirror sites without a fresh suit |
+| **JioStar India v. daddylives.nl** (Delhi HC) | **2026-03-25** | Real-time dynamic injunction for **IPL 2026**; court recognised that live-sport streams spike during the match and shift domains |
+| **Zee Entertainment v. soccerbox.me** (Delhi HC) | **2026-06** | *Ex-parte ad-interim* dynamic injunction for **FIFA World Cup 2026**; plaintiff must **file continuing affidavits** naming further rogue sites/apps, which are then notified to DNRs and ISPs |
+| **Sporta Technologies (FanCode)** (Delhi HC) | **2026-10** | Real-time blocking extended to **F1 practice streams**; the court distinguished live events from films |
+
+Commentary notes dynamic injunctions are losing effectiveness against infrastructure-driven piracy
+networks, which is driving the move to **"Dynamic+" and superlative injunctions**. **Malaysia** is
+considering AI rules alongside anti-piracy measures in a proposed copyright-law overhaul (July 2026).
+The regional AI-regulation picture this KB already records — Latham & Watkins, September 2026, three
+divergent categories — applies here too: **the asset is a per-jurisdiction policy engine, not a
+compliance mode.**
+
+**The build this region specifically creates.** The Zee order's **continuing-affidavit** requirement
+is a recurring, evidence-heavy, deadline-bound document task tied to a live sporting calendar — and
+`takedown automation copyright` returns **zero** open-source repos while `restream detection live
+stream` returns **zero**. **An affidavit generator with a chain-of-custody record, feeding a judicial
+route rather than an administrative one, is the highest-value unbuilt artefact in APAC in this plane**
+(Pattern 79, IN pack).
+
+**Standards footing — and an informed gap.** Several registry entrants in the C2PA soft-binding list
+are watermarking firms commonly associated with Korea and Japan (`com.markany.watermark.1`,
+`com.digicaps.fingerprint.1`, `com.evixar.eaw.1`, `com.evixar.efp.type3.1`), but **nationality is
+inferred from vendor name and was not verified in this pass — treat it as unconfirmed.** What *is*
+verifiable from the registry JSON: **no entry identifier carries an APAC national geography marker**,
+unlike `es.` and `eu.` in EMEA.
+
+**Market figures.** The most-quoted global sports-piracy figure, **$28B/year**, circulates in
+connection with the 2026 World Cup; it is a vendor/industry number and no primary methodology was
+located. One secondary source states Indian court orders in 2026 gave ISPs **up to 36 hours** to block
+a reported site — **unverified against the orders themselves and in tension with the "real-time"
+framing of the same orders**; do not quote it without checking the text. **Honest gap: no APAC-scoped
+market figure for content protection or anti-piracy services was found at any scope in this pass.**
+
 
 ### LATAM
 
@@ -6489,6 +6625,54 @@ explicitly rather than assumed.
 regional revenue case has to be made from the NA and EMEA retention evidence plus the client's own
 subscriber data — say so rather than importing a global number.
 
+### Pass 41 (2026-11-27) — the content-protection, soft-binding & anti-piracy enforcement layer in LATAM
+
+**LATAM's position in this plane is stronger than its position in most planes in this KB: Brazil runs
+a working administrative blocking regime and — uniquely among the four regions — publishes its
+enforcement data.**
+
+| Fact | Detail | Source quality |
+| --- | --- | --- |
+| **Anatel public blocking dashboard** | Launched **2026-05**, near-real-time data on administrative blocks | **The only public, machine-consumable enforcement feed located in any region in this pass** |
+| Anatel blocking volume | **198 blocking operations** against pirate IPTV services in 2025 | Secondary |
+| Scale of demand | Anatel estimates **4–6 million Brazilians** use pirate IPTV recurrently | Agency estimate |
+| **Operation 404, phase 8** | **535 sites and one app suspended, 7 arrests, 44 search warrants**; simultaneous cooperation with **Argentina, Ecuador, Paraguay, Peru and the UK** | Ministry of Justice / Anatel. **DATE UNRESOLVED: sources place the same operation in both 2025 and 2026 — flagged, not resolved in this pass** |
+| Dynamic blocking | Trade report (≈2026-11-26) describes newly identified routes inserted into technical lists shared with operators and regional broadband providers | **Single trade-press report, unverified against Anatel material** |
+| **ANCINE** | IIPA's 2026 Special 301 submission notes ANATEL increased its efforts while **ANCINE has not implemented its own administrative site-blocking system** | IIPA (industry submission) |
+
+**Why the regional posture is the inverse of the KB's healthcare finding.** This KB recorded that in
+LATAM pharmacovigilance "there is nothing to comply with, so the sale must rest on cost per case." In
+*this* plane the opposite holds: **Brazil has an operating administrative mechanism, an agency that
+publishes its actions, and cross-border coordination already running.** The sale here rests on
+**reconciliation and evidence** — proving that what a rights-holder asked to be blocked was blocked,
+and keeping the record. **Do not inherit a regional posture from one plane to another; it inverted
+again.**
+
+**Opportunities, in priority order.**
+
+1. **Dashboard reconciliation as a product.** Anatel's public near-real-time feed plus a client's own
+   detection output equals a measurable enforcement-effectiveness report. This is buildable today,
+   from a primary public source, and no open-source tool does it (`piracy monitoring` = 21 repos, all
+   0–1 stars besides one off-topic BitTorrent mapper).
+2. **The multi-country filing router.** Operation 404's phase-8 cooperation list (AR, EC, PY, PE, UK)
+   is the actual footprint a regional broadcaster needs to file into. One evidence schema, several
+   national routes (Pattern 79).
+3. **The ANCINE gap, stated as a gap.** Audiovisual administrative blocking is **not** implemented by
+   the sector regulator. That is a reason to route through Anatel and the courts today — not a
+   capability to promise.
+
+**Market figures.** Subscription-video platforms are estimated to lose **more than $521 million a
+year across the region** — the only LATAM-scoped figure located, and it is a vendor/industry estimate.
+**Honest gap: no LATAM market figure for content-protection or anti-piracy *services* exists at any
+scope in this pass**; the revenue case must be built from the client's own subscriber and churn data
+plus Anatel's published volumes, and the proposal should say so rather than importing a global number.
+
+**Registry gap, measured:** of the 80 approved C2PA soft-binding algorithm identifiers, **none
+carries a LATAM registrant marker.** The region is a consumer of this standards layer and not yet a
+participant in it — which is precisely what makes Pattern 77 (register an identifier built on a
+permissive model) a differentiating regional play rather than a crowded one.
+
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -7977,3 +8161,51 @@ A cost model built from those five lines is defensible. A TAM slide built from t
 | **Every Puzzle Project** | Global (volunteer) | The digitisation effort feeding public-domain puzzles — **12 active repos, all unlicensed** |
 | **The Atlantic / Time / Business Insider** | North America | The fast followers; Atlantic meters free players toward subscription |
 | **CodyCross / Crostic (Spanish-language apps)** | LATAM | Direct-to-consumer Spanish crossword subscriptions — the demand signal under the missing data layer |
+
+## Market size — pass 41 addendum (2026-11-27): the piracy-loss figure is quoted **4.5× apart**, the two most-cited series move in **opposite directions**, and the thing a buyer purchases is unsized
+
+**The dispersion, same subject, overlapping years.**
+
+| Figure | Scope | Source type |
+| --- | --- | --- |
+| **$75B/year**, rising to **$125B by 2028** | Global piracy losses | Kearney — **projection** |
+| **$67B/year** | Losses to illegal IPTV platforms | Interview, secondary |
+| **$40B–$97.1B/year** | Movie-industry losses to digital piracy | Secondary; **a 2.4× range inside a single claim** |
+| **$28B/year** | Global sports piracy | Most-quoted; no primary methodology located |
+| **£1.35B/year** | UK economy — sport, film and TV | September 2026 study, single economy |
+| **>$521M/year** | LATAM subscription-video platforms | Vendor/industry estimate |
+| **$113B by 2027** | United States | **Projection** |
+
+Headline spread across the global figures: **$28B to $125B = 4.5×**, and the widest is a forecast two
+years out.
+
+**The contradiction that should stop anyone quoting a single number.** The most-cited *measured*
+series moves the other way from the most-cited *loss* series. MUSO tracked **185.6 billion** visits to
+piracy sites in 2025, **down 14.2% year on year**, after **216.3 billion** in 2024, itself **down
+5.7%**. So demand-side traffic has fallen two years running while claimed losses rise. Both can be
+true — fewer visits to higher-value subscription piracy — but **no source located in this pass
+reconciles them**, so the honest position is: cite the direction, never the total.
+
+**The numbers that are actually defensible, and they are structural rather than aggregate.** These
+describe the adversary as a business with costs and uptime obligations, which is what makes a
+detection engagement tractable:
+
+- Roughly **130 US subscription-piracy sites** charging **$5–10/month**.
+- MPA: illicit streaming operations run at **margins approaching 90%**, on about **$2B/year** of
+  combined advertising and subscription revenue.
+- Anatel: **198 blocking operations** in 2025, against an estimated **4–6 million** recurrent pirate
+  IPTV users in Brazil.
+- AGCOM: a **€14.2M** fine issued to a single resolver operator (January 2026) — **the only priced
+  consequence of non-compliance located in any region.**
+
+**NOT CITABLE as a single number:** any global piracy-loss total; the $28B sports figure; the "36
+hours" ISP compliance window reported for Indian orders (unverified against the orders, and in tension
+with their real-time framing); the date of Operation 404 phase 8 (sources split between 2025 and
+2026).
+
+**The structural gap, and it is the same one this KB keeps finding:** **the content-protection and
+anti-piracy *services* market is not sized at any scope** — not globally, not per region. Every figure
+above sizes the **loss**, and a loss figure is not a budget. What a buyer purchases here is a 30-minute
+SLA, an evidence trail and a per-jurisdiction filing route, and **the only priced number anywhere near
+it is a regulatory fine.** Price the engineering from the obligation (Italy's 30 minutes, India's
+affidavit cadence, Anatel's published volumes), never from the loss estimate.

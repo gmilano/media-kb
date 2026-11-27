@@ -4652,3 +4652,80 @@ at source; re-check each before quoting a number to a client.
   work found is 2025. Either the research moved on or the venues are not indexed for these terms;
   what is certain is that the newest public result is a year old and the strongest permissive solver
   implementation, `Berkeley-Crossword-Solver`, is three years stale.
+
+## Pass 41 (2026-11-27) — foundations of the content-protection & soft-binding plane
+
+Verified 2026-11-27: existence by `git ls-remote`, **licence by bytes** from the raw channel
+(13 filenames × 2 branches), metrics by `search/repositories` with `repo:<slug>`.
+
+### The registry — the artefact that governs this plane
+
+[`c2pa-org/softbinding-algorithm-list`](https://github.com/c2pa-org/softbinding-algorithm-list)
+(37★ / 41f, **CC-BY-4.0**, 18,650 B, pushed 2026-11-25) is the authoritative list of approved
+soft-binding algorithm identifiers. A `soft binding` assertion names one of these in its `alg` field;
+that is how a C2PA manifest is recovered after the metadata carrying it has been stripped. **Measured
+from `softbinding-algorithm-list.json` (65,162 B, fetched 2026-11-27) — 80 entries, 61 watermark /
+19 fingerprint, image 43 · video 32 · audio 26 · text 7 · application 3.**
+
+**Who is in it.** Entry **#1** is Digimarc, **#2** is `org.atsc.a336` (the ATSC broadcast watermark
+standard), **#3** is `io.iscc.v0`. The incumbent content-protection vendors are all present — Nagra
+NexGuard, Verimatrix, castLabs (**two** entries, including `castLabs.watermark.1.session-v1`, i.e. a
+*session-bound* forensic mark), MarkAny, DoveRunner, Imatag, Digicaps, Evixar, Microsoft
+(`invismark`, `wavmark`). Adobe holds six (`trustmark.Q/C/P/F`, `hiermark`, `flowmark`, `icn.dense`).
+
+**ISCC — a correction to this KB's own pass-8 assessment.** Pass 8 recorded ISCC (ISO 24138:2024) as
+"Apache-2.0 **but 26 stars** = a normative bet, not an installed base." That read the popularity
+signal and missed the standards signal: **ISCC is entry #3 of 80**, it is one of only 19 fingerprint
+entries, and it now has two Apache-2.0 service repos ([iscc/iscc-c2pa-resolver](https://github.com/iscc/iscc-c2pa-resolver),
+[iscc/iscc-c2pa-store](https://github.com/iscc/iscc-c2pa-store)) pushed 2026-11-27 and 2026-11-21.
+**The bet is being paid off in registry position, which stars do not measure.** Pass 8's caution about
+installed base stands; its implied dismissal does not.
+
+**The open fingerprinting toolkit is now standards-eligible — through one registrant.**
+`com.originalpictures.*` holds **12 of the 80 entries**, and they are wrappers around open
+algorithms: `chromaprint` (the sector-standard audio fingerprinter pass 8 analysed in depth),
+`audfprint`, `pdq`, `vpdq`, `tmk-pdqf`, `dinov2`, `dinov2-lsh256`, plus Meta's seal models. **A
+company registered the open stack and now owns its identifiers.**
+
+### Foundational repos
+
+| Repo | Licence (by bytes) | ★ | Forks | Pushed | Role in a build |
+| --- | --- | --- | --- | --- | --- |
+| [contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs) | **dual MIT (1,083 B) + Apache-2.0 (11,335 B)** | 456 | 206 | 2026-11-26 | **The base of everything in this plane.** Reference Rust SDK for signing, reading and validating manifests. API mislabels it `NOASSERTION`. |
+| [contentauth/c2patool](https://github.com/contentauth/c2patool) | **Apache-2.0** | 175 | 48 | 2026-11-26 | CLI for adding/displaying manifests. The fastest way to a working proof of concept and to CI assertions. |
+| [contentauth/c2pa-python](https://github.com/contentauth/c2pa-python) | **Apache-2.0** | 110 | 40 | 2026-11-25 | Python binding — the practical integration path for a media pipeline that is already Python. |
+| [c2pa-org/specifications](https://github.com/c2pa-org/specifications) | CC-BY-4.0 | 216 | 34 | 2026-11-25 | The spec text. **In this plane, build to the published spec** — the pass-8 rule (RSL) applies again. |
+| [c2pa-org/conformance-public](https://github.com/c2pa-org/conformance-public) | CC-BY-4.0 | 52 | 25 | 2026-11-26 | The conformance programme: the difference between implementing C2PA and being permitted to claim it. Read before promising a client a "C2PA-compliant" deliverable. |
+| [facebookresearch/videoseal](https://github.com/facebookresearch/videoseal) | **MIT** (1,087 B) | 829 | 111 | 2026-11-10 | Video + image watermarking. **The most-registered open algorithm family in the registry.** |
+| [facebookresearch/content-seal](https://github.com/facebookresearch/content-seal) | **MIT** (1,086 B) | 243 | 17 | 2026-11-05 | **New to this KB.** Meta's current umbrella framework: Pixel Seal, Video Seal, TextSeal. Note the README's own caveat: the production deployment is *a custom proprietary implementation*. |
+| [facebookresearch/audioseal](https://github.com/facebookresearch/audioseal) | **MIT — weights included** | 808 | 109 | 2026-11-03 | Localized audio/speech watermarking. **The one unambiguous weights-included permissive grant in the plane** (README, 2024-04-02). |
+| [adobe/trustmark](https://github.com/adobe/trustmark) | **MIT** (1,218 B) | 191 | 41 | 2026-11-11 | Arbitrary-resolution image watermarking; four registry entries. Already correctly recorded as MIT by this KB despite the API's `NOASSERTION`. |
+| [awslabs/speke-reference-server](https://github.com/awslabs/speke-reference-server) | **Apache-2.0** (11,358 B) | 123 | 50 | 2026-09-08 | Already in KB. SPEKE key exchange — the *packaging* side boundary. Pair with Pattern 24, do not confuse with forensic marking. |
+| [deepmark/c2pa-soft-binding-stack](https://github.com/deepmark/c2pa-soft-binding-stack) | **MIT** (1,065 B) | 3 | 1 | 2026-11-24 | A working **Soft Binding Resolution API** implementation. One of very few. |
+| [Original-Pictures/soft-bindings-benchmark](https://github.com/Original-Pictures/soft-bindings-benchmark) | **Apache-2.0** | 0 | 1 | 2026-11-07 | Open-licence benchmark of watermarks and fingerprints as soft bindings. **Use it as the acceptance-test harness; do not re-derive it.** |
+| [beomjin-ahn/provsurvive](https://github.com/beomjin-ahn/provsurvive) | **MIT** (1,081 B) | 2 | 0 | 2026-11-14 | Independent benchmark of provenance survival under edits. The control for the above. |
+| [hagezi/dns-blocklists](https://github.com/hagezi/dns-blocklists) | **GPL-3.0** | **29,211** | 885 | 2026-11-27 | **The control group, not a build dependency.** Proof the blocklist mechanism is mature — for ads and malware. |
+
+### The measured gap that is the whole opportunity
+
+**13 of the 80 approved algorithms declare a Soft Binding Resolution API endpoint.** The remaining 67
+are identifiers with no lookup: a stripped asset can be *matched* in principle and *resolved* nowhere.
+The registry grew by **19 entries in November 2026 alone** and by 55 across 2026, while the resolution
+layer is a handful of repos holding 0–3 stars each. **The spec for the missing half is public and the
+two reference implementations are Apache-2.0 and MIT** — this is the clearest
+substrate-exists/service-missing gap recorded in this KB since pass 35.
+
+### Licence and method notes carried out of this pass
+
+- **`NOASSERTION` is symmetric.** Eighth false negative of `search/repositories` in this KB, and the
+  first pointing *toward* permissiveness: `c2pa-rs` is dual MIT **and** Apache-2.0, flagged
+  `NOASSERTION` only because it ships two licence files. Prior instances concealed something worse
+  (proprietary EULAs, R stubs). **Rule: `NOASSERTION` means unmeasured, in both directions.**
+- **`git ls-remote` is an existence oracle, not an identity oracle.** It succeeds on renamed and
+  redirected slugs, so it cannot tell a live repo from a redirect — the failure mode is a duplicate
+  KB row for one project. Compare `HEAD` SHAs instead. `videoseal` (`f12875a9…`) ≠ `content-seal`
+  (`b93b1a44…`): **two live repos, hypothesis of a rename falsified in one call.** `curl -sI` on the
+  repo page returns 403 through this session's proxy and cannot do this check.
+- **Do not carry `openstego`** (1,452★, **GPL-2.0**, dormant since 2023-08-12) into a forensic
+  proposal because a vendor round-up lists it as "the open-source option". It is steganography, not
+  forensic marking, and it is copyleft.

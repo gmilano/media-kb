@@ -3913,3 +3913,65 @@ Chess puzzles — the counter-example, and the healthiest corner of the plane:
    Wordle clone. A control raw request against a comparable repo returned 200, so this is not
    throttling or proxy failure: the repo is renamed, moved or deleted. `lynn/hello-wordl` is the
    verified live substitute. **A widely-cited repo is not a verified repo.**
+
+## Pass 41 (2026-11-27) — the content-protection, soft-binding & anti-piracy enforcement plane
+
+**Scope, and why it is not a repeat of Pattern 24.** The KB already covers DRM as *access control at
+delivery* — the key boundary that cannot be built from open source. This plane is everything
+**downstream of the gate**: recovering provenance from an asset whose metadata was stripped, tracing
+which account leaked a file, getting an infringing stream taken down, and executing a blocking order.
+Vocabulary check before any web search: `forensic watermark` **0 hits in 0 files**, `license server`
+**0**, `manifest repository` **0**, `restream` **0**, `DMCA` **1**, `blocking order` **1**,
+`soft binding` **2** (incidental TrustMark prose). Measured 2026-11-27.
+
+### The agent layer, in full
+
+Six repos, and the whole layer is **read-only verification**. Not one agent in this plane *marks*,
+*resolves*, *monitors* or *files* anything.
+
+| Agent | Repo | Licence (by bytes) | ★ | Forks | Pushed | What it does — and the limit |
+| --- | --- | --- | --- | --- | --- | --- |
+| C2PA MCP (official) | [contentauth/c2pa-mcp](https://github.com/contentauth/c2pa-mcp) | **Apache-2.0** | 4 | 1 | 2026-03-27 | The Content Authenticity Initiative's own MCP server, over the CAI Rust SDK. **Reads** credentials. Four stars, eight months dormant. |
+| Provenance forensics | [karthikrshet/ClaudeMark](https://github.com/karthikrshet/ClaudeMark) | **MIT** (1,122 B) | 10 | 1 | 2026-11-02 | Local-first statistical watermark/provenance forensics. **The only agent here aimed at detection rather than stripping.** |
+| Agent-behaviour watermarking | [Tooooa/AgentMark](https://github.com/Tooooa/AgentMark) | **MIT** (1,071 B) | 102 | 8 | 2026-04-08 | ACL 2026 Main. Utility-preserving behavioural watermarking **for agents, not for media** — adjacent, and the best-starred repo in the table. |
+| C2PA verify | [harelrech/c2pa-mcp](https://github.com/harelrech/c2pa-mcp) | Apache-2.0 | 2 | 0 | 2026-09-21 | Verifies credentials, returns LLM-ready provenance. |
+| C2PA read (CLI + MCP) | [richardwooding/c2pa-mcp](https://github.com/richardwooding/c2pa-mcp) | MIT | 0 | — | 2026-11-09 | Reports what a file claims. Zero stars, pushed this month. |
+| Spec-as-graph | [encypherai/c2pa-knowledge-graph](https://github.com/encypherai/c2pa-knowledge-graph) | Apache-2.0 | 3 | 1 | 2026-06-05 | Versioned RDF/OWL built from C2PA spec sources. A **spec oracle** for an agent, not a runtime. |
+
+### What returned nothing, stated explicitly
+
+| Query (2026-11-27) | Results | Reading |
+| --- | --- | --- |
+| `takedown automation copyright` | **0** | A literal zero. The most repetitive, highest-volume task in the plane. |
+| `restream detection live stream` | **0** | A literal zero, beneath the largest claimed loss figure in the plane. |
+| `content authenticity mcp` | **2** | 1★ and 0★. |
+| `piracy monitoring` | 21 | Top hit is BitTorrent infrastructure mapping (26★, BSD-2-Clause); **all other top-10 results 0–1★**, several coursework/hackathon. |
+| `forensic watermarking video` | 21 | **Every result 0–1★**, most unlicensed. Five repos share one name — a class cohort, not a field. |
+| `drm license server` | 13 | Captured by *software* licensing. Only real key server: [diegojfer/FairPlay-KSM](https://github.com/diegojfer/FairPlay-KSM), **GPL-3.0, last pushed 2020-04-21**. |
+| `token authentication cdn signed url stars:>=50` | **1** | A Keycloak awesome-list collision. No permissive edge-auth reference. |
+
+**A NEW SHAPE OF SEARCH-TERM CAPTURE, AND IT IS THE THIRD KIND THIS KB HAS RECORDED.** Cycle 6 found
+terms captured *by another industry* (`E2B` → AI sandboxes; `eidr` → ID-card readers). This plane
+adds capture **by the object of enforcement rather than by another sector**: `DMCA takedown` returns
+135 repos, and the top results are *archives of takedown notices*
+([github/dmca](https://github.com/github/dmca), 6,536★) and *re-uploads of content that was taken
+down*. The word describes what happened **to** the repo, so the query can never surface tooling.
+Searching this plane requires naming the mechanism (`soft binding`, `blocking order`,
+`resolution API`), never the legal instrument.
+
+### The counter-layer, and the number that corrects this KB
+
+`c2pa stars:>=50` returns 15 repos and **the most-starred repo matching the standard's own name
+exists to defeat it**: [guillaumemeyer/watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover)
+(**28,928★ / 3,217f, MIT, 2026-11-23**) against
+[contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs) at 456★ = **63×**, and against
+[facebookresearch/content-seal](https://github.com/facebookresearch/content-seal) at 243★ = **119×**.
+Pass 34 measured this law at 7×–21× in ad integrity; pass 23 recorded 6,530★ for the best-known
+remover. **Both understate it.** And unlike ad-fraud evasion, the removal side here has a peer-reviewed
+proof behind it: [XuandongZhao/WatermarkAttacker](https://github.com/XuandongZhao/WatermarkAttacker)
+(281★, MIT) is the NeurIPS 2024 paper *"Invisible Image Watermarks Are Provably Removable Using
+Generative AI."*
+
+**The consequence for a proposal, in one line:** never sell an invisible watermark as *prevention*.
+It is **evidence** — and the registry below is what makes evidence admissible rather than merely
+technical.

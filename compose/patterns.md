@@ -6335,3 +6335,171 @@ label-bearing content. Both are cheap to handle at design time and expensive lat
 - **Do not treat an unlicensed repo as open** because it is active and well made. Twelve Every Puzzle
   Project repositories, `m0nt4ld0/crucigrama`, `javierarce/palabras` and `sofyc/ConQuer` are all
   readable and all legally unusable. Ask for a licence instead — it is the cheapest win here.
+
+## Pattern 76 — The manifest-recovery service: build the lookup half of soft binding
+
+**The measurement that justifies it.** The C2PA soft-binding registry holds **80 approved
+algorithms**; **13** declare a Soft Binding Resolution API endpoint (measured from
+`softbinding-algorithm-list.json`, 2026-11-27). The other 67 can *name* a mark and resolve nothing.
+Meanwhile 19 new entries landed in November 2026 alone. The naming layer is outrunning the lookup
+layer about five to one, and **the spec for the missing half is public** (C2PA Soft Binding
+Resolution API, Decoupled, spec 2.5).
+
+**What to wire together.**
+
+```
+INGEST   ─► c2patool (Apache-2.0) ............. sign manifest at creation
+           contentauth/c2pa-rs (MIT+Apache-2.0)  core signing/validation
+MARK     ─► facebookresearch/videoseal (MIT) ... video/image soft binding
+           facebookresearch/audioseal (MIT, weights included) .. audio
+           adobe/trustmark (MIT) ............... arbitrary-resolution images
+STORE    ─► iscc/iscc-c2pa-store (Apache-2.0) .. Manifest Repository
+RESOLVE  ─► deepmark/c2pa-soft-binding-stack (MIT) .. Resolution API reference
+           iscc/iscc-c2pa-resolver (Apache-2.0)
+TEST     ─► Original-Pictures/soft-bindings-benchmark (Apache-2.0)
+           beomjin-ahn/provsurvive (MIT) ....... survival under edits
+VERIFY   ─► contentauth/c2pa-mcp (Apache-2.0) ... agent-side read path
+```
+
+**The three decisions that make it real.**
+
+1. **Pick the algorithm by registry position, not by stars.** If the asset must be resolvable by
+   anyone else's tooling, the `alg` must be a registered identifier. Unregistered beats registered on
+   benchmark scores and loses on interoperability every time.
+2. **Run the benchmark before the contract, not after.** `soft-bindings-benchmark` and `provsurvive`
+   exist and are permissive; a client's acceptance criterion ("the mark survives our delivery chain")
+   becomes a test run, not an argument.
+3. **Treat the resolution endpoint as the product.** Marking is a library call. The durable asset is
+   the repository plus the API plus the uptime commitment, because that is what 67 of 80 registrants
+   do not have.
+
+**What never to promise:** that recovery works for assets marked before the service existed. Soft
+binding is prospective.
+
+## Pattern 77 — Register the algorithm: the standards position a permissive licence makes available
+
+**The finding this is built on, and it is causal.** Eleven of the 80 registry entries wrap Meta
+FAIR's MIT-licensed models (`videoseal`, `pixelseal`, `audioseal`, `silentcipher`), filed by **five
+distinct third parties** — `aiwatermark`, `reconize`, `immostory`, `originalpictures`, `aidr.studio`.
+Entries registered by Meta or FAIR: **zero**. `com.originalpictures.*` alone holds **12** entries,
+wrapping the open fingerprinting toolkit (`chromaprint`, `audfprint`, `pdq`, `vpdq`, `tmk-pdqf`,
+`dinov2`). The registry's submission rule permits exactly this: a PR may come from *"an individual
+affiliated with the company owning the submitted proprietary algorithm **or a maintainer of the
+submitted open source algorithm or its fork**."*
+
+**The play, in order.**
+
+1. Fork or maintain a permissive marking/fingerprinting implementation (MIT or Apache-2.0 — the
+   licence is the eligibility condition).
+2. Stand up a Soft Binding Resolution API that implements **at least the mandatory endpoints** — the
+   registry's selection rules check that `softBindingResolutionApis` resolves.
+3. Publish algorithm documentation at a stable URL; `informationalUrl` must resolve and must describe
+   *that* algorithm's operation.
+4. File the PR against `softbinding-algorithm-list.json` conforming to
+   `softbinding-algorithm-list-schema.json`, with all mandatory fields.
+5. Note the immutability rule before choosing names: **`identifier`, `alg` and `type` can never be
+   changed** on an existing entry.
+
+**Why a studio or broadcaster client would pay for this.** A registered identifier under their own
+reverse-DNS namespace is a durable, citable interoperability asset that their competitors must
+resolve against — and it is obtainable for engineering effort rather than licence fees, *because* the
+underlying model is MIT.
+
+**The honest caveat:** registration is recognition of an identifier, not a conformance certification.
+Read [c2pa-org/conformance-public](https://github.com/c2pa-org/conformance-public) before any
+deliverable claims the client "is C2PA conformant."
+
+## Pattern 78 — Leak tracing where the mark is the vendor's and the evidence trail is yours
+
+**The constraint, measured.** Session-based forensic watermarking — the per-subscriber mark that makes
+leak attribution possible — **has no open implementation**. `forensic watermarking video` returns 21
+repos and every one holds 0 or 1 star, most with no licence, five sharing a single repo name (a
+coursework cohort). The capability sits with castLabs (registry entry
+`castLabs.watermark.1.session-v1`), Nagra NexGuard, Verimatrix, MarkAny, DoveRunner. **So do not bid
+the mark. Bid everything around it.**
+
+**The division of labour to put in the statement of work.**
+
+| Layer | Who | Why |
+| --- | --- | --- |
+| Session mark embed/extract | **Vendor, under contract** | No open option exists; this is Pattern 24's boundary applied to forensics. |
+| Per-session identity binding | **Globant** | Mapping mark payload → entitlement → account, with retention rules. |
+| Detection intake & triage | **Globant** | Screenshot/stream in, candidate mark out, confidence scored. |
+| Evidence package | **Globant** | Timestamped chain of custody: what was marked, when, by which key, extracted by which build. |
+| Filing & jurisdiction routing | **Globant** (see Pattern 79) | The output of tracing is a legal action, not a dashboard. |
+
+**Build the extractor's test bench from permissive parts** — `soft-bindings-benchmark` (Apache-2.0)
+and `provsurvive` (MIT) — so that "the mark survived the pirate's re-encode" is a measured claim
+rather than a vendor assurance.
+
+**The refusal that makes the proposal credible.** State in writing that invisible marking is
+**evidence, not prevention**, and cite why: the best-maintained remover is MIT-licensed with
+**28,928★** and was pushed this month, against 456★ for the standard's own SDK, and removability of
+invisible image watermarks is a **published NeurIPS 2024 result**
+([XuandongZhao/WatermarkAttacker](https://github.com/XuandongZhao/WatermarkAttacker)). A client who
+hears this first will trust the rest of the estimate.
+
+## Pattern 79 — The 30-minute blocking pipeline, built as a per-jurisdiction policy engine
+
+**Why a single global feature cannot work.** The four regions do not merely differ in strictness,
+they differ in *who holds the authority and what it reaches*:
+
+| Region | Mechanism in force | What it reaches | Deadline |
+| --- | --- | --- | --- |
+| EMEA (Italy) | **Administrative** — AGCOM Piracy Shield since 2024-02 | ISPs; **VPNs and public DNS resolvers** added by AGCOM rules 2025-02; scope widened 2025-08 from live sport to film/TV premieres and live music | **30 minutes** |
+| LATAM (Brazil) | **Administrative** — Anatel | ISPs and regional broadband providers | Operational, not statutory; public dashboard since 2026-05 |
+| APAC (India) | **Judicial** — Delhi High Court dynamic / "Dynamic+" injunctions | Rogue sites and apps, DNRs, ISPs; plaintiff files continuing affidavits naming new targets | Real-time by order |
+| North America | **None in force** | Three competing bills disagree on whether VPNs are in scope at all | — |
+
+**The engine, concretely.** One detection pipeline; one evidence schema; **four policy packs**:
+
+```
+DETECT ──► candidate infringing endpoint + evidence bundle
+             │
+POLICY ──►  jurisdiction resolver
+             ├─ IT  : AGCOM ticket, 30-min clock, VPN/DNS targets permitted
+             ├─ BR  : Anatel administrative route, dashboard reconciliation
+             ├─ IN  : affidavit generator for a live dynamic injunction
+             └─ US  : notice-and-takedown only; NO blocking route — flag and stop
+FILE   ──► per-route submission + immutable audit record
+```
+
+**The guardrail that belongs in the code, not the policy document:** the US pack must **refuse** to
+emit a blocking request. There is no US site-blocking law in force — FADPA (H.R. 791, introduced
+2025-01-28) remains in House Judiciary; the DEFEND IP Act (Senate S. 5529) merges it with Block BEARD
+and **excludes VPNs**; Rep. Issa's American Copyright Protection Act of 2026 **includes** VPNs and its
+text was unpublished as of this pass. A pipeline that files the wrong instrument in the wrong country
+is a liability, so encode the jurisdiction's limits as a hard gate.
+
+**Over-blocking is a design requirement, not a critique to deflect.** The EP study arguing for binding
+30-minute blocking acknowledges over-blocking risk, and Italy's scheme drew a **€14.2M** AGCOM fine
+against a resolver operator in January 2026, now under appeal with the legality of the orders
+challenged. Every automated target must therefore carry a human approver, a reversal path and a
+retained record of who authorised it.
+
+## Pattern 80 — The 15-minute gate for any content-protection or anti-piracy proposal
+
+Run before estimating. Each answer changes the shape of the engagement.
+
+1. **Is the ask prevention or evidence?** If the client says "stop piracy", reset the conversation
+   with the 28,928★-vs-456★ measurement before writing a line of scope. Marks are evidence.
+2. **Prospective or retrospective?** Soft binding and session marking only work on assets marked from
+   now on. If the library is already out, the plane that applies is detection and takedown, not
+   marking.
+3. **Does the deliverable need to interoperate?** If yes, the algorithm **must** be a registered
+   identifier, and only **13 of 80** registered algorithms are actually resolvable today — check the
+   target's endpoint before designing around it.
+4. **Which jurisdictions, and which authority in each?** Administrative (IT, BR), judicial (IN) or
+   none in force (US). This decides whether you are building a filing pipeline, an affidavit
+   generator, or neither.
+5. **Read the licence bytes, never the badge.** In this plane the API mislabels the two most important
+   repos: `c2pa-rs` is **dual MIT + Apache-2.0** and `adobe/trustmark` is **MIT**, both reported as
+   `NOASSERTION`. A gate that auto-rejects `NOASSERTION` discards the standard's own SDK.
+6. **Separate code licence from weights licence.** `audioseal` is MIT **including weights** (README,
+   2024-04-02); `content-seal` licenses *"the code"* and states the deployed system is a custom
+   proprietary implementation. Ask which one the estimate assumes.
+7. **Is a vendor contract already in place?** Session forensic marking and DRM key issuance cannot be
+   delivered from open source. If no contract exists, that procurement is on the critical path and
+   belongs in the plan on day one, not month four.
+8. **Never offer to maintain the blocklist.** Detection, evidence and filing are buildable; the list
+   itself is an instrument of state authority. Offering it misrepresents what Globant can lawfully do.

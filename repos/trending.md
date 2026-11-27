@@ -10,6 +10,96 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 41: content-protection & soft-binding infrastructure (**an entire standards layer born this month, with 0 to 3 stars per repo**)
+
+Infrastructure and platform layer beneath the agents logged in `agents/trending.md`. Verified
+2026-11-27: `git ls-remote` for existence, raw-channel fetch of the licence file for **licence by
+bytes** (13 candidate filenames × 2 branches), and `search/repositories` with `repo:<slug>` for
+stars/forks/pushed in one call each.
+
+**The headline is a date distribution, not a repo.** The C2PA soft-binding *resolution* layer — the
+infrastructure that turns a registered algorithm identifier into an actual manifest lookup — is being
+built right now, in public, by near-anonymous repos. Of the 13 repos matching `c2pa soft binding`,
+**eleven were pushed in November 2026** and the largest holds **3 stars**:
+
+| Repo | Licence (by bytes) | ★ | Forks | Pushed | What it is |
+| --- | --- | --- | --- | --- | --- |
+| [c2pa-org/softbinding-algorithm-list](https://github.com/c2pa-org/softbinding-algorithm-list) | **CC-BY-4.0** (18,650 B) | 37 | 41 | 2026-11-25 | **The registry itself** — 80 approved algorithm identifiers. Forks (41) **exceed** stars (37), ratio 0.9: this is a *contribution* repo, not a consumption repo. Every entry arrives as a PR. |
+| [contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs) | **dual MIT + Apache-2.0** | 456 | 206 | 2026-11-26 | The reference Rust SDK. **The API reports `NOASSERTION`; the bytes are `LICENSE-MIT` (1,083 B) *and* `LICENSE-APACHE` (11,335 B).** The most permissive arrangement available, mislabelled. |
+| [contentauth/c2patool](https://github.com/contentauth/c2patool) | Apache-2.0 | 175 | 48 | 2026-11-26 | The CLI. The practical entry point for signing and inspecting manifests. |
+| [contentauth/c2pa-python](https://github.com/contentauth/c2pa-python) | Apache-2.0 | 110 | 40 | 2026-11-25 | Python binding over `c2pa-rs`. |
+| [c2pa-org/specifications](https://github.com/c2pa-org/specifications) | CC-BY-4.0 | 216 | 34 | 2026-11-25 | The published spec. **CC-BY-4.0 on the document — use the spec, which is the correct move in this plane.** |
+| [c2pa-org/conformance-public](https://github.com/c2pa-org/conformance-public) | CC-BY-4.0 | 52 | 25 | 2026-11-26 | The conformance programme. The gate between "implements C2PA" and "may claim C2PA". |
+| [Original-Pictures/soft-bindings-benchmark](https://github.com/Original-Pictures/soft-bindings-benchmark) | **Apache-2.0** (11,358 B) | **0** | 1 | 2026-11-07 | **The most strategically interesting repo in the pass.** An open-licence benchmark of invisible watermarks and fingerprints *as C2PA soft bindings* — and it is from the registrant holding **12 of the 80 registry entries**. Zero stars. |
+| [beomjin-ahn/provsurvive](https://github.com/beomjin-ahn/provsurvive) | **MIT** (1,081 B) | 2 | 0 | 2026-11-14 | Benchmark harness for provenance survival under image edits. The independent counterpart to the above. |
+| [deepmark/c2pa-soft-binding-stack](https://github.com/deepmark/c2pa-soft-binding-stack) | **MIT** (1,065 B) | 3 | 1 | 2026-11-24 | An implementation of the **Soft Binding Resolution API** — one of only a handful anywhere. Registry entry `me.deepmark.audio.vigil.128` with a live endpoint. |
+| [iscc/iscc-c2pa-resolver](https://github.com/iscc/iscc-c2pa-resolver) | **Apache-2.0** (11,358 B) | 0 | 0 | **2026-11-27** | Resolution API for ISCC (`io.iscc.v0`). **Pushed on measurement day.** |
+| [iscc/iscc-c2pa-store](https://github.com/iscc/iscc-c2pa-store) | Apache-2.0 | 0 | 0 | 2026-11-21 | A **Manifest Repository** with a resolution API — the storage half of the lookup. |
+| [writerslogic/c2pa-text-binding](https://github.com/writerslogic/c2pa-text-binding) | Apache-2.0 **+** dual MIT/Apache | 0 | 1 | 2026-11-16 | Soft binding and fingerprinting for **text**. Holds 6 of the registry's 7 text entries. |
+| [Cognitive-Proof/c2pa-soft-binding-server](https://github.com/Cognitive-Proof/c2pa-soft-binding-server) | MIT | 0 | 0 | 2026-11-16 | Resolution server. Registry entry `com.cognitive-proof.vsrmark.1`. |
+
+**The measured gap, and it is the build:** **13 of the 80 approved algorithms declare a resolution
+API endpoint.** The other 67 are *names without lookups* — a soft binding that identifies an
+algorithm nobody can query recovers no manifest, so the registry is filling roughly five times faster
+than the infrastructure that makes it function. The spec for the missing half is public
+(C2PA Soft Binding Resolution API, Decoupled, spec 2.5) and the two reference implementations above
+are Apache-2.0 and MIT.
+
+**Marking substrate, re-measured 2026-11-27 (licence by bytes in every row):**
+
+| Repo | Licence | ★ | Forks | Pushed | Status change vs this KB |
+| --- | --- | --- | --- | --- | --- |
+| [facebookresearch/videoseal](https://github.com/facebookresearch/videoseal) | **MIT** (1,087 B) | 829 | 111 | 2026-11-10 | Already in KB. **Alive and separate** — see the oracle note below. |
+| [facebookresearch/content-seal](https://github.com/facebookresearch/content-seal) | **MIT** (1,086 B) | 243 | 17 | 2026-11-05 | **New to this KB.** Meta's current umbrella framework (Pixel Seal, Video Seal, TextSeal). |
+| [facebookresearch/audioseal](https://github.com/facebookresearch/audioseal) | **MIT, weights included** | 808 | 109 | 2026-11-03 | Already in KB — **with a licence fact the KB did not record**, below. |
+| [facebookresearch/watermark-anything](https://github.com/facebookresearch/watermark-anything) | MIT | 1,133 | 56 | 2025-06-20 | Already in KB. **17 months dormant** — the most-starred marker in the family is the least maintained. |
+| [adobe/trustmark](https://github.com/adobe/trustmark) | **MIT** (1,218 B) | 191 | 41 | 2026-11-11 | Already in KB, correctly as MIT. API still says `NOASSERTION`. Holds 4 registry entries (`trustmark.Q/C/P/F`). |
+| [eluv-io/blind-video-watermark](https://github.com/eluv-io/blind-video-watermark) | **MIT** (1,063 B) | 109 | 18 | 2022-08-11 | **New to this KB.** Dormant 4 years. |
+| [resemble-ai/Perth](https://github.com/resemble-ai/Perth) | MIT | 547 | 51 | 2026-09-02 | Already in KB. |
+| [swesterfeld/audiowmark](https://github.com/swesterfeld/audiowmark) | **GPL-3.0** (35,149 B) | 605 | 119 | 2026-09-23 | Already in KB. Copyleft — the licence gate matters for a shipped product. |
+| [syvaidya/openstego](https://github.com/syvaidya/openstego) | **GPL-2.0** | 1,452 | 244 | 2023-08-12 | **New to this KB.** Frequently recommended in vendor round-ups as the open option; **it is steganography, dormant since 2023, and GPL-2.0.** Do not carry it into a forensic proposal. |
+
+**A licence fact worth recording because it is the exception that proves the pass-39 law is a
+*choice*.** Pass 39 established "the code is permissive, the weights are not," six times in one
+plane. Here, one lab went the other way and said so in its own README: AudioSeal, **2024-04-02** —
+*"We have updated our license to full MIT license (**including the license for the model weights**)!
+Now you can use AudioSeal in commercial application too!"* That is the only unambiguous
+weights-included permissive grant in this plane, and it is measurably why third parties could
+register it as a C2PA algorithm. **The law still holds for its sibling:** `content-seal`'s README
+licenses *"The code"* under MIT, says nothing about weights, and notes the production system
+("Muse Image") is **a custom proprietary implementation**. So the marker you can download is the
+research version; the one Meta runs is not in the repo.
+
+**METHOD CORRECTION — A NEW LIMIT ON THIS KB'S OWN EXISTENCE ORACLE, AND IT IS THE FIRST TIME THIS
+HAS BEEN CAUGHT.** This KB's standing rule is "`git ls-remote` is the only oracle of existence."
+That is still true, but it is **not an oracle of canonical identity**: `git ls-remote
+https://github.com/facebookresearch/videoseal` succeeds, and so does `content-seal`, because GitHub
+serves renamed and redirected slugs transparently. A success therefore cannot distinguish *live
+repo* from *redirect to a renamed repo* — which would silently create duplicate KB rows for one
+project. **The cheap, conclusive test is to compare `HEAD` SHAs:**
+
+```
+videoseal    f12875a9b5e711e0c6e2dc3a22aca18231ce4a1a
+content-seal b93b1a44dea8b32a88e22672d96072a2e0c72bae   → DIFFERENT SHAs = two distinct live repos
+```
+
+This pass began with the hypothesis that `videoseal` had been renamed to `content-seal`; the SHA test
+**falsified it in one call**, and both rows above are correct as a result. `curl -sI` on the repo page
+returns **403 through this session's proxy**, so it cannot be used for the redirect check — the SHA
+comparison is the method that works here. **Add to the gate: when two slugs look like the same
+project, compare HEAD SHAs before writing either row.**
+
+**EIGHTH FALSE NEGATIVE OF `search/repositories`, AND THE FIRST ONE THAT POINTS THE OTHER WAY.** The
+KB's counter stood at seven. `contentauth/c2pa-rs` — the reference SDK of the entire provenance
+standard — reports `NOASSERTION` because it carries **two** licence files (`LICENSE-MIT` +
+`LICENSE-APACHE`). Every prior instance in this KB had `NOASSERTION` concealing something *worse*
+than advertised (PacBio's proprietary EULA, R stubs). Here it conceals the **best possible** outcome:
+a dual permissive grant. **The corrected rule is symmetric — `NOASSERTION` means "unmeasured in both
+directions," never "non-permissive."** `adobe/trustmark` is the same shape: 1,218 B of Adobe
+"All Rights Reserved" header followed by the full, unmodified MIT text. A gate that auto-rejects
+`NOASSERTION` would have discarded both the standard's SDK and its best image watermarker.
+
+
 ## 2026-11-27 — pass 40: puzzles & games-desk infrastructure (**twelve active archive repos, zero licences — and no permissive word data in Spanish or Portuguese at all**)
 
 Infrastructure and data layer under the engines logged in `agents/trending.md`. Verified 2026-11-27

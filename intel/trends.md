@@ -4062,3 +4062,80 @@ the same outlet, holds that news-organisation partnerships with betting platform
 in journalism. **Raise this before a client asks for it**: prediction and wagering mechanics are the
 highest-engagement, highest-trust-cost options on the table, and the decision belongs to the
 newsroom, not the growth team.
+
+## Pass 41 (2026-11-27) — trends in the content-protection, soft-binding & anti-piracy enforcement plane
+
+### 1. The obligation is becoming machine-speed, which is what makes this a software engagement
+
+Across every region the unit of compliance is collapsing toward **30 minutes**, and no human
+workflow meets that. Italy has enforced a 30-minute blocking obligation since February 2024 via
+AGCOM's Piracy Shield, extended by AGCOM rules in February 2025 to **VPN services and public DNS
+resolvers**, and in August 2025 from live sport to **film and TV premieres and live music**. The
+European Parliament's JURI-commissioned study (July 2026) argues for **binding EU-wide 30-minute
+blocking** — while explicitly acknowledging over-blocking risk. The AAPA proposed a three-layer
+regulatory response on **2026-11-18**. **The deadline, not the detection, is the product
+requirement.**
+
+### 2. The EU's own assessment says the voluntary route failed — a regulator-sourced sales argument
+
+Recommendation (EU) 2023/1018 is non-binding, and the Commission's **November 2025** assessment
+concluded it *"has not resulted in considerable curbing of the overall level of piracy of live
+events"*, with limited improvement in notice-handling promptness. A targeted copyright consultation
+opened **2026-09-29**, and a formal recommendation was expected in November 2026. **As of this pass
+it has not been published** (searched 2026-11-27). This is the cleanest kind of evidence in the KB:
+the body that wrote the voluntary rule published the measurement of its failure. **It is also a dated,
+falsifiable watch item — if the recommendation lands, the EMEA pipeline changes within a quarter.**
+
+### 3. Provenance is shifting from metadata to *recovery*, and a registry now gates it
+
+The year's real movement is not more watermarking research — it is the C2PA **soft binding** layer:
+the mechanism for recovering a manifest once metadata is stripped, which is the normal state of any
+asset that has been through a social platform. The approved-algorithm registry holds **80 entries**,
+**19 of them entered in November 2026 alone** and 55 across 2026. **But only 13 of 80 declare a
+resolution endpoint**, so the naming layer is outrunning the lookup layer roughly five to one. The
+direction is unambiguous and the infrastructure deficit is specific.
+
+### 4. A permissive licence, not a partnership, is what buys a standards position
+
+Eleven registry entries wrap Meta FAIR's MIT-licensed seal models, filed by **five different third
+parties**; **none** is registered by Meta. The registry's rules permit this explicitly — a submission
+may come from *"a maintainer of the submitted open source algorithm or its fork."* AudioSeal's README
+records the decision that enabled it, dated **2024-04-02**: relicensed to *"full MIT license
+(including the license for the model weights)."* **This is the counter-example to the pass-39 law**
+("the code is permissive, the weights are not"): the law describes a *choice*, and here one lab chose
+the other way and measurably captured the registry's largest algorithm family — for other companies.
+
+### 5. The open-source community continues to build the attack harder than the defence — now with a proof
+
+Measured in this plane: **28,928★** for the top watermark remover
+([guillaumemeyer/watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover), MIT,
+pushed 2026-11-23) against **456★** for `c2pa-rs` (**63×**) and **243★** for Meta's current marking
+framework (**119×**). Pass 34 measured 7×–21× for ad-fraud evasion versus detection; **this is the
+same law at five to seventeen times that severity.** What is new is the academic backing:
+`XuandongZhao/WatermarkAttacker` (281★, MIT) is NeurIPS 2024, *"Invisible Image Watermarks Are
+Provably Removable Using Generative AI."* The removal side has reached the agent-skill layer too
+(`minhhieust/ai-meta-cleaner` — a Claude Code / Codex skill to strip C2PA, EXIF and XMP — which
+carries **no licence file** and is therefore unusable itself).
+
+**The trend's practical consequence: stop selling marks as prevention.** A mark is evidence for an
+attribution claim, a guild audit or a blocking application. Sold as protection it will be defeated by
+a better-maintained, more popular, MIT-licensed tool, and the client will have paid for the loss.
+
+### 6. Enforcement is the least automated layer in this entire KB
+
+`takedown automation copyright` returns **0 repos**. `restream detection live stream` returns **0**.
+`piracy monitoring` returns 21, of which the top result is off-topic BitTorrent mapping and the rest
+hold 0–1 stars. Yet the identical technical mechanism is a 29,211-star GPL-3.0 ecosystem when the
+target is advertising. **The asymmetry is legal, not technical: a copyright blocklist is an
+instrument of state authority and cannot be crowd-maintained.** That is precisely why the work is
+consulting work rather than an open-source adoption exercise.
+
+### 7. Regional divergence is now wide enough that "the compliance mode" is the deliverable
+
+In force and administrative: **Italy** (30 minutes, VPN/DNS in scope, €14.2M fine issued to a
+resolver operator in January 2026) and **Brazil** (Anatel administrative blocking, with a public
+near-real-time dashboard since May 2026). In force and judicial: **India** (Delhi High Court
+real-time dynamic injunctions). Not in force at all: **the United States**, where three competing
+bills disagree on whether VPNs are even in scope. A single global "takedown feature" cannot satisfy
+these; **the asset is a per-jurisdiction policy engine** — the same conclusion pass 8 reached for
+APAC AI rules, now reached independently in enforcement.

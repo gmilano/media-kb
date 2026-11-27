@@ -2308,3 +2308,28 @@ streaks and cross-game achievement state; editorial review queues for constructo
 nowhere for crosswords (`dawsonbooth/sudoku-tools` grades sudoku, and that is the whole of it). A
 studio that builds calibration against real solve telemetry owns something no repo and no vendor
 currently sells.
+
+## Pass 41 (2026-11-27) — content-protection platforms: what can be customised, and the layer that is structurally closed
+
+The KB's Pattern 24 already draws the hard line at **DRM key issuance** (Widevine/PlayReady/FairPlay
+require contracts; ClearKey is CI-only). This section maps the platform tier *around* that line for
+the protection and enforcement plane, so a proposal knows which boxes are customisable.
+
+| Platform / system | Repo or source | Licence | ★ | Pushed | Customisable with AI on top? |
+| --- | --- | --- | --- | --- | --- |
+| **C2PA reference stack** | [contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs) + [c2patool](https://github.com/contentauth/c2patool) + [c2pa-python](https://github.com/contentauth/c2pa-python) | **dual MIT/Apache-2.0**, Apache-2.0, Apache-2.0 | 456 / 175 / 110 | 2026-11-26 | **Yes — this is the customisable base of the plane.** Sign on ingest, assert on export, verify in CI. No contract, no vendor, no per-seat fee. |
+| **Soft Binding Resolution API** (the manifest-recovery service) | [deepmark/c2pa-soft-binding-stack](https://github.com/deepmark/c2pa-soft-binding-stack) (MIT), [iscc/iscc-c2pa-resolver](https://github.com/iscc/iscc-c2pa-resolver) + [iscc-c2pa-store](https://github.com/iscc/iscc-c2pa-store) (Apache-2.0), [Cognitive-Proof/c2pa-soft-binding-server](https://github.com/Cognitive-Proof/c2pa-soft-binding-server) (MIT) | **MIT / Apache-2.0** | 3 / 0 / 0 / 0 | 2026-11-24 … 2026-11-27 | **Yes, and it is the gap.** Only **13 of 80** registered algorithms have a live endpoint. Permissive reference implementations exist; the service does not. |
+| **Acceptance-test harness for marks** | [Original-Pictures/soft-bindings-benchmark](https://github.com/Original-Pictures/soft-bindings-benchmark) (Apache-2.0), [beomjin-ahn/provsurvive](https://github.com/beomjin-ahn/provsurvive) (MIT) | **Apache-2.0 / MIT** | 0 / 2 | 2026-11-07 / 2026-11-14 | **Yes — adopt, do not rebuild.** This is the "does the mark survive re-encode" test a client will demand. castLabs argued at MonteVIDEO Tech Day (Jan 2026) that watermark testing is vendor-driven and needs open frameworks; these are them. |
+| **Marking engines** | [videoseal](https://github.com/facebookresearch/videoseal) / [content-seal](https://github.com/facebookresearch/content-seal) / [audioseal](https://github.com/facebookresearch/audioseal) / [trustmark](https://github.com/adobe/trustmark) | **MIT** (AudioSeal incl. weights) | 829 / 243 / 808 / 191 | 2026-11-03 … 2026-11-10 | **Yes for the research models.** Note: `content-seal`'s own README says the deployed Meta system is *a custom proprietary implementation* — the repo is the research version. |
+| **Packaging + key exchange** | [awslabs/speke-reference-server](https://github.com/awslabs/speke-reference-server) | Apache-2.0 | 123 | 2026-09-08 | Partly — SPEKE is the open *interface*; the key authority behind it is not. See Pattern 24. |
+| **Multi-DRM licence issuance** | — | — | — | — | **No. Structurally closed.** The only open key server in the plane, [diegojfer/FairPlay-KSM](https://github.com/diegojfer/FairPlay-KSM) (GPL-3.0), has not been touched since **2020-04-21**. Contract or buy. |
+| **Session-based forensic watermarking** (per-subscriber tracing) | — (vendors only: castLabs `session-v1`, NexGuard, Verimatrix, Irdeto-class) | proprietary | — | — | **No open implementation exists.** `forensic watermarking video` = 21 repos, **all 0–1★**. Integrate a vendor; own the evidence pipeline around it. |
+| **Blocklist execution / takedown filing** | — (state systems: AGCOM Piracy Shield, Anatel) | n/a | — | — | **No, and it must not be.** A copyright blocklist is a legal instrument executed on a regulator's authority. Globant builds the detection, evidence and filing pipeline *into* it. |
+| **Blocklist mechanism, as proof of feasibility** | [hagezi/dns-blocklists](https://github.com/hagezi/dns-blocklists) (GPL-3.0, 29,211★), [mullvad/dns-blocklists](https://github.com/mullvad/dns-blocklists) (GPL-3.0, 2,005★) | GPL-3.0 | 29,211 / 2,005 | 2026-11-27 / 2026-11-26 | **Reference only.** Same mechanism, different target (ads/malware). Cite to prove the engineering is routine; the obstacle is legal authority. |
+
+**The honest shape of the platform tier in this plane:** of nine layers, **four are fully
+customisable and permissive** (C2PA stack, resolution API, test harness, marking engines), one is a
+half-open interface (SPEKE), and **four cannot be built at all** — licence issuance, session
+forensic marking, blocklist execution and takedown authority. That 4/1/4 split is unusually
+favourable compared with most planes in this KB, because the open half is exactly the half that
+produces *evidence*, which is what the regulation now demands.

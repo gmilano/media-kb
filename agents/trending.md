@@ -9,6 +9,96 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 41: the content-protection, soft-binding & anti-piracy enforcement plane (**the registry filled 19 slots this month and only 13 of its 80 entries can actually be looked up**)
+
+Plane found by grepping ~60 candidate terms against all eight KB files before any web search. The KB
+already covered DRM as *access control at delivery* (Pattern 24, the key boundary) and already
+recorded the AI-watermarking substrate. What it had no word for was everything that happens **after
+the asset leaves the gate**: `forensic watermark` **0 hits**, `license server` **0**, `DMCA` **1**,
+`blocking order` **1**, `soft binding` **2** (both incidental prose about TrustMark),
+`manifest repository` **0**, `restream` **0**. That is the hole this pass closes.
+
+**The find of the pass is an artefact, not a repo:
+[`c2pa-org/softbinding-algorithm-list`](https://github.com/c2pa-org/softbinding-algorithm-list)**
+(37★ / 41f, **CC-BY-4.0**, 18,650 B licence, pushed 2026-11-25) — the authoritative list of approved
+C2PA soft-binding algorithm identifiers, i.e. the registry that decides which watermark or
+fingerprint may be named in a `soft binding` assertion to recover a stripped manifest. **Zero prior
+mentions anywhere in this KB.** Measured directly from `softbinding-algorithm-list.json` (65,162 B,
+fetched 2026-11-27), not from prose:
+
+| Registry fact (measured from the JSON, 2026-11-27) | Value |
+| --- | --- |
+| Total approved entries | **80** |
+| By type | **61 watermark / 19 fingerprint** |
+| Entries declaring a Soft Binding Resolution API endpoint | **13 of 80** |
+| Entries whose `dateEntered` falls in **2026-11 alone** | **19** |
+| Entries dated 2026 (any month) | **55 of 80** |
+| Media coverage (`decodedMediaTypes`) | image 43 · video 32 · audio 26 · **text 7** · application 3 |
+
+**The structural finding, and it is causal rather than correlational: a permissive licence bought
+Meta the largest algorithm family in the registry, and none of the registrations are Meta's.**
+Eleven entries wrap Meta FAIR's MIT-licensed models — `com.aiwatermark.{videoseal,pixelseal,audioseal}.1`,
+`me.reconize.videoseal.1`, `be.immostory.videoseal.1`, `studio.aidr.silentcipher.1` and five
+`com.originalpictures.*` seal entries — registered by **five distinct third parties**. Entries owned
+by Meta or FAIR: **zero** (checked by scanning every `alg` for `meta`/`facebook`). The registry's own
+submission rule is what makes this legal: a PR may be filed by *"a maintainer of the submitted open
+source algorithm **or its fork**"*. So the standards position went to the integrators, and the author
+got the citation. One entry states it outright — `com.aiwatermark.videoseal.1`, entered 2026-03-08:
+*"Neural video watermarking using Meta FAIR's VideoSeal model."*
+
+| Agent / tool | Repo | Licence (by bytes) | ★ | Forks | Pushed | Read of it |
+| --- | --- | --- | --- | --- | --- | --- |
+| C2PA MCP server (official) | [contentauth/c2pa-mcp](https://github.com/contentauth/c2pa-mcp) | **Apache-2.0** | 4 | 1 | 2026-03-27 | The Content Authenticity Initiative's own MCP server. **Four stars and eight months dormant.** Reads credentials; cannot write or resolve. |
+| Watermark & provenance forensics | [karthikrshet/ClaudeMark](https://github.com/karthikrshet/ClaudeMark) | **MIT** (1,122 B) | 10 | 1 | 2026-11-02 | **The only agent in the plane pointing at detection rather than removal.** Local-first statistical forensics. Ten stars. |
+| Agent behavioural watermarking | [Tooooa/AgentMark](https://github.com/Tooooa/AgentMark) | **MIT** (1,071 B) | 102 | 8 | 2026-04-08 | ACL 2026 Main. Watermarks *agent behaviour*, not media — adjacent, and the best-starred thing here. |
+| C2PA verify (third-party MCP) | [harelrech/c2pa-mcp](https://github.com/harelrech/c2pa-mcp) | Apache-2.0 | 2 | 0 | 2026-09-21 | Returns LLM-ready provenance. Two stars. |
+| C2PA read (third-party MCP) | [richardwooding/c2pa-mcp](https://github.com/richardwooding/c2pa-mcp) | MIT | 0 | — | 2026-11-09 | CLI + MCP. **Zero stars, pushed this month.** |
+| C2PA knowledge graph | [encypherai/c2pa-knowledge-graph](https://github.com/encypherai/c2pa-knowledge-graph) | Apache-2.0 | 3 | 1 | 2026-06-05 | RDF/OWL generated from the spec sources. Useful as a spec oracle, not a runtime. |
+
+**And the counter-layer, which is where the stars are.** `c2pa stars:>=50` returns 15 repos, and the
+**most-starred repo matching the standard's own name is a tool for defeating it**:
+
+| Repo | Licence | ★ | Forks | Pushed | Note |
+| --- | --- | --- | --- | --- | --- |
+| [guillaumemeyer/watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) | **MIT** (1,089 B) | **28,928** | 3,217 | 2026-11-23 | **New to this KB, and it resets the KB's own number.** *"A privacy-first app that strips AI watermarks from content you own."* |
+| [wiltodelta/remove-ai-watermarks](https://github.com/wiltodelta/remove-ai-watermarks) | Apache-2.0 | 6,550 | 604 | **2026-11-27** | Already in this KB at 6,530★ (pass 23). Pushed again on measurement day. |
+| [XuandongZhao/WatermarkAttacker](https://github.com/XuandongZhao/WatermarkAttacker) | **MIT** (1,069 B) | 281 | 38 | 2025-01-24 | **New to this KB, and it is the published science:** NeurIPS 2024, *"Invisible Image Watermarks Are Provably Removable Using Generative AI."* |
+| [minhhieust/ai-meta-cleaner](https://github.com/minhhieust/ai-meta-cleaner) | **NO LICENCE FILE** | 8 | 10 | 2026-11-18 | *"Claude Code & Codex Agent Skill to remove C2PA Content Credentials, EXIF, XMP."* The stripper reached the agent-skill layer — **and is itself unusable.** |
+| [novatechflow/ai-watermark-scrambler](https://github.com/novatechflow/ai-watermark-scrambler) | Apache-2.0 | 7 | 1 | 2026-11-25 | Scrambles statistical *text* watermarks by local rewriting. |
+
+**This CONFIRMS and SHARPENS the pass-34 law rather than discovering it.** Pass 34 measured open
+source building evasion at **7×–21×** the stars of detection in ad integrity, and pass 23 recorded
+removal out-starring marking at 6,530★. Measured in this plane the ratio is far worse, and now it has
+an academic proof attached: **28,928★ (top remover) vs 456★
+([contentauth/c2pa-rs](https://github.com/contentauth/c2pa-rs), the reference SDK) = 63×**, and
+28,928★ vs 243★ ([facebookresearch/content-seal](https://github.com/facebookresearch/content-seal),
+Meta's current marking framework) = **119×**. **Update the KB's standing advice: the prior guidance
+"assume the removal tool is more popular than the marker" understated it by a factor of four.**
+
+**Measured zeros and collisions in the enforcement layer — the reason this plane has no agents:**
+
+| Query | Results | What it means |
+| --- | --- | --- |
+| `takedown automation copyright` | **0** | A literal zero. The highest-volume repetitive task in the plane has no open implementation at all. |
+| `restream detection live stream` | **0** | A literal zero, under a $28B-a-year claimed loss. Finding the restream is the whole job in live sport. |
+| `piracy monitoring` | 21 | Top result [pawal/torrent-tracker](https://github.com/pawal/torrent-tracker) (26★, BSD-2-Clause) is BitTorrent *infrastructure* mapping, not content monitoring. **Every other top-10 result has 0–1 stars**, several are coursework or hackathon projects. |
+| `forensic watermarking video` | 21 | **Every single result has 0 or 1 star**, most with no licence. Five share the *same repo name* — a coursework cluster, not a field. |
+| `drm license server` | 13 | Keyword-captured by *software* licensing (top hit `SaturnsVoid/SimpleLicensing`, 112★). The only real key server is [diegojfer/FairPlay-KSM](https://github.com/diegojfer/FairPlay-KSM) — **GPL-3.0 and untouched since 2020-04-21.** |
+| `token authentication cdn signed url stars:>=50` | **1** | And it is a Keycloak awesome-list collision. Edge access control has no permissive reference implementation. |
+| `content authenticity mcp` | **2** | One star and zero stars. |
+
+**The control group, and it is the cleanest in this KB.** The identical technical mechanism —
+curated, automated, daily-updated blocklists consumed by resolvers — is a *mature, thriving* open
+ecosystem when the target is advertising or malware, and does not exist at all when the target is
+infringement: [hagezi/dns-blocklists](https://github.com/hagezi/dns-blocklists) **29,211★ / 885f,
+GPL-3.0, pushed 2026-11-27**, [mullvad/dns-blocklists](https://github.com/mullvad/dns-blocklists)
+2,005★ GPL-3.0. There is no copyright counterpart, and the reason is not technical and not neglect:
+**a copyright blocklist is a legal instrument.** Italy's Piracy Shield list is executed on AGCOM's
+authority within 30 minutes; a crowd-curated list carries no authority and exposes its maintainer.
+**So in this plane the artefact Globant can build is the pipeline and the evidence trail, never the
+list.**
+
+
 ## 2026-11-27 — pass 40: the puzzles, games-desk & word-play plane (**the tooling is alive this week and the published science is a year stale — the inverse of every other plane in this KB**)
 
 Plane found by grepping ~100 candidate terms against all eight KB files before any web search:

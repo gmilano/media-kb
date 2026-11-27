@@ -10,6 +10,59 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 35: graphics-desk infrastructure (**the newsroom rig is MIT, the shared design system is unlicensed, and the two facts live in the same org**)
+
+Measured 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name`; 77/77 URLs confirmed
+by `git ls-remote`. This file tracks the **rigs and platforms**; the libraries and NL→chart agents are
+in `agents/trending.md` pass 35.
+
+### The rig layer, by region — one table, because the asymmetry is the story
+
+| Region | Who publishes a graphics rig | Licence pattern | Freshest push | Honest read |
+|---|---|---|---|---|
+| **APAC** | [abcnews](https://github.com/abcnews/odyssey) (ABC Australia, 231 repos) | **MIT** for libraries, **none** for the design system | **2026-11-27** ([chart-builder](https://github.com/abcnews/chart-builder)) | The most active open graphics desk anywhere, and nobody is watching: 3–22 stars per repo. Plus the region owns the chart libraries — ECharts (Apache-2.0, 67,808★), G2 (MIT, 12,678★), pyecharts (MIT, 15,781★). |
+| **North America** | [nprapps](https://github.com/nprapps/interactive-template) (212 repos), [newsdev](https://github.com/newsdev/ai2html) (NYT, 71), [the-pudding](https://github.com/the-pudding/svelte-starter) | **MIT** (NPR, Pudding) / **Apache-2.0** (NYT) | 2026-11-25 (`interactive-template`) | Owns the *rig* lineage and the ideas everyone copied. Ageing: ai2html 2025-10-22, archieml-js 2021-11-12, copytext 2018-06-12, elex **archived**. |
+| **EMEA** | [ZeitOnline/scrolleo](https://github.com/ZeitOnline/scrolleo), [guardian/dotcom-rendering](https://github.com/guardian/dotcom-rendering) | MIT / Apache-2.0 | **2026-11-26** (`scrolleo`) | **Thinnest rig layer of the four.** One new library at 9★; the most-starred EMEA artifact, [bbc/bbplot](https://github.com/bbc/bbplot) (1,645★), has **no licence file** and no push since **2021-07-02**. The Guardian open-sources its entire website but no chart tooling. |
+| **LATAM** | [InfoAmazonia/jeo-plugin](https://github.com/InfoAmazonia/jeo-plugin), [chequeado](https://github.com/chequeado/chequeabot-legacy), [estadao](https://github.com/estadao/basometro) | **GPL-3.0 / AGPL-3.0**, WordPress-coupled | 2026-11-13 (`jeo-plugin`) | **No permissive reusable library found in seven orgs scanned.** What is alive is copyleft geo-tooling for WordPress; the rest is per-story GPL-3.0 code from 2018–2020. Detail and method in `intel/market.md`. |
+
+### The licence detail that decides a client deliverable
+
+Inside **one** organisation — `abcnews`, the most permissive desk found — the split is exact:
+
+- **MIT:** `odyssey`, `odyssey-scrollyteller`, `scrollyteller`, `chart-builder`, `interactive-isobands`,
+  `interactive-datawrapper-scrollyteller`, `d3-layout-narrative`, `dev-proxy`, `us-election-2026`
+- **No licence field at all:** `palette` (the colour system), `components-dataviz` (the shared
+  components), `svelte-scrollyteller` (the newest framework work)
+
+**The reusable libraries are granted; the shared design system is not.** That is the inverse of what
+an integrator hopes for, and it is a five-minute check that prevents a three-week problem.
+
+### Infrastructure that removes a recurring cost — worth its own line
+
+[protomaps/basemaps](https://github.com/protomaps/basemaps) (**BSD-3-Clause**, 780★, 2026-09-11)
+builds a **single-file PMTiles basemap served from static hosting** — no tile server, no per-view
+billing, no vendor key in the page. Paired with
+[maplibre/maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) (**BSD-3-Clause**, 12,189★,
+2026-11-26) it is the first fully permissive web-cartography stack with **zero marginal cost per map
+view** — which matters most on exactly the stories that go viral.
+
+### Channel notes for the next pass
+
+- **`search/repositories?q=repo:owner/name` is still the working channel** for stars/SPDX/`pushed_at`
+  /`archived`; `/repos/{owner}/{repo}` remains blocked ("GitHub access to this repository is not
+  enabled for this session").
+- **New limit found:** that channel returns `total_count: 0` for
+  [nprapps/pym.js](https://github.com/nprapps/pym.js) although the repo exists (`git ls-remote` OK,
+  raw `LICENSE` 1,047 B MIT, `package.json` v1.3.2). **The dot is not the cause** — `chartjs/Chart.js`
+  resolves. Some repos are simply absent from the search index: when that happens, fall back to
+  `ls-remote` + raw, and **record the metadata as unknown rather than as zero.**
+- **`github.com` HTML returns 403** through this session's proxy, so star counts cannot be scraped as
+  a fallback. `raw.githubusercontent.com` works.
+- **The SPDX field is wrong often enough to check:** `NOASSERTION` resolved to real permissive
+  licences for `maplibre-gl-js` (BSD-3-Clause), `quarto-cli` (MIT), `ai2html`/`archieml-js`/`elex`
+  (Apache-2.0, NYT), `guardian/frontend` (Apache-2.0), `mapshaper` (MPL-2.0) and to **AGPL-3.0** for
+  `cjworkbench`. Resolve it from the file; never report `NOASSERTION` as "no licence."
+
 ## 2026-11-27 — pass 34: ad-integrity & supply-chain-transparency infrastructure (**the industry standardised the claim and never deployed the proof: `ads.txt` has eight maintained tools, `ads.cert` has eight stars and no commits since 2023**)
 
 Measured 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name` — see

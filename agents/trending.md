@@ -9,6 +9,59 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 35: the data-journalism graphics desk (**the substrate is finished and permissive; the only thing anyone pays for is the iframe**)
+
+Measured 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name`; every URL re-checked
+with `git ls-remote` — **77/77 resolved, 0 failures.**
+
+Vocabulary probe that found this plane: across eight files and 34 passes the KB said `OpenRefine`
+**13**, `Datasette` **6**, `d3` **5**, `Leaflet` **2**, and said `Vega` **0**, `Observable Plot` **0**,
+`Chart.js` **0**, `MapLibre` **0**, `QGIS` **0**, `Scrollama` **0**, `ArchieML` **0**, `ai2html` **0**,
+`csvkit` **0**, `Frictionless` **0**, `Idyll` **0**, `scrollytelling` **0**, `election results` **0**,
+`graphics desk` **0**. **Thirty-four passes about moving the video and selling the impression, nothing
+about the desk that draws the chart.**
+
+### What moved this week — pushed in the last seven days
+
+| Repo | License | Stars | Last push | Why it matters this week |
+|---|---|---|---|---|
+| [abcnews/chart-builder](https://github.com/abcnews/chart-builder) | MIT | 3 | **2026-11-27** | A chart scrollyteller from ABC Australia, pushed **today**. Three stars. |
+| [chartjs/Chart.js](https://github.com/chartjs/Chart.js) | MIT | 67,825 | **2026-11-27** | Still shipping daily at 67.8k★. |
+| [visgl/deck.gl](https://github.com/visgl/deck.gl) | MIT | 14,831 | **2026-11-27** | WebGL2 geospatial layers. |
+| [mbloch/mapshaper](https://github.com/mbloch/mapshaper) | MPL-2.0 | 4,212 | **2026-11-27** | One author, ten years, still the only tool that shrinks a shapefile correctly. |
+| [ZeitOnline/scrolleo](https://github.com/ZeitOnline/scrolleo) | MIT | **9** | **2026-11-26** | Zeit Online's dependency-free, ESM-only, typed rewrite of Scrollama. **The only new EMEA library in this plane.** |
+| [abcnews/odyssey](https://github.com/abcnews/odyssey) | MIT | 22 | **2026-11-26** | The story engine the whole ABC rig plugs into. |
+| [abcnews/components-dataviz](https://github.com/abcnews/components-dataviz) | **none** | 0 | **2026-11-26** | Shared dataviz components, **no licence**. |
+| [abcnews/interactive-isobands](https://github.com/abcnews/interactive-isobands) | MIT | 0 | **2026-11-26** | Gridded data → isobands. |
+| [Canner/WrenAI](https://github.com/Canner/WrenAI) | Apache-2.0 | 18,413 | **2026-11-26** | Governed text-to-SQL → charts. The NL→chart leader by an order of magnitude. |
+| [mckinsey/vizro](https://github.com/mckinsey/vizro) | Apache-2.0 | 3,828 | **2026-11-26** | Low-code dashboards + NL chart generation. |
+| [abcnews/svelte-scrollyteller](https://github.com/abcnews/svelte-scrollyteller) | **none** | 6 | **2026-11-25** | Where the rig is heading, **unlicensed**. |
+| [nprapps/interactive-template](https://github.com/nprapps/interactive-template) | MIT | 70 | **2026-11-25** | NPR's current news-app template. |
+| [Kanaries/pygwalker](https://github.com/Kanaries/pygwalker) | Apache-2.0 | 16,009 | **2026-11-25** | Dataframe → exploratory UI. |
+| [tryopendata/openchart](https://github.com/tryopendata/openchart) | **Apache-2.0** | 35 | **2026-11-25** | Newly open-sourced spec-driven library. **Its own launch coverage calls it MIT; the repo says Apache-2.0.** Correction recorded. |
+
+### The three findings worth carrying into next week
+
+**1. The substrate is done; the product is the hosting.** Rendering (D3 114,024★ ISC), grammar
+(Vega-Lite BSD-3), two 67k★ permissive chart libraries, BSD maps, MIT wrangling — all active, all
+clean. What does **not** exist in open source is a *hosted responsive embed with an editor UI for a
+non-developer*. That hole is named Datawrapper, and **Datawrapper's own open-source core was archived
+in September 2021** (four repos inside three days); the 1,465★ repo still carrying the name has **no
+`LICENSE` file** and is described as "utility functions." 2026 newsroom guides still call it open
+source. Full table in `verticals/solutions.md`.
+
+**2. The best evidence for finding 1 was published by the most open desk in the world.** ABC
+Australia ships its whole rig MIT — and maintains
+[abcnews/interactive-datawrapper-scrollyteller](https://github.com/abcnews/interactive-datawrapper-scrollyteller)
+(MIT), an open wrapper whose only function is to embed a **closed SaaS chart**. When the people who
+open-source everything still rent the embed, the gap is structural, not a tooling preference.
+
+**3. Momentum and stars are inversely placed in this plane.** The active repos have single-digit
+stars (chart-builder 3, scrolleo 9, odyssey 22, openchart 35) and the famous ones are frozen:
+Chartbuilder **2,095★, last pushed 2017-09-13**; Idyll **2,044★, 2023-02-04**; archieml-js **215★,
+2021-11-12**; ai2html **969★, 2025-10-22**; `bbc/bbplot` **1,645★, 2021-07-02 and no licence file**;
+`newsdev/elex` **archived**. **Sorting this plane by stars returns a museum.** Sort by `pushed_at`.
+
 ## 2026-11-27 — pass 34: the ad-integrity, supply-chain-transparency & verification plane (**the open-source world builds the evasion at 7× to 21× the stars of the detection, and that ratio is measurable in two queries**)
 
 Measured 2026-11-27. Vocabulary probe that found this plane: the eight files said `prebid` **72** and

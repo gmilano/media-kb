@@ -1989,3 +1989,101 @@ client GIVT filtering it controls, a supply graph it can audit, an auction it ca
 owns. It does **not** give an accredited number, in-app viewability, a TCF registration or a
 suitability verdict — and a proposal that is clear about that line will survive procurement better
 than one that is not.
+
+---
+
+## Pass 35 addendum (2026-11-27) — the graphics-desk platform tier (**the rigs are open; the thing newsrooms pay for is not**)
+
+### ⛔ The correction this pass exists to make: **Datawrapper is not open source, and 2026 guides still say it is**
+
+Every newsroom-tooling guide surfaced this pass describes Datawrapper as open source — one data
+journalist's 2026 toolkit says verbatim that it "is open-source but offers cheap paying options for
+hosting." **Verified 2026-11-27, that is false**, and the evidence is in the org itself:
+
+| Repo | License | Stars | Last push | State |
+|---|---|---|---|---|
+| [datawrapper/datawrapper](https://github.com/datawrapper/datawrapper) | **no `LICENSE` file at all** (API: `NOASSERT`; raw fetch of `LICENSE`/`LICENSE.md`/`COPYING` on `main` and `master`: **not found**) | 1,465 | 2025-03-30 | active — but the description reads *"Utility functions developed for Datawrapper."* **This is not the application.** |
+| [datawrapper/chart-core](https://github.com/datawrapper/chart-core) | MIT | 10 | 2021-09-06 | **ARCHIVED** |
+| `datawrapper/frontend` | none | 10 | 2021-09-06 | **ARCHIVED** |
+| `datawrapper/api` | none | 12 | 2021-09-08 | **ARCHIVED** |
+| `datawrapper/orm` | none | 4 | 2021-09-06 | **ARCHIVED** |
+
+The four repositories that constituted the self-hostable product were **all archived within three
+days of each other in September 2021**. The 1,465-star repo that still carries the product's name is
+a utility library with no licence grant. **You cannot self-host Datawrapper in 2026**, and a proposal
+that assumes otherwise fails at the first architecture review.
+
+**The proof that this gap is real and priced — and it is the best single artifact found this pass:**
+ABC Australia publishes its entire graphics desk under MIT, and also maintains
+[abcnews/interactive-datawrapper-scrollyteller](https://github.com/abcnews/interactive-datawrapper-scrollyteller)
+(MIT, 2026-11-16) — **an MIT-licensed wrapper whose only job is to put a closed SaaS chart inside
+their open scrollyteller.** The most open desk in the world still rents the embed. That is the
+market gap stated by someone who had every incentive to close it.
+
+Also proprietary, for the avoidance of a scoping error: **Flourish** (Canva-owned; no repo — and the
+most-named tool in a LATAM survey of investigative and data journalists) and **Highcharts**
+(12,502★, `license.txt` → `shop.highcharts.com`, no `LICENSE` file).
+
+### ✅ The newsroom desk rigs you can actually adopt — all permissive, all verified
+
+These are complete, opinionated *platforms* for producing and publishing graphics, in the same sense
+Odoo is a platform for ERP: a running system you customise, not a library you call.
+
+**ABC Australia (`abcnews`) — 231 repos, and the most active open graphics desk on earth.**
+
+| Repo | License | Stars | Last push | Role in the rig |
+|---|---|---|---|---|
+| [abcnews/odyssey](https://github.com/abcnews/odyssey) | **MIT** | 22 | **2026-11-26** | The story-format engine the rest plugs into. |
+| [abcnews/odyssey-scrollyteller](https://github.com/abcnews/odyssey-scrollyteller) | **MIT** | 114 | 2022-06-08 | Scrollytelling sections inside an Odyssey story. Stable, not dead — `odyssey` carries the churn. |
+| [abcnews/scrollyteller](https://github.com/abcnews/scrollyteller) | **MIT** | 36 | 2023-02-27 | The React component form. |
+| [abcnews/svelte-scrollyteller](https://github.com/abcnews/svelte-scrollyteller) | **no licence field** | 6 | **2026-11-25** | "Scrollytelling, but in Svelte" — the direction of travel, and **unlicensed**. Ask before you ship it. |
+| [abcnews/chart-builder](https://github.com/abcnews/chart-builder) | **MIT** | 3 | **2026-11-27** | A chart scrollyteller. **Pushed today.** |
+| [abcnews/interactive-isobands](https://github.com/abcnews/interactive-isobands) | **MIT** | 0 | 2026-11-26 | Gridded data → isobands; the weather/climate map primitive. |
+| [abcnews/components-dataviz](https://github.com/abcnews/components-dataviz) | **no licence field** | 0 | 2026-11-26 | The shared dataviz components — and the shared components are the unlicensed ones. |
+| [abcnews/palette](https://github.com/abcnews/palette) | **no licence field** | 1 | 2026-11-24 | ABC News colour palettes. Design tokens, no grant. |
+| [abcnews/d3-layout-narrative](https://github.com/abcnews/d3-layout-narrative) | **MIT** | 194 | 2016-04-05 | XKCD-style narrative charts. Their most-starred artifact, and a decade old. |
+
+**Read the licence column before the star column.** The *libraries* are MIT; the *design system*
+(`palette`, `components-dataviz`) and the newest framework work (`svelte-scrollyteller`) carry **no
+licence at all**. A desk that publishes everything can still leave the shared pieces ungranted —
+which is exactly the part an integrator wants to reuse.
+
+**NPR (`nprapps`) — 212 repos; the rig lineage, MIT throughout.**
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [nprapps/interactive-template](https://github.com/nprapps/interactive-template) | **MIT** | 70 | **2026-11-25** | The current Node template for news apps and interactive pages. The live one. |
+| [nprapps/dailygraphics-next](https://github.com/nprapps/dailygraphics-next) | **MIT** | 72 | 2026-09-03 | The daily-graphics rig, 2.0. |
+| [nprapps/dailygraphics](https://github.com/nprapps/dailygraphics) | **MIT** | 294 | 2024-02-13 | The original rig — **4× the stars of its successor.** Read that as adoption inertia, not as a recommendation. |
+| [nprapps/pym.js](https://github.com/nprapps/pym.js) | **MIT** (1,047 B `LICENSE`, `package.json` v1.3.2, both raw-verified; stars/push **not retrievable** — see `repos/foundations.md`) | n/a | n/a | Responsive iframes. The humble piece that makes an embedded chart resize in someone else's CMS. |
+| [nprapps/copytext](https://github.com/nprapps/copytext) | **MIT** | 224 | 2018-06-12 | A spreadsheet as a native object — **the pattern that lets an editor change story copy without a deploy.** Old, small, and the single most copied idea in news apps. |
+| [nprapps/mapturner](https://github.com/nprapps/mapturner) | **MIT** | 107 | 2018-10-20 | CLI for generating TopoJSON for maps. Stale, still the shortest path. |
+
+**The New York Times (`newsdev`) — 71 repos, Apache-2.0, and ageing.**
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [newsdev/ai2html](https://github.com/newsdev/ai2html) | **Apache-2.0** (`LICENSE.md`, 582 B, © 2011–2021 NYT; API: `NOASSERTION`) | 969 | 2025-10-22 | Illustrator artwork → responsive HTML/CSS. **The single most consequential newsroom graphics tool ever released**, and the reason hand-drawn annotation survives on mobile. Also an accessibility lever: it emits live text, not a flattened image. |
+| [newsdev/archieml-js](https://github.com/newsdev/archieml-js) | **Apache-2.0** (`LICENSE`, 577 B, © 2015 NYT) | 215 | 2021-11-12 | Parser for ArchieML — structured text an editor can write **on deadline** without breaking a build. Five years since a push; the format is finished. |
+| [newsdev/archieml.org](https://github.com/newsdev/archieml.org) | — | 84 | 2025-06-25 | The spec hub. |
+| [newsdev/elex](https://github.com/newsdev/elex) | **Apache-2.0** (586 B) | 169 | 2022-09-07 | **ARCHIVED.** Wrapper for the AP v2 Elections API. The election plane's one open client, abandoned. |
+
+**The Pudding and the standalone libraries.**
+
+| Repo | License | Stars | Last push | Role |
+|---|---|---|---|---|
+| [the-pudding/svelte-starter](https://github.com/the-pudding/svelte-starter) | **MIT** | 475 | 2026-11-05 | The visual-essay starter the current generation of interactive work is actually forked from. |
+| [the-pudding/data](https://github.com/the-pudding/data) | **MIT** | 1,085 | 2026-11-19 | Published data behind their stories — the "show your work" norm, as a repo. |
+| [russellsamora/scrollama](https://github.com/russellsamora/scrollama) | **MIT** | 6,013 | 2025-11-13 | `IntersectionObserver` scrollytelling. **The category standard**, 6k★, one maintainer. |
+| [ZeitOnline/scrolleo](https://github.com/ZeitOnline/scrolleo) | **MIT** | **9** | **2026-11-26** | Zeit Online's vanilla-JS modernisation of Scrollama: no dependencies, ESM-only, real TypeScript types. **Nine stars, pushed yesterday** — the only new EMEA entrant found in this plane. |
+| [NUKnightLab/TimelineJS3](https://github.com/NUKnightLab/TimelineJS3) | MPL-2.0 | 3,238 | 2026-11-16 | Spreadsheet → interactive timeline. Knight Lab, still maintained after a decade. |
+| [idyll-lang/idyll](https://github.com/idyll-lang/idyll) | **MIT** | 2,044 | 2023-02-04 | Explorable explanations as markup. 2,044★ and three years idle — **the warning in this tier**: a beloved format tool with no institution behind it stops. |
+| [google/scrollytell](https://github.com/google/scrollytell) | Apache-2.0 | 65 | 2022-02-12 | **ARCHIVED.** |
+| [Quartz/Chartbuilder](https://github.com/Quartz/Chartbuilder) | **MIT** | 2,095 | **2017-09-13** | Quartz's chart tool: 2,095 stars, untouched for nine years. The clearest evidence that *newsroom-built chart products die with the newsroom's funding* — and the reason the hosted-embed gap persists. |
+
+**Publisher platforms, for the record** (whole-site, not graphics-specific):
+[guardian/frontend](https://github.com/guardian/frontend) (**Apache-2.0**, resolved from 723 B
+`LICENSE`; 5,896★, 2026-11-26) and
+[guardian/dotcom-rendering](https://github.com/guardian/dotcom-rendering) (**Apache-2.0**, 277★,
+2026-11-26) — the Guardian publishes its production website stack, which no other major publisher
+does. Useful as a reference architecture; it is not a chart tool.

@@ -3598,3 +3598,77 @@ the irony this plane now contains in full: the same industry is simultaneously s
 **agent-to-agent ad buying** and failing to detect **agent-driven invalid traffic**, whose best tools
 are MIT-licensed, 33,000-star stealth browsers built for AI agents. The buy side is being automated
 faster than the integrity side can describe what automation looks like.
+
+---
+
+## Pass 35 (2026-11-27) — the graphics desk: trends in the one plane where open source already won
+
+### Trend 1 — **The open stack is complete, so the spend moved to hosting.** This is the plane's defining economics
+
+Thirty-four passes of this KB describe planes where the open tooling is partial and a vendor fills the
+gap with capability. The graphics desk is the opposite: **every layer is permissive and actively
+maintained** — D3 (ISC, 114,024★), Chart.js (MIT, 67,825★), ECharts (Apache-2.0, 67,808★), Vega-Lite
+(BSD-3), Plot (ISC), Leaflet (BSD-2), MapLibre (BSD-3), mapshaper (MPL-2.0), OpenRefine (BSD-3),
+Datasette (Apache-2.0), csvkit (MIT), Quarto (MIT). A newsroom can render anything it wants for free.
+
+And newsrooms still pay, because **what they buy is not rendering — it is a hosted responsive embed
+with an edit UI a non-developer can use on deadline.** Datawrapper's newsroom plans run roughly
+**$33–$564/month**. No open-source project in this plane provides that, and the one that used to was
+**archived in September 2021**.
+
+The structural lesson generalises past media: *when a rendering substrate commoditises, value
+migrates to the hosted workflow around it, not to the renderer.* Check it against the prior passes —
+it is the same shape as transcoding (FFmpeg free, packaging-as-a-service paid) found in pass 8.
+
+### Trend 2 — **Momentum inverted against reputation.** Sorting this plane by stars returns a museum
+
+| Frozen and famous | Stars | Last push | | Active and invisible | Stars | Last push |
+|---|---|---|---|---|---|---|
+| [Quartz/Chartbuilder](https://github.com/Quartz/Chartbuilder) | 2,095 | **2017-09-13** | | [abcnews/chart-builder](https://github.com/abcnews/chart-builder) | **3** | **2026-11-27** |
+| [idyll-lang/idyll](https://github.com/idyll-lang/idyll) | 2,044 | 2023-02-04 | | [ZeitOnline/scrolleo](https://github.com/ZeitOnline/scrolleo) | **9** | **2026-11-26** |
+| [bbc/bbplot](https://github.com/bbc/bbplot) | 1,645 | **2021-07-02**, no licence | | [abcnews/odyssey](https://github.com/abcnews/odyssey) | **22** | **2026-11-26** |
+| [newsdev/ai2html](https://github.com/newsdev/ai2html) | 969 | 2025-10-22 | | [tryopendata/openchart](https://github.com/tryopendata/openchart) | **35** | **2026-11-25** |
+| [newsdev/archieml-js](https://github.com/newsdev/archieml-js) | 215 | 2021-11-12 | | [nprapps/interactive-template](https://github.com/nprapps/interactive-template) | **70** | **2026-11-25** |
+
+Two different causes, and they need different responses. **Chartbuilder and Idyll are abandonment** —
+a newsroom product and an academic format tool, both of which stopped when their funding or founder
+did; fork them or avoid them. **ArchieML and TopoJSON are completion** — a text format and a topology
+encoding, finished, with nothing left to change; a 2021 push there is stability, not rot. Telling the
+two apart is the diligence step, and the test is simple: *does the artifact still do its whole job?*
+
+### Trend 3 — **The AI layer has settled on "model proposes a spec, deterministic compiler renders it"**
+
+Of the five NL→chart projects verified this pass, the architecturally correct one is also the smallest:
+[yuqisun/chartwright](https://github.com/yuqisun/chartwright) (MIT, **0★**) has the agent emit a
+library-agnostic **chart spec** and a deterministic compiler produce the config, so the model never
+writes renderer code. [Canner/WrenAI](https://github.com/Canner/WrenAI) (Apache-2.0, 18,413★) applies
+the same principle a layer down — natural language resolves against a **governed semantic layer**
+before any SQL is emitted.
+
+This is why **Vega-Lite (BSD-3-Clause) is the strategically important library of 2026** even at 5,566★
+versus Chart.js's 67,825: it is a small, declarative, *validatable* JSON grammar, which makes it the
+only mainstream permissive target an LLM can emit safely — you can reject a malformed spec before it
+renders, which you cannot do with imperative D3. Note the inversion worth watching: **Altair, the
+Python binding (10,522★), has 1.9× the stars of the grammar it binds.** The agent ecosystem is
+arriving through Python, not JavaScript.
+
+### Trend 4 — **The licence field is wrong often enough that reading it is negligence**
+
+Resolved from files this pass, against an API that reported `NOASSERTION`: MapLibre GL JS → **BSD-3-Clause**;
+Quarto → **MIT** (Posit); ai2html, archieml-js, elex → **Apache-2.0** (NYT); guardian/frontend →
+**Apache-2.0**; mapshaper → **MPL-2.0**; and CJ Workbench → **AGPL-3.0** (Columbia University) — the
+one case where the resolution makes the project *unusable* in a hosted client deliverable rather than
+usable. Two repos resolved to **nothing at all**: `datawrapper/datawrapper` (1,465★) and `bbc/bbplot`
+(1,645★) have no licence file on any branch checked. **Three thousand stars of apparently-open
+tooling with no grant behind it**, and both are routinely recommended in 2026 newsroom guides.
+
+### Trend 5 — **Election graphics are the plane's hard commercial edge, and open source has retreated from it**
+
+In the cycle where **ABC, CBS, NBC and CNN all moved to AP's tabulation data for the 2026 and 2028 US
+elections**, the only open-source client for that feed —
+[newsdev/elex](https://github.com/newsdev/elex) (Apache-2.0, 169★) — sits **archived since
+2022-09-07**. The free alternatives that appeared (civicAPI, Open America's JSON feed) are **hosted
+services, not repositories**: no licence, no self-host, no SLA. So the most consequential graphic any
+newsroom publishes rests on a commercial feed with no maintained open client — while the *display*
+layer above it (D3, MapLibre, TopoJSON, PMTiles) is entirely free. **The data is the moat; the chart
+never was.**

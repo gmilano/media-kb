@@ -1265,6 +1265,32 @@ than technical.
   legally modify. **That combination — a real need, a permissive platform and no competing tooling —
   is the strongest greenfield position found in any of the 34 planes.**
 
+- **The graphics desk, pass 35 (2026-11-27): own the rig modernisation, because the lineage is here
+  and it is ageing.** North America wrote the newsroom graphics playbook and still holds the rigs:
+  [nprapps/interactive-template](https://github.com/nprapps/interactive-template) (MIT, 70★,
+  2026-11-25), [nprapps/dailygraphics-next](https://github.com/nprapps/dailygraphics-next) (MIT, 72★,
+  2026-09-03), [newsdev/ai2html](https://github.com/newsdev/ai2html) (Apache-2.0, 969★, 2025-10-22),
+  [newsdev/archieml-js](https://github.com/newsdev/archieml-js) (Apache-2.0, 215★, 2021-11-12),
+  [the-pudding/svelte-starter](https://github.com/the-pudding/svelte-starter) (MIT, 475★, 2026-11-05).
+  Note the dates: **the ideas everyone copied are maintained slowly or not at all**, and
+  `nprapps/dailygraphics` still carries **4× the stars of its own successor** (294 vs 72) — adoption
+  inertia in plain numbers. **Opportunity:** a rig-modernisation engagement — Svelte build, PMTiles
+  basemaps, Frictionless schema validation in CI, ai2html retained for annotation — sold to
+  mid-market publishers who forked NPR's 2019 template and never upgraded.
+- **The election-graphics squeeze is a North American contract problem, not a technology problem.**
+  ABC, CBS, NBC and CNN all moved to **AP tabulation data for 2026 and 2028**, and the only
+  open-source client for that feed, [newsdev/elex](https://github.com/newsdev/elex) (Apache-2.0,
+  169★), has been **archived since 2022-09-07**. The free alternatives (civicAPI, Open America) are
+  hosted services with no licence and no self-host path.
+  [openelections/openelections-data-us](https://github.com/openelections/openelections-data-us) (5★,
+  no licence field) is a historical archive, not a live client. **Opportunity:** build and maintain a
+  licensed-feed ingestion client — schema-validated, replay-testable against the 2024 and 2026
+  results, with a race-call audit trail. Every US broadcaster and large regional publisher needs
+  exactly one of these every two years, and nobody is selling it.
+- **The one thing not to propose here:** a self-hosted Datawrapper. Its open core was archived in
+  September 2021 and the repo bearing the name has no licence file. Scope the hosted embed as a
+  vendor line item or build a bespoke one; do not plan to fork it.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2678,6 +2704,36 @@ in peer-reviewed research rather than vendor marketing.
 - **Direction of travel:** DoubleVerify reports fraud/IVT **down 45% YoY in EMEA** — the largest
   reported regional improvement anywhere, and vendor-sourced.
 
+- **The graphics desk, pass 35 (2026-11-27): EMEA is the thinnest rig layer of the four regions, and
+  that is the opening.** Scanning the public-broadcaster and publisher orgs for charting, mapping and
+  graphics tooling returned almost nothing reusable. The most-starred EMEA artifact in the plane,
+  [bbc/bbplot](https://github.com/bbc/bbplot) (an R/ggplot2 package for BBC-style charts, **1,645★**),
+  has **no licence file on any branch** and **no push since 2021-07-02**. The only new EMEA library
+  found is [ZeitOnline/scrolleo](https://github.com/ZeitOnline/scrolleo) (MIT, **9★**, 2026-11-26) —
+  a dependency-free, ESM-only, typed modernisation of Scrollama, pushed the day before this pass.
+  The Guardian open-sources its **entire production website** —
+  [guardian/frontend](https://github.com/guardian/frontend) (Apache-2.0, 5,896★, 2026-11-26) and
+  [guardian/dotcom-rendering](https://github.com/guardian/dotcom-rendering) (Apache-2.0, 277★,
+  2026-11-26) — and still publishes no chart tooling. **Opportunity:** EMEA public-service media
+  already behave as open-source *producers* in broadcast (Sofie, CasparCG, sisyfos — pass 22 of this
+  KB). The graphics desk is the obvious next commission and nobody has taken it: a licensed,
+  maintained, accessible EMEA chart-and-map component set, EBU-adjacent, the way Sofie was
+  commissioned for playout.
+- **Digital sovereignty is the budget line that pays for it.** The DPP's European Media Trends 2026
+  report names AI plus a growing appetite for **digital sovereignty** as the forces reshaping European
+  media strategy, and the sovereignty objection to cloud DAM — that standard tooling aggregates data
+  on extra-European servers — **applies with full force to hosted chart embeds**, which are third-party
+  JavaScript executing in the reader's browser on a page the publisher is legally responsible for.
+  [protomaps/basemaps](https://github.com/protomaps/basemaps) (BSD-3-Clause) +
+  [maplibre/maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) (BSD-3-Clause) give a
+  **fully self-hosted basemap with no vendor key and no per-view call home** — a GDPR and sovereignty
+  story, not merely a cost story. **This is the cleanest sovereignty-framed build in the plane.**
+- **EU AI Act Article 50 reaches this plane through a side door.** An AI-generated chart is not
+  usually a deepfake, but an **AI-generated chart *annotation* or an AI-written chart caption is
+  synthetic text published as fact.** Any NL→chart agent deployed in an EMEA newsroom needs the same
+  disclosure plumbing the generative-video work needs. **Opportunity:** extend the provenance ledger
+  already scoped for North American digital replicas to cover agent-produced graphics copy.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -4030,6 +4086,35 @@ locally-built tooling.** That combination is the opportunity and it should be st
   reports **APAC holding about a third of the world's fraud networks** and **Japan's fraud rate up
   219% YoY to 5.1%**, the highest in APAC. That is identity fraud, not ad fraud — do not conflate them
   in a deck, but the same infrastructure and the same operators sit behind both.
+
+- **The graphics desk, pass 35 (2026-11-27): APAC owns this plane twice over, and the KB had never
+  noticed.** First, the **libraries**: the permissive charting substrate outside D3 and Chart.js is
+  substantially APAC-origin — [apache/echarts](https://github.com/apache/echarts) (Apache-2.0,
+  **67,808★**, 2026-11-25, Baidu-origin and now ASF-governed),
+  [antvis/G2](https://github.com/antvis/G2) (MIT, 12,678★, Ant Group) and
+  [pyecharts/pyecharts](https://github.com/pyecharts/pyecharts) (MIT, 15,781★). Second, the **desk**:
+  [abcnews](https://github.com/abcnews/odyssey) — ABC Australia's Story Lab, **231 repos** — is the
+  most actively maintained open graphics desk found anywhere in the world, with
+  [chart-builder](https://github.com/abcnews/chart-builder) (MIT) pushed **2026-11-27, the day of this
+  pass**, [odyssey](https://github.com/abcnews/odyssey) (MIT) 2026-11-26,
+  [svelte-scrollyteller](https://github.com/abcnews/svelte-scrollyteller) 2026-11-25 and
+  [interactive-isobands](https://github.com/abcnews/interactive-isobands) (MIT) 2026-11-26.
+- **The APAC risk is the mirror image of the EMEA one: maintained but unwatched.** ABC's repos carry
+  **0–22 stars each** (`chart-builder` 3, `svelte-scrollyteller` 6, `odyssey` 22). A desk this good
+  with this little external contribution is a **bus-factor dependency**, and three of its most
+  reusable pieces — `palette` (the colour system), `components-dataviz` (the shared components) and
+  `svelte-scrollyteller` (the newest work) — **carry no licence field at all.** **Opportunity, and it
+  is a cheap one:** engage ABC-adjacent or ABU-member broadcasters to put a licence on the shared
+  design system and co-maintain it. The engineering is done; the governance is missing, and
+  governance is what an integrator sells.
+- **Regulatory divergence makes a single APAC graphics compliance story impossible, and that is
+  billable.** AI rules across the region accelerated sharply in the year to September 2026 and now
+  split into binding risk-based frameworks (South Korea, Vietnam), targeted rules (China) and lighter
+  regimes elsewhere, with **generative-AI disclosure and labelling obligations differing by market**.
+  A chart generated or annotated by a model therefore carries different disclosure duties in Seoul,
+  Shanghai and Sydney. **Opportunity:** per-market disclosure configuration in the publishing rig —
+  one build, market-specific labelling — for regional broadcasters and the public broadcasters
+  (Australia, Singapore) already exploring newsroom AI through the ABU.
 
 ### LATAM
 
@@ -5447,6 +5532,47 @@ Forum to find out which, before committing a build.**
   baseline. Do **not** lead with accreditation: there is no body in-region to accredit against, and
   pretending otherwise is the fastest way to lose the account.
 
+- **The graphics desk, pass 35 (2026-11-27): an informed gap, stated as a gap.** Seven LATAM
+  newsroom and civic-data organisations were scanned for a reusable charting or mapping library
+  (`lanacion`, `OjoPublico`, `chequeado`, `agenciapublica`, `InfoAmazonia`, `estadao`, `datasketch`).
+  **No permissive, reusable, maintained graphics library was found in any of them.** What exists is
+  real work in three other shapes:
+  - **Live, maintained, and copyleft/WordPress-coupled:**
+    [InfoAmazonia/jeo-plugin](https://github.com/InfoAmazonia/jeo-plugin) (**GPL-3.0**, 10★,
+    2026-11-13) — interactive map blocks for WordPress Gutenberg — and
+    [InfoAmazonia/amazonia-minada](https://github.com/InfoAmazonia/amazonia-minada) (**AGPL-3.0**, 9★,
+    2026-11-10), a daily-updated illegal-mining map and bot. Genuinely active, and both licences keep
+    them out of a proprietary client deliverable.
+  - **Per-story code, not libraries:** [estadao](https://github.com/estadao/basometro) publishes
+    story repos under **GPL-3.0** (`basometro` 51★ 2020-01-20, and the 2018 tweet- and
+    facial-expression-analysis pieces at 54★ and 52★). Excellent transparency practice; nothing to
+    reuse.
+  - **Components without grants:** `datasketch` (Colombia) has **202 repositories**, overwhelmingly
+    R/Shiny building blocks (`shinypanels` 81★, `shinyinvoer`, `hgchmagic`), and **most carry no
+    licence field.** `chequeado` (Argentina) has [chequeabot-legacy](https://github.com/chequeado/chequeabot-legacy)
+    (MIT, 15★, 2025-05-27) and an active `botletin-oficial` (2026-03-13) — fact-checking automation,
+    adjacent to this plane rather than in it.
+- **Read the asymmetry precisely, because it sets the engagement shape.** APAC and North America
+  export **permissive libraries**; LATAM publishes **copyleft applications and unlicensed
+  components**. A LATAM newsroom that wants a shipped, relicensable graphics system is therefore
+  building on North American rigs (NPR/Pudding MIT) or APAC libraries (ECharts/G2) **today** — there
+  is no regional alternative to adopt. **Opportunity:** the first permissive, Spanish- and
+  Portuguese-language newsroom chart-and-map component set, with LATAM-specific cartography
+  (municipal boundaries, electoral geographies) as PMTiles. The regional appetite is documented —
+  Aspen Digital's January 2026 "Mind the Gap" report describes a regional push toward **shared AI
+  assets and collaboration on attribution and licensing** — and the supply does not exist.
+- **The licence conversation is already open here, which shortens the sale.** Mexico's amendments to
+  the Federal Copyright Law and Federal Labour Law (published **14 May 2026**) are the region's first
+  sector-specific AI rules for media; Argentina's SiPreBA and partners published *Notes Toward
+  Regulating Artificial Intelligence in the Media* in May 2026; Uruguay was the first in the region to
+  sign the Council of Europe's AI framework convention. **Opportunity:** pair the component set with
+  a disclosure-and-attribution layer, which is the part regional publishers are being asked about
+  first and the part the copyleft tooling above does not provide.
+- **One honest caveat on method:** this scan covered seven organisations by GitHub org name and
+  cannot prove absence across the whole region — a library published under an individual developer's
+  account would not appear. It does establish that **the region's best-known data-journalism
+  institutions do not publish one**, which is the fact that matters for sourcing a starting point.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -6628,3 +6754,42 @@ That is a pattern, and it is quotable as one.
 | **GARM / WFA** | **Discontinued August 2024**, days after X's antitrust suit; the settlement reportedly binds the WFA never to revive it or anything similar. Its Brand Safety & Suitability Framework remains in universal use **with no maintaining body.** The governance vacuum of this plane — see `intel/trends.md` pass 34. |
 | **Prebid.org** | The only open, permissive institution on the plane: `prebid-server` (Apache-2.0, 595★), `Prebid.js` (Apache-2.0, 1,619★), `prebid/openrtb` (Apache-2.0, 89★). **The one place a consultancy can change the auction's behaviour rather than report on it.** |
 | **CrowdSec / OWASP (CRS, Coraza, ModSecurity)** | The security community, holding **~33,000 stars of permissive bot-detection infrastructure** that the advertising industry does not cite and does not use. The largest arbitrage on this plane. |
+
+---
+
+## Market size — pass 35 addendum (2026-11-27): the graphics desk has **no market figure at all**, and the only priced number in the plane is a subscription
+
+Thirty-four passes of this KB have recorded market sizings of varying honesty. This plane has none to
+record, and the absence is itself the finding: **no analyst tracks "newsroom data visualisation" as a
+market**, because the rendering is free and the spend is distributed across generic SaaS lines.
+
+The only hard price discovered: **Datawrapper's newsroom plans run roughly $33–$564/month**, with a
+limited free tier. That is the entire visible monetisation of a plane whose open-source substrate
+carries over **450,000 GitHub stars** across the artifacts verified this pass.
+
+What a client engagement is actually priced against, therefore, is **not** the chart tooling:
+
+| Cost line | Open-source status | What it means for a proposal |
+|---|---|---|
+| Chart rendering | **Free and permissive at every layer** (ISC/MIT/BSD/Apache, 5k–114k★) | Zero licence cost. Do not put it in the budget; put it in the risk-reduction column. |
+| Hosted responsive embed + editor UI for non-developers | **Does not exist in open source** (Datawrapper core archived 2021-09) | Either a vendor line item (~$33–$564/mo) or a build. **This is the engagement.** |
+| Map tiles / basemap serving | **Removable cost** — [protomaps/basemaps](https://github.com/protomaps/basemaps) (BSD-3) + [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) (BSD-3) = single-file PMTiles on static hosting | A permanent per-view fee becomes a build-time artifact. The clearest hard-dollar saving in the plane. |
+| Election tabulation data | **Commercial feed; open client archived** ([newsdev/elex](https://github.com/newsdev/elex), 2022) | Feed licence + a bespoke client every cycle. No way around the licence. |
+| Chart/annotation design system | **Published but frequently ungranted** (`abcnews/palette`, `abcnews/components-dataviz`, `bbc/bbplot` — all no licence) | Budget for authoring one, not adopting one. |
+
+### Global players — pass 35 addendum (the graphics-desk layer)
+
+| Player | Position | Why it matters | The catch |
+|---|---|---|---|
+| **Datawrapper** (Germany) | The de facto newsroom chart service | The hosted embed the whole plane is missing. Used across newsrooms by non-developers. | **Not open source despite 2026 guides saying so**: core repos archived 2021-09-06/08, the 1,465★ `datawrapper/datawrapper` has **no licence file**. No self-host path. |
+| **Flourish** (Canva-owned, UK) | The most-named tool in a LATAM survey of investigative/data journalists | Template-driven interactive charts, no code | Proprietary; no repository; now inside a design-SaaS roadmap. |
+| **Highsoft / Highcharts** (Norway) | The enterprise JS charting incumbent | 12,502★ public repo, mature, extremely complete | **Commercial licence** (`license.txt` → `shop.highcharts.com`, no `LICENSE` file). A public repo that reads as permissive at a glance. |
+| **Observable** (US) | D3's authors, commercialised | Publishes [plot](https://github.com/observablehq/plot) (ISC) and [framework](https://github.com/observablehq/framework) (ISC) — a genuinely open core | `framework` last pushed 2026-05-15; the hosted notebook business sets the roadmap, not the OSS. |
+| **Apache Software Foundation / Baidu-origin** | Governs **ECharts** (Apache-2.0, 67,808★) | Foundation governance + patent grant: the lowest-risk charting dependency in existence for client work | Chinese-origin provenance is a procurement question in some Western public-sector tenders — raise it before the client does. |
+| **Ant Group** (`antvis`) | **G2** (MIT, 12,678★), grammar of graphics | APAC-origin, permissive, actively released | Documentation and issue discussion substantially in Chinese. |
+| **Posit** (US) | **Quarto** (MIT), the reproducible publishing spine | One source → HTML/PDF/print; MIT | Company's centre of gravity is R/academic, not newsroom deadlines. |
+| **ABC Australia** (`abcnews`) | **The most active open graphics desk in the world** | 231 repos, MIT libraries, `chart-builder` pushed 2026-11-27 | 0–22 stars per repo; `palette` and `components-dataviz` **unlicensed**; bus-factor risk. |
+| **NPR / NYT / The Pudding** (US) | The rig lineage (MIT / Apache-2.0) | The templates and formats (`ai2html`, ArchieML, `copytext`, `pym.js`) the profession still runs on | Maintenance has slowed to a trickle: ArchieML 2021, `copytext` 2018, `elex` archived. |
+| **The Guardian** (UK) | The only major publisher open-sourcing its **production website** (Apache-2.0) | Reference architecture for a publisher platform | No chart tooling published; not a graphics vendor. |
+| **Associated Press** (US) | **Owns the election-data layer** | ABC, CBS, NBC, CNN all on AP tabulation for 2026 and 2028 | Commercial feed; its only open client archived in 2022. **The moat in this plane is the data, never the chart.** |
+| **Canner (WrenAI)** | The NL→chart leader by an order of magnitude (Apache-2.0, 18,413★) | Governed text-to-SQL → charts/dashboards over a semantic layer | Young; "governed" is an architecture claim a client will ask you to prove. |

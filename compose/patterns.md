@@ -5405,3 +5405,162 @@ attest what it filtered**: a signed, machine-readable integrity claim travelling
 one step of the chain the industry standardised and never deployed. **Combining a three-week-old
 protocol with a three-year-dormant primitive is the highest-leverage composition in this KB**, and
 today it has no competitor.
+
+---
+
+# Pass 35 patterns (2026-11-27) — the graphics desk
+
+**Numbering note:** patterns 1–51 are taken, so this pass uses **52.x**. (Pass 33 shipped as "33",
+collided, and had to be renumbered to 51 in a follow-up commit. Check the highest number before
+writing, not after.)
+
+## Pattern 52.1 — The fully permissive graphics desk: every layer named, every licence verified
+
+**For:** a publisher or broadcaster that wants to produce daily charts and maps in-house with no
+per-seat or per-view licence, and own the output.
+
+**The stack, bottom to top — all verified 2026-11-27:**
+
+| Layer | Repo | Licence | Why this one |
+|---|---|---|---|
+| Data contract | [frictionlessdata/frictionless-py](https://github.com/frictionlessdata/frictionless-py) | MIT | Declare the schema; a renamed column fails CI instead of publishing a wrong chart. **Start here — this is the step every desk skips.** |
+| Clean | [OpenRefine/OpenRefine](https://github.com/OpenRefine/OpenRefine) | BSD-3-Clause | Reporters can use it without a developer. |
+| Script | [wireservice/csvkit](https://github.com/wireservice/csvkit) + [agate](https://github.com/wireservice/agate) | MIT | Deadline-shaped CLI and library. |
+| Serve/explore | [simonw/datasette](https://github.com/simonw/datasette) | Apache-2.0 | Publishes the data behind the story as a queryable API. |
+| Chart spec | [vega/vega-lite](https://github.com/vega/vega-lite) | BSD-3-Clause | Declarative JSON — the only mainstream permissive target you can **validate before rendering**. |
+| Chart render (alt) | [apache/echarts](https://github.com/apache/echarts) | Apache-2.0 | When you want batteries included and a patent grant. |
+| Simplify geography | [mbloch/mapshaper](https://github.com/mbloch/mapshaper) | MPL-2.0 | 60 MB shapefile → 200 KB web map, topology intact. Invoke it; don't paste its source into proprietary files. |
+| Basemap | [protomaps/basemaps](https://github.com/protomaps/basemaps) | BSD-3-Clause | **Single-file PMTiles on static hosting — no tile server, no per-view billing.** |
+| Map render | [maplibre/maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) | BSD-3-Clause | Vector rendering with no vendor key in the page. |
+| Scroll narrative | [russellsamora/scrollama](https://github.com/russellsamora/scrollama) or [ZeitOnline/scrolleo](https://github.com/ZeitOnline/scrolleo) | MIT | Scrollama for 6k★ of battle-testing; scrolleo for ESM-only + real TS types. |
+| Editor copy | [nprapps/copytext](https://github.com/nprapps/copytext) or ArchieML ([newsdev/archieml-js](https://github.com/newsdev/archieml-js)) | MIT / Apache-2.0 | **An editor changes story text without a deploy.** The cheapest goodwill in the build. |
+| Annotation for print/mobile | [newsdev/ai2html](https://github.com/newsdev/ai2html) | Apache-2.0 | Illustrator → responsive HTML with **live text, not a flattened image** (accessibility, not just fidelity). |
+| Embed | [nprapps/pym.js](https://github.com/nprapps/pym.js) | MIT | Resizes correctly inside someone else's CMS. |
+| Build/publish | [the-pudding/svelte-starter](https://github.com/the-pudding/svelte-starter) + [observablehq/framework](https://github.com/observablehq/framework) | MIT / ISC | Static output; no live backend to fall over when the story lands. |
+
+**Wire-up, in order:** schema (`frictionless describe` → commit the descriptor) → clean (OpenRefine,
+export the operation history as the audit trail) → `frictionless validate` in CI → chart as a
+Vega-Lite **spec file in the repo**, never inline config → geography through mapshaper into PMTiles →
+page from `svelte-starter` with scroll steps → copy from a sheet via `copytext` → `pym.js` embed.
+
+**The licence sentence for the SOW:** every component above is ISC, MIT, BSD-2/3-Clause or
+Apache-2.0, except mapshaper (**MPL-2.0**, per-file weak copyleft — invoked as a CLI, so it never
+touches client source). **Zero licence cost, zero copyleft exposure in the deliverable.**
+
+## Pattern 52.2 — Replace the hosted-embed subscription, honestly (the only build in this plane with a hard-dollar number)
+
+**For:** a client who pays for Datawrapper/Flourish seats and asks whether it can be self-hosted.
+
+**Say this first, because it is the whole scoping decision:** **no.** Datawrapper's self-hostable core
+was **archived in September 2021** (`api`, `frontend`, `chart-core`, `orm`, all within three days) and
+the 1,465★ repo still carrying the name has **no licence file** and is described as "utility
+functions." Flourish and Highcharts are proprietary. **There is nothing to fork.** Anyone who says
+otherwise is reading a 2026 guide that is repeating a 2021 fact — several do.
+
+**The honest comparison to put in front of the client:**
+
+| | Keep the subscription | Build the embed service |
+|---|---|---|
+| Cost | ~$33–$564/month, newsroom tier | Build + maintenance, forever |
+| Chart quality | Excellent, immediately | Yours to achieve |
+| Non-developer editing | Solved | **The hard part — this is the product, not the chart** |
+| Sovereignty / third-party JS on your page | Vendor's servers, vendor's script | Fully yours (**the EMEA-decisive column**) |
+| Reader-data exposure | Vendor-dependent | None |
+
+**Build only when the sovereignty or reader-data column decides it** — which in EMEA public-service
+media it increasingly does (see `intel/market.md` pass 35, EMEA). Then the shape is:
+Vega-Lite spec store + a thin editor UI + server-side render to static SVG/PNG +
+[pym.js](https://github.com/nprapps/pym.js) for the responsive iframe. **Scope the editor UI as 70%
+of the effort**, because for the people who use it, it is the entire product.
+
+**The precedent that proves the gap, and the single best slide in this deck:** ABC Australia
+open-sources its whole desk under MIT and *still* maintains
+[abcnews/interactive-datawrapper-scrollyteller](https://github.com/abcnews/interactive-datawrapper-scrollyteller)
+— an MIT wrapper whose only job is to put a **closed SaaS chart** inside their open scrollyteller. The
+most open desk in the world rents the embed.
+
+## Pattern 52.3 — The NL→chart agent that cannot hallucinate a renderer
+
+**For:** "can an LLM make our charts?" — asked by every media client in 2026.
+
+**The architecture, and the one rule:** the model emits a **spec**, a deterministic compiler emits the
+**config**. The model never writes renderer code.
+[yuqisun/chartwright](https://github.com/yuqisun/chartwright) (MIT, **0★**) is the clearest
+implementation of exactly this; read it for the pattern, not as a dependency, and note its compile
+target is **proprietary Highcharts**.
+
+**The build:**
+1. **Governed question → data.** [Canner/WrenAI](https://github.com/Canner/WrenAI) (Apache-2.0,
+   18,413★): natural language resolves against a **semantic layer** before any SQL is emitted, so the
+   agent cannot invent a column.
+2. **Spec, not config.** Agent emits **Vega-Lite** (BSD-3-Clause). Validate the JSON against the
+   schema and **reject it before render** — the step that makes this safe and the reason Vega-Lite
+   matters more than its 5,566 stars suggest.
+3. **House style as a locked layer.** Merge the validated spec with a design-token theme the agent
+   cannot write to (fonts, palette, axis rules). **Author your own tokens** — `abcnews/palette` and
+   `abcnews/components-dataviz` are published but **carry no licence**.
+4. **Explore, don't publish.** [Kanaries/pygwalker](https://github.com/Kanaries/pygwalker)
+   (Apache-2.0) in the notebook for reporters; nothing it produces goes to air unreviewed.
+5. **Human gate, logged.** Spec diff + data lineage + who approved, as the publish record.
+6. **Disclosure.** If a model wrote the caption or annotation, that is **synthetic text published as
+   fact** — EU AI Act Article 50 plumbing applies to the chart, not just to video.
+
+**Do not use:** [microsoft/lida](https://github.com/microsoft/lida) (MIT, 3,299★) as a dependency —
+**last pushed 2024-08-08**; and keep [CJWorkbench/cjworkbench](https://github.com/CJWorkbench/cjworkbench)
+out of any hosted deliverable (**AGPL-3.0**, and dormant since 2024-12-03).
+
+## Pattern 52.4 — Election night, with the licence reality on the table
+
+**For:** a broadcaster or publisher scoping 2026/2028 US election graphics — or any licensed-feed
+results product.
+
+**The split that governs the whole build: the data is the moat; the chart never was.**
+
+- **Paid and unavoidable:** the tabulation feed. ABC, CBS, NBC and CNN all moved to **AP data for
+  2026 and 2028**. Its only open-source client,
+  [newsdev/elex](https://github.com/newsdev/elex) (Apache-2.0, 169★), has been **archived since
+  2022-09-07**. civicAPI and Open America's JSON feed are **hosted services, not repositories** — no
+  licence, no self-host, no SLA — so they are a fallback or a test fixture, never the spine.
+  [openelections/openelections-data-us](https://github.com/openelections/openelections-data-us) is a
+  historical archive for backtesting.
+- **Free and complete:** the display. [d3/d3](https://github.com/d3/d3) (ISC),
+  [topojson](https://github.com/topojson/topojson) (BSD) for compact boundaries,
+  [mapshaper](https://github.com/mbloch/mapshaper) (MPL-2.0) to simplify them,
+  [MapLibre](https://github.com/maplibre/maplibre-gl-js) + [protomaps](https://github.com/protomaps/basemaps)
+  (both BSD-3) for a basemap with **no per-view cost on the one night traffic peaks**.
+
+**The build:** licensed-feed ingestion client (schema-validated with
+[frictionless-py](https://github.com/frictionlessdata/frictionless-py), **replay-tested against 2024
+and 2026 results**) → immutable append-only results store → static regeneration on an interval, not
+live queries → `pym.js` embeds into the CMS → race-call audit trail (who called it, on what
+numbers, when).
+
+**Sell the ingestion client, not the map.** Every US broadcaster and large regional publisher needs
+exactly one, every two years, and since 2022 nobody has maintained an open one.
+
+## Pattern 52.5 — The 15-minute licence gate for any graphics-desk proposal
+
+Run this before the stack slide. It has caught something real in every org scanned this pass.
+
+1. **`LICENSE` file, or nothing?** Fetch `raw.githubusercontent.com/{owner}/{repo}/{main,master}/LICENSE`
+   (and `.md`, `.txt`, `COPYING`). **Two of this plane's most-recommended artifacts have no licence
+   file on any branch:** `datawrapper/datawrapper` (1,465★) and `bbc/bbplot` (1,645★). **~3,000 stars
+   of apparently-open tooling with no grant.**
+2. **Never trust `NOASSERTION`.** Resolve it from the file. This pass: MapLibre → **BSD-3-Clause**,
+   Quarto → **MIT**, ai2html/archieml-js/elex → **Apache-2.0**, guardian/frontend → **Apache-2.0**,
+   mapshaper → **MPL-2.0** — and cjworkbench → **AGPL-3.0**, the one where resolving it *removes* the
+   option.
+3. **Never trust the launch blog either.** [tryopendata/openchart](https://github.com/tryopendata/openchart)
+   was announced as MIT; the repo is **Apache-2.0**.
+4. **A public repo is not a permissive repo.** [highcharts/highcharts](https://github.com/highcharts/highcharts)
+   is 12,502★ with a `license.txt` pointing at a shop.
+5. **Check the design system separately from the libraries.** In `abcnews`, the libraries are MIT and
+   `palette` / `components-dataviz` / `svelte-scrollyteller` have **no licence**. The pieces you most
+   want to reuse are the ungranted ones.
+6. **Sort by `pushed_at`, never by stars.** Stars here return a museum: Chartbuilder 2,095★/**2017**,
+   Idyll 2,044★/2023, bbplot 1,645★/2021, elex **archived**. Then ask the one question that separates
+   abandonment from completion: **does the artifact still do its whole job?** (ArchieML and TopoJSON:
+   yes — finished formats. Chartbuilder and Idyll: no — dead products.)
+7. **If the metadata will not resolve, say "unknown", not "0".** `nprapps/pym.js` exists
+   (`ls-remote` OK, raw MIT `LICENSE`, `package.json` v1.3.2) but returns `total_count: 0` from the
+   search API — a channel limit, not an abandoned repo.

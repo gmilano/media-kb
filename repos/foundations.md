@@ -4034,3 +4034,80 @@ Searched 2026-11-27 through `search/repositories`, sorted by stars:
   it is how you convince yourself a category is busy when it is empty.
 - **No region-specific ad-integrity repository was found for APAC or LATAM**, despite those being the
   two regions with the highest measured IVT rates. The tooling is Global/North-American; the fraud is not.
+
+---
+
+## Pass 35 addendum (2026-11-27) — the graphics-desk substrate (**the one media plane where the open stack is already finished**)
+
+All rows verified 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name` (stars, SPDX,
+`pushed_at`, `archived`) and every URL confirmed with `git ls-remote` — **77/77 resolved, 0 failures.**
+
+**The finding that makes this plane unusual.** Every other plane in this KB has the shape "the need is
+real, the open tooling is partial." This one is inverted: **the substrate is complete and permissively
+licensed at every layer** — rendering, grammar, maps, wrangling, publishing — and the only missing
+piece is the *hosted responsive embed*, which is where the money goes. See `verticals/solutions.md`
+for the Datawrapper correction that follows from this.
+
+### Layer 1 — rendering and chart grammar
+
+| Repo | License | Stars | Last push | Why it is foundational |
+|---|---|---|---|---|
+| [d3/d3](https://github.com/d3/d3) | **ISC** | 114,024 | 2026-11-23 | The substrate the entire news-graphics profession is written against. ISC = BSD-equivalent, no attribution burden in a bundle. |
+| [chartjs/Chart.js](https://github.com/chartjs/Chart.js) | **MIT** | 67,825 | **2026-11-27** | The canvas default. Pushed today. Where a desk goes when D3 is too much and a SaaS embed is too little. |
+| [apache/echarts](https://github.com/apache/echarts) | **Apache-2.0** | 67,808 | 2026-11-25 | ASF-governed, Baidu-origin, the strongest APAC-origin artifact in media open source. Apache-2.0 includes an explicit patent grant — the cleanest licence in this table for a client deliverable. |
+| [plotly/plotly.js](https://github.com/plotly/plotly.js) | **MIT** | 18,391 | 2026-11-25 | Scientific chart types a newsroom occasionally needs (violin, parcoords) that no other permissive library ships. |
+| [antvis/G2](https://github.com/antvis/G2) | **MIT** | 12,678 | 2026-11-25 | Ant Group's grammar-of-graphics implementation. APAC-origin, MIT, actively released. |
+| [pyecharts/pyecharts](https://github.com/pyecharts/pyecharts) | **MIT** | 15,781 | 2026-10-26 | ECharts from Python — the bridge for a data desk that works in notebooks and publishes to web. |
+| [vega/vega](https://github.com/vega/vega) | **BSD-3-Clause** | 12,053 | 2026-11-24 | The visualisation *grammar* — a JSON spec, which is what makes an LLM target tractable. |
+| [vega/vega-lite](https://github.com/vega/vega-lite) | **BSD-3-Clause** | 5,566 | 2026-11-24 | The concise grammar. **The correct compile target for any NL→chart agent**: small spec surface, declarative, validatable before render. |
+| [vega/altair](https://github.com/vega/altair) | **BSD-3-Clause** | 10,522 | 2026-11-17 | Vega-Lite from Python. Note the star inversion — the Python binding has **1.9× the stars of the grammar it binds.** |
+| [observablehq/plot](https://github.com/observablehq/plot) | **ISC** | 5,436 | 2026-11-05 | D3's own authors' answer to "why is a bar chart 200 lines." The fastest exploratory API in the permissive set. |
+| [sveltejs/svelte](https://github.com/sveltejs/svelte) | **MIT** | 89,962 | 2026-11-26 | Not a chart library — but it is now the *de facto* framework of the news-interactive world (Pudding, ABC Australia, NPR rigs all ship Svelte). Included because the desk's build layer is a foundation too. |
+
+### Layer 2 — maps
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [Leaflet/Leaflet](https://github.com/Leaflet/Leaflet) | **BSD-2-Clause** | 45,998 | 2026-11-25 | Still the lowest-risk interactive map on earth. BSD-2 is the most permissive licence in this document. |
+| [visgl/deck.gl](https://github.com/visgl/deck.gl) | **MIT** | 14,831 | **2026-11-27** | WebGL2 layers for million-row geospatial. Pushed today. |
+| [maplibre/maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) | **BSD-3-Clause** (resolved from `LICENSE.txt`, 5,984 B — the API reports `NOASSERTION`) | 12,189 | 2026-11-26 | The post-Mapbox-relicensing vector renderer. **The SPDX field lies here**; the file does not. |
+| [qgis/QGIS](https://github.com/qgis/QGIS) | GPL-2.0 | 14,899 | 2026-11-26 | Copyleft, and it does not matter: QGIS is a desktop tool a cartographer *runs*, not a library you link. Ship the GeoJSON, not the binary. |
+| [mbloch/mapshaper](https://github.com/mbloch/mapshaper) | **MPL-2.0** (resolved from `LICENSE`, 228 B, © 2026) | 4,212 | **2026-11-27** | Topology-preserving simplification — the step that makes a 60 MB shapefile a 200 KB web map. MPL-2.0 is per-file weak copyleft: invoke it, ship beside it, do not paste its source into proprietary files. |
+| [topojson/topojson](https://github.com/topojson/topojson) | BSD (resolved from `LICENSE.md`, 1,429 B) | 4,903 | 2024-09-20 | The compact topology encoding every election map uses. Stable rather than abandoned — the format is finished. |
+| [protomaps/basemaps](https://github.com/protomaps/basemaps) | **BSD-3-Clause** | 780 | 2026-09-11 | PMTiles basemap generation: a **single-file basemap on static hosting, no tile server, no per-view billing.** For a newsroom this removes the only recurring cost in web cartography. |
+
+### Layer 3 — wrangling, querying, publishing
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [OpenRefine/OpenRefine](https://github.com/OpenRefine/OpenRefine) | **BSD-3-Clause** | 12,123 | 2026-11-24 | The messy-data power tool; the one piece of this stack reporters use without a developer. |
+| [simonw/datasette](https://github.com/simonw/datasette) | **Apache-2.0** | 11,677 | 2026-11-26 | Publish a SQLite file as a browsable, queryable API. The spine of "here is the data behind the story." |
+| [wireservice/csvkit](https://github.com/wireservice/csvkit) | **MIT** | 6,421 | 2026-11-09 | CSV at the command line. Written by a news-apps developer for news deadlines. |
+| [wireservice/agate](https://github.com/wireservice/agate) | **MIT** | 1,200 | 2026-11-09 | "Optimised for humans instead of machines" — the library csvkit is built on. |
+| [frictionlessdata/frictionless-py](https://github.com/frictionlessdata/frictionless-py) | **MIT** | 862 | 2026-11-24 | Describe/validate/extract tabular data against a declared schema. **The missing governance layer**: it turns "the intern renamed a column" from a published correction into a failed CI job. |
+| [quarto-dev/quarto-cli](https://github.com/quarto-dev/quarto-cli) | **MIT** (resolved from `COPYING.md`, © Posit — the API reports `NOASSERTION`) | 6,216 | 2026-11-26 | Reproducible publishing: one source, HTML + PDF + print. |
+| [observablehq/framework](https://github.com/observablehq/framework) | **ISC** | 3,691 | 2026-05-15 | Static site generator for data apps — data loaders at build time, so the published page has no live backend. The right architecture for a story page that must survive traffic. |
+| [rawgraphs/rawgraphs-app](https://github.com/rawgraphs/rawgraphs-app) | **Apache-2.0** | 9,065 | 2026-10-08 | Paste data, get a vector chart to finish in Illustrator. The bridge into the print/ai2html workflow. |
+| [gephi/gephi](https://github.com/gephi/gephi) | GPL-3.0 | 6,711 | 2026-11-21 | Network analysis for the "who is connected to whom" investigation. Desktop, so copyleft is survivable. |
+| [tryopendata/openchart](https://github.com/tryopendata/openchart) | **Apache-2.0** | **35** | 2026-11-25 | Spec-driven library with a headless math layer and React/Vue/Svelte adapters, open-sourced in 2026. **Correction to the published announcements: it is Apache-2.0, not MIT** as the launch coverage states. New and tiny — watch it, do not stake a delivery on it. |
+
+### What this layer does **not** have — searched and absent
+
+- **No open-source hosted-embed service.** The entire stack above renders charts; nothing in it
+  *hosts a responsive iframe with an edit UI for a non-developer*, which is the actual product
+  newsrooms buy. That hole has a name and it is Datawrapper — see `verticals/solutions.md`.
+- **No maintained open client for licensed election tabulation.**
+  [newsdev/elex](https://github.com/newsdev/elex) (Apache-2.0, 169★) — the NYT's wrapper for the AP
+  Elections API — is **archived, last pushed 2022-09-07**, in the same cycle in which ABC, CBS, NBC
+  and CNN all moved to AP data for the 2026 and 2028 US elections. The feed is commercial; its only
+  open-source client is abandoned. [openelections/openelections-data-us](https://github.com/openelections/openelections-data-us)
+  (5★, no licence field, 2026-03-16) is a *data* archive, not a live results client.
+- **No permissive LATAM-origin charting library**, after scanning seven regional newsroom orgs. What
+  exists is copyleft or story-specific; the evidence is tabulated in `intel/market.md` pass 35.
+- **`pym.js` metadata is unavailable through this session's one channel, and that is a channel limit,
+  not a missing repo.** [nprapps/pym.js](https://github.com/nprapps/pym.js) — the responsive-iframe
+  library that most news embeds in the world still run — resolves under `git ls-remote`, serves
+  `package.json` v1.3.2 and a 1,047 B **MIT** `LICENSE` over `raw.githubusercontent.com`, yet
+  `search/repositories?q=repo:nprapps/pym.js` returns `total_count: 0`. The dot in the name is **not**
+  the cause (`chartjs/Chart.js` resolves fine), and `/repos/{owner}/{repo}` is blocked for
+  non-session repos. **Stars and last-push for this one row are therefore unknown rather than zero.**

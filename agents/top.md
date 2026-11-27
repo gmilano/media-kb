@@ -3332,3 +3332,52 @@ implementation against.
    `UNLICENSE`. This pass adds **`LICENSE-2.0.txt`** (snowplow's IAB client) and **`licenses/LICENSE.md`**.
    Current working set:
    `LICENSE LICENSE.md LICENSE.txt license.txt LICENCE COPYING COPYING.md LICENSE-APACHE UNLICENSE LICENSE-2.0.txt licenses/LICENSE.md`.
+
+---
+
+## Pass 35 addendum (2026-11-27) — the graphics-desk tier: natural-language → chart agents
+
+**The vocabulary probe that opened this plane.** Across the eight files and thirty-four passes, the KB
+said `OpenRefine` 13 times, `Datasette` 6, `d3` 5, `Leaflet` 2 — and said **`Vega` 0, `Observable Plot` 0,
+`Chart.js` 0, `MapLibre` 0, `QGIS` 0, `Scrollama` 0, `ArchieML` 0, `ai2html` 0, `csvkit` 0,
+`Frictionless` 0, `Idyll` 0, `scrollytelling` 0, `election results` 0, `graphics desk` 0.**
+Thirty-four passes on moving the video and selling the impression; nothing on the desk that draws the
+chart the story is actually about.
+
+**Why this tier is different from every other agent tier in this file:** in most media planes the open
+tooling is partial and the agent layer is speculative. Here the substrate is *finished* — a 114,024★
+ISC renderer, two 67k★ permissive charting libraries, BSD maps, MIT wrangling — so the only real
+question is whether an LLM can drive it. Three projects answer yes under a licence Globant can ship.
+
+### ✅ Tier 1 — permissive, active, verified 2026-11-27
+
+| Agent | Repo | License | Stars | Last push | What it actually does |
+|---|---|---|---|---|---|
+| WrenAI | [Canner/WrenAI](https://github.com/Canner/WrenAI) | Apache-2.0 | 18,413 | **2026-11-26** | GenBI: governed text-to-SQL over a semantic context layer, emitting charts and dashboards across 20+ sources. The only project in this tier with a real governance story. |
+| PyGWalker | [Kanaries/pygwalker](https://github.com/Kanaries/pygwalker) | Apache-2.0 | 16,009 | **2026-11-25** | Turns a dataframe into a Tableau-like exploratory UI inside a notebook; LLM explainer on top. The fastest route from a reporter's CSV to a shareable view. |
+| Vizro + Vizro-AI | [mckinsey/vizro](https://github.com/mckinsey/vizro) | Apache-2.0 | 3,828 | **2026-11-26** | Low-code dashboard toolkit with an NL chart-generation layer; opinionated defaults that already look like a design system. |
+| Evidence | [evidence-dev/evidence](https://github.com/evidence-dev/evidence) | MIT | 7,150 | **2026-11-26** | BI-as-code: Markdown + SQL compiles to an interactive site. The closest thing to a *publishable* agent target — output is a static site, not a BI seat. |
+| Chartwright | [yuqisun/chartwright](https://github.com/yuqisun/chartwright) | MIT | **0** | 2026-09-16 | Agentic data inspection that emits a library-agnostic chart **spec**, then compiles it deterministically — the model never writes chart config. Architecturally the most correct design found; **0 stars, one author.** Read it for the pattern, do not depend on it. |
+
+**Zero stars is written above as data, not as an omission.** Chartwright is listed because its
+separation — agent proposes a spec, deterministic compiler emits the config — is the design the other
+four get wrong, and that is worth knowing even when nobody has starred it. Its compile target is
+**Highcharts, which is proprietary** (see the licence note below), so the pattern is transferable but
+the repo as shipped is not.
+
+### ⚠️ Tier 2 — real, but the licence or the staleness constrains client work
+
+| Agent | Repo | License | Stars | Last push | Constraint |
+|---|---|---|---|---|---|
+| LIDA | [microsoft/lida](https://github.com/microsoft/lida) | MIT | 3,299 | **2024-08-08** | The most-cited NL→visualisation/infographic agent in the literature, and it has not been touched in over two years. MIT, so forkable — but treat it as a paper with code, not a dependency. |
+| CJ Workbench | [CJWorkbench/cjworkbench](https://github.com/CJWorkbench/cjworkbench) | **AGPL-3.0** (LICENSE 34,654 B, © Columbia University) | 312 | 2024-12-03 | The only purpose-built *data-journalism platform with training built in*, and it is both network-copyleft and dormant for two years. AGPL rules it out of a hosted client deliverable. |
+
+### ⛔ The licence trap in this tier, stated plainly
+
+**Highcharts is not open source.** [highcharts/highcharts](https://github.com/highcharts/highcharts)
+carries 12,502 stars and was pushed 2026-11-26, and it has **no `LICENSE` file** — only a
+`license.txt` that points at `shop.highcharts.com` for "licensing alternatives." A public repo with a
+commercial licence file reads, in a hurry, exactly like a permissive dependency. Any agent that
+compiles to Highcharts options (Chartwright does) inherits that bill. The permissive compile targets
+are Vega-Lite (BSD-3-Clause), ECharts (Apache-2.0), Chart.js (MIT) and Plot (ISC) — all verified in
+`repos/foundations.md` this pass.

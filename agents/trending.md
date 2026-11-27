@@ -9,6 +9,52 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 39: the digitisation & OCR plane (**the code is permissive, the weights are not — six times over in one plane**)
+
+Plane chosen by grep of ~90 candidate terms against all eight KB files before any web search. The AV
+side of preservation was already here (`bagit` 17, `mediaconch` 24, `ffv1` 9, `jhove` 7, `iiif` 28); the
+**text** side scored zero on every probe — `tesseract` **0**, `alto` **0**, `page xml` **0**, `hocr` **0**,
+`kraken` **0**, `escriptorium` **0**, `handwritten` **0**, `chronicling` **0**. The KB was selling archive
+retrieval on top of a text layer it had never sourced.
+
+### What is actually moving, measured 2026-11-27
+
+| Agent / model | Code | **Weights** | Stars | Last push |
+|---|---|---|---|---|
+| [docling-project/docling](https://github.com/docling-project/docling) | MIT | MIT | 71,133 | 2026-11-27 |
+| [opendatalab/MinerU](https://github.com/opendatalab/MinerU) | Apache-2.0 **+ additional terms** | same | 84,409 | 2026-11-26 |
+| [datalab-to/marker](https://github.com/datalab-to/marker) | Apache-2.0 | OpenRAIL-M, **<$5M only** | 41,088 | 2026-11-26 |
+| [deepseek-ai/DeepSeek-OCR](https://github.com/deepseek-ai/DeepSeek-OCR) | MIT | MIT | 24,194 | 2026-01-27 |
+| [datalab-to/surya](https://github.com/datalab-to/surya) | Apache-2.0 | OpenRAIL-M, **<$5M only** | 21,629 | 2026-11-13 |
+| [allenai/olmocr](https://github.com/allenai/olmocr) | Apache-2.0 | Apache-2.0 | 19,858 | 2026-03-25 |
+| [ndl-lab/ndlocr-lite](https://github.com/ndl-lab/ndlocr-lite) | **CC BY 4.0** | inherits **DINOv3** agreement | 1,440 | 2026-11-24 |
+| [mittagessen/kraken](https://github.com/mittagessen/kraken) | Apache-2.0 | per-model | 1,114 | 2026-11-21 |
+| [qurator-spk/eynollah](https://github.com/qurator-spk/eynollah) | Apache-2.0 | Apache-2.0 | 417 | 2026-11-13 |
+| [stanford-oval/Churro](https://github.com/stanford-oval/Churro) | Apache-2.0 | **Qwen research licence** | 89 | 2026-04-18 |
+
+**The trend worth tracking from here:** adoption in this plane is now concentrated in **four repos above
+19,000 stars that did not exist as document-OCR products three years ago** (docling, MinerU, marker,
+DeepSeek-OCR), and **three of the four carry a weights restriction the repo badge does not show.** The
+star-weighted majority of this plane is not freely shippable. Re-measure next pass: if olmOCR and docling
+keep their clean terms while the restricted three keep growing, the honest recommendation stays the
+smaller pair.
+
+**Two dormancy signals to re-check, not to build on:**
+[LibraryOfCongress/newspaper-navigator](https://github.com/LibraryOfCongress/newspaper-navigator)
+(272★, Unlicense) is **archived**; [dell-research-harvard/AmericanStories](https://github.com/dell-research-harvard/AmericanStories)
+(142★, **no licence file**) has not been pushed since **2024-03-07** — and the Library of Congress's
+brand-new pipeline depends on its layout models. That is the supply-chain finding of the pass.
+
+**The refusal to carry into any conversation about "AI-cleaning" an archive:** LLM post-OCR correction
+frequently makes the text **worse**. Kanerva et al., *OCR Error Post-Correction with LLMs in Historical
+Documents: No Free Lunches* (RESOURCEFUL 2025, [arXiv 2502.01205](https://arxiv.org/abs/2502.01205))
+report that in many cases the LLM **decreased** quality rather than improving it. ICDAR 2026 ran a whole
+competition on the problem (HIPE-OCRepair). Do not sell post-correction without a measured baseline; the
+yardstick and the tools are in `repos/foundations.md`.
+
+---
+
+
 ## 2026-11-27 — pass 38: the type, font & multi-script text-rendering plane (**agents read type off a page; not one writes or validates a font**)
 
 Plane chosen by grep of ~40 candidate terms against all eight KB files before any web search.

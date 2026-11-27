@@ -3706,3 +3706,74 @@ fully indexed there: **713★, 111 forks, Apache-2.0 (`LICENSE.txt`, 10,851 B), 
 against the old path only because GitHub follows renames; `search/repositories` does not. **A repo that
 answers on `raw.githubusercontent.com` but is missing from the search index has usually been renamed, not
 hidden.** Corrected in `repos/foundations.md` in this pass.
+
+---
+
+## Pass 39 (2026-11-27) — the print, periodical & manuscript digitisation plane: OCR, layout and the text layer
+
+Plane chosen by grep of ~90 candidate terms across all eight files before any web search. The
+**AV**-preservation plane was already covered (`bagit` 17 hits, `mediaconch` 24, `ffv1` 9, `jhove` 7,
+`iiif` 28, `islandora` 38, `omeka` 24) — but the **text** layer was absent in every file:
+`tesseract` **0**, `hocr` **0**, `alto` **0**, `page xml` **0**, `kraken` **0**, `escriptorium` **0**,
+`handwritten` **0**, `newspaper digitisation` **0**, `chronicling` **0**. Meanwhile this KB already sells
+Pattern 3 (archive mining), Pattern 14 (archive→revenue) and Pattern 31 (description backfill), **all of
+which silently assume a searchable text layer already exists.** For a newspaper, magazine or manuscript
+backfile it does not. This pass supplies the missing substrate.
+
+### The engine & document-understanding layer, measured 2026-11-27
+
+Stars/forks/push from `search/repositories` with `repo:` qualifiers; existence from `git ls-remote`;
+every licence below was read from the file, not taken from the API badge.
+
+| Agent / model | Code licence | **Weights licence** | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| [allenai/olmocr](https://github.com/allenai/olmocr) | Apache-2.0 | Apache-2.0 (README §License declares Apache-2.0 for olmOCR; no separate weights clause) | 19,858 | 2026-03-25 | **The default recommendation.** 7B VLM toolkit; the only high-adoption VLM pipeline in this plane with no split-licence trap found. |
+| [docling-project/docling](https://github.com/docling-project/docling) | MIT | MIT | 71,133 | 2026-11-27 | Document→structured conversion, CPU-first, optional GPU for layout/table models. Pushed the day of this pass. Safest permissive spine. |
+| [deepseek-ai/DeepSeek-OCR](https://github.com/deepseek-ai/DeepSeek-OCR) | MIT | MIT | 24,194 | 2026-01-27 | APAC-origin, genuinely MIT in `LICENSE`. Blog roundups disagree on v1/v2 terms — read the model card for any version you pin. |
+| [rednote-hilab/dots.ocr](https://github.com/rednote-hilab/dots.ocr) | MIT (`master/LICENSE`, read) | MIT | *not indexed* | — | **Missing from `search/repositories` entirely**; `git ls-remote` says EXISTS and the licence file reads `MIT License`. See the method note below. |
+| [datalab-to/marker](https://github.com/datalab-to/marker) | Apache-2.0 | ⚠️ **modified AI Pubs OpenRAIL-M — free only for research, personal use and startups under $5M funding/revenue** | 41,088 | 2026-11-26 | Highest-adoption converter in the plane. The code licence is not the question; the weights are. |
+| [datalab-to/surya](https://github.com/datalab-to/surya) | Apache-2.0 | ⚠️ **same OpenRAIL-M + $5M threshold** | 21,629 | 2026-11-13 | OCR/layout engine under `marker`. Same split, same threshold, stated in its own README §Commercial usage. |
+| [opendatalab/MinerU](https://github.com/opendatalab/MinerU) | ⚠️ **Apache-2.0 + additional terms** | same | 84,409 | 2026-11-26 | API says `NOASSERTION`. `master/LICENSE.md` (3,301 B, read): separate commercial licence required above **100M MAU or $20M monthly revenue** (consolidated with affiliates), **mandatory "uses MinerU" notice** in the UI or public docs of any online service, automatic termination on breach. |
+| [stanford-oval/Churro](https://github.com/stanford-oval/Churro) | Apache-2.0 | 🚫 **Qwen research licence; dataset "research use only because of the underlying source licenses"** | 89 | 2026-04-18 | Purpose-built open-weight VLM for *historical* document transcription (EMNLP 2025) — the best fit in the plane on paper and **the one that cannot ship commercially**. |
+| [mittagessen/kraken](https://github.com/mittagessen/kraken) | Apache-2.0 | per-model, varies (publisher's models commonly CC-BY-family) | 1,114 | 2026-11-21 | The HTR engine for historical print and manuscript. Check each trained model's own licence; the engine licence does not travel to the model. |
+| [qurator-spk/eynollah](https://github.com/qurator-spk/eynollah) | Apache-2.0 | Apache-2.0 | 417 | 2026-11-13 | Document **layout** analysis — the step newspapers actually fail at. Clean licence, actively pushed. |
+| [ndl-lab/ndlocr-lite](https://github.com/ndl-lab/ndlocr-lite) | ⚠️ **CC BY 4.0** (`LICENCE`, 18,653 B, read) | ⚠️ bundled layout model is a ViT-Tiny **distilled from DINOv3** → Meta's DINOv3 Agreement also applies | 1,440 | 2026-11-24 | Japan's National Diet Library, CPU-only, v2 shipped three days before this pass. Two separate traps in one repo; both detailed below. |
+
+Eleven rows, all verified. No row in this table is a placeholder.
+
+### The finding of this pass: in this plane the code is free and **the weights are where the restriction lives**
+
+Six independently verified instances, which is enough to call it a rule rather than a coincidence:
+
+1. **Churro** — Apache-2.0 code, **research-only** weights *and* dataset.
+2. **marker** + **surya** — Apache-2.0 code, OpenRAIL-M weights with a **$5M funding/revenue** ceiling.
+3. **MinerU** — Apache-2.0 **plus additional terms**, with MAU and revenue thresholds and a compelled attribution notice.
+4. **ndlocr-lite** — **CC BY 4.0 on the program itself**, plus an inherited Meta model agreement.
+5. **dell-research-harvard/AmericanStories** — dataset **CC-BY-4.0** on Hugging Face, repository code with **no licence file at all**, models shipped by **Dropbox link**.
+6. **FoNDUE-HTR/FONDUE-ES-PRINT-19** — **CC-BY declared in the HTR-United catalogue, nothing in the repo.**
+
+**Consequence for any estimate:** an SBOM scan of the source tree sees Apache-2.0 and MIT and reports a
+clean bill of health for every one of these. The restriction is in a model card, a README section, or a
+second licence file — none of which the scanner reads. *For this plane, resolve the licence of the
+weights you will actually load, separately from the repo, and write both into the proposal.* This is the
+same structure the KB recorded for `acoustid/chromaprint` (pass 8, compilation-level licence) and
+P40/P47 (licence inherited from a data ancestor, declared only in prose) — now with six instances in a
+single plane and two with hard dollar thresholds.
+
+### Method corrections earned in this pass (reusable across all twelve industries)
+
+**(1) The licence probe needs British spelling. Third correction to this probe.**
+`ndl-lab/ndlocr-lite` returned **404 on all eight American licence filenames across both `main` and
+`master`** while `README.md` returned **200**. By the cycle-8 rule that means *the names are wrong, not
+the licence missing* — so clone shallow and look. The file is **`LICENCE`** (18,653 B), beside
+**`LICENCE_DEPENDENCEIES`** (105,169 B — their typo, reproduce it exactly or you 404). Cycle 8 added
+lowercase `license.txt` and `COPYING.md`; **this pass adds `LICENCE`, `LICENCE.md`, `LICENCE.txt`.**
+Three national-library repos in this plane use the British form.
+
+**(2) Both directions of the index error appeared in one pass — so trust `ls-remote`, not the index, and
+not a blog.**
+- *False absence:* `rednote-hilab/dots.ocr` is **absent from `search/repositories`**, yet exists and is MIT.
+- *False presence:* **`PaddlePaddle/PaddleOCR-VL` does not exist.** Two 2026 roundups name "PaddleOCR-VL"
+  as if it were a repository; `git ls-remote` returns nothing. It is a model line **inside**
+  [PaddlePaddle/PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) (Apache-2.0, 93,358★, 2026-09-16).
+  A pass that trusted the roundup would have written a 404 into the agents table.

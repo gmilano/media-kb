@@ -3920,3 +3920,63 @@ one page and **$1.26B** for the same report on another.
 **Rule: never put a font-market number in a client deck without naming the source and the definition.**
 The useful framing is not market size at all — it is that the *engineering* layer is free and permissive
 while the *entitlement* layer is entirely commercial (see `verticals/solutions.md`).
+
+---
+
+## Pass 39 (2026-11-27) — the digitisation & text-layer plane
+
+### 1. The restriction moved from the code to the weights, and the dollar thresholds are now explicit
+
+The headline trend in document AI through 2026 is not capability, it is **licence architecture**. In a
+single plane, six verified cases separate the code licence from the weights licence — and two of them
+name a number:
+
+- **$5M** funding or revenue: beyond that, `marker` and `surya` model weights need a commercial licence.
+- **$20M monthly revenue or 100M MAU** (consolidated with affiliates): beyond that, `MinerU` needs one,
+  and every online service built on it must display a "uses MinerU" notice regardless of size.
+- **Research only**: `Churro`'s weights (Qwen research licence) and dataset — the best-suited historical
+  OCR model in the plane is the one that cannot be shipped.
+
+This is the 2026 successor to the "open source" label problem the KB has tracked elsewhere: the badge in
+the README is accurate about the tree and silent about the artefact that does the work. **An SBOM scan of
+the source tree reports clean for all six.** Expect this pattern to spread; expect procurement not to
+catch it.
+
+### 2. A content licence is now being applied to software by public institutions
+
+Japan's National Diet Library publishes **NDLOCR-Lite under CC BY 4.0** — a licence designed for content,
+applied to a program. It is well-intentioned transparency (the file is right there, 18,653 B, spelled
+`LICENCE`), but CC BY 4.0 carries **no patent grant** and none of the source-distribution machinery a
+software licence provides, and Creative Commons itself does not recommend its licences for software. The
+same repo then **inherits Meta's DINOv3 Agreement** through a distilled ViT-Tiny backbone, which *does*
+have sticky redistribution terms. Net effect: a repo that reads as maximally open is the most legally
+layered one in the plane. **Watch for more of this** — national institutions default to CC because that
+is what their open-data policies specify.
+
+### 3. LLM post-correction is a measured disappointment, and that is sellable
+
+*No Free Lunches* (Kanerva et al., RESOURCEFUL 2025, [arXiv 2502.01205](https://arxiv.org/abs/2502.01205))
+found open-weight LLMs frequently **reduced** OCR quality on historical English and Finnish. ICDAR 2026
+ran the HIPE-OCRepair competition on exactly this. The trend is therefore **away from "AI will fix our
+archive" and toward measured, bounded correction** with CER/WER gates — and the KB's existing P45 shape
+applies: when the dominant approach cannot be shown to work, the deliverable is a **refusal with a
+measurement attached**, which is a shorter sale than a pipeline and a far more defensible one.
+
+### 4. The institutions are re-OCRing, not newly scanning — and that is the budget
+
+The money in 2026 is in **reprocessing collections already digitised**. The Library of Congress shipped
+new OCR-reprocessing software plus a datasets portal for Chronicling America in **August 2026**; the
+National Library of Luxembourg built nautilusocr specifically to turn METS/ALTO into *better* METS/ALTO;
+Uruguay's National Library's 2026 plan asks to retrofit OCR and handwriting recognition across archives
+that are already online. A decade of scanning produced searchable-but-poor text, and engine quality has
+moved far enough that the same pages are worth running again. **This is a much easier sale than
+scanning**: the asset is already in hand, the cost is compute, and the before/after is measurable on the
+client's own pages.
+
+### 5. The standards layer is unlicensed, and nobody has noticed
+
+ALTO and METS — the formats national digitisation programmes **require** — are published on GitHub from
+repositories with **no licence file**. Three for three in this plane with pass 8's RSL. The specifications
+are properly published by the Library of Congress and are usable; the GitHub copies grant nothing. The
+trend to watch is whether any standards body fixes this, because the same defect in the rights-reservation
+plane (pass 8) has now gone two passes unaddressed.

@@ -10,6 +10,65 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 39: digitisation infrastructure (**the two formats every national programme mandates are published from repos with no licence at all**)
+
+Infrastructure half of pass 39. Figures from `search/repositories` with `repo:` qualifiers on
+2026-11-27; existence from `git ls-remote`; every `NOASSERTION`/`NONE` resolved by reading the file.
+
+### The institutional toolchain — this is where the plane's real infrastructure lives
+
+| Repo | Licence | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract) | Apache-2.0 | 77,680 | 10,917 | 2026-11-26 | The substrate. Still the engine inside the national pipelines. |
+| [ocrmypdf/OCRmyPDF](https://github.com/ocrmypdf/OCRmyPDF) | MPL-2.0 | 35,414 | 2,468 | 2026-11-27 | Adds a text layer to existing PDFs — the exact shape of the LATAM problem below. |
+| [mittagessen/kraken](https://github.com/mittagessen/kraken) | Apache-2.0 | 1,114 | 178 | 2026-11-21 | HTR engine for historical print and manuscript. |
+| [qurator-spk/eynollah](https://github.com/qurator-spk/eynollah) | Apache-2.0 | 417 | 38 | 2026-11-13 | Newspaper/periodical layout analysis. |
+| [UB-Mannheim/ocr-fileformat](https://github.com/UB-Mannheim/ocr-fileformat) | MIT | 204 | 28 | 2025-05-21 | Converts between hOCR, ALTO, PAGE. The glue nobody budgets for. |
+| [OCR-D/core](https://github.com/OCR-D/core) | Apache-2.0 | 137 | 31 | 2026-11-09 | Germany's national OCR programme framework. |
+| [OCR-D/ocrd_all](https://github.com/OCR-D/ocrd_all) | MIT | 73 | 17 | 2025-07-04 | The assembled OCR-D toolchain. |
+| [qurator-spk/dinglehopper](https://github.com/qurator-spk/dinglehopper) | Apache-2.0 | 71 | 18 | 2025-08-22 | CER/WER evaluation against ground truth. |
+| [impactcentre/ocrevalUAtion](https://github.com/impactcentre/ocrevalUAtion) | Apache-2.0 | 68 | 26 | 2026-10-13 | The other evaluation tool; still maintained. |
+| [natliblux/nautilusocr](https://github.com/natliblux/nautilusocr) | ⚠️ GPL-3.0 | 56 | 5 | **2023-05-30** | National Library of Luxembourg, METS/ALTO→improved METS/ALTO. Copyleft **and** dormant. |
+| [htr-united/htr-united](https://github.com/htr-united/htr-united) | **CC0-1.0** | 51 | 45 | 2026-11-08 | Ground-truth catalogue. Fork ratio **0.88** — contributed infrastructure, not a showcase. |
+| [cneud/alto-tools](https://github.com/cneud/alto-tools) | Apache-2.0 | 50 | 15 | 2026-09-21 | ALTO XML manipulation. |
+| [LibraryOfCongress/ndnp-open-ocr](https://github.com/LibraryOfCongress/ndnp-open-ocr) | **CC0 1.0** (read, 1,951 B) | 34 | 1 | 2026-10-24 | US national newspaper OCR reprocessing → ALTO XML + PDF at scale. |
+| [open-oni/open-oni](https://github.com/open-oni/open-oni) | Apache-2.0 (read, 573 B) | 58 | 24 | 2026-09-15 | The open newspaper **front end**; API reported `NOASSERTION`. |
+
+### ⚠️ The standards repos have no licence — now 3 for 3 in this plane
+
+| Standard | Repo | Stars | Licence file |
+|---|---|---|---|
+| **ALTO** (the OCR layout format national programmes mandate) | [altoxml/schema](https://github.com/altoxml/schema) | 57 | **NONE** — `README.md` returns 200, all probed licence names 404 |
+| **METS** (the packaging format beside it) | [mets/METS-schema](https://github.com/mets/METS-schema) | 27 | **NONE** |
+| *(pass 8, for comparison)* RSL 1.0 | rslstandard/rsl | 47 | NONE |
+
+**P46 is now a measured rule, not an observation:** *the repository that publishes a standard is
+disproportionately likely to carry no licence grant at all.* Without a grant, default copyright applies —
+all rights reserved. **Use the published specification, not the repo contents**, and never vendor an
+XSD from one of these repos into a client deliverable without asking the maintaining body in writing.
+Both ALTO and METS specifications are published by the Library of Congress and are usable; it is the
+*GitHub copies* that lack terms.
+
+### The supply-chain finding: the US national pipeline depends on an unlicensed, dormant repo
+
+`LibraryOfCongress/ndnp-open-ocr` is a **work of the United States Government — public domain, with a
+CC0 1.0 waiver worldwide** (read from `LICENSE.md`; the API's `NOASSERTION` is wrong in the permissive
+direction, the same false negative the healthcare pass found on `FDA/openfda`). It acknowledges
+incorporating **Tesseract** and **Leptonica** unmodified under their own licences — and per the Library's
+own August 2026 announcement it uses newspaper **layout-detection models from American Stories**
+(Harvard). That repo, [dell-research-harvard/AmericanStories](https://github.com/dell-research-harvard/AmericanStories):
+**142★, no licence file** (8 names × 2 branches probed, `README.md` = 200 so the control passes),
+**last push 2024-03-07**, models distributed via **Dropbox**. The dataset is CC-BY-4.0 on Hugging Face;
+the code and models are not licensed at all.
+
+So the clean, CC0, government-published pipeline has an **unlicensed dependency at its layout step.**
+Anyone who adopts the LoC pipeline inherits that. The fix is small and worth quoting as work:
+substitute `eynollah` (Apache-2.0, pushed 2026-11-13) at the layout step and the chain becomes
+end-to-end permissive.
+
+---
+
+
 ## 2026-11-27 — pass 38: type & text-rendering infrastructure (**the engine layer is being rewritten in Rust under Apache-2.0, and the QA tool's successor shipped today**)
 
 Infrastructure half of pass 38. All figures verified 2026-11-27 via `search/repositories` with `repo:`

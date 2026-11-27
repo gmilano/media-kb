@@ -4407,3 +4407,101 @@ earns its place in the list this pass: it is where [EkType/Mukta](https://github
 (API: `NOASSERTION`) actually keeps its **OFL-1.1, 4,354 B**. And the cycle-8 control still works
 perfectly: `noto-cjk`'s `README.md` returns **200** while all 12 root licence names return **404**, which
 proves the names are wrong rather than the licence missing — the licence was two directories down.
+
+---
+
+## Pass 39 (2026-11-27) — foundational repos for the digitisation & text-layer plane
+
+The AV-preservation foundations in this file (BagIt, MediaConch, FFV1, JHOVE, IIIF, Islandora) answer
+*"is the file intact and will it open in 20 years?"*. None of them answers *"can anyone search the
+words on the page?"* — which is the question that decides whether an archive has commercial value.
+These are the repos that answer the second question. All figures verified 2026-11-27.
+
+### The permissive spine — safe to build a client deliverable on
+
+| Repo | Licence | Stars | Forks | Last push | Why it is foundational |
+|---|---|---|---|---|---|
+| [tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract) | Apache-2.0 | 77,680 | 10,917 | 2026-11-26 | The OCR engine the national programmes actually run. Apache-2.0, patent grant included. |
+| [docling-project/docling](https://github.com/docling-project/docling) | MIT | 71,133 | 5,454 | 2026-11-27 | Document→structured output, CPU-first. The most permissive high-adoption option in the plane. |
+| [ocrmypdf/OCRmyPDF](https://github.com/ocrmypdf/OCRmyPDF) | MPL-2.0 | 35,414 | 2,468 | 2026-11-27 | Adds a searchable text layer to an existing PDF without re-scanning. File-level copyleft only — safe beside proprietary code. |
+| [JaidedAI/EasyOCR](https://github.com/JaidedAI/EasyOCR) | Apache-2.0 | 30,177 | 3,630 | 2026-11-13 | 80+ languages, low integration cost. |
+| [allenai/olmocr](https://github.com/allenai/olmocr) | Apache-2.0 | 19,858 | 1,659 | 2026-03-25 | The VLM pipeline with no weights trap found. Default for new work. |
+| [pymupdf/PyMuPDF](https://github.com/pymupdf/PyMuPDF) | 🚫 **AGPL-3.0** | 11,208 | 856 | 2026-11-26 | Listed **to be avoided**, not adopted: the fastest PDF text extractor in common use is AGPL. See the gate below. |
+| [jsvine/pdfplumber](https://github.com/jsvine/pdfplumber) | MIT | 10,934 | 959 | 2026-11-21 | The MIT replacement for the above in most extraction work. |
+| [mindee/doctr](https://github.com/mindee/doctr) | Apache-2.0 | 6,443 | 696 | 2026-11-27 | OCR with TF/PyTorch backends; actively pushed. |
+| [open-mmlab/mmocr](https://github.com/open-mmlab/mmocr) | Apache-2.0 | 4,739 | 775 | **2024-11-27** | Still the broadest research toolbox — but unpushed for a year. Pin it; don't plan on upstream fixes. |
+| [apache/tika](https://github.com/apache/tika) | Apache-2.0 | 4,160 | 1,050 | 2026-11-25 | The boring, correct choice for mixed-format ingest at the front of the pipeline. |
+| [mittagessen/kraken](https://github.com/mittagessen/kraken) | Apache-2.0 | 1,114 | 178 | 2026-11-21 | Historical print + handwriting. Engine licence ≠ model licence. |
+| [qurator-spk/eynollah](https://github.com/qurator-spk/eynollah) | Apache-2.0 | 417 | 38 | 2026-11-13 | Layout analysis for newspapers — the step that fails first on a broadsheet. |
+| [UB-Mannheim/ocr-fileformat](https://github.com/UB-Mannheim/ocr-fileformat) | MIT | 204 | 28 | 2025-05-21 | hOCR ↔ ALTO ↔ PAGE conversion. |
+| [OCR-D/core](https://github.com/OCR-D/core) | Apache-2.0 | 137 | 31 | 2026-11-09 | The only complete national-programme framework in open source. |
+| [LibraryOfCongress/ndnp-open-ocr](https://github.com/LibraryOfCongress/ndnp-open-ocr) | **CC0 1.0** | 34 | 1 | 2026-10-24 | Reference implementation for newspaper OCR reprocessing at national scale. |
+
+Fifteen rows, every URL resolved, every licence read where the API was ambiguous.
+
+### Measurement — never ship this plane without it
+
+| Repo / dataset | Licence | Stars | What it measures |
+|---|---|---|---|
+| [qurator-spk/dinglehopper](https://github.com/qurator-spk/dinglehopper) | Apache-2.0 | 71 | CER/WER against ground truth, with a visual diff. |
+| [impactcentre/ocrevalUAtion](https://github.com/impactcentre/ocrevalUAtion) | Apache-2.0 | 68 | The IMPACT-lineage evaluation tool; pushed 2026-10-13. |
+| [htr-united/htr-united](https://github.com/htr-united/htr-united) | **CC0-1.0** | 51 | Catalogue of HTR/OCR ground-truth sets by language and script. |
+| **BLN600** (Gale / Univ. of Sheffield) | open dataset, verify at source | — | 600 newspaper excerpts, each with **source image + OCR + manual gold transcription**. The yardstick for post-correction claims. |
+
+**Why this table exists:** the only defensible way to sell OCR work is a measured CER/WER delta on the
+client's own pages. Kanerva et al. ([arXiv 2502.01205](https://arxiv.org/abs/2502.01205), RESOURCEFUL
+2025) found LLM post-correction **decreased** quality in many cases; ICDAR 2026 ran a competition
+(HIPE-OCRepair) because the problem is open. A baseline is not project overhead here — it is the
+deliverable that makes the rest of the engagement arguable.
+
+### ⛔ The 15-minute licence gate for any digitisation proposal
+
+Run this before an estimate. Four of these five checks have produced a wrong answer in this plane.
+
+1. **Resolve the weights separately from the repo.** Six verified split licences in this plane (full list
+   in `agents/top.md`). Apache-2.0 on the tree tells you nothing about the checkpoint you will load.
+   Two have hard money thresholds: **$5M** (marker/surya) and **$20M monthly revenue / 100M MAU** (MinerU).
+2. **Probe British spelling.** `LICENCE`, `LICENCE.md`, `LICENCE.txt` in addition to the American names.
+   Three national-library repos here use the British form; `ndl-lab/ndlocr-lite` 404s on all eight
+   American names while `README.md` returns 200.
+3. **Chase the distillation ancestor.** `ndl-lab/ndlocr-lite` is CC BY 4.0, and its bundled layout model
+   is distilled from **DINOv3** — whose agreement must travel with derivatives (§1.b.i), forbids reverse
+   engineering (§1.b.iv), requires acknowledgement in publications (§1.b.ii) and carries an indemnity and
+   patent-retaliation clause (§5.b). CC BY 4.0 on the wrapper cannot override it.
+4. **Never vendor a standards XSD.** ALTO and METS GitHub repos carry **no licence**. Use the
+   LoC-published specifications instead.
+5. **Check `ls-remote` before writing any URL** — and check the result rather than the roundup.
+   `PaddlePaddle/PaddleOCR-VL` is cited by 2026 blog posts and **does not exist**;
+   `rednote-hilab/dots.ocr` is absent from the search index and **does**.
+
+**AGPL watch for this plane:** `PyMuPDF` (AGPL-3.0) and `natliblux/nautilusocr` (GPL-3.0, dormant since
+2023-05-30). Both are easy to reach for and both change what a client can ship. `pdfplumber` (MIT) and
+`eynollah` (Apache-2.0) are the respective replacements.
+
+### Verification provenance & channel gaps for pass 39 (stated, not glossed)
+
+**Verified at source, this pass:** 36/36 GitHub URLs resolve by `git ls-remote`; stars/forks/push dates
+from `search/repositories` with `repo:` qualifiers on 2026-11-27; and every licence claim that mattered
+was read from the file — `MinerU/LICENSE.md` (3,301 B, thresholds quoted verbatim),
+`ndnp-open-ocr/LICENSE.md` (1,951 B, CC0), `open-oni/LICENSE` (573 B, Apache-2.0),
+`ndl-lab/ndlocr-lite/LICENCE` (18,653 B, CC BY 4.0, found only by shallow clone),
+`dots.ocr/master/LICENSE` (MIT), `facebookresearch/dinov3/LICENSE.md` (§1.b clauses quoted),
+and `marker`/`surya` README §Commercial usage for the OpenRAIL-M weights ceiling.
+
+**⚠️ Not verified at source — two channels are unreachable from this session's network policy:**
+
+1. **`arxiv.org` does not resolve** (proxy returns `403 CONNECT tunnel failed`). The four papers cited in
+   this pass — [2502.01205](https://arxiv.org/abs/2502.01205) (*No Free Lunches*, post-correction),
+   [2407.12838](https://arxiv.org/abs/2407.12838) (*Historical Ink*, LATAM corpus),
+   [2602.16430](https://arxiv.org/abs/2602.16430) (production-scale Indian OCR) and
+   [2608.28195](https://arxiv.org/abs/2608.28195) (*UniLipi*, ICDAR 2026) — have **IDs and titles taken
+   from the search index, with their findings quoted as the index reported them.** The claims are
+   accurately attributed to that source; they are **not** confirmed against the abstracts. Re-verify
+   before putting any of them in a client deck. Same treatment as `new.ddex.net` in pass 8.
+2. **`hemerotecadigital.bn.gob.ar` does not resolve.** Argentina's 415 titles / 150,000+ fascicles /
+   PDF-without-OCR figures come from bn.gov.ar press items and press coverage via search, not from the
+   platform. Reported, not source-verified — flagged again in the LATAM section of `intel/market.md`.
+
+**The rule this keeps re-earning:** a figure's weakest link is its channel, not its plausibility. Record
+which oracle produced each number — `ls-remote` (existence), the search index (metrics), the file itself
+(licence), a blocked domain (nothing) — because the next pass cannot tell the difference afterwards.

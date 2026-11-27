@@ -1414,6 +1414,45 @@ A second, narrower offer: an **indigenous-orthography rendering gate** for publi
 education publishers, built on Skeena — **with the RFN rename step designed in from the start**, because
 Skeena is one of the fonts that requires it.
 
+### Pass 39 (2026-11-27) — the digitisation, OCR & text-layer layer in North America
+
+**The buyer is re-OCRing, not scanning.** In **August 2026** the Library of Congress announced new
+OCR-reprocessing software *and* a datasets portal for Chronicling America (blogs.loc.gov/thesignal). The
+code is [LibraryOfCongress/ndnp-open-ocr](https://github.com/LibraryOfCongress/ndnp-open-ocr) — 34★,
+pushed 2026-10-24, and a **work of the US Government: public domain with a worldwide CC0 1.0 waiver**
+(read from `LICENSE.md`, 1,951 B; the GitHub API's `NOASSERTION` is a false negative in the permissive
+direction, exactly as the healthcare pass found on `FDA/openfda`). It produces fresh **ALTO XML + PDF** at
+batch scale from existing scans, runs locally or in cloud, and wraps **Tesseract + Leptonica** unmodified.
+
+**The opportunity, and it is a specific piece of work:** the LoC pipeline's layout step uses models from
+**American Stories** (Harvard), and [dell-research-harvard/AmericanStories](https://github.com/dell-research-harvard/AmericanStories)
+has **142★, no licence file at all** (eight filenames × two branches probed; `README.md` returns 200, so
+the control passes and the absence is real), **last push 2024-03-07**, with models distributed by
+**Dropbox link**. The dataset is CC-BY-4.0 on Hugging Face; the code and weights are unlicensed. So the
+flagship CC0 national pipeline carries an **unlicensed, 20-month-dormant dependency at its layout step**,
+and every institution that adopts it inherits that. Substituting
+[qurator-spk/eynollah](https://github.com/qurator-spk/eynollah) (Apache-2.0, pushed 2026-11-13) makes the
+chain end-to-end permissive. That is a scoped, provable, licence-driven engagement for any US library
+system, university press or newspaper group running the NDNP stack — and the diligence finding sells it.
+
+**Also NA, and both are warnings:**
+[LibraryOfCongress/newspaper-navigator](https://github.com/LibraryOfCongress/newspaper-navigator) (272★,
+Unlicense) is **archived** — do not propose it as live infrastructure.
+[stanford-oval/Churro](https://github.com/stanford-oval/Churro) (Apache-2.0 code, 89★) is the only
+purpose-built open-weight VLM for *historical* transcription and its **weights are under a Qwen research
+licence with a research-only dataset** — it belongs in a feasibility study, never in a delivery estimate.
+
+**Clean NA engines to build on:** [allenai/olmocr](https://github.com/allenai/olmocr) (Apache-2.0,
+19,858★) and [docling-project/docling](https://github.com/docling-project/docling) (MIT, 71,133★, pushed
+the day of this pass). No weights trap found in either.
+
+**Regulatory frame:** no federal AI statute; the levers remain guild agreements and state-level rules
+(Chambers *Media & Entertainment 2026*), and CCPA-family privacy law raises the cost of consumer-data use.
+None of that constrains a public-domain newspaper backfile — **which is why this plane is the lowest-risk
+AI work available to a US media client.** Public-domain pages, no training-rights question, no personality
+rights, measurable output.
+
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2988,6 +3027,57 @@ eyeball it.** Carry the `python-bidi` **LGPL-3.0** note into the procurement pac
 during review, and prefer `libass` (ISC) + HarfBuzz for the burn-in path, which avoids the copyleft link
 entirely.
 
+### Pass 39 (2026-11-27) — the digitisation, OCR & text-layer layer in EMEA
+
+**EMEA is where the institutions and the toolchains are** — and where the flagship account runs on closed
+software.
+
+**The measured contrast to lead with.** The **Swiss National Library** passed **15 million digitised
+pages across more than 200 newspaper titles, the oldest dating from 1692**, offering **article-level
+segmentation** and free, registration-free full-text search (federal announcement, **2026-02-24**,
+admin.ch; reported elsewhere as more than doubling its page count in four years). The platform is
+**Veridian — proprietary**. Meanwhile the formats it must produce, **ALTO and METS**, are open and
+mandated. The EMEA pitch writes itself: *your obligations and your text layer live in open formats; we
+build the pipeline that produces them so the platform above you stays replaceable.* Do not pitch "replace
+Veridian"; pitch owning the ALTO/METS asset that survives a platform change.
+
+**The only complete national toolchain in open source is German.** [OCR-D/core](https://github.com/OCR-D/core)
+(Apache-2.0, 137★, pushed 2026-11-09) with [OCR-D/ocrd_all](https://github.com/OCR-D/ocrd_all) (MIT, 73★)
+is the OCR-D programme framework; [qurator-spk/eynollah](https://github.com/qurator-spk/eynollah)
+(Apache-2.0, 417★) is its layout analyser and the best-licensed newspaper layout tool anywhere in this
+plane. For handwriting and historical print, [mittagessen/kraken](https://github.com/mittagessen/kraken)
+(Apache-2.0, 1,114★) is the engine — and **its platform, eScriptorium, is not on GitHub at all**
+(`git ls-remote github.com/scripta/escriptorium` → nothing; it lives on GitLab at
+`gitlab.com/scripta/escriptorium`, from EPHE/Inria and partners). **First instance in this KB of a
+plane's leading platform being absent from GitHub entirely** — any discovery process that only searches
+GitHub will miss it, and a table that only accepts github.com URLs will silently omit the best option.
+
+**Evaluation is an EMEA strength and it is how you win the deal:**
+[qurator-spk/dinglehopper](https://github.com/qurator-spk/dinglehopper) (Apache-2.0),
+[impactcentre/ocrevalUAtion](https://github.com/impactcentre/ocrevalUAtion) (Apache-2.0, pushed
+2026-10-13, IMPACT lineage), and [htr-united/htr-united](https://github.com/htr-united/htr-united)
+(**CC0-1.0**, 51★/45f — fork ratio 0.88, contributed infrastructure) cataloguing ground truth by language
+and script. **ICDAR 2026** ran the **HIPE-OCRepair** competition on LLM-assisted OCR post-correction,
+which is the European research community conceding the problem is unsolved — use that, with
+[arXiv 2502.01205](https://arxiv.org/abs/2502.01205), to refuse an unbounded "AI will clean our archive"
+scope and sell a measured one instead.
+
+**Avoid:** [natliblux/nautilusocr](https://github.com/natliblux/nautilusocr) (National Library of
+Luxembourg, 56★) is **GPL-3.0 and dormant since 2023-05-30** — excellent method, wrong licence and no
+maintenance. Read it, do not link it. Luxembourg's open newspaper data (data.bnl.lu) remains a good
+corpus for benchmarking.
+
+**The regulatory hook that turns this into budget:** the **European Accessibility Act** obligations this
+KB already works in pass 18 (P33, backlist remediation) cannot be met by a scan. *A page image is not
+accessible text.* An EAA-driven remediation programme for a periodical or book backfile **is** an OCR
+programme, whatever the procurement calls it — and that reframing moves the money from a discretionary
+digitisation budget to a compliance one. Pair it with the AI Act's Article 50 transparency regime (EU
+Parliament adopted its Omnibus simplification position 569–45 this year) for clients who will also train
+on the recovered text, and with the DPP's 2026 finding that AI plus **digital sovereignty** is the
+dominant European strategic driver — a self-hosted OCR pipeline is a sovereignty asset by construction,
+since the pages never leave the client's infrastructure.
+
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -4523,6 +4613,65 @@ Indic migration** — Kruti Dev and friends to Unicode, with `shaperglot` as the
 (OFL, **no RFN**, so subsetting and shipping needs no rename) as the target family. The second is the
 better engagement: it has a named incumbent format, a verifiable finish line, and a buyer (news groups and
 government publishers) who cannot avoid it.
+
+### Pass 39 (2026-11-27) — the digitisation, OCR & text-layer layer in APAC
+
+**APAC owns the model layer of this plane outright.** By stars, the four most-adopted document-OCR
+projects in the world are APAC-origin or APAC-led:
+[PaddlePaddle/PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) (Baidu, Apache-2.0, **93,358★**,
+2026-09-16), [opendatalab/MinerU](https://github.com/opendatalab/MinerU) (**84,409★**, 2026-11-26),
+[deepseek-ai/DeepSeek-OCR](https://github.com/deepseek-ai/DeepSeek-OCR) (MIT, **24,194★**) and
+[rednote-hilab/dots.ocr](https://github.com/rednote-hilab/dots.ocr) (RedNote/Xiaohongshu, MIT — verified
+by reading `master/LICENSE`, because the repo is **missing from the GitHub search index**).
+
+**But the adoption leader is the licence problem.** MinerU's `LICENSE.md` (3,301 B, read in full) is
+Apache-2.0 **plus additional terms**: a separate commercial licence is required if you or your affiliates,
+**on a consolidated basis**, exceed **100 million MAU** *or* **US$20 million monthly revenue**; any online
+service built on it must **clearly state that it uses MinerU** in its UI or public documentation
+regardless of size; and the licence **terminates automatically** on breach without notice. The GitHub API
+reports `NOASSERTION`. For most Globant engagements the thresholds are irrelevant — **the attribution
+obligation is not**, and it is the kind of term that surfaces after launch.
+
+**Japan is the standout, and the most legally layered repo in the plane.** The **National Diet Library**
+is the only national library shipping its own engine as an installable application:
+[ndl-lab/ndlocr-lite](https://github.com/ndl-lab/ndlocr-lite) (**1,440★**, v2 pushed **2026-11-24**, three
+days before this pass) runs **CPU-only** on Windows/Mac/Linux, handles vertical Japanese text, and adds
+experimental English and handwriting support — the two things the GPU-based
+[ndl-lab/ndlocr_cli](https://github.com/ndl-lab/ndlocr_cli) (691★) struggled with;
+[ndl-lab/ndlkotenocr_cli](https://github.com/ndl-lab/ndlkotenocr_cli) (105★) covers pre-modern books. All
+three are **CC BY 4.0** — a content licence applied to software, with no patent grant. And the bundled
+layout model is a **ViT-Tiny distilled from DINOv3**, so **Meta's DINOv3 Agreement also applies**: it must
+travel with any derivative you distribute (§1.b.i), you must not reverse-engineer the materials
+(§1.b.iv), you must acknowledge it in publications (§1.b.ii), and you accept an indemnity and a
+patent-retaliation termination clause (§5.b). **CC BY 4.0 on the wrapper cannot override the model's
+terms.** Usable — Japanese vertical text and handwriting have no better open option — but it must be
+documented in the proposal, not discovered in review.
+
+**India: research-rich and repo-poor, and this is measured.** Four 2026 publications
+([arXiv 2602.16430](https://arxiv.org/abs/2602.16430) on production-scale Indian OCR; **UniLipi**,
+[arXiv 2608.28195](https://arxiv.org/abs/2608.28195), one model across 13 Indic scripts, accepted to
+ICDAR 2026; a label-free Indic adaptation paper; the CVIT/IIIT **Indic-OCR** pipeline for 22 scheduled
+languages) plus Bodhan AI's September 2026 **IndicOCR** release (claimed 22 languages / 13 scripts, a 33M
+layout parser and a 0.8B OCR model; open-source status unconfirmed from the sources found). Against that:
+the maintained open repositories are **ihdia/sanskrit-ocr (58★, MIT, dormant since 2023-02-16)**,
+`harshitadd/indicOCR` (**2★**), `indicpdf-maker/IndicOCR` (**0★**) and `KarnamN/IndicOCR` (**0★**) — and a
+repository search for **`lipikar ocr` returns zero results**, despite press coverage describing Lipikar as
+built to fill the "near-complete absence of reliable, open-source OCR tools for Indic manuscripts". **The
+papers exist, the maintained code does not.** For an Indian publisher or archive the honest position is
+that this is a build, not an integration, and the ground truth is the scarce asset.
+
+**Korea: informed gap, not coverage.** Searched twice — newspaper-archive digitisation plus national
+library, and Indic/Korean script OCR — and **found nothing relevant on Korean newspaper digitisation or
+Hangul/Hanja historical OCR in open source.** Treat Korea as unresearched rather than empty; one targeted
+pass in Korean-language sources would settle it.
+
+**Regulatory frame (unchanged from pass 8, still correct):** Latham & Watkins (September 2026) sorts APAC
+into three divergent regulatory categories — binding risk-based frameworks (South Korea, Vietnam),
+targeted rules (China), and lighter regimes — so the sellable asset is a **per-jurisdiction policy engine,
+not a single compliance mode**. For this plane specifically the constraint is mild: historical periodicals
+are mostly out of copyright, and the generative-labelling rules that dominate APAC AI regulation do not
+attach to a faithful transcription.
+
 
 ### LATAM
 
@@ -6084,6 +6233,74 @@ North America's lead.
 **Gap recorded:** no LATAM-origin open-source project in this plane was found. The region's licensing
 growth is being administered on vendor platforms and spreadsheets, and the only repository in the world
 that models per-asset territory and embargo rights, `pwnera/artbucket`, is AGPL-3.0 with 34 stars.
+### Pass 39 (2026-11-27) — the digitisation, OCR & text-layer layer in LATAM
+
+**This is the clearest measured demand signal in the whole plane, and there is no LATAM-origin tooling to
+meet it.**
+
+**Argentina — the gap is stated by the institution itself.** The Biblioteca Nacional Mariano Moreno
+launched its **Hemeroteca Digital in December 2025** with **415 titles and more than 150,000 fascicles**
+of newspapers, periodicals and magazines, and the files are **PDF without OCR**, so there is **no
+full-text search**. The library describes the platform as its own development built on free software, and
+through 2026 it kept opening collections — in August 2026 it granted free access to the published issues
+of the *colectividades* (immigrant-community) papers, explicitly balancing Ley 11.723 on intellectual
+property against its mandate to disseminate national heritage. (Separately, *La Nación* reported in
+December 2025 that access to several Hemeroteca archives had been restricted — worth confirming with the
+institution before any engagement, since scope and rights posture may have changed.)
+
+So: **a national newspaper collection, already scanned, already online, already rights-cleared in large
+part — and not searchable.** The work needed is exactly
+[ocrmypdf/OCRmyPDF](https://github.com/ocrmypdf/OCRmyPDF) (MPL-2.0, 35,414★) plus
+[qurator-spk/eynollah](https://github.com/qurator-spk/eynollah) (Apache-2.0) for broadsheet layout and
+[qurator-spk/dinglehopper](https://github.com/qurator-spk/dinglehopper) (Apache-2.0) to prove the result,
+all permissive, all self-hostable on the library's own infrastructure. **No new scanning, no rights
+negotiation, no model training.** This is the most concrete, lowest-risk public-sector AI proposal in this
+KB, and the recipe is Pattern 66 in `compose/patterns.md`.
+
+**Uruguay — the ask is already written into a public plan.** The Biblioteca Nacional's *Ecosistema Digital
+Integrado: Biblioteca Nacional 2026* proposal, on the national participatory-democracy platform
+(plataformaparticipacionciudadana.gub.uy), asks to **"universalizar" OCR and manuscript recognition across
+its digital archives and collections so their content is fully indexable and searchable.** A stated
+institutional objective on a government platform is a procurement signal, not a guess.
+
+**Mexico — the regional benchmark, and the proof the work lands.** The **Hemeroteca Nacional** (UNAM) has
+**more than 8 million digitised images across more than 1,000 titles**, and since **2022** its images
+carry high resolution, metadata **and embedded OCR**. Use Mexico as the reference when selling Argentina
+or Uruguay: the comparison is within the region, in Spanish, at national scale.
+
+**⚠️ Tooling gap — informed, searched, and stated rather than filled.** I searched specifically for
+Spanish- and Portuguese-language open-source OCR/HTR work on Latin American historical press
+(Brazil/Argentina/Chile hemeroteca repos, in Spanish) and **found no maintained LATAM-origin repository
+with any traction.** What exists:
+- **Historical Ink** — a 19th-century **Latin American Spanish** newspaper corpus with LLM-based OCR
+  correction ([arXiv 2407.12838](https://arxiv.org/abs/2407.12838)), datasets published on Hugging Face in
+  original / cleaned / corrected versions. **A paper and datasets, no maintained tool.** It is the single
+  most relevant LATAM artefact in the plane and it is a corpus, not software.
+- **FoNDUE-HTR/FONDUE-ES-PRINT-19** — 19th-century Spanish **print** ground truth, **0★, last push
+  2024-01-15**, **CC-BY declared in the HTR-United catalogue and no licence file in the repo** (fourth
+  instance in this KB of a licence that exists only outside the repository). Swiss-hosted, not LATAM.
+- `tberg12/ocular` (GPL-3.0, 268★, dormant since 2024-06-07) handles historical Spanish but is copyleft
+  and unmaintained.
+
+**What that means commercially:** the models are generic and already good at Spanish and Portuguese print
+(Tesseract, olmOCR, docling, PaddleOCR all cover Latin script), so **the scarce asset is not a model — it
+is Spanish/Portuguese newspaper ground truth and the layout profiles of regional broadsheets.** Build the
+ground-truth set once, with the client, and it becomes a reusable regional asset that no incumbent holds.
+Register it in `htr-united` (CC0) if the client agrees, and it also becomes a public credential.
+
+**Regulatory frame:** LATAM continues to follow the EU model without a single regional framework (IBA;
+Baker McKenzie), Uruguay was first in the region to sign the Council of Europe AI treaty (2025), Chile has
+a bill in Congress and launched **Latam-GPT in February 2026** — a model whose Spanish-language training
+corpus makes recovered regional newspaper text directly valuable. And the newsroom buyer identified in
+pass 8 still holds: outlets that published AI policies (El Comercio's ~10-page guide in early 2026, FLIP,
+ADEPA, SiPreBA/Heinrich Böll May 2026) have committed to being able to **evidence** them.
+
+**Channel gap — stated as required.** `hemerotecadigital.bn.gob.ar` **does not resolve from this session**
+(outside the allowed network domains), so the 415 titles / 150,000 fascicles / no-OCR figures come from
+bn.gov.ar press items and press coverage via search, **not from the platform itself.** Treat them as
+reported, not verified at source, and re-check at first client contact.
+
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -7464,3 +7681,48 @@ identified as the hottest in LATAM (the newsroom that has written a policy and m
 Pair it with the electoral-integrity angle: Brazil's TSE resolution and Chile's digital-likeness bill mean
 **captioned, labelled, correctly rendered political content is a compliance artefact in 2026**, and the
 rendering half of that is currently nobody's job.
+
+---
+
+## Market size — pass 39 addendum (2026-11-27): OCR is **the narrowest headline agreement in this KB**, and the sub-segment's *growth rates* disagree 2.6×
+
+Four independent 2026 estimates for the OCR market, all published this year:
+
+| Source | 2026 estimate | Forecast | CAGR |
+|---|---|---|---|
+| Marketintelo | **$17.3B** | $53.4B by 2034 | — |
+| The Business Research Company | **$20.71B** (from $17.58B in 2025) | — | 17.8% |
+| Persistence Market Research | **$18.6B** | $46.3B by 2033 | 13.9% |
+| GII Research | **$22.21B** | $60.04B by 2032 | 17.72% |
+
+**Spread: 1.28× ($17.3B–$22.21B).** For context, this KB has recorded ~28× on connected TV (pass 32),
+7.3× on discovery (pass 30) and 5.4× on 2D animation (pass 36). **A 1.28× spread is the tightest headline
+agreement in the entire file** — because OCR is an old, well-defined software category with real licence
+revenue, not an emerging one being sized by definition.
+
+### The sub-segment that matters here, and the disagreement that is actually informative
+
+| Source | Segment | 2026 | Growth |
+|---|---|---|---|
+| Persistence | Document digitisation & archiving (>27% of OCR) | **$5.02B** | 13.9% (market CAGR) |
+| GII Research | OCR **scanning services** | **$5.08B** | **5.34%** to 2032 |
+| MarkWide | Document capture **software** | $8.7B | 12.40% to 2035 |
+
+The two digitisation figures land **1.2% apart** — effectively the same number from different houses,
+which is as close to corroboration as this KB ever gets. **But their growth rates differ by 2.6×
+(13.9% vs 5.34%).** That disagreement is the useful part, and it is readable: *services* scanning is a
+mature, slow-growing business, while the *software and AI* layer on top is growing at the market rate.
+**Sell the second, not the first.** A proposal framed as "digitisation services" is priced against a 5%
+market; the same work framed as a measurable text-layer and retrieval capability is priced against a 14%
+one.
+
+### Regional note and the one refusal
+
+Persistence puts **North America above 36%** of the OCR market, consistent with every other regional
+split in this file. **No source found sizes the *cultural-heritage / newspaper* digitisation segment at
+all** — the figures above are dominated by enterprise document capture (invoices, forms, KYC), not
+periodical backfiles. **⛔ Refusal: do not quote $5.02B to a library, archive or publisher as "your
+market".** It is not. What can be stood behind for a heritage buyer is bottom-up and verifiable: page
+count × compute cost per page × measured CER delta, against the institution's own published holdings
+(Argentina's 150,000+ fascicles, Mexico's 8M+ images, Switzerland's 15M pages are all publicly stated).
+That arithmetic is defensible in a way a borrowed enterprise-capture number never is.

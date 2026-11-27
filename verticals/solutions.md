@@ -2223,3 +2223,40 @@ are not merely *cheaper* than commercial fonts for a pipeline that burns text in
 in a TV app — **they are the only ones whose terms a pipeline can satisfy programmatically at scale**,
 because OFL has no per-seat, per-title or per-broadcast tier to count. The money saved is real; the
 compliance risk avoided is the actual reason.
+
+---
+
+## Pass 39 (2026-11-27) — digitisation platforms: what to customise, and the one that is winning and closed
+
+The repository platforms in this file (Islandora, Omeka, IIIF-based viewers) store and display scans.
+The platforms below are specific to **newspapers and periodicals** — the backfile shape with the hardest
+layout problem and the clearest commercial value.
+
+| Platform | Licence | Stars | Last push | Customisable with AI on top? |
+|---|---|---|---|---|
+| [open-oni/open-oni](https://github.com/open-oni/open-oni) | Apache-2.0 (read) | 58 | 2026-09-15 | **Yes — the pick.** The open front end for digitised newspaper collections, descended from the Chronicling America application. Django; ALTO/METS-native. Small community (24 forks) but a real licence and a 2026 push. |
+| [LibraryOfCongress/ndnp-open-ocr](https://github.com/LibraryOfCongress/ndnp-open-ocr) | **CC0 1.0** | 34 | 2026-10-24 | **Yes.** Not a platform but the batch pipeline beside one: re-OCRs existing scans into fresh ALTO XML + PDF, locally or in cloud. CC0 means no attribution obligation at all. |
+| [OCR-D/ocrd_all](https://github.com/OCR-D/ocrd_all) | MIT | 73 | 2025-07-04 | **Yes**, for European print. The assembled German national toolchain; workflow-configurable. |
+| [natliblux/nautilusocr](https://github.com/natliblux/nautilusocr) | GPL-3.0 | 56 | 2023-05-30 | **Only with care.** METS/ALTO in → improved METS/ALTO out, from the National Library of Luxembourg. Copyleft and dormant; read it for method, don't link it into a product. |
+| **Veridian** | 🚫 proprietary (commercial) | — | — | **No.** And it is the one winning the flagship accounts — see below. |
+| **Transkribus** (READ-COOP SCE, Austria) | 🚫 commercial; **models not open** | — | — | **No.** Credit-based pricing, free tier reported at ~50 pages/month. The usability benchmark competitors are measured against. |
+| [ndl-lab/ndlocr-lite](https://github.com/ndl-lab/ndlocr-lite) | ⚠️ CC BY 4.0 + DINOv3-derived model | 1,440 | 2026-11-24 | **Desktop tool, not a platform** — but it is the only national library shipping its own engine as an installable app for Windows/Mac/Linux, CPU-only. |
+
+### The uncomfortable fact to put on the table early
+
+The largest success in this plane in 2026 runs on **closed software**. The Swiss National Library passed
+**15 million digitised pages from more than 200 titles, the oldest from 1692**, with **article-level
+segmentation** and free, registration-free full-text search (announced **2026-02-24**, admin.ch) — on the
+**proprietary Veridian platform**.
+
+Read that correctly, because it is the sales position for this whole plane: **the formats are open and
+mandated (ALTO, METS), and the platform that delivers them best is not.** That is precisely the gap a
+systems integrator fills. The honest pitch is not "open source replaces Veridian" — it is *"your
+obligations and your data are in open formats; we build and own the pipeline that produces them, so the
+platform above stays replaceable."* The one asset that migrates between platforms is a correct ALTO/METS
+text layer; everything else is a rendering choice.
+
+**Where no platform exists:** there is no open equivalent of Veridian's article-level segmentation
+*product*. The components exist (`eynollah` for layout, `kraken`/Tesseract for recognition,
+`ocr-fileformat` for conversion, `dinglehopper` for measurement) and the assembly is work — which is the
+honest shape of a statement of work, not a shrink-wrapped claim.

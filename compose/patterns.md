@@ -6013,3 +6013,144 @@ two tools that perform it have **208 and 58 stars** between them. This is the sa
 
 **The one-line version for a client conversation:** *coverage is not support, support is not shaping, and
 all three are measurable before you commit a launch date.*
+
+---
+
+# The print, periodical & manuscript digitisation plane — patterns from pass 39 (2026-11-27)
+
+Patterns 1–65 above assume, in several places, that an archive has a usable text layer. Patterns 3
+(archive mining), 14 (archive→revenue) and 31 (description backfill) all begin after OCR. These five
+patterns supply what comes before, and the licence gate that governs all of them.
+
+## Pattern 66 — The text-layer retrofit: make an online archive searchable without re-scanning anything
+
+**The build with the clearest stated demand in this KB.** Argentina's Biblioteca Nacional Mariano Moreno
+publishes **415 titles / 150,000+ fascicles** online as **PDFs without OCR**; Uruguay's National Library
+has a published 2026 plan to "universalizar" OCR and handwriting recognition across its digital archives.
+Nothing needs scanning, negotiating or training. The pages are already digitised and largely rights-cleared.
+
+**Wiring, step by step — every component permissive and self-hosted:**
+
+1. **Ingest and triage.** [apache/tika](https://github.com/apache/tika) (Apache-2.0) walks the existing
+   PDF corpus and separates image-only pages from pages that already carry text, so you never pay to
+   OCR a page twice. Record the split — it is the first number the client has never had.
+2. **Layout analysis before recognition.** [qurator-spk/eynollah](https://github.com/qurator-spk/eynollah)
+   (Apache-2.0, 417★, pushed 2026-11-13) segments broadsheet pages into regions and reading order.
+   **Do not skip this on newspapers**: column bleed is the single largest source of unusable OCR, and a
+   recognition engine pointed at a whole broadsheet page produces text no search can use.
+3. **Recognition.** [tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract) (Apache-2.0,
+   77,680★) for Spanish/Portuguese print — it is what the national programmes run, and Latin-script
+   historical print is its strongest case. Where quality is insufficient, escalate *selected* pages to
+   [allenai/olmocr](https://github.com/allenai/olmocr) (Apache-2.0) — **the VLM with no weights trap**.
+4. **Write the text back into the artefact the institution already serves.**
+   [ocrmypdf/OCRmyPDF](https://github.com/ocrmypdf/OCRmyPDF) (MPL-2.0, 35,414★) adds an invisible text
+   layer to the existing PDF. The URLs, the citations and the public-facing catalogue do not change —
+   which is what makes this politically approvable inside a library.
+5. **Emit ALTO XML alongside.** [cneud/alto-tools](https://github.com/cneud/alto-tools) (Apache-2.0) and
+   [UB-Mannheim/ocr-fileformat](https://github.com/UB-Mannheim/ocr-fileformat) (MIT) convert hOCR→ALTO.
+   The ALTO is the migratable asset; the searchable PDF is the deliverable the public sees.
+6. **Prove it.** [qurator-spk/dinglehopper](https://github.com/qurator-spk/dinglehopper) (Apache-2.0) on a
+   stratified sample the client hand-transcribes with you (300–600 lines is enough). This is step 6 and
+   it is the one that gets the second phase funded.
+
+**Licence ledger:** Apache-2.0 ×4, MIT ×1, MPL-2.0 ×1. **No copyleft reaching client code, no model
+weights with thresholds, no data leaving the institution.** Reference implementation to cite:
+[LibraryOfCongress/ndnp-open-ocr](https://github.com/LibraryOfCongress/ndnp-open-ocr) (**CC0 1.0**).
+
+**What to quote:** page count × compute per page × a measured CER delta. Never an enterprise
+document-capture market figure (see `intel/market.md` pass 39 refusal).
+
+## Pattern 67 — The weights gate: the 15-minute check that belongs before every document-AI estimate
+
+This plane produced **six verified cases** where the code licence and the weights licence differ. Run
+this before any proposal; it has caught a wrong answer every time.
+
+| Check | Command / action | Why |
+|---|---|---|
+| 1. Weights, separately from code | Read the model card **and** the README §Commercial/License | `marker`/`surya`: Apache-2.0 code, **OpenRAIL-M weights free only under $5M** funding/revenue. `Churro`: Apache-2.0 code, **Qwen research licence** weights — unshippable. |
+| 2. Additional terms on an Apache repo | Read `LICENSE.md` **in full**, not the badge | `MinerU`: Apache-2.0 **+** separate commercial licence above **100M MAU / $20M monthly revenue**, **+ mandatory "uses MinerU" UI notice at any size**, + automatic termination. API says `NOASSERTION`. |
+| 3. British spelling | Probe `LICENCE`, `LICENCE.md`, `LICENCE.txt` too | `ndl-lab/ndlocr-lite` 404s on all eight American names on both branches while `README.md` = 200. Licence is `LICENCE` (18,653 B). |
+| 4. The distillation ancestor | Trace the model backbone | `ndlocr-lite`'s layout model is distilled from **DINOv3**: the Meta agreement travels with derivatives (§1.b.i), bars reverse engineering (§1.b.iv), compels acknowledgement (§1.b.ii), adds indemnity and patent-retaliation (§5.b). CC BY 4.0 on the wrapper cannot override it. |
+| 5. Standards repos | Use the published spec, never the GitHub XSD | `altoxml/schema` (57★) and `mets/METS-schema` (27★): **no licence file**. Default copyright = all rights reserved. |
+| 6. Existence | `git ls-remote`, every URL | `PaddlePaddle/PaddleOCR-VL` is cited by 2026 roundups and **does not exist**; `rednote-hilab/dots.ocr` is **absent from the search index** and does. |
+
+**The one-line version for a client conversation:** *in document AI the code is free and the weights are
+where the lawyer lives* — and an SBOM scan of the source tree reports clean for all six cases above.
+
+## Pattern 68 — Re-OCR with an evidence trail (and the refusal that makes it credible)
+
+**The 2026 budget in this plane is reprocessing, not scanning.** The Library of Congress shipped new OCR
+reprocessing software and a Chronicling America datasets portal in **August 2026**; Luxembourg built
+`nautilusocr` to turn METS/ALTO into *better* METS/ALTO; Uruguay wants OCR retrofitted across archives
+already online. Engine quality has moved far enough that a decade of scans is worth running again.
+
+**The pattern:** (1) take the client's existing ALTO/hOCR as the **baseline** — not a competitor's claim;
+(2) hand-transcribe a stratified sample as ground truth, with the client's staff, and register it in
+[htr-united/htr-united](https://github.com/htr-united/htr-united) (**CC0-1.0**) if they agree; (3) run
+the candidate chain; (4) report **CER/WER delta per title and per decade** with
+[dinglehopper](https://github.com/qurator-spk/dinglehopper) or
+[ocrevalUAtion](https://github.com/impactcentre/ocrevalUAtion) (both Apache-2.0); (5) **ship only the
+titles that improved.** Some will not, and saying so is the credential.
+
+**⛔ The refusal that comes with it — and it is the sellable half.** Do not promise LLM post-correction
+will clean an archive. Kanerva et al., *No Free Lunches* (RESOURCEFUL 2025,
+[arXiv 2502.01205](https://arxiv.org/abs/2502.01205)) found open-weight LLMs **decreased** quality in many
+cases on historical English and Finnish; **ICDAR 2026** ran the HIPE-OCRepair competition because the
+problem is unsolved. The correct offer is a **bounded, measured** correction step with a gate: it ships
+only where CER improves on the client's own pages. This is the P45 shape — when the dominant approach
+cannot be shown to work, the deliverable is a refusal with a measurement attached. Benchmark to cite:
+**BLN600** (600 newspaper excerpts with source image, OCR and manual gold transcription).
+
+## Pattern 69 — The end-to-end permissive national newspaper pipeline (a licence fix that is a whole engagement)
+
+**The finding:** `LibraryOfCongress/ndnp-open-ocr` is **CC0 1.0** — a US Government work, public domain,
+worldwide waiver — and its **layout step uses models from American Stories** (Harvard), whose repo
+[dell-research-harvard/AmericanStories](https://github.com/dell-research-harvard/AmericanStories) has
+**142★, no licence file at all, last push 2024-03-07**, with **models shipped by Dropbox link** (the
+dataset is CC-BY-4.0 on Hugging Face; the code and weights are not licensed). Every institution adopting
+the national pipeline inherits an unlicensed, dormant dependency at the step that matters most.
+
+**The build:** fork the CC0 pipeline, **replace the layout stage with
+[eynollah](https://github.com/qurator-spk/eynollah)** (Apache-2.0, pushed 2026-11-13), keep Tesseract +
+Leptonica (both already used unmodified under their own licences), add `dinglehopper` as a CI gate so the
+substitution is *proven not to regress* on the client's pages, and emit the same ALTO XML + PDF the NDNP
+programme expects. Deliverable: an **end-to-end permissive, CC0-rooted newspaper OCR pipeline with a
+licence provenance document and a measured no-regression report.**
+
+**Who buys it:** US library systems, university presses and newspaper groups on the NDNP stack; any
+EMEA institution that wants the LoC method without the dependency. The diligence finding *is* the pitch —
+you are not selling OCR, you are selling the removal of a licence defect from national infrastructure,
+with the performance proof attached.
+
+## Pattern 70 — Ground truth as the regional asset (the LATAM build that compounds)
+
+**The measured gap:** generic engines already read Spanish and Portuguese print well, so **the scarce
+asset in LATAM is not a model — it is ground truth and regional layout profiles.** Verified: no maintained
+LATAM-origin OCR/HTR repository with traction exists (searched in Spanish for Brazil/Argentina/Chile
+hemeroteca tooling); **Historical Ink** ([arXiv 2407.12838](https://arxiv.org/abs/2407.12838)) is a corpus
+and a paper, not a tool; `FoNDUE-HTR/FONDUE-ES-PRINT-19` is **0★, dormant since 2024-01-15, with CC-BY
+declared only in the HTR-United catalogue and no licence in the repo**.
+
+**The build:** with the first client, hand-transcribe a few thousand lines spanning their decades,
+typefaces and column grids; version it as a dataset with an **explicit licence file in the repository**
+(do not repeat the FONDUE defect); fine-tune [kraken](https://github.com/mittagessen/kraken) (Apache-2.0)
+or evaluate against it; publish the *catalogue entry* in `htr-united` (CC0) while the client keeps the
+corpus if they prefer. **Each subsequent regional engagement starts from a better baseline than any
+incumbent can offer**, because the asset is local, legal and cumulative — and unlike a model, it does not
+depreciate when the next VLM ships.
+
+**Commercial frame:** Chile's **Latam-GPT** (launched February 2026) makes recovered Spanish-language
+newspaper text directly valuable as training data, which gives the archive owner a second reason to fund
+the work — and brings pass 15's rights-reservation gate (P15) into the same conversation: *decide who may
+train on the text you just created, at the moment you create it.*
+
+## What not to promise in this plane
+
+- **Not** "AI will clean up your archive" — measured evidence says post-correction often makes it worse.
+- **Not** a pipeline built on `Churro`, however well it fits: **research-licensed weights**.
+- **Not** `MinerU` inside a client product without surfacing the **mandatory attribution notice** and the
+  **$20M/100M** thresholds, nor `marker`/`surya` without the **$5M** weights ceiling.
+- **Not** `PyMuPDF` (AGPL-3.0) or `nautilusocr` (GPL-3.0, dormant) in anything the client ships.
+- **Not** an ALTO or METS XSD vendored from GitHub — **those repos carry no licence**.
+- **Not** an enterprise document-capture market figure quoted to a library as "your market".
+- **Not** a quality claim without a CER/WER number on **the client's own pages**.

@@ -9,6 +9,72 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 44: the IP broadcast plant (**the control plane went permissive; the measurement plane is copyleft, unlicensed or dead**)
+
+Plane found the same way as pass 43: ~45 candidate terms grepped against all eight KB files before any
+web search. The result was the cleanest gap yet measured, and an embarrassing one — this KB has been
+using *"are you on SMPTE ST 2110 yet?"* as a **qualifying question** since pass 31 (it appears in
+`compose/patterns.md` and twice in `intel/market.md` as the single best opener for an APAC broadcast
+engagement) while never once listing what open source exists on the far side of that gate:
+`NMOS` 0, `IS-04` 0, `IS-05` 0, `AMWA` 0, `PTP` 0, `genlock` 0, `SDI` 1, `ST 2022-7` 0,
+`JPEG XS` 0, `uncompressed IP` 0, `MXL` 0, `linuxptp` 0, `sdpoker` 0, `pi-list` 0.
+**We were qualifying clients on a standard whose entire tooling layer was absent from the KB.**
+
+**The movement, and it is one project.** `dmf-mxl/mxl` (Apache-2.0, 192★) — the EBU **Dynamic Media
+Facility Media eXchange Layer**, hosted by the **Linux Foundation**, driven by the EBU with NABA and
+AMWA — **was pushed on the day of this pass**, and an entire satellite ecosystem has appeared around
+it inside roughly twelve months: `LeeO86/mxl-stack` (MIT, 10★, 2026-11-11),
+`mykeman/MXL-Lab` (Apache-2.0, 7★, 2026-10-13), `cbcrc/guidance-for-building-ffmpeg-with-mxl`
+(**no licence**, 12★, 2026-11-23), `Bilbycast/bilbycast-mxl-rs` (Apache-2.0 by licence-file read,
+0★, 2026-09-07), `kyletd/MXL-SDK` (MIT, 2★, 2025-12-13), `JohannesItten/MXL-Player` (GPL-3.0, 0★,
+2026-09-05) and `bob-integration/bobistudio` (GPL-3.0, 18★, 2026-11-22), a ST 2110 orchestrator built
+on the MXL shared-memory bus. Reported releases: **v1.0.0 on 2026-02-26**, and **v1.1 at IBC 2026**
+extending MXL from a single server to clusters over RDMA.†
+
+**Also pushed within the week** (control plane, all permissive): `OpenVisualCloud/Media-Transport-Library`
+(BSD-3-Clause by licence-file read, 254★, **2026-11-27**), `OpenVisualCloud/SVT-JPEG-XS`
+(**BSD-2-Clause-Patent** by licence-file read, 105★, **2026-11-27**), `Eyevinn/strom` (Apache-2.0,
+81★, **2026-11-27**), `AMWA-TV/nmos-testing` (Apache-2.0, 71★, 2026-11-26), `sony/nmos-js`
+(Apache-2.0, 60★, 2026-11-26), `AMWA-TV/sdpoker` (Apache-2.0, 22★, 2026-11-26),
+`infantilo/open-media-platform` (Apache-2.0, 12★, 2026-11-26), `NVIDIA/nvnmos` (Apache-2.0, 27★,
+2026-11-25), `AMWA-TV/nmos` (144★, 2026-11-25), the IS-0x specification repos (2026-11-24),
+`chris-ritsen/network-audio-controller` (Unlicense, 404★, 2026-11-23), `sony/nmos-cpp` (Apache-2.0,
+204★, 2026-11-20).
+
+**A correction to a search result, recorded because it would have been a bad call.** A web result for
+this pass stated that `sony/nmos-cpp` — the reference NMOS implementation the whole plane depends on —
+had last seen activity **"2856 days ago"**. That is false: the GitHub search API gives
+`pushed_at = 2026-11-20`, seven days before this pass. **Had the KB recorded it, the plane's single
+most important repo would have been written off as abandoned.** Star counts and activity dates come
+from the API in this KB, never from prose in a search result.
+
+**Dormant or dead on the same axis** — and note *which* layer they are all in:
+`philhartung/aes67-monitor` (MIT, 360★, 2025-08-19), `philhartung/aes67-sender` (GPL-3.0, 254★,
+2025-04-17), `OpenBroadcastSystems/ptpmeasure` (**no licence**, 65★, 2025-10-15),
+`nicolassturmel/media-network-manager-cloud` (MIT, 74★, 2024-05-28), `njh/mast` (MIT, 130★,
+2024-12-04), `borealsystems/Director` (GPL-3.0, 34★, 2023-05-30, self-described as not actively
+maintained), `tschiemer/aes67` (AGPL-3.0, 87★, 2023-02-24), `markmcconnell/mai` (BSD-3-Clause, 112★,
+2022-02-14), `NEOAdvancedTechnology/smpte2110-40-dissector` (**no licence**, 42★, 2022-08-17),
+`voc/aes67-recorder` (**no licence**, 108★, 2019-01-11), and the worst of them:
+**`ebu/smpte2110-analyzer` — Apache-2.0 by licence-file read, 93★, last pushed 2020-05-01**, the only
+permissively-licensed ST 2110 packet analyser anyone published, frozen for **six and a half years**.
+
+**The agent layer of this plane does not exist, and that is a measured claim, not an impression.**
+Searches for an AI agent over broadcast IP operations return exactly one artefact: a paper at the
+**2025 SMPTE Media Technology Summit** proposing a multi-agent, LLM-orchestrated system for ST 2110
+automation with human-in-the-loop safeguards — **simulation only, no released code**.† The nearest
+running software is an orchestrator, not an agent (`bobistudio`, GPL-3.0, beta). Everything in
+`agents/top.md` for this pass is therefore filed honestly as **control-plane libraries an agent can
+drive**, not as agents.
+
+**False friends in this plane's search results** (checked, and not what the name suggests):
+`mist64/perfect6502` (330★) and `mre/mos6502` (112★) match `nmos` as *transistor* NMOS;
+`metacollin/LTspiceInfineonNMOSLibrary` (69★) is a MOSFET model library. `Streampunk/sdpoker`
+(Apache-2.0, 44★) **has twice the stars of the maintained version** — the live one is
+`AMWA-TV/sdpoker` (22★, pushed 2026-11-26 against Streampunk's 2026-01-24); taking the star count as
+the signal picks the stale fork. Likewise `easy-nmos`, cited everywhere as the AMWA starter kit, is
+**not** under `AMWA-TV`: it is `rhastie/easy-nmos` (Apache-2.0, 93★).
+
 ## 2026-11-27 — pass 43: the composition-side plane (**the regulator now prices a field no open format has**)
 
 Plane found by grepping ~40 candidate terms against all eight KB files before any web search. Pass 12

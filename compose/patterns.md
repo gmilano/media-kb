@@ -6850,3 +6850,177 @@ flexible platform in this plane**.
   **single-source** (Asiae) and JASRAC's own guideline text has not been read.
 - **Do not state the MLC's position on AI-assisted registrations.** Two 2026 sources **directly
   contradict** each other and no primary source was reached. Say that, and offer to confirm it.
+
+## IP-plant recipes — added 2026-11-27 (pass 44)
+
+Every repo named below was verified on 2026-11-27 (`git ls-remote` existence, GitHub search API stars
+and last push, licence file read where the API said `NOASSERTION`). The licences are quoted in the
+recipes because in this plane the licence decides the architecture, not the other way round.
+
+**Read first — the constraint that shapes all five patterns.** In the IP plant the permissive, active
+open source is all **control** (NMOS, Apache-2.0 throughout); every tool that **measures** whether the
+plant is healthy is copyleft, unlicensed or abandoned (`intel/trends.md`, finding 1). So: build
+permissively on the control side, and put the copyleft analyser behind a service boundary. And the
+standards **text** is derivative-blocked — Apache-2.0 code, **CC BY-ND 4.0 spec text**, and SMPTE's own
+documents all-rights-reserved — so no deliverable paraphrases the standard.
+
+## Pattern 89 — Rundown-to-fabric: resolve a Sofie take to an IS-05 connection (the highest-differentiation build in this KB's broadcast territory)
+
+**The gap.** This KB's pattern 7 put an agentic newsroom on **Sofie** (MIT) and stopped at the
+automation layer. Sofie decides *what goes to air*; it does not move essence between the boxes that
+make it. The IP plant decides *how the essence moves*. Nobody has joined them in open source.
+
+**The build.**
+1. **Plant inventory:** stand up [`rhastie/easy-nmos`](https://github.com/rhastie/easy-nmos)
+   (Apache-2.0, 93★) — registry + virtual node + test tool in one compose file — and develop against
+   it with no broadcast hardware. Promote to [`sony/nmos-cpp`](https://github.com/sony/nmos-cpp)
+   (Apache-2.0, 204★) as the production registry/node.
+2. **Enumerate** senders, receivers and devices over **IS-04**; model them as the resources a rundown
+   can reference.
+3. **Execute the take** over **IS-05** connection management. Borrow the action semantics from
+   [`bbc/nmos-web-router`](https://github.com/bbc/nmos-web-router) (Apache-2.0, 16★) — a broadcaster's
+   own reference for exactly this operation — rather than inventing them.
+4. **Tally and events** over **IS-07**; **audio shuffles** over **IS-08**. Both are where real
+   facilities spend their time, and both are Apache-2.0 specs.
+5. **Gate every device** with [`AMWA-TV/nmos-testing`](https://github.com/AMWA-TV/nmos-testing)
+   (Apache-2.0, 71★) in CI, and every stream description with
+   [`AMWA-TV/sdpoker`](https://github.com/AMWA-TV/sdpoker) (Apache-2.0, 22★).
+6. **Keep the agent on the proposing side.** It reads state, diagnoses, and *proposes* a take; a human
+   or the existing controller commits it.
+
+**Why it is safe to propose:** every component above is Apache-2.0. Nothing in the critical path is
+copyleft, and the whole chain is testable on a laptop before anyone books facility time.
+
+**Qualifying question:** *"when your rundown calls a source, what makes the route happen today?"* If
+the answer is a hardware router under a proprietary protocol, this is a two-phase engagement and
+phase one is the inventory, not the agent.
+
+## Pattern 90 — The conformance gate as the deliverable (the smallest sellable unit in this plane)
+
+**The insight.** `nmos-testing` is **Apache-2.0**, which means a compliance gate built on it can be
+shipped to a client as product. That is rare: in most planes in this KB the conformance tooling is the
+part you cannot redistribute.
+
+**The build.**
+1. Run [`AMWA-TV/nmos-testing`](https://github.com/AMWA-TV/nmos-testing) against every device, per
+   specification (IS-04, IS-05, IS-07, IS-08, IS-09), and record **which specifications at which
+   versions** each device passes.
+2. Run [`AMWA-TV/sdpoker`](https://github.com/AMWA-TV/sdpoker) over the SDP files — **SDP is where
+   real 2110 deployments break**, and this is a cheap, high-yield check.
+3. Emit a dated, diffable conformance report per device. The diff over time is the artefact the client
+   did not have.
+4. **The refusal that makes it credible:** the report states what was tested and what was not. It does
+   not assert "NMOS-compliant", because that phrase is at least six separate claims and **IS-06 is
+   formally deprecated**.
+5. Use the agent to triage: hundreds of test results a week, of which a handful matter.
+
+**Why this is the first thing to sell:** it is days of work, it needs no production access, and it
+produces the inventory every later phase depends on. It is also the honest answer to "are you on 2110
+yet?" — a question this KB has been asking since pass 31 without being able to help answer it.
+
+## Pattern 91 — The commissioning evidence trail, with the copyleft analyser behind a boundary
+
+**The constraint, stated plainly.** If a delivery includes evidence that a 2110 plant works, that
+evidence comes from [`ebu/pi-list`](https://github.com/ebu/pi-list) (**GPL-3.0**, 134★) or
+[`pkeroulas/st2110-toolkit`](https://github.com/pkeroulas/st2110-toolkit) (**GPL-3.0**, 105★). The
+only permissive analyser ever published,
+[`ebu/smpte2110-analyzer`](https://github.com/ebu/smpte2110-analyzer) (Apache-2.0, 93★), **has not been
+pushed since 2020-05-01**. Plan for copyleft from day one; do not discover this at delivery.
+
+**The architecture.**
+1. **Deploy EBU LIST unmodified, as a separate service.** Integrate over its API. Do not patch it,
+   do not link it, do not vendor it into a product tree — modify it and the GPL follows your changes
+   to your client's users.
+2. **Generate your own test corpus** with
+   [`OpenVisualCloud/Media-Transport-Library`](https://github.com/OpenVisualCloud/Media-Transport-Library)
+   (BSD-3-Clause, 254★) rather than depending on
+   [`ST2110_pcap_zoo`](https://github.com/NEOAdvancedTechnology/ST2110_pcap_zoo) — those reference
+   captures are **unlicensed** and dead since 2022.
+3. **Timing is its own evidence stream.** `linuxptp` (GPL-2.0) as the PTP reference — ship it as a
+   system package, never linked. Note the profile trap: **ST 2110 requires the ST 2059-2 profile while
+   AES67 wants the Default/Media profile, and they use different delay mechanisms — running both in
+   one domain is a misconfiguration.**†
+4. **Your permissive layer is the evidence ledger**, not the probe: timestamped runs, pass/fail per
+   stream, the diff between commissioning and today. That is yours to license as you wish.
+5. **Do not propose `ptpmeasure`** (65★) — it has **no licence file at all**, verified against a live
+   README.
+
+**The revival option, stated once:** `ebu/smpte2110-analyzer` is Apache-2.0, EBU-authored, and
+abandoned. Reviving it is the single highest-leverage contribution available in this plane — it would
+give the industry the permissive analyser it currently does not have.
+
+## Pattern 92 — The software-defined facility on MXL (the forward-looking build, and the one with a real deadline risk)
+
+**The opportunity.** [`dmf-mxl/mxl`](https://github.com/dmf-mxl/mxl) (**Apache-2.0**, 192★, pushed
+2026-11-27) is the first permissively-licensed, vendor-neutral **data plane** for a broadcast
+facility — Linux Foundation hosted, EBU + NABA + AMWA, with BBC, CBC/Radio-Canada, France
+Télévisions, SVT, RTÉ and VRT contributing.†
+
+**The build.**
+1. **MXL as the essence bus** between software media functions on a host; v1.1 reportedly extends
+   this across clustered hosts over **RDMA**.†
+2. **NMOS as the control plane over it** — AMWA has published a specification for managing MXL
+   connections over NMOS,† and [`AMWA-TV/jt-dmf-crm`](https://github.com/AMWA-TV/jt-dmf-crm)
+   (Apache-2.0, 9★) carries the reference model. **This is the convergence to build toward.**
+3. **Processing** with [`Eyevinn/strom`](https://github.com/Eyevinn/strom) (Apache-2.0, 81★,
+   GStreamer) or [`infantilo/pipeline-controller`](https://github.com/infantilo/pipeline-controller)
+   (MIT, 6★).
+4. **Mezzanine compression where a link cannot carry uncompressed:**
+   [`OpenVisualCloud/SVT-JPEG-XS`](https://github.com/OpenVisualCloud/SVT-JPEG-XS) —
+   **BSD-2-Clause-Patent**, which carries an express patent grant and is the right licence posture for
+   a codec.
+5. **Study, don't vendor:** [`bob-integration/bobistudio`](https://github.com/bob-integration/bobistudio)
+   (GPL-3.0, 18★, **beta**) is the first orchestrator built on MXL and the best worked example — read
+   it, run it as a separate process, do not link it.
+6. **For an FFmpeg path**, [`cbcrc/guidance-for-building-ffmpeg-with-mxl`](https://github.com/cbcrc/guidance-for-building-ffmpeg-with-mxl)
+   (12★) documents the build — but it has **no licence file**, so treat it as reading material and
+   write your own.
+
+**⚠️ The honest risk, stated to the client before they fund it.** MXL is roughly a year old; its v1.1
+details come from trade and vendor reporting that this KB has not verified against primary release
+notes;† its satellite ecosystem is six projects with 0–12★ each. **This is a bet on a forming
+standard, not a mature platform.** It is the right bet for a broadcaster with an EBU affiliation and
+an engineering team, and the wrong one for a client who needs air-date certainty this year. Say which
+of the two they are before writing the proposal.
+
+## Pattern 93 — The 20-minute licence gate for any IP-plant or 2110 proposal
+
+Run this before estimating. It has caught something in every plane this KB has gated.
+
+1. **Which specifications, at which versions?** "NMOS-compliant" is six claims minimum. **IS-06 is
+   deprecated** — if a vendor or an RFP cites it, that is a dated document and the rest of it needs
+   checking too.
+2. **Is any deliverable a derivative of the standards text?** If the scope includes annotated,
+   abridged, restructured or **translated** documentation of NMOS or ST 2110, stop. The AMWA spec text
+   is **CC BY-ND 4.0** (no derivatives) and the SMPTE documents are **all rights reserved**. *No fee
+   unblocks this* — unlike CPT and MedDRA in this KB's other planes, it cannot be bought. Documenting
+   the **client's own facility, SDP files and conformance results** is clear; paraphrasing the
+   standard is not.
+3. **Does the scope include commissioning or monitoring evidence?** Then a **GPL-3.0** analyser is in
+   your architecture (pattern 91). Decide the service boundary now.
+4. **Does anything link `linuxptp`?** GPL-2.0 — system package, separate process, never linked.
+5. **Check every candidate repo for a licence file, not a licence badge.** This plane is full of
+   starred code with no licence at all: `ptpmeasure` 65★, `NVIDIA/Rivermax` 72★,
+   `voc/aes67-recorder` 108★, all the `NEOAdvancedTechnology` dissectors and the pcap fixtures.
+   **Verify absence with a control request** — a 404 on the raw channel proves nothing on its own if
+   the README 404s too (the naming-convention trap recorded in pass 8).
+6. **Is the facility hybrid?** Assume yes: two 2026 surveys put SDI at **70%** and **82%** of
+   facilities (`intel/trends.md`, finding 4). Most 2110 exists as **"IP islands"**, so scope the seams
+   between islands, not a greenfield fabric.
+7. **Who will run it after you leave?** APAC reporting makes the **IT/networking skills shortage** the
+   binding constraint on IP migration,† not the technology. If there is no answer, enablement belongs
+   in the proposal and it is not a discount item.
+
+## ⛔ What not to promise in this plane (pass 44)
+
+- **An autonomous agent that makes live routes.** A wrong IS-05 take puts a channel to black. Agents
+  read, diagnose and propose; humans and existing controllers commit.
+- **AI-generated documentation of the standards.** Derivative-blocked, and no payment changes that.
+- **A permissive end-to-end stack including monitoring.** It does not exist. The control plane is
+  permissive; the analyser is GPL-3.0; saying otherwise will be found out at delivery.
+- **A configuration-only delivery.** There is no turnkey platform at *any* licence in this plane
+  (`verticals/solutions.md`). Every honest proposal here is an integration proposal.
+- **A market-sized business case.** The NMOS/IP-control software segment is **not sized anywhere**
+  (`intel/market.md`, pass 44 addendum). Price from the obligation and the integration, never from a
+  borrowed TAM.
+

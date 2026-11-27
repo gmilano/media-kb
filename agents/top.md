@@ -4166,3 +4166,61 @@ times) **and** a major CS conference acronym. A careless pass would have written
 knowledge-graph-embedding library. And `mechanical royalty` is the first case in this KB where **a
 joke repo is the single most-starred thing GitHub offers for a phrase that moves hundreds of
 millions of dollars a year** — the MLC alone distributed roughly $900M in 2025.
+
+## Pass 44 (2026-11-27) — the IP broadcast plant: **there is no agent in this plane, and here is the measurement that says so**
+
+All rows verified 2026-11-27: existence via `git ls-remote` (58/58 of the pass's URLs resolve), stars
+and last-push from the GitHub search API, every `NOASSERTION` resolved by reading the licence file.
+
+**⛔ The refusal first, because this file's job is to list agents and this plane has none.** Searching
+for an AI agent over broadcast IP operations — ST 2110 transport, NMOS routing, PTP timing — returns
+exactly one artefact: a paper at the **2025 SMPTE Media Technology Summit** proposing a multi-agent
+LLM-orchestrated system for ST 2110 automation, with human-in-the-loop safeguards, evaluated in
+**network simulation with no released code**.† There is no deployed open-source agent, and this KB
+will not manufacture rows to reach a minimum.
+
+What follows is therefore labelled for what it is: **the permissive control-plane libraries an agent
+would drive.** The plane is unusually good raw material for one — NMOS makes every device in a
+facility network-addressable and self-describing over a documented REST API, which is exactly the
+substrate an agent needs and is rarer than it sounds. See `compose/patterns.md` patterns 89–93.
+
+### Control-plane libraries an agent can drive — permissive and active
+
+| Library | Repo | Licence | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| nmos-cpp | [sony/nmos-cpp](https://github.com/sony/nmos-cpp) | Apache-2.0 | 204 | 2026-11-20 | The reference NMOS **Registry and Node** in C++ (IS-04, IS-05, IS-07, IS-08, IS-09, IS-10). The thing an agent queries to learn what exists in a facility and to make a route. **Active — a search result claiming 2,856 days of inactivity is false.** |
+| MXL | [dmf-mxl/mxl](https://github.com/dmf-mxl/mxl) | Apache-2.0 | 192 | 2026-11-27 | EBU/NABA/AMWA **Media eXchange Layer**, Linux Foundation hosted: shared-memory exchange of uncompressed media between software media functions, now clustered over RDMA.† The data plane an agent would schedule onto. |
+| Media Transport Library | [OpenVisualCloud/Media-Transport-Library](https://github.com/OpenVisualCloud/Media-Transport-Library) | BSD-3-Clause | 254 | 2026-11-27 | Intel's ST 2110 transport on DPDK/AF_XDP: -10/-20/-21/-30/-40 and ST 2022-7 seamless redundancy. Licence file read: BSD 3-Clause, Intel, 2022. |
+| nmos-testing | [AMWA-TV/nmos-testing](https://github.com/AMWA-TV/nmos-testing) | Apache-2.0 | 71 | 2026-11-26 | AMWA's official NMOS conformance suite. **The highest-leverage repo in this pass**: it turns "is this device compliant?" into a machine-checkable verdict an agent can act on. |
+| nmos-js | [sony/nmos-js](https://github.com/sony/nmos-js) | Apache-2.0 | 60 | 2026-11-26 | Reference browser client for IS-04/IS-05 — the operator UI an agent's actions must remain legible in. |
+| nvnmos | [NVIDIA/nvnmos](https://github.com/NVIDIA/nvnmos) | Apache-2.0 | 27 | 2026-11-25 | NVIDIA's NMOS library, pairing with its Rivermax data plane. Notable as a **vendor** publishing its control plane under Apache-2.0. |
+| sdpoker | [AMWA-TV/sdpoker](https://github.com/AMWA-TV/sdpoker) | Apache-2.0 | 22 | 2026-11-26 | Checks ST 2110 **SDP** files for conformance. The cheapest useful agent tool in the plane: SDP is where real 2110 deployments break. |
+| nmos-web-router | [bbc/nmos-web-router](https://github.com/bbc/nmos-web-router) | Apache-2.0 | 16 | 2026-10-18 | BBC's web routing controller for IS-04/IS-05. A broadcaster-authored reference for the routing action itself. |
+| easy-nmos | [rhastie/easy-nmos](https://github.com/rhastie/easy-nmos) | Apache-2.0 | 93 | 2026-10-13 | Docker-Compose starter kit: registry, virtual node, testing tool. **Not under `AMWA-TV` despite being cited as the AMWA starter kit.** The fastest way to stand up a dev plant with no hardware. |
+| dtnmos | [dektec-com/dtnmos](https://github.com/dektec-com/dtnmos) | BSD-3-Clause | 0 | 2026-11-11 | NMOS node + controller and ST 2110 SDP read/write in **C with no dependencies**. 0★ and the right choice for an embedded or appliance target. |
+| nmos-express | [emanueledimauro/nmos-express](https://github.com/emanueledimauro/nmos-express) | MIT | 3 | 2026-10-31 | **Air-gapped** NMOS web app with a dependency-free Python simulator. The only MIT option, and air-gap matters: broadcast plants are not on the internet. |
+| nmos-patch-gui | [taqq505/nmos-patch-gui](https://github.com/taqq505/nmos-patch-gui) | MIT | 10 | 2026-11-12 | Lightweight NMOS controller UI. |
+| crate-nmos | [st2110/crate-nmos](https://github.com/st2110/crate-nmos) | Apache-2.0 | 0 | 2026-09-15 | Rust IS-04 resource model + IS-05 connection management. **Incomplete by its own README** — no `/bulk`, no Registration/Query API, no SDP. Listed so nobody rediscovers it as a shortcut. |
+
+### Orchestrators — running software, not agents, and the licence decides which you may touch
+
+| Project | Repo | Licence | Stars | Last push | Constraint |
+|---|---|---|---|---|---|
+| open-media-platform | [infantilo/open-media-platform](https://github.com/infantilo/open-media-platform) | Apache-2.0 | 12 | 2026-11-26 | Standards-first modular platform (NMOS IS-04/05/08/12/14). **The only permissive whole-platform attempt** — 12★, so treat as a reference architecture, not a dependency. |
+| strom | [Eyevinn/strom](https://github.com/Eyevinn/strom) | Apache-2.0 | 81 | 2026-11-27 | GStreamer pipeline engine with visual web GUI. Permissive, active, and the realistic processing layer. |
+| bobistudio | [bob-integration/bobistudio](https://github.com/bob-integration/bobistudio) | GPL-3.0 | 18 | 2026-11-22 | ST 2110 orchestrator on the MXL bus; NMOS IS-04/05/07/09/12/14 plus Ember+, TSL 5.0, SNMP. **Beta, and GPL-3.0 — separate process, no linking.** The closest thing to the agent target. |
+| pipeline-controller | [infantilo/pipeline-controller](https://github.com/infantilo/pipeline-controller) | MIT | 6 | 2026-10-27 | GStreamer-based 2110-ready channel-in-a-box. MIT, tiny. |
+| Director | [borealsystems/Director](https://github.com/borealsystems/Director) | GPL-3.0 | 34 | 2023-05-30 | Facility-scale orchestration and control. **Self-describes as not actively maintained** — do not propose it. |
+
+### ⛔ What not to promise in this plane
+
+- **Do not promise an autonomous agent that makes live routes.** A wrong IS-05 connection on a live
+  plant takes a channel to black. Every pattern in this KB for this plane puts the agent on the
+  **read, diagnose and propose** side, with the take executed by a human or an existing controller.
+- **Do not promise AI-generated documentation of the standards.** It is the obvious deliverable and it
+  is the blocked one: the AMWA NMOS **specification text is CC BY-ND 4.0** (no derivatives) and
+  **SMPTE ST 2110 itself is all-rights-reserved**. See `repos/foundations.md` for the licence reads
+  and `intel/trends.md` for why this matters more here than a fee ever could.
+- **Do not size this work from the agent layer.** There is no product to benchmark against; price it
+  from the integration and the conformance gate.
+

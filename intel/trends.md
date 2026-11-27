@@ -4296,3 +4296,124 @@ Sheet music is quoted at a **1.11% CAGR** — the lowest growth figure anywhere 
 **eight times faster than the whole**. The composition side is not a growth market; it is a
 *migration* market, and that is a different sale: moving a flat, century-old catalogue into data,
 not riding a wave. Figures and their spreads are in `intel/market.md` under the pass-43 addendum.
+
+## Pass 44 (2026-11-27) — the IP broadcast plant: **the control plane went permissive while the measurement plane went dark**
+
+Measured 2026-11-27 against 58 repos, all URLs resolving, every ambiguous licence read from the file.
+
+### 1. The plane's law, and it is a three-step gradient inside one plane
+
+This KB's recurring structural finding — that the permissive, maintained open source clusters where
+the problem is a **format**, and thins to nothing where the problem is a **judgment** — reproduces
+here with unusual clarity, and for the first time **the gradient is about operations rather than
+content**:
+
+1. **DISCOVER and CONNECT — a format problem → permissive, active, well-staffed.** `sony/nmos-cpp`
+   Apache-2.0 204★ pushed 2026-11-20; the AMWA IS-0x specification repos all pushed 2026-11-24;
+   `NVIDIA/nvnmos` Apache-2.0 pushed 2026-11-25; `AMWA-TV/nmos-testing` Apache-2.0 pushed 2026-11-26.
+   A device announcing itself over REST is a schema question, and open source answers schema questions.
+2. **MEASURE — a judgment problem → copyleft, unlicensed, or abandoned. No exceptions found.**
+   `ebu/pi-list` GPL-3.0; `pkeroulas/st2110-toolkit` GPL-3.0; **`ebu/smpte2110-analyzer` Apache-2.0
+   but frozen since 2020-05-01**; `OpenBroadcastSystems/ptpmeasure` 65★ with **no licence at all**;
+   all four `NEOAdvancedTechnology` Wireshark dissectors and pcap fixtures **unlicensed and dead since
+   2020–2022**; `philhartung/aes67-monitor` MIT 360★ but 15 months idle.
+3. **TIME — the layer everything else depends on → GPL-2.0, and its measurement half is unlicensed.**
+   `richardcochran/linuxptp` is the de-facto PTP implementation at GPL-2.0, and the only open tool
+   that measures whether PTP is behaving (`ptpmeasure`) may not be lawfully reused.
+
+**The operative conclusion:** a vendor can build and ship a permissive product that *controls* a
+broadcast plant, and cannot ship the thing that proves the plant is *healthy*. That is the exact
+inverse of what a broadcast engineering buyer assumes when they hear "open source", and it should be
+said out loud in the first meeting.
+
+### 2. MXL is the real event of the year in this plane, and it is permissive
+
+`dmf-mxl/mxl` — Apache-2.0, 192★, **pushed the day of this pass** — is the EBU Dynamic Media Facility
+**Media eXchange Layer**, hosted by the **Linux Foundation** and driven by the EBU with **NABA** and
+**AMWA**. It is the data-plane component of the DMF reference architecture, whose premise is replacing
+dedicated hardware appliances with orchestrated software microservices. Reported: **v1.0.0 on
+2026-02-26**, **v1.1 at IBC 2026** extending it from a single server to clusters over **RDMA**, and
+contributions from **BBC, CBC/Radio-Canada, France Télévisions, SVT, RTÉ and VRT**.† The EBU
+published **version 2 of the DMF Reference Architecture** (dated 2026-04-15†), which moves
+orchestration to a cross-cutting concern.
+
+**Why it matters more than its star count suggests:** until MXL, the permissive open source in this
+plane was all *control* — telling hardware what to do. MXL is the first permissively-licensed,
+vendor-neutral **data plane**, which is what makes a software-defined facility buildable rather than
+merely describable. Six independent satellite projects appeared around it within roughly twelve months
+(`repos/trending.md`), which is what a forming standard looks like before the vendors arrive.
+
+### 3. The control plane is being pointed at the software data plane — NMOS now controls MXL
+
+AMWA has published a specification allowing **MXL connections to be managed over NMOS**,† and
+`AMWA-TV/jt-dmf-crm` (Apache-2.0, 9★) carries the Joint Task Force on Dynamic Media Facilities
+conceptual reference model. Work continues in EBU/AMWA JT-DMF on how MXL is controlled, how software
+is placed on available servers, and timing. **This convergence is the thing to track in this plane in
+2027**: the same IS-04/IS-05 verbs that route hardware are becoming the verbs that schedule software.
+
+### 4. SDI is not dying on the schedule the vendors imply — and the two 2026 surveys disagree
+
+| Source | Date | ST 2110 adoption | SDI still in use |
+|---|---|---|---|
+| TV Tech industry survey | 2026-10-07 | **more than half** have deployed ST 2110, but mostly as **"IP islands"** | **primary infrastructure for 70%** |
+| Haivision Broadcast Transformation Report (n > 1,300) | 2026 | **30%** using ST 2110 | **82%** still running SDI |
+
+**These do not reconcile, and the disagreement is the useful part.** On 2110 share they are roughly
+**1.7–1.8× apart**; on SDI persistence they broadly **agree** (70% vs 82%). So the quotable claim is
+*not* an adoption percentage — it is that **SDI remains the primary or coexisting infrastructure for
+the large majority of facilities in both surveys**, and therefore that **hybrid SDI/IP operation is the
+default engagement context, not a transitional edge case**. Scopes differ (a trade survey weighted to
+one readership versus a global vendor survey), which is the likeliest source of the gap. Quote the
+range and name the source, never a single adoption number.
+
+The "IP islands" phrasing is the most actionable detail in either survey: most facilities have 2110
+*somewhere*, which means the common engagement is **joining islands and proving conformance across the
+seams**, not a greenfield build.
+
+### 5. The knowledge-content law, third instance — and this time a fee cannot unblock it
+
+This KB has twice found that **the licence of the knowledge content, not the regulatory pressure,
+decides whether open source can do the job** — CPT codes and MedDRA, both *taxed* content. The IP
+plant supplies a third instance with a **new failure mode**:
+
+- **AMWA NMOS** (`AMWA-TV/nmos`, licence read in full): API definitions and software **Apache-2.0**;
+  the markdown specification documents **CC BY Attribution-NoDerivatives 4.0**.
+- **SMPTE ST 2110** itself (`SMPTE/st2110-10`, `SMPTE/st2110-30`, licence read in full):
+  **"No part of this material may be reproduced, by any means whatsoever, without the prior written
+  permission"** — all rights reserved, published on GitHub, not open source.
+
+**The new flavour: this content is not expensive, it is derivative-blocked.** CPT and MedDRA could be
+licensed by paying; **no payment makes CC BY-ND permit a derivative work.** The practical consequence
+lands precisely on the most obvious AI deliverable in the plane:
+
+- **Blocked:** an agent or RAG product that paraphrases, abridges, restructures or **translates** the
+  standards into client-facing guidance; a Spanish-language annotated NMOS handbook for a LATAM
+  engineering team; "AI-generated 2110 documentation".
+- **Clear:** implementing the specifications in code (Apache-2.0); running `nmos-testing` and
+  `sdpoker` against a client's own devices; generating documentation **of the client's own facility,
+  its own SDP files and its own conformance results**.
+
+**The rule to carry into every industry in this rotation:** when a plane is governed by a standards
+body, read the licence of the *document* separately from the licence of the *code*. They differ here,
+they differed for CPT and MedDRA, and the document licence is the one that constrains an AI
+deliverable.
+
+### 6. The agent layer is empty, and the substrate for it is unusually good
+
+No deployed open-source AI agent for broadcast IP operations exists (measured in `agents/top.md`); the
+only artefact is a **2025 SMPTE Media Technology Summit** paper proposing a multi-agent LLM system for
+ST 2110 automation, in simulation, with no released code.† Meanwhile NMOS makes every device in a
+facility **network-addressable and self-describing over a documented REST API**, and
+`AMWA-TV/nmos-testing` makes compliance **machine-checkable** — which is a better agent substrate than
+most planes in this KB ever offer. **The gap is not capability, it is that nobody has built it.**
+
+### 7. The regional constraint is skills, not technology — and it is strongest where adoption is fastest
+
+APAC reporting identifies a **critical shortage of IT and networking skills for IP workflows** as the
+limiting factor on 2110 deployment,† at the same time as ST 2110 moves from trials into operation
+across the region.† This inverts the usual read: in this plane the binding constraint on a broadcaster
+is **people who can run a routed network**, which makes integration-plus-enablement the sellable unit
+rather than software. EMEA frames the same migration through **sovereignty** — the EBU/NVIDIA
+sovereign-AI work for public service media, and EBU HORIZONS 2026 on sovereignty and resilience† —
+which is a procurement argument for permissive, self-hostable components rather than a technical one.
+

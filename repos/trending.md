@@ -10,6 +10,68 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 44: IP-plant infrastructure (**the first permissively-licensed data plane a broadcast facility has ever had**)
+
+Infrastructure and platform movement for the broadcast media-over-IP plane — ST 2110 transport, NMOS
+discovery and connection management, PTP timing, JPEG XS, AES67 audio. The agent-layer finding, the
+`nmos-cpp` date correction and the false friends are in `agents/trending.md` for the same date.
+
+**The measurement: GitHub search API, 2026-11-27; existence via `git ls-remote` (58/58 resolve); every
+`NOASSERTION` and every apparent absence resolved by reading the licence file over the raw channel
+with a README control request.** As in pass 43, the licence distribution — not the star counts — is
+the finding.
+
+### What moved this week
+
+| Repo | Licence | Stars | Last push | Why it is moving |
+|---|---|---|---|---|
+| [dmf-mxl/mxl](https://github.com/dmf-mxl/mxl) | Apache-2.0 | 192 | 2026-11-27 | **The pass's headline.** EBU Dynamic Media Facility *Media eXchange Layer*: a shared-memory bus for passing uncompressed media between software media functions on a host, now extended across hosts over RDMA. Linux Foundation hosted; EBU + NABA + AMWA. |
+| [OpenVisualCloud/Media-Transport-Library](https://github.com/OpenVisualCloud/Media-Transport-Library) | BSD-3-Clause | 254 | 2026-11-27 | Intel's ST 2110 data plane on DPDK/AF_XDP: -10/-20/-21/-30/-40 plus ST 2022-7 redundancy. The most-starred permissive repo in the plane. |
+| [OpenVisualCloud/SVT-JPEG-XS](https://github.com/OpenVisualCloud/SVT-JPEG-XS) | BSD-2-Clause-Patent | 105 | 2026-11-27 | JPEG XS encoder/decoder — the mezzanine codec that makes 2110 survive a WAN. **Licence read: BSD+Patent, with an express patent grant** — materially better than plain BSD for a codec. |
+| [Eyevinn/strom](https://github.com/Eyevinn/strom) | Apache-2.0 | 81 | 2026-11-27 | GStreamer pipeline engine with a web GUI; the practical glue between a 2110/MXL plant and software processing. |
+| [AMWA-TV/nmos-testing](https://github.com/AMWA-TV/nmos-testing) | Apache-2.0 | 71 | 2026-11-26 | The official NMOS test suite — the same tool the JT-NM Tested programme leans on. Permissive, and the single highest-leverage repo here for a delivery gate. |
+| [sony/nmos-js](https://github.com/sony/nmos-js) | Apache-2.0 | 60 | 2026-11-26 | Browser client for IS-04/IS-05; the reference operator UI. |
+| [AMWA-TV/sdpoker](https://github.com/AMWA-TV/sdpoker) | Apache-2.0 | 22 | 2026-11-26 | SDP conformance checking for ST 2110. **The maintained one** — see the `Streampunk/sdpoker` false friend in `agents/trending.md`. |
+| [infantilo/open-media-platform](https://github.com/infantilo/open-media-platform) | Apache-2.0 | 12 | 2026-11-26 | Standards-first modular broadcast platform implementing NMOS IS-04/05/08/12/14. 12★, and the only permissive attempt at a whole platform in this plane. |
+| [NVIDIA/nvnmos](https://github.com/NVIDIA/nvnmos) | Apache-2.0 | 27 | 2026-11-25 | NVIDIA's NMOS library — a vendor shipping its control plane permissively. |
+| [chris-ritsen/network-audio-controller](https://github.com/chris-ritsen/network-audio-controller) | Unlicense | 404 | 2026-11-23 | Unofficial Dante controller alternative. Public-domain dedication, and the second-most-starred repo in the plane. |
+| [sony/nmos-cpp](https://github.com/sony/nmos-cpp) | Apache-2.0 | 204 | 2026-11-20 | The reference NMOS Registry + Node in C++ (IS-04/05/07/08/09/10). **Active — see the date correction in `agents/trending.md`.** |
+| [ylzwd/openaes67](https://github.com/ylzwd/openaes67) | MIT | 21 | 2026-11-15 | AES67 virtual sound card for Windows, Dante-compatible. Small, MIT, and the newest entrant on the audio side. |
+| [soundondigital/ravennakit](https://github.com/soundondigital/ravennakit) | AGPL-3.0 | 71 | 2026-11-11 | C++ RAVENNA / AES67 / ST 2110-30 implementation. AGPL — service boundary required. |
+| [bob-integration/bobistudio](https://github.com/bob-integration/bobistudio) | GPL-3.0 | 18 | 2026-11-22 | ST 2110 orchestrator on the MXL bus, NMOS IS-04/05/07/09/12/14 plus Ember+, TSL 5.0, SNMP. Beta. The first orchestrator built *on* MXL. |
+
+### The MXL satellite ecosystem — twelve months old, and worth watching as a cohort
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [LeeO86/mxl-stack](https://github.com/LeeO86/mxl-stack) | MIT | 10 | 2026-11-11 | Open media functions for MXL. |
+| [mykeman/MXL-Lab](https://github.com/mykeman/MXL-Lab) | Apache-2.0 | 7 | 2026-10-13 | Self-contained MXL test lab. |
+| [cbcrc/guidance-for-building-ffmpeg-with-mxl](https://github.com/cbcrc/guidance-for-building-ffmpeg-with-mxl) | **none** | 12 | 2026-11-23 | CBC/Radio-Canada's build instructions for FFmpeg with MXL support. **No licence file** (README control request returned 200, so the absence is real). Useful to read, not to vendor. |
+| [Bilbycast/bilbycast-mxl-rs](https://github.com/Bilbycast/bilbycast-mxl-rs) | Apache-2.0 | 0 | 2026-09-07 | Rust wrapper over the MXL crate. Licence read: Apache-2.0 (API reported `NOASSERTION`). |
+| [kyletd/MXL-SDK](https://github.com/kyletd/MXL-SDK) | MIT | 2 | 2025-12-13 | Earliest third-party MXL SDK located. |
+| [JohannesItten/MXL-Player](https://github.com/JohannesItten/MXL-Player) | GPL-3.0 | 0 | 2026-09-05 | Desktop/CLI player for MXL flows. |
+
+**Read the cohort, not the rows.** Six independent satellite projects, four of them permissive, around
+a one-year-old core — that is what the beginning of a standard looks like before the vendors arrive.
+It is also why the star counts are meaningless here: `bilbycast-mxl-rs` and `MXL-Player` are at 0★ and
+are still the only Rust binding and the only player.
+
+### The analysis layer — the part of this plane open source did not build
+
+| Repo | Licence | Stars | Last push | Status |
+|---|---|---|---|---|
+| [ebu/pi-list](https://github.com/ebu/pi-list) | GPL-3.0 | 134 | 2026-10-16 | EBU LIST — the live ST 2110 analyser. Maintained, and **copyleft**. |
+| [pkeroulas/st2110-toolkit](https://github.com/pkeroulas/st2110-toolkit) | GPL-3.0 | 105 | 2026-10-01 | Capture, analyse, transcode 2110. Copyleft. |
+| [ebu/smpte2110-analyzer](https://github.com/ebu/smpte2110-analyzer) | Apache-2.0 | 93 | **2020-05-01** | **The only permissive analyser ever published — dead for six and a half years.** Licence read: Apache-2.0 (API reported `NOASSERTION`). |
+| [OpenBroadcastSystems/ptpmeasure](https://github.com/OpenBroadcastSystems/ptpmeasure) | **none** | 65 | 2025-10-15 | PTP / ST-2110 / ST-2022-6 real-time measurement. **No licence file** under any of ten names on either branch, with README returning 200 — a real absence. 65★ of unusable code. |
+| [NEOAdvancedTechnology/smpte2110-20-dissector](https://github.com/NEOAdvancedTechnology/smpte2110-20-dissector) | **none** | 45 | 2020-04-28 | Wireshark Lua dissector for -20 video. No licence, dead. |
+| [NEOAdvancedTechnology/smpte2110-40-dissector](https://github.com/NEOAdvancedTechnology/smpte2110-40-dissector) | **none** | 42 | 2022-08-17 | Dissector for -40 ancillary data. No licence, dead. |
+| [NEOAdvancedTechnology/ST2110_pcap_zoo](https://github.com/NEOAdvancedTechnology/ST2110_pcap_zoo) | **none** | 26 | 2022-08-17 | Reference ST 2110 pcap captures — **the plane's test fixtures, and they are unlicensed**. |
+
+**That table is the pass's structural finding and it is stated in full in `intel/trends.md`:** every
+tool that answers *"is this plant actually healthy?"* is copyleft, unlicensed, or abandoned. The
+permissive, active software is all on the **control** side.
+
 ## 2026-11-27 — pass 43: composition-side infrastructure (**no maintained permissive OMR engine exists**)
 
 Infrastructure and platform movement for the composition-side plane — lyrics, chords, score capture,

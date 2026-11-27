@@ -2445,3 +2445,44 @@ returns only forks, converters and unrelated church-display projects. No row is 
 than pointing a client at a fork. **`openlyrics/openlyrics`**, the XML interchange standard for song
 lyrics, carries **no licence file** (nine names checked on `master`, control test passed) and has been
 dormant since **2022-02-20** — use the published RelaxNG schema as a specification; do not vendor it.
+
+## Pass 44 (2026-11-27) — the IP broadcast plant layer: **no turnkey platform exists, and for once that is not a licence problem**
+
+Verified 2026-11-27 (existence, stars, last push, licence-file read where the API said `NOASSERTION`).
+
+This file's standing finding is that M&E has no permissively-licensed turnkey platform comparable to
+Odoo. **The IP-plant layer is a different and sharper case: there is no turnkey platform at any
+licence.** A broadcast facility's control system is assembled from a registry, a controller, a
+transport library and a timing daemon — and the integration *is* the product. That is good news for a
+systems integrator and bad news for anyone hoping to configure their way out of the work.
+
+| Platform | Licence | Repo | Stars | Last push | Stack | Use case |
+|---|---|---|---|---|---|---|
+| open-media-platform | Apache-2.0 | [infantilo/open-media-platform](https://github.com/infantilo/open-media-platform) | 12 | 2026-11-26 | — | **The only permissive whole-platform attempt in this plane**: standards-first and modular, implementing AMWA NMOS IS-04/05/08/12/14. At 12★ it is a reference architecture to learn the shape from, not a dependency to stake a programme on. |
+| bobistudio | GPL-3.0 | [bob-integration/bobistudio](https://github.com/bob-integration/bobistudio) | 18 | 2026-11-22 | Docker | Broadcast orchestrator for ST 2110 pipelines on the **MXL shared-memory bus**, with NMOS IS-04/05/07/09/12/14, BCP-002/007-03/008, SAP/SDP, Ember+, TSL 5.0 and SNMP. **Beta.** The most complete orchestrator found — and GPL-3.0, so run it as a separate process and integrate over its interfaces. |
+| easy-nmos | Apache-2.0 | [rhastie/easy-nmos](https://github.com/rhastie/easy-nmos) | 93 | 2026-10-13 | Docker Compose | **The lab platform, and the one to start every engagement on.** Registry, virtual node and the AMWA testing tool in one compose file — a working NMOS facility on a laptop with no broadcast hardware. |
+| strom | Apache-2.0 | [Eyevinn/strom](https://github.com/Eyevinn/strom) | 81 | 2026-11-27 | GStreamer | Media pipeline engine with a visual web GUI. Permissive, pushed the day of this pass, and the realistic processing layer beside a 2110/MXL plant. |
+| pipeline-controller | MIT | [infantilo/pipeline-controller](https://github.com/infantilo/pipeline-controller) | 6 | 2026-10-27 | GStreamer | 2110-ready channel-in-a-box. MIT, 6★ — a pattern to copy, not a platform to buy. |
+| EBU LIST (pi-list) | GPL-3.0 | [ebu/pi-list](https://github.com/ebu/pi-list) | 134 | 2026-10-16 | C++/JS | The validation platform EBU members actually use on 2110 facilities. **Deploy unmodified as a service and integrate over its API** — modify it and the GPL follows your changes. |
+| Director | GPL-3.0 | [borealsystems/Director](https://github.com/borealsystems/Director) | 34 | 2023-05-30 | — | Facility-scale broadcast orchestration and control. **Self-describes as not actively maintained** — listed only so it is recognised and ruled out when a search surfaces it. |
+
+### How this layer joins the platforms already in this file
+
+`Sofie` (MIT, the broadcast automation platform this file calls its most consequential entry) and
+`Nebula` (GPL-3.0 MAM and playout) both sit **above** this plane: they decide what goes to air.
+NMOS and MXL decide **how the essence moves between the boxes that make it**. They are complementary,
+and the join is the valuable part of an engagement — a Sofie rundown whose takes resolve to IS-05
+connections on a real 2110 fabric is the single most differentiated build available in this KB's
+broadcast territory (see `compose/patterns.md` pattern 89).
+
+### ⛔ The procurement warning specific to this layer
+
+- **"NMOS-compliant" is not one claim.** It is at least six (IS-04, IS-05, IS-07, IS-08, IS-09,
+  IS-12), and **IS-06 is formally deprecated**. Ask which specifications, at which versions, and make
+  the answer machine-checkable with `AMWA-TV/nmos-testing` before signing anything.
+- **The analysis tool you will need is copyleft.** There is no permissive, maintained 2110 analyser
+  (see `repos/foundations.md`). If the deliverable includes commissioning evidence, plan for EBU LIST
+  behind a service boundary from day one rather than discovering the constraint at delivery.
+- **Do not promise a configuration-only delivery.** With no turnkey platform at any licence, every
+  honest proposal in this plane is an integration proposal.
+

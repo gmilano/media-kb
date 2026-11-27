@@ -1634,6 +1634,38 @@ caught. That is the loss figure behind every eligibility rule in this section.
 3. **Score and songbook digitisation for publishers** — Audiveris or homr behind a queue (Pattern 85),
    with the AGPL-3.0 obligation priced in from the first slide, not discovered at security review.
 
+#### Pass 44 (2026-11-27) — the IP broadcast plant: **the region with the hard adoption numbers, and they contradict each other**
+
+- **The two 2026 surveys do not reconcile, and the disagreement is the finding.** A **TV Tech**
+  industry survey published **2026-10-07** reports that **more than half** of broadcast and media
+  companies have deployed ST 2110 — but mostly as **"IP islands"** — while **SDI remains the primary
+  infrastructure for 70%**. The **Haivision 2026 Broadcast Transformation Report** (**n > 1,300**)
+  reports **30%** using ST 2110 and **82%** still running SDI.† The two are **~1.7–1.8× apart on
+  2110 share** and **broadly agree on SDI persistence**.
+  **Quote the agreement, not the adoption number:** SDI is primary or coexisting for the large
+  majority of facilities, so **hybrid operation is the default engagement context.** The "IP islands"
+  phrasing is the most commercially useful detail in either survey — the common engagement is
+  **joining islands and proving conformance across the seams**, not a greenfield build (see
+  `compose/patterns.md` pattern 90).
+- **The opportunity is the conformance gate, and it is permissively licensed.**
+  `AMWA-TV/nmos-testing` and `AMWA-TV/sdpoker` are **Apache-2.0**, so a compliance-reporting product
+  built on them can be *shipped to the client as product* — unusual in this KB, where conformance
+  tooling is normally the part that cannot be redistributed. Days of work, no production access
+  required, and it produces the device inventory every later phase depends on.
+- **Who is in the room.** The 2026 **SMPTE Media Technology Summit** named practitioners from
+  **Mobile TV Group, Evertz, Lawo and Meinberg** in its ST 2110 sessions;† the ecosystem is
+  vendor-led and integration-hungry. **SMPTE itself is running the education**: a full-day ST 2110
+  bootcamp at **NAB 2026 (2026-04-21)**, a three-week **IP Media Workflows** programme, and a
+  **first-of-its-kind ST 2110 IP Media Roadshow** at the 2026 NAB Show.† A standards body running
+  roadshows is a demand signal: the buyers do not yet have the skills.
+- **The agent opportunity is unclaimed and the paper trail is here.** The only artefact resembling an
+  AI agent for ST 2110 operations is a **2025 SMPTE Media Technology Summit** paper proposing a
+  multi-agent LLM system with human-in-the-loop safeguards — **simulation only, no code released**.†
+  North America is where that paper was presented and where the vendors who would buy it exhibit.
+- **The refusal.** No North America-specific market figure for IP-plant *software* or NMOS tooling was
+  located. Do not size this from the broadcast-equipment totals in the pass 44 addendum below — those
+  measure hardware.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3439,6 +3471,45 @@ figures differ in currency and scope and are **roughly consistent**, not contrad
    finally not the blocker — the one sub-segment of this plane with no counterparty risk, and the
    natural first engagement (Pattern 85).
 
+#### Pass 44 (2026-11-27) — the IP broadcast plant: **the region that owns the standard, and the only one where the roadmap is public**
+
+- **EMEA is the centre of gravity for this entire plane, and it is institutional rather than
+  commercial.** The **EBU** drives the **Dynamic Media Facility (DMF)** architecture and, with
+  **NABA** and **AMWA**, the **Media eXchange Layer (MXL)** — `dmf-mxl/mxl`, **Apache-2.0**, 192★,
+  pushed on the day of this pass, **hosted by the Linux Foundation**. Reported contributors include
+  **BBC, CBC/Radio-Canada, France Télévisions, SVT, RTÉ and VRT**.† The EBU published **version 2 of
+  the DMF Reference Architecture** (dated **2026-04-15**†), moving orchestration to a cross-cutting
+  concern.
+  **Why this is an EMEA advantage and not just EMEA news:** the roadmap for the software-defined
+  facility is *published*, under a permissive licence, by a membership body the client may already
+  belong to. No other region's broadcast infrastructure plan is readable in advance.
+- **Sovereignty is the procurement argument, and it favours permissive self-hosting.** The **EBU and
+  NVIDIA** have expanded **sovereign AI standards for public service media**, extending to sovereign
+  cloud providers, open model developers and systems integrators, explicitly so broadcasters can
+  deploy agents **while retaining control of data, infrastructure, models and security**.† EBU
+  **HORIZONS 2026** frames sovereignty and resilience as central as infrastructure migrates to IP.†
+  **This is the strongest available argument in any region for Apache-2.0, self-hostable components
+  over a managed vendor stack** — and it is the client's own argument, not ours.
+- **The regulatory overlay, carried from this KB's earlier passes and still the operative one.** The
+  **EU AI Act** transparency rules have applied directly since **2 August**, with penalties up to
+  **€15M or 3% of global annual turnover**;† the **EBU with the main European commercial-broadcaster
+  associations** wrote to the Commission on **17 June** seeking a narrower deepfake definition,
+  clearer disclosure timing and proportionate marking standards.† Relevant here because a
+  software-defined plant is where disclosure and marking obligations get *implemented*.
+- **The licence trap bites hardest in this region.** EMEA engagements are multilingual by default, and
+  **translating the NMOS specification text for a local engineering team is a licence breach**: the
+  AMWA documents are **CC BY-ND 4.0** (no derivatives) and SMPTE's own standards are
+  **all-rights-reserved** (`repos/foundations.md`). Documenting the client's own facility is clear;
+  translating the standard is not. **No fee unblocks it.**
+- **Where the work is.** IP migration is reported as moving from selective deployments toward
+  **broader, more unified architectures**, with **cybersecurity becoming a core engineering
+  requirement rather than an IT concern**.† That is an integration-and-hardening engagement on a
+  published architecture — the most favourable shape in this plane.
+- **The refusal.** No EMEA-specific figure for IP-plant software spend was located. The Bandwidth–Cavell
+  survey finding that **49% of 500 EMEA enterprise decision-makers rank AI/ML a top communications
+  priority for 2026**† is **general enterprise data, not broadcast** — do not present it as a
+  broadcast statistic.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -5215,6 +5286,44 @@ not a finding of absence.
 3. **Multi-script lyric handling** for CJK catalogues, joining this plane to the type and
    text-rendering work of pass 38 — lyric display is a typesetting problem before it is a rights
    problem.
+
+#### Pass 44 (2026-11-27) — the IP broadcast plant: **the region this KB has been qualifying since pass 31, now with the tooling behind the question — and the constraint is people**
+
+- **This pass closes a gap this KB created in this very region.** Since pass 31 the KB has recommended
+  *"are you on SMPTE ST 2110 yet?"* as **the single best qualifying question for an APAC broadcast
+  engagement** — on the grounds that a 2110 facility has network-addressable device control and can
+  therefore support an agent layer — while listing **none** of the tooling on the far side of that
+  gate. The answer to the question now has an inventory behind it: `agents/top.md`,
+  `repos/foundations.md` and patterns 89–93.
+- **Adoption is moving, and the direction is agreed even where the numbers are not.** ST 2110
+  deployments are reported as **moving from trials into operation** across Asia-Pacific, and a
+  **SMPTE Asia-Pacific governor** expects **more APAC broadcasters to adopt IP infrastructure in
+  2026**.† APAC audiences are also reported as **less resistant to AI presenters** than Western
+  ones,† which makes the plant-plus-agent combination easier to land here than elsewhere.
+- **The binding constraint is a skills shortage, and that is the sellable unit.** Regional reporting
+  identifies a **critical shortage of IT and networking skills for IP workflows** (alongside AI
+  literacy) as the limiting factor on migration.† **This inverts the usual proposal shape: the
+  scarce resource is people who can run a routed network, not software.** Integration **plus
+  enablement** is the engagement, and enablement is not a discount line — it is the reason the
+  project survives handover (pattern 93, step 7).
+- **The permissive lab is the enablement asset.** `rhastie/easy-nmos` (Apache-2.0, 93★) stands up a
+  registry, a virtual node and the AMWA test suite **in one Docker Compose file with no broadcast
+  hardware**, and `AMWA-TV/nmos-device-control-mock` (Apache-2.0, 12★) lets engineers develop against
+  devices they do not own. A training environment that costs nothing to replicate is the cheapest
+  durable deliverable available in this plane — **and it is reusable across every client in the
+  region.**
+- **Vendors are already selling the hybrid seam.** **AI-Media** (ASX: AIM) ships encoders supporting
+  **SDI, IP and ST 2110** workflows — including **2110-40 IP simulcast** — explicitly so broadcasters
+  can add AI captioning, translation and multilingual voice **to existing infrastructure**, demoed at
+  IBC2026 on live sports.† That is the hybrid "IP islands" reality monetised, and it is the
+  competitive set for an APAC proposal.
+- **The refusal, and it is specific.** **No APAC-specific ST 2110 adoption percentage was located** —
+  the regional claims are directional ("moving from trials to reality", "more broadcasters expected"),
+  not measured. The adoption numbers in this KB (70%/82% SDI, 30%/>50% 2110) are **North
+  America-weighted or global**, and must not be relabelled as APAC. One search result was titled as a
+  **2027** trends article, which does not fit the current date and was discarded. **No APAC regulatory
+  material on AI in broadcast or on IP infrastructure policy was found** in this pass's searches —
+  recorded as an informed gap, not as an absence of regulation.
 
 ### LATAM
 
@@ -7057,6 +7166,47 @@ out human ones on streaming services.
    is a data problem with no open implementation anywhere (money layer measured at **0★**), and
    Brazil's structure makes it acute enough to fund.
 
+#### Pass 44 (2026-11-27) — the IP broadcast plant: **the region with a named, dated reference deployment — and the cheapest entry point in the plane**
+
+- **The reference deployment is real, recent and named.** **NSC TV**, a **TV Globo** affiliate in
+  **Santa Catarina, Brazil**, selected **Appear's X Platform** to migrate its distribution network
+  **from satellite to IP across six locations**, announced **2026-10-27**, with remote sports and
+  studio production as the stated objective.† A named affiliate, a named vendor, a dated decision and
+  a stated use case — **this is better evidence than this KB has for most regions in most planes**,
+  and it is the reference to cite in a Brazilian proposal.
+- **The transition has left the pilot stage.** Regional analysis reports that IP migration in LATAM
+  has **shifted from pilots and isolated projects to scale**, and that AI adoption in 2026 is driven
+  by **measurable, repeatable operational gains rather than novelty**.† For this plane that is the
+  favourable framing: an IP-plant engagement is an operations-cost argument, not an innovation pitch.
+- **It converges with the region's own standard, and that is the differentiated play.** This KB
+  already carries **TV 3.0 / DTV+** as a LATAM-specific obligation with deadlines (pattern 23), and
+  **Rohde & Schwarz has been selected to supply the first commercial DTV+ transmitters in Brazil**.†
+  **SET Expo 2026** (São Paulo, **17–20 August**) lists **IP & Cloud, TV 3.0 and Artificial
+  Intelligence** as its topics† — the three strands of this engagement in one room.
+  **A facility rebuilding its distribution for DTV+ is opening its plant anyway; the IP fabric and
+  the conformance gate belong in the same programme.** That timing argument is available in no other
+  region.
+- **The cheapest entry point in the plane is region-appropriate here.** Pattern 90 — the conformance
+  gate on `AMWA-TV/nmos-testing` and `AMWA-TV/sdpoker` (both **Apache-2.0**) — needs no production
+  access, no hardware and days rather than quarters, and `rhastie/easy-nmos` makes the whole lab free
+  to replicate. For buyers who cannot fund a migration programme up front, **the gate is a fundable
+  first phase that produces the inventory the migration will need.**
+- **The licence trap, in the region where it is most likely to be triggered.** A Spanish- or
+  Portuguese-language annotated NMOS handbook for a local engineering team is **exactly** the
+  deliverable a LATAM client will ask for, and it is **blocked**: the AMWA specification text is
+  **CC BY-ND 4.0** (no derivatives) and SMPTE's standards are **all-rights-reserved**, and **no
+  payment unblocks either** (`intel/trends.md`, finding 5). Offer instead: documentation of **their**
+  facility, **their** SDP files and **their** conformance results, in their language. That is clear,
+  and it is more useful.
+- **The refusals, both specific.** **No LATAM-specific ST 2110 adoption figure exists in this pass's
+  research** — the evidence is one named deployment and one directional trade analysis, which is not
+  an adoption rate. And **nothing was found on Mexico's broadcast IP migration**: searches returned
+  only a FIFA rights table listing Televisa. Mexico is a major market and this is an **informed gap**,
+  explicitly searched and missing, not a judgement that nothing is happening there. The **IIC Latin
+  America & Caribbean forum** (Montevideo, June 2026) ran a session on **AI policy and regulation
+  across LATAM and the Caribbean**† — the likeliest primary source for the regulatory half, and
+  unread by this pass.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -8652,3 +8802,72 @@ is fundable, and the arithmetic downstream of it is still measured at **0★**.
   market because there are no products. Do not infer a TAM from the royalty *flows* ($900M through
   the MLC in 2025, €14B CISAC collections) — those are the money being administered, not the money
   spent on administering it.
+
+## Market size — pass 44 addendum (2026-11-27): the one segment quoted at **80% of the market it sits inside**, and the software layer is **not sized at all**
+
+Measured 2026-11-27. All figures are commercial market-research estimates with inconsistent scopes and
+base years. As elsewhere in this file, the spread is reported because the spread is the finding.
+
+### Broadcast equipment, headline — **the narrowest agreement in this KB, and it is not the useful number**
+
+| Source estimate | Base year | Value | Growth | Horizon |
+|---|---|---|---|---|
+| Estimate A | 2026 | **$5.93B** | **~6.2% CAGR** | through 2031 |
+| Estimate B | 2026 | **$5.86B** | **4.8% CAGR** | $8.94B by 2035 |
+
+A **~1.2% difference on the same base year** — effectively agreement, and rarer in this file than any
+disagreement. The growth rates still differ by **~1.4×**, so quote the level, not the rate.
+
+### The live-IP segment — and an internal contradiction that disqualifies the headline figure
+
+| Source estimate | Base year | Value | Growth | Horizon |
+|---|---|---|---|---|
+| Estimate C | 2026 | **$4.7B** | **11.6% CAGR** | to 2035 |
+| Estimate D | 2025 | **$2.12B** | **17.4% CAGR** | to 2032 |
+
+**Estimate C should not be quoted, and the reason is arithmetic rather than methodological.** It
+sizes "live IP broadcast equipment" at **$4.7B** inside a total broadcast-equipment market that
+estimates A and B independently put at **$5.86–5.93B** — i.e. **~80% of all broadcast equipment
+sold**, in a world where the same year's surveys report **70–82% of facilities still running SDI as
+primary infrastructure** (see the regional sections above). Those two claims cannot both be true.
+**C is measuring a different and much broader scope than its label implies.**
+
+Estimate D (**$2.12B**, 2025) is the more plausible level at **~36%** of the equipment total, and its
+**17.4% CAGR** is the more defensible growth figure — but it is a single source. If one number is
+needed: **the live-IP segment is roughly a third of broadcast equipment spend and growing at
+11.6–17.4%**, sourced as a range, with the scope stated.
+
+### ⛔ The refusal — and it is the number a buyer in this plane would actually want
+
+- **The NMOS / IP-control *software* segment is not sized anywhere, at any scope.** Not globally, not
+  per region. Every figure above sizes **equipment** — switches, encoders, transmitters — and
+  equipment spend is not a software budget.
+- **A "SMPTE ST 2110 Monitoring Probe Market" report exists** but its figures were not verified in
+  this pass and are **not citable from here**. Noted only so a later pass does not treat its absence
+  as evidence the segment is unsized by everyone.
+- **NOT CITABLE as a single number:** the frequently-repeated **$15–30M** cost of converting a
+  mid-size facility from SDI to ST 2110. It appears without a stated methodology or sample, and a
+  per-facility conversion cost is precisely the figure a client will test against their own capital
+  plan. Price from the client's own device count and the conformance inventory (pattern 90), never
+  from this range.
+
+### What can be stood behind instead — count the devices and the obligations, not the market
+
+This plane's commercial logic does not run through a TAM, and the regional sections above supply
+better anchors than any of the tables here:
+
+1. **The hybrid default.** 70–82% of facilities still run SDI as primary; most 2110 exists as **"IP
+   islands"**. The recurring work is **joining islands and proving conformance across the seams** —
+   countable in devices and specifications, not in market share.
+2. **A conformance gate is priced from the device inventory**, and `nmos-testing` plus `sdpoker` are
+   **Apache-2.0**, so the resulting product is shippable.
+3. **The skills shortage is the APAC constraint**,† which prices enablement as a line item rather
+   than a courtesy.
+4. **A named, dated reference deployment exists in LATAM** (NSC TV / Appear, 2026-10-27†) — worth more
+   in a Brazilian conversation than any forecast in this file.
+
+**The structural observation, consistent with every other plane in this KB:** the measurable money is
+in the hardware the client already owns and the obligation they already carry. The software layer that
+would control it is **unsized because it is largely unbuilt** — which is the opportunity, and also the
+reason there is no TAM to borrow.
+

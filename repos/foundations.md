@@ -4860,3 +4860,99 @@ than left blank.
 4. **Artistic-2.0 appears for the first time in this KB** (ChordPro). OSI-approved and permissive in
    practice, but it is *not* in Globant's MIT/Apache/BSD comfort set — flag it for review rather than
    waving it through.
+
+## Pass 44 (2026-11-27) — the IP broadcast plant: ST 2110 transport, NMOS control, PTP timing
+
+All rows verified 2026-11-27 — existence via `git ls-remote` (58/58 resolve), stars and last push from
+the GitHub search API, and **every licence that the API reported as `NOASSERTION`, or appeared to be
+missing, resolved by reading the file over the raw channel with a README control request.** Two of
+this pass's most important facts came out of that read and not out of the API.
+
+**Why this file needed this pass.** This KB has used *"are you on SMPTE ST 2110 yet?"* as its
+qualifying question for broadcast engagements since pass 31 without ever listing the tooling behind
+the gate. `NMOS`, `IS-04`, `IS-05`, `AMWA`, `PTP`, `genlock`, `MXL`, `JPEG XS` and `linuxptp` all
+measured **0** across the eight files before this pass.
+
+### The licence shape of this plane — read before choosing
+
+This plane splits by **function**, and the split is sharp enough to plan around:
+
+- **Control (discovery, registration, connection management) → permissive and active.** Apache-2.0
+  across the board: `sony/nmos-cpp` 204★, the AMWA specification repos, `NVIDIA/nvnmos`,
+  `AMWA-TV/nmos-testing`, `AMWA-TV/sdpoker`, `bbc/nmos-web-router`.
+- **Data plane → permissive, and newly so.** `Media-Transport-Library` BSD-3-Clause, `mxl`
+  Apache-2.0, `SVT-JPEG-XS` BSD-2-Clause-Patent. **MXL is the first time the data plane of a
+  broadcast facility has been permissively licensed and vendor-neutral.**
+- **Timing → GPL-2.0, and unavoidable.** `linuxptp` is the de-facto PTP implementation.
+- **Measurement and analysis → copyleft, unlicensed, or dead.** No exceptions found.
+- **The standards documents themselves → not open source at all.** The code is free; the text is not.
+
+### Transport and timing — the substrate
+
+| Repo | Licence | Stars | Last push | Why it matters |
+|---|---|---|---|---|
+| [OpenVisualCloud/Media-Transport-Library](https://github.com/OpenVisualCloud/Media-Transport-Library) | BSD-3-Clause | 254 | 2026-11-27 | Intel's real-time ST 2110 stack on COTS hardware: -10/-20/-21/-30/-40 plus **ST 2022-7** seamless redundancy, over DPDK, native sockets or AF_XDP with eBPF filtering. Licence file read: BSD 3-Clause (Intel, 2022). The permissive way to put uncompressed video on a NIC. |
+| [dmf-mxl/mxl](https://github.com/dmf-mxl/mxl) | Apache-2.0 | 192 | 2026-11-27 | EBU **Dynamic Media Facility** Media eXchange Layer, hosted by the **Linux Foundation**, driven by EBU with **NABA** and **AMWA**. Shared-memory exchange of uncompressed essence between software media functions on a host; v1.1 extends it to clusters over **RDMA**.† Contributors include BBC, CBC/Radio-Canada, France Télévisions, SVT, RTÉ and VRT.† **The most consequential new repo in this plane.** |
+| [OpenVisualCloud/SVT-JPEG-XS](https://github.com/OpenVisualCloud/SVT-JPEG-XS) | BSD-2-Clause-Patent | 105 | 2026-11-27 | JPEG XS encode/decode — the low-latency mezzanine codec that lets 2110-class video cross a link that cannot carry uncompressed. **Licence file read: "BSD+Patent", SPDX `BSD-2-Clause-Patent`** — an express patent grant, which for a codec is worth more than the BSD clause count. |
+| [richardcochran/linuxptp](https://github.com/richardcochran/linuxptp) | GPL-2.0 | 445 | 2026-08-09 | `ptp4l` / `phc2sys`: the PTP (IEEE 1588) implementation the industry actually runs, usable as grandmaster or slave for AES67, Dante, RAVENNA and ST 2110 plants.† **ST 2110 requires the SMPTE ST 2059-2 PTP profile; AES67 requires the Default profile and recommends the Media profile — and the two use different delay mechanisms, so running both in one domain is a configuration error, not a preference.**† GPL-2.0: ship it as a system package, do not link it into product code. |
+| [NVIDIA/Rivermax](https://github.com/NVIDIA/Rivermax) | **none** | 72 | 2026-03-10 | Applications on top of the Rivermax media networking SDK. **No licence file** under any of ten names on either branch, with README returning 200 — the absence is real, and the underlying SDK is proprietary besides. Read for reference; do not vendor. The Apache-2.0 companion is `NVIDIA/nvnmos`, and `garethsb/rdk-nmos-example` (Apache-2.0, 0★, 2026-11-06) shows the two wired together. |
+
+### Control plane — NMOS
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [sony/nmos-cpp](https://github.com/sony/nmos-cpp) | Apache-2.0 | 204 | 2026-11-20 | Reference NMOS Registry + Node (IS-04/05/07/08/09/10). The backbone of the plane. |
+| [AMWA-TV/nmos](https://github.com/AMWA-TV/nmos) | **Apache-2.0 (code) + CC BY-ND 4.0 (text)** | 144 | 2026-11-25 | The NMOS specification hub. **Licence read in full, and it is the pass's most consequential fact: the API definitions and software are Apache-2.0, but the markdown documents are Creative Commons Attribution-**NoDerivatives**-4.0.** You may implement freely and redistribute the spec verbatim. You may **not** publish an annotated, abridged, restructured or translated version of the text. |
+| [AMWA-TV/nmos-testing](https://github.com/AMWA-TV/nmos-testing) | Apache-2.0 | 71 | 2026-11-26 | The official conformance test suite. Permissive — so a client-facing compliance gate can be built on it and shipped. |
+| [AMWA-TV/is-04](https://github.com/AMWA-TV/is-04) | Apache-2.0 | 43 | 2026-11-24 | **Discovery & Registration** (Stable). How a device announces itself and how you enumerate a facility. |
+| [AMWA-TV/is-05](https://github.com/AMWA-TV/is-05) | Apache-2.0 | 25 | 2026-11-24 | **Device Connection Management** (Stable). How a route is actually made — the "take". |
+| [AMWA-TV/is-08](https://github.com/AMWA-TV/is-08) | Apache-2.0 | 12 | 2026-11-24 | **Audio Channel Mapping** — shuffling channels inside a stream. Where real 2110 audio work lives. |
+| [AMWA-TV/is-07](https://github.com/AMWA-TV/is-07) | Apache-2.0 | 9 | 2026-11-24 | **Event & Tally** — the signal path for GPI-equivalents and tally in an IP plant. |
+| [AMWA-TV/is-06](https://github.com/AMWA-TV/is-06) | Apache-2.0 | 14 | 2026-11-24 | **Network Control — DEPRECATED.** Recorded precisely so it is not proposed: it is the highest-starred IS spec after -04 and it is dead. |
+| [AMWA-TV/nmos-device-control-mock](https://github.com/AMWA-TV/nmos-device-control-mock) | Apache-2.0 | 12 | 2026-11-23 | Mock device for IS-12/MS-05 control testing — lets you develop against a device you do not own. |
+| [AMWA-TV/jt-dmf-crm](https://github.com/AMWA-TV/jt-dmf-crm) | Apache-2.0 | 9 | 2026-11-24 | Joint Task Force on **Dynamic Media Facilities** conceptual reference model — the AMWA/EBU work that connects NMOS control to MXL. 9★, and it is where this plane is going. |
+| [rhastie/easy-nmos](https://github.com/rhastie/easy-nmos) | Apache-2.0 | 93 | 2026-10-13 | Docker-Compose kit: registry + virtual node + testing tool. **Not under `AMWA-TV`**, despite universal citation as the AMWA starter kit. |
+| [rhastie/build-nmos-cpp](https://github.com/rhastie/build-nmos-cpp) | Apache-2.0 | 28 | 2026-11-09 | Container build environment for the above. |
+| [bbc/nmos-web-router](https://github.com/bbc/nmos-web-router) | Apache-2.0 | 16 | 2026-10-18 | BBC's IS-04/IS-05 web routing controller. |
+| [dgp1000/pi-nmos-st2110](https://github.com/dgp1000/pi-nmos-st2110) | Apache-2.0 | 12 | 2026-09-30 | iPad-controlled 2110/NMOS multiviewer and monitoring rig — a cheap permissive demo platform. |
+
+### Audio over IP — AES67 / ST 2110-30
+
+The audio side is older, larger and **more copyleft** than the video side. `ST 2110-30` is a
+broadcast-constrained profile of AES67, so this layer is shared with pro-audio.
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [bondagit/aes67-linux-daemon](https://github.com/bondagit/aes67-linux-daemon) | GPL-3.0 | 572 | 2026-10-26 | **The most-starred repo in this entire plane**, and it is GPL-3.0: an AES67 endpoint daemon with a config web UI. Deploy as a separate process. |
+| [chris-ritsen/network-audio-controller](https://github.com/chris-ritsen/network-audio-controller) | Unlicense | 404 | 2026-11-23 | Dante controller alternative across iOS/Linux/macOS/Windows. **Public-domain dedication — the least encumbered thing here.** |
+| [philhartung/aes67-monitor](https://github.com/philhartung/aes67-monitor) | MIT | 360 | 2025-08-19 | Real-time monitoring of AES67 / RAVENNA / ST 2110-30 streams. **The largest MIT repo in the plane — and 15 months without a push.** The nearest thing to a permissive monitoring tool anywhere in this pass, which is why its staleness matters. |
+| [Mo-way/awesome-aoip](https://github.com/Mo-way/awesome-aoip) | CC0-1.0 | 163 | 2026-10-02 | Curated audio-over-IP list. CC0 — reusable in client material without attribution obligations. |
+| [njh/mast](https://github.com/njh/mast) | MIT | 130 | 2024-12-04 | Multicast Audio Streaming Toolkit (RTP). MIT, dormant. |
+| [markmcconnell/mai](https://github.com/markmcconnell/mai) | BSD-3-Clause | 112 | 2022-02-14 | An AES67 implementation. Permissive, long dormant. |
+| [soundondigital/ravennakit](https://github.com/soundondigital/ravennakit) | AGPL-3.0 | 71 | 2026-11-11 | RAVENNA / AES67 / ST 2110-30 in C++ for desktop and virtual servers. **AGPL — network users get source rights; keep it behind a service boundary.** |
+| [ylzwd/openaes67](https://github.com/ylzwd/openaes67) | MIT | 21 | 2026-11-15 | AES67 for Windows: 64-in/64-out ASIO virtual sound card, Dante-compatible. MIT and actively pushed. |
+
+### Measurement and analysis — **the hole in this plane**
+
+| Repo | Licence | Stars | Last push | Status |
+|---|---|---|---|---|
+| [ebu/pi-list](https://github.com/ebu/pi-list) | GPL-3.0 | 134 | 2026-10-16 | **EBU LIST** — the live IP software toolkit EBU members use to validate 2110 facilities. The best analyser in open source, and copyleft. |
+| [pkeroulas/st2110-toolkit](https://github.com/pkeroulas/st2110-toolkit) | GPL-3.0 | 105 | 2026-10-01 | Capture, analyse and transcode 2110; includes an NMOS-controlled transcoder proof of concept. |
+| [ebu/smpte2110-analyzer](https://github.com/ebu/smpte2110-analyzer) | Apache-2.0 | 93 | **2020-05-01** | **The only permissive 2110 analyser ever published, frozen six and a half years.** Licence read: Apache-2.0 (EBU, 2017) — the API reported `NOASSERTION`. If this plane has one obvious revival target, it is this repo. |
+| [OpenBroadcastSystems/ptpmeasure](https://github.com/OpenBroadcastSystems/ptpmeasure) | **none** | 65 | 2025-10-15 | PTP / ST-2110 / ST-2022-6 real-time measurement. No licence file; absence verified against a 200 README. **65★ of code nobody may lawfully reuse.** |
+| [NEOAdvancedTechnology/ST2110_pcap_zoo](https://github.com/NEOAdvancedTechnology/ST2110_pcap_zoo) | **none** | 26 | 2022-08-17 | Reference 2110 packet captures — **the plane's test fixtures, unlicensed.** Build your own corpus with MTL rather than depend on these. |
+| [NEOAdvancedTechnology/smpte2110-20-dissector](https://github.com/NEOAdvancedTechnology/smpte2110-20-dissector) | **none** | 45 | 2020-04-28 | Wireshark Lua dissector, -20 video. No licence, dead. |
+| [NEOAdvancedTechnology/smpte2110-40-dissector](https://github.com/NEOAdvancedTechnology/smpte2110-40-dissector) | **none** | 42 | 2022-08-17 | Wireshark Lua dissector, -40 ancillary. No licence, dead. |
+
+### The standards documents — and why this is not a footnote
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [SMPTE/st2110-10](https://github.com/SMPTE/st2110-10) | **All rights reserved** | 5 | 2026-11-11 | ST 2110-10 System Timing & Definitions. **Licence read in full: "No part of this material may be reproduced, by any means whatsoever, without the prior written permission of the Society of Motion Picture and Television Engineers."** It is on GitHub; it is not open source. |
+| [SMPTE/st2110-30](https://github.com/SMPTE/st2110-30) | **All rights reserved** | 6 | 2026-11-11 | ST 2110-30 PCM Digital Audio. Same licence. |
+| [ebu/awesome-broadcasting](https://github.com/ebu/awesome-broadcasting) | CC0-1.0 | 1,805 | 2026-09-30 | EBU's curated broadcast-technology list — **the highest-starred repo located in this pass**, and CC0, so it can be quoted freely in client material. The best single map of this territory. |
+
+**The conclusion that belongs in every proposal for this plane:** you may implement the standards
+freely, and you may not republish them in any altered form. The permissive licence on the *code* says
+nothing about the *text*, and in this plane the text is the gated asset.
+

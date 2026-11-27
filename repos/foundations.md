@@ -5290,3 +5290,25 @@ All rows verified 2026-11-27 via `git ls-remote` + raw licence file (name, byte 
 | [ufs-community/ufs-weather-model](https://github.com/ufs-community/ufs-weather-model) | **LGPL** (`LICENSE.md`@`master`, 2 689 B) | NOAA's Unified Forecast System atmospheric model — the physics side of the US operational stack. Copyleft but **weak per-file**: linkable. |
 | [NOAA-EMC/global-workflow](https://github.com/NOAA-EMC/global-workflow) | **LGPL** (`LICENSE.md`@`master`, 7 642 B) | The operational workflow that runs NOAA's global forecast. |
 | [open-meteo/open-meteo](https://github.com/open-meteo/open-meteo) | **AGPL-3.0** (`LICENSE`, 34 522 B) | Self-hostable weather API serving open data. **Two licences to keep separate:** the *code* is AGPL-3.0 (network copyleft — it will reach a hosted SaaS wrapper), while the *data* it serves is CC BY 4.0. The hosted free tier is **non-commercial only** (<10 000 calls/day); commercial use means a subscription or self-hosting. |
+
+## Pass 48 (2026-11-27) — the post-publication plane: what the standards layer actually gives you
+
+Foundations for corrections, retractions and de-indexing. **The headline measurement of this pass is a
+ceiling, not a repo:** the news-interchange standard's entire vocabulary for "this story should no longer
+be read" is a three-value enum.
+
+| Repo | License | ★ | Pushed | What it contributes |
+|---|---|---|---|---|
+| https://github.com/iptc/newsinjson | **MIT** (`LICENSE`, 1,131 B, © 2024 IPTC) | 47 | 2026-11-24 | Home of IPTC **ninjs**. **Measured ceiling:** the only retraction-adjacent primitive is `pubstatus`, an enum of exactly `usable` / `withheld` / `canceled` — *identical in v1.2, v1.4 and v2-rc*, i.e. unchanged across every published version. No reason code, no correction payload, no de-indexing directive. Verified by reading the schema files, not the docs |
+| https://github.com/schemaorg/schemaorg | **Apache-2.0** | 6,322 | **2026-11-27** | The only published vocabulary that models corrections properly: `correction`, `correctionsPolicy` (on `NewsMediaOrganization`) and the `CorrectionComment` type, which originated in The Trust Project's work. Caveat worth carrying to a client: schema.org's own documentation still files `correction` under its **"new/pending"** area, so it is a vocabulary to adopt, not a settled one |
+| https://github.com/iptc/newsml-g2 | NOASSERTION | 20 | 2026-11-20 | NewsML-G2, the heavier XML interchange standard; same `pubStatus` concept (`nar:pubStatus`) that ninjs mirrors |
+| https://github.com/arx-deidentifier/arx | **Apache-2.0** | 741 | 2025-10-01 | The serious anonymisation toolkit (k-anonymity and related models) — the right tool when the remedy is *anonymise the archived article*, which is what EMEA practice usually asks for, rather than delete it |
+| https://github.com/opengdpr/OpenDSR | **none — NOASSERTION, no licence file** | 387 | **dead 2020-07-30** | The data-subject-request *specification* (access, erasure, portability). 387★ and the most-cited DSR spec in open source — and **it carries no licence and has not moved in over six years**. Fulfilment was explicitly out of scope, which is precisely the gap this plane is about |
+| https://github.com/open-retractions/open-retractions | **none — no licence file** | 46 | **dead 2020-06-23** | An API and web interface to check whether a paper has been retracted. The idea is right and the artefact is unlicensed and abandoned |
+| https://github.com/ethyca/fidesops | **Apache-2.0** | 49 | **ARCHIVED 2022-11-30** | "Privacy as Code for DSAR Orchestration" — the first attempt, folded into `fides`, which is itself now archived. Both ends of a four-year arc are read-only |
+| https://github.com/open-privacy/dsrhub | **Apache-2.0** | 19 | **dead 2023-05-05** | DSR workflow orchestration across microservices. Permissive, sensible, dormant |
+| https://github.com/KantaraInitiative/consent-receipt-v-next | NOASSERTION | 13 | **dead 2019-07-04** | The consent-receipt spec family's feature-request home. The record of consent is the other half of an erasure claim, and its standards home has been quiet since 2019 |
+
+**Nine rows, and only three of them are alive** (`newsinjson`, `schemaorg`, `arx` — and `arx` last moved
+in Oct 2025). Every artefact on this plane that tried to model *the request itself* is archived, dead or
+unlicensed. Stated plainly because it is the buyable fact: a client cannot adopt this layer, only build it.

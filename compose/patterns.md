@@ -7485,3 +7485,88 @@ the "brand, not capability" explanation needs replacing.
   licence** — the core is AGPL-3.0, `weather-map-layer` is **GPL-2.0**.
 - **Do not promise an allow-list compliance check that only accepts `CC-BY-4.0`.** Argentina's SMN feed
   is **CC-BY-2.5-AR**, and ported CC licences are real and in production use.
+
+## Pattern 103 — The refusal file: making a *declined* removal request defensible
+
+**The plane's commercial inversion.** Every vendor in this space sells deletion. In Brazil deletion is
+unconstitutional (STF, RE 1.010.606), in the US there is no duty to delete an archive, and the IACHR
+Special Rapporteur warns that private de-indexing with vague limits is itself the hazard. For roughly half
+the world's publishers the valuable artefact is **the documented refusal** — and nobody sells it.
+
+**Wire it from verified, permissive parts:**
+
+1. **Intake with the statutory clock.** Take the request-shape and deadline logic from
+   [`jeffersongoncalves/laravel-gdpr-dsar`](https://github.com/jeffersongoncalves/laravel-gdpr-dsar)
+   (**MIT**, ★2) — it encodes Arts. 15–22, identity check, and the one-month deadline with the Art. 12(3)
+   extension. Two stars, so read it and reimplement; the value is the clock, not the code.
+2. **Bundle validation.** [`MrLouisWright/dsar-warden`](https://github.com/MrLouisWright/dsar-warden)
+   (**MIT**, ★2) for the checks worth copying: subject matching, secret-field removal, **third-party data
+   flagging**, identity verification. Zero deps, SARIF output — drops into CI as a gate.
+3. **Locate the personal data in the archived article.**
+   [`data-privacy-stack/presidio`](https://github.com/data-privacy-stack/presidio) (**MIT**, ★12,086) as
+   the detector, with [`deepanwadhwa/zink`](https://github.com/deepanwadhwa/zink) (**Apache-2.0**, ★112)
+   where zero-shot NER beats a trained pipeline — which is the normal case for an unlabelled archive.
+   Use the canonical `data-privacy-stack` slug, **not** `microsoft/presidio`.
+4. **Offer the proportionate middle remedy, not a binary.**
+   [`arx-deidentifier/arx`](https://github.com/arx-deidentifier/arx) (**Apache-2.0**, ★741) to anonymise
+   or mask the party rather than remove the article. This is what EMEA practice usually wants and what the
+   Delhi High Court actually ordered (masking of judicial records).
+5. **Record the decision.** Extend the ticket model in
+   [`Yaogui415/newsflow-oss`](https://github.com/Yaogui415/newsflow-oss) (**MIT**, ★104) — its
+   `correction_tickets` API (213 lines) and `post_publish_monitor` agent (455 lines) are the only
+   newsroom-shaped prior art. Add what it lacks entirely: the public-interest test applied, the decider,
+   the outcome, the effective date.
+6. **Publish only what should be public.** `schema.org` `correction` / `CorrectionComment` /
+   `correctionsPolicy` ([`schemaorg/schemaorg`](https://github.com/schemaorg/schemaorg), **Apache-2.0**)
+   for the correction notice; ninjs `pubstatus` for syndication partners.
+
+**Licence warning for the whole recipe:** avoid
+[`audrasjb/gdpr-data-request-form`](https://github.com/audrasjb/gdpr-data-request-form) (GPL-2.0) in a
+proprietary product, and note that `OpenDSR` (★387) and `open-retractions` (★46) carry **no licence file
+at all** — read them for design, copy nothing.
+
+**Sell it as:** NA (US) and LATAM — the refusal file is the primary product. EMEA and APAC — it is the
+audit layer underneath Pattern 104.
+
+---
+
+## Pattern 104 — The de-indexing executor: keep the URL alive, kill the search footprint, prove the date
+
+**The job no open-source project performs.** `noindex takedown` returns **zero repositories**; `deindex`
+returns an Illumina DNA-barcode tool. Meanwhile Italian practice reportedly requires the **publisher** to
+insert metatags that hide the article from general search engines while keeping it in the historical
+archive, and a 2026 ruling attached **damages to delay**. The requirement is therefore not "delete" but
+"suppress, retain, and timestamp".
+
+**The four obligations, and what to build each from:**
+
+1. **Keep the article resolving.** No deletion, no 404, no URL change — the archive copy is the publisher's
+   right to retain (Italian practice) and its defence (STF/ABRAJI position in Brazil). Do not reuse
+   [`pluginpal/strapi-plugin-publisher`](https://github.com/pluginpal/strapi-plugin-publisher)
+   (**MIT**, ★83) as the mechanism — it *unpublishes*, which is the wrong remedy — but do read it as the
+   only mainstream CMS prior art for scheduled state change.
+2. **Suppress the search footprint.** `noindex` meta plus `X-Robots-Tag`, removal from the sitemap, and
+   canonical hygiene. Regenerate the sitemap deterministically in CI with
+   [`cicirello/generate-sitemap`](https://github.com/cicirello/generate-sitemap) (**MIT**, ★113, pushed
+   2026-11-18) so the suppressed URL cannot silently return on the next deploy.
+3. **Detect silent regressions — the damages risk.** Because liability attaches to *delay* and to
+   *reappearance*, monitor the directive rather than trusting it:
+   [`dancolta/seo-drift-monitor`](https://github.com/dancolta/seo-drift-monitor) (★22, **no licence
+   declared — read only, do not vendor**) is the shape of the check: it detects when a deploy silently
+   ships or drops a `noindex` or rewrites a canonical. Build this one in-house; the open artefact is
+   unlicensed.
+4. **Prove when suppression took effect.** An append-only decision log keyed to the article URL, carrying
+   the order reference, the effective timestamp, and re-verification results over time. This is the
+   deliverable that answers the Italian damages question and the Canadian global-de-indexing order, and
+   **nothing in open source produces it.**
+
+**Then reconcile with syndication.** An article suppressed on the publisher's own domain is still live at
+every partner that ingested it. ninjs gives exactly three values —
+`usable` / `withheld` / `canceled` — identical across v1.2, v1.4 and v2-rc, with no reason code and no
+effective date. So the partner notification must carry an out-of-band payload, and that mismatch is worth
+raising with the client before it is discovered in production. **Do not promise a standards-native
+de-indexing propagation: the standard cannot express it.**
+
+**Sell it as:** EMEA first (Italy, and the measured liability is latency), then Canada within NA (global
+de-indexing of judicial records), then India (court-ordered masking). In Brazil, pair it with Pattern 103
+and lead with the refusal.

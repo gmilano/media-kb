@@ -9,6 +9,28 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 48: the post-publication plane (**the first plane in this KB where the judgment layer matured and was then archived**)
+
+Plane located by grepping ~120 candidate terms against all eight files before any web search. Dense
+cluster of zeros: `right to be forgotten`, `derecho al olvido`, `de-indexing`, `delisting`,
+`unpublishing`, `data subject`, `subject access`, `pseudonymisation`, `right of reply`, `SLAPP`,
+`ombudsman`, `press council`, `plagiarism`, `errata` — all zero; `retraction` one.
+
+**New this week on the plane:**
+
+| Agent / tool | Repo | License | ★ | Pushed | Why it is trending-relevant |
+|---|---|---|---|---|---|
+| **presidio** | https://github.com/data-privacy-stack/presidio | **MIT** | 12,086 | **2026-11-27** | Pushed the day of the pass. **And it moved org**: the page carries *"Presidio has moved to a new home!"* — `microsoft/presidio` is now a redirect, not the canonical slug |
+| **rtbf.ir** | https://github.com/rtbf-ir/rtbf.ir | **Apache-2.0** | 218 | **2026-11-27** | Also pushed the day of the pass. The **highest-starred right-to-be-forgotten repo on GitHub** — and it is a *directory of account-deletion links* for Persian web services. The most-starred thing in the world called RTBF contains no erasure code at all |
+| **amazon-s3-find-and-forget** | https://github.com/awslabs/amazon-s3-find-and-forget | **Apache-2.0** | 248 | 2026-11-24 | Still actively maintained — the one execution tool on the plane that has not gone quiet |
+| **pii-guardrail-browser-extension** | https://github.com/dfki-dsa/pii-guardrail-browser-extension | **Apache-2.0** | 108 | 2026-11-23 | DFKI-maintained; the "journalist pasted a source name into a chatbot" control |
+| **fides** | https://github.com/ethyca/fides | **Apache-2.0** | 484 | **ARCHIVED 2026-08-28** | The trend *is* the archival: the only mature DSAR platform (4,774 commits) went read-only three months before this pass, and the space fragmented into ★2–4 single-purpose tools |
+
+**Falsifiable prediction, recorded for a later pass to check:** the ★2–4 DSAR micro-tools
+(`laravel-gdpr-dsar`, `dsar-warden`, `elabftw-gdpr`, all pushed Nov 2026) will **not** consolidate into a
+successor platform within 12 months, because the scarce input is legal adjudication, not code. If one of
+them is above 200★ and has multiple maintainers by 2027-11, the law as stated here is wrong on this plane.
+
 ## 2026-11-27 — pass 47: the weather desk (**the first plane where the model layer is permissive and the licence that governs it is invisible to every scanner**)
 
 Plane found by the pass-43→46 method: ~60 candidate terms grepped against all eight KB files before any

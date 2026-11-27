@@ -4440,3 +4440,58 @@ A repo licence of Apache-2.0 tells you nothing about whether you may sell a fore
   every other repo), and `img.shields.io` returned empty. Existence and licence are verifiable without
   the API and are what the quality bar demands; **star counts were not verifiable, so they are omitted
   rather than guessed.** Any future pass that needs them must attach a source per figure.
+
+## Pass 48 (2026-11-27) — the post-publication plane: corrections, retractions, right of reply, unpublishing & de-indexing
+
+Plane found by the pass-43→47 method: ~120 candidate terms grepped against all eight KB files **before**
+any web search. The cluster that came back empty was the post-publication one — `right to be forgotten`,
+`derecho al olvido`, `de-indexing`, `delisting`, `unpublishing`, `data subject`, `subject access`,
+`pseudonymisation`, `right of reply`, `SLAPP`, `ombudsman`, `press council`, `plagiarism`, `errata` all at
+**zero**, `retraction` at **one**. The 96 hits on `correction` were all this KB's own method notes plus
+post-OCR correction, not the editorial corrections lifecycle. This is the plane that decides what a
+publisher does *after* the story is wrong, contested, or legally stale.
+
+**What the plane holds (8 verified rows; every ★/licence/date read from the GitHub search API this pass):**
+
+| Agent / tool | Repo | License | ★ | Pushed | What it does on this plane |
+|---|---|---|---|---|---|
+| **newsflow-oss** | https://github.com/Yaogui415/newsflow-oss | **MIT** | 104 | 2026-07-22 | **The only open-source newsroom corrections workflow that exists.** Substantive, not vapour: a 213-line correction-ticket API over real SQLAlchemy models plus a 455-line LangChain post-publish monitor agent with impact-severity/type enums. But: single author, **6 commits, all on 2026-05-06**. Models `retraction` — and has **no concept of unpublishing, de-indexing or right of reply** |
+| **presidio** | https://github.com/data-privacy-stack/presidio | **MIT** | 12,086 | **2026-11-27** | PII detection and anonymisation — the engine that finds the personal data inside an archived article. Pushed the day of this pass. **Slug moved: this is no longer `microsoft/presidio`** (see the method note below) |
+| **top_secret** | https://github.com/thoughtbot/top_secret | **MIT** | 422 | 2026-05-14 | Filters sensitive information out of free text before it is sent to an external API or LLM. Ruby; the pragmatic choice for a Rails-era newsroom stack |
+| **amazon-s3-find-and-forget** | https://github.com/awslabs/amazon-s3-find-and-forget | **Apache-2.0** | 248 | 2026-11-24 | **Executes** erasure against a data lake: finds and deletes individual records in S3/Parquet pursuant to GDPR. Explicitly carries the `right-to-be-forgotten` topic. The only actively-maintained *execution* tool found |
+| **zink** | https://github.com/deepanwadhwa/zink | **Apache-2.0** | 112 | 2026-11-20 | Zero-shot text anonymisation using transformer NER — no training set needed, which matters for an archive nobody has labelled |
+| **pii-guardrail-browser-extension** | https://github.com/dfki-dsa/pii-guardrail-browser-extension | **Apache-2.0** | 108 | 2026-11-23 | Local-first Chrome extension that detects and anonymises PII *before* text is pasted into ChatGPT, Claude or Gemini. Maintained by DFKI; the control for the "a journalist pasted the source's name into a chatbot" risk |
+| **citegate** | https://github.com/chrisyangsong/citegate | **MIT** | 101 | 2026-08-30 | Retraction alerting as a CI gate: verifies references against Crossref and OpenAlex and **alerts when a cited paper is retracted**. The only automated "what I cited went bad" watcher found |
+| **fides** | https://github.com/ethyca/fides | **Apache-2.0** | 484 | **ARCHIVED 2026-08-28** | The only mature open-source DSAR fulfilment platform — CLI, admin UI, Privacy Center, 4,774 commits. Banner, quoted verbatim from the repo page: *"This repository was archived by the owner on Aug 28, 2026. It is now read-only."* Listed **because** it is archived: see the finding below |
+
+### The finding: this is the first plane where the judgment layer **regressed** rather than stayed dormant
+
+Five prior passes established the structural law in a three-step form — *declaring* a thing is a format
+problem and open source does it well; *honouring* it is a judgment problem and the code goes dormant;
+*liquidating* the obligation is pure judgment and there is nothing at all. This plane confirms it a
+**sixth** time, and adds a failure mode the KB has not recorded before. The judgment layer here did not
+fail to appear. **It appeared, matured, and was then switched off.**
+
+| Step | What it is | Open-source health, measured this pass |
+|---|---|---|
+| 1. **Detect** the personal data in the archive | ML / format problem | **Healthiest layer on the plane.** presidio **12,086★ MIT pushed the day of this pass**; top_secret 422★ MIT; zink 112★ Apache-2.0; pii-guardrail 108★ Apache-2.0 |
+| 2. **Execute** the deletion in storage | Engineering problem | **Thin but alive.** `amazon-s3-find-and-forget` 248★ Apache-2.0, active 2026-11-24; `opengento/magento2-gdpr` 147★ MIT |
+| 3. **Adjudicate** the request | Legal judgment | **Regressed.** `ethyca/fides` 484★ **archived 2026-08-28**; its predecessor `ethyca/fidesops` 49★ archived 2022-11-30. What replaced it: ★2–4 micro-tools, all pushed in Nov 2026 — `laravel-gdpr-dsar` (★2), `dsar-warden` (★2), `elabftw-gdpr` (★4). **A mature platform was replaced by fragments** |
+| 4. **De-index / unpublish a news article** | Editorial judgment | **Zero. Not "low-starred" — absent.** See the measured zeros below |
+
+### The zeros, measured rather than assumed
+
+Short queries, results *read* rather than counted — because this plane is dense with false friends:
+
+- `noindex takedown` → **0 results.** Not zero stars. Zero repositories.
+- `errata newsroom` → **0 results.**
+- `editorial workflow corrections` → **1 result**, an unrelated n8n hackathon repo (★3).
+- `corrections journalism` → **5 results in the world**, of which one is relevant (newsflow-oss, above).
+- `deindex` → 24 results, **zero relevant**: an Illumina DNA-barcode deindexer (★12), an OpenCOLLADA
+  deindexer, and SEO-mistake checkers. In open source, "deindex" means genetics and sitemaps.
+- `right of reply` → 77 results, **zero relevant** — spam repos, a Lua bot, a raw-IP-sockets assignment.
+- `noindex` → 4,902 results, **zero about privacy-driven de-indexing**: all sitemap and SEO tooling.
+
+The pattern that matters for a buyer: the vocabulary of this plane exists in open source **only in its
+SEO sense**. The legal sense — a publisher instructed by a court to make a lawfully-published article
+untraceable while keeping it in the archive — has no implementation anywhere.

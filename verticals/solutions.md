@@ -2638,3 +2638,24 @@ talent-facing touchscreen, no sponsor/branding layer, no playout integration.**
 either (a) integration into the station's existing proprietary graphics system via data hand-off, or
 (b) a custom build on MapLibre/deck.gl/Cesium fronting CasparCG. Do not scope "replace Chyron with
 open source" — nothing in the world currently does that.
+
+## Pass 48 (2026-11-27) — the post-publication plane: the CMS and platform layer
+
+Real, customisable systems that touch corrections, unpublishing and subject requests. The honest summary:
+**no CMS in open source models a legal unpublishing.** What exists is *scheduling* (editorial convenience)
+and *subject-data export/erasure* (privacy plumbing). The gap between them is the product.
+
+| Platform | Repo | License | ★ | Pushed | What it covers, and where it stops |
+|---|---|---|---|---|---|
+| **Strapi — Publisher plugin** | https://github.com/pluginpal/strapi-plugin-publisher | **MIT** | 83 | 2026-11-25 | Schedules publishing **and unpublishing** of any content type in Strapi. The closest a mainstream headless CMS comes to this plane — and it is a *calendar*, not a legal workflow: no request record, no decision, no reason code, no audit of when de-indexing took effect |
+| **Magento 2 GDPR** | https://github.com/opengento/magento2-gdpr | **MIT** | 147 | 2025-07-23 | Customer-facing erasure and export with configurable privacy rules. E-commerce, not editorial — but the **best-built erasure UX in open source**, and worth reading as the reference implementation a newsroom product should imitate |
+| **WordPress GDPR data-request forms** | https://github.com/audrasjb/gdpr-data-request-form | GPL-2.0 | 23 | **dead 2020-03-07** | Front-end personal-data export/erasure forms on top of WordPress core's own GDPR tools. Relevant because **WordPress core already ships export/erasure primitives** that most publishers never surface; the plugin that surfaced them has been dead for six years. GPL-2.0 — cannot be linked into a closed product |
+| **rtbf.ir** | https://github.com/rtbf-ir/rtbf.ir | **Apache-2.0** | 218 | **2026-11-27** | The highest-starred RTBF repo on GitHub: a curated **directory of account-deletion links** for Persian web services. Not an engine. Listed so nobody mistakes the star count for capability |
+| **laravel-gdpr-dsar** | https://github.com/jeffersongoncalves/laravel-gdpr-dsar | **MIT** | 2 | 2026-11-24 | GDPR Arts. 15–22 for Laravel: identity check, the **one-month deadline with Art. 12(3) extension**, automatic export and erasure. Two stars, and the only artefact found that encodes the statutory clock |
+| **dsar-warden** | https://github.com/MrLouisWright/dsar-warden | **MIT** | 2 | 2026-11-04 | Assembles an Art. 15 export bundle from CSV/JSON/JSONL and checks it: subject matching, secrets removed, **third-party data flagged**, identity verification, deadline. Zero deps, SARIF output, GitHub Action |
+| **elabftw-gdpr** | https://github.com/harrytyp/elabftw-gdpr | **MIT** | 4 | 2026-11-23 | A CLI that answers DSARs for one specific application's user data. Included as evidence of the fragmentation pattern: after `fides` archived, this is the shape the space took |
+
+**What to tell a publisher:** the reusable parts are `magento2-gdpr`'s UX, `dsar-warden`'s bundle
+checks and `laravel-gdpr-dsar`'s statutory clock. Nothing here knows what a *news archive* is — that an
+article has a URL that must keep resolving, a search-engine footprint that must stop, and a public-interest
+defence that must be recorded. That is the build.

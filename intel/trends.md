@@ -4707,3 +4707,63 @@ immune to the referral collapse: a structural reason it is where budget goes.
 Eleven-plus active vendors shipping through 2026 (Chyron Weather 2.3 in February, 2.4 in June), zero open
 peers. The honest prediction is that this does **not** change, because the deliverable is brand rather
 than capability — see the falsifiable prediction recorded in `compose/patterns.md` for this pass.
+
+## Pass 48 (2026-11-27) — the post-publication plane: corrections, retractions and the erasure request
+
+The eight-file grep that opened this pass found the whole post-publication vocabulary missing. What the
+research then found is a plane where the law is accelerating in three regions and the code is going
+backwards.
+
+### 1. The judgment layer regressed — a first for this KB
+
+Across 47 prior passes the structural law held in three steps: declaring is a format problem (healthy),
+honouring is a judgment problem (dormant), liquidating is pure judgment (nothing). Pass 48 confirms it a
+sixth time and adds a new failure mode: **`ethyca/fides`, the only mature open-source DSAR platform —
+484★, 4,774 commits, Apache-2.0, CLI + admin UI + Privacy Center — was archived on 2026-08-28.** Its
+predecessor `fidesops` was archived in 2022. The layer did not fail to appear; it appeared, matured and
+was switched off, and what replaced it is ★2–4 micro-tools pushed in Nov 2026. When a plane's economics
+do not support a maintainer, open source does not degrade gracefully — it stops.
+
+### 2. The standards ceiling is three enum values
+
+Read from the schema files rather than the documentation: ninjs `pubstatus` is an enum of exactly
+`usable` / `withheld` / `canceled`, **unchanged across v1.2, v1.4 and v2-rc**. That is the complete
+machine-readable vocabulary the news industry has for "do not read this story any more". No reason code,
+no correction text, no pointer to the corrected version, no de-indexing instruction, no effective date.
+schema.org does better (`correction`, `correctionsPolicy`, `CorrectionComment`, from The Trust Project)
+and still files `correction` under "new/pending". **The interchange format cannot express the remedy that
+courts are now ordering** — which is exactly why every implementation above it is bespoke.
+
+### 3. "De-index" is an SEO word, not a legal one
+
+In open source the plane's vocabulary exists only in its marketing sense: `noindex` returns 4,902 repos,
+all sitemap and SEO tooling; `deindex` returns 24, of which the top hits are an **Illumina DNA-barcode
+deindexer** and an OpenCOLLADA deindexer. `noindex takedown` returns **zero repositories**. `errata
+newsroom`, zero. `right of reply`, 77 results and zero relevant. A publisher served with a de-indexing
+order is, in open-source terms, alone.
+
+### 4. The remedy the law actually wants is *anonymise and hide*, not *delete*
+
+This is the most commercially useful trend of the pass, and it inverts the obvious product. Italian
+practice reported this year has the **publisher insert metatags** that hide an article from general search
+engines **while keeping it in the historical archive** — and a 2026 ruling attached damages to *delay* in
+de-indexing. So the deliverable is not an erasure button. It is: keep the URL resolving, suppress the
+search footprint, record the effective date, and prove it. Note the source quality: this comes from legal
+commentary (edit.legal), not the ruling text, so it is carried here as **reported, not confirmed** —
+see the informed gaps in `intel/market.md`.
+
+### 5. The compliance layer grows at half the rate of everything else in this KB
+
+Subject-access-request software: **$1.57B (2025) → $1.78B (2026), 13.3% CAGR** (The Business Research
+Company via Research and Markets). Every creative plane in this KB runs 25–36%. The gap is the finding:
+the obligation is growing fast while the *tooling* market grows slowly, because the work is absorbed by
+lawyers and editors rather than software. That is a services opportunity, not a licence opportunity —
+which is the right shape for Globant.
+
+### 6. Where AI adoption actually lands in European media
+
+imec-SMIT (May 2026) finds Europe's media sector most active at the application layer, in three areas:
+**archive search and retrieval**, newsroom productivity, and audience-facing products. The first of those
+is this plane's liability surface — the better the archive search, the more findable the article somebody
+has a legal right to make unfindable. Adoption of retrieval and exposure to erasure duties are the same
+project, and nobody is selling them as one.

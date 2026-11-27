@@ -1790,6 +1790,39 @@ date and the RadioDNS figures are secondary-source only.
   rules specific to media** surfaced; **Canada (ECCC) and Mexico (CONAGUA/SMN) weather-data licensing
   terms were not located this pass** and remain open for a follow-up.
 
+### Pass 48 (2026-11-27) — the post-publication layer in North America
+
+**The regional fact that defines the opportunity: the two countries point in opposite directions.**
+
+- **United States — no erasure duty against the archive.** There is no federal right to be forgotten, and
+  as of 2026 **no state has enacted one for news articles or search results**. AI regulation is a
+  state-level, harm-mitigation affair; the likelihood of federal AI legislation largely evaporated after
+  2025. A July 2026 bill would bar training on minors' chat logs and require affirmative consent for
+  adults' — a consent-and-training question, not an archive question.
+- **Canada — an extraterritorial one.** A Canadian court ruling, reported in the Digital Policy Alert
+  roundup for May 2026, **upheld the right to be forgotten and ordered global de-indexing of judicial
+  records.** Within one region, a US publisher has no erasure obligation against its archive and a
+  Canadian publisher may face a worldwide one.
+
+**What to sell, by buyer:**
+
+| Buyer | The job | Why they buy now |
+|---|---|---|
+| Canadian publishers and legal-information providers | A de-indexing executor with a provable effective date, scoped to judicial-record content | A global de-indexing order is an engineering instruction, and nothing open source performs it |
+| US publishers with CCPA/CPRA intake | DSAR intake and response for *reader* data (not editorial content) | `fides` archived 2026-08-28; whatever they adopted is now read-only, and the replacements are ★2–4 |
+| US newsrooms | Corrections and post-publication monitoring | `newsflow-oss` is the only candidate and is a 6-commit, single-author release; the First-Amendment position means the demand is reputational, not statutory |
+
+**Also live in the region:** Penske Media sued Google (2025) over AI Overviews cannibalising referral
+traffic, and Google has moved to dismiss. Publishers are pushing for scraping regulation, and a
+Canadian–European publishers' coalition pressed for stronger safeguards on unauthorised AI use of news
+content ahead of an EU–Canada summit.
+
+**Informed gaps, stated rather than left silent:**
+- No source found on how Canada's global de-indexing order interacts with AI training or AI search.
+- **No usable North American newsroom AI-adoption figure** surfaced in this pass's searches. The adoption
+  numbers available are global or European; do not present a NA adoption rate from this KB.
+
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3772,6 +3805,41 @@ matters for any Swiss engagement. Norway (2017) remains the only completed natio
   (WMO Regional Association for Africa, **no licence file**). WIS2 adoption is the route in — but the
   licensing terms of individual African national services are unverified here, and silence is not coverage.
 
+### Pass 48 (2026-11-27) — the post-publication layer in EMEA
+
+**The only region where de-indexing is an operational instruction to the publisher rather than a request
+to a search engine.** That single distinction is the whole regional thesis.
+
+- **Italy — the publisher does the work.** Decisions reported this year have the **publisher insert
+  technical metatags** that hide the article from general search engines, while the outlet **retains the
+  right to keep the article in its historical archive**. A 2026 ruling also found Google liable in damages
+  for **delay** in de-indexing time-barred facts. Damages attached to latency is the detail that converts
+  this from a policy into a software requirement: the system must record *when* suppression took effect.
+- **GDPR — the journalism exemption is the battleground.** Art. 17(3)(a) freedom-of-expression grounds are
+  what Google invokes to refuse a significant share of RTBF requests aimed at news articles.
+- **EDPB — Guidelines 03/2026 on web scraping for generative-AI training** were adopted in draft on
+  2026-07-07, preserving data-subject rights as a safeguard.
+- **Adoption, with a number this KB can stand behind.** imec-SMIT (May 2026): Europe's media sector is
+  most active **at the application layer**, in three areas — **archive search and retrieval**, newsroom
+  productivity, and audience-facing products — while noting adoption does not automatically bring control
+  or revenue, since many applications still run on US cloud infrastructure or proprietary models.
+- **Press-freedom counterweight:** a Media Freedom Rapid Response briefing warns that legislative
+  initiatives in several states risk eroding press freedom, particularly around journalists' data and
+  anonymous sources — the reason an erasure product aimed at newsrooms must be built as a *decision
+  record*, not an automatic deletion.
+
+**What to sell:** the de-indexing executor, and it is the strongest sale in any region. Keep the URL
+resolving, suppress the search footprint, stamp the effective date, retain the archive copy, and produce
+an audit trail — because the measured liability here is **delay**, not refusal.
+
+**Informed gaps:**
+- **The Italian metatag requirement is reported by legal commentary (edit.legal), not read from the
+  ruling.** Carried as reported, not confirmed. Do not quote it to a client as settled law.
+- No primary CJEU or national court text on erasure against press archives was reached in this pass;
+  searches returned law-firm summaries and vendor guides.
+- No verified figure for the size of the European DSAR/compliance-tooling segment specific to media.
+
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -5731,6 +5799,41 @@ for APAC in pass 8, now with a radio-specific regulator document behind it.
   defining gap of the decade; APAC is **second only to North America in GenAI adoption pace**; regional
   **ad growth is forecast at 5.2 % YoY in 2026 — the slowest since the pandemic**. Public broadcasters in
   Australia and Singapore are applying AI to newsroom workflow, archiving and verification.
+
+### Pass 48 (2026-11-27) — the post-publication layer in APAC
+
+**The most active right-to-be-forgotten jurisdiction in the world this year is in this region, and the
+region's largest data-protection statute simultaneously declines to grant an erasure right.** Both facts
+are true at once and they are the regional thesis.
+
+- **India — the courts are moving fast.** The Delhi High Court (2026, *Laksh Vir Singh Yadav v. Union of
+  India*, cited as 2026:DHC:4891) held the right to be forgotten is **a facet of Art. 21** and directed
+  **de-indexing, delinking and masking of judicial records** for acquitted persons, discharged accused,
+  parties to matrimonial disputes and sexual-offence victims — while **refusing** it for convicted
+  persons, public figures and matters of live public interest, and holding that de-indexing **does not
+  undermine open justice**. It is a single-judge decision. The Supreme Court issued notice in February
+  2026 in a matter concerning old news reports about a banker discharged in a money-laundering case.
+- **India — the statute says otherwise.** The DPDP Act provides **no broad erasure right**; it offers
+  withdrawal from processing instead, and scraped public data used for AI training may fall outside it.
+  Analysts also report India signalling in July 2026 that it may pursue dedicated AI legislation.
+- **Korea:** a comprehensive, binding, risk-tiered AI law, including a requirement that **synthetic media
+  hard to distinguish from real content be labelled**.
+- **Japan:** consulted during 2026 on a new AI Basic Plan.
+- **A codebase detail that belongs in this region:** the only open-source newsroom corrections workflow
+  found anywhere, `Yaogui415/newsflow-oss` (MIT, 104★), is a **Chinese-language codebase** — its
+  corrections entity is 勘误单 ("errata ticket"). The one artefact on this plane was built in APAC.
+
+**What to sell:** a **policy engine per jurisdiction**, not a compliance mode — the same conclusion an
+earlier pass reached for APAC on a different plane, now confirmed on this one. A publisher operating
+across Delhi, Seoul and Tokyo faces a court-ordered masking duty, a labelling duty and a consultation,
+and the only sane architecture is one that treats the rule as data.
+
+**Informed gaps:**
+- **Nothing found on APAC newsroom AI adoption**; Japan and Korea media-specific coverage was thin in
+  every search run this pass.
+- The Delhi judgment's text was not read directly — the account here rests on legal reporting
+  (SCC Online, Verdictum). The case citation should be verified against the judgment before client use.
+
 
 ### LATAM
 
@@ -7778,6 +7881,44 @@ reachable or surfaced in this pass's searches.
 - **Informed gap:** **no official INMET API was located**, and **Chile (DMC), Colombia (IDEAM) and Peru
   (SENAMHI) licensing terms were not verified this pass.** Written down rather than left silent.
 
+### Pass 48 (2026-11-27) — the post-publication layer in LATAM
+
+**Structurally the inverse of EMEA, and this is the most important regional distinction on the plane: in
+Latin America the defensible act is usually the refusal, not the deletion.**
+
+- **Brazil — the right to be forgotten is unconstitutional.** The Supremo Tribunal Federal held in
+  RE 1.010.606 (February 2021) that the idea of a right to be forgotten is **incompatible with the
+  Federal Constitution**: freedom of expression prevails over the passage of time as a limit on
+  disseminating truthful, lawfully obtained facts. Only Justice Edson Fachin favoured the right.
+  **ABRAJI**, the investigative-journalism association, intervened **against** its application —
+  i.e. the press organised itself as a party in the leading case.
+- **The regional human-rights position.** The IACHR Special Rapporteur for Freedom of Expression (RELE)
+  treats private de-indexing with vague limits as problematic in the Americas, and notes that removal
+  requests are **commonly made directly to newspapers, blogs and journalists**, which can suppress
+  information of public interest. That is the operational reality: the request arrives at the newsroom,
+  not at a search engine, and there is no statutory machinery behind it.
+- **Argentina — unresolved, and flagged as such.** Sources conflict on *Denegri v. Google*: one reports
+  that Argentine courts applied the right to be forgotten for the first time; another that the Supreme
+  Court prioritised freedom of expression and that the right is not explicitly recognised. **This KB does
+  not resolve it and no engagement should be sold on it.** The second source is a low-quality blog; the
+  judgment itself was not reached this pass.
+
+**What to sell — and it is a different product from the EMEA one:**
+
+| Buyer | The job |
+|---|---|
+| Brazilian and regional publishers, press associations (ABRAJI-adjacent) | **The refusal file**: a structured, timestamped record of each removal request, the public-interest test applied, who decided, and why it was declined — defensible if it is ever litigated or publicised |
+| Newsrooms receiving direct requests (the RELE pattern) | Intake and triage that does not default to deletion, with anonymisation (`arx`, `presidio`) available as the proportionate middle remedy |
+| Judicial-information and legal-publishing providers | Masking of party names in published decisions — the one remedy that travels across all four regions |
+
+**Informed gaps, explicit:**
+- **No 2026 rulings or regulatory changes found for Brazil or Argentina.** The governing authority on this
+  plane is still 2021, and every LATAM source reached in this pass dates from 2021–2024. An informed gap:
+  searches were run in Spanish for *derecho al olvido*, STF, Argentina, desindexación and periodismo.
+- Mexico, Chile, Colombia: no plane-specific authority found this pass.
+- No LATAM figure for compliance-tooling spend in media.
+
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -9553,3 +9694,27 @@ the content is openly licensed (public domain / CC-BY-4.0), and the tooling abov
 **the healthiest foundation layer in this KB** — Apache-2.0 and BSD-3 libraries maintained by ECMWF,
 Unidata, the US DOE and the WMO itself. Where the content is free, open source thrives. Where the
 *output is a brand* — step 3 — it stops regardless.
+
+## Market size — pass 48 addendum (2026-11-27): the obligation grows fast, **the tooling market grows at half the rate of every creative plane in this KB**, and the newsroom layer is not sized at all
+
+Three figures, and the interesting one is the slow one.
+
+| Segment | Figure | Source | Confidence |
+|---|---|---|---|
+| **Subject-access-request software** | **$1.57B (2025) → $1.78B (2026), 13.3% CAGR** | The Business Research Company, via Research and Markets | The most specific figure found, and the one to quote |
+| Privacy-management software, total | **$6.24B (2026) → $17.63B (2031), 23.08% CAGR** | Research and Markets | Plausible; mid-range of the spread |
+| Data-privacy software, total | **$7.54B (2026) → $60.40B (2034)** — but the same publisher's page also states **$5.37B (2026) → $45.13B (2034)** | Fortune Business Insights | **Low: internally inconsistent on its own page.** Recorded as a warning, not a number |
+| Privacy-management software | 2025 base $2.7B, 40.5% growth 2026–2032 | PS Market Research | Outlier, ~2× the CAGR of every other source |
+| **Newsroom corrections / de-indexing / right-of-reply tooling** | **No figure exists** | — | Searched; nothing found |
+
+**The finding is the 13.3%.** Every creative plane in this KB runs 25–36% CAGR. The request-handling layer
+grows at roughly half that, while the legal obligation behind it is accelerating in three of four regions
+(Italy attaching damages to de-indexing delay, the Delhi High Court ordering masking, Canada ordering
+global de-indexing). An obligation rising faster than its tooling market means the work is being absorbed
+by **lawyers and editors, not software** — and that is a services shape, not a licence shape. For Globant
+that is the better outcome: the engagement is the build and the policy work, not a seat count.
+
+**A refusal, consistent with earlier passes:** this KB will not publish a size for the newsroom
+post-publication segment. It is not sized by anyone, and the adjacent DSAR figure covers enterprise
+subject-access software — a different buyer with a different budget. Quoting it as a media number would
+be the same scope error this file has refused eleven times before.

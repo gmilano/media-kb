@@ -10,6 +10,23 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 48: the post-publication layer (**a mature platform archived, and a standards ceiling of three enum values**)
+
+| Repo | License | ★ | Pushed | Why it moved onto the radar |
+|---|---|---|---|---|
+| https://github.com/schemaorg/schemaorg | **Apache-2.0** | 6,322 | **2026-11-27** | Pushed the day of the pass; carries `correction`, `correctionsPolicy` and `CorrectionComment` — still marked "new/pending" in its own docs |
+| https://github.com/iptc/newsinjson | **MIT** (1,131 B) | 47 | 2026-11-24 | Active. And the measurement of the pass: `pubstatus` = `usable`/`withheld`/`canceled`, unchanged across v1.2, v1.4 and v2-rc |
+| https://github.com/iptc/newsml-g2 | NOASSERTION | 20 | 2026-11-20 | Active standards work, no SPDX licence declared |
+| https://github.com/ethyca/fides | **Apache-2.0** | 484 | **ARCHIVED 2026-08-28** | The negative trend that defines this plane: 4,774 commits, then read-only |
+| https://github.com/arx-deidentifier/arx | **Apache-2.0** | 741 | 2025-10-01 | The anonymise-instead-of-delete path; healthy but slow-moving |
+
+**Method note recorded here because it will bite every industry in this KB:** `git ls-remote` **follows
+GitHub's transfer and rename redirects**. `microsoft/presidio` answers `ls-remote` perfectly — and is not
+the canonical slug; the project is now `data-privacy-stack/presidio`. Existence checks prove
+*reachability*, never *canonicality*. Only `search/repositories` with `repo:<slug>` distinguishes them: a
+moved slug returns HTTP 422 "cannot be searched". A stale slug passes every existence test this KB has
+been using.
+
 ## 2026-11-27 — pass 47: environmental-data infrastructure (**the healthiest foundation layer in this KB, and open source is literally the global weather-exchange infrastructure**)
 
 Infrastructure for the weather desk: GRIB/NetCDF decode, radar, satellite, met computation and the WMO

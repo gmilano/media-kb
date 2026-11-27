@@ -4523,3 +4523,134 @@ unaccountable software — and ExpTech's own data carries a **"reference only"**
 `dsame` disclaims life-safety use outright. **The trust layer is the product, and nobody is selling
 it.**
 
+
+## Pass 46 (2026-11-27) — trends in the radio delivery & hybrid-radio metadata plane
+
+### 1. The structural law, inverted for the first time in 46 passes: **licence quality tracks how little the real world has to permit**
+
+Every previous plane in this KB produced the same finding — rich permissive substrate, empty agent layer,
+and a licence or content paywall as the blocker. **This plane inverts all three**, and the mechanism is
+clean enough to state as a law:
+
+| Layer | Permission required from the world | Licence | Health |
+|---|---|---|---|
+| AI-DJ agents | **none** | **MIT** | `subwave` 1,687★, pushed day of pass |
+| IP stream delivery | **none** | **MIT / Apache-2.0** | `srs` 29,466★; `tinyice` Apache-2.0 373★, day of pass |
+| Stream orchestration | none | GPL-2.0 | `liquidsoap` 1,763★, day of pass |
+| DAB+ transmission | **spectrum licence + AAC patents** | GPL-3.0 + 4 others | 30–60★, maintainer disclaims redistribution |
+| RDS transmit | **a transmitter** | **GPL-3.0, 7 of 7** | hobby scale |
+| Hybrid-radio metadata | **be a licensed broadcaster with an OEM contract** | Apache-2.0 | **96★ across 8 repos, half dormant since 2008–2011** |
+
+**The law: the more the real world must permit before you can run the code, the worse the open supply —
+regardless of licence.** The bottom row proves the licence is not the variable: six of its eight repos are
+Apache-2.0 or MIT and it is still the most abandoned layer in the plane. **What collapsed there was not
+permission to use the code. It was the population able to use it.** Hobbyists can run an internet radio
+station; they cannot sign a contract with Audi.
+
+**Falsifiable prediction, recorded for a future pass:** if this law holds, then any plane whose
+participation requires a credential, a licence or a counterparty will show thin open supply **even when
+its licences are permissive** — the inverse of pass 45, where the credential barrier coincided with
+copyleft. Check it against the next plane with a permissive standard and a gated participant set.
+
+### 2. The agent layer is the healthiest layer, and that is genuinely new
+
+`perminder-klair/subwave` (MIT, **1,687★**, 144f, pushed **2026-11-27**), `robert-dean/deadair` (MIT,
+145★, **0 open issues**, 2026-11-24), `johncrash64/radio-dj` (MIT, 63★). Three MIT agents, one of them
+pushed the day of the pass, **all three targeting Icecast directly** — `radio-dj` describes itself as
+*"persistent ffmpeg→Icecast with live ducking, LLM banter, BYOK"*. Pass 44 recorded "the agent layer is
+empty, and the substrate for it is unusually good"; here the agent layer arrived **first** and the
+substrate it chose was the **permissive** one. Agents colonise the layer with no gatekeeper.
+
+**The caution, measured:** three further AI-radio repos (`writ-fm` 384★, `Claudio-FM` 79★, `tysa` 27★)
+carry **no licence at all** — **490 of the 2,385 stars in the layer are unusable**, absence verified
+against 200 READMEs on both branches.
+
+### 3. The dated event in this plane: Icecast's old line goes end-of-support in **34 days**
+
+Icecast **2.5.0** became the stable line on **2025-12-31**; **support for 2.4.4 ends 2026-12-31**; and
+**Debian's tracker shows the 2.5.0 migration BLOCKED** ("Updating icecast2 would introduce bugs in
+testing"). Simultaneously two things moved: **Liquidsoap now ships an experimental built-in
+Icecast-compatible server** (so the separate daemon becomes optional), and **`DatanoiseTV/tinyice`
+(Apache-2.0, 373★) was pushed the day of this pass** — the only permissively-licensed Icecast-compatible
+server located anywhere.
+
+**So the incumbent is EOL inside the month, its distro successor is blocked, and both replacements
+appeared this year — one inside the orchestration layer, one permissive.** This is the clearest migration
+trigger in the plane and it needs no client education: the date does the arguing.
+*(Caveat: `icecast.org` is outside this session's network policy; both dates are secondary-source.)*
+
+### 4. The commercial centre of radio moved to the dashboard, and the open standard lost
+
+The two platforms between a station and a car screen are **DTS AutoStage** (Xperi, proprietary) and
+**RadioDNS** (open ETSI standard). The scoreboard as of this pass:
+
+- **AutoStage:** daily in-car audience measurement from **6 million vehicles**, **300+ US local
+  markets**, new **Broadcaster Portal** at NAB 2026, **free to stations** because carmakers pay Xperi.
+- **RadioDNS:** self-reported **2.5M+ cars**, "thousands of stations" — and Radio World describes
+  **"limited take-up by car manufacturers"**. Its entire open toolchain is **96 stars**; the standards
+  body's own Java library has **10**; the EBU's full-featured manager has been **dormant since 2023 with
+  89 open issues**; two client libraries have not moved since **2011** and **2008**.
+
+**The open standard is not losing on licensing or on technical merit — it is losing on maintenance and
+OEM distribution.** And the carmakers hold the last word regardless: per Radio World, both RadioDNS and
+AutoStage only *"provide guidelines and suggestions for the OEMs"*, while automakers retain
+*"a lot of creative license in how they take the information and display it."*
+
+**The trend to watch:** AutoStage is becoming a **measurement currency**, not just a display layer. Once
+in-car listening from 6M vehicles is reported across 300+ markets, the station that does not feed it is
+not merely invisible — it is **under-counted in the ratings that price its inventory**. Townsquare's
+**0.5 share before supplying metadata** is the first published number quantifying that penalty. Expect
+more such figures in 2027; they are the strongest sales evidence this plane will produce.
+
+### 5. The knowledge-content law, fourth instance — and the first time the gate is an **IEC paywall**
+
+This KB has recorded the law three times (CPT in healthcare, MedDRA in pharmacovigilance, MDS/standards
+in the IP plant): *the regulator creates the obligation, but the licence on the knowledge content decides
+whether open source can meet it.* Radio supplies the cleanest test yet, because the **same plane contains
+both outcomes**:
+
+| Standard | Body | Access | Open implementations |
+|---|---|---|---|
+| DAB (EN 300 401), DRM (ES 201 980), SPI (TS 102 818 / 102 371), MOT (EN 301 234) | **ETSI** | **free** | **They exist** — ODR chain, dablin, welle.io, AbracaDABra, python-dabepg |
+| **RDS (IEC 62106)** | **IEC** | **sold per document** | **Monoculture**: 7 of 7 transmit encoders GPL-3.0, hobby scale |
+| **HD Radio (NRSC-5)** | NRSC / **Xperi patents** | document published, **technology patent-licensed** | **Receive only, permanently** — `nrsc5` decodes; nothing encodes |
+
+**ETSI's free publication is why European radio has an open stack at all.** Where the specification costs
+money (IEC), the implementations are hobby-scale and uniformly copyleft; where the **technology** is
+patented (HD Radio), the transmit side is **structurally impossible** rather than merely thin. **Same
+industry, same decade, three access regimes, three completely different supply curves.** This is the
+strongest natural experiment supporting the law anywhere in this KB.
+
+### 6. Three standards, three regions, and LATAM has not chosen — which is itself the trend
+
+EMEA runs **DAB+** (166.6M receivers, +>10% YoY, ~100% factory fit in Italy, 98% in France). North America
+runs **HD Radio** (~125M vehicles, but only **18–21% of FM stations**). APAC's largest deployment is
+**DRM** in India (37–41 high-power MW transmitters, ~13M cars). **LATAM has no decided standard**, and the
+closest source to the question argues the eventual Brazilian answer will be **none of the three** — with
+Anatel historically declining to mandate one at all.
+
+**Consequence for 2027 planning:** the terrestrial-digital engagement that is real in EMEA has **no LATAM
+equivalent to sell yet**, and pretending otherwise is how a regional plan goes wrong. What *is* sellable
+in LATAM is the **standard-independent** layer — internet delivery (where the Icecast EOL lands on
+everyone equally) and the MIT agent layer. See `intel/market.md` for the full informed gap, including the
+Argentina and Mexico **zeros**.
+
+### 7. AI on air is becoming a regulated act, and radio is where it is most visible
+
+The AI-DJ repos are MIT and ready, but putting a synthetic voice on a licensed transmitter is now a
+regulated act in several jurisdictions, and **2026 is the year the dates landed**: China's synthetic-content
+labelling (from 2025-09-01, fines to **¥50m**); India's intermediary obligations for synthetically
+generated content (**2026-02-20**); Korea's AI Basic Act (**2026-01-22**); Vietnam's AI law
+(**2026-03-01**); California's AI Transparency Act provenance duties (**2026-08-02**); most EU AI Act
+requirements (**August 2026**), with the AI Omnibus in force **2026-07-27** pushing Annex III high-risk
+obligations to **2027-12-02**; Canada's "AI for All" strategy (**2026-06-04**) including watermarking.
+Two are radio-specific and worth naming: **Australia's media regulator published sector papers in April
+2026 mapping AI use across television, radio and news** — the only regulator found to examine radio
+directly — and **Radio France added an annex in April 2026** restricting synthetic voice (already in this
+KB from an earlier pass). **Chile's bill** on AI-generated imitations of a person's image, body or
+**voice** is the most on-point LATAM instrument for an AI presenter, and **Brazil's electoral court
+prohibits synthetic audio** favouring or harming a candidacy.
+
+**The composable consequence:** the MIT agent layer plus a per-jurisdiction policy engine is now a
+product shape, not a thought experiment — and radio is the medium where an unlabelled synthetic voice is
+hardest to hide and easiest for a regulator to sample off-air.

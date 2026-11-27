@@ -1722,6 +1722,44 @@ a compliance artefact can be sold this quarter without waiting on a regulator. L
 cyber-compliance evidence trail; keep AWARN/AEA as the roadmap conversation, explicitly labelled as
 pending FCC action.
 
+### Pass 46 (2026-11-27) — the radio delivery & hybrid-radio metadata layer in North America
+
+**The region's digital radio standard is privately owned, and that decides every opportunity here.**
+HD Radio is Xperi's, patent-licensed, and there is **no open transmit implementation and will not be one**
+— `theori-io/nrsc5` (GPL-3.0+, 974★) decodes it and nothing encodes it. So unlike EMEA, a North American
+engagement cannot touch the air interface. Everything sellable sits in **metadata and measurement**.
+
+**The numbers, all self-reported by Xperi or secondary, and flagged as such:** approximately
+**125 million vehicles** on North American roads carry HD Radio, described as over **60% of new vehicles
+shipped** in the US (Xperi, 2026). Quu's *In-Vehicle Visuals Report 2026* puts **74% of the top-100
+best-selling US models** as offering HD Radio, up from 67% a year earlier. On the station side the
+penetration is far lower and the denominators conflict: **18% of US full-power FM stations** run HD Radio
+(Radio World, *US HD Radio by the Numbers*), or **21% of commercial FM stations** on a different base. As
+of June 2025, **one** AM station remained in all-digital mode.
+
+**DTS AutoStage is the asset and it is not open.** Xperi's platform now reports in-car AM/FM audiences
+daily from **6 million vehicles** across **300+ US local markets**, and launched a **Broadcaster Portal**
+at NAB 2026. It is **free to stations** — the carmakers pay. The incentive to supply it is measured:
+Townsquare's stations showed only a **0.5 share** in AutoStage *before* they began sending now-playing
+metadata. Radio World's framing is the sales line: **"Visual Display Is a Cost of Doing Business."**
+
+**The opportunity, stated precisely.** Not an air-interface build and not a measurement product. It is
+**metadata supply and normalisation**: taking a station group's automation output (LibreTime, AzuraCast,
+Nebula, or a commercial system) and emitting it correctly into AutoStage *and* RadioDNS SPI/RadioVIS,
+with artwork, now-playing, programme schedule and ad-break signalling, consistently across dozens or
+hundreds of stations. The open code to do that is **96 stars across 8 repos, half of it dormant since
+2008–2011**, so it is a build with a clear benchmark. The buyer is a **station group**, the trigger is
+**under-measurement**, and the proof is a before/after share figure of the kind Townsquare published.
+
+**Second opportunity, smaller and dated:** Icecast 2.4.4 support ends **2026-12-31** and Debian's 2.5.0
+migration shows **BLOCKED**. Any US broadcaster or webcaster on a distro-packaged Icecast has an
+unsupported streaming server within the month and no clean upgrade path. `DatanoiseTV/tinyice`
+(**Apache-2.0**, 373★, pushed 2026-11-27) is the only permissive escape route located, and it is early
+enough that migration is consulting work rather than a download.
+
+**Informed gap:** `icecast.org` and `radiodns.org` are outside this session's network policy, so the EOL
+date and the RadioDNS figures are secondary-source only.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3625,6 +3663,51 @@ a national regulator, a public-service broadcaster or an MNO with an Art.110 obl
 differentiator is that the standard itself admits the trust gap you are closing. Name Malta as the
 proof that non-compliance is real and documented.
 
+### Pass 46 (2026-11-27) — the radio delivery & hybrid-radio metadata layer in EMEA
+
+**EMEA is the only region where the whole chain is open, standardised and legally mandated-adjacent — and
+therefore the only region where an engagement can touch the air interface itself.** DAB+ is a European
+standard (ETSI EN 300 401), ETSI publishes its documents **free**, and the only open DAB+ transmission
+chain in existence — **ODR-mmbTools** — is a European project. The hybrid-radio metadata standard
+(RadioDNS, ETSI TS 102 818 / 102 371 / EN 301 234) is likewise European, maintained by the **EBU** and
+the **BBC**, whose repos are the plane's entire open codebase.
+
+**The deployment numbers, and these are the strongest in the plane.** WorldDAB announced at its
+**Automotive 2026 event in Frankfurt (June 2026)** that global DAB/DAB+ receiver sales passed
+**166 million** — **166.6 million devices across 11 core markets, up more than 10%** on the February 2025
+figure. DAB+ is **standard in almost all new cars sold in Europe**: **98% of new cars sold in France in
+2025** had it as standard and **Italy reports 100% factory fit**. **France's DAB+ coverage reached 80% of
+the population** and France and Italy were the fastest-growing large markets. Roughly **55 countries**
+were running DAB as an FM alternative as of 2025. **Saudi Arabia** is cited as adopting similar regulatory
+approaches, which places part of the opportunity in the Middle East rather than only Europe.
+
+**RadioDNS's own centre of gravity is here too:** it ran **Automotive Workshop XXVI on 2026-11-24 —
+three days before this pass** — and an Automotive Workshop in London in May 2026, both aimed at
+broadcaster/OEM alignment. Its claimed deployment is **2.5M+ cars** across **Audi, VW, Porsche and BMW**
+— all European marques.
+
+**The opportunity, and EMEA gets two that no other region gets.**
+
+1. **Small-scale and community DAB+ build-out.** The complete open chain exists (ODR-mmbTools + a
+   Raspberry Pi with an EasyDAB v2 board replaces the software modulator), and the UK's small-scale DAB
+   framework plus France's and Italy's growth make the buyer real. **But the licence gate is hard and must
+   be run first:** the chain is GPL-3.0 and `ODR-AudioEnc` is **five licences statically linked** whose
+   maintainer writes that binary redistribution legality *"is unclear to me"*, with **AAC patent licensing
+   via Via Licensing** on top. This is a deliverable for a broadcaster operating its **own** multiplex, not
+   a product to resell. See `compose/patterns.md` Pattern 101.
+2. **Being the maintainer of the hybrid-radio layer.** The EBU built the correct platform —
+   `ebu/radiodns-manager`, covering RadioVIS, RadioEPG **and** Service Following — and it has been
+   **dormant since 2023-05-01 with 89 open issues**. `ebu/content-manager` has been **dead since 2017**.
+   The official `radiodns/java-radiodns` has **ten stars**. Six of the eight RadioDNS repos are Apache-2.0
+   or MIT, so **the licence permits exactly the contribution the layer needs**. For a services firm this
+   is unusually clean positioning: adopt or fork a permissively-licensed, standards-body-blessed,
+   deployed-in-millions-of-cars codebase that **nobody is maintaining**, in the region where the standards
+   body and the carmakers both sit.
+
+**The regulatory watch item, unresolved:** Switzerland's FM switch-off was scheduled for **2026** and is
+**reported to have been reversed** — I could not confirm the reversal from a primary source, and it
+matters for any Swiss engagement. Norway (2017) remains the only completed national FM switch-off.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -5502,6 +5585,51 @@ software.
 audio and rich alerts matter more in APAC's language-dense markets than anywhere else — and with
 **verification**: the region's own tooling is explicitly labelled "reference only", which is an
 admission that nobody has built the trusted path.
+
+### Pass 46 (2026-11-27) — the radio delivery & hybrid-radio metadata layer in APAC
+
+**APAC is the one region running the third standard, and it is the standard with almost no code.**
+India's All India Radio has deployed **DRM (Digital Radio Mondiale)** nationally in the MW and SW bands —
+**37 high-power DRM medium-wave transmitters and 4 shortwave** by the most concrete trade-press count,
+though a second source says **41**, so the exact figure is unsettled. Nautel has shipped six further
+high-power DRM-capable MW transmitters for AIR. Roughly **13 million cars in India** were expected to
+carry digital radio by the end of the year, and an **MG electric vehicle with a line-fitted DRM receiver**
+was used at BES Expo 2026 to demonstrate live AIR DRM broadcasts. At that same expo the DRM Consortium
+pitched DRM as the route for **FM digitisation** in India — i.e. the next decision is still open. An
+AROI-linked October 2026 piece argues a full-digital medium-wave network *"could serve in the region of
+900 million people"*; that is **advocacy, not an AIR figure**, and should be quoted as such.
+
+**Against that deployment, the open-source supply is the thinnest in this entire plane.** The query
+`digital radio mondiale` returns **11 repositories worldwide**. Exactly one is alive:
+`CasualArclamp/DecDRM` (GPL-2.0, **14★**, pushed 2026-11-17), a Rust receiver **and transmitter**.
+Opendigitalradio's own DRM+ receiver is titled **"(unmaintained)"** and last moved in **2018**. So the
+digital radio standard addressing the largest radio audience on earth has **one live repository with
+fourteen stars**, and it is GPL-2.0.
+
+**The regulatory frame is the region's defining feature and it is divergent, which was already this KB's
+APAC finding and holds again here.** Latham & Watkins' APAC analysis describes three diverging regulatory
+categories rather than one. Concretely, for anything that touches synthetic or AI-generated audio on air:
+**China** enforces registration plus synthetic-content labelling (effective 2025-09-01) with fines up to
+**¥50 million**; **South Korea's AI Basic Act** took force **2026-01-22** and Korea declined a TDM
+copyright exception in February 2026; **Vietnam's** AI law is reported effective **2026-03-01** with
+implementing Decree 142/2026; **India's** intermediary labelling obligations for synthetically generated
+content took effect **2026-02-20** and in July 2026 the government signalled it may now pursue dedicated
+AI legislation; **Japan** stays principles-based; **Singapore** relies on AI Verify; **Australia** is
+consulting on mandatory guardrails, set up an **Office of AI** in July 2026, and its media regulator
+published sector papers in **April 2026 mapping AI use across television, radio and news** — the only
+regulator in any region found to have examined **radio** specifically. A regional APAC media review in
+April 2026 concluded AI tools are in operational newsroom use while governance remains *"incomplete,
+delayed, or absent"*.
+
+**The opportunity, and it is shaped by the thin code rather than the big audience.** Two things:
+(1) **DRM-side engineering is effectively greenfield** — a client wanting monitoring, receiver
+integration or content/PAD generation for DRM30 has one GPL-2.0 repo to start from, so the work is a
+build and the differentiation is durable; and (2) the **AI-DJ agent layer is MIT and ready**
+(`perminder-klair/subwave` 1,687★, `robert-dean/deadair` 145★), which matters more here than elsewhere
+because an **Australian** regulator is already writing about AI on radio and a **Chinese** or **Indian**
+deployment carries hard labelling duties. The sellable artefact is an **AI-on-air policy engine per
+jurisdiction** wired to those agents — the same per-jurisdiction policy-engine conclusion this KB reached
+for APAC in pass 8, now with a radio-specific regulator document behind it.
 
 ### LATAM
 
@@ -7451,6 +7579,65 @@ authentication and verification layer**, sold against a national incident in the
 standards admission from EMEA. Brazil is the one country where both halves can be sold in the same
 meeting.
 
+### Pass 46 (2026-11-27) — the radio delivery & hybrid-radio metadata layer in LATAM
+
+**This region is an informed gap in this plane, and the gap is the finding. I searched and did not find;
+that is recorded here rather than filled with inference.**
+
+**What was searched** (2026-11-27, in English and Spanish/Portuguese): Brazilian digital-radio standard
+decisions, Anatel and Ministério das Comunicações positions, DRM in the Brazilian AM band, and digital
+radio in Argentina and Mexico.
+
+**What was found, and its quality:**
+
+- **No official Brazilian decision on a digital radio standard appeared in any search.** Historically
+  Anatel's superintendent stated the **government would not define the standard**, leaving broadcasters
+  to choose — and that report is years old. Older material records a preference for in-band
+  on-channel systems (IBOC) among AM/FM broadcasters on cost grounds, with Radiobras and UnB holding DRM
+  test authorisations.
+- **DRM30 medium-wave field trials did run in Brazil**, in São Paulo, in simulcast beside an analogue AM
+  signal, with the Ministry of Communications, **Anatel** and INCT-CSF; the Padre Anchieta Foundation held
+  a DRM testing authorisation. These are **old academic/field-trial references, not current policy.**
+- **Current Brazilian commentary is blog-level and self-contradictory.** One Brazilian blog argues digital
+  radio **will not** arrive in 2026 but could deploy quickly in **2027**, and that **none of the three
+  major global systems** (DAB+, DRM, HD Radio) will be the one chosen. Another post on the **same blog**
+  advocates DRM in the AM band, noting the Brazilian AM band is *"now virtually empty"* after the FM
+  migration and that Brazil has continental potential to lead DRM for Latin America. **The same outlet
+  disagrees with itself**; neither post is a decision.
+- **The DRM Consortium lists a new member in Brazil** and states a general aim to have the standard
+  adopted regionally — a vendor-body objective, not an adoption.
+- **Argentina and Mexico: nothing relevant was returned at all.** Not a thin result — **zero** on digital
+  radio standards or hybrid-radio metadata for either market.
+
+**Why this matters rather than being a shrug.** Every other region in this plane has a decided air
+interface: EMEA has DAB+ (166.6M receivers), North America has HD Radio (~125M vehicles), APAC has DRM in
+India. **LATAM has no decided standard**, and the one source closest to the question says the eventual
+answer will be **none of the three**. So the terrestrial-digital work that is sellable in EMEA and the
+HD-Radio-metadata work that is sellable in North America **have no LATAM equivalent yet.**
+
+**What is therefore sellable here now, and it is the one layer that needs no standard decision.**
+Internet radio delivery and the agent layer are **standard-independent**: Icecast/Liquidsoap/tinyice and
+the MIT AI-DJ repos work identically in São Paulo and Stockholm. Two concrete items:
+
+1. **The Icecast EOL is region-neutral and lands on everyone.** 2.4.4 support ends **2026-12-31** with
+   Debian's 2.5.0 migration **BLOCKED** — and LATAM's large community and religious-broadcaster
+   webcasting estate is disproportionately on self-managed, distro-packaged Icecast. This is the most
+   immediately actionable radio engagement in the region, and it is a migration, not a research project.
+2. **Spanish/Portuguese-language AI-DJ and automation work on an MIT base.** `perminder-klair/subwave`
+   (MIT, 1,687★), `robert-dean/deadair` (MIT, 145★) and `johncrash64/radio-dj` (MIT, 63★) are permissive
+   and current, and the region's newsroom buyers have already shown they will commit to **documented AI
+   policy** — Listín Diario's January 2026 journalist guidelines, El Comercio's ~10-page AI guide, and the
+   May 2026 SiPreBA / Argentine Federation of Press Workers / Heinrich Böll report. A client who has
+   published an AI policy needs to **evidence** it, and on-air synthetic voice is the most visible place
+   that obligation bites. Note also **Chile's bill** regulating AI-generated imitations of a person's
+   image, body or **voice** — which is the single most relevant LATAM instrument for AI radio presenters —
+   and **Brazil's electoral court prohibition on synthetic audio** favouring or harming a candidacy, which
+   makes **political-advertising audio screening** a concrete, dated LATAM radio deliverable.
+
+**To close this gap properly, a future pass needs:** Anatel and Ministério das Comunicações primary
+sources in Portuguese, plus ENACOM (Argentina) and IFT (Mexico) spectrum/standard filings. None were
+reachable or surfaced in this pass's searches.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -9115,3 +9302,73 @@ in the hardware the client already owns and the obligation they already carry. T
 would control it is **unsized because it is largely unbuilt** — which is the opportunity, and also the
 reason there is no TAM to borrow.
 
+
+## Market size — pass 46 addendum (2026-11-27): radio is the **best-agreed headline figure in this entire KB**, and the layer that decides a station's revenue is **still not sized**
+
+### Radio advertising, headline — quoted only **1.12× apart**, the narrowest spread in 46 passes
+
+| Source | 2026 figure | Forward view | Definition |
+|---|---|---|---|
+| The Business Research Company (pub. Jan 2026) | **$29.09B** (+4.7% on $27.78B in 2025) | $36.71B by 2030, **6% CAGR** | Radio advertising |
+| The Business Research Company — traditional only | **$27.97B** | $32.66B by 2030, **4% CAGR** | Non-digital radio advertising |
+| Mordor Intelligence | **$31.43B** | $49.25B by 2031, **9.36% CAGR** | Radio advertising |
+| PQ Media | *no absolute given* | **+8.5% in 2026** (after +4.8% in 2025) | **Broader**: includes streaming, podcasting and events |
+
+**$27.97B–$31.43B, i.e. a 1.12× spread.** Compare this KB's other planes: piracy loss quoted **4.5×**
+apart, puzzles **5.5×** apart, sheet music **4.9×** apart. **Radio is a century-old business with
+audited, syndicated ad measurement, so the headline is solid — and that is exactly why it is the least
+useful number here.**
+
+**The disagreement that remains is about growth, not size, and it is 2.3×.** TBRC says **4–6% CAGR**;
+Mordor says **9.36%** — on overlapping definitions. Mordor is the outlier and should be labelled as such
+whenever quoted. PQ Media's +8.5% is **not comparable** to either: it counts streaming, podcasting and
+events inside "radio". **Rule for a deck: never place PQ Media's growth rate beside TBRC's base figure.**
+That single mismatch manufactures a false "radio is growing 8.5% off a $29B base" claim.
+
+### The directional split that actually matters
+
+US digital radio ad revenue reportedly hit a **record $2.3B in 2025** with **$2.5B forecast for 2026**,
+while **core over-the-air advertising has declined at ~2.2% per year since 2022** (RAB/Borrell figures,
+reached via a secondary source — **not primary-verified**). So the aggregate is flat-to-up while the
+terrestrial core erodes and the digital slice grows. **That is the shape to sell against**: the client's
+problem is not the size of radio, it is the **mix**.
+
+### Receiver and vehicle counts — more reliable than any revenue figure, and better evidence
+
+| Measure | Figure | Source quality |
+|---|---|---|
+| DAB/DAB+ receiver sales, 11 core markets | **166.6 million**, **+>10%** vs Feb 2025 | WorldDAB, announced at Automotive 2026, Frankfurt, June 2026 — **trade body, dated, specific** |
+| New cars with DAB+ as standard, France 2025 | **98%** | WorldDAB via market report |
+| Factory fit, Italy | **100%** | WorldDAB via market report |
+| DAB+ population coverage, France | **80%** | WorldDAB / trade press |
+| Countries running DAB | **~55** (2025) | Secondary |
+| HD Radio vehicles on the road, North America | **~125 million**, **>60% of new vehicles shipped** (US) | **Xperi self-reported** |
+| Top-100 best-selling US models offering HD Radio | **74%** (from 67% a year earlier) | Quu, *In-Vehicle Visuals Report 2026* |
+| US full-power FM stations running HD Radio | **18%** (or **21%** of *commercial* FM — different denominator) | Radio World / FCC data |
+| DTS AutoStage in-car audience measurement | **6 million vehicles daily**, **300+ US local markets** | **Xperi self-reported** |
+| RadioDNS deployment | **2.5M+ cars** (Audi, VW, Porsche, BMW), "thousands of stations" | **RadioDNS self-reported** |
+
+**Count the devices and the obligations, not the market** — the same conclusion pass 44 reached for the
+IP plant. These receiver counts are dated, attributable and specific, which no revenue forecast in the
+table above is.
+
+### ⛔ The refusal — and once again it is the number a buyer would actually want
+
+**There is no figure, from any source, for what a broadcaster spends to supply metadata to car
+dashboards.** Not a market size, not an average spend, not a vendor-revenue estimate. The layer is:
+
+- **deployed** — 2.5M+ cars for RadioDNS, 6M vehicles measured daily by AutoStage;
+- **commercially decisive** — Townsquare's stations held a **0.5 share** in AutoStage before supplying
+  now-playing metadata, and Radio World calls visual display *"a cost of doing business"*;
+- **structurally unpriced** — AutoStage is **free to stations** (carmakers pay Xperi), and RadioDNS is a
+  membership standard that stations self-host.
+
+**Because the platform side is free to the broadcaster, the only cost is the broadcaster's own
+integration work — and nobody measures that.** This is the fifth plane in this KB where the thing a
+client buys has no market figure, and it is the cleanest example: **the spend is real, the budget line
+exists in every station group, and no analyst has ever counted it.** Do not invent one. Size it
+bottom-up per engagement: stations × feeds × the group's own measured share delta.
+
+**Informed gap:** `radiodns.org` is outside this session's network policy, so **RadioDNS membership fees
+and commercial terms are unverified** — treat as "not investigated, not assumed free", the posture pass 8
+set for DDEX.

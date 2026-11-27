@@ -7162,3 +7162,185 @@ archived**. Design the service boundary in the proposal, not at delivery.
 **⛔ And the sentence to delete from any deck in this plane:** *"an open-source alerting stack."*
 There isn't one. There is a free format, a healthy sensor layer, a hobbyist receive layer, a dead
 signing server, and an obligation the client cannot delegate.
+
+## Radio delivery recipes — added 2026-11-27 (pass 46)
+
+Every repo named below was verified on 2026-11-27: existence via `git ls-remote`, stars/push via GitHub
+`search/repositories`, licences read from the actual files. The licence of each component is stated
+because in this plane it is the thing that decides whether a build is sellable.
+
+## Pattern 98 — The dashboard metadata feed (**the highest-value build in this plane, and the one with a published benchmark**)
+
+**Problem.** A station group's logo, now-playing text and artwork are wrong, stale or absent on car
+dashboards. Measured consequence: Townsquare's stations held a **0.5 share** in DTS AutoStage *before*
+they began supplying now-playing metadata. Radio World: *"Visual Display Is a Cost of Doing Business."*
+
+**Why it is a build and not an integration.** The entire open RadioDNS toolchain is **8 repos / 96
+stars**; the standards body's own Java library has **10★**; the EBU's full-featured manager
+(`ebu/radiodns-manager`, GPL-3.0, 15★) has been **dormant since 2023-05-01 with 89 open issues**; two
+client libraries last moved in **2011** and **2008**. There is nothing to simply deploy.
+
+**The wiring.**
+
+1. **Source of truth** — the automation system's now-playing output. Read it with
+   [`ghaiklor/icecast-parser`](https://github.com/ghaiklor/icecast-parser) (**MIT**, 72★) straight off the
+   Icecast/SHOUTcast stream if the automation has no clean API; otherwise take LibreTime's or AzuraCast's
+   own API. The MIT licence here matters — this component ends up inside the client's product.
+2. **Normalise once, emit three ways.** One internal canonical record (track, artist, artwork URI,
+   programme, segment type) → three emitters. This is the actual deliverable.
+3. **Emitter A — RadioVIS** (the slideshow/visual channel): fork
+   [`bbc/node-radiovis-stomp-server`](https://github.com/bbc/node-radiovis-stomp-server)
+   (**Apache-2.0**, 13★, **pushed 2026-11-04 — the only live repo in the layer**). Reference behaviour from
+   [`bbc/RadioVisDemo`](https://github.com/bbc/RadioVisDemo) (**Apache-2.0**, 28★).
+4. **Emitter B — SPI / RadioEPG XML** (**ETSI TS 102 818**, free): there is **no maintained library** —
+   `spi radiodns xml` returns **0 repositories**. Generate from the ETSI schema directly. Use
+   [`magicbadger/python-dabepg`](https://github.com/magicbadger/python-dabepg) (GPL-2.0, 3★, **2017**) as a
+   **reference for the schema only, behind a process boundary** — do not link GPL-2.0 into a product.
+5. **Emitter C — DTS AutoStage feed** (proprietary): Xperi's onboarding. **Free to the station** —
+   carmakers pay. No code to write beyond the feed format; the value is that steps 1–2 make it consistent
+   across every station in the group.
+6. **Resolution plumbing** — [`radiodns/java-radiodns`](https://github.com/radiodns/java-radiodns)
+   (**Apache-2.0**, 10★) or [`bbc/node-radiodns`](https://github.com/bbc/node-radiodns) (**Apache-2.0**,
+   7★) for the DNS lookup that maps a broadcast parameter set to a hostname.
+
+**Licence shape: clean.** Steps 1, 3, 6 are MIT/Apache-2.0. The only copyleft (step 4's reference) stays
+behind a boundary and ships nothing.
+
+**The deliverable to quote.** Not "RadioDNS integration" — **a before/after share delta in AutoStage**,
+of exactly the kind Townsquare published. That is measurable within one ratings period and it is the
+client's own number, not a vendor's.
+
+## Pattern 99 — The Icecast end-of-support migration (**a dated trigger; the date does the selling**)
+
+**The trigger.** Icecast **2.4.4 support ends 2026-12-31**. **2.5.0** has been the stable line since
+**2025-12-31**, and **Debian's tracker shows the 2.5.0 migration BLOCKED**. So a client on a
+distro-packaged Icecast has an unsupported streaming server within the month and no clean apt upgrade
+path. *(Both dates secondary-source; `icecast.org` is outside this session's network policy.)*
+
+**Three exits, and the choice is a licence decision not a technical one.**
+
+| Exit | Component | Licence | When it is right |
+|---|---|---|---|
+| Upgrade in place | [`xiph/Icecast-Server`](https://github.com/xiph/Icecast-Server) 2.5.0 | GPL-2.0 | Station runs it as internal infrastructure. **Build from source — do not wait for Debian.** Note the GitHub repo is a **`(Mirror)`**; canonical is `gitlab.xiph.org`. |
+| Collapse the daemon | [`savonet/liquidsoap`](https://github.com/savonet/liquidsoap) 2.5.x built-in Icecast-compatible server | GPL-2.0 | The client **already** runs Liquidsoap (anyone on Airtime/AzuraCast/LibreTime does). Removes a moving part entirely. **Experimental/beta — stage it.** |
+| Go permissive | [`DatanoiseTV/tinyice`](https://github.com/DatanoiseTV/tinyice) | **Apache-2.0** | The client needs to **embed or redistribute** the server in a product. The only permissive Icecast-compatible server that exists. 373★, pushed 2026-11-27, **3 open issues — early**. Pilot it, do not promise it. |
+
+**Run the test with DJ clients, not curl.** Liquidsoap's built-in server is documented as accepting
+ordinary Icecast source clients (Butt, Mixxx — and `mixxxdj/mixxx` is already in this KB at 7,445★). The
+migration's real acceptance criterion is that the station's existing source clients and listener URLs
+keep working untouched.
+
+## Pattern 100 — AI presenter on an MIT base, with a jurisdiction gate in front of it
+
+**The stack, and all three layers are permissive — which is unusual enough to say out loud.**
+
+1. **Agent**: [`perminder-klair/subwave`](https://github.com/perminder-klair/subwave) (**MIT**, 1,687★,
+   pushed 2026-11-27) for an agentic DJ, or
+   [`robert-dean/deadair`](https://github.com/robert-dean/deadair) (**MIT**, 145★, **0 open issues**) if
+   the music library is Navidrome, or [`johncrash64/radio-dj`](https://github.com/johncrash64/radio-dj)
+   (**MIT**, 63★) whose **ffmpeg→Icecast with live ducking** is the cleanest reference wiring of agent
+   onto delivery.
+2. **Voice**: `resemble-ai/chatterbox` (**MIT**, 28,008★) or `SWivid/F5-TTS` (**MIT**, 15,633★) — both
+   already catalogued in `agents/top.md`. `keltokhy/writ-fm` (384★) demonstrates exactly this pairing, but
+   **it has no licence** — read it, do not fork it.
+3. **Delivery**: Pattern 99's choice.
+4. **Metadata**: Pattern 98's emitters, so the synthetic segment is labelled *on the dashboard too*.
+
+**The gate, and it goes in front — not after.** Putting a synthetic voice on a licensed transmitter is a
+regulated act with **dates already in force**: China's synthetic-content labelling (2025-09-01, fines to
+**¥50m**); Korea's AI Basic Act (**2026-01-22**); India's intermediary obligations for synthetically
+generated content (**2026-02-20**); Vietnam's AI law (**2026-03-01**); California's AI Transparency Act
+provenance duties (**2026-08-02**); most EU AI Act requirements (**August 2026**); Canada's "AI for All"
+watermarking (**2026-06-04**). Radio-specific: **Australia's media regulator published sector papers in
+April 2026 mapping AI use across television, radio and news**; **Radio France added an annex in April 2026**
+restricting synthetic voice; **Chile's bill** covers AI imitations of a person's **voice**; **Brazil's
+electoral court prohibits synthetic audio** favouring or harming a candidacy.
+
+**So the sellable artefact is the policy engine, not the DJ.** A per-jurisdiction rule set that decides,
+per segment: may this run / must it be labelled / must the label reach the dashboard and the stream
+metadata / is this an election period. The agents are free and MIT; **the compliance evidence is the
+deliverable**, and it is the same per-jurisdiction conclusion this KB reached for APAC in pass 8 — now
+with an actual radio regulator document behind it.
+
+## Pattern 101 — The 20-minute licence gate for any DAB+ or RDS proposal (**run this before writing the SOW**)
+
+Five questions. Any one of them can change the shape of the engagement, and all five are answerable from
+material already in this KB.
+
+1. **Is this "our station" or "our product for other stations"?** Every maintained radio platform —
+   AzuraCast, LibreTime, OpenBroadcaster, DABcast — is **AGPL-3.0**. Internal infrastructure: harmless.
+   Radio-as-a-service to third parties: the **network clause triggers** and modified source must be
+   offered to users. **This question selects the entire stack and it is the most common way a radio
+   engagement goes wrong at contract stage.**
+2. **Does the deliverable transmit DAB+?** Then `ODR-AudioEnc` is in scope, and it is **five licences
+   statically linked into one binary** (`src/` Apache-2.0, `libtoolame-dab` LGPL-2.1+, `src/edi`
+   GPL-3.0+, `fdk-aac` **Fraunhofer** — not OSI-approved, `contrib/fec` LGPL-2.1), **plus AAC patent
+   licensing via Via Licensing**, and **the maintainer's own README says**: *"Whether it is legal or not
+   to distribute compiled binaries from these sources is unclear to me. Please seek legal advice."*
+   **Put that sentence in the risk register verbatim.** No SBOM scan of the source tree will surface it.
+3. **Does it generate RDS?** **7 of 7 transmit encoders are GPL-3.0** (the 8th is unlicensed). Only the
+   decoder (`windytan/redsea`, **MIT**, 445★) is permissive. Reading the data channel is free; **writing
+   it inside a proprietary product is a build or a commercial encoder.**
+4. **Does a receiver ship in the product?** Use [`KejPi/AbracaDABra`](https://github.com/KejPi/AbracaDABra)
+   (**MIT**, 188★, 2026-11-15) — **the best-licensed maintained DAB receiver that exists**. `welle.io`
+   (764★) is the better-known one and it is **GPL-2.0**; picking it by star count is the mistake here.
+5. **Is HD Radio or DRM in scope?** **HD Radio: receive only, permanently** — Xperi-controlled and
+   patent-licensed; `theori-io/nrsc5` (GPL-3.0+, 974★) decodes and nothing encodes. **DRM30**: one live
+   repo on earth, `CasualArclamp/DecDRM` (GPL-2.0, 14★) — greenfield, so durable differentiation, but
+   budget for a build.
+
+## Pattern 102 — The DAB+ small-scale multiplex, assembled (EMEA only, and only after Pattern 101)
+
+**Where this is real:** EMEA, where ETSI publishes the standards free, DAB+ is ~100% factory-fit in Italy
+and 98% in France, and **166.6M receivers** have shipped across 11 core markets. **Not** North America
+(HD Radio is closed) and **not** LATAM (no standard decided).
+
+**The chain, all of it GPL-3.0 unless noted:**
+
+```
+audio → ODR-AudioEnc  (FIVE licences — Pattern 101 Q2)
+      → ODR-DabMux    (GPL-3.0, 49★)   services → ETI
+      → ODR-DabMod    (GPL-3.0, 60★)   ETI → I/Q
+      → USRP / LimeSDR   —or—   Raspberry Pi + EasyDAB v2 (board replaces the software modulator)
+PAD:    ODR-PadEnc    (GPL-3.0, 9★)    DLS text + MOT Slideshow
+EPG:    magicbadger/odr-radioepg-bridge (Apache-2.0, 2★) — EPG bitstream straight from the mux config
+ops UI: ODR-EncoderManager (GPL-3.0+, 10★, DORMANT since 2023-05-22)
+   or   DABodr/DABcast-diffusion-software (AGPL-3.0, 0★, pushed 2026-11-25)
+QA:     Opendigitalradio/etisnoop (GPL-3.0, 14★) — analyse the ETI you just produced
+monitor: KejPi/AbracaDABra (MIT, 188★) — independent off-air receive check
+```
+
+**The two places this build actually earns its fee**, because the chain itself is a documented install:
+
+- **The ops layer is the gap.** The official web UI has been **dormant 3.5 years**; the live alternative
+  has **0 stars**. A multiplex operator needs service management, scheduling, failover and audit, and
+  that is where the custom work belongs — not in the transmission chain.
+- **PAD and EPG are what the listener sees**, and they connect this pattern to Pattern 98: the same
+  canonical now-playing record should drive `ODR-PadEnc` (DLS+/MOT on the DAB carrier) **and** the
+  RadioVIS/SPI emitters (hybrid metadata to the dashboard). **Build it once.** Reference for the PAD
+  side: [`radiorabe/nowplaypadgen`](https://github.com/radiorabe/nowplaypadgen) (AGPL-3.0, 3★, pushed
+  2026-11-23) — read it, keep AGPL behind a boundary.
+
+**Close the loop with measurement**, which this plane supports unusually well: `etisnoop` validates the
+ETI you generated, and an independent MIT receiver confirms what actually went out. A commissioning
+evidence trail of that shape is the pass-44 pattern applied here, and it is the deliverable a regulator
+or a mux landlord will ask for.
+
+## ⛔ What not to promise in this plane (pass 46)
+
+- **Never promise the in-car audience data.** DTS AutoStage's measurement — **6M vehicles daily, 300+ US
+  markets** — is Xperi's asset, and the carmaker pays for the integration. A client can **supply** the
+  platform and **read its portal**. It cannot replace it. Scope the feed; never the panel.
+- **Never promise redistributable open-source DAB+ transmission** without Pattern 101 Q2 answered in
+  writing. The upstream maintainer will not assert it; neither should a proposal.
+- **Never promise RDS generation inside a proprietary product.** 7 of 7 GPL-3.0.
+- **Never promise an open HD Radio transmitter.** It does not exist and cannot.
+- **Never present "RadioDNS support" as one capability.** It is three ETSI documents — RadioVIS, SPI/EPG,
+  Service Following — with three different maintenance states, and the only live open implementation
+  covers **RadioVIS alone**. Ask a vendor which of the three they mean, and ask for an **SPI XML sample**
+  during evaluation. Watch what happens.
+- **Do not pick components by star count in this plane.** `welle.io` (764★, GPL-2.0) loses to
+  `AbracaDABra` (188★, **MIT**) for anything shipped. `rAudio` (441★) has **no licence**. `writ-fm`
+  (384★) has **no licence**. The popular answer and the usable answer diverge in three separate places.
+- **Do not grep `DRM` to check whether this plane is covered.** This KB's 89 `DRM` hits are **Digital
+  Rights Management**. **Digital Radio Mondiale** returns **11 repositories worldwide**, one alive.

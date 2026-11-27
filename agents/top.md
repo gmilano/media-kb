@@ -4316,3 +4316,57 @@ to let stations handle them.
   *"common alerting protocol"* is a 283★ repo called `redesigned-pancake`, and the top result for
   *"public warning system"* is a Romanian FTC robotics project. The false friends are documented in
   `repos/foundations.md`.
+
+## Pass 46 (2026-11-27) — agents for the radio delivery plane: **the one plane in this KB where the agent layer is the healthiest layer**
+
+> Verified 2026-11-27: existence via `git ls-remote`, stars/forks/last-push via GitHub
+> `search/repositories`, every `NOASSERTION` and every apparent licence absence resolved by reading the
+> file over the raw channel against a 200 README control request.
+
+Every prior pass of this KB found the same shape: a rich substrate and an empty agent layer. **This plane
+inverts it.** The agent layer here is MIT, well-starred and moving — and the infrastructure layer one step
+below it (DAB+, RDS, RadioDNS) is copyleft, patent-encumbered or abandoned. The reason is structural and
+worth stating plainly: **an AI DJ needs no spectrum licence, no codec patent and no OEM contract.** It
+needs an audio file and an Icecast socket. That is why this is the one layer hobbyists could finish.
+
+### Tier 1 — permissive and maintained (safe to build on)
+
+| Agent | Repo | Licence | Stars | Forks | Last push | What it does |
+|---|---|---|---|---|---|---|
+| subwave | [perminder-klair/subwave](https://github.com/perminder-klair/subwave) | MIT | 1,687 | 144 | **2026-11-27** | *"Personal internet radio: Agentic AI DJ."* The most-starred agent in this plane, pushed the day of this pass. 65 open issues — young, active, unsettled. |
+| deadair | [robert-dean/deadair](https://github.com/robert-dean/deadair) | MIT | 145 | 16 | 2026-11-24 | A personal AI radio station you self-host: the DJ picks records from a **Navidrome** library and talks between them. **0 open issues** — the tidiest repo in the plane. |
+| radio-dj | [johncrash64/radio-dj](https://github.com/johncrash64/radio-dj) | MIT | 63 | 14 | 2026-08-12 | 24/7 AI DJ in Go: persistent **ffmpeg→Icecast** output, live ducking under the voice track, LLM banter, bring-your-own-key. **The clearest reference wiring of an agent onto real radio delivery infrastructure in this KB.** |
+
+### Tier 2 — real, but the licence forbids reuse
+
+| Agent | Repo | Licence | Stars | Last push | Constraint |
+|---|---|---|---|---|---|
+| writ-fm | [keltokhy/writ-fm](https://github.com/keltokhy/writ-fm) | **none** — absence verified against a 200 `README.md` on both `main` and `master`, nine filenames each | 384 | 2026-09-18 | 24/7 AI-powered station: an LLM writes the DJ scripts, **Chatterbox** speaks them. Chatterbox itself is MIT and already in this file, so **the pipeline is reproducible even though this repo is not reusable.** 384★ nobody may lawfully fork. |
+| Claudio-FM | [bingyanglu/Claudio-FM](https://github.com/bingyanglu/Claudio-FM) | **none** — absence verified the same way | 79 | 2026-06-08 | AI private station that chooses songs and speaks on air. Unlicensed; default copyright applies. |
+| tysa | [jonathanelmgren/tysa](https://github.com/jonathanelmgren/tysa) | **none** — absence verified the same way | 27 | 2025-12-18 | Announces Spotify tracks with AI-generated commentary. Unlicensed **and** dormant, **and** it depends on a commercial music API whose terms govern any redistribution regardless.|
+
+**The licence column outranks the star column here.** The three unlicensed repos hold **490 of the 2,385
+stars** in these two tables. The three usable ones are MIT — and the most-starred of all six is also one
+of them, which is the only reason this plane is pleasant to work in.
+
+### ⛔ What not to promise in this plane
+
+- **Never promise a dashboard experience as an integration.** Getting a station's logo, now-playing text
+  and artwork onto a car screen is the commercial heart of radio in 2026, and the entire open RadioDNS
+  toolchain is **8 repos and 96 stars**, half of it dormant since 2008–2011 (`repos/foundations.md`).
+  It is a **build**, and the thing the client will ask to see — in-car listening data — lives inside
+  **Xperi's DTS AutoStage**, which is proprietary. Scope the feed, not the measurement.
+- **Never promise open-source DAB+ transmission without a licence review first.** The only open encoder,
+  `ODR-AudioEnc`, is **five licences statically linked into one binary**, and its own maintainer writes
+  that whether distributing compiled binaries is legal *"is unclear to me."* Add AAC patent licensing
+  via Via Licensing on top. This belongs in the risk register by name, at proposal time.
+- **Never promise RDS generation inside a proprietary product.** Seven of seven FM/RDS encoders are
+  GPL-3.0 (the eighth is unlicensed). Only the **decoder**, `windytan/redsea`, is MIT. Reading the data
+  channel is free; writing it is a build or a commercial encoder.
+- **Never promise an open HD Radio transmitter.** HD Radio is Xperi-controlled and patent-licensed.
+  `theori-io/nrsc5` (974★) decodes it; there is no open transmit side and there will not be one. The
+  only open *transmit* implementation of any North American broadcast standard in this KB is the
+  **ATSC 3.0** GNU Radio transmitter already catalogued in `repos/foundations.md`.
+- **Do not grep `DRM` to check this plane.** In this KB `DRM` means Digital Rights Management 89 times
+  over. In radio it means **Digital Radio Mondiale** — and that query returns **11 repositories
+  worldwide**, exactly one of them alive.

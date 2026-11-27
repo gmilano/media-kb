@@ -9,6 +9,100 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 46: the radio delivery & hybrid-radio metadata plane (**the one plane where the agent layer is the HEALTHIEST layer — and it is the only plane in this KB where that is true**)
+
+Plane found by the pass-43/44/45 method: ~55 candidate terms grepped against all eight KB files before
+any web search. The KB already had radio **automation** well covered (LibreTime 940★, AzuraCast 4,118★,
+Rivendell, Nebula, `openbroadcaster/observer`) from pass 5 — but **how a radio signal actually reaches a
+listener was literal zero**: `Icecast` 0, `Liquidsoap` 0, `RadioDNS` 0, `hybrid radio` 0, `service
+following` 0, `opendigitalradio` 0, `RDS2` 0, `Shoutcast` 0, `Digital Radio Mondiale` 0, `RadioVIS` 0,
+`RadioEPG` 0, `visual slide` 0. `DAB+` and `HD Radio` had **one mention each**. The `DRM` hits that
+looked like coverage were all **Digital Rights Management** — see the false-friend note below.
+
+### THE MEASUREMENT: licence quality and code depth degrade monotonically with distance from the IP packet
+
+Five steps, every figure from GitHub `search/repositories` on 2026-11-27, existence via `git ls-remote`,
+every `NOASSERTION` and every apparent absence resolved by reading the licence file over the raw channel
+against a 200 README control:
+
+| Step | What it does | Licence shape | Health |
+|---|---|---|---|
+| 1. IP stream delivery | Serve an audio stream to a listener | **MIT / Apache-2.0 abundant** | `ossrs/srs` MIT **29,466★**; `bluenviron/mediamtx` MIT **20,785★**; `DatanoiseTV/tinyice` **Apache-2.0** 373★ **pushed the day of this pass** |
+| 2. Stream orchestration | Scheduling, crossfades, failover | GPL-2.0, but thriving | `savonet/liquidsoap` 1,763★, **pushed the day of this pass** |
+| 3. Terrestrial DAB+ transmission | Mux → modulate → radiate | **GPL-3.0, and the encoder is five licences in one binary** | ODR chain: 49★ / 60★ / 30★ / 9★ |
+| 4. RDS, the analogue data channel | Station name + text on an FM receiver | **Transmit side 100% GPL-3.0, no exceptions** | 7 encoders, every one GPL-3.0; only the *decoder* is MIT |
+| 5. Hybrid-radio metadata (RadioDNS) | Logo, now-playing & artwork on a car dashboard | Apache-2.0 — and it does not matter | **8 repos, 96★ TOTAL**; official org repo **10★**; two dormant since **2008** and **2011** |
+
+**The inversion, and it is the finding of this pass.** In every previous plane of this KB the agent layer
+was the empty one. Here it is the **best** one. The AI-DJ layer is MIT and moving:
+`perminder-klair/subwave` (MIT, **1,687★**, 144f, **pushed 2026-11-27, the day of the pass**),
+`robert-dean/deadair` (MIT, 145★, 2026-11-24), `johncrash64/radio-dj` (MIT, 63★ — and its own
+description reads *"Persistent ffmpeg→Icecast with live ducking, LLM banter, BYOK"*, i.e. it targets
+exactly step 1 of the table above). Meanwhile **step 5 — the layer sitting in 2.5 million cars — has
+96 stars.**
+
+So the money and the code are **inversely placed**. Where a hobbyist can run the entire chain with no
+licence from anyone (internet radio), the code is permissive, abundant and shipping today. Where you
+must be a licensed broadcaster holding an OEM relationship (the car dashboard), the open code is a
+rounding error and a **proprietary platform owns the telemetry**.
+
+### The movement this week, and it is all on steps 1–2 and the agent layer
+
+`DatanoiseTV/tinyice` (Apache-2.0, 373★, **2026-11-27**), `savonet/liquidsoap` (1,763★, **2026-11-27**),
+`perminder-klair/subwave` (MIT, 1,687★, **2026-11-27**), `rern/rAudio` (no licence, 441★,
+**2026-11-27**), `ShadowLight8/Dynamic_RDS` (GPL-3.0, 16★, 2026-11-26), `DABodr/DABcast-diffusion-software`
+(AGPL-3.0, **0★**, 2026-11-25), `AlbrechtL/welle.io` (GPL-2.0, 764★, 2026-11-24),
+`robert-dean/deadair` (MIT, 145★, 2026-11-24), `radiorabe/nowplaypadgen` (AGPL-3.0, **3★**, 2026-11-23),
+`windytan/redsea` (MIT, 445★, 2026-11-22). **Nothing in the RadioDNS set moved except
+`bbc/node-radiovis-stomp-server` (Apache-2.0, 13★, 2026-11-04) — the only live repo in step 5.**
+
+### The AI-DJ agent layer, verified
+
+| Agent | Repo | Licence | Stars | Forks | Last push | Note |
+|---|---|---|---|---|---|---|
+| subwave | [perminder-klair/subwave](https://github.com/perminder-klair/subwave) | MIT | 1,687 | 144 | **2026-11-27** | *"Personal internet radio: Agentic AI DJ."* The most-starred agent in this plane and pushed the day of the pass. 65 open issues — young and busy. |
+| deadair | [robert-dean/deadair](https://github.com/robert-dean/deadair) | MIT | 145 | 16 | 2026-11-24 | AI DJ picks records from a **Navidrome** library and talks over them. **0 open issues.** |
+| radio-dj | [johncrash64/radio-dj](https://github.com/johncrash64/radio-dj) | MIT | 63 | 14 | 2026-08-12 | 24/7 AI DJ in Go: persistent **ffmpeg→Icecast**, live ducking, LLM banter, BYOK. The cleanest wiring example of agent→step-1 in the plane. |
+| writ-fm | [keltokhy/writ-fm](https://github.com/keltokhy/writ-fm) | **none** (absence verified vs 200 README) | 384 | — | 2026-09-18 | 24/7 AI station; scripts written by an LLM, voiced by Chatterbox (which **is** MIT — see `agents/top.md`). **384★ nobody may lawfully reuse.** |
+| Claudio-FM | [bingyanglu/Claudio-FM](https://github.com/bingyanglu/Claudio-FM) | **none** (absence verified vs 200 README) | 79 | — | 2026-06-08 | AI private station that picks songs and speaks on air. Unlicensed. |
+| tysa | [jonathanelmgren/tysa](https://github.com/jonathanelmgren/tysa) | **none** (absence verified vs 200 README) | 27 | — | 2025-12-18 | Announces Spotify tracks with AI commentary. Unlicensed and dormant. |
+
+**Read the licence column before the star column.** The three unlicensed repos hold **490 of the 2,385
+stars** in this table. The three usable ones are MIT and hold the rest — and the top one is also the
+newest. For once, the right answer and the popular answer coincide; that is not true one step down.
+
+### ⛔ False friends in this plane — the worst set since the `eidr`/`isan` pair
+
+- **`DRM` means two different things and this KB already contains the wrong one.** 89 pre-existing hits
+  for `DRM` are **Digital Rights Management**. In radio, DRM is **Digital Radio Mondiale** — the ITU
+  standard All India Radio runs nationally. A grep for `DRM` will tell you this plane is covered. It is
+  not: `digital radio mondiale` returns **11 repositories worldwide**.
+- **`Sfedfcv/redesigned-pancake` (283★, no licence, 2021) tops `radio service following` AND `radio
+  metadata` — and it topped `common alerting protocol` in pass 45.** Second consecutive plane. This
+  repo is a scrape of GitHub's own docs pages. **Treat it as a permanent fixture of star-sorted search
+  in this KB and never let it into a table.**
+- `radio service following` result #1 is `chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020` (327★) — a
+  high-school robotics SDK. The first *real* result is 15★ and dormant since 2023.
+- `icecast` result #1 is `bjarneo/cliamp` (MIT, 4,704★) — a **terminal Winamp clone**, not a server.
+- `audio streaming server` result #1 is `ossrs/srs` (MIT, 29,466★) — a general RTMP/WebRTC media server
+  with no radio function at all. Useful, but not an answer to this plane.
+- **`metaradio` = 3 repositories, all 0★, and none of them is the commercial MetaRadio product** that
+  the trade press names as the standard now-playing connector. The product is not on GitHub.
+- `spi radiodns xml` = **0 repositories.** `hybrid radio metadata` = **0 repositories.**
+
+### Informed gaps — stated, not filled
+
+- **`icecast.org`, `radiodns.org` and `gitlab.xiph.org` are all outside this session's network policy**
+  (`ENOTFOUND` / proxy 403). Consequence: the Icecast **2.4.4 end-of-support date of 2026-12-31** and the
+  **2.5.0 release of 2025-12-31** are recorded here from **secondary sources quoting those sites**, not
+  from the primary page; and **RadioDNS's adoption figures are self-reported and secondary**. Treat both
+  as indicative. To raise them to primary, those three hosts must be allowed.
+- **`xiph/Icecast-Server` on GitHub describes itself as `(Mirror) - Please report bugs at
+  gitlab.xiph.org`.** Its 560★ and its 2026-08-19 push are therefore **mirror** signals, and the
+  canonical forge is the host this session cannot reach. **New method rule: before quoting a star count
+  or a push date, read the repo description for the word "mirror".** This KB's GitHub-as-oracle
+  assumption fails silently here.
+
 ## 2026-11-27 — pass 45: the public-warning & emergency-alerting plane (**the first plane in this KB where the scarce asset is a credential, not a licence**)
 
 Plane found the same way as passes 43 and 44: ~75 candidate terms grepped against all eight KB files

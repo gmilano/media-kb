@@ -2526,3 +2526,65 @@ licensed platform in this plane, and it has 37 stars.**
   life-safety use in its own README and `multimon-ng` calls its EAS decoder alpha. They belong in
   **monitoring and verification** — which, after the FCC's 2026 rules, is itself a billable
   deliverable.
+
+## Pass 46 (2026-11-27) — platforms for the radio delivery plane: **the turnkey layer is excellent and entirely copyleft, and the layer that matters commercially has no platform at all**
+
+Verified 2026-11-27 (GitHub `search/repositories`; licences read where the API said `NOASSERTION`).
+
+### The turnkey radio platforms — real, customisable, and not one of them is permissive
+
+| Platform | Repo | Licence | Stars | Last push | What you get |
+|---|---|---|---|---|---|
+| AzuraCast | [AzuraCast/AzuraCast](https://github.com/AzuraCast/AzuraCast) | **AGPL-3.0** | 4,118 | **2026-11-27** | Self-hosted web radio suite with turnkey installers: library, scheduling, Icecast/SHOUTcast serving, listener stats, DJ streaming. The most complete out-of-the-box answer, and pushed the day of this pass. |
+| LibreTime | [libretime/libretime](https://github.com/libretime/libretime) | **AGPL-3.0** | 940 | 2026-11-22 | Already in this KB (pass 5). The maintained Airtime fork: automation, scheduling, playout. |
+| OpenBroadcaster | [openbroadcaster/observer](https://github.com/openbroadcaster/observer) | **AGPL-3.0** | 188 | 2026-11-13 | Automation, scheduler, media library and player manager for community radio/TV and IPTV. Includes emergency-alerting support (see pass 45). |
+| DABcast | [DABodr/DABcast-diffusion-software](https://github.com/DABodr/DABcast-diffusion-software) | **AGPL-3.0** | **0** | **2026-11-25** | Web interface for a DAB+ multiplex built on ODR-mmbTools. **The only platform-shaped thing in the DAB+ layer, and it has zero stars.** |
+| rAudio | [rern/rAudio](https://github.com/rern/rAudio) | **none** | 441 | **2026-11-27** | Raspberry Pi audio appliance incl. DAB radio and internet radio. 441★, actively developed, **no licence file** — not usable in client work. |
+
+**The licence decision that actually matters here.** Every maintained radio platform in existence is
+**AGPL-3.0**. For a broadcaster running it as internal infrastructure that is harmless. For a client who
+wants to **offer radio-as-a-service to third parties over a network**, AGPL-3.0's network clause is
+triggered and the modified source must be offered to users. This is the single most common way a radio
+engagement goes wrong at the contract stage. **Establish on day one whether the deployment is
+"our station" or "our product for other stations" — the answer selects the entire stack.**
+
+### What has no platform at all: the car dashboard
+
+There is **no platform, open or turnkey, for hybrid-radio metadata delivery.** What exists is:
+
+- **`ebu/radiodns-manager`** (GPL-3.0, 15★) — the EBU built the right thing: one manager for RadioVIS,
+  RadioEPG and Service Following. It has been **dormant since 2023-05-01 with 89 open issues.**
+- **`ebu/content-manager`** (LGPL-3.0, 8★) — the EBU's visual production tool for hybrid-radio content.
+  **Dead since 2017-03-01.**
+- Everything else is a library of 4–28 stars (`repos/foundations.md`).
+
+**The commercial layer is proprietary and it is not a licence problem, it is an ownership problem.**
+Two platforms sit between a station and a car screen:
+
+| Platform | Who owns it | Commercial model | Reach |
+|---|---|---|---|
+| **DTS AutoStage** | Xperi (proprietary) | **Free to radio stations**; the **carmakers** pay Xperi to license it | In-car audience measurement from **6 million vehicles daily**, across **300+ US local markets**; new **Broadcaster Portal** launched at NAB 2026 |
+| **RadioDNS** | Open standard, RadioDNS Ltd | Membership; stations self-host or use providers (Radioplayer, Aiir) | Self-reported **2.5M+ cars** (Audi, VW, Porsche, BMW), "thousands of stations"; Radio World describes **"limited take-up by car manufacturers"** |
+
+**The measured incentive, and it is the number to put in front of a broadcaster.** Townsquare reports
+that before it began supplying now-playing metadata, **each of its stations showed only a 0.5 share in
+DTS AutoStage.** Radio World's framing of the whole layer: *"Visual Display Is a Cost of Doing
+Business."* A station that does not feed the dashboard is not merely plainer-looking — it is
+**under-measured**, and under-measurement prices its advertising.
+
+### ⛔ Procurement warnings specific to this layer
+
+- **Every maintained radio platform is AGPL-3.0.** There is no permissive alternative to evaluate. Do
+  not let a proposal imply one exists.
+- **Do not promise to own the in-car data.** AutoStage's measurement is Xperi's asset and the OEM pays
+  for the integration. A client can **supply** that platform and **read its portal**; it cannot replace
+  it. Scope the feed and the normalisation, never the panel.
+- **"RadioDNS support" is not one capability.** It is RadioVIS (slideshow), RadioEPG/SPI (schedule) and
+  Service Following (handover between FM/DAB/IP) — three ETSI documents with three different maintenance
+  states, and the only live open implementation covers **RadioVIS alone**
+  (`bbc/node-radiovis-stomp-server`, 13★). Ask which of the three a vendor means, and ask for an SPI XML
+  sample during evaluation.
+- **`rAudio`'s 441 stars are a trap.** Active, popular, unlicensed. Default copyright applies.
+- **Informed gap:** `radiodns.org` is outside this session's network policy, so **RadioDNS membership
+  fees and commercial terms are unverified.** Treat as "not investigated, not assumed free" — the same
+  posture pass 8 recorded for DDEX.

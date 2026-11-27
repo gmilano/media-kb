@@ -5041,3 +5041,195 @@ ones unlicensed.** These are not thin findings. They are the whole investment ca
 obligation is absolute, and the credential is the client's. Price the **integration, the
 authentication boundary and the compliance evidence** — never the alerting software, which does not
 exist to be licensed.
+
+## Pass 46 (2026-11-27) — foundational repos for the radio delivery & hybrid-radio metadata plane
+
+> Verified 2026-11-27. Existence via `git ls-remote` (**38/38 resolve**); stars/forks/push via GitHub
+> `search/repositories`; **every `NOASSERTION` and every apparent absence resolved by reading the licence
+> file over the raw channel against a 200 README control request.**
+
+This KB has covered radio **automation** since pass 5 — LibreTime, AzuraCast, Rivendell, Nebula,
+OpenBroadcaster. It had never covered **delivery**: how the signal gets from the playout box to a
+listener's receiver. That is five distinct layers, and their licence quality degrades monotonically the
+further you get from the IP packet.
+
+### The licence shape of this plane — read before choosing
+
+| Layer | What it needs from the world | Licence reality |
+|---|---|---|
+| IP streaming | Nothing. A socket. | **MIT / Apache-2.0, abundant, shipping today** |
+| Stream orchestration | Nothing. | GPL-2.0, thriving |
+| DAB+ terrestrial | Spectrum licence **+ AAC patents** | GPL-3.0, and the encoder is five licences with a maintainer disclaimer |
+| RDS (transmit) | A transmitter | **GPL-3.0, 7 of 7, no exceptions** |
+| Hybrid-radio metadata | **Being a real broadcaster with OEM relationships** | Apache-2.0 — and abandoned anyway |
+
+**The rule this produces: in this plane, permissive licensing correlates with how little the real world
+has to let you do.** Where anyone can participate, the code is permissive and healthy. Where you must
+hold a licence, a patent grant and a carmaker's phone number, the open code is a rounding error.
+
+### Layer 1 — IP streaming delivery (the healthy end, with a deadline inside the month)
+
+| Repo | Licence | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [ossrs/srs](https://github.com/ossrs/srs) | MIT | 29,466 | — | **2026-11-27** | General real-time media server (RTMP/WebRTC/SRT/HLS). Not radio-specific, but MIT and the largest thing in the neighbourhood. |
+| [bluenviron/mediamtx](https://github.com/bluenviron/mediamtx) | MIT | 20,785 | — | **2026-11-27** | MoQ / SRT / WebRTC / RTSP / LL-HLS server. Same note. |
+| [savonet/liquidsoap](https://github.com/savonet/liquidsoap) | GPL-2.0 | 1,763 | 165 | **2026-11-27** | **The orchestration language the whole open radio stack runs on** — Airtime, AzuraCast and LibreTime all drive it. Now ships an *experimental* built-in Icecast-compatible server, which makes a separate daemon optional. |
+| [xiph/Icecast-Server](https://github.com/xiph/Icecast-Server) | GPL-2.0 | 560 | 141 | 2026-08-19 | The incumbent radio streaming server. **This repo's own description reads `(Mirror) - Please report bugs at gitlab.xiph.org`** — treat its stars and push date as mirror signals. |
+| [DatanoiseTV/tinyice](https://github.com/DatanoiseTV/tinyice) | **Apache-2.0** | 373 | 23 | **2026-11-27** | Icecast-compatible audio **and video** server in Go. **The only permissively-licensed Icecast-compatible server found.** 3 open issues: early, but it is the only permissive door out of the EOL below. |
+| [ghaiklor/icecast-parser](https://github.com/ghaiklor/icecast-parser) | MIT | 72 | 18 | 2024-07-05 | Pulls now-playing metadata **out of** an Icecast/SHOUTcast stream. MIT, dormant, still the simplest answer for monitoring. |
+| [xiph/ezstream](https://github.com/xiph/ezstream) | GPL-2.0 family (`COPYING`, 18,632 B) | 61 | 25 | **2021-02-12** | Xiph's own source client. Five years untouched. |
+| [AzuraCast/AzuraCast](https://github.com/AzuraCast/AzuraCast) | AGPL-3.0 | 4,118 | — | **2026-11-27** | Already in this KB (pass 5). Listed again because it is the turnkey bundle that hides every layer above. |
+
+**The dated constraint for any 2027 radio proposal:** Icecast **2.5.0** is the current stable line
+(released **2025-12-31**) and **support for 2.4.4 ends 2026-12-31 — 34 days after this pass**. Debian's
+package tracker shows the 2.5.0 migration **BLOCKED**. A client on a distro-packaged Icecast is therefore
+about to be on an unsupported server with no distro upgrade path. *(Both dates are from secondary sources
+quoting `icecast.org`, which is outside this session's network policy — see the informed gap below.)*
+
+### Layer 2 — DAB+ terrestrial transmission: ODR-mmbTools, the only open chain that exists
+
+The full chain is **ODR-AudioEnc** (audio → ETI payload) → **ODR-DabMux** (services → ETI) →
+**ODR-DabMod** (ETI → I/Q) → SDR hardware (Ettus USRP or LimeSDR), with **ODR-PadEnc** adding DLS text
+and MOT Slideshow. The cheap path replaces the software modulator with a **Raspberry Pi + EasyDAB v2**
+board. It is a fork of the discontinued CRC-mmbTools.
+
+| Repo | Licence | Stars | Forks | Last push |
+|---|---|---|---|---|
+| [Opendigitalradio/ODR-DabMod](https://github.com/Opendigitalradio/ODR-DabMod) | GPL-3.0 (`COPYING`, 35,147 B) | 60 | 33 | 2026-10-01 |
+| [Opendigitalradio/ODR-DabMux](https://github.com/Opendigitalradio/ODR-DabMux) | GPL-3.0 (`COPYING`, 35,147 B) | 49 | 41 | 2026-10-15 |
+| [Opendigitalradio/ODR-AudioEnc](https://github.com/Opendigitalradio/ODR-AudioEnc) | **five licences — see below** | 30 | 25 | 2026-07-01 |
+| [Opendigitalradio/ODR-PadEnc](https://github.com/Opendigitalradio/ODR-PadEnc) | GPL-3.0 (`COPYING`, 35,147 B) | 9 | 15 | 2026-07-01 |
+| [Opendigitalradio/ODR-EncoderManager](https://github.com/Opendigitalradio/ODR-EncoderManager) | GPL-3.0-or-later (`LICENCE`, 674 B) | 10 | 11 | **2023-05-22** |
+| [DABodr/DABcast-diffusion-software](https://github.com/DABodr/DABcast-diffusion-software) | AGPL-3.0 | **0** | 2 | **2026-11-25** |
+| [glokhoff/RaspDAB](https://github.com/glokhoff/RaspDAB) | **none** | 29 | 7 | **2017-06-01** |
+
+**`ODR-AudioEnc` is the sharpest compilation-licence trap in this KB.** The API reports no licence; the
+control test confirms the absence is real (README 200, nine filenames × two branches all 404); and the
+README's own `# LICENCE` section at line 301 lists **five**: `src/` Apache-2.0, `libtoolame-dab`
+LGPL-2.1+, `src/edi` GPL-3.0+, `fdk-aac` under the **Fraunhofer FDK AAC licence** (not OSI-approved,
+and its `NOTICE` directs implementers to obtain **AAC patent licences via Via Licensing**), and
+`contrib/fec` LGPL-2.1. The binary is **statically** linked against two of them. The maintainer then
+writes: *"Whether it is legal or not to distribute compiled binaries from these sources is unclear to me.
+Please seek legal advice to answer this question."* `MODULE_LICENSE_FRAUNHOFER` is a **0-byte marker**.
+Pass 8 found this law in `acoustid/chromaprint`; this instance is worse on three axes — five licences
+instead of two, **static** rather than dynamic linkage, and a **patent** obligation stacked on the
+copyright one. No SPDX field, badge or source-tree SBOM scan can see any of it.
+
+### Layer 3 — RDS, the analogue data channel: a perfect licence monocult
+
+**Seven of seven transmit-side encoders are GPL-3.0; the eighth is unlicensed. The only MIT repo in the
+layer is the decoder.**
+
+| Repo | Licence | Stars | Last push | Side |
+|---|---|---|---|---|
+| [ChristopheJacquet/PiFmRds](https://github.com/ChristopheJacquet/PiFmRds) | GPL-3.0 | 1,599 | 2026-02-01 | Transmit |
+| [miegl/PiFmAdv](https://github.com/miegl/PiFmAdv) | GPL-3.0 | 529 | 2026-10-09 | Transmit |
+| [windytan/redsea](https://github.com/windytan/redsea) | **MIT** | 445 | **2026-11-22** | **Receive** |
+| [jontio/JMPX](https://github.com/jontio/JMPX) | **none** | 68 | 2023-10-06 | Transmit |
+| [Anthony96922/MiniRDS](https://github.com/Anthony96922/MiniRDS) | GPL-3.0 | 18 | 2024-06-29 | Transmit |
+| [ShadowLight8/Dynamic_RDS](https://github.com/ShadowLight8/Dynamic_RDS) | GPL-3.0 | 16 | **2026-11-26** | Transmit |
+| [barteqcz/NanoRDS](https://github.com/barteqcz/NanoRDS) | GPL-3.0 | 14 | 2026-10-15 | Transmit |
+| [ryanginn/rds-master](https://github.com/ryanginn/rds-master) | GPL-3.0 | 11 | 2026-10-25 | Transmit |
+
+### Layer 4 — receivers, and the other two digital standards
+
+| Repo | Licence | Stars | Forks | Last push | Standard |
+|---|---|---|---|---|---|
+| [theori-io/nrsc5](https://github.com/theori-io/nrsc5) | GPL-3.0-or-later (`LICENSE`, 612 B) | 974 | 121 | 2026-10-17 | **HD Radio** — receive only. Xperi-controlled and patent-licensed: **no open transmit side exists or will.** |
+| [AlbrechtL/welle.io](https://github.com/AlbrechtL/welle.io) | GPL-2.0 (`COPYING`, 17,957 B) | 764 | 152 | **2026-11-24** | DAB/DAB+ SDR receiver, the reference implementation |
+| [KejPi/AbracaDABra](https://github.com/KejPi/AbracaDABra) | **MIT** | 188 | 27 | 2026-11-15 | DAB/DAB+ SDR receiver. **The best-licensed DAB receiver that exists, and maintained.** Start here for anything that ships in a product. |
+| [Opendigitalradio/dablin](https://github.com/Opendigitalradio/dablin) | GPL-3.0 | 145 | 33 | 2026-01-20 | DAB receiver incl. ETI-NI / EDI playback |
+| [andrmuel/gr-dab](https://github.com/andrmuel/gr-dab) | GPL-3.0 | 106 | — | 2026-10-06 | GNU Radio DAB module |
+| [williamyang98/DAB-Radio](https://github.com/williamyang98/DAB-Radio) | MIT | 51 | — | 2025-08-30 | RTL-SDR DAB demodulator/decoder |
+| [Opendigitalradio/etisnoop](https://github.com/Opendigitalradio/etisnoop) | GPL-3.0 | 14 | 16 | 2026-01-12 | ETI analyser — the measurement tool for layer 2 |
+| [CasualArclamp/DecDRM](https://github.com/CasualArclamp/DecDRM) | GPL-2.0 | 14 | 5 | **2026-11-17** | **DRM30** receiver **and transmitter** in Rust. **The only live Digital Radio Mondiale repo in the world** — the query returns 11 total. |
+| [Opendigitalradio/qt-drmplus](https://github.com/Opendigitalradio/qt-drmplus) | NOASSERTION | 24 | — | **2018-12-07** | DRM+ receiver, self-titled **"(unmaintained)"** |
+
+### Layer 5 — hybrid-radio metadata (RadioDNS): **8 repos, 96 stars, and it is deployed in 2.5M+ cars**
+
+| Repo | Licence | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [bbc/RadioVisDemo](https://github.com/bbc/RadioVisDemo) | Apache-2.0 | 28 | 14 | 2025-05-08 | RadioDNS + RadioVIS slideshow demo |
+| [ebu/radiodns-manager](https://github.com/ebu/radiodns-manager) | GPL-3.0 | 15 | 3 | **2023-05-01** | The EBU's manager for RadioVIS, RadioEPG **and Service Following** — the whole plane, in one repo, dormant 3.5 years with **89 open issues** |
+| [njh/radiodns-uk](https://github.com/njh/radiodns-uk) | MIT | 13 | 1 | 2024-08-01 | Directory of RadioDNS-enabled UK stations. **Data, not a library.** |
+| [bbc/node-radiovis-stomp-server](https://github.com/bbc/node-radiovis-stomp-server) | Apache-2.0 | 13 | 5 | **2026-11-04** | RadioVIS STOMP server — **the only actively-maintained repo in this layer** |
+| [radiodns/java-radiodns](https://github.com/radiodns/java-radiodns) | Apache-2.0 | 10 | 2 | 2025-11-14 | **The standards body's own Java library. Ten stars.** |
+| [bbc/node-radiodns](https://github.com/bbc/node-radiodns) | Apache-2.0 | 7 | — | 2024-11-27 | RadioDNS resolution + service lookup |
+| [nexgenta/libradiodns](https://github.com/nexgenta/libradiodns) | Apache-2.0 | 6 | — | **2011-01-16** | C client library, fifteen years untouched |
+| [codders/radiodns-client](https://github.com/codders/radiodns-client) | **none** | 4 | — | **2008-11-22** | Example implementation, **eighteen years old** |
+
+**Six of eight are Apache-2.0 or MIT. The licence is not the obstacle in this layer — maintenance is.**
+That makes it the exact inverse of every other plane in this KB, and it is the most sellable fact in this
+pass: the standard is open, permissive, deployed in millions of cars, documented by ETSI — **and there is
+no maintained library to implement it with.**
+
+### The PAD / EPG sub-layer — the XML a broadcaster must actually emit
+
+| Repo | Licence | Stars | Last push | Standard |
+|---|---|---|---|---|
+| [radiorabe/nowplaypadgen](https://github.com/radiorabe/nowplaypadgen) | AGPL-3.0 | 3 | **2026-11-23** | DLS+ / MOT SLS now-playing generator. Live, from Swiss community station RaBe. |
+| [magicbadger/python-dabepg](https://github.com/magicbadger/python-dabepg) | GPL-2.0 | 3 | **2017-11-19** | **ETSI TS 102 818** (DAB EPG XML) + **TS 102 371** |
+| [magicbadger/odr-radioepg-bridge](https://github.com/magicbadger/odr-radioepg-bridge) | Apache-2.0 | 2 | 2024-04-05 | DAB EPG bitstream direct from an ODR mux config |
+| [GlobalRadio/python-dabmot](https://github.com/GlobalRadio/python-dabmot) | NOASSERTION | 1 | 2023-07-25 | **ETSI EN 301 234** (MOT) |
+| [GlobalRadio/python-mot-epg](https://github.com/GlobalRadio/python-mot-epg) | NOASSERTION | 0 | 2023-07-25 | DAB EPG binary encoding |
+| [ebu/content-manager](https://github.com/ebu/content-manager) | LGPL-3.0 | 8 | **2017-03-01** | The EBU's visual production tool for hybrid radio. **Dead nine years.** |
+
+### The standards documents — and the one that is not free
+
+| Standard | Body | What it governs | Access |
+|---|---|---|---|
+| **ETSI TS 102 818** | ETSI | Service & Programme Information (SPI) XML — the hybrid-radio EPG | Free from ETSI |
+| **ETSI TS 102 371** | ETSI | Binary encoding of the above | Free from ETSI |
+| **ETSI EN 301 234** | ETSI | MOT — Multimedia Object Transfer (how slideshows travel) | Free from ETSI |
+| **ETSI EN 300 401** | ETSI | DAB itself | Free from ETSI |
+| **ETSI ES 201 980** | ETSI | DRM (Digital Radio Mondiale) | Free from ETSI |
+| **IEC 62106** | IEC | RDS | **Paid** — IEC standards are sold per document |
+| **NRSC-5** | NRSC | HD Radio air interface | Document published; **the technology is patent-licensed by Xperi** |
+
+**ETSI publishes free, and that is why DAB/DRM/SPI have open implementations at all.** The two
+non-free entries map exactly onto the two worst-supplied layers: RDS (paid standard → monoculture of
+GPL-3.0 hobby encoders) and HD Radio (patent licence → receive-only, forever). **Fourth instance of
+this KB's knowledge-content law, and the first time the gating artefact is an IEC paywall.**
+
+### ⛔ False friends — measured, and one is now a repeat offender
+
+| Query | Top result | Why it is wrong |
+|---|---|---|
+| `radio service following` | `chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020` (327★) | High-school robotics SDK. First real result: 15★, dormant. |
+| `radio service following` / `radio metadata` | `Sfedfcv/redesigned-pancake` (283★, no licence) | A scrape of GitHub's own docs pages. **It also topped `common alerting protocol` in pass 45** — second consecutive plane. Permanent fixture; never table it. |
+| `radio metadata` | `WB2024/WBs-Guide-to-Navidrome` (272★) | A guide to a self-hosted music server. |
+| `icecast` | `bjarneo/cliamp` (MIT, 4,704★) | A terminal Winamp clone. Not a server. |
+| `audio streaming server` | `ossrs/srs` (MIT, 29,466★) | General media server, no radio function. |
+| `metaradio` | 3 repos, **all 0★** | **None is the commercial MetaRadio product** the trade press names as the standard now-playing connector. It is not on GitHub. |
+| `DRM` (grepped in this KB) | 89 hits | **All Digital Rights Management.** Digital Radio Mondiale returns **11 repos worldwide**. |
+| `spi radiodns xml` | — | **0 repositories.** |
+| `hybrid radio metadata` | — | **0 repositories.** |
+
+### Informed gaps — stated rather than filled
+
+- **`icecast.org`, `radiodns.org` and `gitlab.xiph.org` are all outside this session's network policy**
+  (`ENOTFOUND`, and proxy 403 for the GitLab host). So: the Icecast 2.4.4 EOL date, the 2.5.0 release
+  date, and **all RadioDNS adoption figures** are recorded from secondary sources quoting those sites.
+  **RadioDNS's numbers are additionally self-reported.** To raise any of this to primary evidence, those
+  three hosts need to be allowed.
+- **Canonical-forge blindness, and it is a new method defect.** `xiph/Icecast-Server` says `(Mirror)` in
+  its own description. This KB has used GitHub `search/repositories` as its oracle for 46 passes; for a
+  mirrored project that oracle returns **real-looking but wrong** liveness data, and it fails **silently**.
+  **New rule, all twelve industries: read the repo description for "mirror" / "read-only" / "moved"
+  before quoting a star count or a push date.**
+
+### Method notes added by this pass (reusable across all twelve industries)
+
+1. **The licence probe needs the British spelling.** `ODR-EncoderManager` carries GPL-3.0-or-later in a
+   file named **`LICENCE`** — no extension, `master` only (`main` 404s). Pass 8 added `license.txt` and
+   `COPYING.md`; **`LICENCE`, `LICENCE.txt` and `LICENCE.md` were still missing.** Without them this repo
+   reads as unlicensed. Full probe set is now: `LICENSE`, `LICENSE.txt`, `LICENSE.md`, `license.txt`,
+   `license`, **`LICENCE`**, **`LICENCE.txt`**, **`LICENCE.md`**, `COPYING`, `COPYING.txt`, `COPYING.md`,
+   `COPYRIGHT` — on both `master` and `main`.
+2. **When the probe fails, the README may hold the real answer rather than nothing.** `ODR-AudioEnc` has
+   no licence file *and* a full five-licence breakdown in `README.md`. **Grep the README for
+   `licen|gpl|patent` before recording an absence** — one call, and here it changed the finding
+   completely.
+3. **A shallow clone remains the cheapest conclusive oracle.** `git clone --depth 1` settled the
+   five-licence question, surfaced `fdk-aac/MODULE_LICENSE_FRAUNHOFER` as a **0-byte marker** and found
+   `contrib/fec/LICENSE`, in one call. Confirms the pass-8 rule.

@@ -1196,6 +1196,33 @@ noting that the WAVE verdict component is **Commons-Claused against consulting r
 pass/fail logic must be client-owned. (2) **Reviving `openBA` as the ATSC 3.0 app substrate**: it is
 MIT, it is the only one, and if the FCC sets a date it becomes load-bearing overnight. ⚠️ Scope it
 as adopt-and-maintain; there is no upstream.
+### Pass 33 (2026-11-27) — the media-monitoring & earned-media measurement layer in North America
+
+- **The category just became a budget line.** Gartner published its **first-ever Magic Quadrant for
+  PR and Media Monitoring Tools on 2026-10-20**, naming AI visibility, evolving media-relations
+  dynamics and **outcome-based earned-media measurement** as the forces reshaping it. A
+  first-edition MQ is the clearest signal that procurement has a line item where it previously had a
+  discretionary purchase. ⚠️ Leader placements known here only from **Meltwater's own release** — a
+  vendor source.
+- **The buy side has consolidated into one vendor across three functions.** **Cision owns Brandwatch
+  and PR Newswire**: the wire, the clipping and the social-listening tiers of one workflow, sold as a
+  combined dataset. Meltwater positions as the all-in-one alternative. Both proprietary.
+- **AI is explicitly redrawing the paid/owned/earned split.** S&P Global Market Intelligence
+  published on this directly (2026-04). Combined with the answer-engine referral collapse documented
+  in pass 30, earned media is simultaneously **harder to attribute and more valuable** — which is
+  precisely why "outcome-based measurement" is the phrase analysts reach for.
+- **Opportunity — the AMEC-conformant measurement layer nobody ships.** AMEC's Integrated Evaluation
+  Framework (outputs → out-takes → outcomes → impact, tagged across PESO) is the settled, free,
+  industry-endorsed standard, and **no open-source implementation of it exists** (verified
+  2026-11-27). Meanwhile the collection substrate beneath it is Apache-2.0 and committed daily
+  (`story-indexer`, `trafilatura`, `changedetection.io`). **The build: own the corpus on permissive
+  infrastructure, implement AMEC outcomes on top, and retire AVE for metrics a CFO accepts.** This is
+  the plane's flagship North American engagement — see `compose/patterns.md` pattern 33.
+- **Why "own the corpus, rent the analysis" sells here.** The consolidation above is the argument: a
+  client whose wire, clipping and listening all sit with one vendor has no leverage and no portable
+  history. A self-hosted Apache-2.0 collection tier restores both, without requiring the client to
+  abandon their analysis vendor on day one.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2532,6 +2559,42 @@ designated, prominence, default placement and data access on the device become r
 and broadcasters will need both evidence and engineering. ⚠️ Keep EU AI Act Article 50 marking in
 scope for anything the app itself renders — the disclosure has to appear **on the device**, and
 nothing in the open TV stack implements it.
+### Pass 33 (2026-11-27) — the media-monitoring & earned-media measurement layer in EMEA
+
+- **⛔ The informed gap of this pass: Europe runs the world's largest public media monitor and ships
+  none of its code.** The European Commission's Joint Research Centre operates **Europe Media Monitor
+  (EMM)**: **~20,000 news sites, ~500,000 pages/day, 80 languages, 150 countries**, with clustering,
+  multi-label classification, cross-script name-variant matching and topic detection/tracking, now
+  with LLMs integrated. It partners with WHO on the EIOS epidemic-intelligence initiative, and its
+  public applications sit at `media-monitor.europa.eu`. **Searched 2026-11-27: there is no public JRC
+  EMM code repository.** It is an institutional system, not open source.
+- **And the market is simultaneously demanding sovereignty.** The DPP's **European Media Trends 2026**
+  report names AI the dominant driver of transformation *and* records a growing appetite for
+  **digital sovereignty**. So the regional requirement — EU-resident, self-hosted, multilingual
+  monitoring — is a **build**, not a procurement: the capable system is unforkable and the commercial
+  systems are US-owned.
+- **The substrate for that build is unusually good.** `changedetection.io` (Apache-2.0),
+  `miniflux` (Apache-2.0), `rss-bridge` (Unlicense), `trafilatura` (Apache-2.0), `tika` (Apache-2.0),
+  `story-indexer` (Apache-2.0) and `stanza` (Apache-2.0, 70+ languages NER) are all self-hostable and
+  all permissive. **Multilingual entity resolution is solved permissively; multilingual *sentiment*
+  is not** — see the LATAM subsection for the sharpest instance.
+- **Regulation shapes the output, not just the hosting.** EU AI Act **Article 50** transparency duties
+  apply to synthetic content a monitoring system might both detect and generate (briefs, summaries);
+  the European Parliament adopted its position on the **AI Act Omnibus** simplification by **569–45**.
+  DIGITALEUROPE is pressing for technology-neutral horizontal rules in the AVMSD evaluation.
+- **The structural warning worth quoting to a client.** imec-SMIT (Vrije Universiteit Brussel) mapped
+  Europe's AI media landscape and concluded that **adoption does not translate into control** — value
+  is captured by whoever controls infrastructure, data, models, interfaces, rights and business
+  arrangements. For this plane that is an argument for owning the corpus and the index, which is
+  exactly the layer Europe currently rents.
+- **Institutional buyers to approach.** The **EBU** convened its AI Forum in Brussels in March 2026
+  focused on public service media; public broadcasters are the natural first buyers of a sovereign,
+  self-hosted monitoring stack.
+- **MENA, placed explicitly:** Arab media AI spending is projected at **~$520M in 2026**. Analysis
+  from the region stresses that AI-in-media rules cannot be separated from existing privacy,
+  misinformation and platform-responsibility regimes — a compliance-led sale rather than an
+  efficiency-led one. ⚠️ MENA figure is region-specific; do not restate it as EMEA-wide.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3805,6 +3868,42 @@ finding EMEA produces from Article 50, arriving from four separate statutes, whi
 **⛔ Stated as a gap:** no APAC-specific open device-certification or QoE tooling was found. The
 certification layer in this plane is CTA/SVTA (North-America-led) and HbbTV (EMEA); searches for an
 APAC equivalent returned the ITU-R integrated broadcast-broadband reports and nothing implementable.
+### Pass 33 (2026-11-27) — the media-monitoring & earned-media measurement layer in APAC
+
+- **The adoption gap here is a *services* gap, which is the most directly billable finding of this
+  pass.** A 2026 survey of APAC PR professionals found **over half embrace AI, but lack strategic
+  adoption and structured training**. That is not a tooling deficit — the tools are free and
+  permissive. It is a methodology and enablement deficit, and it is exactly what a studio sells.
+- **Regulation diverges sharply, so the compliance story must be per-country.** Latham & Watkins
+  (2026-09) sorts the region into three groups: **binding risk-based frameworks** (South Korea's
+  **AI Framework Act**, Vietnam), **targeted rules** (China, including **labelling of
+  generative AI output**), and lighter-touch regimes. Korea's Act notably also *supports* adoption
+  via public data sharing and R&D, so it is not purely a compliance cost.
+- **Data residency pushes monitoring in-region, which favours self-hosting.** India's **Digital
+  Personal Data Protection Act** is reported to be pushing vendors toward local data centres. A
+  self-hosted Apache-2.0 collection tier satisfies this by construction, where a US SaaS monitoring
+  contract does not.
+- **Vernacular capability is the regional moat, and it is held by local vendors.**
+  **Konnect Insights** (India) specialises in vernacular-language sentiment and integrates local
+  platforms such as **ShareChat** and **Koo**; **Germin8** (Mumbai) and **Truescope** (Australia) are
+  also active. Japanese buyers reportedly favour automated clipping plus AI sentiment, with local
+  vendors competing on compliance-tailored offerings.
+- **⛔ Gap stated explicitly rather than left silent:** searched 2026-11-27 for **permissively
+  licensed open-source sentiment models for Indic and Southeast Asian languages** on this plane and
+  **found none**. `stanza` (Apache-2.0) covers NER across 70+ languages, so *entity* detection works
+  regionally; *sentiment* in Hindi, Bahasa, Thai, Vietnamese or Japanese has no permissive
+  off-the-shelf option found this pass. The vernacular sentiment layer is where local vendors have
+  moat and open source has nothing — and it is buildable, since the DimABSA/XLM-R route used by
+  `pr-radar` is language-agnostic.
+- **Public broadcasters are testing exactly this workflow.** The ABU reported (March 2026) that public
+  broadcasters in **Australia and Singapore** are piloting AI for **newsroom workflows, archiving and
+  verification** — the same three functions a monitoring stack serves.
+- **Demand-side context.** Kantar's Media Reactions 2026 ranks Google first for APAC consumer ad
+  equity (then Netflix, YouTube, TikTok, Instagram) and finds **about one in three APAC consumers use
+  AI to research brands** — which pulls pass 30's answer-engine visibility work into this plane's
+  remit regionally. APAC ad spend growth is ~5.2% for 2026, the slowest since the pandemic, so budget
+  arguments must be efficiency-led.
+
 ### LATAM
 
 - **Mexico now has the region's first sector-specific AI law for entertainment.** Amendments to the
@@ -5134,6 +5233,48 @@ platform mandated since 2007 and now carrying a national transition, the develop
 empty. That is either the supply-side opportunity of this pass or a signal that the work is done
 in-house by the three receiver manufacturers; **it is worth one direct conversation with the SBTVD
 Forum to find out which, before committing a build.**
+### Pass 33 (2026-11-27) — the media-monitoring & earned-media measurement layer in LATAM
+
+- **⛔ The hardest regional finding of this pass, and it is a blocker: the Spanish/Portuguese
+  sentiment substrate is licensed against commercial use.**
+  [`pysentimiento/pysentimiento`](https://github.com/pysentimiento/pysentimiento) is the best
+  open social-NLP library for **Spanish and Portuguese** (sentiment, hate speech, irony). Its entire
+  337-byte licence reads: *"an open-source library for **non-commercial use and scientific research
+  purposes only**"*, and adds that its **models carry the TASS and SemEval-2017 dataset licences**.
+  It was last committed **2024-06-20 — ~2.5 years dormant**.
+  **A Globant LATAM engagement cannot ship it.** There is no architectural workaround: no service
+  boundary or API indirection makes a paid client deliverable non-commercial.
+- **Place that precisely:** on this plane, English sentiment tooling is MIT (`vaderSentiment`,
+  `NewsMTSC`); multilingual *entity* resolution is Apache-2.0 (`stanza`, 70+ languages); and the
+  es/pt *sentiment* tier is non-commercial and abandoned. **The region's language is the one the
+  licence excludes.**
+- **✅ Therefore the LATAM opportunity is a build with a proven recipe.** Fine-tune a permissively
+  licensed multilingual encoder for es/pt **news** sentiment — the exact route
+  [`Etipufhu/pr-radar`](https://github.com/Etipufhu/pr-radar) (MIT) took with **XLM-R on DimABSA
+  (SemEval-2026)**, reporting 6–53% lower error than baseline across all 10 official test sets and
+  then adapting to news headlines. **An Apache-2.0 or MIT es/pt news-sentiment model does not
+  currently exist, the training path is published, and the demand is regional.** This is the single
+  most defensible open-source contribution identified in this pass.
+- **The regional institutions are already organised around AI-in-media policy** — and they are the
+  natural partners and references: **FLIP** (Colombia) and **ADEPA** (Argentina) research AI adoption
+  in media while tracking regulation; **SiPreBA** with the **Heinrich Böll Foundation** published
+  *"Notes Toward Regulating Artificial Intelligence in the Media"* (May 2026); **IFPIM** launched
+  **CTRL+J**, convenings on media sustainability, AI regulation and technological disruption with a
+  Global South focus.
+- **Newsroom adoption is operational, not experimental.** Panels at the Inter-American Press
+  Association's midyear meeting described AI in LATAM newsrooms as ongoing practice under strong human
+  oversight; **Peru's El Comercio** implemented a ~10-page internal AI guide in early 2026. Clients
+  here want governance and measurement, not a demo.
+- **Regulation is uneven and must be checked per country.** A **Chilean** AI bill is before Congress;
+  **Uruguay** became the first LATAM country to sign the Council of Europe's Framework Convention on
+  AI and Human Rights, Democracy and the Rule of Law (2025); several other initiatives are proposed or
+  enacted. Observers split on whether the region should follow the EU model or risk over-regulation.
+- **Market demand is real where it has been looked at:** Brazil, Mexico and Argentina are cited as
+  the regional leaders in adopting media monitoring for **brand reputation and crisis management**,
+  with local vendors and resellers packaging vernacular dashboards. ⚠️ The specific vendor counts in
+  that source (an aggregator directory) are weak; treat the *direction* as reliable and the *numbers*
+  as unverified.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -6207,3 +6348,49 @@ Japan** (Hybridcast; NHK's **MIT** SDKs), **SBTVD Forum / PUC-Rio TeleMídia** (
 **GPL-2.0**), **CTA WAVE** and **SVTA** (device conformance and CMCD/CMSD/Open Caching). **In this
 plane the standards bodies, not the vendors, publish the reusable code** — which is why the regional
 blocks above are organised around standards rather than around suppliers.
+
+## Market size — pass 33 addendum (2026-11-27): the media-monitoring segment, and **the narrowest headline agreement in this KB**
+
+Three estimates, and for once they do not contradict each other by an order of magnitude:
+
+| Source | Base year | Base value | Forecast | Horizon |
+|---|---|---|---|---|
+| ResearchAndMarkets | 2026 | **$6.1B** | $14.4B | 2034 |
+| IMARC-derived | 2025 | **$5.7B** | $13.8B | 2034 |
+| Fortune Business Insights | 2026 | **$7.34B** | $18.56B | 2034 |
+
+**On a common 2026 base: $6.1B vs $7.34B = ~1.20× spread.** Set that against pass 32's **~28×**,
+pass 30's **~7.3×** and pass 12's **~100×**. This is the **tightest headline agreement recorded in
+this file**, and the reason is informative: media monitoring is a mature software category sold as
+named seats on annual contracts to identifiable buyers (comms teams, agencies, public bodies). When
+analysts can count seats, they converge. Where this KB finds 10×–100× spreads, it is almost always
+because the category boundary is contested, not because the measurement is hard.
+
+⚠️ Still vendor-sponsored research with unreconciled scopes (some include social listening, some do
+not). **Quote the range $5.7–7.34B, never a single figure**, and say which scope you mean.
+
+### ⛔ The refusal — what a comms client actually wants to know is unsized
+
+None of the above sizes the thing being bought. A client asks: *what is the value of earned coverage
+we obtained?* The industry's answer used to be **AVE** (advertising value equivalency), which the
+**Barcelona Principles** and AMEC have rejected since 2016. The replacement — **outcome-based
+measurement** (outputs → out-takes → outcomes → impact, tagged across PESO) — is a *framework*, not a
+number, and **has no open-source implementation** (verified 2026-11-27).
+
+So the segment is well-sized and the *deliverable* is unsized. That is a better position than most
+planes in this KB: the budget exists and is agreed, and the method it is meant to fund does not ship.
+
+### Global players — pass 33 addendum (the media-monitoring & press-intelligence layer)
+
+| Player | Position in this plane |
+|---|---|
+| **Cision** | The consolidated incumbent: owns **Brandwatch** (social listening) and **PR Newswire** (the wire) alongside its own clipping and PR suite, marketed as a combined dataset. One vendor across three functions that were formerly three purchases. Proprietary. |
+| **Meltwater** | The all-in-one challenger; **named a Leader in Gartner's first PR & Media Monitoring MQ (2026-10-20)** — ⚠️ per Meltwater's own press release, a vendor source. Proprietary. |
+| **Gartner** | Not a vendor but the decisive actor this year: its **first-edition** Magic Quadrant (2026-10-20) converted the category into a procurement line and named **outcome-based earned-media measurement** as a reshaping force. |
+| **AMEC** | The standards body. Owns the **Integrated Evaluation Framework** and, with the **Barcelona Principles**, the rejection of AVE. Publishes the method, ships **no code** — the central asymmetry of this plane. |
+| **JRC / European Commission (Europe Media Monitor)** | The largest *public* monitoring system in the world — ~20,000 sites, ~500,000 pages/day, 80 languages, 150 countries, LLM-integrated, WHO/EIOS partner. **No public code repository.** Capability without redistributable artifact. |
+| **Media Cloud (MIT / UMass / Northeastern)** | The academic counterweight and **the only mature permissive index**: `story-indexer` **Apache-2.0** and alive (2026-08-28); `web-tools` Apache-2.0 and **dormant since 2023-12-14**. ⚠️ Widely mis-reported as AGPL-3.0 from a 2015-era fork — corrected in `repos/foundations.md` pass 33. |
+| **Konnect Insights / Germin8 / Truescope / YouScan** | The regional tier, and the real moat-holders: vernacular-language sentiment and local platform integrations (ShareChat, Koo) that global vendors do not cover. Proprietary. |
+| **Sprinklr / Hootsuite (Talkwalker) / Sprout Social** | The adjacent social-suite tier; monitoring as a feature of a publishing suite rather than a standalone discipline. Proprietary. |
+| **LexisNexis** | The licensed-archive tier — and notable as a publisher of evidence that *defends* AVE's continued use, against AMEC's position. ⚠️ Cite with the conflict noted. |
+| **Etipufhu (pr-radar)** | A single developer holding the only end-to-end open implementation of this plane (MIT, created 2026-11-21). Recorded as the measure of how empty the open category is, not as an incumbent. |

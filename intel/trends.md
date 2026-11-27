@@ -3360,3 +3360,93 @@ industry's QoE metrics definition — **has not been touched since 2019-03-04, 7
 → **The nervous system is standardised and free; the brain is a product nobody has shipped openly.**
 An agent that consumes CMCD and decides steering has a permissive substrate, a dormant metrics spec
 to revive, and no open competition. See `compose/patterns.md` pattern 32.2.
+
+---
+
+## Pass 33 (2026-11-27) — the sixth confirmation of the structural law, and the cleanest three-step gradient yet measured
+
+**The law, as this KB has stated it since cycle 8:** in media, *format* problems get permissive,
+actively-maintained open source; *judgment* problems get dormant repos, copyleft, or nothing. This
+plane — media monitoring and earned-media measurement — splits into three steps that can be dated
+precisely, and the gradient is monotonic.
+
+### Step 1 — COLLECT (a format problem): permissive, and committed the day of this pass
+
+| Repo | Licence | Last commit |
+|---|---|---|
+| [dgtlmoon/changedetection.io](https://github.com/dgtlmoon/changedetection.io) | Apache-2.0 | **2026-11-27** |
+| [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub) | AGPL-3.0 | **2026-11-27** |
+| [FreshRSS/FreshRSS](https://github.com/FreshRSS/FreshRSS) | AGPL-3.0 | **2026-11-27** |
+| [huginn/huginn](https://github.com/huginn/huginn) | MIT | **2026-11-27** |
+| [flairNLP/fundus](https://github.com/flairNLP/fundus) | MIT | 2026-11-26 |
+| [miniflux/v2](https://github.com/miniflux/v2) | Apache-2.0 | 2026-11-26 |
+| [ArchiveBox/ArchiveBox](https://github.com/ArchiveBox/ArchiveBox) | MIT | 2026-11-26 |
+| [scrapy/scrapy](https://github.com/scrapy/scrapy) | BSD-3-Clause | 2026-11-25 |
+| [apache/tika](https://github.com/apache/tika) | Apache-2.0 | 2026-11-25 |
+| [adbar/trafilatura](https://github.com/adbar/trafilatura) | Apache-2.0 | 2026-11-23 |
+
+**Four repos committed on 2026-11-27 itself.** Fetching, parsing and watching are solved to the day.
+
+### Step 2 — INDEX (half a format problem): one organisation, one licence, a three-year split
+
+| Repo | Licence | Last commit | Gap |
+|---|---|---|---|
+| [mediacloud/story-indexer](https://github.com/mediacloud/story-indexer) | Apache-2.0 | 2026-08-28 | ~3 months |
+| [mediacloud/web-tools](https://github.com/mediacloud/web-tools) | Apache-2.0 | **2023-12-14** | **~3 years** |
+
+Same org, same permissive licence. The **pipeline** is maintained; the **interface a human uses to
+interpret the corpus** is abandoned. The split is not about licence or funding — it is about which
+half is a format problem.
+
+### Step 3 — MEASURE (pure judgment): dormant, non-commercial, or six days old
+
+| Repo | Licence | Last commit | Status |
+|---|---|---|---|
+| [pysentimiento/pysentimiento](https://github.com/pysentimiento/pysentimiento) | ⛔ **non-commercial only** | **2024-06-20** | **~2.5 years dormant AND unusable commercially** |
+| [fhamborg/NewsMTSC](https://github.com/fhamborg/NewsMTSC) | MIT (new files only) | 2025-07-18 | ~16 months dormant |
+| [cjhutto/vaderSentiment](https://github.com/cjhutto/vaderSentiment) | MIT | 2026-03-02 | English-only lexicon |
+| [Scognamiglio1969/radar-intelligence](https://github.com/Scognamiglio1969/radar-intelligence) | **AGPL-3.0** | 2026-09-17 | single maintainer |
+| [Etipufhu/pr-radar](https://github.com/Etipufhu/pr-radar) | MIT | 2026-11-26 | **18 commits, created 2026-11-21** |
+
+→ **The instruments that gather are maintained to the day. The instrument that decides what the
+gathering means is 2.5 years old, licensed against commercial use, or a week old.**
+
+**And the terminal zero, which is the sharpest in this KB after pass 5's settlement zero:** there is
+**no open-source implementation of AMEC's Integrated Evaluation Framework at all** — not dormant, not
+copyleft, *absent*. The industry's own measurement standard, free to adopt, with zero code behind it.
+
+## Pass 33 — the measurement trend that dates this plane precisely
+
+**Gartner published its first-ever Magic Quadrant for PR and Media Monitoring Tools on 2026-10-20.**
+A first-edition Magic Quadrant is the single most reliable signal that a category has become a
+budgeted procurement line rather than a discretionary tool purchase. Its abstract names three forces
+reshaping the market: **AI visibility**, **evolving media-relations dynamics**, and
+**outcome-based earned-media measurement**.
+
+That third phrase is the whole opportunity. The industry is formally moving off **AVE** (advertising
+value equivalency) — the metric that prices earned coverage as if it were bought advertising, which
+the **Barcelona Principles** and AMEC have rejected since 2016 in favour of
+**outputs → out-takes → outcomes → impact**, tagged across **PESO** (paid, earned, shared, owned).
+
+**The asymmetry to exploit:** the *standard* is settled, public and free; the *implementations* are
+all proprietary (Cision, Meltwater, Brandwatch, Truescope); and the *open-source substrate to build
+one* is Apache-2.0 and committed today. ⚠️ Note Gartner's Leader placements are known here only via
+**Meltwater's own press release**, a vendor source — cite the placement, not the ranking.
+
+## Pass 33 — consolidation on the buy side
+
+**Cision owns both Brandwatch and PR Newswire**, marketing the combined datasets as the broadest
+source collection available. So one vendor holds the **wire** (distribution), the **clipping**
+(monitoring) and the **social listening** (Brandwatch) tiers of the same workflow. Meltwater
+positions as the all-in-one alternative.
+
+For a media or brand client this is a single-vendor dependency across three functions that used to be
+three purchases — and it is the strongest commercial argument for a self-hosted, permissively
+licensed collection tier underneath whatever analysis vendor is chosen. **Own the corpus; rent the
+analysis.** That inverts the current default, in which the vendor owns both.
+
+⚠️ **Market-size spread, and an unusual result:** $6.1B (2026) → $14.4B (2034);
+$5.7B (2025) → $13.8B (2034); $7.34B (2026) → $18.56B (2034). On a 2026 base that is a
+**~1.20× spread — the *narrowest* headline disagreement recorded in this KB**, against pass 32's
+~28× and pass 30's ~7.3×. Monitoring is an established software category with real seats and real
+contracts, so the estimators broadly agree. Still vendor-sponsored research; quote the range.

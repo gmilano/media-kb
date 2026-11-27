@@ -3110,3 +3110,82 @@ out. This one cannot.
 - ✅ **`tv-mcp` and `ctv-bridge` are MIT** and are the cheapest way to put a coding agent in front of
   a real Tizen or webOS device. Combined: 18 stars. Treat them as reference code to absorb, not as
   dependencies to pin — at this size, the maintenance risk is total.
+
+---
+
+## Pass 33 addendum (2026-11-27) — the media-monitoring, earned-media & press-intelligence agent layer
+
+**The plane this pass opened.** Thirty-two passes catalogued the industry *publishing outward*. This
+one covers the mirror: **listening inward** — what is said about a brand or a title across news,
+broadcast and social, and how that is measured. Before this pass the eight files said
+`media monitoring` **0** times, `press clipping` **0** times, `broadcast monitoring` **0** times,
+`share of voice` **0** times, `earned media` **0** times, `social listening` **0** times,
+`sentiment analysis` **0** times and `AMEC` **0** times — while saying `playout` 86 times and
+`C2PA` 123 times. The outbound side was covered to the byte; the inbound side had no vocabulary.
+
+> **⚠️ Verification note for this pass — read before comparing with rows above.**
+> **No star counts are asserted in any pass-33 section, and that is deliberate.** This session's
+> GitHub API access is scoped to the session's own repositories: `api.github.com/repos/{any other}`
+> returns `"GitHub access to this repository is not enabled for this session"`. The HTML
+> `stargazerCount` scrape and the `commits/{branch}.atom` feed both returned empty through the
+> proxy. So an absent star figure below is an **unavailable** measurement, not an unrecorded one.
+> What *was* verified, for every row: **existence** via `git ls-remote --exit-code`, **licence** by
+> reading the actual licence file and counting its bytes, and **last commit date** via
+> `git clone --depth 1 --filter=blob:none --no-checkout`. Dates below are last-commit, not
+> last-push, and are therefore slightly conservative.
+
+### The agent layer — six real repos, and the licence line runs straight through the middle
+
+| Agent | Repo | Licence | Last commit | What it does |
+|---|---|---|---|---|
+| PR Radar | [Etipufhu/pr-radar](https://github.com/Etipufhu/pr-radar) | MIT (1,069 B) | 2026-11-26 | **The only end-to-end implementation of this plane in open source.** Collects brand + competitor coverage, deduplicates and clusters into stories, scores tone per brand mention, and has a LoRA-tuned Qwen3-1.7B write a weekly brief whose every number, outlet and recommendation is rule-checked before publication. Market defined in one YAML file; ships two unrelated demos (beauty tech, electric cars). ⚠️ **18 commits, first commit 2026-11-21** — six days old at time of writing. Reference implementation to absorb, *not* a dependency to pin. |
+| NewsMTSC | [fhamborg/NewsMTSC](https://github.com/fhamborg/NewsMTSC) | MIT **for newly-developed files only** — composite, see below | 2025-07-18 | Target-dependent sentiment for news text: polarity **toward a named entity**, not whole-document polarity. This is the correct primitive for brand sentiment and almost nothing else implements it. 16 months dormant. |
+| pysentimiento | [pysentimiento/pysentimiento](https://github.com/pysentimiento/pysentimiento) | ⛔ **NON-COMMERCIAL / RESEARCH ONLY** (337 B) | 2024-06-20 | Transformer social-NLP for **Spanish, Portuguese, English, Italian**: sentiment, hate speech, irony. The best Spanish/Portuguese library on this plane — and **the licence forbids the only use Globant has for it.** See the licence finding below. |
+| VADER | [cjhutto/vaderSentiment](https://github.com/cjhutto/vaderSentiment) | MIT (1,076 B) | 2026-03-02 | Lexicon-and-rule sentiment tuned for short social text. English-only, no training required. A baseline and a fallback, not a solution. |
+| faster-whisper | [SYSTRAN/faster-whisper](https://github.com/SYSTRAN/faster-whisper) | MIT (1,063 B) | 2026-11-12 | CTranslate2 reimplementation of Whisper. **The component that makes *broadcast* monitoring possible at all**: turns radio, TV and podcast audio into searchable text so spoken mentions land in the same index as print. |
+| auto-archiver | [bellingcat/auto-archiver](https://github.com/bellingcat/auto-archiver) | MIT (1,076 B) | 2026-11-18 | Evidence-grade capture of URLs and social posts with hashes and metadata. The tier that matters when a mention must survive deletion — crisis monitoring, regulatory complaints, litigation. |
+
+**Six rows, six real repos. No seventh was invented to reach a round number.**
+
+### ⛔ The licence finding of this pass — a category this KB has not recorded before
+
+`pysentimiento`'s entire `LICENSE.md` is 337 bytes and reads:
+
+> "`pysentimiento` is an open-source library for **non-commercial use and scientific research
+> purposes only**. Please be aware that models are trained with third-party datasets and are subject
+> to their respective licenses." — then links the TASS and SemEval-2017 dataset licences.
+
+**This is worse than copyleft, and it is the first instance in this KB.** AGPL-3.0 constrains *how
+you distribute*; a non-commercial clause forbids *the engagement itself*. There is no architectural
+workaround — no service boundary, no separate process, no "we only call it over an API" structure
+makes a paid client deliverable non-commercial. And note the **second** layer, which is the cycle-8
+law again: even if the code licence were permissive, the **models** carry the TASS and SemEval
+dataset terms.
+
+**Why this lands hardest on LATAM:** this is the Spanish- and Portuguese-language sentiment
+substrate. The plane's English tooling is MIT; the es/pt tooling is non-commercial **and 2.5 years
+dormant**. See `intel/market.md` → Opportunities by region → LATAM for the build this implies.
+
+### Composite licensing, second instance — and this one is pure Python
+
+Cycle 8 recorded `acoustid/chromaprint`: MIT code, LGPL-2.1 as a whole, because of what it links.
+That was read as a native-linking artefact. **`fhamborg/NewsMTSC` shows it is not.** Its 1,393-byte
+licence file opens:
+
+> "This project uses code from various projects, who may have their own license or copyright.
+> - ABSA-PyTorch by Yury Soong et al. … - early-stopping-pytorch by Bjarten …
+> **For newly developed files**, the license information is: … [MIT text]"
+
+A pure-Python repo, no compilation, no linker — and the MIT grant still covers only part of the
+tree. **Rule: "MIT" in a repo's licence file is a claim about some files, not necessarily all of
+them. Read the first paragraph, not the SPDX badge.** Any SBOM scan keyed on the licence *file* will
+report this repo as cleanly MIT.
+
+### Method correction — the licence-filename probe needed a fourth name
+
+Cycle 8 added lowercase `license.txt` and `COPYING.md`. This pass adds **`UNLICENSE`**:
+[`RSS-Bridge/rss-bridge`](https://github.com/RSS-Bridge/rss-bridge) returns 404 for `LICENSE`,
+`LICENSE.md`, `LICENSE.txt`, `license.txt`, `LICENCE`, `COPYING` and `COPYING.md`, while its README
+resolves 200 — which by cycle 8's own rule means *the naming convention is wrong, not the licence
+missing*. It is in `UNLICENSE`: public domain. Current working name set:
+`LICENSE LICENSE.md LICENSE.txt license.txt LICENCE COPYING COPYING.md LICENSE-APACHE UNLICENSE`.

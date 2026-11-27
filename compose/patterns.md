@@ -5082,3 +5082,106 @@ Run this before a single estimate goes into a deck. It catches every trap this p
 7. **Confirm the conformance suite is obtainable at all.** The **HbbTV test suite is members-only**
    (licensed to member companies, tracked in a members-only SVN). If the client needs certified
    HbbTV output, membership or a registered test centre is a line item, not an assumption.
+
+---
+
+## Pattern 33 — AMEC-conformant earned-media intelligence, self-hosted and permissively licensed
+
+**Why this pattern exists.** Gartner's first PR & Media Monitoring Magic Quadrant (2026-10-20) names
+**outcome-based earned-media measurement** a reshaping force; AMEC's Integrated Evaluation Framework
+is the free, settled standard for it; and **no open-source implementation of that framework exists**
+(verified 2026-11-27). Meanwhile the collection substrate beneath it is Apache-2.0/MIT and receiving
+commits daily. So: the budget is agreed, the method is public, the plumbing is free, and the thing in
+the middle is missing. That gap is the deliverable.
+
+**Licence posture: every shipped component below is MIT, Apache-2.0, BSD or public domain.** The
+AGPL-3.0 options are listed only as separately-deployed services, and the one non-commercial
+component is excluded by name.
+
+```
+ COLLECT                 EXTRACT              RESOLVE           INDEX              MEASURE
+ feedparser   (BSD-2)    trafilatura (Ap-2)   stanza  (Ap-2)    story-indexer      AMEC:
+ rss-bridge   (Unlic)    fundus      (MIT)    NER →              (Apache-2.0)      outputs →
+ miniflux     (Ap-2)     newspaper4k (MIT)    brand/title/      meilisearch        out-takes →
+ changedetection.io      tika        (Ap-2)   person            (MIT)              outcomes →
+              (Ap-2)                                                               impact
+ faster-whisper (MIT)    ── audio → text ──→                   ▲                   + PESO tags
+ auto-archiver  (MIT)    ── evidence capture ─────────────────→ │
+                                                    ┌──────────┴──────────┐
+                                                    │ DEDUPE & CLUSTER    │ ← do this BEFORE
+                                                    │ (story-level)       │   any metric
+                                                    └─────────────────────┘
+```
+
+### Wiring, step by step
+
+1. **Collect.** `miniflux` (Apache-2.0) or `feedparser` (BSD-2) for feeds; `rss-bridge` (Unlicense)
+   to manufacture feeds for outlets that publish none; **`changedetection.io` (Apache-2.0)** to watch
+   pages that are not feeds at all — competitor press rooms, regulator notices, rival newsrooms.
+   `GNews` (MIT) for Google News queries, with the warning in step 3.
+2. **Bring broadcast in.** **`faster-whisper` (MIT)** transcribes radio, TV and podcast audio so
+   spoken mentions land in the same index as print. **This is the step that makes it *media*
+   monitoring rather than *web* monitoring**, and it is the cheapest differentiator in the pattern —
+   the commercial vendors charge separately for broadcast.
+3. **⚠️ Deduplicate and cluster into stories BEFORE computing anything.** This is the pattern's
+   load-bearing warning and it is measured, not theoretical: `pr-radar`'s README documents that
+   without deduplication **one article appears in up to 14 Google News market editions**, inflating
+   share of voice by an order of magnitude. Any metric computed on raw collected items is wrong.
+   Cluster to the *story*, then count stories, not rows.
+4. **Extract.** `trafilatura` (Apache-2.0) as the general extractor; **`fundus` (MIT)** where the
+   outlet list is known and finite — which in client monitoring it almost always is — because
+   publisher-specific parsers beat generic heuristics. `tika` (Apache-2.0) for the PDF/DOCX/scanned
+   material that arrives in every real engagement.
+5. **Resolve entities.** **`stanza` (Apache-2.0, 70+ languages)** for NER → brands, titles, people,
+   competitors. A "mention" only becomes a *mention of the client* here. Permissive **and**
+   multilingual, which on this plane is rare.
+6. **Index.** **`story-indexer` (Apache-2.0)** as the corpus backbone — Media Cloud's live pipeline,
+   proven past a billion stories. ⚠️ Use `story-indexer`, **not** `web-tools`: same org, same licence,
+   but the UI layer has been dormant since 2023-12-14. Build your own surface over `meilisearch`
+   (MIT) or OpenSearch. **Verify the licence yourself**: Media Cloud is widely mis-reported as
+   AGPL-3.0 from a stale fork; both live repos read Apache-2.0.
+7. **Score sentiment — and here you must build.** `NewsMTSC` (MIT *for new files only*) is the right
+   *primitive*: target-dependent sentiment, i.e. polarity **toward the named brand**, not
+   whole-document polarity. It is 16 months dormant. **⛔ Do NOT use `pysentimiento` in any paid
+   engagement** — its licence is non-commercial/research-only, and its models additionally carry TASS
+   and SemEval dataset terms. For Spanish/Portuguese (and for Indic/SEA, where nothing permissive
+   exists), fine-tune **XLM-R on DimABSA (SemEval-2026)** — the published route `pr-radar` used,
+   reporting 6–53% lower error than baseline on all 10 official test sets. The output is yours and
+   permissively licensed.
+8. **Measure to the standard, not to AVE.** Map to AMEC's **outputs → out-takes → outcomes → impact**
+   with **PESO** tags. Share of voice is an *output* and belongs at the bottom of the hierarchy, with
+   outlet tier and message penetration attached — never volume alone. **Do not ship AVE**; the
+   Barcelona Principles reject it and a first-edition Gartner MQ now names outcome-based measurement
+   as the market direction.
+9. **Capture evidence where it must survive deletion.** `auto-archiver` (MIT) for hashed, timestamped
+   captures — crisis monitoring, regulatory complaints, litigation. `ArchiveBox` (MIT) if the archive
+   ships **inside** the product; `browsertrix-crawler` (AGPL-3.0) only as a separate internal service
+   when capture fidelity matters more than licence freedom.
+10. **Brief generation, with the check that makes it usable.** `pr-radar`'s design decision is the one
+    to copy: a small local model drafts the weekly brief, and **every number, outlet and
+    recommendation is rule-checked against the underlying data before publication**. Its measured
+    effect — first drafts passing all checks went from 1 of 21 to 11 of 21, level with a model more
+    than twice the size. **The rule-check layer, not the model size, is what makes an LLM brief
+    shippable to a comms director.**
+
+### Licence ledger for this pattern
+
+| Keep inside the deliverable | Deploy as a separate service only | Never ship |
+|---|---|---|
+| feedparser (BSD-2), rss-bridge (Unlicense), miniflux (Ap-2), changedetection.io (Ap-2), trafilatura (Ap-2), fundus (MIT), newspaper4k (MIT), tika (Ap-2), scrapy (BSD-3), stanza (Ap-2), story-indexer (Ap-2), meilisearch (MIT), faster-whisper (MIT), auto-archiver (MIT), ArchiveBox (MIT), huginn (MIT), NewsMTSC (MIT, new files only) | FreshRSS (AGPL-3.0), RSSHub (AGPL-3.0), searxng (AGPL-3.0), browsertrix-crawler (AGPL-3.0), radar-intelligence (AGPL-3.0) | ⛔ **pysentimiento** — non-commercial/research only, plus TASS + SemEval dataset terms on the models |
+
+### Regional variants
+
+- **EMEA:** deploy entirely EU-resident. The sovereignty requirement (DPP European Media Trends 2026)
+  is satisfiable by construction here, and **Europe Media Monitor is not forkable** — so this is a
+  build, not a procurement. Public broadcasters (EBU members) are the first buyers.
+- **LATAM:** step 7 is the engagement. An MIT/Apache es/pt **news** sentiment model does not exist;
+  the only good library is non-commercial. Build it, and the asset is reusable across every
+  Spanish- and Portuguese-language client.
+- **APAC:** self-hosting answers India's DPDP residency pressure directly. Vernacular sentiment
+  (Hindi, Bahasa, Thai, Vietnamese, Japanese) has **no permissive option found this pass** — same
+  build as LATAM, same XLM-R route, different corpora. Lead with enablement: over half of APAC PR
+  professionals report using AI without strategic adoption or structured training.
+- **North America:** lead with **"own the corpus, rent the analysis."** Cision holding wire +
+  clipping + listening leaves clients with no leverage and no portable history; a permissive
+  collection tier restores both without forcing them to drop their analysis vendor on day one.

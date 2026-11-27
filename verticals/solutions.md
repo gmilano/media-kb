@@ -1857,3 +1857,62 @@ its 24 stars.
 - **The HbbTV conformance test suite is not open at all**: licensed only to member companies and
   tracked in a members-only SVN repository. A client needing certified HbbTV output must buy
   membership or use a registered test centre — budget for it.
+
+---
+
+## Pass 33 addendum (2026-11-27) — monitoring, watching & archiving platforms
+
+> Verified 2026-11-27: existence via `git ls-remote`, licence by reading the file, last commit via
+> shallow clone. No star counts this pass (API scoped to session repos — see `agents/top.md` pass 33).
+
+**The procurement fact for this plane:** unlike every other plane in this file, **the permissive
+options here are the good ones**. The copyleft tier is real but avoidable, and the one self-hostable
+product that calls itself "media intelligence" is both AGPL-3.0 and a single-maintainer project.
+
+### ✅ Permissive — embed freely in a client deliverable
+
+| Platform | Licence | Last commit | What it is |
+|---|---|---|---|
+| [dgtlmoon/changedetection.io](https://github.com/dgtlmoon/changedetection.io) | **Apache-2.0** (11,381 B) | **2026-11-27** | Self-hosted web-page change detection with notifications (email, Slack, Discord, Telegram, webhooks). **The "watch this page" primitive** — competitor newsrooms, regulator pages, rival press rooms, pricing pages. Committed on the day of this pass. The single most reusable platform on this plane. |
+| [miniflux/v2](https://github.com/miniflux/v2) | **Apache-2.0** (10,173 B) | 2026-11-26 | Minimalist, single-binary feed reader with a clean API. **The permissive feed-ingestion service** — the Apache-licensed answer where FreshRSS and RSSHub are AGPL. |
+| [RSS-Bridge/rss-bridge](https://github.com/RSS-Bridge/rss-bridge) | **Unlicense** (public domain) | 2026-11-25 | Generates feeds for sites that publish none. Public domain — no obligations whatsoever. Licence found only in `UNLICENSE`; see the probe correction in `agents/top.md` pass 33. |
+| [huginn/huginn](https://github.com/huginn/huginn) | MIT (1,097 B) | **2026-11-27** | Self-hosted agent system for watching and acting on events — the permissive orchestration layer between collection and alerting. Committed the day of this pass. |
+| [ArchiveBox/ArchiveBox](https://github.com/ArchiveBox/ArchiveBox) | MIT (1,069 B) | 2026-11-26 | Self-hosted web archiving. **MIT, which makes it the clearance-safe archive tier** — contrast browsertrix-crawler below. |
+| [meilisearch/meilisearch](https://github.com/meilisearch/meilisearch) | MIT | 2026-11-26 | Fast typo-tolerant search. The retrieval surface over a clippings corpus when OpenSearch is heavier than needed. |
+| [ranahaani/GNews](https://github.com/ranahaani/GNews) | MIT (1,068 B) | 2026-10-25 | Google News query client. ⚠️ Small library, and see the **14-edition duplication trap** in `compose/patterns.md` pattern 33 before using it to compute anything. |
+
+### ⚠️ Copyleft — useful, but keep out of the shipped artifact
+
+| Platform | Licence | Last commit | Note |
+|---|---|---|---|
+| [FreshRSS/FreshRSS](https://github.com/FreshRSS/FreshRSS) | **AGPL-3.0** (34,522 B) | **2026-11-27** | Mature self-hosted aggregator, very actively maintained. Run as a separate service; do not link into a deliverable. |
+| [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub) | **AGPL-3.0** (34,522 B) | **2026-11-27** | Feeds for "anything", with a very large adapter library — operationally the most capable collector here, and the most licence-constrained. |
+| [searxng/searxng](https://github.com/searxng/searxng) | **AGPL-3.0** (34,519 B) | 2026-11-26 | Self-hosted metasearch; a discovery tier for finding mentions search APIs will not return. |
+| [webrecorder/browsertrix-crawler](https://github.com/webrecorder/browsertrix-crawler) | **AGPL-3.0** (34,522 B) | 2026-11-26 | High-fidelity WACZ crawling — better capture quality than ArchiveBox, worse licence. **If the archive must ship inside the product, use ArchiveBox (MIT); if it is an internal service, use this.** |
+| [Scognamiglio1969/radar-intelligence](https://github.com/Scognamiglio1969/radar-intelligence) | **AGPL-3.0** (34,522 B) | 2026-09-17 | **The only self-hostable platform that positions itself as "media intelligence / social listening"** — an open alternative to Talkwalker/Brandwatch. ⚠️ Single maintainer, ~2 months quiet, AGPL. Recorded because it is the category's *only* entrant, not because it is ready. |
+
+### ⛔ The institutional gap — the world's largest public media monitor has no repo
+
+**Europe Media Monitor (EMM)**, run by the European Commission's **Joint Research Centre**, tracks
+**~20,000 news sites, ~500,000 pages per day, in 80 languages across 150 countries**, with
+clustering, multi-label classification, cross-script name-variant matching and topic
+detection/tracking, and now integrates LLMs. It partners with WHO on the EIOS epidemic-intelligence
+initiative. Public applications at `media-monitor.europa.eu`.
+
+**It is not open source.** There is no repository to clone, fork or build on — it is an institutional
+system with public web applications and a research contact address. Searched on 2026-11-27 for a JRC
+EMM code repository; **none exists publicly.**
+
+This is the informed gap of the pass: **Europe operates the most capable multilingual media
+monitoring system in the world and publishes none of its code**, while the EMEA market simultaneously
+demands digital sovereignty and self-hosting (DPP European Media Trends 2026). An EU-resident,
+self-hosted monitoring stack assembled from the Apache/MIT substrate above is therefore a *build*,
+not a *procurement* — see `intel/market.md` → Opportunities by region → EMEA.
+
+### ⛔ And the category that genuinely does not exist
+
+There is **no open-source implementation of AMEC's Integrated Evaluation Framework** — the industry's
+own measurement standard (see `intel/trends.md` pass 33). The framework is free to use and the
+standard is settled; **no repo implements it.** Searched 2026-11-27: the open-source results for
+"PR measurement dashboard" are overwhelmingly GitHub *pull-request* dashboards, which is a naming
+collision, not a market. `pr-radar` (MIT, 6 days old) is the only thing in the vicinity.

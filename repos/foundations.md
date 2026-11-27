@@ -3865,3 +3865,65 @@ is the best index of this plane in existence and has **no licence file and no li
 its README** — probed on 2026-11-27, README control 200. Default copyright applies, so it is
 **read-only research input**; do not vendor it, fork it into a client deliverable, or ship its text.
 Contrast `tugkanboz/awesome-ai-testing`, which is CC0-1.0 and genuinely reusable.
+
+---
+
+## Pass 33 addendum (2026-11-27) — the media-monitoring collection substrate
+
+> Verification for every row: existence via `git ls-remote --exit-code`, licence by reading the
+> actual file and counting bytes, last commit via `git clone --depth 1 --filter=blob:none`.
+> **No star counts in this section** — the API channel is scoped to this session's own repos this
+> pass; see the verification note in `agents/top.md` pass 33. Absent stars = unavailable, not
+> unrecorded.
+
+**The headline: the *collection* tier of media monitoring is the most permissively licensed and most
+actively maintained substrate found in any of the 33 planes.** Four of these repos had commits on
+the day of this pass. Eleven of thirteen are MIT, Apache-2.0 or BSD.
+
+### Article extraction and crawling — all permissive, all alive
+
+| Repo | Licence | Last commit | Why it matters |
+|---|---|---|---|
+| [adbar/trafilatura](https://github.com/adbar/trafilatura) | Apache-2.0 (10,172 B) | 2026-11-23 | The accuracy leader for boilerplate-stripped article text. Already referenced elsewhere in this KB; recorded here as a **foundation** of this plane, which is its primary use. |
+| [flairNLP/fundus](https://github.com/flairNLP/fundus) | MIT (1,101 B) | 2026-11-26 | Publisher-specific parsers rather than one generic heuristic — materially higher fidelity per outlet, at the cost of needing a parser per publisher. The right choice when the outlet list is known and finite, which in media monitoring it usually is. |
+| [AndyTheFactory/newspaper4k](https://github.com/AndyTheFactory/newspaper4k) | MIT (1,079 B) | 2026-11-01 | The maintained continuation of newspaper3k. Use this, not the original. |
+| [codelucas/newspaper](https://github.com/codelucas/newspaper) | MIT (1,079 B) | 2026-10-26 | The original newspaper3k. Still receiving occasional commits, but `newspaper4k` is the active line. Listed so the distinction is explicit — these two are confused constantly. |
+| [fhamborg/news-please](https://github.com/fhamborg/news-please) | Apache-2.0 (11,356 B, in `LICENSE.txt`) | 2026-04-14 | Crawler + extractor + storage in one, with CommonCrawl news support. ~7 months quiet; a complete harness rather than a library. |
+| [scrapy/scrapy](https://github.com/scrapy/scrapy) | BSD-3-Clause (1,516 B) | 2026-11-25 | The crawling framework underneath much of the above. Permissive, and the scheduling/politeness layer nobody should rewrite. |
+| [markusmobius/go-trafilatura](https://github.com/markusmobius/go-trafilatura) | Apache-2.0 (11,356 B) | 2026-09-29 | Go port of trafilatura. The option when the pipeline is Go and a Python sidecar is unwanted. |
+| [go-shiori/go-readability](https://github.com/go-shiori/go-readability) | MIT (1,071 B) | 2025-12-05 | Go Readability port; used as go-trafilatura's fallback extractor. ~12 months quiet — stable, small, low-risk. |
+| [kurtmckee/feedparser](https://github.com/kurtmckee/feedparser) | BSD-2-Clause (3,167 B) | 2026-07-30 | The RSS/Atom parser that tolerates real-world malformed feeds. Mark Pilgrim's original, maintained by Kurt McKee since 2010. |
+| [apache/tika](https://github.com/apache/tika) | Apache-2.0 (33,976 B) | 2026-11-25 | Text and metadata out of a thousand formats — the tier that lets PDFs, press-kit DOCX and scanned clippings enter the same index as HTML. |
+
+### Entity resolution — the step between "a mention" and "a mention of *us*"
+
+| Repo | Licence | Last commit | Why it matters |
+|---|---|---|---|
+| [stanfordnlp/stanza](https://github.com/stanfordnlp/stanza) | Apache-2.0 (602 B, Apache by reference) | 2026-11-13 | Multilingual NER across 70+ languages. **Permissive and multilingual at the same time — rare on this plane**, and the reason brand/person/title resolution is not the bottleneck. Contrast the sentiment tier in `agents/top.md`, where multilingual and permissive do not coexist. |
+
+### The archive and index backbone — and a three-year gap inside one organisation
+
+| Repo | Licence | Last commit | Why it matters |
+|---|---|---|---|
+| [mediacloud/story-indexer](https://github.com/mediacloud/story-indexer) | **Apache-2.0** (11,357 B) | 2026-08-28 | Media Cloud's live ingest/index pipeline — the engine behind a corpus of over a billion news stories. Apache-2.0, so it can be built on commercially. |
+| [mediacloud/web-tools](https://github.com/mediacloud/web-tools) | **Apache-2.0** (10,171 B) | **2023-12-14** | Media Cloud's web interface. **Dormant for ~3 years.** |
+
+#### ⚠️ Licence correction — do not inherit a licence from a fork's README
+
+Public search results, and the widely-linked 2015-era fork `nzufelt/mediacloud`, describe Media Cloud
+as **AGPL-3.0**. **The live repositories are Apache-2.0** — read directly from their licence files on
+2026-11-27 (11,357 B and 10,171 B, both the Apache 2.0 text). The AGPL claim is a stale fork's
+README propagating through aggregators.
+
+This matters commercially and in the right direction: **AGPL would have made the only mature open
+news-index pipeline unusable in a client deliverable; Apache-2.0 makes it the natural backbone.**
+**Rule: a licence read from a fork, an aggregator, a listicle or a model card is a rumour. Read the
+licence file on the default branch of the canonical repo.**
+
+#### And the gradient inside Media Cloud is the whole plane in miniature
+
+Same organisation, same permissive licence, two components: the **pipeline** has commits from three
+months ago; the **interface and analysis tools** have not been touched in three years. The thing that
+*collects* is maintained. The thing that lets a human *interpret* what was collected is abandoned.
+Hold that next to the sentiment tier in `agents/top.md` (2.5 years dormant and non-commercial) and
+the plane's shape is unambiguous — see `intel/trends.md` pass 33.

@@ -9,6 +9,73 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 33: the media-monitoring, earned-media & press-intelligence plane (**the first plane whose *judgment* component is licensed against commercial use outright — a category worse than copyleft**)
+
+Measured 2026-11-27. The vocabulary probe that found this plane: before this pass the eight files said
+`media monitoring` **0**, `press clipping` **0**, `broadcast monitoring` **0**, `share of voice` **0**,
+`earned media` **0**, `social listening` **0**, `sentiment analysis` **0**, `AMEC` **0** — while saying
+`playout` **86** and `C2PA` **123**. **Thirty-two passes of publishing outward; no words at all for
+listening inward.**
+
+> **⚠️ No star counts in this section, and the reason is a channel failure, not an omission.**
+> `api.github.com/repos/{other}` returns *"GitHub access to this repository is not enabled for this
+> session"* (API scoped to this session's own repos); the HTML `stargazerCount` scrape and
+> `commits/{branch}.atom` both returned empty through the proxy. **Existence** was verified via
+> `git ls-remote --exit-code`, **licences** by reading the file and counting bytes, **dates** via
+> `git clone --depth 1 --filter=blob:none`. Dates are last-*commit*, so slightly conservative.
+> Future passes: do not read an absent star value here as a zero.
+
+**The agent layer — six repos, and the licence line runs through the middle of it:**
+
+| Agent | Licence | Last commit | Note |
+|---|---|---|---|
+| [Etipufhu/pr-radar](https://github.com/Etipufhu/pr-radar) | MIT | 2026-11-26 | **18 commits, created 2026-11-21** — the only end-to-end implementation of the plane, six days old |
+| [SYSTRAN/faster-whisper](https://github.com/SYSTRAN/faster-whisper) | MIT | 2026-11-12 | the component that makes *broadcast* monitoring possible |
+| [bellingcat/auto-archiver](https://github.com/bellingcat/auto-archiver) | MIT | 2026-11-18 | evidence-grade capture |
+| [cjhutto/vaderSentiment](https://github.com/cjhutto/vaderSentiment) | MIT | 2026-03-02 | English-only lexicon baseline |
+| [fhamborg/NewsMTSC](https://github.com/fhamborg/NewsMTSC) | MIT **(new files only)** | 2025-07-18 | target-dependent sentiment — the right primitive, 16 months dormant |
+| [pysentimiento/pysentimiento](https://github.com/pysentimiento/pysentimiento) | ⛔ **NON-COMMERCIAL ONLY** | **2024-06-20** | best es/pt library on the plane; unusable in a paid engagement |
+
+**THE FINDING OF THIS PASS — A LICENCE CATEGORY THIS KB HAS NOT RECORDED IN 33 PASSES.**
+`pysentimiento`'s complete 337-byte `LICENSE.md`: *"an open-source library for **non-commercial use
+and scientific research purposes only**"*, plus notice that its **models** carry the TASS and
+SemEval-2017 dataset licences. **This is strictly worse than AGPL-3.0 for a consultancy.** AGPL
+constrains *how you distribute*; a non-commercial clause forbids *the engagement*. No service
+boundary, separate process or "we only call it over an API" arrangement makes a paid client
+deliverable non-commercial. And it is **the Spanish/Portuguese library** — the licence excludes
+exactly the languages LATAM engagements need. See `intel/market.md` → LATAM.
+
+**SIXTH CONFIRMATION OF THE STRUCTURAL LAW, with the cleanest three-step gradient yet measured —
+all three steps inside one plane, all dated:**
+
+- **COLLECT** (format problem) → `changedetection.io` Apache-2.0, `RSSHub` AGPL-3.0, `FreshRSS`
+  AGPL-3.0 and `huginn` MIT **all committed 2026-11-27, the day of this pass**; `fundus`, `miniflux`,
+  `ArchiveBox` 11-26; `scrapy`, `tika` 11-25; `trafilatura` 11-23.
+- **INDEX** (half a format problem) → same org, same licence, three-year split:
+  `mediacloud/story-indexer` Apache-2.0 **2026-08-28** vs `mediacloud/web-tools` Apache-2.0
+  **2023-12-14**. The pipeline lives; the interface a human interprets with is abandoned.
+- **MEASURE** (pure judgment) → `pysentimiento` **2.5 years dormant + non-commercial**; `NewsMTSC`
+  16 months; `radar-intelligence` AGPL-3.0 single-maintainer; `pr-radar` **six days old**.
+- **And the terminal zero:** **no open-source implementation of AMEC's Integrated Evaluation
+  Framework exists at all.** Not dormant, not copyleft — *absent*. The industry's own measurement
+  standard is free, settled, endorsed, and has zero code behind it.
+
+**COMPOSITE LICENSING, SECOND INSTANCE — AND IT IS PURE PYTHON, WHICH KILLS THE NATIVE-LINKING
+EXPLANATION.** Cycle 8 found `acoustid/chromaprint` (MIT code, LGPL-2.1 as a whole) and read it as an
+artefact of what C code links. `fhamborg/NewsMTSC` is pure Python, no compiler, no linker — and its
+1,393-byte licence still opens *"This project uses code from various projects, who may have their own
+license or copyright"* (ABSA-PyTorch, early-stopping-pytorch), granting MIT only **"for newly
+developed files."** **Rule: "MIT" in a licence file is a claim about *some* files. Read the first
+paragraph, not the SPDX badge** — every SBOM scan keyed on the licence file reports this repo as
+cleanly MIT.
+
+**METHOD CORRECTION — the licence-filename probe needed a fourth name.** Cycle 8 added lowercase
+`license.txt` and `COPYING.md`. Add **`UNLICENSE`**: `RSS-Bridge/rss-bridge` 404s on `LICENSE`,
+`LICENSE.md`, `LICENSE.txt`, `license.txt`, `LICENCE`, `COPYING` and `COPYING.md` while its README
+resolves 200 — which by cycle 8's own rule proves the *name set* was wrong, not the licence missing.
+It is public domain, in `UNLICENSE`. Current set:
+`LICENSE LICENSE.md LICENSE.txt license.txt LICENCE COPYING COPYING.md LICENSE-APACHE UNLICENSE`.
+
 ## 2026-11-27 — pass 32: the device, TV-app & client-playback plane (**the first plane in this KB whose agent layer is real and whose *judgment* component carries a licence that names consulting as the prohibited use**)
 
 Measured 2026-11-27. 71 repo slugs probed, 58 resolve. This is the plane the KB had no words for:

@@ -10,6 +10,71 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 33: media-monitoring collection infrastructure (**the most permissive and most actively maintained substrate found in any of the 33 planes — and a three-year dead zone inside one Apache-2.0 organisation**)
+
+Measured 2026-11-27. **No star counts this pass** — API scoped to this session's own repos, HTML and
+`.atom` channels empty through the proxy. Existence via `git ls-remote`, licences read from the actual
+file with byte counts, dates via `git clone --depth 1 --filter=blob:none`. See `agents/trending.md`
+pass 33 for the full channel note.
+
+**Four repos on this plane were committed on the day of this pass. Eleven of thirteen in the
+collection tier are MIT / Apache-2.0 / BSD / public domain.** After 32 passes in which the permissive
+layer was consistently the *standards and pipeline* tier and the turnkey tier was consistently
+copyleft, this plane inverts the usual warning: **here the permissive options are the good ones.**
+
+| Repo | Licence | Last commit |
+|---|---|---|
+| [dgtlmoon/changedetection.io](https://github.com/dgtlmoon/changedetection.io) | **Apache-2.0** (11,381 B) | **2026-11-27** |
+| [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub) | AGPL-3.0 (34,522 B) | **2026-11-27** |
+| [FreshRSS/FreshRSS](https://github.com/FreshRSS/FreshRSS) | AGPL-3.0 (34,522 B) | **2026-11-27** |
+| [huginn/huginn](https://github.com/huginn/huginn) | MIT (1,097 B) | **2026-11-27** |
+| [flairNLP/fundus](https://github.com/flairNLP/fundus) | MIT (1,101 B) | 2026-11-26 |
+| [miniflux/v2](https://github.com/miniflux/v2) | **Apache-2.0** (10,173 B) | 2026-11-26 |
+| [ArchiveBox/ArchiveBox](https://github.com/ArchiveBox/ArchiveBox) | MIT (1,069 B) | 2026-11-26 |
+| [meilisearch/meilisearch](https://github.com/meilisearch/meilisearch) | MIT | 2026-11-26 |
+| [webrecorder/browsertrix-crawler](https://github.com/webrecorder/browsertrix-crawler) | AGPL-3.0 (34,522 B) | 2026-11-26 |
+| [searxng/searxng](https://github.com/searxng/searxng) | AGPL-3.0 (34,519 B) | 2026-11-26 |
+| [scrapy/scrapy](https://github.com/scrapy/scrapy) | BSD-3-Clause (1,516 B) | 2026-11-25 |
+| [apache/tika](https://github.com/apache/tika) | **Apache-2.0** (33,976 B) | 2026-11-25 |
+| [RSS-Bridge/rss-bridge](https://github.com/RSS-Bridge/rss-bridge) | **Unlicense** (public domain) | 2026-11-25 |
+| [adbar/trafilatura](https://github.com/adbar/trafilatura) | **Apache-2.0** (10,172 B) | 2026-11-23 |
+| [stanfordnlp/stanza](https://github.com/stanfordnlp/stanza) | **Apache-2.0** (602 B) | 2026-11-13 |
+| [AndyTheFactory/newspaper4k](https://github.com/AndyTheFactory/newspaper4k) | MIT (1,079 B) | 2026-11-01 |
+| [codelucas/newspaper](https://github.com/codelucas/newspaper) | MIT (1,079 B) | 2026-10-26 |
+| [ranahaani/GNews](https://github.com/ranahaani/GNews) | MIT (1,068 B) | 2026-10-25 |
+| [markusmobius/go-trafilatura](https://github.com/markusmobius/go-trafilatura) | **Apache-2.0** (11,356 B) | 2026-09-29 |
+| [kurtmckee/feedparser](https://github.com/kurtmckee/feedparser) | BSD-2-Clause (3,167 B) | 2026-07-30 |
+| [fhamborg/news-please](https://github.com/fhamborg/news-please) | **Apache-2.0** (11,356 B, `LICENSE.txt`) | 2026-04-14 |
+| [go-shiori/go-readability](https://github.com/go-shiori/go-readability) | MIT (1,071 B) | 2025-12-05 |
+| [mediacloud/story-indexer](https://github.com/mediacloud/story-indexer) | **Apache-2.0** (11,357 B) | 2026-08-28 |
+| [mediacloud/web-tools](https://github.com/mediacloud/web-tools) | **Apache-2.0** (10,171 B) | **2023-12-14** |
+
+**⚠️ LICENCE CORRECTION — AND IT RUNS IN THE COMMERCIALLY FAVOURABLE DIRECTION, WHICH IS WHY IT WOULD
+HAVE BEEN MISSED.** Public search results and the widely-linked 2015-era fork `nzufelt/mediacloud`
+describe **Media Cloud as AGPL-3.0**. **Both live repos read Apache-2.0** — verified by reading the
+files on 2026-11-27 (11,357 B and 10,171 B of Apache 2.0 text). AGPL would have disqualified the only
+mature permissive news-index pipeline from any client deliverable; Apache-2.0 makes it the natural
+backbone. **Rule: a licence from a fork, aggregator, listicle or model card is a rumour. Read the file
+on the canonical repo's default branch.** This is the inverse of the usual failure — the KB has
+repeatedly caught licences that were *worse* than advertised; this one was *better*, and a cautious
+reader would have wrongly excluded it.
+
+**THE THREE-YEAR DEAD ZONE INSIDE ONE ORGANISATION, WHICH IS THE WHOLE PLANE IN MINIATURE.** Same
+org, same Apache-2.0 licence, two components: `story-indexer` (the ingest/index pipeline behind a
+corpus of 1B+ stories) committed **2026-08-28**; `web-tools` (the interface humans use to interpret
+that corpus) last committed **2023-12-14 — ~3 years**. Not a licence problem, not a funding problem.
+The half that is a *format* problem is maintained; the half that is a *judgment* problem is not.
+**Operational consequence: build on `story-indexer`, never `web-tools`, and plan to write your own
+analysis surface** (`meilisearch` MIT, or OpenSearch). See `compose/patterns.md` pattern 33 step 6.
+
+**THE SEARCH-LAYER ARTEFACT WORTH RECORDING, because it will mislead the next pass too.** Querying
+for open-source *PR measurement* tooling returns almost entirely GitHub **pull-request** dashboards
+(devtrack, DevPulse, github-pr-dashboard, "Engineering Pulse"). "PR" collides, and the collision
+makes an empty category look populated. The genuine hits were two: `Etipufhu/pr-radar` (MIT, six days
+old) and `Elmo` — and **Elmo was already catalogued in pass 30**, correctly, as answer-engine
+visibility rather than press monitoring. **Method: when a plane's search results all come from an
+adjacent meaning of the acronym, the category is empty, not covered.**
+
 ## 2026-11-27 — pass 32: device, TV-app & certification infrastructure (**a 30,000-star player deprecated into a rival, a 21,935-star engine declared dead by its own authors, and the plane's verdict component licensed against consultancies**)
 
 Measured 2026-11-27. **71 slugs probed, 58 resolve, 13 do not.** Licences read from the actual file

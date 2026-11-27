@@ -2486,3 +2486,43 @@ broadcast territory (see `compose/patterns.md` pattern 89).
 - **Do not promise a configuration-only delivery.** With no turnkey platform at any licence, every
   honest proposal in this plane is an integration proposal.
 
+
+## Pass 45 (2026-11-27) — platforms for the public-warning & emergency-alerting plane
+
+All rows verified 2026-11-27 (`ls-remote` existence, `search/repositories` metadata, licence files
+read over the raw channel).
+
+**The layer summary, stated first because it is unusually blunt: there is exactly one permissively
+licensed platform in this plane, and it has 37 stars.**
+
+| Platform | Licence | Repo | Stars | Forks | Last push | What you get, and the constraint |
+|---|---|---|---|---|---|---|
+| **Sahana Eden** | **MIT** | [sahana/eden](https://github.com/sahana/eden) | 37 | 59 | **2026-11-27** | Rapid-application-development kit for humanitarian and emergency management — organisations, resources, incidents, shelters, requests. **MIT and active on the day of this pass.** 59 forks to 37 stars: the signature of a platform deployed and localised per country rather than admired. **The Odoo-equivalent of this plane, except small.** Expect to build, not to configure. |
+| **Ushahidi** | AGPL-3.0 (file read) | [ushahidi/platform](https://github.com/ushahidi/platform) | 734 | 511 | **2026-11-27** | Crowdsourced crisis mapping and incident collection — SMS, email, web and social intake onto a map. The most deployed platform here (511 forks). **AGPL-3.0: a hosted instance for a client is a network-use trigger.** Keep it as a separate service with its source offer honoured; never link into it. |
+| **OpenBroadcaster (obplayer)** | AGPL-3.0 | [openbroadcaster/obplayer](https://github.com/openbroadcaster/obplayer) | 144 | 54 | 2026-09-23 | Community-radio playout **with emergency-alerting support built in.** In this KB since pass 8 as a playout tool and **never previously identified as the only project that both airs programming and handles alerts.** For a community or regional broadcaster this is the single closest thing to a turnkey answer. AGPL-3.0. |
+| **eas-station** | **AGPL-3.0** | [KR8MER/eas-station](https://github.com/KR8MER/eas-station) | 24 | 6 | **2026-11-23** | Station-side platform for **monitoring, broadcasting and verifying NOAA and IPAWS alerts.** The most directly relevant open project to the FCC rules now in force, maintained days before this pass, and copyleft. |
+| **CAPCreator / CAPCollector** | BSD-3-Clause | [CAPTools/CAPCreator](https://github.com/CAPTools/CAPCreator) · [CAPTools/CAPCollector](https://github.com/CAPTools/CAPCollector) | 19 / 16 | 16 / — | 2026-07-21 / **2015-06-02** | The authoring tool is alive and permissive; **the server that authenticates, signs, aggregates and forwards is permissive and eleven years dead.** Together they are the clearest statement of this plane's shape, and the Collector is this KB's top revival candidate. |
+| **IFRC Alert Hub** | **none** | [IFRC-Alert-Hub/Alert-Hub-CAP-Aggregator](https://github.com/IFRC-Alert-Hub/Alert-Hub-CAP-Aggregator) | 2 | — | 2024-04-05 | Red Cross / Red Crescent CAP aggregation. **No licence file** (absence verified against a 200 README) — so it is a reference to read, not a dependency. |
+| **WMO RA-I aggregator** | **none** | [wmo-raf/cap-aggregator](https://github.com/wmo-raf/cap-aggregator) | 1 | — | **2026-11-25** | WMO Regional Association for Africa: aggregate CAP 1.2 from multiple feeds. Active two days before this pass, **unlicensed.** |
+
+### ⛔ The procurement warnings specific to this layer
+
+- **There is no permissive turnkey alerting platform, at any size.** The one MIT platform
+  (Sahana Eden) is a development kit; everything operational is AGPL-3.0 or unlicensed. Every honest
+  proposal in this plane is an **integration proposal with a copyleft service boundary** designed in
+  from day one.
+- **"Unlicensed" is the dominant licence of the aggregation layer, and three separate public bodies
+  did it.** WMO's Africa office, the IFRC and Parks Australia each shipped a CAP aggregator with no
+  licence. Default copyright applies: all rights reserved. Read them for design, copy nothing.
+- **Never let an alerting platform claim to be the originator.** Origination requires a credential
+  issued by a state authority (IPAWS COG in the US, IDAP in Brazil, the national competent authority
+  under EECC Art.110 in the EU). Ask, in the first meeting, **"are you an authorised originator, or
+  a disseminator?"** — the whole architecture follows from the answer, and no platform choice changes
+  it.
+- **Do not accept "CAP-compliant" as an answer.** Ask which version (1.1 or 1.2), whether
+  **signatures** are validated, and which **profile** (CAP-CP for Canada, the national profile
+  elsewhere). Of all libraries measured in this pass, one mentions XML signatures and it has 0★.
+- **The life-safety path is not a place for the hobby stack.** `cuppa-joe/dsame` disclaims
+  life-safety use in its own README and `multimon-ng` calls its EAS decoder alpha. They belong in
+  **monitoring and verification** — which, after the FCC's 2026 rules, is itself a billable
+  deliverable.

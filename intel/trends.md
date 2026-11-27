@@ -4417,3 +4417,109 @@ rather than software. EMEA frames the same migration through **sovereignty** —
 sovereign-AI work for public service media, and EBU HORIZONS 2026 on sovereignty and resilience† —
 which is a procurement argument for permissive, self-hostable components rather than a technical one.
 
+
+## Pass 45 (2026-11-27) — trends in the public-warning & emergency-alerting plane
+
+### 1. The new structural law: where the scarce asset is a **credential**, the supply curve is a barbell
+
+This KB's running law said that **the licence of the knowledge content** decides whether open source
+can discharge a regulated obligation — CPT in healthcare billing, MedDRA in pharmacovigilance, the
+registry-allocation monopolies behind ISRC/ISWC/EIDR in rights (pass 5). Emergency alerting is the
+**control case that breaks the old formulation and replaces it with a better one**, because here
+there is *no* gated content:
+
+- **CAP is a free OASIS standard.** No membership, no fee, no licence on the vocabulary.
+- **The hazard data is public.** NWS, MeteoAlarm, JMA, CWA — all published.
+- **The formats are documented** and the profiles are public.
+
+Every input is free, the obligation is absolute in every region, and the supply at the decisive step
+is still **effectively zero**. The reason is not licensing. **It is that the scarce asset is the
+right to speak** — a signing credential and a statutory mandate, held by the state. Open source
+cannot compete for a monopoly on origination, so it colonises both ends and abandons the middle:
+
+> **Detect (MIT, 408★) → Encode (archived / MPL) → ORIGINATE & SIGN (dead since 2015) → Deliver
+> (22 repos, ~20★) → Authenticate (nothing) → Consume (MIT, active, Home Assistant)**
+
+**The generalisable prediction, and it is falsifiable:** in any plane where the gate is a credential
+rather than a dataset or a licence, expect healthy permissive tooling at the sensor and at the
+receiver, and a hole in the middle that no amount of developer enthusiasm fills. If a jurisdiction
+ever opens originator credentials to private parties, step-3 code should appear within two years.
+**Nothing resembling it exists today** — which is the measurement that makes this a prediction rather
+than an opinion.
+
+### 2. The trend that is actually a non-trend: nothing new **sends**
+
+Six repos in this plane were pushed within the week of this pass — `EEWBot/EEWBot` (the day of it),
+`capparselib`, `eas-station`, `ipaws-alerts`, `wmo-raf/cap-aggregator`, `TREM-Lite`. **Every single
+one of them listens, parses, maps or notifies.** Not one originates, signs or disseminates. The
+activity is real and it is all on the receive side. Stop looking for an open originator; there is an
+absence here to stop re-checking hopefully, exactly as pass 17 concluded for residuals.
+
+### 3. Authentication is the gap the standards themselves admit — and 2026 supplied the proof
+
+**ETSI TS 102 900**, the technical basis for EU-Alert over cell broadcast, states that the service
+*"does not provide any capability for the UE to authenticate that the EU-Alert messages received are
+from a genuine source."*† In **June 2026**, attackers breached Brazil's emergency alert system and
+triggered **millions of false "extreme" alerts**.† The only open project that ever authenticated and
+signed CAP alerts — `CAPTools/CAPCollector`, BSD-3-Clause — **has been dead since 2015-06-02**, and
+of every CAP library measured here exactly **one** mentions XML signatures (`cB-Sigma/cap`,
+Apache-2.0, **0★**, 2026-10-11).
+
+A specification that documents its own trust gap, a national-scale incident inside the same year, and
+a measured void between them. **This is the most sellable triple in any media pass**, and it is
+regionally complete: the admission is EMEA, the incident is LATAM, the regulatory response is NA.
+
+### 4. Regulation moved first in North America, and it moved to **cybersecurity**, not to alerting
+
+The FCC's EAS cybersecurity rules are **in force**, with the implementation date **2026-09-29**
+already passed.† Three requirements — strong passwords or alternative authentication, prompt
+patching, firewall or comparable segmentation — across a scope that includes **automation systems,
+audio processors, STLs, RDS encoders and transmitters**, at **every** licensed station.† The
+nationwide test of **2026-11-17** is usable to assess compliance, and a station that misses an alert
+because its equipment was not updated **can be found in violation**.†
+
+**The trend to name:** the regulator did not ask broadcasters to send better alerts. It asked them to
+prove nobody else can send one through their plant. **Alerting compliance has become an
+infrastructure-security problem**, which moves the budget from the news division to engineering and
+makes the deliverable an evidence trail. That reframing is the commercial news in this plane.
+
+### 5. The rich-alert capability is pending, and the two regions are moving in opposite order
+
+| Region | Rich / advanced alerting status | What it means |
+|---|---|---|
+| **North America** | **AWARN petitioned the FCC in late Sept 2026** (five recommendations, multimedia alerts with standardised symbols and graphics), framed as **voluntary**. **No decision located.** Constraint: channel capacity during ATSC 1.0 simulcast; adoption pace tied to the missing 1.0 sunset date.† | Capability exists, **permission pending**. Roadmap conversation only. |
+| **LATAM (Brazil)** | Alerting is **in the standard by decree** (TV 3.0 / DTV+, Aug 2025), with a **published June 2026 operational guideline**, **ABNT NBR 25607:2025**, and **IDAP** monitoring defined.† | **Permission settled, build pending.** An engagement available now. |
+
+**Brazil has the obligation specified and the US has the capability unauthorised.** For a global
+services firm that inverts the usual order of operations: the reference implementation for advanced
+TV alerting will most plausibly be built in **Portuguese, for a World Cup deadline**, and then sold
+north — the same direction of travel as `openeew` (Grillo, Mexico → Linux Foundation).
+
+### 6. The aggregation layer is being reinvented by public institutions who all forget the licence
+
+`alert aggregator CAP` returns **six repositories worldwide.** The **WMO**'s Africa regional office
+(active 2026-11-25), the **IFRC** Alert Hub, and **Parks Australia** have each independently written
+a CAP aggregator, and **all three are unlicensed** — absence verified against 200 READMEs. The only
+permissively licensed one authenticates and signs, and died in 2015.
+
+**The trend:** institutional need is rising fast enough that three unrelated public bodies built the
+same tool within two years, and the open-source commons captured **none** of it, because nobody
+attached nine lines of licence text. **This is the cheapest high-credibility contribution available
+anywhere in this KB** — a licence conversation with WMO RA-I or the IFRC costs nothing and unlocks
+code that is already maintained.
+
+### 7. Volunteer capability is now decoding national warning systems, and that cuts both ways
+
+One person's **MIT**-licensed SDR++ plugin demodulates **J-ALERT**, Japan's national instantaneous
+warning system (161★, active).† `GlobalQuake` (**MIT**, 408★) *issues its own early warnings*.
+`EEWBot` (MIT) pushes Japanese EEW to **Discord**. `astrbot_plugin_disaster_warning` (AGPL-3.0, 104★)
+wires global hazard feeds into an **LLM chatbot**.
+
+Two readings, both true and both worth saying to a client. **The opportunity:** the protocols are
+tractable, the receive side is solved cheaply, and monitoring/verification can be built today.
+**The risk:** if a hobbyist can decode and redistribute a national alert, then the gap between
+*"an alert exists"* and *"a trustworthy alert reached the right people"* is now occupied by
+unaccountable software — and ExpTech's own data carries a **"reference only"** disclaimer while
+`dsame` disclaims life-safety use outright. **The trust layer is the product, and nobody is selling
+it.**
+

@@ -9,6 +9,104 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 45: the public-warning & emergency-alerting plane (**the first plane in this KB where the scarce asset is a credential, not a licence**)
+
+Plane found the same way as passes 43 and 44: ~75 candidate terms grepped against all eight KB files
+before any web search. `IPAWS`, `cell broadcast`, `public warning`, `Common Alerting`, `disaster`,
+`J-Alert`, `Advanced Emergency`, `AEA`, `Wireless Emergency` — **all literal zero**, and the `CAP`
+and `EAS` hits that looked like coverage were substring artefacts ("frequency cap", "overseas").
+The plane a broadcaster is *legally compelled* to operate was the largest remaining void in a KB
+covering 44 planes.
+
+**The movement, and it is all on the receive side.** Four of the plane's live repos were pushed
+inside the week of this pass: `EEWBot/EEWBot` (MIT, 81★, **2026-11-27, the day of the pass**),
+`kelvinn/capparselib` (**MPL**, 30★, 2026-11-24), `KR8MER/eas-station` (AGPL-3.0, 24★, 2026-11-23),
+`takwerx/ipaws-alerts` (AGPL-3.0, 5★, 2026-11-22), plus `wmo-raf/cap-aggregator` (**no licence**, 1★,
+2026-11-25) and `ExpTechTW/TREM-Lite` (AGPL-3.0, 114★, 2026-11-21). Every one of them **listens**.
+Nothing new **sends**.
+
+### THE MEASUREMENT: a five-step gradient, and the cliff is in the middle
+
+This is the most precise form the KB's structural law has taken, because for the first time all five
+steps of one obligation were measured in a single pass.
+
+| Step | Nature of the problem | Best open artefact | Verdict |
+|---|---|---|---|
+| 1. **DETECT** the hazard | engineering | `xspanger3770/GlobalQuake` **MIT 408★**; `openeew/openeew` Apache-2.0 208★; `soltia48/sdrplusplus-j-alert-plugin` MIT 161★ | **Healthy and permissive** |
+| 2. **ENCODE** as CAP/SAME | format | `google/cap-library` Apache-2.0 88★ **ARCHIVED 2019**; `kelvinn/capparselib` **MPL** 30★ live | **Alive but marginal; the canonical library is dead** |
+| 3. **ORIGINATE and SIGN** | **authority** | `CAPTools/CAPCollector` BSD-3 16★ — *"authenticate, sign, aggregate and forward"* — **dead 2015-06-02** | **Effectively zero** |
+| 4. **DELIVER** to the mandated channel | regulated carriage | *cell broadcast* = **22 repos, ~20 stars in total**, none of which originates | **Zero** |
+| 5. **AUTHENTICATE** at the receiver | trust | nothing, and **ETSI TS 102 900 says so in the specification itself** | **Zero, by design** |
+
+**The new law, and it is a genuine variant rather than a restatement.** Earlier passes concluded that
+*the licence of the knowledge content* decides whether open source can discharge an obligation — the
+CPT codes in healthcare, MedDRA in pharmacovigilance, MDDRA-style gating in rights (pass 5). This
+plane has **no gated content at all**: CAP is a free OASIS standard, the hazard data is public, and
+the formats are documented. And the supply is still near-zero at step 3. The reason is new:
+**what is scarce here is the right to speak — a signing credential and a legal mandate.** Open source
+cannot compete for a government monopoly on origination, so it colonises the two ends (detect,
+listen) and abandons the middle. **Where the scarce asset is a credential, expect a barbell: healthy
+permissive tooling at the sensor and at the receiver, and nothing in between.** Falsifiable: if a
+jurisdiction ever opens originator credentials to private parties, step-3 code should appear within
+two years. Nothing of the sort exists today.
+
+### The measured consequence, and it is not hypothetical
+
+**Brazil, June 2026: attackers breached the country's emergency alert system and triggered millions
+of false "extreme" alerts.**† Anatel's position was that the broadcast messages only reached the
+areas defined by Civil Defence parameters. Set that against **ETSI TS 102 900**, the technical basis
+for EU-Alert, which states plainly that the cell broadcast service *"does not provide any capability
+for the UE to authenticate that the EU-Alert messages received are from a genuine source."*† The
+standard documents the hole; Brazil demonstrated it at national scale; **and step 5 of the gradient
+above has no open-source implementation anywhere.** This is the most sellable single pairing produced
+in any media pass: a named incident, a primary standards admission, and a measured void between them.
+
+### False friends — the worst set recorded in this KB, and the rule they refine
+
+Pass 5 established "shorten the query"; pass 8 added "shortening can turn a false zero into a false
+abundance." This plane produced the most extreme examples of both, so the rule now has a third part:
+**sort by stars and the top result is usually garbage, because short hazard words collide with
+beginner repos.**
+
+| Query | Total repos | Relevant in top 6 | What the top result actually is |
+|---|---|---|---|
+| `public warning system` | **244** | **0** | `chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020`, 327★ — a Romanian school robotics repo |
+| `common alerting protocol` | 72 | 1 of 6 (`google/cap-library`, archived) | `Sfedfcv/redesigned-pancake`, 283★ — a GitHub auto-named joke repo |
+| `j-alert` | **5,043** | 1 (`sdrplusplus-j-alert-plugin`, rank 4) | `fabien-d/alertify.js`, 4,213★ — a browser dialog library |
+| `awarn` | 751 | **0** | awareness quiz apps; the **AWARN Alliance — which is petitioning the FCC in this very plane — has no code on GitHub at all** |
+| `IPAWS` | 58 | 2 | `lehtiolab/proteogenomics-analysis-workflow`, 29★ — a mass-spectrometry pipeline |
+| `emergency alert system` | **4,732** | 2 | student projects; the real encoders sit at 48★ and 42★ |
+| `alert aggregator CAP` | **6** | **5** | **the one honest query in the plane** — and see below |
+
+**`alert aggregator CAP` returning six repositories worldwide is the finding.** Five are relevant,
+which makes it the highest-precision query in this KB — and their combined weight is **19 stars**.
+The only one that authenticates and signs is **BSD-3-Clause and died in 2015**. The three that are
+alive (`wmo-raf/cap-aggregator` 1★ 2026-11-25, `IFRC-Alert-Hub/Alert-Hub-CAP-Aggregator` 2★,
+`parks-australia/cap_alerts_aggregator` 0★) are **all three unlicensed — absence verified against
+200 READMEs.** The World Meteorological Organization's regional office, the International Federation
+of Red Cross and Red Crescent Societies, and the Australian government's parks agency have each
+independently written an alert aggregator and **none of them attached a licence.** That is the
+cheapest, highest-credibility opportunity in this pass: the code exists, is being maintained, and
+cannot lawfully be reused by anyone.
+
+### Corrections and method notes carried forward
+
+1. **A three-letter acronym needs word boundaries on both sides.** `CAP` and `EAS` both reported
+   coverage that did not exist ("frequency cap", "overseas"). Healthcare pass 11 logged the same
+   defect for placeholder detection; it is now confirmed as a general probe defect in both
+   directions — false negatives *and* false positives.
+2. **The lowercase-`license.txt` probe paid again.** `nivex/dsame` is **ISC** in `license.txt`; the
+   API and any capitalised-only probe report nothing.
+3. **`search/repositories` silently excludes forks.** `nivex/dsame`, `A-c0rN/dsame` and
+   `dec112/cap-ts` all exist by `ls-remote` and all return an empty `items` array for an exact
+   `repo:` query. **An empty search result is not evidence of absence — it may mean "fork".** Verify
+   with `ls-remote`, then read the licence over raw; do not publish invented star counts for them.
+4. **`repos/<slug>` on the REST API is outside this session's GitHub scope (403).** `search/` is the
+   only metadata channel available, so fork metadata cannot be completed from here — recorded as an
+   informed gap rather than guessed at.
+5. **The more-starred repo is sometimes the dead one.** `ExpTechTW/TREM-tauri` (155★) is archived
+   while `ExpTechTW/TREM-Lite` (114★) is the live successor. Star order inverts the right answer.
+
 ## 2026-11-27 — pass 44: the IP broadcast plant (**the control plane went permissive; the measurement plane is copyleft, unlicensed or dead**)
 
 Plane found the same way as pass 43: ~45 candidate terms grepped against all eight KB files before any

@@ -4956,3 +4956,88 @@ broadcast-constrained profile of AES67, so this layer is shared with pro-audio.
 freely, and you may not republish them in any altered form. The permissive licence on the *code* says
 nothing about the *text*, and in this plane the text is the gated asset.
 
+
+## Pass 45 (2026-11-27) — foundational repos for the public-warning & emergency-alerting plane
+
+All rows verified 2026-11-27: existence by `git ls-remote` (**42/42 of this pass's URLs resolve**),
+metadata from GitHub `search/repositories`, every `NOASSERTION` or apparent absence resolved by
+reading the licence file over the raw channel against a 200 README control.
+
+**What makes this plane different from the other 44.** Every other plane in this KB is a market:
+somebody is selling something and open source is competing, substituting or feeding it. This one is
+an **obligation with a state monopoly at its centre.** A broadcaster does not choose to carry
+alerts, and cannot choose to originate them. That single structural fact explains every licence and
+star count below, and it is why the usual question — *"what can we build on?"* — has to be replaced
+with *"which end of the chain are we allowed to touch?"*
+
+### The format layer — free standard, archived implementation
+
+**CAP (Common Alerting Protocol) is an OASIS standard and it is free to implement.** There is no
+gated vocabulary here, no CPT, no MedDRA, no membership fee — which makes the supply measured below
+the cleanest natural experiment in this KB. See `agents/top.md` for the full library table; the
+foundational facts are these:
+
+| Repo | Licence | Stars | Last push | Why it is foundational |
+|---|---|---|---|---|
+| [google/cap-library](https://github.com/google/cap-library) | Apache-2.0 | 88 | **2019-09-23** | The reference open implementation — create, parse, **validate against CAP profiles**. **Archived.** Still cited by secondary sources in 2026 as the most established option, which is how a dead repo becomes a procurement risk. |
+| [kelvinn/capparselib](https://github.com/kelvinn/capparselib) | **MPL** (25,755 B, read) | 30 | **2026-11-24** | The only actively-maintained CAP parser located. **Mozilla Public Licence = file-level copyleft**, not permissive; the API said `NOASSERTION`. |
+| [cB-Sigma/cap](https://github.com/cB-Sigma/cap) | Apache-2.0 | 0 | 2026-10-11 | Pure-Go CAP 1.2 with **XML signatures**, GeoJSON areas and Atom/RSS feeds. The only permissive library that addresses signing at all, at 0★. |
+| [CAPTools/CAPCreator](https://github.com/CAPTools/CAPCreator) | BSD-3-Clause | 19 | 2026-07-21 | Alert **authoring** under a permissive licence, still maintained. The realistic base for an originator-facing UI. |
+| [CAPTools/CAPCollector](https://github.com/CAPTools/CAPCollector) | BSD-3-Clause | 16 | **2015-06-02** | *"Authenticate, sign, aggregate and forward CAP 1.2 alerts."* The whole hard half of the problem, permissively licensed, **abandoned 2015**. |
+
+### The SAME/EAS receive chain — the US obligation, decoded by hobbyists
+
+| Repo | Licence | Stars | Last push | Why it is foundational |
+|---|---|---|---|---|
+| [EliasOenal/multimon-ng](https://github.com/EliasOenal/multimon-ng) | GPL-2.0 | 1,150 | 2026-11-15 | The demodulator everything else in the chain shells out to. **Its own notes call the EAS decoder alpha.** |
+| [cbs228/sameold](https://github.com/cbs228/sameold) | **Apache-2.0** | 27 | 2025-09-07 | Rust SAME demodulator + decoder; `samedec` replaces multimon-ng's EAS mode. **The only permissive demodulator in the plane** — if a client deliverable must ship without copyleft, this is the row. |
+| [cuppa-joe/dsame](https://github.com/cuppa-joe/dsame) | ISC | 138 | 2022-02-20 | Root of the Python decoder fork tree. README: **not to be relied on where loss, injury or death may result.** |
+| [sasquelch/EAS-Encoder](https://github.com/sasquelch/EAS-Encoder) | LGPL-3.0 | 48 | 2023-07-29 | The only live SAME **encoder**; LGPL-3.0. |
+
+### Detection and hazard monitoring — the healthy end
+
+| Repo | Licence | Stars | Last push | Why it is foundational |
+|---|---|---|---|---|
+| [xspanger3770/GlobalQuake](https://github.com/xspanger3770/GlobalQuake) | **MIT** (file read; API said none) | 408 | 2025-01-23 | Worldwide near-real-time quake monitoring that **issues its own early warnings**. Highest-starred relevant repo in the plane after `OnAir`. |
+| [openeew/openeew](https://github.com/openeew/openeew) | Apache-2.0 | 208 | 2024-05-10 | **Linux Foundation / Grillo (Mexico) / IBM**: sensors, detection and dashboards for low-cost EEW. A LATAM-origin, foundation-hosted, Apache-2.0 stack — the best-governed artefact in the plane. |
+| [sahana/eden](https://github.com/sahana/eden) | **MIT** | 37 | **2026-11-27** | Humanitarian and emergency-management RAD kit. **The only permissively-licensed platform in the plane**, 59 forks against 37 stars. |
+| [ushahidi/platform](https://github.com/ushahidi/platform) | AGPL-3.0 (read) | 734 | **2026-11-27** | Crisis mapping and incident collection; 511 forks. The most deployed, and the most licence-constrained. |
+
+### ⛔ The false-friend table — read this before searching this plane
+
+The worst set recorded in this KB. Documented here because the next pass over any civil-protection
+or public-safety topic will hit the same collisions.
+
+| Query | Total | Relevant in top 6 | Top result by stars |
+|---|---|---|---|
+| `public warning system` | **244** | **0** | `chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020` (327★), school robotics |
+| `common alerting protocol` | 72 | 1 | `Sfedfcv/redesigned-pancake` (283★), auto-named joke repo |
+| `j-alert` | **5,043** | 1 | `fabien-d/alertify.js` (4,213★), browser dialogs |
+| `awarn` | 751 | **0** | awareness quiz apps — **the AWARN Alliance itself has no public code** |
+| `IPAWS` | 58 | 2 | `lehtiolab/proteogenomics-analysis-workflow` (29★), mass spectrometry |
+| `emergency alert system` | **4,732** | 2 | student projects |
+| `cell broadcast alert` | **22** | ~2 | `SteveZMTstudios/CellBroadcast-Trigger` (12★) — a handset **toggle**, not an originator |
+| `alert aggregator CAP` | **6** | **5** | `CAPTools/CAPCollector` (16★, dead 2015) |
+
+**Two numbers to carry into any conversation about this plane.** *Cell broadcast* — the delivery
+channel European law effectively obliges member states to operate — is served by **22 repositories
+totalling roughly 20 stars, none of which can send an alert.** And *alert aggregation* — the step
+where a broadcaster or carrier actually joins the chain — is served by **six repositories worldwide,
+19 stars between them, with the only signed-and-authenticated one dead since 2015 and all three live
+ones unlicensed.** These are not thin findings. They are the whole investment case.
+
+### The standards and the regulation — where the real constraints live
+
+| Artefact | Status | Why it matters here |
+|---|---|---|
+| **OASIS CAP 1.2** | Free, open standard | No content gate. The absence of supply therefore **cannot** be blamed on licensing of the vocabulary — which is what makes this plane's measurement generalisable. |
+| **ETSI TS 102 900** (EU-Alert over Cell Broadcast) | Published ETSI spec | States that cell broadcast **"does not provide any capability for the UE to authenticate that the EU-Alert messages received are from a genuine source."**† The authentication gap is in the standard, not in an implementation. |
+| **EECC Article 110** | EU law; technology-neutral | Obliges member-state public warning to end users. **BEREC** has published guidelines on assessing effectiveness of systems transmitted by different means.† Effectiveness evidence is a deliverable. |
+| **ABNT NBR 25607:2025** + SBTVD **TV 3.0 Emergency Warning System Operational Guidelines (June 2026)** | Published Brazilian guideline | Defines broadcaster behaviour for TV 3.0 alerting and **monitoring of IDAP**, Brazil's public alert notification interface.† The most concrete, most recent primary document in the plane, and it is LATAM. |
+| **FCC EAS cybersecurity rules** | **In force; deadline 2026-09-29 passed** | Strong passwords/alternative authentication, prompt patching, firewall or comparable segmentation — on EAS units *and* automation, audio processors, STLs, RDS encoders, transmitters, at **every** licensed station.† |
+| **SMPTE / AMWA standards text** | All-rights-reserved / CC BY-ND (pass 44) | Unchanged and still relevant: you may implement, you may not republish altered text. |
+
+**The conclusion for every proposal in this plane:** the format is free, the code is thin, the
+obligation is absolute, and the credential is the client's. Price the **integration, the
+authentication boundary and the compliance evidence** — never the alerting software, which does not
+exist to be licensed.

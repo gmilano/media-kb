@@ -4224,3 +4224,95 @@ substrate an agent needs and is rarer than it sounds. See `compose/patterns.md` 
 - **Do not size this work from the agent layer.** There is no product to benchmark against; price it
   from the integration and the conformance gate.
 
+
+## Pass 45 (2026-11-27) — the public-warning & emergency-alerting plane: **one agent exists, it is AGPL-3.0, and the thing it cannot do is the thing that matters**
+
+All rows verified 2026-11-27: existence via `git ls-remote` (**42/42 of this pass's URLs resolve**),
+stars / forks / last-push from the GitHub `search/repositories` API, and every `NOASSERTION` or
+apparent absence resolved by reading the licence file over the raw channel with a README control
+request.
+
+**Why this plane, and why it is embarrassing that it was missing.** Found by grepping ~75 candidate
+terms against all eight KB files before any web search. `IPAWS` 0, `cell broadcast` 0,
+`public warning` 0, `Common Alerting` 0, `disaster` 0, `J-Alert` 0, `Wireless Emergency` 0,
+`Advanced Emergency` 0, `AEA` 0, `ballot` 0, `decision desk` 0. The eleven `CAP` hits and twelve
+`EAS` hits in the KB were **all substring artefacts** — "frequency cap", "tax-credit cap",
+"over**seas** revenue" — so the plane scored a false positive on a careless grep and a true zero on
+inspection. **The placeholder/word-boundary defect logged in healthcare pass 11 bit again here, in
+the opposite direction: a three-letter acronym needs `\b` on both sides or it reports coverage that
+does not exist.** This KB has catalogued 44 planes of media work, including the broadcast plant
+itself (pass 44), **while never once listing the one output a broadcaster is legally compelled to
+carry.** In the United States that obligation applies to *every station the FCC licenses*.†
+
+### The one agent-adjacent artefact in the plane, named honestly
+
+| Project | Repo | Licence | Stars | Last push | What it is, and what it is not |
+|---|---|---|---|---|---|
+| astrbot_plugin_disaster_warning | [Pancakes-Labs/astrbot_plugin_disaster_warning](https://github.com/Pancakes-Labs/astrbot_plugin_disaster_warning) | **AGPL-3.0** | 104 | 2026-10-28 | The only thing in this plane that is actually an agent: a disaster-warning plugin **for the AstrBot LLM chatbot framework**, aggregating earthquake, tsunami, weather and typhoon feeds with a WebUI and rendered visuals. **It is a notification consumer, not an alert originator** — it reads authoritative feeds and talks about them. AGPL-3.0, so a hosted service built on it carries the network-use obligation. The highest-value row in this table and the clearest statement of the plane's shape: the agent sits *downstream* of authority. |
+
+**⛔ The refusal, stated before the useful part.** There is no open-source agent that originates,
+signs or disseminates a public warning, and there will not be one, because **origination is not a
+software problem** — see the structural finding below. Any proposal that implies an agent "issues
+alerts" is wrong in a way a regulator will notice. The honest agentic surface in this plane is
+**monitor, translate, render, verify and evidence** — never *issue*.
+
+### Detection: the upstream layer, and the only healthy one in the plane
+
+Permissively licensed, actively maintained, and built almost entirely by volunteers and NGOs rather
+than by broadcasters or vendors.
+
+| Project | Repo | Licence | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| GlobalQuake | [xspanger3770/GlobalQuake](https://github.com/xspanger3770/GlobalQuake) | **MIT** (licence file read) | 408 | 2025-01-23 | Near-real-time worldwide earthquake monitoring **capable of issuing its own earthquake early warnings**. The highest-starred tool in the whole plane. **The API reported no licence; the file says MIT (2023)** — a correction worth carrying, because 408★ of MIT beats everything else here. |
+| OpenEEW | [openeew/openeew](https://github.com/openeew/openeew) | Apache-2.0 | 208 | 2024-05-10 | Low-cost IoT earthquake early warning — sensors, detection, dashboards. **Linux Foundation project contributed by Grillo (Mexico) with IBM**: a LATAM-origin open-source stack hosted by a neutral foundation, which is rare enough in this KB to be a selling point in a Mexican or Chilean conversation. Dormant 18 months. |
+| SDR++ J-ALERT plugin | [soltia48/sdrplusplus-j-alert-plugin](https://github.com/soltia48/sdrplusplus-j-alert-plugin) | **MIT** (licence file read, © 2026) | 161 | 2026-10-21 | Out-of-tree SDR++ decoder for the **J-ALERT (全国瞬時警報システム) satellite downlink** — Japan's national instantaneous warning system, demodulated by a hobbyist. MIT, active, and the single best APAC artefact in the plane. |
+| TREM-Lite | [ExpTechTW/TREM-Lite](https://github.com/ExpTechTW/TREM-Lite) | AGPL-3.0 | 114 | 2026-11-21 | Taiwan Real-time Earthquake Monitoring, the **live** client. Its predecessor `ExpTechTW/TREM-tauri` (AGPL-3.0, 155★) is **archived** — so the more-starred repo is the dead one, which is exactly the trap a star-sorted search sets here. ExpTech's data is self-labelled *reference only*; the authority is Taiwan's CWA. |
+| EEWBot | [EEWBot/EEWBot](https://github.com/EEWBot/EEWBot) | MIT | 81 | **2026-11-27** | Discord bot for Japanese Earthquake Early Warning — **pushed on the day of this pass**. The pattern worth noting: the live distribution surface for alerts in APAC is a chat platform, maintained by volunteers. |
+| eew | [skubota/eew](https://github.com/skubota/eew) | MIT | 9 | 2023-04-21 | Go reader/decoder for 緊急地震速報 (EEW). Small, MIT, and the right shape for embedding in a pipeline. |
+
+### Encode and decode: alive, hobbyist-grade, and the canonical library is dead
+
+The receive side of the US Emergency Alert System — SAME/EAS audio headers — has more working code
+than any other step, and essentially all of it exists to let enthusiasts listen to alerts rather than
+to let stations handle them.
+
+| Project | Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| multimon-ng | [EliasOenal/multimon-ng](https://github.com/EliasOenal/multimon-ng) | GPL-2.0 | 1,150 | 2026-11-15 | The demodulator the whole SAME chain depends on, **and the most-starred genuinely-relevant repo in this plane**. GPL-2.0: separate process, no linking. Its own status notes call the EAS decoder *alpha*. |
+| sameold / samedec | [cbs228/sameold](https://github.com/cbs228/sameold) | **Apache-2.0** | 27 | 2025-09-07 | SAME/EAS demodulator and decoder in Rust; `samedec` is a drop-in replacement for multimon-ng's EAS mode. **The only permissive demodulator in the plane** — the one row here that can go into a client deliverable without a copyleft conversation. |
+| dsame | [cuppa-joe/dsame](https://github.com/cuppa-joe/dsame) | ISC | 138 | 2022-02-20 | The original Python SAME decoder and the root of a fork tree. Its own README warns it **must not be relied on where loss, injury or death may result** — quote that line to any client who proposes it for production. |
+| dsame (fork) | [nivex/dsame](https://github.com/nivex/dsame) | **ISC** (`license.txt`, lowercase) | fork | — | Maintained fork. **Caught by the lowercase-`license.txt` probe added in pass 5** — the API and a capitalised-only probe both report no licence. The lesson keeps paying: a raw 404 is never, by itself, evidence that a licence is missing. |
+| dsame3 | [jamieden/dsame3](https://github.com/jamieden/dsame3) | ISC | 27 | 2024-04-02 | Python 3 decoder with audio input and transcription options; `dsame3-simple` on PyPI as a library. |
+| jsame | [MaxwellDPS/jsame](https://github.com/MaxwellDPS/jsame) | MIT | 3 | 2022-01-15 | JS/npm port of dsame. MIT and tiny; the npm package is flagged for an unhealthy release cadence. |
+| EAS-Encoder | [sasquelch/EAS-Encoder](https://github.com/sasquelch/EAS-Encoder) | LGPL-3.0 | 48 | 2023-07-29 | Generates SAME headers rather than reading them. **The only live encoder, and it is LGPL-3.0.** |
+| same-encoder | [aaron-em/same-encoder](https://github.com/aaron-em/same-encoder) | MIT | 42 | 2018-06-09 | MIT SAME encoder, untouched eight years. The permissive option in this row is the abandoned one. |
+
+### The CAP format layer — and the archived centre of gravity
+
+| Project | Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| cap-library | [google/cap-library](https://github.com/google/cap-library) | Apache-2.0 | 88 | **2019-09-23** | Google's CAP library: create, parse and **validate against CAP profiles**. Every secondary source still calls it the most established implementation. **It is archived — read-only since 2019.** The canonical open implementation of the format every government on earth mandates is a museum piece. |
+| capparselib | [kelvinn/capparselib](https://github.com/kelvinn/capparselib) | **MPL** (licence file read, 25,755 B) | 30 | **2026-11-24** | Parses CAP 1.1/1.2 feeds into normalised dicts. **The only actively-maintained CAP parser located in this plane — pushed three days before this pass — and the API reported `NOASSERTION`.** It is Mozilla Public Licence, i.e. **file-level copyleft, not permissive**: usable in a commercial product, but modified CAP-parsing files must be published. Flag it in review; do not let it into a proposal as "MIT-ish". |
+| cap | [cB-Sigma/cap](https://github.com/cB-Sigma/cap) | Apache-2.0 | 0 | 2026-10-11 | OASIS CAP 1.2 in pure Go: parsing, validation, **XML signatures**, GeoJSON areas, Atom/RSS feeds. **0★ and the most complete feature list in the table** — the only permissive library that even mentions signatures. A bet, not a base; read it before depending on it. |
+| cap-ts | [dec112/cap-ts](https://github.com/dec112/cap-ts) | **MIT** (`LICENSE.txt` read) | fork | — | TypeScript CAP parser/writer, on npm as `@dec112/cap-ts`. Published under **DEC112**, the Austrian next-generation-emergency-calling project — an EMEA-placed artefact. |
+| cap (Go) | [thetannerryan/cap](https://github.com/thetannerryan/cap) | — | — | — | Go implementation of OASIS CAP 1.2 **plus the Canadian profile (CAP-CP)**. Exists (`ls-remote`), but `search/repositories` refuses the slug, so **no verified stars, licence or push date — listed as located, not as recommended.** |
+| NWS-CAP-parser | [morrissimo/NWS-CAP-parser](https://github.com/morrissimo/NWS-CAP-parser) | MIT | 31 | **2012-11-05** | MIT, and fourteen years untouched. |
+| RCAP | [farrel/RCAP](https://github.com/farrel/RCAP) | **none** | 26 | 2020-12-27 | Ruby CAP implementation. **No licence file on `master`; absence verified against a 200 README.** 26★ nobody may lawfully reuse. |
+| CAP-Java-library | [AT-backbone/CAP-Java-library](https://github.com/AT-backbone/CAP-Java-library) | GPL-2.0 | 2 | 2016-10-20 | XML-CAP processing in Java. GPL-2.0, 2★, dead. |
+
+### ⛔ What not to promise in this plane
+
+- **Never promise alert origination.** The scarce asset is a **credential and a legal mandate**, not
+  code (see `intel/trends.md` for the measurement). You integrate with IPAWS, IDAP, EU-Alert or
+  J-Alert as an authorised originator *the client already is, or is not*. No licence you choose
+  changes that.
+- **Never put a hobby decoder on the life-safety path.** `cuppa-joe/dsame` says so itself, and
+  `multimon-ng` calls its own EAS mode alpha. Use them for **monitoring and verification** — which
+  is, usefully, exactly what the new FCC cyber rules make a station need.†
+- **Do not assume "CAP support" means signature validation.** Of the libraries above, **one**
+  mentions XML signatures and it has 0★. Ask for a signed-alert test vector during evaluation and
+  watch what happens.
+- **Do not quote star counts from a star-sorted search in this plane.** The top result for
+  *"common alerting protocol"* is a 283★ repo called `redesigned-pancake`, and the top result for
+  *"public warning system"* is a Romanian FTC robotics project. The false friends are documented in
+  `repos/foundations.md`.

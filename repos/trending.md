@@ -10,6 +10,85 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 45: public-warning infrastructure (**three governments wrote the same tool and none of them licensed it**)
+
+Infrastructure and platform movement for the emergency-alerting plane — CAP aggregation and signing,
+EAS/SAME station equipment, IPAWS and EU-Alert integration, ATSC 3.0 Advanced Emergency Alerting,
+and the humanitarian incident-management platforms the alerts land in. The agent-layer finding, the
+five-step gradient and the false friends are in `agents/trending.md` for the same date.
+
+**The measurement: GitHub `search/repositories`, 2026-11-27; existence via `git ls-remote`
+(42/42 resolve); every `NOASSERTION` and every apparent absence resolved by reading the licence file
+over the raw channel with a README control request.** As in passes 43–44, the **licence distribution
+is the finding**, not the star counts — and here it is starker than in any previous plane.
+
+### The station side: the FCC just created a market, and the open supply is entirely copyleft
+
+The US compliance deadline in this plane **has already passed**: the FCC's EAS cybersecurity rules
+took effect 60 days after Federal Register publication on 2026-07-31, making **2026-09-29** the
+implementation date, and the nationwide EAS test of **2026-11-17** is explicitly usable by the
+Commission to assess compliance.† The rules reach **every FCC-licensed station** and cover EAS units
+*plus* automation systems, audio processors, STLs, RDS encoders and transmitters.†
+
+| Repo | Licence | Stars | Forks | Last push | Note |
+|---|---|---|---|---|---|
+| [KR8MER/eas-station](https://github.com/KR8MER/eas-station) | **AGPL-3.0** | 24 | 6 | **2026-11-23** | EAS platform for **monitoring, broadcasting and verifying NOAA and IPAWS alerts** — the most complete station-side open project located, pushed four days before this pass. AGPL-3.0: a hosted multi-station service built on it carries the network-use obligation. **The single most relevant repo to the FCC deadline, and the licence is the problem.** |
+| [takwerx/ipaws-alerts](https://github.com/takwerx/ipaws-alerts) | **AGPL-3.0** | 5 | 0 | **2026-11-22** | IPAWS alerts as an **ATAK plugin** — alerts on a tactical map, filtered on-device. Evidence that the live demand for IPAWS integration is coming from the public-safety side, not from broadcasters. |
+| [openbroadcaster/obplayer](https://github.com/openbroadcaster/obplayer) | AGPL-3.0 | 144 | 54 | 2026-09-23 | Community-radio playout **with emergency-alerting support built in** — already in this KB as a playout platform since pass 8, and **never once identified as the alerting artefact it is.** The only project in the plane that both plays programming and handles alerts. |
+| [MissMeridian/boiler](https://github.com/MissMeridian/boiler) | GPL-3.0 | 6 | 0 | 2026-10-21 | IPAWS-adjacent tooling. **Archived** — listed so it is not rediscovered as a shortcut. |
+
+**Zero permissive options.** The four station-side projects are AGPL-3.0, AGPL-3.0, AGPL-3.0 and
+GPL-3.0 (archived). For a plane whose deliverable is usually *an appliance inside a broadcaster's
+plant*, that licence distribution is a procurement fact, not a detail.
+
+### The aggregation and signing layer — the void, with names attached
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [CAPTools/CAPCollector](https://github.com/CAPTools/CAPCollector) | BSD-3-Clause | 16 | **2015-06-02** | *"Server to authenticate, sign, aggregate and forward CAP 1.2 alerts."* **The only open implementation of step 3 of the gradient, permissively licensed, abandoned eleven years ago.** If one repo in this KB deserves a revival, it is this one. |
+| [CAPTools/CAPCreator](https://github.com/CAPTools/CAPCreator) | BSD-3-Clause | 19 | 2026-07-21 | The authoring counterpart — composing CAP 1.2 alerts. **Still maintained**, and the permissive licence makes it the realistic starting point for an alert-authoring UI. |
+| [wmo-raf/cap-aggregator](https://github.com/wmo-raf/cap-aggregator) | **none** | 1 | **2026-11-25** | Aggregates CAP 1.2 from multiple feeds. **WMO Regional Association for Africa**, pushed two days before this pass. No licence file; absence verified against a 200 README. |
+| [IFRC-Alert-Hub/Alert-Hub-CAP-Aggregator](https://github.com/IFRC-Alert-Hub/Alert-Hub-CAP-Aggregator) | **none** | 2 | 2024-04-05 | The **IFRC Alert Hub** aggregator. No licence. |
+| [parks-australia/cap_alerts_aggregator](https://github.com/parks-australia/cap_alerts_aggregator) | **none** | 0 | 2026-11-06 | Aggregates CAP feeds, culls expired/cancelled alerts, publishes the active feed to S3. Australian government. No licence. A companion `..._connector` repo (0★, 2026-11-18) is likewise unlicensed. |
+
+### Where the alerts land: humanitarian incident management, and the one MIT platform
+
+| Repo | Licence | Stars | Forks | Last push | Note |
+|---|---|---|---|---|---|
+| [sahana/eden](https://github.com/sahana/eden) | **MIT** | 37 | 59 | **2026-11-27** | Sahana Eden — rapid-application-development kit for **humanitarian and emergency management**. **MIT, and pushed on the day of this pass**, with more forks than stars (59f/37★, ratio 1.6) — the deployment signature of software that gets forked per-country rather than starred. **The only permissively-licensed platform in the entire plane.** |
+| [ushahidi/platform](https://github.com/ushahidi/platform) | **AGPL-3.0** (licence file read: "Affero") | 734 | 511 | **2026-11-27** | Crowdsourced crisis mapping and incident collection, active the day of this pass, 511 forks. API reported `NOASSERTION`; the file is AGPL. The most-deployed crisis platform in the plane and **the one whose licence most constrains a hosted offering**. |
+
+### Hazard and weather feeds — the consumer end, and it is Home Assistant
+
+The liveliest integration work in the plane is happening in **home automation**, not broadcast.
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [seevee/weather_alerts_card](https://github.com/seevee/weather_alerts_card) | MIT | 91 | 2026-11-24 | Multi-provider alert card for Home Assistant: **NWS, ECCC, MeteoAlarm, BoM, DWD** — a four-region normalisation layer that exists because nobody shipped one. MIT. |
+| [seevee/cap_alerts](https://github.com/seevee/cap_alerts) | MIT | 13 | 2026-11-24 | Multi-region alert integration **modelled on CAP fields**, one entity per active alert. MIT, active, and the cleanest small CAP consumer located. |
+| [NiklasJordan/meteoalarm](https://github.com/NiklasJordan/meteoalarm) | NOASSERTION | 14 | 2026-11-17 | Python access to **MeteoAlarm's official CAP feeds** across European countries. Licence unresolved by the API; treat as unlicensed until read. |
+| [weather-gov/api](https://github.com/weather-gov/api) | **none found** | 312 | 2024-05-08 | The US National Weather Service API repo — the upstream of most NA alerting. **No licence file under either branch** (US federal works are generally uncopyrighted in the US, but the repo asserts nothing). 312★, dormant. |
+
+### ATSC 3.0 / NextGen TV: the carriage layer for rich alerts
+
+Advanced Emergency Alerting is the capability broadcasters are lobbying for: maps, video clips and
+multi-language audio on top of a text EAS crawl. **AWARN petitioned the FCC in late September 2026**
+with five recommendations to expand Advanced Emergency Information, framed as a *voluntary* broadcast
+capability; the binding constraint is channel capacity while ATSC 1.0 simulcast continues, and no FCC
+decision was located.† ATSC reports **over 76% of US households** with access to 3.0 service.†
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [adswill/OnAir](https://github.com/adswill/OnAir) | GPL-3.0 (read) | 1,129 | **2026-11-27** | Open-source SDR receiver with 330+ modes including **ATSC 1.0/3.0, ISDB-T, DVB-T/T2/C/S2, DTMB, DAB+**. **The most-starred repo in this pass and pushed on the day of it.** The practical way to *observe* what a transmitter is actually emitting — which is what alert verification requires. GPL-3.0. |
+| [drmpeg/gr-atsc3](https://github.com/drmpeg/gr-atsc3) | GPL-3.0 | 51 | 2026-06-18 | An **ATSC 3.0 transmitter** for GNU Radio. The only open transmit-side implementation of the standard carrying AEA. GPL-3.0. |
+| [nekohkr/danttoUHD](https://github.com/nekohkr/danttoUHD) | MIT | 24 | 2025-09-11 | ATSC 3.0 → MPEG-2 TS converter. **MIT**, and the only permissive 3.0 tool located. |
+| [johnb-7/hdhr-ac4](https://github.com/johnb-7/hdhr-ac4) | Apache-2.0 | 102 | 2024-05-03 | Emulates an HDHomeRun tuner serving ATSC 3.0 with AC-3 audio — a client-side workaround for AC-4 decoding. Apache-2.0, dormant. |
+
+**The shape of the ATSC 3.0 rows is worth stating:** the receive and transmit implementations are
+GPL-3.0 and the permissive ones are format converters. Same pattern as pass 44's broadcast plant —
+the control and observation layers are copyleft, so plan the service boundary before the proposal,
+not after.
+
 ## 2026-11-27 — pass 44: IP-plant infrastructure (**the first permissively-licensed data plane a broadcast facility has ever had**)
 
 Infrastructure and platform movement for the broadcast media-over-IP plane — ST 2110 transport, NMOS

@@ -1666,6 +1666,62 @@ caught. That is the loss figure behind every eligibility rule in this section.
   located. Do not size this from the broadcast-equipment totals in the pass 44 addendum below — those
   measure hardware.
 
+### Pass 45 (2026-11-27) — the public-warning & emergency-alerting layer in North America
+
+**The opportunity here is a deadline that has already passed, which is the best kind.** The FCC's
+EAS cybersecurity rules were published in the Federal Register on **2026-07-31** and took effect 60
+days later, making **2026-09-29** the implementation date.† They require three things on covered
+equipment: **strong passwords or qualifying alternative authentication, prompt testing and
+installation of manufacturer security patches, and firewall or comparable network segmentation to
+restrict remote management.** Default passwords must be changed before equipment enters service.†
+
+Three details make this commercially unusual:
+
+1. **The scope is wider than EAS boxes.** The rules reach **automation systems, audio processors,
+   studio-to-transmitter links, RDS encoders and transmitters** — i.e. the station's whole
+   internet-connected program chain.†
+2. **They apply to every station the FCC licenses**, TV and radio, with no size carve-out located.†
+3. **Enforcement has an observable trigger.** The nationwide EAS test of **2026-11-17** can be used
+   by the Commission to assess compliance, and counsel has publicly noted that **a station that
+   fails to receive an alert because its EAS equipment was not updated could be found in
+   violation.**† A missed alert is now evidence of a cybersecurity failure, not just a technical
+   fault.
+
+**The sellable unit is therefore an evidence trail, not a product:** per-device inventory of the
+program chain, authentication and patch state, segmentation proof, and a monitored receive path that
+demonstrates alerts are actually arriving. The monitoring half can be built on
+`cbs228/sameold` (**Apache-2.0** — the only permissive demodulator) and `KR8MER/eas-station`
+(AGPL-3.0, behind a service boundary). See `compose/patterns.md` pattern 94.
+
+**The second North American opportunity is still open, and that is why it is worth watching.**
+The **AWARN Alliance** petitioned the FCC in **late September 2026** with five recommendations to
+expand Advanced Emergency Information over ATSC 3.0 — multimedia alerts with standardised symbols
+and graphics, framed as a **voluntary** broadcaster capability.† ATSC 3.0's alerting can carry maps,
+video clips and **multiple audio presentations and languages**, which makes it simultaneously an
+accessibility and a multilingual-audience story. **No FCC decision was located** — treat this as a
+live docket, not a settled capability. The binding constraint is **channel capacity while ATSC 1.0
+simulcast continues**, and industry commentary ties the pace of advanced alerting directly to the
+absence of an ATSC 1.0 sunset date.† **Over 76% of US households** can now receive 3.0 service.†
+
+**The measured gaps, stated as gaps:**
+
+- **Canada has no open-source client for its national alerting system.** A search for the Pelmorex
+  **NAAD** system returns **zero repositories**. The only CAP library claiming the **Canadian
+  profile (CAP-CP)** is `thetannerryan/cap`, which exists by `ls-remote` but cannot be read through
+  this session's GitHub scope — so its licence, stars and activity are **unverified**. For a
+  Canadian engagement, assume you are building the client.
+- **Mexico belongs to the LATAM section below**, but note here that `openeew/openeew` — Apache-2.0,
+  Linux Foundation, contributed by **Grillo (Mexico)** with IBM — is the best-governed artefact in
+  the plane and is North-America-adjacent in practice.
+- **The US National Weather Service API repo** (`weather-gov/api`, 312★) carries **no licence file
+  under either branch** and has been dormant since 2024-05-08. The feed is public; the repo asserts
+  nothing.
+
+**Positioning.** North America is the one region where the obligation is *already overdue* and where
+a compliance artefact can be sold this quarter without waiting on a regulator. Lead with the EAS
+cyber-compliance evidence trail; keep AWARN/AEA as the roadmap conversation, explicitly labelled as
+pending FCC action.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3510,6 +3566,65 @@ figures differ in currency and scope and are **roughly consistent**, not contrad
   priority for 2026**† is **general enterprise data, not broadcast** — do not present it as a
   broadcast statistic.
 
+### Pass 45 (2026-11-27) — the public-warning & emergency-alerting layer in EMEA
+
+**EMEA is the only region where the alerting obligation is horizontal law rather than a
+sector rule, and the only one where the *authentication* gap is written into the standard.**
+
+**The legal baseline.** **EECC Article 110** obliges member states to transmit public warnings to
+end users. It is **technology-neutral** — cell broadcast is one route, location-based SMS may also
+qualify — and **BEREC has published guidelines on assessing the effectiveness** of systems
+transmitted by different means.† Two consequences that matter commercially:
+
+1. **"Effectiveness" is the regulated quantity, and it is an evidence problem.** Technology
+   neutrality means a member state cannot discharge Art.110 by buying a box; it has to show reach.
+   That is a measurement, reporting and audit deliverable — the same shape as the
+   commissioning-evidence work in pass 44.
+2. **Roaming users are in scope.** Regulation (EU) **2022/612** treats roaming users among those who
+   should receive alerts,† which turns "reach" into a cross-border question.
+
+**The finding that makes this plane sellable in EMEA.** **ETSI TS 102 900**, the technical basis for
+EU-Alert over the Cell Broadcast Service, states that cell broadcast **"does not provide any
+capability for the UE to authenticate that the EU-Alert messages received are from a genuine
+source."**† This is not criticism from outside; **the standard documents its own trust gap.** And
+the open-source supply for that gap is **zero**: the only project that ever authenticated and signed
+CAP alerts (`CAPTools/CAPCollector`, BSD-3-Clause) **died in 2015**, and of every CAP library
+measured in this pass **one** mentions XML signatures (`cB-Sigma/cap`, Apache-2.0, **0★**).
+Pair that with the Brazilian incident in the LATAM section and the pitch writes itself.
+
+**Compliance is uneven, and there is a primary source that says so.** A **World Bank** technical
+assessment records that **Malta has not yet met its obligations under EECC Article 110**† — a named
+member state, in a public document from a development institution rather than a vendor. Secondary
+reporting indicates **Sweden** is implementing cell broadcast during 2026 to complement its existing
+SMS-based system.† ⚠️ **A widely-mirrored claim that Finland's FI-Alert "launched November 2026" is
+internally inconsistent in its own source and is NOT treated as verified here.** For a national
+engagement, read the national regulator, not the encyclopaedia.
+
+**What exists to build on in EMEA, and it is weather, not civil protection.** The European layer with
+real open code is **MeteoAlarm**, EUMETNET's CAP warning feed:
+`NiklasJordan/meteoalarm` (Python access to the official CAP feeds, 14★, **licence unresolved**) and
+`seevee/cap_alerts` / `seevee/weather_alerts_card` (**MIT**, active 2026-11-24, normalising **NWS,
+ECCC, MeteoAlarm, BoM and DWD** in one component). The most multi-region-capable alerting code
+located in this entire pass is **a Home Assistant card**. Also EMEA-placed: `dec112/cap-ts`
+(**MIT**, licence file read), published under Austria's **DEC112** next-generation emergency-calling
+project — evidence that the EMEA emergency-communications community does publish permissively when
+it publishes at all. The **WMO Regional Association for Africa** aggregator
+(`wmo-raf/cap-aggregator`, active **2026-11-25**) is the live EMEA-adjacent aggregation project and
+it is **unlicensed**.
+
+**The adjacent regulatory current, already in this file from earlier passes and relevant again.**
+EMEA's media-AI context is the **EU AI Act** (the Parliament voted **569–45** to adopt its position
+on the Omnibus simplification proposal†), **Article 50 transparency** obligations drawing industry
+response,† and a strong **digital-sovereignty** theme in the DPP's *European Media Trends 2026*.†
+For this plane sovereignty is not rhetoric: an alerting path that depends on a non-European cloud AI
+service is a political problem before it is a technical one, which argues for exactly the
+permissive, self-hostable components this plane barely has.
+
+**Positioning.** Sell **effectiveness evidence and the authentication boundary**. The EMEA buyer is
+a national regulator, a public-service broadcaster or an MNO with an Art.110 obligation, and the
+differentiator is that the standard itself admits the trust gap you are closing. Name Malta as the
+proof that non-compliance is real and documented.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -5324,6 +5439,69 @@ not a finding of absence.
   **2027** trends article, which does not fit the current date and was discarded. **No APAC regulatory
   material on AI in broadcast or on IP infrastructure policy was found** in this pass's searches —
   recorded as an informed gap, not as an absence of regulation.
+
+### Pass 45 (2026-11-27) — the public-warning & emergency-alerting layer in APAC
+
+**APAC is where this plane is most mature in operation and most volunteer-driven in code — the
+widest gap between institutional capability and open-source supply measured in any region.**
+
+**Japan is the reference architecture, and it is three layers, not one.** A **GSMA** resource
+(January 2026) describes the national system as **J-Alert** for life-threatening hazards,
+**L-Alert** for local evacuation and service information, and **standards-based cell broadcast
+operated by the country's four major MNOs.**† Operators began delivering cell-broadcast warnings in
+the late 2000s, an approach recognised as best practice because cell broadcast reaches all devices
+simultaneously **regardless of network congestion** — the property that matters in a disaster and the
+reason Europe's Art.110 route looks the way it does.† Handsets sold in Japan have **ETWS**
+(Earthquake and Tsunami Warning System) and **CMAS** reception in firmware.† The Fire and Disaster
+Management Agency runs scheduled nationwide J-Alert tests — one was conducted **2026-08-26 at
+11:00**, per a Tokyo ward notice.†
+
+**And yet the open-source layer is hobbyist, which is the opportunity.** The best artefacts located
+anywhere in this pass for a *national* warning system are:
+
+- `soltia48/sdrplusplus-j-alert-plugin` — **MIT**, 161★, 2026-10-21: an out-of-tree SDR++ plugin that
+  **demodulates and decodes the J-ALERT satellite downlink.** One person, MIT-licensed, decoding a
+  national warning system.
+- `EEWBot/EEWBot` — **MIT**, 81★, pushed **2026-11-27**: Japanese EEW delivered to **Discord**.
+- `Pancakes-Labs/astrbot_plugin_disaster_warning` — AGPL-3.0, 104★, 2026-10-28: the only real
+  **agent** in the plane, aggregating global earthquake, tsunami, weather and typhoon feeds into an
+  LLM chatbot framework with a WebUI.
+- `ExpTechTW/TREM-Lite` — AGPL-3.0, 114★, 2026-11-21 (Taiwan), with its **more-starred predecessor
+  `TREM-tauri` archived**. ExpTech labels its data *reference only*; the authority is Taiwan's CWA.
+- `skubota/eew` — MIT, 9★: Go decoder for 緊急地震速報.
+- `parks-australia/cap_alerts_aggregator` — **no licence**, 0★, 2026-11-06: the Australian
+  government's own CAP aggregator, unlicensed.
+
+**The structural read for APAC:** the institutions are excellent and the tooling is personal. Every
+MIT artefact in this region is a one-maintainer project, and the one government repo has no licence.
+For a broadcaster or carrier engagement, **nothing here is a dependency** — they are proof that the
+protocols are tractable and that the integration work is unclaimed.
+
+**The regulatory frame is divergence, which this KB has already established and which applies
+directly.** Latham & Watkins (September 2026) sorts APAC AI regulation into **three divergent
+categories**, with binding risk-based regimes in South Korea and Vietnam and targeted rules in
+China,† after *"a significant acceleration in the enactment of AI regulation"* over the preceding
+twelve months.† As pass 8 concluded for rights reservation, the reusable asset in APAC is a
+**per-jurisdiction policy engine**, not a single compliance mode — and for alerting the per-country
+variation is even sharper, because the hazard profile, the originating authority and the handset
+population all differ by market.
+
+**Market context for sizing the conversation.** APAC is reported as second only to North America in
+generative-AI adoption pace,† the Asia-Pacific screen economy is tracked toward **~$200B** with
+monetisation as the defining gap,† and APAC adspend growth in 2026 is **5.2%**, the slowest since the
+pandemic.† ⚠️ **Several of those are promotional or market-research sources; treat as indicative.**
+Public broadcasters in Australia and Singapore are explicitly exploring AI for **newsroom workflows,
+archiving and verification**,† which is the adjacent budget line this plane can attach to.
+
+**The constraint to raise in every APAC conversation, carried from pass 44 and confirmed as
+applicable here:** the binding limit on IP-era broadcast work in the region is a **shortage of IT
+and networking skills**,† so alerting integration prices as **integration plus enablement**, not as
+software.
+
+**Positioning.** Lead with multilingual and accessible alert rendering — ATSC 3.0-style multi-language
+audio and rich alerts matter more in APAC's language-dense markets than anywhere else — and with
+**verification**: the region's own tooling is explicitly labelled "reference only", which is an
+admission that nobody has built the trusted path.
 
 ### LATAM
 
@@ -7206,6 +7384,72 @@ out human ones on streaming services.
   America & Caribbean forum** (Montevideo, June 2026) ran a session on **AI policy and regulation
   across LATAM and the Caribbean**† — the likeliest primary source for the regulatory half, and
   unread by this pass.
+
+### Pass 45 (2026-11-27) — the public-warning & emergency-alerting layer in LATAM
+
+**This is the strongest regional position in the pass, and for once LATAM is not the follower: it has
+the most recent primary document, the most concrete broadcaster obligation, and the incident that
+proves the whole plane's thesis.**
+
+**Brazil is building alerting into the television standard itself.** TV 3.0 / **DTV+** was adopted by
+presidential decree in **August 2025** and draws on **ATSC 3.0** technology for video, audio,
+captioning **and emergency alerting**.† The operational detail is published: the **SBTVD Forum's
+"TV 3.0 Operational Guidelines — Emergency Warning System" (June 2026)** sets out broadcaster
+behaviour, references **ABNT NBR 25607:2025**, and describes **monitoring IDAP — Brazil's Public
+Alert Notification Interface — for alerts.**† Commercial service has been targeted **ahead of the
+2026 FIFA World Cup**, with experimental transmissions in Rio de Janeiro and São Paulo and a Brasília
+station added;† ⚠️ **no confirmation of full commercial rollout was located, so treat the launch
+state as unverified and ask the client.** Vendor readiness is visible (Triveni Digital expanded
+Brazil TV 3.0 support at the 2026 NAB Show†), and a peer-reviewed SET/IJBE paper explores
+**geolocated emergency alerts for public health services over TV 3.0**† — i.e. the local research
+community is already past the standard and into applications.
+
+**And then the incident, which is the single most valuable fact in this pass.** In **June 2026,
+attackers breached Brazil's emergency alert system and triggered millions of false "extreme"
+alerts.**† Anatel's response was that the broadcast messages only reached areas defined by Civil
+Defence parameters. Put the three findings side by side and you have a complete, primary-sourced
+argument:
+
+1. **ETSI TS 102 900** states the cell-broadcast channel offers the device **no way to authenticate**
+   that an alert is genuine.†
+2. **Brazil, June 2026:** millions of false alerts actually sent.†
+3. **The open-source supply for alert authentication is zero** — the only project that signed and
+   authenticated CAP (`CAPTools/CAPCollector`, BSD-3) **died 2015-06-02**, and one library in the
+   whole plane mentions XML signatures (`cB-Sigma/cap`, **0★**).
+
+**A standards body documented the hole, a G20 country fell through it, and nobody has built the
+patch.** That is a purchase trigger, not a trend.
+
+**LATAM also owns the best-governed artefact in the plane.** `openeew/openeew` — **Apache-2.0**,
+208★ — is a **Linux Foundation** project contributed by **Grillo, a Mexican company, with IBM**:
+low-cost IoT earthquake early warning, with sensors, detection and dashboards. A LATAM-origin,
+foundation-hosted, permissively licensed hazard-detection stack is worth more in a regional
+conversation than any forecast, and it is dormant since 2024-05-10 — **which makes it a revival and
+stewardship opportunity, not just a dependency.**
+
+**The regulatory context, consistent with earlier passes.** No Latin American country has a fully
+mature, harmonised AI regime; **Peru is furthest along, with the regulation of Law No. 31814
+effective January 2026**, and **Mexico enacted AI-related amendments to its copyright and labour
+laws in 2026** — described as the country's first sector-specific AI rules.† Deepfakes and synthetic
+media are emerging enforcement priorities,† and **there is no blanket AI-labelling rule for ordinary
+commercial content** in the region.† For this plane the relevant read is narrower and sharper:
+**alerting authority in LATAM is unambiguously state-held** (Civil Defence plus Anatel in Brazil), so
+the commercial surface is broadcaster-side carriage, monitoring and evidence.
+
+**The adjacent newsroom buyer remains the warmest in the region**, as pass 8 established: Aspen
+Digital's **January 2026** report on AI and the future of news in Latin America urges human-in-the-loop
+checks and clear disclosure,† FLIP (Colombia) and ADEPA (Argentina) research adoption while tracking
+national regulation,† and **Latam-GPT** — Chile's CENIA with 30+ institutions across eight
+countries — is the regional infrastructure effort.† One measured constraint to keep proposals honest:
+reporting citing LatAm Journalism Review puts **only ~6% of Latin Americans accessing news through AI
+tools.**†
+
+**Positioning.** Two offers, both concrete. (1) **TV 3.0 alerting integration against a published
+June 2026 guideline** — IDAP monitoring, ABNT NBR 25607:2025 conformance, geolocated alert rendering;
+this is the most specific, most current engagement available anywhere in this pass. (2) **The
+authentication and verification layer**, sold against a national incident in the same market and a
+standards admission from EMEA. Brazil is the one country where both halves can be sold in the same
+meeting.
 
 ## Globant positioning
 

@@ -7024,3 +7024,141 @@ Run this before estimating. It has caught something in every plane this KB has g
   (`intel/market.md`, pass 44 addendum). Price from the obligation and the integration, never from a
   borrowed TAM.
 
+
+## Pattern 94 — The EAS cyber-compliance evidence trail (the one deliverable in this plane with a deadline already behind it)
+
+**Why:** The FCC's EAS cybersecurity rules are in force — Federal Register **2026-07-31**, effective
+60 days later, implementation date **2026-09-29** — and they cover **every FCC-licensed station**,
+across EAS units *plus* automation systems, audio processors, STLs, RDS encoders and transmitters.
+The nationwide test of **2026-11-17** is usable by the Commission to assess compliance, and a station
+that fails to receive an alert because its equipment was not updated **can be found in violation**.†
+The client is late, the scope is their whole program chain, and the regulator has an observable
+trigger. Nothing else in this plane sells itself this directly.
+
+**Wiring:**
+
+1. **Inventory the program chain as a graph, not a list.** Every internet-reachable device between
+   automation and transmitter: EAS unit, playout/automation, audio processor, STL, RDS encoder,
+   transmitter. The three regulated properties per device are **authentication** (no default
+   passwords, strong or qualifying alternative auth), **patch state** (manufacturer updates tested
+   and installed promptly), **reachability** (firewall or comparable segmentation restricting remote
+   management).
+2. **Instrument the receive path independently of the EAS box.** Put a software monitor beside the
+   appliance so "did the alert arrive?" has an answer that does not come from the device under test:
+   `cbs228/sameold` + `samedec` (**Apache-2.0** — the only permissive demodulator in the plane) on
+   an SDR feed, decoding SAME headers to a timestamped log. For the station-side console,
+   `KR8MER/eas-station` (**AGPL-3.0**, monitoring/broadcasting/verifying NOAA + IPAWS) **behind a
+   process boundary with its source offer honoured** — never linked into client code.
+3. **Reconcile against the national test calendar.** Each nationwide and required weekly/monthly
+   test becomes a row: expected at T, decoded at T+n, by which device, logged where. That table *is*
+   the compliance artefact.
+4. **Produce the segmentation proof as configuration-as-code**, so the evidence regenerates instead
+   of being re-screenshotted at each renewal.
+5. **Hand the life-safety path back.** The monitor observes; it never gates or forwards an alert.
+   `cuppa-joe/dsame` disclaims life-safety use in its own README and `multimon-ng` calls its EAS
+   decoder alpha — quote both lines in the SOW so the boundary is contractual.
+
+**Sell it as:** a recurring compliance-evidence service per station group, priced from device count.
+**Do not** sell it as EAS equipment replacement; the appliances are certified and you are not.
+
+## Pattern 95 — The TV 3.0 advanced-alert integration, against a guideline that is already published (LATAM)
+
+**Why:** Brazil is the only market where advanced broadcast alerting is **mandated, specified and
+dated**. TV 3.0 / **DTV+** was adopted by decree in **August 2025** on ATSC 3.0 technology including
+emergency alerting; the **SBTVD Forum's "TV 3.0 Operational Guidelines — Emergency Warning System"
+(June 2026)** defines broadcaster behaviour, references **ABNT NBR 25607:2025**, and specifies
+**monitoring IDAP**, Brazil's Public Alert Notification Interface.† In North America the equivalent
+capability is still **awaiting FCC action on AWARN's late-September-2026 petition**.† So the
+reference implementation is buildable in Brazil now and nowhere else.
+
+**Wiring:**
+
+1. **IDAP ingest, treated as untrusted input.** Poll/subscribe per the June 2026 guideline, validate
+   the CAP payload against **CAP 1.2** before anything renders. Parse with `cB-Sigma/cap`
+   (**Apache-2.0**, pure Go, the only permissive library that handles **XML signatures**, GeoJSON
+   areas and feeds — 0★, so read it first and own the fork) or `kelvinn/capparselib` (**MPL**,
+   actively maintained; file-level copyleft, so modified parser files must be published — flag at
+   review).
+2. **Geo-filter before rendering.** The guideline's model is area-scoped alerting; resolve the CAP
+   `<area>` polygon/geocode against the station's service contour so a regional alert does not go
+   national. The peer-reviewed SET/IJBE work on **geolocated TV 3.0 alerts for public health
+   services** is the local prior art to cite.†
+3. **Render the rich payload for the capability that actually exists:** maps, short video, and
+   **multiple audio presentations and languages** — the multilingual and accessibility leg is the
+   part of ATSC 3.0 alerting that differentiates it from a text crawl, and it connects directly to
+   this KB's accessibility plane (pass 3).
+4. **Verify off-air, independently.** `adswill/OnAir` (GPL-3.0, 1,129★, active) receives ATSC 3.0
+   among 330+ modes — use it to confirm what the transmitter actually emitted, as a separate process.
+   `drmpeg/gr-atsc3` (GPL-3.0) is the transmit-side reference if a lab signal is needed;
+   `nekohkr/danttoUHD` (**MIT**) converts 3.0 to MPEG-2 TS for legacy tooling.
+5. **Log every alert end-to-end**: received from IDAP, validated, geo-matched, rendered, emitted,
+   confirmed off-air. In a plane with a national false-alert incident on record, the log is the
+   deliverable the client's regulator will ask for.
+
+**⚠️ Verify before proposing:** full commercial TV 3.0 rollout status was **not confirmed** in this
+pass. Ask the broadcaster where they are between experimental and commercial transmission.
+
+## Pattern 96 — The alert authentication and verification boundary (build, because the open version died in 2015)
+
+**Why:** **ETSI TS 102 900** states that cell broadcast gives the device **no way to authenticate**
+that an alert is genuine.† In **June 2026** attackers breached Brazil's emergency alert system and
+sent **millions of false "extreme" alerts**.† The only open project that authenticated and signed CAP
+alerts — `CAPTools/CAPCollector`, **BSD-3-Clause** — **died 2015-06-02**. One library in the entire
+plane mentions XML signatures and it has **0★**. This is a build, and the justification is primary.
+
+**Wiring:**
+
+1. **Make provenance a first-class field, not a log line.** Every ingested alert gets: source feed,
+   transport, signature present/absent, signature valid/invalid/unverifiable, signer identity,
+   receipt time, and the originator's claimed authority. **"Unverifiable" must be a distinct state
+   from "invalid"** — in this plane most real alerts arrive unsigned, and conflating the two either
+   blocks genuine warnings or waves through forged ones.
+2. **Validate what can be validated.** XML-DSig on CAP where present (`cB-Sigma/cap`, Apache-2.0);
+   CAP profile conformance (`google/cap-library` is **archived** — vendor the validation logic, do
+   not depend on the repo); cross-source corroboration where the same hazard appears on an
+   independent feed (`seevee/cap_alerts`, **MIT**, already normalises NWS/ECCC/MeteoAlarm/BoM/DWD).
+3. **Corroborate against detection, not just against another feed.** `xspanger3770/GlobalQuake`
+   (**MIT**, 408★) and `openeew/openeew` (**Apache-2.0**, Linux Foundation/Grillo/IBM) give an
+   independent physical signal for seismic events: an alert with no corresponding detection is a
+   question worth raising before air.
+4. **Two separate policies, written down.** *Display* policy (what reaches air, and with what
+   provenance badge) and *escalation* policy (what wakes a human). A low-confidence alert is a
+   newsroom decision, not an automation decision.
+5. **Never originate.** This component authenticates, corroborates and evidences. The send stays with
+   the authorised originator. Say so in the architecture document, because the failure mode here is
+   regulatory, not technical.
+
+**Revival option worth proposing explicitly:** `CAPTools/CAPCollector` is **BSD-3-Clause**, which
+means the eleven-year-old implementation of exactly this problem can be lawfully revived and
+contributed back. That is a credible open-source-citizenship story attached to a real client need —
+rare in this KB, where most dead code is unlicensed.
+
+## Pattern 97 — The three-question qualifier for any alerting engagement (ask before scoping anything)
+
+**Why:** This plane punishes an architecture chosen before the client's legal position is known. All
+three questions are cheap, and each one eliminates a whole class of proposal.
+
+1. **"Are you an authorised originator, or a disseminator?"** Origination requires a state-issued
+   credential and mandate — an IPAWS COG in the US, IDAP authorisation in Brazil, the national
+   competent authority under **EECC Art.110** in the EU. **No licence or platform choice changes
+   this.** If they are a disseminator, every "issue an alert" feature is out of scope, permanently.
+2. **"Which obligation are you actually under, and what evidence does it require?"** In the US it is
+   now largely a **cybersecurity** obligation on the program chain (deadline **2026-09-29**, already
+   passed → pattern 94). In the EU, Art.110 is **technology-neutral** and **BEREC** publishes
+   guidelines on assessing *effectiveness* — so the deliverable is a reach measurement, and a World
+   Bank assessment records **Malta** as not yet meeting its obligations, which is the proof that
+   non-compliance is real.† In Brazil it is carriage conformance to a **published June 2026
+   guideline** (→ pattern 95). **The same plane, three different deliverables.**
+3. **"What do you do with an alert you cannot authenticate?"** If there is no answer, pattern 96 is
+   the engagement. If there is an answer, ask to see the log — and if the log does not distinguish
+   *unverifiable* from *invalid*, pattern 96 is still the engagement.
+
+**Then the licence gate, which in this plane is unusually tight.** Of everything measured: the one
+permissive demodulator is `cbs228/sameold` (**Apache-2.0**); the one permissive platform is
+`sahana/eden` (**MIT**, 37★); the one permissive signature-capable library is `cB-Sigma/cap`
+(**Apache-2.0**, 0★). Everything else operational is **AGPL-3.0, GPL-3.0, MPL, unlicensed or
+archived**. Design the service boundary in the proposal, not at delivery.
+
+**⛔ And the sentence to delete from any deck in this plane:** *"an open-source alerting stack."*
+There isn't one. There is a free format, a healthy sensor layer, a hobbyist receive layer, a dead
+signing server, and an obligation the client cannot delegate.

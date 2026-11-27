@@ -3725,3 +3725,143 @@ under whose terms** — that is the one question in this plane that cannot be an
   the archived repo as a live dependency.
 - **Dante has no open implementation.** AES67 (`aes67-linux-daemon`, GPL-3.0) is the open path for
   audio-over-IP; Dante remains proprietary to Audinate. State this before promising audio transport.
+
+## The device, TV-app & client-playback plane — measured 2026-11-27 (pass 32)
+
+Added 2026-11-27 (pass 32). All rows verified this date: existence via `git ls-remote`, stars /
+last-push / SPDX via GitHub `search/repositories`, and **licence read from the actual file wherever
+the API returned `NOASSERTION` or `NONE`**. 71 slugs probed, 58 resolve.
+
+### 1. The client playback layer — permissive, enormous, and pushed this week
+
+| Repo | Licence | Stars | Last push | Why it matters |
+|---|---|---|---|---|
+| [videojs/video.js](https://github.com/videojs/video.js) | **Apache-2.0** (API said `NOASSERTION`; `main/LICENSE`, 870 B, read 2026-11-27) | 40,260★ | 2026-11-26 | Now **"Video.js v10 — media player framework for HTML and React"**. The framework, not just a player. |
+| [video-dev/hls.js](https://github.com/video-dev/hls.js) | **Apache-2.0** (API said `NOASSERTION`; `master/LICENSE`, 1,338 B, © Dailymotion) | 17,068★ | 2026-11-23 | The HLS client of record on the open web. |
+| [shaka-project/shaka-player](https://github.com/shaka-project/shaka-player) | Apache-2.0 | 8,290★ | 2026-11-26 | DASH **and** HLS in one client, with EME/DRM. The default choice when a client needs both. |
+| [Dash-Industry-Forum/dash.js](https://github.com/Dash-Industry-Forum/dash.js) | **BSD-3-Clause** (API said `NOASSERTION`; `master/LICENSE.md`, 1,785 B) | 5,555★ | 2026-11-26 | The DASH *reference* client. Carries the L2A and LoL+ low-latency ABR algorithms. |
+| [sampotts/plyr](https://github.com/sampotts/plyr) | MIT | 29,977★ | 2026-10-21 | ⚠️ **Its own description now reads "Deprecated in favour of Video.js 10; security updates only."** 30,000 stars in maintenance-only. **Do not start a 2027 build here.** |
+| [muxinc/media-chrome](https://github.com/muxinc/media-chrome) | MIT | 2,776★ | 2026-11-12 | Web components for player *controls*, player-engine agnostic. The right skin layer over any of the above. |
+| [androidx/media](https://github.com/androidx/media) | Apache-2.0 | 3,094★ | 2026-11-26 | **Jetpack Media3 — this is where ExoPlayer lives now.** The Android TV / Fire TV playback engine. |
+| [google/ExoPlayer](https://github.com/google/ExoPlayer) | Apache-2.0 | 21,935★ | 2025-12-23 | ⚠️ **Deprecated and stale by its own description**, last push ~11 months. 21,935 stars pointing at a dead door. Use `androidx/media`. |
+| [clappr/clappr](https://github.com/clappr/clappr) | BSD-3-Clause | 7,543★ | 2026-11-26 | Extensible plugin-oriented HTML5 player — **built and still maintained by Globo (Brazil)**. See the LATAM placement in `intel/market.md`. |
+| [Novage/p2p-media-loader](https://github.com/Novage/p2p-media-loader) | Apache-2.0 | 1,738★ | 2026-11-22 | P2P-assisted delivery for live and VOD; plugs into hls.js/shaka. The only open lever on egress cost in this list. |
+| [shaka-project/shaka-packager](https://github.com/shaka-project/shaka-packager) | **BSD-3-Clause** (API said `NOASSERTION`; `main/LICENSE`, 3,167 B, © Google) | 2,673★ | 2026-11-04 | Packaging/DRM origin side. Low latency is **its** job, not the player's. |
+| [axiomatic-systems/Bento4](https://github.com/axiomatic-systems/Bento4) | ⛔ **Dual-licence, terms NOT in the repository** | 2,530★ | 2026-11-22 | See the licence finding below. |
+
+**The four core clients alone hold 71,173 stars, and all four were pushed within four days of this
+pass.** This layer is not a risk; it is the most durable permissive infrastructure in the whole KB.
+
+### 2. The TV application framework layer — permissive, maintained, and **~50× smaller**
+
+| Repo | Licence | Stars | Last push | Platform |
+|---|---|---|---|---|
+| [react-native-tvos/react-native-tvos](https://github.com/react-native-tvos/react-native-tvos) | MIT | 1,432★ | 2026-11-24 | **Apple TV + Android TV** from one React Native codebase. The largest single entry in this layer. |
+| [enactjs/enact](https://github.com/enactjs/enact) | Apache-2.0 | 347★ | 2026-11-26 | **LG webOS' official React-based app framework.** Pushed the day before this pass. |
+| [lightning-js/blits](https://github.com/lightning-js/blits) | Apache-2.0 | 117★ | 2026-11-26 | **Lightning 3 — the active successor to `rdkcentral/Lightning`.** See the correction below. |
+| [ConnectSDK/Connect-SDK-Android](https://github.com/ConnectSDK/Connect-SDK-Android) | Apache-2.0 | 327★ | 2024-03-19 | LG's second-screen/cast discovery SDK. ⚠️ ~2.7 years dormant. |
+| [Samsung/Wits](https://github.com/Samsung/Wits) | Apache-2.0 | 125★ | 2026-05-12 | **Samsung's own tool for Tizen web apps: hot-reload JS/CSS without reinstalling.** The single biggest quality-of-life win in Tizen development. |
+| [interfaced/zombiebox](https://github.com/interfaced/zombiebox) | MIT | 113★ | 2025-09-07 | Strongly-typed JS Smart TV framework with built-in D-pad navigation; Tizen + webOS. ⚠️ ~14 months dormant. |
+| [rdkcentral/rdkservices](https://github.com/rdkcentral/rdkservices) | Apache-2.0 | 44★ | 2026-11-18 | RDK operator-box services (the Thunder plugin set). |
+| [rdkcentral/ThunderJS](https://github.com/rdkcentral/ThunderJS) | Apache-2.0 | 6★ | 2025-09-25 | JS client for Thunder nano-services. 6 stars under the operator STB stack. |
+| [webosose/build-webos](https://github.com/webosose/build-webos) | **Apache-2.0 declared in README only — no licence file** | 732★ | 2025-04-01 | webOS Open Source Edition build layer. See licence finding 3. |
+| [raphamorim/react-tv](https://github.com/raphamorim/react-tv) | MIT | 2,033★ | 2022-03-30 | ⛔ **ARCHIVED.** 2,033 stars, dead 4.7 years. Listed so nobody proposes it. |
+| [mautilus/sdk](https://github.com/mautilus/sdk) | BSD-3-Clause | 102★ | 2017-05-29 | ⛔ **Dead 9.5 years.** The once-standard Smart TV SDK. Same warning. |
+
+**📌 A correction to this KB's own record.** `verticals/solutions.md` (pass 29) calls
+`rdkcentral/Lightning` *"the only open answer to 'and how does it run on the operator's box?'"*.
+Measured on 2026-11-27, that claim is wrong twice over:
+1. **It is no longer the current answer.** `rdkcentral/Lightning` (204★) was last pushed 2026-10-12;
+   **`lightning-js/blits` (117★, Apache-2.0) is "The Lightning 3 App Development Framework"** and was
+   pushed 2026-11-26. A 2027 build should target Blits. The KB had no row for it.
+2. **It was never the only one.** `enact` (LG's official framework, 347★, pushed this week),
+   `react-native-tvos` (1,432★) and `zombiebox` (113★) are all open and all permissive.
+
+**Excluding `react-native-tvos`, the live TV-framework layer holds ~1,421 stars against the player
+layer's 71,173 — a ratio of about 50:1.** Rendering video is a solved, well-funded open problem.
+Rendering an *application* on the device the video plays on is not.
+
+### 3. Telemetry, steering and the shared vocabulary layer
+
+| Repo | Licence | Stars | Last push | Note |
+|---|---|---|---|---|
+| [streaming-video-technology-alliance/common-media-library](https://github.com/streaming-video-technology-alliance/common-media-library) | Apache-2.0 | 86★ | 2026-11-23 | **The cross-player JS media library (CMCD/CMSD helpers).** The most active genuinely-shared code in this layer. |
+| [cta-wave/common-media-client-data](https://github.com/cta-wave/common-media-client-data) | ⚠️ **No licence file** (README control = 200) | 35★ | 2026-09-10 | **CMCD (CTA-5004)** — the spec repo for the per-session telemetry that any multi-CDN switching decision depends on. |
+| [cta-wave/common-media-server-data](https://github.com/cta-wave/common-media-server-data) | ⚠️ **No licence file** | 25★ | 2025-05-28 | CMSD, the server-side counterpart. |
+| [streaming-video-technology-alliance/common-media-client-data-custom-keys](https://github.com/streaming-video-technology-alliance/common-media-client-data-custom-keys) | MIT | 2★ | 2026-09-10 | The registry of custom CMCD keys. 2 stars. |
+| [streaming-video-technology-alliance/OC-API](https://github.com/streaming-video-technology-alliance/OC-API) | MIT | 4★ | 2026-07-22 | Open Caching API (CDNI-based: RFC 8006/8007/8008/8804 + SVTA extensions). |
+| [cta-wave/R4WG20-QoE-Metrics](https://github.com/cta-wave/R4WG20-QoE-Metrics) | ⚠️ **No licence file** | 28★ | **2019-03-04** | ⛔ **The industry's QoE metrics definition repo has been untouched for 7.7 years.** |
+| [streaming-video-technology-alliance/ott_device_matrix](https://github.com/streaming-video-technology-alliance/ott_device_matrix) | ⚠️ **No licence file** | 8★ | 2025-03-17 | **The OTT device capability matrix** — the dataset every CTV build actually needs, 8 stars, no licence, 20 months stale. |
+
+**⛔ Measured gap, stated as a gap: there is no open-source multi-CDN steering implementation.**
+Four slugs probed and failed: `streaming-video-technology-alliance/content-steering`,
+`streaming-video-technology-alliance/open-caching-api`,
+`Dash-Industry-Forum/dash.js-content-steering`, `muxinc/mux-stats-sdk-hlsjs`. The SVTA describes a
+client-side multi-CDN switcher library and an open-source content-steering framework in its project
+pages and an IBC paper, but **no public repository for either was locatable on 2026-11-27**. What
+*is* public is the vocabulary (CMCD/CMSD/OC-API above) and the per-player steering support inside
+`hls.js`/`dash.js`/`shaka-player` themselves. **The steering brain is the unbuilt product; the
+nervous system is already standardised and permissive.**
+
+### 4. The device certification layer — **51 stars, and the judgment component is licence-blocked**
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [cta-wave/dpctf-tests](https://github.com/cta-wave/dpctf-tests) | **BSD-3-Clause** (API said `NOASSERTION`; `master/LICENSE.md`) | 3★ | 2026-11-09 | The device playback conformance test pages. |
+| [cta-wave/dpctf-test-runner](https://github.com/cta-wave/dpctf-test-runner) | **BSD-3-Clause** (API said `NOASSERTION`) | 0★ | 2026-11-09 | The runner (an extended `web-platform-tests` runner). **Zero stars.** |
+| [cta-wave/dpctf-deploy](https://github.com/cta-wave/dpctf-deploy) | **BSD-3-Clause** (API said `NOASSERTION`) | 6★ | 2026-09-07 | Deployment harness tying the components together. |
+| [cta-wave/device-observation-framework](https://github.com/cta-wave/device-observation-framework) | ⛔ **Apache-2.0 + COMMONS CLAUSE** | 1★ | 2026-10-14 | **Renders the pass/fail verdict.** See finding 1. |
+| [cta-wave/Test-Content-Generation](https://github.com/cta-wave/Test-Content-Generation) | BSD-3-Clause | 5★ | 2026-11-20 | Generates the CMAF test content. |
+| [cta-wave/Test-Content](https://github.com/cta-wave/Test-Content) | BSD-3-Clause | 4★ | 2026-10-15 | The generated test vectors. |
+| [cta-wave/mezzanine](https://github.com/cta-wave/mezzanine) | BSD-3-Clause | 3★ | 2024-05-29 | Annotated mezzanine source content. |
+| [cta-wave/WMAS](https://github.com/cta-wave/WMAS) | `NOASSERTION` | 20★ | 2026-11-25 | Web Media API Snapshot — the browser-capability baseline a TV must meet. Active. |
+| [cta-wave/WMAS-deploy](https://github.com/cta-wave/WMAS-deploy) | BSD-3-Clause | 1★ | 2026-11-25 | Its deployment harness. |
+
+**The entire open device-certification stack holds 51 stars** — against 71,173 for the players it
+certifies. **A ratio of ~1,400:1.** And the HbbTV Association's own conformance test suite is **not
+open at all**: it is licensed only to member companies and tracked in a members-only SVN repository.
+
+### Four licence findings from this pass, all reusable across the twelve industries
+
+**1. ⛔ COMMONS CLAUSE — and it is the first licence in this KB that names consulting as the
+prohibited use.** `cta-wave/device-observation-framework`'s `LICENSE` file is Apache-2.0 **plus** a
+Commons Clause rider. Verbatim: the grant *"will not include ... the right to Sell the Software"*,
+where **"Sell"** means providing to third parties *"for a fee or other consideration (including
+without limitation fees for hosting or consulting/ support services related to the Software), a
+product or service whose value derives, entirely or substantially, from the functionality of the
+Software."* Licensor: Consumer Technology Association. Contributor: Resillion UK Limited.
+→ **A Globant "device certification as a service" offering built on this repo is prohibited by its
+licence**, even though every sibling repo in the same org is BSD-3. GitHub's API reports it as
+`NOASSERTION`, and **no SPDX field, badge or SBOM scan of the dependency tree will surface this** —
+the clause is prose in a file. **CI rule: grep every incoming `LICENSE` for `commons clause`.** A
+sweep of the four nearest sibling repos found 0 further hits, so this is targeted, not org-wide.
+
+**2. ⛔ THE LICENCE MAY NOT BE IN THE REPOSITORY AT ALL.** `axiomatic-systems/Bento4` (2,530★,
+pushed 2026-11-22) has **no licence file under any of the ten names probed, on either branch**. Its
+README says only: *"The library is Open Source, with a dual-license model. You can find out more
+about the license on the About Page."* The terms live on `bento4.com`, which **this session's
+network policy cannot resolve**, so this KB does **not** record which open licence applies.
+→ This is a worse case than pass 8's compilation-licence finding (`chromaprint`): there, the terms
+were at least *in* the repo. Here the repository is a pointer to a web page. **Do not let a client
+assume GPL, and do not let a procurement review pass this on the basis of "it's open source".**
+Resolve it against the vendor's page before any Bento4 dependency ships.
+
+**3. The README can be the licence.** `webosose/build-webos` (732★) returns `NONE` from the API and
+has no licence file, but its README carries the full Apache-2.0 grant **and the literal line
+`SPDX-License-Identifier: Apache-2.0`**. The project *is* Apache-2.0; the file is simply absent.
+→ Confirms and extends the pass-8 rule: **a 404 on the raw licence channel is never, by itself,
+evidence that a licence is missing.** Control the probe with `README.md` (it returned 200 for all
+three repos here) and then *read it*.
+
+**4. A Markdown heading defeats GitHub's licence detector.** All three `dpctf-*` repos report
+`NOASSERTION` purely because their `LICENSE.md` opens with `# The 3-Clause BSD License` instead of
+the bare text. They are plain BSD-3-Clause.
+→ **`NOASSERTION` is not a licence finding; it is a prompt to read the file.** This pass resolved
+eight such cases and every one turned out to be a standard permissive licence — except finding 1,
+which is the reason you have to actually look.
+
+**⚠️ And one list that cannot be reused:** `vitalets/awesome-smart-tv` (1,480★, pushed 2026-11-09)
+is the best index of this plane in existence and has **no licence file and no licence statement in
+its README** — probed on 2026-11-27, README control 200. Default copyright applies, so it is
+**read-only research input**; do not vendor it, fork it into a client deliverable, or ship its text.
+Contrast `tugkanboz/awesome-ai-testing`, which is CC0-1.0 and genuinely reusable.

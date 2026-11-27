@@ -9,6 +9,65 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 32: the device, TV-app & client-playback plane (**the first plane in this KB whose agent layer is real and whose *judgment* component carries a licence that names consulting as the prohibited use**)
+
+Measured 2026-11-27. 71 repo slugs probed, 58 resolve. This is the plane the KB had no words for:
+before this pass the eight files said `HbbTV` **0** times, `Roku` **0** times, `multi-CDN` **0**
+times, `encoding ladder` **0** times, `geoblock` **0** times — while saying `ATSC` 53 times and
+`playout` 85 times. **Transmission was covered; the device it transmits to was not.**
+
+**The agent layer is real — and that is the news, because ten of the last twelve planes had none.**
+
+| Agent | Licence | Stars | Last push | Created |
+|---|---|---|---|---|
+| [takahirom/arbigent](https://github.com/takahirom/arbigent) | Apache-2.0 | 657★ | **2026-11-27** | 2024-12-31 |
+| [mozarkai/optics-framework](https://github.com/mozarkai/optics-framework) | Apache-2.0 | 104★ | 2026-11-26 | 2025-03-31 |
+| [Braggiouy/ctv-bridge](https://github.com/Braggiouy/ctv-bridge) | MIT | 12★ | 2026-11-25 | 2025-11-03 |
+| [skdonthi/tv-mcp](https://github.com/skdonthi/tv-mcp) | MIT | 6★ | 2026-08-05 | **2026-08-03** |
+| [Ticklect/tvdoctor](https://github.com/Ticklect/tvdoctor) | **AGPL-3.0** | 3★ | 2026-11-23 | **2026-08-23** |
+
+**TV-specific agent stars: 125.** Arbigent's 657 are general mobile/web testing that reaches TV.
+Three of the five were created in 2026; two of those in a single month (August).
+
+**The finding that makes this plane different from every other one measured.** This KB has recorded
+eleven times that formal work gets open implementations and judgment work gets none. This plane
+holds **both halves at once**, and the licence of the judgment half states the boundary explicitly:
+
+- **Driving a TV app is formal** — a D-pad has five buttons, focus either moved or it did not — so
+  five agents exist. `optics-framework`'s OCR and image matching exist *because* TV UIs expose no
+  accessibility tree; recovering that structure is mechanical, so someone automated it.
+- **Deciding whether playback was correct is judgment**, and the one open component that renders
+  that verdict — [`cta-wave/device-observation-framework`](https://github.com/cta-wave/device-observation-framework)
+  (1★) — is **Apache-2.0 + Commons Clause**: its grant excludes providing, for a fee, *"a product or
+  service whose value derives, entirely or substantially, from the functionality of the Software"*,
+  and it names **"fees for hosting or consulting/ support services"** as that. Licensor: Consumer
+  Technology Association. **This is the first licence in the KB that prohibits the Globant business
+  model in plain words** — not copyleft to engineer around, not a BSL clock to wait out.
+
+So the gradient, measured in stars, by how much judgment each layer carries:
+
+| Layer | What it decides | Stars | Shape |
+|---|---|---|---|
+| Players (`video.js` 40,260 + `hls.js` 17,068 + `shaka-player` 8,290 + `dash.js` 5,555) | nothing — it decodes | **71,173** | Apache/BSD, all pushed within 4 days |
+| TV app frameworks (`enact`, `blits`, `zombiebox`, RDK) excl. `react-native-tvos` | layout, focus | **~1,421** | Apache/MIT, maintained |
+| Regional broadcast middleware (ORB, HbbTV, DVB-I, Hybridcast, Ginga, openBA) | territory conformance | **432** | MIT-heavy, **half of it dormant** |
+| Device certification (`dpctf-*`, WAVE, `ott_device_matrix`) | **pass / fail** | **51** | BSD-3 — except the verdict, which is Commons-Claused |
+
+**~1,400:1 from decode to verdict.** The closer a component gets to saying "this device is
+certified", the less open code exists — and at the exact end point, the licence turns commercial.
+
+**Two agent-layer cautions for a client engagement.** `tvdoctor` is **AGPL-3.0** and is an MCP
+server: hosting it for a client is a network-service use that triggers source provision — fine
+internally, a deliberate decision externally. And `tv-mcp` + `ctv-bridge` hold **18 stars between
+them**; absorb them as reference code, do not pin them as dependencies.
+
+**What was looked for and not found (an informed gap, not silence):** no AI agent anywhere in this
+plane optimises **ABR ladders or QoE** — searched explicitly, and every result was either a generic
+app-test tool or a vendor blog. The QoE *vocabulary* exists and is standardised
+([`cta-wave/R4WG20-QoE-Metrics`](https://github.com/cta-wave/R4WG20-QoE-Metrics), 28★ — **untouched
+since 2019-03-04, 7.7 years**). Nobody has put an agent on top of it. That is the clearest unbuilt
+agent product this pass found.
+
 ## 2026-11-27 — pass 31: live-event show control (**the whole agent layer of this plane is eight repos born in 2026 holding ~38 stars, and one of them paywalls the write path**)
 
 Gap grep first. ~90 terms; the zero cluster was `DMX`, `sACN`, `Art-Net`, `GDTF`, `MVR`, `LTC`,

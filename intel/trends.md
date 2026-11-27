@@ -3261,3 +3261,102 @@ Second, the **agent opportunity is on the inventory side**: E1.33/RDMnet makes a
 configurable over IP, it is Apache-2.0, and nothing in the eight-project agent layer uses it. An agent
 that reads what is *in* a rig and reasons about it has a permissive substrate from the incumbent and
 no competition. See `compose/patterns.md` pattern 31.2.
+
+## Pass 32 (2026-11-27) — the device, TV-app & client-playback plane: what is actually changing
+
+## 47. A licence can forbid *consulting* by name — the worst licence finding in this KB for Globant specifically
+
+Pass 26 recorded licences that collide with DRM; pass 31 recorded one that forbids modification.
+This pass found the one that matters most to a services business.
+[`cta-wave/device-observation-framework`](https://github.com/cta-wave/device-observation-framework)
+(1★, pushed 2026-10-14) — the component that turns playback observations into a **pass/fail
+verdict** — is Apache-2.0 **plus a Commons Clause** rider. Its grant excludes *"the right to Sell
+the Software"*, and defines "Sell" as providing to third parties *"for a fee or other consideration
+(including without limitation fees for hosting or consulting/ support services related to the
+Software), a product or service whose value derives, entirely or substantially, from the
+functionality of the Software."* Licensor: **Consumer Technology Association**. Contributor:
+**Resillion UK Limited**, a commercial test house.
+
+Every licence trap this KB has recorded until now could be engineered around: AGPL by not hosting,
+BSL by waiting out the clock, Llama by checking the acceptable-use list, GPL by not linking. **This
+one has no engineering answer** — the prohibited act is *billing a client for a service built on
+it*, which is the business. The surrounding repos (`dpctf-tests`, `dpctf-test-runner`,
+`dpctf-deploy`, `Test-Content*`, `mezzanine`) are all plain BSD-3; a sweep of four siblings found
+**zero** further Commons Clause hits. So this is not an org policy — **it is a deliberate fence
+around the verdict**, placed by a standards body with a test house as contributor.
+**Operational rule for all twelve industries: grep every incoming `LICENSE` for `commons clause`.**
+No SPDX field, licence badge or source-tree SBOM scan can see a prose rider.
+
+## 48. The open-source gradient now has a measured number: ~1,400 to 1 from decoding to deciding
+
+This KB has recorded eleven times that formal work attracts open implementations and judgment work
+does not. This plane lets the law be *measured*, because all four layers sit in one supply chain:
+
+| Layer | What it decides | Stars | Licence shape |
+|---|---|---|---|
+| Players (`video.js`, `hls.js`, `shaka-player`, `dash.js`) | nothing — it decodes | **71,173** | Apache-2.0 / BSD-3, all pushed within 4 days of this pass |
+| TV app frameworks (`enact`, `blits`, `zombiebox`, RDK; excl. `react-native-tvos`) | layout and focus | **~1,421** | Apache-2.0 / MIT, maintained |
+| Regional broadcast middleware (ORB, HbbTV, DVB-I, Hybridcast, Ginga, openBA) | territory conformance | **432** | MIT-heavy, **half dormant 1–8 years** |
+| Device certification (`dpctf-*`, WAVE, `ott_device_matrix`) | **pass / fail** | **51** | BSD-3 — except the verdict, which is Commons-Claused |
+
+**Decoding a video is 1,400× better served by open source than deciding whether it played
+correctly.** And at the exact point where judgment becomes a billable verdict, the licence turns
+commercial. This is the cleanest confirmation the content law has had, and the first one where the
+gradient is a single number from one plane's own repository list.
+
+## 49. Star count has become actively misleading — two deprecations prove it in one plane
+
+Two of the four largest repos in this plane are dead or dying, and both outrank their own successors:
+
+- [`sampotts/plyr`](https://github.com/sampotts/plyr) (MIT, **29,977★**) now describes itself as
+  *"Deprecated in favour of Video.js 10; security updates only."* The beneficiary,
+  [`videojs/video.js`](https://github.com/videojs/video.js) (40,260★), has rebranded from "player"
+  to **"Video.js v10 — media player framework for HTML and React."**
+- [`google/ExoPlayer`](https://github.com/google/ExoPlayer) (**21,935★**) is *"deprecated and
+  stale"* by its own description, last pushed 2025-12-23. The live engine is
+  [`androidx/media`](https://github.com/androidx/media) (**3,094★**) — **7× fewer stars, and it is
+  the only correct answer** for Android TV / Fire TV.
+
+Add the archived [`react-tv`](https://github.com/raphamorim/react-tv) (2,033★, dead 4.7 years) and
+[`mautilus/sdk`](https://github.com/mautilus/sdk) (102★, dead 9.5 years), and **~54,000 stars in
+this plane point at code nobody should start on in 2027.** → Read the `description` field and
+`pushed_at`, never the star count. A proposal citing ExoPlayer or Plyr today is citing a tombstone,
+and it will be read as such by any client engineer.
+
+## 50. Every region runs a different interactive-TV stack, and each ships its own MIT reference client
+
+The most Globant-relevant structural fact in this plane: **there is no global TV application
+target.** EMEA runs **HbbTV 2.0.5** (published by the HbbTV Association 2026-03-02; ETSI TS 102 796
+V1.8.1, September 2026) with **DVB-I** service lists; North America runs **ATSC 3.0 / NextGen TV**;
+Japan runs **Hybridcast** (IPTV Forum Japan, STD-0010/0011); Brazil runs **TV 3.0 / DTV+** —
+ATSC 3.0's physical layer with **Ginga** as the application layer. Four regions, four stacks, four
+app models.
+
+And each one published an open reference implementation, nearly all **MIT**: ORB and the HbbTV
+Reference Application (EMEA), the DVB-I Reference Client (EMEA/global), NHK's four Hybridcast
+Connect SDKs (APAC), Sinclair's OpenBA (NA), TeleMidia's Ginga (LATAM, GPL-2.0). Standards bodies
+license permissively because they want adoption. **But six of the twelve have not been pushed in
+over a year, and the NA and APAC artefacts are 4–5 years cold.** → The regional work is
+*specification compliance*, not SDK integration, and it is **repeated per region** rather than
+abstracted. That is billable scope, and it is the reason a pan-regional CTV engagement cannot be
+quoted as one build.
+
+## 51. The steering brain is unbuilt, the telemetry vocabulary is standardised, and the metrics spec has been dormant since 2019
+
+Everything needed to optimise delivery is specified and permissive: **CMCD** (CTA-5004,
+[35★](https://github.com/cta-wave/common-media-client-data), **no licence file**), **CMSD** (25★, no
+licence file), SVTA's [`common-media-library`](https://github.com/streaming-video-technology-alliance/common-media-library)
+(Apache-2.0, 86★, pushed 2026-11-23), [`OC-API`](https://github.com/streaming-video-technology-alliance/OC-API)
+(MIT, 4★), and content-steering support inside hls.js / dash.js / shaka-player themselves. dash.js
+v5 has begun emitting **CMCD v2** keys (`ltc`, `msd`), and a shaka-player PR implements the CMCD
+parameters of **ISO/IEC 23009-1:2026 Annex K** so a DASH manifest can configure reporting — that PR
+was **open, not merged**, when checked.
+
+What does not exist: **any public open-source multi-CDN steering implementation.** Four slugs
+probed, four 404s. The SVTA's own pages and an IBC paper describe a client-side switcher library and
+an open steering framework; neither has a locatable public repo as of 2026-11-27. Meanwhile
+[`cta-wave/R4WG20-QoE-Metrics`](https://github.com/cta-wave/R4WG20-QoE-Metrics) (28★) — the
+industry's QoE metrics definition — **has not been touched since 2019-03-04, 7.7 years.**
+→ **The nervous system is standardised and free; the brain is a product nobody has shipped openly.**
+An agent that consumes CMCD and decides steering has a permissive substrate, a dormant metrics spec
+to revive, and no open competition. See `compose/patterns.md` pattern 32.2.

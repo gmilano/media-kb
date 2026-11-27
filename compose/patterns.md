@@ -4935,3 +4935,150 @@ licence file, the other reports `NOASSERTION`. The appetite is local and already
 is a reason to engage the authors — **contribute a licence upstream, or rebuild the idea on QLC+. Do
 not fork unlicensed code silently**; with no grant, default copyright applies and all rights are
 reserved.
+
+## Pattern 32.1 — The licence-clean CTV certification harness (and the one component you must replace)
+
+**The problem.** A client ships a streaming app to Samsung Tizen, LG webOS, Roku, Google TV, Apple
+TV, Fire TV, Vidaa and an operator STB. Each app store runs its own certification. Failures are
+device-specific, intermittent and reported as "it buffers on the 2021 models". They want this
+automated and they want Globant to run it as a service.
+
+**Why the obvious build is illegal.** The complete open stack exists —
+[`cta-wave/dpctf-tests`](https://github.com/cta-wave/dpctf-tests),
+[`dpctf-test-runner`](https://github.com/cta-wave/dpctf-test-runner),
+[`dpctf-deploy`](https://github.com/cta-wave/dpctf-deploy),
+[`Test-Content-Generation`](https://github.com/cta-wave/Test-Content-Generation),
+[`Test-Content`](https://github.com/cta-wave/Test-Content),
+[`mezzanine`](https://github.com/cta-wave/mezzanine) (all **BSD-3-Clause**, verified by reading
+`LICENSE.md` on 2026-11-27) — **except the component that produces the verdict.**
+[`cta-wave/device-observation-framework`](https://github.com/cta-wave/device-observation-framework)
+is **Apache-2.0 + Commons Clause**, and the clause names *"fees for hosting or consulting/ support
+services"* as prohibited "Sell"ing. **A paid Globant certification service built on it breaches its
+licence.** This is not a theoretical reading — it is the clause's own example list.
+
+**Wire it together.**
+1. **Harness:** `dpctf-deploy` + `dpctf-test-runner` + `dpctf-tests` (BSD-3). Serves conformance
+   pages to the device under test; BSD-3 permits commercial service use without condition.
+2. **Content:** `Test-Content-Generation` → `Test-Content`, from `mezzanine` sources (BSD-3). Gives
+   frame-accurate, annotated vectors — the only way a stall can be attributed rather than guessed.
+3. **Capability baseline:** [`cta-wave/WMAS`](https://github.com/cta-wave/WMAS) (20★, pushed
+   2026-11-25) for the Web Media API surface a TV must expose, plus
+   [`ott_device_matrix`](https://github.com/streaming-video-technology-alliance/ott_device_matrix)
+   (8★) as the per-device capability map. ⚠️ **`ott_device_matrix` has no licence file** — read it,
+   do not redistribute it; rebuild the matrix as client-owned data.
+4. **⛔ Observation / verdict — DO NOT USE `device-observation-framework` in a paid engagement.**
+   Build this layer yourself: it is the billable differentiator *and* the licence-blocked one, which
+   is not a coincidence. Implementation: capture playback with the client's own harness, derive
+   observations from the `mezzanine` annotations, and express pass/fail against
+   `R4WG20-QoE-Metrics`' definitions (28★, dormant since 2019 — **the vocabulary is free, the
+   judgment is yours**).
+5. **Drive the device:** [`mozarkai/optics-framework`](https://github.com/mozarkai/optics-framework)
+   (Apache-2.0, 104★) for Android TV / Tizen / webOS, with OCR + image-match locators because TV
+   UIs expose no accessibility tree. Add
+   [`takahirom/arbigent`](https://github.com/takahirom/arbigent) (Apache-2.0, 657★) for scenario
+   decomposition of D-pad flows.
+6. **Deploy/debug loop:** [`Braggiouy/ctv-bridge`](https://github.com/Braggiouy/ctv-bridge) (MIT,
+   12★) or [`skdonthi/tv-mcp`](https://github.com/skdonthi/tv-mcp) (MIT, 6★) to put the coding agent
+   in front of real Tizen/webOS hardware. Absorb as reference code — 18 stars combined.
+7. **Roku, separately:** [`rokucommunity/brighterscript`](https://github.com/rokucommunity/brighterscript)
+   + [`roku-deploy`](https://github.com/rokucommunity/roku-deploy) + [`roku-debug`](https://github.com/rokucommunity/roku-debug)
+   (all MIT, all pushed within a week of this pass). Roku OS is closed; this volunteer toolchain is
+   the entire open surface for a top-two US platform.
+
+**Licence gate before quoting.** `grep -ri "commons clause" */LICENSE*` across every dependency.
+Keep `tvdoctor` (**AGPL-3.0**) internal-only — it is an MCP server, so hosting it for a client
+triggers source provision; its deterministic D-pad exploration is worth having in-house.
+
+**What to sell.** Not "we automate certification" — the verdict logic is the asset. Sell
+**client-owned pass/fail criteria** plus the harness that feeds them, and the per-store submission
+evidence pack. The BSD-3 layers make the harness cheap; the Commons Clause is the reason the
+judgment layer is worth money.
+
+## Pattern 32.2 — The CMCD steering agent: the unbuilt product this plane is waiting for
+
+**The gap, measured.** There is **no public open-source multi-CDN steering implementation** (four
+slugs probed 2026-11-27, four 404s). But the entire input vocabulary is standardised and permissive,
+and the players already emit it.
+
+**Wire it together.**
+1. **Telemetry in:** enable **CMCD** in the player. `dash.js` v5 emits CMCD v2 keys (`ltc`, `msd`);
+   `shaka-player` has an open PR for the CMCD parameters of **ISO/IEC 23009-1:2026 Annex K**
+   (manifest-signalled configuration). Spec: [`cta-wave/common-media-client-data`](https://github.com/cta-wave/common-media-client-data)
+   (⚠️ no licence file — it is a spec to implement, not code to copy).
+2. **Parse and normalise:** [`streaming-video-technology-alliance/common-media-library`](https://github.com/streaming-video-technology-alliance/common-media-library)
+   (**Apache-2.0**, 86★, pushed 2026-11-23) — the cross-player CMCD/CMSD helpers. Custom keys via
+   [`common-media-client-data-custom-keys`](https://github.com/streaming-video-technology-alliance/common-media-client-data-custom-keys)
+   (MIT, 2★).
+3. **Server side:** CMSD ([`common-media-server-data`](https://github.com/cta-wave/common-media-server-data), 25★)
+   for origin/CDN hints, and [`OC-API`](https://github.com/streaming-video-technology-alliance/OC-API)
+   (**MIT**, 4★) if Open Caching is in play (CDNI: RFC 8006/8007/8008/8804 + SVTA extensions).
+4. **The agent — this is the product.** Consume per-session CMCD, score each CDN against QoE
+   definitions from [`R4WG20-QoE-Metrics`](https://github.com/cta-wave/R4WG20-QoE-Metrics) (28★,
+   **dormant 7.7 years**), and emit **HLS/DASH content-steering** responses. Steering *consumption*
+   is already supported in `hls.js`, `dash.js`, `shaka-player` and Media3 — **so the client side is
+   free and only the decision server is missing.**
+5. **Cost lever:** add [`Novage/p2p-media-loader`](https://github.com/Novage/p2p-media-loader)
+   (Apache-2.0, 1,738★) for peer-assisted delivery — the only open lever on egress in this plane.
+
+**Why it is defensible.** The standards are published, the players implement the client half, and
+the metrics spec has been unmaintained since 2019. Nobody has shipped the brain openly. ⚠️ Do not
+promise a bandwidth-saving number: the "35–45% from AV1 + per-title + AI preprocessing" figure in
+circulation is a vendor claim this KB could not verify. Measure on the client's own traffic first.
+
+## Pattern 32.3 — The four-region CTV app build (quote it as four builds, because it is)
+
+**The premise.** There is **no global TV application target.** A pan-regional launch means four
+interactive stacks, and the KB's own prior claim that `rdkcentral/Lightning` is "the only open
+answer" to on-device execution is wrong — Lightning 2 is in maintenance and **Lightning 3 is
+[`lightning-js/blits`](https://github.com/lightning-js/blits)** (Apache-2.0, 117★, pushed
+2026-11-26).
+
+| Region | Stack to target | Start from | Licence |
+|---|---|---|---|
+| **EMEA** | HbbTV 2.0.5 (ETSI TS 102 796 V1.8.1) + DVB-I service lists; **Operator Apps** | [`OpenRedButtonProject/orb`](https://github.com/OpenRedButtonProject/orb) (24★, pushed 2026-11-19) · [`DVBProject/DVB-I-Reference-Client`](https://github.com/DVBProject/DVB-I-Reference-Client) (74★) · [`HbbTV-Association/ReferenceApplication`](https://github.com/HbbTV-Association/ReferenceApplication) (90★) | **Apache-2.0 / MIT / MIT** |
+| **North America** | ATSC 3.0 / NextGen TV + the app-store platforms (Roku, Tizen, Fire TV, Google TV) | [`openBA-NextGenTV/OpenBA-NextGenTV`](https://github.com/openBA-NextGenTV/OpenBA-NextGenTV) (MIT, 15★, ⚠️ **dormant since 2022-09-21**) + the RokuCommunity MIT toolchain | **MIT** |
+| **APAC (Japan)** | Hybridcast (IPTVFJ STD-0010/0011) | [`nhkrd/hyconet4j`](https://github.com/nhkrd/hyconet4j) (15★) + [`nhkrd/antwapp4hc`](https://github.com/nhkrd/antwapp4hc) TV emulator (21★) ⚠️ **both dormant since 2021** | **MIT** |
+| **LATAM (Brazil)** | TV 3.0 / DTV+ — ATSC 3.0 physical layer, **Ginga** application layer, MPEG-H audio mandatory | [`TeleMidia/ginga`](https://github.com/TeleMidia/ginga) (53★, 2024-11-25) + [`clappr/clappr`](https://github.com/clappr/clappr) (BSD-3, 7,543★, Globo) | **GPL-2.0** ⚠️ + BSD-3 |
+
+**The shared layer (build once).** Player: `shaka-player` (Apache-2.0) or `hls.js` (Apache-2.0) on
+web/HbbTV targets, `androidx/media` (Apache-2.0 — **not ExoPlayer**) on Android TV / Fire TV.
+Controls: [`muxinc/media-chrome`](https://github.com/muxinc/media-chrome) (MIT, 2,776★).
+App shell: `blits` (Apache-2.0) for RDK/operator boxes, [`enactjs/enact`](https://github.com/enactjs/enact)
+(Apache-2.0, 347★) for webOS, [`react-native-tvos`](https://github.com/react-native-tvos/react-native-tvos)
+(MIT, 1,432★) for Apple TV + Android TV from one codebase.
+
+**⚠️ Two scoping warnings that decide whether this project is profitable.**
+1. **The Brazilian branch is GPL-2.0.** Ginga is the application layer of DTV+; a proprietary
+   deliverable that links it inherits GPL obligations. Keep Ginga-facing code in a separate process
+   and talk to it over IPC, or scope the Brazilian app as a distinct, differently-licensed artefact.
+2. **The regional reference implementations are specifications with code attached, not SDKs.** Six
+   of the twelve regional repos are over a year stale; the NA and APAC ones are 4–5 years cold.
+   Budget to **adopt and maintain** them. Do not put them on a dependency list and assume upstream
+   fixes will arrive.
+
+## Pattern 32.4 — The 20-minute licence gate for any CTV, player or device proposal
+
+Run this before a single estimate goes into a deck. It catches every trap this pass recorded.
+
+1. **`grep -ri "commons clause" **/LICENSE*`** on every dependency. One hit kills a paid-service
+   model. Known hit: `cta-wave/device-observation-framework`. (Known clean: all `dpctf-*`,
+   `Test-Content*`, `mezzanine`, SVTA `common-media-library`.)
+2. **Treat `NOASSERTION` / `NONE` as "unread", never as "unlicensed".** Eight cases this pass; all
+   eight resolved by reading the file. Probe `LICENSE`, `LICENSE.md`, `LICENSE.txt`, **`license.txt`
+   (lowercase)**, `COPYING`, **`COPYING.md`**, on `main` *and* `master`.
+3. **If no licence file resolves, read the README before concluding anything.** `webosose/build-webos`
+   carries its full Apache-2.0 grant and `SPDX-License-Identifier` in the README with no licence
+   file at all. Control the probe with `README.md`: a 200 there plus 404s on licence names means
+   **your filenames are wrong or the grant is elsewhere**, not that the project is unlicensed.
+4. **If the README points off-site, stop.** `axiomatic-systems/Bento4` (2,530★) says only
+   *"dual-license model… see the About Page"*. The terms are not in the repository. **Resolve them
+   against the vendor before shipping, and never let "it's open source" clear procurement.**
+5. **Check the `description` field and `pushed_at`, not the stars.** `plyr` (29,977★) is deprecated
+   into Video.js 10; `ExoPlayer` (21,935★) is "deprecated and stale"; `react-tv` (2,033★) is
+   archived; `mautilus/sdk` (102★) is 9.5 years dead. ~54,000 stars of tombstones in one plane.
+6. **Check whether the *list* you are citing is licensed.** `vitalets/awesome-smart-tv` (1,480★) has
+   no licence and no README statement — research input only. `tugkanboz/awesome-ai-testing` is
+   CC0-1.0 and reusable.
+7. **Confirm the conformance suite is obtainable at all.** The **HbbTV test suite is members-only**
+   (licensed to member companies, tracked in a members-only SVN). If the client needs certified
+   HbbTV output, membership or a registered test centre is a line item, not an assumption.

@@ -1790,3 +1790,70 @@ reviews in pre-vis, (4) the rig executes. The reviewable artefact in step 2–3 
   engineering with injury liability. See `repos/foundations.md`.
 - **Fixture data is registration-gated** (GDTF Share account, per-manufacturer terms). The platform is
   free; the data that makes it useful is not. Resolve this before quoting any live-event build.
+
+## The device, TV-platform & middleware tier — added 2026-11-27 (pass 32)
+
+Added 2026-11-27 (pass 32). These are the runnable systems on the *endpoint* side of the plane — the
+TV OS, the broadcast middleware and the reference clients a client engagement can actually start
+from and put an agentic layer on. All verified 2026-11-27; licences read from file where the GitHub
+API returned `NOASSERTION`/`NONE`.
+
+### The regional middleware — and this is the part that is **MIT, by design**
+
+Every region runs a *different* interactive-TV stack, each with its own open reference
+implementation. A pan-regional client needs all four; none of them was in this KB before this pass.
+
+| Platform | Repo | Licence | Stars | Last push | Region & role |
+|---|---|---|---|---|---|
+| **ORB (Open Red Button)** | [OpenRedButtonProject/orb](https://github.com/OpenRedButtonProject/orb) | **Apache-2.0** | 24★ | **2026-11-19** | **EMEA.** The only open-source HbbTV stack: JS + C++ over Android WebView/Chromium and RDK/WPE. Launched by Ocean Blue Software (2021); vendor claims it is the only mass-deployed open HbbTV solution. ⚠️ Production needs browser patches, platform integration and DRM — commercial support exists. |
+| **HbbTV Reference Application** | [HbbTV-Association/ReferenceApplication](https://github.com/HbbTV-Association/ReferenceApplication) | MIT | 90★ | 2026-03-03 | **EMEA.** The association's own reference app. MIT — unusually open for a broadcast body. |
+| **DVB-I Reference Client** | [DVBProject/DVB-I-Reference-Client](https://github.com/DVBProject/DVB-I-Reference-Client) | MIT | 74★ | **2026-11-17** | **EMEA/Global.** Built by Sofia Digital for the DVB Project. Back end generates/edits **service lists**; front ends are an **HbbTV OpApp** and an **Android PWA**. The single best starting point for an IP-linear channel product. |
+| **DVB-I Central Service Registry** | [DVBProject/DVB-I-Reference-CSR](https://github.com/DVBProject/DVB-I-Reference-CSR) | MIT | 14★ | 2025-09-23 | **EMEA/Global.** Service-list discovery registry — the piece that makes DVB-I work across territories. |
+| **Hybridcast Connect SDKs** | [nhkrd/hyconet4j](https://github.com/nhkrd/hyconet4j) (Java) · [nhkrd/antwapp4hc](https://github.com/nhkrd/antwapp4hc) (TV emulator) · [nhkrd/hyconet.js](https://github.com/nhkrd/hyconet.js) · [nhkrd/node-red-contrib-hyconet](https://github.com/nhkrd/node-red-contrib-hyconet) | **MIT** (all four) | 15★ / 21★ / 7★ / 7★ | 2021-11-17 / 2021-11-17 / 2020-09-29 / 2020-09-30 | **APAC (Japan).** NHK's own reference implementations of Hybridcast Connect (IPTVFJ STD-0010/0011, standardised Sep 2018). ⚠️ **All four dormant 5+ years** — see the warning below. |
+| **Ginga** | [TeleMidia/ginga](https://github.com/TeleMidia/ginga) | **GPL-2.0** | 53★ | 2024-11-25 | **LATAM (Brazil).** PUC-Rio's implementation of the Ginga standard (ITU-T H.761, ABNT NBR 15606). The application layer of Brazil's **TV 3.0 / DTV+**. ⚠️ GPL-2.0, and 2 years since last push. |
+| **OpenBA NextGen TV** | [openBA-NextGenTV/OpenBA-NextGenTV](https://github.com/openBA-NextGenTV/OpenBA-NextGenTV) | **MIT** | 15★ | **2022-09-21** | **North America.** Sinclair's open-sourced ATSC 3.0 broadcast application. ⚠️ **Dormant 4.2 years** — the NA region's only open broadcast-app artefact, and nobody has touched it. |
+| **node-hbbtv** | [fraunhoferfokus/node-hbbtv](https://github.com/fraunhoferfokus/node-hbbtv) | **LGPL-3.0** | 51★ | 2025-03-07 | **EMEA.** Fraunhofer FOKUS' feature-complete HbbTV 2.0 **companion-screen** implementation, incl. a polyfill for web apps. ⚠️ LGPL — dynamic linking is fine, static bundling is not. |
+| **HbbPlayer** | [Samsung/HbbPlayer](https://github.com/Samsung/HbbPlayer) | MIT | 61★ | **2018-06-26** | **EMEA.** Samsung's HbbTV media player, open-sourced then abandoned 8.4 years ago. Reference only. |
+
+**⚠️ The pattern to brief a client on: the regional middleware is permissive and dormant.** Nine of
+the twelve repos above are MIT or Apache-2.0 — standards bodies license openly because they want
+adoption. But **six of them have not been pushed in over a year, and three are 4–8 years cold.**
+The NA artefact (`openBA`) and the whole APAC Hybridcast toolchain are the extreme cases. These are
+**specifications with reference code attached, not maintained products.** Budget to adopt and
+maintain the code, not to depend on it — and read each one as evidence of what the standard requires
+rather than as a supported SDK.
+
+### The TV operating systems and consumer media platforms — **and here the licence flips to copyleft**
+
+| Platform | Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|---|
+| **webOS Open Source Edition** | [webosose/build-webos](https://github.com/webosose/build-webos) | **Apache-2.0** (declared in README; **no licence file**) | 732★ | 2025-04-01 | LG's open TV OS build layer. The only open TV *operating system* of a top-3 vendor. Pair with [`enactjs/enact`](https://github.com/enactjs/enact) (Apache-2.0, 347★) for the app layer. |
+| **RDK Services** | [rdkcentral/rdkservices](https://github.com/rdkcentral/rdkservices) | Apache-2.0 | 44★ | 2026-11-18 | The operator set-top stack (Thunder plugins) — Comcast/Sky lineage. With [`ThunderJS`](https://github.com/rdkcentral/ThunderJS) (Apache-2.0, 6★) for JS control. |
+| **Jellyfin** | [jellyfin/jellyfin](https://github.com/jellyfin/jellyfin) | **GPL-2.0** | 59,790★ | 2026-11-26 | The free media system — server + API, with clients on every TV platform. The largest platform in this tier by two orders of magnitude. |
+| **Kodi** | [xbmc/xbmc](https://github.com/xbmc/xbmc) | **GPL-2.0-or-later** (read from `master/LICENSE.md`, 290 B) | 21,552★ | **2026-11-27** | The media-centre application; the de facto reference for TV-UI navigation patterns. Pushed the day of this pass. |
+
+**📌 This tier confirms `intel/trends.md` trend 4 ("permissive at the pipeline, copyleft at the
+platform") and adds a sharper rule.** The split here is not pipeline-vs-platform, it is
+**standards-body-vs-product**: the four regional broadcast stacks written by standards bodies and
+public broadcasters (DVB, HbbTV Association, NHK, Sinclair) are **MIT**, while every consumer
+*product* in the tier (Jellyfin GPL-2.0, Kodi GPL-2.0+, Ginga GPL-2.0, node-hbbtv LGPL-3.0) is
+**copyleft**. → For a client deliverable that must stay proprietary, the regional reference clients
+are the safe starting point and the media platforms are not. ORB (Apache-2.0) is the one place where
+a *platform-grade* implementation is also permissive, which is why it matters out of proportion to
+its 24 stars.
+
+### ⛔ Gaps in this tier, stated as gaps
+
+- **There is no open Roku platform.** Roku OS is closed; the open ecosystem is *tooling only* —
+  [`rokucommunity/brighterscript`](https://github.com/rokucommunity/brighterscript) (MIT, 212★,
+  pushed 2026-11-27), [`roku-deploy`](https://github.com/rokucommunity/roku-deploy) (MIT, 60★),
+  [`roku-debug`](https://github.com/rokucommunity/roku-debug) (MIT, 19★),
+  [`vscode-brightscript-language`](https://github.com/rokucommunity/vscode-brightscript-language)
+  (MIT, 132★). All four MIT, all pushed within a week of this pass, all community-run with **no
+  vendor backing**. For the #1–#2 TV OS in the United States, the entire open toolchain is ~423
+  stars maintained by volunteers.
+- **There is no open Tizen platform either** — only [`Samsung/Wits`](https://github.com/Samsung/Wits)
+  (Apache-2.0, 125★, 2026-05-12), Samsung's own hot-reload tool for Tizen web apps.
+- **The HbbTV conformance test suite is not open at all**: licensed only to member companies and
+  tracked in a members-only SVN repository. A client needing certified HbbTV output must buy
+  membership or use a registered test centre — budget for it.

@@ -3042,3 +3042,71 @@ file as an artefact to hand to a human programmer, which is the one thing a ligh
 actually buy (the editorial-handoff role `OpenTimelineIO` plays in the generative pipeline). The
 nearest thing is `xlights-mcp-server`, which writes sequences — and it is the one with the forks.
 **The unbuilt product is "agent writes a reviewable show file", not "agent drives the rig live".**
+
+## The device, TV-app & client-playback plane — measured 2026-11-27 (pass 32), and **it has a real agent layer, 125 stars wide, aimed at the one thing in the plane that is not automatable**
+
+Added 2026-11-27 (pass 32). This plane is how content actually reaches a screen a viewer owns:
+the player, the TV application, the device it is certified on. The KB already held the *web player*
+layer (`shaka-player`, `hls.js`, `dash.js`, `shaka-packager` appear in 5–6 files each). It held
+**nothing** on the device side: before this pass the eight files said `HbbTV` 0 times, `Roku` 0
+times, `multi-CDN` 0 times, `encoding ladder` 0 times and `geoblock` 0 times, while saying `ATSC`
+53 times. The broadcast transmission side was covered; the endpoint it transmits to was not.
+
+**71 repo slugs probed this pass; 58 resolve, 13 do not.** Two of the 13 were wrong guesses of mine
+that resolved to real repos under different owners (`rdkcentral/Blits` → **`lightning-js/blits`**;
+`cta-wave/common-media-library` → **`streaming-video-technology-alliance/common-media-library`**).
+Licences were read from the actual file wherever the GitHub API returned `NOASSERTION` or `NONE`.
+
+### The agent layer — real, permissive, and all of it born in the last 24 months
+
+| Agent | Repo | Licence | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| **Arbigent** | https://github.com/takahirom/arbigent | Apache-2.0 | 657★ | 2026-11-27 | AI agent for testing Android, iOS, **web and TV** apps. Decomposes a scenario into dependent sub-tasks, which is what makes D-pad flows tractable. Pushed the day of this pass. Provider-agnostic. |
+| **Optics Framework** | https://github.com/mozarkai/optics-framework | Apache-2.0 | 104★ | 2026-11-26 | Test automation explicitly covering **Android TV, Tizen and webOS**. Tests as CSV/YAML, recorded live, **or built by an AI agent over MCP**. Self-healing locators (XPath, text, OCR, image match) — the only one here that addresses the real failure mode, which is that TV UIs have no accessibility tree. |
+| **ctv-bridge** | https://github.com/Braggiouy/ctv-bridge | MIT | 12★ | 2026-11-25 | Cross-platform desktop tool to build, deploy and debug **Tizen, webOS and Android TV** apps. Replaces three vendor toolchains with one. |
+| **tv-mcp** | https://github.com/skdonthi/tv-mcp | MIT | 6★ | 2026-08-05 | MCP server that lets a coding agent build, deploy and debug web apps on **Samsung Tizen and LG webOS** TVs. The agent bridge for this plane, and it is 6 stars. |
+| **tvdoctor** | https://github.com/Ticklect/tvdoctor | **AGPL-3.0** | 3★ | 2026-11-23 | Local MCP tools for coding agents: **deterministic D-pad exploration**, evidence-linked findings, replay for web and Android TV. Created 2026-08-23. ⚠️ AGPL — see the licence note below. |
+
+**Index, not an agent:** https://github.com/tugkanboz/awesome-ai-testing (**CC0-1.0**, 206★,
+2026-11-25) lists `optics-framework`, `arbigent` and Playwright-based AI regression tools. CC0 means
+it is genuinely reusable as a research input, which is unusual for a curated list — contrast
+`vitalets/awesome-smart-tv` below.
+
+**The media/TV-specific agent layer is 125 stars** (104 + 12 + 6 + 3). Arbigent's 657 are
+general-purpose mobile/web testing that happens to reach TV. So the honest reading: **the plane has
+a real agent layer, unlike monetization, conformance, identification, age-rating or
+production-finance — but four of its five repos are under 15 stars and three were created in 2026.**
+
+### Why the agent layer exists *here* and nowhere else in this KB — and it is the sharpest version of the content law
+
+Across eleven planes this KB has recorded the same law: where the work is **formal**, open source
+ships; where the work is **judgment**, it is empty. This plane is the first one where **both halves
+are in the same repo list**, and the licence of one of them says the quiet part out loud:
+
+- **Driving a TV app is formal.** A D-pad has five buttons. Focus either moved or it did not. So an
+  agent can do it, and five of them do — `optics-framework`'s OCR/image matching exists precisely
+  because the formal accessibility tree is missing, and recovering it is mechanical work.
+- **Deciding whether playback was *correct* is judgment** — was that stall a device fault, a
+  ladder fault, or the network? — and the one open component that renders that verdict,
+  `cta-wave/device-observation-framework`, is **Apache-2.0 plus the Commons Clause** (see
+  `repos/foundations.md`, pass 32). Its own licence file forbids using it to provide
+  *"a product or service whose value derives, entirely or substantially, from the functionality of
+  the Software"* for a fee — and names **"fees for hosting or consulting/support services"** as
+  exactly that.
+
+**This is the first licence in the entire KB that specifically prohibits the Globant business
+model.** Not copyleft, not a field-of-use restriction on a model, not a BSL clock: a clause whose
+plain text blocks billing a client for a service built on it. Every other licence trap recorded in
+this KB (AGPL network copyleft, BSL date, Llama acceptable-use) can be engineered around or waited
+out. This one cannot.
+
+### Licence notes a client engagement will hit
+
+- ⚠️ **`tvdoctor` is AGPL-3.0.** It is an MCP server, so a hosted deployment for a client is a
+  network-service use and triggers source provision. Fine for a Globant-internal QA tool, a
+  deliberate choice for anything client-facing. `arbigent` and `optics-framework` (both Apache-2.0)
+  carry no such condition — **prefer them as the default, and reach for `tvdoctor` only for its
+  D-pad exploration, which the others do not have.**
+- ✅ **`tv-mcp` and `ctv-bridge` are MIT** and are the cheapest way to put a coding agent in front of
+  a real Tizen or webOS device. Combined: 18 stars. Treat them as reference code to absorb, not as
+  dependencies to pin — at this size, the maintenance risk is total.

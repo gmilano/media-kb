@@ -1156,6 +1156,46 @@ competitor, and the dependency is Apache-2.0 from the market-leading manufacture
 diagnostics and documentation**, not creative lighting design — the former is an inventory problem
 with a permissive substrate, the latter is a designer's craft and a labour question.
 
+
+### Pass 32 (2026-11-27) — the device, TV-app & client-playback layer in North America
+
+**The regulatory position is the opportunity, and it is unusually legible: the US is the only region
+whose next-generation TV transition has no date, and its single open broadcast-app artefact has been
+dormant for four years.**
+
+| Finding | Detail | Source quality |
+|---|---|---|
+| **The ATSC 3.0 transition has no deadline** | The FCC adopted a Further NPRM in late October 2025 proposing to end the ATSC 1.0 simulcast requirement. As reported, the proposed rules set **no ATSC 1.0 cutoff date and no ATSC 3.0 tuner mandate** | Federal Register + ATSC + trade press; **the FCC had not finalised rules when checked — verify GN Docket 16-142 before quoting** |
+| **The largest station groups are lobbying for one** | **Gray Media, Sinclair, Nexstar and Scripps** filed in January 2026 asking the FCC to set an ATSC 1.0 end date **and mandate 3.0 tuners in new TVs**. NAB's earlier petition proposed **February 2028** for the top 55 markets and **February 2030** elsewhere | Trade press + FCC docket |
+| **Must-carry is unresolved** | NAB wants cable/satellite to carry ATSC 3.0 signals; the FCC has set no deadline | Trade press |
+| **The consumer base cannot receive it** | Commissioner Anna Gomez noted NextGen TV **is not backward compatible**, **most TVs sold in the US cannot receive it**, and there is **no federal funding** for consumer education. Lawmakers wrote to the Chairman on **2026-03-27** urging a firm plan | FCC statement + House letter — primary |
+| **Simulcast obligation near-term** | One consumer guide states stations offering 3.0 must simulcast in 1.0 **through at least 2027-07-17** | ⚠️ Consumer guide only — **not verified against FCC rules** |
+| **Device share: the two readings of the same analyst conflict** | Parks Associates is reported both as **Roku OS 28% / Tizen 23%** (US, April 2026) **and** as **Tizen 36% / Roku 17%** ("most-used", Q1 2026) | ⚠️ **Two secondary readings of one analyst that contradict each other.** Do not quote either — the metrics mix installed base, shipments and "most-used" |
+| **Region weight** | North America ~**31%** of the global smart-TV market (2026); leads AI-in-M&E with **33.6%** share (2024, Grand View) | Vendor estimates — directional |
+| **Regulation touching the app layer** | California **AI Transparency Act (SB 942)** delayed to **2026-08-02**; federal **Take It Down Act** compliance deadline **2026-05-19** | Law-firm guides — verify against statute |
+
+**The strategic read, and it is the sharpest supply-side gap in this pass.** The United States runs
+on **Roku OS and Samsung Tizen**, and **neither has an open platform**. The entire open Roku surface
+is a volunteer community toolchain — [`brighterscript`](https://github.com/rokucommunity/brighterscript)
+(MIT, 212★), [`roku-deploy`](https://github.com/rokucommunity/roku-deploy) (MIT, 60★),
+[`roku-debug`](https://github.com/rokucommunity/roku-debug) (MIT, 19★),
+[`vscode-brightscript-language`](https://github.com/rokucommunity/vscode-brightscript-language)
+(MIT, 132★) — **~423 stars, no vendor backing, all pushed within a week of this pass.** For Tizen
+there is only [`Samsung/Wits`](https://github.com/Samsung/Wits) (Apache-2.0, 125★).
+
+And the region's only open broadcast-application artefact,
+[`openBA-NextGenTV/OpenBA-NextGenTV`](https://github.com/openBA-NextGenTV/OpenBA-NextGenTV)
+(**MIT**, 15★) — Sinclair's own open-sourced ATSC 3.0 app — **has not been pushed since
+2022-09-21**. So the broadcasters petitioning for a mandatory transition have, between them, one
+MIT reference application that is four years cold.
+
+**Two deliverables that follow directly.** (1) **A Roku/Tizen certification-and-submission
+practice**: the platforms that matter most in NA are the two with the least open tooling, and
+pattern 32.1's BSD-3 harness plus the RokuCommunity toolchain is the only licence-clean route —
+noting that the WAVE verdict component is **Commons-Claused against consulting revenue**, so the
+pass/fail logic must be client-owned. (2) **Reviving `openBA` as the ATSC 3.0 app substrate**: it is
+MIT, it is the only one, and if the FCC sets a date it becomes load-bearing overnight. ⚠️ Scope it
+as adopt-and-maintain; there is no upstream.
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2452,6 +2492,46 @@ construction. This is the easiest EMEA procurement story in the whole KB.
 EU client that is unremarkable; for a US or APAC client embedding it, the governing-law clause is a
 question to raise before the build, not after.
 
+
+### Pass 32 (2026-11-27) — the device, TV-app & client-playback layer in EMEA
+
+**EMEA is the region where this plane's standards are current, enforced and *being written now* —
+and the only region where broadcasters are trying to regulate the TV device itself as a gatekeeper.
+It is the strongest placement in pass 32.**
+
+| Finding | Detail | Source quality |
+|---|---|---|
+| **HbbTV 2.0.5 is the current core spec** | Published by the HbbTV Association **2026-03-02**; formally published by **ETSI as TS 102 796 V1.8.1 in September 2026** | Association press release + ETSI identifier — **primary, verifiable** |
+| **What 2.0.5 adds** | **Formal DRM support, WebAssembly, and next-generation codecs (AV1 and VVC)**; clarifies how **DVB-I applications associated with whole service lists** are supported — explicitly so a platform or aggregator can **obtain GDPR consent or agreement to terms and conditions** | Association + trade press |
+| **Operator Apps are the commercial vehicle** | The updated Operator Application spec lets an operator app **manage streaming and presentation of a set of IP-delivered linear channels discovered from a DVB-I service list**. **OSN launched a direct-to-TV pay-TV service on Samsung Smart TVs using the HbbTV OpApp standard** | Association + trade press — a live deployment, not a pilot |
+| **Conformance is members-only, and being extended** | The HbbTV conformance test suite is **licensed/distributed only to member companies** and tracked in a members-only SVN repository. The association planned an **RFP to extend it to 2.0.5**; the suite was extended using experience **from Italy and the UK** | Association materials |
+| **Next version** | 2.0.6 tentatively listed, timing uncertain (*"Perhaps 2027?"*) | Association technical keynote |
+| **⭐ Broadcasters want smart TVs designated as DMA gatekeepers** | A coalition of European broadcasters asked the EU to designate **smart TV platforms and virtual assistants as gatekeepers under the Digital Markets Act**, warning that *"the lack of designation of virtual assistants creates a regulatory void, allowing powerful AI assistants to become de facto gatekeepers for media content"* | Trade press quoting the coalition — **the most on-plane regulatory development in any region this pass** |
+| **EU AI Act Article 50 is live** | Applies since **2026-08-02**: machine-readable marking of AI-generated content, deepfake disclosure by deployers, lighter touch for artistic/fictional works. Penalties up to **€15M or 3% of global turnover**. Commission voluntary code of practice on marking/labelling issued **2026-06-10**; systems on the market before the deadline have until **2026-12-02** | Mixed primary/secondary — **verify dates against the Commission's texts** |
+| **The device market is fragmenting away from the top two** | **Hisense's Vidaa has overtaken LG's webOS** in European share; **Titan OS ~4%** in Europe. Europe is the **second-largest** smart-TV region at ~**24%** | Vendor/aggregator estimates — directional, but the direction is the point |
+| **Public broadcaster AI policies cluster here** | Published AI policies are most common among **Western/Northern European** public media and rare in Central/Eastern Europe. ARD, ZDF, Deutschlandradio and Deutsche Welle adopted a **joint AI code in January 2026**; SRG SSR's rules took effect **2026-06-01**; **Radio France** added an annex in April 2026 **banning synthetic voices capable of replacing its journalists' vocal identity** | State Media Monitor 2026 + trade press |
+
+**The strategic read.** EMEA is the only region where the open device stack is **permissive,
+maintained and standards-current at the same time**: [`OpenRedButtonProject/orb`](https://github.com/OpenRedButtonProject/orb)
+(**Apache-2.0**, 24★, pushed **2026-11-19**) is the world's only open-source HbbTV stack;
+[`DVBProject/DVB-I-Reference-Client`](https://github.com/DVBProject/DVB-I-Reference-Client) (MIT,
+74★, pushed **2026-11-17**) ships a back end for service lists plus **an HbbTV OpApp and an Android
+PWA** as front ends; [`DVB-I-Reference-CSR`](https://github.com/DVBProject/DVB-I-Reference-CSR)
+(MIT, 14★) is the discovery registry; [`HbbTV-Association/ReferenceApplication`](https://github.com/HbbTV-Association/ReferenceApplication)
+(MIT, 90★) is the association's own app. **A complete, permissive, currently-maintained path from
+service list to certified operator app exists only in this region.**
+
+**Three deliverables.** (1) **The DVB-I aggregator build** — service list → CSR discovery →
+HbbTV OpApp, all MIT/Apache, with 2.0.5's **GDPR consent and T&C gate** as a first-class feature
+rather than a retrofit; OSN proves the commercial pattern on Samsung hardware. (2) **A 2.0.5
+migration audit**: AV1/VVC and WebAssembly support plus formal DRM are new, the conformance suite
+is **members-only and still being extended to 2.0.5**, so "is our app 2.0.5-ready" is a question no
+client can self-answer — and membership or a registered test centre is a **line item, not an
+assumption**. (3) **DMA-readiness positioning**: if smart TV platforms and virtual assistants are
+designated, prominence, default placement and data access on the device become regulated surfaces,
+and broadcasters will need both evidence and engineering. ⚠️ Keep EU AI Act Article 50 marking in
+scope for anything the app itself renders — the disclosure has to appear **on the device**, and
+nothing in the open TV stack implements it.
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3684,6 +3764,47 @@ distinguish between those two, and says so.**
 across many markets — is a **data and planning** problem, not a show-control problem. Lead in APAC
 with touring/routing analytics, and treat the rig as the second engagement.
 
+
+### Pass 32 (2026-11-27) — the device, TV-app & client-playback layer in APAC
+
+**APAC's position in this plane is a live standard with a dormant open toolchain, plus the region's
+real differentiator: four jurisdictions now legally require AI-content labelling, and the label has
+to be rendered on the device.**
+
+| Finding | Detail | Source quality |
+|---|---|---|
+| **Japan runs its own interactive-TV stack** | **Hybridcast**, specified by **IPTV Forum Japan** (IPTVFJ **STD-0010** integrated broadcast-broadband system, **STD-0011** HTML5 browser). **Hybridcast Connect** standardised **September 2018** | W3C Media & Entertainment IG materials + IPTV Forum Japan — primary |
+| **NHK publishes MIT reference implementations — and they are cold** | [`hyconet4j`](https://github.com/nhkrd/hyconet4j) (Java SDK, **MIT**, 15★, 2021-11-17), [`antwapp4hc`](https://github.com/nhkrd/antwapp4hc) (**TV emulator**, MIT, 21★, 2021-11-17), [`hyconet.js`](https://github.com/nhkrd/hyconet.js) (MIT, 7★, 2020-09-29), [`node-red-contrib-hyconet`](https://github.com/nhkrd/node-red-contrib-hyconet) (MIT, 7★, 2020-09-30) | **Verified by reading repo metadata 2026-11-27.** All four MIT; **all four dormant 5+ years** |
+| **But the standard itself is still advancing** | A **March 2026** NHK paper proposes using the Hybridcast Connect Protocol to transition **from a connected-TV app to a broadcast service** and reports verification on **commercially available receivers**, noting *"it has not been possible to switch from an application to a broadcast service using existing standard technologies"* | ITE conference paper — primary, and it dates the gap |
+| **Installed base (stale figure)** | Hybridcast reported on **300+ TV models, 20 million units** — but that figure is from **2022** | ⚠️ W3C minutes, 4 years old. **Do not quote as current** |
+| **South Korea has the region's broadest AI law** | **AI Basic Act in force 2026-01-22.** Generative-AI transparency rules require operators to **warn users in advance** that a service is generative-AI-powered; **synthetic-media watermarking is in force** | Law-firm alerts — verify against statute |
+| **India regulates through the intermediary framework** | Amendments to the **IT Intermediary Guidelines effective 2026-02-20**, requiring AI-generated content labelling | Law-firm alerts |
+| **Four jurisdictions require labelling; Japan does not** | **China, South Korea, India and Vietnam** require AI-generated content to be labelled (**Vietnam's AI law effective 2026-03-01**). **Japan relies on voluntary guidelines and industry self-regulation**; Taiwan is drafting | Multiple law-firm sources agree |
+| **Market weight** | APAC M&E ~**$905.5B (2026)**, ~**9.1% CAGR**; smart TV APAC CAGR ~**10.2%** through 2033 | ⚠️ Vendor estimate. **Sources contradict each other on whether APAC or North America holds the largest smart-TV share** — do not assert either |
+| **Timing of AI in live broadcast** | Early Japanese/Korean deployments cover synthetic environments, scriptwriting, automated dubbing and subtitling; **wider live-broadcast use expected after 2028**, tied to 6G | Regional trade analysis — directional |
+
+**The strategic read.** APAC is the mirror image of EMEA in this plane: **the standard is live and
+advancing while its open toolchain has been abandoned for five years.** NHK standardised Hybridcast
+Connect, published four MIT reference implementations including **a TV emulator** — the single most
+useful artefact for anyone building without a lab full of Japanese receivers — and then stopped
+touching them in 2021. Meanwhile NHK's own March 2026 paper demonstrates a **new app-to-broadcast
+transition** that the published SDKs do not implement.
+
+**Two deliverables.** (1) **Revive the Hybridcast Connect toolchain as a Globant asset.** All four
+repos are MIT, so there is no licence friction; `antwapp4hc` plus `hyconet4j` give a second-screen /
+companion-device capability for the Japanese market that no maintained competitor offers, and the
+2026 transition technique is a concrete feature to add. ⚠️ Adopt-and-maintain — there is no
+upstream. (2) **The AI-disclosure rendering layer, which is a device-layer problem nobody has
+solved.** Korea requires an **advance warning** that a service is generative-AI-powered; China,
+India and Vietnam require content labels. A label is only legally effective if the **viewer sees it
+on the TV** — and nothing in the open TV stack (`blits`, `enact`, `zombiebox`,
+`react-native-tvos`, ORB, the Hybridcast SDKs) implements a disclosure surface. This is the same
+finding EMEA produces from Article 50, arriving from four separate statutes, which makes it a
+**reusable component rather than a per-country compliance job**.
+
+**⛔ Stated as a gap:** no APAC-specific open device-certification or QoE tooling was found. The
+certification layer in this plane is CTA/SVTA (North-America-led) and HbbTV (EMEA); searches for an
+APAC equivalent returned the ITU-R integrated broadcast-broadband reports and nothing implementable.
 ### LATAM
 
 - **Mexico now has the region's first sector-specific AI law for entertainment.** Amendments to the
@@ -4966,6 +5087,53 @@ Spanish/Portuguese-documented, both built in the last six months. The appetite i
 demonstrated. **Both are unlicensed, so neither can be adopted as-is**; the correct move is to
 contribute a licence upstream or rebuild the idea on QLC+ (Apache-2.0), not to fork them silently.
 
+
+### Pass 32 (2026-11-27) — the device, TV-app & client-playback layer in LATAM
+
+**LATAM holds something no other region in this KB has had in any plane: a brand-new national
+interactive-TV platform going live *this year*, with government-subsidised device distribution
+pending approval. This is the only genuine greenfield in pass 32.**
+
+| Finding | Detail | Source quality |
+|---|---|---|
+| **Brazil's TV 3.0 / DTV+ is launching now** | Decree signed **2025-08-27**. Signal launched **2026-06-11** alongside the World Cup, covering **Rio de Janeiro, São Paulo and the Federal District** | ⚠️ **Sources disagree on status**: one describes June 2026 as the move *"from pilot deployments and regulatory preparation into commercial operation"*, another calls the June 11 signal **experimental**. Say "launching", not "launched", until confirmed |
+| **The architecture is a hybrid of two regional standards** | TV 3.0 uses the **ATSC 3.0 physical layer** (US) with **Ginga** retained as the **application layer** (Brazilian). **MPEG-H audio is mandatory and now on air** | Standards/academic sources + trade press |
+| **The RF plant is *not* the US one** | Brazil uses **MIMO** (horizontally and vertically polarised components) and **new spectrum around 300 MHz**, requiring **different transmitters and antennas** from the US deployment | Trade press — the point for anyone assuming ATSC 3.0 equipment is portable |
+| **Receivers are shipping** | **Intelbras and Aquário** began customer deliveries **2026-06-08**; **Vivensis** also in market; more TVs and STBs expected. **Mirakulo's AstroTV NEXT** middleware is in some receivers, with Android TV and mainstream SoC support | Regional trade press |
+| **⭐ A subsidy could create the installed base at a stroke** | A proposal to invest **~$236M in TV 3.0 converter devices for ~910,000 low-income households**, **still requiring Anatel board approval** | Trade.gov market intelligence — **pending, not approved. Flag as conditional** |
+| **The application layer is GPL-2.0 with a 53-star reference implementation** | [`TeleMidia/ginga`](https://github.com/TeleMidia/ginga) — PUC-Rio's implementation of **ITU-T H.761 / ABNT NBR 15606** — **GPL-2.0**, 53★, last push **2024-11-25**. Ginga has been the mandated interactivity standard since **2007** and is reported to ship in millions of TVs and STBs across Brazil and Latin America | **Licence and dates verified 2026-11-27.** The installed-base claim is a secondary source |
+| **A LATAM-origin player with global reach** | [`clappr/clappr`](https://github.com/clappr/clappr) — **BSD-3-Clause, 7,543★, pushed 2026-11-26** — built and still maintained by **Globo (Brazil)**. The most successful piece of open media infrastructure to come out of the region | Verified 2026-11-27 |
+| **Mexico legislated performers' voices and images first** | Amendments to the **Federal Copyright Law and Federal Labour Law published 2026-05-14**, creating a framework for using performers' voices, images and performances — described as Mexico's first sector-specific AI rule. A separate reform requiring **human dubbing** for foreign audiovisual works translated into Spanish or Indigenous languages **passed the Chamber of Deputies** | Law-firm guides; **the dubbing reform's final status is unconfirmed** |
+| **Brazil's broader framework is still pending** | A **streaming bill** in Congress could add a **cinema-fund levy and Brazilian-content prominence** duties; on AI the **ANPD sandbox consultation is running while the Marco Legal is stalled**. Brazil's electoral court restricts synthetic media favouring or harming a candidate | Law-firm analysis |
+| **Peru** | AI regulation **in effect January 2026** | Secondary |
+| **Chile** | A Santiago streaming industry event framed **CTV, advertising and measurement** as the current focus, with panelists saying **self-regulation counts for more than settled law**, especially on betting ads | Vendor event report — directional |
+
+**The strategic read, and it is the clearest opportunity in pass 32.** Everywhere else in this plane
+Globant would be arriving after the platform is set: Roku and Tizen are closed, HbbTV is twelve
+years mature, Hybridcast is eight years old. **In Brazil the application platform is being populated
+right now**, its app layer is an **open (if GPL-2.0) standard with a 53-star reference
+implementation and no agent layer whatsoever**, the receivers started shipping five months ago, and
+a **$236M public device subsidy is awaiting a regulator's signature**. There is no incumbent
+systems-integrator position to displace because the platform is younger than this KB.
+
+**Three deliverables.** (1) **A DTV+ / Ginga application practice** — the first serious one.
+Interactivity on TV 3.0 means Ginga (declarative NCL / imperative), and the only reference
+implementation is a university repo last pushed two years ago. ⚠️ **It is GPL-2.0**: keep
+Ginga-facing code in a separate process behind IPC, or scope the Brazilian app as a distinct
+artefact under its own licence terms, or the client's proprietary deliverable inherits the
+obligation. (2) **A TV 3.0 receiver/app conformance offering**, using pattern 32.1's BSD-3 harness:
+new platform, new receivers from three manufacturers, MPEG-H mandatory, and **no established test
+practice in-region** — and if the subsidy lands, ~910,000 devices arrive needing exactly this.
+(3) **Build on Clappr, and say so.** A Brazilian client being shown a BSD-3 player maintained by
+Globo is a materially easier conversation than a US or European dependency, and at 7,543 stars and a
+push the day before this pass it is a serious engineering choice, not a courtesy.
+
+**⛔ Stated as a gap, honestly:** searches found **no open-source Ginga *tooling* beyond the
+reference implementation itself** — no linter, no emulator, no test harness, no agent. For a
+platform mandated since 2007 and now carrying a national transition, the developer tooling layer is
+empty. That is either the supply-side opportunity of this pass or a signal that the work is done
+in-house by the three receiver manufacturers; **it is worth one direct conversation with the SBTVD
+Forum to find out which, before committing a build.**
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -5948,3 +6116,94 @@ figures in pass 7 and to government incentive data in pass 27 — and it has now
 | AEG | Venue operator | Running live AI crowd-flow analytics at The O2 | Vendor case-study evidence only |
 | Disney / Europa-Park | Attraction operators | Investing in attraction AI (two Disney patent filings, Aug 2026; Europa-Park's "AI Suite") | **Filings and statements, not shipped products**; ride control stays closed and safety-rated |
 | Audinate (Dante) | Audio-over-IP | De-facto standard for venue audio transport | **No open implementation**; AES67 is the open alternative |
+
+## Market size — pass 32 addendum (2026-11-27): the connected-TV segment is sized **~28× apart on the same base year** — the widest headline spread in this file — and device certification is not sized at all
+
+Added 2026-11-27 (pass 32). Searched for sizing on the device, TV-app and client-playback plane.
+
+### ⛔ The refusal first
+
+**There is no defensible single number for "connected TV" in 2026.** Five vendors, same base year:
+
+| Source framing | 2026 figure | Forecast | Implied CAGR |
+|---|---|---|---|
+| Grand View Research | **USD 318.6B** | USD 757.6B by 2033 | 13.2% |
+| Business Research Insights | **USD 285.36B** | — (to 2035) | 15.23% |
+| Fortune Business Insights | **USD 264.61B** | USD 414.57B by 2034 | 5.77% |
+| Future Market Insights | **USD 192.0B** | USD 489.0B by 2036 | — (from a $175.0B 2025 base) |
+| Persistence Market Research | **USD 11.4B** | — (to 2033) | 12.1% |
+
+**Low to high is ~28×, and the CAGRs disagree by a factor of 2.6 on top of that.** This **supersedes
+pass 3's captioning spread (~18×) as the widest headline disagreement in this file**. Pass 21
+(volumetric video) keeps the separate record for *worst agreement on an identically-scoped base
+year*; here the spread is a **scope artefact**, and naming it is the whole value:
+
+- The **$264B–$319B cluster** is counting the **device and advertising economy** — TV hardware,
+  platform revenue and CTV ad spend together.
+- The **$11.4B figure** is plainly counting something narrow (platform software / a device-services
+  cut).
+- A **$192B** figure sits between the two definitions.
+
+→ **Never put a CTV market number in a deck without the definition attached.** The question to ask a
+client is: *"does your figure include hardware, advertising, or neither?"* The answer moves the
+number by a factor of 28.
+
+### ⛔ The second refusal, and it is the one that matters for this plane: **device certification and QoE testing are unsized**
+
+Globant's addressable work here is **app engineering, certification and playback quality** — and no
+source sizes any of those. What exists is adjacent and must not be substituted:
+
+| Adjacent figure | 2026 value | Why it is NOT this segment |
+|---|---|---|
+| CTV ad solutions | ~**USD 6.72B** (10.4% CAGR to 2034) | Ad-tech spend, not app or device engineering |
+| CTV demand-side platforms | **USD 7.35B** (2025), 30.20% CAGR | Same — the buy side |
+| TV operating systems | → **USD 9.36B by 2034**, 15.80% CAGR | Platform licensing, not services on top |
+| Communication test & measurement | **USD 11.37B (2026)** → USD 19.73B (2032), 9.6% | **Not TV-specific** — network test equipment at large |
+
+### What can be stood behind instead — count the certifications, not the market
+
+The honest substrate is **per-platform certification volume**, which is observable:
+
+- **A single streaming app faces separate certification on each store.** One vendor's CTV testing
+  practice lists **Samsung Tizen, LG webOS, Google TV, Apple TV and Roku**; add **Fire TV, Hisense
+  Vidaa, Titan OS** and operator STBs (RDK) and the realistic matrix is **8–10 targets per release**.
+- **Observed test load at one monitoring vendor: "over 300,000 test runs a month across 69 mobile
+  devices and six smart TV platforms."** That is a measured production figure, and it is the right
+  order-of-magnitude anchor for a certification engagement — **six** smart TV platforms, not one.
+- **Reach anchor:** connected TV reached **96.4 million US households** (Comscore, 2025).
+- **The open substrate is 51 stars** (`dpctf-*` + WAVE + `ott_device_matrix`, verified 2026-11-27)
+  and its verdict component is **Commons-Claused against consulting revenue**. So the work is real,
+  recurring, per-platform, and has **no open product competing for it** — which is a far better
+  argument than any of the five numbers above.
+
+→ **Quote releases × platforms × devices, not market size.** A client with four releases a year
+across nine platforms has a concrete, defensible scope; the CTV "market" does not.
+
+### Global players — pass 32 addendum (the device & client-playback layer)
+
+**The platform owners (these are the gatekeepers, and all are closed):** **Roku** (Roku OS),
+**Samsung** (Tizen), **LG** (webOS — open-core via webOS OSE), **Google** (Android TV / Google TV),
+**Amazon** (Fire TV), **Apple** (tvOS), **Hisense** (Vidaa — *gaining European share from webOS*),
+**Titan OS** (~4% Europe), **Comcast/Sky** (RDK — open via `rdkcentral`). ⚠️ **Share estimates for
+these conflict badly across sources and mix installed base, shipments and "most-used"** — see the
+North America block for two contradictory readings of the same analyst.
+
+**The test and QoE houses — and note who contributes to the open stack:** **Resillion UK** (named
+**contributor** to the Commons-Claused `device-observation-framework`), **Witbe** (QoE monitoring at
+the 300,000-runs/month scale), **Norigin Media** (OTT testing-as-a-service across the certification
+matrix), **Mozark** (which **open-sourced its own test framework** as
+[`mozarkai/optics-framework`](https://github.com/mozarkai/optics-framework), Apache-2.0, 104★).
+
+**📌 The structural read of this player map.** A commercial test house is a named contributor to the
+one open component whose licence forbids selling services built on it, while a different test vendor
+has published its framework under Apache-2.0 with no such restriction. **The incumbents are not
+uniformly closed — they are strategically closed at the verdict and open at the harness.** Globant's
+entry point is therefore the harness plus client-owned pass/fail criteria (pattern 32.1), not a
+certification product that competes with the bodies writing the licences.
+
+**Standards bodies as the real "players" in this plane:** **HbbTV Association** (EMEA; conformance
+suite members-only), **DVB Project** (DVB-I; **MIT** reference client), **ATSC** (NA), **IPTV Forum
+Japan** (Hybridcast; NHK's **MIT** SDKs), **SBTVD Forum / PUC-Rio TeleMídia** (Brazil; Ginga,
+**GPL-2.0**), **CTA WAVE** and **SVTA** (device conformance and CMCD/CMSD/Open Caching). **In this
+plane the standards bodies, not the vendors, publish the reusable code** — which is why the regional
+blocks above are organised around standards rather than around suppliers.

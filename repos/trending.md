@@ -10,6 +10,92 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 32: device, TV-app & certification infrastructure (**a 30,000-star player deprecated into a rival, a 21,935-star engine declared dead by its own authors, and the plane's verdict component licensed against consultancies**)
+
+Measured 2026-11-27. **71 slugs probed, 58 resolve, 13 do not.** Licences read from the actual file
+in every `NOASSERTION`/`NONE` case — eight such cases resolved this pass.
+
+**Two consolidation events at the top of the player layer, both visible only in repo metadata:**
+
+1. **[`sampotts/plyr`](https://github.com/sampotts/plyr) (MIT, 29,977★) now describes itself as
+   "Deprecated in favour of Video.js 10; security updates only."** Thirty thousand stars moved into
+   maintenance-only, and the beneficiary is
+   [`videojs/video.js`](https://github.com/videojs/video.js) (40,260★), which has restyled itself
+   from "player" to **"Video.js v10 — media player framework for HTML and React"**. The open web
+   player field is consolidating, not proliferating.
+2. **[`google/ExoPlayer`](https://github.com/google/ExoPlayer) (Apache-2.0, 21,935★) is "deprecated
+   and stale" by its own description**, last pushed 2025-12-23 (~11 months). The live code is
+   [`androidx/media`](https://github.com/androidx/media) (Apache-2.0, 3,094★, pushed 2026-11-26) —
+   **Jetpack Media3**. A client proposal citing ExoPlayer in 2027 is citing a dead repo with seven
+   times the stars of the live one. ⚠️ **Star count is the single most misleading signal in this
+   plane**: in both cases the deprecated repo massively outranks its own successor.
+
+**A correction to this KB's own record (pass 29).** `verticals/solutions.md` calls
+`rdkcentral/Lightning` *"the only open answer to 'how does it run on the operator's box?'"*. Both
+halves are now false: **[`lightning-js/blits`](https://github.com/lightning-js/blits) (Apache-2.0,
+117★, pushed 2026-11-26) is "The Lightning 3 App Development Framework"**, the live successor to
+Lightning 2 (204★, pushed 2026-10-12) — and `enact` (LG's official framework, 347★, pushed
+2026-11-26), `react-native-tvos` (1,432★) and `zombiebox` (113★) were always open alternatives. The
+KB had a row for Lightning and none for any of these. **Probing `rdkcentral/Blits` 404s** — the
+Lightning 3 repo moved out of the `rdkcentral` org to `lightning-js`, which is exactly the kind of
+move a stale KB row hides.
+
+**The certification layer, which is where this plane's real scarcity sits — 51 stars in total:**
+
+| Repo | Licence | Stars | Last push |
+|---|---|---|---|
+| [cta-wave/WMAS](https://github.com/cta-wave/WMAS) | `NOASSERTION` | 20★ | 2026-11-25 |
+| [cta-wave/dpctf-deploy](https://github.com/cta-wave/dpctf-deploy) | BSD-3 (read) | 6★ | 2026-09-07 |
+| [cta-wave/Test-Content-Generation](https://github.com/cta-wave/Test-Content-Generation) | BSD-3 | 5★ | 2026-11-20 |
+| [cta-wave/dpctf-tests](https://github.com/cta-wave/dpctf-tests) | BSD-3 (read) | 3★ | 2026-11-09 |
+| [cta-wave/dpctf-test-runner](https://github.com/cta-wave/dpctf-test-runner) | BSD-3 (read) | **0★** | 2026-11-09 |
+| [cta-wave/device-observation-framework](https://github.com/cta-wave/device-observation-framework) | ⛔ **Apache-2.0 + Commons Clause** | 1★ | 2026-10-14 |
+| [streaming-video-technology-alliance/ott_device_matrix](https://github.com/streaming-video-technology-alliance/ott_device_matrix) | ⚠️ no licence file | 8★ | 2025-03-17 |
+
+**The licence finding of this pass, and the most commercially consequential one in the KB so far.**
+`device-observation-framework` — the component that converts observations into a **pass/fail
+verdict** — is Apache-2.0 with a **Commons Clause** rider whose text excludes *"the right to Sell
+the Software"*, defining "Sell" to include *"fees for hosting or consulting/ support services
+related to the Software"*. Licensor: **Consumer Technology Association**; contributor: **Resillion
+UK Limited** (a commercial test house). Every sibling repo in the org is BSD-3; a sweep of four
+found **0** further Commons Clause hits. Read plainly: **the open test *content* is free, and the
+open *verdict* is reserved** — and the reservation lands precisely on service businesses.
+→ **CI rule for all twelve industries: grep incoming `LICENSE` files for `commons clause`.** SPDX
+fields, licence badges and SBOM scans of the source tree cannot see it.
+
+**Three more licence shapes recorded this pass** (all generalise beyond media):
+- **The licence is not in the repository.** [`axiomatic-systems/Bento4`](https://github.com/axiomatic-systems/Bento4)
+  (2,530★): no licence file under any of ten names on either branch; README says *"Open Source, with
+  a dual-license model… find out more on the About Page"*. `bento4.com` is **unreachable under this
+  session's network policy**, so the KB records the licence as **unresolved** rather than guessing.
+  Worse than pass 8's `chromaprint` case — there the terms were at least in the repo.
+- **The README is the licence.** [`webosose/build-webos`](https://github.com/webosose/build-webos)
+  (732★) reports `NONE`, has no licence file, and its README carries the full Apache-2.0 grant plus
+  `SPDX-License-Identifier: Apache-2.0`.
+- **A Markdown heading defeats the detector.** All three `dpctf-*` repos report `NOASSERTION` only
+  because `LICENSE.md` starts with `# The 3-Clause BSD License`.
+
+**⛔ Stated as a measured gap: there is no public open-source multi-CDN steering implementation.**
+Four slugs probed and 404: `streaming-video-technology-alliance/content-steering`,
+`.../open-caching-api`, `Dash-Industry-Forum/dash.js-content-steering`,
+`muxinc/mux-stats-sdk-hlsjs`. The SVTA's own pages and an IBC paper describe a client-side
+multi-CDN switcher and an open content-steering framework; **neither has a locatable public
+repository as of 2026-11-27.** What is public is the *vocabulary* —
+[`common-media-library`](https://github.com/streaming-video-technology-alliance/common-media-library)
+(Apache-2.0, 86★, pushed 2026-11-23), CMCD (35★, **no licence file**), CMSD (25★, no licence file),
+[OC-API](https://github.com/streaming-video-technology-alliance/OC-API) (MIT, 4★) — plus steering
+support inside the players themselves. **Nervous system standardised and permissive; brain unbuilt.**
+
+**⚠️ The best index of this plane cannot be reused.**
+[`vitalets/awesome-smart-tv`](https://github.com/vitalets/awesome-smart-tv) (1,480★, pushed
+2026-11-09) has **no licence file and no licence statement in its README**. Default copyright:
+research input only, never a client deliverable. (By contrast
+[`tugkanboz/awesome-ai-testing`](https://github.com/tugkanboz/awesome-ai-testing) is **CC0-1.0**.)
+
+**Two dead repos with enough stars to fool a proposal:**
+[`raphamorim/react-tv`](https://github.com/raphamorim/react-tv) (MIT, 2,033★) is **archived**, dead
+4.7 years; [`mautilus/sdk`](https://github.com/mautilus/sdk) (BSD-3, 102★) dead **9.5 years**.
+
 ## 2026-11-27 — pass 31: show-control infrastructure (**the search layer returned 0–6-star repos born last month and one that does not exist, while every incumbent in the plane went unmentioned**)
 
 Infrastructure half of pass 31. **46 slugs probed by `git ls-remote`; 45 resolve, 1 does not.** But

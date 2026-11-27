@@ -4729,3 +4729,42 @@ substrate-exists/service-missing gap recorded in this KB since pass 35.
 - **Do not carry `openstego`** (1,452★, **GPL-2.0**, dormant since 2023-08-12) into a forensic
   proposal because a vendor round-up lists it as "the open-source option". It is steganography, not
   forensic marking, and it is copyleft.
+
+## Pass 42 (2026-11-27) — foundations of the archive-monetisation plane
+
+Six repos, each verified on 2026-11-27 by `git ls-remote` (existence) **and** the GitHub search API
+(stars, forks, SPDX identifier, `pushed_at`). They divide cleanly into the three steps of turning an
+archive into a sellable catalogue — and the division is where the story is.
+
+| Repo | Licence | Stars / forks | Last push | Role in the plane |
+|---|---|---|---|---|
+| [soCzech/TransNetV2](https://github.com/soCzech/TransNetV2) | MIT | 1,083★ / 156f | 2023-12-04 | Shot-boundary detection network. The standard open answer to "cut this tape into shots" — the unit a clip is actually sold in. |
+| [yahoo/hecate](https://github.com/yahoo/hecate) | Apache-2.0 | 497★ / 116f | 2023-05-20 | Keyframes, thumbnails, animated GIFs and summaries from video. Produces the **preview** a buyer browses. |
+| [mlcommons/croissant](https://github.com/mlcommons/croissant) | Apache-2.0 | 923★ / 134f | **2026-11-16** | Metadata format for ML-ready datasets, built on schema.org, with a dataset-level `license` property and a Responsible-AI extension for provenance. The format in which an archive is described **as a training corpus**. Supported by Kaggle, Hugging Face and OpenML; reference library `mlcroissant`. |
+| [WordPress/openverse](https://github.com/WordPress/openverse) | MIT | 828★ / 367f | **2026-11-27** | Production search engine for openly-licensed media. The only large, alive, licence-aware media discovery system in open source. |
+| [vespa-engine/vespa](https://github.com/vespa-engine/vespa) | Apache-2.0 | 7,202★ / 753f | **2026-11-27** | Embeddings **plus** structured metadata in one retrievable store — i.e. "find the shot" and "is it cleared, and for what territory" answered in a single query. The scale substrate for an archive of any real size. |
+| [skyzhao1223/free-for-creators](https://github.com/skyzhao1223/free-for-creators) | CC0-1.0 | 113★ / 14f | 2026-11-24 | 214 creator assets, each tagged with attribution **and monetisation rules**, CI link-checked. A worked example of licence metadata treated as a first-class, testable field. |
+
+### The shape of the dependency graph, in one line each
+
+1. **Cut it** — TransNetV2 (MIT), hecate (Apache-2.0). Solved, permissive, and **both dormant since 2023**.
+2. **Find it** — the retrieval layer, which this KB already holds: PySceneDetect, `open_clip`, Qdrant,
+   FAISS (all previously indexed), plus Vespa and Openverse added here. Alive and well funded.
+3. **Describe it for the new buyer** — Croissant (Apache-2.0, pushed 11 days ago). Alive, standards-backed.
+4. **Sell it** — nothing. See the measured table in `agents/top.md` (pass 42).
+
+**The asymmetry to carry into any proposal:** steps 1–3 are free, permissive and mostly maintained.
+Step 4 does not exist in open source at any star count. Every archive-monetisation engagement is
+therefore a *systems-integration* job on top of free parts plus a *bespoke build* of the commercial
+step — never a platform selection.
+
+### Licence ledger for this pass
+
+- Shippable as-is: TransNetV2 (MIT), hecate (Apache-2.0), croissant (Apache-2.0), openverse (MIT),
+  vespa (Apache-2.0), free-for-creators (CC0-1.0). **Six for six permissive** — unusually clean for
+  this KB.
+- Dormancy is a maintenance risk, not a licence risk: TransNetV2 and hecate are both ~3 years cold.
+  Budget for vendoring them, because the MIT/Apache grant survives abandonment but the bug fixes do not.
+- **One trap, documented in full in `verticals/solutions.md` (pass 42): `resourcespace/resourcespace`
+  reports `NOASSERTION` to the GitHub API, and it is neither unlicensed nor plain BSD.** Read that
+  entry before putting ResourceSpace in a client architecture.

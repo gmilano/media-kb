@@ -6503,3 +6503,216 @@ Run before estimating. Each answer changes the shape of the engagement.
    belongs in the plan on day one, not month four.
 8. **Never offer to maintain the blocklist.** Detection, evidence and filing are buildable; the list
    itself is an instrument of state authority. Offering it misrepresents what Globant can lawfully do.
+
+## Pattern 81 — The archive-to-catalogue pipeline: everything up to the price tag is free
+
+**Why this pattern exists.** NewscastStudio (2026-03-30) makes archive work the clearest link between
+AI spend and return in media, and states archives only become useful **after** metadata, taxonomy and
+cleanup. imec-SMIT (May 2026) names archive search and retrieval a top-three European application
+area. Meanwhile this pass measured the commercial step at **4 repos holding 1 star between them**.
+So the pipeline splits at a precise point: **steps 1–5 are free and permissive, step 6 is a bespoke
+build every time.** Price the engagement that way and the margin sits where the code does not exist.
+
+**Licence posture: every shipped component is MIT, Apache-2.0, BSD or CC0.** The one GPL-3.0 option
+(Phraseanet) is listed as a separately-deployed service, never embedded.
+
+```
+ 1 CUT              2 PREVIEW          3 EMBED           4 RETRIEVE        5 DESCRIBE       6 SELL
+ TransNetV2 (MIT)   hecate (Ap-2)      open_clip (MIT)   vespa (Ap-2)      croissant        ███████
+ shot boundaries →  keyframes, GIFs,   frame/shot  →     embeddings  +     (Ap-2)           NOTHING
+ the sellable unit  thumbnails,        vectors           structured        licence +        EXISTS
+ PySceneDetect      summaries          ▲                 rights metadata   provenance       ███████
+ (BSD-3) as the     ▲                  │                 in ONE query      per corpus       rate card
+ cheap fallback     │                  │                 ▲                 ▲                quote eng.
+                    └──────────────────┴─────────────────┘                 │                sale ledger
+                                                          │                │                = BUILD IT
+ CATALOGUE OF RECORD ─────────────────────────────────────┘                │
+ resourcespace (BSD-3+TM, License Manager plugin: multi-licence per asset) ┘
+ or phraseanet (GPL-3.0, separate service) — per-asset rights state lives here
+```
+
+### Wiring, step by step
+
+1. **Cut the tape into shots.** [soCzech/TransNetV2](https://github.com/soCzech/TransNetV2) (MIT,
+   1,083★) for quality, PySceneDetect (BSD-3, already in this KB) as the cheap fallback. The shot is
+   the unit a clip is actually licensed in — get this wrong and every downstream price is wrong.
+   **Vendor it: last push 2023-12-04.**
+2. **Make something a buyer can browse.** [yahoo/hecate](https://github.com/yahoo/hecate) (Apache-2.0,
+   497★) emits keyframes, thumbnails, animated GIFs and summaries. **Also vendor it: 2023-05-20.**
+3. **Embed shots, not whole assets.** `open_clip` (MIT, already in this KB) over keyframes. Store
+   per-shot vectors so a hit returns a **timecode**, which is what gets sold.
+4. **Retrieve with the rights in the same query.** [vespa-engine/vespa](https://github.com/vespa-engine/vespa)
+   (Apache-2.0, 7,202★, pushed today) holds embeddings **and** structured fields together, so
+   "waterfront at dusk" and "cleared for broadcast in EMEA, non-exclusive, to 2029" resolve in one
+   call. This is the single most important design decision in the pattern: **a search layer that
+   cannot filter on rights will return shots you may not sell.**
+5. **Keep the catalogue of record where the rights live.**
+   [resourcespace/resourcespace](https://github.com/resourcespace/resourcespace) + its **License
+   Manager** plugin (multiple licences per resource) is the only open DAM found with native sell-side
+   data. **Read the licence trap in `verticals/solutions.md` (pass 42) before committing: the grant is
+   BSD-3 + a trademark clause, and you cannot put "ResourceSpace" in the product name.**
+6. **Build the commercial step.** Rate card by term/territory/exclusivity, quote engine, licence
+   issuance, sale ledger. Measured non-existent this pass. This is the deliverable.
+
+### Licence ledger for this pattern
+
+| Component | Licence | Posture |
+|---|---|---|
+| TransNetV2, open_clip, PySceneDetect, hecate, vespa | MIT / MIT / BSD-3 / Apache-2.0 / Apache-2.0 | Ship embedded; vendor the two dormant ones |
+| croissant / mlcroissant | Apache-2.0 | Ship embedded |
+| resourcespace | **BSD-3 + trademark clause** | Ship, but **rename the product** and plan "Powered by ResourceSpace"; audit the bundled GPL-2.0 component |
+| phraseanet | GPL-3.0 | Separately-deployed service only |
+| Stax | **no licence** | **Excluded by name** — 8★, no grant, all rights reserved |
+
+### Regional variants
+
+- **EMEA** — lead with ITN–Reuters (70+ years, archive turned into a searchable dataset) as the
+  precedent, and make step 4's rights filter also serve the DSM Art. 4 reservation record: same
+  metadata, "no" and "yes, for a price" as two states of one field.
+- **North America** — step 6 is the whole sale, because no industry-wide AV licensing framework exists
+  (ABA, mid-2026); every buyer is bilateral and the seller needs its own instrumentation.
+- **APAC** — step 4's rights fields must be **per-jurisdiction configuration**, since India has
+  proposed compulsory blanket licensing and Japan a voluntary disclosure mechanism in the same year.
+- **LATAM** — step 0 is Pattern 83: in Mexico the AI right may not be in the contract at all.
+
+## Pattern 82 — Selling the archive as a corpus: the gate, the manifest and the meter
+
+**Why this pattern exists.** A second buyer appeared for the same asset, and in 2026 it changed what
+it wants. Trackers surveyed this pass report new publisher deals shifting from **training** rights to
+**display/grounding** rights (one counts 47 display-only against 61 including training; another puts
+display rights in 58.7% of news-publisher deals), and Microsoft's Publisher Content Marketplace makes
+that a platform. A bulk corpus export and a metered grounding API are **different products**, and the
+same archive has to be able to sell both without the rights state diverging.
+
+```
+  ARCHIVE (Pattern 81 output: shots, embeddings, per-asset rights state)
+      │
+      ├─► GATE ───────► CorpusCustody (MIT, 30★) — resolve SPDX obligations,
+      │                 check compatibility, refuse the corpus that cannot ship
+      │                      │  fails → back to clearance (Pattern 83)
+      │                      ▼  passes
+      ├─► MANIFEST ────► croissant (Apache-2.0, 923★) — schema.org-based,
+      │                 dataset `license` field + RAI provenance extension.
+      │                 Consumed natively by Kaggle / Hugging Face / OpenML.
+      │                      │
+      │          ┌───────────┴────────────┐
+      ▼          ▼                        ▼
+  RESERVATION   (a) TRAINING SALE      (b) DISPLAY / GROUNDING
+  LEDGER        bulk export, one       metered API, per-call,
+  ai.robots.txt price, one audit       WITH ATTRIBUTION — the
+  + TDM reserv. trail                  2026 deal shape
+  (pass 5)           │                        │
+      └──────────────┴────────► SALE LEDGER ◄─┘   ← still does not exist
+                                 (build it)
+```
+
+### Wiring, step by step
+
+1. **Gate before you package.** [rishin-sharma/CorpusCustody](https://github.com/rishin-sharma/CorpusCustody)
+   (MIT, 30★, pushed 2026-09-04) resolves SPDX obligations and compatibility across a corpus. It is
+   the *only* open-source artefact found in this plane that stands between an archive and a buyer. At
+   30 stars, treat it as a **reference implementation to extend**, not a dependency to trust blindly.
+2. **Emit a manifest the buyer already reads.** [mlcommons/croissant](https://github.com/mlcommons/croissant)
+   (Apache-2.0, 923★, pushed 2026-11-16) with the dataset-level `license` property populated from the
+   catalogue of record — never hand-written — plus the Responsible-AI extension for provenance.
+3. **Wire the reservation ledger to the same field.** Pass 5's `ai.robots.txt` and the W3C TDM
+   reservation protocol express "no". This pattern expresses "yes, for this price". **They must read
+   the same per-asset rights state**, or you will reserve an asset you have just sold, which is the
+   failure mode that ends a licensing programme.
+4. **Build two meters, not one.** Bulk training export: one price, one audit trail. Display/grounding:
+   per-call metering **with attribution**, because that is what the 2026 deals and Microsoft's
+   marketplace assume.
+5. **Record the sale.** Measured non-existent. Yours.
+
+### What this pattern will not do
+
+It will not **price** anything. Croissant describes, CorpusCustody gates, the reservation protocols
+refuse — and none of the three has a field for money. Pass 8 found the identical three-step gradient
+in royalties: *declare* a reserve = solved; *honour* it = dormant; *liquidate* the obligation = zero
+literal. **Pass 42 confirms the law a sixth time, now on the sell side: describe = alive, gate = 30
+stars, transact = nothing.**
+
+### Falsifiable prediction, logged
+
+**By 2027-06-30, no Croissant-described commercial media archive corpus will be publicly listed with
+a price.** If this is falsified, the sell-side zero has begun to close and this pattern needs rewriting.
+
+## Pattern 83 — The Mexican re-clearance workflow: a statutory trigger with no tooling (LATAM)
+
+**Why this pattern exists.** Mexico's May 2026 reforms to the Federal Copyright Law and Federal Labour
+Law — the country's first sector-specific AI rules — **remove AI uses from the rights automatically
+granted in audiovisual production contracts; a separate written agreement is now required** (Chambers,
+*Media & Entertainment 2026*, Mexico). A new Federal Law on Cinema and Audiovisual followed on
+22 May 2026, extending oversight to VOD. **Consequence: a Mexican back catalogue does not come with AI
+rights attached.** Before one hour can be licensed for training or grounding, the AI right must be
+re-acquired contract by contract. Open-source support for that work, measured this pass:
+`rights clearance` = **40 repos whose top six hold 2,2,1,1,1,1 stars**.
+
+```
+ CONTRACT INVENTORY        PER-ASSET RIGHTS STATE        RE-ACQUISITION          LICENSABLE SUBSET
+ (the hard part)           (the catalogue)               (the legal work)        (the product)
+ scanned agreements  ──►   resourcespace License    ──►  outreach workflow  ──►  "cleared for AI,
+ OCR + layout (pass 39     Manager: multi-licence        per counterparty,       MX, training+display"
+ stack: tesseract,         per asset — model the         dated, evidenced        = the ONLY subset
+ ocrmypdf, docling)        AI right as its OWN                │                  Pattern 82 may export
+       │                   licence row, absent by            │                          ▲
+       │                   default, NEVER inferred           │                          │
+       └──────────────────────────► CorpusCustody gate ◄──────┴──────────────────────────┘
+                                   refuses anything whose AI row is empty
+```
+
+### Wiring, step by step
+
+1. **Inventory the contracts, not the footage.** Reuse this KB's pass-39 digitisation stack (OCR,
+   layout, text layer) against the agreement archive. The binding constraint is paper, not video.
+2. **Model the AI right as a first-class, absent-by-default licence row.** ResourceSpace's License
+   Manager supports multiple licences per resource — use one row per right type and leave the AI row
+   **empty** until a signed agreement fills it. *Never* infer it from the production contract: the
+   reform's entire effect is that the inference is no longer valid.
+3. **Gate on it.** CorpusCustody (MIT) refuses any corpus containing an asset whose AI row is empty.
+   This is what makes the clearance programme auditable rather than aspirational.
+4. **Sell only the cleared subset** via Pattern 82.
+
+### Why this is the best-qualified LATAM engagement in the KB
+
+The trigger is **statutory, dated and public** — not a trend, a survey or a vendor claim. Compare the
+rest of the region, where this pass found the demand side articulated (BVS Media Connect 2026: *the
+video library stops being a passive archive and becomes a searchable, exploitable asset*; LA NACIÓN's
+*Flashback* animating its own photo archive) but **no public archive-for-AI licensing deal by any
+LATAM broadcaster** — searched in Spanish and Portuguese, recorded as an informed gap in
+`intel/market.md`. In Mexico the law tells you the work is required. Everywhere else in the region you
+are still selling the idea.
+
+### Regional variants
+
+- **Brazil** — holdings are *espalhado por inúmeras instituições* with a national mapping effort live;
+  the equivalent step 1 is a **federated inventory** across custodians, fundable as heritage and
+  commercial work at once. Openverse (MIT) is the closest working model for licence-aware federated search.
+- **Colombia** — CISAC/DASC are asking for AV AI rules that do not exist yet; build the rights rows so
+  a future rule can be applied retroactively rather than re-surveyed.
+- **APAC/EMEA reuse** — steps 2–3 are jurisdiction-agnostic; only the "is the AI right conveyed by
+  default?" answer changes. That answer is the per-jurisdiction policy table from Pattern 81's APAC variant.
+
+## What not to promise in this plane (pass 42)
+
+1. **Never promise an open-source clip-licensing platform.** Measured: `stock footage licensing` = 4
+   repos, top stars 1,0,0,0; `footage marketplace` = 18 with 7 stars across the top six;
+   `media licensing marketplace` = 6 whose top three are junk repos. If a vendor claims one, ask for
+   the repository URL.
+2. **Never quote `clip licensing` or `media licensing marketplace` result counts as evidence of a
+   field.** 47 and 6 results respectively, **zero relevant** — FTC robotics, smartwatch firmware,
+   Windows software policy. Read the results, never the total.
+3. **Never put ResourceSpace in a white-labelled product without reading its licence file.** The grant
+   is BSD-3 **plus a trademark clause**; the product cannot be named "ResourceSpace", and a GPL-2.0
+   component ships in the licence folder.
+4. **Never build on Stax** (8★, **no licence file** → all rights reserved), however well it fits.
+5. **Never present TransNetV2 or hecate as maintained.** Both are ~3 years cold. The MIT/Apache grant
+   survives abandonment; the bug fixes do not. Budget for vendoring.
+6. **Never assume a back catalogue conveys AI rights.** In Mexico it does not, by statute, since May
+   2026 — and the same question is unsettled in most other jurisdictions.
+7. **Never promise collective licensing as the EMEA route.** The commercial broadcasters' own
+   association (ACT, June 2026) argued collective licensing **cannot** accommodate the complexity of
+   AV rights and that licensing must be voluntary, direct and rightsholder-controlled.
+8. **Never cite this pass's market figures as audited.** They come from secondary trackers that
+   disagree, and the session's network policy blocked primary retrieval (see the channel note in
+   `intel/trends.md`). Repo facts: verified by `ls-remote` + API. Press figures: cited, unfetched.

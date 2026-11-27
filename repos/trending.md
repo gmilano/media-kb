@@ -10,6 +10,51 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 42: archive-monetisation infrastructure (**the sell-side measured at four repos holding one star**)
+
+Infrastructure and platform movement for the archive-monetisation plane. Agent-side movement and the
+186× adoption ratio are in `agents/trending.md` for the same date.
+
+**The measurement, GitHub search API, 2026-11-27, `sort=stars`.** This is the pass's primary artefact,
+because the interesting number is a zero and zeros have to be measured to count:
+
+| Query | Repos | Top-6 stars | Relevant |
+|---|---|---|---|
+| `stock footage licensing` | **4** | 1, 0, 0, 0 | **none** |
+| `footage marketplace` | 18 | 3, 3, 1, 0, 0, 0 | none |
+| `media licensing marketplace` | 6 | 83, 79, 55, 0, 0, 0 | **none — top three are junk repos** |
+| `rights clearance` | 40 | 2, 2, 1, 1, 1, 1 | none |
+| `archive monetization` | 21 | 176, 7, 2, 1, 1, 1 | none |
+| `clip licensing` | 47 | 327, 153, 146, 95, 77, 23 | **none — FTC robotics, smartwatch firmware, Windows policy** |
+| `shot search video` | 52 | 27, 18, 8, 8, 7, 6 | **one** — shotit/shotit (Apache-2.0) |
+
+`clip licensing` and `media licensing marketplace` are the sharpest **false friends** recorded in this
+KB to date: 47 results that are entirely unrelated, and an 83-star "leader" that is a junk repo. Cycle
+8's rule — *read the results, never the total* — would have been violated six times over by a pass
+that trusted these counts.
+
+**Infrastructure added to `repos/foundations.md` this pass:** TransNetV2 (MIT, shot cutting), hecate
+(Apache-2.0, keyframes/previews), croissant (Apache-2.0, dataset metadata + licence + provenance),
+openverse (MIT, licence-aware media search, pushed today), vespa (Apache-2.0, embeddings + metadata in
+one query, pushed today), free-for-creators (CC0-1.0, licence metadata as a tested field). **Six for
+six permissive.**
+
+**New licence pathology, logged here because it is a CI rule and not a media fact.**
+[resourcespace/resourcespace](https://github.com/resourcespace/resourcespace) (96★, pushed today)
+reports **`NOASSERTION`**. Verified by shallow clone this pass: `LICENSE`/`LICENSE.md`/`COPYING`/
+`COPYING.md`/`LICENCE` all 404; `license.txt` is **76 bytes of pointer** ("see the documentation/licenses
+folder"); that folder holds **30 files of which 29 are other projects' licences** — including
+`jquery-image-annotation.txt`, **29,880 B of GPL-2.0**. The real grant is the 30th file,
+`documentation/licenses/resourcespace.txt`: **BSD-3-Clause plus a trademark clause** forbidding
+"ResourceSpace" in a derived product's name.
+
+**Worse than pass 8's Chromaprint case for exactly one reason:** there, no SPDX field *could* see the
+truth. Here a scanner that globs the licence folder gets a **confident wrong answer** — Apache-2.0 or
+MIT, depending on read order — while missing both the trademark restriction and the copyleft component.
+**Rule, generalising to all twelve industries:** a 200 at the licence path is no more proof you found
+the grant than a 404 is proof one is missing. If the file points at a folder, the folder answers a
+different question; find the file bearing the project's own name.
+
 ## 2026-11-27 — pass 41: content-protection & soft-binding infrastructure (**an entire standards layer born this month, with 0 to 3 stars per repo**)
 
 Infrastructure and platform layer beneath the agents logged in `agents/trending.md`. Verified

@@ -3975,3 +3975,81 @@ Generative AI."*
 **The consequence for a proposal, in one line:** never sell an invisible watermark as *prevention*.
 It is **evidence** — and the registry below is what makes evidence admissible rather than merely
 technical.
+
+## Pass 42 (2026-11-27) — the archive-monetisation plane: shot-level discovery, clip licensing & AI training-data deals
+
+Plane found the way passes 33–41 were found: ~40 candidate terms grepped against all eight KB files
+**before** any web search. The archive is already well covered in this KB on three sides — it can be
+**preserved** (pass 4: Archivematica 13 mentions, OAIS 12, BagIt 20, FFV1 12), **identified** (pass 5:
+fingerprinting, ISCC, DDEX ERN) and **defended** (pass 41: soft binding, blocking orders). The
+sell-side was empty: `licensing marketplace` **0**, `AI training data` **0**, `training-data licensing`
+**0**, `clip licensing` **0**, `archive sales` **0**, `shot boundary` **0**, `keyframe` **0**,
+`screener` **0**, `stock footage` **1**. So the KB knew how to keep footage, name it and stop other
+people using it, and had no vocabulary at all for **selling** it.
+
+That gap matters more in 2026 than in any prior year, because a second buyer appeared. Archive
+monetisation is the one place the trade press consistently links AI spend to return: NewscastStudio's
+March 2026 piece *"Broadcasters look to AI to unlock value from content archives"* makes archives the
+clearest AI business case **and** notes they only become useful after metadata, taxonomy and cleanup
+work; Moments Lab's 2026 outlook (NewscastStudio, 2025-12-31) predicts the year's defining problem is
+the gap between AI spend and working deployment. In Europe the May 2026 imec-SMIT study names
+**archive search and retrieval** one of the three most active application areas in media.
+
+### The agent layer for this plane
+
+| Agent / engine | Repo | Licence | Stars / forks | Last push | What it actually does |
+|---|---|---|---|---|---|
+| Shotit | [shotit/shotit](https://github.com/shotit/shotit) | Apache-2.0 | 27★ / 4f | 2026-09-06 | Screenshot-to-video search engine **explicitly built for TV & film**: give it a frame, it finds the title and timecode. The only alive, media-specific shot-search engine found. |
+| CorpusCustody | [rishin-sharma/CorpusCustody](https://github.com/rishin-sharma/CorpusCustody) | MIT | 30★ / 6f | 2026-09-04 | Training-data licence and provenance **gate**: resolves SPDX obligations and checks compatibility before a corpus ships. The closest thing in open source to a pre-sale rights check on a dataset. |
+| CLIFS | [johanmodin/clifs](https://github.com/johanmodin/clifs) | Apache-2.0 | 483★ / 51f | 2022-03-15 — **dormant ~4.7y** | Free-text search over video frames via the CLIP image/text encoders. Proves the retrieval pattern; nobody has maintained it. |
+| natural-language-youtube-search | [haltakov/natural-language-youtube-search](https://github.com/haltakov/natural-language-youtube-search) | MIT | 932★ / 68f | 2021-10-15 — **dormant ~5.1y** | Search *inside* video by description, as a notebook. The most-starred media-side shot-search artefact in open source, and it has not been touched in five years. |
+| Towhee | [towhee-io/towhee](https://github.com/towhee-io/towhee) | Apache-2.0 | 3,449★ / 255f | 2024-10-18 — **dormant ~2.1y** | Pipeline framework turning video/audio into embeddings. The heaviest-starred general substrate for this plane, also stalled. |
+| Marqo | [marqo-ai/marqo](https://github.com/marqo-ai/marqo) | Apache-2.0 | 5,026★ / 238f | 2026-09-03 | **Ecommerce** search and discovery over text+images. Listed here as the comparator, not as a media tool — see the ratio below. |
+
+All six verified 2026-11-27 by `git ls-remote` (existence) plus the GitHub search API (stars, forks,
+SPDX, `pushed_at`) in the same pass. Dormancy is computed from `pushed_at`, not inferred from vibes.
+
+### The number that defines this plane: 186×
+
+[marqo-ai/marqo](https://github.com/marqo-ai/marqo) (5,026★, Apache-2.0, pushed **2026-09-03**) and
+[shotit/shotit](https://github.com/shotit/shotit) (27★, Apache-2.0, pushed **2026-09-06**) solve the
+*same shape* of problem — find the item by its content — under the *same licence*, and were pushed
+**three days apart**. They are **186× apart in adoption**. Against
+[vespa-engine/vespa](https://github.com/vespa-engine/vespa) (7,202★, pushed today) the media-side
+engine is **267×** behind.
+
+**Read that as a funding fact, not a quality judgement:** content-based retrieval is a solved,
+well-capitalised problem *when the thing being retrieved is for sale in a shop*. Pointed at a
+broadcaster's own archive, the same technique is a 27-star hobby project and two dormant notebooks.
+
+### The sell-side, measured rather than assumed
+
+GitHub search API, 2026-11-27, `sort=stars`:
+
+| Query | Repos returned | Top-6 star counts | Relevant? |
+|---|---|---|---|
+| `stock footage licensing` | **4** | 1, 0, 0, 0 | No — the 1★ is an unrelated image-sensor repo |
+| `footage marketplace` | 18 | 3, 3, 1, 0, 0, 0 | No — generic marketplace scaffolds |
+| `media licensing marketplace` | 6 | 83, 79, 55, 0, 0, 0 | **No — top three are junk repos** (`Rastaman4e/-1`, `chikitang/A`, `BabyJ723/blast-ON`) |
+| `rights clearance` | 40 | 2, 2, 1, 1, 1, 1 | No |
+| `archive monetization` | 21 | 176, 7, 2, 1, 1, 1 | No — top hit is an unrelated GPL-3.0 repo |
+| `clip licensing` | 47 | 327, 153, 146, 95, 77, 23 | **No — zero relevant.** Top hits are an FTC robotics team, MetaWatch smartwatch firmware and a Windows software-policy repo |
+
+Two of these are the KB's sharpest **false-friend** traps yet, and they confirm cycle 8's rule that
+you must read the results and never the total: `clip licensing` looks like 47 findings and is zero,
+and `media licensing marketplace` looks like an 83★ leader and is nothing at all. A careless pass
+would have written six fictional rows out of this table.
+
+### The nuance that makes the zero exact
+
+[WordPress/openverse](https://github.com/WordPress/openverse) (MIT, 828★ / 367f, pushed **today**) is
+the one large, alive, genuinely licence-aware media search engine in open source — and it indexes
+**only openly-licensed media**. [skyzhao1223/free-for-creators](https://github.com/skyzhao1223/free-for-creators)
+(CC0-1.0, 113★, pushed 2026-11-24) is the same shape: 214 assets, each tagged with attribution **and
+monetisation rules**, CI-checked for dead links.
+
+So the precise statement is **not** "open source cannot handle media licensing." It is:
+**open source handles the licence when the answer is free, and goes silent the moment money changes
+hands.** Discovery is solved, rights *description* is solved, and there is no open-source component
+anywhere in this plane that quotes a price, issues a licence for a fee, or records that a clip was
+sold.

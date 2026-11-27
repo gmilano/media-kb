@@ -2333,3 +2333,73 @@ half-open interface (SPEKE), and **four cannot be built at all** — licence iss
 forensic marking, blocklist execution and takedown authority. That 4/1/4 split is unusually
 favourable compared with most planes in this KB, because the open half is exactly the half that
 produces *evidence*, which is what the regulation now demands.
+
+## Pass 42 (2026-11-27) — platforms for the archive-monetisation plane
+
+### The one platform that actually has a sell-side, and the licence trap inside it
+
+| Platform | Repo | Licence (as reported) | Licence (as verified) | Stars / forks | Last push |
+|---|---|---|---|---|---|
+| ResourceSpace | [resourcespace/resourcespace](https://github.com/resourcespace/resourcespace) | `NOASSERTION` (GitHub API) | **BSD-3-Clause + a non-standard trademark clause** | 96★ / — | **2026-11-27** |
+
+ResourceSpace is the open-source DAM with the longest history in the archive world (originally built
+for Oxfam GB) and it is the **only** system found in this plane with a native sell-side artefact: a
+**License Manager plugin** that tracks per-asset licences and copyright and supports *multiple
+licences attached to one resource* — which is exactly the data shape a rights-managed catalogue needs.
+It is alive, with commits landing the day of this pass.
+
+**Now the trap, verified by shallow clone on 2026-11-27 rather than inferred:**
+
+1. The GitHub API reports `NOASSERTION`, which naive tooling reads as "no licence."
+2. `LICENSE`, `LICENSE.md`, `COPYING`, `COPYING.md` and `LICENCE` all return **404** on `master`.
+3. `license.txt` returns **200** — and is **76 bytes** containing no grant whatsoever:
+   *"Please see the "documentation/licenses" folder for all applicable licenses."*
+4. That folder holds **30 files**, and **29 of them are other projects' licences**: DOMPurify
+   (Apache-2.0), chart.js (MIT), date-fns, jQuery, jQuery-UI, jstree, leaflet, pdf.js, openseadragon,
+   video.js, uppy, tinymce, WordPress, ICC colour profiles — **and `jquery-image-annotation.txt`,
+   which is 29,880 bytes of GNU GPL v2.**
+5. The actual grant for ResourceSpace's own code is the 30th file,
+   `documentation/licenses/resourcespace.txt` (1,982 B): standard three-clause BSD, **plus a fourth
+   clause** — derived projects *"may not use the registered trademark 'ResourceSpace', nor may
+   'ResourceSpace' appear in their name, without prior written permission from Montala Limited"*,
+   with *"Powered by ResourceSpace"* offered as the permitted phrasing.
+
+**Why this is worse than the Chromaprint case in pass 8.** There, the licence was owned by the
+*compilation* and no SPDX field could see it. Here the grant **exists and is permissive**, but it is
+filed where no scanner looks, behind a pointer, among twenty-nine other people's licences — one of
+which is copyleft. A scanner that globs the licence directory and takes the first or most common hit
+returns **Apache-2.0 or MIT**: confidently wrong in both directions, missing both the trademark
+restriction and the GPL-2.0 component.
+
+**Two consequences that belong in a statement of work, not a footnote:**
+
+- *Commercial:* a studio white-labelling an archive-licensing portal for a client **cannot name the
+  product with "ResourceSpace"** and should plan on the *"Powered by ResourceSpace"* attribution.
+  That is a branding decision made at architecture time, not at launch.
+- *Engineering:* the bundled `jquery-image-annotation` component is GPL-2.0. Before shipping a
+  derived binary, establish whether that component is in the deployed path.
+
+**Reusable CI rule (generalises to all twelve industries, and extends pass 8's rule):** a 404 at the
+licence path is never by itself proof that a licence is missing — and a **200** at the licence path is
+never by itself proof that you have found the grant. Read the file. If it points somewhere, follow it;
+if it points at a *folder*, assume the folder answers a different question than the one you asked, and
+find the file that bears the project's own name.
+
+### The rest of the platform layer: a measured near-zero
+
+| Platform | Repo | Licence | Stars / forks | Last push | Verdict |
+|---|---|---|---|---|---|
+| Openverse | [WordPress/openverse](https://github.com/WordPress/openverse) | MIT | 828★ / 367f | 2026-11-27 | **Real, alive, production-grade** — but indexes *openly-licensed* media only. The licence-aware discovery half of the plane, with the paid half absent by design. |
+| Stax | [aramadan0096/Stax](https://github.com/aramadan0096/Stax) | **none** | 8★ / 1f | 2026-07-26 | Self-hosted manager for mass-production stock footage and VFX assets. Honest about scope, but **8 stars and no licence file** — with no grant, default copyright applies: all rights reserved. **Do not build on it.** |
+
+Already indexed in this KB and reusable here rather than re-listed: **Phraseanet** (GPL-3.0 — built
+for photo and press agencies, with an advanced rights-management module and Lightbox validation
+workflows), **Pimcore**, **MediaCMS** and the PIM/DAM entries from earlier passes. Phraseanet is the
+closest *architectural* match to an agency catalogue; its GPL-3.0 grant makes it a separately-deployed
+service in any proposal, not a library to embed.
+
+**The platform-selection conclusion for this plane:** there is no platform to select. ResourceSpace
+(+ its License Manager) or Phraseanet carries the catalogue and the per-asset rights data; Openverse
+shows how licence-aware search should behave; and the quote, the rate card and the sale are a bespoke
+build every time. Any vendor claiming an end-to-end open-source clip-licensing platform should be
+asked for the repository URL — this pass measured the field and there isn't one.

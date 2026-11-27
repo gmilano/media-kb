@@ -4139,3 +4139,65 @@ real-time dynamic injunctions). Not in force at all: **the United States**, wher
 bills disagree on whether VPNs are even in scope. A single global "takedown feature" cannot satisfy
 these; **the asset is a per-jurisdiction policy engine** — the same conclusion pass 8 reached for
 APAC AI rules, now reached independently in enforcement.
+
+## Pass 42 (2026-11-27) — trends in the archive-monetisation plane
+
+1. **The archive became the clearest AI business case in media, and the trade press is explicit that
+   it is a data-cleanup project first.** NewscastStudio (2026-03-30), *"Broadcasters look to AI to
+   unlock value from content archives"*, ties archive work to returns **and** states archives only
+   become useful once metadata, taxonomy and cleanup are done. Moments Lab's 2026 outlook
+   (NewscastStudio, 2025-12-31) predicts the defining problem of the year is the gap between AI spend
+   and working deployment, naming legacy on-prem content migration as the obstacle. **Sell the
+   taxonomy, not the model.**
+
+2. **A second buyer arrived for the same asset, and in 2026 it changed what it wants.** Trackers
+   surveyed this pass report the training share of new publisher deals collapsing in favour of
+   **display/grounding rights** — one counts 47 display-only deals against 61 including training, and
+   another puts display rights in 58.7% of news-publisher deals. Microsoft's Publisher Content
+   Marketplace (Copilot as first buyer) is the platform expression of this. *Treat these counts as
+   directional: they come from secondary trackers, several of which disagree, and this session could
+   not fetch primary sources (see channel note below).*
+
+3. **Collective licensing is being tried and simultaneously rejected, by region.** The News/Media
+   Alliance signed a non-exclusive opt-in deal with Bria (March 2026, ~2,200 members, revenue split
+   50-50). In Europe the ACT — the commercial broadcasters' association — argued in its June 2026
+   issue paper that licensing must be *voluntary, direct and under full rightsholder control* and
+   that **collective licensing cannot accommodate the complexity of AV rights**. Same year, opposite
+   conclusions, and the split runs along the news/AV line as much as the geographic one.
+
+4. **Music settled; audiovisual did not.** UMG–Udio (Oct 2025) and Warner–Suno (Nov 2025) each paired
+   a settlement with a licensed platform launching in 2026. An ABA analysis from mid-2026 states that
+   **no industry-wide content-licensing framework analogous to the music model has been announced for
+   film and TV.** Music is the template everyone cites and AV is the market nobody has built.
+
+5. **The engineering is solved and asleep; the money went to retail search.** Shot detection and
+   shot-level retrieval exist under MIT/Apache and are dormant (TransNetV2 2023-12, hecate 2023-05,
+   clifs 2022-03, natural-language-youtube-search 2021-10, towhee 2024-10). The alive, well-starred
+   content-retrieval projects are ecommerce and general search: Marqo 5,026★ (2026-09-03), Vespa
+   7,202★ (today). Media-specific Shotit: **27★**. Pushed three days apart from Marqo, same licence,
+   **186× apart**.
+
+6. **Open source describes licences fluently and transacts them not at all.** Openverse (MIT, 828★,
+   alive today) and free-for-creators (CC0-1.0) model licence metadata well — for **free** content
+   only. Croissant (Apache-2.0, 923★) carries a `license` field and RAI provenance for datasets.
+   Nothing quotes, invoices or records a sale. Measured: `stock footage licensing` = **4 repos**
+   (top stars 1,0,0,0); `rights clearance` = 40 repos, top six = 2,2,1,1,1,1.
+
+7. **The content law (health's CPT law, pass 5's registry law) holds again, with a new face.** What
+   is scarce is never the parser — it is the *allocation* and now the *price*. Clip-level pricing,
+   territory-by-term rate cards and residual splits are the scarce artefacts, and they are scarce
+   because they are commercially confidential, not because they are hard to encode.
+
+8. **A new licence pathology, worse for scanners than pass 8's Chromaprint case.** `resourcespace/resourcespace`
+   (96★, pushed today) reports `NOASSERTION`: its `license.txt` is **76 bytes of pointer** to a folder
+   holding 30 files, 29 of which are *other projects'* licences (including a **GPL-2.0** component).
+   The real grant sits at `documentation/licenses/resourcespace.txt` and is **BSD-3-Clause plus a
+   trademark clause**. Full detail and the CI rule in `verticals/solutions.md` (pass 42).
+
+**Channel note, recorded as an informed gap.** This session's network policy allows GitHub but not the
+article hosts: `curl -sI` returned `000` and WebFetch returned `ENOTFOUND` for newscaststudio.com,
+acte.be, acma.gov.au, lw.com, chambers.com, cisac.org, americanbar.org, imec-publications.be,
+research.google and arxiv.org. **Every repository row in this pass is `ls-remote`+API verified; every
+market claim above is attributed to the publisher and date that WebSearch surfaced and was NOT
+independently fetched.** Treat the deal counts and market figures as leads to confirm, not as audited
+numbers. Repo facts: verified. Press figures: cited, unfetched.

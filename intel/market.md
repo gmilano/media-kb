@@ -1546,6 +1546,50 @@ and subscription revenue. **Quote the business-model numbers, not the loss numbe
 an adversary with payroll and uptime obligations, which is what makes detection tractable.
 
 
+### Pass 42 (2026-11-27) — the archive-monetisation layer in North America
+
+**The structural fact: music has a template, audiovisual has none.** UMG settled with Udio (Oct 2025)
+and Warner with Suno (Nov 2025), each pairing the settlement with a licensed AI platform launching in
+2026. An American Bar Association analysis from mid-2026 states that **no industry-wide
+content-licensing framework analogous to the emerging music model has been announced for film and
+TV.** Music is the precedent every deck cites; AV is the market nobody has built the machinery for.
+
+**What the deal flow looks like (secondary trackers — confirm before quoting).** News Corp is
+reported to have agreed a Meta licence in March 2026 at up to **$50M/year for at least three years**
+covering US and UK titles, and an earlier OpenAI agreement reported at **~$250M over five years**,
+terms unconfirmed by the parties. The News/Media Alliance signed a **non-exclusive opt-in** deal with
+Bria in March 2026 — roughly **2,200 member publishers**, revenue split **50-50**. Microsoft's
+**Publisher Content Marketplace**, co-designed with publishers, lets publishers set terms for content
+used in AI grounding, with Copilot as first buyer. *These figures come from licensing trackers that
+disagree with each other; this session could not fetch primary sources (see the channel note in
+`intel/trends.md`).*
+
+**Regulation is the absence of regulation.** Federal AI rulemaking largely evaporated in 2025; the
+action is state-level and harm-focused, with a proposed 10-year moratorium on certain state AI rules
+in play (CNTI analysis). MLex reported the licensing landscape being shaped by litigation with
+**~100 US copyright cases** pending. Canada has been quieter since AIDA failed to pass. **Licensing
+here is priced by litigation risk, not by statute** — which is why the deals are bilateral and the
+terms are secret.
+
+#### Opportunity — North America
+
+1. **The deal desk, productised.** With no AV framework, every archive sale is negotiated one buyer at
+   a time, and the seller has no instrumentation. The sellable asset is the thing no open-source repo
+   provides (measured this pass: `stock footage licensing` = 4 repos, top stars 1,0,0,0): a rate card
+   by term/territory/exclusivity, a quote engine, and an auditable record of what was licensed to whom.
+   Build it on the free parts — TransNetV2 + hecate to cut and preview, Vespa to retrieve, Croissant to
+   describe the corpus — and bill for the commercial step.
+2. **Litigation-grade provenance.** With ~100 cases pending, a US rightsholder's archive needs to prove
+   *what it holds and where each asset came from* before it can safely sell it.
+   [rishin-sharma/CorpusCustody](https://github.com/rishin-sharma/CorpusCustody) (MIT, 30★) is the only
+   open-source gate of this shape; it is a 30-star project, so this is a build-with-a-reference job.
+3. **Display rights, not training rights.** Trackers this pass show new deals shifting to
+   display/grounding. That changes the deliverable from a bulk corpus export to a **queryable,
+   per-call-metered API with attribution** — a different system, and the one Microsoft's marketplace
+   assumes.
+4. **EIDR remains a North American institution with no open client** (pass 5). Any catalogue-level
+   identifier work here is still integration against a membership registry, not an open implementation.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3259,6 +3303,55 @@ only loss estimates and the one Italian fine. A proposal should price the engine
 not from a published benchmark, because none exists.
 
 
+### Pass 42 (2026-11-27) — the archive-monetisation layer in EMEA
+
+**EMEA is the only region where "archive search and retrieval" is named a top-tier AI application by
+a research institution rather than a vendor.** The imec-SMIT study (May 2026) puts archive search and
+retrieval alongside newsroom productivity and audience-facing products as the European media sector's
+most active application areas, and argues value accrues to whoever controls *infrastructure, data,
+models, interfaces, rights and business arrangements*. It sets out six routes for media organisations
+to create value from AI, including **bilateral licensing with frontier model providers** and
+**collective or sectoral licensing**. The DPP's European Media Trends 2026 names AI the dominant
+driver of strategic change, with rising interest in **digital sovereignty**.
+
+**The reference transaction already exists here.** Reuters and ITN agreed worldwide distribution of
+ITN's **70+ year television archive**, with the archive being turned into a **searchable dataset**.
+That is this entire plane in one deal — cut, describe, make retrievable, then license — and it is the
+single best case study in the KB for an archive-monetisation pitch.
+
+**And the region has taken a position that forecloses the easy answer.** The ACT (commercial
+broadcasters and VOD services) argued in its **June 2026** issue paper that when content is licensed
+it must be **voluntary, direct and under full rightsholder control, enabled by transparency**, and
+that **collective licensing cannot accommodate the complexity of AV rights** — explicitly rejecting
+the collective route that North American news publishers took with Bria. It also warns against blanket
+mandatory labelling of generative AI content under the AI Act. Meanwhile a Council of the EU
+presidency summary on **CDSM Article 15** and licensing in the age of AI notes **most Member States
+report having introduced national mechanisms to facilitate licensing**, and Member States are pushing
+an **AVMSD overhaul**. Press-freedom context: the MFRR counted **736 verified violations** across EU
+member and candidate countries in H1 2026, and public broadcasters remain under severe pressure a year
+into the EMFA.
+
+**Carried forward from pass 5, still the decisive EMEA asymmetry:** this is the one region where
+rights *reservation* is a legal instrument (DSM Art. 4 requires machine-readable form). Reservation
+and monetisation are the same metadata problem viewed from opposite ends — and only in EMEA is one
+half of it legally compelled.
+
+#### Opportunity — EMEA
+
+1. **"Turn the archive into a searchable dataset" is a named, precedented deliverable here.** Lead with
+   ITN–Reuters, scope it as metadata/taxonomy remediation first (the NewscastStudio precondition), and
+   price the retrieval layer on Vespa + `open_clip` (both already in this KB).
+2. **Direct-licensing instrumentation, because the industry body rejected the collective route.** If
+   licensing must be voluntary, direct and rightsholder-controlled, each broadcaster needs **its own**
+   rate card, consent ledger and transparency reporting. That is a per-client build with a reusable
+   core — the best-margin shape in this plane.
+3. **Sovereign deployment is a differentiator, not a constraint.** With digital sovereignty rising in
+   the DPP data and all six foundation repos permissive (MIT/Apache/BSD/CC0), an EU-hosted archive
+   search stack with no US SaaS dependency is deliverable today.
+4. **One reservation/monetisation ledger.** Build the Art. 4 reservation record and the licence record
+   as one dataset: the same asset, the same metadata, "no" and "yes, for this price" as two states.
+   Nobody ships this, and EMEA is the only region legally required to maintain half of it.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -4938,6 +5031,55 @@ a reported site — **unverified against the orders themselves and in tension wi
 framing of the same orders**; do not quote it without checking the text. **Honest gap: no APAC-scoped
 market figure for content protection or anti-piracy services was found at any scope in this pass.**
 
+
+### Pass 42 (2026-11-27) — the archive-monetisation layer in APAC
+
+**APAC holds the two regulatory extremes of this plane, and they are in the same region.** Latham &
+Watkins (Sep 2026) reports a sharp increase in APAC AI regulation with **diverging approaches by
+country**. At one pole, **India has proposed mandatory blanket licensing with revenue-based royalties
+for AI training** — a compulsory, collectively-administered tariff. At the other, **Japan has proposed
+a voluntary mechanism** asking AI operators to disclose training content, pushed by rights holders
+seeking licensing and compensation. Compare EMEA, where the broadcasters' own association argued
+collective licensing *cannot* work for AV rights: **the compulsory-tariff model and the
+voluntary-direct model are both live, 2026, and mutually exclusive.** Korea has a comprehensive
+risk-based AI law; China's AI-content labelling rules took effect September 2025.
+
+**This confirms and sharpens pass 5's APAC corollary:** the sellable asset in APAC is **a
+per-jurisdiction policy engine**, not a compliance mode. An archive-licensing system sold here must
+express "what may be licensed, to whom, on what terms, with what disclosure" as *configuration*,
+because the answer differs by country and the countries are moving in opposite directions.
+
+**The deal structure is also mutating here first.** At BroadcastAsia 2026, speakers described
+partnerships moving past simple licensing toward **co-ownership of intellectual property** (S&P
+Global, June 2026) — i.e. the archive holder takes equity in the derived work rather than a fee for
+the input. Nine Entertainment reportedly signed a one-year Microsoft Copilot deal in July 2026,
+reported as the first of its kind in Australia and APAC.
+
+**Adoption is broad and shallow, and the regulator has said so.** Australia's ACMA published an
+*AI in media* report (April 2026) flagging copyright and compensation concerns over using media
+content to train models, and noting Nine, Seven West Media and the ABC have built internal AI
+guidelines and tools. Chambers characterises APAC as in a phase of **structured experimentation**,
+with Australia relatively advanced. Market backdrop: the Asia-Pacific screen economy is described as
+racing toward **$200B with a monetisation gap defining the decade** (Variety AU), while APAC adspend
+is forecast to grow **5.2% in 2026 — the slowest since the pandemic**. AVIA's 2026 Asia Video Industry
+Report finds piracy evolving, governments engaging and AI emerging.
+
+#### Opportunity — APAC
+
+1. **Sell the policy engine, not the pipeline.** One archive, many jurisdictions, irreconcilable rules:
+   the per-territory rules table *is* the product. The retrieval layer underneath is free and already
+   in this KB.
+2. **Structure for co-ownership, not licensing.** If APAC partnerships are moving to shared IP in the
+   derived work, the instrumentation changes: you must track **contribution** (which assets fed which
+   output) rather than just **consumption**. That is a provenance-graph build — Croissant's RAI
+   provenance extension plus CorpusCustody's SPDX gate are the only open starting points found.
+3. **Australia is the entry market.** A regulator-published report, three broadcasters with internal
+   AI governance already written, and a precedent Copilot deal. Organisations that have published a
+   policy have committed to being able to **evidence** it — the same buying trigger pass 8 identified
+   in LATAM newsrooms.
+4. **The monetisation gap is an attribution problem.** Pass 8 recorded this for the Variety $200B
+   figure; it holds identically for archives. Revenue cannot be apportioned to a shot nobody can
+   identify, which makes shot-level identification the precondition for every revenue claim here.
 
 ### LATAM
 
@@ -6672,6 +6814,69 @@ carries a LATAM registrant marker.** The region is a consumer of this standards 
 participant in it — which is precisely what makes Pattern 77 (register an identifier built on a
 permissive model) a differentiating regional play rather than a crowded one.
 
+
+### Pass 42 (2026-11-27) — the archive-monetisation layer in LATAM
+
+**The single most actionable LATAM finding in this plane, and it is a statutory one.** Mexico's
+reforms to the **Federal Copyright Law and the Federal Labour Law**, published **May 2026** and
+described as the country's first sector-specific AI rules, **remove AI uses from the rights
+automatically granted in audiovisual production contracts — a separate written agreement is now
+required** (Chambers, *Media & Entertainment 2026*, Mexico). A new **Federal Law on Cinema and
+Audiovisual** followed on **22 May 2026**, extending oversight to VOD platforms.
+
+Read that clause against this plane and it is a precondition, not a detail: **a Mexican back
+catalogue does not come with AI rights attached.** Before a single hour of a Mexican archive can be
+licensed for AI training or grounding, the AI right has to be *re-acquired*, contract by contract,
+from the parties to the original production. That is a rights-clearance programme — exactly the work
+for which this pass measured the open-source field at **40 repos whose top six hold 2,2,1,1,1,1
+stars**.
+
+**The rest of the regional picture.** Peru's AI-copyright law took effect **January 2026**. In
+Colombia, **CISAC and its local society DASC** warn that AI rules for audiovisual works are still
+missing and are pushing for them. Latin Lawyer reports Brazil, Argentina, Chile, Colombia and Costa
+Rica each building AI governance frameworks **with no regional harmonisation**. In Argentina, AI
+labelling obligations reaching audiovisual media, streaming, social platforms and news portals appear
+in 2026 normative material, with special rules in election periods — *status (enacted vs proposed)
+not established in this session; treat as unconfirmed.*
+
+**Where LATAM is genuinely ahead: the demand side is already articulated.** At BVS Media Connect 2026
+an executive framed it precisely — *the video library stops being a passive archive and becomes a
+searchable, exploitable asset that generates new content.* Argentina's **LA NACIÓN** runs *Flashback*,
+animating its own **photographic archive** with AI, labelling each episode as AI-generated. Note what
+that is: **internal reuse of an owned archive, not licensing to a third party** — the lower-risk first
+step, and a replicable one.
+
+**The measured defect: you cannot license what nobody has inventoried.** A regional report on sound
+and audiovisual archives describes Brazil's audiovisual holdings as *espalhado por inúmeras
+instituições* — scattered across innumerable institutions — with a national mapping effort underway to
+locate them. The **II Encuentro Iberoamericano de Archivos sobre Inteligencia Artificial en la
+Preservación Documental** (7–9 September 2026, with Argentine and Brazilian participation) is the
+regional forum where that work is being coordinated.
+
+**Informed gap, stated explicitly.** Searched in Spanish and Portuguese for Brazil/Argentina
+broadcaster deals licensing archive content for AI training (`archivo audiovisual Brasil Argentina
+digitalización acervo IA licenciamiento 2026 broadcaster`, extended mode) and for LATAM archive
+digitisation in the regional sweep: **no public archive-for-AI licensing deal by a LATAM broadcaster
+surfaced.** The regulation, the demand-side language and the preservation effort are all documented;
+the transaction is not. **That is an absence of evidence in this session's channels, not evidence that
+no deal exists** — and it is the opposite of the Mexican finding, where the statute is explicit and
+public. Any LATAM pitch should assume it is selling the **first** such deal in the market.
+
+#### Opportunity — LATAM
+
+1. **Mexico first, and lead with the clause.** The May 2026 reform converts archive monetisation into
+   a mandatory re-clearance project with a statutory trigger. The deliverable is a contract-inventory
+   and rights-reacquisition workflow over the catalogue — defensible, dated and legally compelled.
+2. **Sell internal reuse before external licensing.** *Flashback* is the proof: an owned archive
+   animated with AI, labelled, published, no third-party rights negotiation. Shortest path to a
+   reference case, and it builds the taxonomy that any later sale requires anyway.
+3. **Inventory as a product.** With Brazilian holdings scattered across institutions and a national
+   mapping effort live, a federated catalogue — one index, many custodians, per-institution rights
+   state — is fundable as cultural-heritage and commercial work simultaneously. Openverse (MIT, alive
+   today) is the closest working model for licence-aware federated search.
+4. **No harmonisation means the APAC policy-engine asset resells here.** Five countries building
+   frameworks independently is the same requirement as APAC's divergence, so build the per-jurisdiction
+   rules table once.
 
 ## Globant positioning
 

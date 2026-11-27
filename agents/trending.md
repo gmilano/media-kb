@@ -9,6 +9,49 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 42: the archive-monetisation plane (**186× apart, same licence, pushed three days apart**)
+
+Plane found by grepping ~40 candidate terms against all eight KB files before any web search. The
+archive was already covered on three sides — **preserved** (pass 4), **identified** (pass 5),
+**defended** (pass 41) — and the sell-side vocabulary was empty: `licensing marketplace` 0,
+`AI training data` 0, `clip licensing` 0, `archive sales` 0, `shot boundary` 0, `keyframe` 0,
+`screener` 0, `stock footage` 1.
+
+**This week's movement, and it is all on one side of the plane.** Alive and committing:
+[WordPress/openverse](https://github.com/WordPress/openverse) (MIT, 828★/367f, pushed **2026-11-27**),
+[vespa-engine/vespa](https://github.com/vespa-engine/vespa) (Apache-2.0, 7,202★/753f, pushed
+**2026-11-27**), [mlcommons/croissant](https://github.com/mlcommons/croissant) (Apache-2.0, 923★/134f,
+pushed **2026-11-16**), [skyzhao1223/free-for-creators](https://github.com/skyzhao1223/free-for-creators)
+(CC0-1.0, 113★, pushed **2026-11-24**), and
+[resourcespace/resourcespace](https://github.com/resourcespace/resourcespace) (96★, pushed
+**2026-11-27**).
+
+**Cold, and cold for years:** [soCzech/TransNetV2](https://github.com/soCzech/TransNetV2) (MIT,
+1,083★, **2023-12-04**), [yahoo/hecate](https://github.com/yahoo/hecate) (Apache-2.0, 497★,
+**2023-05-20**), [johanmodin/clifs](https://github.com/johanmodin/clifs) (Apache-2.0, 483★,
+**2022-03-15**), [haltakov/natural-language-youtube-search](https://github.com/haltakov/natural-language-youtube-search)
+(MIT, 932★, **2021-10-15**), [towhee-io/towhee](https://github.com/towhee-io/towhee) (Apache-2.0,
+3,449★, **2024-10-18**).
+
+**The number of the pass — 186×.** [marqo-ai/marqo](https://github.com/marqo-ai/marqo) (5,026★,
+Apache-2.0, pushed 2026-09-03, *ecommerce* search) against
+[shotit/shotit](https://github.com/shotit/shotit) (27★, Apache-2.0, pushed 2026-09-06, screenshot-to-video
+search **for TV & film**). Same problem shape, same licence, pushed three days apart, 186× apart in
+adoption. Against Vespa it is 267×. Content-based retrieval is solved and well capitalised **when the
+retrieved thing is for sale in a shop**; aimed at a broadcaster's archive it is a 27-star project.
+
+**New this pass and genuinely new:** [rishin-sharma/CorpusCustody](https://github.com/rishin-sharma/CorpusCustody)
+(MIT, 30★/6f, pushed 2026-09-04) — a training-data licence and provenance *gate* that resolves SPDX
+obligations and checks compatibility before a corpus ships. It is the only open-source artefact found
+anywhere in this plane that sits between an archive and a buyer. 30 stars: a normative bet, not an
+installed base.
+
+**Watch item with a falsifiable prediction.** Croissant is alive, standards-backed (schema.org-based,
+adopted by Kaggle/Hugging Face/OpenML) and carries a `license` field plus an RAI provenance extension
+— it is the obvious container for "archive sold as training corpus." **Prediction: by 2027-06-30 no
+Croissant-described commercial media archive corpus will be publicly listed with a price.** The format
+describes; it does not transact. If this is falsified, the sell-side zero below has started to close.
+
 ## 2026-11-27 — pass 41: the content-protection, soft-binding & anti-piracy enforcement plane (**the registry filled 19 slots this month and only 13 of its 80 entries can actually be looked up**)
 
 Plane found by grepping ~60 candidate terms against all eight KB files before any web search. The KB

@@ -9,6 +9,62 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 38: the type, font & multi-script text-rendering plane (**agents read type off a page; not one writes or validates a font**)
+
+Plane chosen by grep of ~40 candidate terms against all eight KB files before any web search.
+`typeface`, `glyph`, `kerning`, `variable font`, `Noto`, `Devanagari` and `script coverage` each scored
+**zero** across 33,046 lines; `font` scored 10 and all ten sat inside the *print* plane (pass 23). Type had
+entered this KB as a sub-layer of prepress and never as the layer that decides whether a subtitle, a
+lower-third, a TV-app menu or an e-reader page can render a language at all.
+
+### The agent layer, measured 2026-11-27
+
+| Agent | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [dembrandt/dembrandt](https://github.com/dembrandt/dembrandt) | MIT | 4,094 | 2026-11-26 | Website → design tokens incl. typography. Most-adopted agent in the plane, and it **reads**. |
+| [iart-ai/motion-skills](https://github.com/iart-ai/motion-skills) | MIT | 2,255 | 2026-11-18 | 56 motion-graphics agent skills; nearest thing to an agent that *places* type. |
+| [arvindrk/extract-design-system](https://github.com/arvindrk/extract-design-system) | MIT | 325 | 2026-09-05 | Design-token extraction. Same direction: page → tokens. |
+| [jasonmello/pocket-design-mcp](https://github.com/jasonmello/pocket-design-mcp) | Apache-2.0 | 25 | 2026-11-21 | Only MCP server serving **fonts** as first-class assets. |
+| [Kreminskaya/beautiful-pdf-mcp](https://github.com/Kreminskaya/beautiful-pdf-mcp) | MIT | 9 | 2026-06-12 | Typographically coherent PDFs via MCP. Existence proof at 9 stars. |
+
+**The asymmetry is the finding.** `fonttools mcp` returns **TOTAL=1** and that result is
+[jpsanders/banner-builder](https://github.com/jpsanders/banner-builder) (MIT, **0★**, 2026-11-23), a
+banner builder, not a font tool. Subsetting, shaping, coverage checking, compilation and QA — the whole
+font-engineering layer — has **no agent bridge**, for the pass-7 reason: it is called by a pipeline, not
+conversed with.
+
+**False abundance, caught again.** `font mcp server` = **TOTAL=76**, `typography mcp` = **TOTAL=104** —
+and the top hit for the first is [ateymoori/oh-my-android](https://github.com/ateymoori/oh-my-android)
+(MIT, 169★), an **ADB GUI for Android emulators**. The cycle-8 rule holds in both directions: shortening
+a query can manufacture a false abundance as easily as a long one manufactures a false zero. **Read the
+results, never the total.**
+
+### Correction to KB data shipped in pass 23
+
+`googlefonts/fontbakery` was recorded as *"stars n/a, invisible to the search index"*. It had **moved**:
+[fonttools/fontbakery](https://github.com/fonttools/fontbakery), **713★, Apache-2.0, last push
+2025-11-04** — 12.8 months stale and **not archived**. Its successor shipped **the day of this pass**:
+[fonttools/fontspector](https://github.com/fonttools/fontspector), **123★, Apache-2.0, pushed
+2026-11-27**, *"Skrifa/Read-Fonts-based font QA tool (successor to fontbakery)"*, with a
+`fontbakery-bridge` crate to run the old Python checks. **A repo that answers on
+`raw.githubusercontent.com` but is absent from `search/repositories` has usually been renamed, not
+hidden.**
+
+### Reserved Font Names, measured per font — the row that changes a delivery
+
+| Font repo | License | Stars | Last push | Reserved Font Name declared? |
+|---|---|---|---|---|
+| [huertatipografica/Andada-Pro](https://github.com/huertatipografica/Andada-Pro) | OFL-1.1 (`main/OFL.txt`) | 40 | 2024-07-09 | **No RFN** — subset and ship under the same name |
+| [aliftype/amiri](https://github.com/aliftype/amiri) | OFL-1.1 (`main/OFL.txt`) | 485 | 2026-10-12 | **No RFN** |
+| [EkType/Mukta](https://github.com/EkType/Mukta) | OFL-1.1 (`master/OFL.txt`, 4,354 B) | 155 | 2025-08-18 | **No RFN** |
+| [microsoft/Skeena-Indigenous-Typeface](https://github.com/microsoft/Skeena-Indigenous-Typeface) | OFL-1.1 (`main/LICENSE`) | 38 | 2026-11-13 | **YES — "Reserved Font Name Skeena"** |
+| [silnrsi/font-charis](https://github.com/silnrsi/font-charis) | OFL-1.1 (`master/OFL.txt`) | 121 | 2026-11-21 | **YES — "Charis" and "SIL"** |
+
+Two of the five require a **rename of the font's internal names** before a modified build may ship, and
+three do not. **It is a per-font fact that only the licence file answers** — and the two fonts an
+indigenous-language or minority-language project reaches for first are the two that are on the
+restrictive side.
+
 ## 2026-11-27 — pass 37: the consumer-products & brand-licensing plane (**a $389.8B industry whose settlement layer returns one GitHub result**)
 
 The plane where IP becomes a physical product. Measured by grep against all eight KB files *before* any

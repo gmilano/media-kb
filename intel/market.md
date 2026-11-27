@@ -47,6 +47,21 @@ CAGR, mid-$30B scale in 2026, with generative video the fastest-moving segment.
 | Tencent / Alibaba / Zhipu | APAC model labs | Ship real open weights (HunyuanVideo, Wan, CogVideo) | Custom or territorially-limited licenses |
 | Accenture · Capgemini · HCLTech · IBM · Infosys | SI competitors | Named ISG Leaders in EMEA M&E services | Generic AI practice, little media-standards depth — **this is the gap Globant can attack** |
 
+## Type & text rendering — the plane-level number, added 2026-11-27 (pass 38)
+
+**The font/typeface market number is unusable as published.** 2026 estimates span roughly **$1.2B to
+$8.5B — a ~7x spread** — because each vendor report defines the market differently. Most consistent
+cluster: **$1.23–1.26B for 2026** (Global Growth Insights $1.23B; Business Research Insights $1.24B for
+2026 → $1.81B by 2035). Verified Market Research shows **$8.51B (2026) → $12.5B (2033)** on one page and
+**$1.26B** for the same report on another. Never put a font-market figure in a client deck without naming
+the source and the definition.
+
+**The useful framing is the licence split, not the market size.** In this plane the *engineering* layer is
+free and permissive (Apache-2.0/MIT Rust stack, MIT `fonttools`, ISC `libass`, Apache-2.0 coverage tools)
+while the *entitlement* layer — font asset management, seat compliance, broadcast and app embedding
+rights — is **entirely commercial, with no open-source equivalent**. That is where the money is and where
+Globant's IP goes. See `verticals/solutions.md`.
+
 ## Opportunities by region
 
 ### North America
@@ -1359,6 +1374,46 @@ leads with and no open-source project implements.
 
 **Gap recorded:** no North America-specific open-source project in this plane was found. The region's
 contribution to the supply side is the substrate (`idealo/imagededup`) and nothing in the application tier.
+### Pass 38 (2026-11-27) — the type & text-rendering layer in North America
+
+**The region-defining fact is commercial practice, not regulation: the font EULA tier.** Commercial
+foundry licences read on 2026-11-27 separate **desktop**, **web**, **app** and **broadcast** rights and
+price them independently. Several foundries state that using a face for titles, credits, graphics or
+on-screen text for video, film or streaming requires a **Broadcast licence**; embedding a face in a
+mobile/desktop application or a game requires a separate **Application licence**, sometimes conditioned
+on the font being embedded so it cannot be extracted; web licences are commonly scoped to **one domain**.
+Foundries disagree with each other about social platforms — one covers video ads on Google, Facebook,
+TikTok and YouTube under broadcast, another requires broadcast even when the same asset is also posted
+socially.
+
+**The consequence for a media client, and it is the sellable sentence:** a studio that burns text into
+video or embeds a face in a TV app has a **per-title, per-platform, per-seat counting obligation** that no
+open-source system models, and **OFL fonts are the only ones whose terms a pipeline can satisfy
+programmatically at scale** — OFL has no tiers to count.
+
+| Player | Position | Evidence |
+|---|---|---|
+| **Monotype / Adobe / Extensis** | The entitlement layer: font asset management, seat compliance, broadcast and app rights. **No open-source equivalent exists** | Foundry EULA tiers read 2026-11-27; gap confirmed by search measurements in `agents/top.md` |
+| **Microsoft** | Publishes [Skeena Indigenous](https://github.com/microsoft/Skeena-Indigenous-Typeface) under **OFL-1.1 with Reserved Font Name "Skeena"** — 38★, pushed 2026-11-13. Stated goal: eventually support **all North American indigenous orthographies derived from the Latin script**; its docs cover confusable Unicode characters, unstable encodings and language-specific variant letterforms | Repo + `main/LICENSE` read |
+| **Google Fonts** | [google/fonts](https://github.com/google/fonts) — 20,813★, pushed 2026-11-27, **no root licence file**, per-family OFL/Apache/UFL | Verified pass 23, re-verified pass 38 |
+
+**Regulatory frame (unchanged from pass 34, restated for this plane):** no comprehensive US federal AI
+statute; California's **AI Transparency Act (SB 942 / AB 853)** imposes provenance duties on large
+generative-AI providers for image, video and audio **from August 2026**; Canada's **June 2026 "AI for
+All" strategy** includes watermarking of AI-generated content. **Why it touches type:** burned-in captions,
+lower-thirds and on-screen text are part of the rendered deliverable that provenance and labelling rules
+describe, so the renderer is inside the compliance boundary, not beside it.
+
+**Opportunity, specific to this region:** build the **font governance and entitlement service** —
+per-font licence terms, tier (desktop/web/app/broadcast), seat and title counts, expiry, and an audit
+trail of which deliverable embedded which face. The substrate is free and permissive
+(`fontspector` Apache-2.0 for validation, `hyperglot` Apache-2.0 for coverage, a licence record you own),
+the capability is sold only by three vendors, and the counting obligation is a North American commercial
+practice rather than a law — which means it is a procurement problem a studio owns and cannot delegate.
+A second, narrower offer: an **indigenous-orthography rendering gate** for public broadcasters and
+education publishers, built on Skeena — **with the RFN rename step designed in from the start**, because
+Skeena is one of the fonts that requires it.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2881,6 +2936,58 @@ an approval queue it cannot currently prove anything about.
 EMEA-origin code in the plane is French (`leboncoin/trademark-monitor`, MIT, 5★) and Colombian/European
 (`pwnera/artbucket`, AGPL-3.0, 34★) — and the labelling regime, the strongest regulatory driver in any
 region for this plane, has **no reference implementation at all**.
+### Pass 38 (2026-11-27) — the type & text-rendering layer in EMEA
+
+**EMEA is the region where the plane is an engineering problem rather than a licensing one**, because it
+is the region whose scripts are hard: Arabic and Hebrew need bidirectional reordering and contextual
+joining, and Cyrillic and Greek need coverage that Latin-first brand faces frequently lack.
+
+**The RTL chain, verified 2026-11-27, with the one licence that matters in it:**
+
+| Component | License | Stars | Role in the chain |
+|---|---|---|---|
+| [libass/libass](https://github.com/libass/libass) | **ISC** | 1,209 | Burns the subtitle into the frame; delegates shaping to HarfBuzz, so correct Arabic output is configuration, not code |
+| [harfbuzz/harfbuzz](https://github.com/harfbuzz/harfbuzz) | "Old MIT" (`COPYING` read) | 6,261 | The shaper itself |
+| [HOST-Oman/libraqm](https://github.com/HOST-Oman/libraqm) | **MIT** | 341 | Complex-text layout (HarfBuzz + FriBidi). **Pillow built without Raqm renders Arabic isolated and left-to-right** — a failure invisible to anyone who cannot read the script |
+| [mpcabd/python-arabic-reshaper](https://github.com/mpcabd/python-arabic-reshaper) | **MIT** | 452 | Letter joining where no shaper is available |
+| [MeirKriheli/python-bidi](https://github.com/MeirKriheli/python-bidi) | **LGPL-3.0** | 127 | **The one copyleft link in an otherwise permissive chain.** Weak, per-file copyleft — fine when dynamically linked and shipped as a separate component; a procurement question if statically linked into a product |
+| [aliftype/amiri](https://github.com/aliftype/amiri) | **OFL-1.1, no RFN** | 485 | An Arabic face with full **Presentation Forms** coverage. Fonts built only for modern shaping engines often omit the legacy Presentation Forms glyphs that older tools still reach for |
+
+**SIL is the region's (and the world's) minority-language font infrastructure**, and its licence shapes
+are instructive:
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [silnrsi/font-charis](https://github.com/silnrsi/font-charis) | OFL-1.1, **RFN "Charis" + "SIL"** | 121 | 2026-11-21 | Rename required for any modified build |
+| [silnrsi/font-gentium](https://github.com/silnrsi/font-gentium) | OFL-1.1 | 117 | 2026-11-19 | Broad Latin/Greek/Cyrillic coverage |
+| [silnrsi/font-andika](https://github.com/silnrsi/font-andika) | OFL-1.1 | 87 | 2026-11-20 | Literacy-oriented design |
+| [silnrsi/font-scheherazade](https://github.com/silnrsi/font-scheherazade) | OFL-1.1 | 35 | 2026-11-18 | Arabic |
+| [silnrsi/pysilfont](https://github.com/silnrsi/pysilfont) | **MIT** (`LICENSE`, 1,127 B) | 64 | 2026-11-23 | Production utilities; API said `NOASSERTION` |
+| [silnrsi/FDBP](https://github.com/silnrsi/FDBP) | **Creative Commons** (`LICENSE`, 19,576 B) | 147 | 2025-10-02 | Font Development Best Practices — **a document, correctly under a content licence.** A licence scanner that treats every repo as software will mis-file it |
+
+**Self-hosting is the compliance-shaped engineering choice.**
+[fontsource/fontsource](https://github.com/fontsource/fontsource) (**MIT, 6,305★, 2026-11-09**) packages
+open fonts as npm modules with per-subset files, so a European page makes **no third-party font request
+at all**. That is an architectural fact, stated without any claim about specific case law.
+
+**Regulatory and adoption frame:** EU **AI Act** obligations largely apply from **August 2026**, with
+high-risk Annex III duties delayed by the **Digital Omnibus on AI** (in effect **27 July 2026**); the
+Commission plans to revise the **Audiovisual Media Services and Copyright Directives in 2026, proposal due
+by December 2026**; the UK **ICO** published a foresight paper, *The Future of Agentic AI*, in **March
+2026**. Adoption: a **Bandwidth–Cavell** survey of **500 EMEA IT and telecom leaders** found **49%** rank
+AI/ML implementation a top communications priority for 2026 (enterprise communications broadly, **not
+media** — labelled); **Akamai's State of AI in Media 2026** reports that in 2025 **40% of media technology
+CEOs** said AI was core to their product roadmap.
+
+**Opportunity, specific to this region:** sell **multi-script caption and on-screen-text correctness as a
+verifiable delivery gate** to public broadcasters and pan-regional streamers — the buyers who already
+carry AVMSD accessibility duties and are inside the EMFA/AI Act perimeter. The gate is cheap to build
+(`shaperglot` + `unicode-org/text-rendering-tests` + `libass` rendering diffs), it produces an artefact a
+regulator can read, and the differentiator is that **nobody currently proves RTL correctness; they
+eyeball it.** Carry the `python-bidi` **LGPL-3.0** note into the procurement pack before it is found
+during review, and prefer `libass` (ISC) + HarfBuzz for the burn-in path, which avoids the copyleft link
+entirely.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -4357,6 +4464,66 @@ above, but **not re-verified for this plane in this pass.** Treat APAC merchandi
 pain is counterfeiting and the growth is 14.1%. The permissive substrate (`imagededup` Apache-2.0;
 `CLIP-API-service` Apache-2.0, alive 2026-11-09) plus a re-trained logo detector is a deliverable stack;
 the enforcement and settlement logic is Globant IP by necessity, because it does not exist in the open.
+### Pass 38 (2026-11-27) — the type & text-rendering layer in APAC
+
+**APAC is the region where type is a weight problem and a legacy-encoding problem.**
+
+**CJK — the megabyte tax and the tool that answers it.**
+[KonghaYao/cn-font-split](https://github.com/KonghaYao/cn-font-split) (**Apache-2.0, 1,269★, 49f, pushed
+2026-11-27** — the day of this pass) splits a CJK font into many contiguous `unicode-range` slices, which
+is the only workable way to serve Chinese, Japanese or Korean web type. The magnitude, from project
+self-reports rather than benchmarks and labelled as such: a full CJK font of **16,435,884 B** versus a
+subset of **3,615,900 B** (`faberline/surface` PR); page-level subsetting with `fontTools` taking median
+font bytes per page from **393 KB to 117 KB** (`xingkaixin/blog` PR); a web build at **27.1 MB** brought
+under its **24 MiB** gate by subsetting a Japanese font (`storytold/texturecraft` PR).
+
+[notofonts/noto-cjk](https://github.com/notofonts/noto-cjk) (**4,176★, 282f, last push 2025-12-16**) is
+the fallback family, and its licence is **OFL-1.1 held per subtree** — `Sans/LICENSE` and `Serif/LICENSE`,
+4,301 B each, nothing at the root, API reports `NONE`.
+[vp-tw/cjk-web-fonts](https://github.com/vp-tw/cjk-web-fonts) (MIT, pushed 2026-11-15) offers prebuilt
+subsets but has **zero stars — do not cite it to a client**; it is recorded because any CJK search
+surfaces it immediately. `vivliostyle/vivliostyle.js` (**AGPL-3.0**, pass 18) remains the vertical-writing
+and ruby/furigana answer, behind a service boundary.
+
+**India — the supply is real, the maintenance is not, and the legacy encoding is still in production.**
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [EkType/Mukta](https://github.com/EkType/Mukta) | **OFL-1.1, no RFN** (`master/OFL.txt`, 4,354 B) | 155 | **2025-08-18** | The first open family covering **Devanagari, Gujarati, Gurmukhi, Bengali, Tamil and Latin**. Google Design reports its Devanagari variant in use by **Dainik Jagran** (Hindi) and **Lokmat** (Marathi). **15 months stale.** |
+| [itfoundry/Poppins](https://github.com/itfoundry/Poppins) | **OFL-1.1** | 517 | **2024-08-11** | Indian Type Foundry; the most-starred Indic-origin face in this plane and **27 months stale** |
+
+The Indian Type Foundry variable-font project (from 2019) is released under **OFL** via Google Fonts, and
+a 2024-era academic paper states that **India lacks a centralized public repository of high-quality,
+open-licensed Indic fonts** — a measured gap, by a primary-ish source, in the region with the largest
+multi-script news market. Separately, **Kruti Dev**, a **non-Unicode legacy encoding**, remains embedded
+in government and print workflows from the 1990s–2000s: text set in it does not render on systems without
+the font. **That is a scoped, nameable migration engagement.**
+
+**Shaping is the hard part, and it is why coverage tools matter here.** Microsoft's own guidance describes
+the Indic shaping engine breaking text into syllable clusters, **reordering characters**, then applying
+GSUB/GPOS features — so a font carrying every Devanagari codepoint can still render the script wrongly.
+`googlefonts/shaperglot` (Apache-2.0, 58★) is the only open tool that checks for the features the engine
+calls. For engines, [dfrg/swash](https://github.com/dfrg/swash) (Apache-2.0, 886★) implements the
+**Universal Shaping Engine**, which is what covers Devanagari and its neighbours.
+
+**Regulatory frame:** **South Korea's AI Basic Act** is described as the first comprehensive national AI
+legislation and the regional anchor, and Korea **declined** to add a text-and-data-mining exception to its
+Copyright Act; **China** is the most prescriptive, with layered rules on algorithmic recommendation,
+deepfakes and generative AI including **content labelling**; **India** handles AI content labelling through
+IT Rules amendments effective **20 February 2026** and signalled in July 2026 it may pursue dedicated AI
+legislation; **Vietnam's** AI law took effect **1 March 2026**; **Japan** is light-touch; **Australia** set
+up an **Office of AI**, and **ACMA** published sector papers in **April 2026** mapping AI use across
+television, radio and news. Regional read, from APAC media trade coverage (April 2026): **AI deployment in
+newsrooms has outpaced governance.**
+
+**Opportunity, specific to this region:** two offers, both concrete. (1) **The CJK weight gate** — make
+`cn-font-split` plus `fontTools` a standing build step with a byte budget per page or per app build, which
+is a measurable, demonstrable win on a metric streaming and news clients already track. (2) **The legacy
+Indic migration** — Kruti Dev and friends to Unicode, with `shaperglot` as the acceptance test and Mukta
+(OFL, **no RFN**, so subsetting and shipping needs no rename) as the target family. The second is the
+better engagement: it has a named incumbent format, a verifiable finish line, and a buyer (news groups and
+government publishers) who cannot avoid it.
+
 ### LATAM
 
 - **Mexico now has the region's first sector-specific AI law for entertainment.** Amendments to the
@@ -7243,3 +7410,57 @@ measured zero in the KB — is the most sellable single slide this plane produce
 | **MINISO / Bilibili** (APAC) | Retail and platform vehicles for character merchandise at scale | APAC trade coverage | Channel players; named for the market map, not evaluated |
 | **Pwnera SAS** (`artbucket`) | The only open-source brand/DAM platform modelling licence terms, territories, embargo dates — **with an MCP server** | AGPL-3.0, 34,523 B LICENSE, 34★, pushed 2026-11-24 | 34 stars. A normative bet, not an installed base. Commercial licence available on request |
 | **Pimcore GmbH** (EMEA/Austria) | PIM/MDM/DAM still recommended as "open source" by generic roundups | `2026.x/LICENSE.md` is the **Pimcore Open Core License**: *"if not provided for otherwise, a software element is Proprietary Software"* | **Publicly readable source is not an open-source grant.** Never cite Pimcore to a client as open source without quoting POCL |
+
+### Pass 38 (2026-11-27) — the type & text-rendering layer in LATAM
+
+**This is the best-placed finding of the pass, and it is a complete, permissive, unassembled stack.**
+
+[huertatipografica/Andada-Pro](https://github.com/huertatipografica/Andada-Pro) — **OFL-1.1
+(`main/OFL.txt`), no Reserved Font Name declared, 40★, 3 forks, last push 2024-07-09** — is a typeface
+**explicitly designed to support the indigenous languages of Latin America**, built first for **Spanish
+and Guaraní**. No RFN means a subset may ship under the same name with no rename step. It is also
+**28 months stale**, which is the usual condition of the region's own type infrastructure.
+
+**The input layer is hobby-scale, and the only maintained component does not come from the region:**
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [giellalt/keyboard-grn](https://github.com/giellalt/keyboard-grn) | **MIT** | **0** | **2026-10-28** | **The only actively maintained Guaraní keyboard layout found.** It belongs to `giellalt` — a Nordic/Sámi language-technology organisation with **78 repos matching "keyboard"** — not to a Latin American institution |
+| [huertatipografica/teclado-Guarani](https://github.com/huertatipografica/teclado-Guarani) | MIT | 4 | 2017-08-30 | Guaraní–Spanish layout from the Andada publisher. **9 years stale** |
+| [junocomp/guarani-py-keyboard](https://github.com/junocomp/guarani-py-keyboard) | **No licence** | 2 | 2020-07-14 | Paraguayan Guaraní layout. Exists and **cannot be used** |
+
+**The lesson, and it generalises past this plane: stars measure attention, not maintenance.** The 0-star
+repo is the live one; the 4-star repo has not moved since 2017. A pass that ranked these by stars would
+have recommended the dead one.
+
+**Regulatory frame:** **Peru** is furthest along — the regulation of **Law No. 31814** (published
+September 2025) is described as the first enacted AI law in Latin America, reported in effect from
+**January 2026**. **Brazil's PL 2338/2023** passed the Senate in December 2024 on an EU AI Act model and
+awaits the Chamber of Deputies, with one source saying it is deferred to **2027**; Brazil's **TSE
+Resolution 23.732/2024** already restricts synthetic content favouring or harming a candidate.
+**Mexico** has a pending criminal-law reform on AI deepfakes plus 2026 copyright, labour and criminal
+reforms. **Chile** has a risk-based bill plus a separate proposal on realistic digital imitations of a
+person's image, body or voice. A 2026 Universidad de los Andes study counted **716 AI-related regulatory
+instruments, rules and proposals across 23 countries and territories** — fragmentation, not governance.
+Adoption, from a single unverified source and labelled as such: media and publishing in the region
+adopted GenAI for content operations, translation and audience segmentation faster than expected, with
+**Grupo Globo** and **Televisa** named as redesigning workflows around AI-assisted production.
+
+**Opportunity, specific to this region — and it is assemblable today, entirely under permissive
+licences.** **Guaraní is co-official in Paraguay**, which makes correct Guaraní rendering a public-service
+obligation rather than a nice-to-have, and the same pattern repeats for Quechua and Aymara in Peru and
+Bolivia. The complete stack exists and nobody has put it together:
+
+- **Font:** `Andada-Pro` — OFL-1.1, **no RFN**, so subset and ship freely (adopt it, and fund the fork it
+  needs after 28 months of no pushes).
+- **Input:** `giellalt/keyboard-grn` — MIT, maintained.
+- **Proof:** `googlefonts/shaperglot` + `rosettatype/hyperglot` (both Apache-2.0) to show coverage and
+  shaping as a **number** in an acceptance test.
+- **Burn-in:** `libass` (ISC) + HarfBuzz for captions on video.
+
+**The buyer is the public broadcaster, the electoral authority and the education ministry** — the three
+institutions with a legal duty to publish in an indigenous language, and the same buyer profile pass 5
+identified as the hottest in LATAM (the newsroom that has written a policy and must now evidence it).
+Pair it with the electoral-integrity angle: Brazil's TSE resolution and Chile's digital-likeness bill mean
+**captioned, labelled, correctly rendered political content is a compliance artefact in 2026**, and the
+rendering half of that is currently nobody's job.

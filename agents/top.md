@@ -3635,3 +3635,74 @@ royalties, copyrights and licensing, *"available on GitHub to extend and modify.
 `unroyalty` returns **TOTAL=0**. There is no such repository. It is recorded here because it is precisely
 the row a hurried pass would have written, with a plausible name and a plausible description, into the
 one tier of this plane that has no code in it.
+
+---
+
+## Pass 38 (2026-11-27) — the type, font & multi-script text-rendering plane
+
+Chosen the same way as passes 33–37: grep of ~40 candidate terms against all eight KB files **before**
+any web search. The result was the cleanest vocabulary gap measured in any pass of this KB.
+`typeface`, `glyph`, `kerning`, `variable font`, `Noto`, `Devanagari`, `script coverage`, `telecine`,
+`microstock` and `rights-managed` each scored **zero occurrences** across 33,046 lines. `font` scored 10
+and `OFL` 5 — all ten inside the *print* plane (pass 23, "Layer 4 — colour, type and shaping") plus one
+`GPL-3.0 with a font exception` note about MuseScore. So type entered this KB once, as a sub-layer of
+prepress, and never as the plane that decides whether a subtitle, a lower-third, a TV-app menu or an
+e-reader page can render a given language at all.
+
+**One substring warning, because this KB has been bitten by it twice.** The first-pass grep reported
+`sile`, `noto` and `icu` as present in all eight files. With `\b` word boundaries all three score
+**zero**: the hits were `facsimile`, `annotation`-type words and `particular`. The KB's own note from the
+healthcare cycle — *placeholder and presence regexes need word boundaries* — is confirmed again here.
+
+### The finding that earns this pass: two licences, stacked, pointing opposite ways
+
+Everywhere else in this KB the licence question is *"may I use this code?"*. In the type plane there are
+**two licences stacked on every deliverable, and they are different kinds of licence**:
+
+1. **The engine licence** — permissive, but historically messy C: HarfBuzz "old MIT" (API says
+   `NOASSERTION`), FreeType **dual FTL / GPL-2.0**, ICU **Unicode-3.0**, FontForge **GPL-3.0 as a whole**.
+2. **The font licence** — a *content* licence, almost always **OFL-1.1**, whose **Reserved Font Name**
+   clause decides, per font, whether you may ship the subset your player needs **under the same name**.
+
+A type pipeline can be 100% permissive in code and still be undistributable because of one clause in a
+text file shipped next to a `.ttf`. This is the KB's established content-licence law — first measured on
+the CPT code set in healthcare, then MedDRA, then DDEX/ISRC in media pass 5 — appearing in its **cheapest
+and most avoidable form yet**: here the licence is free, readable, and machine-checkable, and teams still
+get it wrong because they check the repository and not the font.
+
+### The agents, measured — and the asymmetry is the finding
+
+| Agent / project | License | Stars | Forks | Last push | What it actually does |
+|---|---|---|---|---|---|
+| [dembrandt/dembrandt](https://github.com/dembrandt/dembrandt) | **MIT** | 4,094 | — | 2026-11-26 | Extracts a website's design system into tokens — logo, colour, **typography** — in seconds. The most-adopted agent in this plane, and it *reads* type off a rendered page. |
+| [iart-ai/motion-skills](https://github.com/iart-ai/motion-skills) | **MIT** | 2,255 | — | 2026-11-18 | 56 agent skills for motion graphics; the nearest thing to an agent that *places* type on a frame. |
+| [arvindrk/extract-design-system](https://github.com/arvindrk/extract-design-system) | **MIT** | 325 | — | 2026-09-05 | Design-token extraction (colour, typography, spacing, radius). Same direction of travel: page → tokens. |
+| [jasonmello/pocket-design-mcp](https://github.com/jasonmello/pocket-design-mcp) | **Apache-2.0** | 25 | — | 2026-11-21 | MCP server serving icons, **fonts**, images, components, design tokens to an agent. The only MCP server in the plane that treats a font as a first-class asset. |
+| [Kreminskaya/beautiful-pdf-mcp](https://github.com/Kreminskaya/beautiful-pdf-mcp) | **MIT** | 9 | — | 2026-06-12 | MCP server producing print-ready, typographically coherent PDFs. 9 stars; cite as existence proof, not as infrastructure. |
+
+**The asymmetry, stated plainly: agents can read typography off a rendered page; nothing writes or
+validates a font binary.** `fonttools mcp` returns **TOTAL=1**, and that one result is
+[jpsanders/banner-builder](https://github.com/jpsanders/banner-builder) (MIT, **0 stars**,
+2026-11-23) — an SVG/PNG banner builder, not a font tool. The entire font-engineering layer below —
+subsetting, shaping, coverage, QA, compilation — has **no agent bridge at all**, exactly as the
+recommender layer had none in pass 7, and for the same structural reason: it is called by a pipeline,
+not conversed with.
+
+**And the false-abundance trap, caught again.** `font mcp server` returns **TOTAL=76** and
+`typography mcp` returns **TOTAL=104** — healthy-looking numbers. Reading the results instead of the
+totals: the top hit for `font mcp server` is
+[ateymoori/oh-my-android](https://github.com/ateymoori/oh-my-android) (MIT, 169★), an **ADB GUI for
+Android emulators**, and the second is [Muanchen2/renpy-mcp](https://github.com/Muanchen2/renpy-mcp)
+(MIT, 26★), a Ren'Py MCP server whose font relevance is one bullet about CJK auto-config. The cycle-8
+rule holds in both directions: **shortening a query can turn a false zero into a false abundance —
+read the results, never the total.**
+
+### The one correction this pass makes to existing KB data
+
+`repos/foundations.md` (pass 23) lists `googlefonts/fontbakery` as *"Exists; invisible to the search
+index"* with stars `n/a`. That was the **wrong org**. The repo moved to **`fonttools/fontbakery`** and is
+fully indexed there: **713★, 111 forks, Apache-2.0 (`LICENSE.txt`, 10,851 B), last push 2025-11-04** —
+**12.8 months stale, and not archived**, which is why nothing warns you. The raw-file probe succeeded
+against the old path only because GitHub follows renames; `search/repositories` does not. **A repo that
+answers on `raw.githubusercontent.com` but is missing from the search index has usually been renamed, not
+hidden.** Corrected in `repos/foundations.md` in this pass.

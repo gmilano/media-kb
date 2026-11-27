@@ -5883,3 +5883,133 @@ Run before the first estimate. Four checks, each of which caught a real trap in 
 **865** results and not one usable project (all six top hits unlicensed; five last touched 2017–2024);
 `logo detection` returns **1,202** with every usable repo years dead. Conversely `licensee portal` returns
 **1**, and that single digit is the most valuable number in this plane.
+
+---
+
+## Pattern 63 — The multi-script caption burn-in that provably renders
+
+**Problem.** A streamer or broadcaster burns subtitles into video for Arabic, Hindi, Thai or Japanese
+audiences. The pipeline reports success, the file passes QC, and the text is wrong in a way **nobody on
+the delivery team can see** — letters unjoined, words reversed, conjuncts broken, tofu boxes. The failure
+is invisible to a reviewer who does not read the script, so it ships.
+
+**Stack (every component verified 2026-11-27).**
+
+| Step | Component | License | Why this one |
+|---|---|---|---|
+| 1. Transcribe / translate | `openai/whisper` (MIT) + the localisation stack from pass 14 | MIT | Already in this KB |
+| 2. Choose the face | [rosettatype/hyperglot](https://github.com/rosettatype/hyperglot) **208★** then [googlefonts/shaperglot](https://github.com/googlefonts/shaperglot) **58★** | **Apache-2.0** both | `hyperglot` says the font *supports* the language; `shaperglot` says it *shapes* it. Run both — coverage without features renders wrongly |
+| 3. Fall back | [notofonts/notofonts.github.io](https://github.com/notofonts/notofonts.github.io) (fonts **OFL-1.1**) | Apache-2.0 tooling | Noto covers **162 of 168 Unicode 16.0 scripts**; it is the only sane fallback |
+| 4. Shape + render | [libass/libass](https://github.com/libass/libass) **1,209★** over HarfBuzz | **ISC** + "old MIT" | `libass` delegates shaping to HarfBuzz, so correct RTL/Indic output is *configuration*. **This path has no copyleft in it** |
+| 4b. If and only if you are in Python/Pillow | [HOST-Oman/libraqm](https://github.com/HOST-Oman/libraqm) **341★** | MIT | **Pillow built without Raqm draws Arabic isolated and left-to-right.** Check the build, not the code |
+| 4c. Last resort | [mpcabd/python-arabic-reshaper](https://github.com/mpcabd/python-arabic-reshaper) **452★** + [MeirKriheli/python-bidi](https://github.com/MeirKriheli/python-bidi) **127★** | MIT + **LGPL-3.0** | Pre-shape and pre-order the string yourself. **`python-bidi` is LGPL-3.0 — the only copyleft link in the chain.** Prefer 4; use 4c only where no shaper is reachable, and never shape twice |
+| 5. Prove it | [unicode-org/text-rendering-tests](https://github.com/unicode-org/text-rendering-tests) **188★** | **Unicode-3.0** | A conformance suite. Renders a known corpus and compares — the artefact that replaces eyeballing |
+| 6. Arabic-specific face | [aliftype/amiri](https://github.com/aliftype/amiri) **485★** | **OFL-1.1, no RFN** | Full **Presentation Forms** coverage, which modern-shaping-only fonts often omit. No RFN, so subset and ship under the same name |
+
+**Wiring.** `shaperglot` runs in CI against the shortlist of faces and fails the build on a missing
+feature, *before* any video is encoded. At encode time `libass` renders against the chosen face; step 5
+renders the conformance corpus through the same configuration and diffs it against expected output. The
+delivery artefact is **the diff, not an assurance** — which is what makes it sellable to a public
+broadcaster under accessibility duties.
+
+**Anti-pattern this replaces:** applying `arabic-reshaper` *and* letting the renderer shape, which shapes
+twice and produces subtly wrong output; and testing by asking one native speaker to look at three frames.
+
+**Regional lead:** EMEA — sell it as an AVMSD/EMFA-legible delivery gate. APAC — lead with Indic
+conjuncts and the Microsoft-documented reorder step. NA/LATAM — lead with indigenous orthographies
+(Skeena, Andada-Pro).
+
+---
+
+## Pattern 64 — The font-licence CI gate (because the repo licence is not the font licence)
+
+**Problem.** Every other plane in this KB asks *"may I use this code?"*. Type stacks **two** licences on
+every deliverable: the **engine** licence (permissive, messy) and the **font** licence (a content licence,
+usually OFL-1.1). A build can be 100% permissive in code and still be undistributable because of one
+clause in a text file next to a `.ttf`.
+
+**The gate, in the order the checks must run.**
+
+1. **Locate the licence — root is not enough, at two depths.** `google/fonts` holds licences **per family**
+   (`ofl/<family>/OFL.txt`); `notofonts/noto-cjk` holds them **per subtree** (`Sans/LICENSE`,
+   `Serif/LICENSE`, 4,301 B, **nothing at the root**, API reports `NONE`). Probe **14 names** —
+   `LICENSE`, `LICENSE.txt`, `LICENSE.md`, `LICENSE.TXT`, `LICENCE`, `COPYING`, `COPYING.txt`,
+   `COPYING.md`, `license.txt`, **`OFL.txt`**, `OFL.md`, `NOTICE` — on `main` **and** `master`, **and then
+   the subdirectories**. `OFL.txt` is where `EkType/Mukta` keeps its OFL-1.1, and the API reports
+   `NOASSERTION` for it.
+2. **Run the cycle-8 control before concluding anything is unlicensed.** Fetch `README.md` from the same
+   path. `noto-cjk`: README **200**, all 12 root licence names **404** → **your names are wrong, the
+   licence is not missing.** A 404 on the raw channel is *never*, by itself, evidence of a missing licence.
+3. **Grep the licence for `with Reserved Font Name`.** This single grep decides whether your subset may
+   keep its name. Measured this pass: **Andada-Pro, Amiri, Mukta — no RFN. Skeena — "Skeena". Charis —
+   "Charis" and "SIL".** Three of five free, two not, and the split tracks nothing you could have guessed.
+4. **If an RFN is declared and you subset, rename the font's internal names.** OFL-1.1 defines a Modified
+   Version as *"any derivative made by adding to, deleting, or substituting — in part or in whole — any of
+   the components of the Original Version"*; **subsetting deletes components**, and SIL's FAQ (per LWN's
+   summary) treats format conversion and non-byte-identical rebuilds as modification too. *State this as a
+   reading of the licence text:* `openfontlicense.org` does not resolve from this session, so the FAQ's
+   own wording on subsetting is **unverified** — see `intel/trends.md`.
+5. **Validate the binary.** [fonttools/fontspector](https://github.com/fonttools/fontspector)
+   (**Apache-2.0, 123★, pushed 2026-11-27**) — CLI, Python module **and WASM**, with Google Fonts,
+   OpenType, Universal, Microsoft and Adobe profiles, plus a `fontbakery-bridge` crate that runs the
+   legacy Python checks. **Do not pin [fonttools/fontbakery](https://github.com/fonttools/fontbakery)**
+   (713★, Apache-2.0): last push **2025-11-04**, 12.8 months stale, **not archived**, and **moved org** —
+   it was recorded in this KB's pass 23 as "invisible to the search index" because the pass looked under
+   `googlefonts/`.
+6. **Diff the build.** [googlefonts/diffenator2](https://github.com/googlefonts/diffenator2)
+   (Apache-2.0, 71★) for visual regression between two font builds.
+7. **For native dependencies, resolve the licence of what you LINK, not what you clone.** The pass-5 rule,
+   and this plane is full of it: **FreeType is dual FTL / GPL-2.0** — a choice you must make and record;
+   **ICU is Unicode-3.0**; **HarfBuzz is "old MIT"** with per-subdirectory `COPYING` files; **FontForge is
+   GPL-3.0 as a whole**, so it is a tool you run, never a component you link.
+
+**Falsifiable prediction, recorded for the next pass of this plane:** `fonttools/fontbakery` will still
+show a 2025 last-push date and still not be archived, and `fontspector` will have outgrown every other
+Rust component here in percentage star growth. If fontbakery moves, the migration stalled and step 5 is
+wrong.
+
+---
+
+## Pattern 65 — Script coverage as a go/no-go market decision (not a design opinion)
+
+**Problem.** A client wants to launch a service, a channel or an app in a new market and has a brand
+typeface they are contractually attached to. "Can our font serve India / MENA / Japan?" is answered today
+by a designer's opinion, a PDF specimen, or a rendered screenshot — and the answer arrives after the
+launch date is fixed.
+
+**Make it a number, in one CI step.**
+
+| Step | Tool | License | Output |
+|---|---|---|---|
+| 1. Which languages does the brand face support? | [rosettatype/hyperglot](https://github.com/rosettatype/hyperglot) **208★, 28f, 2026-10-26** | **Apache-2.0** | A per-language pass/fail list from the font file itself |
+| 2. Does it *shape* them? | [googlefonts/shaperglot](https://github.com/googlefonts/shaperglot) **58★, 11f, 2026-11-17** | **Apache-2.0** | Which required OpenType features are missing |
+| 3. If it fails, what covers the gap? | `notofonts/notofonts.github.io` (**OFL-1.1** fonts) | Apache-2.0 tooling | **162 of 168** Unicode 16.0 scripts, **77,000+** characters (≈ half of Unicode 18.0's 172,808) |
+| 4. What does the gap cost to close? | [googlefonts/fontc](https://github.com/googlefonts/fontc) **196★** / [googlefonts/fontmake](https://github.com/googlefonts/fontmake) **900★** + [adobe-type-tools/afdko](https://github.com/adobe-type-tools/afdko) **1,191★** | Apache-2.0 | A build path for an extended family, priced as work |
+| 5. What does serving it weigh? | [KonghaYao/cn-font-split](https://github.com/KonghaYao/cn-font-split) **1,269★, pushed 2026-11-27** / `fonttools` `pyftsubset` **5,338★** | Apache-2.0 / MIT | Bytes per page or per app build, against a budget |
+
+**The decision this produces.** Three outcomes, each with a different commercial answer: **(a) the brand
+face covers the market** — proceed, and keep the `shaperglot` report as the acceptance artefact; **(b) it
+covers codepoints but not shaping** — a scoped font-engineering engagement, priced from step 4, which is
+the best of the three for Globant because it is small, verifiable and nobody else is bidding it;
+**(c) it cannot serve the market** — a Noto-based fallback plus a brand-adjacent pairing, decided before
+the launch date rather than after.
+
+**Why nobody does this.** The measurement at steps 1–2 costs minutes and exists under Apache-2.0, and the
+two tools that perform it have **208 and 58 stars** between them. This is the same shape as `Little-CMS`
+(pass 23) and `datadiligence` (pass 5): **load-bearing, permissive, maintained, and nearly unknown.**
+
+**Regional lead:**
+- **APAC** — lead with step 5. The weight is the objection: a full CJK font measured at **16.4 MB** against
+  a **3.6 MB** subset, and India's own measured gap (no centralized public repository of high-quality
+  open-licensed Indic fonts) plus **Kruti Dev** legacy encoding still in government and print workflows.
+- **EMEA** — lead with step 2. Arabic and Hebrew fail at *shaping*, not coverage, and `fontsource` (MIT)
+  gives the self-hosted serving story procurement will ask for.
+- **LATAM** — lead with step 1 and name the language. `Andada-Pro` (**OFL-1.1, no RFN**) was built for
+  Spanish and **Guaraní**, which is co-official in Paraguay; the only maintained Guaraní keyboard is
+  `giellalt/keyboard-grn` (**MIT, 0★, pushed 2026-10-28**), from a **Nordic** language-technology org.
+- **NA** — lead with the licence, not the glyphs. The blocker is the foundry EULA's **broadcast** and
+  **app** tiers; `Skeena` (**OFL-1.1, RFN "Skeena"**) covers North American indigenous orthographies and
+  **requires the rename step** from Pattern 64.
+
+**The one-line version for a client conversation:** *coverage is not support, support is not shaping, and
+all three are measurable before you commit a launch date.*

@@ -4290,3 +4290,120 @@ counts:
   LICENSE file** — it exists, and it cannot be used.
 - **"UnRoyalty"**, described by an aggregator as open-source royalty-management software "available on
   GitHub", returns **TOTAL=0**. It does not exist.
+
+---
+
+## Pass 38 (2026-11-27) — type, font & multi-script text rendering
+
+All rows verified on **2026-11-27**: existence via `git ls-remote`, stars/forks/last-push via GitHub
+`search/repositories` with `repo:` qualifiers, and **licence by reading the actual licence file** wherever
+the API returned `NOASSERTION` or `NONE`.
+
+### Correction to pass 23 data — read this before using the print-plane table
+
+| Repo (as listed in pass 23) | What pass 23 said | Verified 2026-11-27 |
+|---|---|---|
+| `googlefonts/fontbakery` | "Apache-2.0, stars `n/a`, exists; invisible to the search index" | **Wrong org — it moved.** Now [fonttools/fontbakery](https://github.com/fonttools/fontbakery): **713★, 111f, Apache-2.0** (`LICENSE.txt`, 10,851 B), last push **2025-11-04**. Fully indexed under the new owner. **12.8 months stale, not archived.** |
+
+**And its successor shipped the day of this pass.**
+[fonttools/fontspector](https://github.com/fonttools/fontspector) — **123★, 27f, Apache-2.0, pushed
+2026-11-27** — describes itself in its own README as *"a Rust port of fontbakery"*, and its GitHub
+description as *"Skrifa/Read-Fonts-based font QA tool (successor to fontbakery)"*. It ships a
+`fontbakery-bridge` crate that **runs the Python fontbakery checks inside fontspector**, a WASM build, and
+runtime-loadable profiles (`profile-googlefonts`, `profile-opentype`, `profile-universal`, plus
+`profile-microsoft` and `profile-adobe`). **CI rule: target fontspector, keep fontbakery only for checks
+not yet ported, and do not pin a tool whose upstream has not moved in a year.**
+
+### Layer A — the shaping and rasterisation engines (the C stack: load-bearing, licence-messy)
+
+| Repo | License (verified) | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [harfbuzz/harfbuzz](https://github.com/harfbuzz/harfbuzz) | **"Old MIT"** — API reports `NOASSERTION`; `COPYING` read | 6,261 | 836 | 2026-11-27 | The text-shaping engine under essentially every modern renderer. Already in the KB via pass 23; repeated here because it is the hinge of *this* plane. |
+| [freetype/freetype](https://github.com/freetype/freetype) | **Dual FTL / GPL-2.0** — `LICENSE.TXT` (2,149 B) read: *"FREETYPE LICENSES"*, two options | 935 | 462 | 2026-11-27 | The rasteriser. **The dual licence is a choice you must make and record**: FTL is BSD-style with an advertising-style credit clause; GPL-2.0 is the other option. API says `NOASSERTION`. |
+| [unicode-org/icu](https://github.com/unicode-org/icu) | **Unicode-3.0** — `LICENSE` (27,718 B) read: *"UNICODE LICENSE V3"* | 3,654 | 950 | 2026-11-25 | Bidi, segmentation, collation, locale data. Permissive, but its own licence family — not MIT, not Apache. |
+| [libass/libass](https://github.com/libass/libass) | **ISC** | 1,209 | 264 | 2026-11-21 | The subtitle renderer. **The most strategically important repo in this plane for media**: it is what burns a caption into a frame, and it delegates shaping to HarfBuzz, so correct RTL and Indic output is a *configuration* property, not a code change. |
+| [HOST-Oman/libraqm](https://github.com/HOST-Oman/libraqm) | **MIT** | 341 | 76 | 2026-07-23 | Complex-text layout wrapper (HarfBuzz + FriBidi). **Pillow built without Raqm draws Arabic isolated and left-to-right** — a silent, visible-only-to-a-reader failure. |
+| [fontforge/fontforge](https://github.com/fontforge/fontforge) | **GPL-3.0 as a whole** — `LICENSE` (10,015 B) read: *"FontForge is available as a whole under the terms of the GNU GPL, version 3 or any later"* | 8,105 | 822 | 2026-11-23 | The editor. API says `NOASSERTION`; the file is explicit. **Use it as a tool, never link it into a product.** |
+| [google/woff2](https://github.com/google/woff2) | **MIT** | 1,830 | 234 | 2026-10-28 | WOFF2 encoder/decoder — the format every browser actually wants. |
+
+### Layer B — the Rust rewrite, and why it matters commercially
+
+The whole engine layer above is being reimplemented in Rust under **Apache-2.0 or MIT**, and this is the
+live trend of the plane rather than a prediction:
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [googlefonts/fontations](https://github.com/googlefonts/fontations) | **Apache-2.0** | 857 | 91 | 2026-11-25 | `read-fonts` + `skrifa` — the font-parsing substrate the new stack is built on. **This is the dependency fontspector means by "Skrifa-based".** |
+| [dfrg/swash](https://github.com/dfrg/swash) | **Apache-2.0** | 886 | 67 | 2026-11-13 | Font introspection, complex shaping and glyph rendering; implements the **Universal Shaping Engine** (so Devanagari and friends) and full **variable-font** support including positioning and feature substitution. |
+| [harfbuzz/rustybuzz](https://github.com/harfbuzz/rustybuzz) | **MIT** | 666 | 42 | 2026-07-26 | A HarfBuzz port in Rust, now under the HarfBuzz org itself. **Four months since last push** — the slowest-moving component of the new stack. |
+| [googlefonts/fontc](https://github.com/googlefonts/fontc) | **Apache-2.0** | 196 | 22 | 2026-11-25 | Font *compiler* — source (designspace/Glyphs) to binary. The Rust answer to `fontmake`. |
+| [fonttools/fontspector](https://github.com/fonttools/fontspector) | **Apache-2.0** | 123 | 27 | 2026-11-27 | Font QA. Successor to fontbakery (above). |
+| [servo/font-kit](https://github.com/servo/font-kit) | **Apache-2.0** | 844 | 138 | 2026-11-01 | Cross-platform font loading and matching. |
+| [boxesandglue/textshape](https://github.com/boxesandglue/textshape) | **MIT** | 2 | 2 | 2026-11-25 | A **Go** shaper inspired by HarfBuzz, claiming `fvar`/`gvar`/`HVAR` plus Arabic, Indic, Thai and Hangul shaping. **2 stars and self-described beta with an unstable API — recorded as existence, not as an option.** Named because a Go shop will find it and must be told its scale. |
+
+**Why Globant should care about the licence shape here, not just the language:** the C stack is permissive
+*in effect* but requires a licence-file read per component and includes one dual-licensed (FreeType) and
+one bespoke-licensed (ICU) dependency. The Rust stack is **uniformly Apache-2.0/MIT, memory-safe, and
+compiles to WASM** — which is what makes client-side shaping in a browser player or a TV app a licensing
+non-event. For any *new* build in this plane the default should be the Rust components; for any existing
+build, HarfBuzz is not a problem to solve.
+
+### Layer C — Python/JS tooling (what a pipeline actually calls)
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [fonttools/fonttools](https://github.com/fonttools/fonttools) | **MIT** | 5,338 | 589 | 2026-11-27 | `pyftsubset` (subsetting), TTX round-trip, `varLib`. Already in the KB via pass 23; it is the single most-called tool of this plane. |
+| [fontsource/fontsource](https://github.com/fontsource/fontsource) | **MIT** | 6,305 | 197 | 2026-11-09 | Self-hostable open-source fonts as npm packages. **The GDPR-safe route for EMEA**: no third-party font CDN request. |
+| [opentypejs/opentype.js](https://github.com/opentypejs/opentype.js) | **MIT** | 5,052 | 564 | 2026-08-08 | Font parsing/writing in JS — reads a font in the browser or in Node without native deps. |
+| [harfbuzz/harfbuzzjs](https://github.com/harfbuzz/harfbuzzjs) | **MIT** | 298 | 53 | 2026-11-21 | HarfBuzz compiled to WASM — correct shaping in a browser, under MIT. |
+| [adobe-type-tools/afdko](https://github.com/adobe-type-tools/afdko) | **Apache-2.0** — `LICENSE.md` (2,305 B) read | 1,191 | 183 | 2026-11-23 | Adobe's font development toolkit. API says `NOASSERTION`; the file says Apache-2.0. |
+| [googlefonts/fontmake](https://github.com/googlefonts/fontmake) | **Apache-2.0** | 900 | 98 | 2026-10-09 | Source-to-binary build (the Python incumbent `fontc` targets). |
+| [googlefonts/glyphsLib](https://github.com/googlefonts/glyphsLib) | **Apache-2.0** | 207 | 61 | 2026-11-23 | Reads/writes Glyphs sources — the bridge from a designer's file to a build. |
+| [googlefonts/ufo2ft](https://github.com/googlefonts/ufo2ft) | **MIT** | 177 | 51 | 2026-11-23 | UFO → binary compiler step. |
+| [googlefonts/gftools](https://github.com/googlefonts/gftools) | **Apache-2.0** | 287 | 75 | 2026-11-07 | The Google Fonts maintenance scripts — onboarding, QA, metadata. |
+| [googlefonts/picosvg](https://github.com/googlefonts/picosvg) | **Apache-2.0** | 223 | 18 | 2026-10-26 | SVG normalisation, the input step for colour fonts. |
+| [googlefonts/nanoemoji](https://github.com/googlefonts/nanoemoji) | **Apache-2.0** | 331 | 31 | 2026-11-10 | Builds colour/emoji fonts from SVGs — relevant to any brand that ships a custom emoji or icon set. |
+| [googlefonts/diffenator2](https://github.com/googlefonts/diffenator2) | **Apache-2.0** | 71 | 9 | 2026-11-06 | Visual regression between two builds of a font. The missing half of a font CI gate. |
+| [silnrsi/pysilfont](https://github.com/silnrsi/pysilfont) | **MIT** — `LICENSE` (1,127 B) read: *"Released under the MIT license"* | 64 | — | 2026-11-23 | SIL's font-production utilities. API says `NOASSERTION`. |
+
+### Layer D — coverage measurement: the two instruments that turn opinion into a number
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [rosettatype/hyperglot](https://github.com/rosettatype/hyperglot) | **Apache-2.0** | 208 | 28 | 2026-10-26 | **Which languages does this font actually support?** A database plus a CLI that answers it per font file. |
+| [googlefonts/shaperglot](https://github.com/googlefonts/shaperglot) | **Apache-2.0** | 58 | 11 | 2026-11-17 | **Does this font *shape* that language correctly** — not merely contain the codepoints? Checks the OpenType features a script needs. |
+
+These two are the plane's instruments and the reason this pass can place findings by region with numbers
+rather than adjectives. **Codepoint coverage is not language support**: a font can contain every
+Devanagari codepoint and still render the script wrongly because it lacks the GSUB/GPOS features the
+Indic shaping engine calls. `hyperglot` answers the first question, `shaperglot` the second. Nothing else
+open-source answers either, and at **208 and 58 stars** they are the usual shape of this KB's most useful
+findings: critical, permissive, and nearly unknown.
+
+### Layer E — typesetting engines above the shaper
+
+| Repo | License | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [typst/typst](https://github.com/typst/typst) | **Apache-2.0** | 57,454 | 1,804 | 2026-11-26 | **By far the largest permissive project in this plane** — a modern typesetting system, scriptable, fast, Apache-2.0. For templated long-form output (reports, programme guides, catalogues) it is the default recommendation. |
+| [sile-typesetter/sile](https://github.com/sile-typesetter/sile) | **MIT** | 1,793 | 110 | 2026-11-14 | Typesetter built on HarfBuzz/ICU, designed for **complex scripts and non-Latin typography** where LaTeX struggles. MIT. |
+| [unicode-org/text-rendering-tests](https://github.com/unicode-org/text-rendering-tests) | **Unicode-3.0** — `LICENSE` (2,033 B) read | 188 | 37 | 2026-08-24 | A **conformance test suite** for text renderers. This is the pass-4 conformance discipline applied to type: a way to prove a renderer is correct rather than assert it. |
+
+(`vivliostyle/vivliostyle.js`, **AGPL-3.0**, is already in this KB from pass 18 as the CJK/vertical-writing
+answer. It belongs to this plane too, with the same warning: network copyleft, so deploy it behind a
+service boundary.)
+
+### The licence-location rule gains a second shape
+
+Pass 23 recorded that [google/fonts](https://github.com/google/fonts) (**20,813★, pushed 2026-11-27**) has
+**no root licence file** — licences live *per family* under `ofl/`, `apache/`, `ufl/`. This pass found the
+other shape: [notofonts/noto-cjk](https://github.com/notofonts/noto-cjk) (**4,176★, 282f, API reports
+`NONE`, last push 2025-12-16**) carries its licence **per subtree** — `Sans/LICENSE` and `Serif/LICENSE`,
+both **OFL-1.1, 4,301 B** — and nothing at the root.
+
+**The probe discipline, now at 14 names and two depths.** Twelve filenames (`LICENSE`, `LICENSE.txt`,
+`LICENSE.md`, `COPYING`, `COPYING.txt`, `COPYING.md`, `license.txt`, `LICENCE`, **`OFL.txt`**, `OFL.md`,
+`LICENSE.TXT`, `NOTICE`) across `main` and `master`, **and then the obvious subdirectories**. `OFL.txt`
+earns its place in the list this pass: it is where [EkType/Mukta](https://github.com/EkType/Mukta)
+(API: `NOASSERTION`) actually keeps its **OFL-1.1, 4,354 B**. And the cycle-8 control still works
+perfectly: `noto-cjk`'s `README.md` returns **200** while all 12 root licence names return **404**, which
+proves the names are wrong rather than the licence missing — the licence was two directories down.

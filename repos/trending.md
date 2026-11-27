@@ -10,6 +10,67 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 38: type & text-rendering infrastructure (**the engine layer is being rewritten in Rust under Apache-2.0, and the QA tool's successor shipped today**)
+
+Infrastructure half of pass 38. All figures verified 2026-11-27 via `search/repositories` with `repo:`
+qualifiers, existence via `git ls-remote`, licences by reading the file wherever the API said
+`NOASSERTION`/`NONE`.
+
+### The live movement: a permissive Rust stack replacing a licence-messy C stack
+
+| Repo | License | Stars | Forks | Last push |
+|---|---|---|---|---|
+| [googlefonts/fontations](https://github.com/googlefonts/fontations) | Apache-2.0 | 857 | 91 | 2026-11-25 |
+| [dfrg/swash](https://github.com/dfrg/swash) | Apache-2.0 | 886 | 67 | 2026-11-13 |
+| [harfbuzz/rustybuzz](https://github.com/harfbuzz/rustybuzz) | MIT | 666 | 42 | 2026-07-26 |
+| [googlefonts/fontc](https://github.com/googlefonts/fontc) | Apache-2.0 | 196 | 22 | 2026-11-25 |
+| [fonttools/fontspector](https://github.com/fonttools/fontspector) | Apache-2.0 | 123 | 27 | **2026-11-27** |
+| [servo/font-kit](https://github.com/servo/font-kit) | Apache-2.0 | 844 | 138 | 2026-11-01 |
+
+…replacing, component for component, a C layer whose licences each need a file read:
+[harfbuzz](https://github.com/harfbuzz/harfbuzz) **"old MIT"** (`NOASSERTION`, 6,261★, 2026-11-27);
+[freetype](https://github.com/freetype/freetype) **dual FTL / GPL-2.0** (`LICENSE.TXT` 2,149 B, 935★);
+[unicode-org/icu](https://github.com/unicode-org/icu) **Unicode-3.0** (`LICENSE` 27,718 B, 3,654★);
+[fontforge](https://github.com/fontforge/fontforge) **GPL-3.0 as a whole** (`LICENSE` 10,015 B, 8,105★).
+
+### The rest of the plane, first appearance in this KB
+
+| Repo | License | Stars | Last push | Why it is here |
+|---|---|---|---|---|
+| [typst/typst](https://github.com/typst/typst) | Apache-2.0 | **57,454** | 2026-11-26 | Largest permissive project in the plane by an order of magnitude. |
+| [fontsource/fontsource](https://github.com/fontsource/fontsource) | MIT | 6,305 | 2026-11-09 | Self-hosted open fonts as npm packages — the GDPR-safe route for EMEA. |
+| [fonttools/fonttools](https://github.com/fonttools/fonttools) | MIT | 5,338 | 2026-11-27 | `pyftsubset`; the most-called tool here. |
+| [opentypejs/opentype.js](https://github.com/opentypejs/opentype.js) | MIT | 5,052 | 2026-08-08 | Font parsing in JS/Node. |
+| [sile-typesetter/sile](https://github.com/sile-typesetter/sile) | MIT | 1,793 | 2026-11-14 | Typesetter built for complex scripts. |
+| [google/woff2](https://github.com/google/woff2) | MIT | 1,830 | 2026-10-28 | The format browsers want. |
+| [KonghaYao/cn-font-split](https://github.com/KonghaYao/cn-font-split) | Apache-2.0 | 1,269 | **2026-11-27** | CJK subsetting into unicode-range slices. The APAC answer, pushed the day of this pass. |
+| [libass/libass](https://github.com/libass/libass) | **ISC** | 1,209 | 2026-11-21 | Burns the caption into the frame; delegates shaping to HarfBuzz. |
+| [adobe-type-tools/afdko](https://github.com/adobe-type-tools/afdko) | Apache-2.0 (`LICENSE.md`) | 1,191 | 2026-11-23 | Adobe's toolkit; API said `NOASSERTION`. |
+| [Jolg42/awesome-typography](https://github.com/Jolg42/awesome-typography) | **CC0-1.0** | 1,554 | 2026-11-18 | A *list*, under a content licence — correctly, since it is content. |
+| [mpcabd/python-arabic-reshaper](https://github.com/mpcabd/python-arabic-reshaper) | MIT | 452 | 2026-11-02 | Arabic letter joining where no shaper is available. |
+| [HOST-Oman/libraqm](https://github.com/HOST-Oman/libraqm) | MIT | 341 | 2026-07-23 | Complex-text layout; **Pillow without it draws Arabic isolated and LTR**. |
+| [notofonts/notofonts.github.io](https://github.com/notofonts/notofonts.github.io) | Apache-2.0 | 324 | 2026-11-24 | The live Noto distribution. |
+| [rosettatype/hyperglot](https://github.com/rosettatype/hyperglot) | Apache-2.0 | 208 | 2026-10-26 | **Which languages does this font support?** |
+| [unicode-org/text-rendering-tests](https://github.com/unicode-org/text-rendering-tests) | Unicode-3.0 (`LICENSE` 2,033 B) | 188 | 2026-08-24 | Conformance suite for renderers. |
+| [MeirKriheli/python-bidi](https://github.com/MeirKriheli/python-bidi) | **LGPL-3.0** | 127 | 2026-10-28 | **The one copyleft link in an otherwise permissive RTL chain.** Matters if statically linked. |
+| [googlefonts/shaperglot](https://github.com/googlefonts/shaperglot) | Apache-2.0 | 58 | 2026-11-17 | **Does it *shape* that language, not merely contain the codepoints?** |
+| [googlefonts/diffenator2](https://github.com/googlefonts/diffenator2) | Apache-2.0 | 71 | 2026-11-06 | Visual regression between two font builds. |
+| [vp-tw/cjk-web-fonts](https://github.com/vp-tw/cjk-web-fonts) | MIT | **0** | 2026-11-15 | Prebuilt CJK web-font subsets served via jsDelivr. **Zero stars — do not cite it to a client**; recorded because a CJK search surfaces it immediately. |
+| [boxesandglue/textshape](https://github.com/boxesandglue/textshape) | MIT | **2** | 2026-11-25 | Go shaper, self-described beta with unstable API. Recorded so a Go shop learns its scale before adopting it. |
+
+### Measured subsetting effects — self-reported, and labelled as such
+
+| Source | Before | After | Caveat |
+|---|---|---|---|
+| `faberline/surface` PR (WASM build) | full CJK font **16,435,884 B** | subset **3,615,900 B** | One project's own PR description, not a benchmark |
+| `xingkaixin/blog` PR (page-level subsetting with fontTools) | median **393 KB** font bytes/page | **117 KB** | Same caveat; single site |
+| `storytold/texturecraft` PR | web build **27.1 MB**, over its 24 MiB gate | under gate after CJK subsetting | Same caveat |
+
+These are the only quantified figures this pass could reach. **The Web Almanac fonts chapter
+(`almanac.httparchive.org`) does not resolve from this session** — see the informed-gaps note in
+`intel/trends.md`. Treat the three rows above as directional evidence that CJK subsetting is a
+multiple-megabyte problem, and nothing more.
+
 ## 2026-11-27 — pass 37: consumer-products & brand-licensing infrastructure (**the substrate is Apache-2.0 and 5,689 stars; the application layer is one search result**)
 
 The licensing-out plane has no open-source application tier and a genuinely excellent substrate. Both

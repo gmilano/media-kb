@@ -3834,3 +3834,89 @@ This is recorded as a trend, not an anecdote, because of **where** it appeared: 
 plane that has no code at all. Content describing software that does not exist accumulates fastest
 precisely where real software is absent, and it is shaped to be plausible — a sensible name, a correct
 feature list, a claim of a GitHub repository. **In an empty tier, verify existence before relevance.**
+
+---
+
+## Pass 38 (2026-11-27) — the type, font & multi-script text-rendering plane
+
+### 1. The type engine layer is being rewritten in Rust, under uniformly permissive licences
+
+Measured by last-push date and licence file on 2026-11-27, not asserted:
+
+| New (Rust) | License | Stars | Last push | Replaces | Its licence |
+|---|---|---|---|---|---|
+| `googlefonts/fontations` (read-fonts/skrifa) | **Apache-2.0** | 857 | 2026-11-25 | font parsing inside FreeType/HarfBuzz | FTL/GPL-2.0 dual; "old MIT" |
+| `dfrg/swash` | **Apache-2.0** | 886 | 2026-11-13 | shaping + rendering | HarfBuzz "old MIT" + FreeType |
+| `harfbuzz/rustybuzz` | **MIT** | 666 | 2026-07-26 | HarfBuzz | "old MIT", `NOASSERTION` |
+| `googlefonts/fontc` | **Apache-2.0** | 196 | 2026-11-25 | `fontmake` (Apache-2.0, Python) | Apache-2.0 |
+| `fonttools/fontspector` | **Apache-2.0** | 123 | **2026-11-27** | `fonttools/fontbakery` (**stale 12.8 months**) | Apache-2.0 |
+
+**Why it is a trend and not a preference:** four of the five were pushed within the last 14 days and one
+on the day of the pass, while the tool being replaced has not moved since **2025-11-04**. The commercial
+consequence is licensing, not language: the new stack is uniformly **Apache-2.0/MIT and compiles to
+WASM**, which turns client-side shaping in a browser player or a TV app into a licensing non-event, where
+the C stack required a per-component licence-file read and included one dual-licensed (FreeType) and one
+bespoke-licensed (ICU) dependency.
+
+**Falsifiable prediction, recorded for the next pass of this plane:** `fonttools/fontbakery` will still
+show a last-push date in 2025 and will still not be archived, while `fontspector` will have gained stars
+faster in percentage terms than any other repo in Layer B. If fontbakery moves again, this trend is
+wrong and the migration stalled.
+
+### 2. Codepoint coverage is not language support — and there are now two tools that prove it
+
+`rosettatype/hyperglot` (**Apache-2.0, 208★**) answers *which languages does this font support*;
+`googlefonts/shaperglot` (**Apache-2.0, 58★**) answers *does it shape them correctly* — whether the font
+carries the OpenType features the Indic, Arabic or Khmer shaping engines call for. A font can contain
+every Devanagari codepoint and still render the script wrongly.
+
+This matters because it converts a market question into a measurement. "Can our brand typeface serve
+India?" has had no cheap answer until now; it now has a CLI answer per font file. At 208 and 58 stars,
+these are the usual shape of this KB's most useful findings: **critical, permissive, nearly unknown.**
+
+Reference point for a fallback decision: **Noto covers 162 of the 168 scripts defined in Unicode 16.0**
+and **over 77,000 characters**, which is roughly half of Unicode 18.0's 172,808 (Wikipedia, Noto fonts).
+A lower-quality aggregator claims 166 of 172 as of November 2025; **the two sources disagree and neither
+is the Noto project's own page**, so cite the range, not the number.
+
+### 3. The font licence is a content licence, and the Reserved Font Name clause is the trap
+
+The OFL-1.1 text defines a **Modified Version** as *"any derivative made by adding to, deleting, or
+substituting — in part or in whole — any of the components of the Original Version"*, and requires the
+copyright holder's **written permission** for a Modified Version to carry a Reserved Font Name,
+restricted to *the primary font name as presented to users*. SIL's own FAQ, as summarised by LWN, goes
+further: **converting the format counts as modification, and so does rebuilding from source if the
+result is not byte-identical to the designer's release.**
+
+**Subsetting deletes components.** On the licence text's own definition a subset is therefore a Modified
+Version, and where an RFN is declared the subset must be renamed internally before distribution. *This
+conclusion is a reading of the licence definition, not a quotation of SIL's FAQ:* `openfontlicense.org`
+does not resolve from this session, so the FAQ's exact wording on subsetting is **unverified** — see the
+informed-gaps note below.
+
+Measured on five fonts this pass: **Andada-Pro, Amiri and Mukta declare no RFN; Skeena ("Skeena") and
+Charis ("Charis", "SIL") do.** Three of five are free to subset-and-ship under the same name and two are
+not, and the split does not correlate with publisher, region or recency. **It is a per-font fact that
+only the licence file answers.**
+
+### 4. Informed gaps — two channels this pass could not reach
+
+| Channel | Why it matters | Status |
+|---|---|---|
+| `almanac.httparchive.org` (Web Almanac **Fonts** chapter) | The only population-scale measurement of web-font usage: WOFF2 share, variable-font adoption, `unicode-range` subsetting prevalence, median font bytes per page | **Does not resolve from this session** (outside allowed network domains). **No population-scale font figure in this pass is verified.** The three subsetting figures in `repos/trending.md` are single-project self-reports and are labelled as such. |
+| `openfontlicense.org` (OFL FAQ) | The authoritative gloss on whether subsetting creates a Modified Version | **Does not resolve from this session.** Licence *text* definition obtained via search result and SPDX; the FAQ's own wording on subsetting is unverified. Treat the subsetting-equals-modification conclusion as a defensible reading, and say so in a client deck. |
+
+Recorded the same way as `new.ddex.net` in pass 5: **an informed gap is information; silence looks
+exactly like coverage.**
+
+### 5. The font market number is unusable, and that is worth knowing before a deck is built
+
+Vendor market-research estimates for the 2026 global font/typeface market span **roughly $1.2B to $8.5B —
+a ~7x spread** — because each report defines the market differently. The most consistently reported
+cluster is **$1.23–1.26B for 2026** (Global Growth Insights $1.23B; Business Research Insights $1.24B for
+2026 rising to $1.81B by 2035). Verified Market Research publishes **$8.51B (2026) → $12.5B (2033)** on
+one page and **$1.26B** for the same report on another.
+
+**Rule: never put a font-market number in a client deck without naming the source and the definition.**
+The useful framing is not market size at all — it is that the *engineering* layer is free and permissive
+while the *entitlement* layer is entirely commercial (see `verticals/solutions.md`).

@@ -2179,3 +2179,47 @@ builds here. Named because the market map needs them, not because they were eval
 the open-source world does not have. A proposal that claims an all-open-source licensing and royalty stack
 is not deliverable. A proposal that builds approvals and royalty logic as Globant IP on top of a permissive
 commerce base (Medusa, Bagisto, Saleor, Spree) plus a permissive DAM (ResourceSpace) **is**.
+
+---
+
+## The type & text-rendering tier — added 2026-11-27 (pass 38)
+
+Real, deployable systems for the plane that renders language. All verified 2026-11-27.
+
+| Platform | License | Repo | Stars | Last push | What you start from, and the constraint |
+|---|---|---|---|---|---|
+| **Typst** | **Apache-2.0** | [typst/typst](https://github.com/typst/typst) | 57,454 | 2026-11-26 | A complete typesetting system with a scripting language — templated long-form output (programme guides, catalogues, rate cards, EPG booklets, report packs). **The one platform in this tier you can fork into a product**: Apache-2.0, no copyleft, no service boundary needed. |
+| **SILE** | **MIT** | [sile-typesetter/sile](https://github.com/sile-typesetter/sile) | 1,793 | 2026-11-14 | Typesetter built directly on HarfBuzz/ICU for **complex-script** work where LaTeX fails. MIT. Choose it over Typst when the job is Arabic, Indic or multi-script book work rather than templated layout. |
+| **Fontsource** | **MIT** | [fontsource/fontsource](https://github.com/fontsource/fontsource) | 6,305 | 2026-11-09 | Self-hosting infrastructure for open fonts, as npm packages with per-subset files. **This is the platform answer to the EMEA font-CDN problem** — no third-party request, so no transfer to a US font host from a European page. |
+| **Noto distribution** | **Apache-2.0** (site/tooling) | [notofonts/notofonts.github.io](https://github.com/notofonts/notofonts.github.io) | 324 | 2026-11-24 | The live Noto build and distribution system. The fonts themselves are **OFL-1.1**. The practical global fallback stack for any script you have not explicitly designed for. |
+| **Fontspector** | **Apache-2.0** | [fonttools/fontspector](https://github.com/fonttools/fontspector) | 123 | **2026-11-27** | Font QA as a CLI, a Python module **and a WASM build** — so it runs in CI *and* in a browser-based review tool. Ships profiles for Google Fonts, OpenType, Microsoft and Adobe conventions. |
+| **FontForge** | **GPL-3.0 as a whole** (`LICENSE`, 10,015 B) | [fontforge/fontforge](https://github.com/fontforge/fontforge) | 8,105 | 2026-11-23 | The open font editor. **Tool, never a component**: GPL-3.0 as a whole means you run it, you do not link it or embed it in a product. |
+| **Vivliostyle** | **AGPL-3.0** | `vivliostyle/vivliostyle.js` | — | (pass 18) | Already in this KB. CJK vertical writing, ruby/furigana. **Network copyleft — behind a service boundary only.** |
+
+### What this tier does *not* contain, stated as a gap
+
+**There is no open-source font asset management system.** The capability a broadcaster or publisher
+actually buys — a central font library with per-font licence terms, seat counts, which brand may use
+which family, expiry, and an audit trail of who embedded what into which deliverable — is sold by
+Monotype, Adobe and Extensis, and has **no open-source equivalent** in this plane. The nearest open
+components are a font *library* (`google/fonts`), a font *host* (`fontsource`) and a font *validator*
+(`fontspector`); none of them models a licence term or a seat.
+
+This is the same shape as the gap recorded in pass 37 for licensee portals and in pass 5 for royalty
+accounting, and it points the same way: **the licence-and-entitlement layer is where Globant builds IP,
+because the open substrate underneath it is permissive, mature and free.** A font governance service
+built on `fontspector` + `hyperglot` + a per-font licence record is a small, well-defined, sellable
+artefact — and the measurements in `agents/top.md` show nobody has built it.
+
+### The commercial layer, for the market map
+
+| Vendor | What they sell that open source does not | Evidence |
+|---|---|---|
+| **Monotype / Adobe / Extensis** | Font asset management, seat compliance, and **broadcast/app embedding rights** | Foundry EULA tiers (see `intel/market.md`, North America) |
+| **Commercial foundries generally** | Tiered licences: desktop, web, **app**, **broadcast** — priced separately | Multiple foundry EULAs read 2026-11-27: on-screen text for video/film/streaming is explicitly a separate Broadcast tier at several foundries; app/game embedding a separate Application tier |
+
+**The consequence for any media pipeline, and it is the most sellable sentence in this pass:** OFL fonts
+are not merely *cheaper* than commercial fonts for a pipeline that burns text into video or embeds a face
+in a TV app — **they are the only ones whose terms a pipeline can satisfy programmatically at scale**,
+because OFL has no per-seat, per-title or per-broadcast tier to count. The money saved is real; the
+compliance risk avoided is the actual reason.

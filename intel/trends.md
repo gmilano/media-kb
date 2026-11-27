@@ -4654,3 +4654,56 @@ prohibits synthetic audio** favouring or harming a candidacy.
 **The composable consequence:** the MIT agent layer plus a per-jurisdiction policy engine is now a
 product shape, not a thought experiment — and radio is the medium where an unlabelled synthetic voice is
 hardest to hide and easiest for a regulator to sample off-air.
+
+---
+
+## Pass 47 (2026-11-27) — trends in the weather desk, environmental data & on-air meteorology
+
+**1. The AI weather models became permissively licensed, and almost nobody in media has noticed.**
+Within roughly eighteen months, global AI forecasting went from research demos to **operational systems
+with open code**: Microsoft's **Aurora** is MIT for code *and* weights; Google's **WeatherNext 2 /
+Cyclones** line is Apache-2.0 code with **CC BY 4.0** on everything else; ECMWF's **anemoi** is
+Apache-2.0 *and is the backbone of operational AIFS*. A capability that was a national-institution
+monopoly is now a dependency a studio can install. This is the single most actionable trend in the plane.
+
+**2. The licence moved from the repository to the artefact — and tooling has not followed.** For an AI
+model, the governing licence attaches to the **weights**, which no SPDX field, badge or source-tree SBOM
+scan can see. Both failure directions were observed this pass in the same plane: **Pangu-Weather** has
+*no licence file at all* while its README forbids commercial use, and a widely-cited public catalogue
+still reports **GraphCast's weights as non-commercial** when the repo's own 2026 README licenses them
+CC BY 4.0. Expect "weights licence" to become a distinct CI check in 2027; today it is a manual read.
+
+**3. Open data policy is diverging from open data *supply* in North America.** ECMWF went **fully open
+(CC-BY-4.0, no information cost) on 2025-10-01**; NOAA data remains public domain but the FY2026
+submission cuts NOAA **>25 %**, eliminates the research office, ends the billion-dollar-disasters
+database and has already curtailed **weather-balloon launches**, with GeoXO satellite capability cut.
+The licence terms improve while the observation base thins — and AI models that were trained on that
+public record are the beneficiaries of its past, not its future.
+
+**4. The licence on the *act* is emerging as a harder gate than the licence on the data.** Japan's
+amended **Meteorological Service Act (full effect end of May 2026)** requires a **JMA permit to provide
+forecasts to users in Japan regardless of operator location**, with public naming of unlicensed
+operators. This is new vocabulary for this KB: a state permit on the *activity*, orthogonal to every
+code and data licence. Any plane where a profession is licensed (medicine, law, engineering,
+meteorology) should now be checked for it.
+
+**5. Acquisition route is becoming a licence determinant.** The same physical fields — **BoM, CMA,
+CPTEC, IMD, JMA, MF, NCMRWF** — are **CC BY-NC-4.0 through ECMWF's TIGGE** while the originating
+services publish on open terms directly. Provenance metadata must now record *where a feed was
+obtained*, not just what it is. Generalises to every dataset in every industry in this KB.
+
+**6. Open source is the actual infrastructure of global weather data exchange.** **89 of 116 operational
+WIS2 nodes (76 %), covering 92 WMO Members, run the Apache-2.0 `wis2box`** as of 2026-06-30. This is the
+clearest case in the whole KB of open source being not an alternative to the institutional system but
+*the institutional system itself* — with bandwidth in LDCs/SIDS, not licensing, as the binding constraint.
+
+**7. Weather is the lever local media is actually pulling for engagement.** TEGNA's weather-led
+personalised apps across **50 markets** and vendor-reported app video lifts (WDBJ: **6 000 → 236 000**
+monthly views) place weather at the centre of the local-news retention strategy — while publishers lose
+search referrals to AI answer engines (pass 30's plane). Weather is first-party, habitual, and
+immune to the referral collapse: a structural reason it is where budget goes.
+
+**8. The on-air layer is a stable, crowded, entirely proprietary market and shows no sign of opening.**
+Eleven-plus active vendors shipping through 2026 (Chyron Weather 2.3 in February, 2.4 in June), zero open
+peers. The honest prediction is that this does **not** change, because the deliverable is brand rather
+than capability — see the falsifiable prediction recorded in `compose/patterns.md` for this pass.

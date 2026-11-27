@@ -2588,3 +2588,53 @@ Business."* A station that does not feed the dashboard is not merely plainer-loo
 - **Informed gap:** `radiodns.org` is outside this session's network policy, so **RadioDNS membership
   fees and commercial terms are unverified.** Treat as "not investigated, not assumed free" — the same
   posture pass 8 recorded for DDEX.
+
+---
+
+## Pass 47 (2026-11-27) — platforms for the weather desk: **the data and model layers are customisable open systems; the on-air layer is a closed-vendor market with no open equivalent**
+
+The gradient in this plane is the inverse of pass 5's rights gradient, and it is the finding to carry
+into an engagement. In pass 5, **declaring** a right was easy (permissive, active), **honouring** it was
+dormant and **settling** it was literally zero. Here the first two steps are *healthy* and the last one
+is empty:
+
+| Step | What it does | State of open source |
+|---|---|---|
+| **1. Access & decode** | Pull GRIB2/NetCDF/radar, decode, grid | **Healthy and permissive** — Apache-2.0 / BSD-3 / MIT, institutionally maintained (ECMWF, Unidata, DOE, WMO) |
+| **2. Model & nowcast** | Run or fine-tune a forecast, extrapolate radar | **Healthy and permissive** — MIT (Aurora), Apache-2.0 (anemoi, WeatherNext, NeuralGCM), BSD-3 (pysteps, FourCastNet) |
+| **3. Put it on air** | Branded on-air graphics, OTT/app presentation | **Zero.** No open-source on-air weather graphics package exists. |
+
+**Why step 3 is empty is not a tooling gap — it is a product fact.** The deliverable at step 3 is
+*brand*: station look, talent workflow, sponsor integration, certified severe-weather presentation.
+Capability is commoditised; presentation is the differentiator stations pay for. That is why the
+proprietary market is crowded and healthy while open source stops dead.
+
+### Open platforms a studio can legally build on
+
+| Platform | Licence (verified) | Repo | What it is, and what it is for |
+|---|---|---|---|
+| **AWIPS II (Unidata community edition)** | **MIT** (`LICENSE`, 1 068 B) | [Unidata/awips2](https://github.com/Unidata/awips2) | The **forecaster workstation** lineage used by the US NWS — display, product generation, data ingest. The Odoo/OpenMRS-equivalent of this plane: a complete operational system, MIT, customisable. Start here for anything resembling a meteorologist's desk. |
+| **wis2box** | **Apache-2.0** (`LICENSE`, 11 357 B) | [wmo-im/wis2box](https://github.com/wmo-im/wis2box) | WMO's WIS2 node in a box — ingest, validate, publish and subscribe to national observational data. **89 of the 116 operational WIS2 nodes worldwide run it (76 %, as of 2026-06-30).** The way a national broadcaster or met service joins global data exchange. |
+| **Open-Meteo** | code **AGPL-3.0** (34 522 B); data CC BY 4.0 | [open-meteo/open-meteo](https://github.com/open-meteo/open-meteo) | Self-hostable forecast API. The pragmatic app/widget backend — **but AGPL-3.0 reaches networked use**, so a closed SaaS wrapper is not available; self-host for internal use or take a commercial subscription. Free hosted tier is non-commercial only. |
+| **Supercell Wx** | **MIT** (`LICENSE.txt` on the **`develop`** branch, 1 081 B) | [dpaulat/supercell-wx](https://github.com/dpaulat/supercell-wx) | Live and archive **NEXRAD Level 2/3 radar plus alerts**, desktop-grade rendering. The most capable **permissive** radar renderer located in any pass, and the only realistic open starting point for a severe-weather display. |
+| **LibreWXR** | **AGPL-3.0** (`LICENSE`, 34 523 B) | [JoshuaKimsey/LibreWXR](https://github.com/JoshuaKimsey/LibreWXR) | Web-based radar renderer with configurable dBZ noise floor, speckle removal and tile-cache warming for smooth animation. Genuinely broadcast-adjacent in intent; **AGPL-3.0 rules it out of a closed product**. |
+| **Open-Meteo weather map layer** | **GPL-2.0** (`LICENSE`, 18 090 B) | [open-meteo/weather-map-layer](https://github.com/open-meteo/weather-map-layer) | Renders forecast fields as raster tiles for MapLibre GL JS. **Note the licence differs from its own parent project** (AGPL-3.0 core vs GPL-2.0 here) — two copyleft licences inside one GitHub org; resolve per repo, never per org. |
+| **CasparCG Server** | **GPL-3.0** (`LICENSE`@`master`, 35 147 B) | [CasparCG/server](https://github.com/CasparCG/server) | Already in this KB since pass 8 as playout. It is **the bridge to air** for this plane: the one open graphics/playout engine that can take a rendered weather scene to SDI/NDI. Invoked as a separate process over AMCP/OSC, so its GPL-3.0 does not reach your own code. |
+
+### The closed on-air market, named — so a proposal does not promise an open alternative that does not exist
+
+Verified as active vendor products in 2026: **Chyron Weather** (2.3 released Feb 2026, 2.4 released
+Jun 2026), **Vizrt Viz Weather**, **The Weather Company** (Max, Max Storm, **Max Engage**), **Baron
+Weather** (radar processing + broadcast graphics), **Ross Video** (Raiden, XPression), **Brainstorm
+AstonWeather**, **MetService Weatherscape XT**, **DTN WSI TruView Max**, **Metra Weather**,
+**AccuWeather Media Solutions**, **Xweather MapsGL**.
+
+There is no open-source peer to any of them. A search for open broadcast weather graphics returns
+radar *viewers* (Supercell Wx, LibreWXR), a *tile layer* (open-meteo/weather-map-layer, 6-star
+experiments like `fbrosda/weather-maps`) and general map renderers — **no on-air template system, no
+talent-facing touchscreen, no sponsor/branding layer, no playout integration.**
+
+**The honest studio position:** build steps 1 and 2 on permissive open source and treat step 3 as
+either (a) integration into the station's existing proprietary graphics system via data hand-off, or
+(b) a custom build on MapLibre/deck.gl/Cesium fronting CasparCG. Do not scope "replace Chyron with
+open source" — nothing in the world currently does that.

@@ -10,6 +10,43 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 47: environmental-data infrastructure (**the healthiest foundation layer in this KB, and open source is literally the global weather-exchange infrastructure**)
+
+Infrastructure for the weather desk: GRIB/NetCDF decode, radar, satellite, met computation and the WMO
+exchange layer. The model layer is logged in `agents/trending.md`. All rows verified 2026-11-27 by
+`git ls-remote` + raw licence file (name, bytes, identifying text).
+
+| Repo | Licence (verified) | Note |
+|---|---|---|
+| [wmo-im/wis2box](https://github.com/wmo-im/wis2box) | **Apache-2.0** (11 357 B) | **The number of the pass: 89 of 116 operational WIS2 nodes — 76 %, covering 92 WMO Members — run this, as of 2026-06-30** (WMO WIS2 Operational Newsletter No. 3). v1.3.0 on 2026-06-24. Open source *is* the institutional system here. |
+| [Unidata/awips2](https://github.com/Unidata/awips2) | **MIT** (1 068 B) | **AWIPS II** community edition — the NWS forecaster-workstation lineage, MIT. The most under-appreciated repo located in this plane. |
+| [ecmwf/eccodes](https://github.com/ecmwf/eccodes) | **Apache-2.0** (`LICENSE`@`master`, 11 336 B) | The GRIB/BUFR decoder the entire field depends on. |
+| [ecmwf/cfgrib](https://github.com/ecmwf/cfgrib) | **Apache-2.0** (11 357 B) | GRIB → xarray bridge. |
+| [blaylockbk/Herbie](https://github.com/blaylockbk/Herbie) | **MIT** (1 079 B) | Pulls GFS/HRRR/IFS/**AIFS** into xarray. The best MIT entry point to the plane. |
+| [ecmwf/earthkit-data](https://github.com/ecmwf/earthkit-data) · [earthkit-plots](https://github.com/ecmwf/earthkit-plots) | **Apache-2.0** (**`LICENCE`** — British spelling, 11 382 B each) | Unified access + the closest permissive thing to a broadcast-grade map renderer from a national-scale met institution. |
+| [Unidata/MetPy](https://github.com/Unidata/MetPy) | **BSD-3-Clause** (1 521 B) | Meteorological calculation and plotting. |
+| [pydata/xarray](https://github.com/pydata/xarray) | **Apache-2.0** (10 268 B) | The array substrate. |
+| [ARM-DOE/pyart](https://github.com/ARM-DOE/pyart) | **BSD-3-Clause** (`LICENSE.txt`, 2 230 B) | US DOE radar toolkit. |
+| [wradlib/wradlib](https://github.com/wradlib/wradlib) | **MIT** (`LICENSE.txt`, 700 B) | Permissive radar processing. |
+| [pytroll/satpy](https://github.com/pytroll/satpy) | **Apache-2.0** (`LICENSE.txt`, 11 357 B) | Satellite compositing — the cloud loop. |
+| [SciTools/iris](https://github.com/SciTools/iris) · [cartopy](https://github.com/SciTools/cartopy) | **BSD-3-Clause** (1 519 / 1 533 B) | Met Office analysis + projections. |
+| [Unidata/siphon](https://github.com/Unidata/siphon) | **BSD-3-Clause** (1 525 B) | THREDDS remote access. |
+| [earthobservations/wetterdienst](https://github.com/earthobservations/wetterdienst) | **MIT** (`LICENSE.md`, 1 082 B) | DWD and other national observations — the EMEA counterpart to Herbie. |
+| [zarr-developers/zarr-python](https://github.com/zarr-developers/zarr-python) | **MIT** (`LICENSE.txt`, 1 124 B) | Cloud-chunked arrays; how ERA5 is served at scale. |
+| [Unidata/netcdf-c](https://github.com/Unidata/netcdf-c) | **BSD-3-Clause** — in **`COPYRIGHT`** only | Looked unlicensed until the filename was right. **Add `COPYRIGHT` to the licence probe.** |
+| [nco/nco](https://github.com/nco/nco) | **BSD-3-Clause** (`LICENSE`, 769 B → `COPYING`) | netCDF operators. |
+| [OSGeo/gdal](https://github.com/OSGeo/gdal) | **MIT-style core**, inside a **21 841-byte multi-licence inventory** at **`LICENSE.TXT`** | Third instance of the compilation-licence pattern after chromaprint and ODR-AudioEnc. **Add `LICENSE.TXT` to the probe.** |
+| [dpaulat/supercell-wx](https://github.com/dpaulat/supercell-wx) | **MIT** (`LICENSE.txt` on the **`develop`** branch, 1 081 B) | NEXRAD L2/L3 + alerts; the most capable **permissive** radar renderer in any pass. 404s on `main`/`master` — **resolve the default branch with `ls-remote --symref` before calling anything unlicensed.** |
+| [JoshuaKimsey/LibreWXR](https://github.com/JoshuaKimsey/LibreWXR) | **AGPL-3.0** (34 523 B) | Broadcast-adjacent web radar renderer — and ruled out of closed products by its licence. |
+| [open-meteo/open-meteo](https://github.com/open-meteo/open-meteo) | **AGPL-3.0** (34 522 B) | Self-hostable API; data served is CC BY 4.0; free hosted tier **non-commercial only**. |
+| [open-meteo/weather-map-layer](https://github.com/open-meteo/weather-map-layer) | **GPL-2.0** (18 090 B) | MapLibre raster weather tiles. **A different licence from its own parent project — resolve per repo, never per org.** |
+| [ufs-community/ufs-weather-model](https://github.com/ufs-community/ufs-weather-model) · [NOAA-EMC/global-workflow](https://github.com/NOAA-EMC/global-workflow) | **LGPL** (`LICENSE.md`@`master`, 2 689 / 7 642 B) | NOAA's operational physics model and workflow. Weak copyleft: linkable. |
+
+**Dropped rather than written down:** `ecmwf/ai-models` and `NOAA-Big-Data-Program/bdp-list` **do not
+resolve** (`ls-remote` failure). `ecmwf/earthkit-regrid` exists but carries **no licence file** on its
+default branch (`develop`), so it is named here as unresolved rather than given an invented licence.
+A 404 is not a finding.
+
 ## 2026-11-27 — pass 46: radio delivery infrastructure (**the only open DAB+ encoder has five licences in one binary and its own maintainer will not say it is redistributable**)
 
 Infrastructure and platform movement for the radio delivery plane: streaming servers, the DAB+

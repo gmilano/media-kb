@@ -9,6 +9,35 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 47: the weather desk (**the first plane where the model layer is permissive and the licence that governs it is invisible to every scanner**)
+
+Plane found by the pass-43→46 method: ~60 candidate terms grepped against all eight KB files before any
+web search. Pass 45 had covered hazard **alerting** (CAP/IPAWS/MeteoAlarm); the **numerical weather
+supply chain** was absent entirely — `meteorolog*`, `GRIB`, `NetCDF`, `ECMWF`, `GraphCast`, `nowcast*`,
+`MetPy`, `eccodes`, `xarray` all returned **0 hits across all eight files**.
+
+**Movement in the AI-forecast model layer, verified at source on 2026-11-27:**
+
+| Model | Repo | Licence as verified at source | Movement |
+|---|---|---|---|
+| Aurora | [microsoft/aurora](https://github.com/microsoft/aurora) | **MIT** (`LICENSE.txt`, 1 111 B) | The clean case: MIT code **and** MIT weights. README asks commercial users to email Microsoft — a request, not a licence term. |
+| WeatherNext 2 / Cyclones | [google-deepmind/graphcast](https://github.com/google-deepmind/graphcast) · [weathernext](https://github.com/google-deepmind/weathernext) | **Apache-2.0** code; README © **2026** Google LLC: all other materials **CC BY 4.0** | **Relicensing worth recording:** public catalogues still report the weights as CC BY-**NC**-SA 4.0. The repo's own 2026 README has no non-commercial term. |
+| AIFS (via anemoi) | [ecmwf/anemoi-core](https://github.com/ecmwf/anemoi-core) · [anemoi-models](https://github.com/ecmwf/anemoi-models) · [anemoi-training](https://github.com/ecmwf/anemoi-training) | **Apache-2.0** (11 354 / 11 357 / 11 357 B) | **AIFS Single v2 + AIFS ENS v2 both operational 2026-05-12.** Apache-2.0 framework behind the world's leading operational system. |
+| NeuralGCM | [neuralgcm/neuralgcm](https://github.com/neuralgcm/neuralgcm) | **Apache-2.0** (11 358 B) | Hybrid ML/physics route for physically consistent output. |
+| FourCastNet | [NVlabs/FourCastNet](https://github.com/NVlabs/FourCastNet) | **BSD-3-Clause** (`LICENSE`@`master`, 2 268 B) | The original fast-global-AI model; still the permissive baseline. |
+| PhysicsNeMo | [NVIDIA/physicsnemo](https://github.com/NVIDIA/physicsnemo) | **Apache-2.0** (`LICENSE.txt`, 11 439 B) | The maintained GPU production path (former Modulus). |
+| pysteps | [pySTEPS/pysteps](https://github.com/pySTEPS/pysteps) | **BSD-3-Clause** (1 518 B) | Probabilistic precipitation **nowcasting** — the model class the on-air desk needs most. Release signed/verified 2026-08-14. |
+| Pangu-Weather ⛔ | [198808xc/Pangu-Weather](https://github.com/198808xc/Pangu-Weather) | **No licence file exists**; README: params **CC BY-NC-SA 4.0**, *"commercial use of these models is forbidden"* | Unusable commercially, and **invisible to licence scanners**. Recorded so it is not rediscovered. |
+
+**The finding to carry forward:** for an AI model the governing licence attaches to the **weights**, not
+the repository, and **both error directions appeared in this one plane** — a scanner seeing more freedom
+than exists (Pangu: no licence file at all), and a catalogue seeing less than exists (GraphCast, stale
+NC claim). An SPDX field is evidence about a repository, never about a model.
+
+**No star counts in this pass's tables.** `api.github.com` is scoped to `gmilano/globant-kb` in this
+session (403 for every other repo) and `img.shields.io` returned empty; existence and licence were
+verified without the API, and **star counts were omitted rather than guessed**.
+
 ## 2026-11-27 — pass 46: the radio delivery & hybrid-radio metadata plane (**the one plane where the agent layer is the HEALTHIEST layer — and it is the only plane in this KB where that is true**)
 
 Plane found by the pass-43/44/45 method: ~55 candidate terms grepped against all eight KB files before

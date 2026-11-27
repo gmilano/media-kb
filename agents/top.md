@@ -4370,3 +4370,73 @@ of them, which is the only reason this plane is pleasant to work in.
 - **Do not grep `DRM` to check this plane.** In this KB `DRM` means Digital Rights Management 89 times
   over. In radio it means **Digital Radio Mondiale** — and that query returns **11 repositories
   worldwide**, exactly one of them alive.
+
+---
+
+## Pass 47 (2026-11-27) — agents for the weather desk: **the one plane where the model layer is permissive and the licence that governs it is INVISIBLE to every scanner**
+
+Plane found by the pass-43/44/45/46 method: ~60 candidate terms grepped against all eight KB files
+before any web search. Pass 45 covered what happens once a hazard is **declared** (CAP, IPAWS,
+MeteoAlarm, EAS). It did not cover **where the numbers come from and how they reach air**:
+`meteorolog*` 0 hits, `GRIB` 0, `NetCDF` 0, `ECMWF` 0, `GraphCast` 0, `nowcast*` 0, `MetPy` 0,
+`eccodes` 0, `xarray` 0 across all eight files. Weather is the most-watched segment in local news and
+the main driver of station app engagement, and the KB had no vocabulary for its supply chain at all.
+
+**Every row below was verified on 2026-11-27** by `git ls-remote` (existence) plus the raw channel
+(licence file, byte count, identifying text). Repos that 404'd are not listed: `ecmwf/ai-models` and
+`NOAA-Big-Data-Program/bdp-list` do not resolve and were dropped rather than written down.
+
+### The forecast models — seven real ones, and the licence is not where you think
+
+| Agent / model | Repo | Licence (as verified at source) | What it does |
+|---|---|---|---|
+| **Aurora** | [microsoft/aurora](https://github.com/microsoft/aurora) | **MIT** (`LICENSE.txt`, 1 111 B) | Microsoft's atmospheric foundation model. The **cleanest licence position in the plane**: MIT covers the code, and the published weights carry MIT too. Its README asks commercial users to email `AIWeatherClimate@microsoft.com` — a request, *not* a restriction in the licence text, which already permits commercial use. |
+| **WeatherNext 2 / WeatherNext Cyclones** (the GraphCast line) | [google-deepmind/graphcast](https://github.com/google-deepmind/graphcast) · [google-deepmind/weathernext](https://github.com/google-deepmind/weathernext) | **Apache-2.0** (`LICENSE`, 11 358 B each); README (© **2026** Google LLC): notebooks + code Apache-2.0, **all other materials CC BY 4.0** | Google DeepMind's graph-neural global forecasting line, now shipped as WeatherNext 2 (FGN) and WeatherNext Cyclones. Weights on the `dm_graphcast` GCS bucket. **CC BY 4.0 permits commercial use with attribution** — see the licence warning below, because the public catalogues still say otherwise. |
+| **AIFS** (via its training framework) | [ecmwf/anemoi-core](https://github.com/ecmwf/anemoi-core) · [ecmwf/anemoi-models](https://github.com/ecmwf/anemoi-models) · [ecmwf/anemoi-training](https://github.com/ecmwf/anemoi-training) | **Apache-2.0** (`LICENSE`, 11 354 / 11 357 / 11 357 B) | Anemoi is the open framework that **is the backbone of ECMWF's operational AIFS**. AIFS Single and AIFS ENS both went to **v2 on 2026-05-12**; model output is **CC-BY-4.0** under ECMWF's Terms of Use, redistributable and commercial with attribution. The most capable *operational* forecast system on earth, with an Apache-2.0 training stack. |
+| **NeuralGCM** | [neuralgcm/neuralgcm](https://github.com/neuralgcm/neuralgcm) | **Apache-2.0** (`LICENSE`, 11 358 B) | Hybrid ML + physics general-circulation model — differentiable dynamical core with learned parameterisations. The route for anyone who needs physical consistency rather than pure pattern-matching. |
+| **FourCastNet** | [NVlabs/FourCastNet](https://github.com/NVlabs/FourCastNet) | **BSD-3-Clause** (`LICENSE`@`master`, 2 268 B) | The Fourier-neural-operator model that started the fast-global-AI-forecast wave. Permissive and self-contained. |
+| **PhysicsNeMo** | [NVIDIA/physicsnemo](https://github.com/NVIDIA/physicsnemo) | **Apache-2.0** (`LICENSE.txt`, 11 439 B) | NVIDIA's physics-ML framework (the former Modulus), the maintained production path for training and serving FourCastNet-class models on GPU. |
+| **pysteps** | [pySTEPS/pysteps](https://github.com/pySTEPS/pysteps) | **BSD-3-Clause** (`LICENSE`, 1 518 B) | Probabilistic **precipitation nowcasting** — the 0–6 hour ensemble radar extrapolation that drives severe-weather cut-ins. Community-governed, PyPI release signed and verified 2026-08-14. This is the model class the on-air desk actually needs most, and it is BSD-3. |
+| **Pangu-Weather** ⛔ | [198808xc/Pangu-Weather](https://github.com/198808xc/Pangu-Weather) | **No licence file exists** under any name on either branch — README §License: trained parameters **CC BY-NC-SA 4.0**, and verbatim *"**The commercial use of these models is forbidden.**"* | One of the most-cited AI weather models, and **unusable in a client deliverable**. Listed here precisely so it is not rediscovered as a shortcut. |
+
+### ⚠️ The licence finding of this pass: for an AI model, the SPDX field is evidence about a *repository*, never about a *model* — and the error runs in BOTH directions
+
+This is a new axis of the structural law this KB has been refining since pass 5. Earlier passes found
+that the licence of the **knowledge content** decides what open source can do (CPT in healthcare,
+MedDRA in pharmacovigilance), and that a licence can belong to the **compilation** rather than the
+repository (`acoustid/chromaprint`, pass 8). This plane adds the sharpest case yet, because here the
+governing licence attaches to the **artefact — the weights** — and tooling cannot see it:
+
+- **A scanner can see MORE freedom than exists.** `198808xc/Pangu-Weather` has **no `LICENSE` file at
+  all** (probed `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `licence.txt`, `COPYING`, `COPYRIGHT`,
+  `LICENSE-GPL`, `gpl-3.0.txt` on both `main` and `master`; the README returns 200 on both, so the
+  channel works and the absence is real). Every SPDX field, licence badge and source-tree SBOM scan
+  therefore reports **nothing** — while the README forbids commercial use outright.
+- **A catalogue can see LESS freedom than exists.** `rebase-energy/awesome-weather-models` — itself
+  carrying **no licence file** — still lists GraphCast's weights as CC BY-**NC**-SA 4.0. The repo's own
+  README, © **2026** Google LLC, licenses the code Apache-2.0 and **all other materials CC BY 4.0**,
+  with no non-commercial term. A third-party catalogue is not a licence, and this one is stale.
+- **Third instance of the compilation-licence pattern**, after chromaprint and ODR-AudioEnc:
+  `OSGeo/gdal`'s licence lives in **`LICENSE.TXT`** (uppercase extension — a name the pass-8 probe
+  still missed), and it is a **21 841-byte inventory of every licence that applies inside the tree**,
+  opening *"In general GDAL/OGR is licensed under an MIT style license."* MIT in general; read the
+  inventory before you redistribute a build.
+
+**Rule for the studio, reusable across all twelve industries:** for every model you ship, resolve the
+**weights** licence separately from the repository licence, from the primary artefact, and record both.
+A repo licence of Apache-2.0 tells you nothing about whether you may sell a forecast made with it.
+
+### Method notes earned this pass (reusable)
+
+- **The licence probe needs two more filenames.** Pass 8 added `license.txt` and `COPYING.md`. Add
+  **`COPYRIGHT`** (`Unidata/netcdf-c` — BSD-3-Clause lives there, and only there) and **`LICENSE.TXT`**
+  (`OSGeo/gdal`). Both looked licence-less until probed by those names.
+- **The branch probe needs `git ls-remote --symref HEAD`.** `dpaulat/supercell-wx` returned 404 for
+  *every* filename on both `main` and `master`, including `README.md` — the pass-8 tell for "your names
+  are wrong, not the file missing." Its default branch is **`develop`**, where `LICENSE.txt` is **MIT**
+  (1 081 B). Never conclude "unlicensed" from `main`/`master` alone.
+- **No star counts in this pass's tables, and that is deliberate.** `api.github.com` is scoped to
+  `gmilano/globant-kb` in this session (403 + *"GitHub access to this repository is not enabled"* for
+  every other repo), and `img.shields.io` returned empty. Existence and licence are verifiable without
+  the API and are what the quality bar demands; **star counts were not verifiable, so they are omitted
+  rather than guessed.** Any future pass that needs them must attach a source per figure.

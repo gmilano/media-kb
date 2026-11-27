@@ -5233,3 +5233,60 @@ this KB's knowledge-content law, and the first time the gating artefact is an IE
 3. **A shallow clone remains the cheapest conclusive oracle.** `git clone --depth 1` settled the
    five-licence question, surfaced `fdk-aac/MODULE_LICENSE_FRAUNHOFER` as a **0-byte marker** and found
    `contrib/fec/LICENSE`, in one call. Confirms the pass-8 rule.
+
+---
+
+## Pass 47 (2026-11-27) — foundational repos for the weather desk: environmental data access, decode & radar
+
+The substrate under every weather segment, app widget and severe-weather cut-in. **This is the
+healthiest foundation layer in the entire media KB**, and the reason is the structural law read
+forward rather than backward: the *content* here — NOAA output is US-government public domain, and
+ECMWF's entire real-time catalogue has been **CC-BY-4.0 with no information cost since 2025-10-01** —
+is openly licensed, so the open-source tooling that reads it is permissive, maintained and
+institutionally owned. Compare pharmacovigilance (MedDRA, paid) and clinical interaction content
+(proprietary), where the same demand produced near-empty repositories.
+
+All rows verified 2026-11-27 via `git ls-remote` + raw licence file (name, byte count, identifying text).
+
+### Decode and array substrate — the GRIB/NetCDF chain
+
+| Repo | Licence (verified) | What it does |
+|---|---|---|
+| [ecmwf/eccodes](https://github.com/ecmwf/eccodes) | **Apache-2.0** (`LICENSE`@`master`, 11 336 B) | ECMWF's **GRIB and BUFR decoder** — the reference implementation the whole field depends on. Everything below that reads GRIB2 reads it through here. |
+| [ecmwf/cfgrib](https://github.com/ecmwf/cfgrib) | **Apache-2.0** (`LICENSE`@`master`, 11 357 B) | The GRIB → `xarray` bridge, binding ecCodes into the Python scientific stack. |
+| [pydata/xarray](https://github.com/pydata/xarray) | **Apache-2.0** (`LICENSE`, 10 268 B) | N-dimensional labelled arrays — the common in-memory representation for every forecast field in this plane. |
+| [Unidata/netcdf-c](https://github.com/Unidata/netcdf-c) | **BSD-3-Clause** — in **`COPYRIGHT`** (© 2025 Unidata), *not* in any `LICENSE*` file | The netCDF C library. Looked licence-less to the pass-8 probe; the filename was the problem, not the licence. |
+| [zarr-developers/zarr-python](https://github.com/zarr-developers/zarr-python) | **MIT** (`LICENSE.txt`, 1 124 B) | Chunked, compressed arrays for cloud object storage — how ERA5 and model archives are served at scale (WeatherBench2 serves ERA5 as Zarr). |
+| [nco/nco](https://github.com/nco/nco) | **BSD-3-Clause** (`LICENSE`, 769 B, pointing to the 3-clause text in `COPYING`) | netCDF Operators — the command-line workhorses for slicing, averaging and concatenating fields. |
+| [OSGeo/gdal](https://github.com/OSGeo/gdal) | **MIT-style core**, stated inside a **21 841-byte multi-licence inventory** at **`LICENSE.TXT`** | Raster/vector geospatial translation. The licence file is a compilation inventory, not a single grant — third instance of that pattern in this KB. Read it before redistributing a build. |
+
+### Meteorological computation, plotting and access
+
+| Repo | Licence (verified) | What it does |
+|---|---|---|
+| [Unidata/MetPy](https://github.com/Unidata/MetPy) | **BSD-3-Clause** (`LICENSE`, 1 521 B) | Meteorological **calculations and plotting** — soundings, Skew-T, thermodynamics, the cross-sections a meteorologist actually puts on screen. |
+| [blaylockbk/Herbie](https://github.com/blaylockbk/Herbie) | **MIT** (`LICENSE`, 1 079 B) | Downloads NWP output — GFS, HRRR, **ECMWF IFS and AIFS** — and hands it back as xarray. The single most useful MIT entry point to this plane. |
+| [ecmwf/earthkit-data](https://github.com/ecmwf/earthkit-data) | **Apache-2.0** (**`LICENCE`** — British spelling, 11 382 B) | ECMWF's unified data-access layer across GRIB, NetCDF, BUFR and cloud sources. |
+| [ecmwf/earthkit-plots](https://github.com/ecmwf/earthkit-plots) | **Apache-2.0** (**`LICENCE`**, 11 382 B) | ECMWF's charting/mapping layer — **the closest thing to a broadcast-grade map renderer that ships under a permissive licence from a national-scale met institution.** |
+| [SciTools/iris](https://github.com/SciTools/iris) | **BSD-3-Clause** (`LICENSE`, 1 519 B) | UK Met Office CF-netCDF analysis library. |
+| [SciTools/cartopy](https://github.com/SciTools/cartopy) | **BSD-3-Clause** (`LICENSE`, 1 533 B) | Cartographic projections and map features — the projection maths behind any weather map. |
+| [Unidata/siphon](https://github.com/Unidata/siphon) | **BSD-3-Clause** (`LICENSE`, 1 525 B) | Remote-access client for THREDDS and other atmospheric data servers. |
+| [earthobservations/wetterdienst](https://github.com/earthobservations/wetterdienst) | **MIT** (`LICENSE.md`, 1 082 B) | Access to **DWD** (Germany) and other national services' observations — the EMEA-side counterpart to Herbie. |
+| [pytroll/satpy](https://github.com/pytroll/satpy) | **Apache-2.0** (`LICENSE.txt`, 11 357 B) | Satellite imagery reading and compositing — the source of the cloud loop in every weather segment. |
+
+### Radar — the severe-weather layer
+
+| Repo | Licence (verified) | What it does |
+|---|---|---|
+| [ARM-DOE/pyart](https://github.com/ARM-DOE/pyart) | **BSD-3-Clause** (`LICENSE.txt`, 2 230 B, UChicago Argonne LLC) | The Python ARM Radar Toolkit — read, correct, grid and analyse weather-radar volumes. US DOE-owned and maintained. |
+| [wradlib/wradlib](https://github.com/wradlib/wradlib) | **MIT** (`LICENSE.txt`, 700 B) | Open radar data processing — attenuation, clutter, georeferencing, rainfall accumulation. The permissive complement to Py-ART. |
+| [Unidata/awips2](https://github.com/Unidata/awips2) | **MIT** (`LICENSE`, 1 068 B) | **AWIPS II** — the forecaster workstation lineage used by the US National Weather Service, in Unidata's community edition, **under MIT**. The most under-appreciated repo in this plane: a complete operational meteorology display system that a studio may legally build a product on. |
+
+### Model-output and standards infrastructure
+
+| Repo | Licence (verified) | What it does |
+|---|---|---|
+| [wmo-im/wis2box](https://github.com/wmo-im/wis2box) | **Apache-2.0** (`LICENSE`, 11 357 B) | WMO's **WIS2 node reference implementation** — free and open-source, aimed explicitly at LDCs, SIDS and developing countries. As of **2026-06-30 there were 116 operational WIS2 nodes representing 92 WMO Members, and 89 of them (76 %) run this software**; v1.3.0 published 2026-06-24. Open source is not adjacent to global weather data exchange — **it is the infrastructure**. |
+| [ufs-community/ufs-weather-model](https://github.com/ufs-community/ufs-weather-model) | **LGPL** (`LICENSE.md`@`master`, 2 689 B) | NOAA's Unified Forecast System atmospheric model — the physics side of the US operational stack. Copyleft but **weak per-file**: linkable. |
+| [NOAA-EMC/global-workflow](https://github.com/NOAA-EMC/global-workflow) | **LGPL** (`LICENSE.md`@`master`, 7 642 B) | The operational workflow that runs NOAA's global forecast. |
+| [open-meteo/open-meteo](https://github.com/open-meteo/open-meteo) | **AGPL-3.0** (`LICENSE`, 34 522 B) | Self-hostable weather API serving open data. **Two licences to keep separate:** the *code* is AGPL-3.0 (network copyleft — it will reach a hosted SaaS wrapper), while the *data* it serves is CC BY 4.0. The hosted free tier is **non-commercial only** (<10 000 calls/day); commercial use means a subscription or self-hosting. |

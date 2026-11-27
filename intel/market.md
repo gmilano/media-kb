@@ -1760,6 +1760,36 @@ enough that migration is consulting work rather than a download.
 **Informed gap:** `icecast.org` and `radiodns.org` are outside this session's network policy, so the EOL
 date and the RadioDNS figures are secondary-source only.
 
+### Pass 47 (2026-11-27) — the weather-desk, environmental-data & on-air meteorology layer in North America
+
+- **The substrate is free and the public collection is shrinking — that asymmetry is the engagement.**
+  NOAA/NWS output is US-government public domain, which is why the open tooling above it is so healthy.
+  But the FY2026 Congressional Budget Submission keeps **NWS funding roughly flat while cutting NOAA
+  overall by more than 25 %**, eliminating the Oceanic and Atmospheric Research office and ending
+  funding for regional climate data and Sea Grant. NOAA's NCEI **discontinued the "billion-dollar
+  disasters" database**; staffing cuts have already **curtailed daily weather-balloon launches**; and OMB
+  directed deep cuts to the **GeoXO** satellite programme's budget and capabilities (reported Oct 2026).
+  Open data stays open; there is simply less of it being made.
+- **Consequence to sell against:** as public observation thins, the modelling and presentation layers
+  move to private and AI-based systems. A station's differentiator becomes *its own* post-processing and
+  presentation on top of a public feed — which is exactly what permissive open source at steps 1–2 buys.
+- **Weather is the proven driver of station app engagement, with figures on the record.** TEGNA rolled
+  out redesigned personalised local apps across **50 markets**, leading with real-time weather and
+  vertical video, and reports increased engagement in test markets (a **10×** video-consumption figure
+  appears in launch coverage — treat as a company claim). The Weather Company's **Max Engage** case study
+  for WDBJ reports mobile video views rising **from 6 000 to 236 000 per month** within two months —
+  **vendor-published, not independently audited**, and worth quoting only with that caveat.
+- **Consolidation sets the buying cycle.** Nexstar's proposed acquisition of TEGNA — which would create
+  the largest US local-TV broadcaster — is **under FCC review**. Weather graphics and app platforms are
+  exactly the duplicated-vendor line items a post-merger integration rationalises.
+- **The one MIT asset most NA stations do not know they can use:** [Unidata/awips2](https://github.com/Unidata/awips2),
+  the NWS forecaster-workstation lineage, community edition, **MIT**.
+- **Still true from pass 45, re-verified in spirit this pass:** `weather-gov/api` carries **no licence
+  file**. The feed is public; the repository asserts nothing.
+- **Informed gaps (searched, not found):** no current authoritative overview of **US federal/state AI
+  rules specific to media** surfaced; **Canada (ECCC) and Mexico (CONAGUA/SMN) weather-data licensing
+  terms were not located this pass** and remain open for a follow-up.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3708,6 +3738,40 @@ broadcaster/OEM alignment. Its claimed deployment is **2.5M+ cars** across **Aud
 **reported to have been reversed** — I could not confirm the reversal from a primary source, and it
 matters for any Swiss engagement. Norway (2017) remains the only completed national FM switch-off.
 
+### Pass 47 (2026-11-27) — the weather-desk, environmental-data & on-air meteorology layer in EMEA
+
+- **EMEA is, on the evidence of this pass, the best region on earth for this plane — and it is a
+  licensing outcome, not a technology one.** ECMWF reached **fully open data status on 2025-10-01**:
+  every product in its Real-time Catalogue is **CC-BY-4.0 with no information cost**. Attribution is a
+  legal requirement, and bulk high-volume delivery may still carry service charges under ECMWF's Terms
+  of Use.
+- **The most capable operational forecast system in the world has an Apache-2.0 training stack.**
+  **AIFS** output is CC-BY-4.0 and explicitly **redistributable and commercial with attribution**;
+  **AIFS Single v2 and AIFS ENS v2 both went live 2026-05-12**; and **anemoi**
+  ([ecmwf/anemoi-core](https://github.com/ecmwf/anemoi-core), **Apache-2.0**) *is* the operational
+  backbone, not a side project. Resolution roadmap: **0.1° IFS streams published from 2026-10-20** while
+  **AIFS streams remain 0.25°**, with the free open subset due to extend to **9 km forecasts at 2-hour
+  latency later in 2026**.
+- **Engagement shape:** a European broadcaster can build an end-to-end weather product — data, model,
+  post-processing — on CC-BY-4.0 data and Apache-2.0/MIT/BSD-3 code, with attribution as the only
+  obligation. No other region offers that combination.
+- **Regulatory context is loosening slightly, not tightening.** The European Parliament adopted its
+  position on the **AI Act Omnibus simplification proposal by 569 votes to 45**. The AVMSD evaluation is
+  live, with DIGITALEUROPE pressing for technology-neutral horizontal regulation.
+- **Sovereignty is the procurement driver.** The DPP's *European Media Trends 2026* names AI the dominant
+  driver of transformation **and digital sovereignty a rising concern**; broadcasters are specifically
+  wary of third-party public AI engines that aggregate data on **extra-European servers**. A
+  self-hosted, permissively licensed weather stack is a direct answer to that objection — and
+  [open-meteo/open-meteo](https://github.com/open-meteo/open-meteo) is self-hostable, with the caveat
+  that its **AGPL-3.0** reaches networked use. The **EBU AI Forum** (Brussels, **2026-03-25**) framed
+  responsible deployment.
+- **MENA, inside this region:** media AI spending in the Mena region is projected to reach **$520 m in
+  2026**.
+- **Informed gap:** **no African NMHS open weather-data licence was located this pass.** The only
+  Africa-side artefact this KB holds remains pass 45's [wmo-raf/cap-aggregator](https://github.com/wmo-raf/cap-aggregator)
+  (WMO Regional Association for Africa, **no licence file**). WIS2 adoption is the route in — but the
+  licensing terms of individual African national services are unverified here, and silence is not coverage.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -5630,6 +5694,43 @@ because an **Australian** regulator is already writing about AI on radio and a *
 deployment carries hard labelling duties. The sellable artefact is an **AI-on-air policy engine per
 jurisdiction** wired to those agents — the same per-jurisdiction policy-engine conclusion this KB reached
 for APAC in pass 8, now with a radio-specific regulator document behind it.
+
+### Pass 47 (2026-11-27) — the weather-desk, environmental-data & on-air meteorology layer in APAC
+
+- **The most important regulatory finding of this pass, and a genuinely new axis for this KB: in Japan
+  the licence is on the ACT, not on the data or the code.** Under the amended **Meteorological Service
+  Act — in full effect from the end of May 2026** — a **JMA permit is required to provide forecasting
+  services to users in Japan, regardless of where the operator is located**. JMA can now **publicly
+  name operators** providing forecast services without the mandatory permits. Every data licence and
+  every code licence in this plane can be permissive and a studio still **may not lawfully issue a
+  forecast for Japan** without that permit.
+- **Architectural consequence (and the pattern to reuse):** for a Japanese deliverable, design the
+  product to **consume a licensed provider's forecast** and present it, rather than to generate a
+  forecast. The AI model is the easy part; the permit is the gate. JMA's own website content is offered
+  under a **Public Data License (Version 1.0)**.
+- **Australia: open by default, commercial by agreement.** BoM's licensing policy recommends **CC BY 4.0
+  as the default open-data standard**, but a separate **Bureau of Meteorology Data Licence Agreement**
+  (versions dated **June 2026** and **October 2026**) governs commercial use, defining "Commercial" use
+  and permitting onward supply to third parties only **as part of a Licensee Product**. Read the version
+  that applies before scoping.
+- **⚠️ The same data carries a different licence by ROUTE — a second new axis.** Data from **BoM, CMA,
+  CPTEC, IMD, JMA, MF and NCMRWF distributed through ECMWF's TIGGE dataset is CC BY-**NC**-4.0 —
+  non-commercial** — even where the originating service publishes on open terms directly. **Source the
+  same field from the aggregator instead of the originator and you lose commercial rights.** Record the
+  acquisition route alongside the licence for every feed, in every industry.
+- **WIS2 is how the rest of the region is coming online.** **Nepal and the Philippines** were among the
+  new operational WIS2 nodes declared **January–June 2026**; 76 % of the 116 operational nodes run the
+  Apache-2.0 [wmo-im/wis2box](https://github.com/wmo-im/wis2box). WMO notes that many Members —
+  particularly LDCs, SIDS and LLDCs — still face **severe bandwidth limitations**, which is a design
+  constraint on any product serving them, not a footnote.
+- **Broader AI regulation diverges sharply.** Latham & Watkins (Sept 2026) groups the region into
+  **binding, risk-based frameworks with tiered obligations (South Korea, Vietnam)** and **targeted AI
+  regulation (China)**; coverage of ~9 APAC jurisdictions centres on high-impact systems, **labelling of
+  generative AI** and human oversight. Malaysia is weighing AI rules inside a copyright overhaul.
+- **Market context:** the Asia-Pacific screen economy is racing toward **$200 bn** with monetisation the
+  defining gap of the decade; APAC is **second only to North America in GenAI adoption pace**; regional
+  **ad growth is forecast at 5.2 % YoY in 2026 — the slowest since the pandemic**. Public broadcasters in
+  Australia and Singapore are applying AI to newsroom workflow, archiving and verification.
 
 ### LATAM
 
@@ -7638,6 +7739,45 @@ the MIT AI-DJ repos work identically in São Paulo and Stockholm. Two concrete i
 sources in Portuguese, plus ENACOM (Argentina) and IFT (Mexico) spectrum/standard filings. None were
 reachable or surfaced in this pass's searches.
 
+### Pass 47 (2026-11-27) — the weather-desk, environmental-data & on-air meteorology layer in LATAM
+
+- **Argentina is the region's one genuinely open, production-grade forecast feed — and its licence is a
+  jurisdiction-ported one that will fail a naive compliance check.** The **Servicio Meteorológico
+  Nacional (SMN)** publishes a **4 km WRF deterministic forecast** for Argentina and neighbouring areas
+  (including parts of Brazil) on **AWS Open Data**, initialised **00 and 12 UTC daily, 72-hour maximum
+  lead time**, under **CC-BY-2.5-AR** — *Creative Commons Attribution 2.5 Argentina*, a country-ported
+  licence, not the unported CC BY 4.0 that tooling expects. Contact: `odp-aws@smn.gov.ar`.
+  **Add ported CC licences to the licence taxonomy**: an allow-list matching only `CC-BY-4.0` rejects
+  this feed wrongly.
+- **Brazil's national data has no official API, and the real access path is community-maintained R
+  packages.** No documented official **INMET** REST API surfaced this pass. Working routes are the
+  **BDMEP portal** (`bdmep.inmet.gov.br`), INMET's synoptic-chart downloads, a **Zenodo mirror** of
+  hourly automatic-station series, and above all the CRAN packages **`climateBR` (v0.2.0, published
+  2026-08-19**, with `download_inmet()`) and **`rmet`**. For a Brazilian engagement, the dependency on a
+  volunteer-maintained CRAN package *is* the integration risk, and naming it early is the value.
+- **Mexico has the region's first sector-specific AI regulation, and it lands on media directly.**
+  Amendments to the **Federal Copyright Law and the Federal Labour Law published 2026-05-14** constitute
+  the first sector-specific AI regulation in Mexico — relevant to any synthesised on-air presenter or
+  voice in a weather segment.
+- **The wider regulatory map is in motion but unfinished.** No Latin American country yet has a fully
+  mature, harmonised AI regime across all sectors; **Brazil, Argentina, Chile, Colombia and Costa Rica**
+  are each advancing their own frameworks, and **Uruguay became the first LATAM signatory of the Council
+  of Europe's AI Framework Convention** (2025). Divergence, not absence, is the planning assumption.
+- **Newsroom-side AI governance is being built regionally rather than nationally**, which is who a studio
+  should talk to: Aspen Digital's *Mind the Gap: AI and the Future of News in Latin America* (Jan 2026)
+  describes **regional coalitions building shared AI assets and attribution/licensing frameworks**;
+  **IFPIM** runs the **CTRL+J** convenings with a Global South focus; **FLIP** (Colombia) and **ADEPA**
+  (Argentina) research adoption while tracking regulation; **SiPreBA** and the Heinrich Böll Foundation
+  published *Notes Toward Regulating Artificial Intelligence in the Media* (May 2026). IAPA/SIP frames
+  adoption as present-tense, with trust, business models and **control over content** as the live issues.
+- **Opportunity, concretely:** the permissive stack at steps 1–2 costs a LATAM broadcaster nothing in
+  licence fees, and the regional gap is **not models but ingestion and continuity** — a maintained,
+  documented ingestion layer over SMN's AWS feed, INMET's portal and a **wis2box** node, with the
+  attribution strings that CC-BY-2.5-AR and CC-BY-4.0 actually require. That is fundable integration
+  work with no open incumbent.
+- **Informed gap:** **no official INMET API was located**, and **Chile (DMC), Colombia (IDEAM) and Peru
+  (SENAMHI) licensing terms were not verified this pass.** Written down rather than left silent.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -9372,3 +9512,44 @@ bottom-up per engagement: stations × feeds × the group's own measured share de
 **Informed gap:** `radiodns.org` is outside this session's network policy, so **RadioDNS membership fees
 and commercial terms are unverified** — treat as "not investigated, not assumed free", the posture pass 8
 set for DDEX.
+
+---
+
+## Market size — pass 47 addendum (2026-11-27): the weather desk, where the **data is free, the models are permissive, and the money is entirely in presentation**
+
+**Headline framing for a proposal.** This plane has an unusual economic shape: the inputs are free by
+law or by licence (US public domain; ECMWF CC-BY-4.0 with **no information cost** since 2025-10-01), the
+state-of-the-art models are MIT/Apache-2.0/BSD-3, and **every dollar in the market sits at the
+presentation layer** — on-air graphics, station branding, app engagement and the ad inventory that
+attaches to the most-watched segment in local news. A studio that understands that the value is in
+step 3 while the capability is free at steps 1–2 is selling the right thing.
+
+**Figures carried forward and newly attached** (each with its source, per the pass-9 rule):
+
+| Figure | Value | Source / caveat |
+|---|---|---|
+| AI in media & entertainment | **$35.77 bn (2026) → $87.44 bn (2030), ~25 % CAGR** | Carried from passes 4–6 of this KB; unchanged basis |
+| GenAI app engagement | **time spent in GenAI apps doubled H1 2025 → H1 2026** | Sensor Tower data cited in Akamai, *The State of AI in Media 2026* |
+| Marketer AI intent | **97 % of marketers plan to use AI in 2026** | DoubleVerify, via Advanced Television — intent, *not* deployment; the same source notes plans have **not** translated into workflow-level adoption |
+| MENA media AI spending | **$520 m in 2026** | Khaleej Times |
+| APAC screen economy | **approaching $200 bn**, monetisation the defining gap | Variety (2026) |
+| APAC ad growth | **5.2 % YoY in 2026 — slowest since the pandemic** | Trade coverage, APAC roundups |
+| WIS2 global adoption | **116 operational nodes / 92 WMO Members (2026-06-30); 89 nodes (76 %) running the Apache-2.0 wis2box**; v1.3.0 on 2026-06-24 | WMO WIS2 Operational Newsletter No. 3 — **primary source, and the hardest number in this pass** |
+| Station app engagement | TEGNA personalised apps across **50 markets**, weather-led; **10×** video consumption in launch markets | TEGNA launch coverage — **company claim** |
+| Weather-app video lift | **6 000 → 236 000 monthly mobile video views in two months** (WDBJ) | The Weather Company *Max Engage* case study — **vendor-published, not audited** |
+
+**The segment-level market this KB could not previously name.** The on-air weather graphics market is
+served by at least eleven active proprietary vendors (Chyron — Weather 2.3 Feb 2026 and 2.4 Jun 2026;
+Vizrt Viz Weather; The Weather Company Max / Max Storm / Max Engage; Baron; Ross Raiden and XPression;
+Brainstorm AstonWeather; MetService Weatherscape XT; DTN WSI TruView Max; Metra Weather; AccuWeather
+Media Solutions; Xweather MapsGL) with **zero open-source peers**. No credible public revenue split for
+this segment surfaced, and inventing one would be worse than naming the gap: **the segment size is an
+informed gap**, while the vendor count and release cadence are verified.
+
+**Why the usual "regulatory pressure creates open source" intuition fails here, again.** Pass 11
+established that the regulator creates the obligation but **the licence of the content decides whether
+open source can meet it**. This plane is the cleanest confirmation yet, read in the positive direction:
+the content is openly licensed (public domain / CC-BY-4.0), and the tooling above it is correspondingly
+**the healthiest foundation layer in this KB** — Apache-2.0 and BSD-3 libraries maintained by ECMWF,
+Unidata, the US DOE and the WMO itself. Where the content is free, open source thrives. Where the
+*output is a brand* — step 3 — it stops regardless.

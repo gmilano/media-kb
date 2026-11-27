@@ -7344,3 +7344,144 @@ or a mux landlord will ask for.
   (384★) has **no licence**. The popular answer and the usable answer diverge in three separate places.
 - **Do not grep `DRM` to check whether this plane is covered.** This KB's 89 `DRM` hits are **Digital
   Rights Management**. **Digital Radio Mondiale** returns **11 repositories worldwide**, one alive.
+
+---
+
+## Weather-desk recipes — added 2026-11-27 (pass 47)
+
+Every repo named below was verified on 2026-11-27 (`git ls-remote` + raw licence file). Licences are
+stated as read at source, not as reported by catalogues.
+
+### P47.1 — The permissive forecast desk (the baseline build, all steps 1–2 permissive)
+
+**Chain:** [blaylockbk/Herbie](https://github.com/blaylockbk/Herbie) (**MIT**) pulls GRIB2 for GFS, HRRR,
+ECMWF IFS and **AIFS** → [ecmwf/cfgrib](https://github.com/ecmwf/cfgrib) (**Apache-2.0**) decodes via
+[ecmwf/eccodes](https://github.com/ecmwf/eccodes) (**Apache-2.0**) → [pydata/xarray](https://github.com/pydata/xarray)
+(**Apache-2.0**) holds the fields → [Unidata/MetPy](https://github.com/Unidata/MetPy) (**BSD-3**) computes
+derived quantities (Skew-T, thermodynamics, cross-sections) → [ecmwf/earthkit-plots](https://github.com/ecmwf/earthkit-plots)
+(**Apache-2.0**) or [SciTools/cartopy](https://github.com/SciTools/cartopy) (**BSD-3**) renders the map →
+scene handed to [CasparCG/server](https://github.com/CasparCG/server) (**GPL-3.0**) for SDI/NDI output.
+
+**Licence wiring that makes this shippable:** steps 1–2 are Apache-2.0/MIT/BSD-3 throughout — no copyleft
+anywhere in your own process. **CasparCG's GPL-3.0 is the only copyleft, and it is a separate process
+driven over AMCP/OSC**, so it is *invoked and distributed alongside* your code, not linked into it —
+the same pattern this KB established for playout in pass 8. Attribution obligation: ECMWF data is
+**CC-BY-4.0 and attribution is a legal requirement**, so the attribution string belongs in the graphic
+template, not in a licence file nobody renders.
+
+### P47.2 — The model bench, with the weights gate built in
+
+**Chain:** [microsoft/aurora](https://github.com/microsoft/aurora) (**MIT**, code *and* weights) as the
+default; [ecmwf/anemoi-core](https://github.com/ecmwf/anemoi-core) + [anemoi-models](https://github.com/ecmwf/anemoi-models)
++ [anemoi-training](https://github.com/ecmwf/anemoi-training) (**all Apache-2.0**) to fine-tune on a
+regional domain; [google-deepmind/weathernext](https://github.com/google-deepmind/weathernext)
+(**Apache-2.0** code, **CC BY 4.0** materials) for the WeatherNext 2 / Cyclones line;
+[neuralgcm/neuralgcm](https://github.com/neuralgcm/neuralgcm) (**Apache-2.0**) when physical consistency
+matters; [NVIDIA/physicsnemo](https://github.com/NVIDIA/physicsnemo) (**Apache-2.0**) +
+[NVlabs/FourCastNet](https://github.com/NVlabs/FourCastNet) (**BSD-3**) for the GPU training path.
+
+**⛔ Excluded by licence, deliberately:** [198808xc/Pangu-Weather](https://github.com/198808xc/Pangu-Weather)
+— **no licence file at all**, README states trained parameters are **CC BY-NC-SA 4.0** and *"the
+commercial use of these models is forbidden."* It will pass every automated licence scan because there
+is nothing for a scanner to read.
+
+**The gate to add to CI (extends the pass-8 licence gate to v8):**
+1. Resolve the **weights** licence from the primary artefact (model card, README §License, bucket
+   terms), **separately** from the repository licence. Record both, with the date read.
+2. Probe licence filenames including `LICENSE`, `LICENSE.txt`, `LICENSE.md`, `license.txt`, `LICENCE`,
+   `COPYING`, `COPYING.md`, **`COPYRIGHT`** (netcdf-c) and **`LICENSE.TXT`** (gdal).
+3. Resolve the default branch with `git ls-remote --symref <url> HEAD` before concluding anything —
+   `dpaulat/supercell-wx` is **MIT on `develop`** and 404s everywhere on `main`/`master`.
+4. A README that returns 200 while every licence name 404s means the licence is genuinely absent; a
+   README that *also* 404s means your branch or names are wrong. (Pass-8 rule, reconfirmed twice here.)
+5. For native dependencies, resolve the licences of the **linked** libraries, not the repo (pass-8
+   chromaprint rule) — and treat a multi-licence inventory file like gdal's 21 841-byte `LICENSE.TXT`
+   as a compilation grant to read, not an SPDX value to copy.
+6. **Record the acquisition route with the licence.** Identical fields are **CC BY-4.0 from BoM/JMA
+   directly and CC BY-NC-4.0 via ECMWF TIGGE.**
+
+### P47.3 — Severe-weather nowcast cut-in (the highest-value, most defensible build)
+
+**Chain:** [ARM-DOE/pyart](https://github.com/ARM-DOE/pyart) (**BSD-3**) or
+[wradlib/wradlib](https://github.com/wradlib/wradlib) (**MIT**) ingest and clean the radar volume →
+[pySTEPS/pysteps](https://github.com/pySTEPS/pysteps) (**BSD-3**) produces the probabilistic 0–6 h
+precipitation nowcast → [dpaulat/supercell-wx](https://github.com/dpaulat/supercell-wx) (**MIT**, on
+`develop`) for the meteorologist's desk view → [maplibre/maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js)
+(**BSD-3**) + [visgl/deck.gl](https://github.com/visgl/deck.gl) (**MIT**) for the web/app renderer →
+CAP alerting via pass 45's [CAPTools/CAPCreator](https://github.com/CAPTools/CAPCreator) (**BSD-3**) →
+air via CasparCG.
+
+**Why this one wins a bid:** the nowcast is where a station's forecast visibly beats a phone's default
+weather app, the whole chain is permissive, and it joins directly onto the alerting plane this KB
+already catalogued in pass 45. Avoid [JoshuaKimsey/LibreWXR](https://github.com/JoshuaKimsey/LibreWXR)
+in a closed product — it is **AGPL-3.0** despite being the most broadcast-adjacent web radar renderer.
+
+### P47.4 — The LATAM station with no national API
+
+**Chain:** SMN Argentina's **4 km WRF** on AWS Open Data (**CC-BY-2.5-AR**, 00/12 UTC, 72 h lead) +
+INMET via **`climateBR` v0.2.0** / **`rmet`** (CRAN) + a [wmo-im/wis2box](https://github.com/wmo-im/wis2box)
+(**Apache-2.0**) node to publish and subscribe → the P47.1 chain above for compute and render.
+
+**The two things to say out loud in the proposal:** (1) the attribution string must satisfy
+**CC-BY-2.5-AR**, a *jurisdiction-ported* licence that an allow-list matching only `CC-BY-4.0` will
+reject wrongly; (2) Brazil's path depends on **volunteer-maintained CRAN packages** because no official
+INMET REST API was located — that is the integration risk, and naming it is the consulting value.
+
+### P47.5 — The Japan-compliant build (architecture driven by a permit, not a licence)
+
+**Do not generate a forecast.** Under the amended Meteorological Service Act (full effect end of May
+2026) a **JMA permit is required to provide forecasting services to users in Japan regardless of where
+the operator sits**, and JMA may publicly name unlicensed operators. Build the product to **ingest a
+permitted provider's forecast** and own the *presentation, personalisation and alerting* layers —
+P47.1's render chain and P47.3's display chain, with step 2 deliberately omitted. The open models are
+all still usable for **internal verification and research**; the regulated act is *issuing the forecast
+to users*.
+
+### P47.6 — Reaching air without an open on-air product
+
+There is **no open-source on-air weather graphics package**. The two viable shapes:
+- **(a) Data hand-off:** compute everything on the permissive stack, then hand fields or rendered
+  frames to the station's existing Chyron / Vizrt / Max / Ross system. Lowest risk, fastest, and what
+  most broadcasters will actually buy.
+- **(b) Custom render:** MapLibre (**BSD-3**) / deck.gl (**MIT**) / [CesiumGS/cesium](https://github.com/CesiumGS/cesium)
+  (**Apache-2.0**) for the visuals, fronting CasparCG (**GPL-3.0**) for playout, with
+  [Unidata/awips2](https://github.com/Unidata/awips2) (**MIT**) as the operational display reference.
+  Real work, genuinely ownable, and the only route to a differentiated look.
+
+## 🔮 Falsifiable prediction recorded this pass (test it in a later plane)
+
+This plane's gradient is **inverted** relative to pass 5's rights gradient. Pass 5: *declare* a right =
+healthy, *honour* it = dormant, *settle* it = literal zero. Pass 47: *access* the data = healthy and
+permissive, *model* it = healthy and permissive, *present it on air* = zero.
+
+**Prediction:** wherever the deliverable is a **branded, on-air or customer-facing artefact**, open
+source approaches zero, while the data layer beneath it stays rich — because the product being sold is
+brand, not capability. **Named test targets for future passes:** on-air **election-night** graphics,
+**sports scoreboard/telestration** graphics, and **financial-ticker** on-air systems. Predict: rich open
+data and computation beneath each (election results feeds, sports data APIs, market data libraries),
+**no open on-air presentation layer for any of the three.** If a future pass finds a maintained,
+permissively licensed on-air graphics package in any of those three, this prediction is **wrong** and
+the "brand, not capability" explanation needs replacing.
+
+## ⛔ What not to promise in this plane (pass 47)
+
+- **Never promise "replace Chyron/Vizrt/Max with open source."** Eleven-plus proprietary vendors ship
+  actively (Chyron Weather 2.3 Feb 2026, 2.4 Jun 2026) and there are **zero open peers**. The open
+  alternative is a custom build, priced as one.
+- **Never ship Pangu-Weather in a client deliverable.** No licence file; README forbids commercial use.
+  It will pass your scanners.
+- **Never quote a repo's SPDX licence as the model's licence.** Resolve weights separately, always.
+- **Never trust a third-party model catalogue on licensing.** `rebase-energy/awesome-weather-models`
+  (itself unlicensed) still lists GraphCast's weights as non-commercial; the repo's 2026 README says
+  CC BY 4.0. Read the primary artefact.
+- **Never assume a feed's licence survives the aggregator.** BoM/JMA/CMA/IMD data is **CC BY-NC-4.0 via
+  TIGGE** and openly licensed direct from source.
+- **Never promise a Japanese weather product that issues its own forecast** without a JMA permit in the
+  risk register by name, at proposal time.
+- **Never wrap Open-Meteo's code in a hosted service** — **AGPL-3.0** reaches networked use. Self-host
+  internally, buy the commercial subscription, or use the CC-BY-4.0 *data* with your own server. The
+  free hosted tier is **non-commercial only** (<10 000 calls/day).
+- **Never put LibreWXR in a closed product** (AGPL-3.0), and **never assume `open-meteo/*` shares one
+  licence** — the core is AGPL-3.0, `weather-map-layer` is **GPL-2.0**.
+- **Do not promise an allow-list compliance check that only accepts `CC-BY-4.0`.** Argentina's SMN feed
+  is **CC-BY-2.5-AR**, and ported CC licences are real and in production use.

@@ -9,6 +9,38 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 52: the film restoration plane (**the only plane in this KB where star count is anti-correlated with liveness**)
+
+**New this pass.** Verified 2026-11-27: existence via `git ls-remote`, stars/forks/push via GitHub
+`search/repositories`, licence by reading the licence file over the raw channel where the API gave nothing
+usable. `github.com` HTML is outside this session's network policy, so repos absent from the search index
+are recorded with stars **unavailable**, not estimated.
+
+**The headline, and it is a warning about this file's own metric:** the four most-starred AI restoration
+models have **102,316 stars between them and no commit since October 2024**.
+
+| Repo | Licence | Stars | Last push | Movement |
+|---|---|---|---|---|
+| [TencentARC/GFPGAN](https://github.com/TencentARC/GFPGAN) | NOASSERTION | 37,737 | **2024-07-26** | ⚠️ Dormant 2y 4m. Face restoration. |
+| [xinntao/Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) | BSD-3-Clause | 37,707 | **2024-08-06** | ⚠️ Dormant 2y 3m. |
+| [jantic/DeOldify](https://github.com/jantic/DeOldify) | MIT | 18,442 | **2024-10-19** | ⛔ **ARCHIVED.** Logged so no future pass recommends it as current. |
+| [XPixelGroup/BasicSR](https://github.com/XPixelGroup/BasicSR) | Apache-2.0 | 8,430 | **2024-07-21** | ⚠️ Dormant 2y 4m. The toolbox under the three above. |
+| [ladaapp/lada](https://github.com/ladaapp/lada) | **AGPL-3.0** | 6,422 | 2026-02-27 | Alive. Mosaic/pixelation restoration. GitHub is a mirror; Codeberg is home. |
+| [ByteDance-Seed/SeedVR](https://github.com/ByteDance-Seed/SeedVR) | **Apache-2.0** | 1,469 | 2026-01-27 | 🚀 SeedVR2 (ICLR 2026). **The most credible permissive model in this plane.** |
+| [hzwer/Practical-RIFE](https://github.com/hzwer/Practical-RIFE) | **MIT** | 1,054 | 2026-08-27 | Alive. The maintained RIFE line for frame interpolation. |
+| [riponcm/nextgenUp](https://github.com/riponcm/nextgenUp) | **MIT** | 247 | **2026-11-15** | 🚀 Live wrapper around the dead models (Real-ESRGAN + GFPGAN + DDColor). |
+| [yahyarahhawi/Spotless-Film](https://github.com/yahyarahhawi/Spotless-Film) | NOASSERTION | 103 | 2026-06-22 | ⛔ **ARCHIVED by owner.** The live code is the fork `dmitrizzle/spotless-film` (MIT). |
+| [fabiocolor/Advanced-Dirt-Removal](https://github.com/fabiocolor/Advanced-Dirt-Removal) | **MIT** | 20 | **2026-11-20** | 🚀 **Pushed 7 days before this pass.** OFX dust/dirt removal for Resolve and Nuke — the most useful permissive tool in the plane. |
+| [myrsloik/DotKill](https://github.com/myrsloik/DotKill) | **MIT** | 16 | 2026-07-27 | Alive. Dotcrawl/rainbow removal for VapourSynth. |
+| [pinterf/RemoveDirt](https://github.com/pinterf/RemoveDirt) | **GPL-2.0** | 14 | 2025-01-08 | The classic dust-buster. Copyleft — see `compose/patterns.md` Pattern 119. |
+| [kebabkenraali/super8-fixer](https://github.com/kebabkenraali/super8-fixer) | NOASSERTION | 0 | 2026-11-08 | New. Frame-line slip repair for Super 8. |
+| [Abel1629/Image-restoration-with-OpenCL](https://github.com/Abel1629/Image-restoration-with-OpenCL) | **NONE** | 0 | 2026-11-24 | New. GPU deflicker + dust/scratch detection. No licence. |
+| [avisalmon/MOV8mm](https://github.com/avisalmon/MOV8mm) | MIT — **unfilled** | 0 | 2025-10-18 | ⛔ Licence reads `Copyright (c) 2025 [Your Name]`. **A new failure mode for this KB.** |
+
+**Baselines recorded for re-measurement next pass:** `Advanced-Dirt-Removal` 20★, `DotKill` 16★,
+`RemoveDirt` 14★, `SeedVR` 1,469★, `nextgenUp` 247★. **Prediction under test:** corporate contribution,
+when it comes, arrives at the enhancement step with a permissive licence — not at the repair step.
+
 ## 2026-11-27 — pass 51: the over-the-air transmission plane (**the whole modulation layer of broadcast is two maintainers and no permissive licence**)
 
 **New this pass.** Verified 2026-11-27: existence via `git ls-remote`, stars/forks/push via the GitHub

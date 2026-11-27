@@ -5007,3 +5007,74 @@ rounding-error-sized.** The pattern is now strong enough to predict: in planes w
 operators rather than consumers, **the agent layer does not exist yet and the engines do**. Sell the
 engine integration; do not promise an agent ecosystem that is not there.
 
+
+## Pass 52 (2026-11-27) — trends in the film restoration & remastering plane
+
+### 1. The inversion: in this plane, stars measure 2024 and liveness lives below 250★
+
+Four repositories hold **102,316 stars** between them — Real-ESRGAN (37,707★), GFPGAN (37,737★), DeOldify
+(18,442★), BasicSR (8,430★) — and **none has been pushed since October 2024**; DeOldify is **archived**.
+Meanwhile every repository in this plane pushed within the last 30 days is under 2,500★, and the
+film-specific ones are at **20★, 16★ and 1★**. This is the first plane in 52 passes where **star rank and
+maintenance status are actively anti-correlated**, and it has a cause: the 2024 cohort were research
+releases that achieved their purpose and stopped, while the maintained code is infrastructure (ASWF) and
+hobbyist domain tooling. **Practical consequence:** a star-ranked "best open source AI restoration" list —
+which is what a client will arrive holding — is a list of unmaintained software.
+
+### 2. The licence boundary falls exactly on the step the client is paying for
+
+Capture has no code to licence, enhancement and substrate are permissive (BSD-3/MIT/Apache-2.0), and
+**repair — dust, scratches, flicker, registration — is GPL-2.0 in every mature implementation**
+(RemoveDirt, MVTools and its VapourSynth port). The one permissive repair tool with real utility,
+`Advanced-Dirt-Removal`, is **MIT at 20★ and seven days old at time of writing**. This is the KB's running
+law in its tightest form yet: *the licence tracks the pipeline stage, and the stage with the domain
+knowledge is the restricted one.*
+
+### 3. The spec that defines a good film scan is a decade old — and the decisive two documents are paid
+
+FADGI's motion picture film scanning guideline **is still the 2015/2016 document, under revision, not yet
+republished**, while the ISO standards it references for scanner resolution (**ISO 16067-2**) and dynamic
+range (**ISO 21550**) must be **purchased**. This is the **third taxed-knowledge-content finding** in this
+KB after the CPT codes (healthcare) and MedDRA (pharmacovigilance) — and the first in media, which makes it
+a cross-industry pattern rather than a healthcare peculiarity. It also explains the code: no open tool
+implements a current film-scanning spec because there is no current free film-scanning spec to implement.
+
+### 4. Tape got a community toolchain; film did not
+
+Videotape digitisation has `vrecord`, QCTools, MediaConch and DVRescue — funded, documented, maintained by
+AMIA and MediaArea. Film digitisation has a 44★ repository dormant since **2016** and a handful of 0★
+Raspberry Pi projects. **The dividing line is capital equipment**: a tape station can be assembled from a
+deck and a capture card, a film scanner cannot be assembled at all. Open source organises around problems
+that a volunteer can own end to end, and **a 35 mm scanner is not one of them.**
+
+### 5. Archives are being asked to document AI intervention in restored material
+
+The FADGI draft on **content authenticity and provenance for AI-impacted audiovisual collections** was open
+for comment until **2026-10-15**. The direction of travel is clear: once a restoration includes a learned
+upscale or a colourisation, the archive is expected to record that it did. This connects the restoration
+plane to pass 5 (identification and rights reservation) and turns provenance from a nice-to-have into a
+deliverable — see Pattern 121.
+
+### 6. The market figures disagree by 2.9×, and the grant counts are the better number
+
+For nominally the same market: **$637.5M (2025)**, **$1.5B (2024)** and **$1.83B (2025)** from three firms —
+a **2.9× spread**, before any growth assumption. Compare the narrowest figure in this KB (radio advertising,
+**1.12×**). Against that, the NFPF's 2026 round is a hard, countable fact: **54 films** funded, each
+receiving a preservation master plus two access copies. **Count the cans and the grants, not the market** —
+the same conclusion passes 44, 46 and 50 reached in their own planes, now confirmed in a fourth.
+
+### 7. A new licence failure mode: the unfilled licence
+
+`avisalmon/MOV8mm` carries an MIT licence whose copyright line reads `Copyright (c) 2025 [Your Name]`.
+Previous passes catalogued *missing* licences and *unrecognised* ones; this is a **present, correctly-named,
+SPDX-detectable licence that grants rights from nobody**. The lesson generalises to all twelve industries:
+**read the first two lines of the licence file, do not stop at the SPDX tag the API returns.**
+
+### 🔮 Falsifiable prediction recorded this pass
+
+If a corporate contributor enters this plane, **it will arrive at the ENHANCE step with a permissive licence
+and a model — not at the REPAIR step** — because enhancement is a general vision problem publishable as a
+paper, while repair requires film-handling knowledge that currently exists only inside four commercial
+suites and a shrinking number of laboratory operators. **Baselines recorded today for re-measurement:**
+`Advanced-Dirt-Removal` **20★**, `DotKill` **16★**, `RemoveDirt` **14★**, `pinterf/mvtools` **192★ and still
+no licence file**, `SeedVR` **1,469★**, `OpenImageIO` **2,409★**.

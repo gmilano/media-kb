@@ -8080,3 +8080,128 @@ discoverability, not maintenance.
 - **A supported, permissive P.1546/P.1812 implementation** — it does not exist. Offer to **build** it.
 - **Brazil's mid-2026 World Cup timeline** — superseded; cite the decree and the **end-2027** extension.
 - **An agent ecosystem** — the entire ML layer of this plane is **one repo at 22★**.
+
+## Pattern 119 — The licence-clean archive remaster pipeline (**the GPL boundary, solved by process isolation**)
+
+**The problem this solves.** The client wants a restoration pipeline they can ship inside a proprietary
+product. The only mature motion-compensated repair filters in open source are **GPL-2.0**
+(`pinterf/RemoveDirt`, `dubhater/vapoursynth-mvtools`). Linking them into proprietary code is not available
+to you. Doing the repair with permissive code alone means accepting a 20★ plugin as your only tool.
+
+**The wiring — and the boundary is the point.**
+
+1. **Ingest / IO** — [`AcademySoftwareFoundation/OpenImageIO`](https://github.com/AcademySoftwareFoundation/OpenImageIO)
+   (**Apache-2.0**, 2,409★) reads the scanner's DPX/Cineon and writes the EXR intermediate via
+   [`openexr`](https://github.com/AcademySoftwareFoundation/openexr) (**BSD-3-Clause**, 1,893★).
+2. **Colour** — [`OpenColorIO`](https://github.com/AcademySoftwareFoundation/OpenColorIO)
+   (**BSD-3-Clause**, 2,152★) carries the log→linear transform. Set this up before any repair: a dust
+   detector tuned on mis-linearised frames will chase grain.
+3. **Repair — ACROSS A PROCESS BOUNDARY.** Drive
+   [`vapoursynth`](https://github.com/vapoursynth/vapoursynth) (**LGPL-2.1**, 2,138★) as a **separate
+   executable invoked over a CLI/pipe**, running a Python script that loads the GPL filters
+   (`RemoveDirt` → `RestoreMotionBlocks`/`SCSelect`, plus MVTools for motion vectors). Your proprietary
+   orchestrator passes file paths and a script; it does **not** link GPL code into its own address space.
+   VapourSynth itself being **LGPL rather than GPL** is what makes the frameserver safe to depend on.
+4. **Permissive repair where it suffices** — for single-frame dust on material that does not need temporal
+   motion compensation, [`fabiocolor/Advanced-Dirt-Removal`](https://github.com/fabiocolor/Advanced-Dirt-Removal)
+   (**MIT**, 20★, pushed 2026-11-20) runs as an **OFX plugin** inside
+   [`Natron`](https://github.com/NatronGitHub/Natron) (**GPL-2.0**, 5,778★) or inside DaVinci Resolve's free
+   tier. Its documented limit is real: **it fills from neighbouring frames, so it cannot fix damage that
+   persists across several frames** — a long scratch or a hair in the gate still needs the GPL temporal path
+   or a commercial suite.
+5. **Enhance (optional, and label it)** — [`ByteDance-Seed/SeedVR`](https://github.com/ByteDance-Seed/SeedVR)
+   (**Apache-2.0**, 1,469★) for restoration/upscale and
+   [`hzwer/Practical-RIFE`](https://github.com/hzwer/Practical-RIFE) (**MIT**, 1,054★) for frame rate.
+   **Do not reach for Real-ESRGAN/GFPGAN/DeOldify here** — all dormant since 2024, DeOldify archived.
+6. **Review and QC** — [`grizzlypeak3d/DJV`](https://github.com/grizzlypeak3d/DJV) (**BSD-3-Clause**,
+   1,180★) for full-bit-depth playback; [`jhove`](https://github.com/openpreserve/jhove) and
+   [`jpylyzer`](https://github.com/openpreserve/jpylyzer) to validate the delivered masters and access
+   copies.
+
+**Get the legal review on step 3 in writing before you build it.** Process isolation versus linking is a
+well-trodden distinction, but it is the client's counsel who has to be comfortable, not you — and the
+answer changes if you ever ship the VapourSynth binary *inside* your installer.
+
+**What to tell the client up front:** the scanner itself is **not** in scope for open source — there is no
+open scanner-control stack at any usable maturity (see `repos/foundations.md`, step 1).
+
+## Pattern 120 — The restoration triage agent (**decide what to restore before restoring anything**)
+
+**The problem this solves.** An archive has tens of thousands of cans and a budget for dozens. The
+expensive decision is *which* material to restore, and it is currently made by an operator spot-checking
+reels. The NFPF's 2026 round funded **54 films** — that is the scale of the funnel, against collections
+orders of magnitude larger.
+
+**The wiring.**
+
+1. **Cheap proxy scan** of everything (not a preservation scan) — any capture that produces viewable frames.
+2. **Damage detection per shot**, as a scoring pass, not a fixing pass: run the **detectors** from the
+   permissive/unlicensed micro-tools as measurement only —
+   [`Abel1629/Image-restoration-with-OpenCL`](https://github.com/Abel1629/Image-restoration-with-OpenCL)
+   (deflicker + motion-protected dust/scratch detection) and
+   [`Sandesh-Chougala0/Scratched-to-Screen`](https://github.com/Sandesh-Chougala0/Scratched-to-Screen)
+   (vertical-scratch detection by morphological filtering). **Both carry NO licence** — so use them as
+   *algorithm references you reimplement*, not as dependencies. Reimplementing a morphological scratch
+   detector is a day's work; clearing an unlicensed dependency is impossible.
+3. **Shot segmentation** with `PySceneDetect` (**BSD-3-Clause**, already in `repos/foundations.md` from
+   pass 6) so the damage score is per shot, not per reel.
+4. **Rank** by `damage × catalogue value`, where catalogue value comes from the **archive-monetisation
+   plane (pass 42)** — shot-level discovery and clip-licensing demand. This is the join that makes the
+   pattern commercial rather than curatorial: **restore what sells or what is decaying fastest, and show
+   the arithmetic.**
+5. **Output** a ranked work order with per-title cost estimates, in the shape a grant application needs
+   (NFPF's unit of funding is a preservation master plus two access copies — match that unit).
+
+**Why this is the right first engagement.** It needs no restoration licence, no scanner, and no commercial
+suite. It is pure orchestration over permissive code, it produces a defensible number, and it is the
+artefact the archive's funder actually asks for.
+
+## Pattern 121 — Provenance-documented restoration (**the deliverable the 2026 draft guidance is pointing at**)
+
+**The problem this solves.** Once a restoration includes a learned upscale, an interpolated frame or a
+colourisation, the archive has created material that is partly synthetic. FADGI's draft on **content
+authenticity and provenance for AI-impacted audiovisual collections** (public comment closed
+**2026-10-15**) signals that documenting this becomes expected practice. An archive that cannot say which
+frames were invented has a catalogue problem that compounds every year.
+
+**The wiring.**
+
+1. **Record the chain, per shot, as data** — source element and gauge, scanner settings, the OCIO transform
+   applied, each repair filter with its parameters, and **every learned model by name, version and licence**
+   (`SeedVR` Apache-2.0, `Practical-RIFE` MIT, and so on).
+2. **Attach it to the asset** using the identification substrate from **pass 5** — the fingerprinting and
+   rights-reservation plane — so the provenance travels with the file rather than living in a spreadsheet
+   that is lost at the next migration.
+3. **Mark the synthetic frames explicitly.** An interpolated frame from RIFE is not a photographic record of
+   anything. Flag it at frame level; this is the single most defensible thing an archive can do and almost
+   nobody does it.
+4. **Validate and seal** with [`jhove`](https://github.com/openpreserve/jhove) /
+   [`jpylyzer`](https://github.com/openpreserve/jpylyzer), and wrap the whole package with
+   **Archivematica** (pass 4).
+5. **Re-verify the guidance against the primary source.** Everything above about FADGI in this KB is
+   **search-attested only** — `digitizationguidelines.gov` is outside this session's network policy. Read
+   the actual draft before you write it into a statement of work.
+
+**The commercial angle.** This is the layer the commercial suites do not provide, because they are
+single-operator desktop tools. It is also what makes a restored catalogue licensable for AI training on
+defensible terms (pass 42): a buyer paying for archive footage increasingly wants to know what in it is
+photographic and what is generated.
+
+## ⛔ What not to promise in this plane (pass 52)
+
+- **An open-source replacement for DIAMANT-Film, PFClean, VIVA or MTI.** It does not exist. The whole open
+  film-damage-repair layer is ten repositories and the largest with a usable licence has **20★**.
+- **"State-of-the-art AI restoration" built on Real-ESRGAN, GFPGAN, DeOldify or BasicSR.** All dormant since
+  mid-2024; **DeOldify is archived**. They work, they are not maintained.
+- **GPL filters inside a proprietary binary.** `RemoveDirt` and the MVTools ports are **GPL-2.0**. Pattern
+  119's process boundary exists for this reason and needs counsel's sign-off.
+- **Anything resting on `pinterf/mvtools`'s licence.** 192★, pushed 2026-11-14, **no licence file at all** —
+  verified by a control request that passed plus a complete 404 sweep of every licence filename.
+- **`avisalmon/MOV8mm` as cleared MIT code.** Its licence says `Copyright (c) 2025 [Your Name]`.
+- **An open scanner-control stack.** `telecine scanner film capture` returns **zero** repositories; the
+  best-known project (`kinograph`, GPL-3.0) has been dormant since **2016**.
+- **A single film-restoration market size.** Three firms disagree by **2.9×** on nominally the same market.
+- **A FADGI-conformant film scan to a current specification.** The motion picture film scanning guideline is
+  **still the 2015/2016 document** and the two ISO standards that define scanner resolution and dynamic
+  range are **paid**.
+- **`darbyjohnston/DJV` as a URL.** It is a redirect; the canonical repo is `grizzlypeak3d/DJV`.

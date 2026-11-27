@@ -4770,3 +4770,82 @@ licence and should not be treated as one.** It is the most-used propagation code
 - **Do not promise an open TV 3.0 stack.** Nothing open implements it, and pass 8 already established
   that `vvenc`/`vvdec`/`LCEVCdec` grant **no patent rights** (BSD-3-Clause-Clear). Brazil has mandated a
   codec pair whose open reference implementations explicitly decline to license the patents.
+
+## Pass 52 (2026-11-27) — the photochemical film restoration & remastering plane: **the one plane in this KB where star count is inverted against liveness**
+
+**Verified 2026-11-27**: existence via `git ls-remote`, stars/forks/last-push via GitHub `search/repositories`,
+licence by reading the actual licence file over the raw channel where the API returned `NOASSERTION` or
+nothing. `github.com` HTML is outside this session's network policy (403 via the proxy), so **where a repo
+is absent from the search index its star count is reported as unavailable rather than estimated** — see the
+method note at the end of this section.
+
+### The finding that organises this whole plane
+
+Every repository in this plane above 8,000★ is **dormant or archived**. Every repository pushed in the last
+30 days is **under 2,500★, and most are under 250★**. The famous "AI film restoration" models are a frozen
+mid-2024 snapshot; the living code is the VFX substrate and a handful of micro-tools with one or two
+maintainers. **In this plane, stars measure 2024, not 2026** — the exact inverse of the assumption a client
+brings to an open source review.
+
+### Layer 1 — the AI enhancement models: permissive, enormous, and frozen
+
+| Agent / model | Repo | Licence | Stars | Forks | Last push | Status |
+|---|---|---|---|---|---|---|
+| GFPGAN | [TencentARC/GFPGAN](https://github.com/TencentARC/GFPGAN) | **NOASSERTION** | 37,737 | 6,284 | **2024-07-26** | Face restoration. **Dormant 2y 4m.** Licence unresolved by the API. |
+| Real-ESRGAN | [xinntao/Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN) | **BSD-3-Clause** | 37,707 | 4,565 | **2024-08-06** | General image/video restoration + upscaling. **Dormant 2y 3m.** |
+| DeOldify | [jantic/DeOldify](https://github.com/jantic/DeOldify) | **MIT** | 18,442 | 2,626 | **2024-10-19** | Colourising/restoring old film. **⛔ ARCHIVED — read-only.** |
+| BasicSR | [XPixelGroup/BasicSR](https://github.com/XPixelGroup/BasicSR) | **Apache-2.0** | 8,430 | — | **2024-07-21** | The toolbox under most of the above (EDSR, ESRGAN, EDVR, BasicVSR, SwinIR). **Dormant 2y 4m.** |
+
+**Four repositories, 102,316 stars between them, and not one commit since October 2024.** This is the
+layer every vendor deck calls "state-of-the-art AI restoration".
+
+### Layer 2 — the AI models that are actually alive
+
+| Agent / model | Repo | Licence | Stars | Forks | Last push | What it does |
+|---|---|---|---|---|---|---|
+| Lada | [ladaapp/lada](https://github.com/ladaapp/lada) | **AGPL-3.0** | 6,422 | 670 | 2026-02-27 | Restores pixelated/mosaic regions. **AGPL — network-copyleft, read it before any hosted deployment.** |
+| SeedVR / SeedVR2 | [ByteDance-Seed/SeedVR](https://github.com/ByteDance-Seed/SeedVR) | **Apache-2.0** | 1,469 | 95 | 2026-01-27 | Diffusion-transformer video restoration (SeedVR2, ICLR 2026; SeedVR, CVPR 2025 Highlight). **The most credible permissive model in this plane.** |
+| Practical-RIFE | [hzwer/Practical-RIFE](https://github.com/hzwer/Practical-RIFE) | **MIT** | 1,054 | 136 | 2026-08-27 | Frame interpolation — the maintained, production-oriented RIFE line. |
+| RIFE (reference) | [megvii-research/ECCV2022-RIFE](https://github.com/megvii-research/ECCV2022-RIFE) | **MIT** (read from `main/LICENSE`, 1,066 B) | *not in search index* | — | — | The research reference implementation. Existence confirmed by `ls-remote`. |
+| nextgenUp | [riponcm/nextgenUp](https://github.com/riponcm/nextgenUp) | **MIT** | 247 | 29 | **2026-11-15** | Desktop upscaler wiring Real-ESRGAN + GFPGAN + DDColor. **The live wrapper around the dead models** — it is maintained, its dependencies are not. |
+
+### Layer 3 — the film-specific repair tools: alive, permissive, and microscopic
+
+| Agent / tool | Repo | Licence | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| Advanced Dirt Removal | [fabiocolor/Advanced-Dirt-Removal](https://github.com/fabiocolor/Advanced-Dirt-Removal) | **MIT** | 20 | **2026-11-20** | OFX plugin (DaVinci Resolve, Nuke) removing single-frame dust/dirt by motion-compensated fill from neighbouring frames. **The single most useful permissive tool in this plane.** |
+| DotKill | [myrsloik/DotKill](https://github.com/myrsloik/DotKill) | **MIT** | 16 | 2026-07-27 | Spatio-temporal dotcrawl and rainbow remover for VapourSynth — the composite-video artefact, not film damage. |
+| vs-deoldify | [dan64/vs-deoldify](https://github.com/dan64/vs-deoldify) | **MIT** (read from `main/LICENSE`, 1,061 B) | *not in search index* | — | VapourSynth colourisation filter wrapping DeOldify + DDColor + ColorMNet + DeepRemaster. Existence confirmed by `ls-remote`. |
+| Spotless-Film (fork) | [dmitrizzle/spotless-film](https://github.com/dmitrizzle/spotless-film) | **MIT** (read from `main/LICENSE`, 1,070 B) | *not in search index* | — | U-Net dust detector + LaMa inpainting on negative scans. **The living fork.** |
+| Spotless-Film (origin) | [yahyarahhawi/Spotless-Film](https://github.com/yahyarahhawi/Spotless-Film) | **NOASSERTION** | 103 | 2026-06-22 | **⛔ ARCHIVED by the owner 2026-06-22.** The starred one is the dead one; the fork above is the live one. |
+| MOV8mm | [avisalmon/MOV8mm](https://github.com/avisalmon/MOV8mm) | **MIT — but see the caution** | 0 | 2025-10-18 | 8 mm pipeline: temporal-brightness deflicker, temporal grain removal, AI scratch/dust removal. |
+| gRestorer | [seatv/gRestorer](https://github.com/seatv/gRestorer) | **NONE** | 6 | 2026-07-10 | NVDEC-based video anomaly detector/restorer. No licence — unusable commercially. |
+| super8-fixer | [kebabkenraali/super8-fixer](https://github.com/kebabkenraali/super8-fixer) | **NOASSERTION** | 0 | 2026-11-08 | Repairs frame-line slips in digitised Super 8 / 8 mm. |
+| Image restoration (OpenCL) | [Abel1629/Image-restoration-with-OpenCL](https://github.com/Abel1629/Image-restoration-with-OpenCL) | **NONE** | 0 | 2026-11-24 | GPU deflicker + motion-protected dust/scratch removal. Research-style, synthetic test data. |
+| Scratched-to-Screen | [Sandesh-Chougala0/Scratched-to-Screen](https://github.com/Sandesh-Chougala0/Scratched-to-Screen) | **NONE** | 0 | 2026-10-27 | Vertical-scratch and dust detection by morphological filtering. Hackathon origin. |
+
+**That is the entire film-damage-repair layer that open source offers: ten repositories, and the largest
+with a usable licence has 20 stars.**
+
+### ⛔ Cautions specific to this plane — read before quoting any of the above
+
+- **`avisalmon/MOV8mm`'s MIT licence names no copyright holder.** The file reads, literally,
+  `Copyright (c) 2025 [Your Name]` — the template placeholder was never filled in. An MIT grant from an
+  unidentified licensor is not something a studio's legal team will clear. **This is a new failure mode for
+  this KB: not a missing licence, but an unfilled one.** Probe for it — read the first two lines of the
+  licence, do not stop at the SPDX tag.
+- **Do not present Real-ESRGAN, GFPGAN, DeOldify or BasicSR as current technology.** Three are dormant
+  since mid-2024 and DeOldify is archived. They still work; they are not maintained, and no CVE in their
+  dependency trees will be fixed.
+- **`ladaapp/lada` is AGPL-3.0.** Its own README states GitHub is a mirror and Codeberg is home.
+- **The starred Spotless-Film is the archived one.** A star-ranked search returns the dead repository first.
+
+### Method note added by this pass (reusable across all twelve industries)
+
+**`git ls-remote` resolving a URL is NOT proof that the URL is canonical.** GitHub silently redirects
+renamed and transferred repositories, so a URL copied from a blog post resolves perfectly while pointing at
+an owner who no longer holds the repo. Two cases in this pass alone: `darbyjohnston/DJV` resolves but the
+canonical repo is **`grizzlypeak3d/DJV`**, and `twistedsanity/MOV8mm` resolves but the canonical repo is
+**`avisalmon/MOV8mm`**. Both old URLs are absent from the search index while the new ones are present.
+**Rule: write the URL that `search/repositories` returns, not the one the source gave you** — the redirect
+is a courtesy, not a guarantee, and a KB full of redirect URLs rots the day one is dropped.

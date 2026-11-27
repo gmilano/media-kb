@@ -10,6 +10,37 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 52: film restoration infrastructure (**the substrate is pushed daily; the domain layer is three maintainers and a GPL**)
+
+Verified 2026-11-27. Distinct from `agents/trending.md`: this file tracks infrastructure and platform repos.
+
+**The movement worth recording:** four of the seven substrate repos in this plane were **pushed within 24
+hours of this pass**, while the film-specific repair layer has three maintainers between its four
+repositories and the most active of those **still ships no licence file**.
+
+| Repo | Licence | Stars | Last push | Movement |
+|---|---|---|---|---|
+| [NatronGitHub/Natron](https://github.com/NatronGitHub/Natron) | GPL-2.0 | 5,778 | **2026-11-27** | 🚀 Pushed today. OFX host — the free restoration workstation. |
+| [AcademySoftwareFoundation/OpenImageIO](https://github.com/AcademySoftwareFoundation/OpenImageIO) | **Apache-2.0** | 2,409 | **2026-11-26** | 🚀 The DPX/Cineon IO layer every scanner project defers to. |
+| [AcademySoftwareFoundation/OpenColorIO](https://github.com/AcademySoftwareFoundation/OpenColorIO) | **BSD-3-Clause** | 2,152 | 2026-10-01 | Active. Log→linear correctness for film scans. |
+| [vapoursynth/vapoursynth](https://github.com/vapoursynth/vapoursynth) | **LGPL-2.1** | 2,138 | **2026-11-23** | 🚀 The frameserver the restoration ecosystem plugs into. LGPL, not GPL — that distinction carries Pattern 119. |
+| [AcademySoftwareFoundation/openexr](https://github.com/AcademySoftwareFoundation/openexr) | **BSD-3-Clause** | 1,893 | **2026-11-27** | 🚀 Pushed today. The restoration intermediate format. |
+| [grizzlypeak3d/DJV](https://github.com/grizzlypeak3d/DJV) | **BSD-3-Clause** | 1,180 | **2026-11-27** | 🚀 Pushed today. **Canonical URL — `darbyjohnston/DJV` is a redirect.** |
+| [dyne/frei0r](https://github.com/dyne/frei0r) | GPL-2.0 | 594 | **2026-11-27** | 🚀 Pushed today. Shared video-filter plugin collection. |
+| [amiaopensource/vrecord](https://github.com/amiaopensource/vrecord) | CC-BY-4.0 | 206 | 2026-11-01 | Active. Tape capture station — **tape, not film.** |
+| [openpreserve/jhove](https://github.com/openpreserve/jhove) | NOASSERTION | 204 | 2026-09-16 | Active. Format validation. |
+| [pinterf/mvtools](https://github.com/pinterf/mvtools) | ⛔ **NO LICENCE FILE** | 192 | **2026-11-14** | Active and unclearable. Control request passes (`README.md` 200) while all 8 licence filenames 404. |
+| [openpreserve/jpylyzer](https://github.com/openpreserve/jpylyzer) | NOASSERTION | 82 | 2026-10-21 | Active. JP2 validation for access copies. |
+| [matthewepler/kinograph](https://github.com/matthewepler/kinograph) | GPL-3.0 | 44 | **2016-01-10** | ⚠️ **Dormant 10y 10m** — and still the best-known open film-scanner project. |
+| [drewsum/film_scanner](https://github.com/drewsum/film_scanner) | **Apache-2.0** | **1** | 2026-11-22 | Alive at one star. TIFF, not DPX. |
+| [rochester-rcl/film_scanner](https://github.com/rochester-rcl/film_scanner) | NONE | 0 | 2017-04-22 | ⚠️ Dormant. Source comment promises DPX "via OpenImageIO" — unkept for nine years. |
+| [mburakbozbey/video-restoration](https://github.com/mburakbozbey/video-restoration) | NONE | 86 | **2020-04-05** | ⚠️ Dormant 6y 7m. Reference only. |
+
+**Measured zeros recorded this pass** (so a later pass does not re-run them): GitHub search for
+`telecine scanner film capture` returns **zero repositories**; `film scanner raspberry pi frame` and
+`super8 8mm film digitizer` return **0★ projects only**. **There is no open-source film-scanner control
+stack**, and that is the plane's defining gap.
+
 ## 2026-11-27 — pass 51: over-the-air infrastructure (**the licence of a media pipeline tracks its transport, not its function**)
 
 **The headline, and it is a new law for this KB.** Pass 8 measured the same signal travelling over IP

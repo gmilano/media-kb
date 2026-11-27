@@ -1932,6 +1932,36 @@ studies** proving ATSC 3.0 service contours match the ATSC 1.0 contours a statio
 `gr-atsc3` as any part of a service path — it cannot reach a retail receiver.
 
 
+#### Film restoration & remastering (pass 52, added 2026-11-27)
+
+**The public funding line is here, and it is countable.** The **National Film Preservation Foundation**
+funded **54 films** in its 2026 round, federally funded via the 2016 Library of Congress reauthorisation
+plus private donors, with each award producing **a preservation master and two access copies**. The spring
+2026 Basic Preservation and Matching Grant rounds closed **2026-04-24**, grant period **July 2026 –
+September 2027**. **NFPF reauthorisation is before Congress during 2026** — a live legislative dependency
+on the region's main public funding source for this plane.
+
+**Where the commercial work sits.** **MTI Film** (restoration software and services) is the North American
+entry in the four-suite oligopoly; the studio catalogue remastering demand — the volume driver behind
+streaming-era 4K reissues — is concentrated here. One syndicated split puts North America at **38%** of the
+restoration services market (directional only; see the pass 52 market addendum).
+
+**The AI-adoption context that shapes the sale.** Forrester characterises North American M&E firms as
+bullish on generative AI but **still bogged down in early experimentation** — which is the right posture to
+sell Pattern 120 into: a triage engagement that produces a defensible ranked work order, not a platform
+replacement. Akamai's 2026 position is that adoption is no longer the question and converting
+experimentation to business value is.
+
+**Regulatory frame.** There is **no single comprehensive US federal AI law** for media; the binding
+constraints are **guild agreements (WGA, SAG-AFTRA, DGA)** and **state-level voice-clone/likeness statutes**.
+For restoration specifically the live question is not model regulation but **provenance disclosure** — see
+the FADGI draft on content authenticity for AI-impacted audiovisual collections (comment closed
+**2026-10-15**) and Pattern 121.
+
+**Opportunity, concretely.** Archive triage (Pattern 120) for studio and broadcaster libraries, and the
+provenance layer (Pattern 121) for catalogue owners who intend to license archive footage for AI training.
+Both are orchestration over permissive code and neither requires a restoration licence.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -4057,6 +4087,39 @@ planning DTT or 5G Broadcast work is, today, unknowingly depending on an archive
 engagement**, and nothing in the market is selling it.
 
 
+#### Film restoration & remastering (pass 52, added 2026-11-27)
+
+**The region holds the domain expertise — this is the one plane where EMEA is the supply side.** Two of the
+four leading restoration suites are **European SMEs**: **DIAMANT-Film** (HS-ART Digital, **Austria**) and
+**PFClean** (The Pixel Farm, **UK**). For an EMEA engagement these are not competitors to displace but the
+**integration partner list**: Globant's value is the triage, orchestration, provenance and QC layer around
+whichever engine the client licenses.
+
+**Public funding.** The UK routes film-heritage money through the **BFI Screen Heritage Fund** and the
+**National Lottery** — e.g. The Box Plymouth's three-year archive programme (2023–2026) funded from both.
+One syndicated split puts Europe at **29%** of the restoration services market (directional only).
+
+**The adoption fact that matters most for this plane.** The imec-SMIT (Vrije Universiteit Brussel) mapping
+report (May 2026) finds Europe's media sector most active at the **application layer**, and names
+**archive search and retrieval** as one of its three main areas alongside newsroom productivity and
+audience-facing products. **Archive work is already where European media AI budget is going** — restoration
+triage is the adjacent, fundable step. The same report urges collective approaches so smaller and regional
+players are not left behind, which fits a shared-tooling engagement across several regional archives.
+
+**Regulatory frame — and it cuts both ways.** The **EU AI Act's Article 50 transparency obligations** are
+the direct hook for Pattern 121: a restored asset containing learned upscaling or colourisation is exactly
+the material that disclosure rules are written for. The **AI Act Omnibus simplification** position passed
+the European Parliament **569–45** (April 2026), and Member States are pushing an **AVMSD** overhaul
+(May 2026). Separately, the **DPP's European Media Trends 2026** report names AI the dominant driver of
+strategic change alongside a rising **digital-sovereignty** requirement — which favours the on-premises,
+open-format pipeline of Pattern 119 over a cloud restoration service, and is a genuine differentiator here
+in a way it is not in North America. The European Commission's Media Industry Outlook notes uptake
+**remains uneven** across the audiovisual sector.
+
+**Opportunity, concretely.** Sovereignty-compliant on-prem remastering pipelines (Pattern 119) for public
+broadcasters and national archives; Article 50 provenance tooling (Pattern 121); and partner-side
+engineering around DIAMANT/PFClean rather than against them.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -6152,6 +6215,36 @@ integration. **Caution:** price the Japanese work as a build and verify the Dece
 against MIC/NHK primary sources before committing to any date.
 
 
+#### Film restoration & remastering (pass 52, added 2026-11-27)
+
+**The institutional layer is real and publishes its own specifications.** Australia's **NFSA** issued
+*Technical Specifications for Preservation Digitisation* (2024), which explicitly "acknowledges and
+contributes to the work conducted by **FIAF** and **IASA**" — notable because the international standards
+themselves were not retrievable in this pass while the national specification is public. The **Taiwan Film
+and Audiovisual Institute** is the region's other clearly identified national film archive. The **ABU**
+reports public broadcasters in **Australia and Singapore** exploring AI for **newsroom workflows,
+archiving and verification** — archiving named explicitly.
+
+**Scale and pace.** One syndicated split puts Asia-Pacific at **24%** of the restoration services market
+(directional only). APAC generative-AI adoption is described as **second only to North America**, and the
+region's screen economy is tracked toward **$200B** with monetisation — not production capacity — framed as
+the defining gap of the decade. Chinese streamers (**Tencent Video**, **iQIYI**) are named as active
+generative-AI investors, i.e. there is budget on the platform side for catalogue work.
+
+**Regulatory frame — the most fragmented of the four regions.** Latham & Watkins (September 2026) sorts
+APAC AI regulation into **binding risk-based frameworks (South Korea, Vietnam)**, **targeted rules
+(China)**, and a third lighter-touch group, noting a **significant acceleration in enactment over the past
+12 months**. **Malaysia** is weighing AI rules alongside anti-piracy measures in a **copyright overhaul**
+(July 2026) — the one case in the region where AI and copyright are being legislated together, which is the
+combination that matters for archive material. **ASEAN** policymakers acknowledge the need for regional
+cooperation on media regulation but progress is **slow**. China's generative-AI labelling rules are the
+region's nearest equivalent to Article 50 for Pattern 121 purposes.
+
+**Opportunity, concretely.** Per-market provenance/labelling compliance is not portable here — scope it
+country by country. The strongest plays are archive triage for the large regional broadcasters and
+platform-side catalogue remastering where streaming budget already exists, plus NFSA-spec-conformant
+digitisation work in Australia where the written specification actually exists to conform to.
+
 ### LATAM
 
 - **Mexico now has the region's first sector-specific AI law for entertainment.** Amendments to the
@@ -7361,6 +7454,47 @@ funded Brazilian games sector — the whole authoring chain (Godot + dialogic + 
 MIT, so a studio engagement carries **no licence exposure at all**, which is a rare sentence in this
 KB.
 
+
+#### Film restoration & remastering (pass 52, added 2026-11-27)
+
+**⛔ Stated as a gap, because that is what the searches returned.** This pass located **no LATAM film-archive
+digitisation or restoration funding programme**, no LATAM entry among the restoration-suite vendors, and
+**no market figure that breaks LATAM out at all** — the one syndicated regional split covers North America
+(38%), Europe (29%) and Asia-Pacific (24%), leaving 9% unallocated and unnamed. Searches run: the plane's
+four global queries plus `AI media LATAM Latin America 2026 adoption regulation players`. **An informed gap
+is information: do not let a client read silence here as coverage, and do not infer a LATAM figure from the
+9% residual.** The obvious institutions to check in a later pass are Cinemateca Brasileira and the region's
+other national cinematheques — **not asserted here, because this pass did not verify them.**
+
+**What *was* verified for the region, and it is the regulatory layer rather than the restoration layer.**
+LATAM is the region where media-specific AI law is moving fastest, which matters for Pattern 121 even
+though it says nothing about scanning capacity:
+
+- **Mexico is the most media-specific case anywhere in this KB's regional intel.** Amendments published
+  **14 May 2026** to the **Federal Copyright Law** and **Federal Labour Law** introduce **the first
+  sector-specific AI rules in Mexico**. For archive material carrying learned upscaling or colourisation,
+  this is the region's sharpest provenance-disclosure hook.
+- **Uruguay** is the **first Latin American country to sign the Council of Europe's AI framework
+  convention** (2025).
+- **Peru** published the regulation implementing its AI law in **September 2025**.
+- **Brazil, Argentina, Chile, Colombia and Costa Rica** are all developing AI governance frameworks; **no
+  Latin American country has a fully mature, harmonised regime across all sectors.**
+
+**The institutional actors that do exist are journalism-side, not archive-side.** **FLIP** (Colombia) and
+**ADEPA** (Argentina) research media AI adoption alongside domestic regulatory debate; **IFPIM** funds
+media initiatives across the region; a May 2026 report, *Notes Toward Regulating Artificial Intelligence in
+the Media*, came from **SiPreBA**, the Argentine Federation of Press Workers and the **Heinrich Böll
+Foundation**. **Aspen Digital's** January 2026 *Mind the Gap* report recommends a pragmatic path —
+experiment, standardise, and **build shared regional AI assets**, with collaboration on **attribution and
+licensing frameworks**.
+
+**Opportunity, concretely — and it follows from the gap rather than ignoring it.** Aspen Digital's
+"shared regional AI assets" recommendation is the opening: **a shared restoration and triage capability
+across several national archives is a better fit here than a per-institution build**, precisely because no
+single LATAM archive surfaced with a funded programme of its own. Pattern 120 costs no restoration licence
+and produces the ranked, costed work order a multilateral funder needs. Pattern 121 lands against Mexico's
+May 2026 amendments. **Scope any Mexican engagement against the amended Copyright and Labour Law texts
+directly** — they are months old and law-firm summaries are the only sources this pass reached.
 
 ### Pass 30 (2026-11-26) — the answer-engine discovery layer in LATAM
 
@@ -10331,3 +10465,49 @@ rather than compete with it.
 World Cup timeline. Do not let a client assume the ISDB-T sunset is near: **the parallel period is
 measured in a decade**, and that is the revenue, not the risk.
 
+
+## Market size — pass 52 addendum (2026-11-27): the film restoration plane, where the **three published figures disagree by 2.9×** and the countable number is a grant round
+
+### The headline figures — and why none of them can be quoted alone
+
+| Scope | Figure | Growth | Source quality |
+|---|---|---|---|
+| Film restoration services (narrow) | **$637.5M (2025)** → $1,474.2M (2034) | CAGR **9.7%** (2026–2034) | Syndicated |
+| Film restoration services | **$1.5B (2024)** → $2.8B (2033) | CAGR **7.6%** (2026–2033) | Syndicated |
+| Film restoration services (broad) | **$1.83B (2025)** → $5B (2035) | CAGR **10.6%** | Syndicated |
+| Video remastering services | **$2.25B (2026)** → $3.72B (2030) | CAGR **13.4%** | Syndicated |
+| "Digital restoration" (much wider scope — not this plane) | $75.73B (2026) | CAGR 8.56% | Syndicated — **do not use** |
+
+**The spread on nominally the same market is 2.9×** ($637.5M vs $1.83B), before any growth assumption, and
+the two firms that come closest still disagree on CAGR by 1.4 points in opposite directions. Compare this
+KB's best-agreed figure (radio advertising, pass 46, quoted **1.12× apart**) and its worst (piracy loss,
+**4.5×**). **This plane sits near the bad end, and every source is a syndicated or vendor-sponsored
+report** — one of the result pages returned visible placeholder figures ("XXX million") in its title.
+
+### ⛔ The refusal — and once again it is the number a buyer would actually want
+
+**There is no figure, from any source located in this pass, for what archives spend on *scanning* as
+distinct from *restoration services*, nor for the installed base of film scanners.** Since the capture step
+is precisely where open source is absent (`repos/foundations.md`, step 1), the one number that would size
+the opportunity is the one nobody publishes. Do not infer it from the services market: a services figure
+bundles labour that a scanner purchase does not.
+
+### What can be stood behind instead — count the grants and the cans
+
+Following the method pass 44/46/50 arrived at independently, the countable facts are better evidence than
+the market figures:
+
+- **NFPF 2026 round: 54 films funded for preservation.** Federally funded (via the 2016 Library of Congress
+  reauthorisation) plus private donors. The funding unit is concrete and worth matching in any proposal:
+  **a preservation master plus two access copies per work.**
+- **The spring 2026 Basic Preservation Grant round closed 2026-04-24**, with a grant period running
+  **July 2026 – September 2027**. The Matching Grants round shared that deadline.
+- **Congress is considering NFPF reauthorisation during 2026** — i.e. the US public funding line for this
+  plane has a live legislative dependency.
+
+### The regional split — quoted, and flagged
+
+One syndicated source splits the restoration market **North America 38% / Europe 29% / Asia-Pacific 24%**.
+Treat it as directional only. **Note what it implies and what it omits: the three named regions total 91%,
+and the remaining 9% is not broken out — LATAM is not separately sized by any source located in this pass.**
+That is an informed gap, recorded as such below rather than filled with an estimate.

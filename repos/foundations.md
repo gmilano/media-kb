@@ -5634,3 +5634,120 @@ and whose users are license-holders. **Testable prediction, baseline recorded to
 contributor ever enters the modulation layer it will arrive with a permissive licence and a receiver
 (ROUTE/DASH) rather than a transmitter, because the receiver is what ships in silicon. Baselines to
 re-measure: `gr-atsc3` 51★, `gr-isdbt` 195★, `rt-mbms-modem` 26★, `tsduck` 1,103★.
+
+## Pass 52 (2026-11-27) — foundations of the film restoration plane: **the licence gradient runs along the pipeline, and the repair step is the copyleft step**
+
+All rows verified 2026-11-27 (existence via `git ls-remote`, stars/forks/push via `search/repositories`,
+licence by reading the licence file over the raw channel where the API returned nothing usable).
+
+### The structural finding: licence tracks *pipeline stage*, not project size
+
+Walk the restoration chain from film to master and the licence changes under your feet at a predictable
+point. This is the sharpest version of this KB's running law that any pass has produced, because here the
+four steps are a single linear pipeline with one deliverable:
+
+| Step | What it needs | What open source offers | Licence shape |
+|---|---|---|---|
+| **1. CAPTURE** — get the film into files | Scanner motion control, frame registration, DPX/Cineon writing | **Essentially nothing.** Apache-2.0 at 1★; the best-known project dormant since 2016 | Permissive — **but there is no code** |
+| **2. REPAIR** — dust, scratches, grain, flicker, registration | Motion-compensated temporal filters | The classic filters that actually work | **GPL-2.0, every one of them** |
+| **3. ENHANCE** — upscale, colourise, interpolate | Learned models | Huge, permissive — and frozen in 2024 | **BSD-3 / MIT / Apache-2.0** |
+| **4. SUBSTRATE** — image IO, colour, review, compositing | Format and colour correctness | Mature, funded, pushed this week | **Apache-2.0 / BSD-3-Clause** |
+
+**The consequence for a client engagement is exact: the step the client is paying for — repair — is the
+step that is GPL.** Capture has no code to licence, enhance and substrate are permissive and safe, and the
+only mature motion-compensated repair filters in open source are GPL-2.0. Plan the process boundary before
+quoting the work; see `compose/patterns.md` Pattern 119.
+
+### Step 4 — the substrate: permissive, funded, and pushed this week
+
+| Repo | Licence | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [NatronGitHub/Natron](https://github.com/NatronGitHub/Natron) | **GPL-2.0** | 5,778 | 461 | **2026-11-27** | Node-graph compositor and **OFX host** — the free Nuke-alike that runs the MIT dirt-removal plugin. |
+| [AcademySoftwareFoundation/OpenImageIO](https://github.com/AcademySoftwareFoundation/OpenImageIO) | **Apache-2.0** | 2,409 | 730 | **2026-11-26** | Format-agnostic image IO — **the DPX and Cineon reader/writer** the scanner projects all defer to. |
+| [AcademySoftwareFoundation/OpenColorIO](https://github.com/AcademySoftwareFoundation/OpenColorIO) | **BSD-3-Clause** | 2,152 | 513 | 2026-10-01 | Colour management — the log/linear transforms that make a film scan mean something. |
+| [vapoursynth/vapoursynth](https://github.com/vapoursynth/vapoursynth) | **LGPL-2.1** | 2,138 | 186 | **2026-11-23** | The frameserver the whole restoration-filter ecosystem plugs into. **LGPL, not GPL** — that distinction is the pattern in Pattern 119. |
+| [AcademySoftwareFoundation/openexr](https://github.com/AcademySoftwareFoundation/openexr) | **BSD-3-Clause** | 1,893 | — | **2026-11-27** | The high-dynamic-range intermediate format for the restoration master. |
+| [grizzlypeak3d/DJV](https://github.com/grizzlypeak3d/DJV) | **BSD-3-Clause** | 1,180 | — | **2026-11-27** | High-bit-depth image-sequence review player (DPX, Cineon, EXR). **Canonical URL — `darbyjohnston/DJV` is a redirect.** |
+| [dyne/frei0r](https://github.com/dyne/frei0r) | **GPL-2.0** | 594 | — | **2026-11-27** | The shared video-filter plugin collection used across the free compositing stack. |
+
+**Seven repositories, four pushed within the last 24 hours.** The substrate is the healthiest layer in this
+plane by a wide margin, and three of the seven are Academy Software Foundation projects — meaning corporate
+maintenance and a real governance model.
+
+### Step 2 — the repair filters: GPL-2.0, and one with no licence at all
+
+| Repo | Licence | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| [pinterf/mvtools](https://github.com/pinterf/mvtools) | **⛔ NO LICENCE FILE** | 192 | 23 | **2026-11-14** | The actively maintained AviSynth MVTools fork — motion estimation, the engine under every temporal repair filter. **See the caution below.** |
+| [dubhater/vapoursynth-mvtools](https://github.com/dubhater/vapoursynth-mvtools) | **GPL-2.0** (read from `master/LICENSE`, 18,092 B) | *not in search index* | — | — | The VapourSynth port of MVTools 2.5.11.20. Existence confirmed by `ls-remote`. |
+| [pinterf/RemoveDirt](https://github.com/pinterf/RemoveDirt) | **GPL-2.0** | 14 | 1 | 2025-01-08 | The classic RemoveDirt 0.9 ported to AviSynth 2.6 + VapourSynth API 4. `RestoreMotionBlocks`, `SCSelect`. **This is the filter that has dust-busted most of the restored film you have seen.** |
+| [myrsloik/DotKill](https://github.com/myrsloik/DotKill) | **MIT** | 16 | 1 | 2026-07-27 | Dotcrawl/rainbow removal (composite-video artefacts). The permissive exception. |
+
+**⛔ The licence defect, measured rather than assumed.** `pinterf/mvtools` is the most active repository in
+this layer and it **ships no licence file at all**. This was verified against this KB's own method rule from
+pass 8: a control request succeeds (`master/README.md` → **200**) while every licence filename returns 404 —
+`LICENSE`, `LICENSE.txt`, `COPYING`, `COPYING.txt`, `COPYING.md`, `license.txt`, `gpl.txt`,
+`docs/license.txt`. **Control passes plus a complete 404 sweep is proof of absence, not a naming problem.**
+Its ancestor is GPL-2.0 and dubhater's port carries the full GPL text, so the *upstream* position is clear —
+but the fork a developer will actually `git clone` grants nothing in writing.
+
+### Step 1 — capture: the measured desert
+
+| Repo | Licence | Stars | Last push | Reality |
+|---|---|---|---|---|
+| [drewsum/film_scanner](https://github.com/drewsum/film_scanner) | **Apache-2.0** | **1** | 2026-11-22 | DIY negative scanning, positioned against SilverFast/VueScan. TIFF export, not DPX. |
+| [matthewepler/kinograph](https://github.com/matthewepler/kinograph) | **GPL-3.0** | 44 | **2016-01-10** | The best-known open film-scanner project. **Dormant 10y 10m.** |
+| [rochester-rcl/film_scanner](https://github.com/rochester-rcl/film_scanner) | **NONE** | 0 | 2017-04-22 | Raspberry Pi capture script. Writes tif/jpg/png; a source comment promises DPX and Cineon "via OpenImageIO" — **the promise is nine years old and unkept.** |
+| [sjcbx/raspberry-pi-cinefilm-reel-scanner](https://github.com/sjcbx/raspberry-pi-cinefilm-reel-scanner) | **NONE** | 0 | 2025-11-14 | Frame-by-frame 9.5 mm digitisation. |
+| [mburakbozbey/video-restoration](https://github.com/mburakbozbey/video-restoration) | **NONE** | 86 | **2020-04-05** | End-to-end restoration with pretrained models. Dormant 6y 7m. Reference only. |
+
+**There is no open-source film-scanner control stack.** Searches for `telecine scanner film capture`
+returned **zero** repositories; `film scanner raspberry pi frame` and `super8 8mm film digitizer` returned
+**0★ hobby projects only**. Everything above either writes the wrong file format or stopped a decade ago.
+This is the sharpest "informed gap" in the plane and it is worth saying out loud to a client: **the physical
+capture step is where the open source ends and the capital equipment begins.**
+
+### The validation layer — borrowed, not new
+
+| Repo | Licence | Stars | Last push | Role |
+|---|---|---|---|---|
+| [amiaopensource/vrecord](https://github.com/amiaopensource/vrecord) | **CC-BY-4.0** | 206 | 2026-11-01 | Tape capture station (AMIA). **CC-BY on software is an odd fit — read it before redistributing.** |
+| [openpreserve/jhove](https://github.com/openpreserve/jhove) | **NOASSERTION** | 204 | 2026-09-16 | Format validation. |
+| [openpreserve/jpylyzer](https://github.com/openpreserve/jpylyzer) | **NOASSERTION** | 82 | 2026-10-21 | JP2 validation — the access-copy format for scanned film. |
+
+Pass 4 already established the file-level preservation chain (FFV1, MXF, Matroska, MediaConch, QCTools,
+Archivematica) and pass 39 the paper/OCR chain. **This pass fills the seam between them: the photochemical
+original.** Note what the seam reveals — videotape digitisation has a funded community toolchain
+(`vrecord`, QCTools, DVRescue), and **film digitisation has nothing equivalent.** The community that
+organised around tape never organised around film, because film scanning needs a machine you cannot build
+from a capture card.
+
+### The standards layer — and why the code is a decade behind
+
+Per this KB's law, the knowledge content decides whether open source can comply. Here it is split, and the
+film-specific half is stale:
+
+- **FADGI** (US Federal Agencies Digital Guidelines Initiative) publishes the relevant guidance and its
+  earlier guidelines carry **CC0 1.0** — freely reusable. But its **motion picture film scanning guideline
+  is still the 2015/2016 document and is under revision, with the new version not yet published.** The
+  *Technical Guidelines for Digitizing Cultural Heritage Materials* reached its **3rd edition in May 2023** —
+  but that covers still images, not motion picture film.
+- **A FADGI draft on content authenticity and provenance for AI-impacted audiovisual collections** was open
+  for public comment until **2026-10-15**. Archives are being asked to document AI intervention in restored
+  material — which wires this plane directly into pass 5 (identification and rights reservation).
+- **⛔ The paid half:** the ISO standards FADGI references are **not free** — **ISO 16067-2** (film scanner
+  resolution) and **ISO 21550** (film scanner dynamic range) must be bought from ISO. **The two documents
+  that define whether a film scan is good enough are the two you cannot read without paying.** Third
+  occurrence of this KB's taxed-content pattern after the CPT (healthcare) and MedDRA (pharmacovigilance)
+  findings — and the first in media.
+- **Free conformance tooling** is attested: the Library of Congress distributes **OpenDICE** and **AutoSFR**
+  for image conformance measurement. **Informed gap:** neither was locatable on GitHub under
+  `usnationalarchives`, `LibraryOfCongress` or `ImageScienceAssociates` in this pass, so they are recorded
+  as attested-but-unlocated, not as repos.
+- **Australia's NFSA** published *Technical Specifications for Preservation Digitisation* (2024), which
+  states it "acknowledges and contributes to the work conducted by FIAF and IASA" — i.e. the national
+  specification is public even where the international ones are not.
+- **Informed gap, network policy:** `digitizationguidelines.gov` is **outside this session's allowed network
+  domains** (DNS refused via the proxy), so every FADGI fact above is **search-attested, not
+  primary-verified**. Re-verify against the primary source before putting it in a client deliverable. No
+  FIAF or IASA document was retrievable in this pass either.

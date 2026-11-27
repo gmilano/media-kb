@@ -2768,3 +2768,51 @@ business software and the media-native tools were weeks old at 0★. **Here the 
 media-native and fifteen years old, and the blocker is the licence and the maintainer count.** That is a
 much better starting position for an integrator — and a much worse one for anyone who needs a vendor
 to call at 03:00 when a transmitter drops off air.
+
+## Pass 52 (2026-11-27) — restoration platforms: **the deployable systems are hosts, and the domain expertise is in four commercial suites**
+
+Verified 2026-11-27. This plane breaks the usual shape of this file. In most planes the question is "which
+platform do we deploy and extend". Here the open platforms are **hosts** — they run somebody else's
+filters — and the actual restoration knowledge sits in proprietary suites with no open equivalent.
+
+### Deployable open platforms — real systems you can stand up and extend
+
+| Platform | Repo | Licence | Stars | Last push | What you get |
+|---|---|---|---|---|---|
+| **Natron** | [NatronGitHub/Natron](https://github.com/NatronGitHub/Natron) | **GPL-2.0** | 5,778 | **2026-11-27** | A full node-graph compositor and **OFX host**. Runs `Advanced-Dirt-Removal` (MIT) as a plugin. This is the closest thing to a free restoration workstation. |
+| **VapourSynth** | [vapoursynth/vapoursynth](https://github.com/vapoursynth/vapoursynth) | **LGPL-2.1** | 2,138 | **2026-11-23** | The scriptable frameserver. Every serious restoration chain in the hobbyist/archival world is a Python VapourSynth script. **LGPL** — the licence that makes Pattern 119 workable. |
+| **DJV** | [grizzlypeak3d/DJV](https://github.com/grizzlypeak3d/DJV) | **BSD-3-Clause** | 1,180 | **2026-11-27** | Review and approval playback at full bit depth for DPX/Cineon/EXR sequences. The piece a client notices immediately. |
+| **vrecord** | [amiaopensource/vrecord](https://github.com/amiaopensource/vrecord) | **CC-BY-4.0** | 206 | 2026-11-01 | A complete, documented tape-capture station. **For tape, not film** — and that asymmetry is the point of this plane. |
+| **JHOVE / jpylyzer** | [openpreserve/jhove](https://github.com/openpreserve/jhove) · [openpreserve/jpylyzer](https://github.com/openpreserve/jpylyzer) | **NOASSERTION** (both) | 204 / 82 | 2026-09-16 / 2026-10-21 | Format validation for the preservation and access copies. |
+
+Pass 4's **Archivematica** remains the preservation workflow wrapper around all of the above; nothing in
+this pass replaces it.
+
+### ⛔ The commercial suites — named, because pretending they are replaceable loses the engagement
+
+There is **no open-source equivalent** of any of these. They hold the motion-compensated repair knowledge,
+the operator UI and the throughput:
+
+| Suite | Vendor | Region | Note |
+|---|---|---|---|
+| **DIAMANT-Film** | HS-ART Digital | **EMEA** (Austria) | The reference restoration suite: dust-busting, stabilisation, de-flicker, paint/retouch. |
+| **PFClean** | The Pixel Farm | **EMEA** (UK) | The other established end-to-end restoration system. |
+| **VIVA** | Algosoft | — | Automated restoration, positioned on throughput. |
+| **MTI Film** | MTI Film | **North America** | Restoration software and services (DRS/Cortex). |
+
+**Note the regional fact buried in that table: two of the four leading restoration suites are European
+SMEs.** For an EMEA engagement this is not a competitive threat, it is the integration partner list —
+see `intel/market.md`.
+
+**DaVinci Resolve** deserves a line of its own: it is **not open source**, but it has a free tier, it is
+already on the client's machines, and it is the **OFX host that `Advanced-Dirt-Removal` explicitly
+targets**. For a pilot, "MIT plugin inside the free tier of the tool you already run" is a far shorter
+path to a demo than standing up Natron.
+
+### What this means for an integrator
+
+The honest pitch in this plane is **not** "we will replace DIAMANT with open source". It is: *we will
+build the triage, orchestration, provenance and QC layer around whichever repair engine you license, and
+we will keep your masters in open formats so you are never locked to that engine again.* Every piece of
+that is permissive (OpenImageIO, OpenColorIO, OpenEXR, DJV) and every piece of it is work the suites do
+badly, because they are single-operator desktop tools in a world where an archive has 40,000 cans.

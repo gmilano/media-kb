@@ -4053,3 +4053,116 @@ So the precise statement is **not** "open source cannot handle media licensing."
 hands.** Discovery is solved, rights *description* is solved, and there is no open-source component
 anywhere in this plane that quotes a price, issues a licence for a fee, or records that a clip was
 sold.
+
+## The composition-side plane — lyrics, chords, score capture & the publishing/mechanical-rights stack — measured 2026-11-27 (pass 43)
+
+Found the same way as passes 40–42: **~40 candidate terms grepped against all eight KB files before
+any web search**, which cost one call and located the gap precisely. Pass 12 had covered music as
+*audio* — generation, stems, MIR, loudness — and even carried the engraving libraries
+(`MuseScore`, `LilyPond`, `Verovio`, `VexFlow`, `abcjs`, `music21`). What it never touched was the
+**song as distinct from the recording**: the words, the chords, the printed page, and the money that
+flows to whoever wrote them.
+
+| Term group | Files | Hits | Verdict |
+|---|---|---|---|
+| `lyric`, `karaoke`, `sing-along`, `LRC`, `ultrastar`, `CDG`, `acapella` | 0 | **0** | The words and the sing-along surface absent |
+| `chord`, `tablature`, `sheet music`, `OMR`, `optical music`, `ABC notation` | 0 | **0** | Chords, tab and score *capture* absent |
+| `songwriter`, `mechanical licens`, `Musixmatch`, `LyricFind` | 0 | **0** | The publishing/composition money layer absent |
+| `MuseScore` 11 · `Verovio` 6 · `LilyPond` 5 · `MusicXML` 4 · `MIDI` 13 · `ISWC` 26 | 4–8 | present | **Already covered** — engraving and interchange (p12), identifiers (p5) |
+
+So the KB could **render** a score and **identify** a recording, but it held nothing about getting a
+printed page *into* data, nothing about the words, and nothing about paying the writer. Pass 39
+covered OCR for periodicals and manuscripts; **it stops at prose and does not read music**.
+
+### What this plane looks like when you measure it: a three-step gradient, and the sixth confirmation of this KB's structural law
+
+Everything below was measured on **2026-11-27** via `search/repositories`, existence confirmed by
+`git ls-remote` (**29/29 resolve**), and every `NOASSERTION` resolved by reading the actual licence
+file. The gradient is the same shape as pass 8's declare/honour/liquidate finding, and it is the
+sixth independent confirmation that **a problem of format gets maintained code and a problem of
+judgment gets none**:
+
+1. **RENDER the song** — a format problem — **healthy**: five repos over 1,300★, four of them pushed
+   within seven days of this pass and two *on the day*.
+2. **IDENTIFY the work** — a registry-allocation problem — **no open implementation**, and the
+   acronym itself is squatted (see the ISWC trap below).
+3. **PAY the writer** — a pure judgment problem — **zero**: the relevant repos hold 0–3★.
+
+### The AI/model layer of this plane
+
+| Agent / model | Repo | Licence | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| **homr** | https://github.com/liebharc/homr | AGPL-3.0 | 497 | **2026-11-27** | Transformer OMR: camera photo of sheet music → MusicXML. **Pushed the day of this pass** |
+| **Audiveris** | https://github.com/Audiveris/audiveris | AGPL-3.0 | 3,019 | 2026-11-25 | The reference OMR engine (Java), printed scores → MusicXML. Most accurate open option |
+| **oemer** | https://github.com/BreezeWhite/oemer | **MIT — but see the defect below** | *unmeasurable* | HEAD 2025-04-18 | End-to-end OMR that tolerates skewed and phone-taken photos |
+| **Sheet Music Transformer** | https://github.com/antoniorv6/SMT | MIT | 90 | 2026-09-27 | OMR beyond monophonic transcription — the research line that homr productised |
+| **Mozart** | https://github.com/aashrafh/Mozart | Apache-2.0 | 716 | 2022-08-24 | Classical OMR pipeline (no deep learning). Dormant **4 years** |
+| **MeasureDetector** | https://github.com/OMR-Research/MeasureDetector | **MIT (`MeasureDetector/`) + Apache-2.0 (TF base fork)** | 53 | 2026-06-14 | Detects measures/systems on a page — the segmentation step ahead of recognition |
+| **karaoke-gen** | https://github.com/nomadkaraoke/karaoke-gen | MIT | 193 | **2026-11-27** | End-to-end karaoke production: separation, transcription, lyric sync, render |
+| **lyrics-transcriber** | https://github.com/nomadkaraoke/python-lyrics-transcriber | MIT | 93 | 2026-01-19 | Whisper-based synced lyrics → ASS/LRC with word timings. **ARCHIVED** — see below |
+| **WhisperX** | https://github.com/m-bain/whisperX | BSD-2-Clause | 25,723 | 2026-11-21 | Word-level alignment. The de-facto aligner this whole plane leans on |
+| **ctc-forced-aligner** | https://github.com/MahmoudAshraf97/ctc-forced-aligner | BSD-2-Clause | 579 | 2026-11-24 | Multilingual forced alignment — text to audio, no transcription step |
+| **Montreal Forced Aligner** | https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner | MIT | 1,922 | 2026-11-25 | The academic-standard aligner; phoneme-level, trainable per language |
+| **whisper-timestamped** | https://github.com/linto-ai/whisper-timestamped | **AGPL-3.0** | 2,858 | 2026-09-28 | Word timings with confidence. **The licence is the reason to prefer WhisperX** |
+| **chord-extractor** | https://github.com/ohollo/chord-extractor | GPL-2.0 | 248 | 2025-08-14 | Chord recognition over audio files (Chordino under the hood) |
+| **BTC-ISMIR19** | https://github.com/jayg996/BTC-ISMIR19 | MIT | 222 | 2020-05-23 | Bi-directional Transformer for chord recognition. Research code, **dead 6 years** |
+
+### In OMR, every maintained implementation is copyleft and every permissive one is dormant
+
+This is measured, not inferred, and it is the procurement fact of the plane:
+
+| Licence class | Repos | Most recent push |
+|---|---|---|
+| **Copyleft (AGPL-3.0)** | Audiveris (3,019★), homr (497★) | **2026-11-25 and 2026-11-27** — both within two days |
+| **Permissive (MIT / Apache-2.0)** | oemer, SMT (90★), Mozart (716★), MeasureDetector (53★), OMR-Datasets (402★) | 2026-09-27 at best; three are **1.5–4 years** dormant |
+
+**There is no actively-maintained permissive OMR engine today.** A score-capture feature is therefore
+an architecture decision with a licence consequence attached: take the accuracy and ship AGPL-3.0
+(which reaches a hosted service), or take a permissive licence and adopt an unmaintained upstream.
+Say this out loud in a proposal; do not let it surface at the security review.
+
+### The licence defect of this pass: an unfilled licence *template*
+
+`BreezeWhite/oemer` ships a `LICENSE` file (1,065 B) that reads, verbatim:
+
+```
+MIT License
+
+Copyright (c) [year] [fullname]
+```
+
+The placeholders were never filled in, while `setup.py` separately asserts
+`License :: OSI Approved :: MIT License`. So the packaging metadata claims MIT and **the licence
+instrument names no copyright holder and no year** — a grant with no identified grantor. This is a
+new category for this KB's licence taxonomy, alongside pass 8's "licence owned by the compilation"
+(Chromaprint) and pass 12's font exception (MuseScore). It is also the exact defect this KB's own
+quality bar forbids — *never leave a template as data* — found in the wild, in a licence file.
+
+Treat `oemer` as **licence-unresolved**, not MIT, until the holder is named upstream. Its stars and
+forks are reported as *unmeasurable* above because the repo is **absent from the GitHub search
+index** entirely (confirmed: `git ls-remote` succeeds, `search/repositories` returns nothing for the
+slug, and the name search returns a *different* `oemer` — see the false friends below).
+
+### Two archived/active signals worth reading together
+
+`nomadkaraoke/python-lyrics-transcriber` is **archived** (2026-01-19) while its sibling
+`nomadkaraoke/karaoke-gen` was **pushed on the day of this pass**. That is consolidation, not
+abandonment: the library folded into the end-to-end tool. Depend on `karaoke-gen`, and if you need
+the transcriber alone, vendor it — an archived repo takes no patches.
+
+### False friends measured in this plane — the sharpest set since pass 8's `eidr`/`isan`
+
+Short queries produced **false abundance**, exactly as pass 8 warned. Read the results, never the total:
+
+| Query | Total | Relevant | What actually comes back |
+|---|---|---|---|
+| `ISWC` | **434** | **0** | The *International Semantic Web Conference* — μKG 109★, JAPE 103★, Text2KGBench 99★. Zero music repos |
+| `mechanical royalty` | 13 | ~1 (0★) | Top hit is **danderfer/Comp_Sci_Sem_2, 228★ — the Bee Movie script**, an unrelated joke repo |
+| `music royalty accounting` | 14 | 4 | Same joke repo on top; the real ones hold 2★, 1★, 0★, 0★ |
+| `oemer` | 4 | 0 | `meteo-team/oemer` (47★, 2022) is a **meteorology** project. The real OMR repo is not indexed |
+
+`ISWC` is the worst of these, because ISWC *is* a real music identifier (this KB uses the term 26
+times) **and** a major CS conference acronym. A careless pass would have written agent rows from a
+knowledge-graph-embedding library. And `mechanical royalty` is the first case in this KB where **a
+joke repo is the single most-starred thing GitHub offers for a phrase that moves hundreds of
+millions of dollars a year** — the MLC alone distributed roughly $900M in 2025.

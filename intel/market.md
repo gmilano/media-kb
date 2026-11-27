@@ -1590,6 +1590,50 @@ terms are secret.
 4. **EIDR remains a North American institution with no open client** (pass 5). Any catalogue-level
    identifier work here is still integration against a membership registry, not an open implementation.
 
+### Pass 43 (2026-11-27) — the composition-side layer in North America
+
+**The regulatory position.** ASCAP, BMI and SOCAN have **aligned**: works that are partly AI-generated
+are registrable, works created entirely by AI with no human creative input are **ineligible**. There
+is no fully implemented federal digital-replica regime; state law covers voice cloning and likeness.
+So eligibility turns on a **declaration made at registration time**, and nobody is tooling that
+declaration.
+
+**The money, and why the matching problem is the business.** The MLC's 2026 statutory mechanical rate
+is **13.1¢ per work** for physical and permanent downloads. The MLC distributed roughly **$900M in
+2025** and holds **hundreds of millions in unmatched royalties**, much of it owed to independent
+writers whose metadata never matched. A market-share distribution of remaining unclaimed **2021**
+royalties is planned to begin **April 2027** — i.e. a five-year lag between accrual and the admission
+that the owner could not be found. Multiple 2026 sources agree the 2026 problem is **metadata
+matching, not collection**.
+
+**Conflict recorded as a conflict, not resolved.** On whether the MLC accepts AI-assisted works, 2026
+sources **directly contradict** each other: one states the MLC and PROs treat fully AI-generated works
+as ineligible so they cannot collect mechanicals; another states the MLC accepts AI-assisted
+registrations under PRO-like rules with documented human authorship. **No MLC or Copyright Office
+primary source was reached.** Do not build a client's registration workflow on either reading until
+the policy text is confirmed.
+
+**Litigation and licensing run in parallel.** Suno remains in litigation with Universal and Sony after
+settling with Warner (November 2025); Universal and Warner have settled with Udio. In **June 2026, 29
+creator and manager organisations** alleged that music companies were licensing works without
+consulting their creators — a consent-and-transparency complaint aimed at the publishers, not the AI
+firms. TIDAL accepts AI-generated music under its content standards but **does not knowingly allocate
+royalties** to tracks it identifies as wholly AI-generated.
+
+**The fraud number that makes the gate commercially real.** A North Carolina man generated hundreds of
+thousands of AI songs, streamed them with bots, and collected **over $8M in royalties** before being
+caught. That is the loss figure behind every eligibility rule in this section.
+
+**Opportunities.**
+1. **The registration-time provenance record.** Build the per-element authorship ledger the PROs'
+   declaration implies and no format carries (Pattern 84). The buyer is a publisher or a distributor
+   facing the ineligibility rule, and the deliverable is evidence they can stand behind, not a claim.
+2. **Catalogue matching as the paid problem.** Hundreds of millions unmatched, a five-year lag, and a
+   measured **0★** open-source money layer. This is the clearest "no incumbent open tool" opening in
+   the plane; scope it as data reconciliation, not as royalty accounting software.
+3. **Score and songbook digitisation for publishers** — Audiveris or homr behind a queue (Pattern 85),
+   with the AGPL-3.0 obligation priced in from the first slide, not discovered at security review.
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -3352,6 +3396,49 @@ half of it legally compelled.
    as one dataset: the same asset, the same metadata, "no" and "yes, for this price" as two states.
    Nobody ships this, and EMEA is the only region legally required to maintain half of it.
 
+### Pass 43 (2026-11-27) — the composition-side layer in EMEA
+
+**EMEA is the only region where a court has priced AI training on compositions.** The **Munich
+Regional Court I ruled for GEMA against Suno on 31 July 2026** (judgment **not final**). Per GEMA, the
+court held that training on its repertoire in the US, and storing and reproducing those works in
+Europe, breached both US and German copyright law, and that exploiting GEMA-repertoire works requires
+a licence with appropriate remuneration — **the first time a European court ruled on AI training
+conducted in the USA** (GEMA's own characterisation; the full judgment was not reached here). CMS
+reports the court assessed **four separate levels** — training, memorisation in the model, model
+provision, and output — finding storage infringes reproduction and output infringes making-available.
+GEMA v. OpenAI (November 2025) is **under appeal** at the Munich Higher Regional Court.
+
+**And yet nothing is licensed.** CISAC's Director General Gadi Oron: **none of the authors' societies
+has licensed any of the music AI services.** GESAC's Burak Özgen confirms it for GenAI services.
+CISAC's 2026 Annual Report is titled around the admission that **"AI is moving faster than the rules
+that protect creators."** So EMEA has the strongest legal mechanism and **zero** executed licences —
+the gap between a right and a working market, measured.
+
+**The policy fork to watch.** A **December 2025 EU report favours statutory licensing** and proposes
+"automated tools" to process the money, conceding the alternative is to route it through the existing
+collecting societies. Labels, publishers and creator groups are generally **hostile** to statutory
+schemes. Either branch produces a tooling requirement: a statutory scheme needs a calculation engine
+nobody has written (the money layer measures **0★**), and the societies' route needs per-work
+provenance they cannot currently receive.
+
+**Framework and scale.** CISAC adopted a **declaration on creativity and AI at its Paris General
+Assembly (June 2026)**, and presented **AI guiding principles for audiovisual societies** at the
+European Committee in **Valencia (March 2026)**. The **EU AI Act's content-labelling and training
+rules are now law**. CISAC reports collections **up 12% in 2025 to €14 billion**; a separate reading
+puts songwriter collections at a record **$15.9B in 2025** including **~$900M from the MLC** — the two
+figures differ in currency and scope and are **roughly consistent**, not contradictory.
+
+**Opportunities.**
+1. **Licence-readiness for a society or publisher.** The Munich ruling's four levels are four separate
+   evidentiary questions. A client that can evidence what was trained on, stored, and emitted is in a
+   different negotiating position from one that cannot. Build the evidence, not the argument.
+2. **The statutory-scheme calculation engine, built now as a per-jurisdiction policy engine** — the
+   same architecture pass 8 recommended for rights reservation, for the same reason: the rule differs
+   by country and will keep moving.
+3. **Score digitisation for Europe's public-domain catalogues**, where the *content* licence is
+   finally not the blocker — the one sub-segment of this plane with no counterparty risk, and the
+   natural first engagement (Pattern 85).
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -5080,6 +5167,54 @@ Report finds piracy evolving, governments engaging and AI emerging.
 4. **The monetisation gap is an attribution problem.** Pass 8 recorded this for the Variety $200B
    figure; it holds identically for archives. Revenue cannot be apportioned to a shot nobody can
    identify, which makes shot-level identification the precondition for every revenue claim here.
+
+### Pass 43 (2026-11-27) — the composition-side layer in APAC
+
+**APAC holds the most precise AI-royalty mechanism in the world, and it is built on the
+composition-side split.** **JASRAC announced in June 2026** that it will manage AI-involved music only
+where human creative contribution can be recognised. The rates, as reported: a **100% management rate**
+where AI wrote only one element (AI lyrics over a human composition), and **50%** where both lyrics
+and melody involve AI — JASRAC managing only the human-created share. Songs where AI generated both
+lyrics and music from simple instructions are judged not to be works at all and are **excluded**.
+Reporting also notes the hard case the rule cannot yet handle: a human *rearranging* an AI-generated
+melody, where contributions resist numerical division.
+
+*Sourcing caveat, stated rather than hidden:* the **100%/50% figures come from a single Korean outlet
+(Asiae)**, and **JASRAC's own guideline text was not reached** in this pass. The human-contribution
+gate itself is corroborated across Japanese and Korean coverage. Treat the gate as established and
+the exact percentages as **single-source** until the primary document is read.
+
+**Japan is also adding a new payment right** for performers and record producers when recorded music is
+played or relayed (MLex, March 2026) — a second money trail forming on the same recording.
+
+**South Korea is the cautionary tale.** KOMCA adopted "Trust Management Criteria for AI-Generated
+Music" in early **August 2026** and **withdrew them on 25 August, 22 days after implementation**, after
+government pushback, pending legislative and social consensus; one account ties the reversal to a
+March 2026 audit. Meanwhile an AI-assisted song **entered Melon's Top 100**, and AI-assisted music
+**became eligible for copyright registration in South Korea (August 2026)**. KOMCA and five other
+industry bodies are now **selecting an AI-detection provider**, and the reporting is explicit that such
+tools **struggle with partly AI-made tracks** — which is precisely the category the rules exist to
+handle. **HYBE** joined other majors in proposing chart-eligibility principles for AI music (July 2026).
+
+**The regional legal texture.** Korea, Japan and Singapore are each addressing generative-AI copyright
+through **limitations and exceptions, administrative guidance and judicial decisions**, and the scope
+and intensity of protection **differ between them** (Chambers, AI & IP 2026). As in pass 8, the
+sellable asset is therefore a **per-jurisdiction policy engine**, not a single compliance mode. No
+music-specific AI rules were found for China or other APAC markets in this pass — **an informed gap**,
+not a finding of absence.
+
+**Opportunities.**
+1. **Build to JASRAC's rule, because it is the only one with arithmetic in it.** A system that records
+   authorship **per element — lyrics separately from melody** — can compute a management share
+   directly. Everyone else's rule is a yes/no; Japan's is a number, and a number is implementable
+   (Pattern 84).
+2. **AI-detection is being procured right now and the tools are known to be weak.** KOMCA plus five
+   bodies are mid-selection. The honest offer is **provenance at creation** rather than detection
+   after the fact — detection fails on exactly the hybrid works that matter, and that is published,
+   not speculative.
+3. **Multi-script lyric handling** for CJK catalogues, joining this plane to the type and
+   text-rendering work of pass 38 — lyric display is a typesetting problem before it is a rights
+   problem.
 
 ### LATAM
 
@@ -6878,6 +7013,50 @@ public. Any LATAM pitch should assume it is selling the **first** such deal in t
    frameworks independently is the same requirement as APAC's divergence, so build the per-jurisdiction
    rules table once.
 
+### Pass 43 (2026-11-27) — the composition-side layer in LATAM
+
+**Mexico moved first, and it is a statutory trigger with no tooling behind it.** Amendments to the
+**Federal Copyright Law (LFDA) and the Federal Labour Law (LFT) were published 14 May 2026** — the
+first sector-specific AI regulation in Mexico, and the same trigger pass 42 recorded on the archive
+side. The composition-side consequence is the one nobody has built for: where a work's authorship
+share determines both a **royalty** and a **labour** entitlement, the per-element authorship record
+stops being paperwork and becomes evidence in two separate proceedings.
+
+**Brazil runs two money trails off one recording.** Brazil treats **streaming as a public
+performance**, so a recording generates both a performance claim and a mechanical/reproduction claim —
+a structural doubling that makes composition-side matching harder there than in North America. A
+**May 2026 joint letter to Brazil's Special Committee**, signed by music bodies including **UBC and
+ECAD**, asked that the copyright chapter of the draft AI bill be left intact. The bill remains **under
+review**. *(The UBC/ECAD signature list comes from a secondary source and was not verified against the
+original letter — treat as reported, not confirmed. No ECAD or UBC policy on AI royalty distribution
+was found; that is an informed gap.)*
+
+**Chile's bill drew the opposite concern** — a **broad text-and-data-mining exception** that CISAC
+panellists flagged as a risk to creators, the mirror image of EMEA's licence-required outcome.
+**Colombia's** audiovisual creators warned of shifting value and called for clear AI rules, arguing
+the country cannot afford to delay.
+
+**Scale and enforcement.** CISAC reports LATAM collections **exceeding €800M by 2025**. **IFPI
+announced global chart rules on 30 July 2026** permitting only **human-led recordings** to chart, and
+is applying them **immediately to the official charts it directly operates across Latin America** —
+making LATAM the region where the human-authorship test has the most **immediate operational bite**,
+ahead of any statute. IFPI also leads the **JusticIA** campaign for AI protection in the region, which
+South American independent music associations have joined. Regional artists report AI tracks crowding
+out human ones on streaming services.
+
+**Opportunities.**
+1. **Mexican re-clearance, extended to the song.** Pass 42 scoped the LFDA/LFT trigger for archive
+   footage; the composition side adds lyrics and melody shares, and the LFT half means a **labour**
+   record, not just a rights record. Same statutory trigger, same absence of tooling, a second
+   deliverable.
+2. **Chart-eligibility evidence for LATAM labels and distributors.** IFPI's rule is live **now** on
+   charts it operates, and it needs a defensible human-led claim per release. This is the only place
+   in the plane where the buyer has a **dated, already-enforced** requirement — the warmest entry
+   point in the region.
+3. **Dual-trail matching for Brazil.** Reconciling performance and mechanical claims on one recording
+   is a data problem with no open implementation anywhere (money layer measured at **0★**), and
+   Brazil's structure makes it acute enough to fund.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -8414,3 +8593,62 @@ above sizes the **loss**, and a loss figure is not a budget. What a buyer purcha
 SLA, an evidence trail and a per-jurisdiction filing route, and **the only priced number anywhere near
 it is a regulatory fine.** Price the engineering from the obligation (Italy's 30 minutes, India's
 affidavit cadence, Anatel's published volumes), never from the loss estimate.
+
+## Market size — pass 43 addendum (2026-11-27): the composition side holds **the lowest growth rate in this entire KB**, and its digital slice grows ~8× faster than the whole
+
+Measured 2026-11-27. All figures are commercial market-research estimates with inconsistent scopes and
+base years; the spread is reported because the spread is the finding.
+
+### Sheet music, headline — quoted ~4.9× apart
+
+| Source estimate | Base year | Value | Growth | Horizon |
+|---|---|---|---|---|
+| Estimate A | 2026 | **$374.82M** | **1.11% CAGR** | $413.98M by 2035 |
+| Estimate B | 2026 | **$0.36B** (~$360M) | **0.02% CAGR** | $0.37B by 2035 |
+| Estimate C | 2024 | **$1.82B** | **4.7% CAGR** | ~$2.77B by 2033 |
+
+Estimates A and B **agree closely on the level** (~$360–375M for 2026) — unusual for this KB — and
+estimate C is **~4.9× higher** on a base year two years earlier, which is a scope artefact, not a
+forecast disagreement: C is almost certainly counting printed-music retail and instrument-adjacent
+sales that A and B exclude.
+
+**The 0.02% CAGR in estimate B should not be quoted.** A compound rate of two basis points over nine
+years is not a forecast; it is a rounding or data-entry artefact. Use A's **1.11%** if a single number
+is needed, and say which scope it covers.
+
+### Digital sheet music — quoted ~2.3× apart on the *same* base year
+
+| Source estimate | Base year | Value | Growth | Horizon |
+|---|---|---|---|---|
+| Estimate D | 2024 | **$372.8M** | **8.5% CAGR** | $766.1M by 2033 |
+| Estimate E | 2024 | **$0.86B** | **10.7% CAGR** | $2.15B by 2033 |
+
+A **2.3× disagreement on the same base year** — the familiar failure mode, and milder than pass 32's
+~28× or pass 12's ~100×. The two agree on **direction and rough pace** (8.5% vs 10.7%), so the growth
+rate is the quotable part and the level is not.
+
+### The number worth carrying into a conversation
+
+**Sheet music's 1.11% CAGR is the lowest growth figure recorded anywhere in this KB**, against the
+25–36% CAGRs this file records for AI media generally (AI M&E $35.77B→$87.44B by 2030 at 25%; video
+generation at 36.2%). Meanwhile the **digital** slice compounds at 8.5–10.7% — roughly **eight times
+the rate of the whole market it sits inside**.
+
+That ratio is the entire commercial thesis of this plane, and it is a different sale from everything
+else in this KB. **The composition side is not a growth market; it is a migration market.** The money
+is not in a wave of new demand — it is in moving a flat, century-old catalogue from paper into data,
+where the only segment growing is the one that has been converted. That is why score capture (OMR)
+and lyric timing are the economically live parts of the plane and royalty software is not: conversion
+is fundable, and the arithmetic downstream of it is still measured at **0★**.
+
+### Refusal, and an informed gap
+
+- **Karaoke is not sized here.** It was searched in the same pass and **no karaoke market figure was
+  returned**. Rather than borrow a number from an adjacent category, this is recorded as an **informed
+  gap**: the karaoke platforms are real, maintained and measured in `repos/foundations.md`, and their
+  market is **unsized in this KB**.
+- **No figure exists for the mechanical-royalty *software* segment**, which is the segment a buyer in
+  this plane would actually be purchasing. Consistent with the 0★ repo measurement: there is no
+  market because there are no products. Do not infer a TAM from the royalty *flows* ($900M through
+  the MLC in 2025, €14B CISAC collections) — those are the money being administered, not the money
+  spent on administering it.

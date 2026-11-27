@@ -6716,3 +6716,137 @@ are still selling the idea.
 8. **Never cite this pass's market figures as audited.** They come from secondary trackers that
    disagree, and the session's network policy blocked primary retrieval (see the channel note in
    `intel/trends.md`). Repo facts: verified by `ls-remote` + API. Press figures: cited, unfetched.
+
+## Composition-side recipes — added 2026-11-27 (pass 43)
+
+Concrete wiring for the lyrics / chords / score-capture / publishing-rights plane. Every repo named
+below is measured in `repos/foundations.md` and `agents/top.md` for the same date, with licences read
+from files and existence confirmed by `git ls-remote` (29/29).
+
+## Pattern 84 — The per-element authorship ledger: build the field the regulator prices and no format has
+
+**The opening.** JASRAC (June 2026) sets its management rate by **which element** a human made —
+**100%** when AI wrote only one element, **50%** when both lyrics and melody involve AI. ASCAP/BMI/SOCAN
+make eligibility turn on an AI-assisted-versus-wholly-AI declaration. Mexico's LFDA/LFT amendments
+(14 May 2026) attach a labour entitlement to the same share. **And no open format in this plane has a
+field for it** — MusicXML and MEI describe notes, LRC describes timings, ChordPro describes chords,
+OpenLyrics describes words; the only homes are free-text escape hatches.
+
+**The wiring.**
+1. **Model the song as elements, not as a file.** One record per element — lyrics, melody, arrangement,
+   production — each with: author identity, human/AI/hybrid flag, the tool and version if AI was
+   involved, timestamp, and the evidence pointer. This is the whole product; everything else is I/O.
+2. **Carry it alongside the score, not inside it.** Emit MusicXML via **`verovio`** (LGPL-3.0, p12) or
+   **`music21`** (BSD-3) for the notes, and keep the ledger as a **sidecar** document keyed to element
+   IDs. Writing provenance into `<miscellaneous>` makes it unqueryable and non-portable — do not.
+3. **Compute the share as a function, not a stored number.** JASRAC's 100%/50% is one jurisdiction's
+   arithmetic over the ledger. Korea withdrew its rules after 22 days; the EU may go statutory. Follow
+   pass 8's rule and build a **per-jurisdiction policy engine** over one evidence store.
+4. **Sign the record at creation.** Pass 5's identification work and pass 41's soft-binding work both
+   apply: a provenance claim nobody can verify is worth what an affidavit is worth.
+
+**Why this beats AI detection, and say so in the room.** KOMCA and five other Korean bodies are
+selecting an AI-detection vendor *right now*, and the published reporting says the tools **fail on
+partly AI-made tracks** — exactly the category the rules exist to govern. Detection after the fact
+cannot recover a per-element share; **provenance at creation records it for free.**
+
+**Falsifiable prediction attached.** The first format to standardise a per-element provenance field
+takes the registration workflow. Watch the MusicXML/MEI trackers and DDEX; a field before mid-2027
+confirms this pattern's premise.
+
+## Pattern 85 — Score capture: pick your licence before you pick your engine, because there is no third option
+
+**The measured constraint.** Every maintained OMR engine is copyleft — **Audiveris** (AGPL-3.0,
+3,019★, pushed 2026-11-25) and **homr** (AGPL-3.0, 497★, pushed 2026-11-27). Every permissive one is
+dormant — **oemer** (MIT *template, unfilled*, HEAD 2025-04-18), **Mozart** (Apache-2.0, 2022-08-24),
+**SMT** (MIT, 2026-09-27), **MeasureDetector** (MIT+Apache-2.0, 2026-06-14), **OMR-Datasets** (MIT,
+2024-04-01). There is **no actively-maintained permissive OMR engine today.**
+
+**Route A — accuracy, and you ship AGPL-3.0.**
+`MeasureDetector` (segmentation) → **`Audiveris`** or **`homr`** (recognition) → MusicXML →
+`verovio`/`alphaTab` (MPL-2.0) for display → `music21` (BSD-3) for analysis. Run the AGPL engine as a
+**batch worker behind a queue**, with your own code in separate processes communicating over files or
+a message bus. Be explicit that AGPL-3.0 reaches a hosted service and that this architecture is a
+containment strategy, not an exemption — then price the obligation.
+
+**Route B — permissive, and you adopt an unmaintained upstream.**
+**`SMT`** (MIT, the only permissive engine touched this year) or **`oemer`**, trained or fine-tuned on
+**`OMR-Datasets`** (MIT). Budget for maintenance you now own. **Before shipping `oemer`, get the
+upstream `LICENSE` fixed** — it still reads `Copyright (c) [year] [fullname]`, a grant naming no
+grantor, while `setup.py` claims MIT. An unresolved licence is a worse problem than an old commit.
+
+**Route C — the honest first engagement.** Start on **public-domain catalogues**, where the content
+licence is not a counterparty risk at all. It is the only sub-segment of this plane with no clearance
+problem, which makes it the right place to prove the pipeline before anyone's repertoire is involved.
+
+## Pattern 86 — Synced lyrics at scale, where the code is MIT and the words are not
+
+**The wiring.** **`lrclib`** (MIT, 2,314★) self-hosted as the lookup service and corpus store →
+**`ctc-forced-aligner`** (BSD-2, 579★) or **`WhisperX`** (BSD-2, 25,723★) to time *your* catalogue →
+LRC/ASS output → **`lrcget`** (MIT, 3,392★) as the reference client behaviour to copy. Use
+**`syncedlyrics`** (MIT) only as a format reference: it has been dormant since 2024-07-28.
+
+**Prefer `WhisperX` or `ctc-forced-aligner` over `whisper-timestamped`** (2,858★) for one reason only:
+`whisper-timestamped` is **AGPL-3.0** and the other two are BSD-2. All three solve the problem; only
+two leave your deployment options open.
+
+**The clearance step that is not optional.** **Displaying lyrics in time with music is a licensed
+act, and the synchronisation/reprint right sits with the music publisher** — not the recording owner
+your client probably has a deal with. `lrclib` is MIT and its README contains **zero** mentions of
+licence, copyright, DMCA or takedown for the corpus it serves; `LyricsGenius` (MIT) is permissive code
+over a third party's API and words. **Never scope this as "open source end to end."** The pipeline is
+open; the words are cleared per territory, from publishers. Put the clearance line item in the first
+estimate — it is the single most common way a lyrics product dies late.
+
+## Pattern 87 — The karaoke plant: copyleft players, permissive generation
+
+**The wiring.** Separation with **Demucs** (p12) → transcription and timing with
+**`karaoke-gen`** (MIT, 193★, pushed the day of this pass) → render to the **UltraStar song format**
+→ play on **`USDX`** (GPL-2.0, 1,320★), **`Performous`** (GPL-2.0+, 650★) or **`Vocaluxe`** (GPL-3.0,
+343★). Pitch scoring and feedback come free from Performous; extend analysis with **`basic-pitch`**
+(Apache-2.0, p12).
+
+**Target the format, not the player.** All three maintained players are copyleft, and all three read
+the **UltraStar format** — so the format, not any one binary, is the integration surface. Write to it
+and you inherit the entire hobby content ecosystem without inheriting GPL into your own product.
+
+**Depend on `karaoke-gen`, not its library sibling.** `python-lyrics-transcriber` (MIT, 93★) was
+**archived 2026-01-19** while `karaoke-gen` shipped on the day of this pass — the library folded into
+the end-to-end tool. If you need the transcriber standalone, **vendor it**: an archived repo takes no
+patches.
+
+## Pattern 88 — The songbook and chord-chart line, and the one licence to send to review
+
+**The wiring.** **`ChordPro`** (549★) as the source format — chords and lyrics in plain text, rendered
+to print-ready PDF/HTML → **`pychord`** (MIT, 292★) for transposition and chord-symbol logic →
+**`alphaTab`** (MPL-2.0, 1,951★) for interactive web display with playback → **`tuxguitar`**
+(LGPL-2.1, 1,666★) when Guitar Pro file interop is required, which in the tab market it usually is.
+Extract chords from audio with **`chord-extractor`** (GPL-2.0) as a **batch step**, never linked in.
+
+**Two licence facts to carry into the proposal.** `ChordPro` is **Artistic-2.0** — the first
+appearance of that licence in this KB; OSI-approved and permissive in practice, but outside Globant's
+MIT/Apache/BSD set, so send it to review rather than assuming it passes. And `tuxguitar`'s **LGPL-2.1**
+(found in **`docs/LICENSE`**, which is why GitHub reports `NOASSERTION`) permits linking from a
+proprietary application provided the library stays replaceable — making it the **most commercially
+flexible platform in this plane**.
+
+## What not to promise in this plane (pass 43)
+
+- **Do not promise a royalty or mechanical-licensing system "built on open source."** Measured
+  2026-11-27: `mechanical royalty` → 13 results, relevant top-six **0★**; `music royalty accounting`
+  → 14 results, **4★**; `lyrics sync licensing` → **1 result, 0★**. Pass 8's 0★ measurement
+  reproduces. There is nothing to build on; there is only something to build.
+- **Do not promise a permissive score-capture engine.** None is maintained. Say which of Route A, B or
+  C you are taking and what it costs.
+- **Do not promise "open source end to end" for anything involving lyrics.** The sync/reprint right is
+  the publisher's; a permissive code licence never reaches the words.
+- **Do not promise ISWC-based matching.** ISWC and CWR have no usable open implementation (p5: CWR's
+  only two are dead since 2015 and 2018). **And do not search for it:** `ISWC` returns **434 results,
+  zero relevant** — the International Semantic Web Conference. A row sourced from that search is
+  fiction.
+- **Do not quote a 0.02% CAGR, and do not quote a karaoke market figure.** The first is a data
+  artefact; the second **does not exist in this KB** — it was searched and nothing came back.
+- **Do not quote JASRAC's 100%/50% as settled.** The gate is corroborated; the percentages are
+  **single-source** (Asiae) and JASRAC's own guideline text has not been read.
+- **Do not state the MLC's position on AI-assisted registrations.** Two 2026 sources **directly
+  contradict** each other and no primary source was reached. Say that, and offer to confirm it.

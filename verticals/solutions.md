@@ -2403,3 +2403,45 @@ service in any proposal, not a library to embed.
 shows how licence-aware search should behave; and the quote, the rate card and the sale are a bespoke
 build every time. Any vendor claiming an end-to-end open-source clip-licensing platform should be
 asked for the repository URL — this pass measured the field and there isn't one.
+
+## Composition-side platforms — lyrics, songbooks, score capture & karaoke — added 2026-11-27 (pass 43)
+
+Real, customisable systems on the **song** side rather than the recording side. Licences were read
+from files, not taken from GitHub's field; existence confirmed by `git ls-remote`. Note before you
+plan anything: **every maintained platform in this table is copyleft.** The permissive options in
+this plane are libraries, not platforms.
+
+| Platform | Repo | Licence | Stars | What it is | How to build on it |
+|---|---|---|---|---|---|
+| **Audiveris** | https://github.com/Audiveris/audiveris | AGPL-3.0 | 3,019 | The reference optical-music-recognition desk: printed score → MusicXML, with a correction UI | The score-capture back end for a digitisation service. **AGPL-3.0 reaches a hosted service** — run it as a batch tool behind a queue and keep your own code separate, or budget for the obligation |
+| **LRCLIB** | https://github.com/tranxuanthang/lrclib | MIT | 2,314 | The server (Rust/Axum/SQLite) behind lrclib.net — a free synced-lyrics API and corpus | The only permissive *platform* here. Self-host for lyric lookup; pair with `ctc-forced-aligner` to time your own catalogue. **The code is MIT; the lyrics are not** — see the rights note below |
+| **TuxGuitar** | https://github.com/helge17/tuxguitar | LGPL-2.1 (`docs/LICENSE`) | 1,666 | Tablature editor and player; reads and writes Guitar Pro files | LGPL permits linking from a proprietary app if you keep the library replaceable — the most commercially flexible platform in the table. Guitar-Pro-format interop is its real asset |
+| **alphaTab** | https://github.com/CoderLine/alphaTab | MPL-2.0 | 1,951 | Notation **and tablature** rendering + playback for web, .NET and Android | The display layer for any score or tab product. MPL-2.0 is file-level copyleft: your files stay yours, changes to theirs go back |
+| **UltraStar Deluxe** | https://github.com/UltraStar-Deluxe/USDX | GPL-2.0 | 1,320 | The karaoke game engine, plus the UltraStar song format that the whole hobby ecosystem writes to | Pushed the day of this pass. Use the **format** as your interchange target even if you write your own player — that is where the content is |
+| **Performous** | https://github.com/performous/performous | GPL-2.0-or-later | 650 | Karaoke/band game with live pitch detection; reads UltraStar songs | Scoring and pitch feedback are the reusable parts. Pairs with `basic-pitch` (p12) for analysis |
+| **ChordPro** | https://github.com/ChordPro/chordpro | **Artistic-2.0** | 549 | Reference implementation of the ChordPro songbook format → PDF/HTML | Songbook publishing at scale: chords + lyrics in plain text, rendered to print. **Artistic-2.0 is new to this KB — send it to licence review** |
+| **Vocaluxe** | https://github.com/Vocaluxe/Vocaluxe | GPL-3.0 | 343 | Karaoke game in the UltraStar lineage, multi-player scoring | Party/venue deployments; shares the USDX song format |
+| **Quelea** | https://github.com/quelea-projection/Quelea | GPL-3.0 | 207 | Live **lyric and song projection** for venues and services | 161 forks on 207 stars — a 0.78 ratio, the mark of a user base that deploys rather than stars. Treat the fork count as the adoption signal here |
+
+### The rights note that governs every row above
+
+**Displaying lyrics in time with music is a licensed act.** The synchronisation/reprint right sits
+with the music publisher, not the recording owner — a different counterparty from the one a media
+client usually has a deal with. So:
+
+- A permissive **code** licence says nothing about the **words**. `LRCLIB` is MIT and its README
+  contains **zero** mentions of licence, copyright, DMCA or takedown for the corpus it serves —
+  checked, not assumed. `LyricsGenius` is MIT code over a third party's API and words.
+- This is the **sixth** confirmation of this KB's content law, first recorded for healthcare's CPT
+  codes and then for MedDRA: *the regulator or the format creates the obligation; the licence on the
+  **content** decides whether open source can discharge it.*
+- **Never scope a lyrics product as "open source end to end."** The pipeline is open; the words are
+  cleared, per territory, from publishers.
+
+### Informed gap — stated rather than filled
+
+**OpenLP**, the largest open lyric-projection application, is **not on GitHub**; searching by name
+returns only forks, converters and unrelated church-display projects. No row is written for it rather
+than pointing a client at a fork. **`openlyrics/openlyrics`**, the XML interchange standard for song
+lyrics, carries **no licence file** (nine names checked on `master`, control test passed) and has been
+dormant since **2022-02-20** — use the published RelaxNG schema as a specification; do not vendor it.

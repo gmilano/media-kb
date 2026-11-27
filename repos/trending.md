@@ -10,6 +10,76 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 43: composition-side infrastructure (**no maintained permissive OMR engine exists**)
+
+Infrastructure and platform movement for the composition-side plane — lyrics, chords, score capture,
+publishing rights. The agent/model layer, the JASRAC per-element finding and the false friends are in
+`agents/trending.md` for the same date.
+
+**The measurement, GitHub search API, 2026-11-27, existence via `git ls-remote` (29/29 resolve),
+every `NOASSERTION` resolved by reading the licence file.** This is the pass's primary artefact,
+because the licence distribution — not the star counts — is what decides whether any of it is usable.
+
+| Repo | Licence | Stars | Last push | Status |
+|---|---|---|---|---|
+| `tranxuanthang/lrcget` | MIT | 3,392 | 2026-11-20 | Alive — most-starred in the plane |
+| `Audiveris/audiveris` | AGPL-3.0 | 3,019 | 2026-11-25 | Alive — reference OMR engine |
+| `tranxuanthang/lrclib` | MIT | 2,314 | 2026-11-10 | Alive — the open synced-lyrics server/corpus |
+| `CoderLine/alphaTab` | MPL-2.0 (file) | 1,951 | 2026-11-26 | Alive — notation + tablature rendering |
+| `helge17/tuxguitar` | LGPL-2.1 (`docs/LICENSE`) | 1,666 | 2026-11-26 | Alive — tablature editor |
+| `UltraStar-Deluxe/USDX` | GPL-2.0 | 1,320 | **2026-11-27** | Alive — pushed the day of this pass |
+| `johnwmillr/LyricsGenius` | MIT | 1,130 | 2026-11-22 | Alive |
+| `cifkao/html-midi-player` | BSD-2-Clause | 914 | 2025-07-06 | Dormant ~1.4 yr |
+| `aashrafh/Mozart` | Apache-2.0 | 716 | 2022-08-24 | **Dead 4 yr** — permissive OMR |
+| `performous/performous` | GPL-2.0-or-later (file) | 650 | 2026-11-26 | Alive |
+| `MahmoudAshraf97/ctc-forced-aligner` | BSD-2-Clause | 579 | 2026-11-24 | Alive |
+| `ChordPro/chordpro` | **Artistic-2.0** (file) | 549 | 2026-11-21 | Alive |
+| `moehmeni/syncedlyrics` | MIT | 526 | 2024-07-28 | Dormant ~2.3 yr |
+| `liebharc/homr` | AGPL-3.0 | 497 | **2026-11-27** | Alive — pushed the day of this pass |
+| `apacha/OMR-Datasets` | MIT | 402 | 2024-04-01 | Dormant ~2.6 yr — the training corpus |
+| `Vocaluxe/Vocaluxe` | GPL-3.0 | 343 | 2026-11-20 | Alive |
+| `yuma-m/pychord` | MIT | 292 | 2026-11-25 | Alive |
+| `ohollo/chord-extractor` | GPL-2.0 | 248 | 2025-08-14 | Dormant ~1.3 yr |
+| `jayg996/BTC-ISMIR19` | MIT | 222 | 2020-05-23 | **Dead 6 yr** |
+| `quelea-projection/Quelea` | GPL-3.0 | 207 | 2026-11-24 | Alive — 161 forks on 207 stars |
+| `antoniorv6/SMT` | MIT | 90 | 2026-09-27 | Slow — permissive OMR research line |
+| `OMR-Research/MeasureDetector` | MIT + Apache-2.0 (split by directory) | 53 | 2026-06-14 | Slow |
+| `BreezeWhite/oemer` | **MIT template, unfilled** | *not indexed* | HEAD 2025-04-18 | Dormant + licence-unresolved |
+
+**What the table says when you sort it by licence instead of stars.** Maintained OMR: Audiveris
+(AGPL-3.0, 2026-11-25) and homr (AGPL-3.0, 2026-11-27). Permissive OMR: oemer (2025-04-18, and its
+licence names no holder), Mozart (2022-08-24), OMR-Datasets (2024-04-01), MeasureDetector
+(2026-06-14), SMT (2026-09-27). **Every maintained engine is copyleft; every permissive one is
+dormant.** Score capture is therefore an architecture decision with a licence consequence, and there
+is no third option today.
+
+The karaoke platforms repeat it: USDX (GPL-2.0), Performous (GPL-2.0+), Vocaluxe (GPL-3.0) — all
+maintained, all copyleft. Projection: Quelea (GPL-3.0). The **permissive** half of this plane is the
+*library* layer — lrcget/lrclib (MIT), alphaTab (MPL-2.0), pychord (MIT), the aligners (BSD-2/MIT) —
+and the alignment tools are permissive mainly because they are shared with the speech plane (p7),
+not because anyone built them for music.
+
+**One licence to flag, not wave through:** `ChordPro` is **Artistic-2.0** — the first appearance of
+that licence anywhere in this KB. OSI-approved and permissive in practice, but outside Globant's
+MIT/Apache/BSD set; send it to review.
+
+**Three `NOASSERTION` repos resolved to real licences by reading files** — alphaTab (MPL-2.0, stated
+in a 16,907 B composite `LICENSE`), tuxguitar (**LGPL-2.1, filed in `docs/LICENSE`** — a new location
+for this KB's probe list), performous (GPL-2.0-or-later in `LICENSE.md`). A root-only scanner reports
+all three as unlicensed. **A `NOASSERTION` is never, by itself, evidence that a licence is missing.**
+
+**The money layer, measured the same day:** `mechanical royalty` 13 results / relevant top-six **0★**;
+`music royalty accounting` 14 results / **4★**; `music publishing rights` 16 results / 5★;
+`lyrics sync licensing` **1 result / 0★**. Pass 8's 0★ measurement on the second query reproduces
+five days later with a wider query set. Two of the publishing-rights hits are 0★ repos advertising
+"Free AI-powered music distribution" — SEO slop occupying the surface of a real commercial function.
+
+**Not on GitHub, so not listed:** OpenLP, the largest open lyric-projection application. Searched by
+name; every result was a fork, a converter or an unrelated church-display project. Its upstream lives
+elsewhere. **`openlyrics/openlyrics`** (35★) has **no licence file** under nine names on `master`
+while `README.txt` returns 200 — control test passes, so the absence is real; dormant since
+2022-02-20. Specification, not dependency.
+
 ## 2026-11-27 — pass 42: archive-monetisation infrastructure (**the sell-side measured at four repos holding one star**)
 
 Infrastructure and platform movement for the archive-monetisation plane. Agent-side movement and the

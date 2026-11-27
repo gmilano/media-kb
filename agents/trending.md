@@ -9,6 +9,86 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 43: the composition-side plane (**the regulator now prices a field no open format has**)
+
+Plane found by grepping ~40 candidate terms against all eight KB files before any web search. Pass 12
+had covered music as *audio* and even carried the engraving libraries; the **song as distinct from the
+recording** was empty: `lyric` 0, `karaoke` 0, `chord` 0, `tablature` 0, `sheet music` 0, `OMR` 0,
+`songwriter` 0, `mechanical licens` 0, `LRC` 0, `acapella` 0.
+
+**This week's movement, and it is all on the craft side.** Pushed on the day of this pass:
+`liebharc/homr` (AGPL-3.0, 497★, transformer OMR) and `UltraStar-Deluxe/USDX` (GPL-2.0, 1,320★,
+karaoke engine) and `nomadkaraoke/karaoke-gen` (MIT, 193★). Pushed within the week:
+`CoderLine/alphaTab` (MPL-2.0, 1,951★, 2026-11-26), `helge17/tuxguitar` (LGPL-2.1, 1,666★, 2026-11-26),
+`performous/performous` (GPL-2.0+, 650★, 2026-11-26), `Audiveris/audiveris` (AGPL-3.0, 3,019★,
+2026-11-25), `yuma-m/pychord` (MIT, 292★, 2026-11-25), `MahmoudAshraf97/ctc-forced-aligner`
+(BSD-2, 579★, 2026-11-24), `quelea-projection/Quelea` (GPL-3.0, 207★, 2026-11-24),
+`ChordPro/chordpro` (Artistic-2.0, 549★, 2026-11-21), `tranxuanthang/lrcget` (MIT, 3,392★, 2026-11-20),
+`Vocaluxe/Vocaluxe` (GPL-3.0, 343★, 2026-11-20).
+
+**Dormant or dead on the same axis:** `moehmeni/syncedlyrics` (MIT, 526★, last push 2024-07-28),
+`apacha/OMR-Datasets` (MIT, 402★, 2024-04-01), `aashrafh/Mozart` (Apache-2.0, 716★, **2022-08-24**),
+`jayg996/BTC-ISMIR19` (MIT, 222★, **2020-05-23**), `BreezeWhite/oemer` (HEAD **2025-04-18**).
+`nomadkaraoke/python-lyrics-transcriber` (MIT, 93★) is **archived** as of 2026-01-19 while its
+sibling `karaoke-gen` shipped today — consolidation, not abandonment.
+
+**Read those two lists together and the licence pattern is not an opinion.** Every OMR engine that is
+maintained is copyleft (Audiveris AGPL-3.0, homr AGPL-3.0, both pushed within two days); every
+permissive one is dormant (oemer, Mozart, MeasureDetector, SMT, OMR-Datasets — best case
+2026-09-27, worst case four years). **There is no actively-maintained permissive OMR engine today.**
+Same shape in karaoke: the three maintained apps are GPL (USDX, Performous, Vocaluxe) and the only
+live MIT tool is `karaoke-gen`, whose own library sibling was just archived.
+
+### The finding of this pass: four regions have independently converged on needing a datum nobody models
+
+The **human-authorship share**, per element, is now the gate on royalty eligibility — and it arrived
+in four places at once, all in 2026:
+
+- **APAC — Japan.** JASRAC (June 2026) manages AI-involved music only where human creative
+  contribution is recognised, and it has put a **number** on it: a **100%** management rate where AI
+  wrote only one element (AI lyrics, human composition), and **50%** where both lyrics and melody
+  involve AI. *The most precise mechanism in any jurisdiction* — and note what it is computed over:
+  **lyrics versus melody**, which is exactly the composition-side split this plane is about.
+- **APAC — South Korea.** KOMCA adopted AI-assisted registration rules in early August 2026 and
+  **withdrew them 22 days later** (25 August) after government pushback. It is now selecting an
+  AI-detection vendor with five other bodies; the tools reportedly fail on *partly* AI-made tracks.
+- **North America.** ASCAP, BMI and SOCAN have aligned: AI-**assisted** works registrable, wholly-AI
+  works ineligible. So eligibility turns on a disclosure the registrant makes at registration time.
+- **EMEA.** The Munich Regional Court I ruled for GEMA against Suno on **31 July 2026** (not final):
+  training, memorisation, model provision and output assessed as **four separate levels**, and a
+  licence required even for training conducted outside Europe.
+
+**Now the gap.** That per-element human share has **no field in any open format in this plane.**
+MusicXML and MEI describe notes and carry `<identification>`/`<creator>`; LRC carries timings;
+ChordPro carries chords; OpenLyrics carries lyrics. None of them has a place to record *what
+authored this element* — only free-text escape hatches (`<miscellaneous>`, encoding descriptions).
+**The one datum that four regions' royalty eligibility now turns on is unrepresentable in every open
+format that touches a song.** That is this pass's falsifiable prediction: the first format to add a
+per-element provenance field wins the registration workflow. Watch MusicXML/MEI issue trackers and
+DDEX's work; if a field appears before mid-2027, this call was right.
+
+### The money layer, re-measured, and pass 8's number reproduces
+
+`mechanical royalty` → 13 results, and **the top hit is `danderfer/Comp_Sci_Sem_2` at 228★ — the Bee
+Movie script**, an unrelated joke repo. `music royalty accounting` → 14 results, same joke repo on
+top, the real ones at 2★/1★/1★/0★/0★. Pass 8 measured this same query's relevant top-six at **0
+stars**; five days later it is **4**. The emptiness is stable and it is still the most extreme in this
+KB. `lyrics sync licensing` → **1 result, 0★**.
+
+**New false friend, and the sharpest since `eidr`/`isan`:** `ISWC` returns **434 results and zero
+relevant ones** — it is the *International Semantic Web Conference* (μKG 109★, JAPE 103★,
+Text2KGBench 99★). ISWC is simultaneously a real music-work identifier (used 26 times in this KB) and
+a major CS acronym. A careless pass writes agent rows from a knowledge-graph library. Likewise
+`oemer`: the name search returns `meteo-team/oemer`, a **meteorology** project, while the real OMR
+repo is absent from the search index altogether.
+
+### Licence defect of the pass: a licence file that is still a template
+
+`BreezeWhite/oemer`'s `LICENSE` reads `Copyright (c) [year] [fullname]` — **the MIT placeholders were
+never filled in** — while `setup.py` asserts the MIT classifier. A grant naming no grantor. Treat as
+licence-unresolved, not MIT. It is also precisely the defect this KB's own quality bar forbids,
+found in the wild.
+
 ## 2026-11-27 — pass 42: the archive-monetisation plane (**186× apart, same licence, pushed three days apart**)
 
 Plane found by grepping ~40 candidate terms against all eight KB files before any web search. The

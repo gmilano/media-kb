@@ -4768,3 +4768,95 @@ step — never a platform selection.
 - **One trap, documented in full in `verticals/solutions.md` (pass 42): `resourcespace/resourcespace`
   reports `NOASSERTION` to the GitHub API, and it is neither unlicensed nor plain BSD.** Read that
   entry before putting ResourceSpace in a client architecture.
+
+## The composition-side plane — lyrics, chords, score capture & publishing rights — measured 2026-11-27 (pass 43)
+
+Measured via `search/repositories` on 2026-11-27, existence confirmed by `git ls-remote`
+(**29/29 resolve**), every `NOASSERTION` resolved by reading the actual licence file. The AI/model
+layer, the OMR licence split and the false friends are in `agents/top.md` for the same date.
+
+### The craft layer — rendering the song. This half is alive
+
+| Repo | Licence | Stars | Forks | Last push | Role |
+|---|---|---|---|---|---|
+| https://github.com/tranxuanthang/lrcget | MIT | 3,392 | 129 | 2026-11-20 | Desktop app that fetches and embeds synced lyrics into a local library. **The most-starred repo in this plane** |
+| https://github.com/Audiveris/audiveris | AGPL-3.0 | 3,019 | 456 | 2026-11-25 | The reference OMR engine; printed score → MusicXML |
+| https://github.com/tranxuanthang/lrclib | MIT | 2,314 | 91 | 2026-11-10 | **The LRCLIB server** (Rust/Axum/SQLite) behind lrclib.net — the open synced-lyrics corpus and API |
+| https://github.com/CoderLine/alphaTab | **MPL-2.0** (read from `LICENSE`, 16,907 B) | 1,951 | 308 | 2026-11-26 | Music-notation **and tablature** rendering + playback for web/.NET. GitHub reports `NOASSERTION` |
+| https://github.com/helge17/tuxguitar | **LGPL-2.1** (read from **`docs/LICENSE`**, 24,838 B) | 1,666 | — | 2026-11-26 | The open tablature editor; reads/writes Guitar Pro files. GitHub reports `NOASSERTION` |
+| https://github.com/UltraStar-Deluxe/USDX | GPL-2.0 | 1,320 | — | **2026-11-27** | UltraStar Deluxe — the karaoke game engine and its song format. **Pushed the day of this pass** |
+| https://github.com/johnwmillr/LyricsGenius | MIT | 1,130 | 185 | 2026-11-22 | Python client for the Genius lyrics API. **MIT code over third-party-licensed words** |
+| https://github.com/cifkao/html-midi-player | BSD-2-Clause | 914 | 102 | 2025-07-06 | Drop-in `<midi-player>`/`<midi-visualizer>` web components |
+| https://github.com/performous/performous | **GPL-2.0-or-later** (read from `LICENSE.md`, 18,387 B) | 650 | 119 | 2026-11-26 | Karaoke/band game with pitch detection; reads UltraStar songs |
+| https://github.com/MahmoudAshraf97/ctc-forced-aligner | BSD-2-Clause | 579 | 99 | 2026-11-24 | Multilingual forced alignment — the lyric-timing engine of choice |
+| https://github.com/ChordPro/chordpro | **Artistic-2.0** (read from `LICENSE`, 9,622 B) | 549 | 80 | 2026-11-21 | Reference implementation of the ChordPro songbook format → PDF/HTML |
+| https://github.com/moehmeni/syncedlyrics | MIT | 526 | 41 | 2024-07-28 | Fetches synced (LRC) lyrics from several providers. Dormant ~2.3 years |
+| https://github.com/liebharc/homr | AGPL-3.0 | 497 | 90 | **2026-11-27** | Camera-photo OMR → MusicXML |
+| https://github.com/apacha/OMR-Datasets | MIT | 402 | 48 | 2024-04-01 | The collected OMR training datasets + loaders. **The corpus the permissive models need** |
+| https://github.com/Vocaluxe/Vocaluxe | GPL-3.0 | 343 | 93 | 2026-11-20 | Karaoke game (UltraStar lineage), multi-player scoring |
+| https://github.com/yuma-m/pychord | MIT | 292 | 52 | 2026-11-25 | Chord symbol parsing/transposition — small, permissive, maintained |
+| https://github.com/ohollo/chord-extractor | GPL-2.0 | 248 | 33 | 2025-08-14 | Batch chord extraction from audio |
+| https://github.com/jayg996/BTC-ISMIR19 | MIT | 222 | 42 | 2020-05-23 | Transformer chord recognition. Research code, dead since 2020 |
+| https://github.com/quelea-projection/Quelea | GPL-3.0 | 207 | 161 | 2026-11-24 | Lyric/song **projection** for live use. Note the fork:star ratio of 0.78 — unusually high, a deployment-heavy user base |
+| https://github.com/antoniorv6/SMT | MIT | 90 | 29 | 2026-09-27 | Sheet Music Transformer — the permissive OMR research line |
+| https://github.com/OMR-Research/MeasureDetector | **MIT (`MeasureDetector/`) + Apache-2.0 (base fork)** | 53 | 13 | 2026-06-14 | Measure/system detection. Both halves permissive; respect the per-directory split in attribution |
+
+Also in this plane and already in the KB from pass 12, not re-listed: `music21` (BSD-3),
+`verovio` (LGPL-3.0), `MuseScore` (GPL-3.0 + font exception), `lilypond` (GPL-3.0), `vexflow` (MIT),
+`abcjs` (MIT), `basic-pitch` (Apache-2.0), `mido`/`pretty-midi`/`MidiTok` (MIT).
+
+### The money layer — paying the writer. Measured on the same day, with `sort=stars`
+
+This is the pass's primary negative artefact. It is not "we found little"; it is **measured empty**:
+
+| Query | Total results | Top *relevant* result | Star sum of the relevant top-6 |
+|---|---|---|---|
+| `mechanical royalty` | 13 | `hunter-sallis/lomiiel-rights-review` — **0★** | **0** |
+| `music royalty accounting` | 14 | `fiehrfly/muses` — 2★, and it is a *curated list*, not code | **4** (2+1+1+0+0) |
+| `music publishing rights` | 16 | `smusab9152/music_claims` — 3★ | **5** |
+| `lyrics sync licensing` | **1** | `leolarge/subtext-lyricsearch` — 0★ | **0** |
+
+Pass 8 measured `music royalty accounting` and found the top six summing to **0 stars**. Five days
+later, with a wider query set, the number is **4** — the finding reproduces, and it remains the most
+extreme emptiness recorded anywhere in this KB, worse than healthcare's `medical necessity` (3★).
+
+Two of the `music publishing rights` results are **0★ repos advertising "Free AI-powered music
+distribution"** — AI-generated slop occupying the search surface for a real commercial function.
+That is now the second industry where the empty money layer has been colonised by SEO repos rather
+than left blank.
+
+### Informed gaps — searched, and genuinely not there
+
+- **OpenLP**, the largest open lyric-projection application, **is not on GitHub.** Searched by name;
+  results were third-party forks, converters and unrelated church-display projects, none of them
+  upstream. Its development lives elsewhere, so **no row is written for it** rather than pointing at
+  a fork. Use `Quelea` (GPL-3.0, above) as the GitHub-resident projection option.
+- **`openlyrics/openlyrics`** — the open XML standard for worship song lyrics — has **no licence file**
+  under nine candidate names on `master`, while `README.txt` returns 200 (control test passes, so
+  this is absence, not a naming-convention miss). 35★, dormant since **2022-02-20**. The README calls
+  it "free, open" and grants nothing. **Demoted to specification, not dependency** — the standing
+  rule from pass 4. Use the published RelaxNG schema; do not vendor the repo.
+- **No open implementation of ISWC assignment, CWR, or mechanical-royalty calculation.** Pass 5
+  already established CWR's only two implementations are dead (2015, 2018) and that ISRC/ISWC are
+  closed by membership. Nothing has changed, and the `ISWC` query is unusable as a search term (434
+  results, zero relevant — it returns the International Semantic Web Conference).
+- **DDEX commercial terms remain unverified** — `new.ddex.net` does not resolve from this session.
+  Carried forward from pass 5 unchanged: treat as *not investigated, not free*.
+
+### Method notes, reusable across all twelve industries
+
+1. **`gh api repos/<slug>` returns 403** under this session's GitHub scope ("access to this repository
+   is not enabled"), while **`gh api search/repositories -f q='repo:<slug>'` works**. So per-repo
+   metadata must come from the *search* endpoint. The consequence matters: a repo **absent from the
+   search index cannot be measured at all** (`oemer`), only proven to exist (`ls-remote`) and read
+   (`raw` / shallow clone).
+2. **`curl -sI https://github.com/<slug>` returns 403** from the proxy. HTML-page probes are not
+   available here; `raw.githubusercontent.com` is, and `git ls-remote` remains the only existence oracle.
+3. **New licence-file location found: `docs/LICENSE`** (tuxguitar, LGPL-2.1, 24,838 B). The probe list
+   is now: `LICENSE`, `LICENSE.md`, `LICENSE.txt`, `license.txt`, `LICENCE`, `LICENSE.rst`, `COPYING`,
+   `COPYING.md`, `COPYING.txt`, `COPYING.LESSER`, **`docs/LICENSE`**. Root-only scanners — including
+   GitHub's — report `NOASSERTION` for every repo that files it anywhere else. Three of this pass's
+   four `NOASSERTION` repos were in fact **MPL-2.0, LGPL-2.1 and Artistic-2.0**.
+4. **Artistic-2.0 appears for the first time in this KB** (ChordPro). OSI-approved and permissive in
+   practice, but it is *not* in Globant's MIT/Apache/BSD comfort set — flag it for review rather than
+   waving it through.

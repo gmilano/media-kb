@@ -4201,3 +4201,98 @@ research.google and arxiv.org. **Every repository row in this pass is `ls-remote
 market claim above is attributed to the publisher and date that WebSearch surfaced and was NOT
 independently fetched.** Treat the deal counts and market figures as leads to confirm, not as audited
 numbers. Repo facts: verified. Press figures: cited, unfetched.
+
+## The composition side: lyrics, chords, score capture & publishing rights — added 2026-11-27 (pass 43)
+
+Measured 2026-11-27. Repo evidence in `repos/foundations.md` and `agents/top.md`; opportunities by
+region in `intel/market.md`, all for the same date.
+
+### 1. The regulator has started pricing a field that no open format can express
+
+This is the trend of the pass, and it arrived in four jurisdictions inside one year. Royalty
+eligibility is becoming a function of the **human-authorship share, per element**:
+
+- **Japan — JASRAC, June 2026.** Manages AI-involved music only where human creative contribution is
+  recognised, and it is the only body anywhere that has published a **number**: a **100%** management
+  rate where AI wrote just one element (AI lyrics over a human composition), and **50%** where both
+  lyrics and melody involve AI. Fully-AI works are excluded from management entirely.
+- **South Korea — KOMCA, August 2026.** Adopted AI-assisted registration criteria and **withdrew them
+  22 days later** after government pushback. Now selecting an AI-detection vendor with five other
+  bodies; reporting says the tools fail precisely on *partly* AI-made tracks.
+- **North America — ASCAP/BMI/SOCAN.** Aligned: AI-**assisted** works registrable, wholly-AI works
+  ineligible. Eligibility therefore rests on a declaration made at registration time.
+- **EMEA — GEMA v. Suno, Munich Regional Court I, 31 July 2026** (not final). Training, memorisation,
+  model provision and output were assessed as **four separate levels**, and a licence was held
+  necessary even for training performed outside Europe.
+
+**Note what JASRAC's rule is computed over: lyrics versus melody.** That is the composition-side split
+exactly. And no open format in this plane has a field for it. MusicXML and MEI describe notes and
+carry `<identification>`/`<creator>`; LRC carries timings; ChordPro carries chords; OpenLyrics carries
+words. The only places to put "what authored this element" are free-text escape hatches
+(`<miscellaneous>`, encoding descriptions). **The datum four regions' royalty eligibility now turns on
+is unrepresentable in every open format that touches a song.**
+
+*Falsifiable prediction, recorded for the next pass:* the first format to standardise a per-element
+provenance field takes the registration workflow. Watch the MusicXML and MEI issue trackers and
+DDEX's output; if such a field appears before mid-2027, this call was right. If the industry instead
+settles on affidavits at registration and no format changes, it was wrong.
+
+### 2. The three-step gradient, and the sixth confirmation of this KB's structural law
+
+The law first recorded in healthcare and sharpened in pass 8 holds again, and this plane gives it the
+cleanest three steps yet:
+
+| Step | What it is | Measured state |
+|---|---|---|
+| **Render** the song | a **format** problem | **Healthy.** lrcget 3,392★, Audiveris 3,019★, lrclib 2,314★, alphaTab 1,951★, tuxguitar 1,666★, USDX 1,320★ — two pushed *on the day of this pass* |
+| **Identify** the work | a **registry-allocation** problem | **No open implementation.** ISWC/CWR closed by membership (p5); the acronym is unusable as a search term |
+| **Pay** the writer | a **judgment** problem | **Zero.** `mechanical royalty` → relevant top-six **0★**; `music royalty accounting` → **4★** |
+
+Pass 8 measured `music royalty accounting`'s relevant top six at **0 stars**. Five days later, with a
+wider query set, it is **4**. The emptiness is stable, reproducible, and still the most extreme in
+this KB — worse than healthcare's `medical necessity` at 3★. The top *search* result for
+`mechanical royalty` is a 228★ joke repo containing the Bee Movie script: **the most-starred thing
+GitHub offers for a phrase describing a money flow of roughly $900M a year through the MLC alone.**
+
+### 3. In score capture, the licence and the maintenance status are the same choice
+
+Measured, not inferred: **every maintained OMR engine is copyleft and every permissive one is
+dormant.** Audiveris (AGPL-3.0) pushed 2026-11-25 and homr (AGPL-3.0) pushed 2026-11-27, against
+oemer (HEAD 2025-04-18), Mozart (Apache-2.0, 2022-08-24), OMR-Datasets (MIT, 2024-04-01),
+MeasureDetector (2026-06-14) and SMT (MIT, 2026-09-27). The karaoke platforms repeat the pattern —
+USDX, Performous and Vocaluxe are all maintained and all GPL.
+
+The permissive half of this plane is the **library** layer, and the aligners within it (WhisperX
+BSD-2 at 25,723★, MFA MIT, ctc-forced-aligner BSD-2) are permissive because they are **shared with
+the speech plane (p7)** — nobody built them for music. The practical consequence: you can assemble a
+permissive *lyric-timing* pipeline today, and you cannot assemble a permissive *score-capture* one.
+
+### 4. The content law again, now over words
+
+**Displaying lyrics in time with music is a licensed act, and the right sits with the publisher** —
+a different counterparty from the recording owner a media client usually has a deal with. The open
+stack reaches the timing and stops at the words. `LRCLIB` is MIT and its README has **zero** mentions
+of licence, copyright, DMCA or takedown for the corpus it serves (checked). `LyricsGenius` is MIT code
+over a third party's API and words. Never scope a lyrics product as open source end to end.
+
+### 5. Licence-reading rules, extended twice by this pass
+
+- **New file location: `docs/LICENSE`** (tuxguitar, LGPL-2.1, 24,838 B). Root-only scanners —
+  GitHub's included — report `NOASSERTION`. Three of this pass's four `NOASSERTION` repos were in
+  fact **MPL-2.0, LGPL-2.1 and Artistic-2.0**. A `NOASSERTION` is never, alone, evidence of a missing
+  licence.
+- **New defect category: the unfilled licence template.** `oemer`'s `LICENSE` still reads
+  `Copyright (c) [year] [fullname]` while `setup.py` asserts the MIT classifier — a grant naming no
+  grantor. It joins pass 8's "licence owned by the compilation" (Chromaprint) and pass 12's font
+  exception (MuseScore) in this KB's taxonomy, and it is the same defect this KB's own quality bar
+  forbids, found in the wild.
+- **Artistic-2.0 appears for the first time** (ChordPro, 549★). OSI-approved, permissive in practice,
+  outside the MIT/Apache/BSD comfort set — flag, don't wave through.
+
+### 6. The market is the mirror image of the technology
+
+Sheet music is quoted at a **1.11% CAGR** — the lowest growth figure anywhere in this KB, against the
+25–36% CAGRs recorded for AI media generally — while its **digital** slice grows at 8.5–10.7%, roughly
+**eight times faster than the whole**. The composition side is not a growth market; it is a
+*migration* market, and that is a different sale: moving a flat, century-old catalogue into data,
+not riding a wave. Figures and their spreads are in `intel/market.md` under the pass-43 addendum.

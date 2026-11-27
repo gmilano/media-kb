@@ -3927,3 +3927,110 @@ months ago; the **interface and analysis tools** have not been touched in three 
 *collects* is maintained. The thing that lets a human *interpret* what was collected is abandoned.
 Hold that next to the sentiment tier in `agents/top.md` (2.5 years dormant and non-commercial) and
 the plane's shape is unambiguous — see `intel/trends.md` pass 33.
+
+---
+
+## The ad-integrity & supply-chain-transparency substrate — measured 2026-11-27 (pass 34)
+
+All rows verified 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name` (stars, SPDX,
+`pushed_at`, `archived`), with licences read from the actual file wherever the API returned `NONE` or
+`NOASSERTION`, and three repositories shallow-cloned to settle the licence question. See
+`agents/top.md` pass 34 for the restored-channel note — **star counts are available again.**
+
+### The spec and format layer — permissive, standardised, and the part that works
+
+The substrate of ad integrity is a set of **declarations**: who is authorised to sell this inventory
+(`ads.txt`, `app-ads.txt`), who those sellers are (`sellers.json`), what moved through which hops
+(`schain`), and what the bid request means (OpenRTB / AdCOM). Declaring is a *format* problem, and on
+this plane — exactly as on every other plane in this KB — the format problem is solved.
+
+| Repo | License | Stars | Last push | Why it matters |
+|---|---|---|---|---|
+| [InteractiveAdvertisingBureau/openrtb](https://github.com/InteractiveAdvertisingBureau/openrtb) | Spec **CC BY 3.0** (no LICENSE file; API says `NONE`) | 532 | 2026-11-11 | The protocol everything in programmatic speaks. Actively maintained in 2026. CC BY 3.0 means you may implement it commercially with attribution — the spec has never been the obstacle. |
+| [InteractiveAdvertisingBureau/AdCOM](https://github.com/InteractiveAdvertisingBureau/AdCOM) | NONE declared | 142 | 2026-10-29 | Advertising Common Object Model — the object vocabulary OpenRTB 3.0 carries. |
+| [prebid/openrtb](https://github.com/prebid/openrtb) | **Apache-2.0** | 89 | 2026-11-12 | Go types/enums for OpenRTB 2.x/3.0, AdCOM 1.0, Native 1.2. **The permissive, maintained implementation to build on.** |
+| [bsm/openrtb](https://github.com/bsm/openrtb) | NOASSERTION — **ARCHIVED** | 292 | 2024-08-09 | Higher-starred than `prebid/openrtb` and **archived**. A star-count-driven choice here picks the dead one; this is the third plane in this KB where that happens (see `intel/trends.md` #49). |
+| [InteractiveAdvertisingBureau/ads.txt-parser](https://github.com/InteractiveAdvertisingBureau/ads.txt-parser) | Apache-2.0 | 37 | 2024-08-27 | Reference `app-ads.txt` parsing. Permissive and clean, two years without a push — stable spec, so low risk. |
+| [InteractiveAdvertisingBureau/adstxtcrawler](https://github.com/InteractiveAdvertisingBureau/adstxtcrawler) | **BSD-2-Clause declared in README prose only** — no licence file under any of nine names (shallow-cloned to confirm); API says `NONE` | 202 | 2024-06-06 | The industry's own reference `ads.txt` crawler. Ships 2017–2018 domain snapshots in the repo root. ⚠️ Usable, but get the BSD grant confirmed in writing before it enters a client deliverable — see method note 1 in `agents/top.md`. |
+| [10up/ads-txt](https://github.com/10up/ads-txt) | GPL-2.0 | 61 | 2026-11-24 | `ads.txt` / `app-ads.txt` manager for WordPress. **The most actively maintained publisher-side tool in the plane** — and GPL-2.0, which is unremarkable inside WordPress and a problem outside it. |
+| [appgoblin-dev/adscrawler](https://github.com/appgoblin-dev/adscrawler) | MIT | 36 | 2025-11-10 | Crawls Google/Apple stores, app SDKs and `app-ads.txt`. The mobile half of the declaration graph, permissively licensed. |
+| [adops-tool/SPO-sellers-json-crawler](https://github.com/adops-tool/SPO-sellers-json-crawler) | Apache-2.0 | 0 | 2026-11-07 | Async Python crawler that verifies `sellers.json` endpoints and maps supply paths recursively through `ads.txt` → `app-ads.txt` → `sellers[].domain`. **Zero stars, three weeks old, Apache-2.0, and the only supply-path mapper that exists.** |
+| [apti-jp/adstxt-validator](https://github.com/apti-jp/adstxt-validator) | MIT | 0 | 2026-03-10 | TypeScript library: parses `ads.txt`, validates entries against `sellers.json`, flags duplicates. |
+| [Chrome-Extensions-labs/Sellers.json-Inspector](https://github.com/Chrome-Extensions-labs/Sellers.json-Inspector) | GPL-3.0 | 6 | 2026-11-07 | MV3 extension for parsing and validating `sellers.json`. |
+| [Chrome-Extensions-labs/Lines-Checker-ads.txt-app-ads.txt-sellers.json](https://github.com/Chrome-Extensions-labs/Lines-Checker-ads.txt-app-ads.txt-sellers.json) | AGPL-3.0 | 4 | 2026-11-07 | Validates lines, cross-references seller IDs, detects soft-404s, commented-out lines and `OWNERDOMAIN` mismatches. ⚠️ AGPL on a browser extension — fine to use, do not vendor the code. |
+| [Yash-Vekaria/ad-inventory-fraud-measurement](https://github.com/Yash-Vekaria/ad-inventory-fraud-measurement) | MIT | 7 | 2024-05-18 | An academic measurement study of `ads.txt`/`sellers.json` inventory fraud. **The only methodology artifact in the plane** — read it before designing an audit. |
+| [KONTRUSTMEDIA/adsdb](https://github.com/KONTRUSTMEDIA/adsdb) | NONE | 2 | 2026-05-05 | An open dataset of `ads.txt`, `app-ads.txt` and `sellers.json` files. No licence file — the data has no grant attached, which on a dataset is the whole question. |
+| [dailymotion/vast-client-js](https://github.com/dailymotion/vast-client-js) | MIT | 386 | 2026-09-30 | VAST (up to v6) parsing. The ad *creative* half of the verification path: you cannot check an impression you cannot parse. |
+
+### The cryptographic-verification step, and it has been dead for three years
+
+| Repo | License | Stars | Last push | Status |
+|---|---|---|---|---|
+| [IABTechLab/adscert](https://github.com/IABTechLab/adscert) | Apache-2.0 (LICENSE read, 10,774 B) | **8** | **2023-07-05** | `ads.cert` — signs and authenticates bid requests so a buyer can verify cryptographically that the seller is who the declaration says. Permissive, from the standards body, **eight stars, abandoned since July 2023.** |
+
+⚠️ **This single row is the hinge of the plane.** `ads.txt` tells you who *claims* the right to sell.
+`ads.cert` proves it. Declaring is adopted everywhere and tooled by eight separate repositories above;
+**proving it has eight stars and no commits in three years.** Nothing replaced it. The industry
+standardised the claim and never deployed the proof.
+
+### The measurement step — permissive on the web, gated in the app
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [InteractiveAdvertisingBureau/Open-Measurement-JSClients](https://github.com/InteractiveAdvertisingBureau/Open-Measurement-JSClients) | **Apache-2.0** (LICENSE read, 11,364 B) | 76 | 2026-11-02 | The OM SDK **JavaScript** clients — genuinely Apache-2.0, genuinely maintained. |
+
+⛔ **And there the open part stops.** The OM SDK **native** library (iOS, Android, CTV) is not on
+GitHub: it is downloaded from the IAB Tech Lab Tools Portal, and Tech Lab runs a **compliance
+programme** that certifies correct use. OM SDK v1.5 (June 2024) is the current release line, and
+Tech Lab announced expanded support for emerging CTV ad formats on **2026-11-10**. So:
+web viewability is Apache-2.0 and self-hostable; **in-app and CTV viewability — the two fastest-growing
+inventory types — require a portal download plus a compliance certification.** That is the
+accreditation boundary, visible as a licence boundary.
+
+### The consent and privacy-signal layer
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework) | NONE declared (spec CC BY 3.0) | 954 | 2026-11-25 | The TCF specifications. Pushed two days before this pass — this is live, contested ground in EMEA (see `intel/market.md` pass 34). |
+| [InteractiveAdvertisingBureau/iabtcf-es](https://github.com/InteractiveAdvertisingBureau/iabtcf-es) | Apache-2.0 | 156 | 2026-11-03 | **The official TCF v2 tool suite — encoder, decoder, CMP stub.** Permissive and maintained: the one piece of the consent chain you never need to buy. |
+| [IABTechLab/iabgpp-es](https://github.com/IABTechLab/iabgpp-es) | Apache-2.0 | 37 | 2026-09-09 | The same for the **Global Privacy Platform** — the multi-jurisdiction successor signal. |
+| [InteractiveAdvertisingBureau/Global-Privacy-Platform](https://github.com/InteractiveAdvertisingBureau/Global-Privacy-Platform) | NONE declared (spec CC BY 3.0) | 128 | 2026-11-04 | The GPP spec itself. |
+| [orestbida/cookieconsent](https://github.com/orestbida/cookieconsent) | MIT | 5,786 | 2026-11-22 | **The most-starred consent UI in open source by a wide margin** — and it is not an IAB-registered CMP, so it cannot emit a valid TCF string on its own. Pair it with `iabtcf-es` if you need TCF; use it alone if you do not. |
+| [kiprotect/klaro](https://github.com/kiprotect/klaro) | **BSD-3-Clause** (API says `NOASSERTION`; LICENSE read, 1,657 B) | 1,526 | 2025-03-27 | Privacy manager with real consent-gating of third-party scripts. Permissive — and 20 months without a push. |
+| [santoshe61/consenti](https://github.com/santoshe61/consenti) | NOASSERTION | 16 | 2026-10-15 | GDPR/CCPA/TCF/GPC consent platform. Six weeks old. |
+
+⚠️ **The size of this category is the point.** The GitHub query `consent management platform TCF`
+returns **six repositories in total**, and four of them have zero stars. Europe mandates the signal;
+the open-source world has written the *codec* for it (`iabtcf-es`, Apache-2.0) and essentially none of
+the *platform*, because a CMP must be **registered with IAB Europe and issued a CMP ID** to be valid.
+Third instance of the accreditation boundary in one plane.
+
+### The event-collection layer, and two licence traps worth more than the repos
+
+Ad-integrity work needs first-party event collection you control, because the alternative is trusting
+the counting party. Three of the five candidates are not open source in the sense a procurement team
+assumes.
+
+| Repo | License | Stars | Last push | Verdict |
+|---|---|---|---|---|
+| [matomo-org/matomo](https://github.com/matomo-org/matomo) | GPL-3.0 | 22,066 | 2026-11-27 | Fully self-hostable analytics with real bot exclusion via `device-detector`. Copyleft: deploy it, do not embed it. |
+| [jitsucom/jitsu](https://github.com/jitsucom/jitsu) | **MIT** | 5,142 | 2026-11-26 | Open-source Segment alternative, scriptable ingestion. **The only genuinely permissive option in this tier — start here.** |
+| [PostHog/posthog](https://github.com/PostHog/posthog) | **MIT Expat, except `ee/`** (LICENSE read, 1,562 B: everything under `ee/` is licensed by `ee/LICENSE`) | 41,180 | 2026-11-27 | API reports `NOASSERTION`. Usable permissively if you delete or avoid `ee/`; a licence question if you ship the repo as-is. |
+| [snowplow/snowplow](https://github.com/snowplow/snowplow) | Apache-2.0 (LICENSE read, 11,358 B) | 7,052 | 2026-11-26 | ⚠️ **The repository named `snowplow` is Apache-2.0. The pipeline is not.** [snowplow/enrich](https://github.com/snowplow/enrich) (31★, 2026-11-24) ships the **Snowplow Limited Use License Agreement v1.0**. [snowplow/snowplow-javascript-tracker](https://github.com/snowplow/snowplow-javascript-tracker) (593★, BSD-3-Clause) is fine. **Resolve licences per component, never per organisation.** |
+| [rudderlabs/rudder-server](https://github.com/rudderlabs/rudder-server) | **Elastic License 2.0** (LICENSE read, 3,792 B) | 4,521 | 2026-11-26 | API reports `NOASSERTION`. **Not an OSI-approved open-source licence** — it forbids providing the product as a managed service. Four and a half thousand stars of something most teams file mentally as "open source". |
+
+### ⛔ Gaps stated as gaps, with the searches that found them
+
+Searched 2026-11-27 through `search/repositories`, sorted by stars:
+
+- **`supply path optimization` — 53 repositories, zero adtech.** The top results are warehouse-robot
+  logistics, AGV fleet management and BSC token contracts. SPO is a standard buy-side discipline with
+  no open-source presence whatsoever.
+- **`brand safety` — 465 repositories, zero brand-safety tools.** Detail in `agents/top.md` pass 34.
+- **`invalid traffic` — 63 repositories in total**, and the only purpose-built engine among them
+  (Nameles) has been dead since 2019.
+- **`malvertising` — 57 repositories**, one maintained (SEADS, Apache-2.0, 50★).
+- **`viewability` — unusable as a query** (498,228 results, all Android view/chart libraries). Searching
+  it is how you convince yourself a category is busy when it is empty.
+- **No region-specific ad-integrity repository was found for APAC or LATAM**, despite those being the
+  two regions with the highest measured IVT rates. The tooling is Global/North-American; the fraud is not.

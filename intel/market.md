@@ -1223,6 +1223,48 @@ as adopt-and-maintain; there is no upstream.
   history. A self-hosted Apache-2.0 collection tier restores both, without requiring the client to
   abandon their analysis vendor on day one.
 
+### Pass 34 (2026-11-27) — the ad-integrity, supply-chain-transparency & verification layer in North America
+
+**The region where accreditation is the product.** North America is where the accreditation bodies sit,
+and that makes it the only region where the binding constraint on this plane is institutional rather
+than technical.
+
+- **MRC accreditation is the gate, and it is weaker than clients assume.** The Media Rating Council
+  accredits invalid-traffic measurement and splits it into **GIVT** (general — declared bots, spiders,
+  datacenter traffic) and **SIVT** (sophisticated — hijacked devices, falsified impressions, ad
+  stacking). **GIVT is required for accreditation; SIVT is "strongly recommended" and not mandated.**
+  HUMAN's platform was accredited for both under the IVT 2.0 addendum per an MRC letter of
+  **2026-04-14**, and the MRC published a quarterly accreditation update on **2026-07-14**.
+  **Opportunity:** the highest-value, lowest-competition deliverable here is not a detector — it is a
+  **vendor-accreditation diligence service**: read the client's verification contracts against the MRC
+  accreditation letters and show them, line by line, which of the invalid traffic they are paying to
+  remove is actually inside the accredited scope. Nobody sells this, every large advertiser needs it,
+  and it requires no model and no data licence.
+- **TAG Certified Against Fraud is a second, separate gate**, run by the Trustworthy Accountability
+  Group since 2016, certifying supply-chain participants on anti-fraud practice rather than certifying
+  a measurement. ⚠️ One secondary source reports **GroupM mandated TAG CAF status for all programmatic
+  partners** in a May supply-chain standards update; single-sourced, verify before quoting to a client.
+  If it holds, it converts certification from a differentiator into a condition of trading with the
+  largest buyer in the market — and that is a compliance-engineering engagement.
+- **Regulatory posture: thin, and one widely-repeated claim does not check out.** One trade article
+  reports an **FTC advanced notice of proposed rulemaking on "deceptive traffic practices"**, with
+  potential liability for intermediaries that knowingly facilitate invalid traffic. ⚠️ **Not found on
+  any FTC primary source during this pass — do not put it in a client deck.** Recorded here because
+  it is circulating and will be quoted back at you; the honest position is that ad fraud in the US
+  remains **governed by private certification, not statute.**
+- **Measured direction of travel is contested.** DoubleVerify reports fraud/IVT **down 41% YoY in North
+  America**; Anura reports global IVT rising **26% (Jan) → 40% (Jun) 2026**. Pixalate publishes
+  quarterly North America benchmarks (Q2 2026 available). **Opportunity:** a client-side
+  **methodology-reconciliation engagement** — the disagreement is not noise, it is two different
+  denominators, and whoever can explain it to a CMO owns the relationship.
+- **The build that is clean here:** Prebid Server (Apache-2.0, 595★, 2026-11-26) self-hosted, with
+  `schain` enforcement and `sellers.json` graph verification via
+  [adops-tool/SPO-sellers-json-crawler](https://github.com/adops-tool/SPO-sellers-json-crawler)
+  (Apache-2.0). Supply-path optimisation has **zero open-source presence anywhere** (53 repos
+  searched, all logistics and crypto), and Prebid Server is the only auction a consultancy can
+  legally modify. **That combination — a real need, a permissive platform and no competing tooling —
+  is the strongest greenfield position found in any of the 34 planes.**
+
 ### EMEA
 
 - **EU AI Act Article 50 is the forcing function, and the date is now confirmed.** Transparency
@@ -2595,6 +2637,47 @@ nothing in the open TV stack implements it.
   misinformation and platform-responsibility regimes — a compliance-led sale rather than an
   efficiency-led one. ⚠️ MENA figure is region-specific; do not restate it as EMEA-wide.
 
+### Pass 34 (2026-11-27) — the ad-integrity, supply-chain-transparency & verification layer in EMEA
+
+**The region where the obligation is statutory, the deadlines are dated, and compliance is measurably
+failing.** EMEA is the only region on this plane with hard law, and the enforcement gap is documented
+in peer-reviewed research rather than vendor marketing.
+
+- **DSA Article 39 advertising repositories: a measured 29% non-compliance.** A peer-reviewed study
+  (ScienceDirect, 2026) found that **only 17 of the 24 services obliged to comply by April 2026
+  (70.8%) actually provided a publicly accessible interface-based ad repository**, and concluded that
+  the Commission has enforced other DSA obligations proactively while **ad-repository compliance has
+  not been adequately enforced.** TikTok made **binding commitments on 2025-12-05** to improve its
+  repository.
+- **⏰ A live deadline that lands inside the next week.** The European Commission opened a **call for
+  evidence on technical guidelines for DSA advertising repositories on 2026-11-04, closing
+  2026-12-02.** Whatever those guidelines specify becomes the build target for every VLOP and VLOSE
+  repository. **Opportunity, and it is time-boxed: a repository-conformance service** — ingest,
+  completeness, queryability, retention — positioned before the guidelines land rather than after.
+- **Political advertising is already in force separately:** the EU Transparency and Targeting of
+  Political Advertising Regulation's **repository provisions apply from 2026-04-10**.
+- **TCF's legal basis moved in the publisher's favour, and the engineering did not change.** The
+  Belgian Market Court ruled on **2026-01-07**, annulling the Belgian DPA's validation of IAB Europe's
+  TCF action plan and indicating that **IAB Europe should not necessarily be treated as a joint
+  controller** for processing carried out for TCF purposes, since it has no influence over that
+  processing. ⚠️ Read the consequence carefully before advising: relieving the *framework operator* of
+  joint controllership does not relieve the *publisher and its vendors*. If anything it concentrates
+  responsibility on the party running the CMP. **Opportunity:** consent-chain audits that establish who
+  the controller actually is per data flow — demand rose, not fell, with this ruling.
+  ⚠️ One vendor blog gives a **TCF 2.3 mandatory enforcement date of 2026-02-28**; unverified against
+  an official source.
+- **What is permissively buildable here, and it is more than anywhere else:**
+  [iabtcf-es](https://github.com/InteractiveAdvertisingBureau/iabtcf-es) (Apache-2.0, 156★) for the TCF
+  codec, [iabgpp-es](https://github.com/IABTechLab/iabgpp-es) (Apache-2.0, 37★) for the
+  multi-jurisdiction GPP signal, [altcha](https://github.com/altcha-org/altcha) (MIT, 2,923★) as a
+  **GDPR / WCAG 2.2 AA / EAA-compliant** human check that keeps the data in-region, and
+  [cookieconsent](https://github.com/orestbida/cookieconsent) (MIT, 5,786★) for capture. ⚠️ **None of
+  this yields a registered CMP** — a CMP ID from IAB Europe is required for a valid TCF string, and
+  `consent management platform TCF` returns **six repositories in total.** Scope the difference
+  explicitly: consent *capture* is buildable, TCF *participation* is a registration.
+- **Direction of travel:** DoubleVerify reports fraud/IVT **down 45% YoY in EMEA** — the largest
+  reported regional improvement anywhere, and vendor-sourced.
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -3903,6 +3986,50 @@ APAC equivalent returned the ITU-R integrated broadcast-broadband reports and no
   AI to research brands** — which pulls pass 30's answer-engine visibility work into this plane's
   remit regionally. APAC ad spend growth is ~5.2% for 2026, the slowest since the pandemic, so budget
   arguments must be efficiency-led.
+
+### Pass 34 (2026-11-27) — the ad-integrity, supply-chain-transparency & verification layer in APAC
+
+**The region with the worst measured invalid traffic on earth, no ad-fraud-specific regulation, and no
+locally-built tooling.** That combination is the opportunity and it should be stated as bluntly as that.
+
+- **The highest IVT rates measured anywhere — and the sources contradict each other about which
+  country is worst.** This contradiction is itself the finding:
+
+  | Source | Claim |
+  |---|---|
+  | Fraudlogix 2025 (via trade guide) | Southeast Asia open-exchange programmatic IVT **up to 40%**; APAC the highest-risk region globally |
+  | GeoSpot | APAC **CTV IVT 33–36%**, the world's highest; app-install fraud concentrated in **India, Vietnam, Indonesia** |
+  | Lunio dataset | **China highest at 16.37%**, Japan 6.07%, **India *lowest* at 5.50%** |
+  | Pixalate Q2 2025 APAC benchmarks | **India *highest* web IVT at 19%**, and 42% on mobile apps |
+
+  ⚠️ **Lunio and Pixalate place India at opposite ends of the same ranking.** Different channels, different
+  denominators, both vendor datasets. **Opportunity:** in APAC the first deliverable is not detection, it
+  is **a measurement baseline the client owns** — self-hosted, documented methodology, comparable
+  quarter to quarter. Every number a client currently holds comes from a vendor whose benchmark
+  disagrees with the next vendor's.
+- **Malvertising is a scaled, documented problem here.** Bitdefender tracked **more than 400,000 scam
+  ad sightings across more than 12,000 campaigns in 13 APAC countries between January and April 2026**,
+  with **Australia accounting for 52% of campaigns and India 14%.** This is the one place where
+  [andpalmier/seads](https://github.com/andpalmier/seads) (Apache-2.0, 50★, 2026-09-05) — a maintained
+  search-engine ad scanner, and the only live tool in a 57-repository category — has an obvious
+  commercial application: continuous brand-impersonation monitoring for Australian financial-services
+  and Indian consumer brands.
+- **⛔ Regulation: there is no ad-fraud regulation in APAC, and that is the honest finding.** Searched
+  2026-11-27. What exists is privacy law that *constrains the remedy*: **China PIPL** (cross-border
+  transfer restrictions), **India DPDPA** (data-localisation obligations in effect), and divergent
+  consent requirements across **Japan, Korea and Singapore**. ⚠️ **Practical consequence that changes
+  architecture:** a US verification vendor's SDK phoning home is a cross-border transfer problem in
+  China and a localisation problem in India. **A self-hosted, in-region IVT stack is not a cost
+  optimisation in APAC — it is frequently the only lawful option.** That is the strongest technical
+  argument for the permissive stack anywhere in this KB.
+- **⛔ No APAC-specific ad-integrity repository was found.** The tooling on this plane is Global and
+  North-American; the fraud is concentrated here. The regional vendor tier is proprietary:
+  **mFilterIt** (India-based, ad-traffic validation and mobile fraud detection) alongside IAS, HUMAN
+  and CHEQ. ⚠️ Vendor listicle as source — treat as presence, not market share.
+- **Adjacent signal, different problem, worth knowing:** Sumsub's *Identity Fraud Report 2026-2027*
+  reports **APAC holding about a third of the world's fraud networks** and **Japan's fraud rate up
+  219% YoY to 5.1%**, the highest in APAC. That is identity fraud, not ad fraud — do not conflate them
+  in a deck, but the same infrastructure and the same operators sit behind both.
 
 ### LATAM
 
@@ -5275,6 +5402,51 @@ Forum to find out which, before committing a build.**
   that source (an aggregator directory) are weak; treat the *direction* as reliable and the *numbers*
   as unverified.
 
+### Pass 34 (2026-11-27) — the ad-integrity, supply-chain-transparency & verification layer in LATAM
+
+**The region with the best time series on this plane and the thinnest institutional response.**
+
+- **Pixalate's LATAM benchmarks give a rising, consistent series** — the same methodology across
+  quarters, which is rarer than it sounds on this plane:
+
+  | Report | Brazil | Mexico |
+  |---|---|---|
+  | Q3 2024 | mobile app **26%**, web 14%, CTV 15% | mobile app 21%, web 12%, CTV 10% |
+  | Q1 2025 | mobile app **42%**, web 23%, **CTV 37%** | mobile app 36%, web 14%, CTV 22% |
+  | Q4 2025 *(published 2026-03-09)* | — | **mobile app 41%**, desktop+mobile web **32%**, **CTV 37%** |
+  | Global baseline, Q4 2025 | web 23%, mobile app 36%, CTV 21% | built from **>103 billion impressions** |
+
+  **Mexican CTV at 37% against a 21% global baseline, and Mexican mobile web at 32% against 23%.**
+  Brazil's mobile-app rate went from 26% to 42% in two quarters. ⚠️ Pixalate's data is predominantly
+  buy-side open-auction traffic and is a vendor benchmark, not an audit — but it is the **same** vendor
+  measuring the **same** way over two years, which makes the *direction* usable even if the level is
+  arguable.
+- **⛔ The institutional gap, stated explicitly because silence would look like coverage.** Searched
+  2026-11-27 for **CONAR**, **IAB Brasil**, and Mexican programmatic-advertising regulation:
+  **nothing found on ad fraud, invalid traffic or verification standards from any of them.** There is no
+  LATAM equivalent of the MRC, no regional accreditation, and no published regional IVT standard. The
+  region with CTV invalid traffic at 37% has **no institution that defines the term.**
+- **What regulation does exist is privacy-side and dated, and it is coming.** Brazil's **ANPD**
+  published its **2026–2027 priority map in December 2025**, including **five enforcement activities on
+  the secondary use of personal data for targeted advertising, especially profiling** — scheduled for
+  **H1 2027.** ⚠️ One source reports the ANPD **became a fully independent regulatory agency in
+  February 2026** (single-sourced; verify officially). ⚠️ One Brazilian article cited an **R$153.7M
+  TikTok fine dated 2026-08-25** which could not be confirmed in this pass — **do not quote it.**
+  **Opportunity, and it has an 18-month runway:** profiling-and-targeting readiness for Brazilian
+  advertisers and publishers, built now against the ANPD's own published priorities, delivered before
+  the enforcement window opens.
+- **⛔ No LATAM-specific ad-integrity repository was found**, and no Spanish- or Portuguese-language
+  tooling on this plane. The one Spanish-language artifact located was an explainer article
+  (programaticalatam.com) rather than code.
+- **The build that fits the region.** LATAM clients are the least likely to be paying for accredited
+  verification and the most exposed to IVT, which inverts the usual sequencing: lead with the
+  **self-hosted GIVT gate** — CrowdSec (MIT, 15,814★) + OWASP CRS/Coraza (Apache-2.0) +
+  crawler-user-agents (MIT, 1,416★) in front of Prebid Server (Apache-2.0, 595★) — because it removes
+  a measurable double-digit percentage of waste **at zero licence cost**, which is a conversation a
+  Mexican or Brazilian publisher can have without a procurement cycle. Then sell the measurement
+  baseline. Do **not** lead with accreditation: there is no body in-region to accredit against, and
+  pretending otherwise is the fastest way to lose the account.
+
 ## Globant positioning
 
 1. **Compete on media standards, not on model access.** The SIs named as EMEA leaders have generic AI
@@ -6394,3 +6566,65 @@ planes in this KB: the budget exists and is agreed, and the method it is meant t
 | **Sprinklr / Hootsuite (Talkwalker) / Sprout Social** | The adjacent social-suite tier; monitoring as a feature of a publishing suite rather than a standalone discipline. Proprietary. |
 | **LexisNexis** | The licensed-archive tier — and notable as a publisher of evidence that *defends* AVE's continued use, against AMEC's position. ⚠️ Cite with the conflict noted. |
 | **Etipufhu (pr-radar)** | A single developer holding the only end-to-end open implementation of this plane (MIT, created 2026-11-21). Recorded as the measure of how empty the open category is, not as an incumbent. |
+
+---
+
+## Market size — pass 34 addendum (2026-11-27): the ad-fraud loss figure is **2.6× apart**, two vendors disagree on the *direction*, and the one number a buyer needs does not exist
+
+Every figure on this plane is published by a company that sells the remedy. There is no
+MRC-accredited public market size for ad fraud, and there is no neutral estimator.
+
+| Estimate | Source | Period | Note |
+|---|---|---|---|
+| **$63B** lost to invalid traffic | Lunio, *2026 Global Invalid Traffic Report* | 2025, vs $740B+ ad spend | Click-based. Augustine Fou argues publicly it **undercounts**, because it counts invalid clicks landing on sites rather than invalid *impressions*. |
+| **>$100B (2026)**, ~$172B by 2028; ~22% of global digital ad spend | Juniper Research | 2026–2028 | ⚠️ Reached via secondary citation only, not read at source. |
+| **$165B** | Anura, via eMarketer | 2025 | Described by the source as a *conservative* estimate — i.e. 2.6× Lunio's for an overlapping period. |
+| **$84B** | Trade publication | 2026 | A fourth point inside the same spread. |
+| **$25.3B** | Spider Labs | **H1 2026 only** | Not comparable to the annual figures; roughly $50B annualised. |
+| IVT **26% (Jan) → 31% (Feb) → 40% (Jun)** | Anura | 2026 | Rate, not loss. Driven by **AI-enabled SIVT**. |
+| Programmatic IVT **18.12%** / **20.64%** | Q1 2026 / Fraudlogix | 2026 | Two measurements, close agreement — the narrowest on this plane. |
+| Mobile app traffic **31% invalid** globally | Vendor report | 2026 | SDK spoofing, click injection, install farms. |
+| Fintech **~43%** of ad budget to fraudulent clicks; gaming **18.49%** IVT | mFilterIt / vendor | 2026 | Sector spread is wider than the regional spread. |
+| fraud/IVT **down 41% NA, down 45% EMEA** YoY | DoubleVerify | 2026 | ⚠️ **Opposite direction to Anura.** |
+
+### ⛔ The refusal — what a buyer actually needs is unsized
+
+The question a CMO asks is *"how much of my spend was wasted, and what would recovering it cost?"*
+There is **no accredited answer at any level of aggregation**: the loss estimates are 2.6× apart, two
+vendors disagree on whether the problem is growing or shrinking by ~40 points, and the two most
+granular datasets (Lunio and Pixalate) **rank India at opposite ends of the same table**. Nobody sizes
+the **verification and brand-safety software market** itself in any source found this pass.
+
+### What can be stood behind instead — a price list, not an estimate
+
+The only hard, officially-published numbers on this plane are the **cost of the gated inputs**, and
+they are far more useful in a proposal than a loss estimate nobody can defend:
+
+| Artifact | Published price | Terms |
+|---|---|---|
+| **IAB/ABC International Spiders and Bots List** | **$5,000** IAB Tech Lab member / **$7,500** IAB associate member / **$15,000** non-member, per year | 12 months from sign-up; delivered via Tech Lab Tools Portal or FTP; **access withheld until payment *and* a signed Data Subscription Agreement**; grant is *limited, non-exclusive, non-transferable, revocable*; fee non-refundable; renewal fee changeable on 60 days' notice. Membership not required to subscribe. |
+| **Same service via ABC UK** | **from £4,285 + VAT** per year | Parallel operator; figures and currency differ from Tech Lab's — confirm current fee before budgeting. |
+| **IAB Content Taxonomy** | **free** | **CC BY 3.0** — implementable commercially with attribution. |
+| **OpenRTB / AdCOM / TCF / GPP specifications** | **free** | **CC BY 3.0.** |
+| **OM SDK — JavaScript clients** | **free** | **Apache-2.0**, on GitHub, 76★, pushed 2026-11-02. |
+| **OM SDK — native (iOS/Android/CTV)** | not published | Tools Portal download + Tech Lab **compliance programme**. v1.5 (June 2024) current; CTV format support expanded **2026-11-10**. |
+
+**This is the third gated knowledge artifact with a published price list recorded in this KB**, after
+the AMA's CPT and MedDRA in healthcare. Three industries, three price lists, same structure: the
+specification is free and the *data that makes it operational* is a revocable annual subscription.
+That is a pattern, and it is quotable as one.
+
+### Global players — pass 34 addendum (the ad-integrity & verification layer)
+
+| Player | Position |
+|---|---|
+| **Media Rating Council (MRC)** | The accreditation body, and therefore the real gatekeeper of this plane. Accredits IVT measurement; **requires GIVT, only "strongly recommends" SIVT.** Publishes accreditation letters and quarterly status updates (Q2 2026 update dated 2026-07-14) — **primary, free, and almost never read by the buyers who depend on it.** |
+| **IAB Tech Lab** | Owns the specifications (OpenRTB, AdCOM, `ads.txt`, `sellers.json`, `ads.cert`, TCF, GPP, Content Taxonomy, OM SDK) and the **compliance programmes** that gate them. Simultaneously the most generous publisher on this plane (CC BY 3.0 specs, Apache-2.0 reference code) and the operator of its paywall ($5k–$15k bot list, Tools Portal native SDK). |
+| **TAG (Trustworthy Accountability Group)** | *Certified Against Fraud* since 2016 — certifies supply-chain practice rather than measurement. ⚠️ Reportedly mandated by GroupM for all programmatic partners (single secondary source). |
+| **DoubleVerify / Integral Ad Science (IAS)** | The two scaled verification incumbents. Both continued on **GARM's taxonomy** after GARM was discontinued. DV publishes the most optimistic regional trend data on this plane (−41% NA, −45% EMEA YoY). |
+| **HUMAN Security** | MRC-accredited for **GIVT *and* SIVT** under the IVT 2.0 addendum (letter 2026-04-14) — one of the few to hold the harder half. |
+| **Anura / Lunio / Pixalate / Fraudlogix / Spider Labs / CHEQ** | The measurement tier, and the source of every loss figure in circulation. **Their estimates span 2.6× and disagree on direction.** Pixalate is the most useful of them for consulting work because it publishes consistent quarterly **regional** benchmarks (NA, EMEA, APAC, LATAM) from >103B impressions/quarter. |
+| **mFilterIt** | The India-based regional challenger; ad-traffic validation and mobile fraud detection. The only non-US/EU vendor surfaced on this plane. |
+| **GARM / WFA** | **Discontinued August 2024**, days after X's antitrust suit; the settlement reportedly binds the WFA never to revive it or anything similar. Its Brand Safety & Suitability Framework remains in universal use **with no maintaining body.** The governance vacuum of this plane — see `intel/trends.md` pass 34. |
+| **Prebid.org** | The only open, permissive institution on the plane: `prebid-server` (Apache-2.0, 595★), `Prebid.js` (Apache-2.0, 1,619★), `prebid/openrtb` (Apache-2.0, 89★). **The one place a consultancy can change the auction's behaviour rather than report on it.** |
+| **CrowdSec / OWASP (CRS, Coraza, ModSecurity)** | The security community, holding **~33,000 stars of permissive bot-detection infrastructure** that the advertising industry does not cite and does not use. The largest arbitrage on this plane. |

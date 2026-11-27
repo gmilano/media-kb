@@ -1916,3 +1916,76 @@ own measurement standard (see `intel/trends.md` pass 33). The framework is free 
 standard is settled; **no repo implements it.** Searched 2026-11-27: the open-source results for
 "PR measurement dashboard" are overwhelmingly GitHub *pull-request* dashboards, which is a naming
 collision, not a market. `pr-radar` (MIT, 6 days old) is the only thing in the vicinity.
+
+---
+
+## Pass 34 addendum (2026-11-27) — the ad-integrity, verification & consent platform tier
+
+Verified 2026-11-27. The question this tier answers: **what can a client actually run, self-hosted,
+to check that the ads it bought or sold were real, authorised, viewable and safely placed?**
+
+### What you can self-host today
+
+| Platform | Repo | License | Stars | Last push | What it gives a client |
+|---|---|---|---|---|---|
+| **Prebid Server** | [prebid/prebid-server](https://github.com/prebid/prebid-server) | Apache-2.0 | 595 | 2026-11-26 | The real-time auction, self-hosted. **The only permissively-licensed, production-grade auction platform in open source** — and the place where a supply-chain (`schain`) policy can actually be *enforced* rather than reported on, because you own the code path. |
+| **Prebid.js** | [prebid/Prebid.js](https://github.com/prebid/Prebid.js) | Apache-2.0 | 1,619 | 2026-11-27 | The client-side half; pushed on the day of this pass. |
+| **Matomo** | [matomo-org/matomo](https://github.com/matomo-org/matomo) | GPL-3.0 | 22,066 | 2026-11-27 | Self-hosted analytics with real bot exclusion. The client owns the counting party — the single most useful structural change available to a publisher on this plane. Copyleft: deploy, do not embed. |
+| **Jitsu** | [jitsucom/jitsu](https://github.com/jitsucom/jitsu) | **MIT** | 5,142 | 2026-11-26 | Scriptable event ingestion. **The permissive choice in this tier.** |
+| **PostHog** | [PostHog/posthog](https://github.com/PostHog/posthog) | MIT Expat except `ee/` | 41,180 | 2026-11-27 | Product analytics; usable permissively if `ee/` is avoided. |
+| **CrowdSec** | [crowdsecurity/crowdsec](https://github.com/crowdsecurity/crowdsec) | MIT | 15,814 | 2026-11-25 | Deployed as the pre-bid GIVT gate: crowdsourced malicious-IP intelligence, free, updated continuously. **The highest-leverage unused component on this plane.** |
+| **OWASP CRS + Coraza** | [coreruleset/coreruleset](https://github.com/coreruleset/coreruleset) / [corazawaf/coraza](https://github.com/corazawaf/coraza) | Apache-2.0 / Apache-2.0 | 3,376 / 4,061 | 2026-11-27 / 2026-11-26 | Rules plus an embeddable engine — put traffic filtering *inside* the ad server. |
+| **ALTCHA** | [altcha-org/altcha](https://github.com/altcha-org/altcha) | MIT | 2,923 | 2026-11-20 | Proof-of-work human check that does not export user data to a US vendor — the EMEA-safe CAPTCHA. |
+| **Ads.txt Manager (WordPress)** | [10up/ads-txt](https://github.com/10up/ads-txt) | GPL-2.0 | 61 | 2026-11-24 | For the very large population of publishers whose CMS is WordPress, this is the entire declaration-management product, maintained, free. |
+| **Cookie Consent + iabtcf-es** | [orestbida/cookieconsent](https://github.com/orestbida/cookieconsent) + [InteractiveAdvertisingBureau/iabtcf-es](https://github.com/InteractiveAdvertisingBureau/iabtcf-es) | MIT + Apache-2.0 | 5,786 + 156 | 2026-11-22 / 2026-11-03 | A self-hosted consent UI plus the official TCF encoder. ⚠️ **Read the limit below before quoting this as a CMP.** |
+
+### ⛔ The three things you cannot self-host, and why — read before scoping
+
+This is the procurement core of the plane. Each of these is blocked by an **accreditation**, not by a
+licence or a missing repository.
+
+1. **An MRC-accredited invalid-traffic number.** The Media Rating Council accredits IVT measurement,
+   and accreditation distinguishes **GIVT** (general — bots, spiders, datacenter traffic; *required*
+   for accreditation) from **SIVT** (sophisticated — hijacked devices, falsified impressions, ad
+   stacking; MRC *strongly recommends* removing it but does not mandate it for accreditation).
+   HUMAN's platform was accredited for both GIVT and SIVT under the IVT 2.0 addendum per an MRC letter
+   of **2026-04-14**. **You can compute GIVT yourself from the permissive substrate above. You cannot
+   make the resulting number accredited.** When a client says "we need IVT measurement", establish
+   first whether they need the *number* or the *accreditation* — the costs differ by orders of magnitude.
+2. **In-app and CTV viewability.** The OM SDK **JavaScript** clients are Apache-2.0 and self-hostable.
+   The **native** library (iOS / Android / CTV) is a Tools Portal download governed by Tech Lab's OM
+   SDK **compliance programme**; v1.5 (June 2024) is the current line and CTV format support was
+   expanded on **2026-11-10**. Web: build it. App and CTV: integrate the certified SDK, usually via
+   an ad SDK that already embeds it.
+3. **A valid TCF consent string in production in the EU.** A CMP must be **registered with IAB Europe
+   and issued a CMP ID** for its string to be accepted by the framework. `orestbida/cookieconsent`
+   (5,786★, MIT) is the most-starred consent UI in open source and **is not a registered CMP**;
+   `iabtcf-es` gives you the codec, not the registration. ⚠️ A self-hosted consent stack is a correct
+   and defensible build for GDPR *consent capture* and a wrong one if the requirement is literally
+   "emit a TCF string our SSPs will honour."
+
+### ⛔ And two tiers that have no platform at all
+
+- **Brand safety / suitability: no open-source platform exists.** Not a thin market — a zero. 465
+  repositories match `brand safety` and none is a brand-safety tool (`agents/top.md` pass 34). The
+  **IAB Content Taxonomy** that such a platform would classify against is **CC BY 3.0 and free**
+  ([InteractiveAdvertisingBureau/Taxonomies](https://github.com/InteractiveAdvertisingBureau/Taxonomies),
+  229★, 2026-10-27) — so the vocabulary is available and nobody has built the classifier. Meanwhile
+  **GARM, whose Brand Safety & Suitability Framework the whole industry still uses, was discontinued
+  by the WFA in August 2024 and the X/WFA settlement reportedly commits the WFA never to revive it or
+  anything similar.** The framework in universal use has **no maintaining body.** For a consultancy
+  this is an opportunity with a caveat: there is no standards body to certify an implementation
+  against, so the deliverable must be the client's *own documented policy*, not a claim of conformance.
+- **Supply-path optimisation: no platform, open or otherwise, in open source.** 53 repositories match
+  the term and all are logistics or crypto. Prebid Server is the only place the work can be done,
+  because it is the only auction you can modify.
+
+### The honest shape of a self-hosted ad-integrity stack, 2026
+
+Permissive and real: **Prebid Server (Apache-2.0) + CrowdSec (MIT) + OWASP CRS/Coraza (Apache-2.0) +
+crawler-user-agents (MIT) + Matomo or Jitsu for first-party counting + iabtcf-es (Apache-2.0) for the
+consent codec + SPO-sellers-json-crawler (Apache-2.0) for the declaration graph.** That stack gives a
+client GIVT filtering it controls, a supply graph it can audit, an auction it can police and a count it
+owns. It does **not** give an accredited number, in-app viewability, a TCF registration or a
+suitability verdict — and a proposal that is clear about that line will survive procurement better
+than one that is not.

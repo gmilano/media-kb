@@ -3189,3 +3189,146 @@ Cycle 8 added lowercase `license.txt` and `COPYING.md`. This pass adds **`UNLICE
 resolves 200 — which by cycle 8's own rule means *the naming convention is wrong, not the licence
 missing*. It is in `UNLICENSE`: public domain. Current working name set:
 `LICENSE LICENSE.md LICENSE.txt license.txt LICENCE COPYING COPYING.md LICENSE-APACHE UNLICENSE`.
+
+---
+
+## The ad-integrity, supply-chain-transparency & verification plane — measured 2026-11-27 (pass 34), and **the open-source community builds the attack at 7× to 21× the rate it builds the defence**
+
+**Vocabulary probe that found this plane.** Before this pass the eight files said `prebid` **72 times**
+and `OpenRTB` **15 times** — the demand side was covered by pass 2 (monetization). The *integrity*
+side was absent: `ad fraud` **0**, `invalid traffic` **0**, `IVT` **0**, `GIVT` **0**, `SIVT` **0**,
+`ads.txt` **0**, `sellers.json` **0**, `schain` **0**, `supply path` **0**, `ad quality` **0**,
+`malvertising` **0**, `Media Rating Council` **0**, `Trustworthy Accountability` **0**,
+`DoubleVerify` **0**, `Integral Ad Science` **0**, `Pixalate` **0**, `AdCP` **0**, `ARTF` **0**.
+Thirty-three passes on how to make, deliver, measure and monetise media; **no words for whether the
+ad impression was real, authorised, viewable or next to safe content.**
+
+> **Verification channel for this pass — and a channel RESTORED.** Pass 33 shipped with no star
+> counts because `api.github.com/repos/{other}` returns *"GitHub access to this repository is not
+> enabled for this session."* That is still true. **But `api.github.com/search/repositories?q=repo:owner/name`
+> is not scoped the same way and returns the full record — stars, SPDX licence, `pushed_at`,
+> `archived` — at a 15,000/hour limit.** Up to five repos per call with `+repo:` OR. Every star count
+> and date below came through that channel on **2026-11-27**, licences were read from the actual file
+> where the API said `NONE` or `NOASSERTION`, and three repos were shallow-cloned to settle the
+> licence question conclusively. **Star counts are back in this KB.**
+
+### The structural result, stated before the tables
+
+This plane does **not** confirm the content-licence law of passes 5 and 33 — it *refines* it, and the
+refinement is the most useful thing in this pass. The vocabulary brand safety needs
+(**IAB Content Taxonomy, CC BY 3.0, free to use with attribution**) is open, and brand-safety open
+source is still a **literal zero**. So the binding constraint is not the licence on the content. It is
+**accreditability**: wherever the output number must be accepted by a third-party auditor (MRC for
+invalid traffic, OM SDK compliance for viewability, TAG Certified Against Fraud for the supply chain),
+open source stops at the boundary of the accreditation no matter how open the spec and the vocabulary
+are. The five-step gradient is in `intel/trends.md` pass 34.
+
+### Tier 1 — Agentic advertising: the layer that did not exist at pass 8, and is three weeks old
+
+`AdCP` / `Ad Context Protocol`, `ARTF` and `AAMP` were all at **0 files** in this KB before today.
+This is the newest agent layer found in any of the 34 planes and the only one where the standards
+body shipped a reference implementation **before** the market shipped a product.
+
+| Agent / framework | Repo | License | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| ARTF (Agentic Real-Time Framework) | [IABTechLab/agentic-real-time-framework](https://github.com/IABTechLab/agentic-real-time-framework) | AGPL-3.0 (Go reference impl); spec CC BY 3.0 | 35 | 2026-11-04 | IAB Tech Lab's framework for agent-to-agent real-time advertising transactions. **Note the licence split: the spec is CC BY 3.0 and freely implementable, the reference implementation is AGPL-3.0** — fine to study, a network-copyleft obligation if you deploy it as a service. |
+| AAMP (Advertising Agentic Messaging Protocol) | [IABTechLab/AAMP](https://github.com/IABTechLab/AAMP) | Apache-2.0 | 28 | 2026-11-02 | The permissive half of the same initiative. **This is the one to build on** — same body, same plane, no copyleft. |
+| OpenProposal | [IABTechLab/OpenProposal](https://github.com/IABTechLab/OpenProposal) | NOASSERTION — README grants Apache-2.0 to `scripts/` + `workflow/` only | 11 | 2026-11-12 | Machine-readable media proposals/RFPs. Read the licence note: **the grant is scoped to two directories**, not the repository. |
+| CoMP | [IABTechLab/CoMP](https://github.com/IABTechLab/CoMP) | NONE | 6 | 2026-07-09 | Compliance-messaging protocol work. No licence file at all — unusable as a dependency. |
+| Agentic advertising stack map | [franks33/agentic-advertising-stack](https://github.com/franks33/agentic-advertising-stack) | CC0-1.0 | 4 | 2026-09-06 | A curated map of the agentic advertising stack: protocols, standards, sell-side and buy-side implementations. Public domain — **the fastest orientation document in this plane.** |
+| AdCP buy-side trading agent | [scumunna/adcp-trader](https://github.com/scumunna/adcp-trader) | MIT | 1 | 2026-06-24 | A buyer-side trading agent for the Ad Context Protocol: trader judgment plus hard guardrails. One star — recorded as the measure of how new this is, not as an incumbent. |
+| Programmatic agent skills | [scumunna/programmatic-skills](https://github.com/scumunna/programmatic-skills) | MIT | 3 | 2026-07-03 | Agent skills for programmatic trading, analytics and account operations (DV360-oriented). |
+| AdTech lead-gen / publisher-compliance skills | [adops-tool/AdTech-LeadGen-agent-skills](https://github.com/adops-tool/AdTech-LeadGen-agent-skills) | Apache-2.0 | 1 | 2026-11-07 | Schema-validated agent skills for AdTech lead generation and publisher compliance. |
+| LangGraph ad-investment agents | [10div10/adtech-multi-agent](https://github.com/10div10/adtech-multi-agent) | NONE | 2 | 2026-07-10 | Multi-agent ad-investment framework on LangGraph. No licence — study only. |
+
+**The whole agentic-advertising agent layer is 91 stars across nine repositories.** Compare with the
+monetization plane's `prebid/Prebid.js` at 1,619 stars on the same measurement day. The protocols
+arrived before the practitioners.
+
+### Tier 2 — The detection layer, and it is the broken one
+
+| Agent / tool | Repo | License | Stars | Last push | Verdict |
+|---|---|---|---|---|---|
+| Nameles | [Nameles-Org/Nameles](https://github.com/Nameles-Org/Nameles) | Apache-2.0 (LICENSE read, 11,357 B) | 72 | **2019-09-06** | **The only real open-source invalid-traffic engine ever built** — entropy-based IVT detection and pre-bid filtering, the published method. Permissive, documented, and **dead for over seven years.** Use the method, not the code. |
+| AdTruth | [papa-torb/adtruth](https://github.com/papa-torb/adtruth) | MIT (LICENSE read, 1,062 B) | 254 | 2025-12-17 | The most-starred thing in the plane, and **its own 17,992-byte README states the ML models and detection rules remain proprietary.** The MIT grant covers the SDK and the plumbing. ⚠️ Do not quote this as "open-source ad fraud detection" to a client without that sentence attached. |
+| PVUV.ai | [qiayue/pvuv.ai](https://github.com/qiayue/pvuv.ai) | MIT | 112 | 2026-11-03 | Privacy-friendly self-hosted web analytics **with built-in invalid-traffic detection**. Genuinely MIT, genuinely active, and the only live permissive IVT code found this pass. Publisher-side, not buy-side. |
+| SEADS | [andpalmier/seads](https://github.com/andpalmier/seads) | Apache-2.0 | 50 | 2026-09-05 | Search-engine ads scanner — detects **malvertising** in search results. The only maintained tool in a category with 57 total GitHub results. |
+| TrafficSentinel Suite | [akmalkhaniub/trafficsentinel-suite](https://github.com/akmalkhaniub/trafficsentinel-suite) | NONE | 0 | 2026-11-13 | An IVT-investigator monorepo with an MCP server — exactly the shape this plane needs, 0 stars, no licence file. Watch it; do not depend on it. |
+| TalkingData 2018 (1st) | [flowlight0/talkingdata-adtracking-fraud-detection](https://github.com/flowlight0/talkingdata-adtracking-fraud-detection) | MIT | 226 | **2018-06-10** | A Kaggle competition solution. |
+| TalkingData 2018 (2nd) | [ShawnyXiao/2018-Kaggle-AdTrackingFraud](https://github.com/ShawnyXiao/2018-Kaggle-AdTrackingFraud) | MIT | 72 | **2019-01-12** | Another one. |
+
+⚠️ **Read the last three rows together.** `ad fraud detection` returns 894 repositories. After AdTruth
+(whose models are closed), **the two highest-starred open artifacts in the category are solutions to a
+single Kaggle contest that closed in 2018.** The public corpus of ad-fraud machine learning is a
+seven-year-old competition dataset. There is no open labelled IVT dataset, because the labels are the
+product the verification vendors sell.
+
+### Tier 3 — The bot-identification substrate (healthy, permissive, and not accreditable)
+
+These are the free substitutes for the **IAB/ABC International Spiders and Bots List**, which costs
+**$5,000 / $7,500 / $15,000 a year** depending on membership (see `intel/market.md` pass 34).
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [crowdsecurity/crowdsec](https://github.com/crowdsecurity/crowdsec) | MIT | 15,814 | 2026-11-25 | IDS/IPS, WAF and bot detection with a crowdsourced malicious-IP blocklist. **The largest permissive asset in this plane by an order of magnitude**, and it is a security tool that nobody in adtech cites. |
+| [owasp-modsecurity/ModSecurity](https://github.com/owasp-modsecurity/ModSecurity) | Apache-2.0 | 9,889 | 2026-11-18 | The WAF engine. |
+| [corazawaf/coraza](https://github.com/corazawaf/coraza) | Apache-2.0 | 4,061 | 2026-11-26 | Go, ModSecurity-compatible WAF **library** — embeddable, which ModSecurity is not. |
+| [coreruleset/coreruleset](https://github.com/coreruleset/coreruleset) | Apache-2.0 | 3,376 | 2026-11-27 | OWASP CRS — the rules, pushed on the day of this pass. |
+| [matomo-org/device-detector](https://github.com/matomo-org/device-detector) | LGPL-3.0 | 3,562 | 2026-11-25 | The most complete open bot/device classifier. LGPL — link, do not fork into a proprietary binary. |
+| [fingerprintjs/BotD](https://github.com/fingerprintjs/BotD) | MIT | 1,504 | 2026-11-26 | Client-side automation detection. README is explicit that the vendor's paid API adds proprietary technology on top. |
+| [monperrus/crawler-user-agents](https://github.com/monperrus/crawler-user-agents) | MIT | 1,416 | 2026-11-26 | The permissive bot user-agent pattern list. **This is the free stand-in for the $15,000 list.** |
+| [omrilotan/isbot](https://github.com/omrilotan/isbot) | Unlicense | 1,169 | 2026-11-24 | Public domain, maintained. |
+| [ua-parser/uap-core](https://github.com/ua-parser/uap-core) | **Apache-2.0** (API says `NOASSERTION`; LICENSE read, 608 B) | 827 | 2026-10-05 | The shared regex corpus behind most UA parsers. See the method note below — the API is wrong here. |
+| [atmire/COUNTER-Robots](https://github.com/atmire/COUNTER-Robots) | MIT | 72 | 2024-04-22 | The scholarly-publishing robot list. Small, stable, and the one with an actual standards body behind it. |
+| [snowplow/iab-spiders-and-robots-java-client](https://github.com/snowplow/iab-spiders-and-robots-java-client) | Apache-2.0 (in `LICENSE-2.0.txt`) | 7 | 2026-09-25 | **The purest open-code/closed-data split in this KB:** a maintained Apache-2.0 client library for a list that costs $5,000–$15,000/year under a signed, revocable data-subscription agreement. The code is free. The data is not. |
+| [altcha-org/altcha](https://github.com/altcha-org/altcha) | MIT | 2,923 | 2026-11-20 | Self-hosted proof-of-work CAPTCHA alternative; GDPR / WCAG 2.2 AA / EAA compliant. The pre-bid human-check that does not ship a US adtech vendor into an EMEA data flow. |
+| [X4BNet/lists_vpn](https://github.com/X4BNet/lists_vpn) | NONE | 944 | 2026-11-26 | Auto-updated VPN/datacenter IP lists — the raw material of GIVT filtering. No licence file; treat as data of unclear provenance. |
+| [firehol/blocklist-ipsets](https://github.com/firehol/blocklist-ipsets) | NONE | 4,011 | 2026-11-26 | Same category, same caveat. |
+
+⚠️ **The relicensing trap in this tier.** [faisalman/ua-parser-js](https://github.com/faisalman/ua-parser-js)
+is **AGPL-3.0** (LICENSE.md read, 32,095 B) at **10,217 stars, pushed 2026-11-26**. It is the
+user-agent parser most teams reach for from memory, and most teams remember it as MIT. If it is in a
+hosted service, the AGPL network clause is live. `uap-core` (Apache-2.0) + a permissive binding is the
+replacement.
+
+### ⛔ Tier 4 does not exist: there is no brand-safety or brand-suitability agent layer
+
+Searched 2026-11-27. `brand safety` returns **465 repositories and not one of them is a brand-safety
+tool** — the top eight by stars are an unrelated docs fork, an Android ROM flasher, a logo-design
+skill, a 2014 Facebook userscript, a 2014 JS file, a Google Analytics ToS paste, a URL shortener and an
+Android-TV debloater. `viewability` is unusable as a search term (498,228 results, all Android chart
+libraries and view bindings). `supply path optimization` returns **53 repositories**, of which the top
+eight are supply-chain logistics projects and BSC token contracts — **zero** are adtech.
+
+This is not a thin result to be padded. It is the finding: **the judgment layer of ad integrity has no
+open-source presence at all**, and the reason is in `intel/trends.md` pass 34 — GARM was discontinued
+in August 2024 and, per the X/WFA settlement, the WFA agreed never to revive it or anything like it,
+so the one framework everybody still uses has **no maintaining body** and no body to accredit an
+implementation against.
+
+### Method corrections from this pass — reusable in all twelve industries
+
+1. **A licence can be declared in README prose and nowhere else, and no automated gate can see it.**
+   [InteractiveAdvertisingBureau/adstxtcrawler](https://github.com/InteractiveAdvertisingBureau/adstxtcrawler)
+   (202 stars) has **no licence file under any of nine names** — confirmed by shallow clone, root
+   listing is `README.md adstxt_crawler.py adstxt_crawler.sql …` — and the GitHub API reports `NONE`.
+   Its README says *"license used is the 2-clause BSD license."* Same pattern at
+   [InteractiveAdvertisingBureau/Taxonomies](https://github.com/InteractiveAdvertisingBureau/Taxonomies)
+   (229 stars): no licence file, README says *"licensed under a Creative Commons Attribution 3[.0]"*.
+   **Cycle 8 found that a licence can belong to the compilation rather than the repository. This adds:
+   a licence can exist only as a sentence in prose.** Neither SPDX fields, licence badges nor SBOM
+   scanning of the source tree can see it. CI rule: when the API says `NONE`, grep the README for
+   `licen[sc]e` before declaring the repo unusable — and when it says BSD in prose, get it in writing.
+2. **A licence can belong to the *component*, not the organisation — and the org's flagship repo is not
+   the component you ship.** [snowplow/snowplow](https://github.com/snowplow/snowplow) is **Apache-2.0**
+   (LICENSE read, 11,358 B) at 7,052 stars. [snowplow/enrich](https://github.com/snowplow/enrich) — the
+   piece you actually deploy — is the **Snowplow Limited Use License Agreement v1.0 (January 2024)**,
+   31 stars, API reports `NOASSERTION`. A scanner that resolves "snowplow" to the repository named
+   `snowplow` returns Apache-2.0 and is wrong about every pipeline component.
+3. **`NOASSERTION` from the API is not evidence of a missing or bad licence.** `ua-parser/uap-core` is
+   Apache-2.0 and `kiprotect/klaro` is BSD-3-Clause (LICENSE read, 1,657 B); the API says `NOASSERTION`
+   for both, because the files open with a non-standard header. Read the file.
+4. **Licence-filename set extended again.** Cycle 8 added `license.txt` and `COPYING.md`; pass 33 added
+   `UNLICENSE`. This pass adds **`LICENSE-2.0.txt`** (snowplow's IAB client) and **`licenses/LICENSE.md`**.
+   Current working set:
+   `LICENSE LICENSE.md LICENSE.txt license.txt LICENCE COPYING COPYING.md LICENSE-APACHE UNLICENSE LICENSE-2.0.txt licenses/LICENSE.md`.

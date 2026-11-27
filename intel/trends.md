@@ -3450,3 +3450,151 @@ $5.7B (2025) → $13.8B (2034); $7.34B (2026) → $18.56B (2034). On a 2026 base
 **~1.20× spread — the *narrowest* headline disagreement recorded in this KB**, against pass 32's
 ~28× and pass 30's ~7.3×. Monitoring is an established software category with real seats and real
 contracts, so the estimators broadly agree. Still vendor-sponsored research; quote the range.
+
+---
+
+## Pass 34 (2026-11-27) — the structural law gets a **five-step** gradient, and a refinement: **accreditability, not content licensing, is the binding constraint**
+
+Pass 5 measured a three-step gradient (declare → honour → liquidate). Pass 33 measured another three
+steps. **The ad-integrity plane yields five steps inside a single plane, and every number below was
+verified on 2026-11-27.**
+
+| # | Step | Kind of problem | Best open artifact | License | Stars | Last push |
+|---|---|---|---|---|---|---|
+| 1 | **Declare** who may sell the inventory | format | [10up/ads-txt](https://github.com/10up/ads-txt) + 8 more tools | GPL-2.0 | 61 | **2026-11-24** |
+| 2 | **Prove** the declaration cryptographically | format + crypto | [IABTechLab/adscert](https://github.com/IABTechLab/adscert) | Apache-2.0 | **8** | **2023-07-05** |
+| 3 | **Detect** invalid traffic | judgment, and the labels are the vendors' product | [Nameles-Org/Nameles](https://github.com/Nameles-Org/Nameles) | Apache-2.0 | 72 | **2019-09-06** |
+| 4 | **Judge** brand suitability | pure judgment, no maintaining body | **nothing** | — | — | — |
+| 5 | **Count** it so an auditor accepts it | accreditation | [OM-JSClients](https://github.com/InteractiveAdvertisingBureau/Open-Measurement-JSClients) (web only) | Apache-2.0 | 76 | 2026-11-02 |
+
+Read the last column downward: **2026-11-24 → 2023-07-05 → 2019-09-06 → nothing.** Monotone decay as
+the problem moves from parsing a file to forming a judgement someone else must accept.
+
+### The refinement, and it matters more than the sixth confirmation would have
+
+Passes 5, 11 and 33, and the healthcare CPT/MedDRA findings, pointed at a content-licence law: *the
+regulator creates the obligation, the licence on the knowledge content decides whether open source can
+discharge it.* **This plane partially falsifies the strong form of that law**, and the correction is
+worth more than another confirmation:
+
+- The content **is** open. The IAB **Content Taxonomy** — the exact vocabulary a brand-safety
+  classifier needs — is **CC BY 3.0, free to implement commercially with attribution**
+  ([InteractiveAdvertisingBureau/Taxonomies](https://github.com/InteractiveAdvertisingBureau/Taxonomies),
+  229★, pushed 2026-10-27). So is OpenRTB (CC BY 3.0, 532★, 2026-11-11). So is the TCF spec.
+- And brand-safety open source is **a literal zero.**
+
+So the content licence was not the binding constraint here. **What stops open source on this plane is
+accreditability: whether a third party must accept the number.** Three independent demonstrations
+inside one plane:
+
+1. **MRC accreditation (invalid traffic).** You can compute GIVT from MIT-licensed lists. You cannot
+   make the result accredited. GIVT is required for MRC accreditation; SIVT is *strongly recommended*
+   and not mandated — so even the paid, accredited tier does not have to catch the hard half.
+2. **OM SDK compliance (viewability).** Web clients Apache-2.0 and public; **native iOS/Android/CTV
+   library is a Tools Portal download inside a compliance programme.** The licence boundary and the
+   accreditation boundary are the same line.
+3. **CMP registration (consent).** `iabtcf-es` (Apache-2.0, 156★) gives the codec; a valid TCF string
+   requires a **CMP ID issued by IAB Europe**. The most-starred consent UI in open source
+   (`orestbida/cookieconsent`, MIT, 5,786★) cannot emit one. `consent management platform TCF` returns
+   **six repositories in total.**
+
+**Revised formulation, and the version to carry into the other eleven industries:** the regulator
+creates the obligation; the licence on the knowledge content decides whether open source can *access*
+the problem; and **accreditation decides whether open source can close it.** Where a number must be
+*accepted* rather than merely *correct*, expect a literal zero, however open the spec and the
+vocabulary are.
+
+### The one number from this pass that belongs in every client conversation
+
+| Query (GitHub, by stars, 2026-11-27) | Repos | Top-8 stars | Ratio |
+|---|---|---|---|
+| `bypass bot detection` — **the attack** | 245 | **18,425** | — |
+| `bot detection library` — **the defence** | 91 | **2,461** | **7.5 : 1** |
+| …including [CloakHQ/CloakBrowser](https://github.com/CloakHQ/CloakBrowser) (MIT, 33,093★, 2026-11-26) | — | **51,518** | **20.9 : 1** |
+
+**Open source builds the evasion 7× to 21× more heavily than it builds the detection**, and the
+evasion side is the fresher of the two: CloakBrowser, camofox-browser (12,507★), invisible-playwright
+(2,616★), httpcloak (1,394★) and rebrowser-patches (1,475★) were all pushed within 25 days of this
+pass, are all MIT, and are all built explicitly for **AI browsing agents**. The defence a publisher can
+assemble from open source is user-agent and client-signal matching — exactly what these are built to
+defeat. ⚠️ **No IVT proposal resting on open-source detection alone should go out without this table
+attached.**
+
+### The sophisticated half of the problem is now AI-generated, and the measurements disagree violently
+
+| Source | Figure | Note |
+|---|---|---|
+| Lunio, *2026 Global Invalid Traffic Report* | **$63B** lost to IVT in 2025, against $740B+ ad spend | Click-based methodology; Augustine Fou argues publicly that this **undercounts**, because it counts invalid clicks arriving on sites rather than invalid *impressions*. |
+| Juniper Research (via secondary source) | **>$100B in 2026**, ~$172B by 2028; ~22% of global digital ad spend | ⚠️ Secondary citation, not read at source. |
+| Anura (via eMarketer) | **$165B** in 2025; global IVT **26% Jan → 31% Feb → 40% Jun 2026** | Vendor data. |
+| Spider Labs | **$25.3B in H1 2026** | Half-year; not comparable to annual figures. |
+| Fraudlogix / Q1 2026 programmatic | **18.1%–20.6%** of programmatic impressions invalid | |
+| DoubleVerify | fraud/IVT **down 41% YoY in North America, down 45% in EMEA** | ⚠️ **Points the opposite way from Anura.** Both are vendors with commercial interest in the number. |
+
+⚠️ **$63B to $165B is a 2.6× spread on overlapping periods, and two vendors disagree on the
+direction of travel.** Quote the range, name the methodology, and note that every figure on this plane
+is produced by a company selling the remedy. There is no MRC-accredited public market size.
+
+## Pass 34 — the governance vacuum: the framework everyone uses has no owner, and cannot get one
+
+- **GARM (Global Alliance for Responsible Media)** published the Brand Safety & Suitability Framework
+  that the entire industry classifies against. The WFA **discontinued GARM in August 2024**, days after
+  X sued it on antitrust grounds.
+- X and the WFA **settled**, and multiple secondary sources report that as part of the settlement the
+  **WFA agreed never to revive GARM or any similar initiative.** ⚠️ Settlement date reported
+  inconsistently (July 2026 in one source); verify against the court record before citing a date.
+- **Who maintains it now: nobody, and sources conflict on even that.** Some claim IAB Tech Lab absorbed
+  it; others say only that the Tech Lab **Content Taxonomy** evolved to accommodate GARM's categories —
+  which is a vocabulary, not a framework. Multiple sources state plainly that no body replaced it.
+- **And it is still in use anyway.** IAS, DoubleVerify, Pinterest and YouTube continued on GARM's
+  taxonomy after the shutdown "since it's impractical to start over."
+
+**Why this is a trend and not trivia:** this is the first plane in 34 where the governing framework is
+not merely unmaintained but **contractually un-revivable by its author.** The practical consequence for
+delivery: a brand-safety engagement cannot be sold as conformance to a standard, because there is no
+standard-keeper. It has to be sold as *the client's own documented suitability policy, implemented
+against a CC BY 3.0 taxonomy, with the classifier as the deliverable.* That is a better consulting
+engagement than certification work — and it is the only honest one available.
+
+## Pass 34 — the method trend: licence metadata has now failed in four distinct ways
+
+Cycle 8 found that a licence can belong to the **compilation** (Chromaprint: MIT code, LGPL-2.1 whole,
+and a third layer in the linked FFT library). This pass adds three more failure modes, all found by
+reading files rather than trusting fields:
+
+1. **Prose-only licence.** `adstxtcrawler` (202★): no licence file under any of nine names — confirmed
+   by shallow clone — API says `NONE`, README says *"license used is the 2-clause BSD license."*
+   `Taxonomies` (229★): identical pattern, README says CC BY 3.0. **No SPDX field, licence badge or
+   SBOM scan of the source tree can see a licence that exists only as a sentence.**
+2. **Component-scoped licence.** `snowplow/snowplow` is Apache-2.0 (7,052★); `snowplow/enrich`, the
+   component you deploy, is the **Snowplow Limited Use License Agreement v1.0** (31★). The brand-named
+   repo is permissive; the shipped artifact is not.
+3. **Directory-scoped licence.** `PostHog/posthog`: MIT Expat for everything **outside `ee/`**.
+   `IABTechLab/OpenProposal`: Apache-2.0 granted to `scripts/` and `workflow/` only.
+
+And the inverse error, which is just as expensive: **`NOASSERTION` is not a verdict.** `ua-parser/uap-core`
+is Apache-2.0 and `kiprotect/klaro` is BSD-3-Clause; the API reports `NOASSERTION` for both because the
+file opens with a non-standard header. **CI rule for all twelve industries: for every dependency, resolve
+the licence of the component you ship, from the file, and grep the README when the field is empty.**
+
+⚠️ **And the relicensing trap:** [faisalman/ua-parser-js](https://github.com/faisalman/ua-parser-js) is
+**AGPL-3.0** at 10,217★, pushed 2026-11-26. Most teams remember it as MIT. In a hosted service the
+network clause is live. Replacement: `ua-parser/uap-core` (Apache-2.0) plus a permissive binding.
+
+## Pass 34 — the agent layer that is three weeks old, and the window that implies
+
+`AdCP`, `ARTF` and `AAMP` were at **0 files** in this KB before today. The agentic-advertising layer is
+**nine repositories holding 91 stars**, four of them pushed in November 2026, and for the first time in
+34 planes **the standards body shipped the agent framework before the market shipped a product**:
+
+- [IABTechLab/AAMP](https://github.com/IABTechLab/AAMP) — **Apache-2.0**, 28★, 2026-11-02.
+- [IABTechLab/agentic-real-time-framework](https://github.com/IABTechLab/agentic-real-time-framework) —
+  spec CC BY 3.0, **reference implementation AGPL-3.0**, 35★, 2026-11-04.
+- [franks33/agentic-advertising-stack](https://github.com/franks33/agentic-advertising-stack) — CC0-1.0,
+  4★: the fastest orientation map of the plane.
+
+**Build on AAMP, not ARTF** — same body, same plane, Apache-2.0 instead of network copyleft. And note
+the irony this plane now contains in full: the same industry is simultaneously standardising
+**agent-to-agent ad buying** and failing to detect **agent-driven invalid traffic**, whose best tools
+are MIT-licensed, 33,000-star stealth browsers built for AI agents. The buy side is being automated
+faster than the integrity side can describe what automation looks like.

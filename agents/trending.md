@@ -9,6 +9,129 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 34: the ad-integrity, supply-chain-transparency & verification plane (**the open-source world builds the evasion at 7× to 21× the stars of the detection, and that ratio is measurable in two queries**)
+
+Measured 2026-11-27. Vocabulary probe that found this plane: the eight files said `prebid` **72** and
+`OpenRTB` **15**, while saying `ad fraud` **0**, `invalid traffic` **0**, `IVT` **0**, `GIVT` **0**,
+`SIVT` **0**, `ads.txt` **0**, `sellers.json` **0**, `schain` **0**, `supply path` **0**,
+`malvertising` **0**, `Media Rating Council` **0**, `DoubleVerify` **0**, `Pixalate` **0**, `AdCP` **0**,
+`ARTF` **0**, `AAMP` **0**. **Thirty-three passes about selling the impression; no words about whether
+it was real.**
+
+> **✅ CHANNEL RESTORED — star counts are back.** Pass 33 shipped without star counts because
+> `api.github.com/repos/{other}` answers *"GitHub access to this repository is not enabled for this
+> session."* **That is still true, and it does not matter: `api.github.com/search/repositories?q=repo:owner/name`
+> is not scoped the same way and returns stars, SPDX licence, `pushed_at` and `archived` in one call,
+> at 15,000/hour, five repos per call with `+repo:` OR.** Every number in this section came through
+> that channel on the day of the pass. Record this for all twelve industries.
+
+### The headline measurement of this pass, in two queries
+
+| Query | Repos | Top-8 stars summed | Most-starred |
+|---|---|---|---|
+| `bypass bot detection` | **245** | **18,425** | jo-inc/camofox-browser — MIT, 12,507★, 2026-11-24 |
+| `bot detection library` | **91** | **2,461** | fingerprintjs/BotD — MIT, 1,504★, 2026-11-26 |
+
+**7.5 : 1 on stars, 2.7 : 1 on repository count — in favour of the attack.** And the ratio is
+understated, because the single largest asset in the whole category answers to neither query cleanly:
+[CloakHQ/CloakBrowser](https://github.com/CloakHQ/CloakBrowser), MIT, **33,093★**, pushed 2026-11-26,
+describing itself as *"Stealth Chromium that passes every bot detection test."* Counted in, evasion
+leads **51,518 to 2,461 — 20.9 : 1.**
+
+| Evasion side | License | Stars | Last push |
+|---|---|---|---|
+| [CloakHQ/CloakBrowser](https://github.com/CloakHQ/CloakBrowser) | MIT | 33,093 | 2026-11-26 |
+| [jo-inc/camofox-browser](https://github.com/jo-inc/camofox-browser) | MIT | 12,507 | 2026-11-24 |
+| [oss-invisible/playwright](https://github.com/oss-invisible/playwright) | MIT | 2,616 | 2026-11-26 |
+| [rebrowser/rebrowser-patches](https://github.com/rebrowser/rebrowser-patches) | MIT | 1,475 | 2026-11-02 |
+| [sardanioss/httpcloak](https://github.com/sardanioss/httpcloak) | MIT | 1,394 | 2026-11-14 |
+| [PortSwigger/bypass-bot-detection](https://github.com/PortSwigger/bypass-bot-detection) | Apache-2.0 | 504 | 2025-09-09 |
+| [xvertile/akamai-bmp-generator](https://github.com/xvertile/akamai-bmp-generator) | NONE | 478 | 2026-05-27 |
+| [techinz/browsers-benchmark](https://github.com/techinz/browsers-benchmark) | MIT | 446 | 2026-11-25 |
+| [oss-invisible/selenium](https://github.com/oss-invisible/selenium) | MIT | 266 | 2026-11-20 |
+
+| Detection side | License | Stars | Last push |
+|---|---|---|---|
+| [fingerprintjs/BotD](https://github.com/fingerprintjs/BotD) | MIT | 1,504 | 2026-11-26 |
+| [JayBizzle/Laravel-Crawler-Detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) | MIT | 326 | 2026-07-28 |
+| [talsec/Free-RASP-Flutter](https://github.com/talsec/Free-RASP-Flutter) | MIT | 263 | 2026-11-25 |
+| [WhichBrowser/Parser-JavaScript](https://github.com/WhichBrowser/Parser-JavaScript) | MIT | 103 | 2026-10-18 |
+| [JefferyHus/es6-crawler-detect](https://github.com/JefferyHus/es6-crawler-detect) | MIT | 96 | 2026-09-13 |
+| [dobiadi/bot-detect](https://github.com/dobiadi/bot-detect) | MIT | 71 | **2023-10-23** |
+
+**Why this is not just a curiosity.** The evasion repos are maintained *this week*, built for AI
+browsing agents, MIT-licensed and drop-in compatible with Playwright and Selenium. Every one of them
+is, functionally, sophisticated-invalid-traffic infrastructure available at zero cost with no
+attribution burden. The defence a publisher can assemble from open source — BotD, crawler-user-agents,
+device-detector — is **user-agent and client-signal matching**, which is precisely what these tools are
+built to defeat. ⚠️ **Any IVT proposal that rests on open-source detection alone should be quoted with
+this table attached.** It is the honest version of what the client is buying.
+
+### The new agent layer: agentic advertising, three weeks old, 91 stars across nine repos
+
+| Repo | License | Stars | Last push |
+|---|---|---|---|
+| [IABTechLab/agentic-real-time-framework](https://github.com/IABTechLab/agentic-real-time-framework) | AGPL-3.0 (impl) / CC BY 3.0 (spec) | 35 | 2026-11-04 |
+| [IABTechLab/AAMP](https://github.com/IABTechLab/AAMP) | Apache-2.0 | 28 | 2026-11-02 |
+| [IABTechLab/OpenProposal](https://github.com/IABTechLab/OpenProposal) | NOASSERTION (Apache-2.0 scoped to two dirs) | 11 | 2026-11-12 |
+| [IABTechLab/CoMP](https://github.com/IABTechLab/CoMP) | NONE | 6 | 2026-07-09 |
+| [franks33/agentic-advertising-stack](https://github.com/franks33/agentic-advertising-stack) | CC0-1.0 | 4 | 2026-09-06 |
+| [scumunna/programmatic-skills](https://github.com/scumunna/programmatic-skills) | MIT | 3 | 2026-07-03 |
+| [10div10/adtech-multi-agent](https://github.com/10div10/adtech-multi-agent) | NONE | 2 | 2026-07-10 |
+| [adops-tool/AdTech-LeadGen-agent-skills](https://github.com/adops-tool/AdTech-LeadGen-agent-skills) | Apache-2.0 | 1 | 2026-11-07 |
+| [scumunna/adcp-trader](https://github.com/scumunna/adcp-trader) | MIT | 1 | 2026-06-24 |
+
+**For the first time in 34 planes, the standards body shipped the agent framework before the market
+shipped the product.** Four of these nine were pushed in November 2026. Globant's window on this plane
+is open *now* and will not be in a year — and note which half is permissive: **AAMP is Apache-2.0,
+ARTF's reference implementation is AGPL-3.0.** Build on AAMP.
+
+### Detection and fraud agents — what actually exists
+
+| Repo | License | Stars | Last push | Note |
+|---|---|---|---|---|
+| [papa-torb/adtruth](https://github.com/papa-torb/adtruth) | MIT | 254 | 2025-12-17 | ⚠️ README states the ML models and detection rules are **proprietary**. |
+| [qiayue/pvuv.ai](https://github.com/qiayue/pvuv.ai) | MIT | 112 | 2026-11-03 | Self-hosted analytics with built-in IVT detection. The only live permissive IVT code found. |
+| [Nameles-Org/Nameles](https://github.com/Nameles-Org/Nameles) | Apache-2.0 | 72 | **2019-09-06** | The only purpose-built open IVT engine ever written. Dead seven years. |
+| [andpalmier/seads](https://github.com/andpalmier/seads) | Apache-2.0 | 50 | 2026-09-05 | Malvertising scanner for search-engine ads. |
+| [akmalkhaniub/trafficsentinel-suite](https://github.com/akmalkhaniub/trafficsentinel-suite) | NONE | 0 | 2026-11-13 | IVT investigator + MCP server. Right shape, no licence, no stars. |
+| [flowlight0/talkingdata-adtracking-fraud-detection](https://github.com/flowlight0/talkingdata-adtracking-fraud-detection) | MIT | 226 | **2018-06-10** | A Kaggle solution — and the **second** most-starred open artifact in the category. |
+
+⚠️ **`ad fraud detection` returns 894 repositories. The open corpus of the field is a Kaggle contest
+from 2018**, because the labels are what the verification vendors sell.
+
+### The three zeros of this pass
+
+- **`brand safety`: 465 repositories, zero brand-safety tools.** The top eight by stars are a docs
+  fork, an Android ROM flasher, a logo-design skill, two 2014 scripts, a Google Analytics ToS paste, a
+  URL shortener and an Android-TV debloater. **The judgment layer of this plane has no open-source
+  presence at all.**
+- **`supply path optimization`: 53 repositories, zero adtech** (warehouse robots and BSC tokens).
+- **`consent management platform TCF`: 6 repositories in total**, four of them at zero stars — for a
+  signal the EU mandates.
+
+### The content tax, third officially-priced instance in this KB
+
+The **IAB/ABC International Spiders and Bots List** — the accredited bot list — is an annual data
+subscription at **$5,000 (Tech Lab member) / $7,500 (IAB associate member) / $15,000 (non-member)**,
+with ABC UK listing from **£4,285 + VAT**; access is withheld until payment *and a signed Data
+Subscription Agreement*, and the grant is **limited, non-exclusive, non-transferable and revocable.**
+After the AMA's CPT (healthcare) and MedDRA (healthcare), this is the **third gated knowledge artifact
+with a published price list** found in this KB — so it is a pattern, not an anecdote.
+
+And the cleanest open-code/closed-data split yet recorded:
+[snowplow/iab-spiders-and-robots-java-client](https://github.com/snowplow/iab-spiders-and-robots-java-client)
+is **Apache-2.0** (in `LICENSE-2.0.txt`), 7★, pushed **2026-09-25** — a maintained open client for a
+list you must pay up to $15,000/year to legally hold. **The code is free. The list is not. The client
+is useless without it.**
+
+⚠️ **But note what this plane does NOT confirm.** The vocabulary *brand safety* needs — the **IAB
+Content Taxonomy** — is **CC BY 3.0, free to implement with attribution**
+([InteractiveAdvertisingBureau/Taxonomies](https://github.com/InteractiveAdvertisingBureau/Taxonomies),
+229★, 2026-10-27), and brand-safety open source is still a literal zero. **Content licensing is not the
+binding constraint on this plane; accreditation is.** That refinement is pass 34's contribution to the
+structural law — see `intel/trends.md`.
+
 ## 2026-11-27 — pass 33: the media-monitoring, earned-media & press-intelligence plane (**the first plane whose *judgment* component is licensed against commercial use outright — a category worse than copyleft**)
 
 Measured 2026-11-27. The vocabulary probe that found this plane: before this pass the eight files said

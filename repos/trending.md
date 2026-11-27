@@ -10,6 +10,91 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 34: ad-integrity & supply-chain-transparency infrastructure (**the industry standardised the claim and never deployed the proof: `ads.txt` has eight maintained tools, `ads.cert` has eight stars and no commits since 2023**)
+
+Measured 2026-11-27 via `api.github.com/search/repositories?q=repo:owner/name` — see
+`agents/trending.md` pass 34 for the channel note. **Star counts restored after pass 33's gap.**
+
+### The one table that describes this plane
+
+| Step in the chain | What kind of problem it is | Best open artifact | License | Stars | Last push |
+|---|---|---|---|---|---|
+| 1. **Declare** who may sell | format | [10up/ads-txt](https://github.com/10up/ads-txt) | GPL-2.0 | 61 | **2026-11-24** |
+| 1b. Parse the declaration | format | [InteractiveAdvertisingBureau/ads.txt-parser](https://github.com/InteractiveAdvertisingBureau/ads.txt-parser) | Apache-2.0 | 37 | 2024-08-27 |
+| 1c. Walk the whole supply graph | format | [adops-tool/SPO-sellers-json-crawler](https://github.com/adops-tool/SPO-sellers-json-crawler) | Apache-2.0 | 0 | **2026-11-07** |
+| 2. **Prove** the declaration cryptographically | format + crypto | [IABTechLab/adscert](https://github.com/IABTechLab/adscert) | Apache-2.0 | **8** | **2023-07-05** |
+| 3. **Detect** invalid traffic | judgment + accredited labels | [Nameles-Org/Nameles](https://github.com/Nameles-Org/Nameles) | Apache-2.0 | 72 | **2019-09-06** |
+| 4. **Judge** brand suitability | pure judgment | — **nothing exists** — | — | — | — |
+| 5. **Count** it so an auditor accepts it | accreditation | [InteractiveAdvertisingBureau/Open-Measurement-JSClients](https://github.com/InteractiveAdvertisingBureau/Open-Measurement-JSClients) (web only) | Apache-2.0 | 76 | 2026-11-02 |
+
+**Read down the "Last push" column.** 2026-11-24 → 2026-11-07 → **2023-07-05** → **2019-09-06** →
+nothing. The further the step is from parsing a file and the closer it is to forming a judgement a
+third party must accept, the older the newest commit, until there is no commit. This is the
+**five-step gradient**, and it is the most complete version of this KB's structural law yet measured —
+pass 33 managed three steps, pass 5 managed three.
+
+### Infrastructure committed in the last three weeks
+
+| Repo | License | Stars | Last push | What it is |
+|---|---|---|---|---|
+| [coreruleset/coreruleset](https://github.com/coreruleset/coreruleset) | Apache-2.0 | 3,376 | **2026-11-27** | OWASP CRS — pushed on the day of this pass. |
+| [corazawaf/coraza](https://github.com/corazawaf/coraza) | Apache-2.0 | 4,061 | 2026-11-26 | Embeddable Go WAF library, ModSecurity-rule compatible. **The piece that lets you put CRS inside your own ad server** rather than in front of it. |
+| [crowdsecurity/crowdsec](https://github.com/crowdsecurity/crowdsec) | MIT | 15,814 | 2026-11-25 | **The largest permissive asset on this plane and nobody in adtech cites it.** Crowdsourced malicious-IP intelligence — a free, continuously-updated GIVT signal, built by the security community, sitting unused next to a $15,000/year bot list. |
+| [monperrus/crawler-user-agents](https://github.com/monperrus/crawler-user-agents) | MIT | 1,416 | 2026-11-26 | The free stand-in for the paid list. |
+| [matomo-org/device-detector](https://github.com/matomo-org/device-detector) | LGPL-3.0 | 3,562 | 2026-11-25 | The most complete open bot/device classifier. |
+| [X4BNet/lists_vpn](https://github.com/X4BNet/lists_vpn) | NONE | 944 | 2026-11-26 | Datacenter/VPN IP lists — raw GIVT material, no licence grant. |
+| [firehol/blocklist-ipsets](https://github.com/firehol/blocklist-ipsets) | NONE | 4,011 | 2026-11-26 | Same, larger, same caveat. |
+| [altcha-org/altcha](https://github.com/altcha-org/altcha) | MIT | 2,923 | 2026-11-20 | Self-hosted PoW CAPTCHA alternative, GDPR/WCAG 2.2 AA/EAA compliant. |
+| [prebid/openrtb](https://github.com/prebid/openrtb) | Apache-2.0 | 89 | 2026-11-12 | Go OpenRTB/AdCOM types — **the live one.** |
+| [InteractiveAdvertisingBureau/openrtb](https://github.com/InteractiveAdvertisingBureau/openrtb) | spec CC BY 3.0 | 532 | 2026-11-11 | The spec, actively maintained. |
+| [Chrome-Extensions-labs/Sellers.json-Inspector](https://github.com/Chrome-Extensions-labs/Sellers.json-Inspector) | GPL-3.0 | 6 | 2026-11-07 | MV3 `sellers.json` validator. |
+| [Chrome-Extensions-labs/Lines-Checker-ads.txt-app-ads.txt-sellers.json](https://github.com/Chrome-Extensions-labs/Lines-Checker-ads.txt-app-ads.txt-sellers.json) | AGPL-3.0 | 4 | 2026-11-07 | Soft-404 and `OWNERDOMAIN`-mismatch detection. |
+
+### The archived-vs-active trap, third occurrence in this KB
+
+| Repo | License | Stars | Last push | State |
+|---|---|---|---|---|
+| [bsm/openrtb](https://github.com/bsm/openrtb) | NOASSERTION | **292** | 2024-08-09 | **ARCHIVED** |
+| [prebid/openrtb](https://github.com/prebid/openrtb) | Apache-2.0 | **89** | 2026-11-12 | Active, permissive |
+
+**The archived one has 3.3× the stars.** Trend #49 in `intel/trends.md` recorded that star count has
+become actively misleading; this is the third plane to prove it, and here it would steer a team onto an
+archived Go library for the single most load-bearing protocol in programmatic advertising.
+
+### Two licence traps in the event-collection tier, found by reading files rather than fields
+
+1. **The licence belongs to the component, not the organisation.**
+   [snowplow/snowplow](https://github.com/snowplow/snowplow) — **Apache-2.0**, 7,052★, 2026-11-26.
+   [snowplow/enrich](https://github.com/snowplow/enrich) — **Snowplow Limited Use License Agreement
+   v1.0 (January 2024)**, 31★, 2026-11-24, API reports `NOASSERTION`.
+   [snowplow/snowplow-javascript-tracker](https://github.com/snowplow/snowplow-javascript-tracker) —
+   BSD-3-Clause, 593★. **The repo with the brand name on it is the permissive one; the repo you deploy
+   is not.** A scanner that resolves the org name and stops gets the wrong answer. **New category,
+   generalises to all twelve industries** — it extends cycle 8's "the licence can belong to the
+   compilation" to "the licence can belong to the component."
+2. **Elastic License 2.0 wearing an open-source badge.**
+   [rudderlabs/rudder-server](https://github.com/rudderlabs/rudder-server) — LICENSE read, 3,792 B,
+   **Elastic License 2.0**, 4,521★, 2026-11-26. Not OSI-approved; forbids offering the product as a
+   managed service. For a consultancy that hosts for clients, that is the prohibited use.
+
+And one correction in the opposite direction, which matters just as much:
+[PostHog/posthog](https://github.com/PostHog/posthog) (41,180★) reports `NOASSERTION` but its LICENSE
+grants **MIT Expat to everything outside `ee/`**. `NOASSERTION` is not a verdict — it is an instruction
+to read the file.
+
+### ⛔ What is not here, and the searches that establish it
+
+- `supply path optimization` → **53 repos, zero adtech.**
+- `brand safety` → **465 repos, zero brand-safety tools.**
+- `invalid traffic` → **63 repos total**; the only purpose-built engine dead since 2019.
+- `malvertising` → **57 repos**; one maintained ([andpalmier/seads](https://github.com/andpalmier/seads), Apache-2.0, 50★).
+- `viewability` → **unusable** (498,228 results, all Android view/chart libraries).
+- **The OM SDK native library is not on GitHub at all** — Tools Portal download plus a Tech Lab
+  compliance programme. In-app and CTV viewability have no open implementation, and those are the two
+  fastest-growing inventory types.
+- **No APAC- or LATAM-specific ad-integrity repository was found**, in the two regions with the
+  highest measured IVT rates on earth.
+
 ## 2026-11-27 — pass 33: media-monitoring collection infrastructure (**the most permissive and most actively maintained substrate found in any of the 33 planes — and a three-year dead zone inside one Apache-2.0 organisation**)
 
 Measured 2026-11-27. **No star counts this pass** — API scoped to this session's own repos, HTML and

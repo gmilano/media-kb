@@ -62,6 +62,32 @@ while the *entitlement* layer — font asset management, seat compliance, broadc
 rights — is **entirely commercial, with no open-source equivalent**. That is where the money is and where
 Globant's IP goes. See `verticals/solutions.md`.
 
+## Over-the-air transmission — the plane-level number, added 2026-11-27 (pass 51)
+
+**For once the vendors nearly agree, and that is the finding.** Two independent reports put the **TV
+transmitter** market at **~$733M (Industry Research)** and **~$739M (Global Growth Insights)** for
+**2026**, the latter growing ~5%/yr to ~$1.16B by 2035. A **~0.8% spread** between independent vendors is
+by far the tightest convergence in this file — everywhere else in this table the spread is a factor of
+two to seven. **The reason is instructive: transmitters are counted by units shipped to licensed
+operators, a denominator that actually exists.** Where this KB's market figures disagree wildly
+(captioning 18×, fonts 7×, AI-in-M&E 2×) the underlying quantity is a *definition*; here it is a
+*countable object*. Quote this number with more confidence than anything else in this file except the
+CIMM currency figures.
+
+| Scope | 2026 estimate | Source type | Note |
+|---|---|---|---|
+| **TV transmitters** | **~$733M–$739M**, → ~$1.16B by 2035 at ~5% CAGR | Two vendors, independently | **The usable figure for this plane.** Covers terrestrial, cable head-end, satellite uplink and hybrid — **not DTT alone.** |
+| Broadcast equipment (broad) | $5.93B (Mordor, ~6.2% CAGR) to $11.93B (Fortune Business Insights) | Four vendors | A **2× spread**. **Data-quality tell worth recording:** the Fortune "broadcast equipment" page carries report ID `107019` — the same ID as its "AI video generation" report. Do not cite that figure. |
+| Digital terrestrial television (market, not equipment) | ~$8.7B, ~4.2% CAGR | MarkWide | Almost certainly services and content, not transmission kit. Do not use it to size a transmission engagement. |
+| **DTT transmission equipment, isolated** | **No figure found** | — | Searched; **no vendor isolates DTT transmission equipment from cable/satellite/hybrid.** Recorded as an informed gap. The named demand drivers in every report are the same two: **analogue switch-off and next-generation upgrades (ATSC 3.0)** — i.e. the regional transitions catalogued below *are* the market. |
+
+**The commercially important asymmetry.** ~$739M/yr of transmitters is a small market that gates a very
+large one: the same reports name next-gen upgrade cycles as the primary driver, and those upgrades are
+**government-mandated with published deadlines** in three of four regions. The money is not in the
+transmitter, it is in the **programme of work the mandate creates** — conformance, coverage replication,
+dual-stack operation and signalling — which no vendor sizes at all.
+
+
 ## Opportunities by region
 
 ### North America
@@ -1867,6 +1893,44 @@ pass), plus the **CC0** identifier assets (`ocd-division-ids` 186★, `openstate
 **Caution.** The cheapest competitor is not a vendor, it is in-house: Hearst's Assembly proves a
 newsroom with engineers will build this on open models. Target the tier that has neither, and bring
 the ingest library and the evidence trail rather than a model.
+
+
+#### Over-the-air transmission (pass 51, added 2026-11-27)
+
+**North America is the best-equipped region in this plane, and the only one where that is true.**
+
+- **The transition is already most of the way there, which changes the sell.** ATSC 3.0 had reached
+  **over 75% of the US population across 80+ markets** as of late January 2026 (Triveni Digital's CEO,
+  via NewscastStudio). This is not a greenfield pitch; it is a **completion and conformance** programme.
+  One vendor in the same coverage reports local-market deployment has **slowed**, attributed to
+  uncertainty about the ATSC 1.0 sunset date — so the blocker is regulatory certainty, not engineering.
+- **The regulatory trigger, with the caveat the sources force.** The FCC adopted a **Further Notice of
+  Proposed Rulemaking** in late 2025 — *Authorizing Permissive Use of the "Next Generation" Broadcast
+  Television Standard*, **Federal Register, 2025-11-20** — proposing to **eliminate mandatory
+  simulcasting**. Reporting then **conflicts**: one account describes an adopted framework requiring
+  full-power stations to complete migration by **Q4 2027**, another says only draft rules exist and dates
+  may move. What is consistently reported is that **current simulcast obligations run through at least
+  2027-07-17**. A **March 2026 congressional letter** (Rep. Alford) pressed the FCC to finish the job.
+  **Verify the docket before quoting a date in a SOW.**
+- **Two unresolved fights that are both engineering work.** **Encryption/DRM** — the ATSC standard does
+  not require it, some stations apply it anyway, consumers hit broken receivers, and the FCC is weighing
+  rules. **Must-carry/MVPD carriage** of ATSC 3.0 signals is unsettled and analysts expect no quick
+  resolution. Either outcome is a signalling-and-conformance project.
+- **The licence advantage, and it is unique to this region.** The propagation model US filings rest on
+  is **ITM/Longley–Rice**, published by **NTIA/ITS itself** (`NTIA/itm`, 88★, pushed 2026-11-24,
+  effectively public domain under 17 U.S.C. §105 with an express worldwide grant) as part of a
+  **coordinated, test-vectored library** — *and* it has an independent **MIT** Python implementation
+  (`itmlogic`, 73★). **North America is the only region whose required coverage mathematics is available
+  under a permissive licence from a maintained source.** A hosted coverage-planning service can be built
+  here with **no copyleft obligation at all** — which is not possible in EMEA, APAC or LATAM.
+
+**The opportunity, concretely.** An 80+-market completion programme with a contested deadline, an
+unresolved encryption question and a permissively-licensed coverage stack. The billable units are
+**PSI/SI and ROUTE/DASH conformance** (TSDuck, BSD-2, so the IP stays Globant's), **coverage replication
+studies** proving ATSC 3.0 service contours match the ATSC 1.0 contours a station must replicate, and
+**receiver-compatibility test harnesses** for the encryption mess. **Caution:** do not propose
+`gr-atsc3` as any part of a service path — it cannot reach a retail receiver.
+
 
 ### EMEA
 
@@ -3947,6 +4011,52 @@ deliverable is a hosted website.
 under EMFA was found this pass; the available material is advocacy and NGO reporting. Do not present
 EMFA's local-media effect as measured — only its obligations are.
 
+
+#### Over-the-air transmission (pass 51, added 2026-11-27)
+
+**EMEA's defining feature in this plane is that the decision has been deferred past the planning
+horizon, and the region has been told to expect no common answer.**
+
+- **The spectrum clock, and the conference that actually matters.** EU law keeps **470–694 MHz**
+  available for digital terrestrial television and programme-making **until at least 2030**, according
+  to national needs. The widespread assumption that **WRC-27** will settle the band's future is
+  **wrong**: analysis of the agenda shows WRC-27 is **not asked to decide** it — the argument at WRC-27
+  is about what **WRC-31** should consider. **The decisive conference is 2031.** WRC-23 already gave
+  mobile a **secondary allocation** across the band in Region 1.
+- **The EBU's position, dated.** Its **WRC-27 opinion (September 2026)** argues 470–694 MHz is **the only
+  spectrum left for DTT in most EU member states**. Crucially it also records that the **Radio Spectrum
+  Policy Group concluded that differences in viewing habits and national circumstances make a common
+  post-2030 spectrum policy across Europe impracticable.**
+- **That conclusion is the commercial finding, and the KB has reached it twice before from other
+  directions.** A regulator-level declaration that a *common* policy is impracticable means the
+  deliverable cannot be a compliance mode — it must be a **per-country roadmap engine**. Pass 5 reached
+  the per-jurisdiction policy-engine conclusion for rights reservation; pass 50 reached it for performer
+  consent; **pass 51 reaches it for spectrum, and this time a regulator has written it down.**
+- **The code position is the region's weak point.** Europe's own terrestrial standard has its only open
+  transmitter in **`drmpeg/gr-dvbt2`, archived and read-only since 2018-10-31** (73★). The living
+  replacement, `gr-dvbt2ll` (19★), has never inherited the audience. **Spain** is investing in a DVB-T2
+  transition to enable UHD services — a concrete national programme with no healthy open transmit stack
+  behind it.
+- **5G Broadcast is the real EMEA greenfield, and it has an AGPL gate.** **Rai and the EBU ran 5G
+  Broadcast trials at Milano-Cortina 2026, in Rome and Turin**, which the EBU framed as validating
+  performance in a real operational environment; Italian city trials and the 2019 German *5G Today*
+  FeMBMS trial precede it. The reference stack is **5G-MAG**: `rt-mbms-modem` and `rt-mbms-tx` are both
+  **AGPL-3.0** (pushed 2026-11-24; `rt-mbs-examples` pushed the day of this pass). **AGPL-3.0 on a
+  transmit path obliges source release to the users of a network service.** Resolve this before
+  architecture.
+- **And the propagation gap bites hardest here.** European coverage filings require **ITU-R P.1546 and
+  P.1812**. Their only implementations sit in **one personal GitHub account**, under a **bespoke notice
+  that is not an OSI licence** (it is the NTIA release text with the rights-granting paragraph removed),
+  at **12–15 stars**, with **P.1546 untouched since 2024-08-16**.
+
+**The opportunity.** Sell the **per-country spectrum and standards roadmap engine** the RSPG has
+effectively admitted is necessary — 2030 legal protection, a 2031 decision, 27+ divergent national
+positions. Alongside it, the **licence-and-maintenance due-diligence product**: any European broadcaster
+planning DTT or 5G Broadcast work is, today, unknowingly depending on an archived transmitter and a
+12-star propagation model under a non-OSI notice. **That audit is a short, high-credibility first
+engagement**, and nothing in the market is selling it.
+
+
 ### APAC
 
 - **Four separate labeling regimes landed in 2026** — the most regulated region for synthetic media,
@@ -6000,6 +6110,47 @@ and found nothing usable: the `AI media APAC` sweeps returned platform, consumer
 material, and the targeted search returned Australian results only. India is the largest local-language
 news market in the region and this KB has **no measured supply or demand data for it** in this plane.
 That is an informed gap, not coverage — and it is the first thing the next APAC pass should close.
+
+
+#### Over-the-air transmission (pass 51, added 2026-11-27)
+
+**APAC is the only region holding two incompatible next-generation standards, and the only one where a
+major platform has just lost an export race.**
+
+- **Korea: the world's reference ATSC 3.0 deployment.** Korea's terrestrial UHD standard was published
+  **June 2016** for a **February 2017** launch — the **first ATSC 3.0 service anywhere**, now with the
+  longest operating history of any deployment. Earlier Korean UHDTV trials used DVB-T2. **Korea is the
+  only market on earth with nearly a decade of ATSC 3.0 operational experience**, which makes it the
+  reference architecture for every later transition, Brazil's included.
+- **Japan: Advanced ISDB-T is still in development, and the date is close.** **Report ITU-R BT.2343-11
+  (03/2026)** — a primary document — records that Japan has run **large field trials in four
+  metropolitan cities** and describes Advanced ISDB-T as a successor preserving ISDB-T's segment
+  structure. A Japanese development roadmap lists a **Terrestrial 8K Media Broadcast Transmission
+  milestone for December 2026**, i.e. **a target, not a launched service**; that roadmap document is
+  itself old enough to warrant re-checking with NHK or MIC. **No launch date is confirmed, and this KB
+  does not assert one.**
+- **The export defeat, and it matters commercially.** Brazil's SBTVD Forum selected **ATSC 3.0 over
+  Advanced ISDB-T** as TV 3.0's physical layer — described in the trade press as **a particular blow to
+  Japan's ISDB-T**, the incumbent platform across South America. Korean technology is reported as
+  powering Brazil's new standard. **The practical consequence: Advanced ISDB-T is now a
+  largely-Japan-only roadmap, while ATSC 3.0 has Korea, the US and Brazil.**
+- **The code position is the emptiest of any region.** **There is no open implementation of Advanced
+  ISDB-T at any star count under any licence** — searched and confirmed this pass. Legacy ISDB-T has
+  exactly one healthy open implementation and **it is not from APAC**: `git-artes/gr-isdbt` (GPL-3.0,
+  195★) is Uruguayan. Japan is about to attempt 8K terrestrial transmission with **zero open substrate**.
+- **Regulatory frame already in this KB, and it still holds.** Latham & Watkins (September 2026) splits
+  APAC AI regulation into **three divergent categories** — binding risk-based frameworks (South Korea,
+  Vietnam), targeted regulation (China), and a third track — which is the same conclusion as the
+  spectrum story: **the portable asset is a per-jurisdiction policy engine, not a compliance mode.**
+
+**The opportunity.** Two distinct plays, and they do not compete. **Korea** is a *knowledge* asset:
+nearly ten years of ATSC 3.0 operations, exportable as reference architecture and migration playbook to
+the US completion programme and to Brazil — and Globant can broker that transfer, since Korea's
+operators are not consultancies. **Japan** is a *build*: an 8K terrestrial target with no open
+implementation of the standard it needs, which is a research-grade engagement rather than an
+integration. **Caution:** price the Japanese work as a build and verify the December 2026 milestone
+against MIC/NHK primary sources before committing to any date.
+
 
 ### LATAM
 
@@ -10124,3 +10275,59 @@ record profile proposes and nothing in the plane implements. The risk a commenta
 is **jurisdictional arbitrage**: studios can source voice talent from countries with no equivalent
 protection. That argues for the compliance layer being **portable across jurisdictions**, which is the
 same per-jurisdiction policy-engine conclusion APAC reaches from the opposite direction.
+
+
+#### Over-the-air transmission (pass 51, added 2026-11-27)
+
+**This is the strongest engagement case in this plane, and one of the strongest in the whole KB — a
+national mandate with a published deadline, a decade-long dual-stack obligation, no open implementation
+of the target standard, and proven regional engineering capacity already in the plane.**
+
+- **The mandate, with its primary instrument.** Brazil's **TV 3.0**, branded **DTV+**, is established by
+  **Decree No. 12,595, signed 2025-08-27**. The **SBTVD Forum** selected **ATSC 3.0 as the physical
+  layer**, rejecting Advanced ISDB-T, and the decree mandates a **two-layer codec design: VVC with an
+  MPEG-5 LCEVC enhancement layer**.
+- **The dates, and the conflict between them stated plainly.** Brazil has **completed its analogue
+  switch-off**, and the **TV 3.0 deployment deadline has been extended to the end of 2027** (CSI
+  Magazine — the most recent reporting found). Earlier plans targeted **2026**, with first public
+  transmissions in major capitals in H1 2026 and commercial availability timed to the **FIFA World
+  Cup**; the preparatory phase closed in 2025 with the decree and São Paulo tests, and **Brasília
+  inaugurated a test station in April 2026**, with pilots expanding through 2026. **Sources disagree:
+  cite the decree and the end-2027 extension, never the mid-2026 World Cup date.** Full national
+  coverage is estimated to take **up to 15 years**, and **ISDB-T/1seg is expected to run in parallel for
+  10–15 years**.
+- **The decade of dual-stack operation is the actual product.** A ten-to-fifteen-year obligation to run
+  **ISDB-T and DTV+ simultaneously** is not a migration, it is a **permanent two-standard operating
+  model** — simulcast scheduling, dual signalling, two coverage models, two conformance regimes, per-site
+  sequencing. **No vendor sizes this and no open platform addresses it.**
+- **The open-source position is the sharpest irony in this KB.** The **only healthy open implementation
+  of ISDB-T in the world is Latin American** — `git-artes/gr-isdbt`, **GPL-3.0-or-later** (verified by
+  reading `LICENSE` 973 B and `COPYING` 35,147 B; the GitHub API misreports it as `NOASSERTION`),
+  **195★/44f**, Instituto de Ingeniería Eléctrica, **Universidad de la República, Montevideo**,
+  copyright 2015–2025. It is **the most-starred modulation-layer repository in the entire plane**, and it
+  implements **precisely the standard the region is now leaving.** Meanwhile **nothing open implements
+  TV 3.0**, and pass 8 already established that its mandated codecs' open reference implementations
+  (`vvenc`, `vvdec`, `LCEVCdec`, all **BSD-3-Clause-Clear**) **expressly grant no patent rights**.
+  **Brazil has mandated a codec pair whose open implementations decline to license the patents.**
+- **What that proves, and it is the sellable part.** The region demonstrably **has the engineering
+  capability** — a Montevideo university lab built a full ISDB-T transceiver, Rx and Tx, and attracted
+  more stars than any other modulator in the plane. **The capability is local, documented, and already
+  the global reference for the outgoing standard.** What is missing is not talent; it is an industrial
+  programme pointed at the incoming one.
+
+**The opportunity, ranked first in this plane.** Four conditions rarely co-occur: a **legal deadline**
+(end-2027), **zero open implementation** of the target stack, a **10–15 year dual-stack obligation**, and
+**proven local capacity**. The engagements, in order of defensibility: (1) **dual-stack operations
+tooling** — ISDB-T/DTV+ simulcast signalling and conformance, built on **TSDuck (BSD-2)** so the IP is
+ownable; (2) **the TV 3.0 patent-and-licence gate** — a short diligence engagement establishing what a
+broadcaster may actually ship, given LCEVC/VVC reference implementations that grant no patent rights, run
+*before* anyone budgets a codec; (3) **coverage replication for per-site sequencing** across a 15-year
+rollout — and note the licence trap: Brazil's filings use **ITU-R** models, so the permissive
+**`itmlogic` (MIT)** implements the *wrong* model, while the right ones (P.1546/P.1812) are a **12–15 star
+personal repository under a non-OSI notice**. (4) A standing offer worth making: **partner with UdelaR**
+rather than compete with it.
+
+**Caution, and it is specific.** Do not promise an open TV 3.0 stack — none exists. Do not quote the
+World Cup timeline. Do not let a client assume the ISDB-T sunset is near: **the parallel period is
+measured in a decade**, and that is the revenue, not the risk.
+

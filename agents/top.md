@@ -4693,3 +4693,80 @@ position has three parts:
 - **The casting and residuals layers are a build, not an integration.** Nine casting repos, 0★ each,
   eight unlicensed; residuals measured at literal zero for the third time. The one repo with adoption
   is a 2009 ATS under a compilation licence.
+
+## Over-the-air transmission — the mux, modulator & coverage layer, added 2026-11-27 (pass 51)
+
+**The plane.** Everything between the plant output and the viewer's antenna: transport-stream
+multiplexing and PSI/SI signalling → modulation (ATSC 3.0 / DVB-T2 / ISDB-T / 5G Broadcast) →
+transmitter → propagation and coverage prediction → spectrum. Pass 8 covered the same signal travelling
+over IP (contribution → player) and pass 44 covered it *inside* the plant (ST 2110, NMOS, PTP). Nothing
+in fifty passes covered it **over the air**.
+
+**Vocabulary probe first, 65 terms, before any web search.** `TSDuck` **0**, `single frequency network`
+**0**, `coverage prediction` **0**, `digital terrestrial` **0**, `Longley` **0**, `repack` **0**,
+`datacast` **0**, `NorDig` **0**, `white space` **0**, `transport stream` **4**, `multiplex` **6**.
+Against that: `ATSC 3.0` **46** and `HbbTV` **41** — the KB already knew this plane as a *standards and
+codec* story (from the device, audio and watermark passes) and had never once measured its **code**.
+`SPLAT` scored 80 hits that were all Gaussian *splatting* from pass 21 — a false positive that a
+total-count read would have accepted. Read the matches, not the total.
+
+### The agent layer, measured
+
+Queries run 2026-11-27 for an agentic/ML layer in this plane: `AI machine learning transmitter
+monitoring spectrum anomaly detection broadcast open source github`; `AI spectrum monitoring agent`;
+`LLM broadcast transmitter predictive maintenance`. **Result: one maintained repository.** The rest of
+what the searches returned was academic code behind papers (UChicago MobiHoc 2019 LTE-band detector;
+a 2026 arXiv OFDMA benchmark framework; SAIFE adversarial autoencoder; AviSense) with no verified
+public, licensed, maintained repo.
+
+This is the pass-50 shape again — **the automation layer of an infrastructure plane is one repo deep** —
+so the table below is honest about what each row *is*. Only the first row is an agent. The rest are the
+engines an agent in this plane would have to drive, and they are the actual deliverable.
+
+| Name | Repo | Licence (verified) | ★ | Pushed | What it is |
+|---|---|---|---|---|---|
+| **SpectrumAlert** | https://github.com/Slayingripper/SpectrumAlert | **GPL-3.0** | 22 | 2026-11-06 | **The only maintained ML tool in the plane.** Isolation-Forest anomaly detection over RF features, RF fingerprinting, MQTT alerting, multi-receiver triangulation of an offending transmitter. Genuinely agentic in shape; 22★ is the whole category. |
+| **TSDuck** | https://github.com/tsduck/tsduck | **BSD-2-Clause** (`LICENSE.txt`, 1,331 B read) | 1,103 | 2026-11-24 | **The only permissively-licensed asset in the entire over-the-air chain**, and the one to build on. 100+ composable `tsp` plugins for TS analysis, PSI/SI table generation and injection, remux, scrambling control. Copyright line reads 2005–**2026**. See the licence warning below — it is not the simple BSD story the metadata implies. |
+| **dtv-utils** | https://github.com/drmpeg/dtv-utils | GPL-3.0 | 62 | 2026-06-28 | Rate/PCR/padding calculators for DTV muxing. Small, unglamorous, and the thing that makes a mux actually legal on air. |
+| **gr-atsc3** | https://github.com/drmpeg/gr-atsc3 | GPL-3.0 | 51 | 2026-06-18 | The **only** open ATSC 3.0 transmitter. Takes a transport stream in. **Does not implement the ROUTE/DASH IP stack, so its output will not play on a retail NextGen TV set** — the author's own caveat. Treat as a lab/bench instrument, never as a service path. |
+| **gr-isdbt** | https://github.com/git-artes/gr-isdbt | **GPL-3.0-or-later** (`LICENSE` 973 B + `COPYING` 35,147 B read; GitHub API says `NOASSERTION`) | **195** | 2025-01-30 | **The most-starred modulation-layer repo in the plane, and it is LATAM-built** — Instituto de Ingeniería Eléctrica, Universidad de la República, Montevideo, copyright 2015–2025. Full ISDB-T transceiver (ARIB STD-B31), Rx and Tx. Implements the standard Brazil is now migrating *away* from. |
+| **gr-dvbt2ll** | https://github.com/drmpeg/gr-dvbt2ll | GPL-3.0 | 19 | 2025-09-11 | Low-latency DVB-T2 transmitter on the EN 302 755 v1.3.1 frame structure. The live DVB-T2 transmit option, because the main one is archived (below). |
+| **rt-mbms-modem** | https://github.com/5G-MAG/rt-mbms-modem | **AGPL-3.0** | 26 | 2026-11-24 | 5G Broadcast (FeMBMS) receive modem, 5G Media Action Group reference stack; `rt-mbms-tx` (AGPL-3.0, 10★) is the transmit side. **AGPL on a broadcast transmit path** — the strongest copyleft in this KB's infrastructure files. |
+
+### Two licence findings, both reusable across all twelve industries
+
+**1. TSDuck is the inverse of the pass-8 `chromaprint` case, and it is the more dangerous shape.**
+`chromaprint`'s *source tree* was a compilation (own code MIT, FFmpeg LGPL parts, licence of the linked
+FFT library decided the rest). TSDuck's source tree is **clean BSD-2 and contains no third-party
+source at all** — so a source-tree SBOM scan passes. The compilation happens **at build and
+distribution time**: `OTHERS.txt` (read this pass) states that TSDuck's *build scripts download*
+Dektec's **DTAPI**, which is **proprietary, binary-only** software, and that the binary packages
+*include* it, alongside **libsrt** (MPL-2.0) and **librist** (BSD-2) binaries on Windows. VATek is
+referenced the same way. **Rule, generalised from pass 8: resolve the licence of what the build
+downloads and what the installer ships, not of what the repository contains.** A clean source scan is
+not evidence of a clean redistributable. Using `tsp` as a pipeline tool is unaffected; **shipping a
+TSDuck-derived binary appliance is a licence review.**
+
+**2. A new licence category — the rights grant with its legal basis removed.** NTIA/ITS releases its
+propagation models under a plain-English notice (`NTIA/itm/LICENSE.md`, 2,087 B, read this pass): works
+of NTIA employees are **outside US copyright under 17 U.S.C. §105**, *plus* an express
+"non-exclusive irrevocable and unconditional… royalty-free" grant for the countries where NTIA does
+hold rights. Effectively public domain, worldwide, and safe. The ITU-R model implementations in the
+`eeveetza` account carry a **838-byte notice whose two operative paragraphs are the NTIA text
+verbatim** — "You may improve, modify, and create derivative works…", "Please provide appropriate
+acknowledgments…" — **with the §105 paragraph and the express ex-US grant deleted.** What remains is a
+warranty disclaimer and a statement of permission with no stated legal basis for it: a personal account
+has no statutory equivalent of §105 to rely on. GitHub reads it as `NOASSERTION`. **This is not an OSI
+licence and should not be treated as one.** It is the most-used propagation code outside North America.
+
+### What not to promise in this plane
+
+- **Do not promise an open ATSC 3.0 service path.** `gr-atsc3` cannot reach a retail receiver
+  (no ROUTE/DASH). `libatsc3` still has no canonical home — confirmed again this pass, consistent with
+  the earlier finding in `repos/foundations.md`.
+- **Do not promise open DVB-T2 transmission from the obvious repo.** `drmpeg/gr-dvbt2` is
+  **archived and read-only, last pushed 2018-10-31**. Reference only.
+- **Do not promise anything for Advanced ISDB-T.** No open implementation exists at any star count.
+- **Do not promise an open TV 3.0 stack.** Nothing open implements it, and pass 8 already established
+  that `vvenc`/`vvdec`/`LCEVCdec` grant **no patent rights** (BSD-3-Clause-Clear). Brazil has mandated a
+  codec pair whose open reference implementations explicitly decline to license the patents.

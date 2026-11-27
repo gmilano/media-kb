@@ -9,6 +9,40 @@ updated: 2026-11-27
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-27 — pass 51: the over-the-air transmission plane (**the whole modulation layer of broadcast is two maintainers and no permissive licence**)
+
+**New this pass.** Verified 2026-11-27: existence via `git ls-remote`, stars/forks/push via the GitHub
+`search/repositories` API, licence by **reading the licence file's bytes** on every `NOASSERTION`.
+
+| Name | Repo | Licence | ★ | Pushed | Note |
+|---|---|---|---|---|---|
+| **TSDuck** | https://github.com/tsduck/tsduck | **BSD-2-Clause** | 1,103 | 2026-11-24 | The plane's only permissive asset. ★/fork **4.5**. Copyright line reads 2005–2026 — twenty-one years and still shipping. |
+| **gr-isdbt** | https://github.com/git-artes/gr-isdbt | **GPL-3.0-or-later** | 195 | 2025-01-30 | LATAM-built (UdelaR, Montevideo). Most-starred modulator in the plane; ★/fork **4.4**. |
+| **NTIA/itm** | https://github.com/NTIA/itm | 17 U.S.C. §105 + express worldwide grant | 88 | 2026-11-24 | Pushed in a **coordinated sweep** with `p528` (39★), `ehata` (21★), `if77` (13★), `LFMF` (10★), `p2108` (6★) and their test-data repos — all 2026-11-24. The signature of a maintained agency library, not a dump. |
+| **itmlogic** | https://github.com/edwardoughton/itmlogic | **MIT** | 73 | 2025-05-14 | The only permissive propagation engine anywhere in this plane. JOSS-published. |
+| **gr-atsc3** | https://github.com/drmpeg/gr-atsc3 | GPL-3.0 | 51 | 2026-06-18 | Only open ATSC 3.0 Tx; **no ROUTE/DASH, so no retail receiver decodes it.** |
+| **rt-mbms-modem** | https://github.com/5G-MAG/rt-mbms-modem | **AGPL-3.0** | 26 | 2026-11-24 | 5G Broadcast reference modem; sibling `rt-mbs-examples` pushed **the day of this pass**. |
+| **SpectrumAlert** | https://github.com/Slayingripper/SpectrumAlert | GPL-3.0 | 22 | 2026-11-06 | **The entire ML/agent layer of this plane, in one repo.** Isolation Forest + RF fingerprinting + MQTT + multi-receiver triangulation. |
+| **Py1812** | https://github.com/eeveetza/Py1812 | **Bespoke non-OSI notice** | **15** | 2026-08-28 | The most-starred ITU-R propagation-model implementation in existence. Fifteen stars. |
+| **p1546** | https://github.com/eeveetza/p1546 | **Bespoke non-OSI notice** | **12** | **2024-08-16** | The field-strength model non-US regulators require. **Untouched for over two years.** |
+| **gr-dvbt2** | https://github.com/drmpeg/gr-dvbt2 | GPL-3.0 | 73 | **2018-10-31** | **ARCHIVED.** Europe's terrestrial standard, frozen eight years. Live replacement `gr-dvbt2ll` has 19★. |
+| **OpenCaster** | https://github.com/aventuri/opencaster | GPL-2.0 | 74 | **2024-05-04** | Forks (79) **exceed stars (74)** — the signature of a tool modified privately rather than followed. |
+| **DVBlast** | https://github.com/videolan/dvblast | GPL-2.0 | 75 | 2026-11-07 | VideoLAN, alive. Demux/stream only — no mux, no transcode, by design. |
+
+**Momentum read, for the next pass to test.** This is the least corporate plane the KB has measured.
+Nothing here is venture-funded, nothing is vendor-seeded, and the two accounts that hold the physical
+layer — one individual (`drmpeg`) and one university lab — have held it for a decade. The only
+*accelerating* row is the 5G-MAG stack (pushed within three days, examples pushed today), which is also
+the only one under **AGPL-3.0**. **Re-measure these baselines next pass:** TSDuck 1,103★, gr-isdbt 195★,
+NTIA/itm 88★, itmlogic 73★, gr-atsc3 51★, rt-mbms-modem 26★, SpectrumAlert 22★, Py1812 15★, p1546 12★.
+
+**The agent-layer queries that returned nothing usable**, recorded so the silence is legible: `AI
+spectrum monitoring agent`, `LLM broadcast transmitter predictive maintenance`, and the long-form
+anomaly-detection query. What came back was papers with no maintained public repo (UChicago MobiHoc
+2019; a 2026 arXiv OFDMA benchmark; SAIFE; AviSense). **One maintained ML repo, 22 stars, in the entire
+over-the-air chain.**
+
+
 ## 2026-11-27 — pass 50: the talent, casting & performer-consent plane (**the agent layer is nine repos at zero stars, and the only real agent in it carries no licence**)
 
 **New this pass.** Verified 2026-11-27: existence via `git ls-remote`, stars/forks/push via GitHub

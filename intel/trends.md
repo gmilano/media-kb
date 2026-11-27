@@ -4931,3 +4931,79 @@ API reports `NOASSERTION` — the pass-8 `chromaprint` mechanism again, **the li
 compilation rather than the repository**. And the plane's sharpest irony: `eliem08/likeness-license`, a
 tool for licensing your likeness, carries a LICENSE reading **"proprietary and confidential… All rights
 reserved."** Licence by file read, every time.
+
+## Over-the-air transmission — trends, added 2026-11-27 (pass 51)
+
+**1. The licence of a media pipeline tracks its transport, not its function — new law, logged.**
+Pass 8 measured contribution → transcode → package → origin → edge → player and found it **permissive
+nearly everywhere**, gated by **patent pools** rather than copyright. Pass 51 measures the *same
+function* over the air and finds **GPL-2.0, GPL-3.0 and AGPL-3.0 with a single BSD-2 exception**, no
+patent question raised at the modulation layer at all, and star counts two orders of magnitude lower
+(19–195★ versus 20,000–30,000★). The function did not change; the transport did. **Mechanism:** IP
+delivery is a CDN business with corporate contributors; over-the-air delivery is an instrument business
+whose authors are researchers and whose users hold licences. **Falsifiable prediction, baseline today:**
+if a corporate contributor ever enters the modulation layer it will arrive **permissively licensed and
+on the receiver side** (ROUTE/DASH), not the transmitter, because the receiver ships in silicon.
+Baselines to re-measure: `gr-atsc3` 51★, `gr-isdbt` 195★, `rt-mbms-modem` 26★, `tsduck` 1,103★.
+
+**2. A rights grant can arrive with its legal basis deleted — a new licence category, and the worst
+seen so far for a regulatory input.** NTIA/ITS releases its propagation models under a notice resting on
+**17 U.S.C. §105** (works of federal employees are outside US copyright) **plus** an express
+"non-exclusive irrevocable and unconditional… royalty-free" grant covering countries where NTIA *does*
+hold rights. The ITU-R model implementations reuse **that same text with the §105 paragraph and the
+express grant removed**, leaving a warranty disclaimer and a bare statement of permission from a
+**personal account that has no statutory equivalent of §105 to stand on**. GitHub reports
+`NOASSERTION`. **This is not an OSI licence**, and it governs the propagation mathematics behind
+coverage filings in EMEA, APAC and LATAM. **Worse than the pass-8 `chromaprint` case**, because
+chromaprint's problem was ambiguity about *which* licence applied; here the question is whether an
+effective grant was ever made.
+
+**3. The compilation licence has a second, more dangerous form: it can live in the build, not the
+source.** Pass 8 found `chromaprint`'s **source tree** was a compilation. **TSDuck inverts it:** the
+source tree is clean BSD-2 with **no third-party source at all** — a source-tree SBOM scan passes —
+while `OTHERS.txt` records that the **build scripts download Dektec's proprietary, binary-only DTAPI**
+and the **installers ship it**, alongside libsrt (MPL-2.0) and librist (BSD-2) binaries. **Rule for CI
+across all twelve industries: resolve the licence of what the build downloads and what the installer
+ships, not of what the repository contains.** A clean source scan is not evidence of a clean
+redistributable.
+
+**4. Four regions, four standards, and for the first time in this KB the divergence is physical.**
+Earlier passes found divergence in *rules* (AI disclosure, consent, reservation) and concluded each time
+that the portable asset is a **per-jurisdiction policy engine**. Here the divergence is in **silicon and
+spectrum**: ATSC 3.0 (US, Korea, now Brazil), DVB-T2 (Europe), ISDB-T → Advanced ISDB-T (Japan), 5G
+Broadcast (European trials). **A policy engine cannot abstract a modulation scheme.** This is the one
+plane where "build once, configure per region" is **false**, and saying so early is worth more to a
+client than any architecture diagram.
+
+**5. The regulator-maintained reference library is a real and rare asset class.** `NTIA/itm`, `p528`,
+`ehata`, `if77`, `LFMF`, `p2108`, their **separate test-data repositories**, **Python wrappers** and a
+**published Quarto wiki** were all pushed in a **single coordinated sweep on 2026-11-24**. That is CI and
+release discipline, not a code dump — from a government research arm. Compare the ITU-R equivalents:
+one personal account, **P.1546 untouched since 2024-08-16**, top artefact **15 stars**. **Where a
+regulator maintains its own models, open source in that plane is healthy; where it does not, the plane
+runs on key-person risk.** This is the formatting-versus-judgment law of passes 6/11 extended to
+*regulatory inputs*: the regulator does not have to mandate the code, it has to **maintain** it.
+
+**6. Europe has been formally told not to expect a common answer, and that is a product spec.** The
+**RSPG concluded a common post-2030 UHF spectrum policy across Europe is impracticable**, and the
+**EBU's September 2026 WRC-27 opinion** records it. Meanwhile the decisive conference is **WRC-31, not
+WRC-27** — a widely-held misreading worth correcting in any client conversation — and EU law protects
+470–694 MHz only **until at least 2030**. A regulator-level admission that harmonisation will not happen
+converts "roadmap uncertainty" from a risk into a **billable, per-country deliverable**.
+
+**7. The successor that never inherited the audience.** `drmpeg/gr-dvbt2` is **archived, read-only,
+last pushed 2018-10-31, 73★**; its living replacement `gr-dvbt2ll` sits at **19★**. Europe's terrestrial
+standard has its most-followed open transmitter frozen for eight years while the maintained one is
+largely undiscovered. **`OpenCaster` shows the sibling pathology: 79 forks against 74 stars** — more
+people modify it privately than follow it publicly, which is what a stale-but-necessary tool looks like
+from the outside. **Diagnostic to reuse: when forks exceed stars in an infrastructure plane, the tool is
+load-bearing and unmaintained — and that is an engagement, not a red flag.**
+
+**8. The agent layer of an infrastructure plane is one repository deep, for the second pass running.**
+Pass 50 found nine casting repos at 0★. Pass 51 finds **one maintained ML tool in the entire
+over-the-air chain** — `SpectrumAlert`, GPL-3.0, **22★** — with everything else behind papers and no
+public maintained code. **Two consecutive infrastructure planes where the "AI agent" layer is
+rounding-error-sized.** The pattern is now strong enough to predict: in planes whose users are licensed
+operators rather than consumers, **the agent layer does not exist yet and the engines do**. Sell the
+engine integration; do not promise an agent ecosystem that is not there.
+

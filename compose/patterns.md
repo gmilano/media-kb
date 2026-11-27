@@ -7877,3 +7877,206 @@ defendant, per item. One compliance mode cannot satisfy these.
 reservation; pass 50 reaches it independently for identity, from both the strictest regime (Mexico) and
 the most fragmented (APAC). **Two planes, same answer: the portable asset is the policy engine, not the
 compliance mode.**
+
+## Over-the-air transmission recipes — added 2026-11-27 (pass 51)
+
+Every repo named below was verified this pass: existence by `git ls-remote`, metadata by the GitHub
+`search/repositories` API, **licence by reading the licence file's bytes**. Run Pattern 117 before
+quoting any of the others.
+
+## Pattern 113 — The transport-stream conformance and signalling service (the permissive baseline build)
+
+**Who buys it.** Any broadcaster mid-transition: a US station completing ATSC 3.0, a Brazilian
+broadcaster standing up DTV+ beside ISDB-T, a European multiplex operator. **This is the only build in
+the plane with no licence friction**, which is why it leads.
+
+**Wiring, step by step.**
+1. **`tsduck` (BSD-2-Clause, 1,103★, pushed 2026-11-24)** as the engine. Use `tsp` as a plugin pipeline,
+   not as a CLI you shell out to.
+2. **Ingest** from the plant: `tsp -I ip` for multicast, or `-I dvb` from a tuner for off-air
+   confidence monitoring of your own signal.
+3. **Analyse in-stream**: chain `-P analyze`, `-P continuity`, `-P pcrverify`, `-P tables` to emit
+   structured PSI/SI, continuity-error and PCR-jitter records.
+4. **Add the decision stage as your own `tsp` plugin** — this is where Globant IP lives. Classify
+   PCR-jitter and continuity patterns into *transport fault* versus *encoder fault* versus
+   *mux-overcommit*, which is the triage call an operator makes manually at 03:00 today.
+5. **Validate SCTE-35** splice points against the as-run log before they reach air.
+6. **Ship as a service, not as an appliance** — see the licence ledger.
+
+**Why it holds.** BSD-2 permits proprietary derivative work, TSDuck is packaged for Debian/FreeBSD and
+has a vendor-independent 21-year maintenance record (copyright 2005–2026), and `tsp`'s plugin boundary
+is a genuine extension point rather than a fork.
+
+### Licence ledger for this pattern
+- `tsduck` **BSD-2-Clause** — your plugin stays yours. **One hard condition:** `OTHERS.txt` states the
+  build downloads **Dektec DTAPI (proprietary, binary-only)** and the installers bundle it, with libsrt
+  (MPL-2.0) and librist (BSD-2) binaries on Windows. **Using `tsp` is clean; redistributing a
+  TSDuck-derived binary appliance is a licence review.** Build from source with DTAPI disabled if you
+  must ship binaries.
+- Do **not** pull `dvblast` (GPL-2.0) or `opencaster` (GPL-2.0) into the same process to "fill gaps" —
+  that is how a proprietary plugin becomes a distribution problem.
+
+## Pattern 114 — The dual-stack simulcast desk (**the highest-value build in this plane; LATAM first**)
+
+**Who buys it, and why it is ranked first.** Brazilian broadcasters face a **10–15 year** obligation to
+run **ISDB-T and DTV+ in parallel** (deployment deadline extended to **end-2027**, Decree **12,595** of
+2025-08-27, full coverage estimated at up to 15 years). That is not a migration project, it is a
+**permanent two-standard operating model**, and **no vendor sizes it and no open platform addresses it**.
+
+**Wiring, step by step.**
+1. **One editorial schedule, two emission chains.** Model the schedule once; render two signalling sets.
+2. **ISDB-T leg**: PSI/SI and EIT generation with **`tsduck`**; where a carousel or DSM-CC payload is
+   needed, **`opencaster` (GPL-2.0)** is the only open option — run it **as a separate process behind a
+   pipe**, never linked in.
+3. **DTV+ leg**: ATSC 3.0 signalling. **Stop here and read Pattern 115** — there is no open path to a
+   retail ATSC 3.0 receiver, so this leg integrates a **commercial** exciter/gateway. Your deliverable
+   is the signalling and conformance layer in front of it, not the modulator.
+4. **Reconciliation gate**: assert that the two legs carry the same service at the same time — the
+   regulator-facing artefact, and the one thing a broadcaster cannot currently prove automatically.
+5. **Per-site sequencing** from coverage studies (Pattern 116) to decide the order in which sites get
+   DTV+.
+6. **As-run evidence** for both legs, retained — this is what makes the parallel period auditable.
+
+**What this pattern will not do.** It will not transmit ATSC 3.0 from open source, it will not resolve
+the VVC/LCEVC patent position (Pattern 115), and it will not shorten the parallel period — **the
+parallel period is the revenue.**
+
+### Why this is the best-qualified LATAM engagement in this plane
+A **legal deadline**, **zero open implementation** of the target stack, a **decade-long** dual-stack
+obligation, and **proven local capacity** — `git-artes/gr-isdbt` (GPL-3.0-or-later, **195★**, UdelaR
+Montevideo) is the most-starred modulation repo in the plane and it is Latin American. The capability is
+local and documented; what is missing is an industrial programme aimed at the incoming standard.
+**Standing recommendation: partner with UdelaR rather than compete with it.**
+
+## Pattern 115 — The TV 3.0 patent-and-licence gate (**run this before anyone budgets a codec**)
+
+**A 20-minute gate, in the shape of Pattern 101, and it has teeth.** Brazil's decree mandates **VVC with
+an MPEG-5 LCEVC enhancement layer**. Pass 8 established, by reading the licences, that the open
+reference implementations of exactly those codecs — **`vvenc`, `vvdec`, `LCEVCdec`, all
+`BSD-3-Clause-Clear`** — **expressly grant no patent rights**; the *Clear* in the licence name **is**
+the carve-out. **Brazil has therefore mandated a codec pair whose open implementations decline to
+license the patents.**
+
+**The four questions, in order.**
+1. **Will you ship an encoder/decoder binary, or only operate a service?** Operating is not
+   distributing; the exposure differs.
+2. **Have you priced the VVC pool licences?** There is more than one pool. "We'll use the open
+   implementation" is **not** an answer to a patent question.
+3. **Does LCEVC's licensing position cover your deployment shape** (broadcast emission versus
+   client-side enhancement)?
+4. **Who indemnifies?** If nobody, the answer is a commercial encoder with indemnity, and the open
+   implementation is a **bench tool only**.
+
+**Deliverable.** A two-page position stating what may be shipped, what must be licensed, and what stays
+on the bench — produced **before** the architecture, because it changes it. This is a short, high-trust
+first engagement and nothing in the market sells it.
+
+## Pattern 116 — The coverage-prediction service, with the model/licence trap wired in
+
+**The trap, stated first.** The **only permissively-licensed** propagation engine in this plane —
+**`edwardoughton/itmlogic`, MIT (verified, 1,143 B), 73★** — implements **Longley–Rice/ITM**, the model
+**North American** filings use. **Every other region's filings require ITU-R P.1546 or P.1812**, whose
+only implementations are a **personal account under a bespoke non-OSI notice**, topping out at **15★**,
+with **P.1546 untouched since 2024-08-16**. **A coverage service is therefore a different build in North
+America than anywhere else**, and anyone who ships one build has shipped the wrong model somewhere.
+
+**Build A — North America (clean, permissive, recommended).**
+1. **`itmlogic` (MIT)** for the propagation core, or **`NTIA/itm`** (17 U.S.C. §105 + express worldwide
+   royalty-free grant, 88★, pushed 2026-11-24) when you need the agency's own C++ reference.
+2. Terrain from public DEM; the NTIA library ships **separate test-data repositories** — use them as
+   regression fixtures, which is the whole reason this base is trustworthy.
+3. Wrap as a hosted service. **No copyleft obligation**, so the service layer is proprietary.
+4. **ATSC 1.0 → 3.0 service-contour replication** as the headline output: prove the new contour covers
+   the old one, which is the station's regulatory burden.
+
+**Build B — EMEA / APAC / LATAM (constrained; price the constraint).**
+1. The required models are **P.1546 / P.1812**. Available implementations: `eeveetza/p1546` (12★),
+   `Py1812` (15★), `p452` (12★) — **bespoke non-OSI notice**; `cpp452` (6★) is the account's one
+   GPL-3.0 repo.
+2. **Do the licence review before the engineering.** The notice is the NTIA text **with the
+   rights-granting paragraph deleted**; a personal account has no §105 to rely on. Treat the grant as
+   **unsettled**, and get written permission or reimplement from the published Recommendation.
+3. **Reimplementation from the ITU-R Recommendation text is the defensible path** and is a real,
+   scopeable deliverable: the Recommendations are published, the maths is specified, and the result can
+   be **MIT and yours**. Validate against the existing code as a reference oracle, not as a dependency.
+4. **`hoche/splat` (GPL, `COPYING` 17,990 B)** is the free terrain tool, with two caveats: it outputs
+   **path loss, not dBµV/m** — the unit coverage is specified in — and **GPL** makes a hosted service a
+   licence decision.
+5. **Do not use `Cloud-RF/Signal-Server`** (4★, **no licence file detected**).
+
+**The sellable insight.** Three-quarters of the world's broadcast regulators depend, for a regulatory
+input, on a **twelve-star personal repository under a notice that is not an OSI licence**. Naming that
+in a first meeting establishes more credibility than any capability slide — and **the MIT
+reimplementation of P.1546/P.1812 is the single most defensible piece of IP available in this plane.**
+
+## Pattern 117 — The transmission-stack due-diligence audit (**the cheapest credible first engagement**)
+
+**Why it exists.** European and APAC broadcasters are, today, planning work on an **archived**
+transmitter and a **12-star** propagation model without knowing it. A two-week audit that says so is
+worth more than a capability deck, and it qualifies the client for Patterns 113–116.
+
+**The checklist, all verifiable in an afternoon.**
+1. **Is the open component you are relying on archived?** `drmpeg/gr-dvbt2`: **archived, read-only,
+   last pushed 2018-10-31**, 73★. Its live successor `gr-dvbt2ll` has **19★**.
+2. **Does your "open ATSC 3.0" path reach a real receiver?** `gr-atsc3` (51★) has **no ROUTE/DASH**;
+   `libatsc3` has **no canonical repository**. If the plan involves a retail set, the answer is no.
+3. **Does an open implementation of your target standard exist at all?** For **Advanced ISDB-T**:
+   **none, at any star count, under any licence.**
+4. **Read the licence file's bytes, every time.** Three of this plane's most important components report
+   `NOASSERTION` and are **not** unlicensed: `gr-isdbt` is **GPL-3.0-or-later**, `itmlogic` is **MIT**,
+   `NTIA/itm` is **effectively public domain with an express worldwide grant**. A `NOASSERTION` is a
+   prompt to read, never a conclusion.
+5. **Audit what the build downloads, not just what the repo contains** — the TSDuck/DTAPI case.
+6. **Count the maintainers.** One individual holds **DVB-T2, DVB-S2 and ATSC 3.0**; one university lab
+   holds **ISDB-T**; one association holds **5G Broadcast**. Then ask the client who they call at 03:00.
+7. **If forks exceed stars, the tool is load-bearing and unmaintained** — `opencaster`, 79f/74★.
+
+## Pattern 118 — The EMEA per-country spectrum roadmap engine
+
+**The spec comes from a regulator.** The **RSPG concluded that a common post-2030 UHF spectrum policy
+across Europe is impracticable**, recorded in the **EBU's September 2026 WRC-27 opinion**; EU law
+protects **470–694 MHz** for DTT and PMSE **until at least 2030**; and the decisive conference is
+**WRC-31, not WRC-27** — WRC-27 only decides what WRC-31 will consider. **Correct that misreading in the
+first meeting.**
+
+**Wiring.**
+1. **A per-country state model**, not a compliance mode: current standard (DVB-T/T2), switch-off status,
+   national post-2030 position, PMSE dependency, 5G Broadcast trial activity.
+2. **Scenario branches** keyed to WRC-31 outcomes, with the 2030 legal floor as the invariant.
+3. **Coverage impact per scenario** via Pattern 116 **Build B** — ITU-R models, so read the licence gate.
+4. **5G Broadcast option appraisal**: the **5G-MAG** reference stack (`rt-mbms-modem`, `rt-mbms-tx`,
+   both **AGPL-3.0**, pushed 2026-11-24; `rt-mbs-examples` pushed 2026-11-27) with **Rai/EBU
+   Milano-Cortina 2026** trials in Rome and Turin as the evidence base.
+5. **The AGPL gate, explicitly:** AGPL-3.0 on a transmit path obliges source release to the users of a
+   network service. **Decide this before architecture, not after.**
+
+**The reusable judgment, now confirmed a third time.** Pass 5 reached the per-jurisdiction policy-engine
+conclusion for rights reservation; pass 50 reached it for performer consent; **pass 51 reaches it for
+spectrum — and this time a regulator wrote the conclusion down.** With one critical limit recorded in
+`intel/trends.md`: **a policy engine cannot abstract a modulation scheme.** Patterns 113–117 are
+per-standard builds, and this is the one plane in the KB where "build once, configure per region" is
+**false**.
+
+## 🔮 Falsifiable prediction recorded this pass (test it in a later plane)
+
+**If a corporate contributor ever enters the open modulation layer, it will arrive permissively licensed
+and on the *receiver* side, not the transmitter** — because receivers ship in silicon and transmitters
+ship in licences. Baselines recorded 2026-11-27: `tsduck` 1,103★ (BSD-2, the lone permissive asset),
+`gr-isdbt` 195★, `NTIA/itm` 88★, `itmlogic` 73★, `gr-atsc3` 51★, `rt-mbms-modem` 26★, `SpectrumAlert`
+22★, `Py1812` 15★, `p1546` 12★ (unpushed since 2024-08-16). **Secondary test:** whether `gr-dvbt2ll`
+(19★) ever crosses its archived predecessor's 73★ — if it never does, this plane's problem is
+discoverability, not maintenance.
+
+## ⛔ What not to promise in this plane (pass 51)
+
+- **An open ATSC 3.0 service path** — `gr-atsc3` cannot reach a retail receiver; `libatsc3` has no
+  canonical repo.
+- **An open DVB-T2 transmitter from the obvious repo** — archived since 2018.
+- **Anything for Advanced ISDB-T** — no open implementation exists.
+- **An open TV 3.0 stack** — none exists, and its mandated codecs' open implementations grant **no
+  patent rights**.
+- **A single coverage service for all regions** — the permissive engine implements the **North American**
+  model only.
+- **A supported, permissive P.1546/P.1812 implementation** — it does not exist. Offer to **build** it.
+- **Brazil's mid-2026 World Cup timeline** — superseded; cite the decree and the **end-2027** extension.
+- **An agent ecosystem** — the entire ML layer of this plane is **one repo at 22★**.

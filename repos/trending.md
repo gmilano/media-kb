@@ -10,6 +10,60 @@ updated: 2026-11-27
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-27 — pass 51: over-the-air infrastructure (**the licence of a media pipeline tracks its transport, not its function**)
+
+**The headline, and it is a new law for this KB.** Pass 8 measured the same signal travelling over IP
+and found the stack **permissive nearly everywhere** — `srs` MIT 29k★, `mediamtx` MIT 20k★,
+`shaka-packager` BSD-3, `trafficserver` Apache-2.0 — with the real gate being **patent pools**, not
+copyright. Push that identical transcode-package-deliver function **over the air** instead and the
+stack inverts completely:
+
+| Layer | Over IP (pass 8) | Over the air (pass 51) |
+|---|---|---|
+| Typical licence | MIT / Apache-2.0 / BSD-3 | **GPL-2.0, GPL-3.0, AGPL-3.0** — one BSD-2 exception in the whole chain |
+| Maintainers | Corporate + foundation | **One individual holds DVB-T2 + DVB-S2 + ATSC 3.0; one university lab holds ISDB-T** |
+| Star scale | 20,000–30,000★ | 19–195★ at the modulation layer |
+| The gate | Patent pools (`BSD-3-Clause-Clear`) | **Copyleft, plus no maintainer to call** |
+
+**Infrastructure repos verified this pass** (existence by `ls-remote`, metadata by API, licence by bytes):
+
+| Repo | Licence (verified) | Pushed | Note |
+|---|---|---|---|
+| https://github.com/tsduck/tsduck | **BSD-2-Clause** (`LICENSE.txt` 1,331 B) | 2026-11-24 | 1,103★/245f. **Build downloads proprietary Dektec DTAPI** (`OTHERS.txt`) — clean source, mixed redistributable. |
+| https://github.com/gnuradio/gnuradio | GPL-3.0 | 2026-11-26 | 6,360★/2,209f. Core tree has a DVB-T2 modulator; **ATSC 1.0 only**, not 3.0. |
+| https://github.com/git-artes/gr-isdbt | **GPL-3.0-or-later** (bytes read) | 2025-01-30 | 195★/44f. UdelaR Uruguay. |
+| https://github.com/NTIA/itm | **§105 + express worldwide grant** (2,087 B read) | 2026-11-24 | 88★/34f. Agency-maintained library. |
+| https://github.com/edwardoughton/itmlogic | **MIT** (1,143 B read) | 2025-05-14 | 73★/25f. Only permissive propagation engine. |
+| https://github.com/videolan/dvblast | GPL-2.0 | 2026-11-07 | 75★/33f. Demux/stream only. |
+| https://github.com/aventuri/opencaster | GPL-2.0 | **2024-05-04** | 74★/**79f**. DSM-CC carousels for HbbTV; forks exceed stars. |
+| https://github.com/drmpeg/gr-dvbt2 | GPL-3.0 | **2018-10-31** | 73★. **ARCHIVED.** |
+| https://github.com/drmpeg/dtv-utils | GPL-3.0 | 2026-06-28 | 62★/11f. Rate/PCR/padding math. |
+| https://github.com/drmpeg/gr-dvbs2rx | GPL-3.0 | 2025-08-26 | 72★/15f. DVB-S2/T2 receiver. |
+| https://github.com/drmpeg/gr-atsc3 | GPL-3.0 | 2026-06-18 | 51★/9f. No ROUTE/DASH. |
+| https://github.com/drmpeg/gr-dvbt2ll | GPL-3.0 | 2025-09-11 | 19★/3f. Low-latency DVB-T2 Tx. |
+| https://github.com/5G-MAG/rt-mbms-modem | **AGPL-3.0** | 2026-11-24 | 26★/13f. `rt-mbms-tx` AGPL-3.0 10★, `rt-libflute` 25★, `rt-mbs-examples` pushed **today**. |
+| https://github.com/eeveetza/Py1812 | **Bespoke non-OSI** (835 B read) | 2026-08-28 | 15★/4f. ITU-R P.1812. |
+| https://github.com/eeveetza/p452 | **Bespoke non-OSI** | 2026-08-29 | 12★/1f. `cpp452` (6★) is the account's only real licence: GPL-3.0. |
+| https://github.com/eeveetza/p1546 | **Bespoke non-OSI** (838 B read) | **2024-08-16** | 12★/2f. ITU-R P.1546. |
+| https://github.com/hoche/splat | **GPL** (`COPYING` 17,990 B read) | — | SPLAT!. **Absent from the GitHub search index — stars/push not retrievable, not guessed.** |
+| https://github.com/Cloud-RF/Signal-Server | **No licence file detected** | 2025-08-28 | 4★/1f. Recorded as an informed negative, not recommended. |
+
+**A false negative of mine, corrected in the open, because the method is the point.** My first search
+concluded "no open-source ITU-R P.1546 implementation exists." That was **wrong** — `eeveetza/p1546`
+and `eeveetza/p1812` both exist. The KB's standing rule saved it: a web search's silence is never
+evidence of absence, so check the namespace directly. **And the corrected finding is far stronger than
+the error would have been:** both model families are open, but the North American model is maintained
+by the regulator's own research arm as a tested multi-repo library *and* has an MIT Python
+implementation at 73★, while the models EMEA/APAC/LATAM filings require sit in **one personal account,
+under a notice that is the NTIA text with the rights-granting paragraph deleted**, topping out at
+**15 stars**, with P.1546 untouched since **August 2024**.
+
+**Maintenance note for the next pass.** `drmpeg/gr-dvbt2` archived 2018 while `gr-dvbt2ll` lives at 19★
+is the clearest "the successor never inherited the audience" case in this KB. Watch whether
+`gr-dvbt2ll` crosses its predecessor's 73★ — if it never does, the plane's discoverability problem is
+worse than its maintenance problem.
+
+
 ## 2026-11-27 — pass 50: the talent & consent plane (**the only adopted platform in the plane is a 2009 staffing ATS under a compilation licence**)
 
 **Infrastructure and platform repos, verified 2026-11-27.**

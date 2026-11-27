@@ -2732,3 +2732,39 @@ platforms are media-native and the gap is the agent layer. In this plane the mat
 (`OpenCATS`, `frappe/hrms`) are **generic business software**, permissive media-native tooling is
 weeks old at 0–1 stars, and the thing a production actually pays for — booking a performer, recording
 their consent, and settling what is owed — has no deployable system anywhere.
+
+## Transmission-side platforms — real systems you can deploy and customise, added 2026-11-27 (pass 51)
+
+The pattern of the last several passes has been "mature platforms exist but are generic business
+software, and the media-native tooling is weeks old at 0★." **This plane breaks that pattern in both
+directions**: the platforms here are entirely media-native — nobody writes a transport-stream
+multiplexer for any other industry — and several have been in production use for fifteen years. What
+they lack is not maturity but **a permissive licence and a living maintainer**.
+
+| Platform | Repo | Licence (verified) | Pushed | Deployable as | Customisation surface for AI |
+|---|---|---|---|---|---|
+| **TSDuck** | https://github.com/tsduck/tsduck | **BSD-2-Clause** (`LICENSE.txt` read) | 2026-11-24 | A real, documented, cross-platform product (Linux/Windows/macOS/BSD) with 1,103★, Debian/FreeBSD packages and a NetActuate marketplace appliance | **The best integration point in the plane.** `tsp` is a plugin pipeline, so an analysis or decision model drops in as a plugin stage: continuity-error and PCR-jitter classification, automatic PSI/SI conformance repair, SCTE-35 splice validation. BSD-2 means Globant IP stays Globant's. **Audit `OTHERS.txt` before shipping a binary** — the build pulls proprietary Dektec DTAPI. |
+| **DVBlast** | https://github.com/videolan/dvblast | GPL-2.0 | 2026-11-07 | VideoLAN-maintained, built for unattended 24×7 operation; the core of a custom IRD or ASI gateway | Service-level monitoring and alarm generation at the demux edge. Does **no** transcode and **no** remux by design — don't size it as a mux. |
+| **OpenCaster** | https://github.com/aventuri/opencaster | GPL-2.0 | **2024-05-04** | Debian-packaged mux + playout suite; **DSM-CC object carousels for HbbTV**, which is the interactive-TV delivery path and has no permissive alternative | Playlist/schedule automation and carousel assembly. **Stale since May 2024 and its commercial descendant (Avalpa Broadcast Server) is where maintenance went** — scope a fork, or buy the commercial build. |
+| **5G-MAG Reference Tools** | https://github.com/5G-MAG/rt-mbms-modem | **AGPL-3.0** (modem and `rt-mbms-tx`) | 2026-11-24 | The only end-to-end open 5G Broadcast stack: transmitter, modem, FLUTE carousel, Android middleware, 5GMS application function/server | The credible EMEA greenfield. **AGPL-3.0 on the transmit path is the hard constraint** — an AGPL network service obliges source release to its users. Settle this before architecture, not after. |
+| **SPLAT!** | https://github.com/hoche/splat | **GPL** (`COPYING` read) | — | Debian-packaged terrain coverage tool, the de-facto free option for ITM studies | Batch coverage runs, site-candidate scoring. Two real limits: output is **path loss, not dBµV/m**, and **GPL** — so a hosted planning service built on it is a licence decision. Existence verified by `ls-remote`; **not in the GitHub search index, so no star/push figures are quoted here.** |
+| **NTIA/ITS Propagation Library** | https://github.com/NTIA/itm | **17 U.S.C. §105 + express worldwide grant** (`LICENSE.md` read) | 2026-11-24 | Not an application — a **maintained library with test-data repos, Python wrappers and a published wiki**, refreshed in a coordinated sweep 2026-11-24 | **The cleanest licence position in the plane and the right base for a hosted coverage service in North America.** Effectively public domain, with an express ex-US grant, so no copyleft obligation on the service you wrap around it. |
+| **itmlogic** | https://github.com/edwardoughton/itmlogic | **MIT** (`LICENSE` read) | 2025-05-14 | Pip/conda-installable Python ITM, JOSS-published, 73★ | **The only permissive propagation engine available.** For a Python/ML coverage pipeline this is the one row in the table with no licence friction at all. Implements the **North American** model only. |
+
+### The honest gap in this table
+
+There is **no deployable open platform** for:
+
+- **ATSC 3.0 service delivery** — `gr-atsc3` has no ROUTE/DASH stack and cannot reach a retail set;
+  `libatsc3` still has no canonical repository.
+- **Advanced ISDB-T** — nothing, at any star count, in any licence.
+- **Brazil's TV 3.0 / DTV+** — nothing implements the mandated stack, and its codec layer
+  (VVC + LCEVC) has open reference implementations that **expressly grant no patent rights** (pass 8).
+- **ITU-R-model coverage prediction as a product** — the models exist as research code under a
+  non-OSI notice; **no packaged, supported, permissive implementation exists for P.1546 or P.1812.**
+
+Against the KB's running comparison: in the talent plane (pass 50) the mature platforms were generic
+business software and the media-native tools were weeks old at 0★. **Here the mature platforms are
+media-native and fifteen years old, and the blocker is the licence and the maintainer count.** That is a
+much better starting position for an integrator — and a much worse one for anyone who needs a vendor
+to call at 03:00 when a transmitter drops off air.

@@ -5553,3 +5553,84 @@ Pass 8 measured this gradient on content and found "publishers are equipped to s
 the code that listens, and nothing calculates what is owed." **Pass 50 measures it on human identity
 and finds the identical shape.** The law is not about content or identity. It is about the fact that
 declaring is a schema, and paying is a judgment.
+
+## Foundations of the over-the-air transmission plane — added 2026-11-27 (pass 51)
+
+Every row verified 2026-11-27: existence by `git ls-remote`, stars/forks/push via the GitHub
+`search/repositories` API, **licence by reading the bytes of the licence file** wherever the API
+returned `NOASSERTION`. Three of the most important rows in this table were `NOASSERTION` and are *not*
+unlicensed — that is the fourth time this KB has caught that false negative.
+
+### Multiplex, signalling and playout — the top of the chain
+
+| Repo | Licence (verified) | ★ / forks | Pushed | Role |
+|---|---|---|---|---|
+| https://github.com/tsduck/tsduck | **BSD-2-Clause** (`LICENSE.txt`, 1,331 B) | 1,103 / 245 | 2026-11-24 | **The anchor of this plane and the only permissive asset in it.** TS analysis, PSI/SI generation, remux, injection, 100+ `tsp` plugins. **But see `OTHERS.txt`:** the build downloads Dektec **DTAPI (proprietary, binary-only)** and the installers bundle it with libsrt (MPL-2.0) and librist (BSD-2). Source clean, redistributable not. |
+| https://github.com/videolan/dvblast | GPL-2.0 | 75 / 33 | 2026-11-07 | VideoLAN's lightweight DVB demux/streamer for 24×7 operation; PID filtering, service-based output preserving PAT/PMT. **Explicitly does no transcoding and no remultiplexing** — pair it with TSDuck, do not expect it to mux. |
+| https://github.com/aventuri/opencaster | GPL-2.0 | 74 / 79 | **2024-05-04** | The classic free MPEG-TS mux/playout suite: CBR muxing, PCR stamping, null-packet handling, PID remapping, DSM-CC object carousels for HbbTV. **Nineteen months without a push** — the commercial Avalpa Broadcast Server built on it is where the maintenance went. Note the fork count (79) exceeds the stars (74), the signature of a tool people modify privately rather than follow. |
+
+### Modulation and physical layer — all copyleft, and two maintainers hold the whole category
+
+| Repo | Licence | ★ / forks | Pushed | Standard / status |
+|---|---|---|---|---|
+| https://github.com/gnuradio/gnuradio | GPL-3.0 | 6,360 / 2,209 | 2026-11-26 | The SDR framework everything below is an out-of-tree module for. Core tree ships a **DVB-T2 modulator** block and **ATSC 1.0 (8VSB) only** — not ATSC 3.0. |
+| https://github.com/git-artes/gr-isdbt | **GPL-3.0-or-later** (`LICENSE` 973 B + `COPYING` 35,147 B) | **195 / 44** | 2025-01-30 | **ISDB-T (ARIB STD-B31), Rx + Tx. The most-starred modulation repo in the plane and the only one from LATAM** — UdelaR, Montevideo. Its own README notes the OFDM core is derived from a DVB-T implementation, ISDB-T being close kin. |
+| https://github.com/drmpeg/gr-dvbt2 | GPL-3.0 | 73 / 23 | **2018-10-31** | DVB-T2 transmitter. **ARCHIVED, read-only.** The obvious repo for Europe's terrestrial standard has been frozen for eight years. |
+| https://github.com/drmpeg/gr-dvbt2ll | GPL-3.0 | 19 / 3 | 2025-09-11 | Low-latency DVB-T2 Tx, EN 302 755 v1.3.1. The live replacement for the archived one, at a quarter of its stars. |
+| https://github.com/drmpeg/gr-dvbs2rx | GPL-3.0 | 72 / 15 | 2025-08-26 | DVB-S2/T2 **receiver** blocks. The satellite-contribution counterpart. |
+| https://github.com/drmpeg/gr-atsc3 | GPL-3.0 | 51 / 9 | 2026-06-18 | **The only open ATSC 3.0 transmitter.** TS in; **no ROUTE/DASH**, so no retail receiver will decode it. |
+| https://github.com/drmpeg/dtv-utils | GPL-3.0 | 62 / 11 | 2026-06-28 | DTV rate/PCR/padding calculators. |
+| https://github.com/5G-MAG/rt-mbms-modem | **AGPL-3.0** | 26 / 13 | 2026-11-24 | 5G Broadcast / FeMBMS receive modem (5G-MAG reference tools); built on parts of the srsRAN library. `rt-mbms-tx` AGPL-3.0 (10★) is the transmitter, `rt-libflute` (25★) the FLUTE carousel, `rt-mbs-examples` pushed **2026-11-27, the day of this pass**. |
+
+**The structural fact.** Count the owners of the physical layer: **`drmpeg` (one individual) holds
+DVB-T2, DVB-S2 and ATSC 3.0; one university lab in Uruguay holds ISDB-T; one industry association holds
+5G Broadcast.** Six of the eight rows are GPL-3.0, one is AGPL-3.0, none is permissive. There is no
+corporate maintainer anywhere in the modulation layer of a trillion-dollar broadcast industry.
+
+### Propagation and coverage — the regional split lives here
+
+| Repo | Licence (verified) | ★ / forks | Pushed | Model / note |
+|---|---|---|---|---|
+| https://github.com/NTIA/itm | **17 U.S.C. §105 + express worldwide royalty-free grant** (`LICENSE.md`, 2,087 B) | 88 / 34 | 2026-11-24 | ITS Irregular Terrain Model (Longley–Rice), 20 MHz–20 GHz. **The model US filings use, published and maintained by the US regulator's own research arm.** API reports `NOASSERTION`; it is effectively public domain. |
+| https://github.com/edwardoughton/itmlogic | **MIT** (`LICENSE`, 1,143 B) | **73 / 25** | 2025-05-14 | **The only permissively-licensed propagation implementation found in this plane.** Longley–Rice ITM in pure Python, published via the *Journal of Open Source Software*; a conda-forge feedstock exists. API reports `NOASSERTION`. |
+| https://github.com/hoche/splat | **GPL** (`COPYING`, 17,990 B) | — | — | SPLAT! — the long-standing terrain/ITM coverage tool, Debian-packaged. **Existence confirmed by `ls-remote`; the repo is absent from the GitHub search index, so stars and push date could not be retrieved and are not guessed here.** Known limitation from the trade press: it outputs **path loss, not dBµV/m field strength**, which is the unit broadcast coverage maps are specified in. |
+| https://github.com/eeveetza/p1546 | **Bespoke 838-byte notice, NOT an OSI licence** — see `agents/top.md` | 12 / 2 | **2024-08-16** | **ITU-R P.1546**, the point-to-area field-strength model non-US regulators require. **Untouched for over two years.** |
+| https://github.com/eeveetza/Py1812 | Same bespoke notice (835 B) | 15 / 4 | 2026-08-28 | **ITU-R P.1812** in Python — the highest-starred ITU-R model implementation anywhere, at **15 stars**. MATLAB sibling `p1812` has 4★. |
+| https://github.com/eeveetza/p452 | Same bespoke notice | 12 / 1 | 2026-08-29 | ITU-R P.452 interference prediction. `cpp452` (6★) is the one repo in the account under a real licence, **GPL-3.0**. |
+| https://github.com/NTIA/p528 | NTIA notice as above | 39 / — | 2026-11-24 | ITU-R P.528 aeronautical. Part of a **coordinated agency library** — `ehata` 21★, `if77-gierhart-johnson` 13★, `LFMF` 10★, `p2108` 6★, plus separate **test-data** repos, **Python wrappers** and a Quarto **wiki**, all pushed 2026-11-24 in one sweep. |
+
+**The finding this plane exists to record, and it corrects a false negative of my own.** My first search
+concluded "no open-source ITU-R P.1546 implementation exists." **That was wrong**, and the KB's own rule
+caught it: a web search's silence is not evidence, so I checked the namespace directly. The truth is
+sharper than the error:
+
+> **Both model families are open. They are not maintained on remotely comparable terms.** The model
+> North American filings use is maintained **by the regulator's own research arm** as a versioned,
+> test-vectored, multi-language library of a dozen repositories, refreshed in a single coordinated sweep
+> four days ago — *and* it has an independent **MIT** Python implementation with 73 stars. The models
+> that **EMEA, APAC and LATAM** filings require live in **one individual's personal GitHub account**,
+> under a **bespoke notice that is not an OSI licence and from which the operative rights grant has been
+> deleted**, where the single most-starred artefact has **15 stars** and the P.1546 implementation has
+> not been touched since **August 2024**.
+
+Three-quarters of the world's broadcast regulators depend, for the propagation mathematics behind every
+coverage filing, on a personal repository with twelve stars. That is **key-person risk on a regulatory
+input**, it is measurable, and it is the most directly sellable gap found in this plane.
+
+### How this plane relates to the rest of the KB
+
+**Pass 8 found that OTT delivery is permissive nearly everywhere** (srs MIT 29k★, mediamtx MIT 20k★,
+shaka-packager BSD-3, trafficserver Apache-2.0) and that the gate was **non-copyright**: patent pools,
+with `BSD-3-Clause-Clear` marking the carve-out. **Pass 51 finds the opposite for the same signal.**
+Push that signal over the air instead of over IP and the stack becomes **GPL-2.0/GPL-3.0/AGPL-3.0 with
+one BSD-2 exception**, maintained by individuals, with no patent question raised at all at the
+modulation layer.
+
+**New law, logged: the licence of a media pipeline tracks its transport, not its function.** The same
+transcode-package-deliver function is permissive and corporate over IP and copyleft and personal over
+the air. The reason is adjacency to hardware and to regulators: IP delivery is a CDN business with
+corporate contributors, over-the-air delivery is an instrument business whose authors are researchers
+and whose users are license-holders. **Testable prediction, baseline recorded today:** if a corporate
+contributor ever enters the modulation layer it will arrive with a permissive licence and a receiver
+(ROUTE/DASH) rather than a transmitter, because the receiver is what ships in silicon. Baselines to
+re-measure: `gr-atsc3` 51★, `gr-isdbt` 195★, `rt-mbms-modem` 26★, `tsduck` 1,103★.

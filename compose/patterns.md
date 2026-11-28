@@ -8667,3 +8667,151 @@ Carried in full in `intel/trends.md` pass 55. The six-line version:
    continuity.
 6. **No** shortlisting by the GitHub SPDX field — it returns `NOASSERTION` for fourteen repositories in this
    plane, mixing safe BSD/MPL with explicitly non-commercial. **Read the file.**
+
+## Pattern 133 — The 20-minute licence gate for any creative-automation proposal (**the plane where the top search result has no licence at all**)
+
+Pass 55's Pattern 132 gates roto/paint/matchmove. This plane needs its own gate because **it fails
+differently**: not non-commercial by design, but **unlicensed, undeclared, or an MIT shell on a closed API**.
+
+Run before anyone scopes hours. Five commands.
+
+1. **Does it exist?** `git ls-remote --exit-code -h https://github.com/<slug>`. The only existence oracle.
+   **`ZebangCheng/AdCraft`, `yisibl/resvg-js` and `amzn/style-dictionary` all resolve here while
+   `search/repositories` returns 422.** A 422 is **not** absence.
+2. **Is the slug canonical?** If `ls-remote` resolves but search 422s, suspect a **redirect**:
+   `git ls-remote --symref https://github.com/<slug> HEAD`. **`amzn/style-dictionary` →
+   `style-dictionary/style-dictionary`.** Writing the stale slug ships a row that 404s for the reader.
+3. **What is the licence, read from the file?**
+   `curl -s https://raw.githubusercontent.com/<slug>/{main,master}/{LICENSE,LICENSE.md,LICENSE.txt,LICENCE,COPYING,LICENSE-MIT}`
+   — all six names, both branches. **`Samsung/rlottie`'s MIT is in `COPYING`**; **`linebender/resvg` is dual
+   MIT+Apache and only `LICENSE-MIT`/`LICENSE-APACHE` exist**. Then grep the text for **`non-commercial`**
+   — that one word is the gate. **`AdCraft`'s file is titled "PERSONAL AND NON-COMMERCIAL LICENSE".**
+4. **If no file is found, that is the answer, not a probe failure.** **`cmenguy/ad-forge` has no LICENSE,
+   SPDX `null`, and no licence statement in `README.md` or `pyproject.toml`.** Check those two before
+   concluding, then **stop: no licence means all rights reserved.**
+5. **Is the "open" project actually an engine?** Read the dependency list for a **hosted API**.
+   **`creatify-ai/video-ad-generator` is MIT and calls the proprietary Creatify API** — clean licence,
+   closed engine. Ask: *if the vendor turns off the key, what still runs?*
+
+**Output:** one line per component — *exists / canonical slug / licence as read / engine or wrapper /
+commercially usable yes-no*. Any `non-commercial`, missing licence file, `NOASSERTION` you could not resolve
+from a file, or hosted-API dependency is a **hard stop requiring a named alternative** before the proposal
+goes out.
+
+## Pattern 134 — The per-destination disclosure manifest (**the build item four jurisdictions and five platforms all demand, and nothing open implements**)
+
+**The problem, stated precisely.** One approved master must publish to many destinations, and **the required
+disclosure state differs per destination** — by statute *and* by platform, and the two do not align.
+Everything in this pattern is a verified requirement from `intel/market.md` pass 56.
+
+**The components, all licence-verified in `repos/foundations.md` pass 56:**
+
+| Step | Component | Licence |
+|---|---|---|
+| Brand tokens as the single source of truth | `style-dictionary/style-dictionary` | Apache-2.0 |
+| Token authoring for designers | `tokens-studio/figma-plugin` | MIT |
+| Template → deterministic SVG | `vercel/satori` | MPL-2.0 |
+| SVG → PNG raster | `linebender/resvg` | dual MIT + Apache-2.0 |
+| SVG minify in the delivery path | `svg/svgo` | MIT |
+| Raster resize per placement spec | `lovell/sharp` | Apache-2.0 |
+| Provenance signing at render | `c2pa-rs` *(already in this KB)* | — |
+
+**The wiring.**
+
+1. **Author once.** Brand tokens in Tokens Studio → `style-dictionary` compiles them to the render
+   pipeline's variables. **The approved unit is the template plus its token set**, per `intel/trends.md`
+   pass 56 §3 — not the individual asset.
+2. **Render deterministically.** Satori turns template + tokens + copy into SVG; `resvg` rasterises;
+   `sharp` resizes to each placement spec. **Deterministic means a variant is provably derived from the
+   approved master** — which is what makes the human sign-off meaningful and what a prompt-based generator
+   cannot give you.
+3. **Attach the disclosure manifest — the part that does not exist and must be built.** A per-destination
+   policy table, keyed on destination, emitting:
+   - **EU** — Article 50 disclosure; **do not claim the 50(2) "assistive editing" carve-out** (the Code of
+     Practice denies advertising the lighter regime). Exposure: **€15 m or 3% of worldwide turnover**.
+   - **California** — **SB 942** latent/hidden provenance in image, video and audio, plus the free
+     detection-tool obligation on large providers; duties from **2026-08-02**.
+   - **New York** — Google's AI ad label is **non-overridable**; the other 49 states, optional.
+   - **India** — **SGI** declaration field; Google's label **non-overridable**.
+   - **China** — content labelling, and registration where applicable.
+   - **TikTok** — AI label for realistic people/scenes, and advertiser labelling of AI ad media.
+   - **Google Merchant Center** — AI metadata on product images.
+4. **Sign provenance at render, then verify it survived.** Embed C2PA at step 2. Then **assert
+   per-destination**: **YouTube and Instagram embed C2PA; TikTok, X and Snapchat do not** (April 2026). The
+   pipeline must **record that the metadata was stripped** rather than silently assume it persisted.
+5. **Emit the evidence pack.** Per campaign: approved master + token hash, variant manifest, disclosure
+   state per destination with the rule cited, C2PA survival result, and the human approver.
+
+**Why this is the sellable deliverable.** It is **deterministic software, not a model**; every requirement
+is **dated and in force**; and it is the one piece **no open project occupies** — `dynamic creative
+optimization` returns **54 repos**, most-starred a **4★ portfolio site**. Sell this in **North America** on
+SB 942 plus the New York label split, in **EMEA** on Article 50, and in **LATAM** on the TikTok obligation
+(the region follows the EU model, so **the EMEA build ports at near-zero marginal cost**).
+
+## Pattern 135 — The transcreation factory, APAC-first (**the one region where an open starting point already exists**)
+
+**Why APAC and not a generic localization pipeline.** `transcreation` returns **76 results**, and the top hit
+is a **real, MIT-licensed, India-origin platform**: **`AI4Bharat/Chitralekha`** (118★, 31 forks) —
+transcription, translation **and voice-over** for Indic languages. This plane's APAC engagement therefore
+starts from **a fork, not an assembly**.
+
+**The stack.**
+
+1. **Fork `AI4Bharat/Chitralekha` (MIT) and budget maintenance.** ⚠️ Its last push is **2025-10-31** — about
+   a year stale. **Treat upstream as a starting point, not a dependency.** State this in the estimate; it is
+   the single biggest cost risk in the pattern.
+2. **Reframe for every placement.** `AhmedHisham1/pyautoflip` (**MIT**, 24★) for saliency-aware **video**
+   reframing to target aspect ratios; `jwagner/smartcrop.js` (**MIT**, 12,961★) for stills. ⚠️ smartcrop's
+   last default-branch commit is **2024-03-16** — **vendor it**, do not track it.
+3. **Burn localized text correctly.** This is where the plane meets this KB's **pass 38 type/font and
+   multi-script text-rendering** work: Indic, CJK and RTL scripts break naive template renderers. Satori +
+   `resvg` handle the layout; the **font-coverage checks from pass 38 are a prerequisite**, not an optional
+   extra.
+4. **Render and animate.** `thorvg/thorvg` (**MIT**, pushed **2026-11-27**) for Lottie/vector —
+   **not `airbnb/lottie-web`**, whose default branch has not moved since **2024-11-19** despite 32,619★.
+5. **Attach the per-market obligation from Pattern 134.** **India:** SGI declaration, Google label
+   non-overridable. **China:** labelling and registration. **Korea:** ⛔ **no text-and-data-mining exception
+   in the Copyright Act** (declined February 2026) — **so training a voice or style model on scraped local
+   material has no safe harbour in Korea.** That constraint belongs in the architecture, not the appendix.
+6. **Scope with a regulator's own map.** **ACMA's April 2026 sector papers** map AI use across Australian
+   television, radio and news — an unusually good, free scoping document for an AU engagement.
+
+**The LATAM variant, and the one thing to change.** The same stack serves Spanish/Portuguese markets with
+**far less script complexity** (step 3 nearly disappears), and the obligation layer becomes **TikTok's label
+plus the EU-model alignment**. Lead with **ADEPA's published guide for media using AI** — a
+publisher-association-endorsed workflow recommendation is a cheaper door into a LATAM newsroom than a
+generic framework. ⛔ **Brazil and Mexico ad-creative rules were not found this pass — re-run before any
+compliance claim in the region's two largest markets.**
+
+## Pattern 136 — The reviewable creative pipeline (**make "a human approved this" a provable claim**)
+
+**The industry consensus is human final approval** — Sprinklr's survey reports **77% comfortable with AI
+workflows when a human signs off**, and its creative agents **only vary already-approved creative**. But
+"a human approved it" is worthless as an audit claim unless you can show **which human, approved what, and
+that the thing shipped was derived from it.** That is this pattern.
+
+1. **Make the template the approval unit.** Approve **template + token set + copy deck**, version-controlled
+   via `style-dictionary` (Apache-2.0). Record the approver and a **content hash of the token set**.
+2. **Generate only downstream of approval.** Variants come from the approved template via Pattern 134's
+   deterministic Satori → `resvg` → `sharp` path. **Deterministic rendering is what makes derivation
+   provable**; a re-prompted generator breaks the chain, which is why the generation step is kept *outside*
+   the approved path.
+3. **Gate by risk, not uniformly.** Per this pass's research: **medium risk → lightweight human review for
+   strategic fit; high risk → senior stakeholder review.** Define "high risk" concretely — **synthetic
+   performers or likenesses** (NO FAKES, TAKE IT DOWN, ASCI's reported virtual-influencer guidance),
+   **regulated claims**, and **any destination where disclosure is mandatory and non-overridable** (EU, New
+   York, India).
+4. **Automate the checks that compile, not the ones that opine.** Token conformance, contrast, safe-area and
+   placement-spec conformance are **deterministic checks** — run them in CI and fail the build. Keep
+   brand-*judgement* with the human. ⛔ **Do not sell an "AI brand compliance" model as the gate**: the
+   nearest real open project found for `brand compliance` was **`utter-one/bonsai` at 59★** out of 596
+   results, and Google's own described pipeline **evaluates compliance after generation**.
+5. **Emit one artefact per campaign.** Approver identity, approved template hash, variant manifest,
+   deterministic-derivation proof, CI check results, disclosure state per destination, C2PA survival per
+   platform.
+
+**What this is worth.** It converts the plane's compliance burden into **the product**. The client needs the
+evidence pack anyway in the EU, California, New York, India and China; building it as the pipeline's output
+rather than as quarterly cleanup is the difference between a cost centre and a capability. **And it is
+licence-clean end to end** — Apache-2.0, MPL-2.0 and MIT only, with **no `ad-forge`, no `AdCraft`, and no
+hosted-API dependency** in the critical path.

@@ -2957,3 +2957,49 @@ source**, but its Additional Use Grant permits free production use by **individu
 watching precisely because it is the only project in the plane that has drawn the right *output* boundary:
 **mattes as AOVs into the compositor the client already runs.** Its licence makes it a design reference, not
 a dependency.
+
+## The creative-production & brand-asset platform layer — pass 56 (2026-11-28)
+
+The pattern this KB keeps finding holds here too: **the customisable open platform exists, but it sits one
+layer below where the client thinks the product is.** Nobody ships an open "creative automation platform".
+Several people ship the design surface, the token compiler and the ad server underneath one.
+
+| Platform | Repo / home | Licence (**read from file**) | ★ | What it is, and what you customise on top |
+|---|---|---|---|---|
+| **Penpot** | https://github.com/penpot/penpot | **MPL-2.0** | **62,834** | Self-hostable design & prototyping tool with **design tokens**. The **Odoo of this plane**: the open authoring surface a brand-template system can be built into. Pushed 2026-11-27 |
+| **Style Dictionary** | https://github.com/style-dictionary/style-dictionary | **Apache-2.0** | **4,899** | Compiles one brand-token source into CSS, iOS, Android, Figma and render-pipeline outputs. **The brand-compliance layer that actually enforces, because it compiles rather than advises** |
+| **Tokens Studio** | https://github.com/tokens-studio/figma-plugin | **MIT** | 1,633 | Token authoring where designers already work; feeds Style Dictionary |
+| **Revive Adserver** | https://github.com/revive-adserver/revive-adserver | **GPL-2.0** | 1,526 | A real, maintained open ad server (pushed 2026-11-27). **Copyleft** — fine self-hosted for a client, a licence conversation if you redistribute |
+| **Chitralekha** | https://github.com/AI4Bharat/Chitralekha | **MIT** | 118 | Video **transcreation** platform — transcription, translation, voice-over for Indic languages. The only verified open platform in this plane aimed at transcreation |
+| **MediaCMS** | https://github.com/mediacms-io/mediacms | **AGPL-3.0** (read from `LICENSE.txt`) | **5,200** | Video/media CMS, pushed 2026-11-27. **AGPL** — network copyleft; fine self-hosted, a hard conversation for a SaaS build |
+
+**Six platforms, every licence verified this pass.** And one removal that matters more than any addition:
+
+### ⛔ Pimcore — already recorded in this KB, independently re-confirmed, and it now bites this plane too
+
+**This is not a new finding and should not be presented as one.** `agents/top.md` already carries Pimcore's
+**Pimcore Open Core Licence (POCL)**, including the detail that `LICENSE.md` 404s on `master` and `main`
+because the default branch is **`2026.x`**. **What this pass adds is independent corroboration from a
+different source** — a general CMS/DAM reference stating Pimcore **abandoned its open-source platform for
+version 12 and moved to the proprietary POCL licence in 2025**.
+
+**Why it matters here specifically:** Pimcore is the combined **CMS + DAM + PIM** that brand and commerce
+engagements reach for, which is exactly the shape of an ad-creative-production engagement. The existing
+POCL note lives in the agents file, where a brand-studio proposal will not look.
+
+**The honest replacement set, because there is no single one:** **Penpot** for the authoring surface,
+**Style Dictionary** for brand tokens, **Nextcloud** or object storage for asset custody, and the
+`repos/foundations.md` pass-56 substrate for render. ⛔ **This is an assembly, not a product**, and a
+proposal should say so rather than imply a Pimcore-shaped drop-in exists.
+
+### Two platform-layer gaps, measured and stated rather than left silent
+
+- **DAM with a verified permissive licence was not found this pass.** The DAM candidates that surfaced
+  (**Phraseanet**, **Nextcloud** — both already named in this KB) came back **without licence information in
+  this pass's results**, and neither was licence-verified from a file in this session. **Do not quote either
+  licence on the strength of this pass.** The one DAM-adjacent system that *was* verified here is
+  **MediaCMS**, and it is **AGPL-3.0** — neither MIT, Apache nor BSD.
+- **No open newsroom-to-ad-creative bridge exists.** **Superdesk** (already in this KB) is the open newsroom
+  CMS, and **its licence was not confirmed in this pass's results either** — flagged in earlier passes and
+  still unverified. Nothing found connects an editorial system to brand-templated commercial creative.
+  That join is **build work**, and `compose/patterns.md` Pattern 135 is where it is specified.

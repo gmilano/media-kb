@@ -5375,3 +5375,132 @@ the stronger of the two explanations. The pass-54 prediction on `openpartner` re
    ProPainter, MatAnyone, MatAnyone 2, MatAnyone-E, E2FGVI, VGGT, DUSt3R, MASt3R, CoTracker, SAM 3, COLMAP,
    ceres-solver, Meshroom and Blender — a set that mixes **safe BSD/MPL/GPL** with **explicitly
    non-commercial**. The field cannot distinguish them. **Read the file.**
+
+## Trends — pass 56 (2026-11-28): the ad-creative production & creative-automation plane
+
+**The plane, and why it was missing.** Brand templating, master→variant versioning, saliency reframing,
+transcreation, DCO and the creative-ops review gate — the layer an agency or in-house studio bills for. It
+was absent from this KB: `creative ops` **0**, `brand template` **0**, `transcreation` **0**, `creative
+versioning` **0**, `brand guideline` **0**, `aspect ratio` **0**, `smart crop` **0**, `dynamic creative`
+**0**, `creative automation` **0**, `ad spec` **0** mentions before this pass.
+
+### 1. The plane's defining asymmetry: a priced category with no open engine
+
+Five research firms size **DCO software between $0.97 bn and $3.2 bn for 2026** (a **3.3× spread**), and
+`search/repositories` returns **54 results** for `dynamic creative optimization` whose **most-starred member
+is a personal portfolio site with 4 stars**. Meanwhile the **substrate is 226,149★ of permissive,
+actively-maintained infrastructure** — Penpot, sharp, Fabric, Satori, Style Dictionary, resvg, ThorVG — none
+of which mentions advertising. **The components are open; the assembly is not.** Globant's position in this
+plane is the assembly, and it is defensible precisely because no upstream project occupies it.
+
+### 2. Operational AI is overtaking generative AI, and the analysts now say so out loud
+
+The year's framing has shifted. Deloitte argues gen AI should be treated as **foundational infrastructure
+rather than a pilot**, and expects AI-generated content to **flood social feeds**.† Quickplay's Paul Pastor
+expects a shift toward **operational AI (managing yield) rather than generative AI for creating content**.†
+EY says AI speeds production while **authenticity becomes the industry's rarest asset**, and notes
+**agentic systems expanding across dubbing, localization and personalization**.†
+
+**For this plane that resolves a strategy question.** The money is **not** in generating another hero asset —
+it is in the **operational layer**: versioning, reframing, labelling and routing that asset to hundreds of
+destinations, each with its own spec and disclosure rule. **That layer is deterministic software, not a
+model**, which is why the substrate above is sufficient and why the plane is buildable now.
+
+### 3. Human sign-off is the consensus, and that makes the review gate a product
+
+Vendors are converging on **pre-publication automated checks with human final approval**: IntelligenceBank
+reviews creative during production and proofing; Frontify runs checks on asset creation or review-status
+change; Google describes a **Gemini pipeline that evaluates brand compliance after generation**.† Sprinklr's
+own survey reports **77% are comfortable with AI workflows when a human has final approval**,† and its
+October 2026 creative-agents beta **produces variations of creative that has already been approved** —
+i.e. **the approved master is the gate, and automation runs downstream of it**.†
+
+**The architectural consequence, and it is the single most reusable idea in this pass:** the unit of
+approval is the **template plus its token set**, not the individual asset. Approve once, then generate
+variants that are **provably** derived from the approved master. **This is what `style-dictionary` makes
+possible and what a prompt-based generator cannot do** — and it is the difference between a reviewable
+pipeline and an unreviewable one.
+
+### 4. Channel rules have become a build requirement, and they differ per destination
+
+Compliance in this plane is no longer a legal review at the end; it is **fields in the render manifest**:
+
+- **EU:** Article 50 applicable since **2026-08-02**; **advertising is denied the lighter artistic-works
+  regime**; fines to **€15 m or 3% of worldwide turnover**.†
+- **US:** **California SB 942** duties from **2026-08-02** (free detection tool, latent provenance);
+  **New York** is the one US jurisdiction where **Google's AI ad label cannot be overridden**.†
+- **India:** **SGI** IT-Rules amendment notified **February 2026**; platforms must have users declare
+  synthetic content; **Google's label is non-overridable**.†
+- **China:** mandatory registration and **strict content labelling**.†
+- **Platforms, which bind soonest:** **TikTok requires AI labels** for realistic people/scenes; **Google
+  Merchant Center asks for AI metadata on product images**; **TikTok asks advertisers to label AI ad
+  media**.†
+- **And provenance does not survive the trip.** As of **April 2026**, **YouTube and Instagram embed C2PA;
+  TikTok, X and Snapchat do not.**†
+
+**So the same approved master must emit different disclosure state per destination.** That is a
+**per-destination policy table in the pipeline**, and nothing open implements it. It is the most concrete
+build opportunity this plane offers (**Pattern 134**).
+
+### 5. In-housing plus cost compression changes who the buyer is
+
+**In-house brand studios are the fastest-growing agency type at 13.85% CAGR (2027–2032)**,† while
+**automation is compressing creative production costs**.† Those two facts together mean the buyer for this
+plane is **a brand building an owned capability**, not an agency protecting billable hours. **That is a
+Globant-shaped engagement** — and it argues for an **owned, licence-clean, self-hostable stack** over a
+seat-based SaaS the client will re-procure in two years.
+
+### 6. The licence failure mode in this plane is worse than in pass 55, in a specific way
+
+Pass 55 found the state of the art **deliberately non-commercial**. Here the failure is **absent or
+undeclared licensing in the exact repos a search engine recommends first**:
+
+- **`cmenguy/ad-forge`** — the searches' *"closest match"* for creative automation. **No LICENSE file**;
+  SPDX `null`; README and `pyproject.toml` silent. **No licence means all rights reserved.** 0★.
+- **`ZebangCheng/AdCraft`** — reported as *"open-sourced July 1, 2026"*. Its licence file is titled
+  **"PERSONAL AND NON-COMMERCIAL LICENSE", Version 1.0, 2026**. **Commercially unusable.**
+- **`creatify-ai/video-ad-generator`** — genuinely **MIT**, and an **MIT wrapper around the proprietary
+  Creatify API**. The licence is clean; **the engine is not open**.
+
+**The lesson is sharper than "read the licence": in this plane, "open source" in a write-up predicts
+nothing.** Three of the top recommendations were unusable, and the usable substrate was found by **ignoring
+advertising keywords entirely** and searching for rendering and token infrastructure.
+
+### 7. Two measurement lessons that changed rows in this pass
+
+- **`pushed_at` is an upper bound on liveness, not a measurement.** `airbnb/lottie-web` reports
+  `pushed_at` **2025-09-01** while its **default branch last moved 2024-11-19**; `mifi/editly` reports
+  **2025-05-12** against **2025-02-20**. Both look twice as alive as they are. `git clone --bare --depth 1`
+  then `log -1` is the fix, and it is cheap.
+- **The SPDX field produced false negatives in both directions.** `konvajs/konva` (**15,034★**) and
+  `Samsung/rlottie` (**1,452★**) both report **`NOASSERTION`** and are both **MIT** in the file — rlottie's
+  in `COPYING`. Conversely `cmenguy/ad-forge`'s `null` was correct. **And `search/repositories` returned 422
+  for three repos that `ls-remote` resolved**, one of them (`amzn/style-dictionary`) because it **redirects**
+  to `style-dictionary/style-dictionary`. **Write canonical slugs.**
+
+### ⛔ What not to promise in this plane (pass 56)
+
+1. **No** "open source DCO platform" — the category is sized at **$1–3 bn** and its most-starred
+   open repository is **a 4★ portfolio website**. The engine does not exist; the assembly is the offer.
+2. **No** use of `ad-forge` (**unlicensed**) or `AdCraft` (**explicitly non-commercial**) in client work,
+   whatever a roundup calls them.
+3. **No** reuse of **pass 55's Article 50(2) "assistive editing" carve-out** for advertising — the Code of
+   Practice **denies advertising the lighter regime**. Same article, opposite answer.
+4. **No** quoting the **$372 bn** creative-production figure: the page publishing it **states its
+   methodology avoids sizing the market**, and the comparable "advertisement production" figure is **169×
+   smaller**.
+5. **No** regional market split for this plane — **none was found for any of the four regions**, and the one
+   APAC advertising-growth snippet sits on a **page about global manufacturing**.
+6. **No** citation of **ASCI's reported 2026-09-29 AI-labelling guidelines** — the source reporting it
+   **could not confirm it officially**.
+7. **No** claim that **Pimcore** is an open DAM/PIM foundation (**POCL**, already recorded in this KB and
+   re-confirmed this pass), and **no** quoting of **Phraseanet's or Superdesk's licence**, neither of which
+   was licence-verified in this pass.
+8. **No** star-ranked shortlist here: it selects **`lottie-web` (32,619★, frozen since 2024-11-19)** over
+   **`thorvg` (1,939★, pushed today)**. Rank by **default-branch freshness**.
+
+† Single secondary source, not verified against primary text. Consistent with pass 55,
+`artificialintelligenceact.eu` **does not resolve under this session's network policy**, so all EU AI Act
+Article 50 claims in this pass are **secondary-sourced only**. `api.github.com` and `github.com` HTML are
+**blocked for out-of-scope repositories** in this session; all repository figures came from
+`gh api search/repositories`, `git ls-remote` and `raw.githubusercontent.com` instead.

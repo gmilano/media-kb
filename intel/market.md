@@ -11221,3 +11221,199 @@ InterPositive price, the 42.7% NA share, the 39% UK AVEC rate, and the AB 2319 V
 **The EU Article 50(2) carve-out wording is corroborated across multiple independent secondary sources but
 was NOT read from primary text in this session** — `artificialintelligenceact.eu` and `restofworld.org` do
 not resolve under this session's network policy and would need to be allowed to close that gap.
+
+## Market size — pass 56 addendum (2026-11-28): the creative-automation plane, where **the two most-quoted figures for the same plane disagree by 169×**
+
+**The spread is the finding.** DCO software, the narrow category, is sized by five firms within a factor of
+3.3. The surrounding "creative production" category is sized by two firms **169× apart**. A deck that quotes
+either number without the spread is quoting a definition, not a market.
+
+| Figure | 2026 value | Forward | Source type |
+|---|---|---|---|
+| DCO software — Mordor Intelligence | **$1.97 bn** | $4.09 bn by 2031, **15.73% CAGR** | Market research† |
+| DCO — Marketintelo | **$3.2 bn** | — | Market research† (**likely a broader "platform" definition**) |
+| DCO — PMarket Research | **~$1.65 bn** | software/platforms **65.0%** of the market in 2025 | Market research† |
+| DCO — The Business Research Company | **$1.16 bn** | $1.92 bn by 2030 | Market research† |
+| DCO — Business Research Insights | **$1.12 bn** | $2.68 bn by 2035 | Market research† |
+| DCO — WENKH Research | **$0.97 bn** | $2.03 bn by 2033 | Market research† |
+| **Advertisement production services** | **~$2.2 bn** | $4.2 bn by 2035, 7.4% CAGR | Market research† |
+| **Creative production services** | **~$372 bn** | $595 bn by 2032, ~8% | Market research† — ⛔ **see below** |
+| Creative agency market | **~$30 bn** | $70 bn by 2034 | Market research† |
+| Creator-related ad spend | **$116 bn** | +15% YoY | Madison and Wall, via trade press† |
+
+**⛔ Do not quote the $372 bn figure.** The same page that publishes it **states its methodology avoids
+sizing the market**. A source internally inconsistent about whether it sizes anything is not a source. And
+note what the inconsistency does to the plane: **"advertisement production services" at ~$2.2 bn and
+"creative production services" at ~$372 bn are nominally the same activity, 169× apart.** The honest line
+for a client deck is: **this plane is not reliably sized; the defensible numbers are the DCO cluster
+($1.0–2.0 bn for narrow definitions, 10–16% growth) and the structural signals below.**
+
+**The structural signals are worth more than the market sizes, and they point the same way:**
+
+- **In-house brand studios are the fastest-growing agency type — 13.85% CAGR, 2027–2032.**† Full-service
+  integrated agencies held the largest share in 2026 at ~25%.† Independently, trade analysis reports
+  **growing client in-housing** with **automation compressing creative production costs**.†
+- **Read together, that is the whole thesis of this plane:** the work is moving *in-house* at the same moment
+  automation is cutting its unit cost. The buyer is therefore **not an agency defending billable hours** —
+  it is **a brand building an owned capability**, which is exactly what Globant sells and exactly the
+  engagement shape that an open, licence-clean substrate (`repos/foundations.md` pass 56) fits.
+- **The $116 bn creator figure is not comparable** and should not be put beside the production numbers: it
+  **includes media cost, not creative fees**.
+
+### Pass 56 (2026-11-28) — the creative-automation plane in North America
+
+- **The binding rules are state-level, and one of them is an engineering requirement, not a policy.**
+  **California SB 942, the AI Transparency Act**, carries duties for large generative-AI providers **from
+  2026-08-02**, including **a free detection tool** and **latent/hidden provenance** in images, video and
+  audio.† For a creative-automation pipeline this is a **build item in the render path**, not a legal review.
+- **The federal picture is executive, not statutory, and is actively pulling the other way.** **Executive
+  Order 14365 (2025-12-11)** created a **DOJ task force to challenge state AI laws**, and a bipartisan
+  preemption draft from **June 2026** has stalled.† **Do not build a US compliance story that assumes state
+  rules are stable** — build the provenance capability, which satisfies the rule either way.
+- **Also in force:** the **TAKE IT DOWN Act** (enforced since **May 2026**) and the **NO FAKES Act**
+  (advanced June 2026)† — together pushing consent documentation, output labelling and fast takedown. These
+  land on **synthetic performers in ad creative**, which is this plane.
+- **Platform reality beats statute for a creative pipeline.** **Google applies AI labels to ads
+  automatically in the EU, India and New York, and advertisers cannot override them there**; elsewhere the
+  label is optional, and **Google itself says using it does not guarantee compliance**.† **New York is the
+  only US jurisdiction in that non-overridable list** — a US campaign is label-mandatory in New York and
+  label-optional in the other 49 states, from the same creative.
+- **The provenance gap is the opportunity.** As of **April 2026**, **YouTube and Instagram embed C2PA
+  metadata; TikTok, X and Snapchat do not.**† So provenance **survives to some destinations and is stripped
+  at others** — a measurable, demonstrable problem.
+- **Canada:** the **"AI for All" strategy (2026-06-04)** commits to **watermarking AI-generated content**,
+  an AI-literacy push and a **Canada Trusted AI Certification** programme.† Canada has **no comprehensive AI
+  statute** — **AIDA died with Bill C-27 in January 2025**.†
+- **The NA opportunity, concretely.** Build the **provenance-and-label layer of the creative pipeline** —
+  C2PA at render, SB 942 latent provenance, per-destination label policy (New York vs the rest), and
+  evidence that metadata survives each platform. This is `compose/patterns.md` **Pattern 134**, and it is
+  **the highest-probability NA engagement in this plane** — not the generation.
+
+### Pass 56 (2026-11-28) — the creative-automation plane in EMEA
+
+- **EMEA is the only region where this plane's compliance requirement is unambiguous, dated and priced.**
+  **EU AI Act Article 50 has applied since 2026-08-02.**† Providers must make generated output
+  **machine-detectable**; deployers must **visibly disclose realistic deepfakes**.
+- **The provision that decides this plane: advertising is denied the lighter regime.** Commission guidelines
+  and a **Code of Practice deny advertising the lighter artistic-works regime**.† Pass 55 found Article
+  50(2)'s **"assistive function for standard editing"** carve-out and used it for compositing. **It does not
+  rescue ad creative**: the carve-out turns on not substantially altering the input or its semantics, and a
+  generated or substantially reframed ad does both. ⛔ **Do not reuse pass 55's Article 50(2) argument in an
+  advertising proposal** — it is the same article and the opposite answer.
+- **The price of getting it wrong: fines to €15 m or 3% of worldwide turnover.**†
+- **One date is genuinely contested in the sources and must not be smoothed:** the Code of Practice
+  publication is given as **2026-06-10** by one source and **2026-07-20** by another.† One source also states
+  the rule is **not retroactive** for content generated before **2026-08-02** — a material scoping point for
+  any archive-reuse campaign. ⛔ **Read the primary text (Regulation (EU) 2024/1689 on EUR-Lex) before
+  quoting any of these three points.** Consistent with pass 55, `artificialintelligenceact.eu` **does not
+  resolve under this session's network policy**, so Article 50 is again **cited from secondary sources only**.
+- **Adoption is real but deliberate, and the bottleneck is named.** Google Cloud research found **64% of
+  media and entertainment companies already had Gen AI use cases, but adoption was lowest in content
+  production at 35%**.† Bandwidth–Cavell's survey of **500 EMEA enterprise IT and telecom leaders** found
+  **49% rank AI/ML implementation a top communications priority for 2026**, while adopting **deliberately
+  rather than rapidly**.† The Akamai/DPP *State of AI in Media 2026* describes some firms in **"AI
+  paralysis"**, waiting for regulation or standards before acting.†
+- **The 64%/35% split is the sales argument.** Demand is proven and **content production is the least-served
+  function** — precisely this plane.
+- **Who is already in the room:** ISG names **Accenture, Capgemini, HCLTech, IBM and Infosys** as leaders in
+  its EMEA media and entertainment report,† and reports EMEA media firms using AI for **content
+  commissioning, ad optimisation and audience targeting**. **Globant is not on that list** — the wedge is
+  the Article 50 creative-compliance layer, which is narrower and more concrete than an SI's AI practice.
+- **Also live:** MEPs have proposed requiring **disclosure of copyrighted training data** and an **opt-out
+  from AI training for news publishers**, still in progress.† The **UK** is consulting on **AI chatbot
+  safeguards for children**.†
+- **The EMEA opportunity.** Sell the **Article 50 evidence pack for advertising**: disclosure at render,
+  machine-detectable provenance, the deepfake-disclosure decision record, and a written basis for why the
+  50(2) carve-out was *not* claimed. **Pattern 134 plus Pattern 136.**
+
+### Pass 56 (2026-11-28) — the creative-automation plane in APAC
+
+- **APAC has the region's only verified open transcreation platform, and it is the plane's best regional
+  asset anywhere.** **`AI4Bharat/Chitralekha` — MIT, 118★, 31 forks** — transcription, translation and
+  voice-over for **Indic languages**. It was the **top hit of only 76 results** for `transcreation`. ⚠️ Its
+  last push is **2025-10-31**: **adopt it as a fork, budget maintenance**, do not assume upstream.
+- **India's rules are in force and they bind the *platform*, which changes who must act.** The IT Rules
+  amendment on **"Synthetically Generated Information" (SGI)** was **notified in February 2026**†;
+  obligations fall mainly on platforms, which must have users **declare synthetic content**. **Google's
+  non-overridable AI ad label applies in India.**† So in India, **declaration is a delivery-time field in
+  the ad pipeline**, not an internal policy.
+- **Two India items are unreliable and are flagged rather than used.** Sources give the SGI effective date
+  as both **February 10** and **February 20, 2026**.† And an **ASCI AI-labelling guideline reported
+  2026-09-29** — covering **virtual influencers and replicated likenesses**, which is squarely this plane —
+  **could not be confirmed from an official source** by the source reporting it. ⛔ **Do not cite ASCI in a
+  client deck on this basis**; check ASCI directly first.
+- **South Korea is the regional anchor, and it made a copyright decision that matters to training-based
+  creative.** The **AI Basic Act** is among the first comprehensive national AI laws and other APAC
+  regulators are reported to use it as a model.† Critically, Korea **declined to introduce a text-and-data-
+  mining exception into its Copyright Act in February 2026**† — **training on scraped brand or editorial
+  material has no TDM safe harbour in Korea**, unlike the EU's regime.
+- **China:** described as the most comprehensive framework in the region, with **mandatory registration** and
+  **strict content-labelling obligations**.† Labelling is a **product requirement** in any China-facing
+  creative pipeline.
+- **Australia:** an **Office of AI** was established in **July 2026** to coordinate policy, and **ACMA
+  published formal sector papers in April 2026 mapping AI use across television, radio and news**† — a
+  regulator-authored map of where AI already sits in media, which is an unusually good scoping document.
+  Government is also **exploring licensing arrangements for AI training on local data**.†
+- **Elsewhere:** **Malaysia's** National AI Office opened consultation on an **AI Governance Bill on
+  2026-07-10** (risk-based, proposing a Central AI Authority)†; **Vietnam and Taiwan** brought AI-specific
+  statutes into force in 2026.† A regional media review (April 2026) concluded **AI deployment has outpaced
+  governance across APAC**.†
+- **The APAC opportunity.** **Transcreation at language scale with a label obligation attached.** Fork
+  Chitralekha, wire it to the pass-56 render substrate, and attach the per-market label field (India
+  mandatory, China labelling, Korea no-TDM constraint on training). This is **Pattern 135** — and it is the
+  one region where a credible open starting point already exists rather than needing to be assembled.
+
+### Pass 56 (2026-11-28) — the creative-automation plane in LATAM
+
+- **LATAM's distinguishing feature in this plane is that the enforcement focus matches the plane exactly.**
+  Law-firm analysis of the region calls **deepfakes and synthetic media "rapidly becoming enforcement
+  priorities"**,† and the region **broadly follows the EU model** on AI regulation.† For ad creative, that
+  means **the Article 50-shaped deliverable built for EMEA is the reusable asset here** — which is a cost
+  advantage, not a second build.
+- **What is actually in force:** **Peru's AI regulation took effect in January 2026**, framed to promote AI
+  while reducing risk across health, education, justice and citizen security.† **Colombia** has taken the
+  lighter route — **CONPES 4144**, a government-wide policy running **through 2030** for capacity, adoption
+  and ethical guardrails, rather than binding rules.† Several countries have adopted the **OECD AI
+  Principles**, and **Uruguay signed the Council of Europe AI convention in 2025**.†
+- **Platform rules bind before statutes do.** **TikTok requires labels on AI-generated or significantly
+  edited content showing realistic-looking people or scenes.**† In a region where statute is uneven, the
+  **platform label is the operative requirement** for a LATAM campaign.
+- **The region's media bodies are ahead of its regulators, and one has published something directly
+  usable.** **Argentina's ADEPA has developed a guide for media using artificial intelligence, with
+  recommendations on platforms, tools and workflows.**† **Colombia's FLIP** and ADEPA both research AI
+  adoption in media while tracking the regulatory debate.† The **International Fund for Public Interest
+  Media (IFPIM)** backs LatAm AI media projects, and its **CTRL+J** convenings cover sustainability, AI
+  regulation and disruption, with its **inaugural LatAm conference held in São Paulo in March**.†
+- **ADEPA's guide is the entry point.** It is a **publisher-association-endorsed workflow recommendation** —
+  the cheapest route into a LATAM media engagement is to **align a proposal to it** rather than arrive with
+  a generic framework.
+- ⛔ **Informed gap, stated rather than left silent.** A dedicated search returned **nothing on
+  Brazilian or Mexican rules specific to AI in advertising creative** this pass — **no result on PL 2338 as
+  it touches ad creative, and nothing on Mexican synthetic-media rules for advertising.** Earlier LATAM
+  findings in this file still stand; **nothing new was found this pass, and the absence of a result is not
+  evidence of an absence of regulation.** Brazil and Mexico are the two largest LATAM ad markets, so
+  **re-run before any LATAM advertising-compliance claim.**
+- **The LATAM opportunity.** The EMEA Article 50 deliverable **ports here at near-zero marginal cost**
+  because the region follows the EU model, and the **deepfake/synthetic-media enforcement focus means the
+  disclosure layer is the part a LATAM client will actually pay for first.** Pattern 134, sold on the
+  TikTok label obligation and ADEPA's guide rather than on a statute.
+
+### ⛔ The regional gap that applies to all four regions equally
+
+**No region-specific market figure for DCO or creative automation was found for *any* of the four regions
+this pass.** The only regional advertising statement that surfaced was a snippet claiming **APAC will be the
+fastest-growing advertising region in 2026** — and that snippet sits on a page about **global
+manufacturing**, so **it is not citable and is not carried into this KB as data.** The regional sections
+above are therefore built on **regulation, named institutions and dated events**, all of which were
+verifiable, rather than on regional revenue splits, which were not. **If a client needs regional market
+sizing for this plane, it is a paid primary-research task, not a KB lookup.**
+
+† Figure or claim from a **single secondary source** — trade press, vendor, law-firm bulletin or
+market-research summary — **not** verified against a primary filing, statute or gazette. Specifically
+unverified in this pass: **every market size in the table above**; the EU Article 50 dates, the Code of
+Practice date conflict, the advertising carve-out denial and the €15 m/3% figure (primary text
+unreachable under this session's network policy); California SB 942's duties and date; EO 14365; the TAKE IT
+DOWN and NO FAKES statuses; Canada's "AI for All" commitments; Google's per-jurisdiction ad-label behaviour;
+the April 2026 C2PA platform-support split; India's SGI dates and the **ASCI guideline, which its own source
+could not confirm officially**; Korea's TDM decision; China's labelling regime; Australia's Office of AI and
+ACMA papers; Malaysia's bill; Peru's and Colombia's instruments; and ADEPA's, FLIP's and IFPIM's activities.

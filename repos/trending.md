@@ -10,6 +10,42 @@ updated: 2026-11-28
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-28 — pass 56: the creative-automation substrate (**226,149★ of permissive infrastructure that never says the word "advertising"**)
+
+**The inversion worth recording.** The agent layer of this plane is near-empty and licence-poisoned (see
+`agents/trending.md` pass 56). The **infrastructure layer is the opposite**: large, permissive, and pushed
+within the last week. It is invisible to an advertising-keyword search because none of it is filed under
+advertising.
+
+| Repo | Licence (**read from file**) | ★ | Last push | Why it is in this plane |
+|---|---|---|---|---|
+| [penpot/penpot](https://github.com/penpot/penpot) | **MPL-2.0** | **62,834** | 2026-11-27 | Self-hostable design tool **with design tokens** — the open template-authoring surface |
+| [lovell/sharp](https://github.com/lovell/sharp) | **Apache-2.0** | **32,873** | 2026-11-27 | The variant-render workhorse (libvips) |
+| [airbnb/lottie-web](https://github.com/airbnb/lottie-web) | **MIT** | **32,619** | 2025-09-01 (**default branch 2024-11-19**) | Animation playback; shipping branch effectively frozen |
+| [fabricjs/fabric.js](https://github.com/fabricjs/fabric.js) | **MIT** | **31,572** | 2026-11-24 | Canvas object model under most template editors |
+| [svg/svgo](https://github.com/svg/svgo) | **MIT** | **22,845** | 2026-11-08 | SVG optimiser in the delivery path |
+| [konvajs/konva](https://github.com/konvajs/konva) | **MIT** (SPDX `NOASSERTION`) | **15,034** | 2026-11-25 | 2D scene graph; the Fabric alternative |
+| [vercel/satori](https://github.com/vercel/satori) | **MPL-2.0** (**not MIT**) | **14,222** | 2026-11-25 | **HTML/CSS → SVG**: deterministic brand-template rendering |
+| [style-dictionary/style-dictionary](https://github.com/style-dictionary/style-dictionary) | **Apache-2.0** | **4,899** | 2026-11-03 | Compiles brand tokens to every platform target |
+| [linebender/resvg](https://github.com/linebender/resvg) | **Dual MIT + Apache-2.0** | **4,227** | 2026-11-27 | SVG → PNG; closes the Satori loop |
+| [thorvg/thorvg](https://github.com/thorvg/thorvg) | **MIT** | 1,939 | **2026-11-27** | The **maintained** Lottie/vector engine |
+| [tokens-studio/figma-plugin](https://github.com/tokens-studio/figma-plugin) | **MIT** | 1,633 | 2026-11-27 | Token authoring inside Figma |
+| [Samsung/rlottie](https://github.com/Samsung/rlottie) | **MIT** (in `COPYING`) | 1,452 | 2026-09-30 | Lottie for embedded and device targets |
+| [revive-adserver/revive-adserver](https://github.com/revive-adserver/revive-adserver) | **GPL-2.0** | 1,526 | 2026-11-27 | Genuinely open ad **serving** — copyleft, and the wrong half of the plane |
+
+**Thirteen rows, every licence read from the file, every figure an exact integer from
+`search/repositories`.** The twelve permissive rows total **226,149★**, and
+**ten of the thirteen were pushed within the last three weeks**.
+
+**The one to stop recommending, and the one to start.** `airbnb/lottie-web` (**32,619★**) outranks
+`thorvg/thorvg` (**1,939★**) by **16.8×** on stars, but lottie-web's default branch last moved **2024-11-19**
+and ThorVG's moved **today**. A star-ranked shortlist picks the frozen one. **Rank by default-branch
+freshness in this plane, not by stars.**
+
+**`excalidraw/excalidraw` (MIT, 136,410★, pushed 2026-11-27) is recorded here deliberately and excluded.**
+It is the largest permissive canvas project found and it is a **whiteboard** — it does not version brand
+creative. Noted so a later pass does not pull it in on its star count alone.
+
 ## 2026-11-28 — pass 55: the compositing-floor substrate (**91,749★ of maths under a 525★ tool**)
 
 **Channels all available** (`ls-remote`, `gh api search`, `raw`); **51/51** URLs resolved, every licence read

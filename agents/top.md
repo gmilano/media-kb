@@ -5215,3 +5215,90 @@ so both would have read as "no licence" under the older probe. One honest channe
 **resolves by `ls-remote`** but returns **422** from `search/repositories`, so its metrics are unavailable
 here; `perarnia/fSpy` (**GPL-3.0** read from file, 2,637★, last push 2022-12-08) is the measurable copy and
 the canonical-URL question is left open rather than guessed.*
+
+## The ad-creative production & creative-automation plane — measured 2026-11-28 (pass 56)
+
+**The plane:** brand templating, master→variant versioning, saliency reframing to new aspect ratios,
+transcreation, dynamic creative optimisation (DCO) and the creative-ops review gate. This is the layer an
+agency or in-house studio actually bills for, and before this pass it existed in this KB only as a
+half-sentence — *"ad creative is Pattern 2 with a 15-second input"*. Measured keyword counts across the
+whole KB before writing: `creative ops` **0**, `brand template` **0**, `transcreation` **0**,
+`creative versioning` **0**, `brand guideline` **0**, `aspect ratio` **0**, `smart crop` **0**,
+`templating` **0**, `dynamic creative` **0**, `creative automation` **0**, `ad spec` **0**.
+
+**Channel note for this pass — read it before trusting any number below.** `git ls-remote`,
+`gh api search/repositories` and `raw.githubusercontent.com` **all worked**. **`api.github.com` and
+`github.com` HTML did not** — both return `403` with *"GitHub access to this repository is not enabled for
+this session"* for every repo outside this session's own scope. So: **every star and fork figure below is an
+exact integer from `search/repositories`**, **every licence was read from the actual LICENSE/COPYING file**,
+and **existence was confirmed by `ls-remote`**. Nothing here is copied from a listicle.
+
+### The headline, and it is a licence finding again — but a different failure mode than pass 55
+
+Pass 55 found the state of the art licensed **non-commercial on purpose**. This plane fails differently:
+**the repos that claim to do creative automation are either non-commercial, carry no licence at all, or have
+zero stars — while the layer that genuinely works is generic rendering and token infrastructure that never
+mentions advertising.**
+
+| Agent / tool | Repo | Licence (**read from the file today**) | ★ | Forks | Last push | Verdict for Globant |
+|---|---|---|---|---|---|---|
+| AdCraft (agentic ad video) | https://github.com/ZebangCheng/AdCraft | ⛔ **"PERSONAL AND NON-COMMERCIAL LICENSE" v1.0, 2026** | n/a — **search 422** | n/a | 2026-10-20 | **Hard stop.** Cannot be used in client work |
+| ad-forge (brand-kit creative pipeline) | https://github.com/cmenguy/ad-forge | ⛔ **NO LICENCE FILE** — SPDX `null`, README and `pyproject.toml` both silent | **0** | 0 | 2026-03-14 | **Hard stop.** No licence = all rights reserved |
+| video-ad-generator | https://github.com/creatify-ai/video-ad-generator | ⚠️ **MIT** — but it is an MIT *wrapper around the proprietary Creatify API* | 74 | 8 | 2026-03-03 | Prompt framework, **not an engine** |
+| ad-creative-generator (Figma→display) | https://github.com/marek-kujda/ad-creative-generator | ⚠️ **NOASSERTION** (a secondary source claims GPL-3; **not verified from the file**) | 3 | — | 2026-03-24 | Unverifiable licence, negligible adoption |
+| OpenAdFormats (42 Meta static formats) | https://github.com/clawnify/OpenAdFormats | ✅ **MIT** | **4** | — | 2026-11-17 | Real licence, **4★** — a reference, not a dependency |
+| Tela (local-first ad design canvas) | https://github.com/heyimjames/tela | ✅ **MIT** | 31 | — | 2026-07-10 | Real licence, pre-adoption |
+| Chitralekha (Indic transcreation) | https://github.com/AI4Bharat/Chitralekha | ✅ **MIT** | 118 | 31 | 2025-10-31 | **The only verified transcreation platform in this plane** — see APAC |
+| pyautoflip (saliency video reframing) | https://github.com/AhmedHisham1/pyautoflip | ✅ **MIT** | 24 | 4 | 2026-11-15 | Works; check UNISAL + InsightFace licences downstream |
+
+**The two traps are not marginal — they are what a search engine recommends first.** Asked for open-source
+creative automation, this session's searches returned **ad-forge as the "closest match"** and **AdCraft as
+"open-sourced July 1, 2026"**. One has no licence; the other's licence file is titled *"PERSONAL AND
+NON-COMMERCIAL"* and says permission is granted "to any individual … for personal and non-commercial
+purposes." **Neither is open source in the sense this KB uses the term**, and both would have entered the KB
+as usable findings on a prose reading.
+
+### The measured zero, with the totals that hide it
+
+The KB convention is to report the search total alongside the top hit, because a plausible total is how a
+zero disguises itself. Sorted by stars, via `search/repositories`:
+
+| Query | Total results | Top hit by stars | What it actually is |
+|---|---|---|---|
+| `dynamic creative optimization` | **54** | `dungnotnull/hd-modern-portfolio` **4★** | **A personal portfolio website.** The named $1–2 bn software category has **no open implementation** |
+| `creative automation` | 1,376 | `ultrafunkamsterdam/nodriver` 4,967★ AGPL-3.0 | **A browser-automation library.** Pure phrase collision |
+| `banner versioning` | 398 | `cirosantilli/china-dictatorship` 3,381★ | Unrelated. The total is noise end to end |
+| `ad creative generator` | 184 | `creatify-ai/video-ad-generator` 74★ MIT | An MIT wrapper on a closed API |
+| `brand compliance` | 596 | `utter-one/bonsai` 59★ Apache-2.0 | Nearest real thing; **59★** |
+| `transcreation` | **76** | `AI4Bharat/Chitralekha` 118★ MIT | **A genuine find** — see APAC |
+| `smart crop` | 11,882 | `jwagner/smartcrop.js` **12,961★** MIT | The canonical option, **last default-branch commit 2024-03-16** |
+
+**`dynamic creative optimization` is the cleanest relevant zero this KB has recorded.** 54 results, and the
+most-starred is a portfolio site with four stars — for a software category three independent research firms
+size between **$0.97 bn and $3.2 bn in 2026**. There is money in this plane and no open engine in it.
+
+### This refines pass 34 rather than contradicting it
+
+Pass 34 recorded *"the agent result is zero"* for advertising creative generation and named **Creatify** as
+commercial. Re-measured today that still holds, with one correction worth carrying: **Creatify does now
+publish an MIT repo** (`creatify-ai/video-ad-generator`, 74★). But the MIT artefact is a **Claude agent
+skill containing creative frameworks that call the Creatify API** — the generation stays proprietary. **The
+zero was right about the engine and slightly wrong about the repo list.** Re-measuring is what found it.
+
+### The SPDX field lied again — twice, in opposite directions
+
+Consistent with the pass-55 lesson, and it matters because shortlisting by the API field would have produced
+the wrong answer both ways:
+
+- **`konvajs/konva`** — SPDX field **`NOASSERTION`**; `LICENSE` reads **"MIT License"**. Rejecting on the
+  field would discard a **15,034★** MIT dependency.
+- **`Samsung/rlottie`** — SPDX field **`NOASSERTION`**; the licence is **MIT**, in **`COPYING`**, not
+  `LICENSE`. Same false negative, different filename.
+- **`cmenguy/ad-forge`** — SPDX `null`, and here the field is **right**: there is genuinely no licence.
+- **`ZebangCheng/AdCraft`** and **`yisibl/resvg-js`** — `search/repositories` returns **422** for both while
+  `ls-remote` resolves them. **A search 422 is not evidence of absence** (pass 132's rule, confirmed twice
+  more today).
+- **`amzn/style-dictionary`** — `ls-remote` resolves it, search returns **422**: it is a **redirect** to
+  `style-dictionary/style-dictionary`. **Write the canonical slug**, or the row 404s for a reader.
+
+**Read the file. Both branches, six filenames.** `Pattern 133` is the gate.

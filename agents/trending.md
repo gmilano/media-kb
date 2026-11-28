@@ -9,6 +9,50 @@ updated: 2026-11-28
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-28 — pass 56: the ad-creative production & creative-automation plane (**the plane where `dynamic creative optimization` returns 54 repos and the most-starred is a 4★ portfolio website**)
+
+**Channel note:** `git ls-remote`, `gh api search/repositories` and `raw.githubusercontent.com` worked.
+**`api.github.com` and `github.com` HTML both returned `403`** for every out-of-scope repo under this
+session's network policy — so **no star count, licence or date in this pass came from a rendered web page**.
+Stars/forks are exact integers from `search/repositories`; **every licence was read from the file**;
+existence confirmed by `ls-remote`; and where liveness mattered, the default branch was read with
+`git clone --bare --depth 1`.
+
+**New this pass, and it is the headline:** this plane has **real money and no open engine**. Three research
+firms size DCO software between **$0.97 bn and $3.2 bn for 2026**, and `dynamic creative optimization`
+returns **54 repositories** whose most-starred member is **a personal portfolio site with 4 stars**.
+
+| Agent / tool | Repo | Licence (**read today**) | ★ | Forks | Last push | Note |
+|---|---|---|---|---|---|---|
+| Chitralekha | [AI4Bharat/Chitralekha](https://github.com/AI4Bharat/Chitralekha) | ✅ **MIT** | 118 | 31 | 2025-10-31 | Indic **transcreation** — transcription + translation + voice-over. Top hit of only **76** results for `transcreation`. India-origin; the APAC anchor of this plane |
+| video-ad-generator | [creatify-ai/video-ad-generator](https://github.com/creatify-ai/video-ad-generator) | ⚠️ **MIT wrapper, closed engine** | 74 | 8 | 2026-03-03 | A Claude agent skill of creative frameworks that call the **proprietary Creatify API**. Refines pass 34's zero |
+| Tela | [heyimjames/tela](https://github.com/heyimjames/tela) | ✅ **MIT** | 31 | — | 2026-07-10 | Local-first ad design canvas. Pre-adoption |
+| pyautoflip | [AhmedHisham1/pyautoflip](https://github.com/AhmedHisham1/pyautoflip) | ✅ **MIT** | 24 | 4 | 2026-11-15 | Saliency video reframing (UNISAL + InsightFace) — **check those two licences downstream** |
+| OpenAdFormats | [clawnify/OpenAdFormats](https://github.com/clawnify/OpenAdFormats) | ✅ **MIT** | **4** | — | 2026-11-17 | 42 Meta static formats, brief→PNG batch. Useful as a **spec reference** |
+| ad-creative-generator | [marek-kujda/ad-creative-generator](https://github.com/marek-kujda/ad-creative-generator) | ⚠️ **NOASSERTION** | 3 | — | 2026-03-24 | Figma→display variations. A secondary source claims GPL-3; **not confirmed from the file** |
+| AdCraft | [ZebangCheng/AdCraft](https://github.com/ZebangCheng/AdCraft) | ⛔ **"PERSONAL AND NON-COMMERCIAL LICENSE" v1.0, 2026** | **search 422** | — | 2026-10-20 | Agentic ad-video platform, reported as "open-sourced". **Commercially unusable** |
+| ad-forge | [cmenguy/ad-forge](https://github.com/cmenguy/ad-forge) | ⛔ **NO LICENCE FILE** (SPDX `null`; README and `pyproject.toml` silent) | **0** | 0 | 2026-03-14 | The search engines' **top recommendation** for this plane. All rights reserved |
+
+**The trap density in this plane is the highest recorded so far.** Of eight agent-layer candidates, **two
+are hard stops** (one explicitly non-commercial, one unlicensed), **one is an MIT shell on a closed API**,
+**one has an unverifiable licence**, and **three of the four clean MIT options have 4, 24 and 31 stars**. The
+single credible, adopted MIT project in the whole agent layer is **Chitralekha**, and it is **a year stale**.
+
+**What moved elsewhere, re-measured not assumed:** `motion-canvas` **20,399★**, last push **2026-07-02** —
+the same date this file already carried from 2026-07-02, confirming **~5 months of silence**.
+`jwagner/smartcrop.js` **12,961★** with its last default-branch commit on **2024-03-16**: the canonical
+answer to aspect-ratio reframing is a dormant repo. `thorvg/thorvg` is the mover worth watching — **MIT,
+1,939★, pushed 2026-11-27** (and 2026-11-28 on the default branch), while `airbnb/lottie-web` at
+**32,619★** has not moved its shipping branch since **2024-11-19**. **Stars point at Lottie; maintenance
+points at ThorVG.**
+
+**Two API lessons re-confirmed, both of which would have produced wrong rows:** `konvajs/konva`
+(**15,034★**) and `Samsung/rlottie` (**1,452★**) both report SPDX **`NOASSERTION`** and are both **MIT** in
+the file — rlottie's in `COPYING`, not `LICENSE`. And `search/repositories` returned **422** for
+`ZebangCheng/AdCraft`, `yisibl/resvg-js` and `amzn/style-dictionary` while `ls-remote` resolved all three —
+the last of those because it **redirects** to `style-dictionary/style-dictionary`. **A 422 is not absence,
+and the SPDX field is not a licence.**
+
 ## 2026-11-28 — pass 55: the compositing floor (**the plane where ~30,500★ of the state of the art is licensed non-commercial, and the permissive repos are the archived ones**)
 
 **Channel note:** `git ls-remote`, `gh api search/repositories` and `raw.githubusercontent.com` **all worked

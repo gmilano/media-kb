@@ -5982,3 +5982,59 @@ The substrate solves *where the camera was* and *what the lens did*. It does **n
 the actor* (segmentation/matting) or *what belongs behind them* (inpainting). Those are the model layer, and
 that is where the licences fail — see `agents/top.md` pass 55. Any proposal that claims this plane is "all
 Apache and BSD" has counted layer 1 and stopped.
+
+## The creative-automation substrate — pass 56 (2026-11-28)
+
+**The finding that reframes the plane:** there is no open DCO engine (see `agents/top.md` pass 56), but the
+**parts of one are all permissive, all actively maintained, and already in production at enormous scale** —
+they are simply filed under rendering, imaging and design tokens rather than under advertising. Globant does
+not need to wait for an open creative-automation platform; it needs to **assemble this substrate**.
+
+**Verification for every row:** existence by `git ls-remote`, **licence read from the actual file** (both
+`main` and `master`, six filenames), stars and forks exact from `gh api search/repositories`. `api.github.com`
+and `github.com` HTML are blocked for out-of-scope repos in this session, so **no figure here came from a
+web page**.
+
+### Tier 1 — permissive, actively maintained, safe to build client work on
+
+| Repo | Licence (**read from file**) | ★ | Forks | Last push | Role in the plane |
+|---|---|---|---|---|---|
+| https://github.com/penpot/penpot | **MPL-2.0** | **62,834** | 4,483 | 2026-11-27 | The only credible **open template-authoring surface** with design tokens; self-hostable |
+| https://github.com/lovell/sharp | **Apache-2.0** | **32,873** | 1,456 | 2026-11-27 | Raster resize/transform engine (libvips binding) — the variant-render workhorse |
+| https://github.com/airbnb/lottie-web | **MIT** | **32,619** | 2,993 | 2025-09-01 | Vector animation playback; **see the freshness caveat below** |
+| https://github.com/fabricjs/fabric.js | **MIT** | **31,572** | 3,644 | 2026-11-24 | Canvas object model — the substrate most template editors are built on |
+| https://github.com/svg/svgo | **MIT** | **22,845** | — | 2026-11-08 | SVG optimiser; belongs in the delivery path, not the authoring path |
+| https://github.com/motion-canvas/motion-canvas | **MIT** | **20,399** | 972 | **2026-07-02** | Programmatic animation. **Already in this file; re-measured and it has not moved in ~5 months** |
+| https://github.com/konvajs/konva | **MIT** (SPDX says `NOASSERTION`) | **15,034** | 1,091 | 2026-11-25 | 2D scene graph; the alternative to Fabric |
+| https://github.com/vercel/satori | **MPL-2.0** (**not MIT** — commonly misreported) | **14,222** | 408 | 2026-11-25 | **HTML/CSS → SVG.** Deterministic templated render; the closest thing to a brand-template engine |
+| https://github.com/jwagner/smartcrop.js | **MIT** | **12,961** | 572 | **2024-03-16** | Saliency crop. **Canonical and dormant** — the reframing answer is a 2024 repo |
+| https://github.com/style-dictionary/style-dictionary | **Apache-2.0** | **4,899** | — | 2026-11-03 | **Brand tokens → platform outputs.** The brand-compliance layer that actually compiles |
+| https://github.com/linebender/resvg | **Dual MIT + Apache-2.0** (both files present) | **4,227** | 400 | 2026-11-27 | SVG → PNG rasteriser; pairs with Satori to close the loop |
+| https://github.com/thorvg/thorvg | **MIT** | 1,939 | 269 | **2026-11-27** | Lottie/vector render engine — **the actively maintained Lottie path** |
+| https://github.com/tokens-studio/figma-plugin | **MIT** | 1,633 | — | 2026-11-27 | Token authoring where designers already are |
+| https://github.com/Samsung/rlottie | **MIT** (in `COPYING`; SPDX says `NOASSERTION`) | 1,452 | 285 | 2026-09-30 | C++ Lottie renderer for embedded/device targets |
+| https://github.com/AI4Bharat/Chitralekha | **MIT** | 118 | 31 | 2025-10-31 | **Transcreation** — transcription, translation and voice-over for Indic languages |
+| https://github.com/AhmedHisham1/pyautoflip | **MIT** | 24 | 4 | 2026-11-15 | Saliency-aware **video** reframing to target aspect ratios |
+
+**Sixteen rows, all real, all licence-verified.** Four more repos were found and are **not** promoted to
+Tier 1, for stated reasons:
+
+| Repo | Licence (**read**) | ★ | Last push | Why it is not Tier 1 |
+|---|---|---|---|---|
+| https://github.com/excalidraw/excalidraw | **MIT** | **136,410** | 2026-11-27 | Enormous and healthy, but it is a **whiteboard**, not a creative-versioning tool. Listed so a later pass does not mistake its star count for relevance |
+| https://github.com/mifi/editly | **MIT** | 5,660 | 2025-05-12 | Declarative video assembly — **dormant ~18 months** |
+| https://github.com/yisibl/resvg-js | **MPL-2.0** | — | 2026-03-26 | Node binding for resvg. **`search/repositories` returns 422**, so no star figure is claimed |
+| https://github.com/revive-adserver/revive-adserver | **GPL-2.0** | 1,526 | 2026-11-27 | Healthy and genuinely open, but **copyleft** and it is **ad serving, not creative production** |
+
+### Two freshness caveats, because `pushed_at` and the default branch disagree
+
+This pass measured both, and they differ in a way that would mislead:
+
+- **`airbnb/lottie-web`** — `pushed_at` is **2025-09-01**, but the **last commit on the default branch is
+  2024-11-19** (`git clone --bare --depth 1` then `log -1`). `pushed_at` counts a push to **any** branch.
+  **Lottie-web's shipping branch has not moved in about two years.** Use **`thorvg/thorvg`** (MIT, pushed
+  **2026-11-27**) for new Lottie rendering work and treat `lottie-web` as a stable format player.
+- **`mifi/editly`** — `pushed_at` 2025-05-12, default branch **2025-02-20**. Same pattern, same conclusion.
+
+**The general rule for this KB:** `pushed_at` is an **upper bound** on liveness, never a measurement of it.
+Where the distinction changes a recommendation, clone bare at depth 1 and read the default branch.

@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 # 🏗️ Foundational Repos — Media & Entertainment
@@ -5935,3 +5935,50 @@ AI host (Apache-2.0, 11,373★), the overlay (MIT, 16,551★), the checkout (MIT
 not exist at all.** For Globant that is the opportunity and it must be sold honestly: this is an
 **integration build on permissive parts**, never a fork-and-brand of an existing platform, because the
 existing platform is 6 stars, 5 stars, or proprietary.
+
+---
+
+## The compositing-floor substrate — geometry, solvers, optical flow & plugin ABI (pass 55, 2026-11-28)
+
+The healthiest layer in the plane, and the reason a licence-clean roto/matchmove bay is buildable at all.
+**Thirteen repositories, nine of them pushed within the last three weeks, not one of them copyleft-viral
+for a pipeline that shells out to them.** Contrast with `agents/top.md` pass 55, where the *model* layer
+sitting directly on top of this substrate is largely non-commercial.
+
+| Repo | Licence (**read from the file**) | Stars | Forks | Last push | Role in the compositing floor |
+|---|---|---|---|---|---|
+| https://github.com/opencv/opencv | **Apache-2.0** | **91,749** | 57,138 | **2026-11-27** | `calib3d` — undistort, homography, solvePnP. The lens and camera maths everything else calls. |
+| https://github.com/colmap/colmap | **BSD-3-Clause** (`LICENSE`, 1,968 B — "the new BSD license") | **13,316** | 2,242 | **2026-11-28** | Structure-from-motion / camera solve. **The matchmove workhorse.** |
+| https://github.com/alicevision/Meshroom | **MPL-2.0** (in **`COPYING.md`**, 1,175 B) | **13,118** | 1,243 | **2026-11-27** | Photogrammetry front-end over AliceVision — set survey and clean-plate geometry. |
+| https://github.com/openMVG/openMVG | **MPL-2.0** | 6,609 | 1,723 | 2026-11-07 | Multiple-view geometry library — the permissive alternative solve path. |
+| https://github.com/ceres-solver/ceres-solver | **BSD-3-Clause** (`LICENSE`, 1,835 B, Google) | 4,616 | 1,146 | **2026-11-27** | **Bundle adjustment.** The non-linear least-squares core under every camera solve. |
+| https://github.com/cvg/Hierarchical-Localization | **Apache-2.0** | 4,272 | 781 | 2026-11-22 | SuperPoint/SuperGlue feature matching — the modern front end to COLMAP. |
+| https://github.com/princeton-vl/RAFT | **BSD-3-Clause** | 4,131 | 681 | 2025-08-24 | **Optical flow.** Underpins temporal matte propagation and retiming. |
+| https://github.com/mapillary/OpenSfM | **BSD-2-Clause** | 3,826 | 902 | 2026-11-26 | SfM pipeline, scriptable in Python — the easiest solve to embed in a service. |
+| https://github.com/colmap/glomap | **BSD-3-Clause** | 2,346 | 186 | 2026-01-30 | 🗄️ **ARCHIVED.** Global SfM, markedly faster than incremental COLMAP. Permissive **and abandoned** — see the archive pattern in `agents/top.md`. |
+| https://github.com/autonomousvision/unimatch | **MIT** | 1,391 | 131 | 2025-01-04 | Unified flow / stereo / depth matching. |
+| https://github.com/lensfun/lensfun | **LGPL-3.0** | 898 | 240 | 2026-11-17 | **The open lens-distortion database.** ~The only maintained corpus of real lens profiles. LGPL — link, don't vendor. |
+| https://github.com/AcademySoftwareFoundation/openfx | **BSD-3-Clause** | 594 | 161 | 2026-11-11 | **The OFX plugin ABI.** The contract that lets a permissive node load into Natron *or* DaVinci Resolve. |
+| https://github.com/AcademySoftwareFoundation/OpenTimelineIO | **Apache-2.0** | 2,124 | 368 | **2026-11-27** | Shot-level editorial interchange — how a roto task list reaches the bay. Already in this KB; repeated here as the plane's task spine. |
+
+**Why `openfx` (594★) matters more than its star count.** It is an **Academy Software Foundation** project
+under **BSD-3-Clause**, and it is the boundary that makes the GPL problem tractable. A roto model wrapped as
+an **OFX plugin** is loaded across a defined ABI by whichever host the artist already owns — Natron
+(GPL-2.0), DaVinci Resolve (proprietary) or Nuke (proprietary) — and the host's licence does not reach back
+through that boundary into your node. This is the same **process-and-ABI isolation** that
+`compose/patterns.md` Pattern 119 used to solve the GPL repair-filter problem in film restoration. It
+generalises: **in this KB, the recurring escape from a copyleft tool layer is a standardised plugin or
+process boundary, not a rewrite.**
+
+**The honest caveat on `lensfun`.** It is **LGPL-3.0**, not permissive, and it is the *only* maintained open
+lens-profile corpus found. Dynamic linking keeps an LGPL obligation narrow, but a statically-linked or
+vendored copy inside a distributed binary pulls the LGPL's relinking duty with it. Treat lens profiles as a
+**linked external library**, exactly as cycle 8's Chromaprint finding requires for every native dependency:
+**resolve the licence of what you link, not of the repository you cloned.**
+
+### Where the substrate stops
+
+The substrate solves *where the camera was* and *what the lens did*. It does **not** solve *which pixels are
+the actor* (segmentation/matting) or *what belongs behind them* (inpainting). Those are the model layer, and
+that is where the licences fail — see `agents/top.md` pass 55. Any proposal that claims this plane is "all
+Apache and BSD" has counted layer 1 and stopped.

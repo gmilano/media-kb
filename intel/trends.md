@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 # 📡 Trends — Media & Entertainment
@@ -5264,3 +5264,114 @@ it — which is the sales argument for building the settlement layer.**
 † Single secondary source — trade press, vendor, agency or market-research summary — not verified against a
 primary filing or official gazette. DFA article numbers come from leaked-draft commentary and must be
 re-checked against the Commission's published text.
+
+---
+
+## Pass 55 (2026-11-28) — the compositing floor: four trends, one of them a correction to this KB
+
+### Trend 1 — **The non-commercial research licence has become the default licence of applied computer vision**
+
+This is the pass's central claim and it is measured, not impressionistic. Across the models that perform
+roto, matting, tracking and paint-out:
+
+- **S-Lab License 1.0 (explicitly non-commercial)** — ProPainter 7,106★, MatAnyone 1,648★, MatAnyone 2
+  959★, MatAnyone-E 203★. **~9,900★ across four repositories**, one licence, one lab (NTU).
+- **CC BY-NC 4.0** — CoTracker 5,216★, E2FGVI 1,170★.
+- **CC BY-NC-SA 4.0** — DUSt3R 7,396★, MASt3R 3,182★, WOFTSAM 39★.
+- **Bespoke non-OSI vendor licences** — VGGT 14,689★ ("VGGT License v1"), SAM 3 12,419★ ("SAM License").
+- **No licence file at all** — VideoMaMa 558★.
+
+**Why it matters more than a licence-hygiene note:** in a KB whose standing rule is "focus on MIT / Apache
+2.0 / BSD — these are the ones Globant can build on," this plane's state of the art is **systematically
+outside** that set. Not through neglect — through **deliberate, legible choice**, with named commercial
+contacts in the licence text. The academic incentive publishes the weights; the commercial grant is withheld
+as the lab's only asset. **Expect this shape wherever the research frontier *is* the product**, and check it
+before promising any CV-heavy capability in any of the twelve industries.
+
+### Trend 2 — **Relicensing toward restriction, twice in one plane in one year**
+
+| Project | Before | After | Date |
+|---|---|---|---|
+| Meta's segmentation model | **SAM 2 — Apache-2.0**, 20,248★ | **SAM 3 — "SAM License"**, non-OSI, 12,419★ | Licence dated **2025-11-19** |
+| The leading open roto GUI | **Sammie-Roto — Apache-2.0**, 147★ | **Sammie-Roto 2 — GPL-3.0**, 525★ | v1 **archived**; v2 pushed **2026-11-27** |
+
+Two independent maintainers, two different directions of travel (permissive → bespoke-vendor;
+permissive → copyleft), **same year, same plane, both at the moment the project became genuinely useful.**
+
+**And the corollary, which is the single most portable finding of this pass: in this plane the permissive
+repositories are disproportionately the *archived* ones.** `Sammie-Roto` (Apache-2.0) archived;
+`Cutie-Roto` (MIT) archived; `glomap` (BSD-3-Clause) **archived 2026-01-30**; `AutoMask` (MIT) dead since
+**2020-12-17**. Every actively-maintained artist-facing tool measured in this plane is **GPL-3.0, AGPL-3.0
+or BSL 1.1**. **Filtering a shortlist by licence without also reading the `archived` flag actively selects
+for abandoned code here** — a concrete, checkable amendment to this KB's own selection rule.
+
+### Trend 3 — **The Article 50 boundary runs through the middle of a VFX shot — and it coincides with the licence boundary**
+
+A **correction to this KB**, not an addition: there are **85 mentions of "Article 50"** across these files
+and, until this pass, **zero mentions of "assistive."** Article 50(2) exempts systems performing an
+**"assistive function for standard editing"** or not **"substantially altering"** the input or its
+semantics. That exemption is load-bearing for every post-production client in EMEA and it was missing.
+
+The reason it matters here is that **two independent boundaries fall in the same place**:
+
+| Operation | Alters semantics? | Article 50 marking | Best open model | Licence |
+|---|---|---|---|---|
+| **Roto / keying / matte** | No — isolates what was photographed | **Very likely exempt** | SAM 2 + BiRefNet + ViTMatte | ✅ **Apache-2.0 / MIT** |
+| **Paint-out / clean plate** | **Yes — invents pixels never photographed** | **Very likely in scope** | ProPainter | ⛔ **S-Lab 1.0 non-commercial** |
+
+**The same operation that triggers the disclosure duty is the operation whose best model you may not use
+commercially.** Roto is clean on **both** axes; paint-out is blocked on **both**. A pipeline that treats
+"AI VFX" as one undifferentiated capability gets both wrong simultaneously — and a pipeline that splits the
+two gets a licence answer and a compliance answer from a **single** architectural decision. That is the
+plane's planning rule, and it is Pattern 129.
+
+⚠️ **Verification status, repeated because it is a legal claim:** carve-out wording corroborated across
+multiple independent secondary sources; **primary text not read in this session** (`artificialintelligenceact.eu`
+does not resolve under this session's egress policy); the **"substantially alter" threshold is explicitly
+described as fuzzy** pending Guidelines and case law. **Planning hypothesis, not legal advice.**
+
+### Trend 4 — **The substrate got healthier while the tool layer stayed at 525 stars**
+
+The geometry and solver layer under this plane is **thriving**: OpenCV 91,749★, COLMAP 13,316★ (pushed
+**2026-11-28**), Meshroom 13,118★ (MPL-2.0), openMVG 6,609★, ceres-solver 4,616★ (pushed **2026-11-27**),
+hloc 4,272★, OpenSfM 3,826★, `tapnet` 2,277★ Apache-2.0. **Nine substrate repositories pushed within three
+weeks, all permissive.**
+
+The artist-facing layer on top of it peaks at **525★** (Sammie-Roto 2, GPL-3.0), with the next twelve tools
+at **≤178★** and two of them at **5★ and 2★**. The review-and-approval agent bridge that pass 6 found
+missing is **still** missing — `nuke_mcp`, **40★, no licence file**, re-measured today, unchanged in a year.
+
+**The gap between a 91,749★ substrate and a 525★ tool is the whole commercial opportunity in this plane,**
+and it is the inverse of the "generation layer is the most-pushed repo" finding in pass 54. Open source
+builds the maths. It does not build the bay the artist sits in.
+
+### 🔮 Falsifiable prediction recorded this pass (test it in a later pass)
+
+**`tapnet` (Apache-2.0, 2,277★) will close the gap on CoTracker (CC BY-NC 4.0, 5,216★) — or the plane's
+point-tracking layer is structurally non-commercial.** Specifically: by **2027-06**, either `tapnet` exceeds
+**4,000★** and at least one actively-maintained roto/matchmove tool measured in this KB names it as its
+tracking backend, **or** CoTracker's lead holds — in which case the permissive option in this plane loses on
+merit rather than on licence, and the "tilted playing field" argument in `intel/market.md` (APAC) becomes
+the stronger of the two explanations. The pass-54 prediction on `openpartner` remains open and untested.
+
+### ⛔ What not to promise in this plane (pass 55)
+
+1. **Never promise "open source AI rotoscoping and paint-out."** Roto is deliverable on permissive parts.
+   **Paint-out is not** — the two leading video inpainters are non-commercial and the permissive
+   alternatives (LaMa, MMagic) are **still-image** models, dormant since 2024/2025, with no temporal
+   coherence.
+2. **Never promise an open planar tracker.** `planar tracking` returns **131 results** and the top hits are
+   academic SLAM from **2017** and a benchmark from **2022**. Mocha Pro has no open equivalent. This is
+   cycle 8's `eidr`/`isan` trap again: **read the results, never the total.**
+3. **Never promise despill.** The term appears nowhere in this KB and no usable open implementation was
+   found. It is required in every greenscreen composite.
+4. **Never state a California AB 2319 VFX credit rate.** Signed **2026-09-19**, effective **2027**,
+   **35–50%** on post generally — but the **VFX rate is unstated** in available analyses and the "$10 m"
+   figure is contested. Read the enrolled bill.
+5. **Never say Netflix/InterPositive automates rotoscoping.** The product description is **colour grading,
+   relighting and continuity fixes**. The roto connection is commentary. No roto layoff tied to it has been
+   reported.
+6. **Never shortlist by SPDX field alone in this plane.** The GitHub API returns `NOASSERTION` for
+   ProPainter, MatAnyone, MatAnyone 2, MatAnyone-E, E2FGVI, VGGT, DUSt3R, MASt3R, CoTracker, SAM 3, COLMAP,
+   ceres-solver, Meshroom and Blender — a set that mixes **safe BSD/MPL/GPL** with **explicitly
+   non-commercial**. The field cannot distinguish them. **Read the file.**

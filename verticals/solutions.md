@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 # 🏭 Vertical Platforms — Media & Entertainment
@@ -2920,3 +2920,40 @@ to say with evidence than a platform recommendation would have been** — and it
 licence files were read and the result lists were read rather than their totals. It is also a materially
 different proposal: integration and compliance work, priced as such, with no vendor lock-in story and no
 upstream to inherit.
+
+---
+
+## Compositing & matchmove platforms — the customisable hosts (pass 55, 2026-11-28)
+
+The "Odoo question" for this plane: which **real, adopted systems** can be bent, rather than replaced, with
+AI on top. The answer is unusual here — the adopted hosts are **copyleft**, and the integration contract is
+a **plugin ABI**, not a fork.
+
+| Platform | Repo | Licence (read today) | Stars | Last push | Replaces | How AI goes on top |
+|---|---|---|---|---|---|---|
+| **Blender** (Motion Tracking workspace) | https://github.com/blender/blender | **GPL** (`COPYING`) | **22,627** | **2026-11-27** | PFTrack, SynthEyes, 3DEqualizer | The only **free, adopted** camera-solve and object-track UI. Add-ons are GPL by Blender's own policy — so ship the model as a **service the add-on calls**, not as add-on code. |
+| **Natron** | https://github.com/NatronGitHub/Natron | **GPL-2.0** | 5,778 | **2026-11-27** | Nuke, After Effects | Node-graph compositor **and OFX host**. Load a permissive roto node across the OFX ABI; the host's GPL does not reach your plugin. |
+| **OpenCV** | https://github.com/opencv/opencv | **Apache-2.0** | **91,749** | **2026-11-27** | — | Not a UI: the substrate your own tool is built from when no host fits. |
+| **Sammie-Roto 2** | https://github.com/Zarxrax/Sammie-Roto-2 | **GPL-3.0** | 525 | **2026-11-27** | Mocha, Silhouette (partially) | The plane's most-adopted purpose-built roto GUI. **GPL-3.0 — read it as a reference implementation and a staffing benchmark, not as a product core.** |
+| **ComfyUI** | (already in this KB — **GPL-3.0**, ~75k★) | **GPL-3.0** | — | — | — | The de-facto graph runner the roto nodes target (`Comfy-Pro-Alpha-Generator`, GPL-3.0, 58★). Same GPL caution. |
+| **OpenFX (ABI)** | https://github.com/AcademySoftwareFoundation/openfx | **BSD-3-Clause** | 594 | 2026-11-11 | — | **The integration contract.** The one permissive thing in this row, and the reason the rest is usable. |
+
+**The platform conclusion, stated plainly: there is no permissive adopted host in this plane.** Blender is
+GPL, Natron is GPL-2.0, ComfyUI is GPL-3.0, Sammie-Roto 2 is GPL-3.0. This is the **inverse** of the pattern
+in most planes of this KB, where the host is permissive (Strapi MIT, Ghost MIT, Owncast MIT) and the
+specialism is thin. Here the host is mature *and* copyleft.
+
+**So the architecture is forced, and it is the same one Pattern 119 reached for film restoration:** keep the
+proprietary value in **your own permissively-licensed service**, and reach the artist through a
+**standardised boundary** — an **OFX plugin**, a local HTTP service the Blender add-on calls, or a
+headless batch node. Do not fork Blender. Do not vendor Natron. Do not build your client's product *inside*
+a GPL-3.0 application and discover the obligation at delivery.
+
+**One platform note that is a buying signal, not a licence note.** `LiveActionAOV`
+(https://github.com/lettidude/LiveActionAOV, **BSL 1.1**, 70★, pushed **2026-11-27**) takes live-action
+plates in and emits **Nuke-ready AOVs and Cryptomatte** using SAM 3 + ViTMatte. BSL 1.1 is **not open
+source**, but its Additional Use Grant permits free production use by **individuals and organisations under
+10 people** — so it is free for a freelancer and **chargeable for a studio or for Globant**. It is worth
+watching precisely because it is the only project in the plane that has drawn the right *output* boundary:
+**mattes as AOVs into the compositor the client already runs.** Its licence makes it a design reference, not
+a dependency.

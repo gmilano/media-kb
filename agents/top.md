@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 # 🎯 AI Agents & Generative Media Models — Media & Entertainment
@@ -5073,3 +5073,145 @@ thing that answers for it.
 permissive settlement layer) will either cross **100★ by 2027-06** as the DFA's disclosure-and-contract
 duties bite, or stay under 40★ — in which case the settlement layer in live commerce is structurally
 proprietary, exactly as royalty accounting is in music.
+
+---
+
+## The compositing floor — roto, keying, matchmove & paint-out — measured 2026-11-28 (pass 55)
+
+**Why this plane, and why it was missing.** Two sentences already in this KB point straight at it and
+neither had any tooling behind them. `agents/top.md` (pass 6) records *"**No open agent bridge for Nuke**
+worth a row… Compositing is the largest seat count in VFX."* `intel/market.md` (pass 6) records that
+FICCI-EY links AI in *"rotoscoping, clean-up and pipeline work"* to **up to 40% time savings** — and that
+*"roto, paint and camera tracking are precisely the labour-intensive tasks the regional outsourcing model
+**bills for**."* So the KB had identified the economics of this plane and named the threat to it, while
+holding **zero repositories for any of the four operations**. A vocabulary probe before any web search
+confirmed it: `matchmove` **0**, `camera solve` **0**, `keying` **0**, `despill` **0**, `clean plate` **0**,
+`optical flow` **0**, `undistort` **0**, `lens profile` **0**, `bundle adjustment` **0**, `previs` **0**
+hits across all eight files. `roto` scored 146 raw hits and **3 on a word-boundary grep** — the substring
+inflation (`protocol`, `rotation`) that cycle 8 flagged, caught this time before it misled the pass.
+
+### The three-layer licence gradient — and it runs the wrong way
+
+| Layer | What it does | Health | Licence reality |
+|---|---|---|---|
+| **1. SUBSTRATE** — geometry, solvers, optical flow, image IO, plugin ABI | Maths and plumbing, far from the artist | **Excellent.** OpenCV 91,749★, COLMAP 13,316★, Meshroom 13,118★ — most pushed this week | **Apache-2.0 / BSD / MPL-2.0** — safe |
+| **2. MODELS** — the thing that actually performs the billable task | Segment, matte, track, fill | Large and active | ⛔ **Non-commercial research licences** — S-Lab 1.0, CC BY-NC, CC BY-NC-SA, bespoke Meta licences |
+| **3. TOOLS** — the artist-facing application | Where a roto artist's hands go | **Tiny.** Top is **525★**; everything else ≤178★ | ⚠️ **GPL-3.0 / AGPL-3.0 / BSL 1.1** |
+
+**The law of this KB, third formulation — and the most precise one yet.** Cycle 8 found restriction tracking
+*proximity to money and obligation* (declare 4,265★ / honour 41★ / settle 0★). Pass 54 found it in live
+commerce. Pass 55 finds something tighter, because here the gradient is **monotonic in a single variable**:
+**licence restriction is inversely proportional to the code's distance from the billable task.** The maths is
+permissive. The artist's tool is copyleft. **The model in the middle — the only part that delivers the 40%
+saving the FICCI-EY report promises — cannot be used commercially at all.** A client can lawfully assemble
+every part of this pipeline *except the part they are paying for*.
+
+### Layer 2 measured — the segmentation, matting and tracking models
+
+| Model | Repo | Licence (**read from the file today**) | Stars | Forks | Last push |
+|---|---|---|---|---|---|
+| **SAM 2** | https://github.com/facebookresearch/sam2 | ✅ **Apache-2.0** (`LICENSE`) | **20,248** | 2,605 | 2026-05-30 |
+| SAM 3 | https://github.com/facebookresearch/sam3 | ⚠️ **"SAM License"** — bespoke, non-OSI (7,353 B, dated 2025-11-19) | 12,419 | 1,895 | 2026-11-17 |
+| RobustVideoMatting | https://github.com/PeterL1n/RobustVideoMatting | ⚠️ **GPL-3.0** | **9,649** | 1,197 | 2024-04-02 |
+| Track-Anything | https://github.com/gaomingqi/Track-Anything | ✅ **MIT** | 7,014 | 508 | 2025-12-13 |
+| BiRefNet | https://github.com/ZhengPeng7/BiRefNet | ✅ **MIT** | 4,466 | 357 | 2026-10-25 |
+| MODNet | https://github.com/ZHKKKe/MODNet | ✅ **Apache-2.0** | 4,390 | 678 | 2024-05-06 |
+| XMem | https://github.com/hkchengrex/XMem | ✅ **MIT** | 1,997 | 215 | 2024-11-15 |
+| MatAnyone | https://github.com/pq-yang/MatAnyone | ⛔ **S-Lab 1.0 — NON-COMMERCIAL** | 1,648 | 113 | 2026-03-04 |
+| Cutie | https://github.com/hkchengrex/Cutie | ✅ **MIT** | 1,135 | 118 | 2024-11-08 |
+| MatAnyone 2 | https://github.com/pq-yang/MatAnyone2 | ⛔ **S-Lab 1.0 — NON-COMMERCIAL** (`LICENSE.txt`) | 959 | — | 2026-07-28 |
+| ViTMatte | https://github.com/hustvl/ViTMatte | ✅ **MIT** | 574 | 51 | 2025-08-13 |
+| VideoMaMa | https://github.com/cvlab-kaist/VideoMaMa | ⛔ **No licence file** (12 names × `main`/`master`) — all rights reserved | 558 | — | 2026-10-21 |
+| MatAnyone-E | https://github.com/Shuyun-Wang/MatAnyone-E | ⛔ **S-Lab 1.0 — NON-COMMERCIAL** | 203 | — | 2026-11-05 |
+
+**The S-Lab cluster is the finding.** Four repositories — ProPainter, MatAnyone, MatAnyone 2, MatAnyone-E —
+totalling **~9,900★**, all carry **S-Lab License 1.0**, whose first clause reads *"Redistribution and use
+**for non-commercial purpose**"* and whose clause 4 requires contacting the authors for commercial use, with
+two named academics at NTU as the contact. This is not an SPDX edge case or a missing field: it is a
+deliberate, legible, **non-commercial** grant on the state of the art in video matting and video inpainting.
+No SBOM scan that trusts the GitHub API's `NOASSERTION` will tell you this.
+
+### Layer 2 measured — paint-out / clean-plate (video inpainting)
+
+| Model | Repo | Licence (read today) | Stars | Last push |
+|---|---|---|---|---|
+| LaMa | https://github.com/advimman/lama | ✅ **Apache-2.0** | **10,419** | 2025-02-05 |
+| MMagic | https://github.com/open-mmlab/mmagic | ✅ **Apache-2.0** | 7,483 | 2024-08-06 |
+| **ProPainter** | https://github.com/sczhou/ProPainter | ⛔ **S-Lab 1.0 — NON-COMMERCIAL** (1,852 B) | **7,106** | 2026-10-27 |
+| E2FGVI | https://github.com/MCG-NKU/E2FGVI | ⛔ **CC BY-NC 4.0** (17,722 B) | 1,170 | 2023-04-07 |
+
+**The two leading *video* inpainters are both non-commercial.** The two permissive options (LaMa, MMagic) are
+**still-image** inpainting with no temporal coherence, and both have been dormant since 2024/2025. Paint-out
+on a moving plate is the single most-requested AI task in this plane and it has **no maintained permissive
+implementation**.
+
+### Layer 2 measured — learned camera solve & point tracking
+
+| Model | Repo | Licence (read today) | Stars | Last push |
+|---|---|---|---|---|
+| VGGT | https://github.com/facebookresearch/vggt | ⛔ **"VGGT License v1"** — bespoke, non-OSI (10,722 B) | **14,689** | 2026-05-19 |
+| Depth-Anything-V2 | https://github.com/DepthAnything/Depth-Anything-V2 | ✅ **Apache-2.0** | 9,244 | 2026-03-24 |
+| DUSt3R | https://github.com/naver/dust3r | ⛔ **CC BY-NC-SA 4.0** | 7,396 | 2025-09-24 |
+| CoTracker | https://github.com/facebookresearch/co-tracker | ⛔ **CC BY-NC 4.0** (`LICENSE.md`, 19,332 B) | 5,216 | 2026-03-03 |
+| MASt3R | https://github.com/naver/mast3r | ⛔ **CC BY-NC-SA 4.0** | 3,182 | 2025-06-30 |
+| **TAPNet / TAPIR** | https://github.com/google-deepmind/tapnet | ✅ **Apache-2.0** | 2,277 | **2026-11-02** |
+| WOFTSAM | https://github.com/serycjon/WOFTSAM | ⛔ **CC BY-NC-SA 4.0** | 39 | 2026-08-26 |
+
+**`tapnet` is the most useful single row in this pass.** Point tracking is the substrate of matchmove, and the
+famous implementation — CoTracker, 5,216★ — is **CC BY-NC 4.0**, unusable commercially. Google DeepMind's
+`tapnet` does the same job under **Apache-2.0** and was pushed this month. It has **less than half**
+CoTracker's stars, which is exactly why a careless pass picks the wrong one.
+
+### Layer 3 measured — the artist-facing tools, and the archive pattern
+
+| Tool | Repo | Licence (read today) | Stars | Last push | State |
+|---|---|---|---|---|---|
+| Sammie-Roto 2 | https://github.com/Zarxrax/Sammie-Roto-2 | ⚠️ **GPL-3.0** | **525** | **2026-11-27** | Active — the plane's leading tool |
+| AutoMask | https://github.com/lukas-blecher/AutoMask | ✅ MIT | 178 | **2020-12-17** | ⛔ Dead 5y 11m |
+| Sammie-Roto (v1) | https://github.com/Zarxrax/Sammie-Roto | ✅ **Apache-2.0** | 147 | 2025-11-23 | 🗄️ **ARCHIVED** |
+| RotoForge-AI | https://github.com/MagnumVD/RotoForge-AI | ⚠️ **GPL-3.0** (`LICENSE.md`) | 115 | 2026-09-30 | Active (Blender) |
+| LiveActionAOV | https://github.com/lettidude/LiveActionAOV | ⛔ **BSL 1.1** — not open source | 70 | **2026-11-27** | Active (SAM 3 → Nuke AOVs) |
+| RotoAI | https://github.com/sPappalard/RotoAI | ⚠️ **AGPL-3.0** | 66 | 2026-08-16 | Active |
+| Cutie-Roto | https://github.com/Zarxrax/Cutie-Roto | ✅ MIT | 59 | 2025-10-31 | 🗄️ **ARCHIVED** |
+| Comfy-Pro-Alpha-Generator | https://github.com/rik-python/ComfyUI-Comfy-Pro-Alpha-Generator | ⚠️ GPL-3.0 | 58 | 2026-11-03 | Active |
+| MatteDesk | https://github.com/fishfinger44/MatteDesk | ⚠️ GPL-3.0 | 51 | 2026-11-23 | Active |
+| RVM-for-Nuke | https://github.com/hkaramian/RobustVideoMatting-For-Nuke | ⚠️ GPL-3.0 | 51 | 2024-01-28 | Dormant |
+| Samosa | https://github.com/tenetmotion/Samosa | ⚠️ GPL-3.0 | 5 | 2026-10-23 | After Effects panel |
+| sam-ui | https://github.com/VolksRat71/sam-ui | ✅ Apache-2.0 | 2 | 2026-10-12 | **Two stars** |
+
+**Two relicensing-toward-restriction events, same plane, same year — so it is a pattern, not an anecdote:**
+
+1. **SAM 2 → SAM 3.** SAM 2 is **Apache-2.0** (20,248★). SAM 3, published with a licence dated
+   **2025-11-19**, is under Meta's bespoke **"SAM License"**. Commercial use *is* granted royalty-free, so
+   this is **not** a non-commercial licence — but it is **not OSI-approved** and it carries an Acceptable Use
+   Policy, a **litigation-termination clause**, ITAR/trade-control restrictions, and an explicit
+   **no-reverse-engineering** covenant. Every roto tool built after November 2025 targets SAM 3.
+2. **Sammie-Roto → Sammie-Roto 2.** Same author. v1 was **Apache-2.0** and is now **archived**; the v2
+   rewrite is **GPL-3.0** and was pushed the day before this pass.
+
+**And the corollary, which is the thing to carry into other industries: in this plane the permissive options
+are disproportionately the *archived* ones.** Measured, not supposed — `Sammie-Roto` (Apache-2.0,
+archived), `Cutie-Roto` (MIT, archived), `glomap` (BSD-3-Clause, **archived** 2026-01-30), `AutoMask` (MIT,
+dead since 2020). Meanwhile every actively-maintained artist tool in the table is GPL-3.0, AGPL-3.0 or BSL.
+Picking "the permissive one" by licence alone, without checking `archived`, selects for abandonment here.
+
+### Measured zeros in this plane
+
+- **Planar tracking has no open production implementation.** The commercial standard is Mocha Pro; `planar
+  tracking` returns **131 results** whose top hits are `dpptam` (GPL-3.0, 220★, **2017**) and `HDN`
+  (Apache-2.0, 61★, **2022**) — academic SLAM and benchmark code, **not a tracker an artist can use**. This
+  is the `eidr`/`isan` trap of cycle 8 in a new costume: a plausible total hiding a relevant zero. Read the
+  results, never the count.
+- **No open despill.** `despill` returns nothing usable, and the term appears **nowhere** in this KB. Despill
+  is a required step in every greenscreen composite on earth.
+- **No open agent layer, confirmed again.** The pass-6 finding stands: the best Nuke bridge remains
+  `dughogan/nuke_mcp` — **40★, no licence file, last pushed 2025-11-03**. Re-measured today, unchanged.
+
+*Verification method, pass 55: **51/51** repository URLs resolved by `git ls-remote`; stars, forks,
+`pushed_at` and `archived` from `gh api search/repositories`; **every licence above read from the actual
+file** over the `raw` channel, including the lowercase `license.txt` and `COPYING.md` names that cycle 8
+added to the probe — `Meshroom`'s MPL-2.0 is in `COPYING.md` and `MatAnyone2`'s S-Lab is in `LICENSE.txt`,
+so both would have read as "no licence" under the older probe. One honest channel gap: `stuffmatic/fSpy`
+**resolves by `ls-remote`** but returns **422** from `search/repositories`, so its metrics are unavailable
+here; `perarnia/fSpy` (**GPL-3.0** read from file, 2,637★, last push 2022-12-08) is the measurable copy and
+the canonical-URL question is left open rather than guessed.*

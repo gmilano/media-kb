@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 # 🧩 Composition Patterns — Media & Entertainment
@@ -8479,3 +8479,191 @@ twelve months of adoption — because the duty falls on brands, who buy rather t
 the disclosure layer is structurally proprietary**, like royalty accounting in music (cycle 8) and settlement
 in rights reservation. `openpartner` at **18★** is the control variable: watch whether it crosses **100★ by
 2027-06**.
+
+---
+
+## Compositing-floor recipes — added 2026-11-28 (pass 55)
+
+Five patterns for roto, keying, matchmove and paint-out. Every repository named below was verified this pass
+by `git ls-remote` (**51/51**) with its licence **read from the file**.
+
+## Pattern 128 — The licence-clean roto bay (**the plane's only commercially shippable matte pipeline**)
+
+**The problem.** A client wants AI-assisted rotoscoping. The obvious picks — MatAnyone (1,648★), MatAnyone 2
+(959★) — are **S-Lab License 1.0, non-commercial**. RobustVideoMatting (9,649★, the most-starred matting
+model) is **GPL-3.0**. Choose by stars and the engagement is undeliverable.
+
+**The build, permissive end to end:**
+
+1. **Prompt / select** — [`facebookresearch/sam2`](https://github.com/facebookresearch/sam2) **Apache-2.0**,
+   20,248★. **Pin SAM 2, not SAM 3.** SAM 3 (12,419★) is the better model and ships under Meta's bespoke
+   **"SAM License"** — non-OSI, with an Acceptable Use Policy, a litigation-termination clause, ITAR
+   restrictions and a no-reverse-engineering covenant. If the client's counsel will sign off on SAM 3, use
+   it; **the default must be SAM 2, because it is the only Apache-2.0 option at this quality.**
+2. **Propagate through time** — [`hkchengrex/Cutie`](https://github.com/hkchengrex/Cutie) **MIT**, 1,135★,
+   or [`hkchengrex/XMem`](https://github.com/hkchengrex/XMem) **MIT**, 1,997★. ⚠️ **Both dormant since
+   November 2024** — budget maintenance, they are not abandoned-but-broken, they are frozen-and-working.
+3. **Refine the edge** — [`hustvl/ViTMatte`](https://github.com/hustvl/ViTMatte) **MIT**, 574★ for
+   trimap-based alpha, plus [`ZhengPeng7/BiRefNet`](https://github.com/ZhengPeng7/BiRefNet) **MIT**, 4,466★
+   (pushed 2026-10-25) for high-resolution boundaries. These two carry the quality that MatAnyone would have
+   given you, under licences you can actually ship.
+4. **Stabilise with flow** — [`princeton-vl/RAFT`](https://github.com/princeton-vl/RAFT) **BSD-3-Clause**,
+   4,131★ to damp inter-frame matte chatter.
+5. **Deliver into the compositor** — wrap as an
+   [`AcademySoftwareFoundation/openfx`](https://github.com/AcademySoftwareFoundation/openfx)
+   **BSD-3-Clause** plugin emitting **alpha + Cryptomatte AOVs**. The OFX ABI is the boundary that lets your
+   permissive node load into **Natron (GPL-2.0)** or **DaVinci Resolve (proprietary)** without either
+   licence reaching your code.
+
+**The design reference to copy and not depend on:**
+[`lettidude/LiveActionAOV`](https://github.com/lettidude/LiveActionAOV) (**BSL 1.1**, 70★, pushed
+**2026-11-27**) already draws the correct output boundary — plates in, **Nuke-ready AOVs and Cryptomatte
+out**. BSL 1.1 grants free production use only to **individuals and organisations under 10 people**, so it
+is free for a freelancer and **chargeable for a studio**. Study the interface; build your own.
+
+**What you must tell the client:** this bay produces **mattes**, which is roto and keying. It does **not**
+do paint-out — see Pattern 129, which is a different licence problem *and* a different regulatory problem.
+
+## Pattern 129 — The paint-out decision gate (**one decision that answers both the licence and the regulator**)
+
+**The insight this pass contributes.** Two independent boundaries — the commercial-licence boundary and the
+EU AI Act Article 50 marking boundary — **fall in the same place** on the compositing floor. So classify the
+operation **once**, and both answers follow.
+
+| | **Roto / key / matte** | **Paint-out / clean plate / removal** |
+|---|---|---|
+| What it does to the plate | Isolates what was photographed | **Synthesises pixels never photographed** |
+| Art. 50(2) "assistive function for standard editing"? | **Very likely yes → exempt** | **Very likely no → in scope** |
+| Best open model | SAM 2 + ViTMatte + BiRefNet | ProPainter (7,106★) |
+| Licence of that model | ✅ Apache-2.0 / MIT | ⛔ **S-Lab 1.0 — non-commercial** |
+| Permissive fallback | — (none needed) | LaMa **Apache-2.0** 10,419★ / MMagic **Apache-2.0** 7,483★ — ⚠️ **still-image only, no temporal coherence, dormant since 2024/2025** |
+
+**The gate, as a pipeline step:**
+
+1. **Tag every shot operation** at task creation as `assistive` or `generative`, carried on the
+   [`OpenTimelineIO`](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) **Apache-2.0** clip
+   metadata that already moves through the facility.
+2. **Route `assistive` to Pattern 128.** No marking obligation, fully permissive stack, ship it.
+3. **Route `generative` to a hard stop with three exits**, and make the client choose explicitly:
+   - **Licence ProPainter commercially** — S-Lab clause 4 requires contacting the authors; the licence text
+     names the contacts at NTU. A real, available path, and the honest recommendation when paint-out is
+     central.
+   - **Accept still-image quality** — LaMa/MMagic per-frame with manual temporal cleanup. Permissive, and
+     worse; quantify the artist hours before proposing it.
+   - **Keep paint-out human** — and sell the triage that decides which shots need it (Pattern 120's logic,
+     applied here).
+4. **For any `generative` shot that ships, emit the Article 50 marking** through the existing dual-mark
+   provenance chain (**Pattern 8**) and the Article 50 disclosure chain (**Pattern 48**). Two machine-readable
+   layers, per the Code of Practice of **2026-06-10**.
+5. **Keep the classification as evidence.** The deliverable is not just marked frames — it is a per-shot
+   record of *why* each operation was or was not marked. That record is what makes an over-marking dispute
+   survivable.
+
+⚠️ **State this caveat in writing to the client.** The Article 50(2) carve-out wording is corroborated
+across multiple independent secondary sources, but **primary text was not read in this session**
+(`artificialintelligenceact.eu` does not resolve under this session's network policy), and commentators
+describe the **"substantially alter" threshold as deliberately fuzzy** pending Guidelines and case law.
+**This gate is a defensible engineering default requiring legal sign-off, not a compliance guarantee.**
+
+## Pattern 130 — The permissive matchmove spine (**swap the famous tracker for the shippable one**)
+
+**The trap.** Matchmove's best-known learned components are all unusable commercially: **CoTracker**
+(5,216★) is **CC BY-NC 4.0**; **DUSt3R** (7,396★) and **MASt3R** (3,182★) are **CC BY-NC-SA 4.0**; **VGGT**
+(14,689★) ships under a bespoke **"VGGT License v1."** That is **~30,500★ of non-commercial code** sitting
+exactly where a matchmove engineer would reach first.
+
+**The spine that ships:**
+
+| Step | Component | Licence | Stars |
+|---|---|---|---|
+| Feature match | [`cvg/Hierarchical-Localization`](https://github.com/cvg/Hierarchical-Localization) | **Apache-2.0** | 4,272 |
+| Point tracking | [`google-deepmind/tapnet`](https://github.com/google-deepmind/tapnet) | **Apache-2.0** | 2,277 |
+| Camera solve | [`colmap/colmap`](https://github.com/colmap/colmap) | **BSD-3-Clause** | 13,316 |
+| Bundle adjustment | [`ceres-solver/ceres-solver`](https://github.com/ceres-solver/ceres-solver) | **BSD-3-Clause** | 4,616 |
+| Alternative solve | [`openMVG/openMVG`](https://github.com/openMVG/openMVG) · [`mapillary/OpenSfM`](https://github.com/mapillary/OpenSfM) | **MPL-2.0** · **BSD-2-Clause** | 6,609 · 3,826 |
+| Lens undistort | [`opencv/opencv`](https://github.com/opencv/opencv) `calib3d` + [`lensfun/lensfun`](https://github.com/lensfun/lensfun) profiles | **Apache-2.0** + **LGPL-3.0** | 91,749 · 898 |
+| Set geometry | [`alicevision/Meshroom`](https://github.com/alicevision/Meshroom) | **MPL-2.0** (`COPYING.md`) | 13,118 |
+| Depth prior | [`DepthAnything/Depth-Anything-V2`](https://github.com/DepthAnything/Depth-Anything-V2) | **Apache-2.0** | 9,244 |
+
+**`tapnet` replaces CoTracker and that is the whole pattern.** Same job, **Apache-2.0**, pushed
+**2026-11-02**, and **less than half the stars** — which is precisely why it gets passed over.
+
+**Two licence rules that are not optional:**
+- **`lensfun` is LGPL-3.0.** Link it dynamically as an external library; do not vendor or statically link it
+  into a distributed binary. This is cycle 8's Chromaprint rule: **resolve the licence of what you link, not
+  of the repo you cloned.**
+- **`glomap`** (**BSD-3-Clause**, 2,346★) is faster global SfM than incremental COLMAP and is
+  🗄️ **ARCHIVED (2026-01-30)**. Permissive and unmaintained. Use it only with a plan to own it.
+
+**Hand off** the solved camera to **Blender's Motion Tracking workspace** (GPL — call it as a service from
+an add-on, do not build your product inside it) or to the client's PFTrack/3DEqualizer seats via standard
+camera export.
+
+## Pattern 131 — The APAC up-stack offer (**sell what the disruptor's licence will not let them buy**)
+
+**The situation, from `intel/market.md` pass 55.** >90% of Hollywood roto is attributed to India;† crews run
+20–50 artists per feature;† FICCI-EY puts AI savings in roto/clean-up at **up to 40%** — a saving on the
+exact hours an APAC vendor invoices. A services business cannot be sold 40% fewer billable hours.
+
+**The asymmetry that makes this sellable, and it is this pass's own measurement.** A well-capitalised buyer
+licenses or acquires the models (Netflix/InterPositive, announced **2026-03-05**). A mid-size APAC vendor
+**cannot lawfully deploy the public state of the art at all** — S-Lab non-commercial on matting and
+inpainting, CC BY-NC on CoTracker, bespoke licences on VGGT and SAM 3. **Open source does not level this
+plane; it tilts it toward whoever can pay for a commercial grant.**
+
+**So sell per-seat and per-system, never per-frame:**
+
+1. **The licence-clean bay** (Pattern 128) as owned infrastructure — the vendor's own Apache/MIT stack,
+   commercially shippable, not rented from a research lab.
+2. **The paint-out gate** (Pattern 129) as a client-facing compliance artefact — it makes the vendor the
+   party who can answer an EMEA client's Article 50 question about a VFX slate.
+3. **The review-and-approval agent that still does not exist.** Pass 6 found no agent bridge for notes,
+   versions and approvals; pass 55 re-measured the best candidate — [`dughogan/nuke_mcp`](https://github.com/dughogan/nuke_mcp),
+   **40★, no licence file, last pushed 2025-11-03** — **unchanged in a year**. `OpenRV` (797★) and
+   `xstudio` (782★) are both permissive and both still unbridged. This is the **most agent-shaped workflow
+   in post and it is empty.**
+4. **The margin story, explicitly.** Per-hour roto revenue is the thing under attack. Per-seat pipeline
+   licensing, per-system integration and per-engagement compliance evidence are not. Lead with **margin
+   architecture**, not tooling — pass 6's conclusion, now with a licence proof underneath it.
+
+**Say the risk honestly:** no rotoscoping layoff or contract change tied to InterPositive has been reported,
+and InterPositive's described product is **colour grading, relighting and continuity fixes** — **not roto**.
+The threat is projected. Overstating it loses the room.
+
+## Pattern 132 — The 20-minute licence gate for any roto, paint or matchmove proposal
+
+Run before anyone scopes hours. Four commands, four questions.
+
+1. **Does it exist?** `git ls-remote --exit-code -h https://github.com/<slug>`. The only existence oracle.
+   `stuffmatic/fSpy` **resolves here while `search/repositories` returns 422** — a search 422 is **not**
+   evidence of absence.
+2. **What is the licence, read from the file?**
+   `curl -s https://raw.githubusercontent.com/<slug>/{main,master}/{LICENSE,LICENSE.md,LICENSE.txt,license.txt,COPYING,COPYING.md}`
+   — all six names, both branches. **`Meshroom`'s MPL-2.0 is in `COPYING.md`; `MatAnyone2`'s S-Lab is in
+   `LICENSE.txt`.** Both read as "no licence" under a shorter probe. Then grep the text for
+   **`non-commercial`** — that one word is the gate in this plane.
+3. **Is it archived?** `gh api -X GET search/repositories -f q="repo:<slug>" --jq '.items[].archived'`.
+   **In this plane the permissive options are disproportionately the archived ones** — `Sammie-Roto`
+   (Apache-2.0), `Cutie-Roto` (MIT), `glomap` (BSD-3-Clause) are all archived. **Licence filter without
+   archive check selects for abandonment here.**
+4. **Does the search total hide a zero?** `planar tracking` = **131 results**, top hits academic SLAM from
+   **2017** and a benchmark from **2022** — a **relevant zero** behind a plausible total. Read the results,
+   never the count.
+
+**The 20-minute output** is one line per component: *exists / licence as read / archived / commercially
+usable yes-no*. Any `non-commercial`, `NC`, `BSL`, bespoke vendor licence or missing licence file is a
+**hard stop requiring a named alternative** before the proposal goes out.
+
+## ⛔ What not to promise in this plane (pass 55)
+
+Carried in full in `intel/trends.md` pass 55. The six-line version:
+
+1. **No** "open source AI paint-out" — the two leading video inpainters are non-commercial; the permissive
+   fallbacks are still-image and dormant.
+2. **No** open planar tracker. Mocha Pro has no open equivalent.
+3. **No** despill — absent from this KB and from open source.
+4. **No** California AB 2319 VFX rate — unstated in available analyses.
+5. **No** claim that Netflix/InterPositive automates roto — it is described as grading, relighting and
+   continuity.
+6. **No** shortlisting by the GitHub SPDX field — it returns `NOASSERTION` for fourteen repositories in this
+   plane, mixing safe BSD/MPL with explicitly non-commercial. **Read the file.**

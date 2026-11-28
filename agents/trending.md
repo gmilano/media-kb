@@ -1,13 +1,86 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 # 📈 Trending Media AI Agents — append-only log
 
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
+
+## 2026-11-28 — pass 55: the compositing floor (**the plane where ~30,500★ of the state of the art is licensed non-commercial, and the permissive repos are the archived ones**)
+
+**Channel note:** `git ls-remote`, `gh api search/repositories` and `raw.githubusercontent.com` **all worked
+this session** — **51/51** repositories resolved by `ls-remote`, every star/fork figure is an exact integer
+from `search/repositories`, and **every licence below was read from the actual file**. Two web hosts did
+**not** resolve under this session's egress policy (`artificialintelligenceact.eu`, `restofworld.org`), so
+the EU AI Act primary text and the Rest of World report on Netflix/InterPositive are **cited from secondary
+sources only** and flagged as such throughout this pass.
+
+**New this pass, and it is the headline:** the models that perform rotoscoping, matting, tracking and
+paint-out are **systematically licensed outside** the MIT/Apache/BSD set this KB is built to use — by
+deliberate choice, with commercial contacts named in the licence text.
+
+| Agent / model | Repo | Licence (**read today**) | Stars | Forks | Last push |
+|---|---|---|---|---|---|
+| SAM 2 | https://github.com/facebookresearch/sam2 | ✅ **Apache-2.0** | **20,248** | 2,605 | 2026-05-30 |
+| VGGT | https://github.com/facebookresearch/vggt | ⛔ **"VGGT License v1"** — bespoke, non-OSI (10,722 B) | **14,689** | 1,579 | 2026-05-19 |
+| SAM 3 | https://github.com/facebookresearch/sam3 | ⚠️ **"SAM License"** — non-OSI (7,353 B, dated 2025-11-19) | 12,419 | 1,895 | **2026-11-17** |
+| LaMa | https://github.com/advimman/lama | ✅ **Apache-2.0** | 10,419 | 1,086 | 2025-02-05 |
+| RobustVideoMatting | https://github.com/PeterL1n/RobustVideoMatting | ⚠️ **GPL-3.0** | 9,649 | 1,197 | 2024-04-02 |
+| Depth-Anything-V2 | https://github.com/DepthAnything/Depth-Anything-V2 | ✅ **Apache-2.0** | 9,244 | 952 | 2026-03-24 |
+| MMagic | https://github.com/open-mmlab/mmagic | ✅ **Apache-2.0** | 7,483 | 1,095 | 2024-08-06 |
+| DUSt3R | https://github.com/naver/dust3r | ⛔ **CC BY-NC-SA 4.0** (361 B) | 7,396 | 773 | 2025-09-24 |
+| **ProPainter** | https://github.com/sczhou/ProPainter | ⛔ **S-Lab 1.0 — NON-COMMERCIAL** (1,852 B) | **7,106** | 826 | **2026-10-27** |
+| Track-Anything | https://github.com/gaomingqi/Track-Anything | ✅ **MIT** | 7,014 | 508 | 2025-12-13 |
+| CoTracker | https://github.com/facebookresearch/co-tracker | ⛔ **CC BY-NC 4.0** (`LICENSE.md`, 19,332 B) | 5,216 | 397 | 2026-03-03 |
+| BiRefNet | https://github.com/ZhengPeng7/BiRefNet | ✅ **MIT** | 4,466 | 357 | 2026-10-25 |
+| MODNet | https://github.com/ZHKKKe/MODNet | ✅ **Apache-2.0** | 4,390 | 678 | 2024-05-06 |
+| MASt3R | https://github.com/naver/mast3r | ⛔ **CC BY-NC-SA 4.0** (361 B) | 3,182 | 295 | 2025-06-30 |
+| **TAPNet / TAPIR** | https://github.com/google-deepmind/tapnet | ✅ **Apache-2.0** | 2,277 | 216 | **2026-11-02** |
+| XMem | https://github.com/hkchengrex/XMem | ✅ **MIT** | 1,997 | 215 | 2024-11-15 |
+| MatAnyone | https://github.com/pq-yang/MatAnyone | ⛔ **S-Lab 1.0 — NON-COMMERCIAL** (1,928 B) | 1,648 | 113 | 2026-03-04 |
+| Cutie | https://github.com/hkchengrex/Cutie | ✅ **MIT** | 1,135 | 118 | 2024-11-08 |
+| E2FGVI | https://github.com/MCG-NKU/E2FGVI | ⛔ **CC BY-NC 4.0** (17,722 B) | 1,170 | 116 | 2023-04-07 |
+| MatAnyone 2 | https://github.com/pq-yang/MatAnyone2 | ⛔ **S-Lab 1.0 — NON-COMMERCIAL** (`LICENSE.txt`) | 959 | — | 2026-07-28 |
+| ViTMatte | https://github.com/hustvl/ViTMatte | ✅ **MIT** | 574 | 51 | 2025-08-13 |
+| VideoMaMa | https://github.com/cvlab-kaist/VideoMaMa | ⛔ **No licence file** (12 names × 2 branches) | 558 | — | 2026-10-21 |
+| **Sammie-Roto 2** | https://github.com/Zarxrax/Sammie-Roto-2 | ⚠️ **GPL-3.0** | **525** | 40 | **2026-11-27** |
+| MatAnyone-E | https://github.com/Shuyun-Wang/MatAnyone-E | ⛔ **S-Lab 1.0 — NON-COMMERCIAL** | 203 | — | 2026-11-05 |
+| AutoMask | https://github.com/lukas-blecher/AutoMask | ✅ MIT | 178 | 21 | ⛔ **2020-12-17 — dead 5y 11m** |
+| Sammie-Roto (v1) | https://github.com/Zarxrax/Sammie-Roto | ✅ **Apache-2.0** | 147 | 8 | 🗄️ **ARCHIVED** |
+| RotoForge-AI | https://github.com/MagnumVD/RotoForge-AI | ⚠️ **GPL-3.0** (`LICENSE.md`) | 115 | 5 | 2026-09-30 |
+| LiveActionAOV | https://github.com/lettidude/LiveActionAOV | ⛔ **BSL 1.1** — not open source | 70 | 6 | **2026-11-27 — day of pass** |
+| RotoAI | https://github.com/sPappalard/RotoAI | ⚠️ **AGPL-3.0** | 66 | 15 | 2026-08-16 |
+| Cutie-Roto | https://github.com/Zarxrax/Cutie-Roto | ✅ **MIT** | 59 | 2 | 🗄️ **ARCHIVED** |
+| Comfy-Pro-Alpha-Generator | https://github.com/rik-python/ComfyUI-Comfy-Pro-Alpha-Generator | ⚠️ GPL-3.0 | 58 | 12 | 2026-11-03 |
+| MatteDesk | https://github.com/fishfinger44/MatteDesk | ⚠️ GPL-3.0 | 51 | 4 | 2026-11-23 |
+| RVM-for-Nuke | https://github.com/hkaramian/RobustVideoMatting-For-Nuke | ⚠️ GPL-3.0 | 51 | 1 | 2024-01-28 |
+| WOFTSAM | https://github.com/serycjon/WOFTSAM | ⛔ **CC BY-NC-SA 4.0** | 39 | — | 2026-08-26 |
+| nuke_mcp | https://github.com/dughogan/nuke_mcp | ⛔ **No licence file** | 40 | 7 | 2025-11-03 — **unchanged in a year** |
+| Samosa | https://github.com/tenetmotion/Samosa | ⚠️ GPL-3.0 | 5 | 0 | 2026-10-23 |
+| sam-ui | https://github.com/VolksRat71/sam-ui | ✅ Apache-2.0 | **2** | 0 | 2026-10-12 |
+
+**Thirty-seven rows, all verified. The arithmetic of the plane:** the non-commercial and non-OSI set —
+ProPainter, MatAnyone ×3, E2FGVI, CoTracker, DUSt3R, MASt3R, VGGT, WOFTSAM, VideoMaMa — totals
+**~30,500★**. The permissive, commercially shippable set that can replace it — SAM 2, BiRefNet, MODNet,
+ViTMatte, Cutie, XMem, `tapnet`, LaMa, Depth-Anything-V2 — exists and is assembled in
+`compose/patterns.md` Patterns 128 and 130. **Both facts are true at once, and that is the pass: the
+plane is deliverable, but only if you refuse the first thing the search returns.**
+
+**Two relicensing events, same plane, same year:** SAM 2 (**Apache-2.0**) → SAM 3 (**bespoke SAM
+License**, dated 2025-11-19); Sammie-Roto (**Apache-2.0**, now **archived**) → Sammie-Roto 2
+(**GPL-3.0**, pushed the day before this pass). **And the corollary worth carrying to the other eleven
+industries: the permissive repositories here are disproportionately the archived ones** — `Sammie-Roto`
+(Apache-2.0) archived, `Cutie-Roto` (MIT) archived, `glomap` (BSD-3-Clause) archived 2026-01-30, `AutoMask`
+(MIT) dead since 2020. **A licence filter that does not also read the `archived` flag selects for
+abandonment in this plane.**
+
+**The agent layer, re-measured and unchanged:** `nuke_mcp` remains **40★ with no licence file**, last pushed
+**2025-11-03**. Pass 6 called notes/versions/approvals "the most agent-shaped workflow in post"; a year
+later nothing has been built. `OpenRV` (797★) and `xstudio` (782★) are both permissive and both still
+unbridged.
 
 ## 2026-11-27 — pass 54: the live-commerce & shoppable-content plane (**the plane where the AI host is the most actively-pushed repo in the KB and the thing that counts the money has 18 stars**)
 

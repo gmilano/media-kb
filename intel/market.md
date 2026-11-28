@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 # 🗺️ Market Map — Media & Entertainment
@@ -11040,3 +11040,184 @@ Verifiable, dated, and from named parties rather than modelled:
 and **not** verified against a primary filing or an official gazette. The regulatory dates (China Order No.
 117; the EU DFA draft) are corroborated by regulatory trackers but the **article numbers of the DFA come from
 leaked-draft commentary and must be re-checked against the Commission's published text** before use.
+
+---
+
+## Market size — pass 55 addendum (2026-11-28): the compositing floor is **sized only as a region**, and the one figure worth carrying is a **labour share**, not a market
+
+### The headline figures — and why none of them survives alone
+
+| Figure | Value | Source type | Verdict |
+|---|---|---|---|
+| LATAM animation, VFX & post-production market | **~$1.32 bn (2025)**, **7.4% CAGR 2026–2035**; **Brazil largest, Mexico fastest-growing** | Market-research summary (Research and Markets)† | **Usable with attribution** — the most specific regional figure found for this plane |
+| North America share of "AI in VFX" market | **42.7% (2025)** | Market-research page (Emergen)† | Share only; the base is unstated, so the share is not convertible to money |
+| Indian VFX segment | **$1.1 bn (2025) → $1.8 bn (2034), 5.58% CAGR** | IMARC narrow cut† | Conflicts in scope with FICCI-EY's ₹48 bn recalibration already in this KB |
+| AI-in-VFX productivity | **"up to 40%"** time saving in roto/clean-up/pipeline | FICCI-EY, already recorded in this KB (pass 6) | **The load-bearing figure of this plane** |
+| Per-shot AI cost reduction | "40–60% on specific shots"; "18–22% post-production time" | Vendor/SEO blogs† | ⛔ **Refused** — mutually inconsistent, no primary source |
+| Indian VFX budget cut on AI projects | "25–40%" | Single vendor blog† | ⛔ **Refused** |
+
+### ⛔ The refusal — and for once the missing number is not the one a buyer wants
+
+There is **no credible standalone market size for rotoscoping, keying, matchmove or paint-out**. Every figure
+found sizes a *container* — "AI in VFX", "animation/VFX/post" — inside which the compositing floor is an
+unbroken-out line item. **Any slide claiming a "roto automation market" is invented.**
+
+But in this plane the missing market size is **not** the number that decides a deal, and that is the finding.
+The compositing floor is a **labour market**, not a software market: its economics are a headcount and an
+hourly rate, not a licence fee. The defensible number is therefore a **labour share**.
+
+### What can be stood behind instead — count the artists and the licences
+
+- **The labour-share figure.** Reporting attributes to Joseph Bell the claim that **more than 90% of
+  Hollywood's rotoscoping work is done in India**.† This is **secondhand and should be quoted as
+  attributed, not as fact** — but even halved it makes the point no market-size slide can: this plane's
+  cost base is a **geographically concentrated workforce**, and that is what AI is aimed at.
+- **The crew-size figure.** Rotoscoping teams of **20–50 artists per feature film** at outsourcing studios
+  in India and Southeast Asia.† An estimate, but a *countable* one — and it converts directly into the only
+  honest business case: hours × rate × shots.
+- **The licence count, which is this pass's own primary measurement.** Of the models that perform the
+  billable task, **four repositories totalling ~9,900★ are non-commercial (S-Lab 1.0)**, two more are
+  **CC BY-NC**, two are **CC BY-NC-SA**, one carries a **bespoke Meta research licence** at 14,689★, and one
+  at 558★ has **no licence file at all**. That is not a market estimate. It is a **measured, verifiable
+  constraint on supply**, and it is worth more in a bid than any CAGR in the table above.
+
+**The framing for a bid: this plane is not sized, it is *staffed* — and the automation aimed at it is
+largely not licensable.** Those two sentences together are the engagement.
+
+---
+
+### Pass 55 (2026-11-28) — the compositing floor in North America
+
+- **The demand signal is a statute with a date, and it is new.** **California AB 2319** was signed by
+  Governor Newsom on **2026-09-19** and creates the state's **first standalone post-production tax credit**,
+  administered by the **California Film Commission** and taking effect in **2027**. Reports describe
+  **35–50%** on qualifying post-production spend — editing, sound, music, **visual effects** and finishing.
+- **The provision that actually changes sourcing: projects no longer have to be *shot* in California to
+  qualify.** The prior credit covered post only for productions also filmed in-state. This decouples the
+  post award from the shoot, which is precisely how a VFX/roto vendor wins work it previously could not bid.
+- **The unsettled part, flagged rather than smoothed.** One analysis puts a **$6 m cap on qualified VFX
+  spend** with a separate $6 m cap on other post costs, and **does not state a VFX credit rate** — so the
+  rate applicable to VFX is **unclear**. Variety calls it a "$10 million tax credit" while another source
+  notes AB 2319 **does not fix one annual dollar amount**. ⛔ **Do not quote a VFX rate or the $10 m figure
+  in a client deck**; read the enrolled bill text first.
+- **The consolidation signal.** Netflix announced the acquisition of **InterPositive** on **2026-03-05**
+  (price undisclosed; reported figures of **~$587 m / "up to $600 m" are unconfirmed**†). Netflix's Q1
+  shareholder letter confirms the acquisition was to give creators a broader set of GenAI tools.
+- **The correction that matters, and it cuts against the headlines.** InterPositive's product is described as
+  automating **colour grading, relighting and continuity fixes**. **Rotoscoping is not in that product
+  description** — the roto link is *industry commentary*, not a Netflix claim. Netflix has also said the
+  technology will be shared only with **in-house creative partners**, not competing production companies.
+  **Sell against the documented capability, not the headline.**
+- **The opportunity.** AB 2319's decoupling of post from the shoot creates a 2027-dated procurement window,
+  and the credit requires **auditable cost reporting by category** — which is `compose/patterns.md`
+  Patterns 27.1–27.5 (incentive-eligibility engine, diffable cost ledger, claim-evidence pack) applied to a
+  statute that did not exist when those patterns were written. **The highest-probability NA engagement in
+  this plane is the claim-evidence layer for a post credit, not the roto automation itself.**
+
+### Pass 55 (2026-11-28) — the compositing floor in EMEA
+
+- **EMEA is the only region where this plane has a *regulatory* lever, and this pass found it sitting
+  unused in the KB's most-covered regulatory topic.** **AI Act Article 50(2)** carves out AI systems that
+  perform an **"assistive function for standard editing"** or that **do not "substantially alter the input
+  data … or the semantics thereof."** This KB contains **85 mentions of "Article 50" and, before this pass,
+  zero mentions of "assistive."**
+- **Applied to the compositing floor, the Article 50 boundary runs straight through it:**
+  - **Roto, keying, matte extraction** — isolating what the camera already photographed. Semantics
+    unchanged. Commentators place a **crop or a denoise pass** on the assistive side. ⇒ **very likely
+    outside** the marking duty.
+  - **Paint-out, clean plate, object removal** — synthesising pixels that were **never photographed**.
+    Commentators place **"generative fill that invents new objects"** firmly on the **non**-assistive side.
+    ⇒ **very likely inside** the marking duty.
+- **⚠️ Verification status, stated precisely.** The carve-out wording is corroborated across **multiple
+  independent secondary sources**, but **neither primary source resolves from this session** —
+  `artificialintelligenceact.eu` and `restofworld.org` both fail DNS under this session's egress policy, so
+  **EUR-Lex/Commission Guidelines text was not read**. Commentators also state the **"substantially alter"
+  threshold is deliberately fuzzy**, pending Guidelines and case law. Treat this as a **strong, well-sourced
+  planning hypothesis requiring primary-text sign-off**, never as settled advice.
+- **Dates.** Article 50 transparency obligations apply from **2026-08-02**; the Commission published the
+  final **Code of Practice on Transparency of AI-generated Content on 2026-06-10** (voluntary; signature is
+  evidence of compliance), requiring **at least two layers of machine-readable marking**; a grace period to
+  **2026-12-02** applies to systems already on the market. Commentary notes the final Guidelines **broadened**
+  the marking exceptions. **The date contest already logged in this file (2026-08-02 vs 2026-12-02) is
+  resolved by this distinction: 08-02 is when the duty applies, 12-02 is the grace deadline for pre-existing
+  systems.**
+- **Also recorded:** a **39% UK VFX AVEC rate** appears in a market report† and is **not verified** here.
+- **The opportunity.** A **per-operation Article 50 classifier** for a post pipeline — a gate that labels
+  each shot operation assistive vs generative, marks only what must be marked, and keeps the reasoning as
+  evidence. It attaches to the existing dual-mark provenance work (Pattern 8) and the Article 50 disclosure
+  chain (Pattern 48), and it is the **cheapest credible EMEA entry in this plane** because it saves the
+  client from over-marking an entire VFX slate.
+
+### Pass 55 (2026-11-28) — the compositing floor in APAC
+
+- **This is the region the plane is *about*.** The compositing floor is where APAC's media-services
+  revenue physically sits: **>90% of Hollywood rotoscoping attributed to India**† and frame-by-frame work
+  distributed across **India, South Korea, the Philippines** — and, note, **Latin America**.
+- **The structural threat is already in this KB and this pass sharpens it.** FICCI-EY's **"up to 40%"**
+  saving in roto/clean-up/pipeline is a saving **on the exact task APAC vendors bill by the hour**. Pass 6
+  called this "the efficiency story and the disintermediation threat to the same P&L." Pass 55 adds the
+  decisive detail: **the automation that would capture that saving is, in open source, largely not
+  licensable for commercial use** (S-Lab 1.0 non-commercial on the matting/inpainting state of the art;
+  CC BY-NC on CoTracker; bespoke licences on VGGT and SAM 3).
+- **So the threat is *not* symmetric, and this is the sellable insight.** A well-capitalised buyer licenses
+  or acquires the models — Netflix/InterPositive is that move. A mid-size APAC services vendor **cannot
+  lawfully deploy the public state of the art** to defend its own margin. **Open source does not level this
+  playing field in this plane; it tilts it toward whoever can pay for a commercial licence.**
+- **Context and caution.** Technicolor, a major Netflix vendor, **collapsed under debt in February 2025 and
+  shut its India operations** — the capacity shock preceded the AI shock. And: **no documented rotoscoping
+  layoff or contract change tied to InterPositive has been reported**. The risk is **projected, not
+  realised**; say so in a client conversation. Post-production workers in India and South Korea have **no
+  union representation equivalent** to SAG-AFTRA/IATSE, which is why the exposure is a labour story rather
+  than a bargaining one.
+- **Regulation.** India's amendments to the **IT Rules took effect 2026-02-20**, adding **Rule 3(3)** —
+  a due-diligence obligation on **synthetically generated information** — and cutting the deepfake takedown
+  window **from 36 hours to three hours**. This is a **platform-layer** duty: it does not regulate a VFX
+  vendor's roto work, but it does make **Indian-hosted synthetic output** the most time-pressured
+  compliance surface in the region. Latham & Watkins' three-category divergence finding (already in this
+  KB) continues to hold.
+- **The opportunity, and it is the pass-6 "up-stack" argument now with a licence proof.** Sell APAC vendors
+  **pipeline ownership, per-seat and per-system**, not frames: the permissive matchmove spine
+  (`compose/patterns.md` Pattern 130), the licence-clean roto bay (Pattern 128), the paint-out decision gate
+  (Pattern 129) and the review/approval agent gap that pass 6 measured and this pass re-measured unchanged
+  (`nuke_mcp`, **40★, no licence**). A studio whose revenue is per-hour roto cannot be sold 40% fewer hours
+  — **but it can be sold the one thing its would-be disruptor's licence will not let it buy off the shelf.**
+
+### Pass 55 (2026-11-28) — the compositing floor in LATAM
+
+- **LATAM is in the same exposed position as APAC and it is almost never named in that sentence.** The
+  reporting on frame-by-frame roto lists **"India, South Korea, the Philippines, and Latin America."** Vendor
+  analysis describes **Mexico** as having *"a strong connection to the US pipeline, particularly for
+  animation and high-volume roto/paint work"*,† and **Brazil** as *"the regional powerhouse with
+  sophisticated technical infrastructure."*† Both are promotional sources — **but the placement is
+  consistent with the Netflix/InterPositive reporting, which is not promotional.**
+- **The market figure is the most specific in this addendum.** LATAM animation/VFX/post: **~$1.32 bn
+  (2025)**, **7.4% CAGR 2026–2035**, **Brazil largest, Mexico fastest-growing**.†
+- **The incentives are live and dated — this is the region's buying trigger.** **Mexico: an audiovisual
+  production tax credit of up to 30%, effective 2026.** **Brazil: the Paulo Gustavo Law and the Audiovisual
+  Sector Fund reactivated.** Streaming investment is deepening across **Brazil, Mexico, Argentina, Colombia
+  and Chile**.
+- **Named players:** **Ánima Estudios**, **Ollin VFX** (Mexico); **Copa Studio**, **Split Studio**,
+  **Pinguim Content** (Brazil).†
+- **⛔ Informed gap, stated rather than left silent.** A dedicated search for **AI-specific regulation of
+  media in Brazil or Mexico** returned **nothing relevant in this pass** — no result on Brazil's AI bill
+  (PL 2338) or Mexican synthetic-media rules as they touch post-production. The KB's existing LATAM
+  findings (the region follows the EU model; Chile's Latam-GPT and bill; Uruguay's Council of Europe
+  signature) still stand from earlier passes, but **nothing new was found this pass, and the absence of a
+  result is not evidence of an absence of regulation.** Re-run before any LATAM compliance claim.
+- **The opportunity, and it differs from APAC's.** Mexico's credit is **effective now** and Brazil's funds
+  are **reactivated**, so LATAM has **capital arriving at the same moment the automation threat lands** —
+  which APAC does not. The play is to **specify the licence-clean pipeline at the point the incentive is
+  claimed**: Patterns 128–130 wired to the Patterns 27.1–27.5 cost/claim-evidence ledger, so a Mexican or
+  Brazilian studio spending credit money builds an **owned, commercially-licensable** roto/matchmove
+  capability rather than renting a non-commercial research model it cannot legally ship.
+- **Dated signal already in this file and still ahead:** the **Virtual Production LATAM Summit, 11–13
+  December 2026, 555 Studios, São Paulo**, with an INsight'26 panel on integrating AI into VFX pipelines
+  covering **governance and costs**.
+
+† Figure or claim from a **single secondary source** — trade press, vendor, agency or market-research
+summary — **not** verified against a primary filing, statute or gazette. Specifically unverified in this
+pass: the 90% India roto share (secondhand attribution), the 20–50 artist crew size, the $587 m/$600 m
+InterPositive price, the 42.7% NA share, the 39% UK AVEC rate, and the AB 2319 VFX rate and $10 m figure.
+**The EU Article 50(2) carve-out wording is corroborated across multiple independent secondary sources but
+was NOT read from primary text in this session** — `artificialintelligenceact.eu` and `restofworld.org` do
+not resolve under this session's network policy and would need to be allowed to close that gap.

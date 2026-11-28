@@ -1,7 +1,7 @@
 ---
 industry: media
 region: Global
-updated: 2026-11-27
+updated: 2026-11-28
 ---
 
 # 📈 Trending Media Repos — append-only log
@@ -9,6 +9,45 @@ updated: 2026-11-27
 > Newest section first; history below is never rewritten.
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
+
+## 2026-11-28 — pass 55: the compositing-floor substrate (**91,749★ of maths under a 525★ tool**)
+
+**Channels all available** (`ls-remote`, `gh api search`, `raw`); **51/51** URLs resolved, every licence read
+from the file. Distinct from `agents/trending.md` pass 55, which carries the *model* layer — this is the
+geometry, solver and ABI layer beneath it, and it is the healthiest layer in the plane by a wide margin.
+
+| Repo | Licence (read today) | Stars / forks | Last push | Note |
+|---|---|---|---|---|
+| https://github.com/opencv/opencv | **Apache-2.0** | 91,749 / 57,138 | **2026-11-27** | `calib3d` — undistort, homography, solvePnP. The lens maths everything calls |
+| https://github.com/colmap/colmap | **BSD-3-Clause** (`LICENSE`, 1,968 B) | 13,316 / 2,242 | **2026-11-28 — day of pass** | The matchmove workhorse. API says `NOASSERTION`; the file says new BSD |
+| https://github.com/alicevision/Meshroom | **MPL-2.0** (in **`COPYING.md`**, 1,175 B) | 13,118 / 1,243 | **2026-11-27** | Photogrammetry front end. **Would read as "no licence" under a probe lacking `COPYING.md`** |
+| https://github.com/openMVG/openMVG | **MPL-2.0** | 6,609 / 1,723 | 2026-11-07 | The permissive alternative solve path |
+| https://github.com/ceres-solver/ceres-solver | **BSD-3-Clause** (1,835 B, Google) | 4,616 / 1,146 | **2026-11-27** | **Bundle adjustment** — the core under every camera solve |
+| https://github.com/cvg/Hierarchical-Localization | **Apache-2.0** | 4,272 / 781 | 2026-11-22 | SuperPoint/SuperGlue matching — modern front end to COLMAP |
+| https://github.com/princeton-vl/RAFT | **BSD-3-Clause** | 4,131 / 681 | 2025-08-24 | **Optical flow** — temporal matte stabilisation |
+| https://github.com/mapillary/OpenSfM | **BSD-2-Clause** | 3,826 / 902 | 2026-11-26 | Python-scriptable SfM — easiest solve to embed in a service |
+| https://github.com/colmap/glomap | **BSD-3-Clause** | 2,346 / 186 | 2026-01-30 | 🗄️ **ARCHIVED.** Faster global SfM. **Permissive and abandoned** — the archive pattern |
+| https://github.com/AcademySoftwareFoundation/OpenTimelineIO | **Apache-2.0** | 2,124 / 368 | **2026-11-27** | Shot-level task spine — how a roto list reaches the bay |
+| https://github.com/google-deepmind/tapnet | **Apache-2.0** | 2,277 / 216 | **2026-11-02** | **The permissive point tracker** — replaces CC BY-NC CoTracker |
+| https://github.com/autonomousvision/unimatch | **MIT** | 1,391 / 131 | 2025-01-04 | Unified flow / stereo / depth |
+| https://github.com/lensfun/lensfun | **LGPL-3.0** | 898 / 240 | 2026-11-17 | **The open lens-distortion database.** LGPL — **link, do not vendor** |
+| https://github.com/AcademySoftwareFoundation/openfx | **BSD-3-Clause** | 594 / 161 | 2026-11-11 | **The OFX plugin ABI** — the boundary that solves the GPL host problem |
+| https://github.com/blender/blender | **GPL** (`COPYING`, 302 B) | 22,627 / 3,701 | **2026-11-27** | The only free adopted camera-solve UI. **Call it as a service; do not build inside it** |
+| https://github.com/perarnia/fSpy | **GPL-3.0** (read from file) | 2,637 / — | 2022-12-08 | Single-image camera match. ⚠️ **Canonical URL unresolved** — `stuffmatic/fSpy` resolves by `ls-remote` but returns **422** from `search/repositories`, so its metrics are unavailable and the canonical question is left **open, not guessed** |
+
+**Nine substrate repositories pushed within three weeks, every one permissive except Blender and `lensfun`.**
+Three are **Academy Software Foundation** projects (`openfx`, `OpenTimelineIO`, and the OpenImageIO/OpenEXR/
+OpenColorIO set already in `repos/foundations.md`) — corporate maintenance and a real governance model.
+
+**The structural observation of this pass, in one line:** the substrate peaks at **91,749★** and the
+artist-facing tool on top of it peaks at **525★** (Sammie-Roto 2, GPL-3.0), with the next twelve tools at
+**≤178★** and two at **5★ and 2★**. **Open source builds the maths; it does not build the bay the artist
+sits in** — the inverse of pass 54, where the generation layer was the most actively-pushed repo in the KB.
+
+**`openfx` is the row to remember despite its 594 stars.** It is the BSD-3-Clause ABI that lets a permissive
+roto node load into Natron (GPL-2.0) or DaVinci Resolve (proprietary) without either licence reaching your
+code — the same **process-and-ABI isolation** Pattern 119 used for the GPL restoration filters. **In this KB
+the recurring escape from a copyleft tool layer is a standardised boundary, not a rewrite.**
 
 ## 2026-11-27 — pass 54: the live-commerce & shoppable-content infrastructure layer
 

@@ -9625,3 +9625,163 @@ primary source this session; `infrequently.org` and `www.pagespeedmatters.com` d
 session (DNS refusal, **not** 404), so the device-class figures are second-hand. Every repository, licence,
 star count and archive status cited in these patterns was verified on 2026-11-28 and appears with its
 evidence in `agents/top.md`, `repos/foundations.md`, `repos/trending.md` or `verticals/solutions.md`.
+
+---
+
+## Pattern 158 — The release-delivery spine (**catalogue → ERN → DSP, all MIT, both ends testable**)
+
+**Problem.** A label or distributor needs to ship releases to DSPs in DDEX ERN and cannot test deliveries
+without a DSP partner willing to receive them.
+
+**Recipe — every component verified 2026-11-28.**
+
+1. **Catalogue spine:** [`beetbox/beets`](https://github.com/beetbox/beets) (**MIT**, `LICENSE` 1080 B,
+   16,000★, pushed 2026-11-27). Holds the master inventory and the file→identifier join. Use its plugin
+   system for ISRC custody; do **not** fork it.
+2. **Message construction:** [`daddykev/ddex-suite`](https://github.com/daddykev/ddex-suite) (**MIT**,
+   1073 B, 70★). Rust core with TypeScript/JS and Python bindings — one behaviour across all three
+   runtimes, which is why it beats the per-language parsers.
+3. **Conformance gate in CI:** [`daddykev/ddex-workbench`](https://github.com/daddykev/ddex-workbench)
+   (**MIT**, 1065 B, 20★). Validates ERN 3.8.2 / 4.2 / 4.3. Run it on every generated message **before**
+   delivery, as a blocking check.
+4. **Delivery:** [`daddykev/stardust-distro`](https://github.com/daddykev/stardust-distro) (**MIT**,
+   1073 B, 15★) for the full catalogue→ERN→DSP path, or
+   [`Miistix/ddex-tool`](https://github.com/Miistix/ddex-tool) (**MIT**, 1063 B) when all you need is
+   validate-a-folder-and-SFTP-it.
+5. **The move that makes this testable:** stand up
+   [`daddykev/stardust-dsp`](https://github.com/daddykev/stardust-dsp) (**MIT**, 1073 B, 7★) as a
+   **receiving DSP in staging**. Both ends of the handshake are the same licence from the same maintainer,
+   so a delivery can be round-tripped end to end with no commercial partner involved. This is the pattern's
+   actual value and it is unusual — most interchange planes in this KB have only one end open.
+
+**Target ERN version:** generate **4.3** but keep **3.8.2** emission available — many DSP integrations still
+require 3.8.2 while newer ones prefer 4.3†.
+
+⚠️ **Two cautions, both load-bearing.** (a) `ddex-tool` **does not bundle the DDEX schema files** — DDEX
+retains copyright over the ERN standard and its schemas, so the schemas must be obtained under DDEX's own
+terms, which **this session could not verify (`new.ddex.net` does not resolve, as in pass 5)**. Resolve that
+commercially before the build starts. (b) **Four of these five repos are by one maintainer.** Price a
+fork-and-maintain line; the tier is permissive and current but has a single point of failure.
+
+**Do not use** [`erv718/ddex-media-pipeline`](https://github.com/erv718/ddex-media-pipeline) in a
+deliverable: **no licence** under any of nine probed filenames and no licence claim in README or package
+metadata. Read it as a reference, ship nothing from it.
+
+---
+
+## Pattern 159 — The AI-declaration pipeline (**greenfield, and the deadline is 2026-12-02†**)
+
+**Problem.** One release needs AI-involvement declarations in four mutually incompatible platform dialects
+and a machine-readable marking for the EU, and **no open tool writes the field layer any of them read**.
+
+**What exists and what does not.** DDEX **MEAD** carries the descriptive metadata that Spotify's AI-credits
+beta uses for AI declarations† — and **MEAD and PIE have zero open implementations**. The only artefact is
+[`labelkit#226`](https://github.com/epsilon-records/labelkit/issues/226), an *issue* on a repo verified at
+**0★, no licence, no description**. So this pattern is explicitly **build, not integrate** — the single most
+common mis-scope on this plane is treating it as integration.
+
+**Recipe.**
+
+1. **One internal truth, many renderings.** Model AI involvement once per track — tool used, whether the
+   output is wholly or partly generated, whether any voice is a digital replica, and the consent record
+   behind it (reuse pass 50's performer-consent plane for that last field; do not re-model it).
+2. **Render per destination**, because the semantics and the consequences differ:
+   - **Spotify** — AI-persona labelling and exclusion from default recommendations†; declarations via MEAD†.
+   - **Apple Music** — voluntary **Transparency Tags**, label/distributor declares, platform displays†.
+   - **TIDAL** — fully-AI tracks **excluded from royalty attribution**†. This one is a *revenue* field, so
+     route it past finance, not just metadata ops.
+   - **Bandcamp** — AI music **banned** since January 2026†: the correct rendering is **do not deliver**.
+3. **EU machine-readable marking.** Emit it for systems already on the market by **2026-12-02**†
+   (Article 50 duties enforceable since **2026-08-02**†). Note Art. 50(4) deepfake disclosure attaches to
+   the **deployer** where an artist self-distributes†, so a distribution client may carry the duty itself.
+4. **Write the MEAD emitter on `ddex-suite`** (MIT) rather than from scratch — it already parses and builds
+   DDEX XML, so MEAD is a schema addition to a working builder, not a new codebase. **This is the single
+   highest-leverage build identified on this plane.**
+5. **Gate in CI with `ddex-workbench`** for ERN, plus your own MEAD schema check, which you will have to
+   write because nothing open validates MEAD.
+
+**Honest framing for the client:** enforcement is the weak part of the story — **zero EU AI Act enforcement
+actions against any music-industry actor as of May 2026**†. Sell the deadline and the platform requirements,
+which are real and dated. Do not sell an enforcement threat that has not materialised.
+
+---
+
+## Pattern 160 — The neighbouring-rights reconciliation ledger (**9.3% of industry revenue, 6–18 month lag, no incumbent open tool**)
+
+**Problem.** Performance/neighbouring-rights income is **9.3% of recorded-music revenue** (≈**$2.95B** on
+IFPI's **$31.7B**), arrives **quarterly to semi-annually with a 6–18 month lag**†, and the collecting bodies
+match on **ISRC**† — so a recording distributed under one ISRC and registered under another produces a
+parallel entry that stalls payment indefinitely†.
+
+**Why it is buildable.** The matching key is known and singular (**ISRC**), the counterparties are few
+(**SoundExchange** US — **>$13B distributed since inception**†, splitting **45% featured artist / 5%
+non-featured / 50% rights holder**†; **PPL** UK — **quarterly**, **50+ territories** by reciprocal
+agreement, and explicitly **not** on-demand streaming†), and **no open tool does this**.
+
+**Recipe.**
+
+1. **ISRC custody as the spine:** `beets` (**MIT**, 16,000★) as the authoritative inventory; every master
+   carries exactly one ISRC and the registration state per body is an attribute of it.
+2. **Detect parallel entries** — the actual failure mode. Reconcile distributed ISRC against
+   registered-at-body ISRC and alert on divergence. This single check is most of the value.
+3. **Accounting core:** read
+   [`wrklst/indie-label-royalty-management`](https://github.com/wrklst/indie-label-royalty-management)
+   (**MIT**, `LICENSE` 1085 B, 4★, pushed 2026-11-27, in production at an independent Berlin label) **before
+   writing any ledger code**. Its **payouts-capped-at-what-is-payable** logic is the hard part of royalty
+   accounting and it is already solved there, in a real deployment, under MIT.
+4. **Ledger design** — borrow the shape, not the code, from
+   [`JacobBelay/Royalty-Split-Ledger`](https://github.com/JacobBelay/Royalty-Split-Ledger): append-only
+   double-entry, **idempotent statement imports**, **row-level locking against duplicate payouts**. ⛔ It
+   carries **no licence**, so **read it and reimplement**. Do not copy a line.
+5. **Forecast the lag.** With a 6–18 month tail on a known revenue share, a simple cohort forecast is worth
+   more to a label's treasury than a better recommender.
+
+⚠️ **Licence-screen before shortlisting on this tier.** Of seven recording-side royalty repos — **five stars
+between them** — **three carry no licence at all** and one claims MIT in prose with no licence file and
+fictional data. The best-engineered repo in the tier is the least usable. Engineering quality and legal
+usability are uncorrelated here.
+
+**Do not substitute**
+[`matijakolaric-com/django-music-publisher`](https://github.com/matijakolaric-com/django-music-publisher)
+(**MIT**, 98★): it is **publishing**-side (CWR works registration, pass 43's plane). Using it here would
+solve the wrong half of the business and overstate this plane's maturity twentyfold.
+
+---
+
+## Pattern 161 — The master-and-stem custody gate (**ship the weights question, not just the code question**)
+
+**Problem.** An archive engagement wants stems reconstructed from stereo masters for remixing, immersive
+remastering or clip licensing — and the separation model's **weights** are licensed differently from its
+code.
+
+**Recipe.**
+
+1. **Separation:** [`adefossez/demucs`](https://github.com/adefossez/demucs) (**3,600★**, pushed
+   2026-11-27). Code is **MIT**; the project states the **model-weights licence is unclear**.
+2. **Make that a gate, not a footnote.** Before any separated audio reaches a client deliverable, record
+   which checkpoint produced it and what that checkpoint's terms are. A source-tree SBOM scan, an SPDX field
+   and a licence badge **all report MIT and all miss this**.
+3. **Custody and identification:** `beets` (**MIT**, 16,000★) for inventory;
+   [`metabrainz/picard`](https://github.com/metabrainz/picard) (**GPL-2.0**, `COPYING.txt` 17,984 B,
+   5,400★) for MusicBrainz-backed tagging. ⚠️ **Picard is copyleft: run it as a tool in your pipeline, do
+   not link it into a proprietary deliverable.** Its licence was found only by shallow clone, because every
+   raw-channel licence filename 404'd while `README.md` returned 200 — cycle 8's rule in action.
+4. **Downstream, reuse what this KB already has:** pass 5 for fingerprinting and rights reservation, pass 41
+   for anti-piracy enforcement, pass 42 for archive monetisation and shot/clip licensing. Do not re-model
+   those.
+
+**The reusable CI rule, now stated in a vendor's own words rather than inferred:** for every native library
+and every model dependency, **resolve the licence of the artefact you redistribute** — linked libraries,
+model weights, schema files — **not the licence of the repository you cloned**. This plane produced three
+independent instances in one pass: Demucs weights, Picard's `COPYING.txt`, and the **DDEX schemas** that
+`ddex-tool` refuses to bundle.
+
+---
+
+† = secondary source (trade press, vendor or practitioner blog), reached via search only and not verified
+against the primary source this session. Every repository, licence (with byte count), star count and commit
+date in Patterns 158–161 was verified on **2026-11-28** — existence by `git ls-remote`, licence by
+`raw.githubusercontent.com` across nine filenames with shallow-clone fallback, stars and forks by repository
+page fetch, because the **GitHub REST API returns HTTP 403 for non-session repositories in this
+environment** — and appears with its evidence in `agents/top.md`, `repos/foundations.md`,
+`repos/trending.md` or `verticals/solutions.md`.

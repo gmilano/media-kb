@@ -5772,3 +5772,150 @@ primary source from this session. `www.pagespeedmatters.com` and `infrequently.o
 session's allowed network domains** (DNS refusal, **not** 404), so the two best quantitative anchors on
 this plane — the 49-outlet news CWV study and Alex Russell's 2026 performance-inequality budgets — are
 recorded as leads at second hand and **were not verified at source this pass.**
+
+---
+
+## The recorded-music supply-chain plane — master custody, release delivery, MEAD enrichment & the payout hole — measured 2026-11-28 (pass 63)
+
+Pass 5 took the **identifiers** (ISRC, ISWC, DDEX ERN as a *registry* question). Pass 43 took the
+**composition** side and said so in its own title — lyrics, chords, score, publishing/mechanical. Neither
+took the **recording** side as a commercial plane, and the grep says so precisely. Word-boundaried against
+all eight files before any web call:
+
+| Term | Hits before this pass |
+|---|---|
+| `DSP delivery`, `master rights`, `multitrack`, `phonogram`, `record label`, `revenue share`, `split sheet`, `producer points`, `SoundExchange`, `distribution deal`, `ISNI` | **0 each** |
+| `payout` | 1 |
+| `sound recording` | 1 |
+| `neighbouring` / `neighboring` | 3 / 2 |
+| `ISRC` / `DDEX` (pass 5's territory, for contrast) | 37 / 41 |
+
+### A method correction that invalidates part of three earlier passes' arithmetic
+
+The unbounded grep this KB has used since cycle 6 is **wrong by orders of magnitude** on short tokens, and
+this pass quantified it rather than just noting it:
+
+| Token | Unbounded count | Word-boundaried | What inflated it |
+|---|---|---|---|
+| `ERN` | 1,612 | **8** | mod**ern**, gov**ern**ance, conc**ern**, patt**ern** |
+| `PPL` | 666 | **0** | a**ppl**y, su**ppl**y, a**ppl**ication |
+| `stem` | 614 | **10** | sy**stem**, eco**system** |
+| `GRid` | 37 | ~0 real | `grid` (power, layout) |
+
+**`PPL` is the worst case in this KB's history: 666 apparent hits, zero real ones.** Any pass that read an
+unbounded count as coverage has over-reported it. Cycle 11 flagged that placeholder regexes need word
+boundaries; this extends the same fix to **every coverage measurement**, which is the more expensive half.
+
+### The agent bridge — measured, and it is the usual answer
+
+`DDEX MCP`, `music distribution MCP`, `royalty MCP` and `label operations MCP` surface **no project with
+meaningful adoption**. The nearest artefact in the whole plane is a **GitHub issue, not a program**:
+[`epsilon-records/labelkit#226`](https://github.com/epsilon-records/labelkit/issues/226), proposing MEAD and
+PIE generation, filed ~10 days before this pass on a repo with **0 stars, no licence and no description**.
+As in passes 7, 42 and 43: a delivery pipeline is **called by a cron job, not conversed with**, so no agent
+layer forms. That is now the sixth confirmation and it should be treated as the plane's default, not news.
+
+### Tier A — the catalogue and master-custody spine (this layer is healthy)
+
+| Agent / tool | Repo | Licence (verified) | Stars / forks | Last push | What it does |
+|---|---|---|---|---|---|
+| beets | https://github.com/beetbox/beets | **MIT** (`LICENSE`, 1080 B, in-tree) | 16,000★ / 2,200f | 2026-11-27 | Music library manager + MusicBrainz tagger. The catalogue spine that already joins a file to an identifier — pass 5 named it for the same reason. |
+| MusicBrainz Picard | https://github.com/metabrainz/picard | **GPL-2.0** (`COPYING.txt`, 17,984 B) | 5,400★ / 484f | 2026-11-27 | Cross-platform tagger on the MusicBrainz database. Copyleft — fine as a **tool you run**, not as a library you embed in a client deliverable. |
+| Demucs | https://github.com/adefossez/demucs | **MIT for code**; ⚠️ **weights licence unclear, stated by the project itself** | 3,600★ / 334f | 2026-11-27 | Hybrid spectrogram/waveform source separation — the stem extractor behind master/multitrack reconstruction. |
+
+**~25,000 stars** sit in Tier A. The asymmetric-licence trap pass 60 recorded reappears here in the
+project's *own* words: Demucs says the code is MIT "as found in the LICENSE file" and that the **model
+weights' licence is unclear**. Shipping separation output to a client is a weights question, not a code
+question, and no SPDX field or SBOM scan of the source tree can see it.
+
+### Tier B — release delivery to DSPs (small, permissive, real, and almost entirely one maintainer)
+
+| Agent / tool | Repo | Licence (verified) | Stars / forks | What it does |
+|---|---|---|---|---|
+| ddex-suite | https://github.com/daddykev/ddex-suite | **MIT** (`LICENSE`, 1073 B) | 70★ / 3f | DDEX XML builder + parser, single Rust core with TypeScript/JS and Python bindings. **The only general-purpose ERN library found with real adoption.** |
+| ddex-workbench | https://github.com/daddykev/ddex-workbench | **MIT** (`LICENSE`, 1065 B) | 20★ / 4f | ERN validation platform, web UI + API; supports ERN 3.8.2, 4.2, 4.3. |
+| stardust-distro | https://github.com/daddykev/stardust-distro | **MIT** (`LICENSE`, 1073 B) | 15★ / 9f | npm-installable distribution platform: catalogue → ERN generation → DSP delivery. The *sending* side. |
+| stardust-dsp | https://github.com/daddykev/stardust-dsp | **MIT** (`LICENSE`, 1073 B) | 7★ / 6f | The *receiving* side: ingests ERN deliveries into a searchable catalogue + streaming front end. Rare: both ends of the handshake, same licence. |
+| ddex-tool | https://github.com/Miistix/ddex-tool | **MIT** (`LICENSE`, 1063 B) | 0★ / 0f | Python CLI: validate a delivery folder against the ERN 4.1.1 schema, ship it over SFTP. |
+| ddex-media-pipeline | https://github.com/erv718/ddex-media-pipeline | ⛔ **NO LICENCE** — none in tree under any of 9 probed names, **and no word-boundaried licence claim in README or any package metadata** | 0★ / 0f | Dependency-free ERN 4.3 `NewReleaseMessage` generator + transcode. Unusable in a client deliverable as it stands. |
+
+**112 stars across the whole delivery tier, and four of the six repos are by one author (`daddykev`).**
+Five of six carry a real `LICENSE` file; the concentration risk is the maintainer, not the licence.
+
+**The schema is the gate, not the code.** `ddex-tool` states it does **not bundle the DDEX schema files**
+because DDEX retains copyright over the ERN standard and its schemas. So an MIT tool still cannot ship the
+artefact it validates against — the exact content-vs-code split this KB recorded for CPT (healthcare),
+MedDRA, and ISRC/ISWC in pass 5. **Pass 5 could not resolve DDEX's implementation terms because
+`new.ddex.net` would not resolve from the session; it still did not resolve this pass.** Unchanged
+informed gap, now twice recorded.
+
+### Tier C — MEAD / PIE enrichment: an absolute zero, and the regulator has already landed on it
+
+MEAD (Media Enrichment and Description) and PIE (Party Identification and Enrichment) are the DDEX
+standards that carry non-core descriptive metadata. **No open-source implementation of either was found.**
+Not a thin one — none. The only artefact in existence is the `labelkit` issue above.
+
+This matters far more than a missing library usually would, because of where the disclosure obligation went:
+**Spotify's AI-credits disclosure beta (opened 2026-04-16, DistroKid the sole delivery partner†) carries the
+AI declarations in MEAD fields†.** The EU AI Act's machine-readable marking duty for systems already on the
+market falls due **2026-12-02† — four days after this measurement.** So the field layer that regulators and
+the largest DSP both now depend on has **zero open implementations**, while the layer beneath it (ERN
+delivery) is MIT and working. That is the sharpest instance of this KB's content law yet recorded: *the
+obligation attaches to a field whose only tooling is proprietary.*
+
+### Tier D — royalty accounting and splits: the layer is not merely small, it is unlicensed
+
+Pass 5 measured `music royalty accounting` and found the top six results summing to **0 stars**. That
+finding survives, but it was incomplete: the tier is not empty, it is **legally unusable**. All seven
+recording-side repos, verified individually on 2026-11-28:
+
+| Repo | Licence (verified, in-tree) | Stars / forks | Last commit | Note |
+|---|---|---|---|---|
+| https://github.com/wrklst/indie-label-royalty-management | **MIT** (`LICENSE`, 1085 B) | 4★ / 0f | 2026-11-27 | **The only production-used, properly licensed option found.** Laravel + React, self-hosted: per-payee percentage splits, accounting periods, payouts capped at what is payable. Runs an independent Berlin label. |
+| https://github.com/invaderjmusic/royalties | **MIT** (`LICENSE`, 1071 B) | 1★ / 1f | — | Revenue splits to song contributors. Minimal. |
+| https://github.com/Mossad-esc/BeatSplit | **MIT** (`LICENSE`, 1078 B) | 0★ / 0f | — | On-chain splitter, Stellar Soroban contracts. A different trust model, not an accounting system. |
+| https://github.com/AffixIO/music-royalty-ledger | ⚠️ **MIT in README only — no `LICENSE` file in tree** | 0★ / 0f | 2026-11-02 | Self-described as **simulated, fictional data**. A proof of concept, not payout software. |
+| https://github.com/JacobBelay/Royalty-Split-Ledger | ⛔ **NO LICENCE anywhere** | 0★ / 0f | 2026-11-24 | Spring Boot + PostgreSQL append-only double-entry ledger, idempotent imports, row-level locking against duplicate payouts. **The best-designed thing in the tier and the least usable.** |
+| https://github.com/SunayHegde/music-royalty-management-system | ⛔ **NO LICENCE anywhere** | 0★ / 0f | 2026-11-15 | Imports Spotify/Apple/YouTube monthly reports, versioned split agreements. A **university DBMS coursework project** — ships `DBMS_Project_Report_Music_Royalty_Management.pdf`. |
+| https://github.com/yash0260/monetunes | ⛔ **NO LICENCE anywhere** | 0★ / 0f | 2026-11-17 | Statement-to-split matching, integer-cent accuracy, writer-share CSV, 1099-style summaries. |
+
+**Seven repos. Five stars between them. Three carry no licence under any of nine probed filenames and no
+word-boundaried licence claim in README or package metadata.** One more claims MIT in prose but ships no
+licence file. The tier's apparent high-water mark,
+[`matijakolaric-com/django-music-publisher`](https://github.com/matijakolaric-com/django-music-publisher)
+(**MIT**, `LICENSE` 1077 B + `LICENSE.rst` 1119 B, **98★ / 61f**, last commit 2026-11-08, CWR registration
+and royalty processing), is **publishing-side** — it is pass 43's plane, not this one. Counting it here
+would overstate the recording side by twentyfold.
+
+### The four-step gradient — the most complete form this law has taken in the KB
+
+| Step | Nature of the problem | What exists | Verified weight |
+|---|---|---|---|
+| **IDENTIFY** the recording | Catalogue / matching | beets, Picard, Demucs | **~25,000★**, permissive (one weights caveat) |
+| **DELIVER** the release | Format / schema | ddex-suite, workbench, stardust ×2, ddex-tool | **112★**, 5 of 6 MIT |
+| **ENRICH** it (MEAD/PIE) | Format — *but licensed shut* | **nothing** | **0** — one issue on an unlicensed 0★ repo |
+| **ACCOUNT & PAY** | Judgment | 7 toy repos | **5★**, 3 unlicensed |
+
+Passes 5 and 8 found a three-step version of this (declare → honour → liquidate). The four-step form is
+more damning, because the collapse is **not monotonic**: step 1 is healthy, step 2 is healthy-but-tiny,
+step 3 is *zero while being the step a regulator now requires*, and step 4 is unlicensed. An engagement
+that assumes "the open stack thins out as you go downstream" will mis-plan step 3 badly.
+
+### Informed gaps — searched and not found, stated so they do not read as coverage
+
+- **No DDEX or distributor figure quantifying MEAD/PIE adoption exists.** Searched; found standards
+  documentation and one vendor blog. DDEX's own news page and distributor integration docs are the next step.
+- **IFPI publishes no "neighbouring rights" line item.** Its **performance rights = 9.3% of revenue** is the
+  closest primary figure, and the two terms are not synonyms. Do not present them as one.
+- **No APAC-specific adoption data for music-streaming AI** was found at all — only global platform policy
+  and one Korean statute. Explicit regional gap, not coverage.
+- **No measured figure for how many labels self-host royalty accounting versus buy it.** Same shape of gap
+  pass 7 recorded for recommenders; still unmeasured.
+- **DDEX's own implementation/licensing terms remain unverified** — `new.ddex.net` did not resolve this pass
+  either, two passes running.
+
+† = secondary source (trade press, vendor or practitioner blog), reached via search only and **not**
+verified against the primary source from this session. Every repository, licence, star count and commit
+date above was verified on 2026-11-28 by `git ls-remote` for existence, `raw.githubusercontent.com` across
+nine licence filenames, and shallow clone where the raw channel 404'd (cycle 8's rule: a raw-channel 404 is
+never by itself proof that a licence is missing).

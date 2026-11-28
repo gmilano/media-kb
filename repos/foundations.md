@@ -6545,3 +6545,101 @@ against the primary source from this session. `infrequently.org` and `www.pagesp
 the 49-outlet news CWV study are leads at second hand, **not verified at source this pass**. Verifying them
 needs those two domains allowed, or a direct CrUX BigQuery query — `bq` is available in this environment
 and is the cheaper path for a later pass.
+
+---
+
+## The recorded-music supply-chain plane — foundational repos — measured 2026-11-28 (pass 63)
+
+The substrate under `agents/top.md` pass 63. Plane located by word-boundaried grep of ~35 candidate terms
+against all eight files **before** any web call: `DSP delivery`, `master rights`, `multitrack`, `phonogram`,
+`record label`, `revenue share`, `split sheet`, `producer points`, `SoundExchange`, `distribution deal` and
+`ISNI` each returned **zero**. Pass 5 held the identifiers; pass 43 held the composition side.
+
+### The licence-probe and counting rules this pass had to fix first
+
+Two corrections, both reusable across all twelve industries:
+
+1. **Coverage counts need word boundaries.** `ERN` read 1,612 unbounded and **8** bounded; `PPL` read 666
+   and **0**; `stem` 614 and **10**. A plane can look covered purely through `modern`, `apply` and `system`.
+2. **Licence probing needs nine filenames and a clone fallback.** `beets` and `metabrainz/picard` both
+   returned 404 on every raw-channel licence name while their `README.md` returned 200 — cycle 8's rule
+   says that proves a naming convention, not a missing licence. Shallow clone resolved both in one call:
+   beets `LICENSE` (MIT, 1080 B), Picard **`COPYING.txt` (GPL-2.0, 17,984 B)**.
+   `matijakolaric-com/django-music-publisher` ships **two** (`LICENSE` 1077 B and `LICENSE.rst` 1119 B).
+
+### Tier A — catalogue, tagging and master/stem custody
+
+| Repo | Licence (verified in-tree) | Stars | Forks | Last push | Role on this plane |
+|---|---|---|---|---|---|
+| [beetbox/beets](https://github.com/beetbox/beets) | **MIT** (`LICENSE`, 1080 B) | 16,000 | 2,200 | 2026-11-27 | The catalogue spine. Joins a physical file to an identifier, scriptable, plugin-rich. Start here for any master-inventory engagement. |
+| [metabrainz/picard](https://github.com/metabrainz/picard) | **GPL-2.0** (`COPYING.txt`, 17,984 B) | 5,400 | 484 | 2026-11-27 | MusicBrainz-backed tagger. Copyleft: run it as a tool, do not link it into a proprietary deliverable. |
+| [adefossez/demucs](https://github.com/adefossez/demucs) | **MIT code**; ⚠️ **model-weights licence unclear — the project says so itself** | 3,600 | 334 | 2026-11-27 | Stem separation / multitrack reconstruction from a stereo master. The weights, not the code, are the client-deliverable risk. |
+
+### Tier B — DDEX release delivery (the working, permissive layer)
+
+| Repo | Licence (verified) | Stars | Forks | Role |
+|---|---|---|---|---|
+| [daddykev/ddex-suite](https://github.com/daddykev/ddex-suite) | **MIT** (`LICENSE`, 1073 B) | 70 | 3 | ERN builder/parser, Rust core + TS/JS + Python bindings. The library to build on. |
+| [daddykev/ddex-workbench](https://github.com/daddykev/ddex-workbench) | **MIT** (`LICENSE`, 1065 B) | 20 | 4 | ERN 3.8.2 / 4.2 / 4.3 validation, web UI + API. The CI gate. |
+| [daddykev/stardust-distro](https://github.com/daddykev/stardust-distro) | **MIT** (`LICENSE`, 1073 B) | 15 | 9 | Catalogue → ERN → DSP delivery. The sending end. |
+| [daddykev/stardust-dsp](https://github.com/daddykev/stardust-dsp) | **MIT** (`LICENSE`, 1073 B) | 7 | 6 | ERN ingest → catalogue → streaming front end. The receiving end. |
+| [Miistix/ddex-tool](https://github.com/Miistix/ddex-tool) | **MIT** (`LICENSE`, 1063 B) | 0 | 0 | ERN 4.1.1 validation + SFTP delivery CLI. Smallest useful unit. |
+| [erv718/ddex-media-pipeline](https://github.com/erv718/ddex-media-pipeline) | ⛔ **NO LICENCE** (9 filenames probed; no word-boundaried claim in README or package metadata) | 0 | 0 | ERN 4.3 generator + transcode, dependency-free. Read it, do not ship it. |
+
+**112 stars for the entire delivery tier, four of six repos by one maintainer (`daddykev`).** The
+single-maintainer concentration is the real adoption risk here — not licence, not staleness (all pushed
+recently). Price a fork-and-maintain line into any engagement that depends on this tier.
+
+**Two licence layers, not one.** `ddex-tool` deliberately does **not** bundle the DDEX schema files, because
+DDEX retains copyright over the ERN standard and its schemas. The code is MIT; the artefact it validates
+against is not redistributable. Same shape as CPT in healthcare and ISRC/ISWC in media pass 5: **resolve the
+licence of the standard, not only of the repository.**
+
+### Tier C — MEAD / PIE: no implementation exists
+
+Searched for open implementations of **Media Enrichment and Description (MEAD)** and **Party Identification
+and Enrichment (PIE)**. **Result: zero repositories.** The only artefact is
+[`epsilon-records/labelkit#226`](https://github.com/epsilon-records/labelkit/issues/226) — an *issue*
+proposing MEAD/PIE generation, on a repo verified at **0★, 0 forks, no licence, no description, last commit
+2026-11-27**. Active, but unlicensed and unusable.
+
+This is the plane's load-bearing gap, because **Spotify's AI-credits beta carries its AI declarations in
+MEAD fields†** and the EU AI Act's machine-readable-marking deadline for pre-existing systems is
+**2026-12-02†**, four days after this measurement. The obligation has attached to the one layer with no
+open tooling.
+
+### Tier D — royalty accounting and payout: unlicensed, not merely immature
+
+Pass 5 recorded `music royalty accounting` with its top six results at **0 stars**. Refined: the tier exists
+and is **legally unusable**. Verified individually (full table with descriptions in `agents/top.md`):
+
+| Repo | Licence (verified) | Stars |
+|---|---|---|
+| [wrklst/indie-label-royalty-management](https://github.com/wrklst/indie-label-royalty-management) | **MIT** (`LICENSE`, 1085 B) | 4 |
+| [invaderjmusic/royalties](https://github.com/invaderjmusic/royalties) | **MIT** (`LICENSE`, 1071 B) | 1 |
+| [Mossad-esc/BeatSplit](https://github.com/Mossad-esc/BeatSplit) | **MIT** (`LICENSE`, 1078 B) | 0 |
+| [AffixIO/music-royalty-ledger](https://github.com/AffixIO/music-royalty-ledger) | ⚠️ MIT **in README only**, no `LICENSE` file | 0 |
+| [JacobBelay/Royalty-Split-Ledger](https://github.com/JacobBelay/Royalty-Split-Ledger) | ⛔ **NO LICENCE** | 0 |
+| [SunayHegde/music-royalty-management-system](https://github.com/SunayHegde/music-royalty-management-system) | ⛔ **NO LICENCE** (university DBMS coursework) | 0 |
+| [yash0260/monetunes](https://github.com/yash0260/monetunes) | ⛔ **NO LICENCE** | 0 |
+
+**Seven repos, five stars, three with no licence at all.** Only `wrklst` is both properly licensed and
+running in production anywhere. For contrast and **not** to be counted on this plane,
+[matijakolaric-com/django-music-publisher](https://github.com/matijakolaric-com/django-music-publisher)
+(**MIT**, 98★ / 61f, 2026-11-08) handles CWR registration and royalty processing on the **publishing** side —
+pass 43's plane.
+
+### What a Globant engagement actually builds here
+
+The buildable composite is **Tier A + Tier B + a written-from-scratch Tier C/D**, and that split should be
+priced explicitly: Tiers A and B are adopt-and-configure; Tier C is greenfield against a copyrighted schema;
+Tier D is greenfield with one 4-star MIT reference implementation worth reading first
+(`wrklst`, Laravel + React, payouts capped at what is payable — that cap is the hard part and it is already
+solved there).
+
+† = secondary source (trade press, vendor or practitioner blog), reached via search only and not verified
+against the primary source from this session. Existence verified by `git ls-remote`; licences by
+`raw.githubusercontent.com` across nine filenames with shallow-clone fallback; stars and forks from the
+repository pages, because **the GitHub REST API is gated to session-enabled repositories in this
+environment and returns HTTP 403 for third-party repos** — `git ls-remote` + raw channel + page fetch is the
+working substitute, recorded here as a method note for later passes.

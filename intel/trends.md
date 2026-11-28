@@ -6072,3 +6072,118 @@ page. Page experience stops being an SEO chore and becomes a retention problem.
 the device-budget figures and the 49-outlet news CWV study are therefore second-hand. **CrUX is queryable
 via `bq` from this environment** and would make the device-class claims first-party — the highest-value
 follow-up on this plane.
+
+---
+
+# Pass 63 (2026-11-28) — the recorded-music supply chain: trends
+
+## 1. An obligation has attached to a layer with no open implementation
+
+This is the pass's headline and it generalises beyond music. **DDEX MEAD and PIE have zero open-source
+implementations** — the only artefact in existence is a GitHub *issue* on an unlicensed, 0-star repo. Yet
+**Spotify's AI-credits disclosure beta carries its AI declarations in MEAD fields†**, and the **EU AI Act's
+machine-readable-marking deadline for systems already on the market falls on 2026-12-02†**, four days after
+this measurement. The layer immediately beneath it — ERN delivery — is MIT-licensed and working.
+
+The trend to watch across every industry in this rotation: **regulators are increasingly attaching duties to
+specific metadata fields rather than to outcomes.** When they do, the binding constraint stops being model
+quality and becomes whether an open implementation of that field layer exists. Here it does not.
+
+## 2. The four-step gradient, and the fact that it is not monotonic
+
+| Step | Problem type | Verified weight |
+|---|---|---|
+| IDENTIFY the recording | catalogue / matching | **~25,000★**, permissive |
+| DELIVER the release | format / schema | **112★**, 5 of 6 MIT |
+| ENRICH it (MEAD/PIE) | format, **licensed shut** | **0** |
+| ACCOUNT & PAY | judgment | **5★**, 3 of 7 unlicensed |
+
+Passes 5 and 8 found a three-step version (declare → honour → liquidate) and read it as a smooth decline
+from format problems to judgment problems. **That reading is wrong.** The collapse here is non-monotonic:
+step 3 is a *format* problem — the easy kind — and it is at absolute zero, while the judgment-heavy step 4
+at least has toy implementations. The cause is not difficulty, it is **licensing**: DDEX retains copyright
+over its schemas, so no one can ship the artefact.
+
+**Planning consequence:** do not estimate a plane by assuming downstream steps are thinner. Measure each
+step, and check whether the standard — not the code — is redistributable.
+
+## 3. The open royalty tier is not immature, it is unlicensed
+
+Pass 5's "top six results, zero stars" was accurate but understated the problem. Re-measured: **seven
+recording-side repos, five stars between them, three with no licence under any of nine probed filenames and
+no word-boundaried licence claim in README or package metadata**; a fourth claims MIT in prose only and says
+its data is fictional.
+
+The inversion worth noting: **the best-engineered repo in the tier is the least usable.**
+`JacobBelay/Royalty-Split-Ledger` implements an append-only double-entry ledger with idempotent imports and
+row-level locking against duplicate payouts — exactly the right design — and carries **no licence at all**.
+Engineering quality and legal usability are uncorrelated in a tier this young, so **licence-screen before
+you shortlist**, not after.
+
+## 4. Platform AI policy has fragmented into four incompatible stances
+
+Permit-and-label (Spotify), voluntary declaration (Apple Music Transparency Tags), **demonetise**
+(TIDAL excludes fully-AI tracks from royalty attribution), and **ban** (Bandcamp, January 2026) — all
+within one year†. Meanwhile **Deezer reports fully AI-generated tracks passed half of daily uploads in
+June 2026†** and Spotify removed **>50M** spam or low-quality tracks†.
+
+For a client this means **a single release now needs per-platform AI declarations with different semantics
+and different consequences** — on one platform a label, on another a loss of royalties, on a third a
+rejection. That is a data-modelling problem (one truth, many renderings), which is precisely the shape
+MEAD was designed for and precisely what has no open tooling.
+
+## 5. Voluntary industry labelling is being proposed where the fraud is self-reported
+
+The RIAA/IFPI-led two-tier **"AI-Generated" / "AI-Assisted"** scheme was welcomed by DiMA (Spotify, Apple
+Music)†, and critics immediately noted the obvious: **self-reporting cannot catch fraud operators**, with
+estimated artist losses around **$2B/yr**†. **IFPI's chart rules take the opposite, evidentiary approach** —
+a recording charts only if the AI service was **licensed**, the track is **substantially human-made**, and
+there is **no stream manipulation**† — and are being applied **to LATAM, MEA and Southeast Asian charts
+first**†.
+
+The detectable trend: **the industry is moving from declaration to evidence.** Declaration needs a metadata
+field; evidence needs provenance, fingerprinting and licence records — which this KB already covers in
+passes 5 and 41. Expect those two planes to converge, and expect the evidence standard to appear in LATAM
+before Europe.
+
+## 6. Latency, not fraud, is the quiet commercial problem
+
+Distributor streaming revenue arrives **monthly with a 2–3 month lag**; neighbouring rights arrive
+**quarterly to semi-annually with a 6–18 month lag**† — on a stream worth **9.3% of industry revenue**
+(≈$2.95B on IFPI's $31.7B). Nothing open reconciles or forecasts it, and the collecting bodies match on
+**ISRC**, so a recording registered under a second ISRC produces a parallel entry that stalls payment†.
+
+This is unglamorous and it is the most financeable build on the plane: a reconciliation ledger against a
+known matching key, with a 6-to-18-month cash-flow consequence attached.
+
+## 7. Maintainer concentration has replaced staleness as the adoption risk
+
+Every repo in the healthy tiers pushed within 24 hours of measurement — **staleness is not the risk here**,
+unlike the recommender tier (pass 7) where LightFM sat 28 months stale. The risk has moved: **four of the
+six DDEX repos are by one author (`daddykev`)**, and that author's four repos hold **112 of the tier's
+112 stars** between them and the two outliers. A plane can be permissive, current and still fragile.
+
+**Diligence rule this produces:** for a small permissive tier, count **distinct maintainers**, not stars and
+not push dates. Price a fork-and-maintain line when the count is one.
+
+## 8. Demucs restates the asymmetric licence in the project's own words
+
+Pass 60 recorded the asymmetric licence as an inference. Demucs states it outright: code **MIT** "as found
+in the LICENSE file", **model-weights licence unclear**. **~3,600★** of stem-separation capability whose
+client-deliverable risk lives entirely in an artefact no SPDX field, badge or source-tree SBOM scan can see.
+The rule from cycle 8 holds and widens: **for any native or model dependency, resolve the licence of the
+thing you ship, not of the repository you cloned.**
+
+## Informed gaps on this plane
+
+- **No DDEX or distributor figure quantifies MEAD/PIE adoption.** Only standards docs and one vendor blog.
+- **IFPI publishes no "neighbouring rights" line item**; performance rights at **9.3%** is the nearest
+  primary figure and the terms are not synonyms.
+- **No APAC-specific music-AI adoption data was found at all** — a gap in our knowledge, not evidence of
+  low activity.
+- **No figure for how many labels self-host royalty accounting versus buy it** — same shape as pass 7's
+  unmeasured recommender question.
+- **DDEX's own implementation terms remain unverified**; `new.ddex.net` did not resolve, as in pass 5.
+
+† = secondary source (trade press, law-firm roundup, vendor or practitioner blog), reached via search only
+and **not** verified against the primary source from this session.

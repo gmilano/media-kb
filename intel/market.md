@@ -12359,3 +12359,154 @@ channel note at the end).
 
 † = secondary source (trade press, law-firm roundup, vendor or developer blog), reached via search only and
 **not** verified against the primary source from this session.
+
+---
+
+# Pass 63 (2026-11-28) — the recorded-music supply chain: market map
+
+## Market size — primary figures
+
+IFPI **Global Music Report 2026** (figures are for 2025, wholesale not retail):
+
+| Measure | Value |
+|---|---|
+| Global recorded-music revenue | **US$31.7B**, **+6.4%** — 11th consecutive growth year, first time above $30B |
+| Streaming | **>US$22B = 69.6%** of recorded-music revenue |
+| Paid subscription | **52.4%** of revenue, **+8.8%** |
+| Ad-supported streaming | **+4.3%** |
+| Paid subscription accounts | **837M**, up from 752M |
+| Americas (largest region) | **38.7%** of global revenue, **+3.5%** |
+| MENA | **+15.2%** — among the fastest-growing regions |
+| **Performance rights** | **9.3%** of total industry revenue |
+| Synchronisation | **2.0%** of total |
+
+### A cross-check worth recording, because the convenient number is otherwise uncitable
+
+Practitioner sources circulate "**US$2.9B** of global neighbouring-rights revenue"†. That figure appears
+only in blogs and would not survive a client challenge on its own. But IFPI's **performance rights = 9.3%**
+of **$31.7B** is **≈$2.95B** — two independent routes to the same magnitude. Cite the IFPI derivation, note
+the blog agrees, and **state the caveat**: IFPI publishes no line item called "neighbouring rights", and
+performance rights is not an exact synonym. Do not present them as one number.
+
+**SoundExchange** reports **>US$13B distributed since inception** (announced March 2026†), splitting
+**45% featured artist / 5% non-featured / 50% rights holder**†.
+
+### The working-capital fact that makes the accounting layer commercially interesting
+
+| Revenue stream | Frequency | Lag |
+|---|---|---|
+| Distributor streaming revenue | monthly | **2–3 months**† |
+| Neighbouring rights | quarterly to semi-annual | **6–18 months**† |
+
+A 6-to-18-month lag on roughly a tenth of industry revenue is the business case for reconciliation and
+forecasting tooling — and the reason the **unlicensed** state of the open royalty-accounting tier
+(5 stars across 7 repos, 3 with no licence at all; see `agents/top.md` pass 63) is a commercial opening
+rather than merely a curiosity.
+
+## The regulatory clock — and it is about to strike
+
+| Jurisdiction | Instrument | Date | Effect |
+|---|---|---|---|
+| **EU** | AI Act **Article 50** transparency duties | **enforceable 2026-08-02**† | Providers must make AI-generated content machine-detectable; Art. 50(4) deepfake disclosure attaches to the **deployer** where an artist self-distributes† |
+| **EU** | Machine-readable marking, systems already on market | **2026-12-02**† | **Four days after this measurement.** Provisional May-2026 agreement granted pre-existing generative systems this grandfather window† |
+| **EU** | Commission Code of Practice | published **2026-06-10**† | Supporting guidance |
+| **EU** | Enforcement to date | **zero actions against any music-industry actor as of May 2026**† | A May snapshot; obligation exists, enforcement record does not yet |
+| **US** | California AI Transparency Act | in force **January 2026**† | Disclosure duties for AI content on streaming platforms |
+| **US** | Copyright | ongoing | Fully AI-generated works generally not copyrightable† |
+| **Mexico** | Federal Copyright Law + Federal Labour Law amendments | published **2026-05-14**† | **First sector-specific AI regulation in Mexico**, covering performers' voice, image and performances |
+| **South Korea** | AI Basic Act | in force; **2026 a pilot year**† | MSIT signals limited enforcement and a **one-year grace period on penalties**; labelling duty so users "clearly recognize" synthetic media |
+| **Global** | IFPI chart rules | 2026† | An AI recording charts only if the AI service is **licensed**, the track is **substantially human-made**, and there is **no stream manipulation** — applied **first to LATAM, MEA and Southeast Asia charts** |
+
+## Platform policy — the demand side of a MEAD implementation
+
+| Platform | Stance (2026) |
+|---|---|
+| **Spotify** | Permits AI music; **labels AI personas from mid-September 2026** and excludes them from default recommendations†. AI-credits disclosure beta from **2026-04-16**, DistroKid the **sole** delivery partner, declarations carried **in MEAD fields**†. Removed **>50M** spam/low-quality tracks this year† |
+| **Apple Music** | Voluntary **Transparency Tags** from March 2026; labels and distributors declare, platform displays† |
+| **TIDAL** | Tags fully AI-generated tracks and **excludes them from royalty attribution**† |
+| **Bandcamp** | **Outright ban** on AI music from January 2026† — the only major service to do so |
+| **Deezer** | Fully AI-generated tracks passed **half of all daily uploads** in June 2026† |
+| **Industry** | RIAA/IFPI-led voluntary two-tier **"AI-Generated" / "AI-Assisted"** tagging; DiMA (Spotify, Apple Music) welcomed it. Critics: self-reporting cannot catch fraud operators, est. **~$2B/yr** artist losses† |
+
+**The structural point for a studio:** every one of those policies is a *declaration* requirement, three of
+them ride on DDEX metadata, and **no open tool writes DDEX MEAD**. The obligation is universal; the tooling
+is proprietary or absent.
+
+## Opportunities by region
+
+### North America
+
+- **SoundExchange/ISRC reconciliation.** The body has distributed **>$13B**† and matches on **ISRC**†. A
+  recording distributed under one ISRC but registered under another creates a parallel-entry problem that
+  stalls payment†. No open tool reconciles this. Build on `beets` (MIT, 16,000★) as the catalogue spine plus
+  `ddex-suite` (MIT, 70★) for message handling — both verified this pass.
+- **California AI Transparency Act (in force Jan 2026†) + Spotify's MEAD-based AI credits†** create a
+  single concrete deliverable: a **declaration pipeline** that takes a label's AI-involvement facts and
+  emits conformant DDEX metadata. Greenfield; price as new build.
+- Largest regional revenue pool: **Americas = 38.7% of global, +3.5%**. The buyers are here.
+
+### EMEA
+
+- **The 2026-12-02 machine-readable-marking deadline†** is the sharpest commercial trigger on this plane
+  anywhere in the world, and it is **four days after this measurement**. Engagements framed as AI Act
+  Article 50 compliance have a date attached, which is rare and sells.
+- **The only production reference implementation on this plane is in Europe**:
+  `wrklst/indie-label-royalty-management` (MIT, 4★) runs an independent **Berlin** label, including the
+  payable-cap logic. Hardening and extending a working 4-star system for a mid-size label is a
+  well-bounded, low-risk engagement.
+- **PPL (UK)** distributes **quarterly** and collects from **50+ territories** via reciprocal agreements†;
+  it does **not** handle on-demand streaming†. Multi-territory neighbouring-rights reconciliation is
+  therefore an EMEA-shaped problem.
+- Caveat to carry: **zero AI Act enforcement actions against any music-industry actor as of May 2026**†.
+  Sell the obligation and the deadline, not an enforcement threat that has not materialised.
+
+### APAC
+
+- **South Korea's AI Basic Act** is in force with **2026 as a pilot year** and a **one-year grace period on
+  penalties**†, plus a labelling duty for realistic synthetic media†. The grace period is the opportunity:
+  build the labelling pipeline during it rather than after.
+- **MENA grew +15.2%**, among the fastest regions globally — relevant to APAC-adjacent delivery footprints.
+- **IFPI's AI chart rules apply first to Southeast Asian charts**†, alongside LATAM and MEA — so the
+  substantially-human-made and licensed-service evidence requirements bite here before they bite in Europe
+  or North America.
+- ⚠️ **Explicit informed gap: no APAC-specific data on AI adoption among music-streaming players was found.**
+  Searched for regional adoption, regulation and player data; results returned global platform policy and
+  one Korean statute only. Japanese, Australian and Korean industry-body reports are the next step. **This
+  is a gap in our knowledge, not evidence of low APAC activity** — do not read it as the latter.
+
+### LATAM
+
+- **Mexico is the clearest regulatory anchor on this plane in any region.** Amendments to the Federal
+  Copyright Law and Federal Labour Law published **2026-05-14** are the **first sector-specific AI
+  regulation in Mexico**, covering performers' **voice, image and performances**†. A performer-consent and
+  declaration system has a statute to point at — stronger footing than the EU's, where enforcement is still
+  at zero.
+- **IFPI applies its AI chart rules to LATAM first**†. The compliance tooling the region needs arrives
+  before the region's charts are even subject to the rest of the world's version. That inverts the usual
+  "LATAM follows" assumption and is the strongest argument for leading with LATAM on this plane.
+- **ALCAM's 2026 "Music + AI" report** surveyed **1,005 music professionals, 72% Brazilian**†, backed by
+  Latin American collective-management societies, covering AI in creative work, rights protection and use of
+  recordings for training. The region has its own primary research to cite.
+- **Enforcement is active**: **Operation LUMEN**, led by Peru's **INDECOPI** with IFPI support, blocked
+  **317 piracy sites across five LATAM countries**†. A regional Mexican singer has filed a reported
+  **$100M** copyright suit against Suno†.
+- Market pressure is real and documented: streaming counts gate access to venues, markets and **public
+  funding** in several LATAM countries, so artists cannot exit the platforms that AI-generated tracks are
+  crowding†.
+
+### Channel and verification notes for this plane
+
+- **The GitHub REST API is unavailable for third-party repos in this environment** — `api.github.com/repos/...`
+  returns **HTTP 403** ("not enabled for this session"), not 404, not throttling. Working substitute, used
+  for all 18 repos this pass: `git ls-remote` (existence) + `raw.githubusercontent.com` across nine licence
+  filenames (licence text + byte count) + shallow clone when the raw channel 404s + repository page fetch
+  (stars, forks). Record this before a later pass rediscovers it.
+- **`new.ddex.net` did not resolve from this session** — the same failure pass 5 recorded. DDEX's
+  implementation and licensing terms are therefore **unverified for the second consecutive pass**.
+- **Word-boundary every coverage grep.** `PPL` read **666** hits unbounded and **0** bounded, inflated
+  entirely by `apply`/`supply` — the largest false-abundance measurement in this KB's history. `ERN`
+  1,612 → 8. `stem` 614 → 10.
+
+† = secondary source (trade press, law-firm roundup, vendor or practitioner blog), reached via search only
+and **not** verified against the primary source from this session. The IFPI figures are attributed to the
+Global Music Report 2026 as reported by IFPI's own release and trade summaries of it.

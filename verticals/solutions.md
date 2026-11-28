@@ -3271,3 +3271,46 @@ In EMEA a CMP is not optional, and it loads before the content. Open options, al
 comparably. **Do not quote a CMP latency figure to a client.** Measure it on their pages with
 `sitespeed.io`, before and after, and treat the result as the only number that exists.
 
+
+---
+
+## Recorded-music platforms — distribution, label back office & catalogue custody — added 2026-11-28 (pass 63)
+
+Real, installable systems for the recording side of the music business. All verified 2026-11-28 (existence
+by `git ls-remote`, licence by raw channel across nine filenames with shallow-clone fallback, stars from the
+repository page — **the GitHub REST API returns HTTP 403 for non-session repos in this environment**).
+
+| Platform | Repo | Licence (verified) | Stars | Stack | What it replaces |
+|---|---|---|---|---|---|
+| **Stardust Distro** | https://github.com/daddykev/stardust-distro | **MIT** (`LICENSE`, 1073 B) | 15 | Node / npm-installable | The distributor's sending side: catalogue → DDEX ERN → DSP delivery. The open analogue of a DistroKid/CD Baby back end. |
+| **Stardust DSP** | https://github.com/daddykev/stardust-dsp | **MIT** (`LICENSE`, 1073 B) | 7 | Node / npm-installable | The *receiving* side: ingests ERN deliveries into a searchable catalogue with a streaming front end. Rare and valuable — **both ends of the same handshake under the same licence**, so a delivery can be tested end to end without a DSP partner. |
+| **DDEX Workbench** | https://github.com/daddykev/ddex-workbench | **MIT** (`LICENSE`, 1065 B) | 20 | Web UI + API | ERN 3.8.2 / 4.2 / 4.3 validation as a service. The conformance gate before delivery. |
+| **Label Royalties** | https://github.com/wrklst/indie-label-royalty-management | **MIT** (`LICENSE`, 1085 B) | 4 | Laravel + React, self-hosted | The independent label's back office: per-payee percentage splits, accounting periods, **payouts capped at what is payable**. In production at an independent Berlin label. **The only properly licensed, production-used royalty system found on this plane.** |
+| **Django Music Publisher** | https://github.com/matijakolaric-com/django-music-publisher | **MIT** (`LICENSE` 1077 B + `LICENSE.rst` 1119 B) | 98 | Django | Music **publishing** admin: metadata, batch CWR work registration, royalty processing. **Publishing side (pass 43's plane), not the recording side** — listed here only because engagements routinely need both and the two are constantly conflated. |
+| **beets** | https://github.com/beetbox/beets | **MIT** (`LICENSE`, 1080 B) | 16,000 | Python + plugins | Catalogue custody and identifier matching over a master inventory. The spine to build on. |
+| **MusicBrainz Picard** | https://github.com/metabrainz/picard | **GPL-2.0** (`COPYING.txt`, 17,984 B) | 5,400 | Qt desktop | Tagging against the MusicBrainz database. **Copyleft — run it, don't embed it.** |
+
+### The gap in this table, stated so it does not read as coverage
+
+There is **no open platform for DDEX MEAD or PIE** — the descriptive/party enrichment standards. Not a weak
+one; none. The only artefact is an *issue* ([`labelkit#226`](https://github.com/epsilon-records/labelkit/issues/226))
+on a repo verified at **0★, no licence, no description**. That matters commercially because **Spotify's
+AI-credits disclosure beta carries its AI declarations in MEAD fields†** and the EU AI Act's
+machine-readable-marking deadline for pre-existing systems is **2026-12-02†**. A label that must declare AI
+involvement has a regulatory obligation, a DSP that reads MEAD, and **nothing open to write it with**.
+
+**Also absent, and worth naming:** no open platform exists for neighbouring-rights registration or
+reconciliation against SoundExchange (US) or PPL (UK). The collecting bodies match on **ISRC**†, and a
+recording distributed under one ISRC but registered at the body under another creates a parallel-entry
+problem that stalls payment†. That reconciliation is a real, well-bounded build with no incumbent open tool.
+
+### Buy-versus-build read for an engagement
+
+Adopt-and-configure: **beets** (catalogue), **ddex-workbench** (validation), **stardust-distro/dsp**
+(delivery, both ends). Read-then-write: **wrklst** for the payable-cap logic, which is the hard part of
+royalty accounting and is already solved there. Greenfield: **MEAD/PIE writing** and **neighbouring-rights
+reconciliation**. Price those last two as new build, not integration — that is the single most common
+mis-scope on this plane.
+
+† = secondary source (trade press, vendor or practitioner blog), reached via search only and not verified
+against the primary source from this session.

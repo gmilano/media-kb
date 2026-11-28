@@ -9,6 +9,77 @@ updated: 2026-11-28
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-28 — pass 63: the recorded-music supply chain (**the regulator's deadline lands in four days on the one layer with zero open implementations**)
+
+Plane located by word-boundaried grep of ~35 terms against all eight files before any web call.
+`DSP delivery`, `master rights`, `multitrack`, `phonogram`, `record label`, `revenue share`, `split sheet`,
+`producer points`, `SoundExchange`, `distribution deal`, `ISNI` — **zero hits each**. Verified 2026-11-28:
+existence by `git ls-remote`, licences by raw channel across nine filenames with shallow-clone fallback,
+stars from repository pages (**the GitHub REST API answers HTTP 403 for non-session repos in this
+environment** — method note for later passes).
+
+**The movement this week is all in one tier, and it is the delivery tier.** Four of the six DDEX repos
+found are by a single maintainer (`daddykev`) and all carry real MIT `LICENSE` files:
+
+| Agent / tool | Repo | Licence | Stars | Forks |
+|---|---|---|---|---|
+| ddex-suite | [daddykev/ddex-suite](https://github.com/daddykev/ddex-suite) | MIT (1073 B) | 70 | 3 |
+| ddex-workbench | [daddykev/ddex-workbench](https://github.com/daddykev/ddex-workbench) | MIT (1065 B) | 20 | 4 |
+| stardust-distro | [daddykev/stardust-distro](https://github.com/daddykev/stardust-distro) | MIT (1073 B) | 15 | 9 |
+| stardust-dsp | [daddykev/stardust-dsp](https://github.com/daddykev/stardust-dsp) | MIT (1073 B) | 7 | 6 |
+| ddex-tool | [Miistix/ddex-tool](https://github.com/Miistix/ddex-tool) | MIT (1063 B) | 0 | 0 |
+| ddex-media-pipeline | [erv718/ddex-media-pipeline](https://github.com/erv718/ddex-media-pipeline) | ⛔ **none** | 0 | 0 |
+
+**112 stars for the whole tier.** The risk is maintainer concentration, not licence or staleness.
+
+### The finding worth carrying to other industries: an obligation attached to an empty layer
+
+**MEAD and PIE have no open-source implementation.** Zero. The only artefact is
+[`labelkit#226`](https://github.com/epsilon-records/labelkit/issues/226) — an *issue* proposing MEAD/PIE
+support, on a repo verified at **0★, no licence, no description, last commit 2026-11-27**.
+
+Meanwhile **Spotify's AI-credits beta puts its AI declarations in MEAD fields†** (opened 2026-04-16,
+DistroKid the sole delivery partner†), and the EU AI Act's machine-readable-marking deadline for systems
+already on the market falls on **2026-12-02† — four days after this measurement**. The layer the regulator
+and the largest DSP both now rely on is the one layer with nothing open in it, while the ERN layer directly
+beneath it is MIT and working.
+
+### Tier D re-measured: pass 5's "zero stars" was right but understated
+
+Pass 5 found `music royalty accounting`'s top six results at 0 stars. The tier is not empty — it is
+**unlicensed**. Seven recording-side repos, **five stars between them**, and **three carry no licence under
+any of nine probed filenames and no word-boundaried licence claim in README or package metadata**:
+[JacobBelay/Royalty-Split-Ledger](https://github.com/JacobBelay/Royalty-Split-Ledger) (0★, 2026-11-24 — the
+best-engineered thing in the tier, append-only double-entry with row-level locking against duplicate
+payouts, and unusable), [SunayHegde/music-royalty-management-system](https://github.com/SunayHegde/music-royalty-management-system)
+(0★, ships a university DBMS project report PDF), [yash0260/monetunes](https://github.com/yash0260/monetunes)
+(0★). A fourth, [AffixIO/music-royalty-ledger](https://github.com/AffixIO/music-royalty-ledger), claims MIT
+in prose with no licence file and says its data is fictional.
+
+The one real option: [wrklst/indie-label-royalty-management](https://github.com/wrklst/indie-label-royalty-management)
+— **MIT** (`LICENSE`, 1085 B), **4★**, last commit 2026-11-27, Laravel + React, in production at an
+independent Berlin label, with payouts capped at what is payable.
+
+### Two method corrections that change earlier passes' numbers
+
+- **Unbounded greps over-report coverage by orders of magnitude on short tokens.** `ERN` 1,612 → **8**;
+  `PPL` **666 → 0** (the worst case in this KB's history, inflated entirely by `apply`/`supply`);
+  `stem` 614 → **10**. Any pass that read an unbounded count as coverage over-reported it. Cycle 11 fixed
+  this for placeholder detection; it must apply to **coverage measurement**, which is the costlier half.
+- **A raw-channel 404 still is not evidence of a missing licence** (cycle 8's rule, confirmed twice more):
+  `beets` and `metabrainz/picard` 404'd on all nine licence names while `README.md` returned 200. Shallow
+  clone found beets `LICENSE` MIT 1080 B and Picard **`COPYING.txt` GPL-2.0 17,984 B**.
+
+### Informed gaps
+
+**No DDEX or distributor figure quantifying MEAD/PIE adoption exists** — searched, found only standards
+docs and one vendor blog. **IFPI publishes no "neighbouring rights" line item**; performance rights at
+**9.3% of revenue** is the closest primary figure and the terms are not synonyms. **No APAC-specific
+music-AI adoption data was found at all.** **DDEX's own implementation terms remain unverified** —
+`new.ddex.net` did not resolve this pass, as in pass 5.
+
+† = secondary source, reached via search only, not verified at primary source this session.
+
 ## 2026-11-28 — pass 62: the reader-facing page-experience plane (**31,222★ measure the page; zero repositories price it**)
 
 The plane sixty-one passes never entered. `Core Web Vitals`, `web-vitals`, `INP`, `CLS`, `TTFB`,

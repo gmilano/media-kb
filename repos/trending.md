@@ -10,6 +10,64 @@ updated: 2026-11-28
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-28 — pass 63: the recorded-music infrastructure tier (**25,000★ identify the recording, 112★ deliver it, 0 enrich it, 5★ pay for it**)
+
+Infrastructure side of the recorded-music supply-chain plane. The four-step gradient, each number verified
+individually on 2026-11-28:
+
+| Step | Problem type | Repos | Verified weight |
+|---|---|---|---|
+| **IDENTIFY** the recording | catalogue / matching | beets, Picard, Demucs | **~25,000★** |
+| **DELIVER** the release | format / schema | ddex-suite, ddex-workbench, stardust-distro, stardust-dsp, ddex-tool, ddex-media-pipeline | **112★** |
+| **ENRICH** it (MEAD / PIE) | format, **licensed shut** | none | **0** |
+| **ACCOUNT & PAY** | judgment | 7 repos | **5★**, 3 unlicensed |
+
+Passes 5 and 8 recorded a three-step version of this law (declare → honour → liquidate). The four-step form
+is worse, because **the collapse is not monotonic**: step 1 is healthy, step 2 is healthy but tiny, step 3
+is *zero while being the step a regulator now requires*, step 4 is unlicensed. Any plan that assumes the
+open stack thins out smoothly downstream will mis-size step 3.
+
+### Tier A — the substrate that works
+
+| Repo | Licence | Stars | Forks | Last push |
+|---|---|---|---|---|
+| [beetbox/beets](https://github.com/beetbox/beets) | **MIT** (`LICENSE`, 1080 B) | 16,000 | 2,200 | 2026-11-27 |
+| [metabrainz/picard](https://github.com/metabrainz/picard) | **GPL-2.0** (`COPYING.txt`, 17,984 B) | 5,400 | 484 | 2026-11-27 |
+| [adefossez/demucs](https://github.com/adefossez/demucs) | **MIT code / weights unclear** | 3,600 | 334 | 2026-11-27 |
+
+All three pushed within 24 hours of the measurement — this tier is alive. **Picard is GPL-2.0, found only
+by shallow clone** (`COPYING.txt`); treat it as a tool you run, not a library you embed.
+
+**Demucs restates pass 60's asymmetric licence in the project's own words:** code MIT "as found in the
+LICENSE file", **model-weights licence unclear**. The deliverable risk is the weights. No SPDX field, badge
+or SBOM scan of the source tree can see that.
+
+### The DDEX schema is a second licence layer above the code
+
+[`Miistix/ddex-tool`](https://github.com/Miistix/ddex-tool) (MIT) **deliberately does not bundle the DDEX
+schema files**, because DDEX retains copyright over the ERN standard and its schemas. An MIT tool that
+cannot redistribute the artefact it validates against is the same content-vs-code split this KB recorded for
+CPT (healthcare) and ISRC/ISWC (media pass 5). **Rule: resolve the licence of the standard, not only of the
+repository.** DDEX's own implementation terms are still unverified — `new.ddex.net` did not resolve this
+pass, as in pass 5. Two passes, same unresolved gap.
+
+### Method notes for later passes, both costly if ignored
+
+- **The GitHub REST API is gated in this environment**: `api.github.com/repos/{any third-party repo}`
+  returns **HTTP 403** ("GitHub access to this repository is not enabled for this session"), not 404 and not
+  rate-limiting. The working substitute, used throughout this pass: `git ls-remote` for existence,
+  `raw.githubusercontent.com` across nine licence filenames for licence text and byte count, shallow clone
+  when the raw channel 404s, and a page fetch for stars and forks.
+- **Word-boundary every coverage grep.** `ERN` 1,612 → **8**; `PPL` **666 → 0**; `stem` 614 → **10**;
+  `GRid` 37 → ~0. `PPL`'s 666-to-0 is the largest false-abundance measurement recorded in this KB.
+
+### Informed gaps
+
+No open MEAD or PIE implementation exists. No DDEX/distributor MEAD adoption figure exists. IFPI publishes
+no neighbouring-rights line item (performance rights **9.3% of revenue** is the nearest primary figure).
+No APAC-specific music-AI adoption data found. No figure for how many labels self-host royalty accounting
+versus buy it.
+
 ## 2026-11-28 — pass 62: the publishing & delivery substrate (**the static-site tier holds 325,000★ and the newsroom front-ends that run on it hold 7,893★**)
 
 Infrastructure side of the page-experience plane. Every static site generator was a **zero** across all

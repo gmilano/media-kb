@@ -3082,3 +3082,32 @@ law, now in the pipeline layer: *the closer the code gets to the decision, the h
 | **FLIP Fluids** (Blender) | [rlguy/Blender-FLIP-Fluids](https://github.com/rlguy/Blender-FLIP-Fluids) | **GPL-3.0** | 1,996★ / 212f | 2026-11-10 | The best open liquid simulator usable by an artist rather than a programmer — and **GPL-3.0 on top of GPL-2.0 Blender**. Commercially sold as a paid add-on while the source remains GPL: a working business model worth studying, and a hard redistribution limit. |
 | **FluidX3D** | [ProjectPhysX/FluidX3D](https://github.com/ProjectPhysX/FluidX3D) | `NOASSERTION` | 5,389★ / 481f | 2026-11-26 | Lattice-Boltzmann CFD, very fast, very active. ⚠️ Licence reported `NOASSERTION` and **not read in this pass** — verify before use; it is not on the safe list until someone reads the file. |
 | **Mantaflow** (in Blender) | *bundled in `blender/blender`* | **GPL-2.0 via Blender** | — | — | Blender's built-in smoke/fire/liquid solver. `Mantaflow` had **0 hits** in this KB before this pass. It ships inside Blender, so it inherits Blender's terms — there is no separately licensed way to take it. |
+
+## On-set & production-planning platforms — the customisable layer — added 2026-11-28 (pass 59)
+
+Real systems that run a production office or a set, and that can carry AI on top. All `ls-remote`-verified.
+
+| Platform | Repo | License | Stars / forks | Last push | What it runs, and where AI attaches |
+|---|---|---|---|---|---|
+| **Open Shot Designer** | https://github.com/koosoli/OpenShotDesigner | **GPL-3.0** (API reports `NOASSERTION`; `main/LICENSE` is the 35,809 B full GPL text) | 48★ / 9f | 2026-11-27 | **The most complete open on-set system found, and the only one with a continuity log.** Browser-based planning suite: lined script, floor plan, shot list, storyboard, equipment manifest, scheduling, call sheets, cast/crew, budget, locations, task board, logistics, rigging, power — plus an **on-set continuity log that exports as DaVinci Resolve clip metadata**. v1.5.1. That export is the one place in this plane where a set-floor record reaches post as structured data. ⚠️ **GPL-3.0: Globant can deploy and modify it, but a derivative distributed to a client inherits copyleft.** A separate fork, `mengpeiwen18-del/OpenShotDesigner`, exists per `ls-remote` but is not in the search index, so no figures are claimed for it. |
+| **Open Gate** | https://github.com/opengateapp/opengate | **GPL-3.0** | 2★ / 1f | 2026-11-03 | Screenplay → breakdown → stripboard → calendar → call sheets, storyboards and mood boards in one synced project, with PDF generation for shooting schedules and call sheets. Created 2026-10-17; the name is a stated working title. **Early, but it is the only open tool covering the script-breakdown-to-stripboard path.** |
+| **awesome-davinci-resolve** | https://github.com/Greenysmac/awesome-davinci-resolve | **CC0-1.0** | 436★ / 28f | 2026-09-07 | Not a platform — a curated index of Resolve plugins and tooling, community-curated by r/colorists and r/davinciresolve. **CC0 means the list itself is reusable as a data source**, which makes it the cheapest available map of what already exists before building anything for Resolve. |
+| **film-tool-hub** | https://github.com/timmcglinchey/film-tool-hub | **none found** — 10 filenames × 2 branches | 0★ / 0f | 2026-11-27 | Printable script-supervisor pack: a take log pre-printed with the day's planned shots plus a per-scene continuity sheet (PR merged 2026-11-20). ⛔ **No licence → not buildable on.** Recorded for one reason: **in 2026 the state of the art for script supervision is still paper**, and this repo is evidence of it. |
+
+### ⛔ What has no open vertical at all on this plane
+
+- **No open DIT / offload platform.** The six offload tools in `repos/foundations.md` are single-purpose
+  utilities, not systems: none manages a shoot's worth of cards, drives, report history or chain of
+  custody across days. The commercial layer (Silverstack, ShotPut Pro, OffShoot, YoYotta) has no open
+  counterpart, and that is the largest vertical-shaped hole in this plane.
+- **No open camera-to-cloud platform.** C2C is now built into RED, Fujifilm, Panasonic and recent Canon
+  cinema bodies†, and every destination for it is proprietary (Frame.io, Moxion). Searched directly: no
+  open C2C ingest target exists.
+- **No open dailies platform.** Colorfront Express Dailies and Resolve's own dailies path have no open
+  equivalent; `offshoot-resolve-dit` builds a Resolve timeline but depends on Resolve Studio, a paid
+  product, and on OffShoot Pro to do the copy.
+- **The honest composite:** on this plane the realistic Globant posture is **AI and automation on top of a
+  commercial offload floor**, not a replacement of it. The one agent that exists already assumes exactly
+  that shape.
+
+† = secondary source (vendor and trade guides, not price- or spec-verified this pass).

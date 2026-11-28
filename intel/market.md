@@ -11743,3 +11743,137 @@ Four things were searched and **not** found. Each is recorded so silence is not 
 4. **SideFX commercial terms were not verified** (`sidefx.com` not fetched this session). Since Houdini is
    the application this entire plane runs on, **that is the most consequential single unknown in this
    pass** — treat as *not investigated, not free*.
+
+### Global players — pass 59 addendum (the on-set data & dailies plane)
+
+The commercial floor of this plane, which open source does not currently displace: **Pomfort**
+(Silverstack), **Imagine Products** (ShotPut Pro), **Hedge** (OffShoot), **YoYotta**, **Colorfront**
+(Express Dailies), **Adobe/Frame.io** (camera-to-cloud), **Moxion** (cloud dailies) and
+**Blackmagic Design** (DaVinci Resolve Studio, the paid dependency of the only agent on this plane).
+⚠️ **No pricing, seat counts or market-share figures were verified this pass and none are quoted.**
+
+Standards bodies, which here matter more than vendors: the **ASC Advanced Data Management Subcommittee**
+(ASC MHL, MIT reference implementation, 84★) and **SMPTE RIS OSVP** (`camdkit` / OpenTrackIO v1.0.1,
+BSD-3-Clause), with **Canon** and **Mo-Sys** contributing the optical-parameter definitions adopted into
+OpenTrackIO via their **OpenLensIO** collaboration.
+
+## Opportunities by region — pass 59 (2026-11-28): the on-set data & dailies plane
+
+⚠️ **A property of this plane that shapes all four regions:** it is one of the very few media planes in
+this KB with **no regulatory driver at all**. No jurisdiction mandates verified offload. The obligation is
+private — insurers, completion bonds and studio delivery specs — which is consistent with the trust-floor
+finding in `repos/foundations.md` and means **regional differentiation here comes from production volume
+and incentives, not from compliance deadlines.** The AI regulation below bites on *synthetic content and
+performer likeness*, which is adjacent to this plane (it governs what the set records and discloses), not
+on the offload itself.
+
+### Pass 59 (2026-11-28) — the on-set & dailies plane in North America
+
+- **Labour terms are the binding constraint, and they moved this year.** The WGA reached a **tentative
+  four-year deal on 2026-04-04** introducing **AI-training compensation**: if studios train on member
+  scripts, writers must be paid†. SAG-AFTRA negotiations were set to open **2026-02-09**†.
+- **Performer-likeness law is in active legal conflict.** **New York's synthetic-performer law takes
+  effect June 2026**†, while California's **AB 2602** and **AB 1836** (performer AI-replica protections)
+  are targets of a **DOJ AI Litigation Task Force** established by a **December 2025 executive order**†.
+  ⚠️ A claim circulating that **California AB 2013 (effective January 2026)** requires *audit-ready logs of
+  training-data sources* appeared only in a low-quality blog and **could not be verified** — do not quote
+  it to a client.
+- **Why this lands on the on-set plane:** disclosure and consent obligations are only satisfiable if the
+  set *records* provenance at acquisition. **The offload step is where chain of custody either starts or
+  is lost forever**, and the open layer that would record it is the 156★ measured above.
+- **The engagement shape:** a provenance-bearing offload and dailies pipeline — `ascmitc/mhl` (MIT) for
+  the manifest, `xxHash` (BSD-2) for speed, `camdkit` (BSD-3) for camera/lens metadata — wrapped around a
+  commercial offloader, with the AI-usage log attached to the same manifest generation that proves the
+  negative survived. **C2C is now built into RED, Fujifilm, Panasonic and recent Canon cinema bodies†**, so
+  the ingest side is already there; the governed destination is not.
+
+### Pass 59 (2026-11-28) — the on-set & dailies plane in EMEA
+
+- **The EU AI Act Article 50 transparency duties are the live instrument**, requiring machine-readable
+  marking of AI content and disclosure of deepfakes, with obligations reported from **August 2026**†. For
+  fiction the duty is lighter: disclosure must not spoil the viewing experience†.
+- **Reach is extraterritorial** — the rules are **not restricted to content produced in the 27 member
+  states**† — so a LATAM or APAC shoot delivering to an EU platform inherits them. ⚠️ Sources also note the
+  Act offers **no sector-specific provisions for audiovisual creation**†, and the **AVMSD review across
+  2026–2027** is the expected vehicle for aligning audiovisual rules with it†.
+- **A genuinely on-plane EMEA development:** **Human Provenance in Film**, launched at the **Cannes Film
+  Market in May 2026** by The Mise En Scène Company — a **three-tier disclosure taxonomy, free under a
+  Creative Commons licence**†. This is the rare case of an open *knowledge artefact* on a plane whose code
+  is empty, and by this KB's own structural law a CC-licensed taxonomy is exactly the input open source can
+  build on.
+- **Adoption is low and should be quoted as low.** One European survival-guide report estimates AI at
+  **likely under 2% of operational expenses**† — an estimate, not a measurement.
+- **Funding:** **Creative Europe MEDIA** funds digital-tool development and is being integrated with AI,
+  though sources are thin on specifics†. **ElevenLabs raised $500M at an $11B valuation in February 2026**†
+  with a studio/broadcaster product — relevant to the audio half of dailies, not to offload.
+- **The engagement shape:** marking and disclosure obligations are **manifest problems**. Attaching an
+  Article 50 disclosure record to the ASC MHL generation at ingest makes the obligation auditable from the
+  first copy — and the MIT/BSD licences of `mhl`, `xxHash` and `camdkit` answer sovereignty questions
+  without a vendor dependency.
+
+### Pass 59 (2026-11-28) — the on-set & dailies plane in APAC
+
+- **China — the most aggressive regulation found in any region, and it is pre-production.** On
+  **1 April 2026** AI dramas formally entered the **national content registration system**, requiring
+  producers to register titles and pass classification review **before distribution**†; regulators moved
+  from post-release takedown to **script pre-approval**, with **25,000 titles removed**†. A state-media
+  figure puts **AI-generated output above 95% of Chinese microdramas released in Q1 2026**† — treat as
+  state-media sourced. A separate draft on AI-generated human characters was circulating for comment†.
+- **India — the largest adoption and the shortest clock.** The **February 2026 IT Amendment cut the
+  deepfake takedown window from 36 hours to 3 hours**†. **Google, Microsoft and Nvidia have partnered with
+  local filmmakers** (Reuters, via secondary)†. The **Eros / *Raanjhanaa*** dispute — litigation over a
+  studio using AI to change the ending of Aanand L. Rai's 2013 feature — is the clearest signal that
+  **retroactive AI alteration of finished work is now a legal risk**†.
+- **Japan and Korea — thinner, and recorded as thinner.** Japan's anime sector reportedly built AI
+  workflows over a decade with guild consent†; a Korean executive (MooAm) argues AI output is flat without
+  conventionally trained cinematographers and art directors†. ⚠️ **Searched and not found: AI-specific
+  film rules for Japan or Korea.** The APAC regulatory picture in these results is effectively China and
+  India only — an informed gap, not coverage.
+- **Why it lands here:** a **3-hour takedown window** is unmeetable without knowing which asset is which,
+  and **script pre-approval** means the registered title must match what was shot. Both are identity and
+  provenance problems rooted at acquisition — i.e. on this plane.
+- **The engagement shape:** a registration-aware ingest that binds each card offload to a registered title
+  and emits a 3-hour-capable takedown index. ⚠️ **Build a per-jurisdiction policy engine, not one
+  pipeline** — China pre-approves, India post-polices on a 3-hour clock, and the two cannot share a
+  workflow.
+
+### Pass 59 (2026-11-28) — the on-set & dailies plane in LATAM
+
+- **Sentiment is the regional asset.** A **2026 qualitative study in AI & Society (Springer)** of Latin
+  American filmmakers found them **"surprisingly positive"** about AI in production, reading it as
+  opportunity rather than threat — the most favourable practitioner stance measured in any region this
+  pass, and a peer-reviewed source rather than a trade blog.
+- **Activity is real and concentrated in Brazil.** An **AI Film Awards Brasil** edition ran in **São Paulo
+  on 2026-11-06/08** with the stated aim of making Brazil a regional hub for AI storytelling†, and Brazil
+  ranked **6th by entry count (212 entries)** in Higgsfield's global competition, behind India, the US,
+  Germany, France and Italy†.
+- **Players:** **Utopai Studios** and **Ex Machina Studios** are co-producing ***Cortés*** with **Antonio
+  Banderas**, shooting in Paris, with **Ex Machina handling Latin American sales**†. Honduras's AI-finished
+  animated feature ***Copán La Leyenda*** drew heavy regional criticism†.
+- **Co-production capacity is the structural ceiling:** Iberseries 2026 reported only **18 Europe–Latin
+  America co-productions, 6% of the total**, led by Spanish–Mexican then Spanish–Argentinian projects†.
+- ⛔ **The explicit regional gap, stated as a gap.** **Searches returned nothing on AI-specific regulation
+  or incentive programmes in Brazil, Mexico or Argentina.** Nothing from **Ancine**, **IMCINE** or
+  **INCAA** surfaced on AI. This is an **informed absence, not coverage**: the next LATAM pass should query
+  those three agencies by name rather than re-running a regional AI query. Because EU obligations are
+  extraterritorial†, **a LATAM service shoot delivering to an EU platform is currently governed by EMEA
+  rules and not by local ones** — which is itself the most useful thing to tell a LATAM client.
+- **The engagement shape:** LATAM is predominantly a **services** market, and verified offload is a
+  services deliverable. A permissive, auditable ingest chain (`mhl` MIT + `xxHash` BSD-2 + `camdkit`
+  BSD-3) that can **prove delivery conformance to an EU or US client** is sellable today without waiting
+  for local AI law — and favourable practitioner sentiment lowers the adoption barrier that defeats this
+  layer elsewhere.
+
+### ⛔ The regional gaps in this plane, stated as gaps (pass 59)
+
+- **No region has an open offload or dailies platform.** The 156★ measured on this plane is global, not
+  regional: there is no EMEA, APAC or LATAM alternative to Silverstack or ShotPut Pro, and no regional fork
+  of any of the six 2026 offload tools.
+- **None of the six offload tools, nor ASC MHL itself, carries any localisation or regional regulatory
+  hook.** No i18n, no jurisdiction-aware reporting. For a plane whose output is a legal chain-of-custody
+  record, that is a concrete and bounded contribution opportunity.
+- **No AI-specific film regulation was found for Japan, Korea, Brazil, Mexico or Argentina.** Recorded here
+  so a later pass reads this as *searched and absent* rather than *not yet searched*.
+
+† = secondary source (trade press, vendor or marketing blogs). The Springer/AI & Society LATAM study and
+the two standards repositories are the only primary-quality sources in this regional section.

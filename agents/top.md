@@ -5436,3 +5436,65 @@ layer it is supposed to automate.
   pointer states "Apart from the GNU GPL, Blender is not available under other licenses."** The
   remaining Houdini bridges drive a **proprietary per-seat application**. The MIT on these bridges is
   real and useful, and it buys Globant **the right to ship the remote control and nothing it controls.**
+
+## The on-set data & dailies plane — the camera-negative floor — added 2026-11-28 (pass 59)
+
+**Why this plane was chosen.** A word-bounded probe of all eight KB files returned **0 hits** for
+`offload`, `CinemaDNG`, `ARRIRAW`, `REDCODE`, `MHL`, `ASC MHL`, `xxHash`, `MD5`, `ASC CDL`,
+`look-up table`, `script supervisor`, `script supervision`, `continuity report`, `shot log`,
+`camera report`, `lens metadata`, `camera-to-cloud`, `C2C`, `proxy generation`,
+`digital imaging technician`, `colorist`, `Silverstack`, `ShotPut`, `YoYotta`, `Pomfort`,
+`Colorfront`, `frame.io` and `Moxion`; `DIT` returned **3**, `dailies` **4**, `on-set` **2**.
+Pass 58 named **on-set/dailies** as a rejected near-miss and never covered it. This pass closes it.
+
+⚠️ **Method note, inherited and applied:** the pass-58 warning about substring noise was obeyed here.
+Unbounded greps reported `DIT` **939** and `LUT` **244**; `grep -E '\bDIT\b'` cut them to **3** and **4**
+(`eDITorial`, `soLUTions`). Every zero above is word-bounded.
+
+### The headline, measured not argued
+
+This plane contains the **only irreversible step in all of production**: the moment the original camera
+files are copied off a card and the card is reformatted. Everything downstream — grade, comp, FX,
+conform — is undoable. The open source adoption is inverted against exactly that stake:
+
+| Measured 2026-11-28 | Stars |
+|---|---|
+| Agent bridges into DaVinci Resolve (downstream, undoable work) | **4,481★** |
+| The **entire** open verified-offload / ASC MHL layer (8 repos, the irreversible step) | **156★** |
+| Six independent camera-card offload tools **created in 2026 alone**, summed | **2★** |
+
+**≈29×.** Open source built the thing that drives the colour GUI and not the thing that proves the
+negative survived the copy. **Of that 156★, the standards body's own reference implementation is 84★ and
+was last pushed 2026-04-21.**
+
+### Agents on this plane (all verified by `ls-remote`; licence by API or by file)
+
+| Agent | Repo | License | Stars / forks | Last push | Note |
+|---|---|---|---|---|---|
+| offshoot-resolve-dit | https://github.com/wangngo/offshoot-resolve-dit | **MIT** | 0★ / 0f | 2026-11-25 | **The only agent on this plane**, created 2026-11-25 — three days before this pass. On-set DIT MCP server: read-only ASC MHL verifier + a 3-2-1 physical-disk handoff gate feeding Resolve Studio dailies. **It wraps OffShoot Pro (Hedge), a commercial offloader** — the agent layer reached for the paid tool, not for any of the six open ones below. |
+| davinci-resolve-mcp | https://github.com/samuelgursky/davinci-resolve-mcp | **MIT** | 4,464★ / 512f | 2026-11-27 | The downstream GUI bridge, and the single largest number on this plane. 37 compound tools against Resolve 19.1.3 / 20.3.2 / 21.x Studio; ffprobe + ffmpeg + Whisper for media analysis. Created 2025-03-18. |
+| resolve-mcp-server | https://github.com/guycochran/resolve-mcp-server | **MIT** | 17★ / 3f | 2026-09-16 | 53 tools, Resolve Studio 21. Editorial, not DIT: ffmpeg is used for silence detection and tightening only. |
+| davinci-resolve-mcp (RaincloudTheDragon) | https://github.com/RaincloudTheDragon/davinci-resolve-mcp | **MIT** (LICENSE, 1,122 B, read directly) | **not claimed** | — | `ls-remote` confirms it exists; `search/repositories` does not index it, so **no star count is asserted**. One of **five** separate forks of the same Resolve MCP found this pass — duplication, not consolidation. |
+| dailies (JonathanSolvesProblems) | https://github.com/JonathanSolvesProblems/dailies | **MIT** | 0★ / 0f | 2026-10-16 | Smart-glasses POV footage of a shoot turned into queryable continuity records; Gemini reads every take, reconciles across takes and reports what changed. **The only project found that attacks script supervision as a data problem.** Created 2026-08-18. |
+| continuity-guardian | https://github.com/bodhai-2/continuity-guardian | **MIT** | 0★ / 0f | 2026-08-24 | Gemini analyses dailies for continuity errors, results in ClickHouse. Built for a hackathon — a prototype, recorded as one. |
+| ShotContinuity-2B | https://github.com/Ikteder/ShotContinuity-2B | **Apache-2.0** | 0★ / 0f | 2026-11-19 | Intent-aware continuity checker for Blender and storyboard shot logs. **Checks text annotations between adjacent shots, not footage** — a storyboard checker, not a set tool. Created and last pushed the same day. |
+| viscriptix-app | https://github.com/Lithographic/viscriptix-app | **Apache-2.0** | 1★ / 1f | 2026-07-17 | AI metadata generator for footage and stills — Gemini, OpenAI, or fully offline with Ollama. The offline path is the one that matters on a set with no bandwidth. |
+
+**Sum of the four purpose-built on-set agents (offshoot-resolve-dit, dailies, continuity-guardian,
+ShotContinuity-2B): 0★.** The 4,481★ on this plane is entirely the Resolve bridges, which do editorial
+and colour work in a facility, not data work on a set.
+
+### ⛔ What this agent layer does *not* contain (searched, not found)
+
+- **No agent performs or supervises an offload.** `offshoot-resolve-dit` *verifies* a manifest another
+  tool wrote and gates a handoff; nothing plans the copy, picks the destinations, or decides the card is
+  safe to format.
+- **No agent reads camera or lens metadata into a decision.** `camdkit` / `OpenTrackIO` (BSD-3-Clause,
+  already recorded in this KB from earlier passes) model the data; no agent consumes it.
+- **No agent generates dailies proxies.** Searched directly: no open agent automates ffmpeg proxy
+  generation for dailies. The Resolve bridges expose relink / proxy / full-resolution *guards*, which is
+  the opposite — they protect a human's proxy state rather than producing it.
+- **Two repos that search surfaced for this plane do not exist.** `Miinwan/dailies` and
+  `tranvietthang94-jpg/check-file` were returned with full descriptions by web search and **both return
+  404 on `ls-remote`**. They are recorded here as non-existent so a later pass does not re-find them.
+  *A search-result description is not evidence that a repo exists.*

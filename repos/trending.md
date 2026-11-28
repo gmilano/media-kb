@@ -10,6 +10,60 @@ updated: 2026-11-28
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-28 — pass 59: the on-set data-custody substrate (**six implementations of the same tool in one year, two stars between them, and a published standard to converge on that none of them converged on**)
+
+**Channel note:** `ls-remote` (**20 explicit checks, 3 genuine 404s**), `search/repositories` and `raw`
+all worked. ⚠️ **`gh api repos/{owner}/{repo}` is `HTTP 403` in this session** — per-repo metadata must come
+from `search/repositories -f q='repo:owner/name'`, which accepts several `repo:` qualifiers per call.
+The index **omitted two repos `ls-remote` confirms exist**, so no stars are claimed for those.
+
+**The substrate, and the one healthy repo in it:**
+
+| Repo | License | Stars / forks | Last push | Role |
+|---|---|---|---|---|
+| [Cyan4973/xxHash](https://github.com/Cyan4973/xxHash) | **BSD-2-Clause** (`master/LICENSE`, 1,389 B, read directly; API says `NOASSERTION`) | 11,461★ / 948f | 2026-11-23 | The hash the whole plane runs on — and **136× the stars of the ASC MHL reference implementation that calls it; 73× the entire 156★ offload layer combined.** |
+| [MediaArea/MediaInfo](https://github.com/MediaArea/MediaInfo) | **BSD-2-Clause** | 2,078★ / 204f | 2026-11-27 | Technical metadata for what comes off the card. |
+| [ascmitc/mhl](https://github.com/ascmitc/mhl) | **MIT** | 84★ / 15f | 2026-04-21 | **The ASC Media Hash List reference implementation** — `mhllib` + `ascmhl` CLI (`create`/`diff`/`flatten`/`info`), PyPI `ascmhl`, Python ≥3.11. **The entire open implementation of the format that attests a negative survived every copy.** |
+| [pomfort/mhl-tool](https://github.com/pomfort/mhl-tool) | **MIT** | 55★ / 14f | 2024-10-21 | MHL **v1** reference, superseded by ASC MHL v2. Idle ~25 months; still needed to read archive drives. |
+| [SMPTE/ris-osvp-metadata-camdkit](https://github.com/SMPTE/ris-osvp-metadata-camdkit) | **BSD-3-Clause** | 55★ / 17f | 2026-07-31 | `camdkit` / **OpenTrackIO v1.0.1** camera + lens model, mapped from ARRI, RED, Canon, Sony, Blackmagic, Mo-Sys. |
+| [ascmitc/mhl-specification](https://github.com/ascmitc/mhl-specification) | ⚠️ **none found** — 10 filenames × 2 branches | 14★ / 1f | 2023-05-24 | The spec text and XSD. **The standard is open; its document carries no licence**, so reuse terms are unstated. Untouched ~3.5 years. |
+| [Agaveis/ascmhl](https://github.com/Agaveis/ascmhl) | **MIT** | 0★ / 0f | 2026-10-11 | Rust read-only validator, created and pushed the same day. **See the hash-coverage divergence below.** |
+
+**The 2026 offload cohort — six tools, one job, 2★, two of them unusable:**
+
+| Repo | License | Stars | Last push | Created | Note |
+|---|---|---|---|---|---|
+| [BitmatchApp/Bitmatch](https://github.com/BitmatchApp/Bitmatch) | **MIT** | 16★ / 4f | 2026-11-27 | 2025-12-20 | Swift, macOS; SHA-256. **The most-adopted open offload tool in existence — at 16★.** |
+| [owenpkent/offloader](https://github.com/owenpkent/offloader) | **MIT** | 1★ / 0f | 2026-10-27 | 2026-08-07 | Python; `xxh64` + ASC MHL, ShotPut-compatible reports, BRAW. **The only one emitting xxh64 *and* MHL — i.e. output the Rust validator must decline.** |
+| [tetsujin28/bandua](https://github.com/tetsujin28/bandua) | **MIT** + non-binding trilingual notice | 0★ / 0f | 2026-11-22 | 2026-11-06 | Rust/Tauri; multi-destination copy, MHL + PDF reports, optional card re-read. |
+| [jamespero/media-offloader](https://github.com/jamespero/media-offloader) | **Apache-2.0** | 0★ / 1f | 2026-11-22 | 2026-11-07 | Rust 1.85+, Win/macOS; verifies against ASC MHL history or `.md5`. **Created one day after `bandua`, same language, same job, no reference to it.** |
+| [AndAy224/sluice](https://github.com/AndAy224/sluice) | **MIT** | 0★ / 0f | 2026-08-28 | 2026-08-27 | Rust, Windows; reads MHL v1.1 + ASC MHL v2, computes **xxHash64 only**. Whole UX is a `SAFE TO FORMAT` verdict requiring two different physical drives. |
+| [Hasoonab9749/offloadmaster](https://github.com/Hasoonab9749/offloadmaster) | ⛔ **none found** | 1★ / 0f | 2026-10-13 | 2026-08-13 | Says "free, open-source" in its description and **ships no licence** → all rights reserved. **The description is not the licence.** |
+| [lubomirbudin-glitch/mmmover](https://github.com/lubomirbudin-glitch/mmmover) | ⛔ **all rights reserved — verified** | 0★ / 0f | 2026-11-20 | 2026-10-04 | C#; xxHash/XXH128/MD5, ASC MHL, proxies with LUTs — **the cohort's most complete feature list, and not open source.** |
+
+**⚠️ The sharpest technical finding of this pass — the standard and its only reimplementation have
+diverged.** ASC MHL's README lists the supported hashes: **xxHash (64, XXH3-64, XXH3-128), MD5, SHA1, C4**.
+`Agaveis/ascmhl`'s README states it **"Recomputes SHA-256, SHA-1 and MD5"**, that it **"does not implement
+the xxHash or C4 algorithms"**, and that it reports `xxh64`/`xxh3`/`c4` manifests as *detected and
+unvalidated*. So **SHA-256 — the algorithm it leads with — is not in the spec at all**, and xxHash, the only
+listed algorithm fast enough to keep up with a card at full read speed, is unsupported. **The one
+independent open validator can verify precisely the manifests real sets do not produce.** Implementing XXH3
+and C4 against the published XSD is bounded, testable work; see `compose/patterns.md` Pattern 57.
+
+**⚠️ A correction of a claim circulating in search summaries.** Secondary sources state that the ASC MHL
+reference implementation is **"not yet a complete implementation of the specification."** The **current
+README on `master` (pushed 2026-04-21) does not say this** — it describes `mhllib` as covering reading
+`ascmhl` folders, parsing and writing ASC MHL XML, chain and collection files, and nested mhl folders. The
+incompleteness claim appears to derive from older documentation and **is not asserted by this KB.** Read the
+primary source before repeating a limitation to a client.
+
+**The structural reading.** Six independent implementations in a single year, converging on nothing, with a
+published standard available to converge on, and 2★ of combined adoption — while `xxHash`, the primitive
+they all call, has 11,461★. The duplication signature matches pass 58's Blender bridges, but the cause
+differs: there is no coordination gap here, there is a **trust gap**. Nobody adopts another author's
+verification code for the only copy of a negative, so everyone writes their own and none of them is
+trusted either. Full argument in `intel/trends.md`, finding 1.
+
 ## 2026-11-28 — pass 58: the FX-simulation substrate (**the solvers are permissive and pushed today; three of the plane's most load-bearing licences cannot be read by any scanner**)
 
 **Channel note:** `ls-remote` (**42/42 slugs resolved**), `search/repositories` and `raw` all worked.

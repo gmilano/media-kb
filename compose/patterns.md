@@ -9064,3 +9064,113 @@ incentives in the last 18 months. The pipeline is portable; the subsidy is not.
 
 † = secondary source. ⚠️ **Rates conflict across sources in both NA and Mexico** — quote Hansard's 39%
 for the UK, and read the enrolled bill before quoting any Californian or Mexican rate.
+
+## Pass 59 (2026-11-28) — on-set data & dailies patterns
+
+Every repo named below was `ls-remote`-verified this pass with its licence read from the API or the file.
+⚠️ **The governing constraint for all three patterns:** this plane contains production's only irreversible
+step. **Globant should sit above a commercial offload floor, not replace it** — the one agent that exists
+already assumes that shape, and a 0★ open offloader is not an acceptable custodian of a client's negative.
+
+### Pattern 56 — The provenance-bearing offload gate (chain of custody from the card)
+
+**Problem.** Disclosure, consent and takedown obligations all require knowing what was shot, by which
+camera, and that the file is byte-identical to what came off the card. Productions prove the *copy* with a
+commercial tool and prove the *provenance* nowhere. Chain of custody either starts at the offload or is
+lost permanently.
+
+**Recipe — wire these together:**
+
+1. **Let the commercial tool do the copy.** OffShoot Pro (Hedge), Silverstack or ShotPut Pro writes the
+   ASC MHL manifest. This is the liability-bearing step; do not reimplement it.
+2. **Verify independently with [`ascmitc/mhl`](https://github.com/ascmitc/mhl) (MIT, 84★)** — `ascmhl
+   verify` / `ascmhl diff` against the written manifest. An independent second read by a *different*
+   implementation is the whole point; the offloader checking its own work is not verification.
+3. **Hash with [`Cyan4973/xxHash`](https://github.com/Cyan4973/xxHash) (BSD-2-Clause, 11,461★)** — XXH3 is
+   the only spec-listed algorithm that keeps up with a card at full read speed.
+4. **Extract technical metadata with [`MediaArea/MediaInfo`](https://github.com/MediaArea/MediaInfo)
+   (BSD-2-Clause, 2,078★)** and camera/lens parameters with
+   [`SMPTE/ris-osvp-metadata-camdkit`](https://github.com/SMPTE/ris-osvp-metadata-camdkit) (BSD-3-Clause,
+   55★ — maps ARRI, RED, Canon, Sony, Blackmagic, Mo-Sys).
+5. **Bind the provenance record to the manifest generation**, not to a sidecar database. ASC MHL is
+   generational and nests, so each copy adds a generation — which makes it the natural carrier for an
+   AI-usage and consent log that must survive every later copy.
+6. **Gate the format authorisation** with the pattern [`AndAy224/sluice`](https://github.com/AndAy224/sluice)
+   (MIT) demonstrates: no `SAFE TO FORMAT` verdict until copies exist on **two different physical drives**.
+
+**Why this is the right shape.** The deliverable is an *attestation*, not an offloader. Globant builds the
+layer that makes a client's existing paid floor auditable — permissively licensed end to end (MIT + BSD),
+so it answers sovereignty questions in EMEA without a vendor dependency.
+
+⚠️ **Do not build on [`Hasoonab9749/offloadmaster`](https://github.com/Hasoonab9749/offloadmaster)** (no
+licence despite describing itself as open source) **or
+[`lubomirbudin-glitch/mmmover`](https://github.com/lubomirbudin-glitch/mmmover)** (licence text reads
+*"published for viewing only… No licence is granted"*, despite shipping the cohort's most complete feature
+list). Both are all-rights-reserved.
+
+### Pattern 57 — Close the ASC MHL validation gap (a bounded, high-leverage contribution)
+
+**Problem.** The only independent open ASC MHL validator cannot validate the manifests real sets produce.
+[`Agaveis/ascmhl`](https://github.com/Agaveis/ascmhl) (MIT, Rust, read-only) recomputes **SHA-256, SHA-1 and
+MD5**, states it **"does not implement the xxHash or C4 algorithms"**, and reports `xxh64` / `xxh3` / `c4`
+manifests as *detected and unvalidated*. ASC MHL specifies **xxHash (64, XXH3-64, XXH3-128), MD5, SHA1, C4**
+— so SHA-256 is **out of spec**, and the fast hashes that on-set work actually uses are exactly the
+unsupported ones. Meanwhile [`owenpkent/offloader`](https://github.com/owenpkent/offloader) (MIT, Python)
+emits `xxh64` + ASC MHL — output the Rust validator must decline.
+
+**Recipe:**
+
+1. **Implement XXH3-64, XXH3-128 and xxHash64** in `Agaveis/ascmhl` by binding
+   [`Cyan4973/xxHash`](https://github.com/Cyan4973/xxHash) (BSD-2-Clause) — compatible with the crate's MIT.
+2. **Add C4** (the Cinema Content Class Create ID) to complete spec coverage.
+3. **Validate against the published XSD** in
+   [`ascmitc/mhl-specification`](https://github.com/ascmitc/mhl-specification) — note the spec repo
+   **carries no licence file** (10 filenames × 2 branches), so treat the schema as reference, not as
+   redistributable material, until the ASC clarifies.
+4. **Differential-test against the reference implementation**: generate manifests with `ascmitc/mhl`
+   (Python) and `owenpkent/offloader`, verify with the Rust crate, and assert agreement. The precedent for
+   proving a parser against production code on this plane is
+   [`Frontier-Stageworks/opentrackio-proof`](https://github.com/Frontier-Stageworks/opentrackio-proof)
+   (Lean 4 proofs of the OpenTrackIO parser; ⚠️ **no licence file found** — read it as method, not as a
+   dependency).
+
+**Why it is worth doing.** It is days of bounded work against a published spec, it makes the only open
+validator usable on real footage, and it buys Globant standing in the ASC Advanced Data Management
+Subcommittee's ecosystem — on a plane where the credible actors are standards bodies rather than vendors.
+
+### Pattern 58 — Set-floor continuity to post, as structured data
+
+**Problem.** Script supervision is still paper. [`timmcglinchey/film-tool-hub`](https://github.com/timmcglinchey/film-tool-hub)
+(⚠️ no licence) represents the open state of the art: a **printable** take log and per-scene continuity
+sheet. The three AI continuity projects are all at **0★** and none reads a supervisor's log — two analyse
+footage after the fact, one checks storyboard text. The record that the person on set actually makes never
+reaches the system that would use it.
+
+**Recipe — the one structured path that exists, plus the AI layer above it:**
+
+1. **Capture on the floor with [`koosoli/OpenShotDesigner`](https://github.com/koosoli/OpenShotDesigner)
+   (GPL-3.0, 48★)** — lined script, shot list and an **on-set continuity log that exports as DaVinci
+   Resolve clip metadata**. This export is the only set-floor-to-post structured bridge found on this plane.
+   ⚠️ **GPL-3.0: deploy and modify freely, but a derivative distributed to a client inherits copyleft** —
+   keep Globant's additions as separate services talking to it over its export, not as linked modifications.
+2. **Carry the metadata into post** via that Resolve clip-metadata export, reconciled against the offload
+   manifest from Pattern 56 so every take resolves to a verified original file.
+3. **Add the AI check as a second opinion, never as the record.** Use
+   [`JonathanSolvesProblems/dailies`](https://github.com/JonathanSolvesProblems/dailies) (MIT) — POV
+   footage reconciled across takes to report what changed — and/or
+   [`bodhai-2/continuity-guardian`](https://github.com/bodhai-2/continuity-guardian) (MIT, hackathon
+   prototype: Gemini over dailies, results in ClickHouse). **Both are 0★ prototypes; treat them as
+   components to rebuild, not as dependencies to ship.**
+4. **Generate searchable shot descriptions with
+   [`Lithographic/viscriptix-app`](https://github.com/Lithographic/viscriptix-app) (Apache-2.0)** — and use
+   its **fully offline Ollama path**, because a set usually has no usable bandwidth and footage should not
+   leave the DIT cart before the offload is verified.
+5. **Reconcile, don't overwrite.** The supervisor's log is the authority; the AI output is a diff against
+   it. On this plane an AI that silently corrects a human continuity record destroys the only
+   contemporaneous evidence of what was actually shot.
+
+**Why this shape.** The scarce asset here is not inference, it is **the structured record at the moment of
+capture**. Whoever owns that owns every downstream claim — provenance, continuity, disclosure and the
+takedown index that India's 3-hour window† makes mandatory.
+
+† = secondary source.

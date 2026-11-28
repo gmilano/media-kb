@@ -9,6 +9,82 @@ updated: 2026-11-28
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-28 — pass 59: the on-set data & dailies plane (**the one irreversible step in production, and open source loses it on trust rather than on capability**)
+
+**Channel note:** `ls-remote` worked (**20 explicit checks, 3 genuine 404s**), `search/repositories` worked,
+`raw.githubusercontent.com` worked. ⚠️ **New channel finding for every future pass:
+`gh api repos/{owner}/{repo}` returns `HTTP 403` — "GitHub access to this repository is not enabled for
+this session."** Only the **search** endpoints are reachable, so per-repo metadata must come from
+`search/repositories -f q='repo:owner/name'` (which batches several `repo:` qualifiers in one call and
+saves rate limit). **`search/repositories` silently omitted two repos that `ls-remote` confirms exist**
+(`RaincloudTheDragon/davinci-resolve-mcp`, `mengpeiwen18-del/OpenShotDesigner`) — pass 58's rule holds and
+is restated: **absence from the search index is not evidence of absence**, and **no star count is claimed
+for a repo the index will not return.**
+
+**Why this plane was chosen.** Word-bounded probes returned **0 hits across all eight KB files** for
+`offload`, `CinemaDNG`, `ARRIRAW`, `REDCODE`, `MHL`, `ASC MHL`, `xxHash`, `MD5`, `ASC CDL`,
+`script supervisor`, `continuity report`, `shot log`, `camera report`, `lens metadata`,
+`camera-to-cloud`, `C2C`, `proxy generation`, `digital imaging technician`, `colorist`, `Silverstack`,
+`ShotPut`, `YoYotta`, `Pomfort`, `Colorfront`, `frame.io` and `Moxion`. **Pass 58 explicitly named
+on-set/dailies as a rejected near-miss and never covered it.** Near-misses rejected this pass instead:
+`OpenColorIO`/`ACES` colour management (25 and 140 hits — covered) and `OpenTrackIO`/`camdkit` (19 and 7 —
+covered), which is why this pass takes the **data-custody** half of the set and not the colour half.
+
+**The headline, measured not argued.** This plane holds production's **only irreversible step** — the
+moment the card is copied and reformatted. Adoption is inverted against exactly that stake:
+
+| Measured 2026-11-28 | Stars |
+|---|---|
+| Agent bridges into DaVinci Resolve (downstream, every mistake undoable) | **4,481★** |
+| The **entire** open verified-offload / ASC MHL layer (8 repos, the irreversible step) | **156★** |
+| Six camera-card offload tools **created in 2026 alone**, summed | **2★** |
+| The four purpose-built **on-set** agents, summed | **0★** |
+
+**≈29×**, and the 156★ includes the standards body's own reference implementation at **84★**.
+
+**The structural finding, which extends this KB's standing law.** Eleven healthcare passes and fifty-eight
+media passes established that *regulatory pressure does not predict permissive supply, and the licence of
+the knowledge content decides whether open source can comply.* **This plane has neither obstacle** — ASC
+MHL is open, the XSD is published, the algorithm is a copy plus a hash — and it is still the emptiest
+adoption layer in the KB. New clause, with evidence rather than assertion:
+
+> **Where the failure is irreversible, open source loses on trust, not on capability.**
+
+- `tetsujin28/bandua` appends a **trilingual liability disclaimer to an MIT licence** — the only repo in 59
+  passes to do so. It is selling reassurance, not features.
+- `AndAy224/sluice`'s entire product surface is an **authorisation to erase** (`SAFE TO FORMAT`), gated on
+  two distinct *physical* drives.
+- The only agent on the plane **wraps a commercial offloader** rather than any of the six open ones.
+- Downstream, where mistakes are undoable, the same ecosystem's open tooling sits at **4,481★**.
+
+**New agents recorded this pass (all `ls-remote`-verified; licence by API or by file):**
+
+| Agent | Repo | License | Stars / forks | Last push | Note |
+|---|---|---|---|---|---|
+| offshoot-resolve-dit | https://github.com/wangngo/offshoot-resolve-dit | **MIT** | 0★ / 0f | 2026-11-25 | **The only agent on this plane**, created three days before this pass. On-set DIT MCP server: read-only ASC MHL verifier + 3-2-1 physical-disk handoff gate into Resolve Studio dailies. **Wraps OffShoot Pro (Hedge), a paid offloader.** |
+| davinci-resolve-mcp | https://github.com/samuelgursky/davinci-resolve-mcp | **MIT** | 4,464★ / 512f | 2026-11-27 | The downstream GUI bridge and the largest number on the plane. 37 compound tools; ffprobe/ffmpeg/Whisper analysis. Created 2025-03-18. |
+| resolve-mcp-server | https://github.com/guycochran/resolve-mcp-server | **MIT** | 17★ / 3f | 2026-09-16 | 53 tools, Resolve Studio 21. Editorial, not DIT — ffmpeg for silence detection only. |
+| dailies (JonathanSolvesProblems) | https://github.com/JonathanSolvesProblems/dailies | **MIT** | 0★ / 0f | 2026-10-16 | Smart-glasses POV footage → queryable continuity records; Gemini reconciles takes and reports what changed. **The only project attacking script supervision as a data problem.** |
+| continuity-guardian | https://github.com/bodhai-2/continuity-guardian | **MIT** | 0★ / 0f | 2026-08-24 | Gemini over dailies for continuity errors, ClickHouse store. Hackathon prototype, recorded as one. |
+| ShotContinuity-2B | https://github.com/Ikteder/ShotContinuity-2B | **Apache-2.0** | 0★ / 0f | 2026-11-19 | Continuity checker for Blender + storyboard shot logs. **Checks text annotations, not footage.** Created and pushed the same day. |
+| viscriptix-app | https://github.com/Lithographic/viscriptix-app | **Apache-2.0** | 1★ / 1f | 2026-07-17 | Footage/stills metadata generation — Gemini, OpenAI, or **fully offline via Ollama**, which is the path that works on a set with no bandwidth. |
+| davinci-resolve-mcp (RaincloudTheDragon) | https://github.com/RaincloudTheDragon/davinci-resolve-mcp | **MIT** (LICENSE, 1,122 B, read directly) | **not claimed** — search index will not return it | — | One of **five** separate forks of the same Resolve MCP found this pass. Duplication, not consolidation. |
+
+**⚠️ Two repos that web search described in full detail do not exist.** `Miinwan/dailies` and
+`tranvietthang94-jpg/check-file` were returned with feature lists and both **404 on `ls-remote`**;
+`Flomenco-Inc/flo-offload-tool` likewise. Recorded as non-existent so a later pass does not re-find them.
+**A search-result description is not evidence that a repo exists** — three phantoms in one pass is the
+highest count recorded, and every one of them would have become a KB entity.
+
+**⚠️ Method correction, reusable across all twelve industries — a licence grep must be anchored to the top
+of the file.** `lubomirbudin-glitch/mmmover`'s licence file matches `BSD 2-Clause` and would have been
+compiled as permissive. The match comes from a **`THIRD-PARTY-NOTICES` block at the bottom** describing
+*bundled xxHash*, inside a file whose first line reads **"All rights reserved… published for viewing
+only."** Reading the first ~20 lines — not grepping the whole file — is the only safe probe. This is
+precisely how a proprietary repo enters a KB as open source. Corollary, same pass: **a large licence file
+is not a modified licence.** `bandua`'s is 2,841 B with `NOASSERTION` from the API, and reads as **verbatim
+MIT plus a non-binding trilingual notice**. Size and `NOASSERTION` are prompts to read, not verdicts.
+
 ## 2026-11-28 — pass 58: the FX-simulation & procedural-effects plane (**the agent layer is 319× the size of the thing it is supposed to automate**)
 
 **Channel note:** `git ls-remote`, `gh api search/repositories` and `raw.githubusercontent.com` all

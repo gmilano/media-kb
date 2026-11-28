@@ -5704,3 +5704,84 @@ usable intelligence rather than trivia:
 - **LATAM** — ⛔ **nothing found.** No LATAM-originated FX-simulation project surfaced in any query run
   this pass. Recorded as an informed gap, not as coverage: it means a LATAM engagement in this plane
   consumes a substrate written elsewhere, which is a sovereignty and support argument, not a defect.
+
+## Pass 59 (2026-11-28) — trends on the on-set data & dailies plane
+
+### 1. The irreversibility premium is now measurable, and it inverts the usual open-source pattern
+
+Across 58 prior passes this KB has repeatedly found open source strongest in the pipeline and weakest where
+proprietary *content* licences block it. This plane breaks that: the format is open (ASC MHL), the schema is
+published, and the work is a copy plus a hash — **no licence obstacle at all** — and it is still the
+emptiest adoption layer measured. **4,481★** of agent tooling drives the colour GUI downstream; **156★**
+covers the entire verified-offload layer at the one step that cannot be redone. The differentiator is not
+capability or licensing but **who carries the liability for the only copy of the negative**, and that is a
+trust floor open source has not crossed. *Full evidence in `repos/foundations.md`.*
+
+### 2. Six implementations in one year, two stars, zero consolidation
+
+`sluice` (2026-08-27), `offloader` (2026-08-07), `offloadmaster` (2026-08-13), `mmmover` (2026-10-04),
+`bandua` (2026-11-06) and `media-offloader` (2026-11-07) all do the same job. **`bandua` and
+`media-offloader` were created one day apart, both in Rust, with no reference to each other.** Combined
+adoption: **2★**. Two of the six carry no usable licence. This is the duplication signature pass 58 found
+in Blender agent bridges, now reproduced on a plane with a *published standard* to converge on — which
+suggests duplication here is driven by **distrust of other people's verification code**, not by missing
+coordination.
+
+### 3. The only agent on the plane wraps the commercial incumbent
+
+`offshoot-resolve-dit` (MIT, created 2026-11-25) is the first and only agent to target on-set data work —
+and it is a **read-only verifier and handoff gate around OffShoot Pro (Hedge)**, feeding Resolve Studio.
+The agent layer, given six open offload tools to automate, **reached for the paid one.** Read it as the
+market's own verdict on which floor is trustworthy, and as the template for how this plane will actually be
+automated: **AI above a commercial substrate, not instead of it.**
+
+### 4. Script supervision is still paper, and the AI attempts bypass it entirely
+
+`film-tool-hub` (2026-11-27) represents the current open state of the art for script supervision: a
+**printable** take log and continuity sheet. The three AI continuity projects found — `dailies`
+(JonathanSolvesProblems, MIT), `continuity-guardian` (MIT, hackathon) and `ShotContinuity-2B` (Apache-2.0)
+— are all at **0★**, and none of them reads a script supervisor's log. Two analyse footage after the fact;
+the third checks storyboard text annotations. **Nothing connects the person on set recording continuity to
+the system that would use it.** The single exception is `OpenShotDesigner`'s continuity log exporting as
+**Resolve clip metadata** — the only set-floor-to-post structured path on this plane, in a GPL-3.0 project
+at 48★.
+
+### 5. The standard's hash coverage and its only reimplementation have diverged
+
+ASC MHL specifies **xxHash (64, XXH3-64, XXH3-128), MD5, SHA1, C4**. Its only independent reimplementation
+(`Agaveis/ascmhl`, Rust, MIT) recomputes **SHA-256, SHA-1, MD5** — leading with an algorithm **not in the
+spec** — and states it **does not implement xxHash or C4**, reporting such manifests as *unvalidated*.
+Since xxHash is the only listed algorithm fast enough for terabytes off a card, **the one open validator
+cannot validate what real sets produce**. A bounded, high-leverage contribution: implement XXH3 and C4
+against the published XSD.
+
+### 6. Camera-to-cloud is arriving faster than any governed destination for it
+
+C2C is reported as built into **RED, Fujifilm, Panasonic and recent Canon cinema bodies**†, and trade
+sources call adoption rapid†. Every destination is proprietary (Frame.io, Moxion), and **no open C2C ingest
+target exists**. One vendor guide is explicit that **C2C does not replace verified offload** — *the cloud
+proxy is not your negative*†. So C2C adds a second, faster path off the camera while the slow path that
+actually protects the original stays on the 156★ layer. **Two paths, one of them governed by nothing open.**
+
+### 7. On-set AI in 2026 is assistive, and the honest claim is a narrow one
+
+A production-trade assessment describes current on-set AI as **mostly assistive** — smart cameras,
+real-time virtual-production tools, continuity aids, automated logging†. A separate April 2026 piece claims
+AI-native pipelines are moving from pilot to everyday production and that **studio governance now requires
+audit trails for AI-assisted sequences and watermarks for generated footage**†, but is thin on specifics.
+⚠️ Figures circulating in low-quality sources — *AI at 35–40% of budgets*, *an "IAB survey" showing 18–22%
+post-production time savings* — are **unsourced and must not be repeated to a client.** The defensible
+version: **AI on set today logs, labels and checks; it does not shoot, and it does not yet carry the
+negative.**
+
+### 8. This plane has no regulator, and that explains its shape
+
+Unlike accessibility (pass 3), conformance (pass 4), age rating (pass 28) or emergency alerting (pass 45),
+**no jurisdiction mandates verified offload.** The obligation is private: insurers, completion bonds and
+studio delivery specs. The adjacent AI rules — EU AI Act Art. 50 marking†, New York's synthetic-performer
+law†, India's 3-hour deepfake takedown†, China's 1 April 2026 content registration† — all govern **what the
+set records and discloses**, which makes acquisition-time provenance the compliance hook. **The regulatory
+pressure is arriving next to this plane rather than on it**, and per this KB's own law — regulatory pressure
+does not predict permissive supply — that is entirely consistent with finding 156★ here.
+
+† = secondary source (trade press, vendor or marketing blogs), not price- or spec-verified this pass.

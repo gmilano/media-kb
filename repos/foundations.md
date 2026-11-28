@@ -6178,3 +6178,97 @@ Stated explicitly so no future pass re-discovers them as live options.
 | **Destruction (DCC-side)** | [joesfer/Voronoi-Shattering](https://github.com/joesfer/Voronoi-Shattering) | LGPL-3.0 | 43★ | **2018-01-02** | **~8 years dead.** The only DCC-side Voronoi fracture plugin found (Maya). The film destruction layer has no live open implementation at all. |
 | **Neural simulation surrogate** | [Pranav-Jain/Neural-Monte-Carlo-Fluid-Simulation](https://github.com/Pranav-Jain/Neural-Monte-Carlo-Fluid-Simulation) · [tovacinni/neural-fluid-fields](https://github.com/tovacinni/neural-fluid-fields) | MIT · MIT | **47★** · 23★ | 2024-05-04 · 2021-12-13 | **The entire layer: top 8 results sum to 142★ and the best one has been dead for 2.5 years.** This is the gap between what AI-in-VFX is sold as and what exists. |
 | **AI applied to sim *data*** | [ZephirFXEC/VQVDB](https://github.com/ZephirFXEC/VQVDB) | **GPL-3.0** | 117★ | 2026-06-24 | OpenVDB volume compression with a VQ-VAE. **The one genuinely useful AI-on-simulation repo found in the whole plane — and it is GPL-3.0**, i.e. the only working piece is the one Globant cannot embed. |
+
+## The on-set data & dailies substrate — verified offload, ASC MHL & camera metadata — added 2026-11-28 (pass 59)
+
+The foundational layer for the one production step that cannot be redone. All rows `ls-remote`-verified;
+licences from the API where it reports a real SPDX id, otherwise read from the licence file directly.
+
+### The standard and its implementations
+
+| Repo | License | Stars / forks | Last push | What it is |
+|---|---|---|---|---|
+| [ascmitc/mhl](https://github.com/ascmitc/mhl) | **MIT** | 84★ / 15f | 2026-04-21 | **The ASC Media Hash List reference implementation** — `mhllib` plus the `ascmhl` CLI (`create`, `diff`, `flatten`, `info`) and `ascmhl-debug` (`verify`, `xsd-schema-check`, `hash`). On PyPI as `ascmhl`, Python ≥3.11. Created 2019-08-12. **This 84★ repo is the entire open implementation of the format that attests a camera negative survived every copy.** |
+| [ascmitc/mhl-specification](https://github.com/ascmitc/mhl-specification) | **none found** — 10 filenames × 2 branches | 14★ / 1f | 2023-05-24 | The ASC MHL specification and XSD schema, from the ASC Advanced Data Management Subcommittee. **The spec text carries no licence file**, so the document's reuse terms are unstated even though the format is open. Untouched for ~3.5 years. |
+| [pomfort/mhl-tool](https://github.com/pomfort/mhl-tool) | **MIT** | 55★ / 14f | 2024-10-21 | The reference implementation of **MHL version 1**, superseded by ASC MHL v2. Idle ~25 months. Kept here because v1 manifests are still on archive drives and still have to be read. |
+| [Agaveis/ascmhl](https://github.com/Agaveis/ascmhl) | **MIT** | 0★ / 0f | 2026-10-11 | A Rust read-only ASC MHL validator; never writes a manifest. Created and last pushed 2026-10-11. **See the hash-coverage defect below — it is the sharpest technical finding on this plane.** |
+
+### ⚠️ The interop defect, verified from both primary sources
+
+ASC MHL's own README lists the hash formats the format supports: **xxHash (64-bit, XXH3-64, XXH3-128),
+MD5, SHA1 and C4.** The only independent reimplementation, `Agaveis/ascmhl`, states in its README that it
+**"Recomputes SHA-256, SHA-1 and MD5"**, that it **"does not implement the xxHash or C4 algorithms"**, and
+that it reports a manifest carrying only `xxh64`, `xxh3` or `c4` as **"detected and unvalidated"**.
+
+Two consequences, both load-bearing:
+
+1. **SHA-256 is not in the ASC MHL hash list at all** — the algorithm the validator leads with is
+   out-of-spec for the format it validates.
+2. **xxHash is what on-set offload actually uses**, because it is the only listed algorithm fast enough to
+   keep up with terabytes coming off a card. So the one independent validator can verify precisely the
+   subset of manifests that real set work does not produce, and must decline the ones it does.
+
+**For Globant this is an opportunity, not a complaint:** implementing XXH3 + C4 against the published XSD
+is bounded, testable work that makes the only open validator actually able to validate a real set's output.
+
+### The primitives the plane runs on
+
+| Repo | License | Stars / forks | Last push | What it is |
+|---|---|---|---|---|
+| [Cyan4973/xxHash](https://github.com/Cyan4973/xxHash) | **BSD-2-Clause** (API reports `NOASSERTION`; `master/LICENSE`, 1,389 B, read directly) | 11,461★ / 948f | 2026-11-23 | The hash the entire offload layer depends on, and **the only genuinely healthy repo on this plane** — **136× the stars of the ASC MHL reference implementation that calls it, and 73× the entire open offload layer combined.** Created 2014-04-30. |
+| [MediaArea/MediaInfo](https://github.com/MediaArea/MediaInfo) | **BSD-2-Clause** | 2,078★ / 204f | 2026-11-27 | Technical metadata for the files coming off the card — container, codec, frame rate, timecode. Actively pushed. |
+| [SMPTE/ris-osvp-metadata-camdkit](https://github.com/SMPTE/ris-osvp-metadata-camdkit) | **BSD-3-Clause** | 55★ / 17f | 2026-07-31 | SMPTE RIS OSVP `camdkit` — the canonical model of static and per-frame camera and lens parameters behind **OpenTrackIO** (v1.0.1), mapped from ARRI, RED, Canon, Sony, Blackmagic and Mo-Sys. Recorded in this KB from earlier passes; repeated here because it is the metadata half of this plane. |
+
+### The 2026 offload cohort — six implementations, 2★, two unusable
+
+Every one of these was created in **2026**. They do the same job: copy a camera card to several
+destinations, hash both ends, write a manifest, report. None has adoption.
+
+| Repo | License | Stars / forks | Last push | Created | Note |
+|---|---|---|---|---|---|
+| [BitmatchApp/Bitmatch](https://github.com/BitmatchApp/Bitmatch) | **MIT** | 16★ / 4f | 2026-11-27 | 2025-12-20 | Swift, macOS only; verifies with SHA-256. **The most-adopted open offload tool in existence, at 16★.** |
+| [owenpkent/offloader](https://github.com/owenpkent/offloader) | **MIT** | 1★ / 0f | 2026-10-27 | 2026-08-07 | Python; `xxh64` + ASC MHL output, ShotPut Pro-compatible job reports, Blackmagic RAW support. **The only one emitting xxh64 *and* MHL** — i.e. the only one whose output the Rust validator above cannot check. |
+| [tetsujin28/bandua](https://github.com/tetsujin28/bandua) | **MIT** (API reports `NOASSERTION`; see the licence note below) | 0★ / 0f | 2026-11-22 | 2026-11-06 | Rust + Tauri desktop app; multi-destination copy, hash both ends, MHL + PDF reports, optional card re-read. |
+| [jamespero/media-offloader](https://github.com/jamespero/media-offloader) | **Apache-2.0** | 0★ / 1f | 2026-11-22 | 2026-11-07 | Rust (needs 1.85+), Windows + macOS; verifies against an ASC MHL history or `.md5` lists. **Created one day after `bandua`, in the same language, for the same job, with no reference to it.** |
+| [AndAy224/sluice](https://github.com/AndAy224/sluice) | **MIT** | 0★ / 0f | 2026-08-28 | 2026-08-27 | Rust, Windows; reads MHL v1.1 and ASC MHL v2 but **computes `xxHash64` only**. Its entire product surface is a verdict: a `SAFE TO FORMAT` banner that unlocks only when the copies sit on two *different physical* drives. |
+| [Hasoonab9749/offloadmaster](https://github.com/Hasoonab9749/offloadmaster) | **none found** — 10 filenames × 2 branches | 1★ / 0f | 2026-10-13 | 2026-08-13 | ⛔ **Describes itself as "free, open-source" and ships no licence**, so it is all-rights-reserved and Globant cannot build on it. MD5/SHA-256 verification, MHL export. **The description is not the licence.** |
+| [lubomirbudin-glitch/mmmover](https://github.com/lubomirbudin-glitch/mmmover) | ⛔ **all rights reserved — verified in the licence text** | 0★ / 0f | 2026-11-20 | 2026-10-04 | C#; multi-drive copy, xxHash/XXH128/MD5, ASC MHL, proxies with LUTs — the most complete feature list of the cohort and **not open source**. `LICENSE` reads *"published for viewing only… No licence is granted."* Official binaries are free to use unmodified. |
+
+### ⚠️ Two licence-probe corrections this pass, both reusable across all twelve industries
+
+1. **A licence grep must be anchored to the top of the file.** `mmmover`'s licence file matched
+   `BSD 2-Clause` and would have been recorded as BSD — but the match came from a
+   **`THIRD-PARTY-NOTICES` block at the bottom** listing the licence of *bundled xxHash*, inside a file
+   whose first line is *"All rights reserved."* **Reading the first ~20 lines, not grepping the whole
+   file, is the only safe probe.** This is how a proprietary repo gets compiled into a KB as permissive.
+2. **A large licence file is not a modified licence.** `bandua`'s file is 2,841 B — ~2.7× a bare MIT — and
+   the API reported `NOASSERTION`. Read in full it is **verbatim MIT plus a non-binding liability notice
+   in English, French and Spanish**: *"Never format or reuse a source card before checking that every copy
+   is complete and readable."* The grant is clean MIT. Size and `NOASSERTION` are prompts to read, not
+   verdicts.
+
+### The structural reading: why this plane is empty
+
+This KB's standing law from earlier passes is that *the regulator creates the obligation and the licence of
+the knowledge content decides whether open source can fulfil it.* **This plane has neither obstacle** — the
+format is open, the XSD is published, and the algorithm is a copy plus a hash — and it is still the
+emptiest adoption layer measured in 59 passes. So the law needs a second clause, and this plane supplies
+the evidence for it:
+
+> **Where the failure is irreversible, open source loses on trust, not on capability.**
+
+Four measured facts, not assertions:
+
+- `bandua` appends a **trilingual liability disclaimer** to an MIT licence — the only repo in 59 passes to
+  do so. It is selling reassurance, not features.
+- `sluice`'s whole UX is an **authorisation to erase**, gated on two distinct physical drives.
+- The one agent on the plane, `offshoot-resolve-dit`, **wraps a commercial offloader** rather than any of
+  the six open ones.
+- Downstream of the irreversible step, where every mistake is undoable, the same ecosystem's open tooling
+  sits at **4,481★**.
+
+Nobody hands the only copy of a negative to a 0★ tool, so productions buy Silverstack / ShotPut Pro /
+OffShoot; because nobody adopts, nobody maintains; so the tools stay at 0★. The code is trivial and the
+liability is what is actually being priced. **The commercial incumbents on this plane — Pomfort
+Silverstack, Imagine Products ShotPut Pro, Hedge OffShoot, YoYotta, Colorfront Express Dailies, Frame.io
+C2C, Moxion — were not price-verified this pass and no figures are quoted for them.**

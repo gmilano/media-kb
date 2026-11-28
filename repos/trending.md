@@ -10,6 +10,69 @@ updated: 2026-11-28
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-28 — pass 57: the performance-capture substrate (**the infrastructure is permissive and alive; the two artefacts the infrastructure needs are a patent and a non-commercial dataset**)
+
+**Channel note:** `ls-remote` + `search/repositories` + `raw` worked. **`huggingface.co`,
+`*.is.tue.mpg.de` and both patent registers (`patents.google.com`, `worldwide.espacenet.com`) were refused
+`403`** under this session's egress policy — dataset cards, model-weight cards and **patent grant status are
+therefore unverified**, and every claim depending on them is marked `†`.
+
+**The shape of this plane, in one line:** the *solvers* are permissive and pushed this week; the *body
+model* is patent-pending; the *motion corpus* is non-commercial. Infrastructure is not the bottleneck here,
+which makes this plane the exact inverse of pass 56's creative-automation plane (where the money was real
+and the engine was missing).
+
+### Simulation, solver and format substrate — all permissive, measured 2026-11-28
+
+| Repo | Licence (**read today**) | ★ | Forks | Last push | Why it is foundational |
+|---|---|---|---|---|---|
+| [NVIDIA/warp](https://github.com/NVIDIA/warp) | ✅ **Apache-2.0** (LICENSE.md, 11,431 B) | 7,366 | 720 | **2026-11-28** | GPU kernel framework used for cloth, hair, soft-body and crowd work. Pushed **today**. The most credible permissive simulation substrate in the plane |
+| [snape/RVO2](https://github.com/snape/RVO2) | ✅ **Apache-2.0** (11,358 B) | 989 | 289 | **2026-11-28** | Optimal reciprocal collision avoidance — **the algorithm under most commercial crowd tools**. Pushed **today**, 16 years after publication |
+| [MengeCrowdSim/Menge](https://github.com/MengeCrowdSim/Menge) | ✅ **Apache-2.0** (LICENSE.txt, 10,852 B) | 156 | 66 | 2025-12-02 | Modular crowd-simulation framework. Small but permissive and the only full *framework* found; `crowd simulation` was a **0-hit term** in this KB before this pass |
+| [vrm-c/UniVRM](https://github.com/vrm-c/UniVRM) | ✅ **MIT** (LICENSE.txt, 1,134 B) | 3,433 | 493 | 2026-10-19 | Reference implementation of **VRM**, the glTF-based 3D avatar format. See the consent note below — this is the most strategically interesting repo in the pass |
+| [vrm-c/vrm-specification](https://github.com/vrm-c/vrm-specification) | ⚠️ **No licence file found** (9 filenames × `main`/`master`; SPDX `null`) | 349 | 48 | 2026-10-02 | The VRM spec itself. The implementation is MIT; **the specification repo carries no licence file** — cite the spec, vendor the implementation |
+| [perfanalytics/pose2sim](https://github.com/perfanalytics/pose2sim) | ✅ **BSD-3-Clause** (1,521 B) | 892 | 124 | 2026-11-27 | Multi-camera markerless capture to OpenSim. **Pushed yesterday** — the healthiest permissive capture pipeline measured, and consistent with `davidpagnon/Sports2D` (BSD-3) already in this KB from pass 19 |
+| [google-ai-edge/mediapipe](https://github.com/google-ai-edge/mediapipe) | ✅ **Apache-2.0** (12,331 B) | 37,899 | 6,253 | 2026-11-26 | The capture front-end. Largest permissive project in the plane by 4.7× |
+| [open-mmlab/mmpose](https://github.com/open-mmlab/mmpose) | ✅ **Apache-2.0** (11,400 B) | 8,086 | 1,547 | **2025-08-04** | 2D/3D pose estimation toolbox. Permissive and widely vendored, but **~16 months without a push** — vendor it, do not expect fixes |
+| [open-mmlab/mmhuman3d](https://github.com/open-mmlab/mmhuman3d) | ✅ **Apache-2.0** (11,404 B) | 1,436 | 155 | **2024-11-12** | Human-mesh toolbox, Apache-clean — but **2 years dormant**, and its whole purpose is to drive SMPL-family models |
+| [soubhiksanyal/FLAME_PyTorch](https://github.com/soubhiksanyal/FLAME_PyTorch) | ⚠️ **MIT code (1,071 B), gated model** | 820 | 101 | 2023-05-23 | Reference FLAME face-model layer. **The code is MIT; the FLAME model it loads is licensed separately** — the same split as SMPL, one level up the face |
+| [Zilize/awesome-text-to-motion](https://github.com/Zilize/awesome-text-to-motion) | ✅ **MIT** (1,071 B) | 108 | 4 | 2025-08-17 | The usable index of this plane's model literature — surveys, datasets, models with code links |
+
+### The gated artefacts — what the permissive substrate above is actually waiting on
+
+| Artefact | Repo / mirror | Licence (**read today**) | ★ | What it blocks |
+|---|---|---|---|---|
+| SMPL / SMPL-X model | [Meshcapade/SMPL_blender_addon](https://github.com/Meshcapade/SMPL_blender_addon) | ⛔ **GPL-3.0 add-on code (LICENSE.md 1,057 B) + Meshcapade sublicense for the model (`models_license.md`, 8,995 B)** | 289 | **The de-facto interchange format for human shape and pose.** Patent-pending per its own licence text; the paid sublicense still forbids commercial training |
+| AMASS | [nghorbani/amass](https://github.com/nghorbani/amass) | ⛔ **Non-commercial scientific research** (LICENSE.txt, 5,905 B) | 1,028 | **The motion corpus.** Nearly every text-to-motion model's training data traces here |
+| HumanML3D | [EricGuo5513/HumanML3D](https://github.com/EricGuo5513/HumanML3D) | ⚠️ **MIT code (1,066 B), data not redistributable** | 1,573 | The text-motion pairing everyone benchmarks on. **Users must rebuild it from AMASS**, inheriting AMASS's terms |
+| Motion-X | [IDEA-Research/Motion-X](https://github.com/IDEA-Research/Motion-X) | ⛔ **Non-commercial** (765 B) — bars "commercial, pornographic, military, or surveillance" use | 908 | The large expressive whole-body corpus. The clearest-written refusal of the three |
+
+### The one structural asymmetry worth carrying out of this pass
+
+**`snape/RVO2` and `NVIDIA/warp` were both pushed today, under Apache-2.0, and solve the hard maths.**
+**`nghorbani/amass` was pushed 2026-09-17 and is the thing nobody can use commercially.** The open-source
+community maintains the *physics* of human motion generously and the *recorded humanity* restrictively,
+because the second one contains people — identifiable performers whose capture sessions were consented for
+research. **That is not licence hostility; it is consent scope**, and it is the same substance the pass 50
+talent-and-consent plane and the Mexican statute in `intel/market.md` are reaching for from the other side.
+A client asking "why can't we just train on open mocap data?" is asking a **consent** question wearing a
+licence costume.
+
+### 🆕 VRM: the one place in this KB where consent is carried *inside the file format*
+
+`vrm-c/UniVRM` is MIT and implements **VRM**, a glTF-based avatar format from the **VRM Consortium
+(Japan)**, which the Library of Congress records as carrying a **"VRM Public License 1.0", a unique VRM
+licence accounting for permissions for the personality of the avatar**†, with per-model terms for
+modification and redistribution settable on the model data itself†. Khronos and the VRM Consortium
+announced standardisation collaboration on **2024-10-24**†.
+
+**Why this matters more than its 3,433 stars suggest:** every other consent mechanism in this KB is a
+document *beside* the asset — a release form, a C2PA assertion, a contract clause. **VRM puts the permission
+inside the avatar**, so it travels with the character into every engine that loads it. For the obligations
+now in force in Mexico, Korea, China and (pending) Denmark, that is the correct architecture, and it already
+exists and is permissively implemented. **It is the strongest reusable finding of pass 57** and it connects
+the pass 50 consent plane to an actual file format.
+
 ## 2026-11-28 — pass 56: the creative-automation substrate (**226,149★ of permissive infrastructure that never says the word "advertising"**)
 
 **The inversion worth recording.** The agent layer of this plane is near-empty and licence-poisoned (see

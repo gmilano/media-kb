@@ -3003,3 +3003,38 @@ proposal should say so rather than imply a Pimcore-shaped drop-in exists.
   CMS, and **its licence was not confirmed in this pass's results either** — flagged in earlier passes and
   still unverified. Nothing found connects an editorial system to brand-templated commercial creative.
   That join is **build work**, and `compose/patterns.md` Pattern 135 is where it is specified.
+
+## Pass 57 (2026-11-28) — character-animation platforms: **the deployable systems are all copyleft, and the permissive layer is a model, not a platform**
+
+> Measured 2026-11-28. Licences read from the file. `huggingface.co` and `*.is.tue.mpg.de` were refused
+> `403` under this session's egress policy; claims depending on them are marked `†`.
+
+**The platform shape of this plane is unusual and worth stating before the table.** In most planes in this
+KB the deployable platform is copyleft and the *libraries* are permissive. Here the same is true, but the
+copyleft platform is not a compromise — **Blender is the industry-standard host for rigging and animation
+in its own right**, not an open substitute for something better. The decision is therefore not "which
+platform", it is **where the client's own code lives relative to it**.
+
+| Platform | Repo | Licence (**read**) | ★ | Last push | What it is, and how to customise it |
+|---|---|---|---|---|---|
+| **Blender** | [blender/blender](https://github.com/blender/blender) | **GPL** (`COPYING`, 302 B pointer) | 22,634 | **2026-11-28** | The host for rigging, skinning, retargeting, animation editing and render. **Rigify** (procedural rig generation) ships in-tree. Customise via **Python add-ons and the command-line/headless path** — add-ons that import `bpy` are GPL-derived, so keep proprietary logic in a **separate process or service** and drive Blender as a tool. Pushed today |
+| **FreeMoCap** | [freemocap/freemocap](https://github.com/freemocap/freemocap) | **AGPL-3.0** (34,523 B) | 10,923 | 2026-11-14 | The most-adopted end-to-end markerless capture *system*: synchronised consumer cameras → 3D motion. **AGPL network copyleft** — if a client's users reach it over a network, the client's modifications become disclosable. Deploy unmodified as an internal capture station; do not build product features inside it |
+| **MakeHuman** | [makehumancommunity/makehuman](https://github.com/makehumancommunity/makehuman) | **AGPL code + separate asset terms** (3,598 B) | 1,669 | 2024-08-19 | Parametric human mesh and base-character generator with a Blender bridge. Dormant 2 years. **Its licence file separates code terms from bundled-asset terms explicitly** — the plane's licensing problem, documented honestly by the project itself |
+| **Pose2Sim** | [perfanalytics/pose2sim](https://github.com/perfanalytics/pose2sim) | **BSD-3-Clause** (1,521 B) | 892 | 2026-11-27 | The one **permissive deployable pipeline**: multi-camera markerless capture into OpenSim. Biomechanics-oriented rather than character-oriented, but it is the only system here a client can embed without copyleft or model gating. Pushed yesterday |
+| **UniVRM / VRM** | [vrm-c/UniVRM](https://github.com/vrm-c/UniVRM) | **MIT** (1,134 B) | 3,433 | 2026-10-19 | Not a platform but the **interchange layer** any avatar platform should adopt: a glTF-based avatar format whose per-model licence carries usage and personality permissions in the file† |
+| **MHR** | [facebookresearch/MHR](https://github.com/facebookresearch/MHR) | **Apache-2.0** (11,358 B) | 919 | 2026-11-26 | The permissive **model** the whole stack can be rebuilt on. Listed here because in this plane the strategic choice is a model, not a platform |
+
+### ⛔ What does not exist in this plane, stated explicitly
+
+- **There is no open-source character-animation *production management* platform** — no open equivalent of
+  ShotGrid/Flow, Ftrack or Kitsu-for-animation-specific rig and shot tracking at the performance layer.
+  (`CGWire/kitsu` is already recorded in this KB from the production-management pass and remains the closest
+  thing; it tracks shots and tasks, **not rigs, takes or capture sessions**.)
+- **There is no open mocap *session and consent* manager.** Given that Mexico now requires contractual terms
+  for AI use of a performer's image and voice, and Korea, China and the proposed Danish bill all require
+  labelling or consent, this is the clearest unbuilt product in the plane. See
+  `compose/patterns.md` Pattern 139.
+- **The commercial capture vendors have no open counterpart at all** for marker-based stage capture,
+  facial head-rigs or real-time on-set solving. Open source covers **markerless, camera-based** capture
+  only. Any engagement that assumes a volume stage is buying hardware and closed software, and the open
+  layer begins **after** the solve.

@@ -5504,3 +5504,94 @@ advertising keywords entirely** and searching for rendering and token infrastruc
 Article 50 claims in this pass are **secondary-sourced only**. `api.github.com` and `github.com` HTML are
 **blocked for out-of-scope repositories** in this session; all repository figures came from
 `gh api search/repositories`, `git ls-remote` and `raw.githubusercontent.com` instead.
+
+## Trends — pass 57 (2026-11-28): the character-animation & performance-capture plane
+
+> Measured 2026-11-28. `huggingface.co`, `*.is.tue.mpg.de`, `patents.google.com` and
+> `worldwide.espacenet.com` were all refused `403` by this session's egress policy. Claims resting on
+> unreachable primaries are marked `†`.
+
+### Trend 1 — **The chokepoint moved from licence to patent, and this KB's structural law needs a third tier**
+
+Fifty-six passes established a two-tier law: *the format is rarely the problem; the licence on the knowledge
+content decides what can ship.* This plane adds a tier beneath both. The SMPL model licence — read
+first-hand from its in-repo mirror (**8,995 B**) — asserts that the model embodies **patent-pending
+technology disclosed in `WO2016207311A1`**, owned by the Max-Planck-Gesellschaft and sublicensed
+commercially by Meshcapade GmbH. **A patent is not cured by a licence on the code**: MIT source implementing
+a patented technique conveys no patent grant to its users.
+
+The law now reads, in order of increasing severity:
+
+**format → content licence → patent.**
+
+And the diagnostic for the third tier is different from the first two. Licence problems are visible in a
+repository. **Patent problems are visible only in the prose of a model licence**, which is precisely where
+no scanner looks. *(Grant status unverifiable here — both patent registers are blocked — so this rests on
+the licensor's own assertion.)*
+
+### Trend 2 — **The first plane where paying does not fix it**
+
+Every previous gated artefact in this KB had a price. MedDRA had a published tariff. CPT had a fee schedule.
+SMPL has a commercial sublicense too — **and that sublicense expressly excludes using the Software to train
+neural networks for commercial use of the trained system, and excludes generating commercial ML training
+data.** The one use that matters for an AI engagement is carved out of the paid tier.
+
+**The generalisable lesson, and it is new:** when the priced tier excludes the use case, the correct move is
+**architectural substitution, not procurement**. In this plane that substitution exists and is two days old
+in its latest push — **`facebookresearch/MHR`, Apache-2.0, 919★**. Check whether the paid tier actually
+grants the needed right **before** quoting a licensing line-item to a client; this is the first recorded
+case where it does not.
+
+### Trend 3 — **Restrictive-for-consent, not restrictive-for-rent — and it changes the client conversation**
+
+AMASS (non-commercial, 5,905 B) and Motion-X (non-commercial, 765 B) are recordings of **identifiable
+people**, captured under research consent. Unlike every other gated artefact recorded in this KB, these
+**cannot be relicensed by their publisher alone** — the performers would have to agree. So the familiar
+advice ("ask the licensor for commercial terms") does not apply, and the restriction will not erode over
+time.
+
+This reframes the most common client question in the plane. **"Why can't we just train on open motion
+data?" is a consent question wearing a licence costume**, and it has the same answer as the pass 50 talent
+plane and the Mexican statute in `intel/market.md`: the performance belongs to the performer. Budget
+**capture**, not licensing.
+
+### Trend 4 — **A new licence class appeared in 2026: registration-gated**
+
+`zju3dv/EasyMocap` (**4,994★**) now carries a **"Project Registration License (PRL) v1.0", © 2026** (3,292 B,
+read today): commercial use is free of charge **but only after registering the project through a Google
+Form**, and the requirement applies to internal or external projects, revenue or no revenue, from
+development through production. It is neither permissive, nor copyleft, nor non-commercial — **it is a
+notification condition**, and **no SPDX identifier expresses it and no licence scanner will flag it**.
+
+Combined with `zju3dv/GVHMR`'s *All Rights Reserved* (768 B), **the same lab has now moved two projects in
+this plane away from recognised licences**, which is the identical direction pass 55 recorded in the
+compositing plane. **Watch for this as a 2026-27 pattern: research labs replacing OSI licences with bespoke
+conditions that are permissive in substance and unscannable in form.** Falsifiable, so test it in a later
+pass: if registration-gating appears in a third unrelated lab's project before 2027-06-30, it is a trend
+and not two labs.
+
+### Trend 5 — **Regulation of this plane arrived before the tooling did, and LATAM is ahead of everyone**
+
+The capture of a human performance is now directly regulated in four regions, and the **most specific
+statute in the world is Mexican**: the DOF reform of **2026-05-14** (in force **2026-05-15**) recognises the
+voice as part of the right to one's image, requires **express consent** for use of a performer's image and
+voice **including AI-generated results** (LFDA art. 87), and requires contracts to state the **conditions
+and remuneration** for AI use of image or voice (LFT art. 305 Bis)†. Korea, China, Denmark and several US
+states are all moving on the same substance from different directions (see `intel/market.md`).
+
+**The asymmetry to carry into any pitch:** the obligations are concrete, dated and in force, while the open
+tooling that would discharge them — a consent-and-session manager, a per-avatar permission record — **does
+not exist**. The one exception is **VRM**, which carries permissions inside the avatar file. In this plane
+the compliance layer is the product opportunity, and it is not crowded.
+
+### ⛔ What not to promise in this plane (pass 57)
+
+- **Do not promise a commercially-trainable motion model built on open data.** No permissive large-scale
+  motion corpus was found; the one candidate's licence is unverifiable from this session.
+- **Do not promise that a paid SMPL sublicense makes an AI pipeline compliant.** Its own text excludes
+  commercial training.
+- **Do not promise anything built on OpenFace.** Non-commercial, and derivatives are assigned to CMU.
+- **Do not quote a mocap market size without the unit check in `intel/market.md`** — one published 2026
+  figure is 1,000× the others.
+- **Do not describe MIT and Apache-2.0 as interchangeable here.** Only Apache-2.0 carries a patent grant,
+  and this is a patent-encumbered plane.

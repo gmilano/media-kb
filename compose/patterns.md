@@ -8815,3 +8815,127 @@ evidence pack anyway in the EU, California, New York, India and China; building 
 rather than as quarterly cleanup is the difference between a cost centre and a capability. **And it is
 licence-clean end to end** — Apache-2.0, MPL-2.0 and MIT only, with **no `ad-forge`, no `AdCraft`, and no
 hosted-API dependency** in the critical path.
+
+## Character-animation & performance-capture recipes — added 2026-11-28 (pass 57)
+
+> Every repo named below was verified on 2026-11-28: existence by `git ls-remote`, stars/dates from
+> `gh api search/repositories`, **licence read from the file**. Where a model's weights live on
+> `huggingface.co` the licence could **not** be checked (blocked by this session's egress policy) and the
+> step says so.
+
+## Pattern 137 — The licence-clean performance pipeline (**rebuild the stack on MHR, because the paid SMPL route excludes the AI use case**)
+
+**The problem this solves.** The obvious pipeline — `4D-Humans` → SMPL → retarget → Blender — is MIT at
+every code step and **commercially unusable**, because the SMPL model is patent-asserted
+(`WO2016207311A1`) and even Meshcapade's **paid** sublicense excludes training neural networks for
+commercial use and generating commercial ML training data. Clients discover this at legal review, after the
+prototype has shipped.
+
+**The wiring.**
+
+1. **Capture / front-end** → **`google-ai-edge/mediapipe`** (Apache-2.0, 37,899★, pushed 2026-11-26) for
+   2D/3D landmarks, or **`perfanalytics/pose2sim`** (BSD-3, 892★, pushed 2026-11-27) when you have a
+   multi-camera rig and want a calibrated solve.
+2. **Body model** → **`facebookresearch/MHR`** (Apache-2.0, 919★, pushed 2026-11-26). **Not** SMPL. MHR
+   gives skeleton, skinned mesh with LODs, pose correctives **and** a facial blendshape model, so it
+   replaces both SMPL and FLAME in one substitution.
+3. **Solver / IK** → **`facebookresearch/momentum`** (MIT, 441★, pushed 2026-11-28). Required by MHR's
+   glTF export path.
+4. **Direct parameter estimation, if you need it** → **`facebookresearch/sam-3d-body`** (3,778★) emits MHR
+   parameters directly. ⚠️ It is under the **SAM License (8,204 B)**, *not* Apache-2.0 — read it; it is
+   commercially permissive in substance but is a custom agreement.
+5. **Rigging** → **`VAST-AI-Research/UniRig`** (MIT, 2,416★) for skeleton + skinning-weight prediction on
+   arbitrary meshes. ⚠️ **Gate this step:** its checkpoint trained on `Articulation-XL2.0` on Hugging Face,
+   whose licence could not be verified here. Verify before shipping, or keep rigging manual in Blender.
+6. **Retargeting** → borrow the solver from **`YanjieZe/GMR`** (MIT, 2,848★); it targets humanoid robots,
+   so take the retargeting maths and supply your own character skeletons.
+7. **Host / finishing** → **Blender** (GPL, pushed 2026-11-28) driven **headless as a separate process**,
+   with client logic outside the `bpy` boundary.
+8. **Interchange / delivery** → **`vrm-c/UniVRM`** (MIT, 3,433★), so the avatar carries its own permissions.
+
+**Why this is the pattern and not an alternative.** It is the only route in the plane where **no step is
+gated by a non-commercial model, a non-commercial corpus, a registration form or a derivative-assignment
+clause** — with exactly one open question, at step 5, which is isolated and has a manual fallback.
+
+## Pattern 138 — The 20-minute licence-and-patent gate for any character-animation proposal
+
+Run this **before** scoping. Pass 55 and 56 each shipped a licence gate; this one adds a patent question,
+because in this plane the code licence is the least informative signal.
+
+1. **Name the body model, not the repo.** Ask "which parametric human model does this emit?" If the answer
+   is **SMPL, SMPL-X or FLAME (pre-2023)**, the pipeline is gated no matter how many MIT badges it carries.
+   If it is **MHR**, proceed.
+2. **Name the training corpus.** If the model was trained on **AMASS**, **HumanML3D** (which rebuilds from
+   AMASS) or **Motion-X**, commercial use of the trained system is barred by the data licence. This
+   disqualifies `MDM`, `MoMask` and `MotionGPT` as *shipped models* — they remain fine as **architectures to
+   retrain** on licensed data.
+3. **Ask whether the paid tier grants the right you need.** New question, from this pass: a commercial
+   sublicense is **not** automatically a training licence. Read the carve-outs.
+4. **Check for a patent assertion in the model licence prose.** No scanner does this. Grep the licence for
+   `patent`.
+5. **Prefer Apache-2.0 over MIT at the model layer.** Apache-2.0 §3 is an express patent grant; MIT has
+   none. In a patent-asserted plane this is a substantive difference, not a preference.
+6. **Probe the licence filename properly.** Nine common names on two branches **missed OpenFace's licence**,
+   which lives in `Copyright.txt` and `OpenFace-license.txt`. Add both. A README that resolves while every
+   licence name 404s means your name list is wrong, not that the repo is unlicensed.
+7. **Read the derivatives clause, not just the permission grant.** OpenFace's assigns your derivatives to
+   CMU and requires delivering them within 30 days.
+8. **Search for a registration condition.** Grep the licence for `register`. `EasyMocap`'s PRL v1.0 permits
+   commercial sale and still requires a **Google Form submission before use begins**.
+
+**Deliverable:** a one-page gate result per candidate — model / corpus / paid-tier scope / patent / licence
+filename / derivatives / registration. Eight lines, and it is the difference between a shippable pipeline
+and a legal-review failure.
+
+## Pattern 139 — The performer consent-and-remuneration record (**the artefact four jurisdictions now require and nothing open produces**)
+
+**The opportunity.** Mexico (LFDA art. 87 + LFT art. 305 Bis, in force **2026-05-15**), Korea (AI Basic Act,
+since **2026-01-22**), China (labelling since **2025-09-01**, human-like services from **2026-07-15**) and
+the proposed Danish bill L 49 all require some combination of **express consent**, **contractual
+remuneration terms**, and **output labelling** for a synthesised human performance. **No open-source tool
+produces this record.** `verticals/solutions.md` records the absence; this pattern is the build.
+
+**The wiring — all components already in this KB.**
+
+1. **Permission container** → **`vrm-c/UniVRM`** (MIT). VRM's per-avatar licence fields carry usage and
+   personality permissions **inside the asset**, so they travel into every engine that loads it. This is
+   the spine; everything else attaches to it.
+2. **Session provenance** → **C2PA** tooling already recorded in this KB from pass 5 (`c2pa-rs`), asserting
+   who captured the performance, when, and under which consent reference.
+3. **Consent and contract metadata** → the declaration substrate from **pass 50** (the talent, casting and
+   performer-consent plane), extended with the **two Mexican fields that no existing schema has**:
+   *conditions of AI use* and *remuneration for AI use*.
+4. **Label emission, per destination** → reuse **Pattern 134**'s per-destination disclosure manifest
+   (pass 56). Korea accepts **either** a human-recognisable label **or** a machine-readable marker; China
+   requires **metadata plus a visible label** for person-simulating services. Same record, different
+   renderers.
+5. **The gap to close in the build** → **pre-existing contracts**. Mexico's art. 305 Bis has **no
+   transitional rules**†, so a Mexican client's talent agreements signed before 2026-05-15 are
+   unaddressed. The record must represent "consent status unknown — pre-reform contract" as a **first-class
+   state**, not an empty field.
+
+**Why it sells.** The obligations are dated and in force; the tooling does not exist; and the deliverable is
+an **evidence pack**, which is a scope a client can approve without betting on a model.
+
+## Pattern 140 — The "we want to train a motion model" conversation (**redirect it, in four moves**)
+
+This request arrives in nearly every animation engagement, and the honest answer is not no.
+
+1. **Name the blocker correctly.** It is **consent**, not licensing. AMASS and Motion-X are recordings of
+   identifiable people captured under research consent; **their publishers cannot relicense them alone**, so
+   asking for commercial terms will not work — unlike MedDRA or CPT, where it would.
+2. **Keep the architecture, replace the data.** **`GuyTevet/motion-diffusion-model`** (MIT, 4,159★),
+   **`EricGuo5513/momask-codes`** (MIT) and **`OpenMotionLab/MotionGPT`** (MIT) are permissively licensed
+   *code*. Retrain them on licensed capture; do not ship their released weights.
+3. **Budget capture, not licensing.** A **`perfanalytics/pose2sim`** (BSD-3) multi-camera rig, or
+   **`freemocap/freemocap`** (AGPL-3.0, run unmodified as an internal station, never embedded) produces
+   data the client owns outright — with consent scoped, from the outset, to **commercial AI training**.
+   That consent scope is the whole deliverable; get it right at the capture session, because it cannot be
+   retrofitted.
+4. **Close with the asset argument.** A client who captures its own talent under commercial-training
+   consent ends up owning **the one thing this entire plane is short of**: a corpus that can legally train a
+   commercial model. `repos/foundations.md` records that no such permissive corpus exists publicly.
+   **That reframes a cost line as a durable asset**, which is usually what unlocks the budget.
+
+**⛔ Do not** offer to "fine-tune on open motion data and sort the licence out later". The data licence
+attaches to the trained system, so the defect is in the weights, and the only remedy is retraining.

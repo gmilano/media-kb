@@ -6038,3 +6038,88 @@ This pass measured both, and they differ in a way that would mislead:
 
 **The general rule for this KB:** `pushed_at` is an **upper bound** on liveness, never a measurement of it.
 Where the distinction changes a recommendation, clone bare at depth 1 and read the default branch.
+
+## Pass 57 (2026-11-28) — foundations of the character-animation & performance-capture plane: **the one plane whose chokepoint is a patent, and whose restrictive artefacts are restrictive for a defensible reason**
+
+> All figures measured 2026-11-28. Existence by `git ls-remote`; stars/forks/dates exact from
+> `gh api search/repositories`; **every licence read from the file**. Refused `403` by this session's egress
+> policy and therefore unverifiable here: `huggingface.co` (weights and dataset cards),
+> `*.is.tue.mpg.de` (the SMPL/FLAME/AMASS licence pages — read from in-repo mirrors instead), and both
+> `patents.google.com` and `worldwide.espacenet.com` (**patent grant status**). Claims resting on those are
+> marked `†`.
+
+### The foundational layer — permissive and alive
+
+| Repo | Licence (**read**) | ★ | Forks | Last push | Role in the plane |
+|---|---|---|---|---|---|
+| [google-ai-edge/mediapipe](https://github.com/google-ai-edge/mediapipe) | **Apache-2.0** (12,331 B) | 37,899 | 6,253 | 2026-11-26 | Pose/hand/face landmark front-end. The plane's one large, permissive, maintained dependency |
+| [blender/blender](https://github.com/blender/blender) | **GPL** (`COPYING`, 302 B pointer file) | 22,634 | 3,702 | **2026-11-28** | The host application for rigging, skinning, retargeting and animation editing — **Rigify** ships inside it. Copyleft: deploy and script it, do not link client code into it |
+| [NVIDIA/warp](https://github.com/NVIDIA/warp) | **Apache-2.0** (11,431 B) | 7,366 | 720 | **2026-11-28** | Differentiable GPU kernels for cloth, hair, soft-body and crowd solvers |
+| [open-mmlab/mmpose](https://github.com/open-mmlab/mmpose) | **Apache-2.0** (11,400 B) | 8,086 | 1,547 | 2025-08-04 | 2D/3D pose estimation toolbox. Permissive, vendorable, **~16 months stale** |
+| [open-mmlab/mmhuman3d](https://github.com/open-mmlab/mmhuman3d) | **Apache-2.0** (11,404 B) | 1,436 | 155 | 2024-11-12 | Human-mesh toolbox. Apache-clean, **2 years dormant**, and built to drive SMPL-family models |
+| [perfanalytics/pose2sim](https://github.com/perfanalytics/pose2sim) | **BSD-3-Clause** (1,521 B) | 892 | 124 | 2026-11-27 | Multi-camera markerless capture → OpenSim. Pushed yesterday |
+| [snape/RVO2](https://github.com/snape/RVO2) | **Apache-2.0** (11,358 B) | 989 | 289 | **2026-11-28** | Reciprocal collision avoidance — the algorithm under most commercial crowd tools |
+| [MengeCrowdSim/Menge](https://github.com/MengeCrowdSim/Menge) | **Apache-2.0** (10,852 B) | 156 | 66 | 2025-12-02 | The only full permissive crowd-simulation *framework* found |
+| [vrm-c/UniVRM](https://github.com/vrm-c/UniVRM) | **MIT** (1,134 B) | 3,433 | 493 | 2026-10-19 | VRM avatar format implementation — consent-carrying interchange (see below) |
+| [freemocap/freemocap](https://github.com/freemocap/freemocap) | **AGPL-3.0** (34,523 B) | 10,923 | 1,056 | 2026-11-14 | The most-adopted markerless capture *system*. **AGPL network copyleft** — run it as a tool, never embed it |
+| [makehumancommunity/makehuman](https://github.com/makehumancommunity/makehuman) | **AGPL source + separately licensed bundled assets** (LICENSE.md, 3,598 B) | 1,669 | 339 | 2024-08-19 | Parametric human mesh generator. Its licence file **explicitly splits code terms from asset terms** — the same split as SMPL, stated honestly and up front |
+
+### The gated artefacts, and the honest reason they are gated
+
+| Artefact | Where its licence was read | Terms | ★ |
+|---|---|---|---|
+| **SMPL / SMPL-X** | `Meshcapade/SMPL_blender_addon/models_license.md` (**8,995 B**) | Meshcapade commercial/trial sublicense of MPG-owned, **patent-pending** technology (`WO2016207311A1`). **Even the paid tier forbids commercial training and commercial training-data generation.** The **SMPL-Body** subset — which excludes the shape blendshapes — is **CC-BY-4.0** | 289 (addon) |
+| **AMASS** | `nghorbani/amass/LICENSE.txt` (**5,905 B**) | "for non-commercial scientific research purposes"; commercial licensing by separate request | 1,028 |
+| **Motion-X** | `IDEA-Research/Motion-X/LICENSE` (**765 B**) | Non-commercial research only; bars "commercial, pornographic, military, or surveillance" use | 908 |
+| **HumanML3D** | `EricGuo5513/HumanML3D/LICENSE` (**1,066 B**) | **MIT code, non-redistributable data**: users must rebuild the corpus from AMASS and inherit AMASS's terms | 1,573 |
+| **FLAME** | via `soubhiksanyal/FLAME_PyTorch` (MIT code, 1,071 B) | Model licensed separately from the loader; **FLAME 2023 Open reported as CC-BY-4.0 while earlier versions are non-commercial**† | 820 |
+
+**This is the first restrictive layer in 57 passes that this KB should not characterise as an obstacle.**
+Every other gated artefact recorded here — MedDRA, CPT, MusicBrainz's carve-outs, the compositing plane's
+relicensing — is gated to protect a *revenue* or a *vocabulary*. AMASS and Motion-X are gated because they
+are **recordings of identifiable people**, captured under research consent. A corpus of human performances
+cannot be relicensed for commercial AI training by its publisher alone; **the performers would have to
+agree**. So the restriction is not rent-seeking, and **it will not be lifted by asking**. The only routes
+are a permissively-licensed model (**MHR**) plus **either** licensed capture of your own talent **or** a
+corpus whose consent explicitly covers commercial training.
+
+### ⛔ The gap, stated so it is not mistaken for coverage
+
+**There is no permissive, commercially-clean, large-scale human-motion corpus in this plane.** This was
+searched for directly. The nearest candidate, **OpenT2M** (arXiv `2603.18623`, March 2026, claiming 2,800+
+hours and a pretrained model), **states no licence in any source reachable from this session**, and its
+likely host — `huggingface.co` — is blocked here. **Recorded as unverified, not as a finding.** Any
+engagement that depends on commercially-trainable motion data must budget for **capture**, not licensing.
+
+### VRM — the consent-carrying format, and why it belongs in `foundations` rather than `verticals`
+
+**VRM** is a glTF-based 3D avatar format from the **VRM Consortium (Japan)**; `vrm-c/UniVRM` is its MIT
+reference implementation at **3,433★**. The Library of Congress format registry records VRM as carrying a
+**"VRM Public License 1.0" accounting for permissions for the personality of the avatar**, with
+modification and redistribution terms settable per model file†; Khronos and the VRM Consortium announced a
+standardisation collaboration on **2024-10-24**†, and VRM 1.0 was published in September 2022†.
+
+Every other consent mechanism this KB has recorded sits *beside* the asset: a release form (pass 50), a
+C2PA assertion (pass 5), a contract clause (Mexico's LFT art. 305 Bis, below). **VRM is the only one that
+rides inside the asset**, which is what makes it foundational: an avatar that carries its own permissions
+satisfies the Korean, Chinese, Mexican and proposed Danish obligations *by construction* rather than by
+paperwork. **Note the asymmetry worth checking before relying on it:** the implementation repo is MIT, but
+`vrm-c/vrm-specification` (349★) returned **no licence file across nine filenames on both branches, with
+SPDX `null`** — so cite the specification, and vendor the implementation.
+
+### Method corrections from this pass — reusable across all twelve industries
+
+1. **The licence probe produced a false negative, and the pattern is now clear enough to name.**
+   `TadasBaltrusaitis/OpenFace` appeared to have **no licence file** across nine filenames × two branches.
+   It has two: **`Copyright.txt`** and **`OpenFace-license.txt`**, on `master` only. Pass 8 added
+   `license.txt` and `COPYING.md` to the probe list for the same reason. **Add both of these.** The
+   generalisation, now third-confirmed: *a repository that names its licence file after itself or after the
+   word "copyright" will read as unlicensed to any fixed filename list.* When a repo's README resolves and
+   every licence name 404s, the name list is wrong — not the repo.
+2. **Word boundaries, again.** `mocap` returned 11 apparent hits in this KB and **every one was a substring
+   of "stop *mo*tion *cap*ture"**. Pass 11 of healthcare logged the identical failure class. A plane can
+   read as partially covered and be completely empty. **Grep with boundaries before concluding coverage.**
+3. **`ls-remote` and `search/repositories` are independent channels.** `caizhongang/SMPLer-X` resolves via
+   `ls-remote` and returns **HTTP 422** from search. **A 422 is not evidence that a repo does not exist** —
+   it means search cannot see it. Report existence from `ls-remote`, adoption from search, and never infer
+   one from the other's failure.

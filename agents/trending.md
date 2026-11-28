@@ -9,6 +9,111 @@ updated: 2026-11-28
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-28 — pass 57: the character-animation & performance-capture plane (**the first plane in this KB whose chokepoint is a PATENT, not a licence — and the first where even the paid commercial route forbids the AI use case**)
+
+**Channel note:** `git ls-remote`, `gh api search/repositories` and `raw.githubusercontent.com` worked.
+**`huggingface.co`, `*.is.tue.mpg.de` (the SMPL/FLAME/AMASS licence pages), `patents.google.com` and
+`worldwide.espacenet.com` were all refused `403` by this session's egress policy** — so model-weight cards,
+dataset cards and **patent grant status could not be checked at source**. Where that mattered, the licence
+text was read from a **mirror inside a repo** instead, and the figure is marked accordingly.
+
+**Why this plane was chosen:** `character animation`, `SMPL`, `retarget`, `skinning`, `blendshape`,
+`facial capture` and `crowd simulation` each returned **0 hits** across all eight KB files. `mocap` appeared
+to return 11 — **every one of them a substring of "stop *mo*tion *cap*ture"**. The plane read as partially
+covered and was in fact empty.
+
+**The headline, and it is a new class of finding for this KB.** Every previous pass concluded that *the
+licence on the knowledge content, not the code, decides what Globant can ship*. This plane goes one level
+deeper. The SMPL model licence — **read first-hand from its mirror at
+`Meshcapade/SMPL_blender_addon/models_license.md`, 8,995 B** — states that the model is owned by the
+Max-Planck-Gesellschaft, was developed at MPI, and that **MPG owns patent-pending technology disclosed in
+patent application `WO2016207311A1` (2016-12-29), "Skinned Multi-Person Linear Model"**. A patent binds
+regardless of what licence sits on the code. **MIT source that implements a patented model conveys no
+patent grant.** And the second clause is sharper still: the *commercial* sublicense, the one you pay
+Meshcapade GmbH for, **expressly excludes**:
+
+> - Use the Software to train methods/algorithms/neural networks/etc. for commercial use of the trained system.
+> - Use the Software to generate training data for machine learning methods for commercial use of the method.
+
+**So the paid route does not unlock the AI use case.** This is the first plane in 57 passes where money does
+not fix the licence, because what is being withheld is not a copyright permission.
+
+**Direct consequence for how to read this plane's star counts:** the permissive, high-star projects are
+*clients* of a gated model. `shubham-goel/4D-Humans` is **MIT, 1,744★** and needs SMPL. `GuyTevet/motion-diffusion-model`
+is **MIT, 4,159★** and trains on HumanML3D, whose **code is MIT but whose data must be rebuilt from AMASS**,
+and AMASS's own licence file (**read, 5,905 B**) is "for non-commercial scientific research purposes".
+**The MIT badge on these repos is accurate and almost irrelevant.**
+
+### The agent/model layer — measured today, 2026-11-28
+
+| Agent / model | Repo | Licence (**read today**) | ★ | Forks | Last push | Note |
+|---|---|---|---|---|---|---|
+| MHR (Momentum Human Rig) | [facebookresearch/MHR](https://github.com/facebookresearch/MHR) | ✅ **Apache-2.0** (11,358 B) | 919 | 85 | 2026-11-26 | **The escape route.** Meta's parametric full-body model — body skeleton, skinned mesh with LODs, pose correctives **and a facial blendshape model**. Apache-2.0 matters here specifically because **§3 is an express patent grant and MIT has none** |
+| Momentum | [facebookresearch/momentum](https://github.com/facebookresearch/momentum) | ✅ **MIT** (1,088 B) | 441 | 74 | **2026-11-28** | The solver/IK library under MHR. Pushed **today**. MHR's SMPL-conversion and glTF export need it |
+| MediaPipe | [google-ai-edge/mediapipe](https://github.com/google-ai-edge/mediapipe) | ✅ **Apache-2.0** (12,331 B) | 37,899 | 6,253 | 2026-11-26 | Pose, hand and face landmarkers. The only large, permissive, **actively maintained** capture front-end in the plane |
+| UniRig | [VAST-AI-Research/UniRig](https://github.com/VAST-AI-Research/UniRig) | ✅ **MIT** (1,124 B) | 2,416 | 231 | 2026-06-04 | **Auto-rigging**: predicts skeleton *and* per-vertex skinning weights for arbitrary meshes. The one genuinely permissive answer to the rigging step. ⚠️ Its checkpoint trained on `Articulation-XL2.0`, hosted on **Hugging Face, which is blocked here — weights licence UNVERIFIED** |
+| MDM (Motion Diffusion Model) | [GuyTevet/motion-diffusion-model](https://github.com/GuyTevet/motion-diffusion-model) | ⚠️ **MIT** (1,066 B) **over gated data** | 4,159 | 465 | 2025-10-01 | Text-to-motion reference implementation. Code clean; **training data is AMASS-derived** |
+| MoMask | [EricGuo5513/momask-codes](https://github.com/EricGuo5513/momask-codes) | ⚠️ **MIT** (1,066 B) **over gated data** | 1,356 | 118 | 2024-09-13 | Masked-transformer text-to-motion, still the quality baseline new 2026 papers compare against. **2+ years without a push** |
+| MotionGPT | [OpenMotionLab/MotionGPT](https://github.com/OpenMotionLab/MotionGPT) | ⚠️ **MIT** (1,070 B) **over gated data** | 2,006 | 151 | 2025-07-01 | Treats motion as a language; same dataset inheritance |
+| 4D-Humans (HMR 2.0) | [shubham-goel/4D-Humans](https://github.com/shubham-goel/4D-Humans) | ⚠️ **MIT** (1,081 B) **needs SMPL** | 1,744 | 183 | 2026-02-07 | The most-cited monocular human-mesh recovery stack. Outputs **SMPL** parameters, so the output format is the gated artefact |
+| GMR (General Motion Retargeting) | [YanjieZe/GMR](https://github.com/YanjieZe/GMR) | ✅ **MIT** (1,055 B) | 2,848 | 491 | 2026-10-22 | Real-time retargeting on CPU. **Targets humanoid robots, not character rigs** — borrow the solver, not the skeletons |
+| prompt2rig | [blendi-remade/prompt2rig](https://github.com/blendi-remade/prompt2rig) | ⚠️ **Apache-2.0 shell (11,358 B) over a non-commercial engine** | 626 | 91 | 2026-11-09 | Text → rigged character performance. Its own README warns the Apache grant **"doesn't cover what you make with it"**: it depends on **GVHMR**, whose licence (768 B) is *All Rights Reserved* |
+| SAM 3D Body | [facebookresearch/sam-3d-body](https://github.com/facebookresearch/sam-3d-body) | ⚠️ **SAM License** (8,204 B), not Apache | 3,778 | 448 | 2026-02-19 | Estimates **MHR** parameters directly — the practical capture path onto the permissive model. Custom Meta terms: **read before client work** |
+| Anny | [naver/anny](https://github.com/naver/anny) | ⚠️ **Mixed, scope-ambiguous** (10,875 B) | 664 | 52 | 2026-11-04 | NAVER's body model, cited as the other SMPL alternative. Licence opens **"All Rights Reserved"** and then grants **Apache-2.0 to "the files within this subdirectory"**. GitHub reports `NOASSERTION`. **Confirm the grant covers the weights before use** |
+| Multi-HMR | [naver/multi-hmr](https://github.com/naver/multi-hmr) | ⛔ **NAVER Non-Commercial** (3,785 B) | 432 | 36 | 2026-03-03 | Whole-body multi-person recovery. "You may not use the Materials or derivatives thereof for any commercial purpose" |
+| SMPLer-X | [caizhongang/SMPLer-X](https://github.com/caizhongang/SMPLer-X) | ⛔ **S-Lab License 1.0** (1,677 B) | **search 422** | — | — | Foundation-scale whole-body estimation; "non-commercial purpose" only. **`ls-remote` resolves but `search/repositories` returns 422** — existence and searchability are separate channels |
+| GVHMR | [zju3dv/GVHMR](https://github.com/zju3dv/GVHMR) | ⛔ **All Rights Reserved** (768 B) | 2,328 | 265 | 2026-09-15 | World-grounded recovery, widely wrapped by "open" demos. **No grant of any kind** |
+| OpenFace 2.0 | [TadasBaltrusaitis/OpenFace](https://github.com/TadasBaltrusaitis/OpenFace) | ⛔ **CMU academic/non-profit NONCOMMERCIAL ONLY** | 7,809 | 1,909 | 2024-06-01 | See the derivative clause below — **the single most hostile term found in 57 passes** |
+
+### ⛔ The OpenFace derivative clause — read it before anyone prototypes with it
+
+7,809 stars, the default answer to "open source facial behaviour analysis", and its terms are headed
+**"ACADEMIC OR NON-PROFIT ORGANIZATION NONCOMMERCIAL RESEARCH USE ONLY"**. The clause that matters is not
+the non-commercial bar — it is **DERIVATIVES**:
+
+> You may create derivatives of or make modifications to the Software, however, You agree that all and any
+> such derivatives and modifications **will be owned by Licensor** and become a part of the Software
+> licensed to You under this Agreement. … You must provide to Licensor one copy of all such derivatives and
+> modifications … **within thirty (30) days** of the publication date of any publication that relates to any
+> such derivatives or modifications.
+
+**Work done on top of it is assigned to Carnegie Mellon University, and must be delivered to them.** No
+listicle surfaces this. Treat OpenFace as unusable in any client context, including internal prototyping.
+
+### 🆕 A licence mechanism this KB has not recorded before: registration-gated
+
+`zju3dv/EasyMocap` (**4,994★**, 575 forks, pushed 2026-09-15) now ships a **"Project Registration License
+(PRL) v1.0", © 2026 ZJU3DV** (3,292 B, read today). It grants use, modification, distribution **and sale**
+free of charge — and then requires that any use by a company or organisation as part of *any* project be
+**registered before such use begins**, via **a Google Form**. Its own text says the requirement applies
+
+> regardless of whether the project: is commercial or non-commercial; is internal or external; is in
+> research, development, testing, deployment, or production; generates revenue; or is made available to
+> third parties.
+
+This is neither permissive nor copyleft nor non-commercial. **It is a notification condition**, and it puts
+**a Google Form in the compliance path of a client deliverable** — a dependency that no SPDX identifier
+expresses and no licence scanner will flag. Record it as its own category: a third ZJU3DV project in this
+plane (`EasyMocap`, `GVHMR`) has now moved **away** from a recognised licence, which is the same
+relicensing-toward-restriction direction pass 55 recorded in compositing.
+
+### What the clean, shippable subset actually is
+
+Three projects in this plane are permissive, actively maintained **and** free of a gated model or dataset:
+**`facebookresearch/MHR`** (Apache-2.0, pushed 2 days ago), **`facebookresearch/momentum`** (MIT, pushed
+today) and **`google-ai-edge/mediapipe`** (Apache-2.0, pushed 2 days ago), with
+**`VAST-AI-Research/UniRig`** (MIT) for rigging subject to its unverified weights. **That is the honest
+buildable set — four projects, one of them with an open question.** Everything else in the agent layer is
+either gated at the model, gated at the dataset, registration-gated, or assigns your derivatives away.
+
+### One listicle-versus-reality measurement, consistent with every prior pass
+
+A 2026 search for permissive video-to-rigged-character retargeting returned
+**`s0ck3t/VideoIntoBlenderModel`** as its "strongest candidate", describing it as Apache-2.0 and
+commercially safe. Both licence claims check out (**Apache-2.0, 11,357 B, pushed 2026-11-03**). Its star
+count is **7**. The recommendation was not wrong; it was **unweighted**. Measure adoption separately from
+licence, always.
+
 ## 2026-11-28 — pass 56: the ad-creative production & creative-automation plane (**the plane where `dynamic creative optimization` returns 54 repos and the most-starred is a 4★ portfolio website**)
 
 **Channel note:** `git ls-remote`, `gh api search/repositories` and `raw.githubusercontent.com` worked.

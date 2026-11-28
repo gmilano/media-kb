@@ -11417,3 +11417,188 @@ DOWN and NO FAKES statuses; Canada's "AI for All" commitments; Google's per-juri
 the April 2026 C2PA platform-support split; India's SGI dates and the **ASCI guideline, which its own source
 could not confirm officially**; Korea's TDM decision; China's labelling regime; Australia's Office of AI and
 ACMA papers; Malaysia's bill; Peru's and Colombia's instruments; and ADEPA's, FLIP's and IFPIM's activities.
+
+## Market size — pass 57 addendum (2026-11-28): the character-animation & performance-capture plane, where **one published 2026 figure is 1,000× another for the same market** and the headline avatar figures disagree by **75×**
+
+### The headline figures — and why none of them can be quoted alone
+
+| Market as named | 2026 figure | Forecast | CAGR | Source type |
+|---|---|---|---|---|
+| Digital avatar | **US$42.6 bn** | US$283.5 bn by 2033 | 31.1% | Persistence Market Research† |
+| Digital avatar | **US$46.3 bn** | US$721.8 bn by 2033 | 48.2% | Grand View Research† |
+| Digital human avatar | **US$615 m** | US$8.06 bn by 2035 | — | Market Research Intellect† |
+| 3D motion capture | **US$318.8 m** | US$759.4 m by 2033 | 13.2% | Grand View Research† |
+| 3D motion capture | **US$547.0 m** | US$1,776.2 m by 2036 | 12.5% | Future Market Insights† |
+| 3D motion capture | **US$0.51 bn** | — | — | Business Research Insights† |
+| 3D motion capture | **US$509.74 bn** | — | — | Global Growth Insights† — **see the unit warning** |
+| Markerless motion capture | **US$102.88 m** | US$370.93 m by 2034 | 17.39% | Fortune Business Insights† |
+
+**Two defects in this table are more useful than any figure in it.**
+
+**1. The 1,000× units error, and it is traceable.** Business Research Insights gives 3D motion capture as
+**US$0.51 bn** for 2026. Global Growth Insights gives **US$509.74 bn** for the same year and market. Those
+are **the same digits with the unit moved three places** — $0.51 bn ≈ $509.74 m. One of these two is a
+million/billion transposition, and the larger number would make motion capture bigger than the entire
+global film and TV industry, which settles which. **If a deck quotes a mocap market in the hundreds of
+billions, it has copied this error.** Flagged because it is exactly the kind of figure that propagates
+unchallenged into a pitch.
+
+**2. The 75× spread in "digital avatar" is a scope disagreement, not a measurement error.** $615 m and
+$46.3 bn describe the same words, so the words are doing no work. The larger figures evidently include
+enterprise avatar/assistant deployments; the smaller one appears to count only avatar production tooling.
+**Never carry a digital-human figure without the scope sentence attached.**
+
+### ⛔ The refusal — and in this plane the missing number is one a buyer would genuinely want
+
+**No source reached from this session sizes the animation and performance-capture *services* market**, which
+is the line Globant would actually sell into, and none sizes the compliance tooling that the statutes below
+now require. **This is a paid primary-research question, not a KB lookup.**
+
+### What can be stood behind instead — count the licences, the clauses and the dates
+
+These are verified, not quoted:
+
+- **The permissive buildable set in this plane is four projects**: `facebookresearch/MHR` (Apache-2.0,
+  919★, pushed 2026-11-26), `facebookresearch/momentum` (MIT, 441★, pushed 2026-11-28),
+  `google-ai-edge/mediapipe` (Apache-2.0, 37,899★, pushed 2026-11-26) and `VAST-AI-Research/UniRig` (MIT,
+  2,416★) — the last with an unverified weights licence.
+- **The gating artefact is patent-asserted**: `WO2016207311A1`, per the SMPL licence text (8,995 B, read).
+- **The paid tier excludes commercial training** — two explicit carve-outs in that same text.
+- **Four jurisdictions have dated, in-force or tabled obligations** on capturing and synthesising a human
+  performance (below). **Dates and statutes are countable; the market is not.**
+
+## Opportunities by region — pass 57 (2026-11-28): the character-animation & performance-capture plane
+
+### Pass 57 (2026-11-28) — the character-animation & performance plane in North America
+
+- **The permissive escape route for this entire plane is North American.** Meta's **MHR** (Apache-2.0),
+  **momentum** (MIT) and **SAM 3D Body** (SAM License) are the only credible alternative to the
+  patent-asserted, European-owned SMPL family. A US engagement can therefore be offered a **clean-model
+  pipeline** that an EMEA-sourced stack cannot match on licence terms — an unusual inversion worth leading
+  with.
+- **The federal picture is the NO FAKES Act of 2026.** `S.4591` was advanced by the Senate Judiciary
+  Committee **unanimously on 2026-06-22**, with House companion `H.R.8915` introduced **2026-05-20**†. It
+  would create a **federal right to authorise use of a person's voice or visual likeness in digital
+  replicas**, and would preempt certain inconsistent state laws **while preserving causes of action under
+  state statutes or common law existing as of 2025-01-02**†. **Not yet law** — do not build a compliance
+  story that assumes enactment.
+- **State law is already binding, and it is the operative layer.** California **AB 1836** (deceased
+  performers' digital replicas) and **AB 2602** (contractual consent for digital replicas) were signed
+  **2024-09-17** and in force **2025-01-01**†. A **New York law regulating AI-generated synthetic
+  performers in commercial advertising took effect 2026-06-09**†. New Jersey's **A 5088, the AI Likeness
+  Protection Act**, was introduced **2026-05-14**†.
+- **Where the work is.** Consent capture and provenance at the point of performance capture: a documented
+  chain from the capture session to the shipped rig. The statutes above are all **consent-and-record**
+  obligations, and nothing open implements them.
+- **Regional sizing caveat:** NA is reported as the largest regional market with ~**41%** share of digital
+  avatars†, and no source reached here sizes the NA capture-services layer separately.
+
+### Pass 57 (2026-11-28) — the character-animation & performance plane in EMEA
+
+- **EMEA's role in this plane is structurally different from every other plane in this KB: it supplies the
+  constraint, not the code.** The SMPL and FLAME model families are owned by the
+  **Max-Planck-Gesellschaft** and were developed at the **Max Planck Institute for Intelligent Systems in
+  Tübingen, Germany**; the commercial sublicensor is **Meshcapade GmbH**, also German; and the asserted
+  patent is a **WIPO** application. **The chokepoint licensor of a global plane is European** — read
+  first-hand from the licence text (8,995 B), not quoted.
+- **Denmark is the jurisdiction to watch, and its mechanism is novel.** Culture Minister **Zenia Stampe**
+  introduced **bill L 49** in the Folketing on **2026-10-08**†, amending copyright law to give people
+  control over their face, voice and identifying traits. Its structure matters: **making a deepfake is not
+  unlawful — publishing one is**, **no intent is required**, a breach of the new **§73a is not a crime**,
+  there are **carve-outs for parody, satire and criticism**, and there is a **separate provision for actors
+  and musicians intended to protect performances**†. **Adoption status is disputed across sources and no
+  date should be quoted**†.
+- **It is spreading.** Legislators in **Cyprus, Belgium, the Netherlands and Germany** are moving on
+  deepfake and likeness legislation, and some EU legislators view the Danish approach as a possible
+  unifying model†. EU **AI Act Article 50** transparency duties also land on synthetic performance output;
+  **the primary text was unreachable from this session and no Article 50 date is asserted here**.
+- **Where the work is.** A **performer-consent and publication-control layer** that can answer the Danish
+  question ("was this published, and with whose permission?") rather than the American one ("was consent
+  obtained?"). The two obligations are not the same shape, and a single evidence pack can satisfy both.
+- **The commercial opening, stated plainly:** because EMEA clients are closest to the licensor, they are
+  the likeliest to already hold a Meshcapade sublicense **and the least likely to know it excludes
+  commercial training**. That conversation is a concrete, short engagement.
+
+### Pass 57 (2026-11-28) — the character-animation & performance plane in APAC
+
+- **APAC supplies both the best open interchange and the strictest labelling regime.**
+- **Japan: the one genuinely strategic open asset in the plane.** The **VRM Consortium**'s avatar format,
+  implemented by `vrm-c/UniVRM` (**MIT, 3,433★**), carries a **"VRM Public License 1.0" accounting for
+  permissions for the personality of the avatar**, with per-model modification and redistribution terms†;
+  Khronos and the VRM Consortium announced standardisation collaboration **2024-10-24**†. **Consent inside
+  the file is an APAC-origin idea**, and it is the correct architecture for every obligation in this
+  section.
+- **Japan, demand side, and it cuts both ways.** **Toei** is expanding **motion capture and virtual
+  production facilities in Tokyo and Kyoto** and bringing AI into its workflows, including budget
+  estimation and AI-assisted background art (Toei CEO Fumio Yoshimura, November 2026)†. At the same time
+  **WIT Studio publicly apologised in April 2026 and replaced an entire opening sequence** after audiences
+  identified generative AI in it†. **The studio appetite is for capture and pipeline AI, and the audience
+  tolerance for visible generative output is low** — which is precisely the performance-capture plane
+  rather than the text-to-video plane.
+- **China: labelling is in force and digital humans are named.** Labelling rules took effect
+  **2025-09-01**, requiring a **hidden label in file metadata** plus **visible labels** for services that
+  could mislead, including person-simulating chatbots and face-swapping†. **Interim Measures for human-like
+  AI interactive services take effect 2026-07-15**†, and a **CAC draft would require a persistent,
+  prominent "digital human" sign** on digital-human services†. **Sources conflict on the draft's status and
+  on reported penalty figures — do not quote amounts.**
+- **South Korea: in force, with a labelling choice that is an engineering decision.** The **AI Basic Act
+  has applied since 2026-01-22**; its Enforcement Decree splits the Article 31(2) labelling obligation into
+  **a human-recognisable method or a machine-readable marker**†, and reported fine suspension for at least
+  a year†. Separately the **KFTC made AI-generated virtual persons a fifth category of endorser**, alongside
+  consumers, celebrities, experts and organisations, effective **2026-06-01**†. Korea also supplies
+  **`naver/anny`** and **`naver/multi-hmr`**, one scope-ambiguous and one explicitly non-commercial.
+- **Where the work is.** A **VRM-based avatar pipeline with per-market label emission** — the machine-
+  readable marker for Korea, the metadata plus visible label for China, and the permission record VRM
+  already carries. APAC is reported the **fastest-growing region** for digital avatars and full-body capture
+  platforms†.
+
+### Pass 57 (2026-11-28) — the character-animation & performance plane in LATAM
+
+- **LATAM has the most specific performance-capture consent statute in the world, and zero repositories in
+  the plane.** That inversion is the finding.
+- **Mexico's reform is in force and it is granular.** Published in the **DOF on 2026-05-14** and effective
+  **2026-05-15**, it amends both the **Ley Federal del Derecho de Autor** and the **Ley Federal del
+  Trabajo**†. Substance: the **voice is recognised as part of the right to one's image**, including the
+  image of characters performed; **LFDA art. 87 requires express consent** for use of a performer's image
+  and voice, **expressly including AI-generated results**; and **LFT art. 305 Bis requires contracts to set
+  out the conditions and the remuneration** for AI use of image or voice†. Exceptions exist for **parody
+  and satire** and for uses that **do not substitute the performer's professional work**†. The Chamber of
+  Deputies approved it **2026-04-07**†.
+- **Two documented weaknesses, worth knowing before advising.** A September 2026 academic analysis argues
+  the reform **narrowed the general right to one's own image by limiting protection to performers**, and
+  that **art. 305 Bis contains no transitional rules for contracts signed before it took effect**† — so
+  **pre-existing talent contracts in Mexico are an open question**, and that is a concrete advisory
+  engagement.
+- **The rest of the region is building the frame, not the rule.** **Uruguay** was the first in LATAM to
+  sign the Council of Europe's AI convention (2025)†; **Peru** published the regulation of Law 31814 in
+  September 2025†; **Brazil, Argentina, Chile, Colombia and Costa Rica** are advancing frameworks, and **no
+  LATAM country has a harmonised AI regime**†.
+- **Where the work is.** A **Mexico-first performer consent and remuneration record** — the artefact art.
+  305 Bis effectively requires and that no open tool produces. It generalises directly to the NA, EMEA and
+  APAC obligations above, which is why it is worth building in the region with the sharpest statute.
+- **⛔ The explicit regional gap, searched for and not found:** **no LATAM-origin open-source project was
+  found anywhere in this plane** — not in capture, rigging, retargeting, facial capture or motion
+  synthesis. The region that regulates performance capture most precisely contributes **none** of its
+  tooling. Recorded as a measured absence, not an assumption.
+
+### ⛔ The regional gap that applies to all four regions equally (pass 57)
+
+**There is no permissive, commercially-clean, large-scale human-motion corpus anywhere.** The only candidate
+found — **OpenT2M** (arXiv `2603.18623`, March 2026, claiming 2,800+ hours) — **states no licence in any
+source reachable from this session**, and `huggingface.co` is blocked by this session's egress policy.
+Likewise **`*.is.tue.mpg.de` (the SMPL/FLAME/AMASS licence pages)** and **both patent registers**
+(`patents.google.com`, `worldwide.espacenet.com`) were refused `403`, so **the patent's grant status is
+unverified in every region**. No region has an advantage here; **the correct answer in all four is to budget
+licensed capture of the client's own talent.**
+
+† Figure or claim from a **single secondary source** — trade press, vendor, law-firm bulletin, academic
+commentary or market-research summary — **not** verified against a primary filing, statute, gazette or
+patent register. Specifically unverified in this pass: **every market size in the table above**; the NO
+FAKES Act statuses and preemption detail; the California, New York and New Jersey dates; Denmark's L 49
+contents and status; the Cyprus/Belgium/Netherlands/Germany activity; EU Article 50's application to this
+plane; the VRM Public License characterisation and the Khronos collaboration date; Toei's facility
+expansion and WIT Studio's apology; China's labelling regime, Interim Measures date and CAC draft; Korea's
+AI Basic Act labelling methods, fine suspension and the KFTC endorser change; Mexico's DOF dates, article
+numbers and exceptions, and the academic critique of them; Uruguay's, Peru's, Brazil's, Argentina's,
+Chile's, Colombia's and Costa Rica's instruments; FLAME 2023's CC-BY-4.0 status; and `UniRig`'s and
+`OpenT2M`'s weights/dataset licences (**Hugging Face unreachable**).

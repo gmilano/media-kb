@@ -9492,3 +9492,136 @@ the primary source this session. Every repository, licence, star count and byte 
 patterns was verified on 2026-11-28 and appears with its evidence in `agents/top.md`,
 `repos/foundations.md` or `verticals/solutions.md`.
 
+
+---
+
+## Pass 62 (2026-11-28) — patterns for the reader-facing page-experience plane
+
+Two new patterns, P48 and P49, continuing from P47. Both are built only from repositories verified on
+2026-11-28 (existence by `git ls-remote`, 43/43; licence read from file wherever the API said
+`NOASSERTION`).
+
+### P48 — The ad-stack P&L: turning "the ads are slow" into a per-vendor number
+
+**The problem this solves.** Every publisher engagement on this plane deadlocks the same way: the
+performance team says the ad stack is destroying INP, the revenue team says the ad stack pays for the
+newsroom, and **neither can price the other's claim.** Nothing open source closes that gap —
+`core web vitals ad revenue` returns **0 repositories** (verified 2026-11-28). So this pattern builds the
+missing artefact out of three free inputs plus the client's own data.
+
+**The wiring, concretely.**
+
+1. **Install field measurement on the live site.** `GoogleChrome/web-vitals` (Apache-2.0, 8,702★,
+   https://github.com/GoogleChrome/web-vitals) — ~2 kB, reports real LCP/INP/CLS per session. Not
+   Lighthouse: Lighthouse is a lab tool and cannot see your readers.
+2. **Ship those beacons somewhere you already own.** `grafana/faro-web-sdk` (Apache-2.0, 1,154★,
+   https://github.com/grafana/faro-web-sdk) if the client runs Grafana, otherwise
+   `open-telemetry/opentelemetry-js` (Apache-2.0, 3,544★,
+   https://github.com/open-telemetry/opentelemetry-js) for vendor-neutral transport. **Critical detail:**
+   emit the session identifier the ad server also records, or step 5 is impossible. This is the single
+   decision that makes or breaks the pattern, and it has to be made before any data is collected.
+3. **Attribute main-thread cost to each named third party.** `patrickhulce/third-party-web` (MIT, 1,108★,
+   https://github.com/patrickhulce/third-party-web) ships a measured dataset of per-entity script cost;
+   join it against the tags actually present on the client's pages to get a ranked list of **named
+   vendors** with an attributed millisecond cost each.
+4. **Reproduce it deliberately per device class.** `sitespeedio/browsertime` (Apache-2.0, 652★,
+   https://github.com/sitespeedio/browsertime) with CPU and network throttling pinned to an **entry-tier
+   Android profile**, not a developer laptop. Run the same page with the ad stack on and off. The delta is
+   the cost of the stack on the device your actual audience holds.
+5. **Join to revenue and compute the thing nobody has.** Per demand partner: revenue contributed per 1,000
+   sessions, against sessions lost to INP-driven abandonment at that partner's attributed cost. Output is
+   one table ranking each vendor by **net** contribution. Some partners will be negative. That table is the
+   deliverable.
+6. **Gate it so it cannot regress.** `GoogleChrome/lighthouse-ci` (Apache-2.0, 7,166★,
+   https://github.com/GoogleChrome/lighthouse-ci) with assertions in CI, via
+   `treosh/lighthouse-ci-action` (MIT, 1,293★, https://github.com/treosh/lighthouse-ci-action). Any new tag
+   must now pass the budget to ship.
+
+**Where the judgment lives, and why this is consulting rather than a package.** Steps 1–4 are free and
+mechanical. **Step 5 cannot be installed** — it requires the client's yield data, an abandonment model, and
+a decision about what a lost reader is worth. That is the entire value, and it is why the repository count
+for it is zero.
+
+**Falsifiable prediction, recorded for a later pass to check.** If this is run on a mid-size publisher with
+a standard header-bidding setup, **at least one demand partner will be net-negative** — contributing less
+revenue than its attributed cost in abandoned sessions. If a run finds every partner net-positive, this
+pattern's premise is wrong and the plane's economics are better than the KB claims. **No run has been done
+from this session; this is a hypothesis with a stated test, not a finding.**
+
+**Anti-pattern to avoid.** Do not defer all third-party scripts as the opening move. One ad-focused
+analysis documents a **"scroll avalanche"**: deferred tags all fire together on the reader's first scroll,
+relocating the INP failure instead of removing it†. Use `QwikDev/partytown` (MIT, 13,835★,
+https://github.com/QwikDev/partytown) to **isolate** to a worker thread, and
+`GoogleChromeLabs/scheduler-polyfill` (Apache-2.0, 148★,
+https://github.com/GoogleChromeLabs/scheduler-polyfill) to break long tasks with `scheduler.yield()`.
+
+### P49 — The device-class gate: an article that opens on the phone your readers actually own
+
+**The problem this solves.** CrUX and Search Console report at **P75**, which by construction excludes the
+slowest quarter of devices. For a publisher whose audience sits in LATAM, APAC, Africa or any
+emerging-market cohort, **the default report measures the readers it has not lost yet.** Reported 2026
+figures: entry-tier Android ~**9×** slower single-core than a contemporary iPhone; a new low-end phone
+~**half** a mid-tier one; Galaxy A17 5G **7.07** vs Galaxy A56 5G **12.0** on Speedometer 3; and IDC's
+**−13.9%** 2026 market decline concentrated at the bottom†.
+
+**The wiring, concretely.**
+
+1. **Read the reference implementation first.** `bbc/simorgh` (**Apache-2.0**, 1,720★, pushed 2026-11-28,
+   https://github.com/bbc/simorgh) — a React news front-end serving BBC World Service in **40+ languages on
+   low-end devices over poor networks**, including RTL scripts. It is the only openly licensed publisher
+   front-end built for this constraint from the start. Licence note: read it from `master/LICENSE`; the
+   GitHub API reports `NOASSERTION` and is wrong.
+2. **Choose a renderer that sends nothing by default.** `withastro/astro` (**MIT**, 64,271★,
+   https://github.com/withastro/astro) for a new build — zero JS unless asked, which is the right default
+   for a page whose job is to be read. `gohugoio/hugo` (Apache-2.0, 90,577★,
+   https://github.com/gohugoio/hugo) where the archive is large and build time dominates.
+3. **Control image weight at the edge.** `imgproxy` (Apache-2.0, 11,224★,
+   https://github.com/imgproxy/imgproxy) for on-the-fly resizing, over `libvips` (**LGPL-2.1**, 11,845★,
+   https://github.com/libvips/libvips). Encode AVIF with `AOMediaCodec/libavif` (**BSD-2-Clause with
+   per-file VideoLAN/dav1d clauses**, 2,239★, https://github.com/AOMediaCodec/libavif). **Two licence
+   cautions:** libvips is LGPL — dynamic linking imposes nothing on your code, static linking into a
+   proprietary binary is a decision to take deliberately; and libavif's `src/obu.c` carries a separate
+   VideoLAN copyright, so the redistributable licence is a property of the **compilation**, not of the
+   repository — the same category as `chromaprint` in pass 5.
+4. **Make the article survive the network.** `GoogleChrome/workbox` (MIT, 13,067★,
+   https://github.com/GoogleChrome/workbox) for a service worker that caches the article shell, so a
+   metered or intermittent 4G connection does not mean a blank page. Add
+   `GoogleChromeLabs/quicklink` (Apache-2.0, 11,307★, https://github.com/GoogleChromeLabs/quicklink) to
+   prefetch the next article the reader is about to open.
+5. **Gate on the device, not on the average.** `sitespeedio/sitespeed.io` (MIT, 5,056★,
+   https://github.com/sitespeedio/sitespeed.io) running continuously against **entry-tier device and
+   network profiles**, with the budget asserted at **P90**, not P75. Audit every template rather than the
+   homepage with `harlan-zw/unlighthouse` (MIT, 4,969★, https://github.com/harlan-zw/unlighthouse) — a
+   publisher has one homepage and 200,000 article pages, and the homepage is the one page that is always
+   fast.
+6. **If the audience is in EMEA or a LATAM market following the EU model, budget the consent script as a
+   render-blocking dependency.** `orestbida/cookieconsent` (MIT, 5,785★,
+   https://github.com/orestbida/cookieconsent) is the strongest open option;
+   `AmauriC/tarteaucitron.js` (MIT, 1,060★, https://github.com/AmauriC/tarteaucitron.js) is CNIL-shaped;
+   `InteractiveAdvertisingBureau/iabtcf-es` (Apache-2.0, **156★**,
+   https://github.com/InteractiveAdvertisingBureau/iabtcf-es) is the official TCF string codec. Avoid
+   `kiprotect/klaro` (BSD-3-Clause, 1,526★) for new work — **20 months without a push**.
+
+**The measurement that sells the work.** Run step 5 against the client's current site at P75 and at P90 and
+put the two numbers side by side. **The gap between them is the audience the client cannot currently see.**
+That single comparison costs one afternoon of free tooling and is the most persuasive artefact on this
+plane, because it is about their readers rather than about a benchmark.
+
+**Informed gap, stated rather than left silent.** There is **no independent 2026 CMP latency benchmark** —
+vendor claims run from "under 12 ms" to third-party reports of 150–300 ms for a named product†, and the low
+figures come from the companies selling the product. **Do not quote a CMP latency to a client.** Measure it
+on their pages with step 5. For EMEA specifically, publishing a neutral reproducible benchmark across the
+open and commercial CMPs is work **no vendor can credibly do about itself**, and every publisher needs it
+before its next renewal.
+
+**Do not build either pattern on `catchpoint/WebPageTest`.** It is **PolyForm Shield 1.0.0** — source-
+available with a **non-compete clause** — and has had no push since **2025-09-19**. Safe for internal
+measurement and client delivery; **not** safe as the engine of a Globant performance product. The
+restriction is visible only in `LICENSE.md`; the GitHub API reports `NOASSERTION`, and no SPDX badge or SBOM
+scan will surface it.
+
+† = secondary source (vendor, trade or developer blog), reached via search only and not verified against the
+primary source this session; `infrequently.org` and `www.pagespeedmatters.com` do not resolve from this
+session (DNS refusal, **not** 404), so the device-class figures are second-hand. Every repository, licence,
+star count and archive status cited in these patterns was verified on 2026-11-28 and appears with its
+evidence in `agents/top.md`, `repos/foundations.md`, `repos/trending.md` or `verticals/solutions.md`.

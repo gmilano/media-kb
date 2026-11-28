@@ -9,6 +9,39 @@ updated: 2026-11-28
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-28 — pass 62: the reader-facing page-experience plane (**31,222★ measure the page; zero repositories price it**)
+
+The plane sixty-one passes never entered. `Core Web Vitals`, `web-vitals`, `INP`, `CLS`, `TTFB`,
+`sitespeed`, `WebPageTest`, `Partytown`, `page speed`, `lazy load`, `service worker` and — word-boundaried —
+`AMP` all returned **zero hits across all eight files** before today. Verified 2026-11-28: existence via
+`git ls-remote` (43/43), stars/forks/`pushed_at` via `search/repositories`, licence read from the file
+wherever the API said `NOASSERTION`. Star counts point-in-time.
+
+| Nombre | Repo | Licencia | Stars | Last push | Why it is here this week |
+|---|---|---|---|---|---|
+| Lighthouse | https://github.com/GoogleChrome/lighthouse | Apache-2.0 | 31,222★ | 2026-11-25 | Still the reference lab audit, still pushed weekly after a decade |
+| Partytown | https://github.com/QwikDev/partytown | MIT | 13,835★ | 2026-11-09 | Most-starred tool on the plane, and its entire purpose is getting ad tags off the main thread |
+| web-vitals | https://github.com/GoogleChrome/web-vitals | Apache-2.0 | 8,702★ | 2026-11-12 | The field-data library. Note it has **3.6× fewer stars than the lab tool** it is supposed to supersede |
+| Lighthouse CI | https://github.com/GoogleChrome/lighthouse-ci | Apache-2.0 | 7,166★ | 2026-11-17 | Audit → build gate. The step most publishers skip |
+| sitespeed.io | https://github.com/sitespeedio/sitespeed.io | MIT | 5,056★ | 2026-11-26 | Fully-OSI self-hosted synthetic monitoring; replaces a vendor contract outright |
+| Unlighthouse | https://github.com/harlan-zw/unlighthouse | MIT | 4,969★ | 2026-11-24 | Site-wide rather than URL-wide — the only correct shape for a 200k-article archive |
+| third-party-web | https://github.com/patrickhulce/third-party-web | MIT | 1,108★ | 2026-09-14 | The measured cost of each named ad/analytics vendor. Converts an argument into a number |
+| Grafana Faro | https://github.com/grafana/faro-web-sdk | Apache-2.0 | 1,154★ | 2026-11-27 | Web vitals into a stack the newsroom already operates |
+| scheduler-polyfill | https://github.com/GoogleChromeLabs/scheduler-polyfill | Apache-2.0 | 148★ | 2026-11-16 | 148★ for the actual fix to the most-failed metric in the industry |
+| WebPageTest | https://github.com/catchpoint/WebPageTest | **PolyForm Shield 1.0.0 — not OSI** | 3,296★ | 2025-09-19 | Here as a **warning**: non-compete licence, and 14 months without a push |
+
+**The week's real finding is a ratio and a zero.** `core web vitals ad revenue` = **0 repositories**;
+`rum ad revenue correlation` = **0**. Lighthouse has 31,222★ for telling a publisher the page is slow;
+`third-party-web` has 1,108★ for telling them which vendor did it; **nothing at all** tells them whether
+that vendor earns more than it costs. 28:1, then a cliff to zero.
+
+**Three dead-or-dying artefacts dated this pass**, so a later pass does not rediscover them as live:
+`apache/incubator-pagespeed-ngx` (Apache-2.0, 4,324★) **archived 2023-04-21**; `sitespeedio/coach`
+(MIT, 1,193★) **archived 2024-05-16**; `GoogleChromeLabs/psi` (Apache-2.0, 3,096★) **archived 2021-04-10**;
+`google/eleventy-high-performance-blog` (MIT, 4,028★) **archived**, last push 2024-06-18. Four archived
+repos with a combined **12,641★** — this plane's tooling churns hard, and star count is the worst possible
+liveness signal here.
+
 ## 2026-11-28 — pass 61: the copy desk & editorial language-quality plane (**every engine on this plane pushed within 48 hours; the artefact with 6,391 stars is a prompt, not a program**)
 
 New this week on a plane that sixty passes never entered: `Vale`, `LanguageTool`, `proselint`, `textlint`,

@@ -12210,3 +12210,152 @@ and the ministry's own release†, not from the consolidated legal text. **The p
 section are the 43 verified repositories, their read licence files, and the byte-level rule-corpus and
 variant-directory measurements taken from the LanguageTool tree at `master` on 2026-11-28.**
 
+
+---
+
+## Opportunities by region — pass 62 (2026-11-28): the reader-facing page-experience & web-delivery plane
+
+**The plane in one sentence.** Publishers are measured by Google on three field metrics (LCP ≤ 2.5 s,
+INP ≤ 200 ms, CLS ≤ 0.1); the dominant cause of failure is the advertising and consent code that pays for
+the journalism; and **nothing open source prices that tradeoff** (`core web vitals ad revenue` = **0
+repositories**, verified 2026-11-28). The measurement tooling is free, mature and Apache/MIT; the judgment
+is unbuilt. That asymmetry is the engagement.
+
+**Why this plane is regionally different and not globally uniform** — and this is the finding that places
+it: performance is a function of the **reader's device**, not of the publisher's code. Reported 2026
+figures: entry-tier Android single-core CPU **~9× slower** than a contemporary iPhone; a new low-end phone
+**~half** the speed of a mid-tier one; Galaxy A17 5G scoring **7.07** on Speedometer 3 against **12.0** for
+a Galaxy A56 5G; and the recommendation to design against **P90–P95 rather than P75**†. IDC forecasts a
+**−13.9%** smartphone market in 2026, concentrated at the bottom, with emerging markets absorbing the most
+pain†. CrUX and Search Console default to **P75**, which structurally excludes the slowest quarter of
+devices. **The same codebase therefore passes in one region and fails in another, and the standard report
+cannot show it.** All device figures are secondary-source and unverified at origin this pass (see the
+channel note at the end).
+
+### North America
+
+- **Regulatory position:** no comprehensive federal AI law; policy runs through executive orders and, in
+  practice, through state statutes — Texas TRAIGA and California SB 53 both effective **2026-01-01**, and
+  California SB 942 (AI Transparency Act) adding provenance and detection duties for large generative-AI
+  providers from **2026-08-02**†. Canada's federal AI bill died in January 2025; its "AI for All" strategy
+  (June 2026) covers literacy, watermarking and a trusted-AI certification†. Mexico has no general AI law;
+  several bills pending, one EU-style risk-tiered†. **None of this regulates page performance** — which is
+  the point: in NA this plane is a pure commercial-performance conversation, with no compliance lever to
+  force the budget.
+- **Where the money is:** NA publishers carry the heaviest programmatic stacks, so they own the largest INP
+  deficit and the largest recoverable upside. The buyer is the **revenue operations owner**, not the CTO —
+  and the pitch is the one artefact nobody has: a per-vendor P&L for the ad stack, built from
+  `patrickhulce/third-party-web` (MIT, 1,108★) joined to the client's own session and yield data.
+- **Structural obstacle, and it is the real one:** the team that owns page speed does not own ad revenue,
+  and the team that owns ad revenue is not measured on page speed. **The deliverable that breaks the
+  deadlock is a shared number, not a faster page.**
+- **Opportunity:** AMP exit programmes. Washington Post, NYT, Vox and CNN are reported to have removed AMP
+  already†; from **July 2026** Google is reported to have stopped serving AMP from its own cache/viewer†,
+  which removes the last reason to keep a second rendering path. Mid-size NA publishers still running
+  `ampproject/amp-wp` (GPL-2.0, 1,809★) are maintaining two front-ends for no ranking benefit.
+
+### EMEA
+
+- **Regulatory position — and this is the only region where the plane has a legal lever.** The EU AI Act is
+  the central regime, with enforcement and new transparency requirements reported from **2026-08-02** and
+  the AI Omnibus in force **2026-07-27**†; MEPs have proposed requiring AI providers to disclose
+  copyrighted works used in training†. The UK has announced an under-16 social-media ban due in force
+  **spring 2027**†. One tracker counts **EMEA 5,939** AI regulatory publications against NA 3,953 and APAC
+  2,575, with the EU itself at 497†.
+- **The plane-specific EMEA fact:** GDPR/ePrivacy make a **consent management platform a required,
+  render-blocking dependency on every page load.** EMEA publishers therefore pay a latency tax that NA
+  publishers can opt out of. There are exactly four credible open CMPs —
+  `orestbida/cookieconsent` (MIT, 5,785★), `AmauriC/tarteaucitron.js` (MIT, 1,060★, CNIL-shaped),
+  `kiprotect/klaro` (BSD-3-Clause, 1,526★, **20 months stale**) and the official
+  `InteractiveAdvertisingBureau/iabtcf-es` (Apache-2.0, **156★**) — and **no independent benchmark of any
+  of their latencies exists.**
+- **Opportunity, and it is the sharpest on this plane:** be the party that measures it. A neutral,
+  reproducible CMP latency benchmark across the open and commercial options, run on
+  `sitespeedio/sitespeed.io` (MIT) against real article pages, is **work no vendor can credibly publish
+  about itself** and every EMEA publisher needs before its next CMP renewal. The inputs are free; the
+  credibility is the product.
+- **Adoption context:** Akamai reports 40% of media companies at some stage of AI adoption, and a Google
+  Cloud figure of 64% of M&E companies with GenAI use cases but only **35% in content production**†;
+  Western Europe marketing AI adoption 88% vs MEA 71%†. Publisher–AI licensing deals already signed with
+  AP, Axel Springer, FT, Vox Media, Condé Nast, Hearst†.
+- **Reference asset:** `bbc/simorgh` (Apache-2.0, 1,720★, pushed today) is an EMEA public broadcaster's own
+  answer to the multi-language, low-end-device problem — the best starting point in the region, free.
+
+### APAC
+
+- **Regulatory position — three divergent categories, so the asset is a policy engine, not a compliance
+  mode.** South Korea's **AI Basic Act in force January 2026**, extraterritorial, with transparency, risk
+  assessment, human oversight and documentation duties, and treated as the regional anchor†. Vietnam's AI
+  Law effective **2026-03-01**, with Decree 142/2026 closing a 60-day risk-tier transition on
+  **2026-06-30**†. China the most prescriptive on outputs (Generative AI Measures; synthetic-content
+  identification from 2025-09-01)†. India signalling dedicated AI legislation in July 2026, with February
+  2026 IT Rules amendments requiring synthetic content labelling†. Japan soft-law and principles-based;
+  Singapore guidance rather than statute†. Korea **declined** a text-and-data-mining copyright exception in
+  February 2026†.
+- **The plane-specific APAC fact:** this is where the **device-class cliff is the business problem**, not a
+  technical footnote. A publisher serving India, Indonesia, the Philippines or Vietnam is serving the
+  entry-tier Android cohort that IDC says will absorb the worst of a −13.9% market†, at the P90–P95 end
+  that CrUX's default P75 hides.
+- **Governance gap as the opening:** an April 2026 APAC media review found AI tools already in operational
+  newsroom use across the region **while formal governance remains incomplete, delayed or absent**†.
+  Australia's ACMA published sector papers mapping AI use across TV, radio and news (April 2026)†, is
+  exploring licensing for AI training on local data, and has advanced legislation to mandate platform
+  payments to news publishers†. Adoption is broad but shallow: Singapore leads with a **60.9%** AI
+  diffusion rate among working-age adults, Korea posted the largest H2-2025 gain, and **only 1 in 10 APAC
+  enterprises** calls itself "very mature" on AI†.
+- **Opportunity:** per-jurisdiction **device-and-policy profiles** — a measurement harness built on
+  `sitespeedio/browsertime` (Apache-2.0) pinned to real entry-tier device profiles per market, reported at
+  P90, alongside the labelling/transparency duty that applies in that market. Nothing open source does this,
+  and a regional publisher group cannot buy it.
+
+### LATAM
+
+- **Regulatory position:** Peru is the most advanced — AI law enacted September 2025, **implementing
+  regulation in force January 2026**, risk-based with prohibited practices, mandatory human oversight for
+  high-risk uses and regulatory sandboxes†. Brazil's **PL 2338/2023** has cleared the Senate and awaits a
+  Chamber of Deputies vote, modelled on the EU AI Act†. Mexico has no horizontal AI law; a criminal-law
+  reform on AI-generated deepfakes is pending Senate approval†. Chile has a risk-based bill in development;
+  Argentina has non-binding guidelines only†. Brazil's electoral court restricts synthetic media
+  (Resolution 23.732/2024)†. One 2026 study counts **716 AI-related regulatory instruments and proposals
+  across 23 countries and territories** in the region — the warning being that this produces uncertainty
+  rather than governance†. The region broadly follows the EU model†, so EMEA consent/transparency work
+  ports here with real reuse.
+- **The plane-specific LATAM fact:** LATAM shares APAC's device reality — entry-tier Android, constrained
+  networks, metered data — **and** inherits EMEA-style consent obligations as the regional statutes land.
+  It therefore gets **both** the device cliff and the CMP latency tax, on thinner engineering budgets than
+  either. That combination is not a disadvantage to Globant; it is the strongest reason the region needs
+  this work done properly rather than copied from a NA playbook.
+- **Newsroom readiness as the entry point:** the Knight Center reports AI use expanding in LATAM
+  newsrooms — mainly transcription, editing and product development — while **formal internal policies
+  remain limited and uneven**†; Peru's El Comercio implemented a near-10-page AI guide in early 2026†; a
+  May 2026 report on regulating AI in the media came from an Argentine press-workers federation with the
+  Heinrich Böll Foundation†. **A newsroom that has written a policy has committed to being able to evidence
+  it** — the same buying trigger recorded in pass 5, and it applies to page-experience claims too.
+- **Opportunity:** offline-first reading. `GoogleChrome/workbox` (MIT, 13,067★) plus
+  `withastro/astro` (MIT, zero-JS-by-default) plus `imgproxy` (Apache-2.0) is a complete, free stack for an
+  article that opens on a metered 4G connection on a 2 GB phone — and `bbc/simorgh` (Apache-2.0) is the
+  proof it works at scale. Second opportunity: the EU-model alignment means a **single** consent and
+  transparency implementation can be built once and sold into both LATAM and EMEA.
+
+### Channel and verification notes for this plane
+
+- **43/43 repository URLs in this pass resolve** via `git ls-remote`. Licences were read from the file
+  wherever the GitHub API returned `NOASSERTION` — which it did four times, and **three of those four were
+  ordinary permissive licences** (Astro MIT, Simorgh Apache-2.0 on `master`, Guardian frontend Apache-2.0,
+  Klaro BSD-3-Clause). The fourth, `catchpoint/WebPageTest`, is **PolyForm Shield 1.0.0**: source-available
+  with a non-compete clause, invisible to SPDX and SBOM tooling.
+- **Two domains do not resolve from this session** (DNS refusal, **not** 404): `infrequently.org` and
+  `www.pagespeedmatters.com`. They hold the two best quantitative anchors on this plane — the 2026
+  performance-inequality device budgets and a study reported to find **80% of 49 major news outlets passing
+  CWV on mobile** on May 2026 CrUX field data†. **Both are therefore second-hand and unverified at source.**
+  For a later pass: `bq` is available in this environment, and **CrUX is queryable on BigQuery directly**,
+  which would replace every † on the device-class claims with a first-party measurement, segmented by
+  country and device class. That is the single highest-value follow-up this plane has.
+- **`repos/<slug>` on the GitHub API is blocked by this session's repository scope**, but
+  `search/repositories -f q='repo:<slug>'` works and returns stars, forks, `pushed_at`, `archived` and SPDX
+  in one call. **New method note:** that `repo:` qualifier **fails with HTTP 422 for owners whose name
+  begins with a digit** — `repo:11ty/eleventy` is unreachable this way. Confirm such repos with
+  `git ls-remote` and read the licence from `raw.githubusercontent.com`.
+
+† = secondary source (trade press, law-firm roundup, vendor or developer blog), reached via search only and
+**not** verified against the primary source from this session.

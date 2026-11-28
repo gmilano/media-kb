@@ -3204,3 +3204,70 @@ an editorial one. Recorded as measured, not unexamined.
 † = secondary source (trade press, publisher rate card) reached via search; `www.chicagomanualofstyle.org`
 is outside this session's allowed network domains (DNS refusal, not a 404), so pricing is a lead.
 
+
+---
+
+## Pass 62 (2026-11-28) — real platforms on the reader-facing page-experience plane
+
+Platforms that a publisher actually runs, customisable with AI on top, on the plane between the CMS and the
+reader. The KB already holds the CMS tier (Strapi, Ghost, Directus, PeerTube, MediaCMS). **This is the tier
+below it, which was absent.** Verified 2026-11-28.
+
+### Publishing platforms a newsroom can run and own
+
+| Platform | Repo | Licencia | Stars | Last push | Fit for a media engagement |
+|---|---|---|---|---|---|
+| Hugo | https://github.com/gohugoio/hugo | Apache-2.0 | 90,577★ / 8,576f | 2026-11-27 | **Best fit for a large archive.** Rebuilds a 200k-article site in minutes; Apache-2.0; single Go binary, so the client's ops burden is near zero |
+| Astro | https://github.com/withastro/astro | **MIT** (read from file) | 64,271★ / 3,940f | 2026-11-28 | **Best fit for a new build.** Ships zero JavaScript by default — the islands model matches an article page, whose job is to be read, not to be an app |
+| Next.js | https://github.com/vercel/next.js | MIT | 143,742★ / 32,656f | 2026-11-28 | The default where the client wants app-like features and has a React team. The perf budget must be defended deliberately here, not inherited |
+| Eleventy | https://github.com/11ty/eleventy | **MIT** (read from file) | ~20.1k★ / 595f | active | The newsroom microsite and data-project workhorse: election trackers, interactive investigations, one-off landing pages |
+| Jekyll | https://github.com/jekyll/jekyll | MIT | 51,799★ / 10,302f | 2026-10-13 | Lowest-risk option for a small newsroom with no JavaScript team |
+| Nuxt | https://github.com/nuxt/nuxt | MIT | 61,119★ / 5,836f | 2026-11-27 | The Vue-side equivalent of Next.js |
+
+### Production front-ends published by actual broadcasters and newspapers
+
+Not templates — **the running code of major news sites, openly licensed.** There is no equivalent of this
+anywhere else in the media stack, and it is the most under-used asset on this plane.
+
+| Platform | Repo | Licencia | Stars | Last push | What it gives an engagement |
+|---|---|---|---|---|---|
+| BBC Simorgh | https://github.com/bbc/simorgh | **Apache-2.0** (`master/LICENSE`) | 1,720★ / 282f | 2026-11-28 | A React news front-end proven in **40+ languages on low-end devices over poor networks**, including RTL scripts. The reference design for any non-Western-European audience |
+| Guardian dotcom-rendering | https://github.com/guardian/dotcom-rendering | Apache-2.0 | 277★ / 37f | 2026-11-27 | The live rendering layer of theguardian.com, including how a reader-revenue publisher structures article rendering and ad slots |
+| Guardian frontend | https://github.com/guardian/frontend | **Apache-2.0** (read from file) | 5,896★ / 571f | 2026-11-27 | A decade of real publisher performance and ad-layout decisions, in public, still pushed daily |
+
+**Why this matters commercially:** a client asking "how should our article page be built" can be answered
+with two production systems serving hundreds of millions of readers, under Apache-2.0, rather than with a
+vendor deck. **277 stars on `dotcom-rendering`** against that level of consequence is the most inverted
+stars-to-importance ratio recorded in this KB.
+
+### Self-hosted measurement, as an alternative to a monitoring contract
+
+| Platform | Repo | Licencia | Stars | Last push | Replaces |
+|---|---|---|---|---|---|
+| sitespeed.io | https://github.com/sitespeedio/sitespeed.io | MIT | 5,056★ / 633f | 2026-11-26 | A commercial synthetic-monitoring subscription. MIT, self-hosted, dashboards included |
+| Lighthouse CI (+ server) | https://github.com/GoogleChrome/lighthouse-ci | Apache-2.0 | 7,166★ / 735f | 2026-11-17 | The "performance regression caught in review" workflow, with its own history server |
+| Grafana Faro | https://github.com/grafana/faro-web-sdk | Apache-2.0 | 1,154★ / 140f | 2026-11-27 | A separate RUM vendor, where the client already runs Grafana |
+| boomerang | https://github.com/akamai/boomerang | **BSD-3-Clause** (`LICENSE.txt`) | ~1.9k★ / 290f | active | A hosted RUM beacon. Yahoo!→SOASTA→Akamai lineage; genuinely BSD despite the vendor ownership |
+| Unlighthouse | https://github.com/harlan-zw/unlighthouse | MIT | 4,969★ / 184f | 2026-11-24 | Per-URL auditing, for sites with more than a handful of templates |
+
+**And the one that is not an option:** `catchpoint/WebPageTest` is **PolyForm Shield 1.0.0** — a
+*non-compete* source-available licence, plus **14 months without a push** (2025-09-19). Fine for internal
+use and client delivery; **not** a base for a Globant performance product. Read `LICENSE.md`; the GitHub
+API reports only `NOASSERTION`.
+
+### Consent management — a required, render-blocking dependency
+
+In EMEA a CMP is not optional, and it loads before the content. Open options, all verified:
+
+| Platform | Repo | Licencia | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| CookieConsent | https://github.com/orestbida/cookieconsent | MIT | 5,785★ / 506f | 2026-11-22 | The strongest open option: MIT, actively pushed, no SaaS dependency |
+| tarteaucitron.js | https://github.com/AmauriC/tarteaucitron.js | MIT | 1,060★ / 374f | 2026-11-27 | Built around CNIL expectations — the most regulator-shaped of the four |
+| Klaro | https://github.com/kiprotect/klaro | **BSD-3-Clause** (read from file) | 1,526★ | 2025-03-27 | **20 months stale.** Deployable, not maintainable |
+| iabtcf-es | https://github.com/InteractiveAdvertisingBureau/iabtcf-es | Apache-2.0 | 156★ / 101f | 2026-11-03 | The official TCF consent-string codec. **156 stars** for the library the entire European programmatic market depends on — the same "the standard has no installed base" shape recorded for ISCC in pass 5 |
+
+**Informed gap, stated explicitly:** there is **no independent 2026 CMP latency benchmark.** Vendors claim
+12–50 ms; third-party reviews report 150–300 ms for named products†; nobody neutral has measured them
+comparably. **Do not quote a CMP latency figure to a client.** Measure it on their pages with
+`sitespeed.io`, before and after, and treat the result as the only number that exists.
+

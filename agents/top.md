@@ -5669,3 +5669,106 @@ checks rather than assumes.)
 the primary source from this session. `www.chicagomanualofstyle.org` is outside this session's allowed
 network domains (DNS refusal, **not** a 404), so its rate card is a lead, not a verified price.
 
+
+---
+
+## Pass 62 (2026-11-28) — the reader-facing page-experience plane: the agents that measure the page a reader actually loads
+
+Sixty-one passes covered how media is made, rights-cleared, encoded, localised and monetised. **None of
+them covered the page the reader opens.** Before this pass, these terms returned **zero hits across all
+eight files**: `Core Web Vitals`, `web-vitals`, `INP`, `CLS`, `TTFB`, `page speed`, `lazy load`,
+`service worker`, `sitespeed`, `WebPageTest`, `Partytown`, `Hugo`, `Jekyll`, `Eleventy`, and — with a word
+boundary applied — `AMP`. The KB held `imgproxy`, `libvips` and `sharp` (image *processing*, from the
+photo-desk pass) and `Prebid` (from the ad passes), but nothing that measures what those choices cost the
+reader. This is the plane where ad revenue and search discovery are both decided.
+
+Verified 2026-11-28: existence via `git ls-remote` (**43/43 resolve**), stars/forks/`pushed_at` via GitHub
+`search/repositories`, and licence **read from the actual file** wherever the API returned `NOASSERTION`.
+Star counts are point-in-time.
+
+### The measurement layer — lab and field
+
+| Nombre | Repo | Licencia | Stars | Last push | What it does on this plane |
+|---|---|---|---|---|---|
+| Lighthouse | https://github.com/GoogleChrome/lighthouse | Apache-2.0 | 31,222★ / 9,808f | 2026-11-25 | The lab audit everyone quotes. Synthetic, single-run, **not** field data — it is the diagnostic, never the KPI |
+| web-vitals | https://github.com/GoogleChrome/web-vitals | Apache-2.0 | 8,702★ / 542f | 2026-11-12 | The 2 kB library that reports real LCP/INP/CLS from real readers' browsers. This is the one that belongs in a publisher page |
+| Lighthouse CI | https://github.com/GoogleChrome/lighthouse-ci | Apache-2.0 | 7,166★ / 735f | 2026-11-17 | Turns the audit into a build gate with assertions and a history server — the difference between knowing and enforcing |
+| sitespeed.io | https://github.com/sitespeedio/sitespeed.io | MIT | 5,056★ / 633f | 2026-11-26 | Self-hosted continuous synthetic monitoring. The only fully OSI-licensed stack here that replaces a commercial monitoring contract |
+| Browsertime | https://github.com/sitespeedio/browsertime | Apache-2.0 | 652★ / 140f | 2026-11-26 | The engine under sitespeed.io: scripted real-browser runs with throttling. Usable on its own for device-class testing |
+| Unlighthouse | https://github.com/harlan-zw/unlighthouse | MIT | 4,969★ / 184f | 2026-11-24 | Scans **every route on a site** rather than one URL. For a publisher with 200k article pages this is the only sane shape |
+| Lighthouse CI Action | https://github.com/treosh/lighthouse-ci-action | MIT | 1,293★ / 89f | 2026-03-12 | Drops the gate into GitHub Actions in ~10 lines. Pushed 8 months ago — stable, not abandoned |
+| boomerang | https://github.com/akamai/boomerang | BSD-3-Clause (read from `LICENSE.txt`) | ~1.9k★ / 290f | active | The oldest real-user-monitoring beacon, Yahoo!→SOASTA→Akamai lineage. Vendor-adjacent but genuinely BSD |
+| Grafana Faro Web SDK | https://github.com/grafana/faro-web-sdk | Apache-2.0 | 1,154★ / 140f | 2026-11-27 | Ships web vitals into an observability stack a newsroom may already run, instead of a second vendor |
+| OpenTelemetry JS | https://github.com/open-telemetry/opentelemetry-js | Apache-2.0 | 3,544★ / 1,211f | 2026-11-28 | The vendor-neutral transport. Matters because it is the exit from per-vendor RUM lock-in |
+| Perfume.js | https://github.com/Zizzamia/perfume.js | MIT | 3,200★ / 113f | 2025-10-25 | Small RUM library. **13 months without a push** — record it, don't start on it |
+
+### The third-party attribution layer — naming what costs you
+
+| Nombre | Repo | Licencia | Stars | Last push | What it does on this plane |
+|---|---|---|---|---|---|
+| third-party-web | https://github.com/patrickhulce/third-party-web | MIT | 1,108★ / 113f | 2026-09-14 | **The single most valuable artefact on this plane for a publisher.** A published dataset of the measured main-thread cost of real third-party scripts, by entity — ad tech included. It converts "ads are slow" into a per-vendor number |
+| Partytown | https://github.com/QwikDev/partytown | MIT | 13,835★ / 461f | 2026-11-09 | Relocates third-party scripts to a web worker so they stop blocking the main thread. The most-starred tool here, and aimed squarely at the ad-tag problem |
+| third-party-capital | https://github.com/GoogleChromeLabs/third-party-capital | Apache-2.0 | 129★ / 11f | 2026-04-24 | Encodes the *recommended* loading strategy per third party as data. 129★ = a standards bet, not an installed base |
+| scheduler-polyfill | https://github.com/GoogleChromeLabs/scheduler-polyfill | Apache-2.0 | 148★ / 16f | 2026-11-16 | `scheduler.yield()` where it is missing — the actual mechanism for breaking the long tasks that fail INP |
+
+### The licence trap on this plane — read this before you quote WebPageTest
+
+| Nombre | Repo | Licencia | Stars | Last push | Why it is a trap |
+|---|---|---|---|---|---|
+| WebPageTest | https://github.com/catchpoint/WebPageTest | **PolyForm Shield 1.0.0 — source-available, NOT OSI open source** | 3,296★ / 751f | 2025-09-19 | The canonical web-performance tool in the industry, and **Globant cannot build a competing offering on it.** PolyForm Shield grants broad use but forbids use "for a purpose that competes with the licensor". GitHub's API reports only `NOASSERTION`; the restriction is visible only by reading `LICENSE.md`. Also **14 months without a push** |
+
+PolyForm Shield is a *non-compete* licence, not a copyleft one. It is safe for internal measurement and
+client delivery; it is **not** safe as the engine of a Globant performance product. That distinction never
+appears in an SPDX badge or an SBOM scan, which is exactly the failure mode recorded for `chromaprint` in
+pass 5 — **licence risk on this plane lives in prose, not in metadata.**
+
+### Three NOASSERTION verdicts that were simply wrong
+
+The GitHub API returned `NOASSERTION` for four repos this pass. Reading the file resolved **three of them
+to ordinary permissive licences**:
+
+| Repo | API said | The file actually says |
+|---|---|---|
+| https://github.com/withastro/astro | NOASSERTION | **MIT** (`main/LICENSE`) |
+| https://github.com/bbc/simorgh | NOASSERTION | **Apache-2.0** (`master/LICENSE` — note: `master`, not `main`) |
+| https://github.com/guardian/frontend | NOASSERTION | **Apache-2.0** (`main/LICENSE`) |
+| https://github.com/kiprotect/klaro | NOASSERTION | **BSD-3-Clause** (`master/LICENSE`) |
+| https://github.com/catchpoint/WebPageTest | NOASSERTION | **PolyForm Shield 1.0.0** — the one case where it meant something |
+
+**Rule, now five passes old and confirmed again:** `NOASSERTION` is not a finding, it is a prompt to read
+the file. Four of five times this pass it hid a perfectly permissive licence; the fifth time it hid the
+only commercially dangerous term on the plane. Treating it as "no licence" loses three usable tools;
+treating it as "probably MIT" ships the trap.
+
+### The measured zero — nothing prices the tradeoff
+
+The whole plane exists because ad tags and consent scripts make pages slow, and pages that are slow lose
+readers. So the decision a publisher actually faces is: **does this script earn more than it costs in
+abandoned sessions?** Searched `gh api search/repositories`, 2026-11-28:
+
+| Query | Repos found | Stars of the top five |
+|---|---|---|
+| `core web vitals ad revenue` | **0 — literally none** | — |
+| `rum ad revenue correlation` | **0 — literally none** | — |
+| `web vitals revenue` | 5 | 2, 1, 0, 0, 0 — and **none** of the five is about this |
+| `revenue weighted performance` | 6 | 2, 0, 0, 0, 0 — all BI dashboards, none relevant |
+| `performance budget ad revenue` | 19 | 8, 5, 2, 1, 0 — all BI dashboards, none relevant |
+
+**Measuring the page: 31,222★. Pricing the page: zero repositories.** The gradient is the same structural
+law this KB has now recorded on six planes — the format problem is solved lavishly, the judgment problem
+is empty:
+
+1. **MEASURE** the page = a format problem = `GoogleChrome/lighthouse` Apache-2.0 **31,222★**, pushed 3 days ago
+2. **ATTRIBUTE** the cost to a named vendor = harder, partly solved = `patrickhulce/third-party-web` MIT **1,108★**, pushed 2026-09-14
+3. **PRICE** it against revenue = pure judgment = **ZERO**
+
+Note the 28:1 star ratio between step 1 and step 2, and the cliff to nothing at step 3. Publishers can see
+the cost and can name which vendor caused it; **nothing open source tells them whether to keep the vendor.**
+That third step is a Globant engagement, not a package install — and it is the most sellable thing on this
+plane because the client already owns the two inputs it needs.
+
+† = secondary source (trade or vendor page), reached via search only and **not** verified against the
+primary source from this session. `www.pagespeedmatters.com` and `infrequently.org` are **outside this
+session's allowed network domains** (DNS refusal, **not** 404), so the two best quantitative anchors on
+this plane — the 49-outlet news CWV study and Alex Russell's 2026 performance-inequality budgets — are
+recorded as leads at second hand and **were not verified at source this pass.**

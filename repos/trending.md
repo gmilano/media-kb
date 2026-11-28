@@ -10,6 +10,79 @@ updated: 2026-11-28
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-28 — pass 62: the publishing & delivery substrate (**the static-site tier holds 325,000★ and the newsroom front-ends that run on it hold 7,893★**)
+
+Infrastructure side of the page-experience plane. Every static site generator was a **zero** across all
+eight files before this pass: `Hugo`, `Jekyll`, `Eleventy`, `Gatsby`, `Astro` (2, incidental),
+`service worker`, `Core Web Vitals`. Verified 2026-11-28 as above.
+
+### The static publishing tier — what a news site is actually built on
+
+| Nombre | Repo | Licencia | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| Next.js | https://github.com/vercel/next.js | MIT | 143,742★ / 32,656f | 2026-11-28 | The default for new publisher builds. MIT, but the rendering model is where the perf budget is won or lost |
+| Hugo | https://github.com/gohugoio/hugo | Apache-2.0 | 90,577★ / 8,576f | 2026-11-27 | Fastest builds at archive scale; a 200k-article site rebuilds in minutes. Apache-2.0 — the cleanest licence in the tier |
+| Nuxt | https://github.com/nuxt/nuxt | MIT | 61,119★ / 5,836f | 2026-11-27 | Vue-side equivalent; relevant where the client's team is already Vue |
+| Astro | https://github.com/withastro/astro | **MIT** (API said NOASSERTION; read from `main/LICENSE`) | 64,271★ / 3,940f | 2026-11-28 | Ships zero JS by default — the islands model is the best structural fit for article pages that exist to be read |
+| Jekyll | https://github.com/jekyll/jekyll | MIT | 51,799★ / 10,302f | 2026-10-13 | Still maintained, still the lowest-risk choice for a small newsroom with no JS team |
+| Eleventy | https://github.com/11ty/eleventy | **MIT** (read from `main/LICENSE`) | ~20.1k★ / 595f | active | The one most used by actual newsrooms for microsites and data projects |
+| Gatsby | https://github.com/gatsbyjs/gatsby | MIT | 55,923★ / 10,061f | 2026-11-25 | **Legacy-risk flag:** high stars, but momentum has moved to Astro/Next. Inherit it; do not choose it |
+
+### Real newsroom front-ends — production code from publishers, readable and licensed
+
+This is the part of the plane with no equivalent anywhere else in the KB: **two major broadcasters and
+newspapers publish the actual code serving their live sites.**
+
+| Nombre | Repo | Licencia | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| Guardian dotcom-rendering | https://github.com/guardian/dotcom-rendering | Apache-2.0 | 277★ / 37f | 2026-11-27 | The live rendering layer of theguardian.com. **277 stars for production code serving hundreds of millions of readers** — the stars/consequence ratio is the most inverted in the KB |
+| Guardian frontend | https://github.com/guardian/frontend | **Apache-2.0** (API said NOASSERTION; read from `main/LICENSE`) | 5,896★ / 571f | 2026-11-27 | The older Scala stack, still pushed daily. A decade of real publisher performance decisions, in public |
+| BBC Simorgh | https://github.com/bbc/simorgh | **Apache-2.0** (read from `master/LICENSE` — note `master`) | 1,720★ / 282f | 2026-11-28 | Serves BBC World Service in **40+ languages on low-end devices over poor networks** — the only openly licensed front-end in existence built for exactly that constraint |
+
+### Delivery and weight control
+
+| Nombre | Repo | Licencia | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| Workbox | https://github.com/GoogleChrome/workbox | MIT | 13,067★ / 895f | 2026-11-15 | Service workers / offline reading. The mechanism behind "the article still opens on the metro" |
+| quicklink | https://github.com/GoogleChromeLabs/quicklink | Apache-2.0 | 11,307★ / 429f | 2026-11-01 | Prefetches the link the reader is about to click. Cheap next-article win for a publisher |
+| Squoosh | https://github.com/GoogleChromeLabs/squoosh | Apache-2.0 | 26,236★ / 2,223f | 2026-10-22 | Image compression, incl. the codecs as WASM |
+| imgproxy | https://github.com/imgproxy/imgproxy | Apache-2.0 | 11,224★ / 797f | 2026-11-24 | On-the-fly image resizing at the edge (already in this KB from the photo desk — **it belongs to this plane too**) |
+| libvips | https://github.com/libvips/libvips | **LGPL-2.1** | 11,845★ / 810f | 2026-11-27 | The engine under most of the above. **LGPL — dynamic linking is fine, static linking is a decision** |
+| libavif | https://github.com/AOMediaCodec/libavif | **BSD-2-Clause + per-file VideoLAN/dav1d clauses** | 2,239★ / 344f | 2026-11-26 | AVIF encode/decode. `src/obu.c` carries a separate VideoLAN copyright — a compilation licence, same category as `chromaprint` in pass 5 |
+
+### The consent tier — the EMEA latency tax, and the only honest open options
+
+Consent scripts are a *render-blocking* dependency that EU law effectively requires. Four open
+implementations exist; none is a market leader, and the leaders are all closed SaaS.
+
+| Nombre | Repo | Licencia | Stars | Last push | Note |
+|---|---|---|---|---|---|
+| CookieConsent | https://github.com/orestbida/cookieconsent | MIT | 5,785★ / 506f | 2026-11-22 | The most-starred open CMP, and the only one that is both MIT and actively pushed |
+| tarteaucitron.js | https://github.com/AmauriC/tarteaucitron.js | MIT | 1,060★ / 374f | 2026-11-27 | French-origin, built around CNIL expectations — the closest thing to a regulator-shaped open CMP |
+| Klaro | https://github.com/kiprotect/klaro | **BSD-3-Clause** (API said NOASSERTION; read from `master/LICENSE`) | 1,526★ | 2025-03-27 | **20 months without a push.** Usable, not maintainable |
+| IAB TCF (iabtcf-es) | https://github.com/InteractiveAdvertisingBureau/iabtcf-es | Apache-2.0 | 156★ / 101f | 2026-11-03 | The official TCF string encoder/decoder. **156 stars for the library that encodes the consent signal the entire European ad market runs on** |
+
+**The informed gap, stated rather than left silent:** no independent 2026 benchmark of CMP latency exists.
+Vendor claims range from "under 12 ms" to measured third-party reports of 150–300 ms for a named CMP†, and
+the sources making the low claims are the vendors selling the product. **Treat every CMP latency figure as
+unverified and measure it on the client's own pages** with `sitespeed.io` before and after — which is
+precisely why the measurement tier above is the first thing to install.
+
+### AMP — the receding format, dated so no later pass treats it as current
+
+| Nombre | Repo | Licencia | Stars | Last push | Status |
+|---|---|---|---|---|---|
+| amphtml | https://github.com/ampproject/amphtml | Apache-2.0 | 14,907★ / 4,054f | 2026-11-25 | **Still pushed**, still Apache-2.0 — not dead, but no longer a ranking advantage |
+| amp-wp | https://github.com/ampproject/amp-wp | GPL-2.0 | 1,809★ / 374f | 2026-11-23 | The WordPress path; **GPL-2.0, not permissive** — the licence outlier in this group |
+| amp-toolbox | https://github.com/ampproject/amp-toolbox | Apache-2.0 | 458★ / 241f | 2025-08-18 | 15 months without a push — the tooling is going before the format |
+
+AMP has **not** been formally deprecated, but it has lost its reason to exist for publishers: Top Stories
+no longer requires it†, and multiple sources report that from **July 2026** Google stopped serving AMP
+results from its own cache/viewer and sends readers to the publisher's own AMP host instead†. Washington
+Post, NYT, Vox, CNN are reported to have removed their AMP versions†. **Advice for an engagement: AMP is a
+migration-off project, not a build-on choice** — and the only remaining case for keeping it is a publisher
+whose canonical pages cannot pass Core Web Vitals, which is an argument for fixing the canonical pages.
+
 ## 2026-11-28 — pass 61: the copy-desk substrate (**the only open multilingual rule corpus in existence, measured in bytes per language — and Spanish has no variant at all**)
 
 Infrastructure under the linters: spell engines, hyphenation, dictionaries and the rule corpora. Verified

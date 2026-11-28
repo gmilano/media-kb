@@ -5964,3 +5964,111 @@ verified against the primary source from this session; `www.chicagomanualofstyle
 session's allowed network domains (DNS refusal, not a 404). All repository counts, star counts, licence
 determinations, byte sizes and variant-directory listings in this section were taken directly this pass.
 
+
+---
+
+## Pass 62 (2026-11-28) — trends on the reader-facing page-experience plane
+
+### 1. INP is the metric the industry fails, and advertising is why
+
+LCP and CLS are largely solved problems with known fixes (image priority, reserved ad slots). **INP is
+not.** Reported failure rates cluster at **40–43% of mobile origins** in 2026†, and every source checked
+names third-party JavaScript — ad tags, header-bidding wrappers, multiple demand partners, consent
+scripts — as the dominant cause. One vendor report puts publishers on standard programmatic setups at
+**600–1200 ms** on mobile against a 200 ms threshold†. **The trend is that the fix is now architectural,
+not incremental:** `QwikDev/partytown` (MIT, 13,835★) moves third-party code to a worker thread, and
+`GoogleChromeLabs/scheduler-polyfill` (Apache-2.0, 148★) provides the `scheduler.yield()` primitive for
+breaking long tasks. Note the **94:1 star ratio** between the workaround and the primitive.
+
+### 2. The counter-trend worth knowing: blanket deferral backfires
+
+The standard advice — defer all non-essential scripts — produces what one ad-focused analysis calls a
+**"scroll avalanche"**: every deferred ad script fires at once on the reader's first scroll, moving the
+INP failure rather than removing it†. **Isolation beats deferral.** This matters because "defer the ads"
+is the recommendation a client will already have been given, and it is the one that quietly fails.
+
+### 3. AMP is ending by attrition, not by announcement
+
+Google has **not** deprecated AMP: `ampproject/amphtml` is Apache-2.0, 14,907★ and pushed 2026-11-25.
+What has gone is its reason to exist. Top Stories no longer requires it†, and multiple sources report that
+from **July 2026** Google stopped serving AMP results from its own cache and viewer, sending readers to the
+publisher's own AMP host instead†. Washington Post, NYT, Vox and CNN are reported to have removed AMP†.
+The tooling is receding faster than the format: `ampproject/amp-toolbox` has had **no push since
+2025-08-18**. **Direction of travel: AMP is a migration-off project.** The only remaining case for keeping
+it is a publisher whose canonical pages cannot pass CWV — which is an argument for fixing those pages.
+
+### 4. The device-class cliff is widening, and the default percentile hides it
+
+The most consequential trend on this plane, because it changes what "the site is fast" even means. Entry-
+tier Android single-core CPU is reported **~9× slower** than a contemporary iPhone, and a new low-end phone
+**~half** the speed of a mid-tier one; Galaxy A17 5G scores **7.07** on Speedometer 3 against **12.0** for a
+Galaxy A56 5G†. IDC forecasts a **−13.9%** smartphone market in 2026 **concentrated at the bottom**, with
+emerging markets absorbing the most pain†. Meanwhile **CrUX and Search Console report at P75 by default**,
+which by construction excludes the slowest quarter of readers — so the standard report is least accurate
+precisely where the audience is growing fastest. The recommendation now circulating among performance
+engineers is to **design against P90–P95**†. For LATAM and APAC audiences this is not a refinement; it is
+the difference between measuring your readers and measuring the ones you have not lost yet.
+
+### 5. Measurement is consolidating on field data, but the lab tool still holds the mindshare
+
+`GoogleChrome/web-vitals` (Apache-2.0) is what Google actually ranks on, and it has **8,702★**.
+`GoogleChrome/lighthouse` is a synthetic single-run diagnostic, and it has **31,222★** — a **3.6:1** ratio
+in favour of the tool that does not produce the numbers that matter. The practical consequence shows up in
+every engagement: clients arrive with a Lighthouse screenshot and no field data. **The trend is the slow
+migration from the screenshot to the beacon**, and the open stack for it is now complete and permissive —
+`web-vitals` + `grafana/faro-web-sdk` (Apache-2.0) or `open-telemetry/opentelemetry-js` (Apache-2.0) for
+transport, with `akamai/boomerang` (BSD-3) as the long-standing alternative.
+
+### 6. Zero-JavaScript-by-default has won the argument for article pages
+
+`withastro/astro` (MIT, 64,271★, pushed today) built its position on shipping no JavaScript unless asked,
+and `gohugoio/hugo` (Apache-2.0, 90,577★) on static output at archive scale. Against them
+`gatsbyjs/gatsby` (MIT, 55,923★) retains high stars with visibly diminished momentum. **For a page whose
+purpose is to be read, the framework trend has moved decisively toward sending less.** The caveat for
+engagements: the publisher's constraint is rarely the framework — it is the ad stack bolted on afterwards,
+which no framework choice can fix.
+
+### 7. Observability is escaping per-vendor RUM
+
+`open-telemetry/opentelemetry-js` (Apache-2.0, 3,544★, pushed today) and `grafana/faro-web-sdk`
+(Apache-2.0, 1,154★) let a publisher put web vitals into infrastructure it already runs instead of buying a
+second monitoring product. **The trend is vendor-neutral transport**, and it matters here because the
+alternative — `catchpoint/WebPageTest` — is **PolyForm Shield 1.0.0** with a non-compete clause and
+**14 months without a push**. The canonical tool of this discipline is the one you cannot build on.
+
+### 8. The structural law, now confirmed on a seventh plane
+
+Measured, not assumed, on 2026-11-28:
+
+| Step | Nature of the problem | Best open artefact | Stars |
+|---|---|---|---|
+| **MEASURE** the page | format | `GoogleChrome/lighthouse` Apache-2.0 | **31,222★** |
+| **ATTRIBUTE** cost to a named vendor | partly judgment | `patrickhulce/third-party-web` MIT | **1,108★** |
+| **PRICE** it against ad revenue | pure judgment | **nothing exists** | **0** |
+
+`core web vitals ad revenue` returns **0 repositories**. `rum ad revenue correlation` returns **0**.
+`web vitals revenue` returns 5, none relevant, top star count 2. **The industry can see that the page is
+slow, and can name which vendor made it slow, and has built nothing that says whether to keep that
+vendor.** This is the same gradient the KB recorded for rights reservation (declare → honour → settle) and
+for clinical coding: wherever the problem reduces to a format, open source has solved it abundantly;
+wherever it requires a commercial judgment, the repository count is zero. **That zero is the deliverable,
+not a gap in the research.**
+
+### 9. Wider AI-in-media context for 2026, as it bears on this plane
+
+Analysts describe generative AI moving from pilot to core infrastructure, with a shift in emphasis **from
+generative AI (making content) to operational AI (managing yield)**†; agentic AI spreading through
+post-production, dubbing, localisation and marketing optimisation†; and Deloitte expecting AI-generated
+content to inundate social feeds, burying higher-quality work, with EY arguing the premium accrues to
+brands with distinctive editorial judgment and **clear provenance**†. One widely cited Gartner forecast has
+traditional search volume falling **~25% by 2026** as readers move to AI chatbots†. **The bearing on this
+plane is direct and slightly counter-intuitive:** as AI answer engines absorb discovery, the visits a
+publisher still earns become more valuable per visit, which **raises** the cost of losing one to a slow
+page. Page experience stops being an SEO chore and becomes a retention problem.
+
+† = secondary source (trade press, analyst summary, vendor or developer blog), reached via search only and
+**not** verified against the primary source from this session. `infrequently.org` and
+`www.pagespeedmatters.com` are outside this session's allowed network domains (DNS refusal, **not** 404);
+the device-budget figures and the 49-outlet news CWV study are therefore second-hand. **CrUX is queryable
+via `bq` from this environment** and would make the device-class claims first-party — the highest-value
+follow-up on this plane.

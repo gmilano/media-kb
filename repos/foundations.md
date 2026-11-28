@@ -6457,3 +6457,91 @@ last step is what makes the choice auditable later.
 
 † = secondary source, reached via search only and not verified against a primary source this session.
 
+
+---
+
+## Pass 62 (2026-11-28) — foundations of the reader-facing page-experience plane
+
+The KB's sixty-one previous passes built out production, rights, encoding, delivery and monetisation. This
+is the substrate under the **last ten metres**: browser to reader. Verified 2026-11-28, 43/43 URLs resolve
+via `git ls-remote`; licences read from file wherever the API said `NOASSERTION`.
+
+### What the three Core Web Vitals actually are, since the KB has never recorded them
+
+The thresholds are stable across every source checked and are what a client's Search Console will measure
+them against:
+
+| Metric | Measures | "Good" threshold | Who fails it, and why it matters to a publisher |
+|---|---|---|---|
+| **LCP** — Largest Contentful Paint | Time until the main article image/headline is painted | **≤ 2.5 s** | Usually the hero image. Fixable with `imgproxy`/AVIF and correct priority hints |
+| **INP** — Interaction to Next Paint | Responsiveness to a tap, across the whole visit | **≤ 200 ms** | **The metric publishers fail.** Caused by third-party JavaScript — ad tags, header bidding wrappers, consent scripts — occupying the main thread |
+| **CLS** — Cumulative Layout Shift | How much the page jumps while loading | **≤ 0.1** | Ad slots without reserved dimensions. The one genuinely cheap fix: declare the slot size |
+
+Reported failure rates for INP cluster around **40–43% of mobile origins** in 2026†, making it the most
+commonly failed vital. One vendor report puts publishers on standard programmatic setups (auto-ads +
+header bidding + multiple demand partners) at **600–1200 ms INP on mobile**†, i.e. 3–6× the threshold.
+**Both figures are vendor-sourced and unverified** — they are the hypothesis a Globant engagement would
+test with the measurement tier, not a finding.
+
+### Five foundational repos for this plane
+
+| Nombre | Repo | Licencia | Stars | Last push | Why foundational |
+|---|---|---|---|---|---|
+| Lighthouse | https://github.com/GoogleChrome/lighthouse | Apache-2.0 | 31,222★ / 9,808f | 2026-11-25 | The shared vocabulary. Every client conversation about page quality starts from its report, whether or not you chose it |
+| web-vitals | https://github.com/GoogleChrome/web-vitals | Apache-2.0 | 8,702★ / 542f | 2026-11-12 | The only correct source of the numbers Google actually ranks on: **field data from real readers**, not a lab run |
+| sitespeed.io | https://github.com/sitespeedio/sitespeed.io | MIT | 5,056★ / 633f | 2026-11-26 | Self-hosted, MIT, no per-seat contract. The foundation of a measurement practice a client can own after handover |
+| third-party-web | https://github.com/patrickhulce/third-party-web | MIT | 1,108★ / 113f | 2026-09-14 | The dataset that attributes cost to a **named vendor**. Without it, "the ads are slow" is an opinion |
+| Partytown | https://github.com/QwikDev/partytown | MIT | 13,835★ / 461f | 2026-11-09 | The one architectural intervention that addresses the cause rather than the symptom: third-party code off the main thread |
+| Workbox | https://github.com/GoogleChrome/workbox | MIT | 13,067★ / 895f | 2026-11-15 | Service-worker foundation. Turns an article into something that survives a bad network — directly a LATAM/APAC concern (see `intel/market.md`) |
+| libvips | https://github.com/libvips/libvips | **LGPL-2.1** | 11,845★ / 810f | 2026-11-27 | The image engine everything else wraps. **Licence note: LGPL-2.1 — dynamic linking imposes no obligation on your code; static linking into a proprietary binary does** |
+
+Seven rows, all real, all verified. The `agents/top.md` block for this pass carries the full measurement and
+attribution tiers; `repos/trending.md` carries the static-publishing tier and the newsroom front-ends.
+
+### The device-class cliff — why one number is the wrong answer
+
+The single most important correction this plane makes to the rest of the KB: **a page is not a fixed
+product.** The same HTML is a different experience on a flagship and on an entry-tier Android, and the gap
+is not closing:
+
+| Finding (2026) | Figure | Source quality |
+|---|---|---|
+| Low-end single-core CPU vs contemporary iPhone | **~9× slower** | Developer analysis of the 2026 budget cohort† |
+| New low-end phone vs mid-tier | **~half the speed** | Same† |
+| Galaxy A17 5G (low tier), Speedometer 3 / Chrome 140 | **7.07** | Same† |
+| Galaxy A56 5G (mid tier), Speedometer 3 / Chrome 134 | **12.0** | Same† |
+| Recommended percentile to design against | **P90–P95, not P75** | Same† |
+| 2026 smartphone market decline, concentrated at the bottom | **−13.9%**, "emerging markets will absorb the most pain" | IDC† |
+| Android Go target | **≤ 2 GB RAM** | Google, via secondary source† |
+
+**The actionable consequence, and it is a method change not a tool change:** CrUX and Search Console report
+at **P75 by default**, which by construction hides the readers on the slowest quarter of devices. For a
+publisher whose audience is concentrated in LATAM, Africa, South or Southeast Asia, **P75 is a measurement
+of the audience they are not losing.** Re-cut the same data at P90/P95 and the device-class cliff appears.
+`sitespeedio/browsertime` is the open tool that can reproduce it deliberately, with CPU and network
+throttling set to an entry-tier profile rather than a developer laptop.
+
+`bbc/simorgh` (Apache-2.0, 1,720★, pushed today) is the **only openly licensed publisher front-end built
+from the start for that constraint** — 40+ languages, low-end devices, poor networks. For any engagement
+whose audience is not North American or Western European, it is the reference implementation to read before
+designing anything.
+
+### Dead ends on this plane, dated
+
+| Repo | Licencia | Stars | Status |
+|---|---|---|---|
+| https://github.com/apache/incubator-pagespeed-ngx | Apache-2.0 | 4,324★ | **Archived 2023-04-21.** The server-side auto-optimisation era is over; the work moved into the build and the CDN |
+| https://github.com/sitespeedio/coach | MIT | 1,193★ | **Archived 2024-05-16** (the project's own advice tool; the monitoring stack it belonged to is alive) |
+| https://github.com/GoogleChromeLabs/psi | Apache-2.0 | 3,096★ | **Archived 2021-04-10.** Use the PageSpeed Insights API directly |
+| https://github.com/google/eleventy-high-performance-blog | MIT | 4,028★ | **Archived**, last push 2024-06-18. Still the best-commented reference for *why* each optimisation exists — read it, do not fork it |
+
+**12,641 combined stars across four archived repos.** On this plane star count is the worst available
+liveness signal: `pushed_at` and `archived` are the only ones that mean anything, and both are one API
+field away. Check them on every row, every pass.
+
+† = secondary source (trade press, vendor or developer blog), reached via search only and **not** verified
+against the primary source from this session. `infrequently.org` and `www.pagespeedmatters.com` are
+**outside this session's allowed network domains** (DNS refusal, **not** 404): the device-budget figures and
+the 49-outlet news CWV study are leads at second hand, **not verified at source this pass**. Verifying them
+needs those two domains allowed, or a direct CrUX BigQuery query — `bq` is available in this environment
+and is the cheaper path for a later pass.

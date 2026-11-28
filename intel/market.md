@@ -11877,3 +11877,149 @@ on the offload itself.
 
 † = secondary source (trade press, vendor or marketing blogs). The Springer/AI & Society LATAM study and
 the two standards repositories are the only primary-quality sources in this regional section.
+
+## Opportunities by region — pass 60 (2026-11-28): the lighting, look-development & rendering plane
+
+**Framing for all four regions.** The verified substrate finding (see `repos/foundations.md`, pass 60) is
+that **31 of 31 repos on this plane are permissive except one**, and the exception is the challenger, not
+the incumbent. So the regional question on this plane is *not* "can open source do this" — it demonstrably
+can. The regional question is **who is allowed to use it, who is paying for the seat above it, and who
+has measured appearance data**. The four sections below are placed on that basis. Every market figure
+carries its source's reliability on its face; the vendor-research numbers are marked and should not be
+quoted to a client without independent confirmation.
+
+### North America
+
+**Where the plane is built, and where the rules about using it are written.** Essentially every incumbent
+artefact is North American in origin: Pixar's **OpenUSD** (7,683★, TOST 1.0), DreamWorks' **MoonRay**
+(4,763★, Apache-2.0), Google's **Filament** (20,807★, Apache-2.0), Autodesk's **arnold-usd** delegate
+(Apache-2.0), AMD's **RadeonProRenderUSD**, NVIDIA's **MDL-SDK** (BSD-3) — and the **Academy Software
+Foundation** itself, which governs 22 projects and took MoonRay in during May 2026.† Andrew Pearce becomes
+ASWF executive director on 2027-01-01, succeeding David Morin; CIQ, Evercast and RIT joined as members
+this cycle, as did Bolt Graphics, CoreWeave and OTOY.†
+
+The governance picture is the commercial opening. Reporting this cycle has studios requiring VFX vendors
+to present an AI strategy, requiring internal AI governance with legal review and human oversight, and
+favouring tools trained on licensed data to protect chain of title; Weta FX's CEO has said studios' legal
+departments instructed the company in writing that no generative AI was to be used on their work.†
+Sohonet (April 2026) describes post-production AI rules arriving from four directions at once — union
+agreements, rights-of-publicity law, studio/platform requirements and the EU AI Act — and notes that **US
+state-level rules are growing in importance** and that facilities will need systems to track approved
+digital replicas and consent terms.† Roland Berger places **compositing and rendering in the "execution
+core"**, the part of the pipeline where AI is most contested and where mid-market studios are squeezed
+hardest.†
+
+**The opportunity, and it is specific to this region because this is where the procurement questionnaires
+are written: sell the licence audit, not the renderer.** A North American studio that has committed in
+writing to no-generative-AI and licensed-data provenance now has to *evidence* that for every component
+in its render stack — and this pass found that the evidence cannot be produced by any scanner. Two
+NVIDIA research repos on this plane carry **one-way licences** (`nvdiffrast` → Nvidia Source Code License
+1-Way Commercial, reported as `NOASSERTION`; `UniRelight` → NVIDIA OneWay Noncommercial, reported as
+**`NONE`**), and three further repos report `NOASSERTION` for three unrelated reasons. A deliverable
+that reads every LICENCE file in a render pipeline and produces a defensible "this is clean for
+commercial delivery" statement is **directly saleable against a stated procurement requirement**, which is
+rarer than it sounds.
+
+*Reliability note:* one vendor research house puts North America at ~42.5% of the global VFX-automation-AI
+market in 2025 and claims cloud rendering costs fell ~35% since 2022.† **Both are commercial-vendor
+figures, independently unverified, and should not be repeated to a client.**
+
+### EMEA
+
+**The region that supplies the permissive science of this plane.** This is a genuine, placed finding
+rather than a market estimate: **EPFL (Switzerland)** produces **Mitsuba 3** (3,002★, pushed 2026-11-27)
+and **Dr.Jit** (816★, BSD-3-Clause), the differentiable-rendering stack that inverse-rendering work runs
+on, *and* the **RGL material database**, which its own lab FAQ reports as **CC0** — the one measured
+appearance source usable in a commercial deliverable.† The **Blender Foundation (Netherlands)** produces
+**Cycles**, whose standalone repo is **Apache-2.0** even though the Blender application is GPL. So the
+two things a studio cannot get from the North American incumbents — a *differentiable* renderer and
+*freely licensed measured material data* — both come from EMEA.
+
+The commercial lookdev seat is also European: **Foundry's Katana** (UK) is the tool that owns the
+authoring position this plane has no open source equivalent for, and Katana 9 added `UsdSuperLayer` and
+an alpha Hydra 2 viewer this cycle.† On workforce, London remains Europe's largest VFX and animation hub
+at **10,564 people, more than double Paris**, its closest rival; the same 2025 Atlas found studios
+clearly experimenting with AI in production but **no evidence of significant employment impact so far**.†
+At Annecy — Europe's largest animation event — AI was reported as "the elephant in the room", and MIFA
+2026 was framed around the AI revolution and new financial models.†
+
+**The opportunity: the differentiable-rendering engagement, and the material-data position.** Mitsuba 3 +
+Dr.Jit make "solve for the lighting/material that reproduces this plate" a tractable deliverable rather
+than research, and both are permissive. Pair that with CC0 RGL data and an EMEA client gets an
+appearance-matching capability with **no non-commercial dependency anywhere in it** — which is exactly
+the thing a North American procurement process is now demanding and cannot easily verify. Note the one
+licence subtlety to disclose up front: Mitsuba's BSD-3 text carries an **appended "Enhancements"
+grant-back**, so a client's publicly released improvements license back to the author automatically.
+
+*Informed gap, stated explicitly:* searches for EU AI Act obligations specific to rendering or VFX, and
+for national incentive schemes aimed at AI-enabled VFX (UK, France, Germany, Ireland), **returned nothing
+substantive**. The EU AI Act appears in this plane's reporting only indirectly, as one of four pressure
+sources in the Sohonet analysis. This is **searched and not found**, not unexamined — a later pass should
+go at the Act's text and the national film-agency schemes directly rather than through trade press.
+
+### APAC
+
+**The region where the capacity question is real and the direction is contested.** The FICCI-EY 2026
+report describes an Indian VFX segment **recalibrating to ₹48 billion** in revenue — recalibrating, not
+simply growing, because **Technicolor's 2025 shutdown displaced up to 2,000 VFX and animation
+professionals in Bengaluru** and Jellyfish Pictures halted global operations the same year.† Other
+projections have India's animation/VFX/post segment moving from **INR 105 billion (2025) to INR 138
+billion (2028)**, and China's animation and VFX market at **USD 72.86 billion (2025) growing at a 6.09%
+CAGR through 2034**.† Multiple research houses call APAC the fastest-growing region for AI in VFX, driven
+by the Chinese and Indian film industries.†
+
+Two placed open-source facts matter more than those estimates. **`syoyo/tinyusdz` (Japan)** is an
+**Apache-2.0** lightweight USD implementation — the practical route to USD on constrained or embedded
+targets, where the reference OpenUSD build is too heavy. (Its star count is **not retrievable from this
+session**: it is absent from the GitHub search index and `github.com` HTML returns 403 through this
+session's proxy. Recorded as an unknown, not as zero.) And **Weta FX (New Zealand)** is the studio at the
+centre of the written no-generative-AI instruction described under North America — the constraint is
+imposed by North American studios but **absorbed by an APAC facility**.
+
+**The opportunity: pipeline reconstitution on permissive ground.** The displaced Bengaluru capacity is
+the most concrete fact on this plane in any region — a large, trained, available workforce whose former
+employer's proprietary pipeline went away with it. A render pipeline rebuilt on
+**OpenUSD + Hydra + MoonRay/LuxCore + OpenImageIO + OCIO + OIDN** is Apache/BSD end to end, owned by the
+client, and carries no per-seat renderer licence at all. That is a rebuild proposition with a named
+workforce behind it, and it is the one engagement on this plane where the permissive substrate is not
+merely cheaper but *structurally* the right answer, because what was lost was the pipeline rather than
+the skill.
+
+### LATAM
+
+**Incentives are moving faster here than tooling, and the gap between them is the opening.** Verified-ish
+and concrete: **Colombia raised its 2026 budget for foreign productions by 49%, to roughly 350,000
+million pesos (~US$90 million)**.† **Mexico unveiled a new tax incentive** and expects "an immediate
+effect", explicitly against the risk of losing ground to Colombia and Brazil, where incentives are
+already established.† A March–April 2026 futures study for the region records that **60% of Brazilian
+animation companies have never engaged in a co-production**, and that **Brazil built its incentives for
+proprietary IP rather than for service work**.† One vendor directory estimates the Latin American VFX
+industry at about **$1.5 billion in 2026**, with Brazil at up to 40% and Colombia at a 40% cash rebate —
+**vendor figures, unverified against Ancine or Proimágenes, and not to be quoted to a client.**† A Linux
+Foundation report (December 2025) puts LATAM AI investment growth at ~28% a year, though not specific to
+animation or VFX.† Colombian trade press reports AI beginning to change the work of animators and
+audiovisual creatives in the country.†
+
+**Informed gap, and it is a real absence rather than a thin search: no LATAM-origin open source project
+was found anywhere on this plane.** Renderers, shading languages, colour management, denoisers,
+acceleration kernels, USD implementations and measured-appearance datasets all originate in North
+America, EMEA or APAC. This was searched for and is absent — recorded explicitly so a later pass reads it
+as measured. It is also the most actionable fact in this section: **the region's engagement value on this
+plane is pipeline integration and service capacity, not upstream contribution**, and nothing in the
+incentive structure above rewards building the upstream piece.
+
+**The opportunity, and it follows directly from the Brazilian finding.** Brazil's incentives reward
+**proprietary IP**, not service work — so the LATAM proposition on this plane is not "render cheaper for
+foreign productions" (which the incentives do not favour and which competes with APAC on price). It is
+**own the pipeline as IP**: a client-owned, Apache/BSD render stack — OpenUSD + Hydra + Cycles/LuxCore +
+OCIO/ACES + OIDN — is itself proprietary technology IP built on permissive foundations, which is the
+category Brazilian incentive design actually supports, while Colombia's and Mexico's cash rebates fund
+the productions that exercise it. **A studio that owns its renderer stack qualifies differently from one
+that rents it**, and no per-seat renderer licence stands between the two.
+
+† = secondary source (trade press, vendor research, festival reporting or lab FAQ), reached via search and
+**not** verified against primary sources this pass. `rgl.epfl.ch`, `www.merl.com`, `zenodo.org` and
+`openexr.com` are outside this session's allowed network domains (`curl` → `000`, a proxy refusal, not a
+404), so the RGL **CC0** claim and the MERL terms conflict are **leads, not verified licence facts**. The
+only primary-quality items in this regional section are the 31 verified repositories and their licence
+files, all of which were read directly.

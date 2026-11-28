@@ -6272,3 +6272,128 @@ OffShoot; because nobody adopts, nobody maintains; so the tools stay at 0★. Th
 liability is what is actually being priced. **The commercial incumbents on this plane — Pomfort
 Silverstack, Imagine Products ShotPut Pro, Hedge OffShoot, YoYotta, Colorfront Express Dailies, Frame.io
 C2C, Moxion — were not price-verified this pass and no figures are quoted for them.**
+
+## Pass 60 (2026-11-28) — foundations of the lighting, look-development & rendering plane: **the healthiest substrate in the whole KB, and it is healthy for a reason this KB can now state as a rule**
+
+All rows verified 2026-11-28 (existence via `git ls-remote` — 41/41 resolved; stars, forks and last push
+via `search/repositories`; licence read from the file wherever the API returned `NOASSERTION`/`NONE`).
+
+### The ASWF core — colour, image, volume, shading and the reference renderer
+
+| Repo | Licence | Stars / forks | Last push | Role on this plane |
+|---|---|---|---|---|
+| [AcademySoftwareFoundation/openvdb](https://github.com/AcademySoftwareFoundation/openvdb) | **Apache-2.0** | 3,559★ / 810f | 2026-11-25 | Sparse volumes — the substrate for rendering smoke, cloud and fire. **Correction to earlier cycles of this KB: the API reports Apache-2.0, not MPL-2.0.** |
+| [AcademySoftwareFoundation/OpenShadingLanguage](https://github.com/AcademySoftwareFoundation/OpenShadingLanguage) | **BSD-3-Clause** | 2,352★ / 424f | **2026-11-27** | OSL — the shading language the industry's renderers share. Pushed the day before this pass. |
+| [AcademySoftwareFoundation/OpenImageIO](https://github.com/AcademySoftwareFoundation/OpenImageIO) | **Apache-2.0** | 2,409★ / 730f | 2026-11-26 | Image I/O plus `maketx`/texture caching — the layer every renderer reads texture through. |
+| [AcademySoftwareFoundation/MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX) | **Apache-2.0** | 2,317★ / 473f | 2026-11-23 | The material interchange graph. The plane's actual interop pivot. |
+| [AcademySoftwareFoundation/OpenColorIO](https://github.com/AcademySoftwareFoundation/OpenColorIO) | **BSD-3-Clause** | 2,152★ / 513f | 2026-10-01 | Colour management. The *only* ASWF core project here without a November push. |
+| [AcademySoftwareFoundation/openexr](https://github.com/AcademySoftwareFoundation/openexr) | **BSD-3-Clause** | 1,893★ / 723f | **2026-11-28** | The HDR image container (incl. deep/multi-part). **Pushed the day of this pass.** 3.5.0 (2026-09-21) added lossless Zstandard compression.† |
+| [AcademySoftwareFoundation/OpenPBR](https://github.com/AcademySoftwareFoundation/OpenPBR) | **Apache-2.0** | 846★ / 47f | 2026-11-16 | The surface shading **model** agreed between Adobe and Autodesk — the spec that ends per-renderer material drift. |
+| [AcademySoftwareFoundation/xstudio](https://github.com/AcademySoftwareFoundation/xstudio) | **Apache-2.0** | 784★ / 135f | 2026-11-20 | DNEG's review/playback application. The lookdev *review* step, permissively licensed. |
+| [AcademySoftwareFoundation/openfx](https://github.com/AcademySoftwareFoundation/openfx) | **BSD-3-Clause** | 594★ / 161f | 2026-11-11 | The host↔plugin API that lets one effect run in many applications. |
+| [AcademySoftwareFoundation/Imath](https://github.com/AcademySoftwareFoundation/Imath) | **BSD-3-Clause** | 495★ / 166f | 2026-11-13 | The maths types (half, vectors, matrices) everything above shares. |
+| [AcademySoftwareFoundation/OpenColorIO-Config-ACES](https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES) | **BSD-3-Clause** | 440★ / 53f | 2026-10-27 | The build system for the ACES OCIO configs — the artefact a facility actually installs. |
+| [AcademySoftwareFoundation/rawtoaces](https://github.com/AcademySoftwareFoundation/rawtoaces) | **Apache-2.0** | 197★ / 66f | 2026-11-24 | Camera raw → ACES. The front door of a colour-managed render pipeline. |
+| [OpenMoonRay/openmoonray](https://github.com/OpenMoonRay/openmoonray) | **Apache-2.0** (10,174 B, read) | **4,763★** / 322f | 2026-11-16 | **DreamWorks' production path tracer** — MCRT, vectorised, with an `hdMoonRay` Hydra delegate. Joined the ASWF in May 2026†; its first ASWF release added MaterialX support.† The highest-starred production renderer in open source. |
+
+### Light transport engines — and the one place copyleft appears
+
+| Repo | Licence | Stars / forks | Last push | Notes |
+|---|---|---|---|---|
+| [mmp/pbrt-v4](https://github.com/mmp/pbrt-v4) | **Apache-2.0** | 3,761★ / 659f | 2026-11-15 | The reference implementation of the textbook. Correctness oracle, not a production renderer. |
+| [mitsuba-renderer/mitsuba3](https://github.com/mitsuba-renderer/mitsuba3) | **BSD-3-Clause + grant-back** (see below) | 3,002★ / 379f | **2026-11-27** | Retargetable, **differentiable** research renderer (EPFL). The inverse-rendering workhorse. |
+| [appleseedhq/appleseed](https://github.com/appleseedhq/appleseed) | **MIT** | 2,337★ / 355f | **2026-06-11** | The most permissive full renderer on the plane — and the only one slipping (5 months quiet). |
+| [LuxCoreRender/LuxCore](https://github.com/LuxCoreRender/LuxCore) | **Apache-2.0** | 1,354★ / 178f | 2026-11-26 | Physically based GPU/CPU renderer, alive and permissive. |
+| [blender/cycles](https://github.com/blender/cycles) | **Apache-2.0** | 686★ / 163f | 2026-11-16 | **The licence fact worth the whole row: Blender is GPL, but Cycles is Apache-2.0 in its own standalone repo.** You can embed Cycles in proprietary software; you cannot embed Blender. |
+| [google/filament](https://github.com/google/filament) | **Apache-2.0** | **20,807★** / 2,322f | 2026-11-25 | Real-time PBR engine. By far the largest star base on this plane — and it is the *real-time* one, not the offline one. |
+| [pablode/gatling](https://github.com/pablode/gatling) | **GPL-3.0** | 334★ / 23f | **2026-11-27** | Vulkan MaterialX/OpenPBR path tracer with a Hydra delegate. **The plane's only copyleft engine — and it is the challenger, not the incumbent.** |
+
+### Acceleration, denoise and the USD imaging bridge
+
+| Repo | Licence | Stars / forks | Last push | Role |
+|---|---|---|---|---|
+| [PixarAnimationStudios/OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD) | **TOST 1.0** (`NOASSERTION`) | 7,683★ / 1,488f | 2026-11-25 | Scene description + **Hydra**, the framework that lets one scene drive many renderers. Licence read below. |
+| [RenderKit/embree](https://github.com/RenderKit/embree) | **Apache-2.0** | 2,783★ / 444f | 2026-11-26 | CPU ray-traversal kernels. The `hdEmbree` delegate in OpenUSD is built on it. |
+| [RenderKit/oidn](https://github.com/RenderKit/oidn) | **Apache-2.0** | 2,130★ / 204f | 2026-10-05 | Open Image Denoise — the neural denoiser (also listed in `agents/top.md`). |
+| [RenderKit/ospray](https://github.com/RenderKit/ospray) | **Apache-2.0** | 1,107★ / 201f | 2026-10-14 | Scalable CPU ray-tracing renderer, strongest in scientific/large-data visualisation. |
+| [mitsuba-renderer/drjit](https://github.com/mitsuba-renderer/drjit) | **BSD-3-Clause** | 816★ / 80f | 2026-10-22 | The JIT/autodiff compiler under Mitsuba 3. The piece that makes differentiable rendering tractable. |
+| [NVIDIA/MDL-SDK](https://github.com/NVIDIA/MDL-SDK) | **BSD-3-Clause** | 538★ / 93f | 2026-08-31 | Material Definition Language SDK. **Permissive — unlike the NVIDIA research repos on this plane.** |
+| [usd-wg/assets](https://github.com/usd-wg/assets) | **Apache-2.0** | 327★ / 53f | 2026-10-29 | The USD working group's test assets — your conformance corpus for a renderer integration. |
+| [KhronosGroup/ANARI-SDK](https://github.com/KhronosGroup/ANARI-SDK) | **Apache-2.0** | 306★ / 57f | 2026-11-25 | Khronos' renderer-agnostic rendering API. The standards-body answer to per-renderer bindings. |
+| [RenderKit/openvkl](https://github.com/RenderKit/openvkl) | **Apache-2.0** | 229★ / 28f | 2026-10-26 | Volume kernels, the volumetric counterpart to Embree. |
+| [Autodesk/arnold-usd](https://github.com/Autodesk/arnold-usd) | **Apache-2.0 + BSD-3** (`NOASSERTION`) | 287★ / 69f | 2026-11-26 | The Hydra delegate/procedural for Arnold. **The delegate is open; the renderer it drives is not.** |
+| [GPUOpen-LibrariesAndSDKs/RadeonProRenderUSD](https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderUSD) | **Apache-2.0** | 241★ / 48f | **2025-08-05** | AMD's Hydra delegate. Permissive but **~16 months dormant** — do not plan on it. |
+
+**Thirteen ASWF rows, seven engines, eleven acceleration/bridge rows — 31 verified repos, every URL
+resolved.** This is the single healthiest substrate recorded anywhere in this KB.
+
+### Why it is healthy — the KB's content law, stated in its cleanest form yet
+
+Eleven passes of this KB have converged on one rule: **regulatory pressure does not predict permissive
+supply; the licence of the required knowledge content does.** Healthcare proved it with the CPT codes
+and MedDRA; media proved it again in pass 5 with ISRC/ISWC/ISAN/EIDR, where the registry assignment —
+not the parser — was the scarce thing.
+
+This plane is the **control case that the rule predicts, and it comes out exactly as predicted.** The
+required knowledge content of physically based rendering is **physics**: the rendering equation, BSDF
+models, spectral response. None of it is anybody's property, there is no registry to join and no
+membership to buy — **so the code is permissive, foundation-governed and pushed this week.** Five
+load-bearing projects pushed within 48 hours of this pass; `openexr` pushed *on the day*.
+
+**And the rule holds at the one point where this plane does have proprietary content.** The gated
+artefact here is not code — it is **measured appearance data**, the BRDF/material measurements you
+cannot derive from first principles because somebody had to put a real material on a real gonioreflectometer:
+
+| Dataset | Reported terms | Consequence for an engagement |
+|---|---|---|
+| **RGL material database** (EPFL) | **CC0**, per the lab's FAQ: "unless otherwise noted, all material data is licensed under the Creative Commons Zero" † | Usable in a commercial deliverable. The permissive measured-appearance source. |
+| **MERL BRDF database** (100 materials) | **Research/academic use only** per MERL's own notice — but a 2023 Zenodo record of the same data states **CC-BY-SA-4.0** † | **Terms conflict. Do not ship it.** Two sources disagree about the same 100 materials, and the permissive-looking one is not the rights holder's own notice. |
+
+**Channel limitation, stated so a later pass does not mistake it for a finding:** `rgl.epfl.ch`,
+`www.merl.com`, `openexr.com` and `zenodo.org` are **outside this session's allowed network domains** —
+`curl` returned `000` (proxy refusal, **not** 404) and DNS did not resolve for the fetch tool. The two
+dataset rows above are therefore **search-reported and NOT verified against the primary source from this
+session.** They are written here as leads with that caveat attached, not as verified licence facts. A
+session with those domains allowed should resolve the MERL conflict first — it is the one unresolved
+rights question on this plane.
+
+### Three `NOASSERTION`s, three different causes — all read, none guessable
+
+Pass 58 recorded that three of its licences could not be read by a scanner. This plane does it again,
+and the three causes are instructive precisely because **no two are the same**:
+
+| Repo | Why the API says `NOASSERTION` | What it actually is |
+|---|---|---|
+| OpenUSD | Licence text is **modified Apache-2.0** | **Tomorrow Open Source Technology License 1.0** (49,826 B). Its own preamble: "differs from the original Apache License 2.0 in the following manner. Section 6 ('Trademarks') is different." **Permissive in substance** — Apache with a rewritten trademark clause. |
+| mitsuba3 | BSD-3 text with an **appended clause** | BSD-3-Clause (2,189 B) **plus an "Enhancements" grant-back**: publish enhancements without a separate written licence and you grant the author "a non-exclusive, royalty-free perpetual license to install, use, modify... distribute, and sublicense such enhancements". Permissive, but **your public fork licenses back automatically** — worth knowing before a client's improvements go public. |
+| arnold-usd | **Mixed file** — one licence plus a third-party notice | `LICENSE.md`, 38,251 B: `SPDX-License-Identifier: Apache-2.0` in an HTML comment on line 1, with Google's BSD-3-Clause notice appended. Effectively Apache-2.0 for Autodesk's code. |
+
+**The method rule, now at its fourth confirmation in this KB: a licence field is a hint, a licence file is
+evidence.** Three repos, one `NOASSERTION` value, three genuinely different legal positions — and only
+one of the three (mitsuba3's grant-back) carries an obligation a reviewer would want to know about.
+
+### Method corrections from this pass — reusable across all twelve industries
+
+1. **`gh api repos/<slug>` is gated by this session's repository scope; `search/repositories` is not.**
+   Every direct `repos/` call returned *"GitHub access to this repository is not enabled for this
+   session"* — for public repos. The `-f q='repo:<slug>'` search form returned full metadata for the
+   same repos. **Use the search form, not the repos endpoint, for third-party metadata here.**
+2. **A `422` from `search/repositories` is not absence — and this pass has the proof.**
+   `AcademySoftwareFoundation/MoonRay`, `ampas/aces-core`, `ampas/aces-dev` and `syoyo/tinyusdz` all
+   returned the 422 *"resources do not exist or you do not have permission"*. `git ls-remote` then
+   resolved **three of the four**, and the fourth was simply the wrong slug. `ampas/aces-core` and
+   `ampas/aces-dev` both carry **Apache-2.0** (11,356 B each, read via raw) and `syoyo/tinyusdz` carries
+   an **Apache-2.0 short notice** (672 B — a reference, not the full text). Their star counts are
+   **not retrievable from this session**, because they are absent from the search index and
+   `github.com` HTML returns **403 through the proxy**. Recorded as an informed gap, not as zero.
+3. **`git ls-remote` proves reachability, not canonical identity — it follows renames.**
+   `dreamworksanimation/openmoonray` answered `ls-remote` happily. It is a **rename redirect**; the
+   canonical slug is **`OpenMoonRay/openmoonray`**. Writing the slug `ls-remote` accepted would have
+   published a URL that works today and rots the moment GitHub drops the redirect. **Resolve the
+   canonical owner by name search before writing a row.**
+4. **The clone trap recurs, exactly as in pass 8's `TheCraftedTech/opencue`.** Searching `tinyusdz`
+   surfaced **`kelley-bu/tinyusdzclone`** (`NOASSERTION`, **0★**, 2026-06-11) above the real project.
+   A careless pass writes the clone. **Prefer the owner you can name over the match ranked first.**
+
+† = secondary source (trade press, lab FAQ or project site, reached only through search results and
+**not** verified against the primary source from this session — see the channel limitation above).

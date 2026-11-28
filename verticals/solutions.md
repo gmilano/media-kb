@@ -3111,3 +3111,46 @@ Real systems that run a production office or a set, and that can carry AI on top
   that shape.
 
 † = secondary source (vendor and trade guides, not price- or spec-verified this pass).
+
+## Lighting, lookdev & rendering platforms — the customisable layer — added 2026-11-28 (pass 60)
+
+Real, running systems on this plane that a studio can install and that an agentic layer can sit on top
+of — the renderer equivalent of Odoo for ERP. All verified 2026-11-28.
+
+| Platform | Repo / home | Licence | Stars | Last push | What you get, and what you can add AI to |
+|---|---|---|---|---|---|
+| **MoonRay** | [OpenMoonRay/openmoonray](https://github.com/OpenMoonRay/openmoonray) | **Apache-2.0** | 4,763★ / 322f | 2026-11-16 | A **production** path tracer with a Hydra delegate (`hdMoonRay`) and distributed rendering, proven on feature animation at DreamWorks. The only install-and-run production renderer on this plane that a client can own outright. Add AI at shader authoring and at sampling policy, not at the integrator. |
+| **Blender + Cycles** | [blender/cycles](https://github.com/blender/cycles) | **Apache-2.0** (Cycles standalone) / **GPL-2.0+** (Blender app) | 686★ / 163f | 2026-11-16 | The whole DCC, free, with the renderer available **separately under Apache-2.0**. **The licence split is the usable fact: ship Cycles inside a proprietary service; ship Blender only as a separate GPL application.** Alpha support for rendering Gaussian splats is arriving in the commercial DCCs this cycle.† |
+| **LuxCore** | [LuxCoreRender/LuxCore](https://github.com/LuxCoreRender/LuxCore) | **Apache-2.0** | 1,354★ / 178f | 2026-11-26 | A physically based GPU/CPU renderer with an active maintainer base — the realistic permissive alternative when MoonRay's scale is not needed. |
+| **OSPRay / OpenVKL / Embree** | [RenderKit/ospray](https://github.com/RenderKit/ospray) | **Apache-2.0** | 1,107★ / 201f | 2026-10-14 | A rendering *service* for very large data (volumes, scientific, archviz at scale) rather than a DCC. The natural back end for a browser-delivered render API. |
+| **xSTUDIO** | [AcademySoftwareFoundation/xstudio](https://github.com/AcademySoftwareFoundation/xstudio) | **Apache-2.0** | 784★ / 135f | 2026-11-20 | DNEG's review and playback application, now ASWF-governed — the **lookdev review** step. The highest-leverage place to put an agent on this plane, because it is where humans make the approve/reject decision that everything upstream is optimising for. |
+| **Filament** | [google/filament](https://github.com/google/filament) | **Apache-2.0** | 20,807★ / 2,322f | 2026-11-25 | Real-time PBR for device and web delivery. Where a lookdev result has to be *shown* to a client interactively rather than rendered offline. |
+| **OpenUSD + Hydra** | [PixarAnimationStudios/OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD) | **TOST 1.0** — modified Apache-2.0, permissive | 7,683★ / 1,488f | 2026-11-25 | Not a renderer: **the socket**. One scene, many render delegates (`hdStorm`, `hdEmbree`, `hdMoonRay`, Arnold, Radeon ProRender). This is the integration point that makes the rest of the table interchangeable. |
+
+**Seven real platforms. No placeholder rows.**
+
+### The commercial incumbents, and what is honestly known about them
+
+The paid tier of this plane is **Autodesk Arnold, Pixar RenderMan, SideFX Karma/Solaris, Maxon Redshift,
+Chaos V-Ray/Vantage and Foundry Katana**. Trade reporting this cycle has Houdini 21 adding alpha Gaussian-splat
+rendering in Karma XPU, Katana 9 adding `UsdSuperLayer` and an alpha Hydra 2 viewer, Chaos Vantage 3 adding
+USD and MaterialX support with AI material generation, and Redshift 2026.3 shipping Hydra/USD updates.†
+
+**None of these were price- or licence-verified this pass and no figures are quoted for them.** What *is*
+verified and matters commercially: **Autodesk's Hydra delegate for Arnold is Apache-2.0 open source
+(`Autodesk/arnold-usd`, 287★, pushed 2026-11-26) while the renderer it drives is proprietary.** That is the
+shape of the whole paid tier — **the connector is open, the kernel is not** — and it is good news for an
+engagement, because it means the integration work is on open ground even when the renderer is bought.
+
+### The honest gap in this table
+
+There is **no open source equivalent of Katana** — no permissive *lighting and look-development
+application*, the tool a lighting TD actually spends the day in, with light rigs, looks, collections and
+per-shot overrides as first-class objects. The plane has permissive **renderers** (MoonRay, LuxCore,
+Cycles), a permissive **interchange** (MaterialX, OpenUSD), a permissive **review** tool (xSTUDIO) and
+permissive **kernels** (Embree, OIDN) — and nothing permissive in the authoring seat between them.
+Houdini Solaris and Katana own that seat commercially. **Searched and absent, recorded so a later pass
+reads this as measured rather than unexamined.** It is also the clearest build-vs-buy opening on the
+plane: the surrounding pieces are all Apache/BSD and already speak USD to each other.
+
+† = secondary source (trade press, reached via search; not price- or spec-verified this pass).

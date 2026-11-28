@@ -9174,3 +9174,148 @@ capture**. Whoever owns that owns every downstream claim — provenance, continu
 takedown index that India's 3-hour window† makes mandatory.
 
 † = secondary source.
+
+## Pass 60 (2026-11-28) — lighting, look-development & rendering patterns
+
+Every repo named below appears with its verified licence, star count and last-push date in
+`agents/top.md`, `repos/foundations.md` or `verticals/solutions.md` under pass 60.
+
+## Pattern 147 — The client-owned render stack (**zero per-seat renderer licence, Apache/BSD end to end**)
+
+**Problem.** A studio or brand wants its own rendering capability without a per-seat renderer licence and
+without a GPL obligation on the service it wraps around it.
+
+**Recipe.**
+1. **Scene description:** [OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD) (TOST 1.0 — modified
+   Apache-2.0, permissive). This is the socket; everything else is swappable behind it.
+2. **Material definition:** [MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX) (Apache-2.0)
+   authored against the [OpenPBR](https://github.com/AcademySoftwareFoundation/OpenPBR) (Apache-2.0) surface
+   model, so the look survives a change of renderer.
+3. **Renderer — pick by scale:**
+   [openmoonray](https://github.com/OpenMoonRay/openmoonray) (Apache-2.0, 4,763★) for production feature
+   work via its `hdMoonRay` Hydra delegate; [LuxCore](https://github.com/LuxCoreRender/LuxCore)
+   (Apache-2.0) for mid-scale; **[blender/cycles](https://github.com/blender/cycles) (Apache-2.0)** when
+   you must embed the renderer inside proprietary software.
+4. **Texture + image I/O:** [OpenImageIO](https://github.com/AcademySoftwareFoundation/OpenImageIO)
+   (Apache-2.0) with `maketx`; [OpenEXR](https://github.com/AcademySoftwareFoundation/openexr) (BSD-3-Clause)
+   for output, 3.5.0+ for Zstandard lossless.†
+5. **Colour:** [OpenColorIO](https://github.com/AcademySoftwareFoundation/OpenColorIO) (BSD-3-Clause) with
+   configs built from
+   [OpenColorIO-Config-ACES](https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES)
+   (BSD-3-Clause); ingest camera raw through
+   [rawtoaces](https://github.com/AcademySoftwareFoundation/rawtoaces) (Apache-2.0).
+6. **Acceleration + denoise:** [embree](https://github.com/RenderKit/embree) (Apache-2.0),
+   [openvkl](https://github.com/RenderKit/openvkl) (Apache-2.0) for volumes,
+   [oidn](https://github.com/RenderKit/oidn) (Apache-2.0) to make low-sample renders shippable.
+7. **Render management:** `AcademySoftwareFoundation/OpenCue` (Apache-2.0) — already in this KB from pass 58.
+8. **Review:** [xstudio](https://github.com/AcademySoftwareFoundation/xstudio) (Apache-2.0).
+9. **Conformance:** render [usd-wg/assets](https://github.com/usd-wg/assets) (Apache-2.0) and diff against
+   reference output before trusting any renderer swap.
+
+**Licence position:** Apache-2.0 / BSD-3-Clause throughout. **No copyleft, no per-seat fee, no
+non-commercial dependency.** The one thing to get right is step 3: Cycles-standalone is Apache-2.0, the
+Blender *application* is GPL-2.0+ — embed the former, ship the latter only as a separate application.
+
+**Why it works:** because the required knowledge content is physics, not a licensed registry. This is the
+one plane in this KB where "all open source" is an honest promise — unlike the rights/royalty stack of
+pass 5, where it must never be promised.
+
+## Pattern 148 — The `NONE`-and-`NOASSERTION` render-stack licence gate (**a CI check, and the clause it must catch**)
+
+**Problem.** A studio has committed in writing to no-generative-AI and licensed-data provenance, and now
+has to evidence it for every component in a render pipeline. No scanner can do this: on this plane one
+repo's licence field says `NOASSERTION` for three unrelated reasons and another says **`NONE` while a
+4,080-byte licence file sits in the repo root**.
+
+**Recipe.**
+1. **Enumerate** every direct and transitive dependency of the render stack, with owner and slug.
+2. **Resolve existence and canonical identity.** `git ls-remote` proves reachability, **but it follows
+   rename redirects** — `dreamworksanimation/openmoonray` answers happily and the canonical slug is
+   `OpenMoonRay/openmoonray`. Confirm the owner by name search before recording a URL.
+3. **Fetch the licence file, not the API field.** Try `LICENSE`, `LICENSE.txt`, `LICENSE.md`,
+   **`license.txt` (lowercase)**, `COPYING`, **`COPYING.md`** across `main`/`master`. A 404 on the raw
+   channel is **never on its own** proof a licence is missing — if `README.md` also 404s, your filenames
+   are wrong, not the repo.
+4. **Fail the build on these strings**, which are the ones that matter and the ones SPDX cannot express:
+   - `non-commercial` / `noncommercially` / `research or evaluation purposes only`
+   - `OneWay` / `1-Way Commercial` → **the asymmetric grant**
+   - `may use the Work and any derivative works commercially` appearing *next to* a use limitation →
+     the licensor has reserved commercially what it denied you
+5. **Classify, don't just flag.** Three `NOASSERTION`s on this plane are three different legal positions:
+   OpenUSD = **TOST 1.0**, Apache-2.0 with a rewritten §6 Trademarks (fine); mitsuba3 = **BSD-3 plus an
+   "Enhancements" grant-back** (fine, but disclose: public forks license back automatically);
+   arnold-usd = **Apache-2.0 with an appended third-party BSD-3 notice** (fine).
+6. **Treat `NONE` as more severe than `NOASSERTION`,** not less. `UniRelight` is the proof.
+7. **For native/linked dependencies, resolve the licence of the *linked* libraries**, not the repo — the
+   Chromaprint rule from pass 8 applies unchanged.
+
+**Known catches this gate produces on this plane:** `NVlabs/nvdiffrast` (1-Way Commercial),
+`Lilgeneric/UniRelight` (OneWay Noncommercial, reported `NONE`), `lvsn/GaSLight` (**no licence file at
+all** → all rights reserved), `pablode/gatling` (GPL-3.0 — not a catch, but a decision).
+**Passes clean:** the entire ASWF core, Embree/OIDN/OSPRay/OpenVKL, MDL-SDK (BSD-3), `nv-tlabs/3dgrut`
+(Apache-2.0 — the sibling-org counter-example that stops the gate becoming "ban NVIDIA").
+
+## Pattern 149 — Appearance matching by inverse rendering (**the EMEA stack, and the only AI on this plane that is both permissive and alive**)
+
+**Problem.** Match a CG element's material and lighting to a live-action plate, without a non-commercial
+dependency anywhere in the chain.
+
+**Recipe.**
+1. **Differentiable renderer:** [mitsuba3](https://github.com/mitsuba-renderer/mitsuba3) (BSD-3 +
+   grant-back, pushed 2026-11-27) on [drjit](https://github.com/mitsuba-renderer/drjit) (BSD-3-Clause) —
+   optimise material and light parameters against the plate by gradient descent.
+2. **Material parameterisation:** express the result as
+   [MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX)/OpenPBR so the solved look is
+   portable to the production renderer rather than trapped in the solver.
+3. **Measured ground truth:** **RGL/EPFL material data (reported CC0†)** — usable commercially. **Do not
+   use the MERL database**: its own notice says research/academic only while a Zenodo record of the same
+   100 materials claims CC-BY-SA-4.0. **Terms conflict; treat as unusable until the rights holder's own
+   notice says otherwise.**
+4. **Environment lighting:** this is the weak link and must be disclosed as such. The permissive option,
+   [DiffusionLight](https://github.com/DiffusionLight/DiffusionLight) (MIT), estimates an HDRI from a
+   single LDR photo — **but has not been pushed since 2024-12-18**. Treat it as a technique to
+   reimplement, not a dependency to vendor. **Do not reach for `UniRelight` or `nvdiffrast`** (one-way
+   non-commercial) or `GaSLight` (no licence).
+5. **Final render + denoise:** MoonRay or Cycles, then [oidn](https://github.com/RenderKit/oidn)
+   (Apache-2.0).
+6. **Validate in colour:** OCIO/ACES config, and review in
+   [xstudio](https://github.com/AcademySoftwareFoundation/xstudio).
+
+**Licence position:** permissive throughout, with **two disclosures**: Mitsuba's grant-back clause, and
+the fact that step 4's only permissive option is dormant. **This is the honest shape of "AI lighting" on
+this plane today** — the optimisation is solid and permissive; the generative convenience layer is not.
+
+## Pattern 150 — Renderer-swappable delivery through Hydra (**buy the kernel, own the wiring**)
+
+**Problem.** The client has bought Arnold, RenderMan or Karma and will not give it up, but does not want
+the pipeline welded to it.
+
+**Recipe.**
+1. Author everything as **OpenUSD** with **MaterialX/OpenPBR** looks.
+2. Drive the bought renderer through its **open** Hydra delegate —
+   [Autodesk/arnold-usd](https://github.com/Autodesk/arnold-usd) is **Apache-2.0** even though Arnold is
+   not. (AMD's [RadeonProRenderUSD](https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderUSD) is
+   also Apache-2.0 but **~16 months dormant** — do not plan on it.)
+3. Keep a **permissive fallback delegate** wired in parallel — `hdMoonRay`, `hdEmbree`, or
+   [gatling](https://github.com/pablode/gatling) (**GPL-3.0 — separate process only**, never linked into
+   proprietary code).
+4. Where a renderer-agnostic API is wanted above the delegates, use
+   [ANARI-SDK](https://github.com/KhronosGroup/ANARI-SDK) (Apache-2.0).
+5. **Prove the swap continuously:** render [usd-wg/assets](https://github.com/usd-wg/assets) through every
+   configured delegate in CI and diff the output. A swap you have not exercised is not a swap.
+6. Deliver interactive client review with [filament](https://github.com/google/filament) (Apache-2.0),
+   and on constrained or embedded targets read USD with **`syoyo/tinyusdz`** (Apache-2.0) instead of the
+   full OpenUSD build.
+
+**Licence position:** Apache-2.0/BSD, with `gatling` quarantined to its own process if used at all —
+**GPL-3.0 is safe across a process boundary and unsafe linked**, the same rule this KB applied to CasparCG
+in pass 25.
+
+**Why this is the default recommendation on this plane:** across the entire paid tier, **the connector is
+open and the kernel is closed.** That means the integration work is always on open ground, so the
+defensible architecture is to own the wiring and treat the renderer as replaceable — regardless of which
+renderer the client has already paid for.
+
+† = secondary source, reached via search and not verified against the primary source this pass
+(`rgl.epfl.ch`, `www.merl.com`, `zenodo.org` and `openexr.com` are outside this session's allowed network
+domains: `curl` → `000`, a proxy refusal, not a 404).

@@ -10,6 +10,47 @@ updated: 2026-11-28
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-28 — pass 60: the rendering substrate (**31 verified repos, one copyleft engine, and the control case that proves this KB's content law**)
+
+Infrastructure counterpart to this date's `agents/trending.md` entry. All verified 2026-11-28.
+
+| Repo | Licencia | Stars / forks | Last push | Layer |
+|---|---|---|---|---|
+| [AcademySoftwareFoundation/openvdb](https://github.com/AcademySoftwareFoundation/openvdb) | Apache-2.0 | 3,559★ / 810f | 2026-11-25 | Sparse volumes (**correction: Apache-2.0, not MPL-2.0 as earlier cycles recorded**) |
+| [AcademySoftwareFoundation/OpenImageIO](https://github.com/AcademySoftwareFoundation/OpenImageIO) | Apache-2.0 | 2,409★ / 730f | 2026-11-26 | Image I/O + texture cache |
+| [AcademySoftwareFoundation/MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX) | Apache-2.0 | 2,317★ / 473f | 2026-11-23 | Material interchange |
+| [RenderKit/embree](https://github.com/RenderKit/embree) | Apache-2.0 | 2,783★ / 444f | 2026-11-26 | CPU ray traversal kernels |
+| [PixarAnimationStudios/OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD) | **TOST 1.0** (`NOASSERTION`) | 7,683★ / 1,488f | 2026-11-25 | Scene description + Hydra |
+| [google/filament](https://github.com/google/filament) | Apache-2.0 | **20,807★** / 2,322f | 2026-11-25 | Real-time PBR engine — the plane's largest star base |
+| [mmp/pbrt-v4](https://github.com/mmp/pbrt-v4) | Apache-2.0 | 3,761★ / 659f | 2026-11-15 | Reference path tracer / correctness oracle |
+| [blender/cycles](https://github.com/blender/cycles) | **Apache-2.0** | 686★ / 163f | 2026-11-16 | **Blender is GPL; Cycles standalone is Apache-2.0.** The embeddable one |
+| [LuxCoreRender/LuxCore](https://github.com/LuxCoreRender/LuxCore) | Apache-2.0 | 1,354★ / 178f | 2026-11-26 | GPU/CPU physically based renderer |
+| [RenderKit/ospray](https://github.com/RenderKit/ospray) | Apache-2.0 | 1,107★ / 201f | 2026-10-14 | Scalable CPU ray tracing (large data) |
+| [AcademySoftwareFoundation/xstudio](https://github.com/AcademySoftwareFoundation/xstudio) | Apache-2.0 | 784★ / 135f | 2026-11-20 | Review/playback (DNEG) |
+| [mitsuba-renderer/drjit](https://github.com/mitsuba-renderer/drjit) | BSD-3-Clause | 816★ / 80f | 2026-10-22 | JIT/autodiff under Mitsuba 3 |
+| [NVIDIA/MDL-SDK](https://github.com/NVIDIA/MDL-SDK) | **BSD-3-Clause** | 538★ / 93f | 2026-08-31 | Material Definition Language — permissive, unlike NVIDIA's research repos |
+| [KhronosGroup/ANARI-SDK](https://github.com/KhronosGroup/ANARI-SDK) | Apache-2.0 | 306★ / 57f | 2026-11-25 | Renderer-agnostic rendering API |
+| [usd-wg/assets](https://github.com/usd-wg/assets) | Apache-2.0 | 327★ / 53f | 2026-10-29 | USD conformance test assets |
+| [Autodesk/arnold-usd](https://github.com/Autodesk/arnold-usd) | Apache-2.0 + BSD-3 (`NOASSERTION`) | 287★ / 69f | 2026-11-26 | Hydra delegate — **open delegate, closed renderer** |
+| [RenderKit/openvkl](https://github.com/RenderKit/openvkl) | Apache-2.0 | 229★ / 28f | 2026-10-26 | Volume kernels |
+| [AcademySoftwareFoundation/rawtoaces](https://github.com/AcademySoftwareFoundation/rawtoaces) | Apache-2.0 | 197★ / 66f | 2026-11-24 | Camera raw → ACES |
+
+**Eighteen rows here; the full 31-repo table with the ASWF core and the engine tier is in
+`repos/foundations.md` under pass 60.**
+
+**The structural reading.** Of 31 verified repos on this plane, **one** is copyleft
+(`pablode/gatling`, GPL-3.0) and it is the challenger; everything at the incumbent tier is
+Apache-2.0, BSD-3-Clause or MIT, and most of it is governed by a foundation rather than a vendor. That
+is the inverse of what this KB found in healthcare, in rights/royalties (pass 5) and in local news
+(pass 49) — and it is **the control case the KB's own law predicts**: the required knowledge content of
+physically based rendering is *physics*, which nobody owns, so there is no registry to gate the code.
+Where this plane *does* have proprietary content — **measured BRDF/appearance data** — the gate
+reappears immediately (MERL: research-only per its own notice vs CC-BY-SA-4.0 per a Zenodo record of
+the same 100 materials — **terms conflict, do not ship**; RGL/EPFL: CC0).†
+
+† = search-reported, **not** verified against primary sources: `rgl.epfl.ch`, `www.merl.com` and
+`zenodo.org` are outside this session's allowed network domains (`curl` → `000`, a proxy refusal, not a 404).
+
 ## 2026-11-28 — pass 59: the on-set data-custody substrate (**six implementations of the same tool in one year, two stars between them, and a published standard to converge on that none of them converged on**)
 
 **Channel note:** `ls-remote` (**20 explicit checks, 3 genuine 404s**), `search/repositories` and `raw`

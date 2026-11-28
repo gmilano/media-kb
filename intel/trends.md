@@ -5785,3 +5785,95 @@ pressure is arriving next to this plane rather than on it**, and per this KB's o
 does not predict permissive supply — that is entirely consistent with finding 156★ here.
 
 † = secondary source (trade press, vendor or marketing blogs), not price- or spec-verified this pass.
+
+## Trends — pass 60 (2026-11-28): the lighting, look-development & rendering plane
+
+### 1. On this plane the stars point at the neural work and the commits point at the physical work
+
+This is the measurement of the pass, and it inverts the assumption that AI is where the movement is.
+
+| Half of the plane | Representative repos | Star mass | Maintenance state |
+|---|---|---|---|
+| **Physically based** | openexr, OpenShadingLanguage, mitsuba3, gatling, MaterialX, embree, OpenImageIO, openvdb, LuxCore | ~20,000★ across the ASWF core + engines | **Five load-bearing pushes inside 48 hours of this pass**; `openexr` pushed *on the day* (2026-11-28), OSL and mitsuba3 and gatling on 2026-11-27 |
+| **Neural / generative** | IC-Light, DiffusionLight, GaSLight, UniRelight, nvdiffrast | 8,591★ in IC-Light alone | **IC-Light quiet ~21 months** (2025-02-20), **DiffusionLight ~23 months** (2024-12-18), GaSLight 15 months and unlicensed, UniRelight one-way non-commercial |
+
+**8,591 stars of permissively licensed relighting have not been touched in 21 months.** A pass that
+ranked this plane by stars would have recommended four dormant or unusable repos; a pass that ranked by
+last-push would have recommended the ASWF core. **Rank by push date on this plane, and say so in the
+deliverable.**
+
+The one exception is the exception that proves the shape: **Open Image Denoise** (Apache-2.0, 2,130★) is
+the only AI component here that is permissive, maintained and genuinely production-standard — and it does
+not generate appearance at all. It removes Monte-Carlo noise from light transport that a physical
+renderer computed. **Falsifiable prediction, recorded for a later pass to check: the next AI component on
+this plane to reach real adoption will again be an *accelerator* of physical rendering — denoising,
+importance sampling, radiance caching — not a replacement for it.** If a generative relighting or
+material-synthesis tool reaches production adoption with a permissive licence and sustained commits
+before the next media pass, this prediction is wrong and should be marked wrong.
+
+### 2. The KB's content law gets its control case — and passes it
+
+Eleven passes have converged on: **regulatory pressure does not predict permissive supply; the licence of
+the required knowledge content does.** Healthcare established it (CPT, MedDRA), media pass 5 confirmed it
+(ISRC/ISWC/ISAN/EIDR — the registry assignment was scarce, never the parser).
+
+A law needs a control case. **This plane is it.** The required knowledge content of physically based
+rendering is *physics* — the rendering equation, BSDF models, spectral response — which nobody owns and
+no registry gates. The law predicts the code should therefore be healthy and permissive. Result:
+**31 verified repos, 30 permissive (Apache-2.0 / BSD-3-Clause / MIT), 1 copyleft — and the copyleft one
+is the challenger** (`pablode/gatling`, GPL-3.0, 334★), not the incumbent. The incumbent tier is
+foundation-governed rather than vendor-governed.
+
+**And the law holds at the single point where this plane *does* have proprietary content.** Measured BRDF
+and appearance data cannot be derived from first principles — somebody had to measure a real material —
+and there the gate reappears instantly: **MERL's 100-material database is research/academic-only per its
+own notice, while a Zenodo record of the same data claims CC-BY-SA-4.0** (terms conflict — do not ship),
+against **RGL/EPFL's CC0**.† One plane, both outcomes, split exactly along the line the law predicts.
+This is now the strongest formulation the rule has had, because it is the first time the KB has tested it
+somewhere it predicted *health* and found health.
+
+### 3. The asymmetric licence — a new category, and scanners are blind to it
+
+Previous passes catalogued copyleft-by-file (MPL-2.0), licence-owned-by-the-compilation (Chromaprint's
+LGPL-by-linkage) and licence-absent-from-the-standards-repo (RSL). This pass adds the sharpest one yet:
+**the one-way grant**, where the terms are restrictive for the licensee and unrestricted for the licensor.
+
+- `NVlabs/nvdiffrast` — **Nvidia Source Code License (1-Way Commercial)**; GitHub reports `NOASSERTION`.
+- `Lilgeneric/UniRelight` — **NVIDIA OneWay Noncommercial License** §3.3: *"only may be used or intended
+  for use non-commercially. Notwithstanding the foregoing, NVIDIA Corporation and its affiliates may use
+  the Work and any derivative works commercially."* GitHub reports **`NONE`** — despite a 4,080-byte
+  LICENSE file sitting in the repository root.
+
+**SPDX has no identifier for "non-commercial for you, commercial for me"**, which is the mechanical reason
+one repo reports `NOASSERTION` and the other reports nothing. **`NONE` is the more dangerous of the two
+signals**, because a human reviewer treats a missing licence as a red flag while an automated gate often
+treats it as "no constraint found". And the trap does not generalise by owner: `nv-tlabs/3dgrut` is plain
+Apache-2.0 (11,355 B, read). **Sibling NVIDIA organisations diverge completely — only the file decides.**
+
+### 4. The seat nobody has opened
+
+The plane has permissive renderers, permissive interchange, permissive kernels and a permissive review
+tool — and **no permissive lighting/look-development application**, the seat a lighting TD works in all
+day. Houdini Solaris and Foundry Katana own it commercially (Katana 9 shipped `UsdSuperLayer` and an
+alpha Hydra 2 viewer this cycle†). Meanwhile the paid tier's *connectors* are open: Autodesk's
+`arnold-usd` Hydra delegate is Apache-2.0 while Arnold itself is not.
+
+**The pattern across the paid tier is consistent and worth stating plainly: the connector is open, the
+kernel is closed.** That is favourable for integration work — the wiring is always on open ground, even
+when the renderer is bought — and it is why OpenUSD/Hydra, not any single renderer, is the real
+integration point on this plane.
+
+### 5. What the trade reporting says, and how much of it to believe
+
+AI is described as moving into the VFX pipeline as tooling rather than replacement, with roto, clean-up
+and "even some lookdev" cited as the automated work, alongside cloud rendering shifting from overflow to
+default for studios outside the top tier.† Market sizing for VFX in 2026 ranges from **USD 13.23 billion
+to USD 27.59 billion depending on scope** — a 2× spread between publishers, which is the most useful
+thing about those figures.† **Treat all of it as contested and quote the spread, not a point estimate.**
+The one employment measurement found was a 2025 industry atlas reporting studios clearly experimenting
+with AI but **no evidence of significant employment impact so far**†, which sits awkwardly against the
+vendor narrative and is the more defensible claim of the two.
+
+† = secondary source (trade press, vendor research or lab FAQ), reached via search and not verified
+against primary sources this pass; `rgl.epfl.ch`, `www.merl.com` and `zenodo.org` are outside this
+session's allowed network domains (`curl` → `000`, a proxy refusal, not a 404).

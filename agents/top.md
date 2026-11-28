@@ -5498,3 +5498,67 @@ and colour work in a facility, not data work on a set.
   `tranvietthang94-jpg/check-file` were returned with full descriptions by web search and **both return
   404 on `ls-remote`**. They are recorded here as non-existent so a later pass does not re-find them.
   *A search-result description is not evidence that a repo exists.*
+
+## The lighting, look-development & rendering plane — added 2026-11-28 (pass 60)
+
+**Why this plane, and how the gap was found.** A grep of ~90 candidate terms against all eight files
+before any web search returned: `path tracing` **0**, `global illumination` **0**, `light transport` **0**,
+`lookdev` **0**, `BSDF` **0**, `BRDF` **0**, `ray tracing` **0**, `HDRI` **0**, `image-based lighting` **0**,
+`UDIM` **0**, `deep compositing` **0**, `UsdShade` **0**, `Hydra delegate` **0**, `render pass` **0**,
+`Arnold` / `RenderMan` / `Karma` **0**, `Embree` **0**, `OptiX` **0**, `Open Image Denoise` **0**.
+Pass 6 took virtual production, pass 55 the compositing floor, pass 57 animation and pass 58 the FX
+solvers; pass 58 also recorded **render *management*** (OpenCue, 1,010★). Nobody had taken the step
+between them: **the renderer itself, and the look that is developed for it.** This is that plane.
+
+### The AI layer — relighting, lighting estimation and neural appearance
+
+Verified 2026-11-28: existence via `git ls-remote` (41/41 resolved), stars/forks/last-push via
+GitHub `search/repositories`, and **licence by reading the file** wherever the API said `NOASSERTION`
+or `NONE`.
+
+| Agent | Repo | Licence | Stars | Last push | What it does |
+|---|---|---|---|---|---|
+| IC-Light | [lllyasviel/IC-Light](https://github.com/lllyasviel/IC-Light) | **Apache-2.0** | 8,591★ / 529f | **2025-02-20** | Diffusion relighting of an existing image under an imposed light direction/colour. The most-starred relighting project in open source — **and 21 months without a push.** |
+| TRELLIS | [microsoft/TRELLIS](https://github.com/microsoft/TRELLIS) | **MIT** (1,141 B) | 14,420★ / 1,439f | 2026-10-27 | Image/text → 3D asset with texture and material output. The largest permissive star base anywhere near this plane, and alive. |
+| 3DGRUT | [nv-tlabs/3dgrut](https://github.com/nv-tlabs/3dgrut) | **Apache-2.0** (11,355 B) | 2,518★ / 293f | 2026-11-06 | 3D Gaussian **ray tracing** (not just splatting) — puts splats into a path-traced light transport context. The one permissive NVIDIA-authored asset on this plane. |
+| Open Image Denoise | [RenderKit/oidn](https://github.com/RenderKit/oidn) | **Apache-2.0** | 2,130★ / 204f | 2026-10-05 | The neural denoiser that makes low-sample path tracing shippable. The only AI on this plane that is already production-standard rather than aspirational. |
+| DiffusionLight | [DiffusionLight/DiffusionLight](https://github.com/DiffusionLight/DiffusionLight) | **MIT** | 721★ / 44f | **2024-12-18** | Estimates an HDRI environment map from a single LDR photo by inpainting a chrome ball. Permissive, directly useful for on-set lighting recovery — **and dormant for ~2 years.** |
+| UniRelight | [Lilgeneric/UniRelight](https://github.com/Lilgeneric/UniRelight) | **NVIDIA OneWay Noncommercial** — see the trap below | — | — | Joint intrinsics + illumination relighting, HDRI-conditioned. **Not usable in a client deliverable.** |
+| GaSLight | [lvsn/GaSLight](https://github.com/lvsn/GaSLight) | **no licence file** (checked `main`/`master`, 7 filenames) | 12★ / 2f | 2025-08-07 | HDR Gaussian splats as a spatially-varying light source. No grant = all rights reserved; read the paper, do not vendor the code. |
+
+**Seven real rows. There is no eighth** — nothing else surfaced on this plane that both exists and is
+worth an engagement's attention, and padding the table would defeat its purpose.
+
+### The trap of this pass: the asymmetric licence, and no scanner can see it
+
+This is a **licence category this KB has not recorded before**, and it is more dangerous than any
+copyleft because it does not look like a restriction — it looks like *nothing at all*.
+
+| Repo | GitHub reports | Actual licence | The operative clause |
+|---|---|---|---|
+| [NVlabs/nvdiffrast](https://github.com/NVlabs/nvdiffrast) | `NOASSERTION` | **Nvidia Source Code License (1-Way Commercial)** | "...only may be used or intended for use **non-commercially**... NVIDIA Corporation and its affiliates may use the Work... commercially" |
+| [Lilgeneric/UniRelight](https://github.com/Lilgeneric/UniRelight) | **`NONE`** (4,080-byte LICENSE file present) | **NVIDIA OneWay Noncommercial License** | §3.3 "The Work and any derivative works thereof only may be used or intended for use non-commercially. **Notwithstanding the foregoing, NVIDIA Corporation and its affiliates may use the Work and any derivative works commercially.** As used herein, 'non-commercially' means for research or evaluation purposes only." |
+
+**The asymmetry is the point.** These are not non-commercial licences in the ordinary sense; they are
+**one-way** licences — the grant is restricted for you and unrestricted for the licensor. SPDX has no
+identifier that expresses "non-commercial for licensee, commercial for licensor", which is *why* GitHub
+emits `NOASSERTION` for one and `NONE` for the other. A dependency scanner reading either field learns
+nothing. **`NONE` is the worse signal of the two**, because a reviewer reads a missing licence as "unlicensed,
+flag it" but an automated gate frequently reads it as "no licence constraint found".
+
+**Rule, and it generalises past media to all twelve industries:** for any repo under an `NVlabs/`,
+`nv-tlabs/` or NVIDIA-research-adjacent owner, **open the LICENCE file and read clause 3.x before
+costing the work.** Two sibling NVIDIA orgs on this very plane diverge completely — `nv-tlabs/3dgrut`
+is plain Apache-2.0 (11,355 B, verified) while `NVlabs/nvdiffrast` is one-way non-commercial. **The owner
+does not predict the licence; only the file does.** And note the transitive bite: UniRelight's own setup
+requires `nvdiffrast`, so even if UniRelight were relicensed tomorrow its dependency would still gate it.
+
+### What this plane's AI layer actually tells a studio
+
+The permissive, **actively maintained** half of this plane is the **physically-based** half. The **neural**
+half is dormant (IC-Light 21 months, DiffusionLight ~2 years), unlicensed (GaSLight), or one-way
+(UniRelight, nvdiffrast). The single exception — the one AI component on this plane that is permissive,
+maintained *and* in production everywhere — is **a denoiser**, which does not generate appearance at all;
+it removes sampling noise from light transport someone else computed. **Falsifiable prediction for a later
+pass: the next genuinely adopted AI component on this plane will again be an accelerator of physical
+rendering (denoise, importance sampling, radiance caching), not a replacement for it.**

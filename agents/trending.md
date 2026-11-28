@@ -9,6 +9,49 @@ updated: 2026-11-28
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-28 — pass 60: the lighting, look-development & rendering plane (**the permissive, maintained half of this plane is the physical half; the neural half is dormant, unlicensed, or one-way**)
+
+New this week on the plane that passes 55–58 circled without entering. Verified 2026-11-28:
+41/41 URLs resolved via `git ls-remote`; licences read from file wherever the API said `NOASSERTION`/`NONE`.
+
+| Nombre | Repo | Licencia | Stars | Last push | Why it is here this week |
+|---|---|---|---|---|---|
+| OpenShadingLanguage | [AcademySoftwareFoundation/OpenShadingLanguage](https://github.com/AcademySoftwareFoundation/OpenShadingLanguage) | BSD-3-Clause | 2,352★ / 424f | **2026-11-27** | The shared shading language, pushed the day before this pass |
+| openexr | [AcademySoftwareFoundation/openexr](https://github.com/AcademySoftwareFoundation/openexr) | BSD-3-Clause | 1,893★ / 723f | **2026-11-28** | **Pushed the day of this pass.** 3.5.0 (2026-09-21) added Zstandard lossless compression† |
+| mitsuba3 | [mitsuba-renderer/mitsuba3](https://github.com/mitsuba-renderer/mitsuba3) | BSD-3 **+ grant-back** | 3,002★ / 379f | **2026-11-27** | Differentiable renderer; the appended "Enhancements" clause is why GitHub says `NOASSERTION` |
+| gatling | [pablode/gatling](https://github.com/pablode/gatling) | **GPL-3.0** | 334★ / 23f | **2026-11-27** | MaterialX/OpenPBR Vulkan path tracer — the plane's only copyleft engine, and the newest mover on it |
+| openmoonray | [OpenMoonRay/openmoonray](https://github.com/OpenMoonRay/openmoonray) | Apache-2.0 | 4,763★ / 322f | 2026-11-16 | DreamWorks' production path tracer; joined the ASWF May 2026†, first ASWF release added MaterialX† |
+| OpenPBR | [AcademySoftwareFoundation/OpenPBR](https://github.com/AcademySoftwareFoundation/OpenPBR) | Apache-2.0 | 846★ / 47f | 2026-11-16 | The Adobe/Autodesk-agreed surface model — the spec that ends per-renderer material drift |
+| 3dgrut | [nv-tlabs/3dgrut](https://github.com/nv-tlabs/3dgrut) | Apache-2.0 | 2,518★ / 293f | 2026-11-06 | Gaussian **ray tracing**; the one permissive NVIDIA-authored repo on this plane |
+
+**Six real movers plus one adjacent (3dgrut). No padding rows.**
+
+**The dormancy measurement — the actual trend, and it runs the other way from every assumption about AI:**
+
+| Repo | Licence | Stars | Last push | Quiet for |
+|---|---|---|---|---|
+| [lllyasviel/IC-Light](https://github.com/lllyasviel/IC-Light) | Apache-2.0 | **8,591★** | 2025-02-20 | **~21 months** |
+| [DiffusionLight/DiffusionLight](https://github.com/DiffusionLight/DiffusionLight) | MIT | 721★ | 2024-12-18 | **~23 months** |
+| [lvsn/GaSLight](https://github.com/lvsn/GaSLight) | **none** | 12★ | 2025-08-07 | ~15 months, and no licence grant at all |
+| [GPUOpen-LibrariesAndSDKs/RadeonProRenderUSD](https://github.com/GPUOpen-LibrariesAndSDKs/RadeonProRenderUSD) | Apache-2.0 | 241★ | 2025-08-05 | ~16 months |
+
+**8,591 stars of permissively licensed relighting have not been touched in 21 months, while the
+physically based substrate pushed five times in 48 hours.** This is the trend to record: on this plane
+the star counts point at the neural work and the commits point at the physical work. A pass that ranked
+by stars alone would have recommended four dormant repos.
+
+**New licence category for this log — the asymmetric/one-way grant.** `NVlabs/nvdiffrast`
+(`NOASSERTION`, 1,944★) is the **Nvidia Source Code License (1-Way Commercial)** and
+`Lilgeneric/UniRelight` (GitHub: **`NONE`**, despite a 4,080-byte LICENSE file) is the **NVIDIA OneWay
+Noncommercial License**, §3.3: non-commercial for you, commercial for NVIDIA. **No SPDX identifier can
+express that**, which is why one reports as `NOASSERTION` and the other as nothing at all. Sibling
+NVIDIA orgs diverge — `nv-tlabs/3dgrut` is plain Apache-2.0 — so **the owner does not predict the
+licence; only the file does.**
+
+† = secondary source, reached via search only and not verified against the primary source from this
+session (`openexr.com`, `rgl.epfl.ch`, `www.merl.com` are outside this session's allowed network domains:
+`curl` returned `000`, a proxy refusal, **not** a 404).
+
 ## 2026-11-28 — pass 59: the on-set data & dailies plane (**the one irreversible step in production, and open source loses it on trust rather than on capability**)
 
 **Channel note:** `ls-remote` worked (**20 explicit checks, 3 genuine 404s**), `search/repositories` worked,

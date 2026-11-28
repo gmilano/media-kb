@@ -9,6 +9,62 @@ updated: 2026-11-28
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-28 — pass 61: the copy desk & editorial language-quality plane (**every engine on this plane pushed within 48 hours; the artefact with 6,391 stars is a prompt, not a program**)
+
+New this week on a plane that sixty passes never entered: `Vale`, `LanguageTool`, `proselint`, `textlint`,
+`harper`, `hunspell`, `hyphenation`, `copy edit` and `AP Stylebook` all returned **zero hits across all
+eight files** before this pass. Verified 2026-11-28: existence via `git ls-remote`, stars/forks/`pushed_at`
+via GitHub `search/repositories`, licence read from the actual file wherever the API said
+`NOASSERTION`/`NONE`. Star counts are point-in-time.
+
+| Nombre | Repo | Licencia | Stars | Last push | Why it is here this week |
+|---|---|---|---|---|---|
+| **harper** | [Automattic/harper](https://github.com/Automattic/harper) | **Apache-2.0** | 18,015★ / 856f | **2026-11-28** | Offline, privacy-first Rust grammar checker. **The most-starred permissive engine on the plane, and it is owned by a publishing-platform company (Automattic), not a linguistics vendor** |
+| **languagetool** | [languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) | **LGPL-2.1** (`COPYING.txt`, 26,432 B) | 15,314★ / 1,609f | **2026-11-28** | The only open **multilingual** rule corpus that exists — 36 language modules. Pushed the day of this pass |
+| **vale** | [vale-cli/vale](https://github.com/vale-cli/vale) | **MIT** (`LICENSE`, 1,068 B) | 6,445★ / 245f | **2026-11-27** | Markup-aware prose linter: the house-style enforcement engine. **Note the org: the project moved off `errata-ai`** |
+| **avoid-ai-writing** | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | MIT | **6,391★** / 531f | **2026-11-24** | **Not a linter — an agent skill.** Markdown rules that audit and rewrite AI-sounding prose. Second-most-starred artefact on the plane and it contains no executable checker |
+| **pycorrector** | [shibing624/pycorrector](https://github.com/shibing624/pycorrector) | Apache-2.0 | 6,549★ / 1,171f | 2026-07-25 | Chinese text error correction (Kenlm/MacBERT/Qwen2.5). **The only non-English engine on this plane with real scale** |
+| **textlint** | [textlint/textlint](https://github.com/textlint/textlint) | MIT (`LICENSE`, 1,055 B) | 3,223★ / 174f | **2026-11-28** | The pluggable natural-language linter the Japanese ecosystem is built on. Pushed the day of this pass |
+| **textlint-rule-preset-ai-writing** | [textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) | MIT | 1,167★ / 24f | **2026-11-23** | Detects AI-sounding **Japanese**. The only AI-writing rule pack on the plane with real adoption — and it is not English |
+| **markdownlint** | [DavidAnson/markdownlint](https://github.com/DavidAnson/markdownlint) | MIT | 6,454★ / 944f | **2026-11-27** | The structural half of the copy desk: heading, list and link conformance before prose rules run |
+
+**Eight real movers. No padding rows.** Six of the eight pushed within five days of this pass.
+
+**The dormancy measurement, and it splits exactly on language.** Every *engine* above pushed inside 48
+hours. Every piece of **non-English tokenisation and dictionary data** has been quiet for years:
+
+| Repo | Licencia | Stars | Last push | Quiet for |
+|---|---|---|---|---|
+| [fxsjy/jieba](https://github.com/fxsjy/jieba) | MIT | **35,260★** | 2024-08-21 | **~27 months** |
+| [atilika/kuromoji](https://github.com/atilika/kuromoji) | Apache-2.0 | 1,067★ | 2023-01-23 | **~46 months** |
+| [bminixhofer/nlprule](https://github.com/bminixhofer/nlprule) | Apache-2.0 (dual `LICENSE-MIT`/`LICENSE-APACHE`) | 680★ | 2023-05-23 | ~42 months |
+| [neuspell/neuspell](https://github.com/neuspell/neuspell) | MIT | 717★ | 2023-07-31 | ~40 months |
+| [spellcheck-ko/hunspell-dict-ko](https://github.com/spellcheck-ko/hunspell-dict-ko) | `NOASSERTION` → GPL (`LICENSE.md`, 2,598 B) | 288★ | 2024-02-11 | ~34 months |
+| [open-korean-text/open-korean-text](https://github.com/open-korean-text/open-korean-text) | Apache-2.0 | 667★ | 2024-03-12 | ~33 months |
+| [wooorm/dictionaries](https://github.com/wooorm/dictionaries) | MIT (collection) | 1,419★ | 2024-09-09 | ~27 months |
+| [get-alex/alex](https://github.com/get-alex/alex) | MIT | 5,111★ | 2024-11-27 | **12 months to the day** |
+| [btford/write-good](https://github.com/btford/write-good) | MIT | 5,110★ | 2025-03-10 | ~21 months |
+| [retextjs/retext](https://github.com/retextjs/retext) | MIT (`license`, 1,094 B) | 2,433★ | 2025-02-04 | ~22 months |
+
+**35,260 stars of Chinese tokenisation have not been touched in 27 months while the English grammar
+engines pushed today.** Ranking this plane by stars recommends five dormant repos and one markdown file.
+
+**The AI-slop linter wave is noise, measured.** Search engines surfaced these as 2026's trending prose
+linters. All MIT, all pushed in the last seven weeks, and between them they hold **128 stars**:
+
+| Repo | Licencia | Stars | Last push |
+|---|---|---|---|
+| [yanstd888/humanizer-lint](https://github.com/yanstd888/humanizer-lint) | MIT | 117★ / 18f | 2026-11-07 |
+| [theserverlessdev/wsc](https://github.com/theserverlessdev/wsc) | MIT | **10★** / 1f | 2026-11-11 |
+| [0xelitesystem/prosegrain](https://github.com/0xelitesystem/prosegrain) | MIT | **1★** / 1f | 2026-11-13 |
+
+A pass that trusted the recommendation text would have written a 1-star repo into `agents/top.md` as a
+trend. **The real trend on this plane is that the AI-writing *rule content* with adoption is Japanese
+(1,167★) and the AI-writing artefact with 6,391★ is a prompt file.**
+
+† = secondary source, reached via search only and not verified against the primary source from this
+session.
+
 ## 2026-11-28 — pass 60: the lighting, look-development & rendering plane (**the permissive, maintained half of this plane is the physical half; the neural half is dormant, unlicensed, or one-way**)
 
 New this week on the plane that passes 55–58 circled without entering. Verified 2026-11-28:

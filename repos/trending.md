@@ -10,6 +10,105 @@ updated: 2026-11-28
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-28 — pass 61: the copy-desk substrate (**the only open multilingual rule corpus in existence, measured in bytes per language — and Spanish has no variant at all**)
+
+Infrastructure under the linters: spell engines, hyphenation, dictionaries and the rule corpora. Verified
+2026-11-28 the same way as the agents log. **The measurement below is primary-source**: byte sizes read
+with `git ls-tree -lr` against a blobless clone of `languagetool-org/languagetool@master` as of
+2026-11-28, not from documentation.
+
+| Repo | Licencia | Stars | Last push | What it is |
+|---|---|---|---|---|
+| [hunspell/hunspell](https://github.com/hunspell/hunspell) | **Tri-license**: `COPYING` GPL-2 (18,093 B) + `COPYING.LESSER` LGPL-2.1 (26,531 B) + `COPYING.MPL` (25,755 B). API reports only `LGPL-2.1` | 2,628★ / 287f | **2026-11-21** | "The most popular spellchecking library" — under every office suite and browser |
+| [nuspell/nuspell](https://github.com/nuspell/nuspell) | LGPL-3.0 (+GPL-3.0 found) | 271★ / 29f | 2026-09-11 | The modern C++ reimplementation of Hunspell |
+| [hunspell/hyphen](https://github.com/hunspell/hyphen) | `NOASSERTION` → `COPYING` (974 B) states **"GPL 2.0/LGPL 2.1/MPL 1.1 tri-license"** verbatim | 83★ / 27f | **2026-11-24** | Hyphenation — the typesetting half of the copy desk |
+| [LibreOffice/dictionaries](https://github.com/LibreOffice/dictionaries) | **`NONE` at repo root.** Licence lives per language directory: `pt_BR/README_en.txt` (1,461 B) = **LGPL-3 + MPL**, Raimundo Moura's VERO project | 579★ / 327f | **2026-11-27** | The dictionary tree that ships with LibreOffice |
+| [sbosio/rla-es](https://github.com/sbosio/rla-es) | `NOASSERTION` → `LICENSE.md` (991 B): **triple disjoint GPL-3+/LGPL-3+/MPL-1.1+**, and **the thesaurus is LGPL-2.1 only** | 264★ / 53f | 2026-10-11 | *Recursos lingüísticos abiertos del español* — the canonical open Spanish dictionary, Argentine-maintained |
+| [wooorm/dictionaries](https://github.com/wooorm/dictionaries) | MIT for the **collection** (`license`, 1,099 B); **each dictionary carries its own** — `es`, `es-AR`, `es-MX` all ship the identical 2,596-byte RLA tri-license notice | 1,419★ / 411f | 2024-09-09 | Hunspell dictionaries repackaged UTF-8 for npm |
+| [wolfgarbe/SymSpell](https://github.com/wolfgarbe/SymSpell) | MIT | 3,493★ / 311f | 2026-10-29 | Symmetric-delete correction — the fast path when you cannot afford a model |
+| [textstat/textstat](https://github.com/textstat/textstat) | MIT | 1,394★ / 194f | 2026-10-26 | Readability metrics (Flesch, Fernández-Huerta for Spanish) — the measurable half of plain-language work |
+| [remarkjs/remark-lint](https://github.com/remarkjs/remark-lint) | MIT (`license`) | 1,042★ / 139f | 2026-01-05 | Markdown rule engine the prose linters plug into |
+| [jxmorris12/language_tool_python](https://github.com/jxmorris12/language_tool_python) | **GPL-3.0** (35,151 B) | 534★ / 71f | 2026-11-21 | **The licence escalation.** See below — this is the most consequential row in this block |
+
+**Ten real rows. No padding.**
+
+### The measurement of this pass: the open rule corpus, in bytes, by language
+
+Total bytes under `languagetool-language-modules/<lang>/src/main/resources/org/languagetool/rules/`,
+`master` @ 2026-11-28. This is the **whole rules directory**, not a single `grammar.xml` — Ukrainian, for
+one, splits its rules across five `grammar-*.xml` files, so a single-file measure would have understated
+it by 470×.
+
+| Language | Rule corpus | Language | Rule corpus |
+|---|---|---|---|
+| **fr** French | **10.07 MB** | **zh** Chinese | 0.87 MB |
+| **ca** Catalan | **9.59 MB** | **ar** Arabic | 0.85 MB |
+| **en** English | **9.19 MB** | **ja** Japanese | 0.25 MB |
+| **de** German | 7.25 MB | **ta** Tamil | 0.18 MB |
+| **nl** Dutch | 5.85 MB | **it** Italian | **0.11 MB** |
+| **pt** Portuguese | 5.41 MB | **de-DE-x-simple-language** | 0.08 MB |
+| **es** Spanish | **2.21 MB** | **ml** Malayalam | 0.02 MB |
+| **uk** Ukrainian | 1.86 MB | **lt** Lithuanian | 0.01 MB |
+
+36 language modules in total. **Catalan out-resources English** — the Softcatalà community has produced a
+larger open rule corpus than the entire anglophone world, which is the single most encouraging fact on
+this plane: corpus size is a function of community will, not speaker count. **Italian, with ~65 million
+speakers, has 0.11 MB — 87× less than Catalan.**
+
+### The variant void, and it is a LATAM finding
+
+Regional variant directories that actually exist in the corpus:
+
+| Language | Variant rule directories |
+|---|---|
+| **en** | `en-AU` `en-CA` `en-GB` `en-NZ` `en-US` (plus `spelling_en-ZA.txt`) — **six variants** |
+| **pt** | `pt-AO` `pt-BR` `pt-MZ` `pt-PT` — **four, including Angola and Mozambique** |
+| **de** | `de-CH` `de-DE-AT` |
+| **ca** | `ca-ES-valencia` |
+| **es** | **(none)** |
+| **fr**, **zh** | (none) |
+
+**The only open multilingual grammar corpus in the world distinguishes Angolan from Mozambican
+Portuguese and does not distinguish Mexican from Argentine Spanish.** The spelling layer confirms it:
+English ships `spelling_en-AU.txt` … `spelling_en-ZA.txt`; Spanish ships one undifferentiated
+`spelling.txt`. ~450 million Latin American Spanish speakers are served by a single monolithic module —
+which also means the gap is addressable with rule content, not research, and the licence that governs it
+(**LGPL-2.1**) is one Globant can both consume and contribute to.
+
+### Three licence findings for the CI gate
+
+1. **The escalation is in the client, not the engine.** `languagetool` core is **LGPL-2.1** — linkable
+   from proprietary code across a process or library boundary. The Python client almost every integration
+   reaches for, `jxmorris12/language_tool_python` (534★, pushed **2026-11-21**), is **GPL-3.0**. The `pip
+   install` that makes the engine usable is the thing that would relicense the caller. **No scan of
+   "languagetool" finds this**: the escalation lives in a different repo, under a different owner, with a
+   different licence. Rule: *resolve the licence of the client you import, not of the engine you call.*
+2. **New trap category: MIT code whose capability is someone else's unlicensed service.**
+   [ssut/py-hanspell](https://github.com/ssut/py-hanspell) (MIT, 359★, 2024-04-12) is honestly licensed
+   and functionally **a client for Naver's spell checker** — its own README says so
+   (`네이버 맞춤법 검사기를 이용한`). The code is redistributable; the capability is not. Korean has **no
+   open spell engine in this tier at all**, only a wrapper around a corporate API.
+3. **The org-rename trap, and a cheap test for it.** `errata-ai/vale` still clones — `git ls-remote`
+   follows the rename — but `search/repositories` with `repo:errata-ai/vale` returns **HTTP 422, "cannot
+   be searched"**. The project lives at **`vale-cli/*`** now. A row written as `errata-ai/vale` records a
+   redirect, not a repository. **Test: `ls-remote` succeeds + `repo:` search 422 ⇒ stale name.**
+
+### Method correction this pass made against itself
+
+The licence probe inherited from cycle 8 (which had added `license.txt` and `COPYING.md`) **still produced
+three false negatives**: `retextjs/retext`, `get-alex/alex` and `wooorm/dictionaries` all reported
+NO-LICENSE-FILE and all three are MIT, in a file named **`license`** — bare, lowercase, no extension (the
+unified/wooorm convention). Added to the probe list: **`license`, `license.md`**.
+
+Second, sharper correction: **a licence detector must match on word boundaries.** Substring matching read
+`amperser/proselint` as ISC because its BSD warranty clause contains "D**ISC**LAIMED", and read
+`textlint` as MPL because MIT's text contains "co**mpl**iance". Both are wrong; both were caught only by
+reading the file. `proselint` is **BSD-3-Clause**, and its GitHub repo is a **mirror — upstream is
+Codeberg**, which is itself worth recording: on this plane the canonical home is not always GitHub.
+
+† = secondary source, reached via search only and not verified against the primary source from this
+session.
+
 ## 2026-11-28 — pass 60: the rendering substrate (**31 verified repos, one copyleft engine, and the control case that proves this KB's content law**)
 
 Infrastructure counterpart to this date's `agents/trending.md` entry. All verified 2026-11-28.

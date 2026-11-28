@@ -12023,3 +12023,190 @@ that rents it**, and no per-seat renderer licence stands between the two.
 404), so the RGL **CC0** claim and the MERL terms conflict are **leads, not verified licence facts**. The
 only primary-quality items in this regional section are the 31 verified repositories and their licence
 files, all of which were read directly.
+
+---
+
+## Market size — pass 61 addendum (2026-11-28): the copy-desk plane, where the headline figures disagree **7.9× on the same base year** while their growth rates agree within three points
+
+Six published estimates for the proofreader / grammar-checker software market, all reached via search and
+all **secondary**†:
+
+| Source† | Base year figure | Forecast | CAGR |
+|---|---|---|---|
+| LP Information (via marketresearch.com)† | **$520 M (2025)** | $999 M by 2031 | 11.5% |
+| Business Research Insights† | $1.28 B (2026) | $2.81 B by 2035 | 8.5% |
+| The Insight Partners† | $1.39 B (2025) | $3.62 B by 2034 | 11.21% |
+| Verified Market Research† | $1.65 B (2025) | $3.21 B by 2033 | 10.0% |
+| WiseGuy Reports† | $2.01 B (2025) | $5.5 B by 2035 | 10.6% |
+| Future Market Report† | **$4,100.75 M (2025)** | $8,245.60 M by 2033 | 9.12% |
+
+**The spread is 7.9× on the same base year (2025: $520 M vs $4,100.75 M) while every CAGR falls in a
+3-point band (8.5%–11.5%).** That combination is diagnostic, and this KB has now seen it several times:
+when the *level* disagrees by nearly an order of magnitude and the *rate* agrees, the disagreement is a
+scope artefact — the firms are counting different products (consumer writing assistants vs enterprise
+proofing vs API licensing) and then applying similar growth assumptions to whatever they counted. **Use
+the band $1.3–2 B for 2026 and do not quote a single figure.** The $4.1 B outlier and the $520 M floor
+should be cited only with their definitions attached, and this pass did not obtain those definitions.
+
+**What is not sized at all:** house-style enforcement. Not one of the six figures separates the thing a
+newsroom or a studio would actually buy — rule authoring, house-style compliance, terminology control —
+from consumer grammar checking. **The segment with the regulatory deadline (Spain, 2 January 2027†) and
+the segment with the standards-body permission (AP, July 2026†) are both invisible in the market data.**
+
+**The priced content, for the comparison that matters.** The engines on this plane cost **$0** (Apache-2.0
+and MIT). The *style content* is the priced good: the AP Stylebook print edition **2026–2028 lists at
+$29.99**†, AP Stylebook Online is sold per named user with volume tiers and member discounts (an undated
+report gives **$30/user, $24 for AP-member news organisations**†, almost certainly stale), and the
+University of Chicago Press publishes annual Chicago Manual of Style subscription rate cards for **2026
+and 2027**†. **This is the third time this KB has found the knowledge content priced while the software
+around it is free** — after healthcare's CPT and MedDRA — and the first time the priced artefact costs
+tens of dollars rather than tens of thousands. The cheapness is the point: at $30 a seat, nobody will
+fund an open replacement, which is exactly why none exists.
+
+### Global players — pass 61 addendum (the editorial language-quality layer)
+
+| Player | Position | What makes them matter here |
+|---|---|---|
+| **Grammarly** | The proprietary incumbent of English writing assistance | Sets the buyer's expectation of what a checker does. Nothing open matches its UX; several things match its rules |
+| **Automattic** | Owns **harper** (Apache-2.0, 18,015★) | **The most-starred permissive grammar engine on earth is owned by a publishing-platform company, not a language vendor.** A WordPress-adjacent engine means the CMS and the checker can share a roadmap |
+| **LanguageTool GmbH** (Germany) | LGPL-2.1 core + paid premium service | The only organisation maintaining a **multilingual** open rule corpus. The freemium split is the reason the corpus survives, and the reason the best rules are not all in it |
+| **The Associated Press** | Owns the style content of US news | Sells the Stylebook; permits AI for grammar/spelling in its newsroom standards† — **both halves of this plane's economics in one organisation** |
+| **University of Chicago Press** | Owns the long-form/book style content | Subscription rate cards published annually† |
+| **Naver** (Korea) | Operates the Korean spell checker that `py-hanspell` calls | Korean copy-desk capability is effectively a corporate API, not an open engine |
+| **Softcatalà** (Catalonia) | Community behind the Catalan rule corpus | **9.59 MB of open Catalan rules — more than English.** The proof that a motivated language community can out-resource a market |
+| **Japan Translation Federation** | Publisher of the JTF style guide | One of the very few published industry style guides that exists as executable MIT rules (221★) |
+| **ICS MEDIA** (Japan) | The only media company found publishing its house style as code | MIT, 22★, abandoned 2023-03-15 — the experiment happened and nobody sustained it |
+
+**The concentration risk worth naming:** the load-bearing content on this plane is maintained by **named
+individuals**, not institutions — `azu` (textlint plus the Japanese AI-writing preset), Titus Wormer
+(retext, alex, the npm dictionary collection), Raimundo Moura (Brazilian Portuguese / VERO), Santiago
+Bosio (Spanish / RLA), Wolf Garbe (SymSpell). Four of those five artefacts have not been touched in over a
+year. **Any engagement that depends on them should budget for maintaining them**, which is also the
+cheapest way to acquire standing in the ecosystem.
+
+## Opportunities by region — pass 61 (2026-11-28): the copy desk & editorial language-quality plane
+
+### North America
+
+**The regulatory position is permission, not restriction — and it is the only plane in this KB where that
+is true.** AP's updated newsroom AI standards (reported July 2026†) expand approved uses to research,
+summarisation, transcription, translation, headline suggestion and **explicitly grammar, spelling and
+search optimisation**, with mandatory human review before publication, a continuing prohibition on
+generative AI in news photography, and disclosure where generative AI played a "material" role — a term
+the reporting notes AP does not define†.
+
+- **The sellable engagement:** a house-style enforcement service that is *harness only*. harper
+  (Apache-2.0) + vale (MIT) + vale-action (MIT) + vale-ls (MIT), with the client's own rule pack as the
+  deliverable. Zero per-seat licence, nothing leaves the client's network, and the structural template
+  comes from `vale-cli/Microsoft` (MIT).
+- **The thing not to ship:** AP or Chicago rules. The content is licensed per seat to the client, not to
+  the integrator. Build the compiler and the harness; let the client hold the subscription. A pass that
+  shipped an "AP style pack" would be redistributing paid content.
+- **The undefined term is the opening.** Because "material role" is undefined†, every US newsroom needs a
+  defensible internal rule for when AI assistance crosses into disclosure. That rule has to be applied to
+  text, consistently, at volume — which is a copy-desk pipeline problem, and nothing open addresses it
+  (`AI writing detection linter` → 4 repos, top five 52★, 1★, 1★, 0★).
+
+### EMEA
+
+**There is a dated obligation here with literally zero open tooling, which makes it the sharpest
+opportunity in this pass.** Spain's **Real Decreto 707/2026 of 2 September** (BOE-A-2026-18509), approved
+by the Council of Ministers on 1 September 2026 and reported to enter into force on **2 January 2027**†,
+implements the cognitive-accessibility mandate of **Ley 6/2022** (BOE no. 78, 1 April 2022) and requires
+information in **lenguaje sencillo** and **lectura fácil** — easy-read versions of forms, applications and
+procedure guides, with plain language as the floor where easy-read is not expressly required†.
+
+Measured against that deadline: **`lectura facil simplificacion` returns 0 repositories.** Not a weak
+field — an empty one. And the only open **simple-language rule module that exists in any language** is
+German: `de-DE-x-simple-language`, **0.08 MB**, inside LanguageTool (LGPL-2.1), verified in the tree this
+pass.
+
+- **Opportunity 1 — the Spanish simple-language module.** Build `es` lectura-fácil rules on the
+  `de-DE-x-simple-language` pattern, contribute upstream under LGPL-2.1, keep client terminology private
+  in a Vale vocabulary. Spain's own `es` module already ships a `style.xml` (49,905 B) and
+  `confusion_pairs.txt` (27,701 B) to extend from, and the same artefact serves every LATAM Spanish
+  engagement — **one build, two regions**.
+- **Opportunity 2 — the minority-language public broadcaster.** Catalan's 9.59 MB corpus (larger than
+  English) is the existence proof; Irish is at 0.96 MB and Breton at 0.44 MB. Any EU public broadcaster
+  with a minority-language remit has a budget line for exactly this and no vendor.
+- **The surrounding obligations:** the European Accessibility Act has applied to ebooks sold to EU
+  consumers since **28 June 2025**†, with EPUB Accessibility 1.1 + WCAG as the practical target† and a W3C
+  note of **4 February 2026** adding an `a11y:exemption` property for microenterprise/disproportionate-
+  burden claims†; EU AI Act **Article 50** transparency duties apply from **2 August 2026**†, which reach
+  newsrooms as deployers†. **Fixed-layout content (comics, illustrated and art books) cannot meet every
+  requirement** because its text cannot be restyled† — a known, documented gap, and the one place where
+  the honest answer to a client is "this file format cannot comply".
+
+### APAC
+
+**The non-English rule content with the most momentum on this plane is Japanese, and it is the first time
+in this KB that a non-English rule pack out-adopts its English equivalents.**
+`textlint-ja/textlint-rule-preset-ai-writing` — MIT, **1,167★**, pushed **2026-11-23** — detects
+AI-sounding Japanese. The three English AI-slop linters that search engines promote as 2026's trend hold
+**117★, 10★ and 1★ between them**. Around it: `textlint` itself (MIT, 3,223★, pushed the day of this
+pass), the technical-writing preset (571★), the JTF style guide as rules (221★) and `prh` (300★).
+
+- **Opportunity 1 — Japanese editorial QA as a product, not a plugin.** The rule packs exist and are MIT;
+  what does not exist is a deployment (CI + editor + CMS hook) around them. `ics-creative`'s house-style
+  preset shows a Japanese media company already wanted this in 2023 and could not sustain it alone
+  (22★, dormant 45 months).
+- **Opportunity 2 — Chinese.** `pycorrector` (Apache-2.0, 6,549★) is the only non-English *engine* on the
+  plane with scale, but its tokenisation substrate, `jieba` (35,260★), has been **dormant 27 months**.
+  Anyone shipping Chinese copy-desk work is standing on an unmaintained dependency with 6,669 forks —
+  which is both the risk and the contribution opportunity.
+- **The Korean warning, stated plainly.** There is no open Korean spell engine in this tier. The MIT
+  package (`py-hanspell`, 359★) is a **client for Naver's checker**: its code is redistributable, its
+  capability is not licensed to you. The only open Korean dictionary (`hunspell-dict-ko`, 288★) is **GPL**
+  and dormant 34 months. **Do not promise a Korean copy desk "all open source"** — price either a Naver
+  commercial agreement or dictionary work.
+- **The corpus reality for the region:** Japanese 0.25 MB, Chinese 0.87 MB, Tamil 0.18 MB, Malayalam
+  0.02 MB, against English 9.19 MB. `hindi grammar checker` returns **6 repos whose top five hold 2, 2, 2,
+  0 and 0 stars** — for the world's most-spoken language after English and Mandarin.
+
+### LATAM
+
+**The finding of this pass, and it is measured rather than argued: the only open multilingual grammar
+corpus in existence distinguishes Angolan from Mozambican Portuguese and does not distinguish Mexican
+from Argentine Spanish.** Verified in the repository tree on 2026-11-28 — Portuguese ships `pt-AO`,
+`pt-BR`, `pt-MZ`, `pt-PT`; English ships five variant rule directories and six variant spelling files;
+German two; Catalan one; **Spanish ships none, and one undifferentiated `spelling.txt`**. Spanish's total
+rule corpus is **2.21 MB against Portuguese's 5.41 MB** — less than half, for roughly four times the
+speakers.
+
+The ecosystem around it is thin in exactly the same way: **`corrector gramatical espanol` returns 5
+repositories whose top five hold 1, 0, 0, 0 and 0 stars**, and `spanish grammatical error correction`
+returns 2 (2★ and 0★). The canonical resource, `sbosio/rla-es` (264★, pushed 2026-10-11), is maintained
+from Argentina under a triple-disjoint GPL-3+/LGPL-3+/MPL-1.1+ grant — permissively usable, and small
+enough that contributing to it buys real standing.
+
+**And the demand is now in writing.** Regional reporting this year documents LATAM newsrooms codifying
+editorial AI rules: a MagmaComms/NextMedia study finds only **about one in ten outlets has a formal AI
+policy**†; **Listín Diario** (Dominican Republic) published a guide in January 2026 modelled on the NYT,
+FT and Washington Post†; **El Comercio** (Peru) put a ~10-page manual into practice in early 2026†; **La
+Gaceta** (Argentina) and **El Tiempo** (Colombia) built manuals with explicit methodologies and criteria†;
+and a SiPreBA/FATPREN/Heinrich-Böll report of May 2026 proposes regulation for AI in media†. **Outlets are
+writing style manuals as PDFs in a region whose language has no variant rule pack and no enforcement
+tooling.** That is demand and supply failing to meet in a measurable way.
+
+- **Opportunity 1 — the `es-419` variant pack.** Fork LanguageTool's `es` module, add `es-MX`, `es-AR`,
+  `es-CO`, `es-CL` directories mirroring the layout Portuguese already uses, contribute upstream under
+  **LGPL-2.1**. It is rule content, not research; the engine, the harness and the test framework all
+  already exist and are maintained. **It is also the one artefact in this pass that serves Spain's
+  2 January 2027 deadline and every LATAM newsroom at the same time.**
+- **Opportunity 2 — the house-style compiler.** Named outlets have manuals in PDF and Word. Nothing open
+  turns a style manual into Vale rules (`terminology checker glossary` → 3 repos, **all 0★**). A compiler
+  plus a per-outlet rule pack is a repeatable engagement with a deliverable the client owns, and the
+  structural template is `vale-cli/Microsoft` (MIT).
+- **Opportunity 3 — Brazilian Portuguese is the better-resourced case, and still unowned.** `pt-BR` rules
+  exist and the VERO dictionary is LGPL-3 + MPL inside a repo GitHub labels `NONE`. The work is not corpus
+  building but **licence-clean packaging and deployment** — and it is the same deliverable, sold to a
+  larger media market.
+
+† = secondary source (trade press, government press release, market-research vendor page or publisher rate
+card), reached via search and **not** verified against the primary source from this session;
+`www.chicagomanualofstyle.org` is outside this session's allowed network domains (DNS refusal, not a 404).
+The BOE regulation number, its approval date and its reported entry into force come from press coverage
+and the ministry's own release†, not from the consolidated legal text. **The primary-quality items in this
+section are the 43 verified repositories, their read licence files, and the byte-level rule-corpus and
+variant-directory measurements taken from the LanguageTool tree at `master` on 2026-11-28.**
+

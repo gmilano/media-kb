@@ -3154,3 +3154,53 @@ reads this as measured rather than unexamined.** It is also the clearest build-v
 plane: the surrounding pieces are all Apache/BSD and already speak USD to each other.
 
 † = secondary source (trade press, reached via search; not price- or spec-verified this pass).
+
+---
+
+## 📝 Pass 61 (2026-11-28) — language-quality platforms: what a studio can self-host between the CMS and the writer
+
+> The CMS layer was covered in earlier passes (Superdesk, Wagtail, Ghost, Strapi). This section covers the
+> **language-service layer that plugs into them** — deployable systems, not libraries. All rows verified
+> 2026-11-28; licences read from file where the API was absent or partial.
+
+| Plataforma | Repo | Licencia | Stars / forks | Last push | Por qué empezar aquí |
+|---|---|---|---|---|---|
+| **LanguageTool Server** | [languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) (`languagetool-server` module, verified present in the tree) | **LGPL-2.1** (`COPYING.txt`, 26,432 B) | 15,314★ / 1,609f | **2026-11-28** | The self-hostable HTTP grammar service. **36 language modules.** Deploy as a separate process and the LGPL boundary is clean — see the pattern in `compose/patterns.md` |
+| **Vale** | [vale-cli/vale](https://github.com/vale-cli/vale) | **MIT** | 6,445★ / 245f | **2026-11-27** | Single binary, no account, no service. The house-style enforcement platform: **the rules are the product, and they are yours** |
+| **Vale in CI** | [vale-cli/vale-action](https://github.com/vale-cli/vale-action) | MIT | 259★ / 57f | **2026-11-21** | Turns house style into a required check on the content repo |
+| **Vale in the editor** | [vale-cli/vale-ls](https://github.com/vale-cli/vale-ls) | MIT | 132★ / 15f | **2026-11-12** | LSP server: rules appear where the writing happens, not in a report after |
+| **Microsoft style pack** | [vale-cli/Microsoft](https://github.com/vale-cli/Microsoft) | MIT | 114★ / 56f | **2026-11-23** | A complete, openly licensed published style guide — **use it as the structural template for a client house style** |
+| **Google style pack** | [vale-cli/Google](https://github.com/vale-cli/Google) | MIT | 98★ / 25f | **2026-11-23** | The second reference implementation; differs from Microsoft's enough to show what a house-style delta looks like |
+| **Red Hat deployment** | [redhat-documentation/vale-at-red-hat](https://github.com/redhat-documentation/vale-at-red-hat) | MIT | 56★ / 73f | **2026-11-27** | A worked **enterprise** Vale deployment, maintained. The fork ratio (73f / 56★ = **1.30**) says it is copied more than it is starred — the signature of something people actually run |
+| **harper** | [Automattic/harper](https://github.com/Automattic/harper) | **Apache-2.0** | 18,015★ / 856f | **2026-11-28** | Grammar as a local service/LSP — no text leaves the building, which is what makes it sellable to a newsroom with source-protection duties |
+| **Weblate** | [WeblateOrg/weblate](https://github.com/WeblateOrg/weblate) | **GPL-3.0** | 6,188★ / 1,391f | **2026-11-28** | Translation platform with **glossary/terminology management** — the only maintained open home for the client's controlled vocabulary. Copyleft: deploy it, do not embed it |
+| **Translate Toolkit** | [translate/translate](https://github.com/translate/translate) | **GPL-3.0** | 989★ / 357f | **2026-11-28** | Format conversion and terminology checks between editorial and localisation |
+| **LibreOffice dictionaries** | [LibreOffice/dictionaries](https://github.com/LibreOffice/dictionaries) | **`NONE` at root**; per-language (pt_BR = LGPL-3 + MPL) | 579★ / 327f | **2026-11-27** | The dictionary supply for every language a studio has to support |
+| **textlint** | [textlint/textlint](https://github.com/textlint/textlint) | MIT | 3,223★ / 174f | **2026-11-28** | The plugin host for CJK and for any rule that needs a parser rather than a regex |
+
+**Twelve verified platforms.** Nine pushed within eight days of this pass.
+
+### The one open "media company house style" in existence, and it is abandoned
+
+[ics-creative/textlint-rule-preset-icsmedia](https://github.com/ics-creative/textlint-rule-preset-icsmedia)
+— **MIT, 22★ / 6f, last push 2023-03-15 (~45 months dormant)** — is the editorial rule set of ICS MEDIA, a
+Japanese media publication, shipped as executable rules. It is the only example found this pass of a
+**media organisation publishing its own house style as code**. The counterpart on the technology side is
+maintained by three companies and pushed last week.
+
+**That asymmetry is the vertical-platform finding of this pass:** every piece of the copy desk a studio
+needs is open, self-hostable and alive — the engines, the CI harness, the editor integration, the
+terminology store — and the one artefact that would make it a *newsroom* copy desk rather than a
+documentation copy desk, the house style itself, is either paywalled (AP, Chicago†) or a dormant 22-star
+repository. **The platform layer is finished; the content layer is the engagement.**
+
+### Searched and absent on the platform layer
+
+No open **house-style compiler** exists — nothing that reads a style manual and emits Vale or LanguageTool
+rules. `terminology checker glossary` returns **3 repos, 0★, 0★, 0★**, and `copy desk editorial` returns
+**3 repos, all 0★**. Weblate's glossary is the closest maintained thing and it is a translation tool, not
+an editorial one. Recorded as measured, not unexamined.
+
+† = secondary source (trade press, publisher rate card) reached via search; `www.chicagomanualofstyle.org`
+is outside this session's allowed network domains (DNS refusal, not a 404), so pricing is a lead.
+

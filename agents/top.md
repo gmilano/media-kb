@@ -5562,3 +5562,110 @@ maintained *and* in production everywhere — is **a denoiser**, which does not 
 it removes sampling noise from light transport someone else computed. **Falsifiable prediction for a later
 pass: the next genuinely adopted AI component on this plane will again be an accelerator of physical
 rendering (denoise, importance sampling, radiance caching), not a replacement for it.**
+---
+
+## 🖋️ Pass 61 (2026-11-28) — the copy desk & editorial language-quality plane: **the engines are solved, permissive and pushed today; the scarce good is rule content, and the cliff is language**
+
+**Why this plane, and how it was chosen.** Sixty passes had covered the newsroom CMS layer (Superdesk,
+Wagtail), post-publication corrections, accessibility, localisation and type/font rendering — and never
+the language-quality layer that sits inside all of them. A vocabulary probe against all eight live files
+before any web search returned: `Vale` **0**, `LanguageTool` **0**, `proselint` **0**, `textlint` **0**,
+`harper` **0**, `hunspell` **0**, `nuspell` **0**, `hyphenation` **0**, `copy edit` **0**, `copy desk`
+**0**, `spellcheck` **0**, `grammar check` **0**, `AP Stylebook` **0**, `Chicago Manual` **0**. Against
+`Superdesk` 29 and `Wagtail` 11 — the room around the gap was already furnished.
+
+All rows verified **2026-11-28**: existence via `git ls-remote`, stars/forks/`pushed_at` via GitHub
+`search/repositories` (`pushed_at` covers any branch, so it can be later than the default branch's last
+commit), licence read from the actual file wherever the API returned `NOASSERTION` or `NONE`.
+
+### The agents
+
+| Nombre | Repo | Licencia | Stars / forks | Last push | Qué hace |
+|---|---|---|---|---|---|
+| **harper** | [Automattic/harper](https://github.com/Automattic/harper) | **Apache-2.0** (`LICENSE`, 11,345 B) | **18,015★** / 856f | **2026-11-28** | Offline, privacy-first grammar checker in Rust. No network call, no per-seat fee, Apache-2.0 — **the default recommendation on this plane** |
+| **languagetool** | [languagetool-org/languagetool](https://github.com/languagetool-org/languagetool) | **LGPL-2.1** (`COPYING.txt`, 26,432 B) | 15,314★ / 1,609f | **2026-11-28** | Style and grammar checker, **36 language modules**. The only open multilingual rule corpus that exists. Freemium: the company sells a premium service around the LGPL core |
+| **vale** | [vale-cli/vale](https://github.com/vale-cli/vale) | **MIT** (`LICENSE`, 1,068 B) | 6,445★ / 245f | **2026-11-27** | Markup-aware prose linter; **the house-style engine** — you supply the rules. Default branch is `v3`; the org moved off `errata-ai` |
+| **pycorrector** | [shibing624/pycorrector](https://github.com/shibing624/pycorrector) | **Apache-2.0** (11,357 B) | 6,549★ / 1,171f | 2026-07-25 | Chinese text error correction (Kenlm, MacBERT, T5, ChatGLM3, Qwen2.5). The only non-English engine here with scale |
+| **markdownlint** | [DavidAnson/markdownlint](https://github.com/DavidAnson/markdownlint) | MIT | 6,454★ / 944f | **2026-11-27** | Structural conformance (headings, lists, links) — runs before prose rules, catches what prose rules cannot see |
+| **avoid-ai-writing** | [conorbronsdon/avoid-ai-writing](https://github.com/conorbronsdon/avoid-ai-writing) | MIT | **6,391★** / 531f | **2026-11-24** | **An agent skill, not a linter**: markdown rules that audit and rewrite AI writing patterns. Listed because its adoption is real and because mistaking it for a checker is the easy error |
+| **alex** | [get-alex/alex](https://github.com/get-alex/alex) | MIT (`license`, 1,099 B) | 5,111★ / 215f | 2024-11-27 | Catches insensitive and inconsiderate writing. **Dormant 12 months to the day** — usable, not maintained |
+| **write-good** | [btford/write-good](https://github.com/btford/write-good) | MIT | 5,110★ / 190f | 2025-03-10 | Naive style linter (weasel words, passive voice). **Dormant ~21 months**; also packaged as a Vale style |
+| **proselint** | [amperser/proselint](https://github.com/amperser/proselint) | **BSD-3-Clause** (`LICENSE.md`, 1,524 B) | 4,605★ / 182f | 2026-09-04 | Prose linter with a research-cited rule set. **GitHub is a mirror — upstream is `codeberg.org/amperser/proselint`** |
+| **textlint** | [textlint/textlint](https://github.com/textlint/textlint) | MIT (`LICENSE`, 1,055 B) | 3,223★ / 174f | **2026-11-28** | Pluggable natural-language linter; the plugin host the whole Japanese ecosystem is built on |
+| **textlint-rule-preset-ai-writing** | [textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) | MIT (1,047 B) | 1,167★ / 24f | **2026-11-23** | Detects AI-like patterns in **Japanese** and pushes toward natural expression. The most-adopted AI-writing rule pack on the plane |
+| **textlint-rule-preset-ja-technical-writing** | [textlint-ja/textlint-rule-preset-ja-technical-writing](https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing) | MIT | 571★ / 12f | **2026-11-26** | The Japanese technical-writing rule set — the closest thing to an open house style in any non-European language |
+| **language_tool_python** | [jxmorris12/language_tool_python](https://github.com/jxmorris12/language_tool_python) | **GPL-3.0** (35,151 B) | 534★ / 71f | **2026-11-21** | The popular Python client for LanguageTool. **Listed as a warning, not a recommendation** — see the licence gate below |
+| **prh** | [prh/prh](https://github.com/prh/prh) | MIT | 300★ / 23f | **2026-11-21** | Japanese proof-reading helper: YAML rule files, used as a textlint rule source |
+| **textlint-rule-preset-JTF-style** | [textlint-ja/textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) | MIT | 221★ / 22f | **2026-11-16** | The Japan Translation Federation style guide **as executable rules** — a published industry style guide that actually shipped as code |
+| **vale-action** | [vale-cli/vale-action](https://github.com/vale-cli/vale-action) | MIT | 259★ / 57f | **2026-11-21** | Vale as a CI check (default branch `reviewdog`) — where house style stops being advice |
+| **vale-ls** | [vale-cli/vale-ls](https://github.com/vale-cli/vale-ls) | MIT (1,066 B) | 132★ / 15f | **2026-11-12** | LSP server for Vale: rules in the writer's editor rather than in a report they never read |
+
+**Seventeen verified rows, all with a real repo, a read licence and a dated last push.** Every engine in
+the table pushed within eight days of this pass; the dormant rows are labelled as dormant.
+
+### The three findings that make this plane different from the other sixty
+
+**1. This is the first plane in this KB where the dominant standards body AFFIRMATIVELY PERMITS AI.** The
+Associated Press's updated newsroom AI standards (reported July 2026†) expand permitted uses to early
+research, summarisation, transcription, translation, headline suggestions **and explicitly grammar,
+spelling and search optimisation**, with human review before publication and a continuing ban on
+generative AI for news photography.† Fifty-nine passes in this KB documented restriction — consent,
+disclosure, reservation, classification. **The copy desk is where the permission already exists**, which
+makes it the lowest-friction AI engagement in a newsroom and the one that needs no new policy argument.
+
+**2. The content law of this KB holds a fourth time, with a new and more useful axis.** Healthcare's CPT,
+healthcare's MedDRA and media's ISRC/EIDR all showed that the *content* decides whether open source can
+do the job. Here the gradient is sharper, because the comparison is controlled — the same engine, Vale
+(MIT), consumes all of these style guides:
+
+| Style content | Open rule pack? | Evidence |
+|---|---|---|
+| **Microsoft Writing Style Guide** | **Yes** — [vale-cli/Microsoft](https://github.com/vale-cli/Microsoft), MIT, 114★, pushed **2026-11-23** | Microsoft sells cloud, not the style guide |
+| **Google developer documentation style guide** | **Yes** — [vale-cli/Google](https://github.com/vale-cli/Google), MIT, 98★, pushed **2026-11-23** | Google sells cloud, not the style guide |
+| **Red Hat supplementary style guide** | **Yes** — [redhat-documentation/vale-at-red-hat](https://github.com/redhat-documentation/vale-at-red-hat), MIT, 56★, pushed **2026-11-27** | Red Hat sells subscriptions, not the style guide |
+| **AP Stylebook** — the style of US news | **No.** `AP stylebook` → **13 repos, top five hold 29, 4, 4, 3 and 1 stars** | AP sells the Stylebook itself† |
+| **Chicago Manual of Style** | **No.** Subscription product; publishes annual rate cards† | The University of Chicago Press sells the manual itself† |
+| *Any newsroom house style* | **No.** `newsroom style guide` → **7 repos, top five hold 4, 4, 1, 1, 1 stars**; `copy desk editorial` → **3 repos, 0★, 0★, 0★** | — |
+
+**The refined law: the style content that is open is the content whose owner sells something else.** Every
+openly licensed style guide on this plane belongs to a company whose revenue comes from a product the guide
+promotes; every paywalled one belongs to an organisation whose product *is* the guide. That predicts
+licence availability better than sector, regulator or region — and it is testable in any other industry
+this KB covers.
+
+**3. The licence gate this plane adds to CI.** `languagetool` core is **LGPL-2.1**: usable from
+proprietary code across a library or process boundary. `jxmorris12/language_tool_python` — the client
+almost every Python integration installs — is **GPL-3.0**. The engine is safe, the convenience wrapper is
+not, and the two live in different repos under different owners, so **no SBOM scan keyed on "languagetool"
+will surface it**. Pair this with the Korean case: `ssut/py-hanspell` is MIT and is a **client for Naver's
+spell checker**, so its code is redistributable while its capability is not licensed to anyone. Two
+different failure shapes, one rule: **resolve the licence and the dependency of the thing you import, not
+of the thing it talks to.**
+
+### Searched and absent, recorded as measured rather than unexamined
+
+`gh api search/repositories`, sorted by stars, 2026-11-28:
+
+| Query | Repos found | Stars of the top five |
+|---|---|---|
+| `lectura facil simplificacion` | **0 — literally none** | — |
+| `copy desk editorial` | 3 | **0, 0, 0** |
+| `terminology checker glossary` | 3 | **0, 0, 0** |
+| `corrector gramatical espanol` | 5 | **1, 0, 0, 0, 0** |
+| `arabic grammar checker` | 5 | 1, 0, 0, 0, 0 |
+| `spanish grammatical error correction` | 2 | 2, 0 |
+| `hindi grammar checker` | 6 | 2, 2, 2, 0, 0 |
+| `portuguese grammar checker` | 2 | 53, 0 |
+| `newsroom style guide` | 7 | 4, 4, 1, 1, 1 |
+| `AP stylebook` | 13 | 29, 4, 4, 3, 1 |
+
+**One star, worldwide, for a Spanish grammar corrector.** Spanish is the second-most-spoken native
+language on earth. The engines that could run one are MIT and Apache-2.0 and pushed this week; what does
+not exist is the rule content. (`house style linter` returns 22 repos whose top two hold 684★ and 228★ —
+**not examined this pass**, and most likely code linters rather than prose tools; recorded so a later pass
+checks rather than assumes.)
+
+† = secondary source (trade press or vendor page), reached via search only and **not** verified against
+the primary source from this session. `www.chicagomanualofstyle.org` is outside this session's allowed
+network domains (DNS refusal, **not** a 404), so its rate card is a lead, not a verified price.
+

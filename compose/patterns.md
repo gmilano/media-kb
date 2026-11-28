@@ -9319,3 +9319,176 @@ renderer the client has already paid for.
 † = secondary source, reached via search and not verified against the primary source this pass
 (`rgl.epfl.ch`, `www.merl.com`, `zenodo.org` and `openexr.com` are outside this session's allowed network
 domains: `curl` → `000`, a proxy refusal, not a 404).
+
+---
+
+## Pattern 151 — The client-owned copy desk (**zero per-seat licence, nothing leaves the building**)
+
+The baseline build for any editorial language-quality engagement. Every component MIT or Apache-2.0,
+verified 2026-11-28.
+
+```
+[writer's editor] ──► vale-ls (MIT, 132★) ──┐
+                                            ├──► vale (MIT, 6,445★) ──► client rule pack  (the deliverable)
+[content repo PR] ──► vale-action (MIT) ────┘            │
+                                                         ├──► vale-cli/Microsoft (MIT, 114★)  = structural template
+[grammar/spelling] ──► harper (Apache-2.0, 18,015★, local, offline)
+[structure]        ──► markdownlint (MIT, 6,454★)
+[readability]      ──► textstat (MIT, 1,394★)
+```
+
+1. **harper** ([Automattic/harper](https://github.com/Automattic/harper), Apache-2.0) for grammar and
+   spelling. It runs offline, which is what makes it sellable to a newsroom with source-protection duties
+   — no sentence of unpublished copy crosses a network boundary.
+2. **vale** ([vale-cli/vale](https://github.com/vale-cli/vale), MIT) for house style. Vale ships no
+   opinion of its own; the rules are the engagement, and the client owns them.
+3. Seed the rule pack's *structure* from [vale-cli/Microsoft](https://github.com/vale-cli/Microsoft)
+   (MIT) — directory layout, rule types, severity conventions — and **not** its content.
+4. **vale-ls** in the editor, **vale-action** in CI. Rules the writer never sees change nothing.
+5. **markdownlint** before the prose rules: structural defects (heading levels, link syntax) produce
+   false prose findings if they run in the wrong order.
+
+**Note the org:** the project moved from `errata-ai` to `vale-cli`. `errata-ai/vale` still clones because
+git follows renames, but it is a redirect — record the canonical name.
+
+## Pattern 152 — The LGPL-safe LanguageTool deployment (**the engine is fine; the Python client is the trap**)
+
+`languagetool` core is **LGPL-2.1** — linkable from proprietary code across a boundary.
+`jxmorris12/language_tool_python` (534★, pushed 2026-11-21) is **GPL-3.0**. The convenience wrapper, not
+the engine, is what would relicense a client's service, and the two sit in different repos under
+different owners, so **no SBOM scan keyed on "languagetool" surfaces it**.
+
+```
+[your proprietary service]
+        │  HTTP/JSON  ◄── the licence boundary lives here
+        ▼
+[languagetool-server (LGPL-2.1), own process/container]
+        │
+        └── 36 language modules, incl. de-DE-x-simple-language
+```
+
+1. Run the **`languagetool-server`** module as its own process or container; talk to it over HTTP.
+2. **Do not `pip install language_tool_python`** into the proprietary service. If a Python client is
+   wanted, write a thin HTTP caller — it is a few dozen lines, and it keeps the GPL out of the image.
+3. If the engine must be *embedded* in a proprietary binary, the permissive reimplementation is
+   `bminixhofer/nlprule` (dual MIT/Apache-2.0) — **and it has been dead since 2023-05-23**, so treat it as
+   a fork-and-maintain decision, not a dependency.
+4. Record in the SBOM which licence option was elected, for Hunspell and for every dictionary (see
+   Pattern 156).
+
+## Pattern 153 — The house-style compiler (**the engagement LATAM and US newsrooms are both asking for in PDFs**)
+
+Named outlets now have editorial AI and style manuals as documents — Listín Diario, El Comercio, La
+Gaceta, El Tiempo†. Nothing open turns a manual into rules: `terminology checker glossary` returns **3
+repositories, all with 0 stars**.
+
+```
+[style manual: PDF/DOCX]
+   ├─► terms & forbidden words ──► Vale `substitution` / `existence` rules
+   ├─► preferred spellings ──────► Vale `Vocab` (client-private)
+   ├─► readability targets ──────► textstat (MIT) thresholds in CI
+   └─► unenforceable judgement ──► documented as human-review items, NOT rules
+```
+
+1. Classify every manual statement as **mechanisable** (terms, spellings, capitalisation, numerals,
+   forbidden constructions) or **judgement** (tone, fairness, newsworthiness). Write rules only for the
+   first class and **publish the second class as an explicit list** — a style rule that cannot be checked
+   should not pretend to be a check.
+2. Emit a Vale style directory plus a `Vocab` the client keeps private.
+3. **Never redistribute AP or Chicago text.** The client holds that subscription; the compiler consumes
+   the client's own manual. Shipping an "AP style pack" is redistributing a paid product.
+4. Deliver the rule pack in the client's repo under their copyright. The compiler is the reusable asset.
+
+## Pattern 154 — The `es-419` variant pack (**contribute the rule content that does not exist**)
+
+Measured this pass from the LanguageTool tree: Portuguese has `pt-AO`, `pt-BR`, `pt-MZ`, `pt-PT`; English
+has five variant rule directories and six variant spelling files; **Spanish has none.**
+
+1. Fork `languagetool-language-modules/es`; create `es-MX`, `es-AR`, `es-CO`, `es-CL` **mirroring the `pt`
+   layout** — the engine already supports variant resolution, so no engine work is required.
+2. Seed from the Spanish resources that do exist: `es/style.xml` (49,905 B), `confusion_pairs.txt`
+   (27,701 B), and the dictionary/thesaurus in [sbosio/rla-es](https://github.com/sbosio/rla-es)
+   (GPL-3+/LGPL-3+/MPL-1.1+, thesaurus LGPL-2.1 separately).
+3. Contribute upstream under **LGPL-2.1**; keep each client's terminology in a private Vale `Vocab`. The
+   split matters: the variant rules are worth more as a public contribution (standing, maintenance shared)
+   and the client's lexicon is worth more private.
+4. Elect and record the licence option for every dictionary shipped (Pattern 156).
+
+**Why this one is first among the LATAM options:** it is rule content rather than research, the engine and
+test harness are maintained and pushed daily, and the same artefact answers Spain's 2 January 2027
+plain-language deadline† and every Spanish-language newsroom in the Americas.
+
+## Pattern 155 — The lectura-fácil / plain-language gate (**for Real Decreto 707/2026, in force 2 Jan 2027†**)
+
+`lectura facil simplificacion` returns **zero repositories**. The only open simple-language rule module in
+any language is German.
+
+```
+[source text] ──► textstat (MIT): Fernández-Huerta / Flesch-Huerta ──► threshold gate
+             ──► es simple-language rules, modelled on
+                 `de-DE-x-simple-language` (0.08 MB, LGPL-2.1) ─────► findings
+             ──► human easy-read specialist sign-off ──────────────► publishable claim
+```
+
+1. **Measure first**: `textstat` gives Spanish-specific readability indices, so a baseline and a target can
+   be agreed before any rewriting.
+2. Build the Spanish rule module on the **German** module's structure — it is the only working reference,
+   and it is LGPL-2.1, so it can be read, copied in structure and contributed back.
+3. **Report, do not auto-rewrite.** Easy-read is an accessibility claim about comprehension by a specific
+   audience; an unreviewed machine rewrite converts a compliance asset into a liability. The pipeline's
+   output is findings plus a diff proposal for a human specialist.
+4. Keep the sign-off record. The obligation is on the publisher, and the evidence that a human validated
+   the easy-read version is the compliance artefact — not the tool's log.
+
+## Pattern 156 — The dictionary licence gate (**a CI check, with the four shapes it must catch**)
+
+Every load-bearing dictionary on this plane reports something other than its real licence. All four cases
+below were read from file this pass:
+
+| Shape | Example | What the API says | What the file says |
+|---|---|---|---|
+| Tri-license, engine | `hunspell/hunspell` | `LGPL-2.1` | `COPYING` GPL-2 + `COPYING.LESSER` LGPL-2.1 + `COPYING.MPL` — **three options** |
+| Tri-license, `NOASSERTION` | `hunspell/hyphen` | `NOASSERTION` | `COPYING` (974 B): "GPL 2.0/LGPL 2.1/MPL 1.1 tri-license" |
+| Licence belongs to the **data** | `LibreOffice/dictionaries` | **`NONE`** | per language dir; `pt_BR/README_en.txt` = LGPL-3 + MPL (VERO) |
+| Sub-component differs | `sbosio/rla-es` | `NOASSERTION` | GPL-3+/LGPL-3+/MPL-1.1+ **and the thesaurus LGPL-2.1 alone** |
+
+1. For every dictionary, hyphenation table and thesaurus in the build, **resolve the licence of the data
+   file**, not of the repository.
+2. Where a tri-license offers it, **elect the permissive option explicitly and record the election** in
+   the SBOM. A tri-licensed file in a proprietary product is fine; an unrecorded choice is what fails an
+   audit two years later.
+3. Treat `NONE` and `NOASSERTION` as **"read the tree"**, never as "no licence". Probe
+   `LICENSE LICENSE.md LICENSE.txt license license.md licence COPYING COPYING.txt COPYING.md
+   LICENSE-MIT LICENSE-APACHE COPYRIGHT`, then the per-language READMEs, then clone shallowly and look.
+4. Match licence names **on word boundaries**. A substring scan reads every BSD file as ISC
+   ("D**ISC**LAIMED") and every MIT file as MPL ("co**mpl**iance"). This pass made both errors before
+   reading the files.
+
+## Pattern 157 — The CJK copy desk (**and the Korean promise not to make**)
+
+```
+ja ──► textlint (MIT) + textlint-ja presets (MIT: ai-writing 1,167★, ja-technical-writing 571★, JTF 221★)
+       + prh (MIT) for YAML term rules
+zh ──► pycorrector (Apache-2.0, 6,549★)   [substrate: jieba MIT 35,260★ — DORMANT 27 months]
+ko ──► ✗ no open engine. hunspell-dict-ko (GPL, dormant 34 months) or a commercial agreement.
+```
+
+1. **Japanese** is the strongest non-English case on the plane: MIT rule packs, maintained, pushed this
+   month, including the only widely adopted AI-writing rule set anywhere. Deploy `textlint` with the
+   `textlint-ja` presets; add client rules via `prh` YAML.
+2. **Chinese**: `pycorrector` (Apache-2.0) for correction, but **budget for `jieba`**. Its 35,260 stars and
+   6,669 forks have not been touched in 27 months; a client shipping Chinese copy-desk work is standing on
+   an unmaintained dependency, and funding its maintenance is cheaper than replacing it.
+3. **Korean**: do not promise an all-open-source copy desk. `ssut/py-hanspell` is MIT **and is a client
+   for Naver's spell checker** — its own README says so. The code is redistributable; the capability is
+   not licensed to you. Price a Naver agreement or dictionary work on `hunspell-dict-ko` (**GPL**, so it
+   constrains distribution as well).
+4. **Never apply the whitespace assumption.** The entire English copy-desk stack tokenises on spaces;
+   `vale` and `harper` rules do not transfer to ja/zh/ko. The tokeniser is the dependency that decides
+   whether anything above it works, and in CJK it is the least maintained layer in the stack.
+
+† = secondary source (trade press or ministry press release), reached via search and not verified against
+the primary source this session. Every repository, licence, star count and byte measurement cited in these
+patterns was verified on 2026-11-28 and appears with its evidence in `agents/top.md`,
+`repos/foundations.md` or `verticals/solutions.md`.
+

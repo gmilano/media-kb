@@ -6397,3 +6397,63 @@ one of the three (mitsuba3's grant-back) carries an obligation a reviewer would 
 
 † = secondary source (trade press, lab FAQ or project site, reached only through search results and
 **not** verified against the primary source from this session — see the channel limitation above).
+
+---
+
+## 🔤 Pass 61 (2026-11-28) — the copy-desk substrate: spell engines, hyphenation, dictionaries and rule corpora
+
+> The layer under the linters. **The licence story on this plane is unusual: every load-bearing component
+> is tri-licensed or licensed per data file, and three of the five most important ones report
+> `NOASSERTION` or `NONE` to the GitHub API.** Verified 2026-11-28 — existence via `git ls-remote`,
+> stars/forks/`pushed_at` via `search/repositories`, and every licence below **read from the file**.
+
+| Repo | Licencia (as read) | Stars / forks | Last push | Role |
+|---|---|---|---|---|
+| [hunspell/hunspell](https://github.com/hunspell/hunspell) | **Tri-license, all three files present and read**: `COPYING` GPL-2 (18,093 B), `COPYING.LESSER` LGPL-2.1 (26,531 B), `COPYING.MPL` (25,755 B). **API reports `LGPL-2.1` only** | 2,628★ / 287f | **2026-11-21** | The spellchecking library under LibreOffice, Firefox, Chrome and macOS tooling |
+| [nuspell/nuspell](https://github.com/nuspell/nuspell) | LGPL-3.0 (`COPYING`, 35,147 B); GitHub reports "LGPL-3.0, GPL-3.0 licenses found" | 271★ / 29f | 2026-09-11 | Modern C++ reimplementation — the one to embed in new C++ work |
+| [hunspell/hyphen](https://github.com/hunspell/hyphen) | **`NOASSERTION`** → `COPYING` (974 B) opens with **"GPL 2.0/LGPL 2.1/MPL 1.1 tri-license"** | 83★ / 27f | **2026-11-24** | Hyphenation patterns and engine — justification, line-breaking, print and EPUB |
+| [sbosio/rla-es](https://github.com/sbosio/rla-es) | **`NOASSERTION`** → `LICENSE.md` (991 B): **"triple esquema de licencias disjuntas"** GPL-3+/LGPL-3+/MPL-1.1+ — **and the thesaurus separately LGPL-2.1** | 264★ / 53f | 2026-10-11 | *Recursos lingüísticos abiertos del español*: the canonical open Spanish dictionary, feeding LibreOffice and Firefox |
+| [LibreOffice/dictionaries](https://github.com/LibreOffice/dictionaries) | **`NONE` at repo root** (only a 134-byte `README` pointing at the wiki). Licence is **per language directory**: `pt_BR/README_en.txt` (1,461 B) names **LGPL-3 + MPL**, author Raimundo Moura, the VERO project | 579★ / 327f | **2026-11-27** | The dictionary and hyphenation tree that ships with LibreOffice |
+| [wooorm/dictionaries](https://github.com/wooorm/dictionaries) | **MIT for the collection** (`license`, 1,099 B) — **each dictionary keeps its own**: `es`, `es-AR` and `es-MX` each ship the same 2,596-byte RLA tri-license notice | 1,419★ / 411f | 2024-09-09 (**dormant ~27 months**) | Hunspell dictionaries normalised to UTF-8 and published to npm |
+| [wolfgarbe/SymSpell](https://github.com/wolfgarbe/SymSpell) | MIT (`LICENSE`, 1,066 B) | 3,493★ / 311f | 2026-10-29 | Symmetric-delete spelling correction and fuzzy search — microsecond latency, no model |
+| [textstat/textstat](https://github.com/textstat/textstat) | MIT (1,093 B) | 1,394★ / 194f | 2026-10-26 | Readability metrics incl. Spanish-specific Fernández-Huerta — the measurable half of plain-language compliance |
+| [retextjs/retext](https://github.com/retextjs/retext) | MIT — file is **`license`**, lowercase, no extension (1,094 B) | 2,433★ / 92f | 2025-02-04 (dormant ~22 months) | Natural-language processing pipeline for the unified/JS ecosystem |
+| [remarkjs/remark-lint](https://github.com/remarkjs/remark-lint) | MIT (`license`) | 1,042★ / 139f | 2026-01-05 | Markdown rule engine — the structural substrate prose rules plug into |
+| [fxsjy/jieba](https://github.com/fxsjy/jieba) | MIT | **35,260★** / 6,669f | 2024-08-21 (**dormant ~27 months**) | Chinese segmentation. Nothing in CJK copy-desk work happens without tokenisation, and this is the default |
+| [atilika/kuromoji](https://github.com/atilika/kuromoji) | Apache-2.0 (`LICENSE.md`, 12,171 B) | 1,067★ / 140f | 2023-01-23 (**dormant ~46 months**) | Japanese morphological analyser (the Lucene lineage) |
+| [open-korean-text/open-korean-text](https://github.com/open-korean-text/open-korean-text) | Apache-2.0 (11,325 B) | 667★ / 95f | 2024-03-12 (dormant ~33 months) | Korean tokenisation/normalisation — the permissive Korean option that still exists |
+| [spellcheck-ko/hunspell-dict-ko](https://github.com/spellcheck-ko/hunspell-dict-ko) | **`NOASSERTION`** → `LICENSE.md` (2,598 B) = **GPL** | 288★ / 46f | 2024-02-11 (dormant ~34 months) | The Korean Hunspell dictionary — copyleft, which matters because the MIT alternative is a Naver API client |
+| [bminixhofer/nlprule](https://github.com/bminixhofer/nlprule) | **Dual**: `LICENSE-MIT` (1,023 B) + `LICENSE-APACHE` both present; API reports Apache-2.0 | 680★ / 46f | 2023-05-23 (**dead ~42 months**) | Rust reimplementation of LanguageTool's rule engine — the permissive escape from LGPL, and it is abandoned |
+| [neuspell/neuspell](https://github.com/neuspell/neuspell) | MIT (1,065 B) | 717★ / 105f | 2023-07-31 (**dead ~40 months**) | Neural spelling correction toolkit — recorded as dead so no later pass proposes it |
+
+**Sixteen verified rows.** Eleven licences had to be read from the file because the API answer was absent,
+partial or wrong.
+
+### Why this file's licence rule needed a third revision
+
+Pass 8 established that a 404 from the `raw` channel is never by itself proof that a licence is missing,
+and added `license.txt` and `COPYING.md` to the probe list. **This pass broke the probe again**, in a new
+way: three MIT repos (`retextjs/retext`, `get-alex/alex`, `wooorm/dictionaries`) reported
+NO-LICENSE-FILE-FOUND because their licence lives in **`license`** — bare, lowercase, no extension. The
+probe list is now `LICENSE LICENSE.md LICENSE.txt license license.md licence LICENCE COPYING COPYING.txt
+COPYING.md license.txt LICENSE-MIT LICENSE-APACHE COPYRIGHT`.
+
+And a second, more general correction: **licence-name detection must match on word boundaries.** A
+substring match read `proselint` as ISC (its BSD disclaimer contains "D**ISC**LAIMED") and `textlint` as
+MPL (MIT's text contains "co**mpl**iance"). Both repos were then read by hand: **BSD-3-Clause** and
+**MIT** respectively. A scanner that greps licence names without boundaries will misreport a predictable
+class of files — every BSD and every MIT one.
+
+### The structural fact this file exists to record
+
+**On this plane the engine is free, permissive, maintained and solved; the *language data* is where every
+constraint lives.** The engines pushed on 2026-11-21, -24, -27 and -28. The dictionaries and tokenisers
+they need have been dormant for 27, 33, 34 and 46 months. And the licence of the data is never the licence
+of the repo: Spanish ships a triple-disjoint grant whose thesaurus is LGPL-2.1 on its own, Brazilian
+Portuguese ships LGPL-3 + MPL inside a repo GitHub labels `NONE`, and the `wooorm` collection is MIT while
+containing nothing that is MIT. **For any dictionary a client ships, resolve the licence of the data file,
+elect the permissive option where a tri-license offers one, and record which option you elected** — that
+last step is what makes the choice auditable later.
+
+† = secondary source, reached via search only and not verified against a primary source this session.
+

@@ -5877,3 +5877,90 @@ vendor narrative and is the more defensible claim of the two.
 † = secondary source (trade press, vendor research or lab FAQ), reached via search and not verified
 against primary sources this pass; `rgl.epfl.ch`, `www.merl.com` and `zenodo.org` are outside this
 session's allowed network domains (`curl` → `000`, a proxy refusal, not a 404).
+
+---
+
+## Pass 61 (2026-11-28) — the copy desk & editorial language-quality plane: six trends, each with the measurement attached
+
+### 1. The engines are solved and permissive; the constraint moved entirely into language data
+
+Every engine on this plane pushed within eight days of this pass: **harper** (Apache-2.0, 18,015★,
+2026-11-28), **languagetool** (LGPL-2.1, 15,314★, 2026-11-28), **textlint** (MIT, 3,223★, 2026-11-28),
+**vale** (MIT, 6,445★, 2026-11-27), **markdownlint** (MIT, 6,454★, 2026-11-27). Every piece of non-English
+language *data* they depend on is dormant: `jieba` **27 months** (35,260★), `kuromoji` **46 months**,
+`hunspell-dict-ko` **34 months**, `open-korean-text` **33 months**, `wooorm/dictionaries` **27 months**.
+
+**The trend to record: on this plane the commits are in the engines and the need is in the data.** It is
+the inverse of the rendering plane (pass 60), where the stars were on the neural work and the commits on
+the physical substrate. Same lesson from the other direction — **ranking by stars picks the wrong artefact
+in both cases.**
+
+### 2. For the first time in this KB, the dominant standards body permits AI rather than restricting it
+
+AP's updated newsroom standards (reported July 2026†) name **grammar, spelling and search optimisation**
+among approved uses, alongside research, summarisation, transcription, translation and headline
+suggestion — subject to human review before publication, with generative AI still barred from creating or
+altering news photography, and disclosure required where generative AI played a "material" role, which the
+reporting notes is left undefined†. Fifty-nine earlier passes documented consent, reservation, labelling
+and classification duties. **The copy desk is the one newsroom function where the permission already
+exists**, so it needs no policy argument to start — only a harness.
+
+### 3. The AI-slop linter wave is a recommendation artefact, not a trend
+
+Search engines surface `humanizer-lint`, `wsc` and `prosegrain` as 2026's trending prose linters. All MIT,
+all pushed in the last seven weeks, and they hold **117★, 10★ and 1★** respectively — **128 stars
+between them**. Meanwhile the artefact on this plane with 6,391★, `conorbronsdon/avoid-ai-writing`, is an
+**agent skill**: markdown rules, no executable checker. And the AI-writing rule pack with genuine adoption
+is **Japanese** (`textlint-ja/textlint-rule-preset-ai-writing`, 1,167★, pushed 2026-11-23).
+
+**Two things follow.** First, a pass that trusted the search summaries would have written a 1-star
+repository into a KB table as a trend — the exact failure mode this file exists to prevent. Second, and
+more interesting: **on this plane the artefact accruing adoption is a prompt, not a program.** That is new
+in this KB, and it is falsifiable: if it is real, the next widely adopted "linter" on this plane will again
+ship as rules-for-an-agent rather than as a binary.
+
+### 4. The content law of this KB now has a mechanism, not just a pattern
+
+Healthcare's CPT and MedDRA, media's ISRC/EIDR, and now editorial style, all show the same shape: the
+software is free and the knowledge content is not. This plane supplies the **controlled comparison** that
+explains why, because one engine (Vale, MIT) consumes all of these guides and only some of them are open:
+
+- **Open:** Microsoft (MIT, 114★), Google (MIT, 98★), Red Hat (MIT, 56★) — companies that sell cloud and
+  subscriptions, for whom the style guide is marketing.
+- **Closed:** AP Stylebook (13 repos, top five **29, 4, 4, 3, 1★**), Chicago Manual (subscription rate
+  cards†) — organisations whose product *is* the guide.
+
+**The refined law: the style content that is open is the content whose owner sells something else.** It
+predicts licence availability better than sector, regulator or geography — and unlike the earlier
+formulations it names the mechanism, so it can be checked in any other industry in this KB.
+
+### 5. The variant void: measured, dated, and squarely a LATAM finding
+
+From the LanguageTool tree at `master`, 2026-11-28: Portuguese has **four** variant rule directories
+(`pt-AO`, `pt-BR`, `pt-MZ`, `pt-PT`), English **five** plus six variant spelling files, German two,
+Catalan one — **Spanish none**, and a single undifferentiated `spelling.txt`. Spanish's whole rule corpus
+is **2.21 MB** against Portuguese's **5.41 MB** and French's **10.07 MB**.
+
+Two adjacent measurements complete the picture: **`corrector gramatical espanol` returns 5 repositories
+whose top five hold 1, 0, 0, 0 and 0 stars**, and **Catalan's corpus (9.59 MB) is larger than English's
+(9.19 MB)**. So the gap is not about speaker counts or market size — Catalan has ~10 million speakers and
+beats English — **it is about whether a community organised to write rules.** For Spanish, nobody has.
+
+### 6. A plain-language obligation with a date and no tooling at all
+
+Spain's **Real Decreto 707/2026** (BOE-A-2026-18509), approved 1 September 2026, reported in force
+**2 January 2027**†, implements Ley 6/2022's cognitive-accessibility mandate and requires **lenguaje
+sencillo** and **lectura fácil**†. Against that: **`lectura facil simplificacion` returns zero
+repositories**, and the only open simple-language rule module in any language is German
+(`de-DE-x-simple-language`, 0.08 MB, LGPL-2.1, verified in the tree).
+
+**A dated statutory obligation, an empty tooling field, and a working reference implementation in another
+language under a licence that permits both consumption and contribution.** Of everything measured this
+pass, this is the cleanest build case — and the artefact it produces also serves every Spanish-language
+engagement in LATAM.
+
+† = secondary source (trade press, ministry press release or vendor page), reached via search and not
+verified against the primary source from this session; `www.chicagomanualofstyle.org` is outside this
+session's allowed network domains (DNS refusal, not a 404). All repository counts, star counts, licence
+determinations, byte sizes and variant-directory listings in this section were taken directly this pass.
+

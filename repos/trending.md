@@ -10,6 +10,74 @@ updated: 2026-11-28
 > Distinct from `agents/trending.md`: this file tracks **infrastructure and platform** repos.
 > (Until this pass the two files were byte-identical — that defect is fixed here.)
 
+## 2026-11-28 — pass 58: the FX-simulation substrate (**the solvers are permissive and pushed today; three of the plane's most load-bearing licences cannot be read by any scanner**)
+
+**Channel note:** `ls-remote` (**42/42 slugs resolved**), `search/repositories` and `raw` all worked.
+**`github.com` HTML `403`**; **`sidefx.com` not fetched** (Houdini terms unverified);
+**`search/repositories` 422 on `dreamworksanimation/openmoonray`** — existence and licence verified
+directly instead, and **no star figure is claimed for it.**
+
+**The shape of this plane, in one line:** the *solver substrate* is excellent, permissive and pushed this
+week; the *applications* are GPL-2.0 and proprietary; and the *crowd, hair and destruction* sub-layers
+are dead. Infrastructure is not the bottleneck — **licence records and sub-layer maintenance are.**
+
+**New foundations recorded (verified today):**
+
+| Repo | License | Stars / forks | Last push | Role |
+|---|---|---|---|---|
+| https://github.com/taichi-dev/taichi | Apache-2.0 | 28,480★ / 2,391f | 2026-10-05 | GPU simulation DSL; most-starred permissive sim project anywhere. **APAC-originated.** |
+| https://github.com/google-deepmind/mujoco | Apache-2.0 | 18,544★ / 2,243f | 2026-11-27 | Rigid-body/contact physics. |
+| https://github.com/NVIDIA/warp | Apache-2.0 | 7,366★ / 720f | **2026-11-28** | Differentiable GPU kernels. **Best permissive entry point in the plane.** |
+| https://github.com/NVIDIA-Omniverse/PhysX | BSD-3-Clause | 4,870★ / 691f | 2026-11-18 | Rigid bodies, cloth, destruction. |
+| https://github.com/st-tech/ppf-contact-solver | Apache-2.0 (11,355 B read) | 4,625★ / 352f | **2026-11-28** | Contact solver for shells/solids/rods. Created 2024-11 → 4,625★ in two years. |
+| https://github.com/AcademySoftwareFoundation/openvdb | Apache-2.0 | 3,559★ / 810f | 2026-11-25 | The sparse volume format all smoke/fire passes through. |
+| https://github.com/AcademySoftwareFoundation/OpenShadingLanguage | BSD-3-Clause | 2,352★ / 424f | 2026-11-27 | Production shading language. |
+| https://github.com/AcademySoftwareFoundation/MaterialX | Apache-2.0 | 2,317★ / 473f | 2026-11-23 | Material interchange. |
+| https://github.com/InteractiveComputerGraphics/PositionBasedDynamics | MIT | 2,299★ / 397f | 2026-09-01 | PBD/XPBD — the method production cloth is built on. **EMEA academic.** |
+| https://github.com/InteractiveComputerGraphics/SPlisHSPlasH | MIT | 1,971★ / 347f | 2026-11-23 | SPH fluids. **EMEA academic.** |
+| https://github.com/tum-pbs/PhiFlow | MIT | 1,959★ / 237f | 2026-07-16 | Differentiable fluids. **EMEA academic (TU München).** |
+| https://github.com/AcademySoftwareFoundation/openexr | BSD-3-Clause | 1,893★ / 723f | **2026-11-28** | The frame format every sim render writes. |
+| https://github.com/LuxCoreRender/LuxCore | Apache-2.0 | 1,354★ / 178f | 2026-11-23 | Physically-based renderer. |
+| https://github.com/AcademySoftwareFoundation/rez | Apache-2.0 | 1,102★ / 369f | 2026-11-26 | Environment resolution — what makes a 40-package FX setup reproducible. |
+| https://github.com/alembic/alembic | **BSD-3-Clause** (API: `NOASSERTION`) | 1,177★ / 271f | 2026-11-20 | Baked geometry/point caches. **`Alembic` had 0 hits in this KB before this pass.** |
+
+**The three licences no scanner reports correctly — the most reusable finding of this pass:**
+
+1. **OpenUSD is not Apache-2.0.** `PixarAnimationStudios/OpenUSD` (7,682★ / 1,488f, 2026-11-25) is under
+   the **Tomorrow Open Source Technology License 1.0**, whose 49,827-byte text opens by stating it
+   *"differs from the original Apache License 2.0… Section 6 ('Trademarks') is different."* **No SPDX
+   identifier exists for TOST 1.0.** It is permissive and safe — but a client inventory reading
+   "OpenUSD: Apache-2.0" is **wrong about an unremovable dependency.**
+2. **A licence can be scoped by directory.** `bulletphysics/bullet3` (14,911★ / 3,126f): *"licensed under
+   the zlib license, **except for the files under 'Extras' and examples/ThirdPartyLibs**."* Sibling of the
+   Chromaprint compilation case: **resolve the licence of the directories you copied.**
+3. **A `COPYING` file can be a redirect, not a grant.** `blender/blender`'s is **302 bytes** and points to
+   `doc/license/GPL-license.txt` = **GPL Version 2, June 1991** (17,992 B) — **not GPL-3.0**, as Blender is
+   routinely mis-cited — and adds the sentence that ends every commercial-licence conversation:
+   ***"Apart from the GNU GPL, Blender is not available under other licenses."*** Also:
+   `mitsuba3` is **verbatim BSD-3-Clause text that is simply never labelled** (2,190 B, EPFL copyright
+   read first-hand) — `NOASSERTION` for want of a header line.
+
+**The dead sub-layers, named so no later pass rediscovers them as live:**
+**Crowds** — Menge (Apache-2.0, 156★) last push **2025-12-02**; CrowdMaster (GPL-3.0, 137★) last push
+**2020-04-12, 6.5 years**. **Destruction** — the popular permissive repos (`unity-fracture` 1,331★ MIT,
+`OpenFracture` 1,146★ MIT) are **Unity runtime mesh-slicers for games, not film fracture**; the only
+DCC-side Voronoi tool is an **LGPL-3.0 Maya plugin dead since 2018-01-02**. **Hair** — `libWetHair`
+(MPL-2.0, 314★) and `Digital-Salon` (MIT, 82★), both research code. **Neural surrogates** — top 8 sum to
+**142★**, best is **47★ dead since 2024-05-04**. ⚠️ `fracture` is a **false-abundance query** in the
+`eidr`/`isan` family: it returns thousands of stars from the wrong industry. **Read the results, never
+the total.**
+
+**The one AI technique here that earns its place** — and it is copyleft:
+https://github.com/ZephirFXEC/VQVDB (**GPL-3.0**, 117★, 2026-06-24) compresses OpenVDB volumes with a
+VQ-VAE. The permissive substrate is shippable; the intelligent thing done to it is not.
+
+**Pipeline-layer note with a procurement lesson:** `ynput/OpenPype` (MIT, **301★**) is **read-only** and
+says so — *"surpassed by AYON"* — while its live Apache-2.0 successor `ynput/ayon-launcher` holds **55★**.
+**The archived predecessor out-ranks its living successor 5.5× in the signal procurement actually uses,
+and the licence improved across a move that looks like decline.** Check `pushed_at` and the repo's own
+description before reading a star count as health.
+
 ## 2026-11-28 — pass 57: the performance-capture substrate (**the infrastructure is permissive and alive; the two artefacts the infrastructure needs are a patent and a non-commercial dataset**)
 
 **Channel note:** `ls-remote` + `search/repositories` + `raw` worked. **`huggingface.co`,

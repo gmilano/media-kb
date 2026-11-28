@@ -5369,3 +5369,70 @@ Two consequences, both actionable:
    grants no patent rights at all.** This is the first plane in this KB where that difference changes a
    build decision. (Patent **grant** status could not be checked — the registers are blocked here — so this
    is read from the licensor's own assertion, not from a register.)
+
+## The FX-simulation & procedural-effects layer — added 2026-11-28 (pass 58)
+
+**Why this layer was opened:** `fluid`, `particle`, `Mantaflow`, `taichi`, `PhysX`, `physics engine`,
+`soft body`, `groom`, `procedural generation`, `smoke sim`, `water sim`, `Alembic`, `AAF` and
+`effects simulation` each returned **0 hits across all eight KB files** — the emptiest vocabulary probe
+run in this KB. `ACES` appeared to return 134 hits and `LUT` 236; **both were pure substring noise**
+(`interfACES`, `surfACES`, `soLUTions`), as was `DIT` at 918 (`eDITorial`) and `slate` at 129
+(`transLATE`). Word-boundary matching cut `LUT` to **0**.
+
+**The finding, and it is measured, not argued.** This plane has a large, healthy, permissive agent
+layer — and **every agent in it is a remote control for a graphical application, not for a solver.**
+
+| Measured quantity (2026-11-28) | Stars |
+|---|---|
+| Agent bridges into Blender / Houdini / Nuke (the eight rows below) | **45,277★** |
+| The entire open neural-simulation layer (top 8 results for `neural fluid simulation`) | **142★** |
+| Agent tooling that touches the volumetric substrate (`mcp openvdb`: **1 result**, 1★) | **1★** |
+
+**That is a 319× gap between the remote control and the physics.** Open source built the thing that
+clicks the buttons; it did not build the thing that does the compute. No previous pass in this KB has
+found a plane where the agent layer is *this* healthy and *this* completely disconnected from the
+layer it is supposed to automate.
+
+### Tier 1 — The DCC-bridge agents (real, permissive, actively pushed)
+
+| Agent | Repo | License | Stars / forks | Last push | What it does |
+|---|---|---|---|---|---|
+| mcp-for-blender | [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender) | MIT | **36,054★** / 3,324f | 2026-11-26 | LLM control of Blender over MCP. **Already in this KB** (passes 36, 57); re-measured here for the trend — 35,788★ (2026-11-18) → 35,944★ (2026-11-26) → **36,054★ today**. Community project, self-declared *not* affiliated with the Blender Foundation. |
+| blender-skills (arjun988) | [arjun988/blender-skills](https://github.com/arjun988/blender-skills) | MIT | 5,232★ / 481f | 2026-11-06 | 94 packaged Blender skills for agent harnesses (Claude Code, Cursor, Codex, Kiro). |
+| scenario-labs/skills | [scenario-labs/skills](https://github.com/scenario-labs/skills) | MIT | 4,119★ / 374f | 2026-11-27 | Skills that route an agent to image/video/audio/3D generators. Adjacent to this plane rather than in it — listed because it is the asset-production sibling of the rows above. |
+| blender-skills (EL4CTEO) | [EL4CTEO/blender-skills](https://github.com/EL4CTEO/blender-skills) | MIT | 3,010★ / 299f | 2026-11-27 | Blender 5.3 workflows as agent skills. **A second, independent 3,000★ implementation of the same idea** — duplication, not consolidation. |
+| crucible | [codepawl/crucible](https://github.com/codepawl/crucible) | MIT | 1,049★ / 104f | 2026-11-28 | A 3D engine designed to be driven by agents rather than bridged to one. The only row here that is not a remote control. |
+| fxhoudinimcp | [healkeiser/fxhoudinimcp](https://github.com/healkeiser/fxhoudinimcp) | MIT | 441★ / 55f | 2026-11-20 | The most complete MCP server for SideFX Houdini — i.e. **the agent bridge into the application where film FX simulation actually happens**. Created 2026-02. |
+| houdini-mcp (capoomgit) | [capoomgit/houdini-mcp](https://github.com/capoomgit/houdini-mcp) | MIT | 312★ / 41f | 2026-06-11 | Earlier Houdini MCP bridge. ~5.5 months without a push. |
+| dcc-mcp-core | [dcc-mcp/dcc-mcp-core](https://github.com/dcc-mcp/dcc-mcp-core) | MIT | 78★ / 10f | 2026-11-28 | A shared Rust/Python control plane intended to serve *several* DCCs instead of one bridge per app. Pushed today. The right architecture, 78 stars of adoption. |
+| nukeserversocket | [sisoe24/nukeserversocket](https://github.com/sisoe24/nukeserversocket) | MIT | 62★ / 9f | 2026-11-21 | Runs Python inside Nuke (and Houdini) from VS Code or an agent over MCP. |
+
+### Tier 2 — Real, but the licence or the staleness constrains client work
+
+| Agent | Repo | License | Stars / forks | Last push | Constraint |
+|---|---|---|---|---|---|
+| Flue | [SFKislev/Flue](https://github.com/SFKislev/Flue) | MIT | 115★ / 5f | 2026-10-18 | Drives many desktop applications from the CLI for agents. Broad rather than deep; no FX-specific knowledge. |
+| ai-forge-mcp | [HurtzDonutStudios/ai-forge-mcp](https://github.com/HurtzDonutStudios/ai-forge-mcp) | **none found** | 102★ / 8f | 2026-04-09 | Claims 565 AI-callable tools across 16 MCP servers for full-pipeline asset production. **No licence file** → default copyright, all rights reserved. Unusable regardless of the feature list. |
+| houdini-mcp (oculairmedia) | [oculairmedia/houdini-mcp](https://github.com/oculairmedia/houdini-mcp) | **none — verified** | 88★ / 13f | 2026-09-28 | Houdini over MCP via `hrpyc`. **Licence absence confirmed, not assumed**: 11 filename variants × 2 branches all 404 while `README.md` returned 200 on both branches, so the naming convention is right and the file genuinely is not there. 88 stars of code nobody may redistribute. |
+| MuleCreate | [felixbfx/MuleCreate](https://github.com/felixbfx/MuleCreate) | GPL-3.0 | 74★ / 6f | 2026-11-25 | Sketch in 3D, hand the sketch to an AI that builds it in Houdini. Active, genuinely on-plane, **GPL-3.0** → separate-process only. |
+| artclaw_bridge | [IvanYangYangXi/artclaw_bridge](https://github.com/IvanYangYangXi/artclaw_bridge) | MIT | 39★ / 6f | 2026-05-01 | Generic DCC↔agent bridge framework. ~7 months idle. |
+| mujoco-mcp-server | [Rongxuan-Zhou/mujoco-mcp-server](https://github.com/Rongxuan-Zhou/mujoco-mcp-server) | MIT | 12★ | 2026-03-05 | **The closest thing to an agent that drives a solver** — and it drives a *robotics* solver, not an FX one. 12 stars. |
+| rez-skills | [loonghao/rez-skills](https://github.com/loonghao/rez-skills) | MIT | 5★ / 0f | 2026-10-28 | Agent skills for Rez, the VFX package/environment manager. Tiny, but the only agent tooling found for the *pipeline* layer. |
+| VoxelSieve | [yoshi5534/VoxelSieve](https://github.com/yoshi5534/VoxelSieve) | Apache-2.0 | **1★** | 2026-11-25 | The **entire** result set for `mcp openvdb` — one repo, one star, and it is industrial CT scanning, not VFX. This single row is the measurement behind the 319× claim. |
+
+### ⛔ What the agent layer here does *not* contain (searched, not found)
+
+- **No agent sets up a simulation.** Not a fluid solve, not a destruction setup, not a cloth or hair
+  solve, not a crowd. The bridges expose the application's Python API; the judgment of *what to simulate
+  and with which parameters* is unimplemented in every repo above.
+- **`simulation surrogate neural network physics graphics` → 0 results.**
+  `AI motion synthesis vfx simulation acceleration` → **0 results**.
+  `smoke pyro simulation vfx` → **0 results**. `agent skills vfx houdini` → **0 results**.
+  Four separate queries, four empty sets. Per this KB's own rule, these were re-run short before being
+  recorded as zeros — shortening turned `rigid body destruction fracture` (2 toy repos) into `fracture`
+  (1,331★), so the zeros above are query-independent, not phrasing artefacts.
+- **The licence consequence that makes all of this cosmetic:** 44,296★ of that 45,277★ — mcp-for-blender
+  plus both blender-skills repos — exists to drive **Blender, which is GPL-2.0 and whose own licence
+  pointer states "Apart from the GNU GPL, Blender is not available under other licenses."** The
+  remaining Houdini bridges drive a **proprietary per-seat application**. The MIT on these bridges is
+  real and useful, and it buys Globant **the right to ship the remote control and nothing it controls.**

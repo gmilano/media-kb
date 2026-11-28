@@ -8939,3 +8939,128 @@ This request arrives in nearly every animation engagement, and the honest answer
 
 **⛔ Do not** offer to "fine-tune on open motion data and sort the licence out later". The data licence
 attaches to the trained system, so the defect is in the weights, and the only remedy is retraining.
+
+## Pattern 141 — The permissive simulation microservice (**the core recipe of this plane**)
+
+**Problem.** The client wants simulated elements — liquid, smoke, debris, cloth — generated
+programmatically, and Globant must ship the thing that does it. The obvious route (Blender + FLIP Fluids)
+is **GPL-2.0 under GPL-3.0** and cannot be redistributed inside a product.
+
+**Recipe — no copyleft anywhere in the deliverable:**
+
+1. **Solver core:** [NVIDIA/warp](https://github.com/NVIDIA/warp) (Apache-2.0, 7,366★, pushed 2026-11-28)
+   for custom GPU kernels, plus
+   [st-tech/ppf-contact-solver](https://github.com/st-tech/ppf-contact-solver) (Apache-2.0, 4,625★) for
+   contact/cloth/shells and
+   [InteractiveComputerGraphics/SPlisHSPlasH](https://github.com/InteractiveComputerGraphics/SPlisHSPlasH)
+   (MIT, 1,971★) for SPH liquids.
+2. **Rigid bodies / destruction:** [NVIDIA-Omniverse/PhysX](https://github.com/NVIDIA-Omniverse/PhysX)
+   (BSD-3-Clause, 4,870★). **Not** `bullet3` as a vendored copy unless step 5 is done.
+3. **Write results to permissive formats, never to a DCC scene:**
+   [OpenVDB](https://github.com/AcademySoftwareFoundation/openvdb) (Apache-2.0) for volumes,
+   [Alembic](https://github.com/alembic/alembic) (BSD-3-Clause) for baked geometry and point caches,
+   [OpenEXR](https://github.com/AcademySoftwareFoundation/openexr) (BSD-3-Clause) for frames.
+4. **Orchestrate on** [OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) (Apache-2.0) with
+   [Rez](https://github.com/AcademySoftwareFoundation/rez) (Apache-2.0) pinning the environment.
+5. **Licence gate before vendoring anything native** — see Pattern 143.
+
+**Why it works:** the artist's application is never in the delivery path. Houdini or Blender *consume*
+the OpenVDB/Alembic caches the service produces; the service itself is Apache/BSD/MIT end to end.
+**The licence boundary is the file format.**
+
+## Pattern 142 — Agent-driven FX setup without shipping the DCC
+
+**Problem.** The client wants "an agent that sets up our sim shots". The agent bridges are MIT and
+excellent; the applications they drive are GPL-2.0 or proprietary.
+
+**Recipe:**
+
+1. **Control plane:** [healkeiser/fxhoudinimcp](https://github.com/healkeiser/fxhoudinimcp) (MIT, 441★)
+   for Houdini, or [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender) (MIT, 36,054★)
+   for Blender. Prefer [dcc-mcp/dcc-mcp-core](https://github.com/dcc-mcp/dcc-mcp-core) (MIT, pushed
+   2026-11-28) if more than one DCC is in scope — it is the only multi-DCC control plane found.
+2. **The application stays on the client's own licences, on the client's own machines.** Globant
+   delivers the bridge, the prompts/skills and the parameter schemas — never a bundled DCC.
+3. **The artefact Globant owns is the scene description**, written as OpenUSD or Alembic, so the output
+   survives independently of the application that produced it.
+4. **Hand off to Pattern 141** for anything that must run headless at scale.
+
+⚠️ **Do not use** [oculairmedia/houdini-mcp](https://github.com/oculairmedia/houdini-mcp) (88★) or
+[HurtzDonutStudios/ai-forge-mcp](https://github.com/HurtzDonutStudios/ai-forge-mcp) (102★): **both have
+no licence file** — verified across 11 filename variants and both branches, with `README.md` returning
+200 as the control. No licence means all rights reserved, whatever the feature list says.
+
+## Pattern 143 — The `NOASSERTION` gate (**a CI check this KB can now justify with four examples**)
+
+**Problem.** Licence scanners silently mislabel the most load-bearing repos in this plane.
+
+**Recipe.** Fail the build on `NOASSERTION`/`NONE` rather than ignoring it, and require a human-read note
+in a manifest for each. The four cases this pass found, all in one plane:
+
+| Dependency | Scanner says | Reality (read first-hand) | Action |
+|---|---|---|---|
+| [OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD) | `NOASSERTION` → usually guessed "Apache-2.0" | **TOST 1.0**, Apache-2.0 with §6 Trademarks changed; **no SPDX id exists** | Permissive — record the real name in the inventory |
+| [bullet3](https://github.com/bulletphysics/bullet3) | `NOASSERTION` | **zlib except `Extras/` and `examples/ThirdPartyLibs`** | Resolve the licence of **the directories you copied** |
+| [mitsuba3](https://github.com/mitsuba-renderer/mitsuba3) | `NOASSERTION` | **BSD-3-Clause text, unlabelled** (EPFL copyright) | Safe; add the header note |
+| [alembic](https://github.com/alembic/alembic) | `NOASSERTION` | **BSD-3-Clause, SPDX id inside `LICENSE.txt`** | Safe; the API just missed the filename |
+
+**Probe filenames in this order** (this KB's accumulated list, and it mattered again this pass):
+`LICENSE`, `LICENSE.txt`, `LICENSE.md`, **`license.txt`** (lowercase), `LICENCE`, `COPYING`,
+`COPYING.txt`, **`COPYING.md`**. **And read the file, do not just confirm it exists** — Blender's
+`COPYING` is a **302-byte pointer** to `doc/license/GPL-license.txt`, so a scanner that checks for
+presence concludes "licence found" and learns nothing.
+
+## Pattern 144 — Crowds without a crowd engine (**the dead-options list, so nobody rediscovers it**)
+
+**Problem.** The client wants crowd simulation. Every open crowd system is dead or a web demo.
+
+**Do not start from:** [Menge](https://github.com/MengeCrowdSim/Menge) (Apache-2.0, 156★, last push
+**2025-12-02**) or [CrowdMaster](https://github.com/johnroper100/CrowdMaster) (GPL-3.0, 137★, last push
+**2020-04-12 — 6.5 years**). Both are the first results anyone finds; neither is maintained.
+
+**Recipe instead:** drive agent counts as a **physics and instancing problem**, not a crowd-software
+problem — [MuJoCo](https://github.com/google-deepmind/mujoco) (Apache-2.0) or
+[warp](https://github.com/NVIDIA/warp) (Apache-2.0) to integrate motion, bake to **Alembic point caches**
+(BSD-3), then **instance geometry at render time** in the client's renderer or
+[LuxCore](https://github.com/LuxCoreRender/LuxCore) (Apache-2.0). For the per-agent animation itself,
+hand off to **pass 57's retargeting layer** rather than rebuilding it here.
+
+## Pattern 145 — How to answer "can AI speed up our simulations?" (**with a falsifiable prediction on record**)
+
+**The honest answer, with this pass's measurements:** the open neural-simulation layer is **142★ in total**
+(top 8 results for `neural fluid simulation`), its best repo is **47★ and dead since 2024-05-04**, and
+three separate queries for simulation surrogates and AI sim acceleration returned **literally zero
+results**. Meanwhile the agent layer around the same plane holds **45,277★**. **AI in this plane today
+automates the interface, not the physics.**
+
+**What to offer instead, in priority order:**
+
+1. **Agent-driven setup** (Pattern 142) — real, available now, MIT.
+2. **Permissive headless sim at scale** (Pattern 141) — removes the per-seat bottleneck, which is usually
+   the actual cost complaint behind the question.
+3. **Neural compression of sim data** — the one genuinely useful AI-on-simulation technique found:
+   [ZephirFXEC/VQVDB](https://github.com/ZephirFXEC/VQVDB) (117★). ⚠️ **GPL-3.0** → separate process,
+   or reimplement the approach against OpenVDB (Apache-2.0) rather than embedding the repo.
+4. **Do not promise a learned solver.** Nothing shippable exists.
+
+**Falsifiable prediction, recorded 2026-11-28 so a later pass can mark it right or wrong:** *by
+2027-05-28, no open-source neural fluid/FX simulation repo aimed at film production will exceed 500★ with
+a push in the preceding 90 days.* Today's ceiling is **47★**. If a future pass finds one, this assessment
+is wrong and Pattern 145 must be rewritten — **that is the point of writing it down.**
+
+## Pattern 146 — Placing simulation work where the incentive pays for it
+
+**Problem.** Sim and FX are the most expensive hours in a VFX budget, and three regions changed their
+incentives in the last 18 months. The pipeline is portable; the subsidy is not.
+
+**Recipe — match the deliverable to the regional instrument:**
+
+| Region | Instrument to design against | How it shapes the engagement |
+|---|---|---|
+| **North America** | California **AB 2319**, signed **2026-09-19**, first **standalone post-production credit, effective 2027** (reported 35%†); existing **+5% VFX uplift** at ≥75% of worldwide VFX spend or ≥$10M CA VFX† | Bill sim/render hours as **post-production**, not tooling. A permissive NA-governed sim service (`warp`+`PhysX`+OpenVDB+OpenCue) is a qualifying line item rather than overhead. |
+| **EMEA** | **UK 39% on VFX costs** — **UK Parliament Hansard, 2026-04-16 (primary)**; VFX exempt from the 80% cap† | The only incentive that names VFX as its own category, and simulation is the costliest thing inside it. Source the stack on **MIT European research code** (PhiFlow, SPlisHSPlasH, Mitsuba) to answer sovereignty questions in the same breath. |
+| **APAC** | India **Budget 2026–27** IICT creator labs (**₹250 crore**, 15,000 schools / 500 colleges)†; **Tamil Nadu AVGC-XR Policy 2026** (**₹250 crore** R&D, **₹50 crore** CoE, ≥200 startups by 2030)† | Public money is funding **artists, not tools**. Sell the automation layer above a large trained workforce — and build a **per-jurisdiction policy engine**, since APAC AI regulation is diverging (Latham & Watkins, 2026-09)†. |
+| **LATAM** | Colombia **CINA**, up to **35%** on local audiovisual services and **explicitly covering animation**†; Mexico's new animation/post incentive with a **≥70% local-spend condition**† | CINA reaches animation-services spend, which is where sim billing sits. Mexico's localisation condition makes a **local delivery entity** a precondition, not an optimisation. Brazil: **no federal programme — only Rio and São Paulo**†. |
+
+† = secondary source. ⚠️ **Rates conflict across sources in both NA and Mexico** — quote Hansard's 39%
+for the UK, and read the enrolled bill before quoting any Californian or Mexican rate.

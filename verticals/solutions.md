@@ -3038,3 +3038,47 @@ platform", it is **where the client's own code lives relative to it**.
   facial head-rigs or real-time on-set solving. Open source covers **markerless, camera-based** capture
   only. Any engagement that assumes a volume stage is buying hardware and closed software, and the open
   layer begins **after** the solve.
+
+## Pass 58 (2026-11-28) — FX-simulation platforms: **the only two applications this plane runs on are GPL-2.0 and proprietary, and the open pipeline layer migrated away from its own star base**
+
+The pattern this KB keeps finding — permissive libraries, copyleft or closed *systems* — is sharper
+here than anywhere, because in this plane the *application* is the product. An FX simulation is set up
+in Houdini or Blender. There is no third option.
+
+### The two applications
+
+| Platform | Repo / source | License | Stars / forks | Last push | What it means for an engagement |
+|---|---|---|---|---|---|
+| **Blender** | [blender/blender](https://github.com/blender/blender) | **GPL-2.0** | 22,635★ / 3,703f | **2026-11-28** | ⚠️ **Read the licence situation carefully, because it is not what the repo appears to say.** `COPYING` is a **302-byte pointer, not a licence** — it says only *"Blender uses the GNU General Public License… Please read this file for the full license. doc/license/GPL-license.txt"*. That file, read today, is **GNU GPL Version 2, June 1991** (17,992 B) — **not GPL-3.0**, which is how Blender is routinely mis-cited. The pointer also closes the door explicitly: ***"Apart from the GNU GPL, Blender is not available under other licenses."*** No dual licence, no commercial exception, nothing to negotiate. The GitHub API reports `NOASSERTION` for all of this. |
+| **SideFX Houdini** | *no public repo* | **Proprietary, per-seat** | — | — | The industry-standard FX application: fluids, pyro, destruction, crowds. Everything in this plane's agent layer with "houdini" in its name is a bridge into software the client licenses per seat. ⚠️ **Commercial terms and tier pricing were not verified in this session** (`sidefx.com` not fetched) — treat as *not investigated, not free*. |
+
+**The consequence for delivery:** Globant can build and ship the *bridge* (MIT), the *solver service*
+(Apache/MIT/BSD — see `repos/foundations.md`), and the *scene data* (OpenUSD/Alembic/OpenVDB). Globant
+cannot ship either application. **Design the licence boundary as a process boundary**, from the start.
+
+### The open pipeline layer that wraps them
+
+| Platform | Repo | License | Stars / forks | Last push | Note |
+|---|---|---|---|---|---|
+| **AYON** | [ynput/ayon-launcher](https://github.com/ynput/ayon-launcher) | Apache-2.0 | **55★** / 29f | 2026-11-26 | The current generation of the open VFX/animation pipeline. Apache-2.0 and actively developed. |
+| **OpenPype** | [ynput/OpenPype](https://github.com/ynput/OpenPype) | MIT | **301★** / 118f | **2024-09-18** | ⚠️ **Read-only.** Its own description: *"OpenPype has been surpassed by AYON and is now read only."* **The migration cost the project 82% of its visible following**: the MIT predecessor holds 301★, the Apache-2.0 successor 55★. A star-ranked search for "open source VFX pipeline" still surfaces the archived one first. **Do not start a client on OpenPype.** |
+| **Kitsu** | [cgwire/kitsu](https://github.com/cgwire/kitsu) | **AGPL-3.0** | 780★ / 190f | 2026-11-27 | Production tracking for animation/VFX — shot lists, tasks, review. The most-adopted open option, and **AGPL-3.0**: deploy unmodified and integrate over its API, or the client's own code becomes disclosable. |
+| **Zou** | [cgwire/zou](https://github.com/cgwire/zou) | **AGPL-3.0** | 203★ / 148f | 2026-11-27 | Kitsu's API server. Same AGPL constraint; note the **unusually high fork:star ratio (0.73)** — people are modifying this, which is exactly the activity AGPL-3.0 governs. |
+| **Rez** | [AcademySoftwareFoundation/rez](https://github.com/AcademySoftwareFoundation/rez) | Apache-2.0 | 1,102★ / 369f | 2026-11-26 | Package/environment resolution. **The most-starred permissive pipeline component, and the least glamorous.** |
+| **OpenCue** | [AcademySoftwareFoundation/OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) | Apache-2.0 | 1,010★ / 273f | 2026-11-23 | Render-farm management. Permissive and alive. |
+| **tik_manager4** | [masqu3rad3/tik_manager4](https://github.com/masqu3rad3/tik_manager4) | GPL-3.0 | 197★ / 20f | 2026-09-08 | Project/asset management across DCCs. GPL-3.0. |
+| **PlumberManager** | [hasielhassan/PlumberManager](https://github.com/hasielhassan/PlumberManager) | GPL-3.0 | 98★ / 15f | 2026-09-05 | Pipeline diagramming/documentation. GPL-3.0. |
+
+**Read the licence column down this table.** The permissive entries (Rez, OpenCue, AYON) are
+*infrastructure* — packages, farms, launchers. Everything that holds **production judgment** — what the
+shots are, who is assigned, what state a task is in (Kitsu/Zou), how the project is structured
+(tik_manager4) — is **AGPL-3.0 or GPL-3.0**. The sixth independent confirmation of this KB's structural
+law, now in the pipeline layer: *the closer the code gets to the decision, the harder the licence gets.*
+
+### The simulation add-ons that artists actually use
+
+| Platform | Repo | License | Stars / forks | Last push | Note |
+|---|---|---|---|---|---|
+| **FLIP Fluids** (Blender) | [rlguy/Blender-FLIP-Fluids](https://github.com/rlguy/Blender-FLIP-Fluids) | **GPL-3.0** | 1,996★ / 212f | 2026-11-10 | The best open liquid simulator usable by an artist rather than a programmer — and **GPL-3.0 on top of GPL-2.0 Blender**. Commercially sold as a paid add-on while the source remains GPL: a working business model worth studying, and a hard redistribution limit. |
+| **FluidX3D** | [ProjectPhysX/FluidX3D](https://github.com/ProjectPhysX/FluidX3D) | `NOASSERTION` | 5,389★ / 481f | 2026-11-26 | Lattice-Boltzmann CFD, very fast, very active. ⚠️ Licence reported `NOASSERTION` and **not read in this pass** — verify before use; it is not on the safe list until someone reads the file. |
+| **Mantaflow** (in Blender) | *bundled in `blender/blender`* | **GPL-2.0 via Blender** | — | — | Blender's built-in smoke/fire/liquid solver. `Mantaflow` had **0 hits** in this KB before this pass. It ships inside Blender, so it inherits Blender's terms — there is no separately licensed way to take it. |

@@ -9,6 +9,71 @@ updated: 2026-11-28
 > Newest section first. **Nothing below is ever rewritten** — that history is the only way to see
 > which projects actually sustained momentum and which spiked and died.
 
+## 2026-11-28 — pass 58: the FX-simulation & procedural-effects plane (**the agent layer is 319× the size of the thing it is supposed to automate**)
+
+**Channel note:** `git ls-remote`, `gh api search/repositories` and `raw.githubusercontent.com` all
+worked. **`github.com` HTML returned `403`** under this session's egress policy, so the `blender-mcp` →
+`mcp-for-blender` rename could **not** be re-confirmed this pass (pass 36 established it; taken on that
+record, not re-verified). **`sidefx.com` was not fetched** — Houdini commercial terms are unverified.
+`search/repositories` returned **HTTP 422** for two real slugs (`dreamworksanimation/openmoonray`,
+`Genesis-Embodied-AI/Genesis`) that `ls-remote` confirms exist: **a 422 from the search index is not
+evidence of absence**, and no star figures are claimed for them.
+
+**Why this plane was chosen:** `fluid`, `particle`, `Mantaflow`, `taichi`, `PhysX`, `physics engine`,
+`soft body`, `groom`, `procedural generation`, `smoke sim`, `water sim`, `Alembic`, `AAF` and
+`effects simulation` each returned **0 hits across all eight KB files** — the emptiest probe this KB has
+run. Two near-misses were rejected first: **on-air graphics** (`CasparCG` 34 hits, `Sofie` 175 — already
+covered) and **on-set/dailies**. ⚠️ **A method warning worth more than the plane itself:** `ACES`
+appeared to return 134 hits, `LUT` 236, `DIT` 918 and `slate` 129 — **every one of them substring noise**
+(`interfACES`, `soLUTions`, `eDITorial`, `transLATE`). Word-boundary matching cut `LUT` to **0** and
+`DIT` to **1**. *A vocabulary probe without `grep -w` manufactures false coverage.*
+
+**The headline, measured not argued.** This plane's agent layer is large, permissive and pushed this
+week — and **every agent in it is a remote control for a GUI application, not for a solver**:
+
+| Measured 2026-11-28 | Stars |
+|---|---|
+| Agent bridges into Blender / Houdini / Nuke | **45,277★** |
+| The entire open neural-simulation layer (top 8 for `neural fluid simulation`) | **142★** |
+| Agent tooling touching the volumetric substrate (`mcp openvdb` → 1 result) | **1★** |
+
+**319×.** Open source built the thing that clicks the buttons and not the thing that does the compute.
+**When a client says "AI for VFX" they are imagining the 142★ layer and will be sold the 45,277★ one.**
+
+**New agents recorded this pass (all verified by `ls-remote`, licence by API or file):**
+
+| Agent | Repo | License | Stars / forks | Last push | Note |
+|---|---|---|---|---|---|
+| fxhoudinimcp | https://github.com/healkeiser/fxhoudinimcp | **MIT** | 441★ / 55f | 2026-11-20 | The agent bridge into the application where film FX simulation actually happens. Created 2026-02. |
+| houdini-mcp (capoomgit) | https://github.com/capoomgit/houdini-mcp | **MIT** | 312★ / 41f | 2026-06-11 | ~5.5 months idle. |
+| crucible | https://github.com/codepawl/crucible | **MIT** | 1,049★ / 104f | 2026-11-28 | A 3D engine built to be *driven* by agents, not bridged to one. |
+| blender-skills (arjun988) | https://github.com/arjun988/blender-skills | **MIT** | 5,232★ / 481f | 2026-11-06 | 94 packaged Blender skills. |
+| blender-skills (EL4CTEO) | https://github.com/EL4CTEO/blender-skills | **MIT** | 3,010★ / 299f | 2026-11-27 | **A second independent 3,000★ implementation of the same idea** — duplication, not consolidation. |
+| dcc-mcp-core | https://github.com/dcc-mcp/dcc-mcp-core | **MIT** | 78★ / 10f | 2026-11-28 | Multi-DCC control plane. The right architecture, 78★ of adoption. |
+| nukeserversocket | https://github.com/sisoe24/nukeserversocket | **MIT** | 62★ / 9f | 2026-11-21 | Python into Nuke/Houdini over MCP. |
+| MuleCreate | https://github.com/felixbfx/MuleCreate | GPL-3.0 | 74★ / 6f | 2026-11-25 | 3D sketch → AI builds it in Houdini. On-plane, copyleft. |
+| rez-skills | https://github.com/loonghao/rez-skills | **MIT** | 5★ / 0f | 2026-10-28 | The only agent tooling found for the *pipeline* layer. |
+| mujoco-mcp-server | https://github.com/Rongxuan-Zhou/mujoco-mcp-server | **MIT** | 12★ | 2026-03-05 | **The closest thing to an agent that drives a solver — and it drives a robotics solver.** |
+| VoxelSieve | https://github.com/yoshi5534/VoxelSieve | Apache-2.0 | **1★** | 2026-11-25 | The *entire* result set for `mcp openvdb`, and it is industrial CT. The measurement behind "319×". |
+| ai-forge-mcp | https://github.com/HurtzDonutStudios/ai-forge-mcp | **none found** | 102★ / 8f | 2026-04-09 | Claims 565 AI-callable tools. No licence → all rights reserved. |
+| houdini-mcp (oculairmedia) | https://github.com/oculairmedia/houdini-mcp | **none — verified** | 88★ / 13f | 2026-09-28 | **11 filename variants × 2 branches all 404 while `README.md` returned 200 on both** — the naming convention is right, the file is genuinely absent. |
+
+**Trend measurement the append-only log exists for** — `ahujasid/mcp-for-blender`, re-measured across
+three passes: **35,788★ (2026-11-18, pass 57) → 35,944★ (2026-11-26) → 36,054★ (2026-11-28)**. Over the
+same ten days `blender/blender` went **22,543★ → 22,635★**. **The MIT remote control now has 1.59× the
+stars of the GPL-2.0 application it drives, and is growing ~2.9× faster.**
+
+**Four queries, four empty sets** (each re-run short per this KB's rule, since shortening
+`rigid body destruction fracture` → `fracture` turned 2 toy repos into 1,331★): `smoke pyro simulation
+vfx`, `simulation surrogate neural network physics graphics`, `AI motion synthesis vfx simulation
+acceleration`, `agent skills vfx houdini` — **all 0 results.** The zeros are query-independent.
+
+**The licence consequence that makes the whole agent layer cosmetic:** **44,296★ of the 45,277★** exists
+to drive **Blender, which is GPL-2.0 and whose own licence pointer states "Apart from the GNU GPL,
+Blender is not available under other licenses."** The rest drive **proprietary per-seat Houdini**. The
+MIT on these bridges is real, and it buys Globant **the right to ship the remote control and nothing it
+controls.** Design the licence boundary as a process boundary (see `compose/patterns.md` P142).
+
 ## 2026-11-28 — pass 57: the character-animation & performance-capture plane (**the first plane in this KB whose chokepoint is a PATENT, not a licence — and the first where even the paid commercial route forbids the AI use case**)
 
 **Channel note:** `git ls-remote`, `gh api search/repositories` and `raw.githubusercontent.com` worked.

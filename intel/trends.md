@@ -5595,3 +5595,112 @@ the compliance layer is the product opportunity, and it is not crowded.
   figure is 1,000× the others.
 - **Do not describe MIT and Apache-2.0 as interchangeable here.** Only Apache-2.0 carries a patent grant,
   and this is a patent-encumbered plane.
+
+## Trends — pass 58 (2026-11-28): the FX-simulation & procedural-effects plane
+
+### T58.1 — The automation went to the interface, not the engine (**measured at 319×**)
+
+The headline of this pass, and a shape no previous plane produced. Agent bridges into the FX
+applications total **45,277★** (mcp-for-blender 36,054, blender-skills ×2 at 8,242, Houdini bridges 841,
+Nuke 62, dcc-mcp-core 78). The **entire** open neural-simulation layer — the top eight results for
+`neural fluid simulation` — totals **142★**, and its best repo has been dead since **2024-05-04**.
+Agent tooling touching the volumetric substrate: **one repo, one star** (`mcp openvdb` → `VoxelSieve`,
+which is industrial CT, not VFX).
+
+Open source built a superb remote control for the artist's GUI and essentially nothing that does the
+physics. **When a client says "AI for VFX", they are usually imagining the 142★ layer and will be sold
+the 45,277★ one.** Those are different products: one automates *clicking*, the other would automate
+*simulating*, and only the first exists.
+
+### T58.2 — The bridge is now 1.59× the application it drives
+
+`ahujasid/mcp-for-blender`: **36,054★** today vs `blender/blender`: **22,635★**. Measured drift over ten
+days — the bridge **+266★** (35,788 on 2026-11-18 → 36,054 today), Blender **+92★** over the same window
+(22,543 recorded by pass 57 → 22,635). **The remote control is growing ~2.9× faster than the application
+and already has 1.59× its stars.** Star counts measure attention, not use; what this measures is that
+*the agent integration is where the new attention is going*, which is a procurement signal even though
+it is not an adoption one.
+
+### T58.3 — A licence can be scoped by directory (**new sub-case of the compilation law**)
+
+`bulletphysics/bullet3` (14,911★, the most-used physics engine in existence) states in its own
+`LICENSE.txt`: *"The files in this repository are licensed under the zlib license, **except for the files
+under 'Extras' and examples/ThirdPartyLibs**."* The API reports `NOASSERTION` for exactly this reason.
+Earlier cycles of this KB recorded that a licence can belong to the **compilation** (Chromaprint: MIT
+code, LGPL-2.1 as a whole, plus a third layer from the FFT library you link). This is the sibling case:
+**the licence varies by path inside one repository**, and no SPDX field, badge or source-tree SBOM can
+represent it. **CI rule:** for any vendored native dependency, resolve the licence of *the directories
+you actually copied*, not of the repo.
+
+### T58.4 — OpenUSD is not Apache-2.0, and no scanner can say what it is
+
+`PixarAnimationStudios/OpenUSD` (7,682★) is under the **Tomorrow Open Source Technology License 1.0**,
+which its 49,827-byte licence file introduces by saying it *"differs from the original Apache License
+2.0… Section 6 ('Trademarks') is different."* **There is no SPDX identifier for TOST 1.0**, so the API
+reports `NOASSERTION` and most inventories either guess "Apache-2.0" or record nothing. This matters
+more than the usual mislabel: USD is the format the entire 3D pipeline — including every studio this
+plane serves — is converging on. A client's licence inventory that says "OpenUSD: Apache-2.0" is
+**wrong on a dependency it cannot remove.** (Practically: TOST differs only on trademarks, so it is
+permissive and safe to build on. The defect is in the *records*, not the terms.)
+
+### T58.5 — Blender's licence file is a pointer, and it forecloses the negotiation
+
+`blender/blender`'s `COPYING` is **302 bytes** and contains no licence text — it points to
+`doc/license/GPL-license.txt`, which is **GPL Version 2, June 1991**, not GPL-3.0 as Blender is widely
+cited. The pointer adds one sentence that settles every "can we get a commercial licence?" conversation
+before it starts: ***"Apart from the GNU GPL, Blender is not available under other licenses."*** Two
+lessons: a 302-byte `COPYING` is a **redirect, not a grant**, and this is the second time in two passes
+that the decisive licence sentence was in a file a scanner never opens.
+
+### T58.6 — The crowd layer of this industry is dead, and nobody has noticed
+
+`crowd simulation` as a film capability has **no live open implementation**. Menge (Apache-2.0, the
+academic reference) last pushed **2025-12-02**; CrowdMaster (GPL-3.0, the only Blender crowd system)
+last pushed **2020-04-12 — 6.5 years**. What *is* alive is three.js and WebGPU crowd demos
+(111★, 68★), which are real but not film-scale. Meanwhile the *contact and cloth* solver layer was
+pushed **today** (`ppf-contact-solver`, `warp`). **Within a single plane, adjacent sub-layers differ by
+six years of maintenance** — which is why "is there open source for X" must always be asked per
+sub-layer, never per plane.
+
+### T58.7 — Film destruction has no open implementation; the popular repos solve a different problem
+
+`fracture` returns genuinely popular permissive repos — `unity-fracture` 1,331★ MIT,
+`OpenFracture` 1,146★ MIT — and **both are Unity runtime mesh-slicers for games.** The only DCC-side
+Voronoi fracture tool found is a **Maya plugin, LGPL-3.0, last pushed 2018-01-02**. This is a textbook
+false-positive of the kind this KB has recorded before (`eidr`, `isan`): **the query returns abundance
+and the abundance is the wrong industry.** Read the results, never the total.
+
+### T58.8 — The one piece of AI that is genuinely useful on simulation data is GPL-3.0
+
+`ZephirFXEC/VQVDB` (117★, pushed 2026-06-24) compresses OpenVDB volumes with a VQ-VAE — neural
+compression of the exact data this plane generates in terabytes. It is the only AI-on-simulation repo
+found in the plane that addresses a real production cost, and it is **GPL-3.0**. The permissive
+substrate (OpenVDB, Apache-2.0) is shippable; the intelligent thing done to it is not.
+
+### T58.9 — The open pipeline layer migrated and lost 82% of its following
+
+OpenPype (MIT, **301★**) is read-only and says so: *"surpassed by AYON."* AYON (Apache-2.0, **55★**) is
+the live successor. A star-ranked search still puts the dead one first. **An archived predecessor
+out-ranks its living successor by 5.5× in exactly the signal most procurement decisions use**, and the
+licence even improved (MIT → Apache-2.0) across a move that looks like decline. Check `pushed_at` and
+the repo's own description before reading a star count as health.
+
+### T58.10 — Where the substrate comes from, placed by region (and one region has nothing)
+
+The permissive solver substrate of this plane is geographically concentrated, and the placement is
+usable intelligence rather than trivia:
+
+- **North America** — NVIDIA (`warp` Apache-2.0, `PhysX` BSD-3), Pixar (`OpenUSD`),
+  DreamWorks (`openmoonray` Apache-2.0), Google DeepMind (`mujoco`), and the
+  **Academy Software Foundation** (OpenVDB, OpenEXR, OSL, MaterialX, Rez, OpenCue, OTIO). The
+  institutional home of the plane's infrastructure.
+- **EMEA** — academic groups: `tum-pbs/PhiFlow` (MIT; the org name denotes TU München),
+  `mitsuba3` (copyright line read first-hand: *Wenzel Jakob, EPFL*),
+  `InteractiveComputerGraphics` (SPlisHSPlasH + PositionBasedDynamics, both MIT). **EMEA supplies the
+  methods and the MIT licences; it does not supply the platforms.**
+- **APAC** — `taichi-dev/taichi` (Apache-2.0, 28,480★, the most-starred permissive simulation project
+  anywhere) and `st-tech/ppf-contact-solver` (Apache-2.0, pushed today, from a Japanese corporate org).
+  **APAC is where the newest permissive solvers are being written** — not only where the labour is.
+- **LATAM** — ⛔ **nothing found.** No LATAM-originated FX-simulation project surfaced in any query run
+  this pass. Recorded as an informed gap, not as coverage: it means a LATAM engagement in this plane
+  consumes a substrate written elsewhere, which is a sovereignty and support argument, not a defect.

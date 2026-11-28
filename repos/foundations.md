@@ -6123,3 +6123,58 @@ SPDX `null`** — so cite the specification, and vendor the implementation.
    `ls-remote` and returns **HTTP 422** from search. **A 422 is not evidence that a repo does not exist** —
    it means search cannot see it. Report existence from `ls-remote`, adoption from search, and never infer
    one from the other's failure.
+
+## Pass 58 (2026-11-28) — foundations of the FX-simulation & procedural-effects plane: **the substrate is excellent, permissive, and pushed this week — and three of its most important licences cannot be read by any scanner**
+
+Every row verified today: existence by `git ls-remote` (**42/42 resolved**), stars/forks/last-push by
+`gh api search/repositories`, and **licence by reading the actual file wherever the API returned
+`NOASSERTION`** — which it did for four of the most load-bearing repos in the plane.
+
+### Tier 1 — Permissive solver substrate (safe to build on, and genuinely alive)
+
+| Repo | License | Stars / forks | Last push | Role in an FX pipeline |
+|---|---|---|---|---|
+| [taichi-dev/taichi](https://github.com/taichi-dev/taichi) | Apache-2.0 | 28,480★ / 2,391f | 2026-10-05 | DSL for writing GPU simulation kernels in Python. The most-starred permissive simulation project in existence. |
+| [google-deepmind/mujoco](https://github.com/google-deepmind/mujoco) | Apache-2.0 | 18,544★ / 2,243f | 2026-11-27 | Rigid-body/contact physics. Robotics-first, but the only Apache-2.0 contact engine at this maturity. |
+| [NVIDIA/warp](https://github.com/NVIDIA/warp) | Apache-2.0 | 7,366★ / 720f | **2026-11-28** | Python framework for writing differentiable GPU simulation kernels. Pushed today. **The single best entry point** for permissive, custom FX simulation. |
+| [NVIDIA-Omniverse/PhysX](https://github.com/NVIDIA-Omniverse/PhysX) | BSD-3-Clause | 4,870★ / 691f | 2026-11-18 | Production rigid-body, cloth and destruction engine, genuinely BSD-3. |
+| [st-tech/ppf-contact-solver](https://github.com/st-tech/ppf-contact-solver) | Apache-2.0 (11,355 B read) | 4,625★ / 352f | **2026-11-28** | Contact solver for shells, solids, rods and rigid bodies. **Created 2024-11, 4,625★ in two years, pushed today** — the fastest-rising permissive solver in the plane. |
+| [AcademySoftwareFoundation/openvdb](https://github.com/AcademySoftwareFoundation/openvdb) | Apache-2.0 | 3,559★ / 810f | 2026-11-25 | The sparse volume format. **Every smoke, fire and cloud element in modern film passes through it.** |
+| [AcademySoftwareFoundation/OpenShadingLanguage](https://github.com/AcademySoftwareFoundation/OpenShadingLanguage) | BSD-3-Clause | 2,352★ / 424f | 2026-11-27 | Shading language for production renderers. |
+| [AcademySoftwareFoundation/MaterialX](https://github.com/AcademySoftwareFoundation/MaterialX) | Apache-2.0 | 2,317★ / 473f | 2026-11-23 | Look/material interchange. |
+| [InteractiveComputerGraphics/PositionBasedDynamics](https://github.com/InteractiveComputerGraphics/PositionBasedDynamics) | MIT | 2,299★ / 397f | 2026-09-01 | PBD/XPBD for rigid bodies and deformables — the method most production cloth is built on. |
+| [InteractiveComputerGraphics/SPlisHSPlasH](https://github.com/InteractiveComputerGraphics/SPlisHSPlasH) | MIT | 1,971★ / 347f | 2026-11-23 | SPH fluid simulation library. MIT, maintained, publication-grade. |
+| [tum-pbs/PhiFlow](https://github.com/tum-pbs/PhiFlow) | MIT | 1,959★ / 237f | 2026-07-16 | Differentiable fluid simulation for ML workflows. ~4 months idle. |
+| [AcademySoftwareFoundation/openexr](https://github.com/AcademySoftwareFoundation/openexr) | BSD-3-Clause | 1,893★ / 723f | **2026-11-28** | The frame format every sim render writes into. |
+| [LuxCoreRender/LuxCore](https://github.com/LuxCoreRender/LuxCore) | Apache-2.0 | 1,354★ / 178f | 2026-11-23 | Physically-based renderer, Apache-2.0 throughout. |
+| [AcademySoftwareFoundation/rez](https://github.com/AcademySoftwareFoundation/rez) | Apache-2.0 | 1,102★ / 369f | 2026-11-26 | Package/environment manager. **The thing that actually makes a 40-package FX environment reproducible.** |
+| [AcademySoftwareFoundation/OpenCue](https://github.com/AcademySoftwareFoundation/OpenCue) | Apache-2.0 | 1,010★ / 273f | 2026-11-23 | Render-farm management. Already in this KB; repeated here because **no sim ships without a farm**. |
+| [AcademySoftwareFoundation/OpenTimelineIO](https://github.com/AcademySoftwareFoundation/OpenTimelineIO) | Apache-2.0 | 2,126★ / 368f | 2026-11-27 | Editorial interchange; the hand-off boundary out of FX. Already in this KB. |
+
+### Tier 2 — Load-bearing, and **the licence is not what a scanner reports**
+
+This is the most important table in this pass. Four of these are cited daily as "Apache" or "BSD" or
+"unlicensed"; **none of those labels is correct**, and in each case the API field is `NOASSERTION`.
+
+| Repo | What the API says | What the file actually says (read today) | Stars / forks | Last push |
+|---|---|---|---|---|
+| [PixarAnimationStudios/OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD) | `NOASSERTION` | **Tomorrow Open Source Technology License 1.0 (TOST 1.0)** — a 49,827-byte file that states outright: *"The Tomorrow Open Source Technology License 1.0 differs from the original Apache License 2.0 in the following manner. Section 6 ('Trademarks') is different."* **It is not Apache-2.0 and there is no SPDX identifier for it.** This is the scene-description format the entire 3D/FX pipeline is standardising on. | 7,682★ / 1,488f | 2026-11-25 |
+| [bulletphysics/bullet3](https://github.com/bulletphysics/bullet3) | `NOASSERTION` | **zlib — but scoped by directory**: *"The files in this repository are licensed under the zlib license, **except for the files under 'Extras' and examples/ThirdPartyLibs**."* A new sub-case of this KB's compilation-licence law: the licence varies **by path**, and no SPDX field, badge or SBOM of the source tree can express that. | 14,911★ / 3,126f | 2026-10-09 |
+| [mitsuba-renderer/mitsuba3](https://github.com/mitsuba-renderer/mitsuba3) | `NOASSERTION` | **Verbatim BSD-3-Clause text, simply never labelled as such** — 2,190 B, copyright *"Wenzel Jakob <wenzel.jakob@epfl.ch>"* (EPFL, read from the file itself). Safe to use; it fails scanners purely for want of a header line. | 3,002★ / 379f | 2026-11-27 |
+| [alembic/alembic](https://github.com/alembic/alembic) | `NOASSERTION` | **BSD-3-Clause, with `SPDX-License-Identifier: BSD 3-Clause` inside the file** — in `LICENSE.txt`, which the API did not resolve. The baked-geometry interchange format; `Alembic` had **0 hits** in this KB before this pass. | 1,177★ / 271f | 2026-11-20 |
+| [dreamworksanimation/openmoonray](https://github.com/dreamworksanimation/openmoonray) | *unmeasurable* | **Apache-2.0, 10,174 B, read directly on both `main` and `master`.** DreamWorks' production renderer. ⚠️ **`search/repositories` returns HTTP 422 for this slug**, so stars and last-push could not be measured — `ls-remote` confirms it exists and the licence is read first-hand. Recorded as an informed gap: **no star figure is given here because none was measured.** | not measured | not measured |
+
+### ⛔ The three sub-layers of this plane that are dead or were never built
+
+Stated explicitly so no future pass re-discovers them as live options.
+
+| Sub-layer | Best permissive option found | License | Stars | Last push | Verdict |
+|---|---|---|---|---|---|
+| **Crowds** | [MengeCrowdSim/Menge](https://github.com/MengeCrowdSim/Menge) | Apache-2.0 | 156★ / 66f | **2025-12-02** | ~12 months idle. The academic reference framework, and the only permissive one with a real codebase. |
+| **Crowds (DCC-side)** | [johnroper100/CrowdMaster](https://github.com/johnroper100/CrowdMaster) | GPL-3.0 | 137★ / 23f | **2020-04-12** | **6.5 years dead.** The only Blender crowd system. |
+| **Crowds (web/real-time)** | [sweriko/Horde](https://github.com/sweriko/Horde) · [wayne-wu/webgpu-crowd-simulation](https://github.com/wayne-wu/webgpu-crowd-simulation) | MIT · BSD-3-Clause | 111★ · 68★ | 2025-10-16 · 2026-03-18 | Real and permissive, but three.js/WebGPU demos — **not film-scale**. |
+| **Hair / groom** | [raymondyfei/libWetHair](https://github.com/raymondyfei/libWetHair) · [digital-salon/Digital-Salon](https://github.com/digital-salon/Digital-Salon) | **MPL-2.0** · MIT | 314★ · 82★ | 2026-10-18 · 2025-07-14 | Research code. MPL-2.0 is file-level copyleft — workable, but it is not a grooming tool. |
+| **Destruction / fracture** | [ElasticSea/unity-fracture](https://github.com/ElasticSea/unity-fracture) · [dgreenheck/OpenFracture](https://github.com/dgreenheck/OpenFracture) | MIT · MIT | 1,331★ · 1,146★ | 2021-05-17 · 2024-07-17 | **Both are Unity runtime mesh-slicers for games, not film-grade fracture.** Permissive and popular, and they solve a different problem. |
+| **Destruction (DCC-side)** | [joesfer/Voronoi-Shattering](https://github.com/joesfer/Voronoi-Shattering) | LGPL-3.0 | 43★ | **2018-01-02** | **~8 years dead.** The only DCC-side Voronoi fracture plugin found (Maya). The film destruction layer has no live open implementation at all. |
+| **Neural simulation surrogate** | [Pranav-Jain/Neural-Monte-Carlo-Fluid-Simulation](https://github.com/Pranav-Jain/Neural-Monte-Carlo-Fluid-Simulation) · [tovacinni/neural-fluid-fields](https://github.com/tovacinni/neural-fluid-fields) | MIT · MIT | **47★** · 23★ | 2024-05-04 · 2021-12-13 | **The entire layer: top 8 results sum to 142★ and the best one has been dead for 2.5 years.** This is the gap between what AI-in-VFX is sold as and what exists. |
+| **AI applied to sim *data*** | [ZephirFXEC/VQVDB](https://github.com/ZephirFXEC/VQVDB) | **GPL-3.0** | 117★ | 2026-06-24 | OpenVDB volume compression with a VQ-VAE. **The one genuinely useful AI-on-simulation repo found in the whole plane — and it is GPL-3.0**, i.e. the only working piece is the one Globant cannot embed. |

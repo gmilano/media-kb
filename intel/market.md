@@ -11602,3 +11602,144 @@ AI Basic Act labelling methods, fine suspension and the KFTC endorser change; Me
 numbers and exceptions, and the academic critique of them; Uruguay's, Peru's, Brazil's, Argentina's,
 Chile's, Colombia's and Costa Rica's instruments; FLAME 2023's CC-BY-4.0 status; and `UniRig`'s and
 `OpenT2M`'s weights/dataset licences (**Hugging Face unreachable**).
+
+### Global players — pass 58 addendum (the FX-simulation & procedural-effects layer)
+
+| Player | Type | Strength | Weakness / what it means for Globant |
+|---|---|---|---|
+| **SideFX** (Houdini) | Proprietary application | The de-facto standard for film fluids, pyro, destruction and crowds. There is no open equivalent at the application level. | Per-seat proprietary; **commercial terms not verified this session** (`sidefx.com` not fetched). The client brings the licences; Globant brings the automation around them. |
+| **Blender Foundation** | GPL-2.0 application | Free, enormous individual user base, bundles Mantaflow for smoke/fire/liquid. | **GPL-2.0 and explicitly not available under any other licence** (read first-hand). Usable, never shippable inside a product. |
+| **NVIDIA** | Permissive substrate owner | `warp` (Apache-2.0, pushed today) and `PhysX` (BSD-3) are the most production-ready permissive simulation stack in existence. | Hardware-aligned: the permissiveness is a funnel to GPUs. Fine, but name the incentive. |
+| **Academy Software Foundation** (Linux Foundation) | Neutral steward | Holds the plane's formats under Apache-2.0/BSD-3: OpenVDB, OpenEXR, OSL, MaterialX, Rez, OpenCue, OTIO. **The single most reliable licence source in this plane.** | Formats and infrastructure only — ASWF ships no solver and no application. |
+| **Pixar / Disney** | Format owner | OpenUSD is becoming the universal scene description for the whole pipeline. | ⚠️ **TOST 1.0, not Apache-2.0, and no SPDX id exists** — a licence-inventory defect on an unremovable dependency. |
+| **DreamWorks Animation** | Open-source renderer | `openmoonray` is genuinely Apache-2.0 (10,174 B read). | ⚠️ `search/repositories` returns **422** for the slug: **no star or activity figure was measurable**, so adoption is unknown. |
+| **ynput** (AYON / OpenPype) | Open pipeline vendor | AYON is Apache-2.0 and actively developed — the only permissive VFX pipeline platform. | **55★** against its own archived MIT predecessor's 301★. Small; commercially supported. |
+| **CGWire** (Kitsu / Zou) | Open production tracking | The most-adopted open tracker for animation/VFX. | **AGPL-3.0** on both halves: API-boundary integration only. |
+| **TransPerfect** | Consolidator | Acquired MPC's French assets (2025-03) and The Mill (2025-04, relaunched 2025-10-29)† following the Technicolor collapse† — now an AI/language company that owns storied VFX brands. | Evidence that **the FX vendor layer is consolidating into companies whose core business is not VFX.** |
+
+† = secondary sources (trade press / encyclopaedic), not primary documents.
+
+## Opportunities by region — pass 58 (2026-11-28): the FX-simulation & procedural-effects plane
+
+**The regional logic of this plane is unusual and worth stating before the subsections**: simulation is
+the most compute-heavy and most labour-heavy line in a VFX budget, so **this plane follows incentives and
+capacity, not technology adoption.** Three of the four regions have moved their incentives in the last
+18 months, and that — not model releases — is what changes where the work lands.
+
+### Pass 58 (2026-11-28) — the FX-simulation plane in North America
+
+- **The decisive fact is a brand-new, FX-shaped incentive.** California **AB 2319** was signed
+  **2026-09-19** (alongside **SB 186**), creating **California's first standalone post-production tax
+  credit, effective 2027**, reported at **35%**†. Until now post and VFX were a sub-clause of a
+  production credit; **a standalone post credit is the first incentive that pays for exactly the work
+  this plane does** — sim, FX and render hours, which are post, not production.
+- **The existing programme already carries a VFX uplift**: **+5%** when California VFX is **≥75% of
+  total worldwide VFX spend** or **≥$10M of qualified California VFX expenditure**†. The cap was raised
+  **July 2025 from $330M → $750M**, after which **147 productions** were approved, **+53% YoY**†.
+  Governor Newsom's 2026 proposal would take it to **≥$1B/yr through 2040** — **a proposal, not law**†.
+  ⚠️ Base-rate figures conflict across sources (a 20–25%→35–40% claim vs a 20% base): **do not quote a
+  rate without reading the enrolled bill.** Federal incentive legislation remains **pending**†.
+- **The supply side contracted hard, and that is the opening.** The Technicolor collapse took MPC and
+  The Mill with it; TransPerfect bought MPC's French assets (**2025-03**) and The Mill (**2025-04**,
+  relaunched **2025-10-29**)†. **Thousands of LA VFX jobs went with it**†. Capacity left the region at
+  the same moment an incentive arrived to pull work back — and the rebuilt vendors are owned by a
+  language-and-AI company, not a VFX house.
+- **Where the work is for Globant:** the plane's substrate is North American (NVIDIA, Pixar, DreamWorks,
+  ASWF), so an NA engagement can be offered a **fully permissive, locally-governed simulation service** —
+  `warp` + `PhysX` + OpenVDB + OpenCue, Apache/BSD throughout, no GPL in the deliverable. Pair it with
+  the **2027 post-credit**: a sim microservice whose hours qualify as post-production spend is a
+  financeable line item, not a tooling cost.
+
+### Pass 58 (2026-11-28) — the FX-simulation plane in EMEA
+
+- **The UK has the only incentive on earth that names VFX as its own category — and it is primary-sourced.**
+  A **UK Parliament Hansard record of 2026-04-16** cites a **39% rate on VFX costs**. This is the one
+  regional figure in this pass that comes from a primary public document rather than trade press.
+  Secondary detail: **39% gross / 29.25% net** on qualifying UK VFX costs, effective **April 2025**, with
+  **VFX costs exempt from the 80% cap**†. ⚠️ **Sources conflict** — the same commercial source elsewhere
+  says "up to 34%"†. **Quote Hansard's 39%, cite the record, and verify the net figure with an
+  accountant.** Reported effect: **71% of UK Screen Alliance members saw increased sales enquiries**
+  since the rules took effect†.
+- **Why this matters specifically for simulation:** the UK relief applies to **VFX costs**, and
+  simulation is the most expensive category within VFX. **The budget line this plane sits in is the exact
+  line the UK chose to subsidise at 39%** — the tightest incentive-to-capability fit in any region.
+- **EMEA supplies the methods and the permissive licences.** `PhiFlow` (MIT, TU München), `mitsuba3`
+  (BSD-3 text, EPFL copyright read first-hand), `SPlisHSPlasH` and `PositionBasedDynamics` (both MIT,
+  `InteractiveComputerGraphics`). An EMEA engagement can be sourced on **MIT-licensed European research
+  code** — which also answers the **digital-sovereignty** appetite the DPP's *European Media Trends 2026*
+  reports as a growing driver†.
+- **The regulatory overlay is transparency, not simulation.** **EU AI Act Article 50** disclosure duties
+  apply to synthetic output, and agencies are already restructuring around them†; the European Parliament
+  adopted its position on the **AI Act Omnibus** simplification **569–45**†. Nothing in Article 50 targets
+  a physics solve — but a generated element in a shot is synthetic content, so **the labelling obligation
+  attaches to this plane's output even though it never mentions it.**
+
+### Pass 58 (2026-11-28) — the FX-simulation plane in APAC
+
+- **APAC is where this work is actually executed, and now also where the newest permissive solvers are
+  written.** `taichi-dev/taichi` (Apache-2.0, **28,480★** — the most-starred permissive simulation project
+  anywhere) and `st-tech/ppf-contact-solver` (Apache-2.0, **4,625★ in two years, pushed today**, Japanese
+  corporate org). **APAC is not only the labour pool in this plane; it is a licence source.** That is new,
+  and it contradicts the usual "APAC executes, NA/EMEA builds" framing.
+- **India is putting public money into the pipeline, not the tools.** Union Budget **2026–27** backs
+  **IICT Mumbai** creator labs — reported **₹250 crore**, **15,000 schools / 500 colleges**, with a stated
+  goal of **2 million skilled AVGC professionals by 2030**† (⚠️ a conflicting "20 lakh jobs" figure appears
+  in the same coverage — same order, different claim). **Tamil Nadu's AVGC-XR Policy 2026** is a five-year
+  plan: **≥200 startups by 2030**, **~20% of India's AVGC-XR market**, **₹250 crore R&D**, startup grants
+  **≤₹1 crore**, and a **₹50 crore Centre of Excellence in Chennai**†. **Maharashtra's AVGC-XR Policy 2025**
+  carries a reported **₹3,268 crore initial allocation**†.
+- ⚠️ **Treat the sector projections as incompatible, not as a range.** Sources in the same week give
+  **$2.2–3B by 2026 at 15–18% CAGR**, **$33.5B by 2027**, and **$100B by 2030** — the last is explicitly
+  **an aspiration, not a forecast**†. **No source found measures actual studio capacity or output growth**,
+  so capacity claims in this plane are unverified.
+- **The opportunity is the gap between skilling and tooling.** India is funding **artists**; this pass
+  measured that the **tool layer for sim is 142★ of neural work and a dead crowd layer**. A studio with
+  thousands of trained FX artists and no automation above the GUI is the clearest buyer in any region for
+  the permissive sim-service pattern — and the **30–50% cost delta vs US/UK operations**† is what makes
+  the automation worth financing rather than absorbing.
+- **Regulation is fragmenting by jurisdiction** (Latham & Watkins, **September 2026**): binding risk-based
+  frameworks (South Korea, Vietnam), targeted rules (China), and a third looser category†. As pass 8
+  recorded for a different plane, the sellable asset is **a policy engine per jurisdiction**, not one
+  compliance mode.
+
+### Pass 58 (2026-11-28) — the FX-simulation plane in LATAM
+
+- **Colombia is the region's strongest incentive for exactly this work.** The **CINA** programme grants
+  tax credits of **up to 35% on local audiovisual services spend**, and — the detail that matters here —
+  it **explicitly covers animation, advertising and video games** alongside film and series†.
+  **Animation-services spend is where sim and FX billing sits**, so CINA reaches this plane directly where
+  a film-only credit would not. Proimágenes Colombia states shooting in Colombia is **30–40% more
+  cost-efficient than Mexico or Brazil**†, and **Annecy named Colombia its 2027 Country of Honour**† — a
+  demand signal for animation capacity specifically.
+- **Mexico has a new incentive with a hard localisation condition.** It covers **animation and
+  post-production** and requires **≥70% of expenditure to go to local companies**†. ⚠️ **Rates conflict**:
+  "up to 30%"† vs an older IMCINE-based **17.5%** of qualified Mexican expenditure† — **verify before
+  quoting either.** Mexico City remains LATAM's audiovisual capital, with studios, rental houses, post and
+  VFX providers co-located†.
+- **Brazil's incentives are fragmented**: **only Rio de Janeiro and São Paulo have their own programmes,
+  with no federal one in place**†. For a plane whose economics are driven by incentives, that fragmentation
+  is the finding.
+- ⚠️ **The growth is uneven at studio level.** One directory reports that **Ánima Estudios, Mexico's
+  long-time flagship animation studio, closed in July 2026** — **single-source and unverified**; flagged
+  because if true it is the most important structural fact in the region for this plane, and it should be
+  checked before being used in any pitch.
+- **Market size:** LATAM animation/VFX/post is estimated at **~$1.32B (2025)**†, with streaming investment
+  and new tax incentives credited as the drivers. A competing directory figure of **$27.9B (2024)** is
+  animation-only at a different scope and **is not comparable** — do not blend them.
+
+### ⛔ The regional gaps in this plane, stated as gaps (pass 58)
+
+Four things were searched and **not** found. Each is recorded so silence is not mistaken for coverage:
+
+1. **No LATAM-originated FX-simulation open source exists in any query run this pass.** The substrate is
+   NA, EMEA and APAC. A LATAM engagement consumes a stack written elsewhere — a support and sovereignty
+   argument to raise proactively, not a defect to hide.
+2. **No AI-specific market sizing for VFX/simulation was found in any region** — consistent with what
+   pass 6 recorded for the production plane. The usable numbers are *segment* figures from trade bodies
+   and incentive rates from legislatures, **never "AI in VFX" figures.** Analyst coverage of this plane
+   does not exist; that is a fact about analysts, not about the market.
+3. **No source reached in any region sizes the simulation/FX *services* layer separately** from VFX as a
+   whole. Every figure above is either all-VFX or all-animation.
+4. **SideFX commercial terms were not verified** (`sidefx.com` not fetched this session). Since Houdini is
+   the application this entire plane runs on, **that is the most consequential single unknown in this
+   pass** — treat as *not investigated, not free*.
